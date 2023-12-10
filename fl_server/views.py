@@ -3,17 +3,19 @@ from django.shortcuts import render
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from fl_server.forms import LoginForm, UserRegistrationForm, UserEditForm, ProfileEditForm
-from fl_server.models import NLP_Model, Profile
+from fl_server.models import Model, Profile
 
 
 def model_list(request):
-    models = NLP_Model.objects.all()
+    models = Model.objects.all()
     return render(request,
                   'base.html',
                   {'models': models})
 
 
 @login_required
+
+
 def dashboard(request):
     return render(request,
                   'account/dashboard.html',

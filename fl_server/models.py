@@ -11,10 +11,10 @@ class Profile(models.Model):
     photo = models.ImageField(upload_to='users/%Y/%m/%d/', blank=True)
 
     def __str__(self):
-        return f'Profile of {self.user.username}'
+        return f'Profile of {self.user.name}'
 
 
-class NLP_Model_Family(models.Model):
+class Model_Family(models.Model):
     model_family_id = models.BigAutoField(primary_key=True)
     model_family_name = models.CharField(max_length=100)
     model_family_owner = models.ForeignKey(User,
@@ -27,16 +27,37 @@ class NLP_Model_Family(models.Model):
         return self.model_family_name
 
 
-class NLP_Model(models.Model):
+class Model(models.Model):
     class Provider(models.TextChoices):
-        HF = 'HF', 'Hugging Face'
+        HF = 'HF', 'Hugging Face',
+        KE = 'KE', 'Keras',
+        PT = 'PT', 'PyTorch'
 
-    family_model_id = models.ForeignKey(NLP_Model_Family,
-                                        on_delete=models.CASCADE,
-                                        related_name='family_model_id')
+    class Category(models.TextChoices):
+        DL = 'DL', 'Deep Learning',
+        ML = 'ML', 'Machine Learning',
+        NL = 'NL', 'Natural Language Processing'
+
+    class Type(models.TextChoices):
+        AD = 'AD', 'Anomaly Detection',
+        CL = 'CL', 'Classification',
+        SG = 'SG', 'Segmentation',
+        TC = 'TC', 'Text-Classification',
+        TG = 'TG', 'Text-Generation'
+
     model_name = models.CharField(max_length=100)
+    model_description = models.TextField()
     model_version = models.CharField(max_length=15)
-    model_repo = models.CharField(max_length=250)
+    model_category = models.CharField(max_length=2,
+                                      choices=Category.choices,
+                                      default=Category.ML)
+    model_type = models.CharField(max_length=2,
+                                  choices=Type.choices,
+                                  default=Type.AD)
+    model_family = models.ForeignKey(Model_Family,
+                                     on_delete=models.CASCADE,
+                                     related_name='family_model')
+    model_repo = models.CharField(max_length=250),
     model_owner = models.ForeignKey(User,
                                     on_delete=models.CASCADE,
                                     related_name='model_owner')
@@ -50,11 +71,33 @@ class NLP_Model(models.Model):
         return self.model_name
 
 
-class NLP_Model_File(models.Model):
-    NLP_model_id = models.ForeignKey(NLP_Model,
-                                     on_delete=models.CASCADE,
-                                     related_name='NLP_model_id')
-    model_file_type = models.CharField(max_length=250)
+class Model_File(models.Model):
+    class Type(models.TextChoices):
+        NONE = 'NA', 'N/A',
+        Q2K = 'Q2K', 'Q2_K',
+        Q3KL = 'Q3KL', 'Q3_K_L',
+        Q3KM = 'Q3KM', 'Q3_K_M',
+        Q3KS = 'Q3KS', 'Q3_K_S'
+        Q40 = 'Q40', 'Q4_0',
+        Q4KM = 'Q4KM', 'Q4_K_M',
+        Q4KS = 'Q4KS', 'Q4_K_S',
+        Q50 = 'Q50', 'Q5_0',
+        Q5KM = 'Q5KM', 'Q5_K_M',
+        Q5KS = 'Q5KS', 'Q5_K_S',
+        Q6K = 'Q6K', 'Q6_K',
+        Q80 = 'Q80', 'Q8_0'
+
+    class Extension(models.TextChoices):
+        NONE = 'NA', 'N/A',
+        BIN = 'BIN', 'Binary',
+        GGUF = 'GGUF', 'GGUF'
+
+    model_id = models.ForeignKey(Model,
+                                 on_delete=models.CASCADE,
+                                 related_name='model_id')
+    model_file_type = models.CharField(max_length=4,
+                                       choices=Type.choices,
+                                       default=Type.NONE)
     model_file_filename = models.CharField(max_length=250)
     model_file_extension = models.CharField(max_length=6, blank=True, null=True)
     model_filesize = models.BigIntegerField(blank=True, null=True)
