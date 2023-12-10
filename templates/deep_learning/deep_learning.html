@@ -4,767 +4,767 @@
 
 {% block content %}
     
-        <div class="accordion accordion-flush" id="DeepAssistant">
-          <div class="accordion-item">
-            <h2 class="accordion-header">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#DeepAssistant-collapseOne" aria-expanded="false" aria-controls="DeepAssistant-collapseOne">
-                Data preparation
-              </button>
-            </h2>
-            <div id="DeepAssistant-collapseOne" class="accordion-collapse collapse" data-bs-parent="#DeepAssistant">
-              <div class="accordion-body">
-                  <form class="row g-3" action="/dl_classifier_processing/" method="post">
-                    {% csrf_token %}
-                      <h5>Data Augmentation</h5>
-                      <div class="col-md-3 col-sm-6">
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" name="{{ form1.dpcla_data_augmentation_cropping.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_data_augmentation_cropping.id_for_label }}">
-                            <label class="form-check-label" for="{{ form1.dpcla_data_augmentation_cropping.id_for_label }}">Image Cropping</label>
-                        </div>
-                      </div>
-                  </form>
+<div class="accordion accordion-flush" id="DeepAssistant">
+  <div class="accordion-item">
+    <h2 class="accordion-header">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#DeepAssistant-collapseOne" aria-expanded="false" aria-controls="DeepAssistant-collapseOne">
+        Data preparation
+      </button>
+    </h2>
+    <div id="DeepAssistant-collapseOne" class="accordion-collapse collapse" data-bs-parent="#DeepAssistant">
+      <div class="accordion-body">
+          <form class="row g-3" action="/dl_classifier_processing/" method="post">
+            {% csrf_token %}
+              <h5>Data Augmentation</h5>
+              <div class="col-md-3 col-sm-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" name="{{ form1.dpcla_data_augmentation_cropping.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_data_augmentation_cropping.id_for_label }}">
+                    <label class="form-check-label" for="{{ form1.dpcla_data_augmentation_cropping.id_for_label }}">Image Cropping</label>
+                </div>
               </div>
-            </div>
-          </div>
-          <div class="accordion-item">
-            <h2 class="accordion-header">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#DeepAssistant-collapseTwo" aria-expanded="false" aria-controls="DeepAssistant-collapseTwo">
-                Image Classification
-              </button>
-            </h2>
-            <div id="DeepAssistant-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#DeepAssistant">
-              <div class="accordion-body">
-                  <form class="row g-3" action="/dl_classifier_processing/" method="post">
-                    {% csrf_token %}
-                      <h5>Data Augmentation</h5>
-                      <div class="col-md-3 col-sm-6">
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" name="{{ form1.dpcla_data_augmentation_cropping.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_data_augmentation_cropping.id_for_label }}">
-                            <label class="form-check-label" for="{{ form1.dpcla_data_augmentation_cropping.id_for_label }}">Image Cropping</label>
-                        </div>
-                      </div>
-                      <div class="col-md-3 col-sm-6">
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" name="{{ form1.dpcla_data_augmentation_horizontal_flip.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_data_augmentation_horizontal_flip.id_for_label }}">
-                          <label class="form-check-label" for="{{ form1.dpcla_data_augmentation_horizontal_flip.id_for_label }}">Image Horizontal Flip</label>
-                        </div>
-                      </div>
-                      <div class="col-md-3 col-sm-6">
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" name="{{ form1.dpcla_data_augmentation_vertical_flip.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_data_augmentation_vertical_flip.id_for_label }}">
-                          <label class="form-check-label" for="{{ form1.dpcla_data_augmentation_vertical_flip.id_for_label }}">Image Vertical Flip</label>
-                        </div>
-                      </div>
-                      <div class="col-md-3 col-sm-6">
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" name="{{ form1.dpcla_data_augmentation_translation.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_data_augmentation_translation.id_for_label }}">
-                          <label class="form-check-label" for="{{ form1.dpcla_data_augmentation_translation.id_for_label }}">Image Translation</label>
-                        </div>
-                      </div>
-                      <div class="col-md-3 col-sm-6">
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" name="{{ form1.dpcla_data_augmentation_rotation.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_data_augmentation_rotation.id_for_label }}">
-                          <label class="form-check-label" for="{{ form1.dpcla_data_augmentation_rotation.id_for_label }}">Image Rotation</label>
-                        </div>
-                      </div>
-                      <div class="col-md-3 col-sm-6">
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" name="{{ form1.dpcla_data_augmentation_zoom.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_data_augmentation_zoom.id_for_label }}">
-                          <label class="form-check-label" for="{{ form1.dpcla_data_augmentation_zoom.id_for_label }}">Image Zoom</label>
-                        </div>
-                      </div>
-                      <div class="col-md-3 col-sm-6">
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" name="{{ form1.dpcla_data_augmentation_contrast.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_data_augmentation_contrast.id_for_label }}">
-                          <label class="form-check-label" for="{{ form1.dpcla_data_augmentation_contrast.id_for_label }}">Image Contrast</label>
-                        </div>
-                      </div>
-                      <div class="col-md-3 col-sm-6">
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" name="{{ form1.dpcla_data_augmentation_brightness.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_data_augmentation_brightness.id_for_label }}">
-                          <label class="form-check-label" for="{{ form1.dpcla_data_augmentation_brightness.id_for_label }}">Image Brightness</label>
-                        </div>
-                      </div>
-                      <div class="d-grid gap-2 d-md-flex justify-content-md-end col-md-12">
-                        <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                          <button type="button" class="btn btn-success" onclick="selectDataAug();">Select All</button>
-                          <button type="button" class="btn btn-danger" onclick="unselectDataAug();">Unselect All</button>
-                        </div>
-                      </div>
-
-                      <h5>Model choice</h5>
-                      <div class="col-md-3 col-sm-6">
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" name="{{ form1.dpcla_Xception.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_Xception.id_for_label }}">
-                          <label class="form-check-label" for="{{ form1.dpcla_Xception.id_for_label }}">Xception Image Cropping <a href="https://arxiv.org/abs/1610.02357" target="_blank"><svg class="bi" width="16" height="16" role="img" aria-label="Exception"><use href="#info"></use></svg></a></label>
-                        </div>
-                      </div>
-                      <div class="col-md-3 col-sm-6">
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" name="{{ form1.dpcla_VGG11.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_VGG11.id_for_label }}">
-                          <label class="form-check-label" for="{{ form1.dpcla_VGG11.id_for_label }}">VGG 11 <a href="" target="_blank"><svg class="bi" width="16" height="16" role="img" aria-label="VGG 11"><use href="#info"></use></svg></a></label>
-                        </div>
-                      </div>
-                      <div class="col-md-3 col-sm-6">
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" name="{{ form1.dpcla_VGG13.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_VGG13.id_for_label }}">
-                          <label class="form-check-label" for="{{ form1.dpcla_VGG13.id_for_label }}">VGG 13 <a href="" target="_blank"><svg class="bi" width="16" height="16" role="img" aria-label="VGG 13"><use href="#info"></use></svg></a></label>
-                        </div>
-                      </div>
-                      <div class="col-md-3 col-sm-6">
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" name="{{ form1.dpcla_VGG16.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_VGG16.id_for_label }}">
-                          <label class="form-check-label" for="{{ form1.dpcla_VGG16.id_for_label }}">VGG 16 <a href="" target="_blank"><svg class="bi" width="16" height="16" role="img" aria-label="VGG 16"><use href="#info"></use></svg></a></label>
-                        </div>
-                      </div>
-                      <div class="col-md-3 col-sm-6">
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" name="{{ form1.dpcla_VGG19.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_VGG19.id_for_label }}">
-                          <label class="form-check-label" for="{{ form1.dpcla_VGG19.id_for_label }}">VGG 19 <a href="" target="_blank"><svg class="bi" width="16" height="16" role="img" aria-label="VGG 19"><use href="#info"></use></svg></a></label>
-                        </div>
-                      </div>
-                      <div class="col-md-3 col-sm-6">
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" name="{{ form1.dpcla_ResNet18.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_ResNet18.id_for_label }}">
-                          <label class="form-check-label" for="{{ form1.dpcla_ResNet18.id_for_label }}">ResNet 18 <a href="" target="_blank"><svg class="bi" width="16" height="16" role="img" aria-label="ResNet 18"><use href="#info"></use></svg></a></label>
-                        </div>
-                      </div>
-                      <div class="col-md-3 col-sm-6">
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" name="{{ form1.dpcla_ResNet34.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_ResNet34.id_for_label }}">
-                          <label class="form-check-label" for="{{ form1.dpcla_ResNet34.id_for_label }}">ResNet 34 <a href="" target="_blank"><svg class="bi" width="16" height="16" role="img" aria-label="ResNet 34"><use href="#info"></use></svg></a></label>
-                        </div>
-                      </div>
-                      <div class="col-md-3 col-sm-6">
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" name="{{ form1.dpcla_ResNet50.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_ResNet50.id_for_label }}">
-                          <label class="form-check-label" for="{{ form1.dpcla_ResNet50.id_for_label }}">ResNet 50 <a href="" target="_blank"><svg class="bi" width="16" height="16" role="img" aria-label="ResNet 50"><use href="#info"></use></svg></a></label>
-                        </div>
-                      </div>
-                      <div class="col-md-3 col-sm-6">
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" name="{{ form1.dpcla_ResNet50V2.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_ResNet50V2.id_for_label }}">
-                          <label class="form-check-label" for="{{ form1.dpcla_ResNet50V2.id_for_label }}">ResNet 50 V2 <a href="" target="_blank"><svg class="bi" width="16" height="16" role="img" aria-label="ResNet 50 V2"><use href="#info"></use></svg></a></label>
-                        </div>
-                      </div>
-                      <div class="col-md-3 col-sm-6">
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" name="{{ form1.dpcla_ResNetRS50.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_ResNetRS50.id_for_label }}">
-                          <label class="form-check-label" for="{{ form1.dpcla_ResNetRS50.id_for_label }}">ResNet RS 50</label>
-                        </div>
-                      </div>
-                      <div class="col-md-3 col-sm-6">
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" name="{{ form1.dpcla_ResNet101.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_ResNet101.id_for_label }}">
-                          <label class="form-check-label" for="{{ form1.dpcla_ResNet101.id_for_label }}">ResNet 101</label>
-                        </div>
-                      </div>
-                      <div class="col-md-3 col-sm-6">
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" name="{{ form1.dpcla_ResNet101V2.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_ResNet101V2.id_for_label }}">
-                          <label class="form-check-label" for="{{ form1.dpcla_ResNet101V2.id_for_label }}">ResNet 101 V2</label>
-                        </div>
-                      </div>
-                      <div class="col-md-3 col-sm-6">
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" name="{{ form1.dpcla_ResNetRS101.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_ResNetRS101.id_for_label }}">
-                          <label class="form-check-label" for="{{ form1.dpcla_ResNetRS101.id_for_label }}">ResNet RS 101</label>
-                        </div>
-                      </div>
-                      <div class="col-md-3 col-sm-6">
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" name="{{ form1.dpcla_ResNet152.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_ResNet152.id_for_label }}">
-                          <label class="form-check-label" for="{{ form1.dpcla_ResNet152.id_for_label }}">ResNet 152</label>
-                        </div>
-                      </div>
-                      <div class="col-md-3 col-sm-6">
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" name="{{ form1.dpcla_ResNet152V2.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_ResNet152V2.id_for_label }}">
-                          <label class="form-check-label" for="{{ form1.dpcla_ResNet152V2.id_for_label }}">ResNet 152 V2</label>
-                        </div>
-                      </div>
-                      <div class="col-md-3 col-sm-6">
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" name="{{ form1.dpcla_ResNetRS152.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_ResNetRS152.id_for_label }}">
-                          <label class="form-check-label" for="{{ form1.dpcla_ResNetRS152.id_for_label }}">ResNet RS 152</label>
-                        </div>
-                      </div>
-                      <div class="col-md-3 col-sm-6">
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" name="{{ form1.dpcla_ResNetRS200.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_ResNetRS200.id_for_label }}">
-                          <label class="form-check-label" for="{{ form1.dpcla_ResNetRS200.id_for_label }}">ResNet RS 200</label>
-                        </div>
-                      </div>
-                      <div class="col-md-3 col-sm-6">
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" name="{{ form1.dpcla_ResNetRS270.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_ResNetRS270.id_for_label }}">
-                          <label class="form-check-label" for="{{ form1.dpcla_ResNetRS270.id_for_label }}">ResNet RS 270</label>
-                        </div>
-                      </div>
-                      <div class="col-md-3 col-sm-6">
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" name="{{ form1.dpcla_ResNetRS350.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_ResNetRS350.id_for_label }}">
-                          <label class="form-check-label" for="{{ form1.dpcla_ResNetRS350.id_for_label }}">ResNet RS 350</label>
-                        </div>
-                      </div>
-                      <div class="col-md-3 col-sm-6">
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" name="{{ form1.dpcla_ResNetRS420.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_ResNetRS420.id_for_label }}">
-                          <label class="form-check-label" for="{{ form1.dpcla_ResNetRS420.id_for_label }}">ResNet RS 420</label>
-                        </div>
-                      </div>
-                      <div class="col-md-3 col-sm-6">
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" name="{{ form1.dpcla_InceptionV3.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_InceptionV3.id_for_label }}">
-                          <label class="form-check-label" for="{{ form1.dpcla_InceptionV3.id_for_label }}">Inception V3</label>
-                        </div>
-                      </div>
-                      <div class="col-md-3 col-sm-6">
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" name="{{ form1.dpcla_InceptionResNetV2.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_InceptionResNetV2.id_for_label }}">
-                          <label class="form-check-label" for="{{ form1.dpcla_InceptionResNetV2.id_for_label }}">Inception ResNet V2</label>
-                        </div>
-                      </div>
-                      <div class="col-md-3 col-sm-6">
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" name="{{ form1.dpcla_MobileNet.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_MobileNet.id_for_label }}">
-                          <label class="form-check-label" for="{{ form1.dpcla_MobileNet.id_for_label }}">MobileNet</label>
-                        </div>
-                      </div>
-                      <div class="col-md-3 col-sm-6">
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" name="{{ form1.dpcla_MobileNetV2.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_MobileNetV2.id_for_label }}">
-                          <label class="form-check-label" for="{{ form1.dpcla_MobileNetV2.id_for_label }}">MobileNet V2</label>
-                        </div>
-                      </div>
-                      <div class="col-md-3 col-sm-6">
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" name="{{ form1.dpcla_MobileNetV3Small.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_MobileNetV3Small.id_for_label }}">
-                          <label class="form-check-label" for="{{ form1.dpcla_MobileNetV3Small.id_for_label }}">MobileNet V3 Small</label>
-                        </div>
-                      </div>
-                      <div class="col-md-3 col-sm-6">
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" name="{{ form1.dpcla_MobileNetV3Large.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_MobileNetV3Large.id_for_label }}">
-                          <label class="form-check-label" for="{{ form1.dpcla_MobileNetV3Large.id_for_label }}">MobileNet V3 Large</label>
-                        </div>
-                      </div>
-                      <div class="col-md-3 col-sm-6">
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" name="{{ form1.dpcla_DenseNet121.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_DenseNet121.id_for_label }}">
-                          <label class="form-check-label" for="{{ form1.dpcla_DenseNet121.id_for_label }}">DenseNet 121</label>
-                        </div>
-                      </div>
-                      <div class="col-md-3 col-sm-6">
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" name="{{ form1.dpcla_DenseNet169.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_DenseNet169.id_for_label }}">
-                          <label class="form-check-label" for="{{ form1.dpcla_DenseNet169.id_for_label }}">DenseNet 169</label>
-                        </div>
-                      </div>
-                      <div class="col-md-3 col-sm-6">
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" name="{{ form1.dpcla_DenseNet201.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_DenseNet201.id_for_label }}">
-                          <label class="form-check-label" for="{{ form1.dpcla_DenseNet201.id_for_label }}">DenseNet 201</label>
-                        </div>
-                      </div>
-                      <div class="col-md-3 col-sm-6">
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" name="{{ form1.dpcla_NASNetMobile.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_NASNetMobile.id_for_label }}">
-                          <label class="form-check-label" for="{{ form1.dpcla_NASNetMobile.id_for_label }}">NASNet Mobile</label>
-                        </div>
-                      </div>
-                      <div class="col-md-3 col-sm-6">
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" name="{{ form1.dpcla_NASNetLarge.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_NASNetLarge.id_for_label }}">
-                          <label class="form-check-label" for="{{ form1.dpcla_NASNetLarge.id_for_label }}">NASNet Large</label>
-                        </div>
-                      </div>
-                      <div class="col-md-3 col-sm-6">
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" name="{{ form1.dpcla_EfficientNetB0.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_EfficientNetB0.id_for_label }}">
-                          <label class="form-check-label" for="{{ form1.dpcla_EfficientNetB0.id_for_label }}">EfficientNet B0</label>
-                        </div>
-                      </div>
-                      <div class="col-md-3 col-sm-6">
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" name="{{ form1.dpcla_EfficientNetB0V2.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_EfficientNetB0V2.id_for_label }}">
-                          <label class="form-check-label" for="{{ form1.dpcla_EfficientNetB0V2.id_for_label }}">EfficientNet B0 V2</label>
-                        </div>
-                      </div>
-                      <div class="col-md-3 col-sm-6">
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" name="{{ form1.dpcla_EfficientNetB1.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_EfficientNetB1.id_for_label }}">
-                          <label class="form-check-label" for="{{ form1.dpcla_EfficientNetB1.id_for_label }}">EfficientNet B1</label>
-                        </div>
-                      </div>
-                      <div class="col-md-3 col-sm-6">
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" name="{{ form1.dpcla_EfficientNetB1V2.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_EfficientNetB1V2.id_for_label }}">
-                          <label class="form-check-label" for="{{ form1.dpcla_EfficientNetB1V2.id_for_label }}">EfficientNet B1 V2</label>
-                        </div>
-                      </div>
-                      <div class="col-md-3 col-sm-6">
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" name="{{ form1.dpcla_EfficientNetB2.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_EfficientNetB2.id_for_label }}">
-                          <label class="form-check-label" for="{{ form1.dpcla_EfficientNetB2.id_for_label }}">EfficientNet B2</label>
-                        </div>
-                      </div>
-                      <div class="col-md-3 col-sm-6">
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" name="{{ form1.dpcla_EfficientNetB2V2.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_EfficientNetB2V2.id_for_label }}">
-                          <label class="form-check-label" for="{{ form1.dpcla_EfficientNetB2V2.id_for_label }}">EfficientNet B2 V2</label>
-                        </div>
-                      </div>
-                      <div class="col-md-3 col-sm-6">
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" name="{{ form1.dpcla_EfficientNetB3.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_EfficientNetB3.id_for_label }}">
-                          <label class="form-check-label" for="{{ form1.dpcla_EfficientNetB3.id_for_label }}">EfficientNet B3</label>
-                        </div>
-                      </div>
-                      <div class="col-md-3 col-sm-6">
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" name="{{ form1.dpcla_EfficientNetB3V2.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_EfficientNetB3V2.id_for_label }}">
-                          <label class="form-check-label" for="{{ form1.dpcla_EfficientNetB3V2.id_for_label }}">EfficientNet B3 V2</label>
-                        </div>
-                      </div>
-
-                      <div class="col-md-3 col-sm-6">
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" name="{{ form1.dpcla_EfficientNetB4.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_EfficientNetB4.id_for_label }}">
-                          <label class="form-check-label" for="{{ form1.dpcla_EfficientNetB4.id_for_label }}">EfficientNet B4</label>
-                        </div>
-                      </div>
-                      <div class="col-md-3 col-sm-6">
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" name="{{ form1.dpcla_EfficientNetB5.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_EfficientNetB5.id_for_label }}">
-                          <label class="form-check-label" for="{{ form1.dpcla_EfficientNetB5.id_for_label }}">EfficientNet B5</label>
-                        </div>
-                      </div>
-                      <div class="col-md-3 col-sm-6">
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" name="{{ form1.dpcla_EfficientNetB6.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_EfficientNetB6.id_for_label }}">
-                          <label class="form-check-label" for="{{ form1.dpcla_EfficientNetB6.id_for_label }}">EfficientNet B6</label>
-                        </div>
-                      </div>
-                      <div class="col-md-3 col-sm-6">
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" name="{{ form1.dpcla_EfficientNetB7.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_EfficientNetB7.id_for_label }}">
-                          <label class="form-check-label" for="{{ form1.dpcla_EfficientNetB7.id_for_label }}">EfficientNet B7</label>
-                        </div>
-                      </div>
-                      <div class="col-md-3 col-sm-6">
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" name="{{ form1.dpcla_EfficientNetV2Small.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_EfficientNetV2Small.id_for_label }}">
-                          <label class="form-check-label" for="{{ form1.dpcla_EfficientNetV2Small.id_for_label }}">EfficientNet V2 Small</label>
-                        </div>
-                      </div>
-                      <div class="col-md-3 col-sm-6">
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" name="{{ form1.dpcla_EfficientNetV2Medium.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_EfficientNetV2Medium.id_for_label }}">
-                          <label class="form-check-label" for="{{ form1.dpcla_EfficientNetV2Medium.id_for_label }}">EfficientNet V2 Medium</label>
-                        </div>
-                      </div>
-                      <div class="col-md-3 col-sm-6">
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" name="{{ form1.dpcla_EfficientNetV2Large.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_EfficientNetV2Large.id_for_label }}">
-                          <label class="form-check-label" for="{{ form1.dpcla_EfficientNetV2Large.id_for_label }}">EfficientNet V2 Large</label>
-                        </div>
-                      </div>
-                      <div class="col-md-3 col-sm-6">
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" name="{{ form1.dpcla_ConvNeXtTiny.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_ConvNeXtTiny.id_for_label }}">
-                          <label class="form-check-label" for="{{ form1.dpcla_ConvNeXtTiny.id_for_label }}">ConvNeXt Tiny</label>
-                        </div>
-                      </div>
-                      <div class="col-md-3 col-sm-6">
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" name="{{ form1.dpcla_ConvNeXtSmall.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_ConvNeXtSmall.id_for_label }}">
-                          <label class="form-check-label" for="{{ form1.dpcla_ConvNeXtSmall.id_for_label }}">ConvNeXt Small</label>
-                        </div>
-                      </div>
-                      <div class="col-md-3 col-sm-6">
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" name="{{ form1.dpcla_ConvNeXtBase.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_ConvNeXtBase.id_for_label }}">
-                          <label class="form-check-label" for="{{ form1.dpcla_ConvNeXtBase.id_for_label }}">ConvNeXt Base</label>
-                        </div>
-                      </div>
-                      <div class="col-md-3 col-sm-6">
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" name="{{ form1.dpcla_ConvNeXtLarge.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_ConvNeXtLarge.id_for_label }}">
-                          <label class="form-check-label" for="{{ form1.dpcla_ConvNeXtLarge.id_for_label }}">ConvNeXt Large</label>
-                        </div>
-                      </div>
-                      <div class="col-md-3 col-sm-6">
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" name="{{ form1.dpcla_ConvNeXtXLarge.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_ConvNeXtXLarge.id_for_label }}">
-                          <label class="form-check-label" for="{{ form1.dpcla_ConvNeXtXLarge.id_for_label }}">ConvNeXt XLarge</label>
-                        </div>
-                      </div>
-                      <div class="col-md-3 col-sm-6">
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" name="{{ form1.dpcla_RegNetX002.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_RegNetX002.id_for_label }}">
-                          <label class="form-check-label" for="{{ form1.dpcla_RegNetX002.id_for_label }}">RegNetX 002</label>
-                        </div>
-                      </div>
-                      <div class="col-md-3 col-sm-6">
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" name="{{ form1.dpcla_RegNetY002.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_RegNetY002.id_for_label }}">
-                          <label class="form-check-label" for="{{ form1.dpcla_RegNetY002.id_for_label }}">RegNetY 002</label>
-                        </div>
-                      </div>
-                      <div class="col-md-3 col-sm-6">
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" name="{{ form1.dpcla_RegNetX004.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_RegNetX004.id_for_label }}">
-                          <label class="form-check-label" for="{{ form1.dpcla_RegNetX004.id_for_label }}">RegNetX 004</label>
-                        </div>
-                      </div>
-                      <div class="col-md-3 col-sm-6">
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" name="{{ form1.dpcla_RegNetY004.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_RegNetY004.id_for_label }}">
-                          <label class="form-check-label" for="{{ form1.dpcla_RegNetY004.id_for_label }}">RegNetY 004</label>
-                        </diV>
-                      </div>
-                      <div class="col-md-3 col-sm-6">
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" name="{{ form1.dpcla_RegNetX006.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_RegNetX006.id_for_label }}">
-                          <label class="form-check-label" for="{{ form1.dpcla_RegNetX006.id_for_label }}">RegNetX 006</label>
-                        </div>
-                      </div>
-                      <div class="col-md-3 col-sm-6">
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" name="{{ form1.dpcla_RegNetY006.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_RegNetY006.id_for_label }}">
-                          <label class="form-check-label" for="{{ form1.dpcla_RegNetY006.id_for_label }}">RegNetY 006</label>
-                        </diV>
-                      </div>
-                      <div class="col-md-3 col-sm-6">
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" name="{{ form1.dpcla_RegNetX008.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_RegNetX008.id_for_label }}">
-                          <label class="form-check-label" for="{{ form1.dpcla_RegNetX008.id_for_label }}">RegNetX 008</label>
-                        </div>
-                      </div>
-                      <div class="col-md-3 col-sm-6">
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" name="{{ form1.dpcla_RegNetY008.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_RegNetY008.id_for_label }}">
-                          <label class="form-check-label" for="{{ form1.dpcla_RegNetY008.id_for_label }}">RegNetY 008</label>
-                        </diV>
-                      </div>
-                      <div class="col-md-3 col-sm-6">
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" name="{{ form1.dpcla_RegNetX016.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_RegNetX016.id_for_label }}">
-                          <label class="form-check-label" for="{{ form1.dpcla_RegNetX016.id_for_label }}">RegNetX 016</label>
-                        </div>
-                      </div>
-                      <div class="col-md-3 col-sm-6">
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" name="{{ form1.dpcla_RegNetY016.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_RegNetY016.id_for_label }}">
-                          <label class="form-check-label" for="{{ form1.dpcla_RegNetY016.id_for_label }}">RegNetY 016</label>
-                        </diV>
-                      </div>
-                      <div class="col-md-3 col-sm-6">
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" name="{{ form1.dpcla_RegNetX032.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_RegNetX032.id_for_label }}">
-                          <label class="form-check-label" for="{{ form1.dpcla_RegNetX032.id_for_label }}">RegNetX 032</label>
-                        </div>
-                      </div>
-                      <div class="col-md-3 col-sm-6">
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" name="{{ form1.dpcla_RegNetY032.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_RegNetY032.id_for_label }}">
-                          <label class="form-check-label" for="{{ form1.dpcla_RegNetY032.id_for_label }}">RegNetY 032</label>
-                        </diV>
-                      </div>
-                      <div class="col-md-3 col-sm-6">
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" name="{{ form1.dpcla_RegNetX040.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_RegNetX040.id_for_label }}">
-                          <label class="form-check-label" for="{{ form1.dpcla_RegNetX040.id_for_label }}">RegNetX 040</label>
-                        </div>
-                      </div>
-                      <div class="col-md-3 col-sm-6">
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" name="{{ form1.dpcla_RegNetY040.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_RegNetY040.id_for_label }}">
-                          <label class="form-check-label" for="{{ form1.dpcla_RegNetY040.id_for_label }}">RegNetY 040</label>
-                        </diV>
-                      </div>
-                      <div class="col-md-3 col-sm-6">
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" name="{{ form1.dpcla_RegNetX064.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_RegNetX064.id_for_label }}">
-                          <label class="form-check-label" for="{{ form1.dpcla_RegNetX064.id_for_label }}">RegNetX 064</label>
-                        </div>
-                      </div>
-                      <div class="col-md-3 col-sm-6">
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" name="{{ form1.dpcla_RegNetY064.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_RegNetY064.id_for_label }}">
-                          <label class="form-check-label" for="{{ form1.dpcla_RegNetY064.id_for_label }}">RegNetY 064</label>
-                        </diV>
-                      </div>
-                      <div class="col-md-3 col-sm-6">
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" name="{{ form1.dpcla_RegNetX080.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_RegNetX080.id_for_label }}">
-                          <label class="form-check-label" for="{{ form1.dpcla_RegNetX080.id_for_label }}">RegNetX 080</label>
-                        </div>
-                      </div>
-                      <div class="col-md-3 col-sm-6">
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" name="{{ form1.dpcla_RegNetY080.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_RegNetY080.id_for_label }}">
-                          <label class="form-check-label" for="{{ form1.dpcla_RegNetY080.id_for_label }}">RegNetY 080</label>
-                        </diV>
-                      </div>
-                      <div class="col-md-3 col-sm-6">
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" name="{{ form1.dpcla_RegNetX120.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_RegNetX120.id_for_label }}">
-                          <label class="form-check-label" for="{{ form1.dpcla_RegNetX120.id_for_label }}">RegNetX 120</label>
-                        </div>
-                      </div>
-                      <div class="col-md-3 col-sm-6">
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" name="{{ form1.dpcla_RegNetY120.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_RegNetY120.id_for_label }}">
-                          <label class="form-check-label" for="{{ form1.dpcla_RegNetY120.id_for_label }}">RegNetY 120</label>
-                        </diV>
-                      </div>
-                      <div class="col-md-3 col-sm-6">
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" name="{{ form1.dpcla_RegNetX160.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_RegNetX160.id_for_label }}">
-                          <label class="form-check-label" for="{{ form1.dpcla_RegNetX160.id_for_label }}">RegNetX 160</label>
-                        </div>
-                      </div>
-                      <div class="col-md-3 col-sm-6">
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" name="{{ form1.dpcla_RegNetY160.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_RegNetY160.id_for_label }}">
-                          <label class="form-check-label" for="{{ form1.dpcla_RegNetY160.id_for_label }}">RegNetY 160</label>
-                        </diV>
-                      </div>
-                      <div class="col-md-3 col-sm-6">
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" name="{{ form1.dpcla_RegNetX320.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_RegNetX320.id_for_label }}">
-                          <label class="form-check-label" for="{{ form1.dpcla_RegNetX320.id_for_label }}">RegNetX 320</label>
-                        </div>
-                      </div>
-                      <div class="col-md-3 col-sm-6">
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" name="{{ form1.dpcla_RegNetY320.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_RegNetY320.id_for_label }}">
-                          <label class="form-check-label" for="{{ form1.dpcla_RegNetY320.id_for_label }}">RegNetY 320</label>
-                        </diV>
-                      </div>
-
-                      <div class="d-grid gap-2 d-md-flex justify-content-md-center col-md-12">
-                        <div class="btn-group" role="group">
-                          <input type="checkbox" class="btn-check" id="check01" autocomplete="off" onclick="selectXception(this);">
-                          <label class="btn btn-outline-primary" for="check01">Xception</label>
-                          <input type="checkbox" class="btn-check" id="check02" autocomplete="off" onclick="selectVGG(this);">
-                          <label class="btn btn-outline-primary" for="check02">VGG</label>
-                          <input type="checkbox" class="btn-check" id="check03" autocomplete="off" onclick="selectResNet(this);">
-                          <label class="btn btn-outline-primary" for="check03">ResNet</label>
-                          <input type="checkbox" class="btn-check" id="check04" autocomplete="off" onclick="selectInception(this);">
-                          <label class="btn btn-outline-primary" for="check04">Inception</label>
-                        </div>
-                        <div class="btn-group" role="group">
-                          <input type="checkbox" class="btn-check" id="check05" autocomplete="off" onclick="selectMobileNet(this);">
-                          <label class="btn btn-outline-primary" for="check05">MobileNet</label>
-                          <input type="checkbox" class="btn-check" id="check06" autocomplete="off" onclick="selectDenseNet(this);">
-                          <label class="btn btn-outline-primary" for="check06">DenseNet</label>
-                          <input type="checkbox" class="btn-check" id="check07" autocomplete="off" onclick="selectNASNet(this);">
-                          <label class="btn btn-outline-primary" for="check07">NASNet</label>
-                          <input type="checkbox" class="btn-check" id="check08" autocomplete="off" onclick="selectEfficientNet(this);">
-                          <label class="btn btn-outline-primary" for="check08">EfficientNet</label>
-                        </div>
-                        <div class="btn-group" role="group">
-                          <input type="checkbox" class="btn-check" id="check09" autocomplete="off" onclick="selectConvNeXt(this);">
-                          <label class="btn btn-outline-primary" for="check09">ConvNeXt</label>
-                          <input type="checkbox" class="btn-check" id="check10" autocomplete="off" onclick="selectRegNetX(this);">
-                          <label class="btn btn-outline-primary" for="check10">RegNetX</label>
-                          <input type="checkbox" class="btn-check" id="check11" autocomplete="off" onclick="selectRegNetY(this);">
-                          <label class="btn btn-outline-primary" for="check11">RegNetY</label>
-                        </div>
-                      </div>
-
-                      <div class="d-grid gap-2 d-md-flex justify-content-md-between col-md-12">
-                        <div class="btn-group" role="group">
-                          <input type="radio" class="btn-check" name="img-radio" id="radio1" autocomplete="off">
-                          <label class="btn btn-outline-secondary" for="radio1">RX</label>
-
-                          <input type="radio" class="btn-check" name="img-radio" id="radio2" autocomplete="off">
-                          <label class="btn btn-outline-secondary" for="radio2">CT Scan</label>
-
-                          <input type="radio" class="btn-check" name="img-radio" id="radio3" autocomplete="off">
-                          <label class="btn btn-outline-secondary" for="radio3">IRM</label>
-
-                          <input type="radio" class="btn-check" name="img-radio" id="radio4" autocomplete="off">
-                          <label class="btn btn-outline-secondary" for="radio4">PET Scan</label>
-                        </div>
-                        <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                          <button type="button" class="btn btn-success" onclick="selectModel();">Select All</button>
-                          <button type="button" class="btn btn-danger" onclick="unselectModel();">Unselect All</button>
-                        </div>
-                      </div>
-                      <br>
-
-                      <h5>Training Strategy</h5>
-
-                      <h5>Explainability (XAI)</h5>
-                      <div class="col-md-3 col-sm-6">
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" name="{{ form1.dpcla_activationmaximization.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_activationmaximization.id_for_label }}">
-                          <label class="form-check-label" for="{{ form1.dpcla_activationmaximization.id_for_label }}">Activation Maximization</label>
-                        </diV>
-                      </div>
-                      <div class="col-md-3 col-sm-6">
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" name="{{ form1.dpcla_gradcam.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_gradcam.id_for_label }}">
-                          <label class="form-check-label" for="{{ form1.dpcla_gradcam.id_for_label }}">Grad CAM</label>
-                        </diV>
-                      </div>
-                      <div class="col-md-3 col-sm-6">
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" name="{{ form1.dpcla_gradcamplusplus.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_gradcamplusplus.id_for_label }}">
-                          <label class="form-check-label" for="{{ form1.dpcla_gradcamplusplus.id_for_label }}">Grad CAM ++</label>
-                        </diV>
-                      </div>
-                      <div class="col-md-3 col-sm-6">
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" name="{{ form1.dpcla_scorecam.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_scorecam.id_for_label }}">
-                          <label class="form-check-label" for="{{ form1.dpcla_scorecam.id_for_label }}">Score CAM</label>
-                        </diV>
-                      </div>
-                      <div class="col-md-3 col-sm-6">
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" name="{{ form1.dpcla_fasterscorecam.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_fasterscorecam.id_for_label }}">
-                          <label class="form-check-label" for="{{ form1.dpcla_fasterscorecam.id_for_label }}">Faster-CAM</label>
-                        </diV>
-                      </div>
-                      <div class="col-md-3 col-sm-6">
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" name="{{ form1.dpcla_layercam.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_layercam.id_for_label }}">
-                          <label class="form-check-label" for="{{ form1.dpcla_layercam.id_for_label }}">Layer CAM</label>
-                        </diV>
-                      </div>
-                      <div class="col-md-3 col-sm-6">
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" name="{{ form1.dpcla_vanillasaliency.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_vanillasaliency.id_for_label }}">
-                          <label class="form-check-label" for="{{ form1.dpcla_vanillasaliency.id_for_label }}">Vanilla Saliency</label>
-                        </diV>
-                      </div>
-                      <div class="col-md-3 col-sm-6">
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" name="{{ form1.dpcla_smoothgrad.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_smoothgrad.id_for_label }}">
-                          <label class="form-check-label" for="{{ form1.dpcla_smoothgrad.id_for_label }}">Smooth Grad</label>
-                        </diV>
-                      </div>
-                      <div class="d-grid gap-2 d-md-flex justify-content-md-end col-md-12">
-                        <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                          <button type="button" class="btn btn-success" onclick="selectXAI();">Select All</button>
-                          <button type="button" class="btn btn-danger" onclick="unselectXAI();">Unselect All</button>
-                        </div>
-                      </div>
-
-                      <h5>Training Output</h5>
-                      <div class="col-md-3 col-sm-6">
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" name="{{ form1.dpcla_savemodel.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_savemodel.id_for_label }}">
-                          <label class="form-check-label" for="{{ form1.dpcla_savemodel.id_for_label }}">Save Model</label>
-                        </diV>
-                      </div>
-                      <div class="col-md-3 col-sm-6">
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" name="{{ form1.dpcla_traingraph.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_traingraph.id_for_label }}">
-                          <label class="form-check-label" for="{{ form1.dpcla_traingraph.id_for_label }}">Training / Validation Graphs</label>
-                        </diV>
-                      </div>
-                      <div class="col-md-3 col-sm-6">
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" name="{{ form1.dpcla_confmatrix.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_confmatrix.id_for_label }}">
-                          <label class="form-check-label" for="{{ form1.dpcla_confmatrix.id_for_label }}">Confusion Matrix</label>
-                        </diV>
-                      </div>
-                      <div class="col-md-3 col-sm-6">
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" name="{{ form1.dpcla_classreport.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_classreport.id_for_label }}">
-                          <label class="form-check-label" for="{{ form1.dpcla_classreport.id_for_label }}">Classification Report</label>
-                        </diV>
-                      </div>
-                      <div class="col-md-3 col-sm-6">
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" name="{{ form1.dpcla_tflite.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_tflite.id_for_label }}">
-                          <label class="form-check-label" for="{{ form1.dpcla_tflite.id_for_label }}">TFLite Conversion</label>
-                        </diV>
-                      </div>
-
-                      <div class="d-grid gap-2 d-md-flex justify-content-md-end col-md-12">
-                        <button type="reset" class="btn btn-secondary mb-3">Reset</button>
-                        <button type="submit" class="btn btn-primary mb-3">Run</button>
-                      </div>
-                  </form>
+          </form>
+      </div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h2 class="accordion-header">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#DeepAssistant-collapseTwo" aria-expanded="false" aria-controls="DeepAssistant-collapseTwo">
+        Image Classification
+      </button>
+    </h2>
+    <div id="DeepAssistant-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#DeepAssistant">
+      <div class="accordion-body">
+          <form class="row g-3" action="/dl_classifier_processing/" method="post">
+            {% csrf_token %}
+              <h5>Data Augmentation</h5>
+              <div class="col-md-3 col-sm-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" name="{{ form1.dpcla_data_augmentation_cropping.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_data_augmentation_cropping.id_for_label }}">
+                    <label class="form-check-label" for="{{ form1.dpcla_data_augmentation_cropping.id_for_label }}">Image Cropping</label>
+                </div>
               </div>
-            </div>
-          </div>
-          <div class="accordion-item">
-            <h2 class="accordion-header">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#DeepAssistant-collapseThree" aria-expanded="false" aria-controls="DeepAssistant-collapseThree">
-                Image Segmentation
-              </button>
-            </h2>
-            <div id="DeepAssistant-collapseThree" class="accordion-collapse collapse" data-bs-parent="#DeepAssistant">
-              <div class="accordion-body">
-                  <form class="row g-3" action="/dl_classifier_processing/" method="post">
-                    {% csrf_token %}
-                      <h5>Model Choice</h5>
-                      <div class="col-md-3 col-sm-6">
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" name="{{ form1.dpseg_unet.html_name }}" type="checkbox" role="switch" id="{{ form1.dpseg_unet.id_for_label }}">
-                          <label class="form-check-label" for="{{ form1.dpseg_unet.id_for_label }}">U-Net</label>
-                        </div>
-                      </div>
-                      <div class="col-md-3 col-sm-6">
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" name="{{ form1.dpseg_unetplusplus.html_name }}" type="checkbox" role="switch" id="{{ form1.dpseg_unetplusplus.id_for_label }}">
-                          <label class="form-check-label" for="{{ form1.dpseg_unetplusplus.id_for_label }}">U-Net++</label>
-                        </div>
-                      </div>
-                      <div class="col-md-3 col-sm-6">
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" name="{{ form1.dpseg_manet.html_name }}" type="checkbox" role="switch" id="{{ form1.dpseg_unetplusplus.id_for_label }}">
-                          <label class="form-check-label" for="{{ form1.dpseg_manet.id_for_label }}">MAnet</label>
-                        </div>
-                      </div>
-                      <div class="col-md-3 col-sm-6">
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" name="{{ form1.dpseg_linknet.html_name }}" type="checkbox" role="switch" id="{{ form1.dpseg_linknet.id_for_label }}">
-                          <label class="form-check-label" for="{{ form1.dpseg_linknet.id_for_label }}">Linknet</label>
-                        </div>
-                      </div>
-                      <div class="col-md-3 col-sm-6">
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" name="{{ form1.dpseg_fpn.html_name }}" type="checkbox" role="switch" id="{{ form1.dpseg_fpn.id_for_label }}">
-                          <label class="form-check-label" for="{{ form1.dpseg_fpn.id_for_label }}">FPN</label>
-                        </div>
-                      </div>
-                      <div class="col-md-3 col-sm-6">
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" name="{{ form1.dpseg_pspnet.html_name }}" type="checkbox" role="switch" id="{{ form1.dpseg_pspnet.id_for_label }}">
-                          <label class="form-check-label" for="{{ form1.dpseg_pspnet.id_for_label }}">PSP Net</label>
-                        </div>
-                      </div>
-                      <div class="col-md-3 col-sm-6">
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" name="{{ form1.dpseg_pan.html_name }}" type="checkbox" role="switch" id="{{ form1.dpseg_pan.id_for_label }}">
-                          <label class="form-check-label" for="{{ form1.dpseg_pan.id_for_label }}">PAN</label>
-                        </div>
-                      </div>
-                      <div class="col-md-3 col-sm-6">
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" name="{{ form1.dpseg_deeplabv3.html_name }}" type="checkbox" role="switch" id="{{ form1.dpseg_deeplabv3.id_for_label }}">
-                          <label class="form-check-label" for="{{ form1.dpseg_deeplabv3.id_for_label }}">DeepLab v3</label>
-                        </div>
-                      </div>
-                      <div class="col-md-3 col-sm-6">
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" name="{{ form1.dpseg_deeplabv3plus.html_name }}" type="checkbox" role="switch" id="{{ form1.dpseg_deeplabv3plus.id_for_label }}">
-                          <label class="form-check-label" for="{{ form1.dpseg_deeplabv3plus.id_for_label }}">DeepLab v3+</label>
-                        </div>
-                      </div>
-                  </form>
+              <div class="col-md-3 col-sm-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" name="{{ form1.dpcla_data_augmentation_horizontal_flip.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_data_augmentation_horizontal_flip.id_for_label }}">
+                  <label class="form-check-label" for="{{ form1.dpcla_data_augmentation_horizontal_flip.id_for_label }}">Image Horizontal Flip</label>
+                </div>
               </div>
-            </div>
-          </div>
-        </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" name="{{ form1.dpcla_data_augmentation_vertical_flip.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_data_augmentation_vertical_flip.id_for_label }}">
+                  <label class="form-check-label" for="{{ form1.dpcla_data_augmentation_vertical_flip.id_for_label }}">Image Vertical Flip</label>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" name="{{ form1.dpcla_data_augmentation_translation.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_data_augmentation_translation.id_for_label }}">
+                  <label class="form-check-label" for="{{ form1.dpcla_data_augmentation_translation.id_for_label }}">Image Translation</label>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" name="{{ form1.dpcla_data_augmentation_rotation.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_data_augmentation_rotation.id_for_label }}">
+                  <label class="form-check-label" for="{{ form1.dpcla_data_augmentation_rotation.id_for_label }}">Image Rotation</label>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" name="{{ form1.dpcla_data_augmentation_zoom.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_data_augmentation_zoom.id_for_label }}">
+                  <label class="form-check-label" for="{{ form1.dpcla_data_augmentation_zoom.id_for_label }}">Image Zoom</label>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" name="{{ form1.dpcla_data_augmentation_contrast.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_data_augmentation_contrast.id_for_label }}">
+                  <label class="form-check-label" for="{{ form1.dpcla_data_augmentation_contrast.id_for_label }}">Image Contrast</label>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" name="{{ form1.dpcla_data_augmentation_brightness.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_data_augmentation_brightness.id_for_label }}">
+                  <label class="form-check-label" for="{{ form1.dpcla_data_augmentation_brightness.id_for_label }}">Image Brightness</label>
+                </div>
+              </div>
+              <div class="d-grid gap-2 d-md-flex justify-content-md-end col-md-12">
+                <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                  <button type="button" class="btn btn-success" onclick="selectDataAug();">Select All</button>
+                  <button type="button" class="btn btn-danger" onclick="unselectDataAug();">Unselect All</button>
+                </div>
+              </div>
+
+              <h5>Model choice</h5>
+              <div class="col-md-3 col-sm-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" name="{{ form1.dpcla_Xception.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_Xception.id_for_label }}">
+                  <label class="form-check-label" for="{{ form1.dpcla_Xception.id_for_label }}">Xception Image Cropping <a href="https://arxiv.org/abs/1610.02357" target="_blank"><svg class="bi" width="16" height="16" role="img" aria-label="Exception"><use href="#info"></use></svg></a></label>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" name="{{ form1.dpcla_VGG11.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_VGG11.id_for_label }}">
+                  <label class="form-check-label" for="{{ form1.dpcla_VGG11.id_for_label }}">VGG 11 <a href="" target="_blank"><svg class="bi" width="16" height="16" role="img" aria-label="VGG 11"><use href="#info"></use></svg></a></label>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" name="{{ form1.dpcla_VGG13.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_VGG13.id_for_label }}">
+                  <label class="form-check-label" for="{{ form1.dpcla_VGG13.id_for_label }}">VGG 13 <a href="" target="_blank"><svg class="bi" width="16" height="16" role="img" aria-label="VGG 13"><use href="#info"></use></svg></a></label>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" name="{{ form1.dpcla_VGG16.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_VGG16.id_for_label }}">
+                  <label class="form-check-label" for="{{ form1.dpcla_VGG16.id_for_label }}">VGG 16 <a href="" target="_blank"><svg class="bi" width="16" height="16" role="img" aria-label="VGG 16"><use href="#info"></use></svg></a></label>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" name="{{ form1.dpcla_VGG19.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_VGG19.id_for_label }}">
+                  <label class="form-check-label" for="{{ form1.dpcla_VGG19.id_for_label }}">VGG 19 <a href="" target="_blank"><svg class="bi" width="16" height="16" role="img" aria-label="VGG 19"><use href="#info"></use></svg></a></label>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" name="{{ form1.dpcla_ResNet18.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_ResNet18.id_for_label }}">
+                  <label class="form-check-label" for="{{ form1.dpcla_ResNet18.id_for_label }}">ResNet 18 <a href="" target="_blank"><svg class="bi" width="16" height="16" role="img" aria-label="ResNet 18"><use href="#info"></use></svg></a></label>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" name="{{ form1.dpcla_ResNet34.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_ResNet34.id_for_label }}">
+                  <label class="form-check-label" for="{{ form1.dpcla_ResNet34.id_for_label }}">ResNet 34 <a href="" target="_blank"><svg class="bi" width="16" height="16" role="img" aria-label="ResNet 34"><use href="#info"></use></svg></a></label>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" name="{{ form1.dpcla_ResNet50.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_ResNet50.id_for_label }}">
+                  <label class="form-check-label" for="{{ form1.dpcla_ResNet50.id_for_label }}">ResNet 50 <a href="" target="_blank"><svg class="bi" width="16" height="16" role="img" aria-label="ResNet 50"><use href="#info"></use></svg></a></label>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" name="{{ form1.dpcla_ResNet50V2.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_ResNet50V2.id_for_label }}">
+                  <label class="form-check-label" for="{{ form1.dpcla_ResNet50V2.id_for_label }}">ResNet 50 V2 <a href="" target="_blank"><svg class="bi" width="16" height="16" role="img" aria-label="ResNet 50 V2"><use href="#info"></use></svg></a></label>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" name="{{ form1.dpcla_ResNetRS50.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_ResNetRS50.id_for_label }}">
+                  <label class="form-check-label" for="{{ form1.dpcla_ResNetRS50.id_for_label }}">ResNet RS 50</label>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" name="{{ form1.dpcla_ResNet101.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_ResNet101.id_for_label }}">
+                  <label class="form-check-label" for="{{ form1.dpcla_ResNet101.id_for_label }}">ResNet 101</label>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" name="{{ form1.dpcla_ResNet101V2.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_ResNet101V2.id_for_label }}">
+                  <label class="form-check-label" for="{{ form1.dpcla_ResNet101V2.id_for_label }}">ResNet 101 V2</label>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" name="{{ form1.dpcla_ResNetRS101.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_ResNetRS101.id_for_label }}">
+                  <label class="form-check-label" for="{{ form1.dpcla_ResNetRS101.id_for_label }}">ResNet RS 101</label>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" name="{{ form1.dpcla_ResNet152.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_ResNet152.id_for_label }}">
+                  <label class="form-check-label" for="{{ form1.dpcla_ResNet152.id_for_label }}">ResNet 152</label>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" name="{{ form1.dpcla_ResNet152V2.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_ResNet152V2.id_for_label }}">
+                  <label class="form-check-label" for="{{ form1.dpcla_ResNet152V2.id_for_label }}">ResNet 152 V2</label>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" name="{{ form1.dpcla_ResNetRS152.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_ResNetRS152.id_for_label }}">
+                  <label class="form-check-label" for="{{ form1.dpcla_ResNetRS152.id_for_label }}">ResNet RS 152</label>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" name="{{ form1.dpcla_ResNetRS200.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_ResNetRS200.id_for_label }}">
+                  <label class="form-check-label" for="{{ form1.dpcla_ResNetRS200.id_for_label }}">ResNet RS 200</label>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" name="{{ form1.dpcla_ResNetRS270.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_ResNetRS270.id_for_label }}">
+                  <label class="form-check-label" for="{{ form1.dpcla_ResNetRS270.id_for_label }}">ResNet RS 270</label>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" name="{{ form1.dpcla_ResNetRS350.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_ResNetRS350.id_for_label }}">
+                  <label class="form-check-label" for="{{ form1.dpcla_ResNetRS350.id_for_label }}">ResNet RS 350</label>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" name="{{ form1.dpcla_ResNetRS420.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_ResNetRS420.id_for_label }}">
+                  <label class="form-check-label" for="{{ form1.dpcla_ResNetRS420.id_for_label }}">ResNet RS 420</label>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" name="{{ form1.dpcla_InceptionV3.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_InceptionV3.id_for_label }}">
+                  <label class="form-check-label" for="{{ form1.dpcla_InceptionV3.id_for_label }}">Inception V3</label>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" name="{{ form1.dpcla_InceptionResNetV2.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_InceptionResNetV2.id_for_label }}">
+                  <label class="form-check-label" for="{{ form1.dpcla_InceptionResNetV2.id_for_label }}">Inception ResNet V2</label>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" name="{{ form1.dpcla_MobileNet.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_MobileNet.id_for_label }}">
+                  <label class="form-check-label" for="{{ form1.dpcla_MobileNet.id_for_label }}">MobileNet</label>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" name="{{ form1.dpcla_MobileNetV2.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_MobileNetV2.id_for_label }}">
+                  <label class="form-check-label" for="{{ form1.dpcla_MobileNetV2.id_for_label }}">MobileNet V2</label>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" name="{{ form1.dpcla_MobileNetV3Small.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_MobileNetV3Small.id_for_label }}">
+                  <label class="form-check-label" for="{{ form1.dpcla_MobileNetV3Small.id_for_label }}">MobileNet V3 Small</label>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" name="{{ form1.dpcla_MobileNetV3Large.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_MobileNetV3Large.id_for_label }}">
+                  <label class="form-check-label" for="{{ form1.dpcla_MobileNetV3Large.id_for_label }}">MobileNet V3 Large</label>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" name="{{ form1.dpcla_DenseNet121.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_DenseNet121.id_for_label }}">
+                  <label class="form-check-label" for="{{ form1.dpcla_DenseNet121.id_for_label }}">DenseNet 121</label>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" name="{{ form1.dpcla_DenseNet169.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_DenseNet169.id_for_label }}">
+                  <label class="form-check-label" for="{{ form1.dpcla_DenseNet169.id_for_label }}">DenseNet 169</label>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" name="{{ form1.dpcla_DenseNet201.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_DenseNet201.id_for_label }}">
+                  <label class="form-check-label" for="{{ form1.dpcla_DenseNet201.id_for_label }}">DenseNet 201</label>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" name="{{ form1.dpcla_NASNetMobile.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_NASNetMobile.id_for_label }}">
+                  <label class="form-check-label" for="{{ form1.dpcla_NASNetMobile.id_for_label }}">NASNet Mobile</label>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" name="{{ form1.dpcla_NASNetLarge.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_NASNetLarge.id_for_label }}">
+                  <label class="form-check-label" for="{{ form1.dpcla_NASNetLarge.id_for_label }}">NASNet Large</label>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" name="{{ form1.dpcla_EfficientNetB0.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_EfficientNetB0.id_for_label }}">
+                  <label class="form-check-label" for="{{ form1.dpcla_EfficientNetB0.id_for_label }}">EfficientNet B0</label>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" name="{{ form1.dpcla_EfficientNetB0V2.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_EfficientNetB0V2.id_for_label }}">
+                  <label class="form-check-label" for="{{ form1.dpcla_EfficientNetB0V2.id_for_label }}">EfficientNet B0 V2</label>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" name="{{ form1.dpcla_EfficientNetB1.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_EfficientNetB1.id_for_label }}">
+                  <label class="form-check-label" for="{{ form1.dpcla_EfficientNetB1.id_for_label }}">EfficientNet B1</label>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" name="{{ form1.dpcla_EfficientNetB1V2.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_EfficientNetB1V2.id_for_label }}">
+                  <label class="form-check-label" for="{{ form1.dpcla_EfficientNetB1V2.id_for_label }}">EfficientNet B1 V2</label>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" name="{{ form1.dpcla_EfficientNetB2.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_EfficientNetB2.id_for_label }}">
+                  <label class="form-check-label" for="{{ form1.dpcla_EfficientNetB2.id_for_label }}">EfficientNet B2</label>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" name="{{ form1.dpcla_EfficientNetB2V2.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_EfficientNetB2V2.id_for_label }}">
+                  <label class="form-check-label" for="{{ form1.dpcla_EfficientNetB2V2.id_for_label }}">EfficientNet B2 V2</label>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" name="{{ form1.dpcla_EfficientNetB3.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_EfficientNetB3.id_for_label }}">
+                  <label class="form-check-label" for="{{ form1.dpcla_EfficientNetB3.id_for_label }}">EfficientNet B3</label>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" name="{{ form1.dpcla_EfficientNetB3V2.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_EfficientNetB3V2.id_for_label }}">
+                  <label class="form-check-label" for="{{ form1.dpcla_EfficientNetB3V2.id_for_label }}">EfficientNet B3 V2</label>
+                </div>
+              </div>
+
+              <div class="col-md-3 col-sm-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" name="{{ form1.dpcla_EfficientNetB4.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_EfficientNetB4.id_for_label }}">
+                  <label class="form-check-label" for="{{ form1.dpcla_EfficientNetB4.id_for_label }}">EfficientNet B4</label>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" name="{{ form1.dpcla_EfficientNetB5.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_EfficientNetB5.id_for_label }}">
+                  <label class="form-check-label" for="{{ form1.dpcla_EfficientNetB5.id_for_label }}">EfficientNet B5</label>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" name="{{ form1.dpcla_EfficientNetB6.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_EfficientNetB6.id_for_label }}">
+                  <label class="form-check-label" for="{{ form1.dpcla_EfficientNetB6.id_for_label }}">EfficientNet B6</label>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" name="{{ form1.dpcla_EfficientNetB7.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_EfficientNetB7.id_for_label }}">
+                  <label class="form-check-label" for="{{ form1.dpcla_EfficientNetB7.id_for_label }}">EfficientNet B7</label>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" name="{{ form1.dpcla_EfficientNetV2Small.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_EfficientNetV2Small.id_for_label }}">
+                  <label class="form-check-label" for="{{ form1.dpcla_EfficientNetV2Small.id_for_label }}">EfficientNet V2 Small</label>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" name="{{ form1.dpcla_EfficientNetV2Medium.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_EfficientNetV2Medium.id_for_label }}">
+                  <label class="form-check-label" for="{{ form1.dpcla_EfficientNetV2Medium.id_for_label }}">EfficientNet V2 Medium</label>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" name="{{ form1.dpcla_EfficientNetV2Large.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_EfficientNetV2Large.id_for_label }}">
+                  <label class="form-check-label" for="{{ form1.dpcla_EfficientNetV2Large.id_for_label }}">EfficientNet V2 Large</label>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" name="{{ form1.dpcla_ConvNeXtTiny.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_ConvNeXtTiny.id_for_label }}">
+                  <label class="form-check-label" for="{{ form1.dpcla_ConvNeXtTiny.id_for_label }}">ConvNeXt Tiny</label>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" name="{{ form1.dpcla_ConvNeXtSmall.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_ConvNeXtSmall.id_for_label }}">
+                  <label class="form-check-label" for="{{ form1.dpcla_ConvNeXtSmall.id_for_label }}">ConvNeXt Small</label>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" name="{{ form1.dpcla_ConvNeXtBase.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_ConvNeXtBase.id_for_label }}">
+                  <label class="form-check-label" for="{{ form1.dpcla_ConvNeXtBase.id_for_label }}">ConvNeXt Base</label>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" name="{{ form1.dpcla_ConvNeXtLarge.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_ConvNeXtLarge.id_for_label }}">
+                  <label class="form-check-label" for="{{ form1.dpcla_ConvNeXtLarge.id_for_label }}">ConvNeXt Large</label>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" name="{{ form1.dpcla_ConvNeXtXLarge.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_ConvNeXtXLarge.id_for_label }}">
+                  <label class="form-check-label" for="{{ form1.dpcla_ConvNeXtXLarge.id_for_label }}">ConvNeXt XLarge</label>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" name="{{ form1.dpcla_RegNetX002.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_RegNetX002.id_for_label }}">
+                  <label class="form-check-label" for="{{ form1.dpcla_RegNetX002.id_for_label }}">RegNetX 002</label>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" name="{{ form1.dpcla_RegNetY002.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_RegNetY002.id_for_label }}">
+                  <label class="form-check-label" for="{{ form1.dpcla_RegNetY002.id_for_label }}">RegNetY 002</label>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" name="{{ form1.dpcla_RegNetX004.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_RegNetX004.id_for_label }}">
+                  <label class="form-check-label" for="{{ form1.dpcla_RegNetX004.id_for_label }}">RegNetX 004</label>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" name="{{ form1.dpcla_RegNetY004.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_RegNetY004.id_for_label }}">
+                  <label class="form-check-label" for="{{ form1.dpcla_RegNetY004.id_for_label }}">RegNetY 004</label>
+                </diV>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" name="{{ form1.dpcla_RegNetX006.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_RegNetX006.id_for_label }}">
+                  <label class="form-check-label" for="{{ form1.dpcla_RegNetX006.id_for_label }}">RegNetX 006</label>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" name="{{ form1.dpcla_RegNetY006.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_RegNetY006.id_for_label }}">
+                  <label class="form-check-label" for="{{ form1.dpcla_RegNetY006.id_for_label }}">RegNetY 006</label>
+                </diV>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" name="{{ form1.dpcla_RegNetX008.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_RegNetX008.id_for_label }}">
+                  <label class="form-check-label" for="{{ form1.dpcla_RegNetX008.id_for_label }}">RegNetX 008</label>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" name="{{ form1.dpcla_RegNetY008.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_RegNetY008.id_for_label }}">
+                  <label class="form-check-label" for="{{ form1.dpcla_RegNetY008.id_for_label }}">RegNetY 008</label>
+                </diV>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" name="{{ form1.dpcla_RegNetX016.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_RegNetX016.id_for_label }}">
+                  <label class="form-check-label" for="{{ form1.dpcla_RegNetX016.id_for_label }}">RegNetX 016</label>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" name="{{ form1.dpcla_RegNetY016.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_RegNetY016.id_for_label }}">
+                  <label class="form-check-label" for="{{ form1.dpcla_RegNetY016.id_for_label }}">RegNetY 016</label>
+                </diV>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" name="{{ form1.dpcla_RegNetX032.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_RegNetX032.id_for_label }}">
+                  <label class="form-check-label" for="{{ form1.dpcla_RegNetX032.id_for_label }}">RegNetX 032</label>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" name="{{ form1.dpcla_RegNetY032.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_RegNetY032.id_for_label }}">
+                  <label class="form-check-label" for="{{ form1.dpcla_RegNetY032.id_for_label }}">RegNetY 032</label>
+                </diV>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" name="{{ form1.dpcla_RegNetX040.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_RegNetX040.id_for_label }}">
+                  <label class="form-check-label" for="{{ form1.dpcla_RegNetX040.id_for_label }}">RegNetX 040</label>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" name="{{ form1.dpcla_RegNetY040.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_RegNetY040.id_for_label }}">
+                  <label class="form-check-label" for="{{ form1.dpcla_RegNetY040.id_for_label }}">RegNetY 040</label>
+                </diV>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" name="{{ form1.dpcla_RegNetX064.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_RegNetX064.id_for_label }}">
+                  <label class="form-check-label" for="{{ form1.dpcla_RegNetX064.id_for_label }}">RegNetX 064</label>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" name="{{ form1.dpcla_RegNetY064.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_RegNetY064.id_for_label }}">
+                  <label class="form-check-label" for="{{ form1.dpcla_RegNetY064.id_for_label }}">RegNetY 064</label>
+                </diV>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" name="{{ form1.dpcla_RegNetX080.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_RegNetX080.id_for_label }}">
+                  <label class="form-check-label" for="{{ form1.dpcla_RegNetX080.id_for_label }}">RegNetX 080</label>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" name="{{ form1.dpcla_RegNetY080.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_RegNetY080.id_for_label }}">
+                  <label class="form-check-label" for="{{ form1.dpcla_RegNetY080.id_for_label }}">RegNetY 080</label>
+                </diV>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" name="{{ form1.dpcla_RegNetX120.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_RegNetX120.id_for_label }}">
+                  <label class="form-check-label" for="{{ form1.dpcla_RegNetX120.id_for_label }}">RegNetX 120</label>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" name="{{ form1.dpcla_RegNetY120.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_RegNetY120.id_for_label }}">
+                  <label class="form-check-label" for="{{ form1.dpcla_RegNetY120.id_for_label }}">RegNetY 120</label>
+                </diV>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" name="{{ form1.dpcla_RegNetX160.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_RegNetX160.id_for_label }}">
+                  <label class="form-check-label" for="{{ form1.dpcla_RegNetX160.id_for_label }}">RegNetX 160</label>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" name="{{ form1.dpcla_RegNetY160.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_RegNetY160.id_for_label }}">
+                  <label class="form-check-label" for="{{ form1.dpcla_RegNetY160.id_for_label }}">RegNetY 160</label>
+                </diV>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" name="{{ form1.dpcla_RegNetX320.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_RegNetX320.id_for_label }}">
+                  <label class="form-check-label" for="{{ form1.dpcla_RegNetX320.id_for_label }}">RegNetX 320</label>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" name="{{ form1.dpcla_RegNetY320.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_RegNetY320.id_for_label }}">
+                  <label class="form-check-label" for="{{ form1.dpcla_RegNetY320.id_for_label }}">RegNetY 320</label>
+                </diV>
+              </div>
+
+              <div class="d-grid gap-2 d-md-flex justify-content-md-center col-md-12">
+                <div class="btn-group" role="group">
+                  <input type="checkbox" class="btn-check" id="check01" autocomplete="off" onclick="selectXception(this);">
+                  <label class="btn btn-outline-primary" for="check01">Xception</label>
+                  <input type="checkbox" class="btn-check" id="check02" autocomplete="off" onclick="selectVGG(this);">
+                  <label class="btn btn-outline-primary" for="check02">VGG</label>
+                  <input type="checkbox" class="btn-check" id="check03" autocomplete="off" onclick="selectResNet(this);">
+                  <label class="btn btn-outline-primary" for="check03">ResNet</label>
+                  <input type="checkbox" class="btn-check" id="check04" autocomplete="off" onclick="selectInception(this);">
+                  <label class="btn btn-outline-primary" for="check04">Inception</label>
+                </div>
+                <div class="btn-group" role="group">
+                  <input type="checkbox" class="btn-check" id="check05" autocomplete="off" onclick="selectMobileNet(this);">
+                  <label class="btn btn-outline-primary" for="check05">MobileNet</label>
+                  <input type="checkbox" class="btn-check" id="check06" autocomplete="off" onclick="selectDenseNet(this);">
+                  <label class="btn btn-outline-primary" for="check06">DenseNet</label>
+                  <input type="checkbox" class="btn-check" id="check07" autocomplete="off" onclick="selectNASNet(this);">
+                  <label class="btn btn-outline-primary" for="check07">NASNet</label>
+                  <input type="checkbox" class="btn-check" id="check08" autocomplete="off" onclick="selectEfficientNet(this);">
+                  <label class="btn btn-outline-primary" for="check08">EfficientNet</label>
+                </div>
+                <div class="btn-group" role="group">
+                  <input type="checkbox" class="btn-check" id="check09" autocomplete="off" onclick="selectConvNeXt(this);">
+                  <label class="btn btn-outline-primary" for="check09">ConvNeXt</label>
+                  <input type="checkbox" class="btn-check" id="check10" autocomplete="off" onclick="selectRegNetX(this);">
+                  <label class="btn btn-outline-primary" for="check10">RegNetX</label>
+                  <input type="checkbox" class="btn-check" id="check11" autocomplete="off" onclick="selectRegNetY(this);">
+                  <label class="btn btn-outline-primary" for="check11">RegNetY</label>
+                </div>
+              </div>
+
+              <div class="d-grid gap-2 d-md-flex justify-content-md-between col-md-12">
+                <div class="btn-group" role="group">
+                  <input type="radio" class="btn-check" name="img-radio" id="radio1" autocomplete="off">
+                  <label class="btn btn-outline-secondary" for="radio1">RX</label>
+
+                  <input type="radio" class="btn-check" name="img-radio" id="radio2" autocomplete="off">
+                  <label class="btn btn-outline-secondary" for="radio2">CT Scan</label>
+
+                  <input type="radio" class="btn-check" name="img-radio" id="radio3" autocomplete="off">
+                  <label class="btn btn-outline-secondary" for="radio3">IRM</label>
+
+                  <input type="radio" class="btn-check" name="img-radio" id="radio4" autocomplete="off">
+                  <label class="btn btn-outline-secondary" for="radio4">PET Scan</label>
+                </div>
+                <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                  <button type="button" class="btn btn-success" onclick="selectModel();">Select All</button>
+                  <button type="button" class="btn btn-danger" onclick="unselectModel();">Unselect All</button>
+                </div>
+              </div>
+              <br>
+
+              <h5>Training Strategy</h5>
+
+              <h5>Explainability (XAI)</h5>
+              <div class="col-md-3 col-sm-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" name="{{ form1.dpcla_activationmaximization.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_activationmaximization.id_for_label }}">
+                  <label class="form-check-label" for="{{ form1.dpcla_activationmaximization.id_for_label }}">Activation Maximization</label>
+                </diV>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" name="{{ form1.dpcla_gradcam.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_gradcam.id_for_label }}">
+                  <label class="form-check-label" for="{{ form1.dpcla_gradcam.id_for_label }}">Grad CAM</label>
+                </diV>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" name="{{ form1.dpcla_gradcamplusplus.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_gradcamplusplus.id_for_label }}">
+                  <label class="form-check-label" for="{{ form1.dpcla_gradcamplusplus.id_for_label }}">Grad CAM ++</label>
+                </diV>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" name="{{ form1.dpcla_scorecam.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_scorecam.id_for_label }}">
+                  <label class="form-check-label" for="{{ form1.dpcla_scorecam.id_for_label }}">Score CAM</label>
+                </diV>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" name="{{ form1.dpcla_fasterscorecam.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_fasterscorecam.id_for_label }}">
+                  <label class="form-check-label" for="{{ form1.dpcla_fasterscorecam.id_for_label }}">Faster-CAM</label>
+                </diV>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" name="{{ form1.dpcla_layercam.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_layercam.id_for_label }}">
+                  <label class="form-check-label" for="{{ form1.dpcla_layercam.id_for_label }}">Layer CAM</label>
+                </diV>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" name="{{ form1.dpcla_vanillasaliency.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_vanillasaliency.id_for_label }}">
+                  <label class="form-check-label" for="{{ form1.dpcla_vanillasaliency.id_for_label }}">Vanilla Saliency</label>
+                </diV>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" name="{{ form1.dpcla_smoothgrad.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_smoothgrad.id_for_label }}">
+                  <label class="form-check-label" for="{{ form1.dpcla_smoothgrad.id_for_label }}">Smooth Grad</label>
+                </diV>
+              </div>
+              <div class="d-grid gap-2 d-md-flex justify-content-md-end col-md-12">
+                <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                  <button type="button" class="btn btn-success" onclick="selectXAI();">Select All</button>
+                  <button type="button" class="btn btn-danger" onclick="unselectXAI();">Unselect All</button>
+                </div>
+              </div>
+
+              <h5>Training Output</h5>
+              <div class="col-md-3 col-sm-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" name="{{ form1.dpcla_savemodel.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_savemodel.id_for_label }}">
+                  <label class="form-check-label" for="{{ form1.dpcla_savemodel.id_for_label }}">Save Model</label>
+                </diV>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" name="{{ form1.dpcla_traingraph.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_traingraph.id_for_label }}">
+                  <label class="form-check-label" for="{{ form1.dpcla_traingraph.id_for_label }}">Training / Validation Graphs</label>
+                </diV>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" name="{{ form1.dpcla_confmatrix.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_confmatrix.id_for_label }}">
+                  <label class="form-check-label" for="{{ form1.dpcla_confmatrix.id_for_label }}">Confusion Matrix</label>
+                </diV>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" name="{{ form1.dpcla_classreport.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_classreport.id_for_label }}">
+                  <label class="form-check-label" for="{{ form1.dpcla_classreport.id_for_label }}">Classification Report</label>
+                </diV>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" name="{{ form1.dpcla_tflite.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_tflite.id_for_label }}">
+                  <label class="form-check-label" for="{{ form1.dpcla_tflite.id_for_label }}">TFLite Conversion</label>
+                </diV>
+              </div>
+
+              <div class="d-grid gap-2 d-md-flex justify-content-md-end col-md-12">
+                <button type="reset" class="btn btn-secondary mb-3">Reset</button>
+                <button type="submit" class="btn btn-primary mb-3">Run</button>
+              </div>
+          </form>
+      </div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h2 class="accordion-header">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#DeepAssistant-collapseThree" aria-expanded="false" aria-controls="DeepAssistant-collapseThree">
+        Image Segmentation
+      </button>
+    </h2>
+    <div id="DeepAssistant-collapseThree" class="accordion-collapse collapse" data-bs-parent="#DeepAssistant">
+      <div class="accordion-body">
+          <form class="row g-3" action="/dl_classifier_processing/" method="post">
+            {% csrf_token %}
+              <h5>Model Choice</h5>
+              <div class="col-md-3 col-sm-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" name="{{ form1.dpseg_unet.html_name }}" type="checkbox" role="switch" id="{{ form1.dpseg_unet.id_for_label }}">
+                  <label class="form-check-label" for="{{ form1.dpseg_unet.id_for_label }}">U-Net</label>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" name="{{ form1.dpseg_unetplusplus.html_name }}" type="checkbox" role="switch" id="{{ form1.dpseg_unetplusplus.id_for_label }}">
+                  <label class="form-check-label" for="{{ form1.dpseg_unetplusplus.id_for_label }}">U-Net++</label>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" name="{{ form1.dpseg_manet.html_name }}" type="checkbox" role="switch" id="{{ form1.dpseg_unetplusplus.id_for_label }}">
+                  <label class="form-check-label" for="{{ form1.dpseg_manet.id_for_label }}">MAnet</label>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" name="{{ form1.dpseg_linknet.html_name }}" type="checkbox" role="switch" id="{{ form1.dpseg_linknet.id_for_label }}">
+                  <label class="form-check-label" for="{{ form1.dpseg_linknet.id_for_label }}">Linknet</label>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" name="{{ form1.dpseg_fpn.html_name }}" type="checkbox" role="switch" id="{{ form1.dpseg_fpn.id_for_label }}">
+                  <label class="form-check-label" for="{{ form1.dpseg_fpn.id_for_label }}">FPN</label>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" name="{{ form1.dpseg_pspnet.html_name }}" type="checkbox" role="switch" id="{{ form1.dpseg_pspnet.id_for_label }}">
+                  <label class="form-check-label" for="{{ form1.dpseg_pspnet.id_for_label }}">PSP Net</label>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" name="{{ form1.dpseg_pan.html_name }}" type="checkbox" role="switch" id="{{ form1.dpseg_pan.id_for_label }}">
+                  <label class="form-check-label" for="{{ form1.dpseg_pan.id_for_label }}">PAN</label>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" name="{{ form1.dpseg_deeplabv3.html_name }}" type="checkbox" role="switch" id="{{ form1.dpseg_deeplabv3.id_for_label }}">
+                  <label class="form-check-label" for="{{ form1.dpseg_deeplabv3.id_for_label }}">DeepLab v3</label>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" name="{{ form1.dpseg_deeplabv3plus.html_name }}" type="checkbox" role="switch" id="{{ form1.dpseg_deeplabv3plus.id_for_label }}">
+                  <label class="form-check-label" for="{{ form1.dpseg_deeplabv3plus.id_for_label }}">DeepLab v3+</label>
+                </div>
+              </div>
+          </form>
+      </div>
+    </div>
+  </div>
+</div>
     
 {% endblock %}
 
