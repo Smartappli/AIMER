@@ -23,4 +23,4 @@ def machine_learning(request):
 
 def natural_language_processing(request):
     logo = ['share', 'hospital', 'data', 'cpu', 'gpu']
-    return render(request, "machine_learning/machine_learning.html", {"logo": logo, "section": 'nlp'})
+    return render(request, "natural_language_processing/natural_language_processing.html", {"logo": logo, "section": 'nlp'})
