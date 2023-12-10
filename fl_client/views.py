@@ -8,7 +8,7 @@ def index(request):
 
 def data_processing(request):
     logo = ['share', 'hospital', 'data', 'cpu', 'gpu']
-    return render(request, "deep_learning/deep_learning.html", {"logo": logo, "section": 'data'})
+    return render(request, "data_processing/data_processing.html", {"logo": logo, "section": 'data'})
 
 
 def deep_learning(request):
