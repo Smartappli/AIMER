@@ -1,0 +1,11 @@
+{
+  "fl_server_ip": "localhost",
+  "registration_socket": "8765",
+  "exchange_socket": "7890",
+  "receive_socket": "4321",
+  "db_server_ip": "localhost",
+  "db_server_socket": "9017",
+  "round_interval": 5,
+  "aggregation_threshold": 1.0,
+  "polling": 1
+}
