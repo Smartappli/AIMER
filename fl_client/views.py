@@ -11,6 +11,21 @@ def data_processing(request):
     return render(request, "data_processing/data_processing.html", {"logo": logo, "section": 'data'})
 
 
+def data_processing_faqs(request):
+    logo = ['share', 'hospital', 'data', 'cpu', 'gpu']
+    return render(request, "data_processing/data_processing_faqs.html", {"logo": logo, "section": 'data'})
+
+
+def data_processing_models(request):
+    logo = ['share', 'hospital', 'data', 'cpu', 'gpu']
+    return render(request, "data_processing/data_processing_models.html", {"logo": logo, "section": 'data'})
+
+
+def data_processing_tutorials(request):
+    logo = ['share', 'hospital', 'data', 'cpu', 'gpu']
+    return render(request, "data_processing/data_processing_tutorials.html", {"logo": logo, "section": 'data'})
+
+
 def deep_learning(request):
     logo = ['share', 'hospital', 'data', 'cpu', 'gpu']
     return render(request, "deep_learning/deep_learning.html", {"logo": logo, "section": 'dl'})
