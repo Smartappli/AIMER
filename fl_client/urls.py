@@ -18,5 +18,8 @@ urlpatterns = [
     path('machine_learning_faqs/', views.machine_learning_faqs, name='machine_learning_faqs'),
     path('machine_learning_models/', views.machine_learning_models, name='machine_learning_models'),
     path('machine_learning_tutorials/', views.machine_learning_tutorials, name='machine_learning_tutorials'),
-    path('natural_language_processing/', views.natural_language_processing, name='natural_language_processing')
+    path('natural_language_processing/', views.natural_language_processing, name='natural_language_processing'),
+    path('natural_language_processing_faqs/', views.natural_language_processing_faqs, name='natural_language_processing_faqs'),
+    path('natural_language_processing_models/', views.natural_language_processing_models, name='natural_language_processing_models'),
+    path('natural_language_processing_tutorials/', views.natural_language_processing_tutorials, name='natural_language_processing_tutorials')
 ]

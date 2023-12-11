@@ -70,3 +70,21 @@ def natural_language_processing(request):
     logo = ['share', 'hospital', 'data', 'cpu', 'gpu']
     return render(request, "natural_language_processing/natural_language_processing.html",
                   {"logo": logo, "section": 'nlp'})
+
+
+def natural_language_processing_faqs(request):
+    logo = ['share', 'hospital', 'data', 'cpu', 'gpu']
+    return render(request, "natural_language_processing/natural_language_processing_faqs.html",
+                  {"logo": logo, "section": 'nlp'})
+
+
+def natural_language_processing_models(request):
+    logo = ['share', 'hospital', 'data', 'cpu', 'gpu']
+    return render(request, "natural_language_processing/natural_language_processing_models.html",
+                  {"logo": logo, "section": 'nlp'})
+
+
+def natural_language_processing_tutorials(request):
+    logo = ['share', 'hospital', 'data', 'cpu', 'gpu']
+    return render(request, "natural_language_processing/natural_language_processing_tutorials.html",
+                  {"logo": logo, "section": 'nlp'})
