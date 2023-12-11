@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from .forms import DLClassificationForm
 
 
 def index(request):
@@ -39,6 +40,13 @@ def deep_learning_faqs(request):
 def deep_learning_models(request):
     logo = ['share', 'hospital', 'data', 'cpu', 'gpu']
     return render(request, "deep_learning/deep_learning_models.html", {"logo": logo, "section": 'dl'})
+
+
+def deep_learning_run(request):
+    if request.method == "POST":
+        form = DLClassificationForm(request.POST)
+        if form.is_valid():
+            cd = form.cleaned_data
 
 
 def deep_learning_tutorials(request):
