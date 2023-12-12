@@ -1,6 +1,10 @@
 from django.shortcuts import render
-from .forms import DLClassificationForm, DLSegmentation, MLClassificationForm, MLRegressionForm, MLTimeSeriesForm, \
-    MLClusteringForm, MLAnomalyDetectionForm, NLPTextGenerationForm, NLPEmotionalAnalysisForm
+from .forms import (DLClassificationForm, DLSegmentation, MLClassificationForm, MLRegressionForm, MLTimeSeriesForm,
+                    MLClusteringForm, MLAnomalyDetectionForm, NLPTextGenerationForm, NLPEmotionalAnalysisForm,
+                    UserRegistrationForm, UserEditForm, ProfileEditForm)
+from .models import Profile, Model, Model_File, Model_Family
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 
 def index(request):
@@ -153,3 +157,61 @@ def natural_language_processing_tutorials(request):
     logo = ['share', 'hospital', 'data', 'cpu', 'gpu']
     return render(request, "natural_language_processing/natural_language_processing_tutorials.html",
                   {"logo": logo, "section": 'nlp'})
+
+
+def model_list(request):
+    models = Model.objects.all()
+    return render(request,
+                  'base.html',
+                  {'models': models})
+
+
+def register(request):
+    if request.method == 'POST':
+        user_form = UserRegistrationForm(request.POST)
+        if user_form.is_valid():
+            # Create a new user object but avoid saving it yet
+            new_user = user_form.save(commit=False)
+            # Set the chosen password
+            new_user.set_password(
+                user_form.cleaned_data['password']
+            )
+            # Save the User object
+            new_user.save()
+            # Create the user profile
+            Profile.objects.create(user=new_user)
+            return render(request,
+                          'account/register_done.html',
+                          {'new_user': new_user})
+
+    else:
+        user_form = UserRegistrationForm()
+    return render(request,
+                  'account/register.html',
+                  {'user_form': user_form})
+
+
+@login_required
+def edit(request):
+    if request.method == 'POST':
+        user_form = UserEditForm(
+            instance=request.user,
+            data=request.POST)
+        profile_form = ProfileEditForm(
+            instance=request.user.profile,
+            date=request.POST,
+            files=request.FILES)
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+            messages.success(request, "Profile updated successfully.")
+        else:
+            messages.error(request, 'Error updating your profile.')
+    else:
+        user_form = UserEditForm(instance=request.user)
+        profile_form = ProfileEditForm(instance=request.user.profile)
+
+    return render(request,
+                  'account/edit.html',
+                  {'user_form': user_form,
+                   'profile_form': profile_form})

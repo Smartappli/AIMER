@@ -21,5 +21,7 @@ urlpatterns = [
     path('natural_language_processing/', views.natural_language_processing, name='natural_language_processing'),
     path('natural_language_processing_faqs/', views.natural_language_processing_faqs, name='natural_language_processing_faqs'),
     path('natural_language_processing_models/', views.natural_language_processing_models, name='natural_language_processing_models'),
-    path('natural_language_processing_tutorials/', views.natural_language_processing_tutorials, name='natural_language_processing_tutorials')
+    path('natural_language_processing_tutorials/', views.natural_language_processing_tutorials, name='natural_language_processing_tutorials'),
+    path('register/', views.register, name='register'),
+    path('edit/', views.edit, name='edit')
 ]
