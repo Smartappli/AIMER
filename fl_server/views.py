@@ -1,10 +1,15 @@
 # from django.http import HttpResponse
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
 # from django.contrib.auth import authenticate, login
 # from django.contrib.auth.decorators import login_required
 # from fl_server.forms import LoginForm, UserRegistrationForm, UserEditForm, ProfileEditForm
 # from .models import Model
 # from django.contrib import messages
+
+
+def index(request):
+    return HttpResponseRedirect("/server/dashboard/")
 
 
 def dashboard(request):

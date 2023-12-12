@@ -7,10 +7,10 @@
         </div>
 
         <ul class="nav nav-underline col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-          <li><a href="../server_projects/" class="link-success nav-link px-2">Projects</a></li>
-          <li><a href="../server_stakeholders/" class="link-danger nav-link px-2">Stakeholders</a></li>
-          <li><a href="../server_monitoring/" class="link-info nav-link px-2">Monitoring</a></li>
-          <li><a href="../server_management/" class="link-warning nav-link px-2 ">Management</a></li>
+          <li><a href="../server_projects/" class="link-success nav-link px-2 {% if section == "projects" %}active{%  endif %}">Projects</a></li>
+          <li><a href="../server_stakeholders/" class="link-danger nav-link px-2 {% if section == "stakeholders" %}active{%  endif %}">Stakeholders</a></li>
+          <li><a href="../server_monitoring/" class="link-info nav-link px-2 {% if section == "monitoring" %}active{%  endif %}">Monitoring</a></li>
+          <li><a href="../server_management/" class="link-warning nav-link px-2 {% if section == "management" %}active{%  endif %}">Management</a></li>
         </ul>
 
         <div class="col-md-3 text-end">
