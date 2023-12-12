@@ -14,11 +14,18 @@
     {% include 'core/icons.html' %}
     <div class="container">
       {% include 'core/header.html' %}
-
-        <div id="content">
-            {% block content %}
-            {% endblock content %}
-        </div>
+      {% if messages %}
+          {% for message in messages %}
+            <div class="alert alert-{%  if message.tags == "success" %}success{% endif %}{% if message.tags == "info" %}info{% endif %}{% if message.tags == "warning" %}warning{% endif %}{% if message.tags == "error" %}danger{% endif %}{% if message.tags == "debug" %}secondary{% endif %} alert-dismissible fade show" role="alert">
+              <strong>{{ message|safe }}</strong>
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+          {% endfor %}
+      {% endif %}
+      <div id="content">
+        {% block content %}
+        {% endblock content %}
+      </div>
 
       {% include 'core/footer.html' %}
     </div>
