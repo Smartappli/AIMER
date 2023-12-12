@@ -1,3 +1,20 @@
+"""
+Copyright (C) 2024  Olivier DEBAUCHE
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as
+published by the Free Software Foundation, either version 3 of the
+License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
+"""
+
 from django.contrib.auth.models import User
 from django.conf import settings
 from django.db import models
@@ -13,6 +30,7 @@ class Profile(models.Model):
     def __str__(self):
         return f'Profile of {self.user.name}'
 
+
 class Model_Family(models.Model):
     model_family_id = models.BigAutoField(primary_key=True)
     model_family_name = models.CharField(max_length=100)
@@ -24,6 +42,7 @@ class Model_Family(models.Model):
 
     def __str__(self):
         return self.model_family_name
+
 
 class Model(models.Model):
     class Provider(models.TextChoices):
@@ -57,7 +76,7 @@ class Model(models.Model):
                                      related_name='family_model')
     model_repo = models.CharField(max_length=250),
     model_owner = models.ForeignKey(User,
-                                    on_delete=models.CASCADE,
+                                    on_delete=models.DO_NOTHING,
                                     related_name='model_owner')
     model_creation_date = models.DateTimeField(auto_now_add=True)
     model_updated_date = models.DateTimeField(auto_now=True)
@@ -67,6 +86,7 @@ class Model(models.Model):
 
     def __str__(self):
         return self.model_name
+
 
 class Model_File(models.Model):
     class Type(models.TextChoices):
