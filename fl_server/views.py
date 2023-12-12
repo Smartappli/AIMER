@@ -8,31 +8,35 @@ from django.shortcuts import render
 
 
 def dashboard(request):
+    logo = ['share', 'hospital', 'data', 'cpu', 'gpu']
     return render(request,
                   'server/server_dashboard.html',
-                  {'section': 'Dashboard'})
+                  {'section': 'Dashboard', 'logo': logo})
 
 
 def server_projects(request):
+    logo = ['share', 'hospital', 'data', 'cpu', 'gpu']
     return render(request,
                   'server/server_projects.html',
-                  {'section': 'projects'})
+                  {'section': 'projects', 'logo': logo})
 
 
 def server_stakeholders(request):
+    logo = ['share', 'hospital', 'data', 'cpu', 'gpu']
     return render(request,
                   'server/server_stakeholders.html',
-                  {'section': 'stakeholders'})
-
+                  {'section': 'stakeholders', 'logo': logo})
 
 
 def server_monitoring(request):
+    logo = ['share', 'hospital', 'data', 'cpu', 'gpu']
     return render(request,
                   'server/server_monitoring.html',
-                  {'section': 'monitoring'})
+                  {'section': 'monitoring', 'logo': logo})
 
 
 def server_management(request):
+    logo = ['share', 'hospital', 'data', 'cpu', 'gpu']
     return render(request,
                   'server/server_management.html',
-                  {'section': 'management'})
+                  {'section': 'management', 'logo': logo})
