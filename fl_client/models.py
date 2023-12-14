@@ -33,9 +33,18 @@ class Profile(models.Model):
 
 # ---- Project tables ----
 class Local_Project(models.Model):
+
+    class Project_Type(models.TextChoices):
+        LC = 'LC', 'Local Project'
+        RM = 'RM', 'Remote Project'
+        FD = 'FD', 'Federated Project'
+
     local_project_id = models.BigAutoField(primary_key=True)
     local_project_title = models.CharField(max_length=250)
     local_project_description = models.TextField()
+    local_project_type = models.CharField(max_length=2,
+                                      choices=Project_Type.choices,
+                                      default=Project_Type.LC)
     local_project_owner = models.ForeignKey(User,
                                       on_delete=models.DO_NOTHING,
                                       related_name='local_project_owner')
