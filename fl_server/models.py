@@ -19,14 +19,15 @@ from django.contrib.auth.models import User
 from django.db import models
 
 
-class Project(models.Model):
-    project_owner = models.ForeignKey(User,
+class Server_Project(models.Model):
+    server_project_id = models.BigAutoField(primary_key=True)
+    server_project_title = models.CharField(max_length=250)
+    server_project_description = models.TextField()
+    server_project_owner = models.ForeignKey(User,
                                       on_delete=models.DO_NOTHING,
-                                      related_name='project_owner')
-    project_title = models.CharField(max_length=250)
-    project_description = models.TextField()
-    project_creation_date = models.DateTimeField(auto_now_add=True)
-    project_updated_date = models.DateTimeField(auto_now=True)
+                                      related_name='server_project_owner')
+    server_project_creation_date = models.DateTimeField(auto_now_add=True)
+    server_project_updated_date = models.DateTimeField(auto_now=True)
 
 
 

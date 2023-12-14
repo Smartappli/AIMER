@@ -31,6 +31,18 @@ class Profile(models.Model):
         return f'Profile of {self.user.name}'
 
 
+# ---- Project tables ----
+class Local_Project(models.Model):
+    local_project_id = models.BigAutoField(primary_key=True)
+    local_project_title = models.CharField(max_length=250)
+    local_project_description = models.TextField()
+    local_project_owner = models.ForeignKey(User,
+                                      on_delete=models.DO_NOTHING,
+                                      related_name='local_project_owner')
+    local_project_creation_date = models.DateTimeField(auto_now_add=True)
+    local_project_updated_date = models.DateTimeField(auto_now=True)
+
+# ---- Model tables ----
 class Model_Family(models.Model):
     model_family_id = models.BigAutoField(primary_key=True)
     model_family_name = models.CharField(max_length=100)

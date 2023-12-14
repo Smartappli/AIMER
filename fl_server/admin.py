@@ -16,8 +16,8 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 
 from django.contrib import admin
-from .models import Project
+from .models import Server_Project
 
-admin.site.register(Project)
+admin.site.register(Server_Project)
 
 
