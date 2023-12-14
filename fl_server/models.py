@@ -19,15 +19,21 @@ from django.contrib.auth.models import User
 from django.db import models
 
 
+class Agent_Configuration(models.Model):
+    agent_id = models.AutoField(primary_key=True)
+    agent_name = models.CharField(max_length=250)
+    agent_description = models.CharField(max_length=250)
+    agent_ip = models.GenericIPAddressField(default='127.0.0.1')
+    agent_port = models.CharField(max_length=5, default='8765')
+    agent_state = models.CharField(max_length=10, default='offline')
+
+
 class Server_Project(models.Model):
     server_project_id = models.BigAutoField(primary_key=True)
     server_project_title = models.CharField(max_length=250)
     server_project_description = models.TextField()
     server_project_owner = models.ForeignKey(User,
-                                      on_delete=models.DO_NOTHING,
-                                      related_name='server_project_owner')
+                                             on_delete=models.DO_NOTHING,
+                                             related_name='server_project_owner')
     server_project_creation_date = models.DateTimeField(auto_now_add=True)
     server_project_updated_date = models.DateTimeField(auto_now=True)
-
-
-
