@@ -14,8 +14,12 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
+from django import forms
+from django.contrib.auth.models import User
+from .models import Agent_Configuration
 
-# from django import forms
-# from django.contrib.auth.models import User
-# from .models import Profile
 
+class AgentEditForm(forms.ModelForm):
+    class Meta:
+        model = Agent_Configuration
+        fields = ['agent_name', 'agent_description', 'agent_ip', 'agent_port', 'agent_state']

@@ -20,7 +20,7 @@ from django.db import models
 
 
 class Agent_Configuration(models.Model):
-    agent_id = models.AutoField(primary_key=True)
+    agent_id = models.BigAutoField(primary_key=True)
     agent_name = models.CharField(max_length=250)
     agent_description = models.CharField(max_length=250)
     agent_ip = models.GenericIPAddressField(default='127.0.0.1')
