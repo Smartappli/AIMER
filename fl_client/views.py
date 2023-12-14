@@ -71,6 +71,11 @@ def deep_learning_classification_run(request):
             cd = form.cleaned_data
 
 
+
+
+
+
+
 def deep_learning_segmentation_run(request):
     if request.method == "POST":
         form = DLSegmentation(request.POST)

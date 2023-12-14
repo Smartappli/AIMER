@@ -14,6 +14,7 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
+import uuid
 
 from django.contrib.auth.models import User
 from django.conf import settings
@@ -33,27 +34,27 @@ class Profile(models.Model):
 
 # ---- Project tables ----
 class Local_Project(models.Model):
-
     class Project_Type(models.TextChoices):
         LC = 'LC', 'Local Project'
         RM = 'RM', 'Remote Project'
         FD = 'FD', 'Federated Project'
 
-    local_project_id = models.BigAutoField(primary_key=True)
+    local_project_id = models.BigAutoField(primary_key=True, default=1)
     local_project_title = models.CharField(max_length=250)
     local_project_description = models.TextField()
     local_project_type = models.CharField(max_length=2,
-                                      choices=Project_Type.choices,
-                                      default=Project_Type.LC)
+                                          choices=Project_Type.choices,
+                                          default=Project_Type.LC)
     local_project_owner = models.ForeignKey(User,
-                                      on_delete=models.DO_NOTHING,
-                                      related_name='local_project_owner')
+                                            on_delete=models.CASCADE,
+                                            related_name='local_project_owner')
     local_project_creation_date = models.DateTimeField(auto_now_add=True)
     local_project_updated_date = models.DateTimeField(auto_now=True)
 
+
 # ---- Model tables ----
 class Model_Family(models.Model):
-    model_family_id = models.BigAutoField(primary_key=True)
+    model_family_id = models.BigAutoField(primary_key=True, default=1)
     model_family_name = models.CharField(max_length=100)
     model_family_owner = models.ForeignKey(User,
                                            on_delete=models.CASCADE,
@@ -83,6 +84,7 @@ class Model(models.Model):
         TC = 'TC', 'Text-Classification',
         TG = 'TG', 'Text-Generation'
 
+    model_id = models.BigAutoField(primary_key=True, default=1, editable=False)
     model_name = models.CharField(max_length=100)
     model_description = models.TextField()
     model_version = models.CharField(max_length=15)
@@ -130,9 +132,10 @@ class Model_File(models.Model):
         BIN = 'BIN', 'Binary',
         GGUF = 'GGUF', 'GGUF'
 
-    model_id = models.ForeignKey(Model,
-                                 on_delete=models.CASCADE,
-                                 related_name='model_id')
+    model_file_model_id = models.ForeignKey(Model,
+                                            on_delete=models.CASCADE,
+                                            default=1,
+                                            related_name='model_file_model_id')
     model_file_type = models.CharField(max_length=4,
                                        choices=Type.choices,
                                        default=Type.NONE)
@@ -144,3 +147,37 @@ class Model_File(models.Model):
 
     def __str__(self):
         return self.model_file_filename
+
+
+class ModelDocument(models.Model):
+    model_doc_model_id = models.ForeignKey(Model,
+                                           on_delete=models.CASCADE,
+                                           related_name='model_doc_model_id')
+    model_doc_title = models.CharField(max_length=250)
+    model_doc_filename = models.CharField(max_length=250)
+
+
+# --- Processing ----
+class Queue(models.Model):
+    class State(models.TextChoices):
+        CL = 'CL', 'Cancelled',
+        CP = 'CP', 'Completed',
+        CR = 'CR', 'Created',
+        ER = 'ER', 'Error',
+        IP = 'IP', 'In progress'
+        PN = 'PN', 'Pending',
+        RL = 'RL', 'Rejected',
+        RS = 'RS', 'Restarted'
+        ST = 'ST', 'Started',
+        SP = 'SP', 'Stopped',
+        UP = 'UP', 'Updated'
+
+    queue_id = models.BigAutoField(primary_key=True, default=1, editable=False)
+    queue_model_id = models.ForeignKey(Model,
+                                       on_delete=models.CASCADE,
+                                       related_name='queue_model_id')
+    queue_state = models.CharField(max_length=2,
+                                   choices=State.choices,
+                                   default=State.CR)
+    queue_creation_date = models.DateTimeField(auto_now_add=True)
+    queue_updated_date = models.DateTimeField(auto_now=True)
