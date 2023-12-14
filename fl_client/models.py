@@ -179,5 +179,9 @@ class Queue(models.Model):
     queue_state = models.CharField(max_length=2,
                                    choices=State.choices,
                                    default=State.CR)
+    queue_owner = models.ForeignKey(User,
+                                    on_delete=models.CASCADE,
+                                    default=1,
+                                    related_name='queue_owner')
     queue_creation_date = models.DateTimeField(auto_now_add=True)
     queue_updated_date = models.DateTimeField(auto_now=True)

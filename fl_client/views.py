@@ -19,7 +19,7 @@ from django.shortcuts import render
 from .forms import (DLClassificationForm, DLSegmentation, MLClassificationForm, MLRegressionForm, MLTimeSeriesForm,
                     MLClusteringForm, MLAnomalyDetectionForm, NLPTextGenerationForm, NLPEmotionalAnalysisForm,
                     UserRegistrationForm, UserEditForm, ProfileEditForm)
-from .models import Profile, Model, Model_File, Model_Family
+from .models import Profile, Model, Model_File, Model_Family, ModelDocument, Queue
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
@@ -70,10 +70,22 @@ def deep_learning_classification_run(request):
         if form.is_valid():
             cd = form.cleaned_data
 
+            # Xception #
+            if cd['dpcla_Xception']:
+                Queue.objects.create(queue_model_id=1, queue_state='CR')
 
+            # VGG #
+            if cd['dpcla_VGG11']:
+                Queue.objects.create(queue_model_id=2)
 
+            if cd['dpcla_VGG13']:
+                Queue.objects.create(queue_model_id=3)
 
+            if cd['dpcla_VGG16']:
+                Queue.objects.create(queue_model_id=4)
 
+            if cd['dpcla_VGG19']:
+                Queue.objects.create(queue_model_id=5)
 
 
 def deep_learning_segmentation_run(request):
