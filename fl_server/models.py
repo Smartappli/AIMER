@@ -23,6 +23,10 @@ class Agent_Configuration(models.Model):
     agent_id = models.BigAutoField(primary_key=True)
     agent_name = models.CharField(max_length=250)
     agent_description = models.CharField(max_length=250)
+    agent_creator = models.ForeignKey(User,
+                                      on_delete=models.DO_NOTHING,
+                                      default=1,
+                                      related_name='agent_creator')
     agent_ip = models.GenericIPAddressField(default='127.0.0.1')
     agent_port = models.CharField(max_length=5, default='8765')
     agent_state = models.CharField(max_length=10, default='offline')
@@ -75,6 +79,11 @@ class Server_Model(models.Model):
 class Server_Aggregator(models.Model):
     class Method(models.TextChoices):
         FA = 'FA', 'FedAvg'
+        FC = 'FC', 'FedCurv'
+        FP = 'FP', 'FedProx'
+        GM = 'GM', 'Geometric median'
+        CM = 'CM', 'Coordinate-wise median'
+        KA = 'KA', 'Krum algorithm'
 
     server_aggregator_id = models.BigAutoField(primary_key=True)
     server_aggregator_model_id = models.ForeignKey(Server_Model,
