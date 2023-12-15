@@ -19,7 +19,7 @@ from django.shortcuts import render
 from .forms import (DLClassificationForm, DLSegmentation, MLClassificationForm, MLRegressionForm, MLTimeSeriesForm,
                     MLClusteringForm, MLAnomalyDetectionForm, NLPTextGenerationForm, NLPEmotionalAnalysisForm,
                     UserRegistrationForm, UserEditForm, ProfileEditForm)
-from .models import Profile, Model, Model_File, Model_Family, ModelDocument, Queue
+from .models import Profile, Model, Model_File, Model_Family, Model_Document, Queue
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 

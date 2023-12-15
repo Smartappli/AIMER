@@ -14,8 +14,6 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
-import uuid
-
 from django.contrib.auth.models import User
 from django.conf import settings
 from django.db import models
@@ -54,12 +52,12 @@ class Local_Project(models.Model):
 
 # ---- Model tables ----
 class Model_Family(models.Model):
-    model_family_id = models.BigAutoField(primary_key=True, default=1)
+    model_family_id = models.BigAutoField(primary_key=True)
     model_family_name = models.CharField(max_length=100)
     model_family_owner = models.ForeignKey(User,
                                            on_delete=models.CASCADE,
                                            related_name='model_family_owner')
-    model_family_creation_date = models.DateTimeField(auto_created=True)
+    model_family_creation_date = models.DateTimeField(auto_now_add=True)
     model_family_updated_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -86,8 +84,8 @@ class Model(models.Model):
 
     model_id = models.BigAutoField(primary_key=True, default=1, editable=False)
     model_name = models.CharField(max_length=100)
-    model_description = models.TextField()
-    model_version = models.CharField(max_length=15)
+    model_description = models.TextField(null=True, blank=True)
+    model_version = models.CharField(max_length=15, null=True, blank=True)
     model_category = models.CharField(max_length=2,
                                       choices=Category.choices,
                                       default=Category.ML)
@@ -149,12 +147,18 @@ class Model_File(models.Model):
         return self.model_file_filename
 
 
-class ModelDocument(models.Model):
+class Model_Document(models.Model):
     model_doc_model_id = models.ForeignKey(Model,
                                            on_delete=models.CASCADE,
                                            related_name='model_doc_model_id')
     model_doc_title = models.CharField(max_length=250)
     model_doc_filename = models.CharField(max_length=250)
+    model_doc_owner = models.ForeignKey(User,
+                                        on_delete=models.DO_NOTHING,
+                                        default=1,
+                                        related_name='model_doc_owner')
+    model_doc_creation_date = models.DateTimeField(auto_now_add=True)
+    model_doc_updated_date = models.DateTimeField(auto_now=True)
 
 
 # --- Processing ----
