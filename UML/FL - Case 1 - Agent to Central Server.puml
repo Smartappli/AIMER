@@ -1,0 +1,13 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+"Local Agent" -> "Local Agent": Authentication Request
+"Local Agent" --> "Central Server": Autorisation Request
+"Central Server" ---> "Local Agent": Autorisation Response
+"Local Agent" ---> "Central Server": Training Task Creation
+"Central Server" -> "Central Server": Model Training
+"Central Server" ---> "Local Agent": Trained Model
+"Central Server" -> "Central Server": Data destruction
+@enduml
