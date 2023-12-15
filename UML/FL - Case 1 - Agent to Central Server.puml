@@ -7,7 +7,10 @@ autonumber
 "Local Agent" --> "Central Server": Autorisation Request
 "Central Server" ---> "Local Agent": Autorisation Response
 "Local Agent" ---> "Central Server": Training Task Creation
+"Local Agent" ---> "Central Server": Model Transfer
+"Local Agent" ---> "Central Server": Data Transfer
 "Central Server" -> "Central Server": Model Training
-"Central Server" ---> "Local Agent": Trained Model
-"Central Server" -> "Central Server": Data destruction
+"Central Server" -> "Central Server": Task State Update
+"Central Server" ---> "Local Agent": Return Trained Model
+"Central Server" -> "Central Server": Data Destruction
 @enduml
