@@ -147,18 +147,30 @@ class Model_File(models.Model):
         return self.model_file_filename
 
 
+class Document(models.Model):
+    document_model_id = models.BigAutoField(primary_key=True, editable=False)
+    document_title = models.CharField(max_length=250)
+    document_filename = models.CharField(max_length=250)
+    document_owner = models.ForeignKey(User,
+                                       on_delete=models.DO_NOTHING,
+                                       default=1,
+                                       related_name='model_doc_owner')
+    document_creation_date = models.DateTimeField(auto_now_add=True)
+    document_updated_date = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.document_filename + ' ----- ' + self.document_title
+
+
 class Model_Document(models.Model):
-    model_doc_model_id = models.ForeignKey(Model,
-                                           on_delete=models.CASCADE,
-                                           related_name='model_doc_model_id')
-    model_doc_title = models.CharField(max_length=250)
-    model_doc_filename = models.CharField(max_length=250)
-    model_doc_owner = models.ForeignKey(User,
-                                        on_delete=models.DO_NOTHING,
-                                        default=1,
-                                        related_name='model_doc_owner')
-    model_doc_creation_date = models.DateTimeField(auto_now_add=True)
-    model_doc_updated_date = models.DateTimeField(auto_now=True)
+    modeldoc_model_id = models.ForeignKey(Model,
+                                          on_delete=models.CASCADE,
+                                          default=1,
+                                          related_name='modeldoc_model_id')
+    modeldoc_document = models.ForeignKey(Document,
+                                          on_delete=models.CASCADE,
+                                          default=1,
+                                          related_name='modeldoc_document_id')
 
 
 # --- Processing ----
