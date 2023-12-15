@@ -49,6 +49,9 @@ class Local_Project(models.Model):
     local_project_creation_date = models.DateTimeField(auto_now_add=True)
     local_project_updated_date = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return self.local_project_title
+
 
 # ---- Model tables ----
 class Model_Family(models.Model):
@@ -171,6 +174,9 @@ class Model_Document(models.Model):
                                           on_delete=models.CASCADE,
                                           default=1,
                                           related_name='modeldoc_document_id')
+
+    def __str__(self):
+        return  self.modeldoc_model_id.model_name + ' ----- ' + self.modeldoc_document.document_filename + '  |  ' + self.modeldoc_document.document_title
 
 
 # --- Processing ----
