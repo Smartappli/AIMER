@@ -115,7 +115,7 @@ class Model(models.Model):
     model_updated_date = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.model_name
+        return self.model_category + ' | ' + self.model_type + ' --- ' + self.model_name
 
 
 class Model_File(models.Model):
@@ -155,7 +155,7 @@ class Model_File(models.Model):
     model_file_updated_date = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.model_file_filename
+        return self.model_file_type + " --- " + self.model_file_extension + ' --- ' + self.model_file_filename
 
 
 class Document(models.Model):
