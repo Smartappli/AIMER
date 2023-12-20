@@ -65,6 +65,9 @@ class Model_Family(models.Model):
     model_family_creation_date = models.DateTimeField(auto_now_add=True)
     model_family_updated_date = models.DateTimeField(auto_now_add=True)
 
+    class Meta:
+        ordering = ['model_family_name']
+
     def __str__(self):
         return self.model_family_name
 
@@ -73,6 +76,7 @@ class Model(models.Model):
     class Provider(models.TextChoices):
         HF = 'HF', 'Hugging Face',
         KE = 'KE', 'Keras',
+        PC = 'PC', 'PyCaret'
         PT = 'PT', 'PyTorch'
 
     class Category(models.TextChoices):
@@ -106,7 +110,7 @@ class Model(models.Model):
     model_provider = models.CharField(max_length=2,
                                       choices=Provider.choices,
                                       default=Provider.HF)
-    model_repo = models.CharField(max_length=250, null=True, blank=True),
+    model_repo = models.CharField(max_length=250, null=True, blank=True)
     model_active = models.BooleanField(default=True)
     model_owner = models.ForeignKey(User,
                                     on_delete=models.DO_NOTHING,
@@ -114,8 +118,11 @@ class Model(models.Model):
     model_creation_date = models.DateTimeField(auto_now_add=True)
     model_updated_date = models.DateTimeField(auto_now=True)
 
+    class Meta:
+        ordering = ['model_name']
+
     def __str__(self):
-        return self.model_category + ' | ' + self.model_type + ' --- ' + self.model_name
+        return str(self.model_id) + ' - ' + self.model_name
 
 
 class Model_File(models.Model):
@@ -169,6 +176,9 @@ class Document(models.Model):
                                        related_name='document_owner')
     document_creation_date = models.DateTimeField(auto_now_add=True)
     document_updated_date = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['document_filename']
 
     def __str__(self):
         return self.document_filename + ' ----- ' + self.document_title
