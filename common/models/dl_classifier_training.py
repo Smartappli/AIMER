@@ -89,122 +89,209 @@ match model_id:
     case 13:
         print("ResNet RS 101")
         from tensorflow.keras.applications.resnet_rs import ResNetRS101
-
+        base_model = ResNetRS101(input_shape=(img_height, img_width, channel),
+                                 include_top=False,
+                                 weights='imagenet')
     case 14:
         print("ResNet 152")
         from tensorflow.keras.applications.resnet import ResNet152
+        base_model = ResNet152(input_shape=(img_height, img_width, channel),
+                               include_top=False,
+                               weights='imagenet')
 
     case 15:
         print("ResNet 152 V2")
         from tensorflow.keras.applications.resnet_v2 import ResNet152V2
+        base_model = ResNet152V2(input_shape=(img_height, img_width, channel),
+                                 include_top=False,
+                                 weights='imagenet')
 
     case 16:
         print("ResNet RS 152")
         from tensorflow.keras.applications.resnet_rs import ResNetRS152
+        base_model = ResNetRS152(input_shape=(img_height, img_width, channel),
+                                 include_top=False,
+                                 weights='imagenet')
 
     case 17:
         print("ResNet RS 200")
         from tensorflow.keras.applications.resnet_rs import ResNetRS200
+        base_model = ResNetRS200(input_shape=(img_height, img_width, channel),
+                                 include_top=False,
+                                 weights='imagenet')
 
     case 18:
         print("ResNet RS 270")
         from tensorflow.keras.applications.resnet_rs import ResNetRS270
+        base_model = ResNetRS270(input_shape=(img_height, img_width, channel),
+                                 include_top=False,
+                                 weights='imagenet')
 
     case 19:
         print("ResNet RS 350")
         from tensorflow.keras.applications.resnet_rs import ResNetRS350
+        base_model = ResNetRS350(input_shape=(img_height, img_width, channel),
+                                 include_top=False,
+                                 weights='imagenet')
 
     case 20:
         print("ResNet RS 420")
         from tensorflow.keras.applications.resnet_rs import ResNetRS420
+        base_model = ResNetRS420(input_shape=(img_height, img_width, channel),
+                                 include_top=False,
+                                 weights='imagenet')
 
     case 21:
         print("Inception V3")
         from tensorflow.keras.applications.inception_v3 import InceptionV3
-
+        base_model = InceptionV3(input_shape=(img_height, img_width, channel),
+                                 include_top=False,
+                                 weights='imagenet')
     case 22:
         print("Inception ResNet V2")
         from tensorflow.keras.applications.inception_resnet_v2 import InceptionResNetV2
+        base_model = InceptionResNetV2(input_shape=(img_height, img_width, channel),
+                                       include_top=False,
+                                       weights='imagenet')
 
     case 23:
         print("MobileNet")
         from tensorflow.keras.applications.mobilenet import MobileNet
+        base_model = MobileNet(input_shape=(img_height, img_width, channel),
+                               include_top=False,
+                               weights='imagenet')
 
     case 24:
         print("MobileNet V2")
         from tensorflow.keras.applications.mobilenet_v2 import MobileNetV2
+        base_model = MobileNetV2(input_shape=(img_height, img_width, channel),
+                                 include_top=False,
+                                 weights='imagenet')
 
     case 25:
         print("MobileNet V3 Small")
         from tensorflow.keras.applications import MobileNetV3Small
+        base_model = MobileNetV3Small(input_shape=(img_height, img_width, channel),
+                                      include_top=False,
+                                      weights='imagenet')
 
     case 26:
         print("MobileNet V3 Large")
         from tensorflow.keras.applications import MobileNetV3Large
+        base_model = MobileNetV3Large(input_shape=(img_height, img_width, channel),
+                                      include_top=False,
+                                      weights='imagenet')
 
     case 27:
         print("DenseNet 121")
         from tensorflow.keras.applications.densenet import DenseNet121
+        base_model = DenseNet121(input_shape=(img_height, img_width, channel),
+                                 include_top=False,
+                                 weights='imagenet')
 
     case 28:
         print("DenseNet 169")
         from tensorflow.keras.applications.densenet import DenseNet169
+        base_model = DenseNet169(input_shape=(img_height, img_width, channel),
+                                 include_top=False,
+                                 weights='imagenet')
 
     case 29:
         print("DenseNet 201")
         from tensorflow.keras.applications.densenet import DenseNet201
+        base_model = DenseNet201(input_shape=(img_height, img_width, channel),
+                                 include_top=False,
+                                 weights='imagenet')
 
     case 30:
         print("NASNet Mobile")
         from tensorflow.keras.applications.nasnet import NASNetMobile
+        base_model = NASNetMobile(input_shape=(img_height, img_width, channel),
+                                  include_top=False,
+                                  weights='imagenet')
 
     case 31:
         print("NASNet Large")
         from tensorflow.keras.applications.nasnet import NASNetLarge
+        base_model = NASNetLarge(input_shape=(img_height, img_width, channel),
+                                 include_top=False,
+                                 weights='imagenet')
 
     case 32:
         print("EfficientNet B0")
         from tensorflow.keras.applications.efficientnet import EfficientNetB0
+        base_model = EfficientNetB0(input_shape=(img_height, img_width, channel),
+                                    include_top=False,
+                                    weights='imagenet')
 
     case 33:
         print("EfficientNet B0 V2")
         from tensorflow.keras.applications.efficientnet_v2 import EfficientNetV2B0
+        base_model = EfficientNetV2B0(input_shape=(img_height, img_width, channel),
+                                      include_top=False,
+                                      weights='imagenet')
 
     case 34:
         print("EfficientNet B1")
         from tensorflow.keras.applications.efficientnet import EfficientNetB1
+        base_model = EfficientNetB1(input_shape=(img_height, img_width, channel),
+                                    include_top=False,
+                                    weights='imagenet')
 
     case 35:
         print("EfficientNet B1 V2")
         from tensorflow.keras.applications.efficientnet_v2 import EfficientNetV2B1
+        base_model = EfficientNetV2B1(input_shape=(img_height, img_width, channel),
+                                      include_top=False,
+                                      weights='imagenet')
 
     case 36:
         print("EfficientNet B2")
         from tensorflow.keras.applications.efficientnet import EfficientNetB2
+        base_model = EfficientNetB2(input_shape=(img_height, img_width, channel),
+                                    include_top=False,
+                                    weights='imagenet')
 
     case 37:
         print("EfficientNet B2 V2")
         from tensorflow.keras.applications.efficientnet_v2 import EfficientNetV2B2
+        base_model = EfficientNetV2B2(input_shape=(img_height, img_width, channel),
+                                      include_top=False,
+                                      weights='imagenet')
 
     case 38:
         print("EfficientNet B3")
         from tensorflow.keras.applications.efficientnet import EfficientNetB3
+        base_model = EfficientNetB3(input_shape=(img_height, img_width, channel),
+                                    include_top=False,
+                                    weights='imagenet')
 
     case 39:
         print("EfficientNet B3 V2")
         from tensorflow.keras.applications.efficientnet_v2 import EfficientNetV2B3
+        base_model = EfficientNetV2B3(input_shape=(img_height, img_width, channel),
+                                      include_top=False,
+                                      weights='imagenet')
 
     case 40:
         print("EfficientNet B4")
         from tensorflow.keras.applications.efficientnet import EfficientNetB4
+        base_model = EfficientNetB4(input_shape=(img_height, img_width, channel),
+                                    include_top=False,
+                                    weights='imagenet')
 
     case 41:
         print("EfficientNet B5")
         from tensorflow.keras.applications.efficientnet import EfficientNetB5
-
+        base_model = EfficientNetB5(input_shape=(img_height, img_width, channel),
+                                    include_top=False,
+                                    weights='imagenet')
     case 42:
         print("EfficientNet B6")
         from tensorflow.keras.applications.efficientnet import EfficientNetB6
+        base_model = EfficientNetB6(input_shape=(img_height, img_width, channel),
+                                    include_top=False,
+                                    weights='imagenet')
 
     case 43:
         print("EfficientNet B7")
