@@ -43,6 +43,7 @@ class Local_Project(models.Model):
     local_project_type = models.CharField(max_length=2,
                                           choices=Project_Type.choices,
                                           default=Project_Type.LC)
+    local_project_active = models.BooleanField(default=True)
     local_project_owner = models.ForeignKey(User,
                                             on_delete=models.CASCADE,
                                             related_name='local_project_owner')
@@ -57,6 +58,7 @@ class Local_Project(models.Model):
 class Model_Family(models.Model):
     model_family_id = models.BigAutoField(primary_key=True)
     model_family_name = models.CharField(max_length=100)
+    model_family_active = models.BooleanField(default=True)
     model_family_owner = models.ForeignKey(User,
                                            on_delete=models.CASCADE,
                                            related_name='model_family_owner')
@@ -81,11 +83,14 @@ class Model(models.Model):
     class Type(models.TextChoices):
         AD = 'AD', 'Anomaly Detection',
         CL = 'CL', 'Classification',
+        CU = 'CU', 'Clustering'
+        RG = 'RG', 'Regression'
         SG = 'SG', 'Segmentation',
         TC = 'TC', 'Text-Classification',
         TG = 'TG', 'Text-Generation'
+        TS = 'TS', 'Time-Series'
 
-    model_id = models.BigAutoField(primary_key=True, default=1, editable=False)
+    model_id = models.BigAutoField(primary_key=True, editable=False)
     model_name = models.CharField(max_length=100)
     model_description = models.TextField(null=True, blank=True)
     model_version = models.CharField(max_length=15, null=True, blank=True)
@@ -98,15 +103,16 @@ class Model(models.Model):
     model_family = models.ForeignKey(Model_Family,
                                      on_delete=models.CASCADE,
                                      related_name='family_model')
-    model_repo = models.CharField(max_length=250),
+    model_provider = models.CharField(max_length=2,
+                                      choices=Provider.choices,
+                                      default=Provider.HF)
+    model_repo = models.CharField(max_length=250, null=True, blank=True),
+    model_active = models.BooleanField(default=True)
     model_owner = models.ForeignKey(User,
                                     on_delete=models.DO_NOTHING,
                                     related_name='model_owner')
     model_creation_date = models.DateTimeField(auto_now_add=True)
     model_updated_date = models.DateTimeField(auto_now=True)
-    model_provider = models.CharField(max_length=2,
-                                      choices=Provider.choices,
-                                      default=Provider.HF)
 
     def __str__(self):
         return self.model_name
@@ -141,7 +147,9 @@ class Model_File(models.Model):
                                        choices=Type.choices,
                                        default=Type.NONE)
     model_file_filename = models.CharField(max_length=250)
-    model_file_extension = models.CharField(max_length=6, blank=True, null=True)
+    model_file_extension = models.CharField(max_length=6,
+                                            choices=Extension.choices,
+                                            default=Extension.NONE)
     model_filesize = models.BigIntegerField(blank=True, null=True)
     model_file_creation_date = models.DateTimeField(auto_now_add=True)
     model_file_updated_date = models.DateTimeField(auto_now=True)
@@ -153,11 +161,12 @@ class Model_File(models.Model):
 class Document(models.Model):
     document_model_id = models.BigAutoField(primary_key=True, editable=False)
     document_title = models.CharField(max_length=250)
-    document_filename = models.CharField(max_length=250)
+    document_filename = models.CharField(max_length=250, default="")
+    document_active = models.BooleanField(default=True)
     document_owner = models.ForeignKey(User,
                                        on_delete=models.DO_NOTHING,
                                        default=1,
-                                       related_name='model_doc_owner')
+                                       related_name='document_owner')
     document_creation_date = models.DateTimeField(auto_now_add=True)
     document_updated_date = models.DateTimeField(auto_now=True)
 
@@ -174,9 +183,17 @@ class Model_Document(models.Model):
                                           on_delete=models.CASCADE,
                                           default=1,
                                           related_name='modeldoc_document_id')
+    modeldoc_active = models.BooleanField(default=True)
+    modeldoc_owner = models.ForeignKey(User,
+                                       on_delete=models.DO_NOTHING,
+                                       default=1,
+                                       related_name='modeldoc_owner')
+
+    # modeldoc_creation_date = models.DateTimeField(auto_now_add=True)
+    # modeldoc_updated_date = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return  self.modeldoc_model_id.model_name + ' ----- ' + self.modeldoc_document.document_filename + '  |  ' + self.modeldoc_document.document_title
+        return self.modeldoc_model_id.model_name + ' ----- ' + self.modeldoc_document.document_filename + '  |  ' + self.modeldoc_document.document_title
 
 
 # --- Processing ----
