@@ -13,10 +13,17 @@ print("GPUs Available: " + str(
     numgpu) + " - Python: " + platform.python_version() + " - PyTorch: " + tc.__version__ + " - TensorFlow: " + tf.__version__ + " - Keras: " + k.__version__ + " - Numpy: " + np.version.version + " - Pandas: " + pd.__version__ + " - Sklearn: " + sk.__version__ + " - Seaborn: " + sns.__version__ + "  - Matplotlib: " + mpl.__version__)
 
 model_id = 1
+img_height = 224
+img_width = 224
+channel = 3
+
 match model_id:
     case 1:  # Xception
         print("Xception")
         from tensorflow.keras.applications.xception import Xception
+        base_model = Xception(input_shape=(img_height, img_width, channel),
+                              include_top=False,
+                              weights='imagenet')
 
     case 2:  # VGG 11
         print("VGG 11")
@@ -27,10 +34,16 @@ match model_id:
     case 4:  # VGG 16
         print("VGG 16")
         from tensorflow.keras.applications.vgg16 import VGG16
+        base_model = VGG16(input_shape=(img_height, img_width, channel),
+                           include_top=False,
+                           weights='imagenet')
 
     case 5:  # VGG 19
         print("VGG 19")
         from tensorflow.keras.applications.vgg19 import VGG19
+        base_model = VGG19(input_shape=(img_height, img_width, channel),
+                           include_top=False,
+                           weights='imagenet')
 
     case 6:  # ResNet 18
         print("ResNet 18")
@@ -41,22 +54,37 @@ match model_id:
     case 8:
         print("ResNet 50")
         from tensorflow.keras.applications.resnet50 import ResNet50
+        base_model = ResNet50(input_shape=(img_height, img_width, channel),
+                              include_top=False,
+                              weights='imagenet')
 
     case 9:
         print("ResNet 50 V2")
         from tensorflow.keras.applications.resnet_v2 import ResNet50V2
+        base_model = ResNet50V2(input_shape=(img_height, img_width, channel),
+                                include_top=False,
+                                weights='imagenet')
 
     case 10:
         print("ResNet RS 50")
         from tensorflow.keras.applications.resnet_rs import ResNetRS50
+        base_model = ResNetRS50(input_shape=(img_height, img_width, channel),
+                                include_top=False,
+                                weights='imagenet')
 
     case 11:
         print("ResNet 101")
         from tensorflow.keras.applications.resnet import ResNet101
+        base_model = ResNet101(input_shape=(img_height, img_width, channel),
+                               include_top=False,
+                               weights='imagenet')
 
     case 12:
         print("ResNet 101 V2")
         from tensorflow.keras.applications.resnet_v2 import ResNet101V2
+        base_model = ResNet101V2(input_shape=(img_height, img_width, channel),
+                                 include_top=False,
+                                 weights='imagenet')
 
     case 13:
         print("ResNet RS 101")
