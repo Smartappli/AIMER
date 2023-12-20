@@ -296,134 +296,231 @@ match model_id:
     case 43:
         print("EfficientNet B7")
         from tensorflow.keras.applications.efficientnet import EfficientNetB7
+        base_model = EfficientNetB7(input_shape=(img_height, img_width, channel),
+                                    include_top=False,
+                                    weights='imagenet')
 
     case 44:
         print("EfficientNet V2 Small")
         from tensorflow.keras.applications.efficientnet_v2 import EfficientNetV2S
+        base_model = EfficientNetV2S(input_shape=(img_height, img_width, channel),
+                                     include_top=False,
+                                     weights='imagenet')
 
     case 45:
         print("EfficientNet V2 Medium")
         from tensorflow.keras.applications.efficientnet_v2 import EfficientNetV2M
+        base_model = EfficientNetV2M(input_shape=(img_height, img_width, channel),
+                                     include_top=False,
+                                     weights='imagenet')
 
     case 46:
         print("EfficientNet V2 Large")
         from tensorflow.keras.applications.efficientnet_v2 import EfficientNetV2L
+        base_model = EfficientNetV2L(input_shape=(img_height, img_width, channel),
+                                     include_top=False,
+                                     weights='imagenet')
 
     case 47:
         print("ConvNeXt Tiny")
         from tensorflow.keras.applications.convnext import ConvNeXtTiny
+        base_model = ConvNeXtTiny(input_shape=(img_height, img_width, channel),
+                                  include_top=False,
+                                  weights='imagenet')
 
     case 48:
         print("ConvNeXt Small")
         from tensorflow.keras.applications.convnext import ConvNeXtSmall
+        base_model = ConvNeXtSmall(input_shape=(img_height, img_width, channel),
+                                   include_top=False,
+                                   weights='imagenet')
 
     case 49:
         print("ConvNeXt Medium")
         from tensorflow.keras.applications.convnext import ConvNeXtBase
+        base_model = ConvNeXtBase(input_shape=(img_height, img_width, channel),
+                                  include_top=False,
+                                  weights='imagenet')
 
     case 50:
         print("ConvNeXt Large")
         from tensorflow.keras.applications.convnext import ConvNeXtLarge
+        base_model = ConvNeXtLarge(input_shape=(img_height, img_width, channel),
+                                   include_top=False,
+                                   weights='imagenet')
 
     case 51:
         print("ConvNeXt XLarge")
         from tensorflow.keras.applications.convnext import ConvNeXtXLarge
+        base_model = ConvNeXtXLarge(input_shape=(img_height, img_width, channel),
+                                    include_top=False,
+                                    weights='imagenet')
 
     case 52:
         print("RegNetX 002")
         from tensorflow.keras.applications.regnet import RegNetX002
+        base_model = RegNetX002(input_shape=(img_height, img_width, channel),
+                                include_top=False,
+                                weights='imagenet')
 
     case 53:
         print("RegNetY 002")
         from tensorflow.keras.applications.regnet import RegNetY002
+        base_model = RegNetY002(input_shape=(img_height, img_width, channel),
+                                include_top=False,
+                                weights='imagenet')
 
     case 54:
         print("RegNetX 004")
         from tensorflow.keras.applications.regnet import RegNetX004
+        base_model = RegNetX004(input_shape=(img_height, img_width, channel),
+                                include_top=False,
+                                weights='imagenet')
 
     case 55:
         print("RegNetY 004")
         from tensorflow.keras.applications.regnet import RegNetY004
+        base_model = RegNetY004(input_shape=(img_height, img_width, channel),
+                                include_top=False,
+                                weights='imagenet')
 
     case 56:
         print("RegNetX 006")
         from tensorflow.keras.applications.regnet import RegNetX006
-
+        base_model = RegNetX006(input_shape=(img_height, img_width, channel),
+                                include_top=False,
+                                weights='imagenet')
     case 57:
         print("RegNetY 006")
         from tensorflow.keras.applications.regnet import RegNetY006
+        base_model = RegNetY006(input_shape=(img_height, img_width, channel),
+                                include_top=False,
+                                weights='imagenet')
 
     case 58:
         print("RegNetX 008")
         from tensorflow.keras.applications.regnet import RegNetX008
+        base_model = RegNetX008(input_shape=(img_height, img_width, channel),
+                                include_top=False,
+                                weights='imagenet')
 
     case 59:
         print("RegNetY 008")
         from tensorflow.keras.applications.regnet import RegNetY008
+        base_model = RegNetY008(input_shape=(img_height, img_width, channel),
+                                include_top=False,
+                                weights='imagenet')
 
     case 60:
         print("RegNetX 016")
         from tensorflow.keras.applications.regnet import RegNetX016
+        base_model = RegNetX016(input_shape=(img_height, img_width, channel),
+                                include_top=False,
+                                weights='imagenet')
 
     case 61:
         print("RegNetY 016")
         from tensorflow.keras.applications.regnet import RegNetY016
+        base_model = RegNetY016(input_shape=(img_height, img_width, channel),
+                                include_top=False,
+                                weights='imagenet')
 
     case 62:
         print("RegNetX 032")
         from tensorflow.keras.applications.regnet import RegNetX032
+        base_model = RegNetX032(input_shape=(img_height, img_width, channel),
+                                include_top=False,
+                                weights='imagenet')
 
     case 63:
         print("RegNetY 032")
         from tensorflow.keras.applications.regnet import RegNetY032
-
+        base_model = RegNetY032(input_shape=(img_height, img_width, channel),
+                                include_top=False,
+                                weights='imagenet')
     case 64:
         print("RegNetX 040")
         from tensorflow.keras.applications.regnet import RegNetX040
+        base_model = RegNetX040(input_shape=(img_height, img_width, channel),
+                                include_top=False,
+                                weights='imagenet')
 
     case 65:
         print("RegNetY 040")
         from tensorflow.keras.applications.regnet import RegNetY040
+        base_model = RegNetY040(input_shape=(img_height, img_width, channel),
+                                include_top=False,
+                                weights='imagenet')
 
     case 66:
         print("RegNetX 064")
         from tensorflow.keras.applications.regnet import RegNetX064
+        base_model = RegNetX064(input_shape=(img_height, img_width, channel),
+                                include_top=False,
+                                weights='imagenet')
 
     case 67:
         print("RegNetY 064")
         from tensorflow.keras.applications.regnet import RegNetY064
+        base_model = RegNetY064(input_shape=(img_height, img_width, channel),
+                                include_top=False,
+                                weights='imagenet')
 
     case 68:
         print("RegNetX 080")
         from tensorflow.keras.applications.regnet import RegNetX080
+        base_model = RegNetX080(input_shape=(img_height, img_width, channel),
+                                include_top=False,
+                                weights='imagenet')
 
     case 69:
         print("RegNetY 080")
         from tensorflow.keras.applications.regnet import RegNetY080
+        base_model = RegNetY080(input_shape=(img_height, img_width, channel),
+                                include_top=False,
+                                weights='imagenet')
 
     case 70:
         print("RegNetX 120")
         from tensorflow.keras.applications.regnet import RegNetX120
+        base_model = RegNetX120(input_shape=(img_height, img_width, channel),
+                                include_top=False,
+                                weights='imagenet')
 
     case 71:
         print("RegNetY 120")
         from tensorflow.keras.applications.regnet import RegNetY120
+        base_model = RegNetY120(input_shape=(img_height, img_width, channel),
+                                include_top=False,
+                                weights='imagenet')
 
     case 72:
         print("RegNetX 160")
         from tensorflow.keras.applications.regnet import RegNetX160
+        base_model = RegNetX160(input_shape=(img_height, img_width, channel),
+                                include_top=False,
+                                weights='imagenet')
 
     case 73:
         print("RegNetY 160")
         from tensorflow.keras.applications.regnet import RegNetY160
+        base_model = RegNetY160(input_shape=(img_height, img_width, channel),
+                                include_top=False,
+                                weights='imagenet')
 
     case 74:
         print("RegNetX 320")
         from tensorflow.keras.applications.regnet import RegNetX320
+        base_model = RegNetX320(input_shape=(img_height, img_width, channel),
+                                include_top=False,
+                                weights='imagenet')
 
     case 75:
         print("RegNetY 320")
         from tensorflow.keras.applications.regnet import RegNetY320
+        base_model = RegNetY320(input_shape=(img_height, img_width, channel),
+                                include_top=False,
+                                weights='imagenet')
 
     case _:
         print("Error")
