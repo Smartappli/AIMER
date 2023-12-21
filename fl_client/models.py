@@ -122,7 +122,10 @@ class Model(models.Model):
         ordering = ['model_name']
 
     def __str__(self):
-        return str(self.model_id) + ' - ' + self.model_name
+        if str(self.model_version) != "None":
+            return str(self.model_id) + ' - ' + self.model_name + ' - v' + str(self.model_version)
+        else:
+            return str(self.model_id) + ' - ' + self.model_name
 
 
 class Model_File(models.Model):
