@@ -123,9 +123,9 @@ class Model(models.Model):
 
     def __str__(self):
         if str(self.model_version) != "None":
-            return str(self.model_id) + ' - ' + self.model_name + ' - v' + str(self.model_version)
+            return str(self.model_id) + ' - ' + self.model_category + ' | ' + self.model_type + ' - ' + self.model_name + ' - v' + str(self.model_version)
         else:
-            return str(self.model_id) + ' - ' + self.model_name
+            return str(self.model_id) + ' - ' + self.model_category + ' | ' + self.model_type + ' - ' + self.model_name
 
 
 class Model_File(models.Model):
