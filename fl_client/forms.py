@@ -277,12 +277,23 @@ class MLAnomalyDetectionForm(forms.Form):
 
 
 class NLPTextGenerationForm(forms.Form):
-    # alfred
+    # Alfred
     nlptg_model_alfred_40b = forms.BooleanField(required=False)
+
+    # Code
+    nlptg_model_code_13b = forms.BooleanField(required=False)
+    nlptg_model_code_33b = forms.BooleanField(required=False)
 
     # CodeLLaMA Models
     nlptg_model_codellama_7b = forms.BooleanField(required=False)
+    nlptg_model_codellama_7b_instruct = forms.BooleanField(required=False)
+    nlptg_model_codellama_7b_python = forms.BooleanField(required=False)
     nlptg_model_codellama_13b = forms.BooleanField(required=False)
+    nlptg_model_codellama_13b_instruct = forms.BooleanField(required=False)
+    nlptg_model_codellama_13b_python = forms.BooleanField(required=False)
+    nlptg_model_codellama_34b = forms.BooleanField(required=False)
+    nlptg_model_codellama_34b_instruct = forms.BooleanField(required=False)
+    nlptg_model_codellama_34b_python = forms.BooleanField(required=False)
 
     # Falcom Models
     nlptg_model_falcon_7b = forms.BooleanField(required=False)
@@ -294,14 +305,22 @@ class NLPTextGenerationForm(forms.Form):
 
     # LLaMa 2 Models
     nlptg_model_llama2_7b = forms.BooleanField(required=False)
+    nlptg_model_llama2_7b_chat = forms.BooleanField(required=False)
+    nlptg_model_llama2_7b_code = forms.BooleanField(required=False)
     nlptg_model_llama2_13b = forms.BooleanField(required=False)
+    nlptg_model_llama2_13b_chat = forms.BooleanField(required=False)
     nlptg_model_llama2_70b = forms.BooleanField(required=False)
+    nlptg_model_llama2_70b_chat = forms.BooleanField(required=False)
 
     # Med42 Model
     nlptg_model_med42_70b = forms.BooleanField(required=False)
 
+    # MedAlpaca Model
+    nlptg_model_medalpaca_13b = forms.BooleanField(required=False)
+
     # Meditron Models
     nlptg_model_meditron_7b = forms.BooleanField(required=False)
+    nlptg_model_meditron_7b_chat = forms.BooleanField(required=False)
     nlptg_model_meditron_70b = forms.BooleanField(required=False)
 
     # Mistral Models
@@ -309,16 +328,20 @@ class NLPTextGenerationForm(forms.Form):
     nlptg_model_mistral_7b_instruct = forms.BooleanField(required=False)
     nlptg_model_mistral_7b_openorca = forms.BooleanField(required=False)
 
+    # Mixtral Models
+    nlptg_model_mixtral_8x7b = forms.BooleanField(required=False)
+    nlptg_model_mixtral_8x7b_instruct = forms.BooleanField(required=False)
+
     # Neural-Chat Model
-    nlptg_model_neuralchat_7b_v3_2 = forms.BooleanField(required=False)
+    nlptg_model_neuralchat_7b = forms.BooleanField(required=False)
 
     # OpenChat Model
-    nlptg_model_openchat_7b_v3_5 = forms.BooleanField(required=False)
+    nlptg_model_openchat_7b = forms.BooleanField(required=False)
 
     # OpenLLaMA
-    nlptg_model_openllama_3b_v2 = forms.BooleanField(required=False)
-    nlptg_model_openllama_7b_v2 = forms.BooleanField(required=False)
-    nlptg_model_openllama_13b_v2 = forms.BooleanField(required=False)
+    nlptg_model_openllama_3b = forms.BooleanField(required=False)
+    nlptg_model_openllama_7b = forms.BooleanField(required=False)
+    nlptg_model_openllama_13b = forms.BooleanField(required=False)
 
     # Orca 2 models
     nlptg_model_orca2_7b = forms.BooleanField(required=False)
@@ -328,14 +351,26 @@ class NLPTextGenerationForm(forms.Form):
     mlptg_model_psymedrp_13b_v1 = forms.BooleanField(required=False)
     mlptg_model_psymedrp_20b_v1 = forms.BooleanField(required=False)
 
+    # Python Code
+    nlptg_model_python_code_13b = forms.BooleanField(required=False)
+    mlptg_model_python_code_33b = forms.BooleanField(required=False)
+
     # Starling LM
-    nlptg_model_starlinglm_7b_alpha = forms.BooleanField(required=False)
+    nlptg_model_starlinglm_7b = forms.BooleanField(required=False)
 
     # Vicuna
-    nlptg_model_vicuna_7b_v1_5 = forms.BooleanField(required=False)
-    nlptg_model_vicuna_13b_v1_5 = forms.BooleanField(required=False)
+    nlptg_model_vicuna_7b = forms.BooleanField(required=False)
+    nlptg_model_vicuna_13b = forms.BooleanField(required=False)
+    nlptg_model_vicuna_33b = forms.BooleanField(required=False)
+    nlptg_model_vicuna_33b_coder = forms.BooleanField(required=False)
+
+    # Vicuna
+    nlptg_model_wizardlm_7b = forms.BooleanField(required=False)
+    nlptg_model_wizardlm_13b = forms.BooleanField(required=False)
+    nlptg_model_wizardlm_70b = forms.BooleanField(required=False)
 
     # Zephyr
+    nlptg_model_zephyr_3b = forms.BooleanField(required=False)
     nlptg_model_zephyr_7b_alpha = forms.BooleanField(required=False)
     nlptg_model_zephyr_7b_beta = forms.BooleanField(required=False)
 

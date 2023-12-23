@@ -136,9 +136,11 @@ class Model_File(models.Model):
         Q3KM = 'Q3KM', 'Q3_K_M',
         Q3KS = 'Q3KS', 'Q3_K_S'
         Q40 = 'Q40', 'Q4_0',
+        Q41 = 'Q41', 'Q4_1',
         Q4KM = 'Q4KM', 'Q4_K_M',
         Q4KS = 'Q4KS', 'Q4_K_S',
         Q50 = 'Q50', 'Q5_0',
+        Q51 = 'Q51', 'Q5_1',
         Q5KM = 'Q5KM', 'Q5_K_M',
         Q5KS = 'Q5KS', 'Q5_K_S',
         Q6K = 'Q6K', 'Q6_K',
@@ -160,12 +162,16 @@ class Model_File(models.Model):
     model_file_extension = models.CharField(max_length=6,
                                             choices=Extension.choices,
                                             default=Extension.NONE)
-    model_filesize = models.BigIntegerField(blank=True, null=True)
+    model_file_size = models.BigIntegerField(blank=True, null=True)
+    model_file_sha256 = models.CharField(max_length=64, blank=True, null=True)
     model_file_creation_date = models.DateTimeField(auto_now_add=True)
     model_file_updated_date = models.DateTimeField(auto_now=True)
 
+    class Meta:
+        ordering = ['-model_file_model_id', '-model_file_type']
+
     def __str__(self):
-        return self.model_file_type + " --- " + self.model_file_extension + ' --- ' + self.model_file_filename
+        return self.model_file_model_id.model_name + ' | ' + self.model_file_type + " --- " + self.model_file_extension + ' --- ' + self.model_file_filename
 
 
 class Document(models.Model):
@@ -204,6 +210,10 @@ class Model_Document(models.Model):
 
     # modeldoc_creation_date = models.DateTimeField(auto_now_add=True)
     # modeldoc_updated_date = models.DateTimeField(auto_now=True)
+
+
+    class Meta:
+        ordering = ['modeldoc_model_id']
 
     def __str__(self):
         return self.modeldoc_model_id.model_name + ' ----- ' + self.modeldoc_document.document_filename + '  |  ' + self.modeldoc_document.document_title
