@@ -41,5 +41,6 @@ urlpatterns = [
     path('natural_language_processing_tutorials/', views.natural_language_processing_tutorials, name='natural_language_processing_tutorials'),
     path('register/', views.register, name='register'),
     path('edit/', views.edit, name='edit'),
-    path('import/', views.import_data, name='import')
+    path('import/', views.import_data, name='import'),
+    path('download/', views.download_data, name='download')
 ]

@@ -22,7 +22,6 @@ from .forms import (DLClassificationForm, DLSegmentation, MLClassificationForm, 
 from .models import Profile, Model, Model_File, Model_Family, Model_Document, Queue
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from huggingface_hub import list_repo_tree
 
 
 def index(request):
@@ -31,13 +30,16 @@ def index(request):
 
 
 def import_data(request):
+    from huggingface_hub import list_repo_tree
+
     my_model = Model.objects.filter(model_category='NL',
                                     model_type='TG',
                                     model_provider='HF')
-
+    grandtotal = 0
     for p in my_model:
-        the_model = Model.objects.get(pk = p.model_id)
+        the_model = Model.objects.get(pk=p.model_id)
         repo_tree = list(list_repo_tree(p.model_repo, expand=True))
+        total = 0
 
         print(list(repo_tree))
         for fichier in repo_tree:
@@ -50,12 +52,12 @@ def import_data(request):
 
             fichier_split = fichier.path.split('.')
 
-            if (fichier_split[-1] == "gguf") or (fichier_split[-1].split('-')[0] =='gguf'):
+            if (fichier_split[-1] == "gguf") or (fichier_split[-1].split('-')[0] == 'gguf'):
                 q = fichier_split[-2]
                 path = fichier.path
                 file_size = int(fichier.lfs["size"])
                 sha256 = fichier.lfs['sha256']
-                insertion=1
+                insertion = 1
 
             match q:
                 case 'Q2_K':
@@ -111,6 +113,47 @@ def import_data(request):
                                           model_file_size=file_size,
                                           model_file_sha256=sha256
                                           )
+                total += file_size
+                grandtotal += file_size
+
+        print(p.model_repo + ": " + str(total))
+
+    print("TOTAL: " + str(grandtotal))
+
+    logo = ['share', 'hospital', 'data', 'cpu', 'gpu']
+    return render(request, "core/index.html", {"logo": logo})
+
+
+def download_data(request):
+    from huggingface_hub import hf_hub_download, try_to_load_from_cache, _CACHED_NO_EXIST
+
+    my_models = Model.objects.filter(model_category='NL',
+                                     model_type='TG',
+                                     model_provider='HF')
+
+    for p in my_models:
+        print(p.model_repo)
+
+        my_files = Model_File.objects.filter(model_file_model_id=p.model_id,
+                                             model_file_type='Q4KM')
+
+        for q in my_files:
+            filepath = try_to_load_from_cache(repo_id=p.model_repo, filename=q.model_file_filename, repo_type="model")
+            if isinstance(filepath, str):
+                # file exists and is cached
+                print("File in cache")
+                print(filepath)
+
+            elif filepath is _CACHED_NO_EXIST:
+                # non-existence of file is cached
+                print("File in download")
+                hf_hub_download(repo_id=p.model_repo, filename=q.model_file_filename)
+                print("File downloaded")
+
+            else:
+                print("File in download")
+                hf_hub_download(repo_id=p.model_repo, filename=q.model_file_filename)
+                print("File downloaded")
 
     logo = ['share', 'hospital', 'data', 'cpu', 'gpu']
     return render(request, "core/index.html", {"logo": logo})
