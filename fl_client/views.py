@@ -50,20 +50,12 @@ def import_data(request):
 
             fichier_split = fichier.path.split('.')
 
-            if fichier_split[-1] == "gguf":
+            if (fichier_split[-1] == "gguf") or (fichier_split[-1].split('-')[0] =='gguf'):
                 q = fichier_split[-2]
                 path = fichier.path
                 file_size = int(fichier.lfs["size"])
                 sha256 = fichier.lfs['sha256']
                 insertion=1
-
-            else:
-                if len(fichier_split) > 2 and fichier_split[-2] == "gguf":
-                    q = fichier_split[-3]
-                    path = fichier.path
-                    file_size = int(fichier.lfs["size"])
-                    sha256 = fichier.lfs['sha256']
-                    insertion=1
 
             match q:
                 case 'Q2_K':
@@ -110,12 +102,6 @@ def import_data(request):
 
                 case 'Q8_0':
                     model_type = 'Q80'
-
-            print(model_type)
-            print(path)
-            print(file_size)
-            print(sha256)
-            print("\n")
 
             if insertion == 1:
                 Model_File.objects.create(model_file_model_id=the_model,
