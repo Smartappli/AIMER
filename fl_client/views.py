@@ -22,9 +22,110 @@ from .forms import (DLClassificationForm, DLSegmentation, MLClassificationForm, 
 from .models import Profile, Model, Model_File, Model_Family, Model_Document, Queue
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from huggingface_hub import list_repo_tree
 
 
 def index(request):
+    logo = ['share', 'hospital', 'data', 'cpu', 'gpu']
+    return render(request, "core/index.html", {"logo": logo})
+
+
+def import_data(request):
+    my_model = Model.objects.filter(model_category='NL',
+                                    model_type='TG',
+                                    model_provider='HF')
+
+    for p in my_model:
+        the_model = Model.objects.get(pk = p.model_id)
+        repo_tree = list(list_repo_tree(p.model_repo, expand=True))
+
+        print(list(repo_tree))
+        for fichier in repo_tree:
+            q = ''
+            path = ''
+            file_size = 0
+            sha256 = ''
+            model_type = ''
+            insertion = 0
+
+            fichier_split = fichier.path.split('.')
+
+            if fichier_split[-1] == "gguf":
+                q = fichier_split[-2]
+                path = fichier.path
+                file_size = int(fichier.lfs["size"])
+                sha256 = fichier.lfs['sha256']
+                insertion=1
+
+            else:
+                if len(fichier_split) > 2 and fichier_split[-2] == "gguf":
+                    q = fichier_split[-3]
+                    path = fichier.path
+                    file_size = int(fichier.lfs["size"])
+                    sha256 = fichier.lfs['sha256']
+                    insertion=1
+
+            match q:
+                case 'Q2_K':
+                    model_type = 'Q2K'
+
+                case 'Q3_K_L':
+                    model_type = 'Q3KL'
+
+                case 'Q3_K_L':
+                    model_type = 'Q3KL'
+
+                case 'Q3_K_M':
+                    model_type = 'Q3KM'
+
+                case 'Q3_K_S':
+                    model_type = 'Q3KS'
+
+                case 'Q4_0':
+                    model_type = 'Q40'
+
+                case 'Q4_1':
+                    model_type = 'Q41'
+
+                case 'Q4_K_M':
+                    model_type = 'Q4KM'
+
+                case 'Q4_K_S':
+                    model_type = 'Q4KS'
+
+                case 'Q5_0':
+                    model_type = 'Q50'
+
+                case 'Q5_1':
+                    model_type = 'Q51'
+
+                case 'Q5_K_M':
+                    model_type = 'Q5KM'
+
+                case 'Q5_K_S':
+                    model_type = 'Q5KS'
+
+                case 'Q6_K':
+                    model_type = 'Q6K'
+
+                case 'Q8_0':
+                    model_type = 'Q80'
+
+            print(model_type)
+            print(path)
+            print(file_size)
+            print(sha256)
+            print("\n")
+
+            if insertion == 1:
+                Model_File.objects.create(model_file_model_id=the_model,
+                                          model_file_type=model_type,
+                                          model_file_filename=path,
+                                          model_file_extension='GGUF',
+                                          model_file_size=file_size,
+                                          model_file_sha256=sha256
+                                          )
+
     logo = ['share', 'hospital', 'data', 'cpu', 'gpu']
     return render(request, "core/index.html", {"logo": logo})
 
