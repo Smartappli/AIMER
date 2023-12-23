@@ -125,6 +125,8 @@ def import_data(request):
 
 
 def download_data(request):
+    import os
+    import shutil
     from huggingface_hub import hf_hub_download, try_to_load_from_cache, _CACHED_NO_EXIST
 
     my_models = Model.objects.filter(model_category='NL',
@@ -135,8 +137,9 @@ def download_data(request):
         print(p.model_repo)
 
         my_files = Model_File.objects.filter(model_file_model_id=p.model_id,
-                                             model_file_type='Q4KM')
+                                             model_file_type='Q4KM').order_by('model_file_filename')
 
+        model_list = []
         for q in my_files:
             filepath = try_to_load_from_cache(repo_id=p.model_repo, filename=q.model_file_filename, repo_type="model")
             if isinstance(filepath, str):
@@ -152,8 +155,35 @@ def download_data(request):
 
             else:
                 print("File in download")
-                hf_hub_download(repo_id=p.model_repo, filename=q.model_file_filename)
+
+                hf_hub_download(repo_id=p.model_repo,
+                                filename=q.model_file_filename)
+
                 print("File downloaded")
+
+            model_list.append(try_to_load_from_cache(repo_id=p.model_repo,
+                                                     filename=q.model_file_filename,
+                                                     repo_type="model"))
+
+            if len(model_list) > 1:
+                model_list.sort()
+                new_name = model_list[0]
+                target = new_name.replace('-split-a', '')
+
+                for file in model_list[1:]:
+                    with open(new_name, 'ab') as out_file, open(file, 'rb') as in_file:
+                        shutil.copyfileobj(in_file, out_file)
+                        os.remove(file)
+
+                    os.rename(new_name, target)
+
+                i = 0
+                for q2 in my_files:
+                    if i == 0:
+                        Model_File.objects.filter(pk=q2.model_file_model_id).update(model_file_filename=q2.model_file_filename.replace('-split-a', ''))
+                        i = 1
+                    else:
+                        Model_File.objects.get(pk=q2.model_file_model_id).delete()
 
     logo = ['share', 'hospital', 'data', 'cpu', 'gpu']
     return render(request, "core/index.html", {"logo": logo})

@@ -17,7 +17,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 from django.contrib.auth.models import User
 from django.conf import settings
 from django.db import models
-
+import uuid
 
 class Profile(models.Model):
     user = models.OneToOneField(
@@ -38,6 +38,7 @@ class Local_Project(models.Model):
         FD = 'FD', 'Federated Project'
 
     local_project_id = models.BigAutoField(primary_key=True, default=1)
+    # local_project_uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
     local_project_title = models.CharField(max_length=250)
     local_project_description = models.TextField()
     local_project_type = models.CharField(max_length=2,
@@ -57,6 +58,7 @@ class Local_Project(models.Model):
 # ---- Model tables ----
 class Model_Family(models.Model):
     model_family_id = models.BigAutoField(primary_key=True)
+    # model_family_uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
     model_family_name = models.CharField(max_length=100)
     model_family_active = models.BooleanField(default=True)
     model_family_owner = models.ForeignKey(User,
@@ -95,6 +97,7 @@ class Model(models.Model):
         TS = 'TS', 'Time-Series'
 
     model_id = models.BigAutoField(primary_key=True, editable=False)
+    # model_uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
     model_name = models.CharField(max_length=100)
     model_description = models.TextField(null=True, blank=True)
     model_version = models.CharField(max_length=15, null=True, blank=True)
@@ -151,6 +154,7 @@ class Model_File(models.Model):
         BIN = 'BIN', 'Binary',
         GGUF = 'GGUF', 'GGUF'
 
+    # model_file_uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
     model_file_model_id = models.ForeignKey(Model,
                                             on_delete=models.CASCADE,
                                             default=1,
@@ -176,6 +180,7 @@ class Model_File(models.Model):
 
 class Document(models.Model):
     document_model_id = models.BigAutoField(primary_key=True, editable=False)
+    # document_uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
     document_title = models.CharField(max_length=250)
     document_filename = models.CharField(max_length=250, default="")
     document_active = models.BooleanField(default=True)
@@ -194,6 +199,7 @@ class Document(models.Model):
 
 
 class Model_Document(models.Model):
+    # modeldoc_uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
     modeldoc_model_id = models.ForeignKey(Model,
                                           on_delete=models.CASCADE,
                                           default=1,
@@ -235,6 +241,7 @@ class Queue(models.Model):
         UP = 'UP', 'Updated'
 
     queue_id = models.BigAutoField(primary_key=True, default=1, editable=False)
+    # queue_uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
     queue_model_id = models.ForeignKey(Model,
                                        on_delete=models.CASCADE,
                                        related_name='queue_model_id')
