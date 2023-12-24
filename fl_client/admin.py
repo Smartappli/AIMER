@@ -16,13 +16,14 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 
 from django.contrib import admin
-from .models import Model_Family, Model, Model_File, Document, Model_Document, Profile
+from .models import Model_Family, Model, Model_File, Document, Model_Document, Profile, Queue
 
 admin.site.register(Model_Family)
 admin.site.register(Model)
 admin.site.register(Model_File)
 admin.site.register(Document)
 admin.site.register(Model_Document)
+admin.site.register(Queue)
 
 
 @admin.register(Profile)
