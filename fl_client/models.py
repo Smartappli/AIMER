@@ -19,6 +19,7 @@ from django.conf import settings
 from django.db import models
 import uuid
 
+
 class Profile(models.Model):
     user = models.OneToOneField(
         settings.AUTH_USER_MODEL,
@@ -126,7 +127,9 @@ class Model(models.Model):
 
     def __str__(self):
         if str(self.model_version) != "None":
-            return str(self.model_id) + ' - ' + self.model_category + ' | ' + self.model_type + ' - ' + self.model_name + ' - v' + str(self.model_version)
+            return str(
+                self.model_id) + ' - ' + self.model_category + ' | ' + self.model_type + ' - ' + self.model_name + ' - v' + str(
+                self.model_version)
         else:
             return str(self.model_id) + ' - ' + self.model_category + ' | ' + self.model_type + ' - ' + self.model_name
 
@@ -162,17 +165,18 @@ class Model_File(models.Model):
     model_file_type = models.CharField(max_length=4,
                                        choices=Type.choices,
                                        default=Type.NONE)
-    model_file_filename = models.CharField(max_length=250)
+    model_file_filename = models.CharField(max_length=250, unique=True)
     model_file_extension = models.CharField(max_length=6,
                                             choices=Extension.choices,
                                             default=Extension.NONE)
     model_file_size = models.BigIntegerField(blank=True, null=True)
+    model_file_max_ram_required = models.CharField(max_length=10, blank=True, null=True)
     model_file_sha256 = models.CharField(max_length=64, blank=True, null=True)
     model_file_creation_date = models.DateTimeField(auto_now_add=True)
     model_file_updated_date = models.DateTimeField(auto_now=True)
 
     class Meta:
-        ordering = ['-model_file_model_id', '-model_file_type']
+        ordering = ['model_file_model_id', 'model_file_type']
 
     def __str__(self):
         return self.model_file_model_id.model_name + ' | ' + self.model_file_type + " --- " + self.model_file_extension + ' --- ' + self.model_file_filename
@@ -217,7 +221,6 @@ class Model_Document(models.Model):
     # modeldoc_creation_date = models.DateTimeField(auto_now_add=True)
     # modeldoc_updated_date = models.DateTimeField(auto_now=True)
 
-
     class Meta:
         ordering = ['modeldoc_model_id']
 
@@ -257,3 +260,15 @@ class Queue(models.Model):
 
     def __str__(self):
         return str(self.queue_uuid)
+
+
+class Help(models.Model):
+    help_uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
+    help_key = models.CharField(max_length=15, unique=True)
+    help_value = models.CharField(max_length=250)
+
+    class Meta:
+        ordering = ['help_key']
+
+    def __str__(self):
+        return self.help_key + ' : ' + self.help_value

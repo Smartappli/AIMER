@@ -106,19 +106,20 @@ def import_data(request):
                     model_type = 'Q80'
 
             if insertion == 1:
-                Model_File.objects.create(model_file_model_id=the_model,
-                                          model_file_type=model_type,
-                                          model_file_filename=path,
-                                          model_file_extension='GGUF',
-                                          model_file_size=file_size,
-                                          model_file_sha256=sha256
-                                          )
+                z = Model_File.objects.get_or_create(model_file_model_id=the_model,
+                                                     model_file_type=model_type,
+                                                     model_file_filename=path,
+                                                     model_file_extension='GGUF',
+                                                     model_file_size=file_size,
+                                                     model_file_sha256=sha256
+                                                     )
                 total += file_size
-                grandtotal += file_size
+                if model_type == 'Q4KM':
+                    grandtotal += file_size
 
         print(p.model_repo + ": " + str(total))
 
-    print("TOTAL: " + str(grandtotal))
+    print("TOTAL: " + str(format(grandtotal/1024/1024/1024, '.2f')) + " GB")
 
     logo = ['share', 'hospital', 'data', 'cpu', 'gpu']
     return render(request, "core/index.html", {"logo": logo})
@@ -180,7 +181,8 @@ def download_data(request):
                 i = 0
                 for q2 in my_files:
                     if i == 0:
-                        Model_File.objects.filter(pk=q2.model_file_model_id).update(model_file_filename=q2.model_file_filename.replace('-split-a', ''))
+                        Model_File.objects.filter(pk=q2.model_file_model_id).update(
+                            model_file_filename=q2.model_file_filename.replace('-split-a', ''))
                         i = 1
                     else:
                         Model_File.objects.get(pk=q2.model_file_model_id).delete()
@@ -229,243 +231,244 @@ def deep_learning_classification_run(request):
         form = DLClassificationForm(request.POST)
         if form.is_valid():
             cd = form.cleaned_data
+            model_id = 1
 
             # Xception #
             if cd['dpcla_Xception']:
-                Queue.objects.create(queue_model_id=1, queue_state='CR')
+                model_id = the_model = Model.objects.get(pk=1)
 
             # VGG #
             if cd['dpcla_VGG11']:
-                Queue.objects.create(queue_model_id=2, queue_state='CR')
+                model_id = the_model = Model.objects.get(pk=2)
 
             if cd['dpcla_VGG13']:
-                Queue.objects.create(queue_model_id=3, queue_state='CR')
+                model_id = the_model = Model.objects.get(pk=3)
 
             if cd['dpcla_VGG16']:
-                Queue.objects.create(queue_model_id=4, queue_state='CR')
+                model_id = the_model = Model.objects.get(pk=4)
 
             if cd['dpcla_VGG19']:
-                Queue.objects.create(queue_model_id=5, queue_state='CR')
+                model_id = the_model = Model.objects.get(pk=5)
 
             # ResNet, ResNet V2, ResNetRS #
             if cd['dpcla_ResNet18']:
-                Queue.objects.create(queue_model_id=6, queue_state='CR')
+                model_id = the_model = Model.objects.get(pk=6)
 
             if cd["dpcla_ResNet34"]:
-                Queue.objects.create(queue_model_id=7, queue_state='CR')
+                model_id = the_model = Model.objects.get(pk=7)
 
             if cd["dpcla_ResNet50"]:
-                Queue.objects.create(queue_model_id=8, queue_state='CR')
+                model_id = the_model = Model.objects.get(pk=8)
 
             if cd['dpcla_ResNet50V2']:
-                Queue.objects.create(queue_model_id=9, queue_state='CR')
+                model_id = the_model = Model.objects.get(pk=9)
 
             if cd['dpcla_ResNetRS50']:
-                Queue.objects.create(queue_model_id=10, queue_state='CR')
+                model_id = the_model = Model.objects.get(pk=10)
 
             if cd['dpcla_ResNet101']:
-                Queue.objects.create(queue_model_id=11, queue_state='CR')
+                model_id = the_model = Model.objects.get(pk=11)
 
             if cd['dpcla_ResNet101V2']:
-                Queue.objects.create(queue_model_id=12, queue_state='CR')
+                model_id = the_model = Model.objects.get(pk=12)
 
             if cd['dpcla_ResNetRS101']:
-                Queue.objects.create(queue_model_id=13, queue_state='CR')
+                model_id = the_model = Model.objects.get(pk=13)
 
             if cd['dpcla_ResNet152']:
-                Queue.objects.create(queue_model_id=14, queue_state='CR')
+                model_id = the_model = Model.objects.get(pk=14)
 
             if cd['dpcla_ResNet152V2']:
-                Queue.objects.create(queue_model_id=15, queue_state='CR')
+                model_id = the_model = Model.objects.get(pk=15)
 
             if cd['dpcla_ResNetRS152']:
-                Queue.objects.create(queue_model_id=16, queue_state='CR')
+                model_id = the_model = Model.objects.get(pk=16)
 
             if cd['dpcla_ResNetRS200']:
-                Queue.objects.create(queue_model_id=17, queue_state='CR')
+                model_id = the_model = Model.objects.get(pk=17)
 
             if cd['dpcla_ResNetRS270']:
-                Queue.objects.create(queue_model_id=18, queue_state='CR')
+                model_id = the_model = Model.objects.get(pk=18)
 
             if cd['dpcla_ResNetRS350']:
-                Queue.objects.create(queue_model_id=19, queue_state='CR')
+                model_id = the_model = Model.objects.get(pk=19)
 
             if cd['dpcla_ResNetRS420']:
-                Queue.objects.create(queue_model_id=20, queue_state='CR')
+                model_id = the_model = Model.objects.get(pk=20)
 
             # Inception
             if cd['dpcla_InceptionV3']:
-                Queue.objects.create(queue_model_id=21, queue_state='CR')
+                model_id = the_model = Model.objects.get(pk=21)
 
             if cd['dpcla_InceptionResNetV2']:
-                Queue.objects.create(queue_model_id=22, queue_state='CR')
+                model_id = the_model = Model.objects.get(pk=22)
 
             # MobileNet
             if cd['dpcla_MobileNet']:
-                Queue.objects.create(queue_model_id=23, queue_state='CR')
+                model_id = the_model = Model.objects.get(pk=23)
 
             if cd['dpcla_MobileNetV2']:
-                Queue.objects.create(queue_model_id=24, queue_state='CR')
+                model_id = the_model = Model.objects.get(pk=24)
 
             if cd['dpcla_MobileNetV3Small']:
-                Queue.objects.create(queue_model_id=25, queue_state='CR')
+                model_id = the_model = Model.objects.get(pk=25)
 
             if cd['dpcla_MobileNetV3Large']:
-                Queue.objects.create(queue_model_id=26, queue_state='CR')
+                model_id = the_model = Model.objects.get(pk=26)
 
             # DenseNet #
             if cd['dpcla_DenseNet121']:
-                Queue.objects.create(queue_model_id=27, queue_state='CR')
+                model_id = the_model = Model.objects.get(pk=27)
 
             if cd['dpcla_DenseNet169']:
-                Queue.objects.create(queue_model_id=28, queue_state='CR')
+                model_id = the_model = Model.objects.get(pk=28)
 
             if cd['dpcla_DenseNet201']:
-                Queue.objects.create(queue_model_id=29, queue_state='CR')
+                model_id = the_model = Model.objects.get(pk=29)
 
             # NASNet #
             if cd['dpcla_NASNetMobile']:
-                Queue.objects.create(queue_model_id=30, queue_state='CR')
+                model_id = the_model = Model.objects.get(pk=30)
 
             if cd['dpcla_NASNetLarge']:
-                Queue.objects.create(queue_model_id=31, queue_state='CR')
+                model_id = the_model = Model.objects.get(pk=31)
 
             # EfficientNet, EfficientNet V2
             if cd['dpcla_EfficientNetB0']:
-                Queue.objects.create(queue_model_id=32, queue_state='CR')
+                model_id = the_model = Model.objects.get(pk=32)
 
             if cd['dpcla_EfficientNetB0V2']:
-                Queue.objects.create(queue_model_id=33, queue_state='CR')
+                model_id = the_model = Model.objects.get(pk=33)
 
             if cd['dpcla_EfficientNetB1']:
-                Queue.objects.create(queue_model_id=34, queue_state='CR')
+                model_id = the_model = Model.objects.get(pk=34)
 
             if cd['dpcla_EfficientNetB1V2']:
-                Queue.objects.create(queue_model_id=35, queue_state='CR')
+                model_id = the_model = Model.objects.get(pk=35)
 
             if cd['dpcla_EfficientNetB2']:
-                Queue.objects.create(queue_model_id=36, queue_state='CR')
+                model_id = the_model = Model.objects.get(pk=36)
 
             if cd['dpcla_EfficientNetB2V2']:
-                Queue.objects.create(queue_model_id=37, queue_state='CR')
+                model_id = the_model = Model.objects.get(pk=37)
 
             if cd['dpcla_EfficientNetB3']:
-                Queue.objects.create(queue_model_id=38, queue_state='CR')
+                model_id = the_model = Model.objects.get(pk=38)
 
             if cd['dpcla_EfficientNetB3V2']:
-                Queue.objects.create(queue_model_id=39, queue_state='CR')
+                model_id = the_model = Model.objects.get(pk=39)
 
             if cd['dpcla_EfficientNetB4']:
-                Queue.objects.create(queue_model_id=40, queue_state='CR')
+                model_id = the_model = Model.objects.get(pk=40)
 
             if cd['dpcla_EfficientNetB5']:
-                Queue.objects.create(queue_model_id=41, queue_state='CR')
+                model_id = the_model = Model.objects.get(pk=41)
 
             if cd['dpcla_EfficientNetB6']:
-                Queue.objects.create(queue_model_id=42, queue_state='CR')
+                model_id = the_model = Model.objects.get(pk=42)
 
             if cd['dpcla_EfficientNetB7']:
-                Queue.objects.create(queue_model_id=43, queue_state='CR')
+                model_id = the_model = Model.objects.get(pk=43)
 
             if cd['dpcla_EfficientNetV2Small']:
-                Queue.objects.create(queue_model_id=44, queue_state='CR')
+                model_id = the_model = Model.objects.get(pk=44)
 
             if cd['dpcla_EfficientNetV2Medium']:
-                Queue.objects.create(queue_model_id=45, queue_state='CR')
+                model_id = the_model = Model.objects.get(pk=45)
 
             if cd['dpcla_EfficientNetV2Large']:
-                Queue.objects.create(queue_model_id=46, queue_state='CR')
+                model_id = the_model = Model.objects.get(pk=46)
 
             # ConvNeXt #
             if cd['dpcla_ConvNeXtTiny']:
-                Queue.objects.create(queue_model_id=47, queue_state='CR')
+                model_id = the_model = Model.objects.get(pk=47)
 
             if cd['dpcla_ConvNeXtSmall']:
-                Queue.objects.create(queue_model_id=48, queue_state='CR')
+                model_id = the_model = Model.objects.get(pk=48)
 
             if cd['dpcla_ConvNeXtBase']:
-                Queue.objects.create(queue_model_id=49, queue_state='CR')
+                model_id = the_model = Model.objects.get(pk=49)
 
             if cd['dpcla_ConvNeXtLarge']:
-                Queue.objects.create(queue_model_id=50, queue_state='CR')
+                model_id = the_model = Model.objects.get(pk=50)
 
             if cd['dpcla_ConvNeXtXLarge']:
-                Queue.objects.create(queue_model_id=51, queue_state='CR')
+                model_id = the_model = Model.objects.get(pk=51)
 
             # RegNetX, RegNetY#
             if cd['dpcla_RegNetX002']:
-                Queue.objects.create(queue_model_id=52, queue_state='CR')
+                model_id = the_model = Model.objects.get(pk=52)
 
             if cd['dpcla_RegNetY002']:
-                Queue.objects.create(queue_model_id=53, queue_state='CR')
+                model_id = the_model = Model.objects.get(pk=53)
 
             if cd['dpcla_RegNetX004']:
-                Queue.objects.create(queue_model_id=54, queue_state='CR')
+                model_id = the_model = Model.objects.get(pk=54)
 
             if cd['dpcla_RegNetY004']:
-                Queue.objects.create(queue_model_id=55, queue_state='CR')
+                model_id = the_model = Model.objects.get(pk=55)
 
             if cd['dpcla_RegNetX006']:
-                Queue.objects.create(queue_model_id=56, queue_state='CR')
+                model_id = the_model = Model.objects.get(pk=56)
 
             if cd['dpcla_RegNetY006']:
-                Queue.objects.create(queue_model_id=57, queue_state='CR')
+                model_id = the_model = Model.objects.get(pk=57)
 
             if cd['dpcla_RegNetX008']:
-                Queue.objects.create(queue_model_id=58, queue_state='CR')
+                model_id = the_model = Model.objects.get(pk=58)
 
             if cd['dpcla_RegNetY008']:
-                Queue.objects.create(Queue_model_id=59, queue_state='CR')
+                model_id = the_model = Model.objects.get(pk=59)
 
             if cd['dpcla_RegNetX016']:
-                Queue.objects.create(queue_model_id=60, queue_state='CR')
+                model_id = the_model = Model.objects.get(pk=60)
 
             if cd['dpcla_RegNetY016']:
-                Queue.objects.create(Queue_model_id=61, queue_state='CR')
+                model_id = the_model = Model.objects.get(pk=61)
 
             if cd['dpcla_RegNetX032']:
-                Queue.objects.create(queue_model_id=62, queue_state='CR')
+                model_id = the_model = Model.objects.get(pk=62)
 
             if cd['dpcla_RegNetY032']:
-                Queue.objects.create(Queue_model_id=63, queue_state='CR')
+                model_id = the_model = Model.objects.get(pk=63)
 
             if cd['dpcla_RegNetX040']:
-                Queue.objects.create(queue_model_id=64, queue_state='CR')
+                model_id = the_model = Model.objects.get(pk=64)
 
             if cd['dpcla_RegNetY40']:
-                Queue.objects.create(queue_model_id=65, queue_state='CR')
+                model_id = the_model = Model.objects.get(pk=65)
 
             if cd['dpcla_RegNetX064']:
-                Queue.objects.create(queue_model_id=66, queue_state='CR')
+                model_id = the_model = Model.objects.get(pk=66)
 
             if cd['dpcla_RegNetY064']:
-                Queue.objects.create(queue_model_id=67, queue_state='CR')
+                model_id = the_model = Model.objects.get(pk=67)
 
             if cd['dpcla_RegNetX080']:
-                Queue.objects.create(queue_model_id=68, queue_state='CR')
+                model_id = the_model = Model.objects.get(pk=68)
 
             if cd['dpcla_RegNetY80']:
-                Queue.objects.create(queue_model_id=69, queue_state='CR')
+                model_id = the_model = Model.objects.get(pk=69)
 
             if cd['dpcla_RegNetX120']:
-                Queue.objects.create(queue_model_id=70, queue_state='CR')
+                model_id = the_model = Model.objects.get(pk=70)
 
             if cd['dpcla_RegNetY120']:
-                Queue.objects.create(queue_model_id=71, queue_state='CR')
+                model_id = the_model = Model.objects.get(pk=71)
 
             if cd['dpcla_RegNetX160']:
-                Queue.objects.create(queue_model_id=72, queue_state='CR')
+                model_id = the_model = Model.objects.get(pk=72)
 
             if cd['dpcla_RegNetY160']:
-                Queue.objects.create(Queue_model_id=73, queue_state='CR')
+                model_id = the_model = Model.objects.get(pk=73)
 
             if cd['dpcla_RegNetX320']:
-                Queue.objects.create(queue_model_id=74, queue_state='CR')
+                model_id = the_model = Model.objects.get(pk=74)
 
             if cd['dpcla_RegNetY320']:
-                Queue.objects.create(queue_model_id=75, queue_state='CR')
+                model_id = the_model = Model.objects.get(pk=75)
 
-
+            Queue.objects.create(queue_model_id=model_id, queue_state='CR')
 def deep_learning_segmentation_run(request):
     if request.method == "POST":
         form = DLSegmentation(request.POST)
