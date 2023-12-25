@@ -16,7 +16,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 
 from django.contrib import admin
-from .models import Model_Family, Model, Model_File, Document, Model_Document, Profile, Queue, Help
+from .models import Model_Family, Model, Model_File, Document, Model_Document, Profile, Queue, Help, Dataset, License
 
 admin.site.register(Model_Family)
 admin.site.register(Model)
@@ -25,6 +25,8 @@ admin.site.register(Document)
 admin.site.register(Model_Document)
 admin.site.register(Queue)
 admin.site.register(Help)
+admin.site.register(Dataset)
+admin.site.register(License)
 
 
 @admin.register(Profile)

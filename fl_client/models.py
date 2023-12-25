@@ -56,6 +56,26 @@ class Local_Project(models.Model):
         return self.local_project_title
 
 
+class License(models.Model):
+    license_id = models.BigAutoField(primary_key=True, editable=False)
+    license_uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
+    license_short_name = models.CharField(max_length=30, null=True, blank=True)
+    license_name = models.CharField(max_length=250)
+    license_description = models.TextField(blank=True)
+    license_owner = models.ForeignKey(User,
+                                      on_delete=models.DO_NOTHING,
+                                      default=1,
+                                      related_name='license_owner')
+    license_creation_date = models.DateTimeField(auto_now_add=True)
+    license_updated_date = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['license_short_name']
+
+    def __str__(self):
+        return self.license_short_name + ' - ' + self.license_name
+
+
 # ---- Model tables ----
 class Model_Family(models.Model):
     model_family_id = models.BigAutoField(primary_key=True)
@@ -115,6 +135,10 @@ class Model(models.Model):
                                       choices=Provider.choices,
                                       default=Provider.HF)
     model_repo = models.CharField(max_length=250, null=True, blank=True)
+    model_license = models.ForeignKey(License,
+                                      on_delete=models.DO_NOTHING,
+                                      default=1,
+                                      related_name='model_license')
     model_active = models.BooleanField(default=True)
     model_owner = models.ForeignKey(User,
                                     on_delete=models.DO_NOTHING,
@@ -127,11 +151,9 @@ class Model(models.Model):
 
     def __str__(self):
         if str(self.model_version) != "None":
-            return str(
-                self.model_id) + ' - ' + self.model_category + ' | ' + self.model_type + ' - ' + self.model_name + ' - v' + str(
-                self.model_version)
+            return self.model_category + self.model_type + ' - ' + self.model_name + ' - v' + str(self.model_version)
         else:
-            return str(self.model_id) + ' - ' + self.model_category + ' | ' + self.model_type + ' - ' + self.model_name
+            return self.model_category + self.model_type + ' - ' + self.model_name
 
 
 class Model_File(models.Model):
@@ -170,13 +192,12 @@ class Model_File(models.Model):
                                             choices=Extension.choices,
                                             default=Extension.NONE)
     model_file_size = models.BigIntegerField(blank=True, null=True)
-    model_file_max_ram_required = models.CharField(max_length=10, blank=True, null=True)
     model_file_sha256 = models.CharField(max_length=64, blank=True, null=True)
     model_file_creation_date = models.DateTimeField(auto_now_add=True)
     model_file_updated_date = models.DateTimeField(auto_now=True)
 
     class Meta:
-        ordering = ['model_file_model_id', 'model_file_type']
+        ordering = ['model_file_filename']
 
     def __str__(self):
         return self.model_file_model_id.model_name + ' | ' + self.model_file_type + " --- " + self.model_file_extension + ' --- ' + self.model_file_filename
@@ -217,15 +238,49 @@ class Model_Document(models.Model):
                                        on_delete=models.DO_NOTHING,
                                        default=1,
                                        related_name='modeldoc_owner')
-
-    # modeldoc_creation_date = models.DateTimeField(auto_now_add=True)
-    # modeldoc_updated_date = models.DateTimeField(auto_now=True)
+    modeldoc_creation_date = models.DateTimeField(auto_now_add=True, blank=True, null=True)
+    modeldoc_updated_date = models.DateTimeField(auto_now=True, blank=True, null=True)
 
     class Meta:
         ordering = ['modeldoc_model_id']
 
     def __str__(self):
         return self.modeldoc_model_id.model_name + ' ----- ' + self.modeldoc_document.document_filename + '  |  ' + self.modeldoc_document.document_title
+
+
+class Dataset(models.Model):
+    class Format(models.TextChoices):
+        CSV = 'CSV', 'Comma-separated values'
+        DICOM = 'DICOM', 'DICOM'
+        FHIR = 'FHIR', 'FHIR'
+        SNOMED = 'SNOMED', 'SNOMED CT'
+        IMG = 'IMG', 'Image'
+        JSON = 'JSON', 'JavaScript Object Notation'
+        TXT = 'TXT', 'Text'
+
+    dataset_id = models.BigAutoField(primary_key=True, default=1, editable=False)
+    dataset_uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
+    dataset_name = models.CharField(max_length=250)
+    dataset_description = models.TextField(blank=True)
+    dataset_format = models.TextField(max_length=6,
+                                      choices=Format.choices,
+                                      default=Format.CSV)
+    dataset_licence = models.ForeignKey(License,
+                                        on_delete=models.DO_NOTHING,
+                                        default=1,
+                                        related_name='dataset_license')
+    dataset_owner = models.ForeignKey(User,
+                                      on_delete=models.DO_NOTHING,
+                                      default=1,
+                                      related_name='dataset_owner')
+    dataset_creation_date = models.DateTimeField(auto_now_add=True)
+    dataset_updated_date = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['dataset_name']
+
+    def __str__(self):
+        return self.dataset_name + ""
 
 
 # --- Processing ----
@@ -248,6 +303,9 @@ class Queue(models.Model):
     queue_model_id = models.ForeignKey(Model,
                                        on_delete=models.CASCADE,
                                        related_name='queue_model_id')
+    queue_model_type = models.CharField(max_length=4,
+                                        null=True,
+                                        blank=True)
     queue_params = models.JSONField(default=dict)
     queue_state = models.CharField(max_length=2,
                                    choices=State.choices,
@@ -259,6 +317,9 @@ class Queue(models.Model):
     queue_creation_date = models.DateTimeField(auto_now_add=True)
     queue_updated_date = models.DateTimeField(auto_now=True)
 
+    class Meta:
+        ordering = ['queue_model_type', 'queue_state']
+
     def __str__(self):
         return str(self.queue_uuid)
 
@@ -267,6 +328,8 @@ class Help(models.Model):
     help_uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
     help_key = models.CharField(max_length=15, unique=True)
     help_value = models.CharField(max_length=250)
+    help_creation_date = models.DateTimeField(auto_now_add=True, blank=True, null=True)
+    help_updated_date = models.DateTimeField(auto_now=True, blank=True, null=True)
 
     class Meta:
         ordering = ['help_key']
