@@ -32,19 +32,25 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
         </h2>
         <div id="NLPAssistant-collapseOne" class="accordion-collapse collapse" data-bs-parent="#NLPAssistant">
           <div class="accordion-body">
-              <form class="row g-3" action="/npl_textgeneration_processing/" method="post">
+              <form class="row g-3" action="/natural_language_processing_chat/" method="post">
                 {% csrf_token %}
                   <h5>Model Choice</h5>
                   <div class="col-md-3 col-sm-6">
                     <div class="form-check form-switch">
                       <input class="form-check-input" name="nlptg_model" type="radio" id="{{ form1.nlptg_model_alfred_40b.id_for_label }}">
-                      <label class="form-check-label" for="{{ form1.nlptg_model_alfred_40b.id_for_label }}">Alfred 40B</label>
+                      <label class="form-check-label" for="{{ form1.nlptg_model_alfred_40b.id_for_label }}">Alfred 40B 
+                          <a href="{% static 'pdf/2306.15595.pdf' %}" target="_blank"><svg class="bi" width="16" height="16" role="img" aria-label="Alfred 40B"><use href="#pdf"></use></svg></a>
+                          <a href="{% static 'pdf/2309.00071.pdf' %}" target="_blank"><svg class="bi" width="16" height="16" role="img" aria-label="Alfred 40B"><use href="#pdf"></use></svg></a>
+                          <a href="{% static 'pdf/2307.03172.pdf' %}" target="_blank"><svg class="bi" width="16" height="16" role="img" aria-label="Alfred 40B"><use href="#pdf"></use></svg></a>
+                      </label>
                     </div>
                   </div>
                   <div class="col-md-3 col-sm-6">
                     <div class="form-check form-switch">
                       <input class="form-check-input" name="nlptg_model" type="radio" id="{{ form1.nlptg_model_codellama_7b.id_for_label }}">
-                      <label class="form-check-label" for="{{ form1.nlptg_model_codellama_7b.id_for_label }}">CodeLLaMa 7B</label>
+                      <label class="form-check-label" for="{{ form1.nlptg_model_codellama_7b.id_for_label }}">CodeLLaMa 7B
+                          <a href="{% static 'pdf/2308.12950.pdf' %}" target="_blank"><svg class="bi" width="16" height="16" role="img" aria-label="Alfred 40B"><use href="#pdf"></use></svg></a>
+                      </label>
                     </div>
                   </div>
                   <div class="col-md-3 col-sm-6">
@@ -56,7 +62,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
                   <div class="col-md-3 col-sm-6">
                     <div class="form-check form-switch">
                       <input class="form-check-input" name="nlptg_model" type="radio" id="{{ form1.nlptg_model_falcon_7b.id_for_label }}">
-                      <label class="form-check-label" for="{{ form1.nlptg_nlptg_model_falcon_7b.id_for_label }}">Falcon 7B</label>
+                      <label class="form-check-label" for="{{ form1.nlptg_model_falcon_7b.id_for_label }}">Falcon 7B</label>
                     </div>
                   </div>
                   <div class="col-md-3 col-sm-6">
@@ -145,8 +151,8 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
                   </div>
                   <div class="col-md-3 col-sm-6">
                     <div class="form-check form-switch">
-                      <input class="form-check-input" name="nlptg_model" type="radio" id="{{ form1.nlptg_model_neuralchat_7b_v3_2.id_for_label }}">
-                      <label class="form-check-label" for="{{ form1.nlptg_model_neuralchat_7b_v3_2.id_for_label }}">Neural Chat 7B v3.2</label>
+                      <input class="form-check-input" name="nlptg_model" type="radio" id="{{ form1.nlptg_model_neuralchat_7b.id_for_label }}">
+                      <label class="form-check-label" for="{{ form1.nlptg_model_neuralchat_7b.id_for_label }}">Neural Chat 7B v3.3</label>
                     </div>
                   </div>
                   <div class="col-md-3 col-sm-6">
@@ -209,7 +215,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
                       <label class="form-check-label" for="{{ form1.nlptg_model_vicuna_7b_v1_5.id_for_label }}">Vicuna 7B v1.5</label>
                     </div>
                   </div>
-                   <div class="col-md-3 col-sm-6">
+                  <div class="col-md-3 col-sm-6">
                     <div class="form-check form-switch">
                       <input class="form-check-input" name="nlptg_model" type="radio" id="{{ form1.nlptg_model_vicuna_13b_v1_5.id_for_label }}">
                       <label class="form-check-label" for="{{ form1.nlptg_model_vicuna_13b_v1_5.id_for_label }}">Vicuna 13B v1.5</label>
@@ -221,7 +227,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
                       <label class="form-check-label" for="{{ form1.nlptg_model_zephyr_7b_alpha.id_for_label }}">Zephyr 7B Alpha</label>
                     </div>
                   </div>
-                   <div class="col-md-3 col-sm-6">
+                  <div class="col-md-3 col-sm-6">
                     <div class="form-check form-switch">
                       <input class="form-check-input" name="nlptg_model" type="radio" id="{{ form1.nlptg_model_zephyr_7b_beta.id_for_label }}">
                       <label class="form-check-label" for="{{ form1.nlptg_model_zephyr_7b_beta.id_for_label }}">Zephyr 7B Beta</label>
@@ -292,17 +298,44 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
                 </a>
             </li>
             <li>
+                Code 13B
+            </li>
+            <li>
+                Code 33B
+            </li>
+            <li>
                 CodeLLaMa 7B
                 <a href="{% static 'pdf/2308.12950.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
                     <svg class="bi" width="16" height="16" role="img" aria-label="Code Llama: Open Foundation Models for Code"><use href="#pdf"></use></svg>
                 </a>
             </li>
             <li>
+                CodeLLaMa 7B-Instruct
+            </li>   
+             <li>
+                CodeLLaMa 7B-Python
+            </li>             
+            <li>
                 CodeLLaMa 13B
                 <a href="{% static 'pdf/2308.12950.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
                     <svg class="bi" width="16" height="16" role="img" aria-label="Code Llama: Open Foundation Models for Code"><use href="#pdf"></use></svg>
                 </a>
             </li>
+            <li>
+                CodeLLaMa 13B-Instruct
+            </li>
+            <li>
+                CodeLLaMa 13B-Python
+            </li>
+            <li>
+                CodeLLaMa 34B
+            </li>              
+            <li>
+                CodeLLaMa 34B-Instruct
+            </li>
+            <li>
+                CodeLLaMa 34B-Python
+            </li>               
             <li>
                 Falcon 7B
                 <a href="{% static 'pdf/2205.14135.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
@@ -325,7 +358,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
                 </a>
              </li>
              <li>
-                Falcon 7B Instruct
+                Falcon 7B-Instruct
                 <a href="{% static 'pdf/2205.14135.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
                     <svg class="bi" width="16" height="16" role="img" aria-label="FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness"><use href="#pdf"></use></svg>
                 </a>
@@ -367,7 +400,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
                 </a>
             </li>
             <li>
-                Falcon 40B Instruct
+                Falcon 40B-Instruct
                 <a href="{% static 'pdf/2205.14135.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
                     <svg class="bi" width="16" height="16" role="img" aria-label="FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness"><use href="#pdf"></use></svg>
                 </a>
@@ -406,7 +439,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
                 </a>
             </li>
             <li>
-                Falcon 180B Chat
+                Falcon 180B-Chat
                 <a href="{% static 'pdf/2205.14135.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
                     <svg class="bi" width="16" height="16" role="img" aria-label="FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness"><use href="#pdf"></use></svg>
                 </a>
@@ -430,10 +463,19 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
                 </a>
             </li>
             <li>
+                LLaMA 2 7B-Chat
+            </li>  
+             <li>
+                LLaMA 2 7B-Coder
+            </li>              
+            <li>
                 LLaMa 2 13B
                 <a href="{% static 'pdf/2307.09288.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
                     <svg class="bi" width="16" height="16" role="img" aria-label="Llama 2: Open Foundation and Fine-Tuned Chat Models"><use href="#pdf"></use></svg>
                 </a>
+            </li>
+            <li>
+                LLaMA 2 13B-Chat
             </li>
             <li>
                 LLaMa 2 70B
@@ -441,16 +483,28 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
                     <svg class="bi" width="16" height="16" role="img" aria-label="Llama 2: Open Foundation and Fine-Tuned Chat Models"><use href="#pdf"></use></svg>
                 </a>
             </li>
+             <li>
+                LLaMA 2 70B-Chat
+            </li>             
             <li>
-
                 Med42 70B
             </li>
+            <li>
+                MedAlpaca 13B
+            </li>              
             <li>
                 Meditron 7B
                 <a href="{% static 'pdf/2311.16079.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
                     <svg class="bi" width="16" height="16" role="img" aria-label="MEDITRON-70B: Scaling Medical Pretraining for Large Language Models"><use href="#pdf"></use></svg>
                 </a>
             </li>
+            <li>
+                Meditron 7B-Chat
+            </li>
+          </ul>
+        </div>
+        <div class="col-md-6">
+          <ul>
             <li>
                 Meditron 70B
                 <a href="{% static 'pdf/2311.16079.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
@@ -462,13 +516,9 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
                 <a href="{% static 'pdf/2310.06825.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
                     <svg class="bi" width="16" height="16" role="img" aria-label="Mistral 7B"><use href="#pdf"></use></svg>
                 </a>
-            </li>
-          </ul>
-        </div>
-          <div class="col-md-6">
-          <ul>
+            </li>              
             <li>
-                Mistral 7B Instruct
+                Mistral 7B-Instruct
                 <a href="{% static 'pdf/2310.06825.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
                     <svg class="bi" width="16" height="16" role="img" aria-label="Mistral 7B"><use href="#pdf"></use></svg>
                 </a>
@@ -483,11 +533,19 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
                 </a>
             </li>
             <li>
-
-                Neural Chat 7B v3.2
+                Mixtral 8x7B
             </li>
             <li>
-                OpenChat 7B v3.5                
+                Mixtral 8x7B-Instruct
+            </li>
+            <li>
+                Neural-Chat 7B v3.3
+            </li>
+            <li>
+                Notus v1
+            </li>
+            <li>
+                OpenChat 7B v3.5-1012               
                 <a href="{% static 'pdf/2309.11235.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
                     <svg class="bi" width="16" height="16" role="img" aria-label="OPENCHAT: ADVANCING OPEN-SOURCE LANGUAGE MODELS WITH MIXED-QUALITY DATA"><use href="#pdf"></use></svg>
                 </a>
@@ -499,15 +557,12 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
                 </a>
             </li>
             <li>
-
                 Open LLaMA 3B v2
             </li>
             <li>
-
                 Open LLaMa 7B v2
             </li>
             <li>
-
                 Open LLaMa 13B v2
             </li>
             <li>
@@ -523,12 +578,16 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
                 </a>                
             </li>
             <li>
-
-                PsyMedRP 13B
+                Python Code 13B
             </li>
             <li>
-
-                PsyMedRP 20B
+                Python Code 33B
+            </li>              
+            <li>
+                PsyMedRP 13B v1
+            </li>
+            <li>
+                PsyMedRP 20B v1
             </li>
             <li>
                 Starling LM 7B Alpha
@@ -554,6 +613,43 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
                     <svg class="bi" width="16" height="16" role="img" aria-label="Llama 2: Open Foundation and Fine-Tuned Chat Models"><use href="#pdf"></use></svg>
                 </a>
             </li>
+            <li>
+                Vicuna 33B v1.3
+                
+            </li>
+             <li>
+                Vicuna 33B-Coder
+            </li>
+            <li>
+                WizardLM 7B v1.0
+                <a href="{% static 'pdf/2304.12244.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
+                    <svg class="bi" width="16" height="16" role="img" aria-label="Direct Preference Optimization: Your Language Model is Secretly a Reward Model"><use href="#pdf"></use></svg>
+                </a>  
+                <a href="{% static 'pdf/2306.08568.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
+                    <svg class="bi" width="16" height="16" role="img" aria-label="Direct Preference Optimization: Your Language Model is Secretly a Reward Model"><use href="#pdf"></use></svg>
+                </a>                
+            </li> 
+            <li>
+                WizardLM 13B v1.2
+                <a href="{% static 'pdf/2304.12244.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
+                    <svg class="bi" width="16" height="16" role="img" aria-label="Direct Preference Optimization: Your Language Model is Secretly a Reward Model"><use href="#pdf"></use></svg>
+                </a>  
+                <a href="{% static 'pdf/2306.08568.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
+                    <svg class="bi" width="16" height="16" role="img" aria-label="Direct Preference Optimization: Your Language Model is Secretly a Reward Model"><use href="#pdf"></use></svg>
+                </a>                 
+            </li>              
+            <li>
+                WizardLM 70B v1.0
+                <a href="{% static 'pdf/2304.12244.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
+                    <svg class="bi" width="16" height="16" role="img" aria-label="Direct Preference Optimization: Your Language Model is Secretly a Reward Model"><use href="#pdf"></use></svg>
+                </a>  
+                <a href="{% static 'pdf/2306.08568.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
+                    <svg class="bi" width="16" height="16" role="img" aria-label="Direct Preference Optimization: Your Language Model is Secretly a Reward Model"><use href="#pdf"></use></svg>
+                </a>                  
+            </li>   
+            <li>
+                Zephyr 3B
+            </li>              
             <li>
                 Zephyr 7B Alpha
                 <a href="{% static 'pdf/2305.18290.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">

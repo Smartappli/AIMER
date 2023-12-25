@@ -140,6 +140,8 @@ class DLClassificationForm(forms.Form):
     dpcla_vanillasaliency = forms.BooleanField(required=False)
     dpcla_smoothgrad = forms.BooleanField(required=False)
 
+    # --- OUTPUT ---
+
     dpcla_savemodel = forms.BooleanField(required=False)
     dpcla_traingraph = forms.BooleanField(required=False)
     dpcla_confmatrix = forms.BooleanField(required=False)

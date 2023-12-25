@@ -119,7 +119,7 @@ def import_data(request):
 
         print(p.model_repo + ": " + str(total))
 
-    print("TOTAL: " + str(format(grandtotal/1024/1024/1024, '.2f')) + " GB")
+    print("TOTAL: " + str(format(grandtotal / 1024 / 1024 / 1024, '.2f')) + " GB")
 
     logo = ['share', 'hospital', 'data', 'cpu', 'gpu']
     return render(request, "core/index.html", {"logo": logo})
@@ -468,7 +468,45 @@ def deep_learning_classification_run(request):
             if cd['dpcla_RegNetY320']:
                 model_id = the_model = Model.objects.get(pk=75)
 
-            Queue.objects.create(queue_model_id=model_id, queue_state='CR')
+            params = dict()
+
+            augmentation = dict()
+            augmentation['cropping'] = cd['dpcla_data_augmentation_cropping']
+            augmentation['horizontal_flip'] = cd['dpcla_data_augmentation_horizontal_flip']
+            augmentation['vertical_flip'] = cd['dpcla_data_augmentation_vertical_flip']
+            augmentation['translation'] = cd['dpcla_data_augmentation_translation']
+            augmentation['rotation'] = cd['dpcla_data_augmentation_rotation']
+            augmentation['zoom'] = cd['dpcla_data_augmentation_zoom']
+            augmentation['contrast'] = cd['dpcla_data_augmentation_contrast']
+            augmentation['brightness'] = cd['dpcla_data_augmentation_brightness']
+
+            params['augmentation'] = augmentation
+
+            xai = dict()
+            xai['activation_maximization'] = cd['dpcla_activationmaximization']
+            xai['gradcam'] = cd['dpcla_gradcam']
+            xai['gradcamplusplus'] = cd['dpcla_gradcamplusplus']
+            xai['scorecam'] = cd['dpcla_scorecam']
+            xai['fasterscorecam'] = cd['dpcla_fasterscorecam']
+            xai['layercam'] = cd['dpcla_layercam']
+            xai['vanillasaliency'] = cd['dpcla_vanillasaliency']
+            xai['smoothgrad'] = cd['dpcla_smoothgrad']
+
+            params['xai'] = xai
+
+            output = dict()
+            output['save_model'] = cd['dpcla_savemodel']
+            output['train_graph'] = cd['dpcla_traingraph']
+            output['confmatrix'] = cd['dpcla_confmatrix']
+            output['classreport'] = cd['dpcla_classreport']
+            output['tflite'] = cd['dpcla_tflite']
+
+            params['output'] = output
+
+            Queue.objects.create(queue_model_id=model_id, queue_model_type='DLCL', queue_state='CR',
+                                 queue_params=params)
+
+
 def deep_learning_segmentation_run(request):
     if request.method == "POST":
         form = DLSegmentation(request.POST)
