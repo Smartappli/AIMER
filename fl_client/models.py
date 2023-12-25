@@ -254,15 +254,23 @@ class Dataset(models.Model):
         DICOM = 'DICOM', 'DICOM'
         FHIR = 'FHIR', 'FHIR'
         SNOMED = 'SNOMED', 'SNOMED CT'
-        IMG = 'IMG', 'Image'
+        IMG = 'IMG', 'Images'
         JSON = 'JSON', 'JavaScript Object Notation'
         TXT = 'TXT', 'Text'
 
-    dataset_id = models.BigAutoField(primary_key=True, default=1, editable=False)
+    class Type(models.TextChoices):
+        LC = 'LC', 'Lolly hosted'
+        CS = 'CS', 'On the central server'
+        EH = 'EH', 'Externally Hosted'
+
+    dataset_id = models.BigAutoField(primary_key=True, editable=False)
     dataset_uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
     dataset_name = models.CharField(max_length=250)
     dataset_description = models.TextField(blank=True)
-    dataset_format = models.TextField(max_length=6,
+    dataset_type = models.CharField(max_length=6,
+                                    choices=Type.choices,
+                                    default=Type.LC)
+    dataset_format = models.CharField(max_length=6,
                                       choices=Format.choices,
                                       default=Format.CSV)
     dataset_licence = models.ForeignKey(License,
@@ -280,7 +288,89 @@ class Dataset(models.Model):
         ordering = ['dataset_name']
 
     def __str__(self):
-        return self.dataset_name + ""
+        return self.dataset_name
+
+
+class Dataset_Local_Data(models.Model):
+    dataset_local_data_id = models.BigAutoField(primary_key=True, editable=False)
+    dataset_local_data_uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
+    dataset_local_data_dataset_id = models.ForeignKey(Dataset,
+                                                      on_delete=models.DO_NOTHING,
+                                                      default=1,
+                                                      related_name='dataset_local_data_dataset_id')
+    dataset_local_data_link = models.URLField(max_length=255)
+    dataset_local_data_username = models.CharField(max_length=30, blank=True, null=True)
+    dataset_local_data_password = models.CharField(max_length=30, blank=True, null=True)
+    dataset_local_data_creation_date = models.DateTimeField(auto_now_add=True)
+    dataset_local_data_updated_date = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['dataset_local_data_link']
+
+    def __str__(self):
+        return self.dataset_local_data_dataset_id.dataset_name + ' - ' + self.dataset_local_data_link
+
+
+class Dataset_Remote_Data(models.Model):
+    class Protocol(models.TextChoices):
+        HTTP = 'HTTP', 'HTTP'
+        HTTPS = 'HTTPS', 'HTTPS'
+        FTP = 'FTP', 'FTP'
+        FTPS = 'FTPS', 'FTPS'
+        SCP = 'SCP', 'SCP'
+        SFTP = 'SFTP', 'SFTP'
+
+    dataset_remote_data_id = models.BigAutoField(primary_key=True, editable=False)
+    dataset_remote_data_uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
+    dataset_remote_data_dataset_id = models.ForeignKey(Dataset,
+                                                       on_delete=models.DO_NOTHING,
+                                                       default=1,
+                                                       related_name='dataset_remote_data_dataset_id')
+    dataset_remote_data_protocol = models.CharField(max_length=6,
+                                                    choices=Protocol.choices,
+                                                    default=Protocol.HTTP)
+    dataset_remote_data_username = models.CharField(max_length=30, blank=True, null=True)
+    dataset_remote_data_password = models.CharField(max_length=30, blank=True, null=True)
+    dataset_remote_data_ip = models.CharField(max_length=40, blank=True, null=True)
+    dataset_remote_data_path = models.CharField(max_length=255, blank=True, null=True)
+    dataset_remote_creation_date = models.DateTimeField(auto_now_add=True)
+    dataset_remote_updated_date = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['dataset_remote_data_path']
+
+    def __str__(self):
+        return self.dataset_remote_data_dataset_id.dataset_name + ' - ' + str(self.dataset_remote_data_ip) + ' - ' + self.dataset_remote_data_path
+
+
+class Dataset_Central_Data(models.Model):
+    dataset_central_data_id = models.BigAutoField(primary_key=True, editable=False)
+    dataset_central_data_uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
+    dataset_central_data_dataset_id = models.ForeignKey(Dataset,
+                                                        on_delete=models.DO_NOTHING,
+                                                        default=1,
+                                                        related_name='dataset_central_data_dataset_id')
+    dataset_central_data_link = models.CharField(max_length=255, blank=True)
+    dataset_central_creation_date = models.DateTimeField(auto_now_add=True)
+    dataset_central_updated_date = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['dataset_central_data_link']
+
+    def __str__(self):
+        return self.dataset_central_data_dataset_id.dataset_name + ' - ' + str(self.dataset_central_data_link)
+
+
+class Dataset_File(models.Model):
+    dataset_file_id = models.BigAutoField(primary_key=True, editable=False)
+    dataset_file_uuid = models.UUIDField(default=uuid.uuid4, editable=False)
+    dataset_file_dataset_id = models.ForeignKey(Dataset,
+                                                on_delete=models.DO_NOTHING,
+                                                default=1,
+                                                related_name='dataset_file_dataset_id')
+    dataset_file_filename = models.CharField(max_length=255)
+    dataset_file_creation_date = models.DateTimeField(auto_now_add=True)
+    dataset_file_updated_date = models.DateTimeField(auto_now=True)
 
 
 # --- Processing ----
@@ -307,6 +397,10 @@ class Queue(models.Model):
                                         null=True,
                                         blank=True)
     queue_params = models.JSONField(default=dict)
+    queue_dataset_id = models.ForeignKey(Dataset,
+                                         default=1,
+                                         on_delete=models.CASCADE,
+                                         related_name='queue_dataset_id')
     queue_state = models.CharField(max_length=2,
                                    choices=State.choices,
                                    default=State.CR)
@@ -327,7 +421,7 @@ class Queue(models.Model):
 class Help(models.Model):
     help_uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
     help_key = models.CharField(max_length=15, unique=True)
-    help_value = models.CharField(max_length=250)
+    help_value = models.CharField(max_length=255)
     help_creation_date = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     help_updated_date = models.DateTimeField(auto_now=True, blank=True, null=True)
 
