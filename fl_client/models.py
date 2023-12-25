@@ -248,6 +248,7 @@ class Queue(models.Model):
     queue_model_id = models.ForeignKey(Model,
                                        on_delete=models.CASCADE,
                                        related_name='queue_model_id')
+    queue_params = models.JSONField(default=dict)
     queue_state = models.CharField(max_length=2,
                                    choices=State.choices,
                                    default=State.CR)
