@@ -1,4 +1,7 @@
-from fl_client.models import Queue, Model, Model_File, Dataset, Dataset_File, Dataset_Central_Data, Dataset_Local_Data, Dataset_Remote_Data
+from fl_client.models import Queue
+from fl_client.models import Model, Model_File
+from fl_client.models import Dataset, Dataset_File, Dataset_Central_Data, Dataset_Local_Data, Dataset_Remote_Data
+
 # import pycaret
 from pycaret.datasets import get_data
 from pycaret.classification import *
@@ -11,4 +14,5 @@ for task in tasks:
     model_id = task.queue_model_id
     dataset_id = task.queue_dataset_id
     params = task.queue_model.params
+
 

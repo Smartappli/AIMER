@@ -1,4 +1,6 @@
-from fl_client.models import Queue, Model, Model_File, Dataset, Dataset_File, Dataset_Central_Data, Dataset_Local_Data, Dataset_Remote_Data
+from fl_client.models import Queue
+from fl_client.models import Model, Model_File
+from fl_client.models import Dataset, Dataset_File, Dataset_Central_Data, Dataset_Local_Data, Dataset_Remote_Data
 from huggingface_hub import hf_hub_download, try_to_load_from_cache, _CACHED_NO_EXIST
 
 tasks = Queue.objects.filters(queue_state='CR', queue_model_type='NLTG')

@@ -1,19 +1,30 @@
-from fl_client.models import Queue, Model, Model_File, Dataset, Dataset_File, Dataset_Central_Data, Dataset_Local_Data, Dataset_Remote_Data
+import platform
 import tensorflow as tf
+from tensorflow import keras
 import keras_tuner as kt
-import keras as k
 import sklearn as sk
 import seaborn as sns
 import numpy as np
 import pandas as pd
 import matplotlib as mpl
-import platform
+from fl_client.models import Queue
+from fl_client.models import Model, Model_File
+from fl_client.models import Dataset, Dataset_File, Dataset_Central_Data, Dataset_Local_Data, Dataset_Remote_Data
+
 import torch as tc
 from tensorflow.keras import layers
 
 numgpu = len(tf.config.list_physical_devices('GPU'))
-print("GPUs Available: " + str(
-    numgpu) + " - Python: " + platform.python_version() + " - PyTorch: " + tc.__version__ + " - TensorFlow: " + tf.__version__ + " - Keras: " + k.__version__ + " - Numpy: " + np.version.version + " - Pandas: " + pd.__version__ + " - Sklearn: " + sk.__version__ + " - Seaborn: " + sns.__version__ + "  - Matplotlib: " + mpl.__version__)
+print("GPUs Available: " + str(numgpu)
+      + " - Python: " + platform.python_version()
+      + " - PyTorch: " + tc.__version__
+      + " - TensorFlow: " + tf.__version__
+      + " - Keras: " + keras.__version__
+      + " - Numpy: " + np.version.version
+      + " - Pandas: " + pd.__version__
+      + " - Sklearn: " + sk.__version__
+      + " - Seaborn: " + sns.__version__
+      + "  - Matplotlib: " + mpl.__version__)
 
 tasks = Queue.objects.get(queue_state='CR', queue_model_type='DLCL')
 for task in tasks:
@@ -31,7 +42,7 @@ for task in tasks:
     match model_id:
         case 1:  # Xception
             print("Xception")
-            from tensorflow.keras.applications.xception import Xception, preprocess_input
+            from tensorflow.keras.applications.xception import Xception
 
             base_model = Xception(input_shape=(img_height, img_width, channel),
                                   include_top=False,
