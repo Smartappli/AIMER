@@ -350,15 +350,15 @@ class NLPTextGenerationForm(forms.Form):
     mlptg_model_orca2_13b = forms.BooleanField(required=False)
 
     # PsyMedRP
-    mlptg_model_psymedrp_13b_v1 = forms.BooleanField(required=False)
-    mlptg_model_psymedrp_20b_v1 = forms.BooleanField(required=False)
+    mlptg_model_psymedrp_13b = forms.BooleanField(required=False)
+    mlptg_model_psymedrp_20b = forms.BooleanField(required=False)
 
     # Python Code
     nlptg_model_python_code_13b = forms.BooleanField(required=False)
     mlptg_model_python_code_33b = forms.BooleanField(required=False)
 
     # Starling LM
-    nlptg_model_starlinglm_7b = forms.BooleanField(required=False)
+    nlptg_model_starlinglm_7b_alpha = forms.BooleanField(required=False)
 
     # Vicuna
     nlptg_model_vicuna_7b = forms.BooleanField(required=False)

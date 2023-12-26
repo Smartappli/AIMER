@@ -583,8 +583,10 @@ def machine_learning_tutorials(request):
 
 def natural_language_processing(request):
     logo = ['share', 'hospital', 'data', 'cpu', 'gpu']
+    form1 = NLPTextGenerationForm()
+    form2 = NLPEmotionalAnalysisForm()
     return render(request, "natural_language_processing/natural_language_processing.html",
-                  {"logo": logo, "section": 'nlp'})
+                  {"logo": logo, "form1": form1, "form2": form2, "section": 'nlp', "pdf": True})
 
 
 def natural_language_processing_emotional_analysis_run(request):
