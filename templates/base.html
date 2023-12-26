@@ -43,9 +43,10 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
         {% block content %}
         {% endblock content %}
       </div>
-
       {% include 'core/footer.html' %}
     </div>
+    {% block script %}
+    {% endblock script %}
     {% include 'core/theme.html' %}
     <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
     <script src="{% static 'js/color-modes.js' %}" async></script>

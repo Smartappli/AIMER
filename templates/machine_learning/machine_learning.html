@@ -851,3 +851,241 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
   </div>    
 {% endif %}
 {% endblock %}
+
+{% block script %}
+<script>
+    function adSelectModel() {
+        document.getElementById("{{ form5.mlad_abod.id_for_label }}").checked = true;
+        document.getElementById("{{ form5.mlad_cluster.id_for_label }}").checked = true;
+        document.getElementById("{{ form5.mlad_cof.id_for_label }}").checked = true;
+        document.getElementById("{{ form5.mlad_iforest.id_for_label }}").checked = true;
+        document.getElementById("{{ form5.mlad_histogram.id_for_label }}").checked = true;
+        document.getElementById("{{ form5.mlad_knn.id_for_label }}").checked = true;
+        document.getElementById("{{ form5.mlad_lof.id_for_label }}").checked = true;
+        document.getElementById("{{ form5.mlad_svm.id_for_label }}").checked = true;
+        document.getElementById("{{ form5.mlad_pca.id_for_label }}").checked = true;
+        document.getElementById("{{ form5.mlad_mcd.id_for_label }}").checked = true;
+        document.getElementById("{{ form5.mlad_sod.id_for_label }}").checked = true;
+        document.getElementById("{{ form5.mlad_sos.id_for_label }}").checked = true;
+    }
+
+    function adUnselectModel() {
+        document.getElementById("{{ form5.mlad_abod.id_for_label }}").checked = false;
+        document.getElementById("{{ form5.mlad_cluster.id_for_label }}").checked = false;
+        document.getElementById("{{ form5.mlad_cof.id_for_label }}").checked = false;
+        document.getElementById("{{ form5.mlad_iforest.id_for_label }}").checked = false;
+        document.getElementById("{{ form5.mlad_histogram.id_for_label }}").checked = false;
+        document.getElementById("{{ form5.mlad_knn.id_for_label }}").checked = false;
+        document.getElementById("{{ form5.mlad_lof.id_for_label }}").checked = false;
+        document.getElementById("{{ form5.mlad_svm.id_for_label }}").checked = false;
+        document.getElementById("{{ form5.mlad_pca.id_for_label }}").checked = false;
+        document.getElementById("{{ form5.mlad_mcd.id_for_label }}").checked = false;
+        document.getElementById("{{ form5.mlad_sod.id_for_label }}").checked = false;
+        document.getElementById("{{ form5.mlad_sos.id_for_label }}").checked = false;
+    }
+
+    function regSelectModel() {
+        document.getElementById("{{ form2.mlreg_lr.id_for_label }}").checked = true;
+        document.getElementById("{{ form2.mlreg_lasso.id_for_label }}").checked = true;
+        document.getElementById("{{ form2.mlreg_ridge.id_for_label }}").checked = true;
+        document.getElementById("{{ form2.mlreg_en.id_for_label }}").checked = true;
+        document.getElementById("{{ form2.mlreg_lar.id_for_label }}").checked = true;
+        document.getElementById("{{ form2.mlreg_llar.id_for_label }}").checked = true;
+        document.getElementById("{{ form2.mlreg_omp.id_for_label }}").checked = true;
+        document.getElementById("{{ form2.mlreg_br.id_for_label }}").checked = true;
+        document.getElementById("{{ form2.mlreg_ard.id_for_label }}").checked = true;
+        document.getElementById("{{ form2.mlreg_par.id_for_label }}").checked = true;
+        document.getElementById("{{ form2.mlreg_ransac.id_for_label }}").checked = true;
+        document.getElementById("{{ form2.mlreg_tr.id_for_label }}").checked = true;
+        document.getElementById("{{ form2.mlreg_huber.id_for_label }}").checked = true;
+        document.getElementById("{{ form2.mlreg_kr.id_for_label }}").checked = true;
+        document.getElementById("{{ form2.mlreg_svm.id_for_label }}").checked = true;
+        document.getElementById("{{ form2.mlreg_knn.id_for_label }}").checked = true;
+        document.getElementById("{{ form2.mlreg_dt.id_for_label }}").checked = true;
+        document.getElementById("{{ form2.mlreg_rf.id_for_label }}").checked = true;
+        document.getElementById("{{ form2.mlreg_et.id_for_label }}").checked = true;
+        document.getElementById("{{ form2.mlreg_ada.id_for_label }}").checked = true;
+        document.getElementById("{{ form2.mlreg_gbr.id_for_label }}").checked = true;
+        document.getElementById("{{ form2.mlreg_mlp.id_for_label }}").checked = true;
+        document.getElementById("{{ form2.mlreg_xgboost.id_for_label }}").checked = true;
+        document.getElementById("{{ form2.mlreg_lightgbm.id_for_label }}").checked = true;
+        document.getElementById("{{ form2.mlreg_catboost.id_for_label }}").checked = true;
+        document.getElementById("{{ form2.mlreg_dummy.id_for_label }}").checked = true;
+        document.getElementById("{{ form2.mlreg_bagging.id_for_label }}").checked = true;
+        document.getElementById("{{ form2.mlreg_stacking.id_for_label }}").checked = true;
+        document.getElementById("{{ form2.mlreg_voting.id_for_label }}").checked = true;
+    }
+
+    function regUnselectModel() {
+        document.getElementById("{{ form2.mlreg_lr.id_for_label }}").checked = false;
+        document.getElementById("{{ form2.mlreg_lasso.id_for_label }}").checked = false;
+        document.getElementById("{{ form2.mlreg_ridge.id_for_label }}").checked = false;
+        document.getElementById("{{ form2.mlreg_en.id_for_label }}").checked = false;
+        document.getElementById("{{ form2.mlreg_lar.id_for_label }}").checked = false;
+        document.getElementById("{{ form2.mlreg_llar.id_for_label }}").checked = false;
+        document.getElementById("{{ form2.mlreg_omp.id_for_label }}").checked = false;
+        document.getElementById("{{ form2.mlreg_br.id_for_label }}").checked = false;
+        document.getElementById("{{ form2.mlreg_ard.id_for_label }}").checked = false;
+        document.getElementById("{{ form2.mlreg_par.id_for_label }}").checked = false;
+        document.getElementById("{{ form2.mlreg_ransac.id_for_label }}").checked = false;
+        document.getElementById("{{ form2.mlreg_tr.id_for_label }}").checked = false;
+        document.getElementById("{{ form2.mlreg_huber.id_for_label }}").checked = false;
+        document.getElementById("{{ form2.mlreg_kr.id_for_label }}").checked = false;
+        document.getElementById("{{ form2.mlreg_svm.id_for_label }}").checked = false;
+        document.getElementById("{{ form2.mlreg_knn.id_for_label }}").checked = false;
+        document.getElementById("{{ form2.mlreg_dt.id_for_label }}").checked = false;
+        document.getElementById("{{ form2.mlreg_rf.id_for_label }}").checked = false;
+        document.getElementById("{{ form2.mlreg_et.id_for_label }}").checked = false;
+        document.getElementById("{{ form2.mlreg_ada.id_for_label }}").checked = false;
+        document.getElementById("{{ form2.mlreg_gbr.id_for_label }}").checked = false;
+        document.getElementById("{{ form2.mlreg_mlp.id_for_label }}").checked = false;
+        document.getElementById("{{ form2.mlreg_xgboost.id_for_label }}").checked = false;
+        document.getElementById("{{ form2.mlreg_lightgbm.id_for_label }}").checked = false;
+        document.getElementById("{{ form2.mlreg_catboost.id_for_label }}").checked = false;
+        document.getElementById("{{ form2.mlreg_dummy.id_for_label }}").checked = false;
+        document.getElementById("{{ form2.mlreg_bagging.id_for_label }}").checked = false;
+        document.getElementById("{{ form2.mlreg_stacking.id_for_label }}").checked = false;
+        document.getElementById("{{ form2.mlreg_voting.id_for_label }}").checked = false;
+    }
+
+    function claSelectModel() {
+        document.getElementById("{{ form1.mlcla_lr.id_for_label }}").checked = true;
+        document.getElementById("{{ form1.mlcla_knn.id_for_label }}").checked = true;
+        document.getElementById("{{ form1.mlcla_nb.id_for_label }}").checked = true;
+        document.getElementById("{{ form1.mlcla_dt.id_for_label }}").checked = true;
+        document.getElementById("{{ form1.mlcla_svm.id_for_label  }}").checked = true;
+        document.getElementById("{{ form1.mlcla_rbfsvm.id_for_label }}").checked = true;
+        document.getElementById("{{ form1.mlcla_gpc.id_for_label }}").checked = true;
+        document.getElementById("{{ form1.mlcla_mlp.id_for_label }}").checked = true;
+        document.getElementById("{{ form1.mlcla_ridge.id_for_label }}").checked = true;
+        document.getElementById("{{ form1.mlcla_rf.id_for_label }}").checked = true;
+        document.getElementById("{{ form1.mlcla_qda.id_for_label }}").checked = true;
+        document.getElementById("{{ form1.mlcla_ada.id_for_label }}").checked = true;
+        document.getElementById("{{ form1.mlcla_gbc.id_for_label }}").checked = true;
+        document.getElementById("{{ form1.mlcla_lda.id_for_label }}").checked = true;
+        document.getElementById("{{ form1.mlcla_et.id_for_label }}").checked = true;
+        document.getElementById("{{ form1.mlcla_xgboost.id_for_label }}").checked = true;
+        document.getElementById("{{ form1.mlcla_lightgbm.id_for_label }}").checked = true;
+        document.getElementById("{{ form1.mlcla_catboost.id_for_label }}").checked = true;
+        document.getElementById("{{ form1.mlcla_dummy.id_for_label }}").checked = true;
+    }
+
+    function claUnselectModel() {
+        document.getElementById("{{ form1.mlcla_lr.id_for_label }}").checked = false;
+        document.getElementById("{{ form1.mlcla_knn.id_for_label }}").checked = false;
+        document.getElementById("{{ form1.mlcla_nb.id_for_label }}").checked = false;
+        document.getElementById("{{ form1.mlcla_dt.id_for_label }}").checked = false;
+        document.getElementById("{{ form1.mlcla_svm.id_for_label }}").checked = false;
+        document.getElementById("{{ form1.mlcla_rbfsvm.id_for_label }}").checked = false;
+        document.getElementById("{{ form1.mlcla_gpc.id_for_label }}").checked = false;
+        document.getElementById("{{ form1.mlcla_mlp.id_for_label }}").checked = false;
+        document.getElementById("{{ form1.mlcla_ridge.id_for_label }}").checked = false;
+        document.getElementById("{{ form1.mlcla_rf.id_for_label }}").checked = false;
+        document.getElementById("{{ form1.mlcla_qda.id_for_label }}").checked = false;
+        document.getElementById("{{ form1.mlcla_ada.id_for_label }}").checked = false;
+        document.getElementById("{{ form1.mlcla_gbc.id_for_label }}").checked = false;
+        document.getElementById("{{ form1.mlcla_lda.id_for_label }}").checked = false;
+        document.getElementById("{{ form1.mlcla_et.id_for_label }}").checked = false;
+        document.getElementById("{{ form1.mlcla_xgboost.id_for_label }}").checked = false;
+        document.getElementById("{{ form1.mlcla_lightgbm.id_for_label }}").checked = false;
+        document.getElementById("{{ form1.mlcla_catboost.id_for_label }}").checked = false;
+        document.getElementById("{{ form1.mlcla_dummy.id_for_label }}").checked = false;
+    }
+
+    function tsSelectModel() {
+        document.getElementById("{{ form3.mlts_naive.id_for_label }}").checked = true;
+        document.getElementById("{{ form3.mlts_grand_means.id_for_label }}").checked = true;
+        document.getElementById("{{ form3.mlts_snaive.id_for_label }}").checked = true;
+        document.getElementById("{{ form3.mlts_polytrend.id_for_label }}").checked = true;
+        document.getElementById("{{ form3.mlts_arima.id_for_label }}").checked = true;
+        document.getElementById("{{ form3.mlts_auto_arima.id_for_label }}").checked = true;
+        document.getElementById("{{ form3.mlts_exp_smooth.id_for_label }}").checked = true;
+        document.getElementById("{{ form3.mlts_ets.id_for_label }}").checked = true;
+        document.getElementById("{{ form3.mlts_theta.id_for_label }}").checked = true;
+        document.getElementById("{{ form3.mlts_stlf.id_for_label }}").checked = true;
+        document.getElementById("{{ form3.mlts_croston.id_for_label }}").checked = true;
+        document.getElementById("{{ form3.mlts_bats.id_for_label }}").checked = true;
+        document.getElementById("{{ form3.mlts_tbats.id_for_label }}").checked = true;
+        document.getElementById("{{ form3.mlts_prophet.id_for_label }}").checked = true;
+        document.getElementById("{{ form3.mlts_lr_cds_dt.id_for_label }}").checked = true;
+        document.getElementById("{{ form3.mlts_en_cds_dt.id_for_label }}").checked = true;
+        document.getElementById("{{ form3.mlts_ridge_cds_dt.id_for_label }}").checked = true;
+        document.getElementById("{{ form3.mlts_lasso_cds_dt.id_for_label }}").checked = true;
+        document.getElementById("{{ form3.mlts_lar_cds_dt.id_for_label }}").checked = true;
+        document.getElementById("{{ form3.mlts_llar_cds_dt.id_for_label }}").checked = true;
+        document.getElementById("{{ form3.mlts_br_cds_dt.id_for_label }}").checked = true;
+        document.getElementById("{{ form3.mlts_huber_cds_dt.id_for_label }}").checked = true;
+        document.getElementById("{{ form3.mlts_par_cds_dt.id_for_label }}").checked = true;
+        document.getElementById("{{ form3.mlts_omp_cds_dt.id_for_label }}").checked = true;
+        document.getElementById("{{ form3.mlts_knn_cds_dt.id_for_label }}").checked = true;
+        document.getElementById("{{ form3.mlts_dt_cds_dt.id_for_label }}").checked = true;
+        document.getElementById("{{ form3.mlts_rf_cds_dt.id_for_label }}").checked = true;
+        document.getElementById("{{ form3.mlts_et_cds_dt.id_for_label }}").checked = true;
+        document.getElementById("{{ form3.mlts_gbr_cds_dt.id_for_label }}").checked = true;
+        document.getElementById("{{ form3.mlts_ada_cds_dt.id_for_label }}").checked = true;
+        document.getElementById("{{ form3.mlts_xgboost_cds_dt.id_for_label }}").checked = true;
+        document.getElementById("{{ form3.mlts_lightgbm_cds_dt.id_for_label }}").checked = true;
+        document.getElementById("{{ form3.mlts_catboost_cds_dt.id_for_label }}").checked = true;
+    }
+
+    function tsUnselectModel() {
+        document.getElementById("{{ form3.mlts_naive.id_for_label }}").checked = false;
+        document.getElementById("{{ form3.mlts_grand_means.id_for_label }}").checked = false;
+        document.getElementById("{{ form3.mlts_snaive.id_for_label }}").checked = false;
+        document.getElementById("{{ form3.mlts_polytrend.id_for_label }}").checked = false;
+        document.getElementById("{{ form3.mlts_arima.id_for_label }}").checked = false;
+        document.getElementById("{{ form3.mlts_auto_arima.id_for_label }}").checked = false;
+        document.getElementById("{{ form3.mlts_exp_smooth.id_for_label }}").checked = false;
+        document.getElementById("{{ form3.mlts_ets.id_for_label }}").checked = false;
+        document.getElementById("{{ form3.mlts_theta.id_for_label }}").checked = false;
+        document.getElementById("{{ form3.mlts_stlf.id_for_label }}").checked = false;
+        document.getElementById("{{ form3.mlts_croston.id_for_label }}").checked = false;
+        document.getElementById("{{ form3.mlts_bats.id_for_label }}").checked = false;
+        document.getElementById("{{ form3.mlts_tbats.id_for_label }}").checked = false;
+        document.getElementById("{{ form3.mlts_prophet.id_for_label }}").checked = false;
+        document.getElementById("{{ form3.mlts_lr_cds_dt.id_for_label }}").checked = false;
+        document.getElementById("{{ form3.mlts_en_cds_dt.id_for_label }}").checked = false;
+        document.getElementById("{{ form3.mlts_ridge_cds_dt.id_for_label }}").checked = false;
+        document.getElementById("{{ form3.mlts_lasso_cds_dt.id_for_label }}").checked = false;
+        document.getElementById("{{ form3.mlts_lar_cds_dt.id_for_label }}").checked = false;
+        document.getElementById("{{ form3.mlts_llar_cds_dt.id_for_label }}").checked = false;
+        document.getElementById("{{ form3.mlts_br_cds_dt.id_for_label }}").checked = false;
+        document.getElementById("{{ form3.mlts_huber_cds_dt.id_for_label }}").checked = false;
+        document.getElementById("{{ form3.mlts_par_cds_dt.id_for_label }}").checked = false;
+        document.getElementById("{{ form3.mlts_omp_cds_dt.id_for_label }}").checked = false;
+        document.getElementById("{{ form3.mlts_knn_cds_dt.id_for_label }}").checked = false;
+        document.getElementById("{{ form3.mlts_dt_cds_dt.id_for_label }}").checked = false;
+        document.getElementById("{{ form3.mlts_rf_cds_dt.id_for_label }}").checked = false;
+        document.getElementById("{{ form3.mlts_et_cds_dt.id_for_label }}").checked = false;
+        document.getElementById("{{ form3.mlts_gbr_cds_dt.id_for_label }}").checked = false;
+        document.getElementById("{{ form3.mlts_ada_cds_dt.id_for_label }}").checked = false;
+        document.getElementById("{{ form3.mlts_xgboost_cds_dt.id_for_label }}").checked = false;
+        document.getElementById("{{ form3.mlts_lightgbm_cds_dt.id_for_label }}").checked = false;
+        document.getElementById("{{ form3.mlts_catboost_cds_dt.id_for_label }}").checked = false;
+    }
+
+    function cluSelectModel() {
+        document.getElementById("{{ form4.mlclu_kmeans.id_for_label }}").checked = true;
+        document.getElementById("{{ form4.mlclu_ap.id_for_label }}").checked = true;
+        document.getElementById("{{ form4.mlclu_meanshift.id_for_label }}").checked = true;
+        document.getElementById("{{ form4.mlclu_sc.id_for_label }}").checked = true;
+        document.getElementById("{{ form4.mlclu_hclust.id_for_label }}").checked = true;
+        document.getElementById("{{ form4.mlclu_dbscan.id_for_label }}").checked = true;
+        document.getElementById("{{ form4.mlclu_optics.id_for_label }}").checked = true;
+        document.getElementById("{{ form4.mlclu_birch.id_for_label }}").checked = true;
+        document.getElementById("{{ form4.mlclu_kmodes.id_for_label }}").checked = true;
+    }
+
+    function cluUnselectModel() {
+        document.getElementById("{{ form4.mlclu_kmeans.id_for_label }}").checked = false;
+        document.getElementById("{{ form4.mlclu_ap.id_for_label }}").checked = false;
+        document.getElementById("{{ form4.mlclu_meanshift.id_for_label }}").checked = false;
+        document.getElementById("{{ form4.mlclu_sc.id_for_label }}").checked = false;
+        document.getElementById("{{ form4.mlclu_hclust.id_for_label }}").checked = false;
+        document.getElementById("{{ form4.mlclu_dbscan.id_for_label }}").checked = false;
+        document.getElementById("{{ form4.mlclu_optics.id_for_label }}").checked = false;
+        document.getElementById("{{ form4.mlclu_birch.id_for_label }}").checked = false;
+        document.getElementById("{{ form4.mlclu_kmodes.id_for_label }}").checked = false;
+    }
+</script>
+{% endblock %}

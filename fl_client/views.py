@@ -213,7 +213,9 @@ def data_processing_tutorials(request):
 
 def deep_learning(request):
     logo = ['share', 'hospital', 'data', 'cpu', 'gpu']
-    return render(request, "deep_learning/deep_learning.html", {"logo": logo, "section": 'dl', "pdf": 'False'})
+    form1 = DLClassificationForm()
+    form2 = DLSegmentation()
+    return render(request, "deep_learning/deep_learning.html", {"logo": logo, "form1": form1, "form2": form2, "section": 'dl', "pdf": False})
 
 
 def deep_learning_faqs(request):
@@ -520,8 +522,13 @@ def deep_learning_tutorials(request):
 
 
 def machine_learning(request):
+    form1 = MLClassificationForm
+    form2 = MLRegressionForm
+    form3 = MLTimeSeriesForm
+    form4 = MLClusteringForm
+    form5 = MLAnomalyDetectionForm
     logo = ['share', 'hospital', 'data', 'cpu', 'gpu']
-    return render(request, "machine_learning/machine_learning.html", {"logo": logo, "section": 'ml'})
+    return render(request, "machine_learning/machine_learning.html", {"logo": logo,"form1": form1, "form2": form2, "form3": form3, "form4": form4, "form5": form5, "section": 'ml'})
 
 
 def machine_learning_anomaly_detection_run(request):
