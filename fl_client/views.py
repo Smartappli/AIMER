@@ -213,7 +213,7 @@ def data_processing_tutorials(request):
 
 def deep_learning(request):
     logo = ['share', 'hospital', 'data', 'cpu', 'gpu']
-    return render(request, "deep_learning/deep_learning.html", {"logo": logo, "section": 'dl'})
+    return render(request, "deep_learning/deep_learning.html", {"logo": logo, "section": 'dl', "pdf": 'False'})
 
 
 def deep_learning_faqs(request):

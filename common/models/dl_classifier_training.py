@@ -9,6 +9,7 @@ import pandas as pd
 import matplotlib as mpl
 import platform
 import torch as tc
+from tensorflow.keras import layers
 
 numgpu = len(tf.config.list_physical_devices('GPU'))
 print("GPUs Available: " + str(
@@ -17,18 +18,21 @@ print("GPUs Available: " + str(
 tasks = Queue.objects.get(queue_state='CR', queue_model_type='DLCL')
 for task in tasks:
     model_id = task.queue_model_id
+    dataset_id = task.queue_dataset_id
     params = task.queue_model.params
 
     # Begin temporary
     img_height = 224
     img_width = 224
     channel = 3
+    classes = 4
     # End temporary
 
     match model_id:
         case 1:  # Xception
             print("Xception")
-            from tensorflow.keras.applications.xception import Xception
+            from tensorflow.keras.applications.xception import Xception, preprocess_input
+
             base_model = Xception(input_shape=(img_height, img_width, channel),
                                   include_top=False,
                                   weights='imagenet')
@@ -533,3 +537,12 @@ for task in tasks:
         case _:
             print("Error")
 
+    base_model.trainable = False
+
+    hp = kt.HyperParameters()
+
+    inputs = tf.keras.Input(shape=(img_height, img_width, channel))
+    x = base_model(inputs, training=False)
+    x = layers.GlobalAveragePooling2D()(x)
+    outputs = layers.Dense(classes)(x)
+    model = tf.keras.Model(inputs, outputs)
