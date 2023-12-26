@@ -16,7 +16,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 
 from django.contrib import admin
-from .models import Model_Family, Model, Model_File, Document, Model_Document, Profile, Queue, Help, Dataset, License
+from .models import Model_Family, Model, Model_File, Document, Model_Document, Profile, Queue, Help, Dataset, License, Dataset_File, Dataset_Local_Data, Dataset_Remote_Data, Dataset_Central_Data
 
 admin.site.register(Model_Family)
 admin.site.register(Model)
@@ -27,7 +27,10 @@ admin.site.register(Queue)
 admin.site.register(Help)
 admin.site.register(Dataset)
 admin.site.register(License)
-
+admin.site.register(Dataset_File)
+admin.site.register(Dataset_Local_Data)
+admin.site.register(Dataset_Remote_Data)
+admin.site.register(Dataset_Central_Data)
 
 @admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin):
