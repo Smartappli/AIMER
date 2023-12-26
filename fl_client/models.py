@@ -17,7 +17,9 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 from django.contrib.auth.models import User
 from django.conf import settings
 from django.db import models
+from django.utils.text import slugify
 import uuid
+
 
 
 class Profile(models.Model):
@@ -119,7 +121,7 @@ class Model(models.Model):
 
     model_id = models.BigAutoField(primary_key=True, editable=False)
     model_uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
-    model_name = models.CharField(max_length=100)
+    model_name = models.CharField(max_length=200)
     model_description = models.TextField(null=True, blank=True)
     model_version = models.CharField(max_length=15, null=True, blank=True)
     model_category = models.CharField(max_length=2,
