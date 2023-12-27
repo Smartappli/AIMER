@@ -28,6 +28,7 @@ from .models import Profile, Model, Model_File, Queue  # Model_Family, Model_Doc
 
 
 def index(request):
+    """Method to render the index page."""
     logo = ['share', 'hospital', 'data', 'cpu', 'gpu']
     return render(request,
                   "core/index.html",
@@ -35,6 +36,7 @@ def index(request):
 
 
 def import_data(request):
+    """Moethod for importing data"""
     from huggingface_hub import list_repo_tree
 
     my_model = Model.objects.filter(model_category='NL',
@@ -133,6 +135,7 @@ def import_data(request):
 
 
 def download_data(request):
+    """Method to download the data from Hugging Face"""
     import os
     import shutil
     from huggingface_hub import hf_hub_download, try_to_load_from_cache, _CACHED_NO_EXIST
@@ -204,6 +207,7 @@ def download_data(request):
 
 
 def data_processing(request):
+    """Method to generate data processing form"""
     logo = ['share', 'hospital', 'data', 'cpu', 'gpu']
     return render(request,
                   "data_processing/data_processing.html",
@@ -211,6 +215,7 @@ def data_processing(request):
 
 
 def data_processing_faqs(request):
+    """Method to display data faqs"""
     logo = ['share', 'hospital', 'data', 'cpu', 'gpu']
     return render(request,
                   "data_processing/data_processing_faqs.html",
@@ -218,6 +223,7 @@ def data_processing_faqs(request):
 
 
 def data_processing_models(request):
+    """Method to display data processing models"""
     logo = ['share', 'hospital', 'data', 'cpu', 'gpu']
     return render(request,
                   "data_processing/data_processing_models.html",
@@ -225,6 +231,7 @@ def data_processing_models(request):
 
 
 def data_processing_tutorials(request):
+    """Method to display data processing tutorials"""
     logo = ['share', 'hospital', 'data', 'cpu', 'gpu']
     return render(request,
                   "data_processing/data_processing_tutorials.html",
@@ -232,6 +239,7 @@ def data_processing_tutorials(request):
 
 
 def deep_learning(request):
+    """Method to render deep learning form"""
     logo = ['share', 'hospital', 'data', 'cpu', 'gpu']
     form1 = DLClassificationForm()
     form2 = DLSegmentation()
@@ -241,6 +249,7 @@ def deep_learning(request):
 
 
 def deep_learning_faqs(request):
+    """Method to display deep learning faqs"""
     logo = ['share', 'hospital', 'data', 'cpu', 'gpu']
     return render(request,
                   "deep_learning/deep_learning_faqs.html",
@@ -248,6 +257,7 @@ def deep_learning_faqs(request):
 
 
 def deep_learning_models(request):
+    """Method to display all deep learning models."""
     logo = ['share', 'hospital', 'data', 'cpu', 'gpu']
     return render(request,
                   "deep_learning/deep_learning_models.html",
@@ -255,6 +265,7 @@ def deep_learning_models(request):
 
 
 def deep_learning_classification_run(request):
+    """Method to run the deep learning classification"""
     if request.method == "POST":
         form = DLClassificationForm(request.POST)
         if form.is_valid():
@@ -533,6 +544,7 @@ def deep_learning_classification_run(request):
 
 
 def deep_learning_segmentation_run(request):
+    """Method to run a deep learning segmentation"""
     if request.method == "POST":
         form = DLSegmentation(request.POST)
         if form.is_valid():
@@ -540,6 +552,7 @@ def deep_learning_segmentation_run(request):
 
 
 def deep_learning_tutorials(request):
+    """Method to generate deep learning tutorials"""
     logo = ['share', 'hospital', 'data', 'cpu', 'gpu']
     return render(request,
                   "deep_learning/deep_learning_tutorials.html",
@@ -547,6 +560,7 @@ def deep_learning_tutorials(request):
 
 
 def machine_learning(request):
+    """Method to create a machine learning form"""
     form1 = MLClassificationForm
     form2 = MLRegressionForm
     form3 = MLTimeSeriesForm
@@ -565,6 +579,7 @@ def machine_learning(request):
 
 
 def machine_learning_anomaly_detection_run(request):
+    """Method to run machine learning anomaly detection"""
     if request.method == "POST":
         form = MLAnomalyDetectionForm(request.POST)
         if form.is_valid():
@@ -572,6 +587,7 @@ def machine_learning_anomaly_detection_run(request):
 
 
 def machine_learning_classification_run(request):
+    """Method to run machine learning classification"""
     if request.method == "POST":
         form = MLClassificationForm(request.POST)
         if form.is_valid():
@@ -579,6 +595,7 @@ def machine_learning_classification_run(request):
 
 
 def machine_learning_clustering_run(request):
+    """Method to run machine learning clustering"""
     if request.method == "POST":
         form = MLClusteringForm(request.POST)
         if form.is_valid():
@@ -586,6 +603,7 @@ def machine_learning_clustering_run(request):
 
 
 def machine_learning_faqs(request):
+    """Method to generate machine learning faqs"""
     logo = ['share', 'hospital', 'data', 'cpu', 'gpu']
     return render(request,
                   "machine_learning/machine_learning_faqs.html",
@@ -593,6 +611,7 @@ def machine_learning_faqs(request):
 
 
 def machine_learning_models(request):
+    """Method to generate machine learning models list"""
     logo = ['share', 'hospital', 'data', 'cpu', 'gpu']
     return render(request,
                   "machine_learning/machine_learning_models.html",
@@ -600,6 +619,7 @@ def machine_learning_models(request):
 
 
 def machine_learning_regression_run(request):
+    """Method for executing machine learning"""
     if request.method == "POST":
         form = MLRegressionForm(request.POST)
         if form.is_valid():
@@ -607,6 +627,7 @@ def machine_learning_regression_run(request):
 
 
 def machine_learning_timeseries_run(request):
+    """Method for executing time series analysis"""
     if request.method == "POST":
         form = MLTimeSeriesForm(request.POST)
         if form.is_valid():
@@ -614,6 +635,7 @@ def machine_learning_timeseries_run(request):
 
 
 def machine_learning_tutorials(request):
+    """Method for create machine learning tutorials page"""
     logo = ['share', 'hospital', 'data', 'cpu', 'gpu']
     return render(request,
                   "machine_learning/machine_learning_tutorials.html",
@@ -621,6 +643,7 @@ def machine_learning_tutorials(request):
 
 
 def natural_language_processing(request):
+    """Method for creating natural language"""
     logo = ['share', 'hospital', 'data', 'cpu', 'gpu']
     form1 = NLPTextGenerationForm()
     form2 = NLPEmotionalAnalysisForm()
@@ -630,6 +653,7 @@ def natural_language_processing(request):
 
 
 def natural_language_processing_emotional_analysis_run(request):
+    """Method for execute natural language processing emotional analysis"""
     if request.method == "POST":
         form = NLPEmotionalAnalysisForm(request.POST)
         if form.is_valid():
@@ -637,6 +661,7 @@ def natural_language_processing_emotional_analysis_run(request):
 
 
 def natural_language_processing_faqs(request):
+    """Method to display natural language processing faqs"""
     logo = ['share', 'hospital', 'data', 'cpu', 'gpu']
     return render(request,
                   "natural_language_processing/natural_language_processing_faqs.html",
@@ -644,6 +669,7 @@ def natural_language_processing_faqs(request):
 
 
 def natural_language_processing_models(request):
+    """Method to display all models available"""
     logo = ['share', 'hospital', 'data', 'cpu', 'gpu']
     return render(request,
                   "natural_language_processing/natural_language_processing_models.html",
@@ -651,6 +677,7 @@ def natural_language_processing_models(request):
 
 
 def natural_language_processing_text_generation_run(request):
+    """Method to use text generation natural language processing models"""
     if request.method == "POST":
         form = NLPTextGenerationForm(request.POST)
         if form.is_valid():
@@ -658,6 +685,7 @@ def natural_language_processing_text_generation_run(request):
 
 
 def natural_language_processing_tutorials(request):
+    """Method to generate natural language processing tutorials"""
     logo = ['share', 'hospital', 'data', 'cpu', 'gpu']
     return render(request,
                   "natural_language_processing/natural_language_processing_tutorials.html",
@@ -665,6 +693,7 @@ def natural_language_processing_tutorials(request):
 
 
 def model_list(request):
+    """Method to list all models"""
     models = Model.objects.all()
     return render(request,
                   'base.html',
@@ -672,6 +701,7 @@ def model_list(request):
 
 
 def register(request):
+    """Method to register a new model"""
     if request.method == 'POST':
         user_form = UserRegistrationForm(request.POST)
         if user_form.is_valid():
@@ -698,6 +728,7 @@ def register(request):
 
 @login_required
 def edit(request):
+    """Method to edit an existing user profile"""
     if request.method == 'POST':
         user_form = UserEditForm(
             instance=request.user,
