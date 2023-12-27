@@ -252,6 +252,7 @@ class MLTimeSeriesForm(forms.Form):
 
 
 class MLClusteringForm(forms.Form):
+    """Form for select models of Machine Learning clustering"""
     mlclu_kmeans = forms.BooleanField(required=False)
     mlclu_ap = forms.BooleanField(required=False)
     mlclu_meanshift = forms.BooleanField(required=False)

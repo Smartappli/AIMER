@@ -16,7 +16,11 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 
 from django.contrib import admin
-from .models import Model_Family, Model, Model_File, Document, Model_Document, Profile, Queue, Help, Dataset, License, Dataset_File, Dataset_Local_Data, Dataset_Remote_Data, Dataset_Central_Data
+from .models import Model_Family, Model, Model_File
+from .models import Document, Model_Document
+from .models import Profile, Queue, Help, License
+from .models import Dataset, Dataset_File
+from .models import Dataset_Local_Data, Dataset_Remote_Data, Dataset_Central_Data
 
 admin.site.register(Model_Family)
 admin.site.register(Model)
@@ -34,5 +38,6 @@ admin.site.register(Dataset_Central_Data)
 
 @admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin):
+    """Manage Profile objects"""
     list_display = ["user", 'date_of_birth', 'photo']
     raw_id_fields = ['user']

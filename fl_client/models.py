@@ -75,7 +75,9 @@ class License(models.Model):
         ordering = ['license_short_name']
 
     def __str__(self):
-        return self.license_short_name + ' - ' + self.license_name
+        return (self.license_short_name
+                + ' - '
+                + self.license_name)
 
 
 # ---- Model tables ----
@@ -99,23 +101,23 @@ class Model_Family(models.Model):
 
 class Model(models.Model):
     class Provider(models.TextChoices):
-        HF = 'HF', 'Hugging Face',
-        KE = 'KE', 'Keras',
+        HF = 'HF', 'Hugging Face'
+        KE = 'KE', 'Keras'
         PC = 'PC', 'PyCaret'
         PT = 'PT', 'PyTorch'
 
     class Category(models.TextChoices):
-        DL = 'DL', 'Deep Learning',
-        ML = 'ML', 'Machine Learning',
+        DL = 'DL', 'Deep Learning'
+        ML = 'ML', 'Machine Learning'
         NL = 'NL', 'Natural Language Processing'
 
     class Type(models.TextChoices):
-        AD = 'AD', 'Anomaly Detection',
-        CL = 'CL', 'Classification',
+        AD = 'AD', 'Anomaly Detection'
+        CL = 'CL', 'Classification'
         CU = 'CU', 'Clustering'
         RG = 'RG', 'Regression'
-        SG = 'SG', 'Segmentation',
-        TC = 'TC', 'Text-Classification',
+        SG = 'SG', 'Segmentation'
+        TC = 'TC', 'Text-Classification'
         TG = 'TG', 'Text-Generation'
         TS = 'TS', 'Time-Series'
 
@@ -153,27 +155,35 @@ class Model(models.Model):
 
     def __str__(self):
         if str(self.model_version) != "None":
-            return self.model_category + self.model_type + ' - ' + self.model_name + ' - v' + str(self.model_version)
+            return (self.model_category
+                    + self.model_type
+                    + ' - '
+                    + self.model_name
+                    + ' - v'
+                    + str(self.model_version))
         else:
-            return self.model_category + self.model_type + ' - ' + self.model_name
+            return (self.model_category
+                    + self.model_type
+                    + ' - '
+                    + self.model_name)
 
 
 class Model_File(models.Model):
     class Type(models.TextChoices):
-        NONE = 'NA', 'N/A',
-        Q2K = 'Q2K', 'Q2_K',
-        Q3KL = 'Q3KL', 'Q3_K_L',
-        Q3KM = 'Q3KM', 'Q3_K_M',
+        NONE = 'NA', 'N/A'
+        Q2K = 'Q2K', 'Q2_K'
+        Q3KL = 'Q3KL', 'Q3_K_L'
+        Q3KM = 'Q3KM', 'Q3_K_M'
         Q3KS = 'Q3KS', 'Q3_K_S'
-        Q40 = 'Q40', 'Q4_0',
-        Q41 = 'Q41', 'Q4_1',
-        Q4KM = 'Q4KM', 'Q4_K_M',
-        Q4KS = 'Q4KS', 'Q4_K_S',
-        Q50 = 'Q50', 'Q5_0',
-        Q51 = 'Q51', 'Q5_1',
-        Q5KM = 'Q5KM', 'Q5_K_M',
-        Q5KS = 'Q5KS', 'Q5_K_S',
-        Q6K = 'Q6K', 'Q6_K',
+        Q40 = 'Q40', 'Q4_0'
+        Q41 = 'Q41', 'Q4_1'
+        Q4KM = 'Q4KM', 'Q4_K_M'
+        Q4KS = 'Q4KS', 'Q4_K_S'
+        Q50 = 'Q50', 'Q5_0'
+        Q51 = 'Q51', 'Q5_1'
+        Q5KM = 'Q5KM', 'Q5_K_M'
+        Q5KS = 'Q5KS', 'Q5_K_S'
+        Q6K = 'Q6K', 'Q6_K'
         Q80 = 'Q80', 'Q8_0'
 
     class Extension(models.TextChoices):
@@ -202,7 +212,13 @@ class Model_File(models.Model):
         ordering = ['model_file_filename']
 
     def __str__(self):
-        return self.model_file_model_id.model_name + ' | ' + self.model_file_type + " --- " + self.model_file_extension + ' --- ' + self.model_file_filename
+        return (self.model_file_model_id.model_name
+                + ' | '
+                + self.model_file_type
+                + " --- "
+                + self.model_file_extension
+                + ' --- '
+                + self.model_file_filename)
 
 
 class Document(models.Model):
@@ -222,7 +238,9 @@ class Document(models.Model):
         ordering = ['document_filename']
 
     def __str__(self):
-        return self.document_filename + ' ----- ' + self.document_title
+        return (self.document_filename
+                + ' ----- '
+                + self.document_title)
 
 
 class Model_Document(models.Model):
@@ -247,7 +265,11 @@ class Model_Document(models.Model):
         ordering = ['modeldoc_model_id']
 
     def __str__(self):
-        return self.modeldoc_model_id.model_name + ' ----- ' + self.modeldoc_document.document_filename + '  |  ' + self.modeldoc_document.document_title
+        return (self.modeldoc_model_id.model_name
+                + ' ----- '
+                + self.modeldoc_document.document_filename
+                + '  |  '
+                + self.modeldoc_document.document_title)
 
 
 class Dataset(models.Model):
@@ -310,7 +332,9 @@ class Dataset_Local_Data(models.Model):
         ordering = ['dataset_local_data_link']
 
     def __str__(self):
-        return self.dataset_local_data_dataset_id.dataset_name + ' - ' + self.dataset_local_data_link
+        return (self.dataset_local_data_dataset_id.dataset_name
+                + ' - '
+                + self.dataset_local_data_link)
 
 
 class Dataset_Remote_Data(models.Model):
@@ -342,7 +366,11 @@ class Dataset_Remote_Data(models.Model):
         ordering = ['dataset_remote_data_path']
 
     def __str__(self):
-        return self.dataset_remote_data_dataset_id.dataset_name + ' - ' + str(self.dataset_remote_data_ip) + ' - ' + self.dataset_remote_data_path
+        return (self.dataset_remote_data_dataset_id.dataset_name
+                + ' - '
+                + str(self.dataset_remote_data_ip)
+                + ' - '
+                + self.dataset_remote_data_path)
 
 
 class Dataset_Central_Data(models.Model):
@@ -360,7 +388,9 @@ class Dataset_Central_Data(models.Model):
         ordering = ['dataset_central_data_link']
 
     def __str__(self):
-        return self.dataset_central_data_dataset_id.dataset_name + ' - ' + str(self.dataset_central_data_link)
+        return (self.dataset_central_data_dataset_id.dataset_name
+                + ' - '
+                + str(self.dataset_central_data_link))
 
 
 class Dataset_File(models.Model):
@@ -378,16 +408,16 @@ class Dataset_File(models.Model):
 # --- Processing ----
 class Queue(models.Model):
     class State(models.TextChoices):
-        CL = 'CL', 'Cancelled',
-        CP = 'CP', 'Completed',
-        CR = 'CR', 'Created',
-        ER = 'ER', 'Error',
+        CL = 'CL', 'Cancelled'
+        CP = 'CP', 'Completed'
+        CR = 'CR', 'Created'
+        ER = 'ER', 'Error'
         IP = 'IP', 'In progress'
-        PN = 'PN', 'Pending',
-        RL = 'RL', 'Rejected',
+        PN = 'PN', 'Pending'
+        RL = 'RL', 'Rejected'
         RS = 'RS', 'Restarted'
-        ST = 'ST', 'Started',
-        SP = 'SP', 'Stopped',
+        ST = 'ST', 'Started'
+        SP = 'SP', 'Stopped'
         UP = 'UP', 'Updated'
 
     queue_id = models.BigAutoField(primary_key=True, default=1, editable=False)
@@ -431,4 +461,6 @@ class Help(models.Model):
         ordering = ['help_key']
 
     def __str__(self):
-        return self.help_key + ' : ' + self.help_value
+        return (self.help_key
+                + ' : '
+                + self.help_value)
