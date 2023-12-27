@@ -14,17 +14,17 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
-
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from django.shortcuts import render
+
 from .forms import DLClassificationForm, DLSegmentation
 from .forms import MLClassificationForm, MLRegressionForm
 from .forms import MLTimeSeriesForm
 from .forms import MLClusteringForm, MLAnomalyDetectionForm
 from .forms import NLPTextGenerationForm, NLPEmotionalAnalysisForm
-from .forms import  UserRegistrationForm, UserEditForm, ProfileEditForm
-from .models import Profile, Model, Model_File, Model_Family, Model_Document, Queue
-from django.contrib.auth.decorators import login_required
-from django.contrib import messages
+from .forms import UserRegistrationForm, UserEditForm, ProfileEditForm
+from .models import Profile, Model, Model_File, Queue  # Model_Family, Model_Document,
 
 
 def index(request):
@@ -111,13 +111,13 @@ def import_data(request):
                     model_type = 'Q80'
 
             if insertion == 1:
-                z = Model_File.objects.get_or_create(model_file_model_id=the_model,
-                                                     model_file_type=model_type,
-                                                     model_file_filename=path,
-                                                     model_file_extension='GGUF',
-                                                     model_file_size=file_size,
-                                                     model_file_sha256=sha256
-                                                     )
+                Model_File.objects.get_or_create(model_file_model_id=the_model,
+                                                 model_file_type=model_type,
+                                                 model_file_filename=path,
+                                                 model_file_extension='GGUF',
+                                                 model_file_size=file_size,
+                                                 model_file_sha256=sha256
+                                                 )
                 total += file_size
                 if model_type == 'Q4KM':
                     grandtotal += file_size
@@ -147,9 +147,11 @@ def download_data(request):
         my_files = Model_File.objects.filter(model_file_model_id=p.model_id,
                                              model_file_type='Q4KM').order_by('model_file_filename')
 
-        model_list = []
+        model_listing = []
         for q in my_files:
-            filepath = try_to_load_from_cache(repo_id=p.model_repo, filename=q.model_file_filename, repo_type="model")
+            filepath = try_to_load_from_cache(repo_id=p.model_repo,
+                                              filename=q.model_file_filename,
+                                              repo_type="model")
             if isinstance(filepath, str):
                 # file exists and is cached
                 print("File in cache")
@@ -170,16 +172,16 @@ def download_data(request):
 
                 print("File downloaded")
 
-            model_list.append(try_to_load_from_cache(repo_id=p.model_repo,
+            model_listing.append(try_to_load_from_cache(repo_id=p.model_repo,
                                                      filename=q.model_file_filename,
                                                      repo_type="model"))
 
-            if len(model_list) > 1:
-                model_list.sort()
-                new_name = model_list[0]
+            if len(model_listing) > 1:
+                model_listing.sort()
+                new_name = model_listing[0]
                 target = new_name.replace('-split-a', '')
 
-                for file in model_list[1:]:
+                for file in model_listing[1:]:
                     with open(new_name, 'ab') as out_file, open(file, 'rb') as in_file:
                         shutil.copyfileobj(in_file, out_file)
                         os.remove(file)
@@ -261,238 +263,238 @@ def deep_learning_classification_run(request):
 
             # Xception #
             if cd['dpcla_Xception']:
-                model_id = the_model = Model.objects.get(pk=1)
+                model_id = Model.objects.get(pk=1)
 
             # VGG #
             if cd['dpcla_VGG11']:
-                model_id = the_model = Model.objects.get(pk=2)
+                model_id = Model.objects.get(pk=2)
 
             if cd['dpcla_VGG13']:
-                model_id = the_model = Model.objects.get(pk=3)
+                model_id = Model.objects.get(pk=3)
 
             if cd['dpcla_VGG16']:
-                model_id = the_model = Model.objects.get(pk=4)
+                model_id = Model.objects.get(pk=4)
 
             if cd['dpcla_VGG19']:
-                model_id = the_model = Model.objects.get(pk=5)
+                model_id = Model.objects.get(pk=5)
 
             # ResNet, ResNet V2, ResNetRS #
             if cd['dpcla_ResNet18']:
-                model_id = the_model = Model.objects.get(pk=6)
+                model_id = Model.objects.get(pk=6)
 
             if cd["dpcla_ResNet34"]:
-                model_id = the_model = Model.objects.get(pk=7)
+                model_id = Model.objects.get(pk=7)
 
             if cd["dpcla_ResNet50"]:
-                model_id = the_model = Model.objects.get(pk=8)
+                model_id = Model.objects.get(pk=8)
 
             if cd['dpcla_ResNet50V2']:
-                model_id = the_model = Model.objects.get(pk=9)
+                model_id = Model.objects.get(pk=9)
 
             if cd['dpcla_ResNetRS50']:
-                model_id = the_model = Model.objects.get(pk=10)
+                model_id = Model.objects.get(pk=10)
 
             if cd['dpcla_ResNet101']:
-                model_id = the_model = Model.objects.get(pk=11)
+                model_id = Model.objects.get(pk=11)
 
             if cd['dpcla_ResNet101V2']:
-                model_id = the_model = Model.objects.get(pk=12)
+                model_id = Model.objects.get(pk=12)
 
             if cd['dpcla_ResNetRS101']:
-                model_id = the_model = Model.objects.get(pk=13)
+                model_id = Model.objects.get(pk=13)
 
             if cd['dpcla_ResNet152']:
-                model_id = the_model = Model.objects.get(pk=14)
+                model_id = Model.objects.get(pk=14)
 
             if cd['dpcla_ResNet152V2']:
-                model_id = the_model = Model.objects.get(pk=15)
+                model_id = Model.objects.get(pk=15)
 
             if cd['dpcla_ResNetRS152']:
-                model_id = the_model = Model.objects.get(pk=16)
+                model_id = Model.objects.get(pk=16)
 
             if cd['dpcla_ResNetRS200']:
-                model_id = the_model = Model.objects.get(pk=17)
+                model_id = Model.objects.get(pk=17)
 
             if cd['dpcla_ResNetRS270']:
-                model_id = the_model = Model.objects.get(pk=18)
+                model_id = Model.objects.get(pk=18)
 
             if cd['dpcla_ResNetRS350']:
-                model_id = the_model = Model.objects.get(pk=19)
+                model_id = Model.objects.get(pk=19)
 
             if cd['dpcla_ResNetRS420']:
-                model_id = the_model = Model.objects.get(pk=20)
+                model_id = Model.objects.get(pk=20)
 
             # Inception
             if cd['dpcla_InceptionV3']:
-                model_id = the_model = Model.objects.get(pk=21)
+                model_id = Model.objects.get(pk=21)
 
             if cd['dpcla_InceptionResNetV2']:
-                model_id = the_model = Model.objects.get(pk=22)
+                model_id = Model.objects.get(pk=22)
 
             # MobileNet
             if cd['dpcla_MobileNet']:
-                model_id = the_model = Model.objects.get(pk=23)
+                model_id = Model.objects.get(pk=23)
 
             if cd['dpcla_MobileNetV2']:
-                model_id = the_model = Model.objects.get(pk=24)
+                model_id = Model.objects.get(pk=24)
 
             if cd['dpcla_MobileNetV3Small']:
-                model_id = the_model = Model.objects.get(pk=25)
+                model_id = Model.objects.get(pk=25)
 
             if cd['dpcla_MobileNetV3Large']:
-                model_id = the_model = Model.objects.get(pk=26)
+                model_id = Model.objects.get(pk=26)
 
             # DenseNet #
             if cd['dpcla_DenseNet121']:
-                model_id = the_model = Model.objects.get(pk=27)
+                model_id = Model.objects.get(pk=27)
 
             if cd['dpcla_DenseNet169']:
-                model_id = the_model = Model.objects.get(pk=28)
+                model_id = Model.objects.get(pk=28)
 
             if cd['dpcla_DenseNet201']:
-                model_id = the_model = Model.objects.get(pk=29)
+                model_id = Model.objects.get(pk=29)
 
             # NASNet #
             if cd['dpcla_NASNetMobile']:
-                model_id = the_model = Model.objects.get(pk=30)
+                model_id = Model.objects.get(pk=30)
 
             if cd['dpcla_NASNetLarge']:
-                model_id = the_model = Model.objects.get(pk=31)
+                model_id = Model.objects.get(pk=31)
 
             # EfficientNet, EfficientNet V2
             if cd['dpcla_EfficientNetB0']:
-                model_id = the_model = Model.objects.get(pk=32)
+                model_id = Model.objects.get(pk=32)
 
             if cd['dpcla_EfficientNetB0V2']:
-                model_id = the_model = Model.objects.get(pk=33)
+                model_id = Model.objects.get(pk=33)
 
             if cd['dpcla_EfficientNetB1']:
-                model_id = the_model = Model.objects.get(pk=34)
+                model_id = Model.objects.get(pk=34)
 
             if cd['dpcla_EfficientNetB1V2']:
-                model_id = the_model = Model.objects.get(pk=35)
+                model_id = Model.objects.get(pk=35)
 
             if cd['dpcla_EfficientNetB2']:
-                model_id = the_model = Model.objects.get(pk=36)
+                model_id = Model.objects.get(pk=36)
 
             if cd['dpcla_EfficientNetB2V2']:
-                model_id = the_model = Model.objects.get(pk=37)
+                model_id = Model.objects.get(pk=37)
 
             if cd['dpcla_EfficientNetB3']:
-                model_id = the_model = Model.objects.get(pk=38)
+                model_id = Model.objects.get(pk=38)
 
             if cd['dpcla_EfficientNetB3V2']:
-                model_id = the_model = Model.objects.get(pk=39)
+                model_id = Model.objects.get(pk=39)
 
             if cd['dpcla_EfficientNetB4']:
-                model_id = the_model = Model.objects.get(pk=40)
+                model_id = Model.objects.get(pk=40)
 
             if cd['dpcla_EfficientNetB5']:
-                model_id = the_model = Model.objects.get(pk=41)
+                model_id = Model.objects.get(pk=41)
 
             if cd['dpcla_EfficientNetB6']:
-                model_id = the_model = Model.objects.get(pk=42)
+                model_id = Model.objects.get(pk=42)
 
             if cd['dpcla_EfficientNetB7']:
-                model_id = the_model = Model.objects.get(pk=43)
+                model_id = Model.objects.get(pk=43)
 
             if cd['dpcla_EfficientNetV2Small']:
-                model_id = the_model = Model.objects.get(pk=44)
+                model_id = Model.objects.get(pk=44)
 
             if cd['dpcla_EfficientNetV2Medium']:
-                model_id = the_model = Model.objects.get(pk=45)
+                model_id = Model.objects.get(pk=45)
 
             if cd['dpcla_EfficientNetV2Large']:
-                model_id = the_model = Model.objects.get(pk=46)
+                model_id = Model.objects.get(pk=46)
 
             # ConvNeXt #
             if cd['dpcla_ConvNeXtTiny']:
-                model_id = the_model = Model.objects.get(pk=47)
+                model_id = Model.objects.get(pk=47)
 
             if cd['dpcla_ConvNeXtSmall']:
-                model_id = the_model = Model.objects.get(pk=48)
+                model_id = Model.objects.get(pk=48)
 
             if cd['dpcla_ConvNeXtBase']:
-                model_id = the_model = Model.objects.get(pk=49)
+                model_id = Model.objects.get(pk=49)
 
             if cd['dpcla_ConvNeXtLarge']:
-                model_id = the_model = Model.objects.get(pk=50)
+                model_id = Model.objects.get(pk=50)
 
             if cd['dpcla_ConvNeXtXLarge']:
-                model_id = the_model = Model.objects.get(pk=51)
+                model_id = Model.objects.get(pk=51)
 
             # RegNetX, RegNetY#
             if cd['dpcla_RegNetX002']:
-                model_id = the_model = Model.objects.get(pk=52)
+                model_id = Model.objects.get(pk=52)
 
             if cd['dpcla_RegNetY002']:
-                model_id = the_model = Model.objects.get(pk=53)
+                model_id = Model.objects.get(pk=53)
 
             if cd['dpcla_RegNetX004']:
-                model_id = the_model = Model.objects.get(pk=54)
+                model_id = Model.objects.get(pk=54)
 
             if cd['dpcla_RegNetY004']:
-                model_id = the_model = Model.objects.get(pk=55)
+                model_id = Model.objects.get(pk=55)
 
             if cd['dpcla_RegNetX006']:
-                model_id = the_model = Model.objects.get(pk=56)
+                model_id = Model.objects.get(pk=56)
 
             if cd['dpcla_RegNetY006']:
-                model_id = the_model = Model.objects.get(pk=57)
+                model_id = Model.objects.get(pk=57)
 
             if cd['dpcla_RegNetX008']:
-                model_id = the_model = Model.objects.get(pk=58)
+                model_id = Model.objects.get(pk=58)
 
             if cd['dpcla_RegNetY008']:
-                model_id = the_model = Model.objects.get(pk=59)
+                model_id = Model.objects.get(pk=59)
 
             if cd['dpcla_RegNetX016']:
-                model_id = the_model = Model.objects.get(pk=60)
+                model_id = Model.objects.get(pk=60)
 
             if cd['dpcla_RegNetY016']:
-                model_id = the_model = Model.objects.get(pk=61)
+                model_id = Model.objects.get(pk=61)
 
             if cd['dpcla_RegNetX032']:
-                model_id = the_model = Model.objects.get(pk=62)
+                model_id = Model.objects.get(pk=62)
 
             if cd['dpcla_RegNetY032']:
-                model_id = the_model = Model.objects.get(pk=63)
+                model_id = Model.objects.get(pk=63)
 
             if cd['dpcla_RegNetX040']:
-                model_id = the_model = Model.objects.get(pk=64)
+                model_id = Model.objects.get(pk=64)
 
             if cd['dpcla_RegNetY40']:
-                model_id = the_model = Model.objects.get(pk=65)
+                model_id = Model.objects.get(pk=65)
 
             if cd['dpcla_RegNetX064']:
-                model_id = the_model = Model.objects.get(pk=66)
+                model_id = Model.objects.get(pk=66)
 
             if cd['dpcla_RegNetY064']:
-                model_id = the_model = Model.objects.get(pk=67)
+                model_id = Model.objects.get(pk=67)
 
             if cd['dpcla_RegNetX080']:
-                model_id = the_model = Model.objects.get(pk=68)
+                model_id = Model.objects.get(pk=68)
 
             if cd['dpcla_RegNetY80']:
-                model_id = the_model = Model.objects.get(pk=69)
+                model_id = Model.objects.get(pk=69)
 
             if cd['dpcla_RegNetX120']:
-                model_id = the_model = Model.objects.get(pk=70)
+                model_id = Model.objects.get(pk=70)
 
             if cd['dpcla_RegNetY120']:
-                model_id = the_model = Model.objects.get(pk=71)
+                model_id = Model.objects.get(pk=71)
 
             if cd['dpcla_RegNetX160']:
-                model_id = the_model = Model.objects.get(pk=72)
+                model_id = Model.objects.get(pk=72)
 
             if cd['dpcla_RegNetY160']:
-                model_id = the_model = Model.objects.get(pk=73)
+                model_id = Model.objects.get(pk=73)
 
             if cd['dpcla_RegNetX320']:
-                model_id = the_model = Model.objects.get(pk=74)
+                model_id = Model.objects.get(pk=74)
 
             if cd['dpcla_RegNetY320']:
-                model_id = the_model = Model.objects.get(pk=75)
+                model_id = Model.objects.get(pk=75)
 
             params = {}
 
@@ -553,7 +555,13 @@ def machine_learning(request):
     logo = ['share', 'hospital', 'data', 'cpu', 'gpu']
     return render(request,
                   "machine_learning/machine_learning.html",
-                  {"logo": logo,"form1": form1, "form2": form2, "form3": form3, "form4": form4, "form5": form5, "section": 'ml'})
+                  {"logo": logo,
+                   "form1": form1,
+                   "form2": form2,
+                   "form3": form3,
+                   "form4": form4,
+                   "form5": form5,
+                   "section": 'ml'})
 
 
 def machine_learning_anomaly_detection_run(request):

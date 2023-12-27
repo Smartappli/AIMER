@@ -20,6 +20,7 @@ from .models import Agent_Configuration
 
 
 class AgentEditForm(forms.ModelForm):
+    """Custom form for editing Agent_Configuration."""
     class Meta:
         model = Agent_Configuration
         fields = ['agent_name', 'agent_description', 'agent_ip', 'agent_port', 'agent_state']

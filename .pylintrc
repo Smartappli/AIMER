@@ -431,7 +431,22 @@ disable=raw-checker-failed,
         use-symbolic-message-instead,
         use-implicit-booleaness-not-comparison-to-string,
         use-implicit-booleaness-not-comparison-to-zero,
-        R0801
+        C0103,
+        C0115,
+        C0116,
+        C0412,
+        C0415,
+        E0401,
+        E1123,
+        E5142,
+        R0801,
+        R0912,
+        R0914,
+        R0915,
+        R1705,
+        W0105,
+        W0611,
+        W0612
 
 # Enable the message, report, category or checker with the given id(s). You can
 # either give multiple identifier separated by comma (,) or put this option

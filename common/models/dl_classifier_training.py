@@ -61,7 +61,6 @@ for task in tasks:
         case 1:  # Xception
             print("Xception")
             from tensorflow.keras.applications.xception import Xception
-
             base_model = Xception(input_shape=(img_height, img_width, channel),
                                   include_top=False,
                                   weights='imagenet')

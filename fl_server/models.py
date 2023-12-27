@@ -109,10 +109,10 @@ class Federated_Authorisation(models.Model):
 
     federated_autorisation_model_id = models.ForeignKey(Server_Model,
                                                         on_delete=models.DO_NOTHING,
-                                                        related_name='federated_authorisation_model_id')
+                                                        related_name='fd_authorisation_model_id')
     federated_autorisation_agent_id = models.ForeignKey(Agent_Configuration,
                                                         on_delete=models.CASCADE,
-                                                        related_name='federated_authorisation_agent_id')
+                                                        related_name='fd_authorisation_agent_id')
     federated_autorisation_permission = models.CharField(max_length=2,
                                                          choices=Permission.choices,
                                                          default=Permission.IC)

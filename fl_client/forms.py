@@ -392,6 +392,7 @@ class NLPEmotionalAnalysisForm(forms.Form):
 
 
 class UserRegistrationForm(forms.ModelForm):
+    """Class for creating user registration form."""
     password = forms.CharField(label='Password',
                                widget=forms.PasswordInput)
     password2 = forms.CharField(label='Repeat Password',
@@ -405,12 +406,14 @@ class UserRegistrationForm(forms.ModelForm):
                   'email']
 
     def clean_password2(self):
+        """Validate password"""
         cd = self.cleaned_data
         if cd['password'] != cd['password2']:
             raise forms.ValidationError('Passwords do not match.')
         return cd['password2']
 
     def clean_email(self):
+        """Validate email"""
         data = self.cleaned_data['email']
         if User.objects.filter(email=data).exists():
             raise forms.ValidationError('Email already registered.')
@@ -426,6 +429,7 @@ class UserEditForm(forms.ModelForm):
                   'email']
 
     def clean_email(self):
+        """Validate email"""
         data = self.cleaned_data['email']
         qs = User.objects.exclude(id=self.instance.id).filter(email=data)
         if qs.exists():
@@ -434,6 +438,7 @@ class UserEditForm(forms.ModelForm):
 
 
 class ProfileEditForm(forms.ModelForm):
+    """Class for creating Profile Edition form"""
     class Meta:
         model = Profile
         fields = ['date_of_birth',

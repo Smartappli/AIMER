@@ -26,6 +26,7 @@ from django.shortcuts import render
 
 
 def index(request):
+    """Class method that create main page"""
     return HttpResponseRedirect("/server/dashboard/")
 
 
@@ -67,4 +68,3 @@ def server_management(request):
     return render(request,
                   'server/server_management.html',
                   {'section': 'management', 'logo': logo})
-

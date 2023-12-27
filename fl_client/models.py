@@ -22,8 +22,6 @@ from django.conf import settings
 from django.db import models
 
 
-
-
 class Profile(models.Model):
     user = models.OneToOneField(
         settings.AUTH_USER_MODEL,
@@ -171,7 +169,9 @@ class Model(models.Model):
 
 
 class Model_File(models.Model):
+    """Class for storing file"""
     class Type(models.TextChoices):
+        """Class representing file types."""
         NONE = 'NA', 'N/A'
         Q2K = 'Q2K', 'Q2_K'
         Q3KL = 'Q3KL', 'Q3_K_L'
