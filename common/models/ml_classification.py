@@ -17,4 +17,3 @@ for task in tasks:
     dataset_id = task.queue_dataset_id
     params = task.queue_model.params
 
-

@@ -1,6 +1,6 @@
 import platform
 import tensorflow as tf
-from tensorflow import keras
+import keras as k
 import keras_tuner as kt
 import sklearn as sk
 import seaborn as sns
@@ -20,7 +20,7 @@ print("GPUs Available: " + str(numgpu)
       + " - Python: " + platform.python_version()
       + " - PyTorch: " + tc.__version__
       + " - TensorFlow: " + tf.__version__
-      + " - Keras: " + keras.__version__
+      + " - Keras: " + k.__version__
       + " - Numpy: " + np.version.version
       + " - Pandas: " + pd.__version__
       + " - Sklearn: " + sk.__version__
@@ -43,7 +43,7 @@ for task in tasks:
     match model_id:
         case 1:  # Xception
             print("Xception")
-            from keras.applications.xception import Xception
+            from tensorflow.keras.applications.xception import Xception
 
             base_model = Xception(input_shape=(img_height, img_width, channel),
                                   include_top=False,
