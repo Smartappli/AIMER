@@ -30,6 +30,7 @@ def index(request):
 
 
 def dashboard(request):
+    """Class method that create the main page"""
     logo = ['share', 'hospital', 'data', 'cpu', 'gpu']
     return render(request,
                   'server/server_dashboard.html',
@@ -37,6 +38,7 @@ def dashboard(request):
 
 
 def server_projects(request):
+    """Class method that create projects page"""
     logo = ['share', 'hospital', 'data', 'cpu', 'gpu']
     return render(request,
                   'server/server_projects.html',
@@ -44,6 +46,7 @@ def server_projects(request):
 
 
 def server_stakeholders(request):
+    """Class method that create stakejolders page"""
     logo = ['share', 'hospital', 'data', 'cpu', 'gpu']
     return render(request,
                   'server/server_stakeholders.html',
@@ -51,6 +54,7 @@ def server_stakeholders(request):
 
 
 def server_monitoring(request):
+    """Class method that create monitoring page"""
     logo = ['share', 'hospital', 'data', 'cpu', 'gpu']
     return render(request,
                   'server/server_monitoring.html',
@@ -58,7 +62,9 @@ def server_monitoring(request):
 
 
 def server_management(request):
+    """Class method that create the server management page"""
     logo = ['share', 'hospital', 'data', 'cpu', 'gpu']
     return render(request,
                   'server/server_management.html',
                   {'section': 'management', 'logo': logo})
+
