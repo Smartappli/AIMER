@@ -22,4 +22,4 @@ jobs:
         pip install pylint pylint-django
     - name: Analysing the code with pylint
       run: |
-        shopt -s globstar && pylint --load-plugins pylint_django --django-settings-module=lab.settings **/*.py --ignore=fl_client/migrations/*
+        shopt -s globstar && pylint --load-plugins pylint_django --django-settings-module=lab.settings **/*.py
