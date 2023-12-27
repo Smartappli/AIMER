@@ -1,8 +1,8 @@
 import random
 
 # import pycaret
-from pycaret.datasets import get_data
-from pycaret.regression import *
+# from pycaret.datasets import get_data
+# from pycaret.regression import *
 
 from fl_client.models import Queue
 from fl_client.models import Model, Model_File

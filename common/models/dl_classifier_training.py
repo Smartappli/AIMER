@@ -7,13 +7,13 @@ import seaborn as sns
 import numpy as np
 import pandas as pd
 import matplotlib as mpl
-from fl_client.models import Queue
-from fl_client.models import Model, Model_File
-from fl_client.models import Dataset, Dataset_File
-from fl_client.models import Dataset_Central_Data, Dataset_Local_Data, Dataset_Remote_Data
-
 import torch as tc
 from tensorflow.keras import layers
+
+from fl_client.models import Queue
+# from fl_client.models import Model, Model_File
+# from fl_client.models import Dataset, Dataset_File
+# from fl_client.models import Dataset_Central_Data, Dataset_Local_Data, Dataset_Remote_Data
 
 numgpu = len(tf.config.list_physical_devices('GPU'))
 print("GPUs Available: " + str(numgpu)
@@ -43,7 +43,7 @@ for task in tasks:
     match model_id:
         case 1:  # Xception
             print("Xception")
-            from tensorflow.keras.applications.xception import Xception
+            from keras.applications.xception import Xception
 
             base_model = Xception(input_shape=(img_height, img_width, channel),
                                   include_top=False,
