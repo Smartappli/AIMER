@@ -21,6 +21,7 @@ from .models import Profile
 
 
 class DLClassificationForm(forms.Form):
+    """Class for creating DL classification form."""
     # --- DATA AUGMENTATION ---
 
     dpcla_data_augmentation_cropping = forms.BooleanField(required=False)
@@ -150,6 +151,7 @@ class DLClassificationForm(forms.Form):
 
 
 class DLSegmentation(forms.Form):
+    """Class for creating DL segmentation form."""
     dpseg_unet = forms.BooleanField(required=False)
     dpseg_unetplusplus = forms.BooleanField(required=False)
     dpseg_manet = forms.BooleanField(required=False)
@@ -162,6 +164,7 @@ class DLSegmentation(forms.Form):
 
 
 class MLClassificationForm(forms.Form):
+    """Class for creating ML classification form."""
     mlcla_lr = forms.BooleanField(required=False)
     mlcla_knn = forms.BooleanField(required=False)
     mlcla_nb = forms.BooleanField(required=False)
@@ -184,6 +187,7 @@ class MLClassificationForm(forms.Form):
 
 
 class MLRegressionForm(forms.Form):
+    """Class for creating mL regression form."""
     mlreg_lr = forms.BooleanField(required=False)
     mlreg_lasso = forms.BooleanField(required=False)
     mlreg_ridge = forms.BooleanField(required=False)
@@ -216,6 +220,7 @@ class MLRegressionForm(forms.Form):
 
 
 class MLTimeSeriesForm(forms.Form):
+    """Class for creating ML time series form."""
     mlts_naive = forms.BooleanField(required=False)
     mlts_grand_means = forms.BooleanField(required=False)
     mlts_snaive = forms.BooleanField(required=False)
@@ -252,7 +257,7 @@ class MLTimeSeriesForm(forms.Form):
 
 
 class MLClusteringForm(forms.Form):
-    """Form for select models of Machine Learning clustering"""
+    """Class for creating ML Clustering form."""
     mlclu_kmeans = forms.BooleanField(required=False)
     mlclu_ap = forms.BooleanField(required=False)
     mlclu_meanshift = forms.BooleanField(required=False)
@@ -265,6 +270,7 @@ class MLClusteringForm(forms.Form):
 
 
 class MLAnomalyDetectionForm(forms.Form):
+    """Class for creating ML Anomaly Detection form."""
     mlad_abod = forms.BooleanField(required=False)
     mlad_cluster = forms.BooleanField(required=False)
     mlad_cof = forms.BooleanField(required=False)
@@ -280,6 +286,7 @@ class MLAnomalyDetectionForm(forms.Form):
 
 
 class NLPTextGenerationForm(forms.Form):
+    """Class for creating NLP Text Generation form."""
     # Alfred
     nlptg_model_alfred_40b = forms.BooleanField(required=False)
 
@@ -379,6 +386,7 @@ class NLPTextGenerationForm(forms.Form):
 
 
 class NLPEmotionalAnalysisForm(forms.Form):
+    """Class for creating NLP Emotional Analysis form."""
     # Alfred
     nlpema_model_bert = forms.BooleanField(required=False)
 
@@ -410,6 +418,7 @@ class UserRegistrationForm(forms.ModelForm):
 
 
 class UserEditForm(forms.ModelForm):
+    """Class for creating Profile Edition mform."""
     class Meta:
         model = User
         fields = ['first_name',
