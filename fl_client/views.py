@@ -549,7 +549,7 @@ def deep_learning_segmentation_run(request):
         form = DLSegmentation(request.POST)
         if form.is_valid():
             cd = form.cleaned_data
-
+            print(cd)
 
 def deep_learning_tutorials(request):
     """Method to generate deep learning tutorials"""
@@ -584,6 +584,7 @@ def machine_learning_anomaly_detection_run(request):
         form = MLAnomalyDetectionForm(request.POST)
         if form.is_valid():
             cd = form.cleaned_data
+            print(cd)
 
 
 def machine_learning_classification_run(request):
@@ -592,6 +593,7 @@ def machine_learning_classification_run(request):
         form = MLClassificationForm(request.POST)
         if form.is_valid():
             cd = form.cleaned_data
+            print(cd)
 
 
 def machine_learning_clustering_run(request):
@@ -600,6 +602,7 @@ def machine_learning_clustering_run(request):
         form = MLClusteringForm(request.POST)
         if form.is_valid():
             cd = form.cleaned_data
+            print(cd)
 
 
 def machine_learning_faqs(request):
@@ -624,6 +627,7 @@ def machine_learning_regression_run(request):
         form = MLRegressionForm(request.POST)
         if form.is_valid():
             cd = form.cleaned_data
+            print(cd)
 
 
 def machine_learning_timeseries_run(request):
@@ -632,6 +636,7 @@ def machine_learning_timeseries_run(request):
         form = MLTimeSeriesForm(request.POST)
         if form.is_valid():
             cd = form.cleaned_data
+            print(cd)
 
 
 def machine_learning_tutorials(request):
@@ -658,6 +663,7 @@ def natural_language_processing_emotional_analysis_run(request):
         form = NLPEmotionalAnalysisForm(request.POST)
         if form.is_valid():
             cd = form.cleaned_data
+            print(cd)
 
 
 def natural_language_processing_faqs(request):
@@ -682,6 +688,7 @@ def natural_language_processing_text_generation_run(request):
         form = NLPTextGenerationForm(request.POST)
         if form.is_valid():
             cd = form.cleaned_data
+            print(cd)
 
 
 def natural_language_processing_tutorials(request):
