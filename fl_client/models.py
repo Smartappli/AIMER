@@ -14,11 +14,13 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
+
+import uuid
+
 from django.contrib.auth.models import User
 from django.conf import settings
 from django.db import models
-from django.utils.text import slugify
-import uuid
+
 
 
 
@@ -187,8 +189,8 @@ class Model_File(models.Model):
         Q80 = 'Q80', 'Q8_0'
 
     class Extension(models.TextChoices):
-        NONE = 'NA', 'N/A',
-        BIN = 'BIN', 'Binary',
+        NONE = 'NA', 'N/A'
+        BIN = 'BIN', 'Binary'
         GGUF = 'GGUF', 'GGUF'
 
     model_file_uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
@@ -321,7 +323,7 @@ class Dataset_Local_Data(models.Model):
     dataset_local_data_dataset_id = models.ForeignKey(Dataset,
                                                       on_delete=models.DO_NOTHING,
                                                       default=1,
-                                                      related_name='dataset_local_data_dataset_id')
+                                                      related_name='ds_local_data_dataset_id')
     dataset_local_data_link = models.URLField(max_length=255)
     dataset_local_data_username = models.CharField(max_length=30, blank=True, null=True)
     dataset_local_data_password = models.CharField(max_length=30, blank=True, null=True)
@@ -351,7 +353,7 @@ class Dataset_Remote_Data(models.Model):
     dataset_remote_data_dataset_id = models.ForeignKey(Dataset,
                                                        on_delete=models.DO_NOTHING,
                                                        default=1,
-                                                       related_name='dataset_remote_data_dataset_id')
+                                                       related_name='ds_remote_data_dataset_id')
     dataset_remote_data_protocol = models.CharField(max_length=6,
                                                     choices=Protocol.choices,
                                                     default=Protocol.HTTP)
@@ -379,7 +381,7 @@ class Dataset_Central_Data(models.Model):
     dataset_central_data_dataset_id = models.ForeignKey(Dataset,
                                                         on_delete=models.DO_NOTHING,
                                                         default=1,
-                                                        related_name='dataset_central_data_dataset_id')
+                                                        related_name='ds_central_data_dataset_id')
     dataset_central_data_link = models.CharField(max_length=255, blank=True)
     dataset_central_creation_date = models.DateTimeField(auto_now_add=True)
     dataset_central_updated_date = models.DateTimeField(auto_now=True)

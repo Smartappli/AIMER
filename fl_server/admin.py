@@ -27,5 +27,3 @@ admin.site.register(Agent_Configuration)
 admin.site.register(Server_Model)
 admin.site.register(Server_Aggregator)
 admin.site.register(Federated_Authorisation)
-
-

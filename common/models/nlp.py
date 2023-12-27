@@ -35,7 +35,6 @@ for task in tasks:
         filepath = try_to_load_from_cache(repo_id=p.model_repo,
                                           filename=q.model_file_filename,
                                           repo_type="model")
-        
         if isinstance(filepath, str):
             # file exists and is cached
             print("File in cache")
