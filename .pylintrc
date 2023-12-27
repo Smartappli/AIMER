@@ -2,4 +2,4 @@
 
 # Add <file or directory> to the black list. It should be a base name, not a
 # path. You may set this option multiple times.
-ignore=tests.py, urls.py, migrations
+ignore=fl_client/migrations, fl_server/migrations
