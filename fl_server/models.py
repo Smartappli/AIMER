@@ -20,6 +20,7 @@ from django.db import models
 
 
 class Agent_Configuration(models.Model):
+    """Class representing agent configuration"""
     agent_id = models.BigAutoField(primary_key=True)
     agent_name = models.CharField(max_length=250)
     agent_description = models.CharField(max_length=250)
@@ -38,6 +39,7 @@ class Agent_Configuration(models.Model):
 
 
 class Server_Project(models.Model):
+    """Class representing Server Project"""
     server_project_id = models.BigAutoField(primary_key=True)
     server_project_title = models.CharField(max_length=250)
     server_project_description = models.TextField(null=True, blank=True)
@@ -52,7 +54,9 @@ class Server_Project(models.Model):
 
 
 class Server_Model(models.Model):
+    """Class representing Server Model"""
     class Training(models.TextChoices):
+        """Class representing localisation of training"""
         FS = 'FS', 'On the Federated Server'
         LA = 'LA', 'On a Specific Local Agent'
         AA = 'AA', 'On all Local Participating Agents'
@@ -60,6 +64,7 @@ class Server_Model(models.Model):
         FL = 'FL', 'In Federated Learning'
 
     class Origin(models.TextChoices):
+        """Class for origin selection"""
         AG = 'AG', 'Local Agent'
         AS = 'AS', 'Aggregator Server'
 
@@ -77,7 +82,9 @@ class Server_Model(models.Model):
 
 
 class Server_Aggregator(models.Model):
+    """Class for server aggregation form creation"""
     class Method(models.TextChoices):
+        """Class representing methods of aggregation"""
         FA = 'FA', 'FedAvg'
         FC = 'FC', 'FedCurv'
         FP = 'FP', 'FedProx'
@@ -97,11 +104,14 @@ class Server_Aggregator(models.Model):
 
 
 class Federated_Authorisation(models.Model):
+    """Class to represent a federated authorisation"""
     class Permission(models.TextChoices):
+        """Class representing type of permissions"""
         IC = 'IC', 'Included'
         EC = 'EC', 'Excluded'
 
     class State(models.TextChoices):
+        """Class representing state of federated authorisation"""
         IN = 'IN', 'Invited'
         RJ = 'RJ', 'Rejected'
         AC = 'AC', 'Accepted'

@@ -23,6 +23,7 @@ from django.db import models
 
 
 class Profile(models.Model):
+    """Class to represent a user's profile'"""
     user = models.OneToOneField(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE)
@@ -35,7 +36,9 @@ class Profile(models.Model):
 
 # ---- Project tables ----
 class Local_Project(models.Model):
+    """Class to represent a Local Project"""
     class Project_Type(models.TextChoices):
+        """Class to represent a project type"""
         LC = 'LC', 'Local Project'
         RM = 'RM', 'Remote Project'
         FD = 'FD', 'Federated Project'
@@ -59,6 +62,7 @@ class Local_Project(models.Model):
 
 
 class License(models.Model):
+    """Class to represent a license"""
     license_id = models.BigAutoField(primary_key=True, editable=False)
     license_uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
     license_short_name = models.CharField(max_length=30, null=True, blank=True)
@@ -82,6 +86,7 @@ class License(models.Model):
 
 # ---- Model tables ----
 class Model_Family(models.Model):
+    """Class representing a family of model"""
     model_family_id = models.BigAutoField(primary_key=True)
     model_family_uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
     model_family_name = models.CharField(max_length=100)
@@ -100,18 +105,22 @@ class Model_Family(models.Model):
 
 
 class Model(models.Model):
+    """Class representing a Model"""
     class Provider(models.TextChoices):
+        """Class representing a provider"""
         HF = 'HF', 'Hugging Face'
         KE = 'KE', 'Keras'
         PC = 'PC', 'PyCaret'
         PT = 'PT', 'PyTorch'
 
     class Category(models.TextChoices):
+        """Class representing a category of model"""
         DL = 'DL', 'Deep Learning'
         ML = 'ML', 'Machine Learning'
         NL = 'NL', 'Natural Language Processing'
 
     class Type(models.TextChoices):
+        """Class representing a type of model"""
         AD = 'AD', 'Anomaly Detection'
         CL = 'CL', 'Classification'
         CU = 'CU', 'Clustering'
@@ -189,6 +198,7 @@ class Model_File(models.Model):
         Q80 = 'Q80', 'Q8_0'
 
     class Extension(models.TextChoices):
+        """Class representing a file extension."""
         NONE = 'NA', 'N/A'
         BIN = 'BIN', 'Binary'
         GGUF = 'GGUF', 'GGUF'
@@ -224,6 +234,7 @@ class Model_File(models.Model):
 
 
 class Document(models.Model):
+    """Class representing a document"""
     document_model_id = models.BigAutoField(primary_key=True, editable=False)
     document_uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
     document_title = models.CharField(max_length=250)
@@ -246,6 +257,7 @@ class Document(models.Model):
 
 
 class Model_Document(models.Model):
+    """Class representing a link between a model and a document"""
     modeldoc_uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
     modeldoc_model_id = models.ForeignKey(Model,
                                           on_delete=models.CASCADE,
@@ -275,7 +287,9 @@ class Model_Document(models.Model):
 
 
 class Dataset(models.Model):
+    """Class representing a dataset"""
     class Format(models.TextChoices):
+        """Class representing a dataset format"""
         CSV = 'CSV', 'Comma-separated values'
         DICOM = 'DICOM', 'DICOM'
         FHIR = 'FHIR', 'FHIR'
@@ -285,6 +299,7 @@ class Dataset(models.Model):
         TXT = 'TXT', 'Text'
 
     class Type(models.TextChoices):
+        """Class representing the location of a dataset"""
         LC = 'LC', 'Lolly hosted'
         CS = 'CS', 'On the central server'
         EH = 'EH', 'Externally Hosted'
@@ -318,6 +333,7 @@ class Dataset(models.Model):
 
 
 class Dataset_Local_Data(models.Model):
+    """Class representing a dataset hosted on the local machine"""
     dataset_local_data_id = models.BigAutoField(primary_key=True, editable=False)
     dataset_local_data_uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
     dataset_local_data_dataset_id = models.ForeignKey(Dataset,
@@ -340,7 +356,9 @@ class Dataset_Local_Data(models.Model):
 
 
 class Dataset_Remote_Data(models.Model):
+    """Class representing a dataset hosted on a remote server"""
     class Protocol(models.TextChoices):
+        """Class representing the protocol to access to remote datasets"""
         HTTP = 'HTTP', 'HTTP'
         HTTPS = 'HTTPS', 'HTTPS'
         FTP = 'FTP', 'FTP'
@@ -376,6 +394,7 @@ class Dataset_Remote_Data(models.Model):
 
 
 class Dataset_Central_Data(models.Model):
+    """Class to represent a dataset hosted on the central server"""
     dataset_central_data_id = models.BigAutoField(primary_key=True, editable=False)
     dataset_central_data_uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
     dataset_central_data_dataset_id = models.ForeignKey(Dataset,
@@ -396,6 +415,7 @@ class Dataset_Central_Data(models.Model):
 
 
 class Dataset_File(models.Model):
+    """Class representing the file associated with a dataset."""
     dataset_file_id = models.BigAutoField(primary_key=True, editable=False)
     dataset_file_uuid = models.UUIDField(default=uuid.uuid4, editable=False)
     dataset_file_dataset_id = models.ForeignKey(Dataset,
@@ -409,7 +429,9 @@ class Dataset_File(models.Model):
 
 # --- Processing ----
 class Queue(models.Model):
+    """Class representing a queue"""
     class State(models.TextChoices):
+        """Class representing the state of a task"""
         CL = 'CL', 'Cancelled'
         CP = 'CP', 'Completed'
         CR = 'CR', 'Created'
@@ -453,6 +475,7 @@ class Queue(models.Model):
 
 
 class Help(models.Model):
+    """Class representing the help"""
     help_uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
     help_key = models.CharField(max_length=15, unique=True)
     help_value = models.CharField(max_length=255)
