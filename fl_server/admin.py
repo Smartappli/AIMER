@@ -16,7 +16,11 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 
 from django.contrib import admin
-from .models import Server_Project, Agent_Configuration, Server_Model, Server_Aggregator, Federated_Authorisation
+from .models import Server_Project
+from .models import Agent_Configuration
+from .models import Server_Model
+from .models import Server_Aggregator
+from .models import Federated_Authorisation
 
 admin.site.register(Server_Project)
 admin.site.register(Agent_Configuration)

@@ -16,9 +16,12 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 
 from django.shortcuts import render
-from .forms import (DLClassificationForm, DLSegmentation, MLClassificationForm, MLRegressionForm, MLTimeSeriesForm,
-                    MLClusteringForm, MLAnomalyDetectionForm, NLPTextGenerationForm, NLPEmotionalAnalysisForm,
-                    UserRegistrationForm, UserEditForm, ProfileEditForm)
+from .forms import DLClassificationForm, DLSegmentation
+from .forms import MLClassificationForm, MLRegressionForm
+from .forms import MLTimeSeriesForm
+from .forms import MLClusteringForm, MLAnomalyDetectionForm
+from .forms import NLPTextGenerationForm, NLPEmotionalAnalysisForm
+from .forms import  UserRegistrationForm, UserEditForm, ProfileEditForm
 from .models import Profile, Model, Model_File, Model_Family, Model_Document, Queue
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -26,7 +29,9 @@ from django.contrib import messages
 
 def index(request):
     logo = ['share', 'hospital', 'data', 'cpu', 'gpu']
-    return render(request, "core/index.html", {"logo": logo})
+    return render(request,
+                  "core/index.html",
+                  {"logo": logo})
 
 
 def import_data(request):
@@ -122,7 +127,9 @@ def import_data(request):
     print("TOTAL: " + str(format(grandtotal / 1024 / 1024 / 1024, '.2f')) + " GB")
 
     logo = ['share', 'hospital', 'data', 'cpu', 'gpu']
-    return render(request, "core/index.html", {"logo": logo})
+    return render(request,
+                  "core/index.html",
+                  {"logo": logo})
 
 
 def download_data(request):
@@ -151,7 +158,8 @@ def download_data(request):
             elif filepath is _CACHED_NO_EXIST:
                 # non-existence of file is cached
                 print("File in download")
-                hf_hub_download(repo_id=p.model_repo, filename=q.model_file_filename)
+                hf_hub_download(repo_id=p.model_repo,
+                                filename=q.model_file_filename)
                 print("File downloaded")
 
             else:
@@ -188,44 +196,60 @@ def download_data(request):
                         Model_File.objects.get(pk=q2.model_file_model_id).delete()
 
     logo = ['share', 'hospital', 'data', 'cpu', 'gpu']
-    return render(request, "core/index.html", {"logo": logo})
+    return render(request,
+                  "core/index.html",
+                  {"logo": logo})
 
 
 def data_processing(request):
     logo = ['share', 'hospital', 'data', 'cpu', 'gpu']
-    return render(request, "data_processing/data_processing.html", {"logo": logo, "section": 'data'})
+    return render(request,
+                  "data_processing/data_processing.html",
+                  {"logo": logo, "section": 'data'})
 
 
 def data_processing_faqs(request):
     logo = ['share', 'hospital', 'data', 'cpu', 'gpu']
-    return render(request, "data_processing/data_processing_faqs.html", {"logo": logo, "section": 'data'})
+    return render(request,
+                  "data_processing/data_processing_faqs.html",
+                  {"logo": logo, "section": 'data'})
 
 
 def data_processing_models(request):
     logo = ['share', 'hospital', 'data', 'cpu', 'gpu']
-    return render(request, "data_processing/data_processing_models.html", {"logo": logo, "section": 'data'})
+    return render(request,
+                  "data_processing/data_processing_models.html",
+                  {"logo": logo, "section": 'data'})
 
 
 def data_processing_tutorials(request):
     logo = ['share', 'hospital', 'data', 'cpu', 'gpu']
-    return render(request, "data_processing/data_processing_tutorials.html", {"logo": logo, "section": 'data'})
+    return render(request,
+                  "data_processing/data_processing_tutorials.html",
+                  {"logo": logo, "section": 'data'})
 
 
 def deep_learning(request):
     logo = ['share', 'hospital', 'data', 'cpu', 'gpu']
     form1 = DLClassificationForm()
     form2 = DLSegmentation()
-    return render(request, "deep_learning/deep_learning.html", {"logo": logo, "form1": form1, "form2": form2, "section": 'dl', "pdf": False})
+    return render(request,
+                  "deep_learning/deep_learning.html",
+                  {"logo": logo, "form1": form1, "form2": form2, "section": 'dl', "pdf": False})
 
 
 def deep_learning_faqs(request):
     logo = ['share', 'hospital', 'data', 'cpu', 'gpu']
-    return render(request, "deep_learning/deep_learning_faqs.html", {"logo": logo, "section": 'dl'})
+    return render(request,
+                  "deep_learning/deep_learning_faqs.html",
+                  {"logo": logo, "section": 'dl'})
 
 
 def deep_learning_models(request):
     logo = ['share', 'hospital', 'data', 'cpu', 'gpu']
-    return render(request, "deep_learning/deep_learning_models.html", {"logo": logo, "section": 'dl'})
+    return render(request,
+                  "deep_learning/deep_learning_models.html",
+                  {"logo": logo, "section": 'dl'})
 
 
 def deep_learning_classification_run(request):
@@ -515,7 +539,9 @@ def deep_learning_segmentation_run(request):
 
 def deep_learning_tutorials(request):
     logo = ['share', 'hospital', 'data', 'cpu', 'gpu']
-    return render(request, "deep_learning/deep_learning_tutorials.html", {"logo": logo, "section": 'dl'})
+    return render(request,
+                  "deep_learning/deep_learning_tutorials.html",
+                  {"logo": logo, "section": 'dl'})
 
 
 def machine_learning(request):
@@ -525,7 +551,9 @@ def machine_learning(request):
     form4 = MLClusteringForm
     form5 = MLAnomalyDetectionForm
     logo = ['share', 'hospital', 'data', 'cpu', 'gpu']
-    return render(request, "machine_learning/machine_learning.html", {"logo": logo,"form1": form1, "form2": form2, "form3": form3, "form4": form4, "form5": form5, "section": 'ml'})
+    return render(request,
+                  "machine_learning/machine_learning.html",
+                  {"logo": logo,"form1": form1, "form2": form2, "form3": form3, "form4": form4, "form5": form5, "section": 'ml'})
 
 
 def machine_learning_anomaly_detection_run(request):
@@ -551,12 +579,16 @@ def machine_learning_clustering_run(request):
 
 def machine_learning_faqs(request):
     logo = ['share', 'hospital', 'data', 'cpu', 'gpu']
-    return render(request, "machine_learning/machine_learning_faqs.html", {"logo": logo, "section": 'ml'})
+    return render(request,
+                  "machine_learning/machine_learning_faqs.html",
+                  {"logo": logo, "section": 'ml'})
 
 
 def machine_learning_models(request):
     logo = ['share', 'hospital', 'data', 'cpu', 'gpu']
-    return render(request, "machine_learning/machine_learning_models.html", {"logo": logo, "section": 'ml'})
+    return render(request,
+                  "machine_learning/machine_learning_models.html",
+                  {"logo": logo, "section": 'ml'})
 
 
 def machine_learning_regression_run(request):
@@ -575,14 +607,17 @@ def machine_learning_timeseries_run(request):
 
 def machine_learning_tutorials(request):
     logo = ['share', 'hospital', 'data', 'cpu', 'gpu']
-    return render(request, "machine_learning/machine_learning_tutorials.html", {"logo": logo, "section": 'ml'})
+    return render(request,
+                  "machine_learning/machine_learning_tutorials.html",
+                  {"logo": logo, "section": 'ml'})
 
 
 def natural_language_processing(request):
     logo = ['share', 'hospital', 'data', 'cpu', 'gpu']
     form1 = NLPTextGenerationForm()
     form2 = NLPEmotionalAnalysisForm()
-    return render(request, "natural_language_processing/natural_language_processing.html",
+    return render(request,
+                  "natural_language_processing/natural_language_processing.html",
                   {"logo": logo, "form1": form1, "form2": form2, "section": 'nlp', "pdf": True})
 
 
@@ -595,13 +630,15 @@ def natural_language_processing_emotional_analysis_run(request):
 
 def natural_language_processing_faqs(request):
     logo = ['share', 'hospital', 'data', 'cpu', 'gpu']
-    return render(request, "natural_language_processing/natural_language_processing_faqs.html",
+    return render(request,
+                  "natural_language_processing/natural_language_processing_faqs.html",
                   {"logo": logo, "section": 'nlp'})
 
 
 def natural_language_processing_models(request):
     logo = ['share', 'hospital', 'data', 'cpu', 'gpu']
-    return render(request, "natural_language_processing/natural_language_processing_models.html",
+    return render(request,
+                  "natural_language_processing/natural_language_processing_models.html",
                   {"logo": logo, "section": 'nlp'})
 
 
@@ -614,7 +651,8 @@ def natural_language_processing_text_generation_run(request):
 
 def natural_language_processing_tutorials(request):
     logo = ['share', 'hospital', 'data', 'cpu', 'gpu']
-    return render(request, "natural_language_processing/natural_language_processing_tutorials.html",
+    return render(request,
+                  "natural_language_processing/natural_language_processing_tutorials.html",
                   {"logo": logo, "section": 'nlp'})
 
 
