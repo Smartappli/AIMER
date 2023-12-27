@@ -16,25 +16,25 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 
 from django.contrib import admin
-from .models import Model_Family, Model, Model_File
-from .models import Document, Model_Document
+from .models import ModelFamily, Model, ModelFile
+from .models import Document, ModelDocument
 from .models import Profile, Queue, Help, License
-from .models import Dataset, Dataset_File
-from .models import Dataset_Local_Data, Dataset_Remote_Data, Dataset_Central_Data
+from .models import Dataset, DatasetFile
+from .models import DatasetLocalData, DatasetRemoteData, DatasetCentralData
 
-admin.site.register(Model_Family)
+admin.site.register(ModelFamily)
 admin.site.register(Model)
-admin.site.register(Model_File)
+admin.site.register(ModelFile)
 admin.site.register(Document)
-admin.site.register(Model_Document)
+admin.site.register(ModelDocument)
 admin.site.register(Queue)
 admin.site.register(Help)
 admin.site.register(Dataset)
 admin.site.register(License)
-admin.site.register(Dataset_File)
-admin.site.register(Dataset_Local_Data)
-admin.site.register(Dataset_Remote_Data)
-admin.site.register(Dataset_Central_Data)
+admin.site.register(DatasetFile)
+admin.site.register(DatasetLocalData)
+admin.site.register(DatasetRemoteData)
+admin.site.register(DatasetCentralData)
 
 @admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin):

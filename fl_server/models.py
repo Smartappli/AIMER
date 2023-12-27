@@ -19,7 +19,7 @@ from django.contrib.auth.models import User
 from django.db import models
 
 
-class Agent_Configuration(models.Model):
+class AgentConfiguration(models.Model):
     """Class representing agent configuration"""
     agent_id = models.BigAutoField(primary_key=True)
     agent_name = models.CharField(max_length=250)
@@ -38,7 +38,7 @@ class Agent_Configuration(models.Model):
         return self.agent_name + ' ---- ' + self.agent_state
 
 
-class Server_Project(models.Model):
+class ServerProject(models.Model):
     """Class representing Server Project"""
     server_project_id = models.BigAutoField(primary_key=True)
     server_project_title = models.CharField(max_length=250)
@@ -53,7 +53,7 @@ class Server_Project(models.Model):
         return self.server_project_title
 
 
-class Server_Model(models.Model):
+class ServerModel(models.Model):
     """Class representing Server Model"""
     class Training(models.TextChoices):
         """Class representing localisation of training"""
@@ -81,7 +81,7 @@ class Server_Model(models.Model):
     model_updated_date = models.DateTimeField(auto_now=True)
 
 
-class Server_Aggregator(models.Model):
+class ServerAggregator(models.Model):
     """Class for server aggregation form creation"""
     class Method(models.TextChoices):
         """Class representing methods of aggregation"""
@@ -93,7 +93,7 @@ class Server_Aggregator(models.Model):
         KA = 'KA', 'Krum algorithm'
 
     server_aggregator_id = models.BigAutoField(primary_key=True)
-    server_aggregator_model_id = models.ForeignKey(Server_Model,
+    server_aggregator_model_id = models.ForeignKey(ServerModel,
                                                    on_delete=models.DO_NOTHING,
                                                    related_name='server_aggregator_model_id')
     server_aggregator_method = models.CharField(max_length=2,
@@ -103,7 +103,7 @@ class Server_Aggregator(models.Model):
     server_aggregator_updated_date = models.DateTimeField(auto_now=True)
 
 
-class Federated_Authorisation(models.Model):
+class FederatedAuthorisation(models.Model):
     """Class to represent a federated authorisation"""
     class Permission(models.TextChoices):
         """Class representing type of permissions"""
@@ -117,10 +117,10 @@ class Federated_Authorisation(models.Model):
         AC = 'AC', 'Accepted'
         SP = 'SP', 'Suspended'
 
-    federated_autorisation_model_id = models.ForeignKey(Server_Model,
+    federated_autorisation_model_id = models.ForeignKey(ServerModel,
                                                         on_delete=models.DO_NOTHING,
                                                         related_name='fd_authorisation_model_id')
-    federated_autorisation_agent_id = models.ForeignKey(Agent_Configuration,
+    federated_autorisation_agent_id = models.ForeignKey(AgentConfiguration,
                                                         on_delete=models.CASCADE,
                                                         related_name='fd_authorisation_agent_id')
     federated_autorisation_permission = models.CharField(max_length=2,

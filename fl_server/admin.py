@@ -16,14 +16,14 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 
 from django.contrib import admin
-from .models import Server_Project
-from .models import Agent_Configuration
-from .models import Server_Model
-from .models import Server_Aggregator
-from .models import Federated_Authorisation
+from .models import ServerProject
+from .models import AgentConfiguration
+from .models import ServerModel
+from .models import ServerAggregator
+from .models import FederatedAuthorisation
 
-admin.site.register(Server_Project)
-admin.site.register(Agent_Configuration)
-admin.site.register(Server_Model)
-admin.site.register(Server_Aggregator)
-admin.site.register(Federated_Authorisation)
+admin.site.register(ServerProject)
+admin.site.register(AgentConfiguration)
+admin.site.register(ServerModel)
+admin.site.register(ServerAggregator)
+admin.site.register(FederatedAuthorisation)

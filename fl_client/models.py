@@ -35,9 +35,9 @@ class Profile(models.Model):
 
 
 # ---- Project tables ----
-class Local_Project(models.Model):
+class LocalProject(models.Model):
     """Class to represent a Local Project"""
-    class Project_Type(models.TextChoices):
+    class ProjectType(models.TextChoices):
         """Class to represent a project type"""
         LC = 'LC', 'Local Project'
         RM = 'RM', 'Remote Project'
@@ -48,8 +48,8 @@ class Local_Project(models.Model):
     local_project_title = models.CharField(max_length=250)
     local_project_description = models.TextField()
     local_project_type = models.CharField(max_length=2,
-                                          choices=Project_Type.choices,
-                                          default=Project_Type.LC)
+                                          choices=ProjectType.choices,
+                                          default=ProjectType.LC)
     local_project_active = models.BooleanField(default=True)
     local_project_owner = models.ForeignKey(User,
                                             on_delete=models.CASCADE,
@@ -85,7 +85,7 @@ class License(models.Model):
 
 
 # ---- Model tables ----
-class Model_Family(models.Model):
+class ModelFamily(models.Model):
     """Class representing a family of model"""
     model_family_id = models.BigAutoField(primary_key=True)
     model_family_uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
@@ -141,7 +141,7 @@ class Model(models.Model):
     model_type = models.CharField(max_length=2,
                                   choices=Type.choices,
                                   default=Type.AD)
-    model_family = models.ForeignKey(Model_Family,
+    model_family = models.ForeignKey(ModelFamily,
                                      on_delete=models.CASCADE,
                                      related_name='family_model')
     model_provider = models.CharField(max_length=2,
@@ -177,7 +177,7 @@ class Model(models.Model):
                     + self.model_name)
 
 
-class Model_File(models.Model):
+class ModelFile(models.Model):
     """Class for storing file"""
     class Type(models.TextChoices):
         """Class representing file types."""
@@ -256,7 +256,7 @@ class Document(models.Model):
                 + self.document_title)
 
 
-class Model_Document(models.Model):
+class ModelDocument(models.Model):
     """Class representing a link between a model and a document"""
     modeldoc_uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
     modeldoc_model_id = models.ForeignKey(Model,
@@ -332,7 +332,7 @@ class Dataset(models.Model):
         return self.dataset_name
 
 
-class Dataset_Local_Data(models.Model):
+class DatasetLocalData(models.Model):
     """Class representing a dataset hosted on the local machine"""
     dataset_local_data_id = models.BigAutoField(primary_key=True, editable=False)
     dataset_local_data_uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
@@ -355,7 +355,7 @@ class Dataset_Local_Data(models.Model):
                 + self.dataset_local_data_link)
 
 
-class Dataset_Remote_Data(models.Model):
+class DatasetRemoteData(models.Model):
     """Class representing a dataset hosted on a remote server"""
     class Protocol(models.TextChoices):
         """Class representing the protocol to access to remote datasets"""
@@ -393,7 +393,7 @@ class Dataset_Remote_Data(models.Model):
                 + self.dataset_remote_data_path)
 
 
-class Dataset_Central_Data(models.Model):
+class DatasetCentralData(models.Model):
     """Class to represent a dataset hosted on the central server"""
     dataset_central_data_id = models.BigAutoField(primary_key=True, editable=False)
     dataset_central_data_uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
@@ -414,7 +414,7 @@ class Dataset_Central_Data(models.Model):
                 + str(self.dataset_central_data_link))
 
 
-class Dataset_File(models.Model):
+class DatasetFile(models.Model):
     """Class representing the file associated with a dataset."""
     dataset_file_id = models.BigAutoField(primary_key=True, editable=False)
     dataset_file_uuid = models.UUIDField(default=uuid.uuid4, editable=False)

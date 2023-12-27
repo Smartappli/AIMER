@@ -24,7 +24,7 @@ from .forms import MLTimeSeriesForm
 from .forms import MLClusteringForm, MLAnomalyDetectionForm
 from .forms import NLPTextGenerationForm, NLPEmotionalAnalysisForm
 from .forms import UserRegistrationForm, UserEditForm, ProfileEditForm
-from .models import Profile, Model, Model_File, Queue  # Model_Family, Model_Document,
+from .models import Profile, Model, ModelFile, Queue  # ModelFamily, ModelDocument,
 
 
 def index(request):
@@ -113,7 +113,7 @@ def import_data(request):
                     model_type = 'Q80'
 
             if insertion == 1:
-                Model_File.objects.get_or_create(model_file_model_id=the_model,
+                ModelFile.objects.get_or_create(model_file_model_id=the_model,
                                                  model_file_type=model_type,
                                                  model_file_filename=path,
                                                  model_file_extension='GGUF',
@@ -147,7 +147,7 @@ def download_data(request):
     for p in my_models:
         print(p.model_repo)
 
-        my_files = Model_File.objects.filter(model_file_model_id=p.model_id,
+        my_files = ModelFile.objects.filter(model_file_model_id=p.model_id,
                                              model_file_type='Q4KM').order_by('model_file_filename')
 
         model_listing = []
@@ -194,11 +194,11 @@ def download_data(request):
                 i = 0
                 for q2 in my_files:
                     if i == 0:
-                        Model_File.objects.filter(pk=q2.model_file_model_id).update(
+                        ModelFile.objects.filter(pk=q2.model_file_model_id).update(
                             model_file_filename=q2.model_file_filename.replace('-split-a', ''))
                         i = 1
                     else:
-                        Model_File.objects.get(pk=q2.model_file_model_id).delete()
+                        ModelFile.objects.get(pk=q2.model_file_model_id).delete()
 
     logo = ['share', 'hospital', 'data', 'cpu', 'gpu']
     return render(request,
