@@ -133,6 +133,7 @@ class Model(models.Model):
     model_id = models.BigAutoField(primary_key=True, editable=False)
     model_uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
     model_name = models.CharField(max_length=200)
+    model_short_name = models.CharField(max_length=200, blank=True, null=True)
     model_description = models.TextField(null=True, blank=True)
     model_version = models.CharField(max_length=15, null=True, blank=True)
     model_category = models.CharField(max_length=2,

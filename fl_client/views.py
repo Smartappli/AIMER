@@ -270,279 +270,53 @@ def deep_learning_classification_run(request):
         form = DLClassificationForm(request.POST)
         if form.is_valid():
             cd = form.cleaned_data
-            model_id = 1
 
-            # Xception #
-            if cd['dpcla_Xception']:
-                model_id = Model.objects.get(pk=1)
-
-            # VGG #
-            if cd['dpcla_VGG11']:
-                model_id = Model.objects.get(pk=2)
-
-            if cd['dpcla_VGG13']:
-                model_id = Model.objects.get(pk=3)
-
-            if cd['dpcla_VGG16']:
-                model_id = Model.objects.get(pk=4)
-
-            if cd['dpcla_VGG19']:
-                model_id = Model.objects.get(pk=5)
-
-            # ResNet, ResNet V2, ResNetRS #
-            if cd['dpcla_ResNet18']:
-                model_id = Model.objects.get(pk=6)
-
-            if cd["dpcla_ResNet34"]:
-                model_id = Model.objects.get(pk=7)
-
-            if cd["dpcla_ResNet50"]:
-                model_id = Model.objects.get(pk=8)
-
-            if cd['dpcla_ResNet50V2']:
-                model_id = Model.objects.get(pk=9)
-
-            if cd['dpcla_ResNetRS50']:
-                model_id = Model.objects.get(pk=10)
-
-            if cd['dpcla_ResNet101']:
-                model_id = Model.objects.get(pk=11)
-
-            if cd['dpcla_ResNet101V2']:
-                model_id = Model.objects.get(pk=12)
-
-            if cd['dpcla_ResNetRS101']:
-                model_id = Model.objects.get(pk=13)
-
-            if cd['dpcla_ResNet152']:
-                model_id = Model.objects.get(pk=14)
-
-            if cd['dpcla_ResNet152V2']:
-                model_id = Model.objects.get(pk=15)
-
-            if cd['dpcla_ResNetRS152']:
-                model_id = Model.objects.get(pk=16)
-
-            if cd['dpcla_ResNetRS200']:
-                model_id = Model.objects.get(pk=17)
-
-            if cd['dpcla_ResNetRS270']:
-                model_id = Model.objects.get(pk=18)
-
-            if cd['dpcla_ResNetRS350']:
-                model_id = Model.objects.get(pk=19)
-
-            if cd['dpcla_ResNetRS420']:
-                model_id = Model.objects.get(pk=20)
-
-            # Inception
-            if cd['dpcla_InceptionV3']:
-                model_id = Model.objects.get(pk=21)
-
-            if cd['dpcla_InceptionResNetV2']:
-                model_id = Model.objects.get(pk=22)
-
-            # MobileNet
-            if cd['dpcla_MobileNet']:
-                model_id = Model.objects.get(pk=23)
-
-            if cd['dpcla_MobileNetV2']:
-                model_id = Model.objects.get(pk=24)
-
-            if cd['dpcla_MobileNetV3Small']:
-                model_id = Model.objects.get(pk=25)
-
-            if cd['dpcla_MobileNetV3Large']:
-                model_id = Model.objects.get(pk=26)
-
-            # DenseNet #
-            if cd['dpcla_DenseNet121']:
-                model_id = Model.objects.get(pk=27)
-
-            if cd['dpcla_DenseNet169']:
-                model_id = Model.objects.get(pk=28)
-
-            if cd['dpcla_DenseNet201']:
-                model_id = Model.objects.get(pk=29)
-
-            # NASNet #
-            if cd['dpcla_NASNetMobile']:
-                model_id = Model.objects.get(pk=30)
-
-            if cd['dpcla_NASNetLarge']:
-                model_id = Model.objects.get(pk=31)
-
-            # EfficientNet, EfficientNet V2
-            if cd['dpcla_EfficientNetB0']:
-                model_id = Model.objects.get(pk=32)
-
-            if cd['dpcla_EfficientNetB0V2']:
-                model_id = Model.objects.get(pk=33)
-
-            if cd['dpcla_EfficientNetB1']:
-                model_id = Model.objects.get(pk=34)
-
-            if cd['dpcla_EfficientNetB1V2']:
-                model_id = Model.objects.get(pk=35)
-
-            if cd['dpcla_EfficientNetB2']:
-                model_id = Model.objects.get(pk=36)
-
-            if cd['dpcla_EfficientNetB2V2']:
-                model_id = Model.objects.get(pk=37)
-
-            if cd['dpcla_EfficientNetB3']:
-                model_id = Model.objects.get(pk=38)
-
-            if cd['dpcla_EfficientNetB3V2']:
-                model_id = Model.objects.get(pk=39)
-
-            if cd['dpcla_EfficientNetB4']:
-                model_id = Model.objects.get(pk=40)
-
-            if cd['dpcla_EfficientNetB5']:
-                model_id = Model.objects.get(pk=41)
-
-            if cd['dpcla_EfficientNetB6']:
-                model_id = Model.objects.get(pk=42)
-
-            if cd['dpcla_EfficientNetB7']:
-                model_id = Model.objects.get(pk=43)
-
-            if cd['dpcla_EfficientNetV2Small']:
-                model_id = Model.objects.get(pk=44)
-
-            if cd['dpcla_EfficientNetV2Medium']:
-                model_id = Model.objects.get(pk=45)
-
-            if cd['dpcla_EfficientNetV2Large']:
-                model_id = Model.objects.get(pk=46)
-
-            # ConvNeXt #
-            if cd['dpcla_ConvNeXtTiny']:
-                model_id = Model.objects.get(pk=47)
-
-            if cd['dpcla_ConvNeXtSmall']:
-                model_id = Model.objects.get(pk=48)
-
-            if cd['dpcla_ConvNeXtBase']:
-                model_id = Model.objects.get(pk=49)
-
-            if cd['dpcla_ConvNeXtLarge']:
-                model_id = Model.objects.get(pk=50)
-
-            if cd['dpcla_ConvNeXtXLarge']:
-                model_id = Model.objects.get(pk=51)
-
-            # RegNetX, RegNetY#
-            if cd['dpcla_RegNetX002']:
-                model_id = Model.objects.get(pk=52)
-
-            if cd['dpcla_RegNetY002']:
-                model_id = Model.objects.get(pk=53)
-
-            if cd['dpcla_RegNetX004']:
-                model_id = Model.objects.get(pk=54)
-
-            if cd['dpcla_RegNetY004']:
-                model_id = Model.objects.get(pk=55)
-
-            if cd['dpcla_RegNetX006']:
-                model_id = Model.objects.get(pk=56)
-
-            if cd['dpcla_RegNetY006']:
-                model_id = Model.objects.get(pk=57)
-
-            if cd['dpcla_RegNetX008']:
-                model_id = Model.objects.get(pk=58)
-
-            if cd['dpcla_RegNetY008']:
-                model_id = Model.objects.get(pk=59)
-
-            if cd['dpcla_RegNetX016']:
-                model_id = Model.objects.get(pk=60)
-
-            if cd['dpcla_RegNetY016']:
-                model_id = Model.objects.get(pk=61)
-
-            if cd['dpcla_RegNetX032']:
-                model_id = Model.objects.get(pk=62)
-
-            if cd['dpcla_RegNetY032']:
-                model_id = Model.objects.get(pk=63)
-
-            if cd['dpcla_RegNetX040']:
-                model_id = Model.objects.get(pk=64)
-
-            if cd['dpcla_RegNetY40']:
-                model_id = Model.objects.get(pk=65)
-
-            if cd['dpcla_RegNetX064']:
-                model_id = Model.objects.get(pk=66)
-
-            if cd['dpcla_RegNetY064']:
-                model_id = Model.objects.get(pk=67)
-
-            if cd['dpcla_RegNetX080']:
-                model_id = Model.objects.get(pk=68)
-
-            if cd['dpcla_RegNetY80']:
-                model_id = Model.objects.get(pk=69)
-
-            if cd['dpcla_RegNetX120']:
-                model_id = Model.objects.get(pk=70)
-
-            if cd['dpcla_RegNetY120']:
-                model_id = Model.objects.get(pk=71)
-
-            if cd['dpcla_RegNetX160']:
-                model_id = Model.objects.get(pk=72)
-
-            if cd['dpcla_RegNetY160']:
-                model_id = Model.objects.get(pk=73)
-
-            if cd['dpcla_RegNetX320']:
-                model_id = Model.objects.get(pk=74)
-
-            if cd['dpcla_RegNetY320']:
-                model_id = Model.objects.get(pk=75)
-
-            params = {}
-
-            augmentation = {'cropping': cd['dpcla_data_augmentation_cropping'],
-                            'horizontal_flip': cd['dpcla_data_augmentation_horizontal_flip'],
-                            'vertical_flip': cd['dpcla_data_augmentation_vertical_flip'],
-                            'translation': cd['dpcla_data_augmentation_translation'],
-                            'rotation': cd['dpcla_data_augmentation_rotation'],
-                            'zoom': cd['dpcla_data_augmentation_zoom'],
-                            'contrast': cd['dpcla_data_augmentation_contrast'],
-                            'brightness': cd['dpcla_data_augmentation_brightness']}
-
-            params['augmentation'] = augmentation
-
-            xai = {'activation_maximization': cd['dpcla_activationmaximization'],
-                   'gradcam': cd['dpcla_gradcam'],
-                   'gradcamplusplus': cd['dpcla_gradcamplusplus'],
-                   'scorecam': cd['dpcla_scorecam'],
-                   'fasterscorecam': cd['dpcla_fasterscorecam'],
-                   'layercam': cd['dpcla_layercam'],
-                   'vanillasaliency': cd['dpcla_vanillasaliency'],
-                   'smoothgrad': cd['dpcla_smoothgrad']}
-
-            params['xai'] = xai
-
-            output = {'save_model': cd['dpcla_savemodel'],
-                      'train_graph': cd['dpcla_traingraph'],
-                      'confmatrix': cd['dpcla_confmatrix'],
-                      'classreport': cd['dpcla_classreport'],
-                      'tflite': cd['dpcla_tflite']}
-
-            params['output'] = output
-
-            Queue.objects.create(queue_model_id=model_id,
-                                 queue_model_type='DLCL',
-                                 queue_state='CR',
-                                 queue_params=params)
+            for model_key in cd.keys():
+                model_name = model_key.split('_')
+
+                try:
+                    model_id = Model.objects.get(model_short_name=model_name[1])
+                except Model.DoesNotExist:
+                    model_id = None
+
+                if model_id is not None:
+
+                    params = {}
+
+                    augmentation = {'cropping': cd['dpcla_data_augmentation_cropping'],
+                                    'horizontal_flip': cd['dpcla_data_augmentation_horizontal_flip'],
+                                    'vertical_flip': cd['dpcla_data_augmentation_vertical_flip'],
+                                    'translation': cd['dpcla_data_augmentation_translation'],
+                                    'rotation': cd['dpcla_data_augmentation_rotation'],
+                                    'zoom': cd['dpcla_data_augmentation_zoom'],
+                                    'contrast': cd['dpcla_data_augmentation_contrast'],
+                                    'brightness': cd['dpcla_data_augmentation_brightness']}
+
+                    params['augmentation'] = augmentation
+
+                    xai = {'activation_maximization': cd['dpcla_activationmaximization'],
+                           'gradcam': cd['dpcla_gradcam'],
+                           'gradcamplusplus': cd['dpcla_gradcamplusplus'],
+                           'scorecam': cd['dpcla_scorecam'],
+                           'fasterscorecam': cd['dpcla_fasterscorecam'],
+                           'layercam': cd['dpcla_layercam'],
+                           'vanillasaliency': cd['dpcla_vanillasaliency'],
+                           'smoothgrad': cd['dpcla_smoothgrad']}
+
+                    params['xai'] = xai
+
+                    output = {'save_model': cd['dpcla_savemodel'],
+                              'train_graph': cd['dpcla_traingraph'],
+                              'confmatrix': cd['dpcla_confmatrix'],
+                              'classreport': cd['dpcla_classreport'],
+                              'tflite': cd['dpcla_tflite']}
+
+                    params['output'] = output
+
+                    Queue.objects.create(queue_model_id=model_id,
+                                         queue_model_type='DLCL',
+                                         queue_state='CR',
+                                         queue_params=params)
 
 
 def deep_learning_segmentation_run(request):
@@ -551,7 +325,36 @@ def deep_learning_segmentation_run(request):
         form = DLSegmentation(request.POST)
         if form.is_valid():
             cd = form.cleaned_data
-            print(cd)
+
+            model_id = 1
+            if cd['dpseg_unet']:
+                model_id = Model.objects.get(pk=67)
+
+            if cd['dpseg_unetplusplus']:
+                model_id = Model.objects.get(pk=67)
+
+            if cd['dpseg_manet']:
+                model_id = Model.objects.get(pk=67)
+
+            if cd['dpseg_linknet']:
+                model_id = Model.objects.get(pk=67)
+
+            if cd['dpseg_fpn']:
+                model_id = Model.objects.get(pk=67)
+
+            if cd['dpseg_pspnet']:
+                model_id = Model.objects.get(pk=67)
+
+            if cd['dpseg_pan']:
+                model_id = Model.objects.get(pk=67)
+
+            if cd['dpseg_deeplabv3']:
+                model_id = Model.objects.get(pk=67)
+
+            if cd['dpseg_deeplabv3plus']:
+                model_id = Model.objects.get(pk=67)
+
+            print(model_id)
 
 
 def deep_learning_tutorials(request):
