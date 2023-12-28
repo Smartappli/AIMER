@@ -114,12 +114,12 @@ def import_data(request):
 
             if insertion == 1:
                 ModelFile.objects.get_or_create(model_file_model_id=the_model,
-                                                 model_file_type=model_type,
-                                                 model_file_filename=path,
-                                                 model_file_extension='GGUF',
-                                                 model_file_size=file_size,
-                                                 model_file_sha256=sha256
-                                                 )
+                                                model_file_type=model_type,
+                                                model_file_filename=path,
+                                                model_file_extension='GGUF',
+                                                model_file_size=file_size,
+                                                model_file_sha256=sha256
+                                                )
                 total += file_size
                 if model_type == 'Q4KM':
                     grandtotal += file_size
@@ -148,7 +148,7 @@ def download_data(request):
         print(p.model_repo)
 
         my_files = ModelFile.objects.filter(model_file_model_id=p.model_id,
-                                             model_file_type='Q4KM').order_by('model_file_filename')
+                                            model_file_type='Q4KM').order_by('model_file_filename')
 
         model_listing = []
         for q in my_files:
@@ -176,8 +176,8 @@ def download_data(request):
                 print("File downloaded")
 
             model_listing.append(try_to_load_from_cache(repo_id=p.model_repo,
-                                                     filename=q.model_file_filename,
-                                                     repo_type="model"))
+                                                        filename=q.model_file_filename,
+                                                        repo_type="model"))
 
             if len(model_listing) > 1:
                 model_listing.sort()
@@ -539,7 +539,9 @@ def deep_learning_classification_run(request):
 
             params['output'] = output
 
-            Queue.objects.create(queue_model_id=model_id, queue_model_type='DLCL', queue_state='CR',
+            Queue.objects.create(queue_model_id=model_id,
+                                 queue_model_type='DLCL',
+                                 queue_state='CR',
                                  queue_params=params)
 
 
@@ -550,6 +552,7 @@ def deep_learning_segmentation_run(request):
         if form.is_valid():
             cd = form.cleaned_data
             print(cd)
+
 
 def deep_learning_tutorials(request):
     """Method to generate deep learning tutorials"""
