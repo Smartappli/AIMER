@@ -243,9 +243,42 @@ def deep_learning(request):
     logo = ['share', 'hospital', 'data', 'cpu', 'gpu']
     form1 = DLClassificationForm()
     form2 = DLSegmentation()
+    optimizers = ('SGD',
+                  'RMSProp',
+                  'Adam',
+                  'AdamW',
+                  'Adadelta',
+                  'Adagrad',
+                  'Adamax',
+                  'Adafactor',
+                  'Nadam',
+                  'Ftrl')
+    losses = ('BinaryCrossentropy',
+              'CategoricalCrossentropy',
+              'SparseCategoricalCrossentropy',
+              'Poisson',
+              'KLDivergence',
+              'MeanSquaredError',
+              'MeanAbsoluteError',
+              'MeanAbsolutePercentageError',
+              'MeanSquaredLogarithmicError',
+              'CosineSimilarity',
+              'Huber',
+              'LogCosh',
+              'Hinge',
+              'SquaredHinge',
+              'CategoricalHinge')
+    lrs = (0.1,0.01,0.001,0.0001,0.00001)
     return render(request,
                   "deep_learning/deep_learning.html",
-                  {"logo": logo, "form1": form1, "form2": form2, "section": 'dl', "pdf": False})
+                  {"logo": logo,
+                   "form1": form1,
+                   "optimizers": optimizers,
+                   "losses": losses,
+                   "lrs": lrs,
+                   "form2": form2,
+                   "section": 'dl',
+                   "pdf": False})
 
 
 def deep_learning_faqs(request):
@@ -280,7 +313,6 @@ def deep_learning_classification_run(request):
                     model_id = None
 
                 if model_id is not None:
-
                     params = {}
 
                     augmentation = {'cropping': cd['dpcla_data_augmentation_cropping'],

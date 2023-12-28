@@ -130,6 +130,20 @@ class DLClassificationForm(forms.Form):
     dpcla_RegNetX320 = forms.BooleanField(required=False)
     dpcla_RegNetY320 = forms.BooleanField(required=False)
 
+    # --- TRAINING STRATEGY ---
+
+    dpcla_Optimizer1 = forms.CharField(max_length=100, required=True)
+    dpcla_Optimizer2 = forms.CharField(max_length=100, required=False)
+    dpcla_Optimizer3 = forms.CharField(max_length=100, required=False)
+
+    dpcla_Loss1 = forms.CharField(max_length=100, required=True)
+    dpcla_Loss2 = forms.CharField(max_length=100, required=False)
+    dpcla_Loss3 = forms.CharField(max_length=100, required=False)
+
+    dpcla_lr1 = forms.FloatField(required=True)
+    dpcla_lr2 = forms.FloatField(required=False)
+    dpcla_lr3 = forms.FloatField(required=False)
+
     # --- EXPLAINABILITY (XAI) ---
 
     dpcla_activationmaximization = forms.BooleanField(required=False)

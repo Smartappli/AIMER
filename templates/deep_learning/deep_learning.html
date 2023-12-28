@@ -35,12 +35,14 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
               <form class="row g-3" action="/dl_classifier_processing/" method="post">
                 {% csrf_token %}
                   <h5>Data Augmentation</h5>
+                  <!--
                   <div class="col-md-3 col-sm-6">
                     <div class="form-check form-switch">
                       <input class="form-check-input" name="{{ form1.dpcla_data_augmentation_cropping.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_data_augmentation_cropping.id_for_label }}">
                         <label class="form-check-label" for="{{ form1.dpcla_data_augmentation_cropping.id_for_label }}">Image Cropping</label>
                     </div>
                   </div>
+                  -->
               </form>
           </div>
         </div>
@@ -617,7 +619,35 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
                   <br>
     
                   <h5>Training Strategy</h5>
-    
+                  <div class="col-md-3 col-sm-6">
+                    Step 1
+                  </div>              
+                  <div class="col-md-3 col-sm-6">
+                    <select class="form-select" name="{{ form1.dpcla_Optimizer1.html_name }}" id="{{ form1.dpcla_Optimizer1.id_for_label }}" aria-label="Optimizer choice for step 1">
+                      <option selected>--- Optimizer ---</option>
+                        {% for optimizer in optimizers %}
+                            <option value="{{ optimizer }}">{{ optimizer }}</option>
+                        {% endfor %}
+                    </select>
+                  </div>
+                  <div class="col-md-3 col-sm-6">
+                    <select class="form-select" name="{{ form1.dpcla_Loss1.html_name }}" id="{{ form1.dpcla_Loss1.id_for_label }}" aria-label="Loss function choice for step 1">
+                      <option selected>--- Loss Function ---</option>
+                        {% for loss in losses %}
+                            <option value="{{ loss }}">{{ loss }}</option>
+                        {% endfor %}
+                    </select>
+                  </div>     
+                  <div class="col-md-3 col-sm-6">
+                    <select class="form-select" name="{{ form1.dpcla_lr1.html_name }}" id="{{ form1.dpcla_lr1.id_for_label }}" aria-label="Learning rate choice for step 1">
+                      <option selected>--- Learning Rate ---</option>
+                        {% for lr in lrs %}
+                            <option value="{{ lr }}">{{ lr }}</option>
+                        {% endfor %}
+                    </select>
+                  </div>                
+                  <br>
+              
                   <h5>Explainability (XAI)</h5>
                   <div class="col-md-3 col-sm-6">
                     <div class="form-check form-switch">
