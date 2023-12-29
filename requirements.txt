@@ -14,6 +14,6 @@ pandas==2.0.3
 torch==2.1.2
 torchvision==0.16.2
 prophet==1.1.5
-lightgbm==4.1.0
+lightgbm==4.2.0
 #keras-nlp==0.7.0.dev3
 #keras-cv==0.8.0.dev0
