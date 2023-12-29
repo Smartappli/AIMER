@@ -1,4 +1,4 @@
-name: Python license check action
+name: Dependencies license compliance checker
 
 on:
   push:
