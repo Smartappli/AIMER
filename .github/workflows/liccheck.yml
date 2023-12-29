@@ -3,7 +3,7 @@ name: Python license check action
 on:
   push:
     branches:
-      - main
+      - master
 
 env:
   DEP_PATH: requirements.txt
