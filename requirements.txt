@@ -3,8 +3,9 @@ django==5.0
 huggingface-hub==0.20.1
 #pycaret[full]==3.2.0 # 3.2.1
 scikit-learn-intelex==2024.0.1
-tensorflow==2.14.1 # 2.14.1
-keras==2.14 # 2.14
+#tensorflow==2.15 # 2.14.1
+tf-nightly==2.16.0.dev20231229  # Pin a working nightly until rc0.
+keras==3.0.2 # 2.14
 keras-tuner==1.4.6
 seaborn==0.13.0 # 0.12.2
 numpy==1.25.2 # 1.24.3
@@ -15,5 +16,3 @@ torch==2.1.2
 torchvision==0.16.2
 prophet==1.1.5
 lightgbm==4.2.0
-#keras-nlp==0.7.0.dev3
-#keras-cv==0.8.0.dev0
