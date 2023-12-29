@@ -7,7 +7,7 @@ updates:
     labels:
       - "🤖 Dependencies"
   - package-ecosystem: "pip"
-    directory: "/api"
+    directory: "/"
     schedule:
       interval: "daily"
     labels:
