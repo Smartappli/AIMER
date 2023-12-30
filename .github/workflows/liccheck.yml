@@ -26,9 +26,6 @@ jobs:
       uses: pilosus/action-pip-license-checker@v2
       with:
         requirements: 'requirements-all.txt'
-        report-format: 'json-pretty'
-        formatter: '%-65s %-65s %-20s %-40s'
-        totals: true
         fail: 'StrongCopyleft,NetworkCopyleft,Error'
         exclude: '(?i)^(pylint|tbb|nvidia|aio[-_]*).*'
         verbose: 1
