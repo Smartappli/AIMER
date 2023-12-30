@@ -29,6 +29,7 @@ jobs:
         fail: 'StrongCopyleft,NetworkCopyleft,Error'
         exclude: '(?i)^(pylint|tbb|nvidia|aio[-_]*).*'
         verbose: 1
+        github-token: ${{ secrets.OAUTH_TOKEN_GITHUB }}
     - name: Save report
       if: ${{ always() }}
       run: echo "${{ steps.license_check_report.outputs.report }}" > license-report.json
