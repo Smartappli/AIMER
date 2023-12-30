@@ -30,7 +30,7 @@ jobs:
         exclude: '(?i)^(pylint|nvidia|aio[-_]*).*'
     - name: Print report
       if: ${{ always() }}
-      run: echo "${{ steps.license_check_report.outputs.report }}"
+      run: echo "${{ steps.license_check_report.outputs.report }}" > license-report.json
     - name: Upload artifact
       if: ${{ always() }}
       uses: actions/upload-artifact@v3
