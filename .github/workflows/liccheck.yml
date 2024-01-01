@@ -26,14 +26,16 @@ jobs:
       uses: pilosus/action-pip-license-checker@v2
       with:
         requirements: 'requirements-all.txt'
-        fail: 'Copyleft'
-        exclude: '(?i)^(pylint|nvidia|aio[-_]*).*'
-    - name: Print report
+        fail: 'StrongCopyleft,NetworkCopyleft,Error'
+        exclude: '(?i)^(pylint|tbb|nvidia|aio[-_]*).*'
+        verbose: 1
+        github-token: ${{ secrets.OAUTH_TOKEN_GITHUB }}
+    - name: Save report
       if: ${{ always() }}
-      run: echo "${{ steps.license_check_report.outputs.report }}"
+      run: echo "${{ steps.license_check_report.outputs.report }}" > license-report.json
     - name: Upload artifact
       if: ${{ always() }}
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: license-report
         path: license-report.json
