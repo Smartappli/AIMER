@@ -4,10 +4,10 @@ huggingface-hub==0.20.1
 #pycaret[full]==3.2.0 # 3.2.1
 scikit-learn-intelex==2024.0.1
 #tensorflow==2.15 # 2.14.1
-tf-nightly==2.16.0.dev20231229  # Pin a working nightly until rc0.
+tf-nightly==2.16.0.dev20240101  # Pin a working nightly until rc0.
 keras==3.0.2 # 2.14
 keras-tuner==1.4.6
-seaborn==0.13.0 # 0.12.2
+seaborn==0.13.1 # 0.12.2
 numpy==1.25.2 # 1.24.3
 matplotlib==3.6.0 # 3.7.2
 scikit-learn==1.2.2 # 1.3.2
