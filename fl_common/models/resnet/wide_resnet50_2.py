@@ -1,8 +1,8 @@
-from torchvision.models.vgg import vgg19, VGG19_Weights
+from torchvision.models.resnet import wide_resnet50_2, Wide_ResNet50_2_Weights
 
 # Initialize model
-weights = VGG19_Weights.DEFAULT
-model = vgg19(weights=weights)
+weights = Wide_ResNet50_2_Weights.DEFAULT
+model = wide_resnet50_2(weights=weights)
 
 # Initialize the Weight Transforms
 preprocess = weights.transforms()
