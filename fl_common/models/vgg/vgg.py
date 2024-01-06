@@ -9,6 +9,134 @@ from torch.utils.data.sampler import SubsetRandomSampler
 from sklearn.model_selection import train_test_split
 import time
 
+# Parameters
+dataset_path = 'c:/IA/Data'  # Replace with the actual path to your dataset
+vgg_type = 'VGG16_BN'
+optimizer_name = 'Adam'
+learning_rate = 0.001
+criterion_name = 'CrossEntropyLoss'
+batch_size = 32
+num_epochs = 100
+patience = 7
+
+def get_vgg_model(vgg_type='VGG16', num_classes=1000):
+    # Load the pre-trained version of VGG
+    if vgg_type == 'VGG11':
+        weights = models.VGG11_Weights.DEFAULT
+        vgg_model = models.vgg11(weights=weights)
+    elif vgg_type == 'VGG11_BN':
+        weights = models.VGG11_BN_Weights.DEFAULT
+        vgg_model = models.vgg11_bn(weights=weights)
+    elif vgg_type == 'VGG13':
+        weights = models.VGG13_Weights.DEFAULT
+        vgg_model = models.vgg13(weights=weights)
+    elif vgg_type == 'VGG13_BN':
+        weights = models.VGG13_BN_Weights.DEFAULT
+        vgg_model = models.vgg13_bn(weights=weights)
+    elif vgg_type == 'VGG16':
+        weights = models.VGG16_Weights.DEFAULT
+        vgg_model = models.vgg16(weights=weights)
+    elif vgg_type == 'VGG16_BN':
+        weights = models.VGG16_BN_Weights.DEFAULT
+        vgg_model = models.vgg16_bn(weights=weights)
+    elif vgg_type == 'VGG19':
+        weights = models.VGG19_Weights.DEFAULT
+        vgg_model = models.vgg19(weights=weights)
+    elif vgg_type == 'VGG19_BN':
+        weights = models.VGG19_BN_Weights.DEFAULT
+        vgg_model = models.vgg19_bn(weights=weights)
+    else:
+        raise ValueError(f'Unknown VGG Architecture : {vgg_type}')
+
+    # Modify last layer to suit number of classes
+    num_features = vgg_model.classifier[-1].in_features
+    vgg_model.classifier[-1] = nn.Linear(num_features, num_classes)
+
+    return vgg_model
+
+
+def get_criterion(criterion_name):
+    if criterion_name == 'MSELoss':
+        return nn.MSELoss()
+    elif criterion_name == 'L1Loss':
+        return nn.L1Loss()
+    elif criterion_name == 'CTCLoss':
+        return nn.CTCLoss()
+    elif criterion_name == 'KLDivLoss':
+        return nn.KLDivLoss()
+    elif criterion_name == 'GaussianNLLLoss':
+        return nn.GaussianNLLLoss()
+    elif criterion_name == 'SmoothL1Loss':
+        return nn.SmoothL1Loss()
+    elif criterion_name == 'CrossEntropyLoss':
+        return nn.CrossEntropyLoss()
+    elif criterion_name == 'BCELoss':
+        return nn.BCELoss()
+    elif criterion_name == 'BCEWithLogitsLoss':
+        return nn.BCEWithLogitsLoss()
+    elif criterion_name == 'NLLLoss':
+        return nn.NLLLoss()
+    elif criterion_name == 'PoissonNLLLoss':
+        return nn.PoissonNLLLoss()
+    elif criterion_name == 'KLDivLoss':
+        return nn.KLDivLoss()
+    elif criterion_name == 'MarginRankingLoss':
+        return nn.MarginRankingLoss()
+    elif criterion_name == 'HingeEmbeddingLoss':
+        return nn.HingeEmbeddingLoss()
+    elif criterion_name == 'MultiLabelMarginLoss':
+        return nn.MultiLabelMarginLoss()
+    elif criterion_name == 'SmoothL1Loss':
+        return nn.SmoothL1Loss()
+    elif criterion_name == 'HuberLoss':
+        return nn.HuberLoss()
+    elif criterion_name == 'SoftMarginLoss':
+        return nn.SoftMarginLoss()
+    elif criterion_name == 'MultiLabelSoftMarginLoss':
+        return nn.MultiLabelSoftMarginLoss()
+    elif criterion_name == 'CosineEmbeddingLoss':
+        return nn.CosineEmbeddingLoss()
+    elif criterion_name == 'MultiMarginLoss':
+        return nn.MultiMarginLoss()
+    elif criterion_name == 'TripletMarginLoss':
+        return nn.TripletMarginLoss()
+    elif criterion_name == 'TripletMarginWithDistanceLoss':
+        return nn.TripletMarginWithDistanceLoss()
+    else:
+        raise ValueError(f'Unknown Criterion : {criterion_name}')
+
+
+def get_optimizer(optimizer_name, model_parameters, learning_rate):
+    if optimizer_name == 'SGD':
+        return optim.SGD(model_parameters, lr=learning_rate)
+    elif optimizer_name == 'Adam':
+        return optim.Adam(model_parameters, lr=learning_rate)
+    elif optimizer_name == 'RMSprop':
+        return optim.RMSprop(model_parameters, lr=learning_rate)
+    elif optimizer_name == 'Adagrad':
+        return optim.Adagrad(model_parameters, lr=learning_rate)
+    elif optimizer_name == 'Adadelta':
+        return optim.Adadelta(model_parameters, lr=learning_rate)
+    elif optimizer_name == 'AdamW':
+        return optim.AdamW(model_parameters, lr=learning_rate)
+    elif optimizer_name == 'SparseAdam':
+        return optim.SparseAdam(model_parameters, lr=learning_rate)
+    elif optimizer_name == 'Adamax':
+        return optim.Adamax(model_parameters, lr=learning_rate)
+    elif optimizer_name == 'ASGD':
+        return optim.ASGD(model_parameters, lr=learning_rate)
+    elif optimizer_name == 'LBFGS':
+        return optim.LBFGS(model_parameters, lr=learning_rate)
+    elif optimizer_name == 'Rprop':
+        return optim.Rprop(model_parameters, lr=learning_rate)
+    elif optimizer_name == 'NAdam':
+        return optim.NAdam(model_parameters, lr=learning_rate)
+    elif optimizer_name == 'RAdam':
+        return optim.RAdam(model_parameters, lr=learning_rate)
+    else:
+        raise ValueError(f'Unknown Optimizer : {optimizer_name}')
+
+
 # Define the transformation for the dataset
 transform = transforms.Compose([
     transforms.Resize((224, 224)),
@@ -16,7 +144,6 @@ transform = transforms.Compose([
 ])
 
 # Load your custom dataset
-dataset_path = 'c:/IA/Data'  # Replace with the actual path to your dataset
 dataset = datasets.ImageFolder(root=dataset_path, transform=transform)
 
 # Split the dataset into training and testing sets
@@ -25,15 +152,14 @@ train_sampler = SubsetRandomSampler(train_indices)
 test_sampler = SubsetRandomSampler(test_indices)
 
 # Define data loaders
-batch_size = 32
 train_loader = DataLoader(dataset, batch_size=batch_size, sampler=train_sampler)
 test_loader = DataLoader(dataset, batch_size=batch_size, sampler=test_sampler)
 
-# Use the pre-trained VGG16 model
-weights = models.VGG16_Weights.DEFAULT
-model = models.vgg16(weights=weights)
+# Use the pre-trained VGG model
 num_classes = len(dataset.classes)
-model.classifier[6] = nn.Linear(4096, num_classes)
+model = get_vgg_model(vgg_type=vgg_type, num_classes=num_classes)
+
+# model.classifier[6] = nn.Linear(4096, num_classes)
 
 # Move the model to GPU if available
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
@@ -43,9 +169,9 @@ if torch.cuda.device_count() > 1:
 model = model.to(device)
 
 # Define the loss criterion and optimizer
-criterion = nn.CrossEntropyLoss()
-optimizer = optim.Adam(model.parameters(), lr=0.001)
-
+model_parameters = model.parameters()
+criterion = get_criterion(criterion_name)
+optimizer = get_optimizer(optimizer_name, model_parameters, learning_rate)
 
 # Early stopping class
 class EarlyStopping:
@@ -68,7 +194,6 @@ class EarlyStopping:
 
 
 # Training loop
-num_epochs = 100
 early_stopping = EarlyStopping(patience=5)
 
 train_losses = []

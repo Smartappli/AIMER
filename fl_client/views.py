@@ -10,8 +10,8 @@ from .forms import NLPTextGenerationForm, NLPEmotionalAnalysisForm
 from .forms import UserRegistrationForm, UserEditForm, ProfileEditForm
 from .models import Profile, Model, ModelFile, Queue  # ModelFamily, ModelDocument,
 
-from fl_common.models.xception import xception
-from fl_common.models.alexnet import alexnet
+# from fl_common.models.xception import xception
+# from fl_common.models.alexnet import alexnet
 
 
 def index(request):
@@ -23,7 +23,7 @@ def index(request):
 
 
 def import_data(request):
-    """Moethod for importing data"""
+    """Method for importing data"""
     from huggingface_hub import list_repo_tree
 
     my_model = Model.objects.filter(model_category='NL',
