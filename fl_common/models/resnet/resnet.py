@@ -13,7 +13,7 @@ import time
 
 # Parameters
 dataset_path = 'c:/IA/Data'  # Replace with the actual path to your dataset
-densenet_type = 'DenseNet161'
+resnet_type = 'ResNet50'
 optimizer_name = 'Adam'
 learning_rate = 0.001
 criterion_name = 'CrossEntropyLoss'
@@ -22,49 +22,31 @@ num_epochs = 100
 patience = 7
 
 
-def get_efficientnet_model(efficientnet_type='EfficientNetB0', num_classes=1000):
-    # Load the pre-trained version of EfficientNet
-    if efficientnet_type == 'EfficientNetB0':
-        weights = models.EfficientNet_B0_Weights.DEFAULT
-        efficientnet_model = models.efficientnet_b0(weights=weights)
-    elif efficientnet_type == 'EfficientNetB1':
-        weights = models.EfficientNet_B1_Weights.DEFAULT
-        efficientnet_model = models.efficientnet_b1(weights=weights)
-    elif efficientnet_type == 'EfficientNetB2':
-        weights = models.EfficientNet_B2_Weights.DEFAULT
-        efficientnet_model = models.efficientnet_b2(weights=weights)
-    elif efficientnet_type == 'EfficientNetB3':
-        weights = models.EfficientNet_B3_Weights.DEFAULT
-        efficientnet_model = models.efficientnet_b3(weights=weights)
-    elif efficientnet_type == 'EfficientNetB4':
-        weights = models.EfficientNet_B4_Weights.DEFAULT
-        efficientnet_model = models.efficientnet_b4(weights=weights)
-    elif efficientnet_type == 'EfficientNetB5':
-        weights = models.EfficientNet_B5_Weights.DEFAULT
-        efficientnet_model = models.efficientnet_b5(weights=weights)
-    elif efficientnet_type == 'EfficientNetB6':
-        weights = models.EfficientNet_B6_Weights.DEFAULT
-        efficientnet_model = models.efficientnet_b6(weights=weights)
-    elif efficientnet_type == 'EfficientNetB7':
-        weights = models.EfficientNet_B7_Weights.DEFAULT
-        efficientnet_model = models.efficientnet_b7(weights=weights)
-    elif efficientnet_type == 'EfficientNetV2S':
-        weights = models.EfficientNet_V2_S_Weights.DEFAULT
-        efficientnet_model = models.efficientnet_v2_s(weights=weights)
-    elif efficientnet_type == 'EfficientNetV2M':
-        weights = models.EfficientNet_V2_M_Weights.DEFAULT
-        efficientnet_model = models.efficientnet_v2_m(weights=weights)
-    elif efficientnet_type == 'EfficientNetV2L':
-        weights = models.EfficientNet_V2_L_Weights.DEFAULT
-        efficientnet_model = models.efficientnet_v2_l(weights=weights)
+def get_resnet_model(resnet_type='DenseNet121', num_classes=1000):
+    # Load the pre-trained version of DenseNet
+    if resnet_type == 'ResNet18':
+        weights = models.ResNet18_Weights.DEFAULT
+        resnet_model = models.resnet18(weights=weights)
+    elif resnet_type == 'ResNet34':
+        weights = models.ResNet34_Weights.DEFAULT
+        resnet_model = models.resnet34(weights=weights)
+    elif resnet_type == 'ResNet50':
+        weights = models.ResNet50_Weights.DEFAULT
+        resnet_model = models.resnet50(weights=weights)
+    elif resnet_type == 'ResNet101':
+        weights = models.ResNet101_Weights.DEFAULT
+        resnet_model = models.resnet101(weights=weights)
+    elif resnet_type == 'ResNet152':
+        weights = models.ResNet152_Weights.DEFAULT
+        resnet_model = models.resnet152(weights=weights)
     else:
-        raise ValueError(f'Unknown DenseNet Architecture : {efficientnet_type}')
+        raise ValueError(f'Unknown DenseNet Architecture : {resnet_type}')
 
     # Modify last layer to suit number of classes
-    num_features = efficientnet_model._fc.in_features
-    efficientnet_model._fc = nn.Linear(num_features, num_classes)
+    num_features = resnet_model.fc.in_features
+    resnet_model.fc = nn.Linear(num_features, num_classes)
 
-    return efficientnet_model
+    return resnet_model
 
 
 def get_criterion(criterion_name):
@@ -194,7 +176,7 @@ test_loader = DataLoader(dataset, batch_size=batch_size, sampler=test_sampler)
 
 # Use the pre-trained VGG model
 num_classes = len(dataset.classes)
-model = get_efficientnet_model(efficientnet_type=densenet_type, num_classes=num_classes)
+model = get_resnet_model(resnet_type=resnet_type, num_classes=num_classes)
 
 # model.classifier[6] = nn.Linear(4096, num_classes)
 
