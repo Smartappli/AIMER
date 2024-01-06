@@ -13,7 +13,7 @@ import time
 
 # Parameters
 dataset_path = 'c:/IA/Data'  # Replace with the actual path to your dataset
-vgg_type = 'VGG16_BN'
+densenet_type = 'DenseNet161'
 optimizer_name = 'Adam'
 learning_rate = 0.001
 criterion_name = 'CrossEntropyLoss'
@@ -21,40 +21,50 @@ batch_size = 32
 num_epochs = 100
 patience = 7
 
-def get_vgg_model(vgg_type='VGG16', num_classes=1000):
-    # Load the pre-trained version of VGG
-    if vgg_type == 'VGG11':
-        weights = models.VGG11_Weights.DEFAULT
-        vgg_model = models.vgg11(weights=weights)
-    elif vgg_type == 'VGG11_BN':
-        weights = models.VGG11_BN_Weights.DEFAULT
-        vgg_model = models.vgg11_bn(weights=weights)
-    elif vgg_type == 'VGG13':
-        weights = models.VGG13_Weights.DEFAULT
-        vgg_model = models.vgg13(weights=weights)
-    elif vgg_type == 'VGG13_BN':
-        weights = models.VGG13_BN_Weights.DEFAULT
-        vgg_model = models.vgg13_bn(weights=weights)
-    elif vgg_type == 'VGG16':
-        weights = models.VGG16_Weights.DEFAULT
-        vgg_model = models.vgg16(weights=weights)
-    elif vgg_type == 'VGG16_BN':
-        weights = models.VGG16_BN_Weights.DEFAULT
-        vgg_model = models.vgg16_bn(weights=weights)
-    elif vgg_type == 'VGG19':
-        weights = models.VGG19_Weights.DEFAULT
-        vgg_model = models.vgg19(weights=weights)
-    elif vgg_type == 'VGG19_BN':
-        weights = models.VGG19_BN_Weights.DEFAULT
-        vgg_model = models.vgg19_bn(weights=weights)
+
+def get_efficientnet_model(efficientnet_type='EfficientNetB0', num_classes=1000):
+    # Load the pre-trained version of EfficientNet
+    if efficientnet_type == 'EfficientNetB0':
+        weights = models.EfficientNet_B0_Weights.DEFAULT
+        efficientnet_model = models.efficientnet_b0(weights=weights)
+    elif efficientnet_type == 'EfficientNetB1':
+        weights = models.EfficientNet_B1_Weights.DEFAULT
+        efficientnet_model = models.efficientnet_b1(weights=weights)
+    elif efficientnet_type == 'EfficientNetB2':
+        weights = models.EfficientNet_B2_Weights.DEFAULT
+        efficientnet_model = models.efficientnet_b2(weights=weights)
+    elif efficientnet_type == 'EfficientNetB3':
+        weights = models.EfficientNet_B3_Weights.DEFAULT
+        efficientnet_model = models.efficientnet_b3(weights=weights)
+    elif efficientnet_type == 'EfficientNetB4':
+        weights = models.EfficientNet_B4_Weights.DEFAULT
+        efficientnet_model = models.efficientnet_b4(weights=weights)
+    elif efficientnet_type == 'EfficientNetB5':
+        weights = models.EfficientNet_B5_Weights.DEFAULT
+        efficientnet_model = models.efficientnet_b5(weights=weights)
+    elif efficientnet_type == 'EfficientNetB6':
+        weights = models.EfficientNet_B6_Weights.DEFAULT
+        efficientnet_model = models.efficientnet_b6(weights=weights)
+    elif efficientnet_type == 'EfficientNetB7':
+        weights = models.EfficientNet_B7_Weights.DEFAULT
+        efficientnet_model = models.efficientnet_b7(weights=weights)
+    elif efficientnet_type == 'EfficientNetV2S':
+        weights = models.EfficientNet_V2_S_Weights.DEFAULT
+        efficientnet_model = models.efficientnet_v2_s(weights=weights)
+    elif efficientnet_type == 'EfficientNetV2M':
+        weights = models.EfficientNet_V2_M_Weights.DEFAULT
+        efficientnet_model = models.efficientnet_v2_m(weights=weights)
+    elif efficientnet_type == 'EfficientNetV2L':
+        weights = models.EfficientNet_V2_L_Weights.DEFAULT
+        efficientnet_model = models.efficientnet_v2_l(weights=weights)
     else:
-        raise ValueError(f'Unknown VGG Architecture : {vgg_type}')
+        raise ValueError(f'Unknown DenseNet Architecture : {efficientnet_type}')
 
     # Modify last layer to suit number of classes
-    num_features = vgg_model.classifier[-1].in_features
-    vgg_model.classifier[-1] = nn.Linear(num_features, num_classes)
+    num_features = efficientnet_model.classifier.in_features
+    efficientnet_model._fc = nn.Linear(num_features, num_classes)
 
-    return vgg_model
+    return efficientnet_model
 
 
 def get_criterion(criterion_name):
@@ -138,6 +148,7 @@ def get_optimizer(optimizer_name, model_parameters, learning_rate):
     else:
         raise ValueError(f'Unknown Optimizer : {optimizer_name}')
 
+
 def get_scheduler(optimizer, scheduler_type='step', **kwargs):
     """
     Get a learning rate scheduler for the optimizer.
@@ -183,7 +194,7 @@ test_loader = DataLoader(dataset, batch_size=batch_size, sampler=test_sampler)
 
 # Use the pre-trained VGG model
 num_classes = len(dataset.classes)
-model = get_vgg_model(vgg_type=vgg_type, num_classes=num_classes)
+model = get_efficientnet_model(efficientnet_type=densenet_type, num_classes=num_classes)
 
 # model.classifier[6] = nn.Linear(4096, num_classes)
 

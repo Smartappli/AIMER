@@ -1,2 +1,0 @@
-import torch
-from torchvision.models.efficientnet import efficientnet_b5
