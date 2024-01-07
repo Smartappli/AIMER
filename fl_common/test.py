@@ -1,203 +1,66 @@
 import torch
 import torch.nn as nn
 import torch.optim as optim
-from torch.utils.data import DataLoader
-from torchvision import datasets, transforms, models
-from sklearn.metrics import confusion_matrix, classification_report
-import matplotlib.pyplot as plt
-from torch.utils.data.sampler import SubsetRandomSampler
-from sklearn.model_selection import train_test_split
-import time
+from torchvision import models, datasets, transforms
+import syft as sy
 
-# Define the transformation for the dataset
+# Créer un hook PySyft pour étendre PyTorch avec des fonctionnalités de Federated Learning
+hook = sy.TorchHook(torch)
+
+# Créer des workers virtuels pour simuler des appareils distants
+bob = sy.VirtualWorker(hook, id="bob")
+alice = sy.VirtualWorker(hook, id="alice")
+
+# Charger les données et les diviser entre les travailleurs
+# Assurez-vous d'avoir vos propres données et de les charger ici
+# Dans cet exemple, nous utilisons le jeu de données CIFAR-10
 transform = transforms.Compose([
     transforms.Resize((224, 224)),
     transforms.ToTensor(),
 ])
 
-# Load your custom dataset
-dataset_path = 'c:/IA/Data'  # Replace with the actual path to your dataset
-dataset = datasets.ImageFolder(root=dataset_path, transform=transform)
+train_dataset = datasets.CIFAR10(root='./data', train=True, download=True, transform=transform)
+test_dataset = datasets.CIFAR10(root='./data', train=False, download=True, transform=transform)
 
-# Split the dataset into training and testing sets
-train_indices, test_indices = train_test_split(list(range(len(dataset))), test_size=0.2, random_state=42)
-train_sampler = SubsetRandomSampler(train_indices)
-test_sampler = SubsetRandomSampler(test_indices)
+data_loader = torch.utils.data.DataLoader(train_dataset, batch_size=32, shuffle=True)
 
-# Define data loaders
-batch_size = 32
-train_loader = DataLoader(dataset, batch_size=batch_size, sampler=train_sampler)
-test_loader = DataLoader(dataset, batch_size=batch_size, sampler=test_sampler)
+# Diviser les données entre les travailleurs
+data_bob, data_alice = data_loader.dataset.data.split([len(data_loader.dataset) // 2, len(data_loader.dataset) // 2])
 
-# Use the pre-trained VGG16 model
-weights = models.VGG16_Weights.DEFAULT
-model = models.vgg16(weights=weights)
-num_classes = len(dataset.classes)
-model.classifier[6] = nn.Linear(4096, num_classes)
+data_bob = transforms.functional.to_tensor(data_bob / 255.0).send(bob)
+data_alice = transforms.functional.to_tensor(data_alice / 255.0).send(alice)
 
-# Move the model to GPU if available
-device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-if torch.cuda.device_count() > 1:
-    model = nn.DataParallel(model)
+# Créer un modèle VGG16
+model = models.vgg16(pretrained=False)
+model.classifier[6] = nn.Linear(4096, 2)  # Modifier la couche de sortie pour le nombre de classes souhaité
 
-model = model.to(device)
-
-# Define the loss criterion and optimizer
+# Définir un optimiseur et une fonction de perte
+optimizer = optim.SGD(model.parameters(), lr=0.001, momentum=0.9)
 criterion = nn.CrossEntropyLoss()
-optimizer = optim.Adam(model.parameters(), lr=0.001)
 
 
-# Early stopping class
-class EarlyStopping:
-    def __init__(self, patience=5):
-        self.patience = patience
-        self.counter = 0
-        self.best_score = float('inf')
-        self.early_stop = False
-        self.best_model_weights = None
-
-    def __call__(self, val_loss, model):
-        if val_loss < self.best_score:
-            self.best_score = val_loss
-            self.counter = 0
-            self.best_model_weights = model.state_dict()
-        else:
-            self.counter += 1
-            if self.counter >= self.patience:
-                self.early_stop = True
+# Définir la fonction d'entraînement
+def train(epoch, model, data, target, optimizer, criterion):
+    model.send(data.location)
+    optimizer.zero_grad()
+    output = model(data)
+    loss = criterion(output, target)
+    loss.backward()
+    optimizer.step()
+    model.get()
+    return loss.get()
 
 
-# Training loop
-num_epochs = 100
-early_stopping = EarlyStopping(patience=5)
+# Entraîner le modèle sur les deux partenaires
+for epoch in range(5):  # Vous pouvez ajuster le nombre d'époques en fonction de vos besoins
+    # Entraîner sur Bob
+    loss_bob = train(epoch, model, data_bob, torch.randint(0, 2, (len(data_bob),)), optimizer, criterion)
 
-train_losses = []
-val_losses = []
-train_accuracies = []
-val_accuracies = []
-elapsed_times = []
+    # Entraîner sur Alice
+    loss_alice = train(epoch, model, data_alice, torch.randint(0, 2, (len(data_alice),)), optimizer, criterion)
 
-start_time = time.time()
+    # Afficher la perte totale après chaque époque
+    print(f"Epoch {epoch + 1}, Loss Bob: {loss_bob.item()}, Loss Alice: {loss_alice.item()}")
 
-for epoch in range(num_epochs):
-    epoch_start_time = time.time()
-
-    model.train()
-    running_loss = 0.0
-    correct_train = 0
-    total_train = 0
-
-    for inputs, labels in train_loader:
-        inputs, labels = inputs.to(device), labels.to(device)
-
-        optimizer.zero_grad()
-        outputs = model(inputs)
-        loss = criterion(outputs, labels)
-        loss.backward()
-        optimizer.step()
-
-        running_loss += loss.item()
-
-        _, predicted = torch.max(outputs.data, 1)
-        total_train += labels.size(0)
-        correct_train += (predicted == labels).sum().item()
-
-    avg_train_loss = running_loss / len(train_loader)
-    train_losses.append(avg_train_loss)
-    train_accuracy = correct_train / total_train
-    train_accuracies.append(train_accuracy)
-
-    # Validation
-    model.eval()
-    val_loss = 0.0
-    correct_val = 0
-    total_val = 0
-
-    with torch.no_grad():
-        for inputs, labels in test_loader:
-            inputs, labels = inputs.to(device), labels.to(device)
-
-            outputs = model(inputs)
-            loss = criterion(outputs, labels)
-            val_loss += loss.item()
-
-            _, predicted = torch.max(outputs.data, 1)
-            total_val += labels.size(0)
-            correct_val += (predicted == labels).sum().item()
-
-        avg_val_loss = val_loss / len(test_loader)
-        val_losses.append(avg_val_loss)
-        val_accuracy = correct_val / total_val
-        val_accuracies.append(val_accuracy)
-
-    # Early stopping check
-    early_stopping(avg_val_loss, model)
-    if early_stopping.early_stop:
-        print("Early stopping after {} epochs".format(epoch + 1))
-        break
-
-    epoch_end_time = time.time()
-    elapsed_time = epoch_end_time - epoch_start_time
-    elapsed_times.append(elapsed_time)
-
-    # Print and plot results
-    print(f"Epoch {epoch + 1}/{num_epochs} => "
-          f"Train Loss: {avg_train_loss:.4f}, Train Accuracy: {train_accuracy:.4f}, "
-          f"Validation Loss: {avg_val_loss:.4f}, Validation Accuracy: {val_accuracy:.4f}, "
-          f"Elapsed Time: {elapsed_time:.2f} seconds")
-
-# Calculate total training time
-end_time = time.time()
-total_training_time = end_time - start_time
-print(f"\nTotal Training Time: {total_training_time:.2f} seconds")
-
-# Save the best model weights
-model.load_state_dict(early_stopping.best_model_weights)
-torch.save(model.state_dict(), 'best_model.pth')
-
-# Plot training and validation losses
-plt.plot(train_losses, label='Training Loss')
-plt.plot(val_losses, label='Validation Loss')
-plt.legend()
-plt.xlabel('Epoch')
-plt.ylabel('Loss')
-plt.title('Training and Validation Losses')
-plt.show()
-
-# Plot training and validation accuracies
-plt.plot(train_accuracies, label='Training Accuracy')
-plt.plot(val_accuracies, label='Validation Accuracy')
-plt.legend()
-plt.xlabel('Epoch')
-plt.ylabel('Accuracy')
-plt.title('Training and Validation Accuracies')
-plt.show()
-
-# Performance evaluation
-model.eval()
-all_predictions = []
-all_labels = []
-
-with torch.no_grad():
-    for inputs, labels in test_loader:
-        inputs, labels = inputs.to(device), labels.to(device)
-        outputs = model(inputs)
-        _, predictions = torch.max(outputs, 1)
-
-        all_predictions.extend(predictions.cpu().numpy())
-        all_labels.extend(labels.cpu().numpy())
-
-# Confusion matrix and classification report
-conf_matrix = confusion_matrix(all_labels, all_predictions)
-class_report = classification_report(all_labels, all_predictions, target_names=dataset.classes)
-
-print("\nConfusion Matrix:")
-print(conf_matrix)
-print("\nClassification Report:")
-print(class_report)
-
-# Print final accuracy and validation accuracy
-final_accuracy = correct_train / total_train
-final_val_accuracy = correct_val / total_val
-print(f"\nFinal Training Accuracy: {final_accuracy:.4f}")
-print(f"Final Validation Accuracy: {final_val_accuracy:.4f}")
+# Fusionner les modèles de Bob et Alice pour créer un modèle global
+model_global = model.fix_precision().share(bob, alice, crypto_provider=sy.VirtualWorker(hook, id="crypto"))
