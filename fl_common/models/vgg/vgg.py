@@ -1,14 +1,26 @@
-from tqdm import tqdm
+import os
 import torch
 import torch.nn as nn
 import torch.optim as optim
 import torch.optim.lr_scheduler as lr_scheduler
 from torch.utils.data import DataLoader
 from torchvision import datasets, transforms, models
-from sklearn.metrics import confusion_matrix, classification_report, ConfusionMatrixDisplay
-import matplotlib.pyplot as plt
+from tqdm import tqdm
+from captum.attr import (
+    Saliency,
+    IntegratedGradients,
+    GuidedBackprop,
+    DeepLift,
+    LayerConductance,
+    NeuronConductance,
+    Occlusion,
+    ShapleyValueSampling,
+)
+from sklearn.metrics import confusion_matrix, classification_report
 from torch.utils.data.sampler import SubsetRandomSampler
 from sklearn.model_selection import train_test_split
+import matplotlib.pyplot as plt
+import seaborn as sns
 import time
 
 # Parameters
@@ -20,22 +32,23 @@ best_val_loss = float('inf')  # Initialize the best validation loss
 
 perform_second_training = True  # Set to True to perform the second training
 perform_third_training = False  # Set To True to perform the third training
+verbose = True
 
-optimizer_name_phase1 = 'Adam'
+optimizer_name_phase1 = 'SGD'
 learning_rate_phase1 = 0.01
 criterion_name_phase1 = 'CrossEntropyLoss'
-num_epochs_phase1 = 5  # Number of epochs for the first training phase
+num_epochs_phase1 = 3  # Number of epochs for the first training phase
 scheduler_phase1 = False
 early_stopping_patience_phase1 = 5
 
-optimizer_name_phase2 = 'Adam'
-learning_rate_phase2 = 0.001
+optimizer_name_phase2 = 'SGD'
+learning_rate_phase2 = 0.0005
 criterion_name_phase2 = 'CrossEntropyLoss'
 num_epochs_phase2 = 50  # Number of epochs for the second training phase
 scheduler_phase2 = False
 early_stopping_patience_phase2 = 5
 
-optimizer_nmae_phase3 = 'Adam'
+optimizer_name_phase3 = 'SGD'
 learning_rate_phase3 = 0.0001
 criterion_name_phase3 = 'CrossEntropyLoss'
 num_epochs_phase3 = 50  # Number of epochs for the third training phase
@@ -185,6 +198,42 @@ def get_scheduler(optimizer, scheduler_type='step', **kwargs):
         raise ValueError(f"Invalid scheduler_type: {scheduler_type}")
 
 
+# Function to generate and save XAI heatmap for a specific image using selected methods
+def generate_xai_heatmaps(model, image_tensor, label, save_dir, methods=None):
+    model.eval()
+
+    # Create input tensor with batch dimension
+    input_tensor = image_tensor.unsqueeze(0)
+
+    # Use the specified methods or all available methods if None
+    methods = methods or xai_methods
+
+    for method in methods:
+        # Compute attributions
+        attributions = method.attribute(input_tensor, target=label)
+
+        # Take the absolute value of the attributions
+        attributions = torch.abs(attributions)
+
+        # Reduce attributions to 2D (assuming the input is an image)
+        attributions = attributions.sum(dim=1)
+
+        # Normalize attributions to [0, 1]
+        attributions = (attributions - attributions.min()) / (attributions.max() - attributions.min())
+
+        # Convert to numpy array for plotting
+        attributions_np = attributions.squeeze(0).cpu().detach().numpy()
+
+        # Plot and save the heatmap
+        method_name = str(method).split('.')[-1].split(' ')[0]
+        plt.imshow(attributions_np, cmap='viridis')
+        plt.title(f'XAI Heatmap for {method_name} (Label: {label})')
+        plt.colorbar()
+        save_path = os.path.join(save_dir, f'xai_heatmap_{method_name}_{label}.png')
+        plt.savefig(save_path)
+        plt.show()
+
+
 # Define the transformation for the dataset
 transform = transforms.Compose([
     transforms.Resize((224, 224)),
@@ -207,6 +256,18 @@ test_loader = DataLoader(dataset, batch_size=batch_size, sampler=test_sampler)
 num_classes = len(dataset.classes)
 model = get_vgg_model(vgg_type=vgg_type, num_classes=num_classes)
 
+# List of available XAI methods in captum
+xai_methods = [
+    Saliency(model),
+    IntegratedGradients(model),
+    GuidedBackprop(model),
+    DeepLift(model),
+    LayerConductance(model.features[7], model),
+    NeuronConductance(model.features[7], model),
+    Occlusion(model),
+    ShapleyValueSampling(model),
+]
+
 # Move the model to GPU if available
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 if torch.cuda.device_count() > 1:
@@ -227,7 +288,7 @@ scheduler = get_scheduler(optimizer, scheduler_type='step', step_size=10, gamma=
 
 # Early stopping class
 class EarlyStopping:
-    def __init__(self, patience=5, verbose=False):
+    def __init__(self, patience=5, verbose=verbose):
         self.patience = patience
         self.verbose = verbose
         self.counter = 0
@@ -455,8 +516,8 @@ if perform_third_training and not early_stopping_phase2.early_stop:  # Proceed o
 
     # Optionally reset the optimizer, criterion and scheduler for the second phase
     model_parameters = model.parameters()
-    criterion = get_criterion(criterion_name_phase2)
-    optimizer = get_optimizer(optimizer_name_phase2, model_parameters, learning_rate_phase2)
+    criterion = get_criterion(criterion_name_phase3)
+    optimizer = get_optimizer(optimizer_name_phase3, model_parameters, learning_rate_phase3)
 
     # scheduler = get_scheduler(optimizer, scheduler_type='step', step_size=10, gamma=0.5)
     # scheduler = get_scheduler(optimizer, scheduler_type='multi_step', milestones=[30, 60, 90], gamma=0.5)
@@ -576,6 +637,9 @@ plt.ylabel('Accuracy')
 plt.legend()
 
 plt.tight_layout()
+plt.savefig('training_curves.png')  # Saving the graph
+
+plt.tight_layout()
 plt.show()
 
 # Test the final model on the test set
@@ -605,15 +669,35 @@ print(f"\nTest Accuracy: {test_accuracy:.4f}")
 
 # Generate and plot confusion matrix
 conf_matrix = confusion_matrix(all_labels, all_preds)
-plt.figure(figsize=(8, 8))
-plt.imshow(conf_matrix, interpolation='nearest', cmap=plt.cm.Blues)
+plt.figure(figsize=(10, 8))
+sns.heatmap(conf_matrix, annot=True, fmt="d", cmap=plt.cm.Blues, cbar=False, annot_kws={"size": 14})
 plt.title('Confusion Matrix')
-plt.colorbar()
 plt.xlabel('Predicted Label')
 plt.ylabel('True Label')
-plt.show()
+plt.savefig('confusion_matrix.png')  # Saving the confusion matrix
+plt.show()  # Confusion matrix display
 
 # Print classification report
 class_names = dataset.classes
 class_report = classification_report(all_labels, all_preds, target_names=class_names)
 print("\nClassification Report:\n", class_report)
+
+# Save classification report to a text file
+with open('classification_report.txt', 'w') as report_file:
+    report_file.write("Classification Report:\n" + class_report)
+
+# Loop through test dataset and generate XAI heatmaps for specific methods
+for i, (inputs, labels) in enumerate(test_loader):
+    inputs, labels = inputs.to(device), labels.to(device)
+
+    outputs = model(inputs)
+    _, predicted = torch.max(outputs.data, 1)
+
+    if predicted != labels:
+        save_dir = 'xai_heatmaps'
+        os.makedirs(save_dir, exist_ok=True)
+
+        # Specify the methods you want to use (e.g., 'GuidedBackprop' and 'IntegratedGradients')
+        specific_methods = [GuidedBackprop(model), IntegratedGradients(model)]
+
+        generate_xai_heatmaps(model, inputs[0], labels.item(), save_dir=save_dir, methods=specific_methods)
