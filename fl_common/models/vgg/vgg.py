@@ -25,7 +25,7 @@ import time
 
 # Parameters
 dataset_path = 'c:/IA/Data'  # Replace with the actual path to your dataset
-batch_size = 32
+batch_size = 64
 
 vgg_type = 'VGG16_BN'
 best_val_loss = float('inf')  # Initialize the best validation loss
