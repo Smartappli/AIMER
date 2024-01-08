@@ -68,6 +68,7 @@ num_epochs_phase3 = 50  # Number of epochs for the third training phase
 scheduler_phase3 = False
 early_stopping_patience_phase3 = 5
 
+xai = True
 
 def create_transform(resize=None,
                      center_crop=None,
@@ -601,7 +602,7 @@ if perform_second_training and not early_stopping_phase1.early_stop:  # Proceed 
         # Save the model if the current validation loss is the best
         if avg_val_loss < best_val_loss:
             best_val_loss = avg_val_loss
-            torch.save(model.state_dict(), 'best_model.pth')
+            torch.save(model.state_dict(), save_dir + 'best_model.pth')
 
         epoch_end_time = time.time()
         elapsed_time = epoch_end_time - epoch_start_time
@@ -711,7 +712,7 @@ if perform_third_training and not early_stopping_phase2.early_stop:  # Proceed o
         # Save the model if the current validation loss is the best
         if avg_val_loss < best_val_loss:
             best_val_loss = avg_val_loss
-            torch.save(model.state_dict(), 'best_model.pth')
+            torch.save(model.state_dict(), save_dir + 'best_model.pth')
 
         epoch_end_time = time.time()
         elapsed_time = epoch_end_time - epoch_start_time
@@ -786,7 +787,7 @@ with torch.no_grad():
         _, predicted = torch.max(outputs.data, 1)
 
         total_test += labels.size(0)
-        correct_test += torch.sum(preds == labels.data)
+        correct_test += (predicted == labels).sum().item()
 
         all_preds.extend(predicted.cpu().numpy())
         all_labels.extend(labels.cpu().numpy())
