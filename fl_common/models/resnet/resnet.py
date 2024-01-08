@@ -70,6 +70,7 @@ early_stopping_patience_phase3 = 5
 
 xai = True
 
+
 def create_transform(resize=None,
                      center_crop=None,
                      random_crop=None,
@@ -147,6 +148,7 @@ def create_transform(resize=None,
 
     transform = transforms.Compose(transform_list)
     return transform
+
 
 def get_resnet_model(resnet_type='ResNet50', num_classes=1000):
     # Load the pre-trained version of DenseNet
@@ -256,6 +258,7 @@ def get_optimizer(optimizer_name, model_parameters, learning_rate):
     else:
         raise ValueError(f'Unknown Optimizer : {optimizer_name}')
 
+
 def get_scheduler(optimizer, scheduler_type='step', **kwargs):
     """
     Get a learning rate scheduler for the optimizer.
@@ -315,6 +318,7 @@ def generate_xai_heatmaps(model, image_tensor, label, save_dir, methods=None):
         save_path = os.path.join(save_dir, f'xai_heatmap_{method_name}_{label}.png')
         plt.savefig(save_path)
         plt.show()
+
 
 # Load your custom dataset
 dataset = datasets.ImageFolder(root=dataset_path,
@@ -383,6 +387,7 @@ optimizer = get_optimizer(optimizer_name_phase1, model_parameters, learning_rate
 
 scheduler = get_scheduler(optimizer, scheduler_type='step', step_size=10, gamma=0.5)
 
+
 # Early stopping class
 class EarlyStopping:
     def __init__(self, patience=5, verbose=verbose):
@@ -430,7 +435,8 @@ for epoch in range(num_epochs_phase1):
     print(f"\nEpoch {epoch + 1}/{num_epochs_phase1}, Learning Rate: {optimizer.param_groups[0]['lr']}")
 
     # Use tqdm for a progress bar over the training batches
-    with tqdm(enumerate(train_loader), total=len(train_loader), desc=f"Epoch {epoch + 1}/{num_epochs_phase1}") as progress_bar:
+    with tqdm(enumerate(train_loader), total=len(train_loader),
+              desc=f"Epoch {epoch + 1}/{num_epochs_phase1}") as progress_bar:
         for batch_idx, (inputs, labels) in progress_bar:
             inputs, labels = inputs.to(device), labels.to(device)
 
@@ -539,7 +545,8 @@ if perform_second_training and not early_stopping_phase1.early_stop:  # Proceed 
         print(f"\nEpoch {epoch + 1}/{num_epochs_phase2}, Learning Rate: {optimizer.param_groups[0]['lr']}")
 
         # Use tqdm for a progress bar over the training batches
-        with tqdm(enumerate(train_loader), total=len(train_loader), desc=f"Epoch {epoch + 1}/{num_epochs_phase2}") as progress_bar:
+        with tqdm(enumerate(train_loader), total=len(train_loader),
+                  desc=f"Epoch {epoch + 1}/{num_epochs_phase2}") as progress_bar:
             for batch_idx, (inputs, labels) in progress_bar:
                 inputs, labels = inputs.to(device), labels.to(device)
 
@@ -649,7 +656,8 @@ if perform_third_training and not early_stopping_phase2.early_stop:  # Proceed o
         print(f"\nEpoch {epoch + 1}/{num_epochs_phase3}, Learning Rate: {optimizer.param_groups[0]['lr']}")
 
         # Use tqdm for a progress bar over the training batches
-        with tqdm(enumerate(train_loader), total=len(train_loader), desc=f"Epoch {epoch + 1}/{num_epochs_phase3}") as progress_bar:
+        with tqdm(enumerate(train_loader), total=len(train_loader),
+                  desc=f"Epoch {epoch + 1}/{num_epochs_phase3}") as progress_bar:
             for batch_idx, (inputs, labels) in progress_bar:
                 inputs, labels = inputs.to(device), labels.to(device)
 
@@ -812,7 +820,7 @@ class_report = classification_report(all_labels, all_preds, target_names=class_n
 print("\nClassification Report:\n", class_report)
 
 # Save classification report to a text file
-with open(save_dir+'classification_report.txt', 'w') as report_file:
+with open(save_dir + 'classification_report.txt', 'w') as report_file:
     report_file.write(save_dir + "Classification Report:\n" + class_report)
 
 # Loop through test dataset and generate XAI heatmaps for specific methods
@@ -827,11 +835,12 @@ if xai:
 
         # Convert predicted and labels to scalar values
         predicted_scalars = predicted.tolist()  # Convert to list
-        labels_scalars = labels.tolist()        # Convert to list
+        labels_scalars = labels.tolist()  # Convert to list
 
         for j, (predicted_scalar, label_scalar) in enumerate(zip(predicted_scalars, labels_scalars)):
             if predicted_scalar != label_scalar:
-                print(f"Example {i * test_loader.batch_size + j + 1}: Prediction: {predicted_scalar}, Actual: {label_scalar}")
+                print(
+                    f"Example {i * test_loader.batch_size + j + 1}: Prediction: {predicted_scalar}, Actual: {label_scalar}")
 
                 # Specify the methods you want to use (e.g., 'GuidedBackprop' and 'IntegratedGradients')
                 specific_methods = [GuidedBackprop(model), IntegratedGradients(model)]

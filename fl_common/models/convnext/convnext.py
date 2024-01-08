@@ -166,8 +166,17 @@ def get_convnext_model(convnext_type='ConvNeXt_Large', num_classes=1000):
         raise ValueError(f'Unknown DenseNet Architecture : {convnext_type}')
 
     # Modify last layer to suit number of classes
-    num_features = convnext_model.head.fc.in_features
-    convnext_model.head.fc = nn.Linear(num_features, num_classes)
+    if hasattr(convnext_model, 'classifier') and isinstance(convnext_model.classifier, nn.Sequential):
+        # Find the last fully connected layer in the classifier
+        for layer in reversed(convnext_model.classifier):
+            if isinstance(layer, nn.Linear):
+                num_features = layer.in_features
+                layer.out_features = num_classes
+                break
+        else:
+            raise ValueError('No Linear layer found in the classifier.')
+    else:
+        raise ValueError('Model does not have a known structure.')
 
     return convnext_model
 
@@ -356,8 +365,8 @@ xai_methods = [
     IntegratedGradients(model),
     GuidedBackprop(model),
     DeepLift(model),
-    LayerConductance(model.layer4, model),
-    NeuronConductance(model.layer4, model),
+    LayerConductance(model.classifier[-1], model),
+    NeuronConductance(model.classifier[-1], model),
     Occlusion(model),
     ShapleyValueSampling(model),
 ]

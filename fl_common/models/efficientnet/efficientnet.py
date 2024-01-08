@@ -37,7 +37,7 @@ augmentation_params = {
 batch_size = 64
 
 # Model Parameters
-efficientnet_type = 'EfficientNetV2S'
+efficientnet_type = 'EfficientNetB0'
 best_val_loss = float('inf')  # Initialize the best validation loss
 save_dir = 'c:/TFE/Models/' + efficientnet_type + '/'  # Replace with the actual path where to save results
 os.makedirs(save_dir, exist_ok=True)
@@ -188,8 +188,11 @@ def get_efficientnet_model(efficientnet_type='EfficientNetB0', num_classes=1000)
         raise ValueError(f'Unknown DenseNet Architecture : {efficientnet_type}')
 
     # Modify last layer to suit number of classes
-    num_features = efficientnet_model._fc.in_features
-    efficientnet_model._fc = nn.Linear(num_features, num_classes)
+    if hasattr(efficientnet_model, '_fc') and isinstance(efficientnet_model._fc, nn.Linear):
+        num_features = efficientnet_model._fc.in_features
+        efficientnet_model._fc = nn.Linear(num_features, num_classes)
+    else:
+        raise ValueError('Model does not have a known structure.')
 
     return efficientnet_model
 

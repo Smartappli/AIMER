@@ -37,7 +37,7 @@ augmentation_params = {
 batch_size = 64
 
 # Model Parameters
-densenet_type = 'DenseNet161'
+densenet_type = 'DenseNet121'
 best_val_loss = float('inf')  # Initialize the best validation loss
 save_dir = 'c:/TFE/Models/' + densenet_type + '/'  # Replace with the actual path where to save results
 os.makedirs(save_dir, exist_ok=True)
