@@ -23,24 +23,35 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import time
 
-# Parameters
+# Dataset Parameters
 dataset_path = 'c:/IA/Data'  # Replace with the actual path to the dataset
+normalize_params = ([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
+augmentation_params = {
+    'data_augmentation': True,
+    'random_rotation': 0.8,
+    'rotation_range': 90,  # Augmentation plus importante de la rotation
+    'horizontal_flip_prob': 0.8,  # Probabilité plus élevée de retournement horizontal
+    'vertical_flip_prob': 0.8,  # Probabilité plus élevée de retournement vertical
+    'resize': 224,
+}
 batch_size = 64
 
-vgg_type = 'VGG16_BN'
+# Model Parameters
+vgg_type = 'VGG19_BN'
 best_val_loss = float('inf')  # Initialize the best validation loss
 save_dir = 'c:/TFE/Models/' + vgg_type + '/'  # Replace with the actual path where to save results
 os.makedirs(save_dir, exist_ok=True)
 
-perform_second_training = False  # Set to True to perform the second training
+# Training Parameters
+perform_second_training = True  # Set to True to perform the second training
 perform_third_training = False  # Set To True to perform the third training
 verbose = True
 
 optimizer_name_phase1 = 'SGD'
 learning_rate_phase1 = 0.01
 criterion_name_phase1 = 'CrossEntropyLoss'
-num_epochs_phase1 = 3  # Number of epochs for the first training phase
-scheduler_phase1 = True
+num_epochs_phase1 = 5  # Number of epochs for the first training phase
+scheduler_phase1 = False
 early_stopping_patience_phase1 = 5
 
 optimizer_name_phase2 = 'SGD'
@@ -56,6 +67,86 @@ criterion_name_phase3 = 'CrossEntropyLoss'
 num_epochs_phase3 = 50  # Number of epochs for the third training phase
 scheduler_phase3 = False
 early_stopping_patience_phase3 = 5
+
+xai = True
+
+def create_transform(resize=None,
+                     center_crop=None,
+                     random_crop=None,
+                     random_horizontal_flip=False,
+                     random_vertical_flip=False,
+                     to_tensor=True,
+                     normalize=None,
+                     random_rotation=None,
+                     color_jitter=None,
+                     gaussian_blur=None,
+                     data_augmentation=False,
+                     rotation_range=45,
+                     horizontal_flip_prob=0.5,
+                     vertical_flip_prob=0.5):
+    """
+    Create a PyTorch transform based on the specified parameters.
+
+    Parameters:
+    - resize: Tuple or int, size of the resized image (width, height) or single size for both dimensions.
+    - center_crop: Tuple or int, size of the center crop (width, height) or single size for both dimensions.
+    - random_crop: Tuple or int, size of the random crop (width, height) or single size for both dimensions.
+    - random_horizontal_flip: bool, whether to apply random horizontal flip.
+    - random_vertical_flip: bool, whether to apply random vertical flip.
+    - to_tensor: bool, whether to convert the image to a PyTorch tensor.
+    - normalize: Tuple, mean and standard deviation for normalization.
+    - random_rotation: float, range of degrees for random rotation.
+    - color_jitter: Tuple, parameters for color jittering (brightness, contrast, saturation, hue).
+    - gaussian_blur: Tuple, parameters for Gaussian blur (kernel size, sigma).
+    - data_augmentation: bool, whether to apply additional data augmentation.
+    - rotation_range: float, range of degrees for random rotation during data augmentation.
+    - horizontal_flip_prob: float, probability of random horizontal flip during data augmentation.
+    - vertical_flip_prob: float, probability of random vertical flip during data augmentation.
+
+    Returns:
+    - transform: torchvision.transforms.Compose, a composition of specified transformations.
+    """
+    transform_list = []
+
+    if data_augmentation:
+        if resize is not None:
+            if isinstance(resize, int):
+                resize = (resize, resize)
+            transform_list.append(transforms.Resize(resize))
+
+        if center_crop is not None:
+            if isinstance(center_crop, int):
+                center_crop = (center_crop, center_crop)
+            transform_list.append(transforms.CenterCrop(center_crop))
+
+        if random_crop is not None:
+            if isinstance(random_crop, int):
+                random_crop = (random_crop, random_crop)
+            transform_list.append(transforms.RandomCrop(random_crop))
+
+        if random_horizontal_flip:
+            transform_list.append(transforms.RandomHorizontalFlip(p=horizontal_flip_prob))
+
+        if random_vertical_flip:
+            transform_list.append(transforms.RandomVerticalFlip(p=vertical_flip_prob))
+
+        if random_rotation is not None:
+            transform_list.append(transforms.RandomRotation(degrees=rotation_range))
+
+        if color_jitter is not None:
+            transform_list.append(transforms.ColorJitter(*color_jitter))
+
+        if gaussian_blur is not None:
+            transform_list.append(transforms.GaussianBlur(gaussian_blur))
+
+        if to_tensor:
+            transform_list.append(transforms.ToTensor())
+
+        if normalize is not None:
+            transform_list.append(transforms.Normalize(mean=normalize[0], std=normalize[1]))
+
+    transform = transforms.Compose(transform_list)
+    return transform
 
 
 def get_vgg_model(vgg_type='VGG16', num_classes=1000):
@@ -235,23 +326,37 @@ def generate_xai_heatmaps(model, image_tensor, label, save_dir, methods=None):
         plt.savefig(save_path)
         plt.show()
 
-
-# Define the transformation for the dataset
-transform = transforms.Compose([
-    transforms.Resize((224, 224)),
-    transforms.ToTensor(),
-])
-
 # Load your custom dataset
-dataset = datasets.ImageFolder(root=dataset_path, transform=transform)
+dataset = datasets.ImageFolder(root=dataset_path,
+                               transform=create_transform(**augmentation_params,
+                                                          normalize=normalize_params))
 
 # Split the dataset into training and testing sets
-train_indices, test_indices = train_test_split(list(range(len(dataset))), test_size=0.2, random_state=42)
+train_indices, test_indices = train_test_split(list(range(len(dataset))), test_size=0.1, random_state=42)
+
+# Further split the training set into training and validation sets
+train_indices, val_indices = train_test_split(train_indices, test_size=0.222222, random_state=42)
+
+# Create SubsetRandomSampler for each set
 train_sampler = SubsetRandomSampler(train_indices)
+val_sampler = SubsetRandomSampler(val_indices)
 test_sampler = SubsetRandomSampler(test_indices)
+
+# Calculate the number of images in each set
+total_images = len(dataset)
+num_train_images = len(train_indices)
+num_val_images = len(val_indices)
+num_test_images = len(test_indices)
+
+# Print the information
+print(f"Nombre total d'images dans le dataset: {total_images}")
+print(f"Nombre d'images dans l'ensemble d'entraînement: {num_train_images}")
+print(f"Nombre d'images dans l'ensemble de validation: {num_val_images}")
+print(f"Nombre d'images dans l'ensemble de test: {num_test_images}")
 
 # Define data loaders
 train_loader = DataLoader(dataset, batch_size=batch_size, sampler=train_sampler)
+val_loader = DataLoader(dataset, batch_size=batch_size, sampler=val_sampler)
 test_loader = DataLoader(dataset, batch_size=batch_size, sampler=test_sampler)
 
 # Use the pre-trained VGG model
@@ -405,10 +510,19 @@ for epoch in range(num_epochs_phase1):
     elapsed_times.append(elapsed_time)
 
     # Print and plot results
+    elapsed_time_msg = "Elapsed Time: "
+
+    if elapsed_time >= 3600:
+        elapsed_time_msg += f"{elapsed_time / 3600:.2f} hour(s)"
+    elif elapsed_time >= 60:
+        elapsed_time_msg += f"{elapsed_time / 60:.2f} minute(s)"
+    else:
+        elapsed_time_msg += f"{elapsed_time:.2f} seconds"
+
     print(f"Epoch {epoch + 1}/{num_epochs_phase1} => "
           f"Train Loss: {avg_train_loss:.4f}, Train Accuracy: {train_accuracy:.4f}, "
           f"Validation Loss: {avg_val_loss:.4f}, Validation Accuracy: {val_accuracy:.4f}, "
-          f"Elapsed Time: {elapsed_time:.2f} seconds")
+          f"{elapsed_time_msg}")
 
 if perform_second_training and not early_stopping_phase1.early_stop:  # Proceed only if the first phase didn't early stop
     print("\nStarting the second training phase...\n")
@@ -498,17 +612,26 @@ if perform_second_training and not early_stopping_phase1.early_stop:  # Proceed 
         # Save the model if the current validation loss is the best
         if avg_val_loss < best_val_loss:
             best_val_loss = avg_val_loss
-            torch.save(model.state_dict(), 'best_model.pth')
+            torch.save(model.state_dict(), save_dir + 'best_model.pth')
 
         epoch_end_time = time.time()
         elapsed_time = epoch_end_time - epoch_start_time
         elapsed_times.append(elapsed_time)
 
         # Print and plot results for the second phase
+        elapsed_time_msg = "Elapsed Time: "
+
+        if elapsed_time >= 3600:
+            elapsed_time_msg += f"{elapsed_time / 3600:.2f} hour(s)"
+        elif elapsed_time >= 60:
+            elapsed_time_msg += f"{elapsed_time / 60:.2f} minute(s)"
+        else:
+            elapsed_time_msg += f"{elapsed_time:.2f} seconds"
+
         print(f"\nEpoch {epoch + 1}/{num_epochs_phase2} (Phase 2) => "
               f"Train Loss: {avg_train_loss:.4f}, Train Accuracy: {train_accuracy:.4f}, "
               f"Validation Loss: {avg_val_loss:.4f}, Validation Accuracy: {val_accuracy:.4f}, "
-              f"Elapsed Time: {elapsed_time:.2f} seconds")
+              f"{elapsed_time_msg}")
 
 # Third Training Phase (Optional)
 if perform_third_training and not early_stopping_phase2.early_stop:  # Proceed only if the second phase didn't early stop
@@ -599,21 +722,37 @@ if perform_third_training and not early_stopping_phase2.early_stop:  # Proceed o
         # Save the model if the current validation loss is the best
         if avg_val_loss < best_val_loss:
             best_val_loss = avg_val_loss
-            torch.save(model.state_dict(), 'best_model.pth')
+            torch.save(model.state_dict(), save_dir + 'best_model.pth')
 
         epoch_end_time = time.time()
         elapsed_time = epoch_end_time - epoch_start_time
         elapsed_times.append(elapsed_time)
 
         # Print and plot results for the third phase
+        elapsed_time_msg = "Elapsed Time: "
+
+        if elapsed_time >= 3600:
+            elapsed_time_msg += f"{elapsed_time / 3600:.2f} hour(s)"
+        elif elapsed_time >= 60:
+            elapsed_time_msg += f"{elapsed_time / 60:.2f} minute(s)"
+        else:
+            elapsed_time_msg += f"{elapsed_time:.2f} seconds"
+
         print(f"\nEpoch {epoch + 1}/{num_epochs_phase3} (Phase 3) => "
               f"Train Loss: {avg_train_loss:.4f}, Train Accuracy: {train_accuracy:.4f}, "
               f"Validation Loss: {avg_val_loss:.4f}, Validation Accuracy: {val_accuracy:.4f}, "
-              f"Elapsed Time: {elapsed_time:.2f} seconds")
+              f"{elapsed_time_msg}")
 
 # Calculate total training time
 total_training_time = time.time() - start_time
-print(f"\nTotal Training Time: {total_training_time / 60:.2f} minutes")
+if total_training_time >= 3600:
+    unit, time_value = 'hour(s)', total_training_time / 3600
+elif total_training_time >= 60:
+    unit, time_value = 'minute(s)', total_training_time / 60
+else:
+    unit, time_value = 'seconds', total_training_time
+
+print(f"\nTotal Training Time: {time_value:.2f} {unit}")
 
 # Plot training curves
 fig, axes = plt.subplots(1, 2, figsize=(12, 6))
@@ -687,27 +826,28 @@ with open(save_dir+'classification_report.txt', 'w') as report_file:
     report_file.write(save_dir + "Classification Report:\n" + class_report)
 
 # Loop through test dataset and generate XAI heatmaps for specific methods
-save_dir += 'xai_heatmaps/'
-# Loop through test dataset and generate XAI heatmaps for specific methods
-for i, (inputs, labels) in enumerate(test_loader):
-    inputs, labels = inputs.to(device), labels.to(device)
+if xai:
+    save_dir += 'xai_heatmaps/'
+    # Loop through test dataset and generate XAI heatmaps for specific methods
+    for i, (inputs, labels) in enumerate(test_loader):
+        inputs, labels = inputs.to(device), labels.to(device)
 
-    outputs = model(inputs)
-    _, predicted = torch.max(outputs, 1)
+        outputs = model(inputs)
+        _, predicted = torch.max(outputs, 1)
 
-    # Convert predicted and labels to scalar values
-    predicted_scalars = predicted.tolist()  # Convert to list
-    labels_scalars = labels.tolist()        # Convert to list
+        # Convert predicted and labels to scalar values
+        predicted_scalars = predicted.tolist()  # Convert to list
+        labels_scalars = labels.tolist()        # Convert to list
 
-    for j, (predicted_scalar, label_scalar) in enumerate(zip(predicted_scalars, labels_scalars)):
-        if predicted_scalar != label_scalar:
-            print(f"Example {i * test_loader.batch_size + j + 1}: Prediction: {predicted_scalar}, Actual: {label_scalar}")
+        for j, (predicted_scalar, label_scalar) in enumerate(zip(predicted_scalars, labels_scalars)):
+            if predicted_scalar != label_scalar:
+                print(f"Example {i * test_loader.batch_size + j + 1}: Prediction: {predicted_scalar}, Actual: {label_scalar}")
 
-            # Specify the methods you want to use (e.g., 'GuidedBackprop' and 'IntegratedGradients')
-            specific_methods = [GuidedBackprop(model), IntegratedGradients(model)]
+                # Specify the methods you want to use (e.g., 'GuidedBackprop' and 'IntegratedGradients')
+                specific_methods = [GuidedBackprop(model), IntegratedGradients(model)]
 
-            # Create a directory for XAI heatmaps based on the specific example
-            example_dir = f"{save_dir}/example_{i * test_loader.batch_size + j + 1}/"
-            os.makedirs(example_dir, exist_ok=True)
+                # Create a directory for XAI heatmaps based on the specific example
+                example_dir = f"{save_dir}/example_{i * test_loader.batch_size + j + 1}/"
+                os.makedirs(example_dir, exist_ok=True)
 
-            generate_xai_heatmaps(model, inputs[j], label_scalar, save_dir=example_dir, methods=specific_methods)
+                generate_xai_heatmaps(model, inputs[j], label_scalar, save_dir=example_dir, methods=specific_methods)

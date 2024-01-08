@@ -322,10 +322,10 @@ dataset = datasets.ImageFolder(root=dataset_path,
                                                           normalize=normalize_params))
 
 # Split the dataset into training and testing sets
-train_indices, test_indices = train_test_split(list(range(len(dataset))), test_size=0.2, random_state=42)
+train_indices, test_indices = train_test_split(list(range(len(dataset))), test_size=0.1, random_state=42)
 
 # Further split the training set into training and validation sets
-train_indices, val_indices = train_test_split(train_indices, test_size=0.1, random_state=42)
+train_indices, val_indices = train_test_split(train_indices, test_size=0.222222, random_state=42)
 
 # Create SubsetRandomSampler for each set
 train_sampler = SubsetRandomSampler(train_indices)
@@ -816,27 +816,28 @@ with open(save_dir+'classification_report.txt', 'w') as report_file:
     report_file.write(save_dir + "Classification Report:\n" + class_report)
 
 # Loop through test dataset and generate XAI heatmaps for specific methods
-save_dir += 'xai_heatmaps/'
-# Loop through test dataset and generate XAI heatmaps for specific methods
-for i, (inputs, labels) in enumerate(test_loader):
-    inputs, labels = inputs.to(device), labels.to(device)
+if xai:
+    save_dir += 'xai_heatmaps/'
+    # Loop through test dataset and generate XAI heatmaps for specific methods
+    for i, (inputs, labels) in enumerate(test_loader):
+        inputs, labels = inputs.to(device), labels.to(device)
 
-    outputs = model(inputs)
-    _, predicted = torch.max(outputs, 1)
+        outputs = model(inputs)
+        _, predicted = torch.max(outputs, 1)
 
-    # Convert predicted and labels to scalar values
-    predicted_scalars = predicted.tolist()  # Convert to list
-    labels_scalars = labels.tolist()        # Convert to list
+        # Convert predicted and labels to scalar values
+        predicted_scalars = predicted.tolist()  # Convert to list
+        labels_scalars = labels.tolist()        # Convert to list
 
-    for j, (predicted_scalar, label_scalar) in enumerate(zip(predicted_scalars, labels_scalars)):
-        if predicted_scalar != label_scalar:
-            print(f"Example {i * test_loader.batch_size + j + 1}: Prediction: {predicted_scalar}, Actual: {label_scalar}")
+        for j, (predicted_scalar, label_scalar) in enumerate(zip(predicted_scalars, labels_scalars)):
+            if predicted_scalar != label_scalar:
+                print(f"Example {i * test_loader.batch_size + j + 1}: Prediction: {predicted_scalar}, Actual: {label_scalar}")
 
-            # Specify the methods you want to use (e.g., 'GuidedBackprop' and 'IntegratedGradients')
-            specific_methods = [GuidedBackprop(model), IntegratedGradients(model)]
+                # Specify the methods you want to use (e.g., 'GuidedBackprop' and 'IntegratedGradients')
+                specific_methods = [GuidedBackprop(model), IntegratedGradients(model)]
 
-            # Create a directory for XAI heatmaps based on the specific example
-            example_dir = f"{save_dir}/example_{i * test_loader.batch_size + j + 1}/"
-            os.makedirs(example_dir, exist_ok=True)
+                # Create a directory for XAI heatmaps based on the specific example
+                example_dir = f"{save_dir}/example_{i * test_loader.batch_size + j + 1}/"
+                os.makedirs(example_dir, exist_ok=True)
 
-            generate_xai_heatmaps(model, inputs[j], label_scalar, save_dir=example_dir, methods=specific_methods)
+                generate_xai_heatmaps(model, inputs[j], label_scalar, save_dir=example_dir, methods=specific_methods)
