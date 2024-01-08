@@ -24,13 +24,15 @@ import seaborn as sns
 import time
 
 # Parameters
-dataset_path = 'c:/IA/Data'  # Replace with the actual path to your dataset
+dataset_path = 'c:/IA/Data'  # Replace with the actual path to the dataset
 batch_size = 64
 
 vgg_type = 'VGG16_BN'
 best_val_loss = float('inf')  # Initialize the best validation loss
+save_dir = 'c:/TFE/Models/' + vgg_type + '/'  # Replace with the actual path where to save results
+os.makedirs(save_dir, exist_ok=True)
 
-perform_second_training = True  # Set to True to perform the second training
+perform_second_training = False  # Set to True to perform the second training
 perform_third_training = False  # Set To True to perform the third training
 verbose = True
 
@@ -38,14 +40,14 @@ optimizer_name_phase1 = 'SGD'
 learning_rate_phase1 = 0.01
 criterion_name_phase1 = 'CrossEntropyLoss'
 num_epochs_phase1 = 3  # Number of epochs for the first training phase
-scheduler_phase1 = False
+scheduler_phase1 = True
 early_stopping_patience_phase1 = 5
 
 optimizer_name_phase2 = 'SGD'
 learning_rate_phase2 = 0.0005
 criterion_name_phase2 = 'CrossEntropyLoss'
 num_epochs_phase2 = 50  # Number of epochs for the second training phase
-scheduler_phase2 = False
+scheduler_phase2 = True
 early_stopping_patience_phase2 = 5
 
 optimizer_name_phase3 = 'SGD'
@@ -396,7 +398,7 @@ for epoch in range(num_epochs_phase1):
     # Save the model if the current validation loss is the best
     if avg_val_loss < best_val_loss:
         best_val_loss = avg_val_loss
-        torch.save(model.state_dict(), 'best_model.pth')
+        torch.save(model.state_dict(), save_dir + 'best_model.pth')
 
     epoch_end_time = time.time()
     elapsed_time = epoch_end_time - epoch_start_time
@@ -509,8 +511,6 @@ if perform_second_training and not early_stopping_phase1.early_stop:  # Proceed 
               f"Elapsed Time: {elapsed_time:.2f} seconds")
 
 # Third Training Phase (Optional)
-perform_third_training = True  # Set to True to perform the third training
-
 if perform_third_training and not early_stopping_phase2.early_stop:  # Proceed only if the second phase didn't early stop
     print("\nStarting the third training phase...\n")
 
@@ -616,30 +616,30 @@ total_training_time = time.time() - start_time
 print(f"\nTotal Training Time: {total_training_time / 60:.2f} minutes")
 
 # Plot training curves
-plt.figure(figsize=(12, 6))
+fig, axes = plt.subplots(1, 2, figsize=(12, 6))
 
 # Plot losses
-plt.subplot(1, 2, 1)
-plt.plot(train_losses, label='Training Loss')
-plt.plot(val_losses, label='Validation Loss')
-plt.title('Training and Validation Losses')
-plt.xlabel('Epoch')
-plt.ylabel('Loss')
-plt.legend()
+axes[0].plot(train_losses, label='Training Loss')
+axes[0].plot(val_losses, label='Validation Loss')
+axes[0].set_title('Training and Validation Losses')
+axes[0].set_xlabel('Epoch')
+axes[0].set_ylabel('Loss')
+axes[0].legend()
 
 # Plot accuracies
-plt.subplot(1, 2, 2)
-plt.plot(train_accuracies, label='Training Accuracy')
-plt.plot(val_accuracies, label='Validation Accuracy')
-plt.title('Training and Validation Accuracies')
-plt.xlabel('Epoch')
-plt.ylabel('Accuracy')
-plt.legend()
+axes[1].plot(train_accuracies, label='Training Accuracy')
+axes[1].plot(val_accuracies, label='Validation Accuracy')
+axes[1].set_title('Training and Validation Accuracies')
+axes[1].set_xlabel('Epoch')
+axes[1].set_ylabel('Accuracy')
+axes[1].legend()
 
-plt.tight_layout()
-plt.savefig('training_curves.png')  # Saving the graph
+fig.tight_layout()
 
-plt.tight_layout()
+# Saving the graph
+save_path = os.path.join(save_dir, 'training_curves.png')
+fig.savefig(save_path)
+
 plt.show()
 
 # Test the final model on the test set
@@ -674,7 +674,7 @@ sns.heatmap(conf_matrix, annot=True, fmt="d", cmap=plt.cm.Blues, cbar=False, ann
 plt.title('Confusion Matrix')
 plt.xlabel('Predicted Label')
 plt.ylabel('True Label')
-plt.savefig('confusion_matrix.png')  # Saving the confusion matrix
+plt.savefig(save_dir + 'confusion_matrix.png')  # Saving the confusion matrix
 plt.show()  # Confusion matrix display
 
 # Print classification report
@@ -683,21 +683,31 @@ class_report = classification_report(all_labels, all_preds, target_names=class_n
 print("\nClassification Report:\n", class_report)
 
 # Save classification report to a text file
-with open('classification_report.txt', 'w') as report_file:
-    report_file.write("Classification Report:\n" + class_report)
+with open(save_dir+'classification_report.txt', 'w') as report_file:
+    report_file.write(save_dir + "Classification Report:\n" + class_report)
 
+# Loop through test dataset and generate XAI heatmaps for specific methods
+save_dir += 'xai_heatmaps/'
 # Loop through test dataset and generate XAI heatmaps for specific methods
 for i, (inputs, labels) in enumerate(test_loader):
     inputs, labels = inputs.to(device), labels.to(device)
 
     outputs = model(inputs)
-    _, predicted = torch.max(outputs.data, 1)
+    _, predicted = torch.max(outputs, 1)
 
-    if predicted != labels:
-        save_dir = 'xai_heatmaps'
-        os.makedirs(save_dir, exist_ok=True)
+    # Convert predicted and labels to scalar values
+    predicted_scalars = predicted.tolist()  # Convert to list
+    labels_scalars = labels.tolist()        # Convert to list
 
-        # Specify the methods you want to use (e.g., 'GuidedBackprop' and 'IntegratedGradients')
-        specific_methods = [GuidedBackprop(model), IntegratedGradients(model)]
+    for j, (predicted_scalar, label_scalar) in enumerate(zip(predicted_scalars, labels_scalars)):
+        if predicted_scalar != label_scalar:
+            print(f"Example {i * test_loader.batch_size + j + 1}: Prediction: {predicted_scalar}, Actual: {label_scalar}")
 
-        generate_xai_heatmaps(model, inputs[0], labels.item(), save_dir=save_dir, methods=specific_methods)
+            # Specify the methods you want to use (e.g., 'GuidedBackprop' and 'IntegratedGradients')
+            specific_methods = [GuidedBackprop(model), IntegratedGradients(model)]
+
+            # Create a directory for XAI heatmaps based on the specific example
+            example_dir = f"{save_dir}/example_{i * test_loader.batch_size + j + 1}/"
+            os.makedirs(example_dir, exist_ok=True)
+
+            generate_xai_heatmaps(model, inputs[j], label_scalar, save_dir=example_dir, methods=specific_methods)
