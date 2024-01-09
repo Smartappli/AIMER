@@ -34,7 +34,7 @@ augmentation_params = {
     'vertical_flip_prob': 0.8,  # Probabilité plus élevée de retournement vertical
     'resize': 224,
 }
-batch_size = 64
+batch_size = 32
 
 # Model Parameters
 resnet_type = 'ResNet50'
@@ -167,6 +167,21 @@ def get_resnet_model(resnet_type='ResNet50', num_classes=1000):
     elif resnet_type == 'ResNet152':
         weights = models.ResNet152_Weights.DEFAULT
         resnet_model = models.resnet152(weights=weights)
+    elif resnet_type == 'ResNeXt50_32X4D':
+        weights = models.ResNeXt50_32X4D_Weights.DEFAULT
+        resnet_model = models.resnext50_32x4d(weights=weights)
+    elif resnet_type == 'ResNeXt101_32X8D':
+        weights = models.ResNeXt101_32X8D_Weights.DEFAULT
+        resnet_model = models.resnext101_32x8d(weights=weights)
+    elif resnet_type == 'ResNeXt101_64X4D':
+        weights = models.ResNeXt101_64X4D_Weights.DEFAULT
+        resnet_model = models.resnext101_64x4d(weights=weights)
+    elif resnet_type == 'Wide_ResNet50_2':
+        weights = models.Wide_ResNet50_2_Weights.DEFAULT
+        resnet_model = models.wide_resnet50_2(weights=weights)
+    elif resnet_type == 'Wide_ResNet50_2':
+        weights = models.Wide_ResNet50_2_Weights.DEFAULT
+        resnet_model = models.wide_resnet101_2(weights=weights)
     else:
         raise ValueError(f'Unknown DenseNet Architecture : {resnet_type}')
 

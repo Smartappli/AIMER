@@ -34,10 +34,10 @@ augmentation_params = {
     'vertical_flip_prob': 0.8,  # Probabilité plus élevée de retournement vertical
     'resize': 224,
 }
-batch_size = 64
+batch_size = 32
 
 # Model Parameters
-swin_type = 'Swin_T'
+swin_type = 'Swin_V2_B'
 best_val_loss = float('inf')  # Initialize the best validation loss
 save_dir = 'c:/TFE/Models/' + swin_type + '/'  # Replace with the actual path where to save results
 os.makedirs(save_dir, exist_ok=True)
@@ -160,14 +160,14 @@ def get_swin_model(swin_type='Swin_T', num_classes=1000):
         swin_model = models.swin_s(weights=weights)
     elif swin_type == 'Swin_B':
         weights = models.Swin_B_Weights.DEFAULT
-        resnet_model = models.swin_b(weights=weights)
-    elif swin_type == 'Swin_T':
+        swin_model = models.swin_b(weights=weights)
+    elif swin_type == 'Swin_V2_T':
         weights = models.Swin_V2_T_Weights.DEFAULT
         swin_model = models.swin_v2_t(weights=weights)
-    elif swin_type == 'Swin_S':
+    elif swin_type == 'Swin_V2_S':
         weights = models.Swin_V2_S_Weights.DEFAULT
         swin_model = models.swin_v2_s(weights=weights)
-    elif swin_type == 'Swin_B':
+    elif swin_type == 'Swin_V2_B':
         weights = models.Swin_V2_B_Weights.DEFAULT
         swin_model = models.swin_v2_b(weights=weights)
     else:
