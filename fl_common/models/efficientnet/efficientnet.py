@@ -1,8 +1,8 @@
 import os
 import torch
 import torch.nn as nn
-import torch.optim as optim
-import torch.optim.lr_scheduler as lr_scheduler
+# import torch.optim as optim
+# import torch.optim.lr_scheduler as lr_scheduler
 from torch.utils.data import DataLoader
 from torchvision import datasets, transforms, models
 from tqdm import tqdm
@@ -22,6 +22,7 @@ from sklearn.model_selection import train_test_split
 import matplotlib.pyplot as plt
 import seaborn as sns
 import time
+from fl_common.models.utils import get_optimizer, get_criterion, get_scheduler, generate_xai_heatmaps, create_transform
 
 # Dataset Parameters
 dataset_path = 'c:/IA/Data'  # Replace with the actual path to the dataset
@@ -70,85 +71,6 @@ early_stopping_patience_phase3 = 5
 
 xai = True
 
-def create_transform(resize=None,
-                     center_crop=None,
-                     random_crop=None,
-                     random_horizontal_flip=False,
-                     random_vertical_flip=False,
-                     to_tensor=True,
-                     normalize=None,
-                     random_rotation=None,
-                     color_jitter=None,
-                     gaussian_blur=None,
-                     data_augmentation=False,
-                     rotation_range=45,
-                     horizontal_flip_prob=0.5,
-                     vertical_flip_prob=0.5):
-    """
-    Create a PyTorch transform based on the specified parameters.
-
-    Parameters:
-    - resize: Tuple or int, size of the resized image (width, height) or single size for both dimensions.
-    - center_crop: Tuple or int, size of the center crop (width, height) or single size for both dimensions.
-    - random_crop: Tuple or int, size of the random crop (width, height) or single size for both dimensions.
-    - random_horizontal_flip: bool, whether to apply random horizontal flip.
-    - random_vertical_flip: bool, whether to apply random vertical flip.
-    - to_tensor: bool, whether to convert the image to a PyTorch tensor.
-    - normalize: Tuple, mean and standard deviation for normalization.
-    - random_rotation: float, range of degrees for random rotation.
-    - color_jitter: Tuple, parameters for color jittering (brightness, contrast, saturation, hue).
-    - gaussian_blur: Tuple, parameters for Gaussian blur (kernel size, sigma).
-    - data_augmentation: bool, whether to apply additional data augmentation.
-    - rotation_range: float, range of degrees for random rotation during data augmentation.
-    - horizontal_flip_prob: float, probability of random horizontal flip during data augmentation.
-    - vertical_flip_prob: float, probability of random vertical flip during data augmentation.
-
-    Returns:
-    - transform: torchvision.transforms.Compose, a composition of specified transformations.
-    """
-    transform_list = []
-
-    if data_augmentation:
-        if resize is not None:
-            if isinstance(resize, int):
-                resize = (resize, resize)
-            transform_list.append(transforms.Resize(resize))
-
-        if center_crop is not None:
-            if isinstance(center_crop, int):
-                center_crop = (center_crop, center_crop)
-            transform_list.append(transforms.CenterCrop(center_crop))
-
-        if random_crop is not None:
-            if isinstance(random_crop, int):
-                random_crop = (random_crop, random_crop)
-            transform_list.append(transforms.RandomCrop(random_crop))
-
-        if random_horizontal_flip:
-            transform_list.append(transforms.RandomHorizontalFlip(p=horizontal_flip_prob))
-
-        if random_vertical_flip:
-            transform_list.append(transforms.RandomVerticalFlip(p=vertical_flip_prob))
-
-        if random_rotation is not None:
-            transform_list.append(transforms.RandomRotation(degrees=rotation_range))
-
-        if color_jitter is not None:
-            transform_list.append(transforms.ColorJitter(*color_jitter))
-
-        if gaussian_blur is not None:
-            transform_list.append(transforms.GaussianBlur(gaussian_blur))
-
-        if to_tensor:
-            transform_list.append(transforms.ToTensor())
-
-        if normalize is not None:
-            transform_list.append(transforms.Normalize(mean=normalize[0], std=normalize[1]))
-
-    transform = transforms.Compose(transform_list)
-    return transform
-
-
 def get_efficientnet_model(efficientnet_type='EfficientNetB0', num_classes=1000):
     # Load the pre-trained version of EfficientNet
     if efficientnet_type == 'EfficientNetB0':
@@ -192,148 +114,6 @@ def get_efficientnet_model(efficientnet_type='EfficientNetB0', num_classes=1000)
     efficientnet_model.classifier[-1] = nn.Linear(num_features, num_classes)
 
     return efficientnet_model
-
-
-def get_criterion(criterion_name):
-    if criterion_name == 'MSELoss':
-        return nn.MSELoss()
-    elif criterion_name == 'L1Loss':
-        return nn.L1Loss()
-    elif criterion_name == 'CTCLoss':
-        return nn.CTCLoss()
-    elif criterion_name == 'KLDivLoss':
-        return nn.KLDivLoss()
-    elif criterion_name == 'GaussianNLLLoss':
-        return nn.GaussianNLLLoss()
-    elif criterion_name == 'SmoothL1Loss':
-        return nn.SmoothL1Loss()
-    elif criterion_name == 'CrossEntropyLoss':
-        return nn.CrossEntropyLoss()
-    elif criterion_name == 'BCELoss':
-        return nn.BCELoss()
-    elif criterion_name == 'BCEWithLogitsLoss':
-        return nn.BCEWithLogitsLoss()
-    elif criterion_name == 'NLLLoss':
-        return nn.NLLLoss()
-    elif criterion_name == 'PoissonNLLLoss':
-        return nn.PoissonNLLLoss()
-    elif criterion_name == 'KLDivLoss':
-        return nn.KLDivLoss()
-    elif criterion_name == 'MarginRankingLoss':
-        return nn.MarginRankingLoss()
-    elif criterion_name == 'HingeEmbeddingLoss':
-        return nn.HingeEmbeddingLoss()
-    elif criterion_name == 'MultiLabelMarginLoss':
-        return nn.MultiLabelMarginLoss()
-    elif criterion_name == 'SmoothL1Loss':
-        return nn.SmoothL1Loss()
-    elif criterion_name == 'HuberLoss':
-        return nn.HuberLoss()
-    elif criterion_name == 'SoftMarginLoss':
-        return nn.SoftMarginLoss()
-    elif criterion_name == 'MultiLabelSoftMarginLoss':
-        return nn.MultiLabelSoftMarginLoss()
-    elif criterion_name == 'CosineEmbeddingLoss':
-        return nn.CosineEmbeddingLoss()
-    elif criterion_name == 'MultiMarginLoss':
-        return nn.MultiMarginLoss()
-    elif criterion_name == 'TripletMarginLoss':
-        return nn.TripletMarginLoss()
-    elif criterion_name == 'TripletMarginWithDistanceLoss':
-        return nn.TripletMarginWithDistanceLoss()
-    else:
-        raise ValueError(f'Unknown Criterion : {criterion_name}')
-
-
-def get_optimizer(optimizer_name, model_parameters, learning_rate):
-    if optimizer_name == 'SGD':
-        return optim.SGD(model_parameters, lr=learning_rate)
-    elif optimizer_name == 'Adam':
-        return optim.Adam(model_parameters, lr=learning_rate)
-    elif optimizer_name == 'RMSprop':
-        return optim.RMSprop(model_parameters, lr=learning_rate)
-    elif optimizer_name == 'Adagrad':
-        return optim.Adagrad(model_parameters, lr=learning_rate)
-    elif optimizer_name == 'Adadelta':
-        return optim.Adadelta(model_parameters, lr=learning_rate)
-    elif optimizer_name == 'AdamW':
-        return optim.AdamW(model_parameters, lr=learning_rate)
-    elif optimizer_name == 'SparseAdam':
-        return optim.SparseAdam(model_parameters, lr=learning_rate)
-    elif optimizer_name == 'Adamax':
-        return optim.Adamax(model_parameters, lr=learning_rate)
-    elif optimizer_name == 'ASGD':
-        return optim.ASGD(model_parameters, lr=learning_rate)
-    elif optimizer_name == 'LBFGS':
-        return optim.LBFGS(model_parameters, lr=learning_rate)
-    elif optimizer_name == 'Rprop':
-        return optim.Rprop(model_parameters, lr=learning_rate)
-    elif optimizer_name == 'NAdam':
-        return optim.NAdam(model_parameters, lr=learning_rate)
-    elif optimizer_name == 'RAdam':
-        return optim.RAdam(model_parameters, lr=learning_rate)
-    else:
-        raise ValueError(f'Unknown Optimizer : {optimizer_name}')
-
-def get_scheduler(optimizer, scheduler_type='step', **kwargs):
-    """
-    Get a learning rate scheduler for the optimizer.
-
-    Parameters:
-        optimizer (torch.optim.Optimizer): Optimizer for which the scheduler is desired.
-        scheduler_type (str): Type of scheduler to use. Options: 'step', 'multi_step', 'exponential'.
-        **kwargs: Additional arguments for the specific scheduler type.
-
-    Returns:
-        torch.optim.lr_scheduler._LRScheduler: Learning rate scheduler.
-    """
-    if scheduler_type == 'step':
-        # Example: StepLR
-        return lr_scheduler.StepLR(optimizer, **kwargs)
-    elif scheduler_type == 'multi_step':
-        # Example: MultiStepLR
-        return lr_scheduler.MultiStepLR(optimizer, **kwargs)
-    elif scheduler_type == 'exponential':
-        # Example: ExponentialLR
-        return lr_scheduler.ExponentialLR(optimizer, **kwargs)
-    else:
-        raise ValueError(f"Invalid scheduler_type: {scheduler_type}")
-
-
-# Function to generate and save XAI heatmap for a specific image using selected methods
-def generate_xai_heatmaps(model, image_tensor, label, save_dir, methods=None):
-    model.eval()
-
-    # Create input tensor with batch dimension
-    input_tensor = image_tensor.unsqueeze(0)
-
-    # Use the specified methods or all available methods if None
-    methods = methods or xai_methods
-
-    for method in methods:
-        # Compute attributions
-        attributions = method.attribute(input_tensor, target=label)
-
-        # Take the absolute value of the attributions
-        attributions = torch.abs(attributions)
-
-        # Reduce attributions to 2D (assuming the input is an image)
-        attributions = attributions.sum(dim=1)
-
-        # Normalize attributions to [0, 1]
-        attributions = (attributions - attributions.min()) / (attributions.max() - attributions.min())
-
-        # Convert to numpy array for plotting
-        attributions_np = attributions.squeeze(0).cpu().detach().numpy()
-
-        # Plot and save the heatmap
-        method_name = str(method).split('.')[-1].split(' ')[0]
-        plt.imshow(attributions_np, cmap='viridis')
-        plt.title(f'XAI Heatmap for {method_name} (Label: {label})')
-        plt.colorbar()
-        save_path = os.path.join(save_dir, f'xai_heatmap_{method_name}_{label}.png')
-        plt.savefig(save_path)
-        plt.show()
 
 # Load your custom dataset
 dataset = datasets.ImageFolder(root=dataset_path,
