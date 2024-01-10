@@ -7,9 +7,10 @@ import syft as sy
 # Créer un hook PySyft pour étendre PyTorch avec des fonctionnalités de Federated Learning
 hook = sy.TorchHook(torch)
 
+
 # Créer des workers virtuels pour simuler des appareils distants
-bob = sy.VirtualWorker(hook, id="bob")
-alice = sy.VirtualWorker(hook, id="alice")
+bob = sy.Worker(hook, id="bob")
+alice = sy.Worker(hook, id="alice")
 
 # Charger les données et les diviser entre les travailleurs
 # Assurez-vous d'avoir vos propres données et de les charger ici
@@ -63,4 +64,4 @@ for epoch in range(5):  # Vous pouvez ajuster le nombre d'époques en fonction d
     print(f"Epoch {epoch + 1}, Loss Bob: {loss_bob.item()}, Loss Alice: {loss_alice.item()}")
 
 # Fusionner les modèles de Bob et Alice pour créer un modèle global
-model_global = model.fix_precision().share(bob, alice, crypto_provider=sy.VirtualWorker(hook, id="crypto"))
+model_global = model.fix_precision().share(bob, alice, crypto_provider=sy.Worker(hook, id="crypto"))

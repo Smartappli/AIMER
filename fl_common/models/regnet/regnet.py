@@ -37,9 +37,9 @@ augmentation_params = {
 batch_size = 64
 
 # Model Parameters
-efficientnet_type = 'EfficientNetB0'
+regnet_type = 'RegNet_X_400MF'
 best_val_loss = float('inf')  # Initialize the best validation loss
-save_dir = 'c:/TFE/Models/' + efficientnet_type + '/'  # Replace with the actual path where to save results
+save_dir = 'c:/TFE/Models/' + regnet_type + '/'  # Replace with the actual path where to save results
 os.makedirs(save_dir, exist_ok=True)
 
 # Training Parameters
@@ -149,49 +149,46 @@ def create_transform(resize=None,
     return transform
 
 
-def get_efficientnet_model(efficientnet_type='EfficientNetB0', num_classes=1000):
-    # Load the pre-trained version of EfficientNet
-    if efficientnet_type == 'EfficientNetB0':
-        weights = models.EfficientNet_B0_Weights.DEFAULT
-        efficientnet_model = models.efficientnet_b0(weights=weights)
-    elif efficientnet_type == 'EfficientNetB1':
-        weights = models.EfficientNet_B1_Weights.DEFAULT
-        efficientnet_model = models.efficientnet_b1(weights=weights)
-    elif efficientnet_type == 'EfficientNetB2':
-        weights = models.EfficientNet_B2_Weights.DEFAULT
-        efficientnet_model = models.efficientnet_b2(weights=weights)
-    elif efficientnet_type == 'EfficientNetB3':
-        weights = models.EfficientNet_B3_Weights.DEFAULT
-        efficientnet_model = models.efficientnet_b3(weights=weights)
-    elif efficientnet_type == 'EfficientNetB4':
-        weights = models.EfficientNet_B4_Weights.DEFAULT
-        efficientnet_model = models.efficientnet_b4(weights=weights)
-    elif efficientnet_type == 'EfficientNetB5':
-        weights = models.EfficientNet_B5_Weights.DEFAULT
-        efficientnet_model = models.efficientnet_b5(weights=weights)
-    elif efficientnet_type == 'EfficientNetB6':
-        weights = models.EfficientNet_B6_Weights.DEFAULT
-        efficientnet_model = models.efficientnet_b6(weights=weights)
-    elif efficientnet_type == 'EfficientNetB7':
-        weights = models.EfficientNet_B7_Weights.DEFAULT
-        efficientnet_model = models.efficientnet_b7(weights=weights)
-    elif efficientnet_type == 'EfficientNetV2S':
-        weights = models.EfficientNet_V2_S_Weights.DEFAULT
-        efficientnet_model = models.efficientnet_v2_s(weights=weights)
-    elif efficientnet_type == 'EfficientNetV2M':
-        weights = models.EfficientNet_V2_M_Weights.DEFAULT
-        efficientnet_model = models.efficientnet_v2_m(weights=weights)
-    elif efficientnet_type == 'EfficientNetV2L':
-        weights = models.EfficientNet_V2_L_Weights.DEFAULT
-        efficientnet_model = models.efficientnet_v2_l(weights=weights)
+def get_regnet_model(regnet_type='RegNet_X_400MF', num_classes=1000):
+    # Load the pre-trained version of RegNet
+    if regnet_type == 'RegNet_X_400MF':
+        weights = models.RegNet_X_400MF_Weights.DEFAULT
+        regnet_model = models.regnet_x_400mf(weights=weights)
+    elif regnet_type == 'RegNet_X_800MF':
+        weights = models.RegNet_X_800MF_Weights.DEFAULT
+        regnet_model = models.regnet_x_800mf(weights=weights)
+    elif regnet_type == 'RegNet_X_1_6GF':
+        weights = models.RegNet_X_1_6GF_Weights.DEFAULT
+        regnet_model = models.regnet_x_1_6gf(weights=weights)
+    elif regnet_type == 'RegNet_X_3_2GF':
+        weights = models.RegNet_X_3_2GF_Weights.DEFAULT
+        regnet_model = models.regnet_x_3_2gf(weights=weights)
+    elif regnet_type == 'RegNet_X_16GF':
+        weights = models.RegNet_X_16GF_Weights.DEFAULT
+        regnet_model = models.regnet_x_16gf(weights=weights)
+    elif regnet_type == 'RegNet_Y_400MF':
+        weights = models.RegNet_Y_400MF_Weights.DEFAULT
+        regnet_model = models.regnet_y_400mf(weights=weights)
+    elif regnet_type == 'RegNet_Y_800MF':
+        weights = models.RegNet_Y_800MF_Weights.DEFAULT
+        regnet_model = models.regnet_y_800mf(weights=weights)
+    elif regnet_type == 'RegNetY_1_6GF':
+        weights = models.RegNet_Y_1_6GF_Weights.DEFAULT
+        regnet_model = models.regnet_y_1_6gf(weights=weights)
+    elif regnet_type == 'RegNet_Y_3_2GF':
+        weights = models.RegNet_Y_3_2GF_Weights.DEFAULT
+        regnet_model = models.regnet_y_3_2gf(weights=weights)
+    elif regnet_type == 'RegNet_Y_16GF':
+        weights = models.RegNet_Y_16GF_Weights.DEFAULT
+        regnet_model = models.regnet_y_16gf(weights=weights)
     else:
-        raise ValueError(f'Unknown DenseNet Architecture : {efficientnet_type}')
+        raise ValueError(f'Unknown RegNet Architecture: {regnet_type}')
 
     # Modify last layer to suit number of classes
-    num_features = efficientnet_model.classifier[-1].in_features
-    efficientnet_model.classifier[-1] = nn.Linear(num_features, num_classes)
+    num_features = regnet_model.fc.in_features
+    regnet_model.fc = nn.Linear(num_features, num_classes)
 
-    return efficientnet_model
+    return regnet_model
 
 
 def get_criterion(criterion_name):
@@ -370,7 +367,7 @@ test_loader = DataLoader(dataset, batch_size=batch_size, sampler=test_sampler)
 
 # Use the pre-trained VGG model
 num_classes = len(dataset.classes)
-model = get_efficientnet_model(efficientnet_type=efficientnet_type, num_classes=num_classes)
+model = get_regnet_model(regnet_type=regnet_type, num_classes=num_classes)
 
 # List of available XAI methods in captum
 xai_methods = [
@@ -378,8 +375,8 @@ xai_methods = [
     IntegratedGradients(model),
     GuidedBackprop(model),
     DeepLift(model),
-    # LayerConductance(model._blocks[7], model),
-    # NeuronConductance(model._blocks[7], model),
+    # LayerConductance(model.features[7], model),
+    # NeuronConductance(model.features[7], model),
     Occlusion(model),
     ShapleyValueSampling(model),
 ]
