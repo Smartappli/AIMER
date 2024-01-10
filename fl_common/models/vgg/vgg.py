@@ -1,8 +1,7 @@
 import os
+import time
 import torch
 import torch.nn as nn
-# import torch.optim as optim
-# import torch.optim.lr_scheduler as lr_scheduler
 from torch.utils.data import DataLoader
 from torchvision import datasets, transforms, models
 from tqdm import tqdm
@@ -21,7 +20,6 @@ from torch.utils.data.sampler import SubsetRandomSampler
 from sklearn.model_selection import train_test_split
 import matplotlib.pyplot as plt
 import seaborn as sns
-import time
 from fl_common.models.utils import get_optimizer, get_criterion, get_scheduler, generate_xai_heatmaps, create_transform
 
 # Dataset Parameters
