@@ -26,7 +26,7 @@ jobs:
       uses: pilosus/action-pip-license-checker@v2
       with:
         requirements: 'requirements-all.txt'
-        fail: 'StrongCopyleft,NetworkCopyleft,Error'
+        fail: 'NetworkCopyleft'
         exclude: '(?i)^(pylint|tbb|nvidia|aio[-_]*).*'
         verbose: 1
         github-token: ${{ secrets.OAUTH_TOKEN_GITHUB }}
