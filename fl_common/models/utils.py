@@ -104,6 +104,42 @@ def create_transform(resize=None,
 
 
 def get_dataset(dataset_path, batch_size, augmentation_params, normalize_params):
+    """
+    Create and configure data loaders for a custom dataset.
+
+    Args:
+    - dataset_path (str): The path to the root directory of the custom dataset.
+    - batch_size (int): The batch size for training, validation, and testing data loaders.
+    - augmentation_params (dict): A dictionary containing parameters for data augmentation.
+    - normalize_params (dict): A dictionary containing parameters for data normalization.
+
+    Returns:
+    - train_loader (torch.utils.data.DataLoader): DataLoader for the training set.
+    - val_loader (torch.utils.data.DataLoader): DataLoader for the validation set.
+    - test_loader (torch.utils.data.DataLoader): DataLoader for the test set.
+    - num_classes (int): The number of classes in the dataset.
+    - class_names (list): List of class names present in the dataset.
+
+    Note:
+    - The dataset is loaded using torchvision.datasets.ImageFolder.
+    - It is split into training, validation, and test sets using train_test_split.
+    - SubsetRandomSampler is used to create samplers for each set.
+    - The number of images in each set is printed.
+    - Data loaders are created for each set with the specified batch size.
+    - The number of classes and class names are determined and returned.
+
+    Example Usage:
+    ```python
+    dataset_path = '/path/to/dataset'
+    batch_size = 32
+    augmentation_params = {'resize': (256, 256), 'random_crop': (224, 224)}
+    normalize_params = {'mean': [0.485, 0.456, 0.406], 'std': [0.229, 0.224, 0.225]}
+
+    train_loader, val_loader, test_loader, num_classes, class_names = get_dataset(
+        dataset_path, batch_size, augmentation_params, normalize_params)
+    ```
+    """
+
     # Load your custom dataset
     dataset = datasets.ImageFolder(root=dataset_path,
                                    transform=create_transform(**augmentation_params,
@@ -142,7 +178,49 @@ def get_dataset(dataset_path, batch_size, augmentation_params, normalize_params)
 
     return train_loader, val_loader, test_loader, num_classes, class_names
 
+
 def get_criterion(criterion_name):
+    """
+    Return the specified loss criterion from PyTorch's nn module.
+
+    Args:
+    - criterion_name (str): Name of the loss criterion to be instantiated.
+
+    Returns:
+    - criterion (torch.nn.modules.loss._Loss): The instantiated loss criterion.
+
+    Raises:
+    - ValueError: If the provided criterion_name is not recognized.
+
+    Supported Loss Criteria:
+    - 'MSELoss': Mean Squared Error Loss
+    - 'L1Loss': L1 Loss (Mean Absolute Error)
+    - 'CTCLoss': Connectionist Temporal Classification Loss
+    - 'KLDivLoss': Kullback-Leibler Divergence Loss
+    - 'GaussianNLLLoss': Gaussian Negative Log Likelihood Loss
+    - 'SmoothL1Loss': Smooth L1 Loss (Huber Loss)
+    - 'CrossEntropyLoss': Cross-Entropy Loss
+    - 'BCELoss': Binary Cross-Entropy Loss
+    - 'BCEWithLogitsLoss': Binary Cross-Entropy with Logits Loss
+    - 'NLLLoss': Negative Log Likelihood Loss
+    - 'PoissonNLLLoss': Poisson Negative Log Likelihood Loss
+    - 'MarginRankingLoss': Margin Ranking Loss
+    - 'HingeEmbeddingLoss': Hinge Embedding Loss
+    - 'MultiLabelMarginLoss': Multi-Label Margin Loss
+    - 'HuberLoss': Huber Loss (Smooth L1 Loss)
+    - 'SoftMarginLoss': Soft Margin Loss
+    - 'MultiLabelSoftMarginLoss': Multi-Label Soft Margin Loss
+    - 'CosineEmbeddingLoss': Cosine Embedding Loss
+    - 'MultiMarginLoss': Multi-Margin Loss
+    - 'TripletMarginLoss': Triplet Margin Loss
+    - 'TripletMarginWithDistanceLoss': Triplet Margin with Distance Loss
+
+    Example Usage:
+    ```python
+    criterion_name = 'CrossEntropyLoss'
+    criterion = get_criterion(criterion_name)
+    ```
+    """
     if criterion_name == 'MSELoss':
         return nn.MSELoss()
     elif criterion_name == 'L1Loss':
@@ -194,6 +272,43 @@ def get_criterion(criterion_name):
 
 
 def get_optimizer(optimizer_name, model_parameters, learning_rate):
+    """
+    Return the specified optimizer from PyTorch's optim module.
+
+    Args:
+    - optimizer_name (str): Name of the optimizer to be instantiated.
+    - model_parameters (iterable): Iterable of model parameters to optimize.
+    - learning_rate (float): Learning rate for the optimizer.
+
+    Returns:
+    - optimizer (torch.optim.Optimizer): The instantiated optimizer.
+
+    Raises:
+    - ValueError: If the provided optimizer_name is not recognized.
+
+    Supported Optimizers:
+    - 'SGD': Stochastic Gradient Descent
+    - 'Adam': Adam Optimizer
+    - 'RMSprop': RMSprop Optimizer
+    - 'Adagrad': Adagrad Optimizer
+    - 'Adadelta': Adadelta Optimizer
+    - 'AdamW': Adam with Weight Decay Optimizer
+    - 'SparseAdam': Sparse Adam Optimizer
+    - 'Adamax': Adamax Optimizer
+    - 'ASGD': Accelerated Stochastic Gradient Descent
+    - 'LBFGS': Limited-memory Broyden-Fletcher-Goldfarb-Shanno
+    - 'Rprop': Resilient Backpropagation
+    - 'NAdam': Nesterov Adam Optimizer
+    - 'RAdam': Rectified Adam Optimizer
+
+    Example Usage:
+    ```python
+    optimizer_name = 'Adam'
+    model_parameters = model.parameters()
+    learning_rate = 0.001
+    optimizer = get_optimizer(optimizer_name, model_parameters, learning_rate)
+    ```
+    """
     if optimizer_name == 'SGD':
         return optim.SGD(model_parameters, lr=learning_rate)
     elif optimizer_name == 'Adam':
@@ -251,6 +366,41 @@ def get_scheduler(optimizer, scheduler_type='step', **kwargs):
 
 # Function to generate and save XAI heatmap for a specific image using selected methods
 def generate_xai_heatmaps(model, image_tensor, label, save_dir, methods=None):
+    """
+    Generate and save XAI (Explainable AI) heatmaps using various attribution methods.
+
+    Args:
+    - model (torch.nn.Module): The trained PyTorch model for which heatmaps are generated.
+    - image_tensor (torch.Tensor): Input image tensor for which explanations are generated.
+    - label (int): The target label for which attributions are computed.
+    - save_dir (str): Directory to save the generated heatmaps.
+    - methods (list, optional): List of XAI methods from captum library. Default is None,
+      which uses a predefined set of available methods.
+
+    Returns:
+    - None
+
+    Note:
+    - This function uses captum library for computing attributions and generating heatmaps.
+    - The input image tensor should have the same dimensions as the model input.
+    - The generated heatmaps are saved in the specified directory with filenames indicating
+      the XAI method and the target label.
+
+    Example Usage:
+    ```python
+    model = MyModel()
+    image_tensor = load_image('path/to/image.jpg')
+    label = 3
+    save_dir = 'path/to/save/heatmaps'
+
+    # Generate heatmaps using default methods
+    generate_xai_heatmaps(model, image_tensor, label, save_dir)
+
+    # Generate heatmaps using specific methods
+    custom_methods = [Saliency(model), GuidedBackprop(model)]
+    generate_xai_heatmaps(model, image_tensor, label, save_dir, methods=custom_methods)
+    ```
+    """
     model.eval()
 
     # Create input tensor with batch dimension
@@ -298,6 +448,46 @@ def generate_xai_heatmaps(model, image_tensor, label, save_dir, methods=None):
 
 # Early stopping class
 class EarlyStopping:
+    """
+    Monitor validation loss during training and stop the training process early
+    if the validation loss does not improve for a specified number of consecutive epochs.
+
+    Args:
+    - patience (int): Number of epochs with no improvement after which training will be stopped.
+    - verbose (bool): If True, prints a message each time the validation loss plateaus.
+
+    Attributes:
+    - patience (int): Number of epochs with no improvement allowed.
+    - verbose (bool): If True, prints a message each time the validation loss plateaus.
+    - counter (int): Counter to keep track of consecutive epochs without improvement.
+    - best_loss (float): The best validation loss observed during training.
+    - early_stop (bool): Flag to indicate whether early stopping criteria are met.
+
+    Methods:
+    - __call__(val_loss, model): Updates the early stopping criteria based on the provided validation loss.
+      Should be called after each epoch during training.
+
+    Example Usage:
+    ```python
+    # Initialize EarlyStopping object
+    early_stopping = EarlyStopping(patience=5, verbose=True)
+
+    # Inside the training loop
+    for epoch in range(num_epochs):
+        # Training steps here
+
+        # Validate the model and get the validation loss
+        val_loss = validate(model, val_loader)
+
+        # Check early stopping criteria
+        early_stopping(val_loss, model)
+
+        # Break the loop if early stopping criteria are met
+        if early_stopping.early_stop:
+            print("Early stopping triggered. Training halted.")
+            break
+    ```
+    """
     def __init__(self, patience=7, verbose=False):
         self.patience = patience
         self.verbose = verbose
@@ -306,6 +496,16 @@ class EarlyStopping:
         self.early_stop = False
 
     def __call__(self, val_loss, model):
+        """
+        Update early stopping criteria based on the provided validation loss.
+
+        Args:
+        - val_loss (float): Validation loss obtained during the current epoch.
+        - model (torch.nn.Module): The trained PyTorch model being monitored.
+
+        Returns:
+        - None
+        """
         if self.best_loss is None:
             self.best_loss = val_loss
         elif val_loss > self.best_loss:
