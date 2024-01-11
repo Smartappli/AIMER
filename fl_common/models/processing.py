@@ -9,6 +9,19 @@ model_familly = 'vgg'
 
 
 def get_familly_model(model_type):
+    """
+    Returns a model based on the specified model family and type.
+
+    Parameters:
+    - model_type (str): Type of the model within the specified family.
+
+    Returns:
+    - model (torch.nn.Module): Model corresponding to the specified family and type.
+
+    Raises:
+    - ValueError: If the specified model family is not recognized.
+    """
+
     match model_familly:
         case 'vgg':
             return get_vgg_model(model_type)

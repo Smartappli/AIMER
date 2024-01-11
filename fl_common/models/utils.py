@@ -438,7 +438,8 @@ def generate_xai_heatmaps(model, image_tensor, label, save_dir, methods=None):
         attributions_np = attributions.squeeze(0).cpu().detach().numpy()
 
         # Plot and save the heatmap
-        method_name = str(method).split('.')[-1].split(' ')[0]
+        # method_name = str(method).split('.')[-1].split(' ')[0]
+        method_name = str(method).rsplit('.', maxsplit=1)[-1].split(' ')[0]
         plt.imshow(attributions_np, cmap='viridis')
         plt.title(f'XAI Heatmap for {method_name} (Label: {label})')
         plt.colorbar()

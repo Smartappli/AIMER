@@ -75,6 +75,23 @@ early_stopping_patience_phase3 = 5
 xai = True
 
 def get_swin_model(swin_type='Swin_T', num_classes=1000):
+    """
+    Loads a pre-trained Swin Transformer model based on the specified Swin type
+    and modifies the last layer for a given number of output classes.
+
+    Parameters:
+    - swin_type (str, optional): Type of Swin Transformer model. Default is 'Swin_T'.
+    - num_classes (int, optional): Number of output classes. Default is 1000.
+
+    Returns:
+    - swin_model (torch.nn.Module): Modified Swin Transformer model with the last layer
+      adjusted for the specified number of output classes.
+
+    Raises:
+    - ValueError: If the specified Swin type is unknown or if the model does not have
+      a known structure with a linear last layer.
+    """
+
     # Load the pre-trained version of DenseNet
     if swin_type == 'Swin_T':
         weights = models.Swin_T_Weights.DEFAULT

@@ -121,7 +121,7 @@ def get_convnext_model(convnext_type='ConvNeXt_Large', num_classes=1000):
         # Find the last fully connected layer in the classifier
         for layer in reversed(convnext_model.classifier):
             if isinstance(layer, nn.Linear):
-                num_features = layer.in_features
+                # num_features = layer.in_features
                 layer.out_features = num_classes
                 break
         else:
