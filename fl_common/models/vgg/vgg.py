@@ -2,7 +2,7 @@ import os
 import time
 import torch
 import torch.nn as nn
-from torch.utils.data import DataLoader
+# from torch.utils.data import DataLoader
 from torchvision import datasets, transforms, models
 from tqdm import tqdm
 from captum.attr import (
@@ -16,11 +16,16 @@ from captum.attr import (
     ShapleyValueSampling,
 )
 from sklearn.metrics import confusion_matrix, classification_report
-from torch.utils.data.sampler import SubsetRandomSampler
-from sklearn.model_selection import train_test_split
+# from torch.utils.data.sampler import SubsetRandomSampler
+# from sklearn.model_selection import train_test_split
 import matplotlib.pyplot as plt
 import seaborn as sns
-from fl_common.models.utils import get_optimizer, get_criterion, get_scheduler, generate_xai_heatmaps, get_dataset, EarlyStopping
+from fl_common.models.utils import (get_optimizer,
+                                    get_criterion,
+                                    get_scheduler,
+                                    generate_xai_heatmaps,
+                                    get_dataset,
+                                    EarlyStopping)
 
 # Dataset Parameters
 dataset_path = 'c:/IA/Data'  # Replace with the actual path to the dataset
@@ -104,8 +109,8 @@ def get_vgg_model(vgg_type='VGG16', num_classes=1000):
 
     return vgg_model
 
-
-train_loader, val_loader, test_loader, num_classes = get_dataset(dataset_path,
+# Load your custom dataset
+train_loader, val_loader, test_loader, num_classes, class_names = get_dataset(dataset_path,
                                                                  batch_size,
                                                                  augmentation_params,
                                                                  normalize_params)
@@ -544,7 +549,6 @@ plt.savefig(save_dir + 'confusion_matrix.png')  # Saving the confusion matrix
 plt.show()  # Confusion matrix display
 
 # Print classification report
-class_names = dataset.classes
 class_report = classification_report(all_labels, all_preds, target_names=class_names)
 print("\nClassification Report:\n", class_report)
 

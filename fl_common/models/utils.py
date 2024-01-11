@@ -138,8 +138,9 @@ def get_dataset(dataset_path, batch_size, augmentation_params, normalize_params)
     test_loader = DataLoader(dataset, batch_size=batch_size, sampler=test_sampler)
 
     num_classes = len(dataset.classes)
+    class_names = dataset.classes
 
-    return train_loader, val_loader, test_loader, num_classes
+    return train_loader, val_loader, test_loader, num_classes, class_names
 
 def get_criterion(criterion_name):
     if criterion_name == 'MSELoss':

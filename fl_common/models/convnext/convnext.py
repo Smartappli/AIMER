@@ -2,7 +2,7 @@ import os
 import time
 import torch
 import torch.nn as nn
-from torch.utils.data import DataLoader
+# from torch.utils.data import DataLoader
 from torchvision import datasets, transforms, models
 from tqdm import tqdm
 from captum.attr import (
@@ -16,11 +16,16 @@ from captum.attr import (
     ShapleyValueSampling,
 )
 from sklearn.metrics import confusion_matrix, classification_report
-from torch.utils.data.sampler import SubsetRandomSampler
-from sklearn.model_selection import train_test_split
+# from torch.utils.data.sampler import SubsetRandomSampler
+# from sklearn.model_selection import train_test_split
 import matplotlib.pyplot as plt
 import seaborn as sns
-from fl_common.models.utils import get_optimizer, get_criterion, get_scheduler, generate_xai_heatmaps, create_transform
+from fl_common.models.utils import (get_optimizer,
+                                    get_criterion,
+                                    get_scheduler,
+                                    generate_xai_heatmaps,
+                                    get_dataset,
+                                    EarlyStopping)
 
 # Dataset Parameters
 dataset_path = 'c:/IA/Data'  # Replace with the actual path to the dataset
@@ -102,40 +107,12 @@ def get_convnext_model(convnext_type='ConvNeXt_Large', num_classes=1000):
     return convnext_model
 
 # Load your custom dataset
-dataset = datasets.ImageFolder(root=dataset_path,
-                               transform=create_transform(**augmentation_params,
-                                                          normalize=normalize_params))
-
-# Split the dataset into training and testing sets
-train_indices, test_indices = train_test_split(list(range(len(dataset))), test_size=0.1, random_state=42)
-
-# Further split the training set into training and validation sets
-train_indices, val_indices = train_test_split(train_indices, test_size=0.222222, random_state=42)
-
-# Create SubsetRandomSampler for each set
-train_sampler = SubsetRandomSampler(train_indices)
-val_sampler = SubsetRandomSampler(val_indices)
-test_sampler = SubsetRandomSampler(test_indices)
-
-# Calculate the number of images in each set
-total_images = len(dataset)
-num_train_images = len(train_indices)
-num_val_images = len(val_indices)
-num_test_images = len(test_indices)
-
-# Print the information
-print(f"Nombre total d'images dans le dataset: {total_images}")
-print(f"Nombre d'images dans l'ensemble d'entraînement: {num_train_images}")
-print(f"Nombre d'images dans l'ensemble de validation: {num_val_images}")
-print(f"Nombre d'images dans l'ensemble de test: {num_test_images}")
-
-# Define data loaders
-train_loader = DataLoader(dataset, batch_size=batch_size, sampler=train_sampler)
-val_loader = DataLoader(dataset, batch_size=batch_size, sampler=val_sampler)
-test_loader = DataLoader(dataset, batch_size=batch_size, sampler=test_sampler)
+train_loader, val_loader, test_loader, num_classes, class_names = get_dataset(dataset_path,
+                                                                 batch_size,
+                                                                 augmentation_params,
+                                                                 normalize_params)
 
 # Use the pre-trained VGG model
-num_classes = len(dataset.classes)
 model = get_convnext_model(convnext_type=convnext_type, num_classes=num_classes)
 
 # List of available XAI methods in captum
@@ -168,33 +145,10 @@ optimizer = get_optimizer(optimizer_name_phase1, model_parameters, learning_rate
 
 scheduler = get_scheduler(optimizer, scheduler_type='step', step_size=10, gamma=0.5)
 
-# Early stopping class
-class EarlyStopping:
-    def __init__(self, patience=5, verbose=verbose):
-        self.patience = patience
-        self.verbose = verbose
-        self.counter = 0
-        self.best_loss = None
-        self.early_stop = False
-
-    def __call__(self, val_loss, model):
-        if self.best_loss is None:
-            self.best_loss = val_loss
-        elif val_loss > self.best_loss:
-            self.counter += 1
-            if self.verbose:
-                print(f"EarlyStopping counter: {self.counter} out of {self.patience}")
-            if self.counter >= self.patience:
-                self.early_stop = True
-        else:
-            self.best_loss = val_loss
-            self.counter = 0
-
-
 # Training loop
-early_stopping_phase1 = EarlyStopping(patience=early_stopping_patience_phase1)
-early_stopping_phase2 = EarlyStopping(patience=early_stopping_patience_phase2)
-early_stopping_phase3 = EarlyStopping(patience=early_stopping_patience_phase3)
+early_stopping_phase1 = EarlyStopping(patience=early_stopping_patience_phase1, verbose=verbose)
+early_stopping_phase2 = EarlyStopping(patience=early_stopping_patience_phase2, verbose=verbose)
+early_stopping_phase3 = EarlyStopping(patience=early_stopping_patience_phase3, verbose=verbose)
 
 train_losses = []
 val_losses = []
@@ -592,7 +546,6 @@ plt.savefig(save_dir + 'confusion_matrix.png')  # Saving the confusion matrix
 plt.show()  # Confusion matrix display
 
 # Print classification report
-class_names = dataset.classes
 class_report = classification_report(all_labels, all_preds, target_names=class_names)
 print("\nClassification Report:\n", class_report)
 
