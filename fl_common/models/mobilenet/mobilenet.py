@@ -75,6 +75,32 @@ early_stopping_patience_phase3 = 5
 xai = True
 
 def get_mobilenet_model(mobilenet_type='MobileNet_V3_Small', num_classes=1000):
+    """
+    Obtain a MobileNet model with a specified architecture type and modify it for the given number of classes.
+
+    Args:
+    - mobilenet_type (str): Type of MobileNet architecture to be loaded.
+      Options: 'MobileNet_V2', 'MobileNet_V3_Small', 'MobileNet_V3_Large'.
+      Default is 'MobileNet_V3_Small'.
+    - num_classes (int): Number of output classes for the modified model. Default is 1000.
+
+    Returns:
+    - mobilenet_model (torch.nn.Module): The modified MobileNet model.
+
+    Raises:
+    - ValueError: If the provided mobilenet_type is not recognized.
+
+    Note:
+    - This function loads a pre-trained MobileNet model and modifies its last fully connected layer
+      to match the specified number of output classes.
+
+    Example Usage:
+    ```python
+    # Obtain a MobileNet_V2 model with 10 output classes
+    model = get_mobilenet_model(mobilenet_type='MobileNet_V2', num_classes=10)
+    ```
+    """
+
     # Load the pre-trained version of VGG
     if mobilenet_type == 'MobileNet_V2':
         weights = models.MobileNet_V2_Weights.DEFAULT

@@ -75,6 +75,32 @@ early_stopping_patience_phase3 = 5
 xai = True
 
 def get_efficientnet_model(efficientnet_type='EfficientNetB0', num_classes=1000):
+    """
+    Obtain an EfficientNet model with a specified architecture type and modify it for the given number of classes.
+
+    Args:
+    - efficientnet_type (str): Type of EfficientNet architecture to be loaded.
+      Options: 'EfficientNetB0' to 'EfficientNetB7', 'EfficientNetV2S', 'EfficientNetV2M', 'EfficientNetV2L'.
+      Default is 'EfficientNetB0'.
+    - num_classes (int): Number of output classes for the modified model. Default is 1000.
+
+    Returns:
+    - efficientnet_model (torch.nn.Module): The modified EfficientNet model.
+
+    Raises:
+    - ValueError: If the provided efficientnet_type is not recognized.
+
+    Note:
+    - This function loads a pre-trained EfficientNet model and modifies its last fully connected layer
+      to match the specified number of output classes.
+
+    Example Usage:
+    ```python
+    # Obtain an EfficientNetB0 model with 10 output classes
+    model = get_efficientnet_model(efficientnet_type='EfficientNetB0', num_classes=10)
+    ```
+    """
+
     # Load the pre-trained version of EfficientNet
     if efficientnet_type == 'EfficientNetB0':
         weights = models.EfficientNet_B0_Weights.DEFAULT

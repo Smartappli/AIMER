@@ -634,8 +634,8 @@ for task in tasks:
 
     hp = kt.HyperParameters()
 
-    inputs = tf.keras.Input(shape=(IMG_HEIGHT, IMG_WIDTH, CHANNEL))
+    inputs = k.Input(shape=(IMG_HEIGHT, IMG_WIDTH, CHANNEL))
     x = base_model(inputs, training=False)
     x = layers.GlobalAveragePooling2D()(x)
     outputs = layers.Dense(CLASSES)(x)
-    model = tf.keras.Model(inputs, outputs)
+    model = k.Model(inputs, outputs)

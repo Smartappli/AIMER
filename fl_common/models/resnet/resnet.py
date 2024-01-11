@@ -76,6 +76,33 @@ xai = True
 
 
 def get_resnet_model(resnet_type='ResNet50', num_classes=1000):
+    """
+    Obtain a ResNet model with a specified architecture type and modify it for the given number of classes.
+
+    Args:
+    - resnet_type (str): Type of ResNet architecture to be loaded.
+      Options: 'ResNet18', 'ResNet34', 'ResNet50', 'ResNet101', 'ResNet152',
+      'ResNeXt50_32X4D', 'ResNeXt101_32X8D', 'ResNeXt101_64X4D', 'Wide_ResNet50_2', 'Wide_ResNet101_2'.
+      Default is 'ResNet50'.
+    - num_classes (int): Number of output classes for the modified model. Default is 1000.
+
+    Returns:
+    - resnet_model (torch.nn.Module): The modified ResNet model.
+
+    Raises:
+    - ValueError: If the provided resnet_type is not recognized.
+
+    Note:
+    - This function loads a pre-trained ResNet model and modifies its last fully connected layer
+      to match the specified number of output classes.
+
+    Example Usage:
+    ```python
+    # Obtain a ResNet50 model with 10 output classes
+    model = get_resnet_model(resnet_type='ResNet50', num_classes=10)
+    ```
+    """
+
     # Load the pre-trained version of DenseNet
     if resnet_type == 'ResNet18':
         weights = models.ResNet18_Weights.DEFAULT

@@ -75,6 +75,32 @@ early_stopping_patience_phase3 = 5
 xai = True
 
 def get_vgg_model(vgg_type='VGG16', num_classes=1000):
+    """
+    Obtain a VGG model with a specified architecture type and modify it for the given number of classes.
+
+    Args:
+    - vgg_type (str): Type of VGG architecture to be loaded.
+      Options: 'VGG11', 'VGG11_BN', 'VGG13', 'VGG13_BN', 'VGG16', 'VGG16_BN', 'VGG19', 'VGG19_BN'.
+      Default is 'VGG16'.
+    - num_classes (int): Number of output classes for the modified model. Default is 1000.
+
+    Returns:
+    - vgg_model (torch.nn.Module): The modified VGG model.
+
+    Raises:
+    - ValueError: If the provided vgg_type is not recognized.
+
+    Note:
+    - This function loads a pre-trained VGG model and modifies its last fully connected layer
+      to match the specified number of output classes.
+
+    Example Usage:
+    ```python
+    # Obtain a VGG16 model with 10 output classes
+    model = get_vgg_model(vgg_type='VGG16', num_classes=10)
+    ```
+    """
+
     # Load the pre-trained version of VGG
     if vgg_type == 'VGG11':
         weights = models.VGG11_Weights.DEFAULT

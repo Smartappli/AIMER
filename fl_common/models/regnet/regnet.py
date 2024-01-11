@@ -75,6 +75,33 @@ early_stopping_patience_phase3 = 5
 xai = True
 
 def get_regnet_model(regnet_type='RegNet_X_400MF', num_classes=1000):
+    """
+    Obtain a RegNet model with a specified architecture type and modify it for the given number of classes.
+
+    Args:
+    - regnet_type (str): Type of RegNet architecture to be loaded.
+      Options: 'RegNet_X_400MF', 'RegNet_X_800MF', 'RegNet_X_1_6GF', 'RegNet_X_3_2GF', 'RegNet_X_16GF',
+               'RegNet_Y_400MF', 'RegNet_Y_800MF', 'RegNet_Y_1_6GF', 'RegNet_Y_3_2GF', 'RegNet_Y_16GF'.
+      Default is 'RegNet_X_400MF'.
+    - num_classes (int): Number of output classes for the modified model. Default is 1000.
+
+    Returns:
+    - regnet_model (torch.nn.Module): The modified RegNet model.
+
+    Raises:
+    - ValueError: If the provided regnet_type is not recognized.
+
+    Note:
+    - This function loads a pre-trained RegNet model and modifies its last fully connected layer
+      to match the specified number of output classes.
+
+    Example Usage:
+    ```python
+    # Obtain a RegNet_X_400MF model with 10 output classes
+    model = get_regnet_model(regnet_type='RegNet_X_400MF', num_classes=10)
+    ```
+    """
+
     # Load the pre-trained version of RegNet
     if regnet_type == 'RegNet_X_400MF':
         weights = models.RegNet_X_400MF_Weights.DEFAULT

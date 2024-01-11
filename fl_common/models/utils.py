@@ -446,6 +446,7 @@ def generate_xai_heatmaps(model, image_tensor, label, save_dir, methods=None):
         plt.savefig(save_path)
         plt.show()
 
+
 # Early stopping class
 class EarlyStopping:
     """

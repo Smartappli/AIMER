@@ -12,11 +12,15 @@ def get_familly_model(model_type):
     match model_familly:
         case 'vgg':
             return get_vgg_model(model_type)
+
         case 'resnet':
             return get_resnet_model(model_type)
+
         case 'densenet':
             return get_densenet_model(model_type)
+
         case 'swin':
             return get_swin_model(model_type)
-        case _:
-            nothing_matched_function()
+
+        #case _:
+        #    nothing_matched_function()
