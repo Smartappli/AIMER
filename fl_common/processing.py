@@ -42,7 +42,7 @@ augmentation_params = {
 }
 batch_size = 32
 
-model_list = ['resnet18', 'Swin_V2_T', 'RegNet_X_400MF', 'MobileNet_V3_Small',
+model_list = ['ResNet18', 'Swin_V2_T', 'RegNet_X_400MF', 'MobileNet_V3_Small',
               'ConvNeXt_Tiny', 'AlexNet', 'Inception_V3', 'VGG11', 'DenseNet121',
               'EfficientNetB0', 'ShuffleNet_V2_X0_5', 'MNASNet0_5']
 # Model Parameters
