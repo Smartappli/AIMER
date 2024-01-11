@@ -29,7 +29,7 @@ def get_resnet_model(resnet_type, num_classes):
     ```
     """
 
-    # Load the pre-trained version of DenseNet
+    # Load the pre-trained version of ResNet
     if resnet_type == 'ResNet18':
         weights = models.ResNet18_Weights.DEFAULT
         resnet_model = models.resnet18(weights=weights)

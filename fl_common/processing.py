@@ -4,14 +4,8 @@ import torch
 import torch.nn as nn
 from tqdm import tqdm
 from captum.attr import (
-    Saliency,
     IntegratedGradients,
     GuidedBackprop,
-    DeepLift,
-    LayerConductance,
-    NeuronConductance,
-    Occlusion,
-    ShapleyValueSampling,
 )
 from sklearn.metrics import confusion_matrix, classification_report
 import matplotlib.pyplot as plt
@@ -22,14 +16,18 @@ from fl_common.models.utils import (get_optimizer,
                                     generate_xai_heatmaps,
                                     get_dataset,
                                     EarlyStopping)
-from fl_common.models.convnext.convnext import get_convnext_model
-from fl_common.models.densenet.densenet import get_densenet_model
-from fl_common.models.efficientnet.efficientnet import get_efficientnet_model
-from fl_common.models.mobilenet.mobilenet import get_mobilenet_model
-from fl_common.models.regnet.regnet import get_regnet_model
-from fl_common.models.resnet.resnet import get_resnet_model
-from fl_common.models.swin_transformer.swin import get_swin_model
-from fl_common.models.vgg.vgg import get_vgg_model
+from fl_common.models.alexnet import get_alexnet_model
+from fl_common.models.convnext import get_convnext_model
+from fl_common.models.densenet import get_densenet_model
+from fl_common.models.efficientnet import get_efficientnet_model
+from fl_common.models.inception import get_inception_model
+from fl_common.models.mnasnet import get_mnasnet_model
+from fl_common.models.mobilenet import get_mobilenet_model
+from fl_common.models.regnet import get_regnet_model
+from fl_common.models.resnet import get_resnet_model
+from fl_common.models.shufflenet import get_shufflenet_model
+from fl_common.models.swin import get_swin_model
+from fl_common.models.vgg import get_vgg_model
 
 # Dataset Parameters
 dataset_path = 'c:/IA/Data'  # Replace with the actual path to the dataset
@@ -45,7 +43,8 @@ augmentation_params = {
 batch_size = 32
 
 model_list = ['resnet18', 'Swin_V2_T', 'RegNet_X_400MF', 'MobileNet_V3_Small',
-              'ConvNeXt_Tiny', 'VGG11', 'DenseNet121', 'EfficientNetB0']
+              'ConvNeXt_Tiny', 'AlexNet', 'Inception_V3', 'VGG11', 'DenseNet121',
+              'EfficientNetB0', 'ShuffleNet_V2_X0_5', 'MNASNet0_5']
 # Model Parameters
 best_val_loss = float('inf')  # Initialize the best validation loss
 
@@ -96,14 +95,20 @@ def get_familly_model(model_type, num_classes):
         model = get_vgg_model(model_type, num_classes)
     elif model_type in ['Swin_T', 'Swin_S', 'Swin_B', 'Swin_V2_T', 'Swin_V2_S', 'Swin_V2_B']:
         model = get_swin_model(model_type, num_classes)
+    elif model_type in ['ShuffleNet_V2_X0_5', 'ShuffleNet_V2_X1_0', 'ShuffleNet_V2_X1_5', 'ShuffleNet_V2_X2_0']:
+        model = get_shufflenet_model(model_type, num_classes)
     elif model_type in ['ResNet18', 'ResNet34', 'ResNet50', 'ResNet101', 'ResNet152', 'ResNeXt50_32X4D',
                         'ResNeXt101_32X4D', 'ResNeXt101_64X4D', 'Wide_ResNet50_2', 'Wide_ResNet101_2']:
         model = get_resnet_model(model_type, num_classes)
     elif model_type in ['RegNet_X_400MF', 'RegNet_X_800MF', 'RegNet_X_1_6GF', 'RegNet_X_3_2GF', 'RegNet_X_16GF',
                         'RegNet_Y_400MF', 'RegNet_Y_800MF', 'RegNet_Y_1_6GF', 'RegNet_Y_3_2GF', 'RegNet_Y_16GF']:
         model = get_regnet_model(model_type, num_classes)
+    elif model_type in ['MNASNet0_5', 'MNASNet0_75', 'MNASNet1_0', 'MNASNet1_3']:
+        model = get_mnasnet_model(model_type, num_classes)
     elif model_type in ['MobileNet_V2', 'MobileNet_V3_Small', 'MobileNet_V3_Large']:
         model = get_mobilenet_model(model_type, num_classes)
+    elif model_type in ['Inception_V3']:
+        model = get_inception_model(model_type, num_classes)
     elif model_type in ['EfficientNetB0', 'EfficientNetB1', 'EfficientNetB2', 'EfficientNetB3', 'EfficientNetB4',
                         'EfficientNetB5', 'EfficientNetB0', 'EfficientNetB7', 'EfficientNetV2S', 'EfficientNetV',
                         'EfficientNetV2L']:
@@ -113,7 +118,7 @@ def get_familly_model(model_type, num_classes):
     elif model_type in ['ConvNeXt_Tiny', 'ConvNeXt_Small', 'ConvNeXt_Base', 'ConvNeXt_Large']:
         model = get_convnext_model(model_type, num_classes)
     else:
-        model = get_vgg_model(vgg_type='VGG16', num_classes=4)
+        model = get_alexnet_model(alexnet_type='AlexNet', num_classes=num_classes)
     return model
 
 
@@ -121,13 +126,13 @@ for model_type in model_list:
     save_dir = 'c:/TFE/Models/' + model_type + '/'  # Replace with the actual path where to save results
     os.makedirs(save_dir, exist_ok=True)
 
-    print(f"Model: {model_type}")
-
     # Load your custom dataset
     train_loader, val_loader, test_loader, num_classes, class_names = get_dataset(dataset_path,
                                                                                   batch_size,
                                                                                   augmentation_params,
                                                                                   normalize_params)
+
+    print(f"Model: {model_type}")
 
     # Use the pre-trained model
     model = get_familly_model(model_type, num_classes)
