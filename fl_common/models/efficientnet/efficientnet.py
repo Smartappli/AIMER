@@ -1,33 +1,7 @@
-import os
-import time
-import torch
 import torch.nn as nn
-# from torch.utils.data import DataLoader
-from torchvision import datasets, transforms, models
-from tqdm import tqdm
-from captum.attr import (
-    Saliency,
-    IntegratedGradients,
-    GuidedBackprop,
-    DeepLift,
-    LayerConductance,
-    NeuronConductance,
-    Occlusion,
-    ShapleyValueSampling,
-)
-from sklearn.metrics import confusion_matrix, classification_report
-# from torch.utils.data.sampler import SubsetRandomSampler
-# from sklearn.model_selection import train_test_split
-import matplotlib.pyplot as plt
-import seaborn as sns
-from fl_common.models.utils import (get_optimizer,
-                                    get_criterion,
-                                    get_scheduler,
-                                    generate_xai_heatmaps,
-                                    get_dataset,
-                                    EarlyStopping)
+from torchvision import models
 
-def get_efficientnet_model(efficientnet_type='EfficientNetB0', num_classes=1000):
+def get_efficientnet_model(efficientnet_type, num_classes):
     """
     Obtain an EfficientNet model with a specified architecture type and modify it for the given number of classes.
 

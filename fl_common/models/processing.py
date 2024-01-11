@@ -2,8 +2,6 @@ import os
 import time
 import torch
 import torch.nn as nn
-# from torch.utils.data import DataLoader
-from torchvision import datasets, transforms, models
 from tqdm import tqdm
 from captum.attr import (
     Saliency,
@@ -16,8 +14,6 @@ from captum.attr import (
     ShapleyValueSampling,
 )
 from sklearn.metrics import confusion_matrix, classification_report
-# from torch.utils.data.sampler import SubsetRandomSampler
-# from sklearn.model_selection import train_test_split
 import matplotlib.pyplot as plt
 import seaborn as sns
 from fl_common.models.utils import (get_optimizer,
@@ -48,7 +44,8 @@ augmentation_params = {
 }
 batch_size = 32
 
-model_list = ['resnet18', 'resnet34', 'resnet50', 'MobileNet_V3_Small', 'VGG11', 'VGG13', 'VGG16']
+model_list = ['resnet18', 'Swin_V2_T', 'RegNet_X_400MF', 'MobileNet_V3_Small',
+              'ConvNeXt_Tiny', 'VGG11', 'DenseNet121', 'EfficientNetB0']
 # Model Parameters
 best_val_loss = float('inf')  # Initialize the best validation loss
 
@@ -95,52 +92,30 @@ def get_familly_model(model_type, num_classes):
     - ValueError: If the specified model family is not recognized.
     """
 
-    if (model_type == 'VGG11'
-            or model_type == 'VGG11_BN'
-            or model_type == 'VGG13'
-            or model_type == 'VGG13_BN'
-            or model_type == 'VGG16'
-            or model_type == 'VGG16_BN'
-            or model_type == 'VGG19'
-            or model_type == 'VGG19_BN'
-    ):
+    if model_type in ['VGG11', 'VGG11_BN', 'VGG13', 'VGG13_BN', 'VGG16', 'VGG16_BN', 'VGG19', 'VGG19_BN']:
         model = get_vgg_model(model_type, num_classes)
-    elif (model_type == 'Swin_T'
-          or model_type == 'Swin_S'
-          or model_type == 'Swin_B'
-          or model_type == 'Swin_V2_T'
-          or model_type == 'Swin_V2_S'
-          or model_type == 'Swin_V2_B'):
+    elif model_type in ['Swin_T', 'Swin_S', 'Swin_B', 'Swin_V2_T', 'Swin_V2_S', 'Swin_V2_B']:
         model = get_swin_model(model_type, num_classes)
-    elif (model_type == 'ResNet18'
-          or model_type == 'ResNet34'
-          or model_type == 'ResNet50'
-          or model_type == 'ResNet101'
-          or model_type == 'ResNet152'
-          or model_type == 'ResNeXt50_32X4D'
-          or model_type == 'ResNeXt101_32X4D'
-          or model_type == 'ResNeXt101_64X4D'
-          or model_type == 'Wide_ResNet50_2'
-          or model_type == 'Wide_ResNet101_2'):
+    elif model_type in ['ResNet18', 'ResNet34', 'ResNet50', 'ResNet101', 'ResNet152', 'ResNeXt50_32X4D',
+                        'ResNeXt101_32X4D', 'ResNeXt101_64X4D', 'Wide_ResNet50_2', 'Wide_ResNet101_2']:
         model = get_resnet_model(model_type, num_classes)
-    elif (model_type == 'RegNet_X_400MF'
-          or model_type == 'RegNet_X_800MF'
-          or model_type == 'RegNet_X_1_6GF'
-          or model_type == 'RegNet_X_3_2GF'
-          or model_type == 'RegNet_X_16GF'
-          or model_type == 'RegNet_Y_400MF'
-          or model_type == 'RegNet_Y_800MF'
-          or model_type == 'RegNet_Y_1_6GF'
-          or model_type == 'RegNet_Y_3_2GF'
-          or model_type == 'RegNet_Y_16GF'):
+    elif model_type in ['RegNet_X_400MF', 'RegNet_X_800MF', 'RegNet_X_1_6GF', 'RegNet_X_3_2GF', 'RegNet_X_16GF',
+                        'RegNet_Y_400MF', 'RegNet_Y_800MF', 'RegNet_Y_1_6GF', 'RegNet_Y_3_2GF', 'RegNet_Y_16GF']:
         model = get_regnet_model(model_type, num_classes)
-    elif (model_type == "MobileNet_V2"
-          or model_type == "MobileNet_V3_Small"
-          or model_type ==" MobileNet_V3_Large"):
+    elif model_type in ['MobileNet_V2', 'MobileNet_V3_Small', 'MobileNet_V3_Large']:
         model = get_mobilenet_model(model_type, num_classes)
-    else :
+    elif model_type in ['EfficientNetB0', 'EfficientNetB1', 'EfficientNetB2', 'EfficientNetB3', 'EfficientNetB4',
+                        'EfficientNetB5', 'EfficientNetB0', 'EfficientNetB7', 'EfficientNetV2S', 'EfficientNetV',
+                        'EfficientNetV2L']:
+        model = get_efficientnet_model(model_type, num_classes)
+    elif model_type in ['DenseNet121', 'DenseNet161', 'DenseNet169', 'DenseNet201']:
+        model = get_densenet_model(model_type, num_classes)
+    elif model_type in ['ConvNeXt_Tiny', 'ConvNeXt_Small', 'ConvNeXt_Base', 'ConvNeXt_Large']:
+        model = get_convnext_model(model_type, num_classes)
+    else:
         model = get_vgg_model(vgg_type='VGG16', num_classes=4)
     return model
+
 
 for model_type in model_list:
     save_dir = 'c:/TFE/Models/' + model_type + '/'  # Replace with the actual path where to save results
