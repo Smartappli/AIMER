@@ -1,4 +1,4 @@
-name: FL_Common_Testing
+name: Unit_Tests
 
 on: [push]
 
@@ -19,4 +19,12 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
         pip install git+https://github.com/pycaret/pycaret.git
+    - name: Fl_client unit tests
+      run: |
+        python manage.py test fl_client.tests
+    - name: Fl_common unit tests
+      run: |
         python manage.py test fl_common.tests
+    - name: FL_server units tests
+      run: |
+        python manage.py test fl_server.tests

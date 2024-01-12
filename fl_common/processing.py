@@ -21,13 +21,18 @@ from fl_common.models.convnext import get_convnext_model
 from fl_common.models.densenet import get_densenet_model
 from fl_common.models.efficientnet import get_efficientnet_model
 from fl_common.models.inception import get_inception_model
+from fl_common.models.maxvit import get_maxvit_model
 from fl_common.models.mnasnet import get_mnasnet_model
 from fl_common.models.mobilenet import get_mobilenet_model
 from fl_common.models.regnet import get_regnet_model
 from fl_common.models.resnet import get_resnet_model
+from fl_common.models.resnext import get_resnext_model
+from fl_common.models.squeezenet import get_squeezenet_model
 from fl_common.models.shufflenet import get_shufflenet_model
-from fl_common.models.swin import get_swin_model
+from fl_common.models.swin_transformer import get_swin_model
 from fl_common.models.vgg import get_vgg_model
+from fl_common.models.vision_transformer import get_vision_model
+from fl_common.models.wide_resnet import get_wide_resnet_model
 
 # Dataset Parameters
 dataset_path = 'c:/IA/Data'  # Replace with the actual path to the dataset
@@ -43,8 +48,10 @@ augmentation_params = {
 batch_size = 16
 
 model_list = ['ResNet18', 'Swin_V2_T', 'RegNet_X_400MF', 'MobileNet_V3_Small',
-              'ConvNeXt_Tiny', 'AlexNet', 'Inception_V3', 'VGG11', 'DenseNet121',
-              'EfficientNetB0', 'ShuffleNet_V2_X0_5', 'MNASNet0_5']
+              'ConvNeXt_Tiny', 'AlexNet', 'GoogLeNet', 'Inception_V3', 'VGG11',
+              'DenseNet121', 'EfficientNetB0', 'ShuffleNet_V2_X0_5', 'MNASNet0_5',
+              'Wide_ResNet50_2', 'ResNeXt50_32X4D', 'MaxVit_T', 'SqueezeNet1_0',
+              'ViT_B_16']
 # Model Parameters
 best_val_loss = float('inf')  # Initialize the best validation loss
 
@@ -91,14 +98,22 @@ def get_familly_model(model_type, num_classes):
     - ValueError: If the specified model family is not recognized.
     """
 
-    if model_type in ['VGG11', 'VGG11_BN', 'VGG13', 'VGG13_BN', 'VGG16', 'VGG16_BN', 'VGG19', 'VGG19_BN']:
+    if model_type in ['Wide_ResNet50_2', 'Wide_ResNet101_2']:
+        model = get_wide_resnet_model(model_type, num_classes)
+    elif model_type in ['ViT_B_16', 'ViT_B_32', 'ViT_L_16', 'ViT_L_32', 'ViT_H_14']:
+        model = get_vision_model(model_type, num_classes)
+    elif model_type in ['VGG11', 'VGG11_BN', 'VGG13', 'VGG13_BN', 'VGG16', 'VGG16_BN', 'VGG19', 'VGG19_BN']:
         model = get_vgg_model(model_type, num_classes)
     elif model_type in ['Swin_T', 'Swin_S', 'Swin_B', 'Swin_V2_T', 'Swin_V2_S', 'Swin_V2_B']:
         model = get_swin_model(model_type, num_classes)
+    elif model_type in ["SqueezeNet1_0", 'SqueezeNet1_1']:
+        model = get_squeezenet_model(model_type, num_classes)
     elif model_type in ['ShuffleNet_V2_X0_5', 'ShuffleNet_V2_X1_0', 'ShuffleNet_V2_X1_5', 'ShuffleNet_V2_X2_0']:
         model = get_shufflenet_model(model_type, num_classes)
+    elif model_type in ['ResNeXt50_32X4D', 'ResNeXt101_32X8D', 'ResNeXt101_64X4D']:
+        model = get_resnext_model(model_type, num_classes)
     elif model_type in ['ResNet18', 'ResNet34', 'ResNet50', 'ResNet101', 'ResNet152', 'ResNeXt50_32X4D',
-                        'ResNeXt101_32X4D', 'ResNeXt101_64X4D', 'Wide_ResNet50_2', 'Wide_ResNet101_2']:
+                        'ResNeXt101_32X4D', 'ResNeXt101_64X4D']:
         model = get_resnet_model(model_type, num_classes)
     elif model_type in ['RegNet_X_400MF', 'RegNet_X_800MF', 'RegNet_X_1_6GF', 'RegNet_X_3_2GF', 'RegNet_X_16GF',
                         'RegNet_Y_400MF', 'RegNet_Y_800MF', 'RegNet_Y_1_6GF', 'RegNet_Y_3_2GF', 'RegNet_Y_16GF']:
@@ -107,6 +122,8 @@ def get_familly_model(model_type, num_classes):
         model = get_mnasnet_model(model_type, num_classes)
     elif model_type in ['MobileNet_V2', 'MobileNet_V3_Small', 'MobileNet_V3_Large']:
         model = get_mobilenet_model(model_type, num_classes)
+    elif model_type in ['MaxVit_T']:
+        model = get_maxvit_model(model_type, num_classes)
     elif model_type in ['Inception_V3']:
         model = get_inception_model(model_type, num_classes)
     elif model_type in ['EfficientNetB0', 'EfficientNetB1', 'EfficientNetB2', 'EfficientNetB3', 'EfficientNetB4',
