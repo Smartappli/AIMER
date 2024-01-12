@@ -40,7 +40,7 @@ augmentation_params = {
     'vertical_flip_prob': 0.8,  # Probabilité plus élevée de retournement vertical
     'resize': 224,
 }
-batch_size = 32
+batch_size = 16
 
 model_list = ['ResNet18', 'Swin_V2_T', 'RegNet_X_400MF', 'MobileNet_V3_Small',
               'ConvNeXt_Tiny', 'AlexNet', 'Inception_V3', 'VGG11', 'DenseNet121',
