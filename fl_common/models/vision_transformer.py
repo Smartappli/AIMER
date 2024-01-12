@@ -35,14 +35,8 @@ def get_vision_model(vision_type, num_classes):
     else:
         raise ValueError(f'Unknown Vision Transformer Architecture: {vision_type}')
 
-    # Get the last layer in the Sequential module
-    last_layer = vision_model.heads[-1]
-
-    # Check if it's a linear layer and get its input features
-    if isinstance(last_layer, nn.Linear):
-        num_features = last_layer.in_features
-    else:
-        # Handle the case where the last layer is not a linear layer
-        raise ValueError("The last layer is not a linear layer.")
+    # Replace the last layer with a new linear layer with the specified number of classes
+    last_layer = nn.Linear(in_features=vision_model.heads[-1].in_features, out_features=num_classes)
+    vision_model.heads[-1] = last_layer
 
     return vision_model

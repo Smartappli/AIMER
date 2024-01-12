@@ -36,7 +36,7 @@ def get_shufflenet_model(shufflenet_type, num_classes):
         weights = models.ShuffleNet_V2_X2_0_Weights.DEFAULT
         shufflenet_model = models.shufflenet_v2_x2_0(weights=weights)
     else:
-        raise ValueError(f'Unknown DenseNet Architecture : {shufflenet_type}')
+        raise ValueError(f'Unknown ShuffleNet Architecture: {shufflenet_type}')
 
     # Modify last layer to suit number of classes
     num_features = shufflenet_model.fc.in_features

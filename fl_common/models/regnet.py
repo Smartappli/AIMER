@@ -51,7 +51,7 @@ def get_regnet_model(regnet_type, num_classes):
     elif regnet_type == 'RegNet_Y_800MF':
         weights = models.RegNet_Y_800MF_Weights.DEFAULT
         regnet_model = models.regnet_y_800mf(weights=weights)
-    elif regnet_type == 'RegNetY_1_6GF':
+    elif regnet_type == 'RegNet_Y_1_6GF':
         weights = models.RegNet_Y_1_6GF_Weights.DEFAULT
         regnet_model = models.regnet_y_1_6gf(weights=weights)
     elif regnet_type == 'RegNet_Y_3_2GF':
