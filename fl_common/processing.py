@@ -20,6 +20,7 @@ from fl_common.models.alexnet import get_alexnet_model
 from fl_common.models.convnext import get_convnext_model
 from fl_common.models.densenet import get_densenet_model
 from fl_common.models.efficientnet import get_efficientnet_model
+from fl_common.models.inception_next import get_inception_next_model
 from fl_common.models.inception import get_inception_model
 from fl_common.models.maxvit import get_maxvit_model
 from fl_common.models.mnasnet import get_mnasnet_model
@@ -33,6 +34,9 @@ from fl_common.models.swin_transformer import get_swin_model
 from fl_common.models.vgg import get_vgg_model
 from fl_common.models.vision_transformer import get_vision_model
 from fl_common.models.wide_resnet import get_wide_resnet_model
+from fl_common.models.xception import get_xception_model
+
+os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
 
 # Dataset Parameters
 dataset_path = 'c:/IA/Data'  # Replace with the actual path to the dataset
@@ -47,7 +51,7 @@ augmentation_params = {
 }
 batch_size = 16
 
-model_list = ['ResNet18', 'Swin_V2_T', 'RegNet_X_400MF', 'MobileNet_V3_Small',
+model_list = ['xception41', 'ResNet18', 'Swin_V2_T', 'RegNet_X_400MF', 'MobileNet_V3_Small',
               'ConvNeXt_Tiny', 'AlexNet', 'GoogLeNet', 'Inception_V3', 'VGG11',
               'DenseNet121', 'EfficientNetB0', 'ShuffleNet_V2_X0_5', 'MNASNet0_5',
               'Wide_ResNet50_2', 'ResNeXt50_32X4D', 'MaxVit_T', 'SqueezeNet1_0',
@@ -98,7 +102,9 @@ def get_familly_model(model_type, num_classes):
     - ValueError: If the specified model family is not recognized.
     """
 
-    if model_type in ['Wide_ResNet50_2', 'Wide_ResNet101_2']:
+    if model_type in ['legacy_xception', 'xception41', 'xception65', 'xception71', 'xception41p', 'xception65p']:
+        model = get_xception_model(model_type, num_classes)
+    elif model_type in ['Wide_ResNet50_2', 'Wide_ResNet101_2']:
         model = get_wide_resnet_model(model_type, num_classes)
     elif model_type in ['ViT_B_16', 'ViT_B_32', 'ViT_L_16', 'ViT_L_32', 'ViT_H_14']:
         model = get_vision_model(model_type, num_classes)
@@ -124,7 +130,9 @@ def get_familly_model(model_type, num_classes):
         model = get_mobilenet_model(model_type, num_classes)
     elif model_type in ['MaxVit_T']:
         model = get_maxvit_model(model_type, num_classes)
-    elif model_type in ['Inception_V3']:
+    elif model_type in ['inception_next_tiny', 'inception_next_small', 'inception_next_base']:
+        model = get_inception_next_model(model_type, num_classes)
+    elif model_type in ['Inception_V3', 'inception_v4', 'inception_resnet_v2']:
         model = get_inception_model(model_type, num_classes)
     elif model_type in ['EfficientNetB0', 'EfficientNetB1', 'EfficientNetB2', 'EfficientNetB3', 'EfficientNetB4',
                         'EfficientNetB5', 'EfficientNetB0', 'EfficientNetB7', 'EfficientNetV2S', 'EfficientNetV',
