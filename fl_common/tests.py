@@ -16,6 +16,7 @@ from fl_common.models.convnext import get_convnext_model
 from fl_common.models.densenet import get_densenet_model
 from fl_common.models.efficientnet import get_efficientnet_model
 from fl_common.models.googlenet import get_googlenet_model
+from fl_common.models.inception_next import get_inception_next_model
 from fl_common.models.inception import get_inception_model
 from fl_common.models.maxvit import get_maxvit_model
 from fl_common.models.mnasnet import get_mnasnet_model
@@ -694,18 +695,36 @@ class ProcessingTestCase(TestCase):
         self.assertIsInstance(last_layer, nn.Linear)
         self.assertEqual(last_layer.out_features, num_classes)
 
+    """Inception Next Model Unit Tests"""
+    def test_all_inception_next_models(self):
+        inception_next_types = [
+            'inception_next_tiny',
+            'inception_next_small',
+            'inception_next_base'
+        ]
+
+        for inception_next_type in inception_next_types:
+            with self.subTest(inception_next_type=inception_next_type):
+                model = get_inception_next_model(inception_next_type, num_classes=10)
+                self.assertTrue(isinstance(model, torch.nn.Module))
+
+    def test_unknown_inception_next_type(self):
+        with self.assertRaises(ValueError):
+            get_inception_next_model('unknown_type', num_classes=10)
+
+
     """Inception Model Unit Tests"""
     def test_get_inception_model(self):
-        # inception = get_inception_model('Inception_V3', 1000)
-        # self.assertIsNotNone(inception, msg="get_inception_model KO")
-        inception_types = ['Inception_V3']
-        num_classes = 10  # You can adjust the number of classes as needed
+        inception_types = [
+            'Inception_V3',
+            'inception_v4',
+            'inception_resnet_v2'
+        ]
 
         for inception_type in inception_types:
             with self.subTest(inception_type=inception_type):
-                model = get_inception_model(inception_type, num_classes)
-                self.assertIsInstance(model, nn.Module)
-                # Add more specific assertions about the model if needed
+                model = get_inception_model(inception_type, num_classes=10)
+                self.assertTrue(isinstance(model, torch.nn.Module))
 
     def test_inception_unknown_architecture(self):
         inception_type = 'UnknownArchitecture'
