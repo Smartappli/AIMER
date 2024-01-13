@@ -279,7 +279,7 @@ class ProcessingTestCase(TestCase):
 
     """Volo Model Unit Tests"""
     def test_all_volo_models(self):
-        volo_types = ['volo_d1_224', 'volo_d1_384', 'volo_d2_224', 'volo_d2_384', 'volo_d3_224', 'volo_d3_384',
+        volo_types = ['volo_d1_224', 'volo_d1_384', 'volo_d2_224', 'volo_d2_384', 'volo_d3_224', 'volo_d3_448',
                       'volo_d4_224', 'volo_d4_448', 'volo_d5_224', 'volo_d5_448', 'volo_d5_512']
 
         for volo_type in volo_types:

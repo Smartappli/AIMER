@@ -36,12 +36,12 @@ def get_volo_model(volo_type, num_classes):
         volo_model = create_model('volo_d2_384', pretrained=True, num_classes=num_classes)
     elif volo_type == 'volo_d3_224':
         volo_model = create_model('volo_d3_224', pretrained=True, num_classes=num_classes)
-    elif volo_type == 'volo_d3_384':
-        volo_model = create_model('volo_d3_384', pretrained=True, num_classes=num_classes)
+    elif volo_type == 'volo_d3_448':
+        volo_model = create_model('volo_d3_448', pretrained=True, num_classes=num_classes)
     elif volo_type == 'volo_d4_224':
         volo_model = create_model('volo_d4_224', pretrained=True, num_classes=num_classes)
     elif volo_type == 'volo_d4_448':
-        volo_model = create_model('volo_c4_448', pretrained=True, num_classes=num_classes)
+        volo_model = create_model('volo_d4_448', pretrained=True, num_classes=num_classes)
     elif volo_type == 'volo_d5_224':
         volo_model = create_model('volo_d5_224', pretrained=True, num_classes=num_classes)
     elif volo_type == 'volo_d5_448':

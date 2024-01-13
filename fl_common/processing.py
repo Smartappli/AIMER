@@ -107,7 +107,7 @@ def get_familly_model(model_type, num_classes):
         model = get_xception_model(model_type, num_classes)
     elif model_type in ['Wide_ResNet50_2', 'Wide_ResNet101_2']:
         model = get_wide_resnet_model(model_type, num_classes)
-    elif model_type in ['volo_d1_224', 'volo_d1_384', 'volo_d2_224', 'volo_d2_384', 'volo_d3_224', 'volo_d3_384',
+    elif model_type in ['volo_d1_224', 'volo_d1_384', 'volo_d2_224', 'volo_d2_384', 'volo_d3_224', 'volo_d3_448',
                         'volo_d4_224', 'volo_d4_448', 'volo_d5_224', 'volo_d5_448', 'volo_d5_512']:
         model = get_volo_model(model_type, num_classes)
     elif model_type in ['ViT_B_16', 'ViT_B_32', 'ViT_L_16', 'ViT_L_32', 'ViT_H_14']:
