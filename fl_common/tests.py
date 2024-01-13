@@ -1,3 +1,4 @@
+import os
 import torch
 import torch.nn as nn
 import torch.optim as optim
@@ -29,9 +30,11 @@ from fl_common.models.squeezenet import get_squeezenet_model
 from fl_common.models.swin_transformer import get_swin_model
 from fl_common.models.vgg import get_vgg_model
 from fl_common.models.vision_transformer import get_vision_model
+from fl_common.models.volo import get_volo_model
 from fl_common.models.wide_resnet import get_wide_resnet_model
 from fl_common.models.xception import get_xception_model
 
+os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
 
 class ProcessingTestCase(TestCase):
     """
@@ -273,6 +276,20 @@ class ProcessingTestCase(TestCase):
     def test_get_wide_resnet_model(self):
         wide_resnet_model = get_wide_resnet_model('Wide_ResNet50_2', 1000)
         self.assertIsNotNone(wide_resnet_model, msg="Wide ResNet KO")
+
+    """Volo Model Unit Tests"""
+    def test_all_volo_models(self):
+        volo_types = ['volo_d1_224', 'volo_d1_384', 'volo_d2_224', 'volo_d2_384', 'volo_d3_224', 'volo_d3_384',
+                      'volo_d4_224', 'volo_d4_448', 'volo_d5_224', 'volo_d5_448', 'volo_d5_512']
+
+        for volo_type in volo_types:
+            with self.subTest(volo_type=volo_type):
+                model = get_volo_model(volo_type, num_classes=10)
+                self.assertTrue(isinstance(model, nn.Module))
+
+    def test_unknown_volo_type(self):
+        with self.assertRaises(ValueError):
+            get_volo_model('unknown_type', num_classes=10)
 
     """Vision Transformer Model Unit Tests"""
     def test_get_vision_model(self):

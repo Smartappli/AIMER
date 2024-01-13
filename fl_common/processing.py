@@ -33,6 +33,7 @@ from fl_common.models.shufflenet import get_shufflenet_model
 from fl_common.models.swin_transformer import get_swin_model
 from fl_common.models.vgg import get_vgg_model
 from fl_common.models.vision_transformer import get_vision_model
+from fl_common.models.volo import get_volo_model
 from fl_common.models.wide_resnet import get_wide_resnet_model
 from fl_common.models.xception import get_xception_model
 
@@ -55,7 +56,7 @@ model_list = ['xception41', 'ResNet18', 'Swin_V2_T', 'RegNet_X_400MF', 'MobileNe
               'ConvNeXt_Tiny', 'AlexNet', 'GoogLeNet', 'Inception_V3', 'VGG11',
               'DenseNet121', 'EfficientNetB0', 'ShuffleNet_V2_X0_5', 'MNASNet0_5',
               'Wide_ResNet50_2', 'ResNeXt50_32X4D', 'MaxVit_T', 'SqueezeNet1_0',
-              'ViT_B_16']
+              'ViT_B_16', 'volo_d1_224']
 # Model Parameters
 best_val_loss = float('inf')  # Initialize the best validation loss
 
@@ -106,6 +107,9 @@ def get_familly_model(model_type, num_classes):
         model = get_xception_model(model_type, num_classes)
     elif model_type in ['Wide_ResNet50_2', 'Wide_ResNet101_2']:
         model = get_wide_resnet_model(model_type, num_classes)
+    elif model_type in ['volo_d1_224', 'volo_d1_384', 'volo_d2_224', 'volo_d2_384', 'volo_d3_224', 'volo_d3_384',
+                        'volo_d4_224', 'volo_d4_448', 'volo_d5_224', 'volo_d5_448', 'volo_d5_512']:
+        model = get_volo_model(model_type, num_classes)
     elif model_type in ['ViT_B_16', 'ViT_B_32', 'ViT_L_16', 'ViT_L_32', 'ViT_H_14']:
         model = get_vision_model(model_type, num_classes)
     elif model_type in ['VGG11', 'VGG11_BN', 'VGG13', 'VGG13_BN', 'VGG16', 'VGG16_BN', 'VGG19', 'VGG19_BN']:
