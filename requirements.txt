@@ -4,7 +4,7 @@ huggingface-hub==0.20.2
 #pycaret[full]==3.2.0 # 3.2.1
 scikit-learn-intelex==2024.0.1
 #tensorflow==2.15 # 2.14.1
-tf-nightly==2.16.0.dev20240112
+tf-nightly==2.16.0.dev20240116
 keras==3.0.2 # 2.14
 keras-tuner==1.4.6
 seaborn==0.13.1 # 0.12.2

@@ -20,17 +20,17 @@ def get_xception_model(xception_type, num_classes):
     - torch.nn.Module: Modified Xception model with the specified architecture
       and last layer adapted for the given number of classes.
     """
-    if (xception_type == 'legacy_xception'):
+    if xception_type == 'legacy_xception':
         xception_model = create_model('legacy_xception', pretrained=True, num_classes=num_classes)
-    elif (xception_type == 'xception41'):
+    elif xception_type == 'xception41':
         xception_model = create_model('xception41', pretrained=True, num_classes=num_classes)
-    elif (xception_type == 'xception65'):
+    elif xception_type == 'xception65':
         xception_model = create_model('xception65', pretrained=True, num_classes=num_classes)
-    elif (xception_type == 'xception71'):
+    elif xception_type == 'xception71':
         xception_model = create_model('xception71', pretrained=True, num_classes=num_classes)
-    elif (xception_type == 'xception41p'):
+    elif xception_type == 'xception41p':
         xception_model = create_model('xception41', pretrained=True, num_classes=num_classes)
-    elif (xception_type == 'xception65p'):
+    elif xception_type == 'xception65p':
         xception_model = create_model('xception65p', pretrained=True, num_classes=num_classes)
     else:
         raise ValueError(f'Unknown Xception Architecture: {xception_type}')
