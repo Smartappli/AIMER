@@ -16,6 +16,7 @@ from fl_common.models.alexnet import get_alexnet_model
 from fl_common.models.convnext import get_convnext_model
 from fl_common.models.densenet import get_densenet_model
 from fl_common.models.efficientnet import get_efficientnet_model
+from fl_common.models.edgenet import get_edgenet_model
 from fl_common.models.googlenet import get_googlenet_model
 from fl_common.models.inception_next import get_inception_next_model
 from fl_common.models.inception import get_inception_model
@@ -841,6 +842,31 @@ class ProcessingTestCase(TestCase):
         last_layer = efficientnet_model.classifier[-1]
         self.assertIsInstance(last_layer, nn.Linear)
         self.assertEqual(last_layer.out_features, num_classes)
+
+    """EdgeNet Model Unit Tests"""
+    def test_valid_edgenet_type(self):
+        edgenet_types = ["edgenext_xx_small", "edgenext_x_small", "edgenext_small", "edgenext_base", "edgenext_small_rw"]
+        num_classes = 10
+
+        for edgenet_type in edgenet_types:
+            with self.subTest(edgenet_type=edgenet_type):
+                model = get_edgenet_model(edgenet_type, num_classes)
+                self.assertIsNotNone(model)
+                # Add more specific assertions if needed
+
+    def test_invalid_edgenet_type(self):
+        invalid_edgenet_type = "invalid_type"
+        num_classes = 10
+
+        with self.assertRaises(ValueError):
+            get_edgenet_model(invalid_edgenet_type, num_classes)
+
+    def test_invalid_num_classes(self):
+        edgenet_type = "edgenext_small"
+        invalid_num_classes = "not_an_integer"
+
+        with self.assertRaises(ValueError):
+            get_edgenet_model(edgenet_type, invalid_num_classes)
 
     '''DenseNet Model Unit Tests'''
     def test_densenet_model(self):
