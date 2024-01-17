@@ -1,0 +1,12 @@
+import os
+from django.test import TestCase
+from fl_common.models.wide_resnet import get_wide_resnet_model
+
+os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
+
+
+class ProcessingPartWTestCase(TestCase):
+    """Wide Resnet Model Unit Tests"""
+    def test_get_wide_resnet_model(self):
+        wide_resnet_model = get_wide_resnet_model('Wide_ResNet50_2', 1000)
+        self.assertIsNotNone(wide_resnet_model, msg="Wide ResNet KO")
