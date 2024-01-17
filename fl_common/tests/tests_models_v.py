@@ -7,38 +7,73 @@ from fl_common.models.volo import get_volo_model
 
 os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
 
+
 class ProcessingPartVTestCase(TestCase):
     """Volo Model Unit Tests"""
+
     def test_all_volo_models(self):
+        """
+        Test case for obtaining various Volo models.
+
+        Raises:
+            AssertionError: If any of the assertions fail.
+        """
         volo_types = ['volo_d1_224', 'volo_d1_384', 'volo_d2_224', 'volo_d2_384', 'volo_d3_224', 'volo_d3_448',
                       'volo_d4_224', 'volo_d4_448', 'volo_d5_224', 'volo_d5_448', 'volo_d5_512']
 
         for volo_type in volo_types:
             with self.subTest(volo_type=volo_type):
+                # Get the Volo model for testing
                 model = get_volo_model(volo_type, num_classes=10)
+                # Check if the model is an instance of torch.nn.Module
                 self.assertTrue(isinstance(model, nn.Module))
 
-    def test_unknown_volo_type(self):
+    def test_volo_unknown_type(self):
+        """
+        Test case for handling unknown Volo model type in get_volo_model function.
+
+        Raises:
+            AssertionError: If the assertion fails.
+            ValueError: If an unknown Volo model type is provided.
+        """
         with self.assertRaises(ValueError):
+            # Attempt to get a Volo model with an unknown type
             get_volo_model('unknown_type', num_classes=10)
 
     """Vision Transformer Model Unit Tests"""
+
     def test_get_vision_model(self):
-        # vision_model = get_vision_model('ViT_B_16', 1000)
-        # self.assertIsNotNone(vision_model, msg="Wision Transform KO")
+        """
+        Test case for obtaining various Vision Transformer models.
+
+        Raises:
+            AssertionError: If any of the assertions fail.
+        """
+        # List of Vision Transformer model types to test
         vision_types = ['ViT_B_16', 'ViT_B_32', 'ViT_L_16', 'ViT_L_32', 'ViT_H_14']
         num_classes = 10  # You can adjust the number of classes as needed
 
+        # Loop through each Vision Transformer model type
         for vision_type in vision_types:
             with self.subTest(vision_type=vision_type):
+                # Get the Vision Transformer model for testing
                 model = get_vision_model(vision_type, num_classes)
-                self.assertIsInstance(model, nn.Module, msg=f'get_maxvit_model {vision_type} KO')
+                # Check if the model is an instance of torch.nn.Module
+                self.assertIsInstance(model, nn.Module, msg=f'get_vision_model {vision_type} KO')
 
     def test_vision_unknown_architecture(self):
+        """
+        Test case for handling unknown Vision Transformer architecture in get_vision_model function.
+
+        Raises:
+            AssertionError: If the assertion fails.
+            ValueError: If an unknown Vision Transformer architecture is provided.
+        """
         vision_type = 'UnknownArchitecture'
         num_classes = 10
 
         with self.assertRaises(ValueError) as context:
+            # Attempt to get a Vision Transformer model with an unknown architecture
             get_vision_model(vision_type, num_classes)
 
         self.assertEqual(
@@ -68,22 +103,38 @@ class ProcessingPartVTestCase(TestCase):
     """
 
     def test_get_vgg_model(self):
-        # vgg11 = get_vgg_model('VGG11',1000)
-        # self.assertIsNotNone(vgg11, msg="get_vgg_model KO")
+        """
+        Test case for obtaining various VGG models.
+
+        Raises:
+            AssertionError: If any of the assertions fail.
+        """
+        # List of VGG model types to test
         vgg_types = ['VGG11', 'VGG11_BN', 'VGG13', 'VGG13_BN', 'VGG16', 'VGG16_BN', 'VGG19', 'VGG19_BN']
         num_classes = 10  # You can adjust the number of classes as needed
 
+        # Loop through each VGG model type
         for vgg_type in vgg_types:
             with self.subTest(vgg_type=vgg_type):
+                # Get the VGG model for testing
                 model = get_vgg_model(vgg_type, num_classes)
+                # Check if the model is an instance of torch.nn.Module
                 self.assertIsInstance(model, nn.Module)
                 # Add more specific assertions about the model if needed
 
     def test_vgg_unknown_architecture(self):
+        """
+        Test case for handling unknown VGG architecture in get_vgg_model function.
+
+        Raises:
+            AssertionError: If the assertion fails.
+            ValueError: If an unknown VGG architecture is provided.
+        """
         vgg_type = 'UnknownArchitecture'
         num_classes = 10
 
         with self.assertRaises(ValueError) as context:
+            # Attempt to get a VGG model with an unknown architecture
             get_vgg_model(vgg_type, num_classes)
 
         self.assertEqual(
@@ -92,6 +143,12 @@ class ProcessingPartVTestCase(TestCase):
         )
 
     def test_vgg_last_layer_adaptation(self):
+        """
+        Test case for ensuring last layer adaptation in VGG models.
+
+        Raises:
+            AssertionError: If any of the assertions fail.
+        """
         # Provide a known architecture type
         vgg_type = 'VGG16'
         num_classes = 10
@@ -99,10 +156,17 @@ class ProcessingPartVTestCase(TestCase):
         # Override the last layer with a linear layer for testing purposes
         vgg_model = get_vgg_model(vgg_type, num_classes)
         last_layer = vgg_model.classifier[-1]
+        # Check if the last layer is an instance of nn.Linear
         self.assertIsInstance(last_layer, nn.Linear)
         self.assertEqual(last_layer.out_features, num_classes)
 
     def test_vgg_model_structure(self):
+        """
+        Test case for ensuring the structure of VGG models.
+
+        Raises:
+            AssertionError: If any of the assertions fail.
+        """
         # Provide a known architecture type
         vgg_type = 'VGG16'
         num_classes = 10
