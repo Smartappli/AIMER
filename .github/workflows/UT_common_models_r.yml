@@ -1,15 +1,7 @@
-name: Pylint
+name: UT_Common_Models_R
 
 on:
-  push:
-    branches:
-      - master
-
   workflow_call:
-
-  pull_request:
-    branches:
-      - "**"
 
 concurrency:
   group: linting-${{ github.event_name == 'pull_request' && format('{0}-{1}', github.workflow, github.event.pull_request.number) || github.workflow_ref }}
@@ -32,7 +24,6 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
         pip install git+https://github.com/pycaret/pycaret.git
-        pip install pylint pylint-django
-    - name: Analysing the code with pylint
+    - name: Fl_common Models R
       run: |
-        shopt -s globstar && pylint --load-plugins pylint_django --django-settings-module=lab.settings **/*.py
+        python manage.py test fl_common.tests.tests_models_r

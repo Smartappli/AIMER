@@ -1,0 +1,71 @@
+name: Nightlies
+
+on:
+  schedule:
+    - cron: "0 00 * * */7" # 12am UTC, 5:30pm Indian, 9pm Brazil, 11am AEDT
+  workflow_dispatch:
+    inputs:
+      none:
+        description: "Run Nightlies Tests Manually"
+        required: false
+
+jobs:
+  call-Licenses-Check:
+    if: github.repository == 'Smartappli/tfe' # don't run on forks
+    uses: Smartappli/tfe/.github/workflows/liccheck.yml@master
+
+  call-PyLint:
+    if: github.repository == 'Smartappli/tfe' # don't run on forks
+    uses: Smartappli/tfe/.github/workflows/pylint.yml@master
+
+  call-UT-common_training:
+    if: github.repository == 'Smartappli/tfe' # don't run on forks
+    uses: Smartappli/tfe/.github/workflows/UT_common_training.yml@master
+
+  call-UT-common_models_A:
+    if: github.repository == 'Smartappli/tfe' # don't run on forks
+    uses: Smartappli/tfe/.github/workflows/UT_common_models_a.yml@master
+
+  call-UT-common_models_C:
+    if: github.repository == 'Smartappli/tfe' # don't run on forks
+    uses: Smartappli/tfe/.github/workflows/UT_common_models_c.yml@master
+
+  call-UT-common_models_D:
+    if: github.repository == 'Smartappli/tfe' # don't run on forks
+    uses: Smartappli/tfe/.github/workflows/UT_common_models_d.yml@master
+
+  call-UT-common_models_E:
+    if: github.repository == 'Smartappli/tfe' # don't run on forks
+    uses: Smartappli/tfe/.github/workflows/UT_common_models_e.yml@master
+
+  call-UT-common_models_G:
+    if: github.repository == 'Smartappli/tfe' # don't run on forks
+    uses: Smartappli/tfe/.github/workflows/UT_common_models_g.yml@master
+
+  call-UT-common_models_I:
+    if: github.repository == 'Smartappli/tfe' # don't run on forks
+    uses: Smartappli/tfe/.github/workflows/UT_common_models_i.yml@master
+
+  call-UT-common_models_M:
+    if: github.repository == 'Smartappli/tfe' # don't run on forks
+    uses: Smartappli/tfe/.github/workflows/UT_common_models_m.yml@master
+
+  call-UT-common_models_R:
+    if: github.repository == 'Smartappli/tfe' # don't run on forks
+    uses: Smartappli/tfe/.github/workflows/UT_common_models_r.yml@master
+
+  call-UT-common_models_S:
+    if: github.repository == 'Smartappli/tfe' # don't run on forks
+    uses: Smartappli/tfe/.github/workflows/UT_common_models_s.yml@master
+
+  call-UT-common_models_V:
+    if: github.repository == 'Smartappli/tfe' # don't run on forks
+    uses: Smartappli/tfe/.github/workflows/UT_common_models_v.yml@master
+
+  call-UT-common_models_W:
+    if: github.repository == 'Smartappli/tfe' # don't run on forks
+    uses: Smartappli/tfe/.github/workflows/UT_common_models_w.yml@master
+
+  call-UT-common_models_X:
+    if: github.repository == 'Smartappli/tfe' # don't run on forks
+    uses: Smartappli/tfe/.github/workflows/UT_common_models_x.yml@master

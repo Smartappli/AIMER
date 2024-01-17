@@ -1,9 +1,11 @@
 name: Dependencies license compliance checker
 
 on:
-  push:
-    branches:
-      - master
+  workflow_call:
+
+concurrency:
+  group: linting-${{ github.event_name == 'pull_request' && format('{0}-{1}', github.workflow, github.event.pull_request.number) || github.workflow_ref }}
+  cancel-in-progress: true
 
 jobs:
   license_check:

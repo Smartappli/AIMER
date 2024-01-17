@@ -1,6 +1,11 @@
-name: UT_Common_Models_A_M
+name: UT_Common_Models_A
 
-on: [push]
+on:
+  workflow_call:
+
+concurrency:
+  group: linting-${{ github.event_name == 'pull_request' && format('{0}-{1}', github.workflow, github.event.pull_request.number) || github.workflow_ref }}
+  cancel-in-progress: true
 
 jobs:
   build:
@@ -39,6 +44,4 @@ jobs:
         python manage.py test fl_common.tests.tests_models_i
     - name: Fl_common Models M
       run: |
-        python manage.py test fl_common.tests.tests_models_m
-        
-        
+        python manage.py test fl_common.tests.tests_models_m     

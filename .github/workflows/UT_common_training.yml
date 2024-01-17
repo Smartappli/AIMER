@@ -1,10 +1,6 @@
-name: Pylint
+name: UT_Common_Training
 
 on:
-  push:
-    branches:
-      - master
-
   workflow_call:
 
   pull_request:
@@ -32,7 +28,6 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
         pip install git+https://github.com/pycaret/pycaret.git
-        pip install pylint pylint-django
-    - name: Analysing the code with pylint
+    - name: Fl_common unit tests
       run: |
-        shopt -s globstar && pylint --load-plugins pylint_django --django-settings-module=lab.settings **/*.py
+        python manage.py test fl_common.tests.tests
