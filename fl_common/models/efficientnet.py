@@ -63,7 +63,7 @@ def get_efficientnet_model(efficientnet_type, num_classes):
         weights = models.EfficientNet_V2_L_Weights.DEFAULT
         efficientnet_model = models.efficientnet_v2_l(weights=weights)
     else:
-        raise ValueError(f'Unknown DenseNet Architecture : {efficientnet_type}')
+        raise ValueError(f'Unknown EfficientNet Architecture: {efficientnet_type}')
 
     # Modify last layer to suit number of classes
     num_features = efficientnet_model.classifier[-1].in_features
