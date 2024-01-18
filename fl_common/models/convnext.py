@@ -1,6 +1,7 @@
 import torch.nn as nn
 from torchvision import models
 
+
 def get_convnext_model(convnext_type, num_classes):
     """0
     Obtain a ConvNeXt model with a specified architecture type and modify it for the given number of classes.
@@ -41,7 +42,7 @@ def get_convnext_model(convnext_type, num_classes):
         weights = models.ConvNeXt_Large_Weights.DEFAULT
         convnext_model = models.convnext_large(weights=weights)
     else:
-        raise ValueError(f'Unknown DenseNet Architecture : {convnext_type}')
+        raise ValueError(f'Unknown ConvNeXt Architecture : {convnext_type}')
 
     # Modify last layer to suit number of classes
     for layer in reversed(convnext_model.classifier):

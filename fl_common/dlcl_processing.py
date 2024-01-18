@@ -17,8 +17,10 @@ from fl_common.models.utils import (get_optimizer,
                                     get_dataset,
                                     EarlyStopping)
 from fl_common.models.alexnet import get_alexnet_model
+from fl_common.models.beit import get_beit_model
 from fl_common.models.convnext import get_convnext_model
 from fl_common.models.densenet import get_densenet_model
+from fl_common.models.edgenet import get_edgenet_model
 from fl_common.models.efficientnet import get_efficientnet_model
 from fl_common.models.inception_next import get_inception_next_model
 from fl_common.models.inception import get_inception_model
@@ -56,7 +58,7 @@ model_list = ['xception41', 'ResNet18', 'Swin_V2_T', 'RegNet_X_400MF', 'MobileNe
               'ConvNeXt_Tiny', 'AlexNet', 'GoogLeNet', 'Inception_V3', 'VGG11',
               'DenseNet121', 'EfficientNetB0', 'ShuffleNet_V2_X0_5', 'MNASNet0_5',
               'Wide_ResNet50_2', 'ResNeXt50_32X4D', 'MaxVit_T', 'SqueezeNet1_0',
-              'ViT_B_16', 'volo_d1_224']
+              'ViT_B_16', 'volo_d1_224', 'edgenext_small', 'beit_base_patch16_224']
 # Model Parameters
 best_val_loss = float('inf')  # Initialize the best validation loss
 
@@ -142,10 +144,16 @@ def get_familly_model(model_type, num_classes):
                         'EfficientNetB5', 'EfficientNetB0', 'EfficientNetB7', 'EfficientNetV2S', 'EfficientNetV',
                         'EfficientNetV2L']:
         model = get_efficientnet_model(model_type, num_classes)
+    elif model_type in ['edgenext_xx_small', 'edgenext_x_small', 'edgenext_small', 'edgenext_base', 'edgenext_small_rw']:
+        model = get_edgenet_model(model_type, num_classes)
     elif model_type in ['DenseNet121', 'DenseNet161', 'DenseNet169', 'DenseNet201']:
         model = get_densenet_model(model_type, num_classes)
     elif model_type in ['ConvNeXt_Tiny', 'ConvNeXt_Small', 'ConvNeXt_Base', 'ConvNeXt_Large']:
         model = get_convnext_model(model_type, num_classes)
+    elif model_type in ['beit_base_patch16_224', 'beit_base_patch16_384', 'beit_large_patch16_224',
+                        'beit_large_patch16_384', 'beit_large_patch16_512', 'beitv2_base_patch16_224',
+                        'beitv2_large_patch16_224']:
+        model = get_beit_model(model_type, num_classes)
     else:
         model = get_alexnet_model(alexnet_type='AlexNet', num_classes=num_classes)
     return model

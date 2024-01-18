@@ -1,4 +1,4 @@
-name: UT_Common_Models_A
+name: UT_Common_Models_B
 
 on:
   workflow_call:
@@ -24,6 +24,6 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
         pip install git+https://github.com/pycaret/pycaret.git
-    - name: Fl_common Models A
+    - name: Fl_common Models B
       run: |
-        python manage.py test fl_common.tests.tests_models_a
+        python manage.py test fl_common.tests.tests_models_b
