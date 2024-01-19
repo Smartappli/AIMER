@@ -88,7 +88,7 @@ num_epochs_phase3 = 50  # Number of epochs for the third training phase
 scheduler_phase3 = False
 early_stopping_patience_phase3 = 5
 
-xai = True
+xai = False
 
 
 def get_familly_model(model_type, num_classes):
