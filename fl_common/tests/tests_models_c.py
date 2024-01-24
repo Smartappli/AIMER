@@ -42,7 +42,7 @@ class ProcessingPartCTestCase(TestCase):
 
         self.assertEqual(
             str(context.exception),
-            f'Unknown DenseNet Architecture : {convnext_type}'
+            f'Unknown ConvNeXt Architecture : {convnext_type}'
         )
 
     def test_convnext_last_layer_adaptation(self):
