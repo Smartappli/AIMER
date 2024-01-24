@@ -1,6 +1,6 @@
 django==5.0.1
 #llama-cpp-python==0.2.24
-huggingface-hub==0.20.2
+huggingface-hub==0.20.3
 #pycaret[full]==3.2.0 # 3.2.1
 #git+https://github.com/pycaret/pycaret.git
 scikit-learn-intelex==2024.1.0
