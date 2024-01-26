@@ -18,7 +18,7 @@ def get_convit_model(convit_type, num_classes):
 
     Example:
         To get a Convit Tiny model with 10 output classes:
-        >>> model = get_convit_model("convit_tiny", num_classes=10)
+        model = get_convit_model("convit_tiny", num_classes=10)
     """
     if convit_type == "convit_tiny":
         convit_model = create_model('convit_tiny', pretrained=True, num_classes=num_classes)
