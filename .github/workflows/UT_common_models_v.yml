@@ -1,4 +1,4 @@
-name: UT_Common_Models_R_X
+name: UT_Common_Models_V
 
 on:
   workflow_call:
