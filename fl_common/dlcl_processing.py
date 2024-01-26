@@ -60,7 +60,8 @@ model_list = ['xception41', 'ResNet18', 'Swin_V2_T', 'RegNet_X_400MF', 'MobileNe
               'ConvNeXt_Tiny', 'AlexNet', 'GoogLeNet', 'Inception_V3', 'VGG11',
               'DenseNet121', 'EfficientNetB0', 'ShuffleNet_V2_X0_5', 'MNASNet0_5',
               'Wide_ResNet50_2', 'ResNeXt50_32X4D', 'MaxVit_T', 'SqueezeNet1_0',
-              'ViT_B_16', 'volo_d1_224', 'edgenext_small', 'beit_base_patch16_224', 'convit_tiny']
+              'ViT_B_16', 'volo_d1_224', 'edgenext_small', 'beit_base_patch16_224',
+              'convit_tiny', 'davit_tiny']
 
 # Model Parameters
 best_val_loss = float('inf')  # Initialize the best validation loss
