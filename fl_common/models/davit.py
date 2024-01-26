@@ -23,7 +23,7 @@ def get_davit_model(davit_type, num_classes):
     elif davit_type == "davit_large":
         davit_model = create_model('davit_large', pretrained=True, num_classes=num_classes)
     elif davit_type == "davit_huge":
-        davit_model = create_model('davit_huge', pretrained=True, num_classes=num_classes)
+        davit_model = create_model('davit_huge', pretrained=False, num_classes=num_classes)
     elif davit_type == "davit_giant":
         davit_model = create_model('davit_giant', pretrained=False, num_classes=num_classes)
     else:
