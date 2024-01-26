@@ -35,6 +35,7 @@ from fl_common.models.resnext import get_resnext_model
 from fl_common.models.squeezenet import get_squeezenet_model
 from fl_common.models.shufflenet import get_shufflenet_model
 from fl_common.models.swin_transformer import get_swin_model
+from fl_common.models.tiny_vit import get_tiny_vit_model
 from fl_common.models.vgg import get_vgg_model
 from fl_common.models.vision_transformer import get_vision_model
 from fl_common.models.volo import get_volo_model
@@ -61,7 +62,7 @@ model_list = ['xception41', 'ResNet18', 'Swin_V2_T', 'RegNet_X_400MF', 'MobileNe
               'DenseNet121', 'EfficientNetB0', 'ShuffleNet_V2_X0_5', 'MNASNet0_5',
               'Wide_ResNet50_2', 'ResNeXt50_32X4D', 'MaxVit_T', 'SqueezeNet1_0',
               'ViT_B_16', 'volo_d1_224', 'edgenext_small', 'beit_base_patch16_224',
-              'convit_tiny', 'davit_tiny']
+              'convit_tiny', 'davit_tiny', 'tiny_vit_5m_224']
 
 # Model Parameters
 best_val_loss = float('inf')  # Initialize the best validation loss
@@ -120,6 +121,8 @@ def get_familly_model(model_type, num_classes):
         model = get_vision_model(model_type, num_classes)
     elif model_type in ['VGG11', 'VGG11_BN', 'VGG13', 'VGG13_BN', 'VGG16', 'VGG16_BN', 'VGG19', 'VGG19_BN']:
         model = get_vgg_model(model_type, num_classes)
+    elif model_type in ['tiny_vit_5m_224', 'tiny_vit_11m_224', 'tiny_vit_21m_224', 'tiny_vit_21m_384', 'tiny_vit_21m_512']:
+        model = get_tiny_vit_model(model_type, num_classes)
     elif model_type in ['Swin_T', 'Swin_S', 'Swin_B', 'Swin_V2_T', 'Swin_V2_S', 'Swin_V2_B']:
         model = get_swin_model(model_type, num_classes)
     elif model_type in ["SqueezeNet1_0", 'SqueezeNet1_1']:
