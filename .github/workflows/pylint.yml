@@ -36,10 +36,10 @@ jobs:
         pip install pylint pylint-django
     - name: Analysing the code with pylint
       run: |
-        if ($env:RUNNER_OS -eq "Windows") {
+        if [ "${{ runner.os }}" = "Windows" ]; then
           # For Windows, use double quotes around the wildcard to expand correctly
           pylint --load-plugins pylint_django --django-settings-module=lab.settings "**/*.py"
-        } else {
+        else
           # For Linux and macOS, use single quotes and find command for recursive globbing
-          Get-ChildItem -Recurse -Filter *.py | ForEach-Object { pylint --load-plugins pylint_django --django-settings-module=lab.settings $_.FullName }
-        }
+          find . -name "*.py" | xargs pylint --load-plugins pylint_django --django-settings-module=lab.settings
+        fi
