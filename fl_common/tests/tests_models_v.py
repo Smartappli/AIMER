@@ -194,7 +194,7 @@ class ProcessingPartVTestCase(TestCase):
         - 'ese_vovnet57b'
         - 'ese_vovnet99b'
         - 'eca_vovnet39b'
-        - 'eca_vovnet39b_evos'
+        - 'ese_vovnet39b_evos'
         """
         architectures = [
             'vovnet39a',
@@ -206,7 +206,7 @@ class ProcessingPartVTestCase(TestCase):
             'ese_vovnet57b',
             'ese_vovnet99b',
             'eca_vovnet39b',
-            'eca_vovnet39b_evos'
+            'ese_vovnet39b_evos'
         ]
 
         for arch in architectures:

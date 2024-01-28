@@ -114,4 +114,3 @@ class ProcessingPartXTestCase(TestCase):
         """
         with self.assertRaises(ValueError):
             get_xcit_model('unknown_model', num_classes=10)
-

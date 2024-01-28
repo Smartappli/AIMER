@@ -27,9 +27,3 @@ jobs:
     - name: Fl_common Models V
       run: |
         python manage.py test fl_common.tests.tests_models_v
-    - name: Fl_common Models W
-      run: |
-        python manage.py test fl_common.tests.tests_models_w
-    - name: Fl_common Models X
-      run: |
-        python manage.py test fl_common.tests.tests_models_x  

@@ -1,10 +1,10 @@
-name: UT_Common_Models_T
+name: UT_Common_Models_L
 
 on:
   workflow_call:
 
 concurrency:
-  group: ut_common_models_t-${{ github.event_name == 'pull_request' && format('{0}-{1}', github.workflow, github.event.pull_request.number) || github.workflow_ref }}
+  group: ut_common_models_l-${{ github.event_name == 'pull_request' && format('{0}-{1}', github.workflow, github.event.pull_request.number) || github.workflow_ref }}
   cancel-in-progress: true
 
 jobs:
@@ -24,6 +24,6 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
         pip install git+https://github.com/pycaret/pycaret.git
-    - name: Fl_common Models T
+    - name: Fl_common Models L
       run: |
-        python manage.py test fl_common.tests.tests_models_t
+        python manage.py test fl_common.tests.tests_models_l

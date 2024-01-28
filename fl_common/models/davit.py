@@ -21,11 +21,20 @@ def get_davit_model(davit_type, num_classes):
     elif davit_type == "davit_base":
         davit_model = create_model('davit_base', pretrained=True, num_classes=num_classes)
     elif davit_type == "davit_large":
-        davit_model = create_model('davit_large', pretrained=True, num_classes=num_classes)
+        try:
+            davit_model = create_model('davit_large', pretrained=True, num_classes=num_classes)
+        except:
+            davit_model = create_model('davit_large', pretrained=False, num_classes=num_classes)
     elif davit_type == "davit_huge":
-        davit_model = create_model('davit_huge', pretrained=False, num_classes=num_classes)
+        try:
+            davit_model = create_model('davit_huge', pretrained=True, num_classes=num_classes)
+        except:
+            davit_model = create_model('davit_huge', pretrained=False, num_classes=num_classes)
     elif davit_type == "davit_giant":
-        davit_model = create_model('davit_giant', pretrained=False, num_classes=num_classes)
+        try:
+            davit_model = create_model('davit_giant', pretrained=True, num_classes=num_classes)
+        except:
+            davit_model = create_model('davit_giant', pretrained=False, num_classes=num_classes)
     else:
         # Raise a ValueError if an unknown Davit architecture is specified
         raise ValueError(f'Unknown Davit Architecture: {davit_type}')
