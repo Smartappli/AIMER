@@ -18,6 +18,8 @@ from fl_common.models.utils import (get_optimizer,
                                     EarlyStopping)
 from fl_common.models.alexnet import get_alexnet_model
 from fl_common.models.beit import get_beit_model
+from fl_common.models.cait import get_cait_model
+from fl_common.models.coat import get_coat_model
 from fl_common.models.convit import get_convit_model
 from fl_common.models.convnext import get_convnext_model
 from fl_common.models.davit import get_davit_model
@@ -25,8 +27,10 @@ from fl_common.models.densenet import get_densenet_model
 from fl_common.models.edgenet import get_edgenet_model
 from fl_common.models.efficientnet import get_efficientnet_model
 from fl_common.models.fastvit import get_fastvit_model
+from fl_common.models.gcvit import get_gcvit_model
 from fl_common.models.inception_next import get_inception_next_model
 from fl_common.models.inception import get_inception_model
+from fl_common.models.levit import get_levit_model
 from fl_common.models.maxvit import get_maxvit_model
 from fl_common.models.mnasnet import get_mnasnet_model
 from fl_common.models.mobilenet import get_mobilenet_model
@@ -40,6 +44,7 @@ from fl_common.models.tiny_vit import get_tiny_vit_model
 from fl_common.models.vgg import get_vgg_model
 from fl_common.models.vision_transformer import get_vision_model
 from fl_common.models.volo import get_volo_model
+from fl_common.models.vovnet import get_vovnet_model
 from fl_common.models.wide_resnet import get_wide_resnet_model
 from fl_common.models.xception import get_xception_model
 
@@ -63,7 +68,8 @@ model_list = ['xception41', 'ResNet18', 'Swin_V2_T', 'RegNet_X_400MF', 'MobileNe
               'DenseNet121', 'EfficientNetB0', 'ShuffleNet_V2_X0_5', 'MNASNet0_5',
               'Wide_ResNet50_2', 'ResNeXt50_32X4D', 'MaxVit_T', 'SqueezeNet1_0',
               'ViT_B_16', 'volo_d1_224', 'edgenext_small', 'beit_base_patch16_224',
-              'convit_tiny', 'davit_tiny', 'tiny_vit_5m_224', 'fastvit_t8']
+              'convit_tiny', 'davit_tiny', 'tiny_vit_5m_224', 'fastvit_t8', 'coat_tiny',
+              'cait_xxs24_224', 'gcvit_xxtiny', 'vovnet39a', 'levit_128s']
 
 # Model Parameters
 best_val_loss = float('inf')  # Initialize the best validation loss
@@ -115,6 +121,10 @@ def get_familly_model(model_type, num_classes):
         model = get_xception_model(model_type, num_classes)
     elif model_type in ['Wide_ResNet50_2', 'Wide_ResNet101_2']:
         model = get_wide_resnet_model(model_type, num_classes)
+    elif model_type in ['vovnet39a', 'vovnet57a', 'ese_vovnet19b_slim_dw', 'ese_vovnet19b_slim_dw',
+                        'ese_vovnet19b_slim', 'ese_vovnet39b', 'ese_vovnet57b', 'ese_vovnet99b',
+                        'eca_vovnet39b', 'eca_vovnet39b_evos']:
+        model = get_vovnet_model(model_type, num_classes)
     elif model_type in ['volo_d1_224', 'volo_d1_384', 'volo_d2_224', 'volo_d2_384', 'volo_d3_224', 'volo_d3_448',
                         'volo_d4_224', 'volo_d4_448', 'volo_d5_224', 'volo_d5_448', 'volo_d5_512']:
         model = get_volo_model(model_type, num_classes)
@@ -138,16 +148,23 @@ def get_familly_model(model_type, num_classes):
     elif model_type in ['RegNet_X_400MF', 'RegNet_X_800MF', 'RegNet_X_1_6GF', 'RegNet_X_3_2GF', 'RegNet_X_16GF',
                         'RegNet_Y_400MF', 'RegNet_Y_800MF', 'RegNet_Y_1_6GF', 'RegNet_Y_3_2GF', 'RegNet_Y_16GF']:
         model = get_regnet_model(model_type, num_classes)
-    elif model_type in ['MNASNet0_5', 'MNASNet0_75', 'MNASNet1_0', 'MNASNet1_3']:
-        model = get_mnasnet_model(model_type, num_classes)
     elif model_type in ['MobileNet_V2', 'MobileNet_V3_Small', 'MobileNet_V3_Large']:
         model = get_mobilenet_model(model_type, num_classes)
+    elif model_type in ['MNASNet0_5', 'MNASNet0_75', 'MNASNet1_0', 'MNASNet1_3']:
+        model = get_mnasnet_model(model_type, num_classes)
     elif model_type in ['MaxVit_T']:
         model = get_maxvit_model(model_type, num_classes)
+    elif model_type in ['levit_128s', 'levit_128', 'levit_192', 'levit_256', 'levit_384', 'levit_384_s8',
+                        'levit_512_s8', 'levit_512', 'levit_256d', 'levit_512d', 'levit_conv_128s',
+                       'levit_conv_128', 'levit_conv_192', 'levit_conv_256', 'levit_conv_384', 'levit_conv_384_s8',
+                       'levit_conv_512_s8', 'levit_conv_512', 'levit_conv_256d', 'levit_conv_512d']:
+        model = get_levit_model(model_type, num_classes)
     elif model_type in ['inception_next_tiny', 'inception_next_small', 'inception_next_base']:
         model = get_inception_next_model(model_type, num_classes)
     elif model_type in ['Inception_V3', 'inception_v4', 'inception_resnet_v2']:
         model = get_inception_model(model_type, num_classes)
+    elif model_type in ['gcvit_xxtiny', 'gcvit_xtiny', 'gcvit_tiny', 'gcvit_small', 'gcvit_base']:
+        model = get_gcvit_model(model_type, num_classes)
     elif model_type in ['fastvit_t8', 'fastvit_t12', 'fastvit_s12', 'fastvit_sa12', 'fastvit_sa24', 'fastvit_sa36',
                         'fastvit_ma36']:
         model = get_fastvit_model(model_type, num_classes)
@@ -155,7 +172,8 @@ def get_familly_model(model_type, num_classes):
                         'EfficientNetB5', 'EfficientNetB0', 'EfficientNetB7', 'EfficientNetV2S', 'EfficientNetV',
                         'EfficientNetV2L']:
         model = get_efficientnet_model(model_type, num_classes)
-    elif model_type in ['edgenext_xx_small', 'edgenext_x_small', 'edgenext_small', 'edgenext_base', 'edgenext_small_rw']:
+    elif model_type in ['edgenext_xx_small', 'edgenext_x_small', 'edgenext_small', 'edgenext_base',
+                        'edgenext_small_rw']:
         model = get_edgenet_model(model_type, num_classes)
     elif model_type in ['DenseNet121', 'DenseNet161', 'DenseNet169', 'DenseNet201']:
         model = get_densenet_model(model_type, num_classes)
@@ -165,6 +183,12 @@ def get_familly_model(model_type, num_classes):
         model = get_convnext_model(model_type, num_classes)
     elif model_type in ['convit_tiny', 'convit_small', 'convit_base']:
         model = get_convit_model(model_type, num_classes)
+    elif model_type in ['coat_tiny', 'coat_mini', 'coat_small', 'coat_lite_tiny', 'coat_lite_mini',
+                        'coat_lite_small', 'coat_lite_medium', 'coat_lite_medium_384']:
+        model = get_coat_model(model_type, num_classes)
+    elif model_type in ['cait_xxs24_224', 'cait_xxs24_384', 'cait_xxs36_224', 'cait_xxs36_384', 'cait_xs24_384',
+                        'cait_s24_224', 'cait_s24_384', 'cait_s36_224', 'cait_m36_224', 'cait_m48_448']:
+        model = get_cait_model(model_type, num_classes)
     elif model_type in ['beit_base_patch16_224', 'beit_base_patch16_384', 'beit_large_patch16_224',
                         'beit_large_patch16_384', 'beit_large_patch16_512', 'beitv2_base_patch16_224',
                         'beitv2_large_patch16_224']:
