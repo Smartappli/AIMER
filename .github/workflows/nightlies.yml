@@ -42,6 +42,10 @@ jobs:
     if: github.repository == 'Smartappli/tfe' # don't run on forks
     uses: Smartappli/tfe/.github/workflows/UT_common_models_e.yml@master
 
+  call-UT-common_models_F:
+    if: github.repository == 'Smartappli/tfe' # don't run on forks
+    uses: Smartappli/tfe/.github/workflows/UT_common_models_f.yml@master
+
   call-UT-common_models_G:
     if: github.repository == 'Smartappli/tfe' # don't run on forks
     uses: Smartappli/tfe/.github/workflows/UT_common_models_g.yml@master
@@ -49,6 +53,10 @@ jobs:
   call-UT-common_models_I:
     if: github.repository == 'Smartappli/tfe' # don't run on forks
     uses: Smartappli/tfe/.github/workflows/UT_common_models_i.yml@master
+
+  call-UT-common_models_L:
+    if: github.repository == 'Smartappli/tfe' # don't run on forks
+    uses: Smartappli/tfe/.github/workflows/UT_common_models_l.yml@master
 
   call-UT-common_models_M:
     if: github.repository == 'Smartappli/tfe' # don't run on forks

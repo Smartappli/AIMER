@@ -24,6 +24,7 @@ from fl_common.models.davit import get_davit_model
 from fl_common.models.densenet import get_densenet_model
 from fl_common.models.edgenet import get_edgenet_model
 from fl_common.models.efficientnet import get_efficientnet_model
+from fl_common.models.fastvit import get_fastvit_model
 from fl_common.models.inception_next import get_inception_next_model
 from fl_common.models.inception import get_inception_model
 from fl_common.models.maxvit import get_maxvit_model
@@ -62,7 +63,7 @@ model_list = ['xception41', 'ResNet18', 'Swin_V2_T', 'RegNet_X_400MF', 'MobileNe
               'DenseNet121', 'EfficientNetB0', 'ShuffleNet_V2_X0_5', 'MNASNet0_5',
               'Wide_ResNet50_2', 'ResNeXt50_32X4D', 'MaxVit_T', 'SqueezeNet1_0',
               'ViT_B_16', 'volo_d1_224', 'edgenext_small', 'beit_base_patch16_224',
-              'convit_tiny', 'davit_tiny', 'tiny_vit_5m_224']
+              'convit_tiny', 'davit_tiny', 'tiny_vit_5m_224', 'fastvit_t8']
 
 # Model Parameters
 best_val_loss = float('inf')  # Initialize the best validation loss
@@ -147,6 +148,9 @@ def get_familly_model(model_type, num_classes):
         model = get_inception_next_model(model_type, num_classes)
     elif model_type in ['Inception_V3', 'inception_v4', 'inception_resnet_v2']:
         model = get_inception_model(model_type, num_classes)
+    elif model_type in ['fastvit_t8', 'fastvit_t12', 'fastvit_s12', 'fastvit_sa12', 'fastvit_sa24', 'fastvit_sa36',
+                        'fastvit_ma36']:
+        model = get_fastvit_model(model_type, num_classes)
     elif model_type in ['EfficientNetB0', 'EfficientNetB1', 'EfficientNetB2', 'EfficientNetB3', 'EfficientNetB4',
                         'EfficientNetB5', 'EfficientNetB0', 'EfficientNetB7', 'EfficientNetV2S', 'EfficientNetV',
                         'EfficientNetV2L']:
