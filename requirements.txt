@@ -22,4 +22,4 @@ captum==0.7.0
 psycopg2==2.9.9
 tqdm==4.66.1
 syft==0.8.4b14
-hagrid==0.3.105
+hagrid==0.3.106
