@@ -1,4 +1,4 @@
-django==5.0.1
+django==5.0.2
 #llama-cpp-python==0.2.29
 huggingface-hub==0.20.3
 #pycaret[full]==3.2.0 # 3.2.1
