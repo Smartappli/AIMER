@@ -5,7 +5,7 @@ huggingface-hub==0.20.3
 #git+https://github.com/pycaret/pycaret.git
 scikit-learn-intelex
 #tensorflow==2.15 # 2.14.1
-tf-nightly==2.17.0.dev20240214
+tf-nightly==2.17.0.dev20240213
 keras==3.0.4 # 2.14
 keras-tuner==1.4.6
 seaborn==0.13.2 # 0.12.2
@@ -20,6 +20,6 @@ prophet==1.1.5
 lightgbm==4.3.0
 captum==0.7.0
 psycopg2==2.9.9
-tqdm==4.66.2
+tqdm==4.66.1
 syft==0.8.4b22
 hagrid==0.3.110
