@@ -21,5 +21,5 @@ lightgbm==4.3.0
 captum==0.7.0
 psycopg2==2.9.9
 tqdm==4.66.1
-syft==0.8.4b23
+syft==0.8.4b28
 hagrid==0.3.110
