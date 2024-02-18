@@ -47,6 +47,7 @@ from fl_common.models.volo import get_volo_model
 from fl_common.models.vovnet import get_vovnet_model
 from fl_common.models.wide_resnet import get_wide_resnet_model
 from fl_common.models.xception import get_xception_model
+from fl_common.models.xcit import get_xcit_model
 
 os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
 
@@ -63,7 +64,7 @@ augmentation_params = {
 }
 batch_size = 16
 
-model_list = ['xception41', 'ResNet18', 'Swin_V2_T', 'RegNet_X_400MF', 'MobileNet_V3_Small',
+model_list = ['xcit_nano_12_p16_224', 'xception41', 'ResNet18', 'Swin_V2_T', 'RegNet_X_400MF', 'MobileNet_V3_Small',
               'ConvNeXt_Tiny', 'AlexNet', 'GoogLeNet', 'Inception_V3', 'VGG11',
               'DenseNet121', 'EfficientNetB0', 'ShuffleNet_V2_X0_5', 'MNASNet0_5',
               'Wide_ResNet50_2', 'ResNeXt50_32X4D', 'MaxVit_T', 'SqueezeNet1_0',
@@ -116,8 +117,16 @@ def get_familly_model(model_type, num_classes):
     Raises:
     - ValueError: If the specified model family is not recognized.
     """
-
-    if model_type in ['legacy_xception', 'xception41', 'xception65', 'xception71', 'xception41p', 'xception65p']:
+    if model_type in ['xcit_nano_12_p16_224', 'xcit_nano_12_p16_384', 'xcit_tiny_12_p16_224', 'xcit_tiny_12_p16_384',
+                      'xcit_small_12_p16_224', 'xcit_small_12_p16_384', 'xcit_tiny_24_p16_224', 'xcit_tiny_24_p16_384',
+                      'xcit_small_24_p16_224', 'xcit_small_24_p16_384', 'xcit_medium_24_p16_224',
+                      'xcit_medium_24_p16_384', 'xcit_large_24_p16_224', 'xcit_large_24_p16_384', 'xcit_nano_12_p8_224',
+                      'xcit_nano_12_p8_384', 'xcit_tiny_12_p8_224', 'xcit_tiny_12_p8_384', 'xcit_small_12_p8_224',
+                      'xcit_small_12_p8_384', 'xcit_tiny_24_p8_224', 'xcit_tiny_24_p8_384', 'xcit_small_24_p8_224',
+                      'xcit_small_24_p8_384', 'xcit_medium_24_p8_224', 'xcit_medium_24_p8_384', 'xcit_large_24_p8_224',
+                      'xcit_large_24_p8_384']:
+        model = get_xcit_model(model_type, num_classes)
+    elif model_type in ['legacy_xception', 'xception41', 'xception65', 'xception71', 'xception41p', 'xception65p']:
         model = get_xception_model(model_type, num_classes)
     elif model_type in ['Wide_ResNet50_2', 'Wide_ResNet101_2']:
         model = get_wide_resnet_model(model_type, num_classes)
