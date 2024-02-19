@@ -21,6 +21,7 @@ from fl_common.models.beit import get_beit_model
 from fl_common.models.cait import get_cait_model
 from fl_common.models.coat import get_coat_model
 from fl_common.models.convit import get_convit_model
+from fl_common.models.convmixer import get_convmixer_model
 from fl_common.models.convnext import get_convnext_model
 from fl_common.models.davit import get_davit_model
 from fl_common.models.densenet import get_densenet_model
@@ -70,7 +71,7 @@ model_list = ['xcit_nano_12_p16_224', 'xception41', 'ResNet18', 'Swin_V2_T', 'Re
               'Wide_ResNet50_2', 'ResNeXt50_32X4D', 'MaxVit_T', 'SqueezeNet1_0',
               'ViT_B_16', 'volo_d1_224', 'edgenext_small', 'beit_base_patch16_224',
               'convit_tiny', 'davit_tiny', 'tiny_vit_5m_224', 'fastvit_t8', 'coat_tiny',
-              'cait_xxs24_224', 'gcvit_xxtiny', 'vovnet39a', 'levit_128s']
+              'cait_xxs24_224', 'gcvit_xxtiny', 'vovnet39a', 'levit_128s', 'convmixer_1536_20']
 
 # Model Parameters
 best_val_loss = float('inf')  # Initialize the best validation loss
@@ -175,6 +176,8 @@ def get_family_model_c(model_type, num_classes):
     elif model_type in ['coat_tiny', 'coat_mini', 'coat_small', 'coat_lite_tiny', 'coat_lite_mini',
                         'coat_lite_small', 'coat_lite_medium', 'coat_lite_medium_384']:
         model = get_coat_model(model_type, num_classes)
+    elif model_type in ['convmixer_1536_20', 'convmixer_768_32', 'convmixer_1024_20_ks9_p14']:
+        model = get_convmixer_model(model_type, num_classes)
     elif model_type in ['convit_tiny', 'convit_small', 'convit_base']:
         model = get_convit_model(model_type, num_classes)
     elif model_type in ['ConvNeXt_Tiny', 'ConvNeXt_Small', 'ConvNeXt_Base', 'ConvNeXt_Large']:
@@ -435,6 +438,7 @@ def get_family_model_t(model_type, num_classes):
         model = get_tiny_vit_model(model_type, num_classes)
 
     return model
+
 
 def get_family_model_v(model_type, num_classes):
     """
