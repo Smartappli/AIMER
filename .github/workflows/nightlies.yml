@@ -4,14 +4,12 @@ on:
   push:
     branches:
       - master
+  pull_request:
+    branches:
+      - "**"
   schedule:
-    - cron: "0 00 * * */7" # 12am UTC, 5:30pm Indian, 9pm Brazil, 11am AEDT
+    - cron: "0 00 * * *" # 12am UTC, 5:30pm Indian, 9pm Brazil, 11am AEDT
   workflow_dispatch:
-    inputs:
-      none:
-        description: "Run Nightlies Tests Manually"
-        required: false
-  workflow_call:
     inputs:
       none:
         description: "Run Nightlies Tests Manually"
