@@ -3,10 +3,6 @@ name: UT_Common_Training
 on:
   workflow_call:
 
-  pull_request:
-    branches:
-      - "**"
-
 concurrency:
   group: ut_common_training-${{ github.event_name == 'pull_request' && format('{0}-{1}', github.workflow, github.event.pull_request.number) || github.workflow_ref }}
   cancel-in-progress: true
