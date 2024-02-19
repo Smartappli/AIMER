@@ -11,6 +11,11 @@ on:
       none:
         description: "Run Nightlies Tests Manually"
         required: false
+  workflow_call:
+    inputs:
+      none:
+        description: "Run Nightlies Tests Manually"
+        required: false
 
 jobs:
   call-Licenses-Check:
