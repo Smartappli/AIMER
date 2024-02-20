@@ -8,7 +8,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build:
+  test-alexnet:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -41,4 +41,4 @@ jobs:
         pip install git+https://github.com/pycaret/pycaret.git
     - name: Fl_common Models A
       run: |
-        python manage.py test fl_common.tests.tests_models_a
+        python manage.py test fl_common.tests.tests_models_alexnet

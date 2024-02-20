@@ -6,7 +6,7 @@ from fl_common.models.alexnet import get_alexnet_model
 os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
 
 
-class ProcessingPartATestCase(TestCase):
+class ProcessinAlexnetTestCase(TestCase):
     """AlexNet Model Unit Tests"""
     def test_alexnet_model(self):
         """
