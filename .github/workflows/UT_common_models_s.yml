@@ -48,6 +48,7 @@ jobs:
     strategy:
       matrix:
         python-version: ["3.10"]
+    needs: tests-shufflenet-models
     steps:
     - name: Free Disk Space (Ubuntu)
       uses: jlumbroso/free-disk-space@main
@@ -83,6 +84,7 @@ jobs:
     strategy:
       matrix:
         python-version: ["3.10"]
+    needs: tests-squeezenet-models
     steps:
     - name: Free Disk Space (Ubuntu)
       uses: jlumbroso/free-disk-space@main

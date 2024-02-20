@@ -30,6 +30,7 @@ jobs:
 
   call-UT-common_models_C:
     if: github.repository == 'Smartappli/AIMER' # don't run on forks
+    needs: call-UT-common_models_B
     uses: Smartappli/AIMER/.github/workflows/UT_common_models_c.yml@master
 
   call-UT-common_models_D:
