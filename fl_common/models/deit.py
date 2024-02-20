@@ -66,3 +66,5 @@ def get_deit_model(deit_type, num_classes):
     else:
         # Raise a ValueError if an unknown Deit architecture is specified
         raise ValueError
+
+    return deit_model
