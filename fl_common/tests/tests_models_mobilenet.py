@@ -6,7 +6,7 @@ from fl_common.models.mobilenet import get_mobilenet_model
 os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
 
 
-class ProcessingPartMTestCase(TestCase):
+class ProcessingMobilenetTestCase(TestCase):
     """MobileNet Model Unit Tests"""
     def test_get_mobilenet_model(self):
         """
