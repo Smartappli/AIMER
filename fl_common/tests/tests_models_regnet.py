@@ -6,7 +6,7 @@ from fl_common.models.regnet import get_regnet_model
 os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
 
 
-class ProcessingPartRTestCase(TestCase):
+class ProcessingRegnetTestCase(TestCase):
     # Regnet Models Unit tests
     def test_get_regnet_model(self):
         """

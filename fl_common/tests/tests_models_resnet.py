@@ -6,7 +6,7 @@ from fl_common.models.resnet import get_resnet_model
 os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
 
 
-class ProcessingPartRTestCase(TestCase):
+class ProcessingResnetTestCase(TestCase):
     """ResNet Mmodel Unit Tests"""
     def test_get_resnet_model(self):
         """

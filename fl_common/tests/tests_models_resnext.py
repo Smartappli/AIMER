@@ -6,7 +6,7 @@ from fl_common.models.resnext import get_resnext_model
 os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
 
 
-class ProcessingPartRTestCase(TestCase):
+class ProcessingResnextTestCase(TestCase):
     """ResNext Model Unit Tests"""
     def test_get_resnext_model(self):
         """
