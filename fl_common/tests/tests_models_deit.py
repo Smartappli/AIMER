@@ -8,6 +8,15 @@ os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
 class ProcessingDeitTestCase(TestCase):
     """Det Models Unit Tests"""
     def test_known_deit_types(self):
+        """
+        Test case to ensure that known DEIT (Data-efficient Image Transformer) architectures can be created.
+
+        Iterates through a list of known DEIT architecture types and attempts to create models for each type.
+        Verifies that the models are not None.
+
+        Raises:
+            AssertionError: If any known DEIT architecture fails to be created or if any architecture is unknown.
+        """
         known_deit_types = [
             "deit_tiny_patch16_224",
             "deit_small_patch16_224",
@@ -38,6 +47,14 @@ class ProcessingDeitTestCase(TestCase):
                     self.fail(f"{deit_type} should be a known Deit architecture.")
 
     def test_unknown_deit_type(self):
+        """
+        Test case to ensure that attempting to create a DEIT (Data-efficient Image Transformer) model with an unknown architecture type raises a ValueError.
+
+        Verifies that a ValueError is raised when attempting to create a DEIT model with an unknown architecture type.
+
+        Raises:
+            AssertionError: If creating a DEIT model with an unknown architecture type does not raise a ValueError.
+        """
         unknown_deit_type = "unknown_deit_type"
         num_classes = 1000
 
