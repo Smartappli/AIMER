@@ -8,7 +8,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build:
+  test-levit-models:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -39,6 +39,6 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
         pip install git+https://github.com/pycaret/pycaret.git
-    - name: Fl_common Models L
+    - name: Fl_common Models Levit
       run: |
-        python manage.py test fl_common.tests.tests_models_l
+        python manage.py test fl_common.tests.tests_models_levit
