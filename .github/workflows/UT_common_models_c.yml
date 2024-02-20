@@ -8,7 +8,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  test-models-cait:
+  test-cait-models:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -39,11 +39,11 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
         pip install git+https://github.com/pycaret/pycaret.git
-    - name: Fl_common Models C
+    - name: Fl_common Models Cait
       run: |
         python manage.py test fl_common.tests.tests_models_cait
 
-  test-models-coat:
+  test-coat-models:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -74,6 +74,6 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
         pip install git+https://github.com/pycaret/pycaret.git
-    - name: Fl_common Models C
+    - name: Fl_common Models Coat
       run: |
         python manage.py test fl_common.tests.tests_models_coat
