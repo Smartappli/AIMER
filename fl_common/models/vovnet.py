@@ -34,17 +34,17 @@ def get_vovnet_model(vovnet_type, num_classes):
     elif vovnet_type == 'ese_vovnet19b_dw':
         vovnet_model = create_model('ese_vovnet19b_dw', pretrained=False, num_classes=num_classes)
     elif vovnet_type == 'ese_vovnet19b_slim':
-         vovnet_model = create_model('ese_vovnet19b_slim', pretrained=False, num_classes=num_classes)
+        vovnet_model = create_model('ese_vovnet19b_slim', pretrained=False, num_classes=num_classes)
     elif vovnet_type == 'ese_vovnet39b':
-         vovnet_model = create_model('ese_vovnet39b', pretrained=False, num_classes=num_classes)
+        vovnet_model = create_model('ese_vovnet39b', pretrained=False, num_classes=num_classes)
     elif vovnet_type == 'ese_vovnet57b':
-         vovnet_model = create_model('ese_vovnet57b', pretrained=False, num_classes=num_classes)
+        vovnet_model = create_model('ese_vovnet57b', pretrained=False, num_classes=num_classes)
     elif vovnet_type == 'ese_vovnet99b':
-         vovnet_model = create_model('ese_vovnet99b', pretrained=False, num_classes=num_classes)
+        vovnet_model = create_model('ese_vovnet99b', pretrained=False, num_classes=num_classes)
     elif vovnet_type == 'eca_vovnet39b':
-         vovnet_model = create_model('eca_vovnet39b', pretrained=False, num_classes=num_classes)
+        vovnet_model = create_model('eca_vovnet39b', pretrained=False, num_classes=num_classes)
     elif vovnet_type == 'ese_vovnet39b_evos':
-         vovnet_model = create_model('ese_vovnet39b_evos', pretrained=False, num_classes=num_classes)
+        vovnet_model = create_model('ese_vovnet39b_evos', pretrained=False, num_classes=num_classes)
     else:
         raise ValueError(f'Unknown Vovnet Architecture : {vovnet_type}')
 
