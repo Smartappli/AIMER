@@ -8,7 +8,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build:
+  test-wide_resnet_models:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -39,6 +39,6 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
         pip install git+https://github.com/pycaret/pycaret.git
-    - name: Fl_common Models W
+    - name: Fl_common Models Wide Resnet
       run: |
-        python manage.py test fl_common.tests.tests_models_w
+        python manage.py test fl_common.tests.tests_models_wide_resnet
