@@ -8,7 +8,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build:
+  test-fastvit-models:
     runs-on: ubuntu-latest
     strategy:
       matrix:
