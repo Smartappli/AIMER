@@ -232,6 +232,19 @@ class ProcessingPartCTestCase(TestCase):
 
     # Crossvit model unit tests
     def test_get_crossvit_model(self):
+        """
+        Test the get_crossvit_model function.
+
+        This test iterates over various configurations of CrossViT models
+        and ensures that the returned models are not None and instances
+        of nn.Module.
+
+        Parameters:
+            None
+
+        Returns:
+            None
+        """
         num_classes = 1000  # Example number of classes
         crossvit_types = [
             "crossvit_tiny_240", "crossvit_small_240", "crossvit_base_240",
@@ -248,6 +261,19 @@ class ProcessingPartCTestCase(TestCase):
 
     # Cspnet model unit tests
     def test_get_cspnet_model(self):
+        """
+        Test the get_cspnet_model function.
+
+        This test iterates over various configurations of CSPNet models
+        and ensures that the returned models are not None and instances
+        of nn.Module.
+
+        Parameters:
+            None
+
+        Returns:
+            None
+        """
         num_classes = 1000  # Example number of classes
         cspnet_types = [
             "cspresnet50", "cspresnet50d", "cspresnet50w", "cspresnext50",
