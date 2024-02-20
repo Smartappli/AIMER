@@ -6,7 +6,7 @@ from fl_common.models.coat import get_coat_model
 os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
 
 
-class ProcessingPartCoatTestCase(TestCase):
+class ProcessingCoatTestCase(TestCase):
     """Coat Models Unit Tests"""
 
     def test_known_coat_types(self):

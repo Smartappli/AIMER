@@ -6,7 +6,7 @@ from fl_common.models.efficientnet import get_efficientnet_model
 os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
 
 
-class ProcessingEfficientnetTestCase(TestCase):
+class ProcessingEfficientNetTestCase(TestCase):
     """EfficientNet Model Unit Tests"""
     def test_efficientnet_model(self):
         """

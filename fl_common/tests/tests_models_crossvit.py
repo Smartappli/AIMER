@@ -6,7 +6,7 @@ from fl_common.models.crossvit import get_crossvit_model
 os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
 
 
-class ProcessingPartCTestCase(TestCase):
+class ProcessingCrossvitTestCase(TestCase):
     # Crossvit model unit tests
     def test_get_crossvit_model(self):
         """

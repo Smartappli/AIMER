@@ -6,7 +6,7 @@ from fl_common.models.cspnet import get_cspnet_model
 os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
 
 
-class ProcessingPartCTestCase(TestCase):
+class ProcessingCspnetTestCase(TestCase):
     # Cspnet model unit tests
     def test_get_cspnet_model(self):
         """

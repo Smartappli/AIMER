@@ -6,8 +6,8 @@ from fl_common.models.convmixer import get_convmixer_model
 os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
 
 
-class ProcessingPartCTestCase(TestCase):
-     # Convmixer model unit tests
+class ProcessingConvmixerTestCase(TestCase):
+    # Convmixer model unit tests
     def test_get_convmixer_model(self):
         """
         Unit test for the `get_convmixer_model` function.

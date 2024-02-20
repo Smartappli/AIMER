@@ -6,7 +6,7 @@ from fl_common.models.gcvit import get_gcvit_model
 os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
 
 
-class ProcessingPartGTestCase(TestCase):
+class ProcessingGcVitTestCase(TestCase):
     """Gcvit Models Unit Tests"""
     def test_known_gcvit_types(self):
         """

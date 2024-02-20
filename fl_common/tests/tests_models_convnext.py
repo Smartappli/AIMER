@@ -6,7 +6,7 @@ from fl_common.models.convnext import get_convnext_model
 os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
 
 
-class ProcessingPartCTestCase(TestCase):
+class ProcessingConvNextTestCase(TestCase):
     """ConvNeXt Model Unit Test"""
     def test_convnext_model(self):
         """

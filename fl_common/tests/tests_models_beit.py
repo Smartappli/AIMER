@@ -6,7 +6,7 @@ from fl_common.models.beit import get_beit_model
 os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
 
 
-class ProcessingPartBTestCase(TestCase):
+class ProcessingBeitTestCase(TestCase):
     """Beit Model Unit Tests"""
     def test_valid_architecture(self):
         """Test for a valid BEiT architecture."""

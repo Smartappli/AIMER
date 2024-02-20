@@ -6,7 +6,7 @@ from fl_common.models.convit import get_convit_model
 os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
 
 
-class ProcessingPartCTestCase(TestCase):
+class ProcessingConvitTestCase(TestCase):
     """Convit Models Unit Tests"""
 
     def test_valid_architecture(self):

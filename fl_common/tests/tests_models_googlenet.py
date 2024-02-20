@@ -6,7 +6,7 @@ from fl_common.models.googlenet import get_googlenet_model
 os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
 
 
-class ProcessingPartGTestCase(TestCase):
+class ProcessingGoogleNetTestCase(TestCase):
     """GoogleNet Model Unit Tests"""
     def test_get_googlenet_model(self):
         """

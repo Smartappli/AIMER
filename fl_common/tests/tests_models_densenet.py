@@ -6,7 +6,7 @@ from fl_common.models.densenet import get_densenet_model
 os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
 
 
-class ProcessingPartCTestCase(TestCase):
+class ProcessingDenseNetTestCase(TestCase):
     """DenseNet Models Unit Tests"""
     def test_densenet_model(self):
         """

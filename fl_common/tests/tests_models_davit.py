@@ -6,7 +6,7 @@ from fl_common.models.davit import get_davit_model
 os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
 
 
-class ProcessingPartCTestCase(TestCase):
+class ProcessingDavitTestCase(TestCase):
     """Davit Models Unit Tests"""
     def test_all_davit_models(self):
         """

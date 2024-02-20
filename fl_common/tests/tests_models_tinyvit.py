@@ -5,7 +5,7 @@ from fl_common.models.tiny_vit import get_tiny_vit_model
 os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
 
 
-class ProcessingPartTTestCase(TestCase):
+class ProcessingTinyVitTestCase(TestCase):
     """Tiny_Vit Models Unit Tests"""
     def test_all_tiny_vit_models(self):
         """

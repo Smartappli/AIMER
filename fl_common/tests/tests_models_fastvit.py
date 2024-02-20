@@ -6,7 +6,7 @@ from fl_common.models.fastvit import get_fastvit_model
 os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
 
 
-class ProcessingPartFTestCase(TestCase):
+class ProcessingFastVitTestCase(TestCase):
     """Fast Vision Models Unit Tests"""
     def test_all_architectures(self):
         """
