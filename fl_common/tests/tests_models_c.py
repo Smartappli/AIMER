@@ -3,9 +3,10 @@ import torch.nn as nn
 from django.test import TestCase
 from fl_common.models.cait import get_cait_model
 from fl_common.models.coat import get_coat_model
-from fl_common.models.convmixer import get_convmixer_model
 from fl_common.models.convit import get_convit_model
+from fl_common.models.convmixer import get_convmixer_model
 from fl_common.models.convnext import get_convnext_model
+from fl_common.models.crossvit import get_crossvit_model
 
 os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
 
@@ -225,5 +226,21 @@ class ProcessingPartCTestCase(TestCase):
         for convmixer_type in convmixer_types:
             with self.subTest(convmixer_type=convmixer_type):
                 model = get_convmixer_model(convmixer_type, num_classes)
+                self.assertIsNotNone(model)
+                self.assertIsInstance(model, nn.Module)
+
+    # Crossvit model unit tests
+    def test_get_crossvit_model(self):
+        num_classes = 1000  # Example number of classes
+        crossvit_types = [
+            "crossvit_tiny_240", "crossvit_small_240", "crossvit_base_240",
+            "crossvit_9_240", "crossvit_15_240", "crossvit_18_240",
+            "crossvit_9_dagger_240", "crossvit_15_dagger_240", "crossvit_15_dagger_408",
+            "crossvit_18_dagger_240", "crossvit_18_dagger_408"
+        ]
+
+        for crossvit_type in crossvit_types:
+            with self.subTest(crossvit_type=crossvit_type):
+                model = get_crossvit_model(crossvit_type, num_classes)
                 self.assertIsNotNone(model)
                 self.assertIsInstance(model, nn.Module)

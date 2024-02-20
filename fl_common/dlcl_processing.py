@@ -23,6 +23,7 @@ from fl_common.models.coat import get_coat_model
 from fl_common.models.convit import get_convit_model
 from fl_common.models.convmixer import get_convmixer_model
 from fl_common.models.convnext import get_convnext_model
+from fl_common.models.crossvit import get_crossvit_model
 from fl_common.models.davit import get_davit_model
 from fl_common.models.densenet import get_densenet_model
 from fl_common.models.edgenet import get_edgenet_model
@@ -66,12 +67,11 @@ augmentation_params = {
 batch_size = 16
 
 model_list = ['xcit_nano_12_p16_224', 'xception41', 'ResNet18', 'Swin_V2_T', 'RegNet_X_400MF', 'MobileNet_V3_Small',
-              'ConvNeXt_Tiny', 'AlexNet', 'GoogLeNet', 'Inception_V3', 'VGG11',
-              'DenseNet121', 'EfficientNetB0', 'ShuffleNet_V2_X0_5', 'MNASNet0_5',
-              'Wide_ResNet50_2', 'ResNeXt50_32X4D', 'MaxVit_T', 'SqueezeNet1_0',
-              'ViT_B_16', 'volo_d1_224', 'edgenext_small', 'beit_base_patch16_224',
-              'convit_tiny', 'davit_tiny', 'tiny_vit_5m_224', 'fastvit_t8', 'coat_tiny',
-              'cait_xxs24_224', 'gcvit_xxtiny', 'vovnet39a', 'levit_128s', 'convmixer_1536_20']
+              'ConvNeXt_Tiny', 'AlexNet', 'GoogLeNet', 'Inception_V3', 'VGG11', 'DenseNet121', 'EfficientNetB0',
+              'ShuffleNet_V2_X0_5', 'MNASNet0_5', 'Wide_ResNet50_2', 'ResNeXt50_32X4D', 'MaxVit_T', 'SqueezeNet1_0',
+              'ViT_B_16', 'volo_d1_224', 'edgenext_small', 'beit_base_patch16_224', 'convit_tiny', 'davit_tiny',
+              'tiny_vit_5m_224', 'fastvit_t8', 'coat_tiny', 'cait_xxs24_224', 'gcvit_xxtiny', 'vovnet39a',
+              'levit_128s', 'convmixer_1536_20', 'crossvit_tiny_240']
 
 # Model Parameters
 best_val_loss = float('inf')  # Initialize the best validation loss
@@ -182,6 +182,10 @@ def get_family_model_c(model_type, num_classes):
         model = get_convit_model(model_type, num_classes)
     elif model_type in ['ConvNeXt_Tiny', 'ConvNeXt_Small', 'ConvNeXt_Base', 'ConvNeXt_Large']:
         model = get_convnext_model(model_type, num_classes)
+    elif model_type in ['crossvit_tiny_240', 'rossvit_small_240', 'crossvit_base_240', 'crossvit_9_240',
+                        'crossvit_15_240', 'crossvit_18_240', 'crossvit_9_dagger_240', 'rossvit_15_dagger_240',
+                        'crossvit_15_dagger_408', 'crossvit_18_dagger_240', 'crossvit_18_dagger_408']:
+        model = get_crossvit_model(model_type, num_classes)
 
     return model
 

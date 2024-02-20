@@ -3,7 +3,7 @@ from torchvision import models
 
 
 def get_convnext_model(convnext_type, num_classes):
-    """0
+    """
     Obtain a ConvNeXt model with a specified architecture type and modify it for the given number of classes.
 
     Args:
