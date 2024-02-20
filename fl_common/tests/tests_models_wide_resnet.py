@@ -5,7 +5,7 @@ from fl_common.models.wide_resnet import get_wide_resnet_model
 os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
 
 
-class ProcessingPartWTestCase(TestCase):
+class ProcessingWideResnetTestCase(TestCase):
     """Wide Resnet Model Unit Tests"""
     def test_get_wide_resnet_model(self):
         """
