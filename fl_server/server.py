@@ -36,7 +36,7 @@ def launch_node():
     )
 
     print ("\n--- Démarrage du noeud Vivalia ---")
-    node_vivalia = sy.orchestra.launch(name="do-vivalia", local_db=True, dev_mode=True, reset=True)
+    node_vivalia = sy.orchestra.launch(name="do-vivalia", port=9003, local_db=True, dev_mode=True, reset=True)
     root_domain_vivalia_client = node_vivalia.login(email="info@openmined.org", password="changethis")
     root_domain_vivalia_client.register(
        name="Jane Doe",
