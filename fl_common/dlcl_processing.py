@@ -28,6 +28,7 @@ from fl_common.models.cspnet import get_cspnet_model
 from fl_common.models.davit import get_davit_model
 from fl_common.models.deit import get_deit_model
 from fl_common.models.densenet import get_densenet_model
+from fl_common.models.dila import get_dila_model
 from fl_common.models.edgenet import get_edgenet_model
 from fl_common.models.efficientnet import get_efficientnet_model
 from fl_common.models.fastvit import get_fastvit_model
@@ -242,6 +243,9 @@ def get_family_model_d(model_type, num_classes):
         model = get_deit_model(model_type, num_classes)
     elif model_type in ['DenseNet121', 'DenseNet161', 'DenseNet169', 'DenseNet201']:
         model = get_densenet_model(model_type, num_classes)
+    elif model_type in ['dla60_res2net', 'dla60_res2next', 'dla34', 'dla46_c', 'dla46x_c', 'dla60x_c', 'dla60',
+                        'dla60x', 'dla102', 'dla102x', 'dla102x2', 'dla169']:
+        model = get_dila_model(model_type, num_classes)
 
     return model
 
