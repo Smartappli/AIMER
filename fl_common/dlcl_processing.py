@@ -26,6 +26,7 @@ from fl_common.models.convnext import get_convnext_model
 from fl_common.models.crossvit import get_crossvit_model
 from fl_common.models.cspnet import get_cspnet_model
 from fl_common.models.davit import get_davit_model
+from fl_common.models.deit import get_deit_model
 from fl_common.models.densenet import get_densenet_model
 from fl_common.models.edgenet import get_edgenet_model
 from fl_common.models.efficientnet import get_efficientnet_model
@@ -72,7 +73,7 @@ model_list = ['xcit_nano_12_p16_224', 'xception41', 'ResNet18', 'Swin_V2_T', 'Re
               'ShuffleNet_V2_X0_5', 'MNASNet0_5', 'Wide_ResNet50_2', 'ResNeXt50_32X4D', 'MaxVit_T', 'SqueezeNet1_0',
               'ViT_B_16', 'volo_d1_224', 'edgenext_small', 'beit_base_patch16_224', 'convit_tiny', 'davit_tiny',
               'tiny_vit_5m_224', 'fastvit_t8', 'coat_tiny', 'cait_xxs24_224', 'gcvit_xxtiny', 'vovnet39a',
-              'levit_128s', 'convmixer_1536_20', 'crossvit_tiny_240', 'cspresnet50']
+              'levit_128s', 'convmixer_1536_20', 'crossvit_tiny_240', 'cspresnet50', 'deit_tiny_patch16_224']
 
 # Model Parameters
 best_val_loss = float('inf')  # Initialize the best validation loss
@@ -216,22 +217,29 @@ def get_family_model_c(model_type, num_classes):
 
 def get_family_model_d(model_type, num_classes):
     """
-    Retrieves a model belonging to family D based on the provided model type and number of classes.
+    Get a family model based on the specified type.
 
     Parameters:
-    - model_type (str): The type of model to retrieve. Should be one of the supported models:
-                        - For Davit models: ['davit_tiny', 'davit_small', 'davit_base', 'davit_large',
-                                              'davit_huge', 'davit_giant']
-                        - For DenseNet models: ['DenseNet121', 'DenseNet161', 'DenseNet169', 'DenseNet201']
-    - num_classes (int): The number of classes for the model.
+        model_type (str): Type of model.
+        num_classes (int): Number of output classes.
 
     Returns:
-    - model: The requested model if available, otherwise 'Unknown'.
+        torch.nn.Module: Model.
+
+    Raises:
+        ValueError: If an unknown model type is specified.
     """
     model = "Unknown"
 
     if model_type in ['davit_tiny', 'davit_small', 'davit_base', 'davit_large', 'davit_huge', 'davit_giant']:
         model = get_davit_model(model_type, num_classes)
+    elif model_type in ['deit_tiny_patch16_224', 'deit_small_patch16_224', 'deit_base_patch16_224',
+                        'deit_base_patch16_384', 'deit_tiny_distilled_patch16_224', 'deit_small_distilled_patch16_224',
+                        'deit_base_distilled_patch16_224', 'deit_base_distilled_patch16_384', 'deit3_small_patch16_224',
+                        'deit3_small_patch16_384', 'deit3_medium_patch16_224', 'deit3_base_patch16_224',
+                        'deit3_base_patch16_384', 'deit3_large_patch16_224', 'deit3_large_patch16_384',
+                        'deit3_huge_patch14_224']:
+        model = get_deit_model(model_type, num_classes)
     elif model_type in ['DenseNet121', 'DenseNet161', 'DenseNet169', 'DenseNet201']:
         model = get_densenet_model(model_type, num_classes)
 
