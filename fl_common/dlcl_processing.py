@@ -24,6 +24,7 @@ from fl_common.models.convit import get_convit_model
 from fl_common.models.convmixer import get_convmixer_model
 from fl_common.models.convnext import get_convnext_model
 from fl_common.models.crossvit import get_crossvit_model
+from fl_common.models.cspnet import get_cspnet_model
 from fl_common.models.davit import get_davit_model
 from fl_common.models.densenet import get_densenet_model
 from fl_common.models.edgenet import get_edgenet_model
@@ -71,7 +72,7 @@ model_list = ['xcit_nano_12_p16_224', 'xception41', 'ResNet18', 'Swin_V2_T', 'Re
               'ShuffleNet_V2_X0_5', 'MNASNet0_5', 'Wide_ResNet50_2', 'ResNeXt50_32X4D', 'MaxVit_T', 'SqueezeNet1_0',
               'ViT_B_16', 'volo_d1_224', 'edgenext_small', 'beit_base_patch16_224', 'convit_tiny', 'davit_tiny',
               'tiny_vit_5m_224', 'fastvit_t8', 'coat_tiny', 'cait_xxs24_224', 'gcvit_xxtiny', 'vovnet39a',
-              'levit_128s', 'convmixer_1536_20', 'crossvit_tiny_240']
+              'levit_128s', 'convmixer_1536_20', 'crossvit_tiny_240', 'cspresnet50']
 
 # Model Parameters
 best_val_loss = float('inf')  # Initialize the best validation loss
@@ -150,23 +151,40 @@ def get_family_model_b(model_type, num_classes):
 
 def get_family_model_c(model_type, num_classes):
     """
-    Retrieves a model belonging to family C based on the provided model type and number of classes.
+    Selects and returns a model from a family of different architectures based on the provided model type.
 
     Parameters:
-    - model_type (str): The type of model to retrieve. Should be one of the supported models:
-                        - For CAIT models: ['cait_xxs24_224', 'cait_xxs24_384', 'cait_xxs36_224', 'cait_xxs36_384',
-                                             'cait_xs24_384', 'cait_s24_224', 'cait_s24_384', 'cait_s36_224',
-                                             'cait_m36_224', 'cait_m48_448']
-                        - For COAT models: ['coat_tiny', 'coat_mini', 'coat_small', 'coat_lite_tiny',
-                                             'coat_lite_mini', 'coat_lite_small', 'coat_lite_medium',
-                                             'coat_lite_medium_384']
-                        - For Convit models: ['convit_tiny', 'convit_small', 'convit_base']
-                        - For ConvNeXt models: ['ConvNeXt_Tiny', 'ConvNeXt_Small', 'ConvNeXt_Base',
-                                                 'ConvNeXt_Large']
-    - num_classes (int): The number of classes for the model.
+        model_type (str): The type of model to retrieve. It can be one of the following:
+                          - For CAIT models: ['cait_xxs24_224', 'cait_xxs24_384', 'cait_xxs36_224', 'cait_xxs36_384',
+                                               'cait_xs24_384', 'cait_s24_224', 'cait_s24_384', 'cait_s36_224',
+                                               'cait_m36_224', 'cait_m48_448']
+                          - For COAT models: ['coat_tiny', 'coat_mini', 'coat_small', 'coat_lite_tiny',
+                                               'coat_lite_mini', 'coat_lite_small', 'coat_lite_medium',
+                                               'coat_lite_medium_384']
+                          - For Convmixer models: ['convmixer_1536_20', 'convmixer_768_32',
+                                                    'convmixer_1024_20_ks9_p14']
+                          - For Convit models: ['convit_tiny', 'convit_small', 'convit_base']
+                          - For ConvNeXt models: ['ConvNeXt_Tiny', 'ConvNeXt_Small', 'ConvNeXt_Base',
+                                                   'ConvNeXt_Large']
+                          - For Crossvit models: ['crossvit_tiny_240', 'rossvit_small_240', 'crossvit_base_240',
+                                                   'crossvit_9_240', 'crossvit_15_240', 'crossvit_18_240',
+                                                   'crossvit_9_dagger_240', 'rossvit_15_dagger_240',
+                                                   'crossvit_15_dagger_408', 'crossvit_18_dagger_240',
+                                                   'crossvit_18_dagger_408']
+                          - For CSPNet models: ["cspresnet50", "cspresnet50d", "cspresnet50w", "cspresnext50",
+                                                "cspdarknet53", "darknet17", "darknet21", "sedarknet21",
+                                                "darknet53", "darknetaa53", "cs3darknet_s", "cs3darknet_m",
+                                                "cs3darknet_l", "cs3darknet_x", "cs3darknet_focus_s",
+                                                "cs3darknet_focus_m", "cs3darknet_focus_l", "cs3darknet_focus_x",
+                                                "cs3sedarknet_l", "cs3sedarknet_x", "cs3sedarknet_xdw",
+                                                "cs3edgenet_x", "cs3se_edgenet_x"]
+        num_classes (int): The number of classes for the final classification layer.
 
     Returns:
-    - model: The requested model if available, otherwise 'Unknown'.
+        torch.nn.Module: The selected model instance.
+
+    Raises:
+        ValueError: If the specified model type is unknown.
     """
     model = "Unknown"
 
@@ -186,6 +204,12 @@ def get_family_model_c(model_type, num_classes):
                         'crossvit_15_240', 'crossvit_18_240', 'crossvit_9_dagger_240', 'rossvit_15_dagger_240',
                         'crossvit_15_dagger_408', 'crossvit_18_dagger_240', 'crossvit_18_dagger_408']:
         model = get_crossvit_model(model_type, num_classes)
+    elif model_type in ['cspresnet50', 'cspresnet50d', 'cspresnet50w', 'cspresnext50', 'cspdarknet53', 'darknet17',
+                        'darknet21', 'sedarknet21', 'darknet53', 'darknetaa53', 'cs3darknet_s', 'cs3darknet_m',
+                        'cs3darknet_l', 'cs3darknet_x', 'cs3darknet_focus_s', 'cs3darknet_focus_m',
+                        'cs3darknet_focus_l', 'cs3darknet_focus_x', 'cs3sedarknet_l', 'cs3sedarknet_x',
+                        'cs3sedarknet_xdw', 'cs3edgenet_x', 'cs3se_edgenet_x']:
+        model = get_cspnet_model(model_type, num_classes)
 
     return model
 
