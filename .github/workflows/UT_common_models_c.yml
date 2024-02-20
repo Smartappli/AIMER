@@ -48,6 +48,7 @@ jobs:
     strategy:
       matrix:
         python-version: ["3.10"]
+    needs: test-cait-models
     steps:
     - name: Free Disk Space (Ubuntu)
       uses: jlumbroso/free-disk-space@main
@@ -83,6 +84,7 @@ jobs:
     strategy:
       matrix:
         python-version: ["3.10"]
+    needs: test-coat-models
     steps:
     - name: Free Disk Space (Ubuntu)
       uses: jlumbroso/free-disk-space@main
@@ -118,6 +120,7 @@ jobs:
     strategy:
       matrix:
         python-version: ["3.10"]
+    needs: test-convit-models
     steps:
     - name: Free Disk Space (Ubuntu)
       uses: jlumbroso/free-disk-space@main
@@ -153,6 +156,7 @@ jobs:
     strategy:
       matrix:
         python-version: ["3.10"]
+    needs: test-convmixer-models
     steps:
     - name: Free Disk Space (Ubuntu)
       uses: jlumbroso/free-disk-space@main
@@ -188,6 +192,7 @@ jobs:
     strategy:
       matrix:
         python-version: ["3.10"]
+    needs: test-convnext-models
     steps:
     - name: Free Disk Space (Ubuntu)
       uses: jlumbroso/free-disk-space@main
@@ -223,6 +228,7 @@ jobs:
     strategy:
       matrix:
         python-version: ["3.10"]
+    needs: test-crossvit-models
     steps:
     - name: Free Disk Space (Ubuntu)
       uses: jlumbroso/free-disk-space@main
