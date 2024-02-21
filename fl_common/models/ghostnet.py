@@ -16,11 +16,11 @@ def get_ghostnet_model(ghostnet_type, num_classes):
         ValueError: If an unknown GhostNet architecture type is specified.
     """
     if ghostnet_type == 'ghostnet_050':
-        ghostnet_model = create_model('ghostnet_050', pretrained=True, num_classes=num_classes)
+        ghostnet_model = create_model('ghostnet_050', pretrained=False, num_classes=num_classes)
     elif ghostnet_type == 'ghostnet_100':
         ghostnet_model = create_model('ghostnet_100', pretrained=True, num_classes=num_classes)
     elif ghostnet_type == 'ghostnet_130':
-        ghostnet_model = create_model('ghostnet_130', pretrained=True, num_classes=num_classes)
+        ghostnet_model = create_model('ghostnet_130', pretrained=False, num_classes=num_classes)
     elif ghostnet_type == 'ghostnetv2_100':
         ghostnet_model = create_model('ghostnetv2_100', pretrained=True, num_classes=num_classes)
     elif ghostnet_type == 'ghostnetv2_130':
