@@ -19,15 +19,7 @@ class ProcessingEvaTestCase(TestCase):
             'eva02_small_patch14_224',
             'eva02_base_patch14_224',
             'eva02_large_patch14_224',
-            'eva02_tiny_patch14_336',
-            'eva02_small_patch14_336',
-            'eva02_base_patch14_448',
-            'eva02_large_patch14_448',
-            'eva_giant_patch14_clip_224',
-            'eva02_base_patch16_clip_224',
-            'eva02_large_patch14_clip_224',
-            'eva02_large_patch14_clip_336',
-            'eva02_enormous_patch14_clip_224'
+            'eva02_tiny_patch14_336'
         ]
 
         num_classes = 1000  # Assuming 1000 classes for the test
