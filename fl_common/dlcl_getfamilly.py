@@ -17,6 +17,7 @@ from fl_common.models.dpn import get_dpn_model
 from fl_common.models.edgenet import get_edgenet_model
 from fl_common.models.efficientnet import get_efficientnet_model
 from fl_common.models.fastvit import get_fastvit_model
+from fl_common.models.focalnet import get_focalnet_model
 from fl_common.models.gcvit import get_gcvit_model
 from fl_common.models.inception_next import get_inception_next_model
 from fl_common.models.inception import get_inception_model
@@ -218,23 +219,27 @@ def get_family_model_e(model_type, num_classes):
 
 def get_family_model_f(model_type, num_classes):
     """
-    Retrieves a model belonging to family F based on the provided model type and number of classes.
+    Get a model from a family of models based on the specified model type.
 
     Parameters:
-    - model_type (str): The type of model to retrieve. Should be one of the supported models:
-                        - For FastViT models: ['fastvit_t8', 'fastvit_t12', 'fastvit_s12', 'fastvit_sa12',
-                                               'fastvit_sa24', 'fastvit_sa36', 'fastvit_ma36']
-    - num_classes (int): The number of classes for the model.
+        model_type (str): Type of the model.
+        num_classes (int): Number of output classes.
 
     Returns:
-    - model: The requested model if available, otherwise 'Unknown'.
+        model: The selected model instance.
+
+    Raises:
+        ValueError: If an unknown model type is specified.
     """
     model = "Unknown"
 
     if model_type in ['fastvit_t8', 'fastvit_t12', 'fastvit_s12', 'fastvit_sa12', 'fastvit_sa24', 'fastvit_sa36',
                       'fastvit_ma36']:
         model = get_fastvit_model(model_type, num_classes)
-
+    elif model_type in ['focalnet_tiny_srf', 'focalnet_small_srf', 'focalnet_base_srf', 'focalnet_tiny_lrf',
+                        'focalnet_small_lrf', 'focalnet_base_lrf', 'focalnet_large_fl3', 'focalnet_large_fl4',
+                        'focalnet_xlarge_fl3', 'focalnet_xlarge_fl4', 'focalnet_huge_fl3', 'focalnet_huge_fl4']:
+        model = get_focalnet_model(model_type, num_classes)
     return model
 
 
