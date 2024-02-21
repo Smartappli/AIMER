@@ -5,7 +5,7 @@ from fl_common.models.dla import get_dla_model
 os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
 
 
-class ProcessingDilaTestCase(TestCase):
+class ProcessingDlaTestCase(TestCase):
     """Dila Models Unit Tests"""
     def test_known_dila_types(self):
         """
