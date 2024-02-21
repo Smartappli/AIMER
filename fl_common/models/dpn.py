@@ -16,7 +16,7 @@ def get_dpn_model(dpn_type, num_classes):
         ValueError: If an unknown DPN architecture type is specified.
     """
     if dpn_type == "dpn48b":
-        dpn_model = create_model('dpn48b', pretrained=True, num_classes=num_classes)
+        dpn_model = create_model('dpn48b', pretrained=False, num_classes=num_classes)
     elif dpn_type == "dpn68":
         dpn_model = create_model('dpn68', pretrained=True, num_classes=num_classes)
     elif dpn_type == "dpn68b":

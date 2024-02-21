@@ -1,6 +1,6 @@
 import os
 from django.test import TestCase
-from fl_common.models.dla import get_dila_model
+from fl_common.models.dla import get_dla_model
 
 os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
 
@@ -37,7 +37,7 @@ class ProcessingDilaTestCase(TestCase):
         for dila_type in known_dila_types:
             with self.subTest(dila_type=dila_type):
                 try:
-                    model = get_dila_model(dila_type, num_classes)
+                    model = get_dla_model(dila_type, num_classes)
                     self.assertIsNotNone(model)
                 except ValueError:
                     self.fail(f"{dila_type} should be a known Dila architecture.")
@@ -55,4 +55,4 @@ class ProcessingDilaTestCase(TestCase):
         num_classes = 1000
 
         with self.assertRaises(ValueError):
-            get_dila_model(unknown_dila_type, num_classes)
+            get_dla_model(unknown_dila_type, num_classes)
