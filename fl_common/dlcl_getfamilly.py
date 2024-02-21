@@ -19,6 +19,8 @@ from fl_common.models.efficientnet import get_efficientnet_model
 from fl_common.models.fastvit import get_fastvit_model
 from fl_common.models.focalnet import get_focalnet_model
 from fl_common.models.gcvit import get_gcvit_model
+from fl_common.models.ghostnet import get_ghostnet_model
+from fl_common.models.googlenet import get_googlenet_model
 from fl_common.models.inception_next import get_inception_next_model
 from fl_common.models.inception import get_inception_model
 from fl_common.models.levit import get_levit_model
@@ -260,7 +262,10 @@ def get_family_model_g(model_type, num_classes):
 
     if model_type in ['gcvit_xxtiny', 'gcvit_xtiny', 'gcvit_tiny', 'gcvit_small', 'gcvit_base']:
         model = get_gcvit_model(model_type, num_classes)
-
+    elif model_type in ['ghostnet_050', 'ghostnet_100', 'gostnet_130', 'ghostnetv2_100', 'ghostnetv2_130', 'ghostnetv2_160']:
+        model = get_ghostnet_model(model_type, num_classes)
+    elif model_type == 'GoogLeNet':
+        model = get_googlenet_model(model_type, num_classes)
     return model
 
 
