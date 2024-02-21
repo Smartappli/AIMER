@@ -16,6 +16,7 @@ from fl_common.models.dla import get_dla_model
 from fl_common.models.dpn import get_dpn_model
 from fl_common.models.edgenet import get_edgenet_model
 from fl_common.models.efficientnet import get_efficientnet_model
+from fl_common.models.eva import get_eva_model
 from fl_common.models.fastvit import get_fastvit_model
 from fl_common.models.focalnet import get_focalnet_model
 from fl_common.models.gcvit import get_gcvit_model
@@ -215,6 +216,13 @@ def get_family_model_e(model_type, num_classes):
                         'EfficientNetB5', 'EfficientNetB6', 'EfficientNetB7', 'EfficientNetV2S', 'EfficientNetV2M',
                         'EfficientNetV2L']:
         model = get_efficientnet_model(model_type, num_classes)
+    elif model_type in ['eva_giant_patch14_224', 'eva_giant_patch14_336', 'eva_giant_patch14_560',
+                        'eva02_tiny_patch14_224', 'eva02_small_patch14_224', 'eva02_base_patch14_224',
+                        'eva02_large_patch14_224', 'eva02_tiny_patch14_336', 'eva02_small_patch14_336',
+                        'eva02_base_patch14_448', 'eva02_large_patch14_448', 'eva_giant_patch14_clip_224',
+                        'eva02_base_patch16_clip_224', 'eva02_large_patch14_clip_224', 'eva02_large_patch14_clip_336',
+                        'eva02_enormous_patch14_clip_224']:
+        model = get_eva_model(model_type, num_classes)
 
     return model
 

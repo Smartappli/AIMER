@@ -1,5 +1,4 @@
 import os
-import torch.nn as nn
 from django.test import TestCase
 from fl_common.models.edgenet import get_edgenet_model
 
@@ -8,7 +7,6 @@ os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
 
 class ProcessingEdgenetTestCase(TestCase):
     """EdgeNet Model Unit Tests"""
-
     def test_valid_edgenet_type(self):
         """
         Test case for validating various EdgeNet model types in get_edgenet_model function.
