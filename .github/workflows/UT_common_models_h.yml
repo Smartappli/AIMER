@@ -1,14 +1,14 @@
-name: UT_Common_Models_G
+name: UT_Common_Models_H
 
 on:
   workflow_call:
 
 concurrency:
-  group: ut_common_models_g-${{ github.event_name == 'pull_request' && format('{0}-{1}', github.workflow, github.event.pull_request.number) || github.workflow_ref }}
+  group: ut_common_models_h-${{ github.event_name == 'pull_request' && format('{0}-{1}', github.workflow, github.event.pull_request.number) || github.workflow_ref }}
   cancel-in-progress: true
 
 jobs:
-  test-gcvit-models:
+  test-harcorenas-models:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -72,6 +72,6 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
-    - name: Fl_common Models Gcvit
+    - name: Fl_common Models Hardcorenas
       run: |
-        python manage.py test fl_common.tests.tests_models_gcvit
+        python manage.py test fl_common.tests.tests_models_hardcorenas

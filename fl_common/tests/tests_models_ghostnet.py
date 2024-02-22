@@ -5,7 +5,7 @@ from fl_common.models.ghostnet import get_ghostnet_model
 os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
 
 
-class ProcessingPartXTestCase(TestCase):
+class ProcessingGhostnetTestCase(TestCase):
     """Ghostnet Models Unit Tests"""
     def test_known_ghostnet_types(self):
         """

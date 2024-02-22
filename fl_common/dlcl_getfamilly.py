@@ -22,6 +22,7 @@ from fl_common.models.focalnet import get_focalnet_model
 from fl_common.models.gcvit import get_gcvit_model
 from fl_common.models.ghostnet import get_ghostnet_model
 from fl_common.models.googlenet import get_googlenet_model
+from fl_common.models.hardcorenas import get_hardcorenas_model
 from fl_common.models.inception_next import get_inception_next_model
 from fl_common.models.inception import get_inception_model
 from fl_common.models.levit import get_levit_model
@@ -270,10 +271,20 @@ def get_family_model_g(model_type, num_classes):
 
     if model_type in ['gcvit_xxtiny', 'gcvit_xtiny', 'gcvit_tiny', 'gcvit_small', 'gcvit_base']:
         model = get_gcvit_model(model_type, num_classes)
-    elif model_type in ['ghostnet_050', 'ghostnet_100', 'gostnet_130', 'ghostnetv2_100', 'ghostnetv2_130', 'ghostnetv2_160']:
+    elif model_type in ['ghostnet_050', 'ghostnet_100', 'gostnet_130', 'ghostnetv2_100', 'ghostnetv2_130',
+                        'ghostnetv2_160']:
         model = get_ghostnet_model(model_type, num_classes)
     elif model_type == 'GoogLeNet':
         model = get_googlenet_model(model_type, num_classes)
+    return model
+
+
+def get_family_model_h(model_type, num_classes):
+    model = "Unknown"
+
+    if model_type in ['hardcorenas_a', 'hardcorenas_b', 'hardcorenas_c', 'hardcorenas_d', 'hardcorenas_e',
+                      'hardcorenas_f']:
+        model = get_hardcorenas_model(model_type, num_classes)
     return model
 
 
@@ -560,6 +571,8 @@ def get_family_model(model_type, num_classes):
             model = get_family_model_f(model_type, num_classes)
         case 'g':
             model = get_family_model_g(model_type, num_classes)
+        case 'h':
+            model = get_family_model_h(model_type, num_classes)
         case 'i':
             model = get_family_model_i(model_type, num_classes)
         case 'l':
