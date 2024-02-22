@@ -13,6 +13,8 @@ jobs:
     strategy:
       matrix:
         python-version: ["3.10"]
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
     - name: ⌛ rate 1
       shell: pwsh
@@ -81,6 +83,8 @@ jobs:
     strategy:
       matrix:
         python-version: ["3.10"]
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     needs: test-cait-models
     steps:
     - name: ⌛ rate 1
@@ -150,6 +154,8 @@ jobs:
     strategy:
       matrix:
         python-version: ["3.10"]
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     needs: test-coat-models
     steps:
     - name: ⌛ rate 1
@@ -219,6 +225,8 @@ jobs:
     strategy:
       matrix:
         python-version: ["3.10"]
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     needs: test-convit-models
     steps:
     - name: ⌛ rate 1
@@ -288,6 +296,8 @@ jobs:
     strategy:
       matrix:
         python-version: ["3.10"]
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     needs: test-convmixer-models
     steps:
     - name: ⌛ rate 1
@@ -357,6 +367,8 @@ jobs:
     strategy:
       matrix:
         python-version: ["3.10"]
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     needs: test-convnext-models
     steps:
     - name: ⌛ rate 1
@@ -426,6 +438,8 @@ jobs:
     strategy:
       matrix:
         python-version: ["3.10"]
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     needs: test-crossvit-models
     steps:
     - name: ⌛ rate 1

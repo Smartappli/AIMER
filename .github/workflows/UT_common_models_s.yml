@@ -13,6 +13,8 @@ jobs:
     strategy:
       matrix:
         python-version: ["3.10"]
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
     - name: ⌛ rate 1
       shell: pwsh
@@ -82,6 +84,8 @@ jobs:
     strategy:
       matrix:
         python-version: ["3.10"]
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     needs: tests-shufflenet-models
     steps:
     - name: ⌛ rate 1
@@ -151,6 +155,8 @@ jobs:
     strategy:
       matrix:
         python-version: ["3.10"]
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     needs: tests-squeezenet-models
     steps:
     - name: ⌛ rate 1

@@ -13,6 +13,8 @@ jobs:
     strategy:
       matrix:
         python-version: ["3.10"]
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
     - name: ⌛ rate 1
       shell: pwsh
