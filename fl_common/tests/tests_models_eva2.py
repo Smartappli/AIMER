@@ -12,9 +12,6 @@ class ProcessingEvaTestCase(TestCase):
         Test for known Eva architecture types to ensure they return a model without raising any exceptions.
         """
         known_eva_types = [
-            'eva02_small_patch14_336',
-            'eva02_base_patch14_448',
-            'eva02_large_patch14_448',
             'eva_giant_patch14_clip_224',
             'eva02_base_patch16_clip_224',
             'eva02_large_patch14_clip_224',
