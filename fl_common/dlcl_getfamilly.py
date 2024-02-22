@@ -23,6 +23,7 @@ from fl_common.models.gcvit import get_gcvit_model
 from fl_common.models.ghostnet import get_ghostnet_model
 from fl_common.models.googlenet import get_googlenet_model
 from fl_common.models.hardcorenas import get_hardcorenas_model
+from fl_common.models.hgnet import get_hgnet_model
 from fl_common.models.inception_next import get_inception_next_model
 from fl_common.models.inception import get_inception_model
 from fl_common.models.levit import get_levit_model
@@ -285,6 +286,9 @@ def get_family_model_h(model_type, num_classes):
     if model_type in ['hardcorenas_a', 'hardcorenas_b', 'hardcorenas_c', 'hardcorenas_d', 'hardcorenas_e',
                       'hardcorenas_f']:
         model = get_hardcorenas_model(model_type, num_classes)
+    elif model_type in ['hgnet_tiny', 'hgnet_small', 'hgnet_base', 'hgnetv2_b0', 'hgnetv2_b1', 'hgnetv2_b2',
+                        'hgnetv2_b3', 'hgnetv2_b4', 'hgnetv2_b5', 'hgnetv2_b6']:
+        model = get_hgnet_model(model_type, num_classes)
     return model
 
 
