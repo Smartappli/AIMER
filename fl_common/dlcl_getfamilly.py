@@ -35,6 +35,8 @@ from fl_common.models.nasnet import get_nasnet_model
 from fl_common.models.nest import get_nest_model
 from fl_common.models.nextvit import get_nextvit_model
 from fl_common.models.nfnet import get_nfnet_model
+from fl_common.models.pit import get_pit_model
+from fl_common.models.pnasnet import get_pnasnet_model
 from fl_common.models.regnet import get_regnet_model
 from fl_common.models.resnet import get_resnet_model
 from fl_common.models.resnext import get_resnext_model
@@ -448,6 +450,17 @@ def get_family_model_n(model_type, num_classes):
     return model
 
 
+def get_family_model_p(model_type, num_classes):
+    model = "Unknown"
+
+    if model_type in ['pit_b_224', 'pit_s_224', 'pit_xs_224', 'pit_ti_224', 'pit_b_distilled_224',
+                      'pit_s_distilled_224', 'pit_xs_distilled_224', 'pit_ti_distilled_224']:
+        model = get_pit_model(model_type, num_classes)
+    elif model_type == 'pnasnet5large':
+        model = get_pnasnet_model(model_type, num_classes)
+
+    return model
+
 
 def get_family_model_r(model_type, num_classes):
     """
@@ -672,7 +685,9 @@ def get_family_model(model_type, num_classes):
         case 'm':
             model = get_family_model_m(model_type, num_classes)
         case 'n':
-            model = get_maxvit_model(model_type, num_classes)
+            model = get_family_model_n(model_type, num_classes)
+        case 'p':
+            model = get_family_model_p(model_type, num_classes)
         case 'r':
             model = get_family_model_r(model_type, num_classes)
         case 's':
