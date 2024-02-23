@@ -69,6 +69,11 @@ jobs:
     needs: call-UT-common_training
     uses: Smartappli/AIMER/.github/workflows/UT_common_models_m.yml@master
 
+  call-UT-common_models_n:
+    if: github.repository == 'Smartappli/AIMER' # don't run on forks
+    needs: call-UT-common_training
+    uses: Smartappli/AIMER/.github/workflows/UT_common_models_n.yml@master
+
   call-UT-common_models_R:
     if: github.repository == 'Smartappli/AIMER' # don't run on forks
     needs: call-UT-common_training
@@ -103,7 +108,7 @@ jobs:
     if: github.repository == 'Smartappli/AIMER' # don't run on forks
     needs: ['call-UT-common_models_A', 'call-UT-common_models_B', 'call-UT-common_models_C', 'call-UT-common_models_D',
             'call-UT-common_models_E', 'call-UT-common_models_F', 'call-UT-common_models_G', 'call-UT-common_models_h',
-            'call-UT-common_models_I', 'call-UT-common_models_L', 'call-UT-common_models_M', 'call-UT-common_models_R',
-            'call-UT-common_models_S', 'call-UT-common_models_T', 'call-UT-common_models_V', 'call-UT-common_models_W',
-            'call-UT-common_models_X']
+            'call-UT-common_models_I', 'call-UT-common_models_L', 'call-UT-common_models_M', 'call-UT-common_models_N',
+            'call-UT-common_models_R', 'call-UT-common_models_S', 'call-UT-common_models_T', 'call-UT-common_models_V',
+            'call-UT-common_models_W', 'call-UT-common_models_X']
     uses: Smartappli/AIMER/.github/workflows/liccheck.yml@master
