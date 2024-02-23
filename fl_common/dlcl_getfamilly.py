@@ -38,6 +38,7 @@ from fl_common.models.squeezenet import get_squeezenet_model
 from fl_common.models.shufflenet import get_shufflenet_model
 from fl_common.models.swin_transformer import get_swin_model
 from fl_common.models.tiny_vit import get_tiny_vit_model
+from fl_common.models.tresnet import get_tresnet_model
 from fl_common.models.vgg import get_vgg_model
 from fl_common.models.vision_transformer import get_vision_model
 from fl_common.models.volo import get_volo_model
@@ -447,8 +448,11 @@ def get_family_model_t(model_type, num_classes):
     """
     model = "Unknown"
 
-    if model_type in ['tiny_vit_5m_224', 'tiny_vit_11m_224', 'tiny_vit_21m_224', 'tiny_vit_21m_384', 'tiny_vit_21m_512']:
+    if model_type in ['tiny_vit_5m_224', 'tiny_vit_11m_224', 'tiny_vit_21m_224', 'tiny_vit_21m_384',
+                      'tiny_vit_21m_512']:
         model = get_tiny_vit_model(model_type, num_classes)
+    elif model_type in ['tresnet_m', 'tresnet_l', 'tresnet_xl', 'tresnet_v2_l']:
+        model = get_tresnet_model(model_type, num_classes)
 
     return model
 
