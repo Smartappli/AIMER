@@ -31,6 +31,10 @@ from fl_common.models.levit import get_levit_model
 from fl_common.models.maxvit import get_maxvit_model
 from fl_common.models.mnasnet import get_mnasnet_model
 from fl_common.models.mobilenet import get_mobilenet_model
+from fl_common.models.nasnet import get_nasnet_model
+from fl_common.models.nest import get_nest_model
+from fl_common.models.nextvit import get_nextvit_model
+from fl_common.models.nfnet import get_nfnet_model
 from fl_common.models.regnet import get_regnet_model
 from fl_common.models.resnet import get_resnet_model
 from fl_common.models.resnext import get_resnext_model
@@ -408,6 +412,43 @@ def get_family_model_m(model_type, num_classes):
     return model
 
 
+def get_family_model_n(model_type, num_classes):
+    """
+    Get a model from the 'N' family based on the specified model type.
+
+    Args:
+        model_type (str): The type of model from the 'N' family. It can be one of the following:
+            - 'nasnetalarge': NASNet-A Large model.
+            - 'nest_base', 'nest_small', 'nest_tiny', 'nest_base_jx', 'nest_small_jx', 'nest_tiny_jx': Various NEST architectures.
+            - 'nextvit_small', 'nextvit_base', 'nextvit_large': NEXTVIT architectures.
+            - 'dm_nfnet_f0' to 'nf_ecaresnet101': Different architectures from the NFNet family.
+        num_classes (int): The number of output classes.
+
+    Returns:
+        torch.nn.Module: The selected model from the 'N' family.
+
+    Raises:
+        ValueError: If an unknown model type is specified.
+    """
+    model = "Unknown"
+
+    if model_type in ['nasnetalarge']:
+        model = get_nasnet_model(model_type, num_classes)
+    elif model_type in ['nest_base', 'nest_small', 'nest_tiny', 'nest_base_jx', 'nest_small_jx', 'nest_tiny_jx']:
+        model = get_nest_model(model_type, num_classes)
+    elif model_type in ['nextvit_small', 'nextvit_base', 'nextvit_large']:
+        model = get_nextvit_model(model_type, num_classes)
+    elif model_type in ['dm_nfnet_f0', 'dm_nfnet_f1', 'dm_nfnet_f2', 'dm_nfnet_f3', 'dm_nfnet_f4', 'dm_nfnet_f5',
+                        'dm_nfnet_f6', 'nfnet_f0', 'nfnet_f1', 'nfnet_f2', 'nfnet_f3', 'nfnet_f4', 'nfnet_f5',
+                        'nfnet_f6', 'nfnet_f7', 'nfnet_l0', 'eca_nfnet_l0', 'eca_nfnet_l1', 'eca_nfnet_l2',
+                        'eca_nfnet_l3', 'nf_regnet_b0', 'nf_regnet_b1', 'nf_regnet_b2', 'nf_regnet_b3', 'nf_regnet_b4',
+                        'nf_regnet_b5', 'nf_resnet26', 'nf_resnet50', 'nf_resnet101', 'nf_seresnet26', 'nf_seresnet50',
+                        'nf_seresnet101', 'nf_ecaresnet26', 'nf_ecaresnet50', 'nf_ecaresnet101']:
+        model = get_nfnet_model(model_type,num_classes)
+    return model
+
+
+
 def get_family_model_r(model_type, num_classes):
     """
     Retrieves a model belonging to family R based on the provided model type and number of classes.
@@ -630,6 +671,8 @@ def get_family_model(model_type, num_classes):
             model = get_family_model_l(model_type, num_classes)
         case 'm':
             model = get_family_model_m(model_type, num_classes)
+        case 'n':
+            model = get_maxvit_model(model_type, num_classes)
         case 'r':
             model = get_family_model_r(model_type, num_classes)
         case 's':
