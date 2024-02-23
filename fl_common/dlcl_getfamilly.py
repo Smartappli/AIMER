@@ -38,6 +38,7 @@ from fl_common.models.squeezenet import get_squeezenet_model
 from fl_common.models.shufflenet import get_shufflenet_model
 from fl_common.models.swin_transformer import get_swin_model
 from fl_common.models.tiny_vit import get_tiny_vit_model
+from fl_common.models.twins import get_twins_model
 from fl_common.models.tresnet import get_tresnet_model
 from fl_common.models.vgg import get_vgg_model
 from fl_common.models.vision_transformer import get_vision_model
@@ -160,17 +161,25 @@ def get_family_model_c(model_type, num_classes):
 
 def get_family_model_d(model_type, num_classes):
     """
-    Get a family model based on the specified type.
+    Get a model from the family of models including Davit, DeiT, DenseNet, DLA, and DPN.
 
     Parameters:
-        model_type (str): Type of model.
+        model_type (str): Type of the model. Options include:
+            - For Davit: 'davit_tiny', 'davit_small', 'davit_base', 'davit_large', 'davit_huge', 'davit_giant'
+            - For DeiT: 'deit_tiny_patch16_224', 'deit_small_patch16_224', 'deit_base_patch16_224',
+                        'deit_base_patch16_384', 'deit_tiny_distilled_patch16_224', 'deit_small_distilled_patch16_224',
+                        'deit_base_distilled_patch16_224', 'deit_base_distilled_patch16_384', 'deit3_small_patch16_224',
+                        'deit3_small_patch16_384', 'deit3_medium_patch16_224', 'deit3_base_patch16_224',
+                        'deit3_base_patch16_384', 'deit3_large_patch16_224', 'deit3_large_patch16_384',
+                        'deit3_huge_patch14_224'
+            - For DenseNet: 'DenseNet121', 'DenseNet161', 'DenseNet169', 'DenseNet201'
+            - For DLA: 'dla60_res2net', 'dla60_res2next', 'dla34', 'dla46_c', 'dla46x_c', 'dla60x_c', 'dla60', 'dla60x',
+                       'dla102', 'dla102x', 'dla102x2', 'dla169'
+            - For DPN: 'dpn48b', 'dpn68', 'dpn68b', 'dpn92', 'dpn98', 'dpn131', 'dpn107'
         num_classes (int): Number of output classes.
 
     Returns:
-        torch.nn.Module: Model.
-
-    Raises:
-        ValueError: If an unknown model type is specified.
+        torch.nn.Module: The selected model.
     """
     model = "Unknown"
 
@@ -196,20 +205,25 @@ def get_family_model_d(model_type, num_classes):
 
 def get_family_model_e(model_type, num_classes):
     """
-    Retrieves a model belonging to family E based on the provided model type and number of classes.
+    Get a model from the family of models including EdgeNet, EfficientNet, and Eva.
 
     Parameters:
-    - model_type (str): The type of model to retrieve. Should be one of the supported models:
-                        - For EdgeNet models: ['edgenext_xx_small', 'edgenext_x_small', 'edgenext_small',
-                                               'edgenext_base', 'edgenext_small_rw']
-                        - For EfficientNet models: ['EfficientNetB0', 'EfficientNetB1', 'EfficientNetB2',
-                                                    'EfficientNetB3', 'EfficientNetB4', 'EfficientNetB5',
-                                                    'EfficientNetB6', 'EfficientNetB7', 'EfficientNetV2S',
-                                                    'EfficientNetV2M', 'EfficientNetV2L']
-    - num_classes (int): The number of classes for the model.
+        model_type (str): Type of the model. Options include:
+            - For EdgeNet: 'edgenext_xx_small', 'edgenext_x_small', 'edgenext_small', 'edgenext_base',
+                           'edgenext_small_rw'
+            - For EfficientNet: 'EfficientNetB0', 'EfficientNetB1', 'EfficientNetB2', 'EfficientNetB3',
+                                'EfficientNetB4', 'EfficientNetB5', 'EfficientNetB6', 'EfficientNetB7',
+                                'EfficientNetV2S', 'EfficientNetV2M', 'EfficientNetV2L'
+            - For Eva: 'eva_giant_patch14_224', 'eva_giant_patch14_336', 'eva_giant_patch14_560',
+                       'eva02_tiny_patch14_224', 'eva02_small_patch14_224', 'eva02_base_patch14_224',
+                       'eva02_large_patch14_224', 'eva02_tiny_patch14_336', 'eva02_small_patch14_336',
+                       'eva02_base_patch14_448', 'eva02_large_patch14_448', 'eva_giant_patch14_clip_224',
+                       'eva02_base_patch16_clip_224', 'eva02_large_patch14_clip_224', 'eva02_large_patch14_clip_336',
+                       'eva02_enormous_patch14_clip_224'
+        num_classes (int): Number of output classes.
 
     Returns:
-    - model: The requested model if available, otherwise 'Unknown'.
+        torch.nn.Module: The selected model.
     """
     model = "Unknown"
 
@@ -233,17 +247,19 @@ def get_family_model_e(model_type, num_classes):
 
 def get_family_model_f(model_type, num_classes):
     """
-    Get a model from a family of models based on the specified model type.
+    Get a model from the family of models including FastViT and FocalNet.
 
     Parameters:
-        model_type (str): Type of the model.
+        model_type (str): Type of the model. Options include:
+            - For FastViT: 'fastvit_t8', 'fastvit_t12', 'fastvit_s12', 'fastvit_sa12', 'fastvit_sa24', 'fastvit_sa36',
+                           'fastvit_ma36'
+            - For FocalNet: 'focalnet_tiny_srf', 'focalnet_small_srf', 'focalnet_base_srf', 'focalnet_tiny_lrf',
+                            'focalnet_small_lrf', 'focalnet_base_lrf', 'focalnet_large_fl3', 'focalnet_large_fl4',
+                            'focalnet_xlarge_fl3', 'focalnet_xlarge_fl4', 'focalnet_huge_fl3', 'focalnet_huge_fl4'
         num_classes (int): Number of output classes.
 
     Returns:
-        model: The selected model instance.
-
-    Raises:
-        ValueError: If an unknown model type is specified.
+        torch.nn.Module: The selected model.
     """
     model = "Unknown"
 
@@ -259,16 +275,18 @@ def get_family_model_f(model_type, num_classes):
 
 def get_family_model_g(model_type, num_classes):
     """
-    Retrieves a model belonging to family G based on the provided model type and number of classes.
+    Get a model from the family of models including GCViT, GhostNet, and GoogLeNet.
 
     Parameters:
-    - model_type (str): The type of model to retrieve. Should be one of the supported models:
-                        - For GCViT models: ['gcvit_xxtiny', 'gcvit_xtiny', 'gcvit_tiny', 'gcvit_small',
-                                              'gcvit_base']
-    - num_classes (int): The number of classes for the model.
+        model_type (str): Type of the model. Options include:
+            - For GCViT: 'gcvit_xxtiny', 'gcvit_xtiny', 'gcvit_tiny', 'gcvit_small', 'gcvit_base'
+            - For GhostNet: 'ghostnet_050', 'ghostnet_100', 'ghostnet_130', 'ghostnetv2_100', 'ghostnetv2_130',
+                            'ghostnetv2_160'
+            - For GoogLeNet: 'GoogLeNet'
+        num_classes (int): Number of output classes.
 
     Returns:
-    - model: The requested model if available, otherwise 'Unknown'.
+        torch.nn.Module: The selected model.
     """
     model = "Unknown"
 
@@ -283,6 +301,22 @@ def get_family_model_g(model_type, num_classes):
 
 
 def get_family_model_h(model_type, num_classes):
+    """
+    Get a model from the family of models including HardcoreNAS, HGNet, and HRNet.
+
+    Parameters:
+        model_type (str): Type of the model. Options include:
+            - For HardcoreNAS: 'hardcorenas_a', 'hardcorenas_b', 'hardcorenas_c', 'hardcorenas_d', 'hardcorenas_e',
+                               'hardcorenas_f'
+            - For HGNet: 'hgnet_tiny', 'hgnet_small', 'hgnet_base', 'hgnetv2_b0', 'hgnetv2_b1', 'hgnetv2_b2',
+                         'hgnetv2_b3', 'hgnetv2_b4', 'hgnetv2_b5', 'hgnetv2_b6'
+            - For HRNet: 'hrnet_w18_small', 'hrnet_w18_small_v2', 'hrnet_w18', 'hrnet_w30', 'hrnet_w32', 'hrnet_w40',
+                         'hrnet_w44', 'hrnet_w48', 'hrnet_w64', 'hrnet_w18_ssld', 'hrnet_w48_ssld'
+        num_classes (int): Number of output classes.
+
+    Returns:
+        torch.nn.Module: The selected model.
+    """
     model = "Unknown"
 
     if model_type in ['hardcorenas_a', 'hardcorenas_b', 'hardcorenas_c', 'hardcorenas_d', 'hardcorenas_e',
@@ -435,16 +469,19 @@ def get_family_model_s(model_type, num_classes):
 
 def get_family_model_t(model_type, num_classes):
     """
-    Retrieves a model belonging to family T based on the provided model type and number of classes.
+    Get a model from the family of models including TinyViT, TResNet, and Twins.
 
     Parameters:
-    - model_type (str): The type of model to retrieve. Should be one of the supported models:
-                        - For TinyViT models: ['tiny_vit_5m_224', 'tiny_vit_11m_224', 'tiny_vit_21m_224',
-                                               'tiny_vit_21m_384', 'tiny_vit_21m_512']
-    - num_classes (int): The number of classes for the model.
+        model_type (str): Type of the model. Options include:
+            - For TinyViT: 'tiny_vit_5m_224', 'tiny_vit_11m_224', 'tiny_vit_21m_224', 'tiny_vit_21m_384', 'tiny_vit_21m_512'
+            - For TResNet: 'tresnet_m', 'tresnet_l', 'tresnet_xl', 'tresnet_v2_l'
+            - For Twins: 'twins_pcpvt_small', 'twins_pcpvt_base', 'twins_pcpvt_large', 'twins_svt_small',
+                         'twins_svt_base', 'twins_svt_large'
+        num_classes (int): Number of output classes.
 
     Returns:
-    - model: The requested model if available, otherwise 'Unknown'.
+        torch.nn.Module: The selected model.
+
     """
     model = "Unknown"
 
@@ -453,7 +490,9 @@ def get_family_model_t(model_type, num_classes):
         model = get_tiny_vit_model(model_type, num_classes)
     elif model_type in ['tresnet_m', 'tresnet_l', 'tresnet_xl', 'tresnet_v2_l']:
         model = get_tresnet_model(model_type, num_classes)
-
+    elif model_type in ['twins_pcpvt_small', 'twins_pcpvt_base', 'twins_pcpvt_large', 'twins_svt_small',
+                        'twins_svt_base', 'twins_svt_large']:
+        model = get_twins_model(model_type, num_classes)
     return model
 
 
