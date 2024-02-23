@@ -1,4 +1,4 @@
-name: Nightlies
+name: Nightlies Models - PART B
 
 on:
   schedule:
