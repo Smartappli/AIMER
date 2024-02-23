@@ -22,11 +22,11 @@ def get_nest_model(nest_type, num_classes):
         ValueError: If an unknown NEST architecture type is specified.
     """
     if nest_type == 'nest_base':
-        nest_model = create_model('nest_base',pretrained=True, num_classes=num_classes)
+        nest_model = create_model('nest_base',pretrained=False, num_classes=num_classes)
     elif nest_type == 'nest_small':
-        nest_model = create_model('nest_small',pretrained=True, num_classes=num_classes)
+        nest_model = create_model('nest_small',pretrained=False, num_classes=num_classes)
     elif nest_type == 'nest_tiny':
-        nest_model = create_model('nest_tiny',pretrained=True, num_classes=num_classes)
+        nest_model = create_model('nest_tiny',pretrained=False, num_classes=num_classes)
     elif nest_type == 'nest_base_jx':
         nest_model = create_model('nest_base_jx',pretrained=True, num_classes=num_classes)
     elif nest_type == 'nest_small_jx':
