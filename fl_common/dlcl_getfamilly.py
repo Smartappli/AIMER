@@ -37,6 +37,7 @@ from fl_common.models.nextvit import get_nextvit_model
 from fl_common.models.nfnet import get_nfnet_model
 from fl_common.models.pit import get_pit_model
 from fl_common.models.pnasnet import get_pnasnet_model
+from fl_common.models.pvt_v2 import get_pvt_v2_model
 from fl_common.models.regnet import get_regnet_model
 from fl_common.models.resnet import get_resnet_model
 from fl_common.models.resnext import get_resnext_model
@@ -458,7 +459,8 @@ def get_family_model_p(model_type, num_classes):
         model = get_pit_model(model_type, num_classes)
     elif model_type == 'pnasnet5large':
         model = get_pnasnet_model(model_type, num_classes)
-
+    elif model_type in ['pvt_v2_b0', 'pvt_v2_b1', 'pvt_v2_b2', 'pvt_v2_b3', 'pvt_v2_b4', 'pvt_v2_b5', 'pvt_v2_b2_li']:
+        model = get_pvt_v2_model(model_type, num_classes)
     return model
 
 
