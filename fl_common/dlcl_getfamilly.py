@@ -452,6 +452,23 @@ def get_family_model_n(model_type, num_classes):
 
 
 def get_family_model_p(model_type, num_classes):
+    """
+    Get a model from the family of models including PIT, PNASNet, and PVTv2.
+
+    Args:
+        model_type (str): The type of the model architecture.
+            - For PIT: 'pit_b_224', 'pit_s_224', 'pit_xs_224', 'pit_ti_224', 'pit_b_distilled_224',
+              'pit_s_distilled_224', 'pit_xs_distilled_224', 'pit_ti_distilled_224'
+            - For PNASNet: 'pnasnet5large'
+            - For PVTv2: 'pvt_v2_b0', 'pvt_v2_b1', 'pvt_v2_b2', 'pvt_v2_b3', 'pvt_v2_b4', 'pvt_v2_b5', 'pvt_v2_b2_li'
+        num_classes (int): The number of output classes.
+
+    Returns:
+        torch.nn.Module: The requested model.
+
+    Raises:
+        ValueError: If the specified model_type is unknown.
+    """
     model = "Unknown"
 
     if model_type in ['pit_b_224', 'pit_s_224', 'pit_xs_224', 'pit_ti_224', 'pit_b_distilled_224',
