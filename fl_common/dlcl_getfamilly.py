@@ -41,8 +41,9 @@ from fl_common.models.pvt_v2 import get_pvt_v2_model
 from fl_common.models.regnet import get_regnet_model
 from fl_common.models.resnet import get_resnet_model
 from fl_common.models.resnext import get_resnext_model
-from fl_common.models.squeezenet import get_squeezenet_model
+from fl_common.models.selecsls import get_selecsls_model
 from fl_common.models.shufflenet import get_shufflenet_model
+from fl_common.models.squeezenet import get_squeezenet_model
 from fl_common.models.swin_transformer import get_swin_model
 from fl_common.models.tiny_vit import get_tiny_vit_model
 from fl_common.models.tnt import get_tnt_model
@@ -531,7 +532,9 @@ def get_family_model_s(model_type, num_classes):
     """
     model = "Unknown"
 
-    if model_type in ['ShuffleNet_V2_X0_5', 'ShuffleNet_V2_X1_0', 'ShuffleNet_V2_X1_5', 'ShuffleNet_V2_X2_0']:
+    if model_type in ['selecsls42', 'selecsls42b', 'selecsls60', 'selecsls60b', 'selecsls84']:
+        model = get_selecsls_model(model_type, num_classes)
+    elif model_type in ['ShuffleNet_V2_X0_5', 'ShuffleNet_V2_X1_0', 'ShuffleNet_V2_X1_5', 'ShuffleNet_V2_X2_0']:
         model = get_shufflenet_model(model_type, num_classes)
     elif model_type in ["SqueezeNet1_0", 'SqueezeNet1_1']:
         model = get_squeezenet_model(model_type, num_classes)

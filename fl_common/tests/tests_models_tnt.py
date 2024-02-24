@@ -5,7 +5,7 @@ from fl_common.models.tnt import get_tnt_model
 os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
 
 
-class ProcessingTinyVitTestCase(TestCase):
+class ProcessingTntTestCase(TestCase):
     """Tnt Models Unit Tests"""
     def test_known_tnt_types(self):
         """
