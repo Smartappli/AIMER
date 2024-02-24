@@ -34,6 +34,7 @@ from fl_common.models.mlp_mixer import get_mlp_mixer_model
 from fl_common.models.mnasnet import get_mnasnet_model
 from fl_common.models.mobilenet import get_mobilenet_model
 from fl_common.models.mobilevit import get_mobilevit_model
+from fl_common.models.mvitv2 import get_mvitv2_model
 from fl_common.models.nasnet import get_nasnet_model
 from fl_common.models.nest import get_nest_model
 from fl_common.models.nextvit import get_nextvit_model
@@ -400,17 +401,34 @@ def get_family_model_l(model_type, num_classes):
 
 def get_family_model_m(model_type, num_classes):
     """
-    Retrieves a model belonging to family M based on the provided model type and number of classes.
+    Create and return an instance of a specified deep learning model architecture.
 
-    Parameters:
-    - model_type (str): The type of model to retrieve. Should be one of the supported models:
-                        - For MaxViT models: ['MaxVit_T']
-                        - For MNASNet models: ['MNASNet0_5', 'MNASNet0_75', 'MNASNet1_0', 'MNASNet1_3']
-                        - For MobileNet models: ['MobileNet_V2', 'MobileNet_V3_Small', 'MobileNet_V3_Large']
-    - num_classes (int): The number of classes for the model.
+    Args:
+    - model_type (str): The type of model architecture to create. It should be one of the following:
+        - 'MaxVit_T' for MaxVit architecture.
+        - 'MNASNet0_5', 'MNASNet0_75', 'MNASNet1_0', 'MNASNet1_3' for MNASNet architectures.
+        - 'poolformer_s12', 'poolformer_s24', 'poolformer_s36', 'poolformer_m36', 'poolformer_m48',
+          'poolformerv2_s12', 'poolformerv2_s24', 'poolformerv2_s36', 'poolformerv2_m36',
+          'poolformerv2_m48', 'convformer_s18', 'convformer_s36', 'convformer_m36', 'convformer_b36',
+          'caformer_s18', 'caformer_s36', 'caformer_m36', 'caformer_b36' for Poolformer, Convformer,
+          CAformer architectures.
+        - 'mixer_s32_224', 'mixer_s16_224', 'mixer_b32_224', 'mixer_b16_224', 'mixer_l32_224',
+          'mixer_l16_224', 'gmixer_12_224', 'gmixer_24_224', 'resmlp_12_224', 'resmlp_24_224',
+          'resmlp_36_224', 'resmlp_big_24_224', 'gmlp_ti16_224', 'gmlp_s16_224', 'gmlp_b16_224'
+          for MLP-Mixer architectures.
+        - 'MobileNet_V2', 'MobileNet_V3_Small', 'MobileNet_V3_Large' for MobileNet architectures.
+        - 'mobilevit_xxs', 'mobilevit_xs', 'mobilevit_s', 'mobilevitv2_050', 'mobilevitv2_075',
+          'mobilevitv2_100', 'mobilevitv2_125', 'mobilevitv2_150', 'mobilevitv2_175', 'mobilevitv2_200'
+          for MobileViT architectures.
+        - 'mvitv2_tiny', 'mvitv2_small', 'mvitv2_base', 'mvitv2_large', 'mvitv2_small_cls',
+          'mvitv2_base_cls', 'mvitv2_large_cls', 'mvitv2_huge_cls' for MViTv2 architectures.
+    - num_classes (int): The number of output classes for the model.
 
     Returns:
-    - model: The requested model if available, otherwise 'Unknown'.
+    - torch.nn.Module: An instance of the specified deep learning model architecture.
+
+    Raises:
+    - ValueError: If an unknown model architecture type is specified.
     """
     model = "Unknown"
 
@@ -432,6 +450,9 @@ def get_family_model_m(model_type, num_classes):
     elif model_type in ['mobilevit_xxs', 'mobilevit_xs', 'mobilevit_s', 'mobilevitv2_050', 'mobilevitv2_075',
                         'mobilevitv2_100', 'mobilevitv2_125', 'mobilevitv2_150', 'mobilevitv2_175', 'mobilevitv2_200']:
         model = get_mobilevit_model(model_type, num_classes)
+    elif model_type in ['mvitv2_tiny', 'mvitv2_small', 'mvitv2_base', 'mvitv2_large', 'mvitv2_small_cls',
+                        'mvitv2_base_cls', 'mvitv2_large_cls', 'mvitv2_huge_cls']:
+        model = get_mvitv2_model(model_type, num_classes)
     return model
 
 
@@ -442,7 +463,8 @@ def get_family_model_n(model_type, num_classes):
     Args:
         model_type (str): The type of model from the 'N' family. It can be one of the following:
             - 'nasnetalarge': NASNet-A Large model.
-            - 'nest_base', 'nest_small', 'nest_tiny', 'nest_base_jx', 'nest_small_jx', 'nest_tiny_jx': Various NEST architectures.
+            - 'nest_base', 'nest_small', 'nest_tiny', 'nest_base_jx', 'nest_small_jx', 'nest_tiny_jx':
+              Various NEST architectures.
             - 'nextvit_small', 'nextvit_base', 'nextvit_large': NEXTVIT architectures.
             - 'dm_nfnet_f0' to 'nf_ecaresnet101': Different architectures from the NFNet family.
         num_classes (int): The number of output classes.
@@ -534,19 +556,27 @@ def get_family_model_r(model_type, num_classes):
 
 def get_family_model_s(model_type, num_classes):
     """
-    Retrieves a model belonging to family S based on the provided model type and number of classes.
+    Create and return an instance of a specified deep learning model architecture.
 
-    Parameters:
-    - model_type (str): The type of model to retrieve. Should be one of the supported models:
-                        - For ShuffleNet V2 models: ['ShuffleNet_V2_X0_5', 'ShuffleNet_V2_X1_0',
-                                                      'ShuffleNet_V2_X1_5', 'ShuffleNet_V2_X2_0']
-                        - For SqueezeNet models: ['SqueezeNet1_0', 'SqueezeNet1_1']
-                        - For Swin Transformer models: ['Swin_T', 'Swin_S', 'Swin_B', 'Swin_V2_T', 'Swin_V2_S',
-                                                         'Swin_V2_B']
-    - num_classes (int): The number of classes for the model.
+    Args:
+    - model_type (str): The type of model architecture to create. It should be one of the following:
+        - 'selecsls42', 'selecsls42b', 'selecsls60', 'selecsls60b', 'selecsls84' for SelecSLS architectures.
+        - 'legacy_seresnet18', 'legacy_seresnet34', 'legacy_seresnet50', 'legacy_seresnet101',
+          'legacy_seresnet152', 'legacy_senet154', 'legacy_seresnext26_32x4d',
+          'legacy_seresnext50_32x4d', 'legacy_seresnext101_32x4d' for Legacy SEResNet and SENet architectures.
+        - 'sequencer2d_s', 'sequencer2d_m', 'sequencer2d_l' for Sequencer2D architectures.
+        - 'ShuffleNet_V2_X0_5', 'ShuffleNet_V2_X1_0', 'ShuffleNet_V2_X1_5', 'ShuffleNet_V2_X2_0'
+          for ShuffleNetV2 architectures.
+        - 'skresnet18', 'skresnet34', 'skresnet50', 'skresnet50d', 'skresnext50_32x4d' for SKNet architectures.
+        - 'SqueezeNet1_0', 'SqueezeNet1_1' for SqueezeNet architectures.
+        - 'Swin_T', 'Swin_S', 'Swin_B', 'Swin_V2_T', 'Swin_V2_S', 'Swin_V2_B' for Swin Transformer architectures.
+    - num_classes (int): The number of output classes for the model.
 
     Returns:
-    - model: The requested model if available, otherwise 'Unknown'.
+    - torch.nn.Module: An instance of the specified deep learning model architecture.
+
+    Raises:
+    - ValueError: If an unknown model architecture type is specified.
     """
     model = "Unknown"
 
@@ -572,24 +602,23 @@ def get_family_model_s(model_type, num_classes):
 
 def get_family_model_t(model_type, num_classes):
     """
-    Get a model from the T family based on the specified architecture type.
+    Create and return an instance of a specified deep learning model architecture.
 
     Args:
-        model_type (str): The type of T family architecture. It can be one of the following:
-            - 'tiny_vit_5m_224': TinyViT with 5M parameters and input size 224x224.
-            - 'tiny_vit_11m_224': TinyViT with 11M parameters and input size 224x224.
-            - 'tiny_vit_21m_224': TinyViT with 21M parameters and input size 224x224.
-            - 'tiny_vit_21m_384': TinyViT with 21M parameters and input size 384x384.
-            - 'tiny_vit_21m_512': TinyViT with 21M parameters and input size 512x512.
-            - 'tnt_s_patch16_224': TnT (Transformers in Transformer) small with patch size 16 and input size 224x224.
-            - 'tnt_b_patch16_224': TnT (Transformers in Transformer) base with patch size 16 and input size 224x224.
-        num_classes (int): The number of output classes.
+    - model_type (str): The type of model architecture to create. It should be one of the following:
+        - 'tiny_vit_5m_224', 'tiny_vit_11m_224', 'tiny_vit_21m_224', 'tiny_vit_21m_384', 'tiny_vit_21m_512'
+        for TinyViT architectures.
+        - 'tnt_s_patch16_224', 'tnt_b_patch16_224' for TNT architectures.
+        - 'tresnet_m', 'tresnet_l', 'tresnet_xl', 'tresnet_v2_l' for TResNet architectures.
+        - 'twins_pcpvt_small', 'twins_pcpvt_base', 'twins_pcpvt_large', 'twins_svt_small',
+          'twins_svt_base', 'twins_svt_large' for Twins architectures.
+    - num_classes (int): The number of output classes for the model.
 
     Returns:
-        torch.nn.Module: The model from the T family.
+    - torch.nn.Module: An instance of the specified deep learning model architecture.
 
     Raises:
-        ValueError: If an unknown model type is specified.
+    - ValueError: If an unknown model architecture type is specified.
     """
     model = "Unknown"
 

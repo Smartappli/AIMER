@@ -89,8 +89,8 @@ def get_levit_model(levit_type, num_classes):
         except:
             levit_model = create_model('levit_conv_512d', pretrained=False, num_classes=num_classes)
     else:
-        # Raise a ValueError if an unknown Davit architecture is specified
+        # Raise a ValueError if an unknown Levit architecture is specified
         raise ValueError(f'Unknown Levit Architecture: {levit_type}')
 
-    # Return the created Leit model
+    # Return the created Levit model
     return levit_model
