@@ -29,6 +29,7 @@ from fl_common.models.inception_next import get_inception_next_model
 from fl_common.models.inception import get_inception_model
 from fl_common.models.levit import get_levit_model
 from fl_common.models.maxvit import get_maxvit_model
+from fl_common.models.metaformer import get_metaformer_model
 from fl_common.models.mnasnet import get_mnasnet_model
 from fl_common.models.mobilenet import get_mobilenet_model
 from fl_common.models.nasnet import get_nasnet_model
@@ -415,6 +416,11 @@ def get_family_model_m(model_type, num_classes):
         model = get_maxvit_model(model_type, num_classes)
     elif model_type in ['MNASNet0_5', 'MNASNet0_75', 'MNASNet1_0', 'MNASNet1_3']:
         model = get_mnasnet_model(model_type, num_classes)
+    elif model_type in ['poolformer_s12', 'poolformer_s24', 'poolformer_s36', 'poolformer_m36', 'poolformer_m48',
+                        'poolformerv2_s12', 'poolformerv2_s24', 'poolformerv2_s36', 'poolformerv2_m36',
+                        'poolformerv2_m48', 'convformer_s18', 'convformer_s36', 'convformer_m36', 'convformer_b36',
+                        'caformer_s18', 'caformer_s36', 'caformer_m36', 'caformer_b36']:
+        model = get_metaformer_model(model_type, num_classes)
     elif model_type in ['MobileNet_V2', 'MobileNet_V3_Small', 'MobileNet_V3_Large']:
         model = get_mobilenet_model(model_type, num_classes)
 
