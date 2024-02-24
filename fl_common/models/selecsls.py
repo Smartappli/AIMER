@@ -31,6 +31,6 @@ def get_selecsls_model(selecsls_type, num_classes):
     elif selecsls_type == 'selecsls84':
         selecsls_model = create_model('selecsls84', pretrained=False, num_classes=num_classes)
     else:
-        raise ValueError(f'Unknown Pvt_v2 Architecture: {selecsls_type}')
+        raise ValueError(f'Unknown Selecsls Architecture: {selecsls_type}')
 
     return selecsls_model

@@ -43,6 +43,6 @@ def get_senet_model(senet_type, num_classes):
     elif senet_type == 'legacy_seresnext101_32x4d':
         senet_model = create_model('legacy_seresnext101_32x4d', pretrained=True, num_classes=num_classes)
     else:
-        raise ValueError(f'Unknown Pvt_v2 Architecture: {senet_type}')
+        raise ValueError(f'Unknown Senet Architecture: {senet_type}')
 
     return senet_model

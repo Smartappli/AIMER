@@ -45,6 +45,7 @@ from fl_common.models.selecsls import get_selecsls_model
 from fl_common.models.senet import get_senet_model
 from fl_common.models.sequencer import get_sequencer_model
 from fl_common.models.shufflenet import get_shufflenet_model
+from fl_common.models.sknet import get_sknet_model
 from fl_common.models.squeezenet import get_squeezenet_model
 from fl_common.models.swin_transformer import get_swin_model
 from fl_common.models.tiny_vit import get_tiny_vit_model
@@ -544,6 +545,8 @@ def get_family_model_s(model_type, num_classes):
         model = get_sequencer_model(model_type, num_classes)
     elif model_type in ['ShuffleNet_V2_X0_5', 'ShuffleNet_V2_X1_0', 'ShuffleNet_V2_X1_5', 'ShuffleNet_V2_X2_0']:
         model = get_shufflenet_model(model_type, num_classes)
+    elif model_type in ['skresnet18', 'skresnet34', 'skresnet50', 'skresnet50d', 'skresnext50_32x4d']:
+        model = get_sknet_model(model_type, num_classes)
     elif model_type in ["SqueezeNet1_0", 'SqueezeNet1_1']:
         model = get_squeezenet_model(model_type, num_classes)
     elif model_type in ['Swin_T', 'Swin_S', 'Swin_B', 'Swin_V2_T', 'Swin_V2_S', 'Swin_V2_B']:

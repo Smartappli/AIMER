@@ -25,6 +25,6 @@ def get_sequencer_model(sequencer_type, num_classes):
     elif sequencer_type == 'sequencer2d_l':
         sequencer_model = create_model('sequencer2d_l', pretrained=True, num_classes=num_classes)
     else:
-        raise ValueError(f'Unknown Pvt_v2 Architecture: {sequencer_type}')
+        raise ValueError(f'Unknown Sequencer Architecture: {sequencer_type}')
 
     return sequencer_model
