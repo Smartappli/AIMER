@@ -33,6 +33,7 @@ from fl_common.models.metaformer import get_metaformer_model
 from fl_common.models.mlp_mixer import get_mlp_mixer_model
 from fl_common.models.mnasnet import get_mnasnet_model
 from fl_common.models.mobilenet import get_mobilenet_model
+from fl_common.models.mobilevit import get_mobilevit_model
 from fl_common.models.nasnet import get_nasnet_model
 from fl_common.models.nest import get_nest_model
 from fl_common.models.nextvit import get_nextvit_model
@@ -428,7 +429,9 @@ def get_family_model_m(model_type, num_classes):
         model = get_mlp_mixer_model(model_type, num_classes)
     elif model_type in ['MobileNet_V2', 'MobileNet_V3_Small', 'MobileNet_V3_Large']:
         model = get_mobilenet_model(model_type, num_classes)
-
+    elif model_type in ['mobilevit_xxs', 'mobilevit_xs', 'mobilevit_s', 'mobilevitv2_050', 'mobilevitv2_075',
+                        'mobilevitv2_100', 'mobilevitv2_125', 'mobilevitv2_150', 'mobilevitv2_175', 'mobilevitv2_200']:
+        model = get_mobilevit_model(model_type, num_classes)
     return model
 
 
