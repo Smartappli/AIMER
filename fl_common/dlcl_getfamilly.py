@@ -45,6 +45,7 @@ from fl_common.models.squeezenet import get_squeezenet_model
 from fl_common.models.shufflenet import get_shufflenet_model
 from fl_common.models.swin_transformer import get_swin_model
 from fl_common.models.tiny_vit import get_tiny_vit_model
+from fl_common.models.tnt import get_tnt_model
 from fl_common.models.twins import get_twins_model
 from fl_common.models.tresnet import get_tresnet_model
 from fl_common.models.vgg import get_vgg_model
@@ -542,25 +543,32 @@ def get_family_model_s(model_type, num_classes):
 
 def get_family_model_t(model_type, num_classes):
     """
-    Get a model from the family of models including TinyViT, TResNet, and Twins.
+    Get a model from the T family based on the specified architecture type.
 
-    Parameters:
-        model_type (str): Type of the model. Options include:
-            - For TinyViT: 'tiny_vit_5m_224', 'tiny_vit_11m_224', 'tiny_vit_21m_224', 'tiny_vit_21m_384', 'tiny_vit_21m_512'
-            - For TResNet: 'tresnet_m', 'tresnet_l', 'tresnet_xl', 'tresnet_v2_l'
-            - For Twins: 'twins_pcpvt_small', 'twins_pcpvt_base', 'twins_pcpvt_large', 'twins_svt_small',
-                         'twins_svt_base', 'twins_svt_large'
-        num_classes (int): Number of output classes.
+    Args:
+        model_type (str): The type of T family architecture. It can be one of the following:
+            - 'tiny_vit_5m_224': TinyViT with 5M parameters and input size 224x224.
+            - 'tiny_vit_11m_224': TinyViT with 11M parameters and input size 224x224.
+            - 'tiny_vit_21m_224': TinyViT with 21M parameters and input size 224x224.
+            - 'tiny_vit_21m_384': TinyViT with 21M parameters and input size 384x384.
+            - 'tiny_vit_21m_512': TinyViT with 21M parameters and input size 512x512.
+            - 'tnt_s_patch16_224': TnT (Transformers in Transformer) small with patch size 16 and input size 224x224.
+            - 'tnt_b_patch16_224': TnT (Transformers in Transformer) base with patch size 16 and input size 224x224.
+        num_classes (int): The number of output classes.
 
     Returns:
-        torch.nn.Module: The selected model.
+        torch.nn.Module: The model from the T family.
 
+    Raises:
+        ValueError: If an unknown model type is specified.
     """
     model = "Unknown"
 
     if model_type in ['tiny_vit_5m_224', 'tiny_vit_11m_224', 'tiny_vit_21m_224', 'tiny_vit_21m_384',
                       'tiny_vit_21m_512']:
         model = get_tiny_vit_model(model_type, num_classes)
+    if model_type in ['tnt_s_patch16_224', 'tnt_b_patch16_224']:
+        model = get_tnt_model(model_type, num_classes)
     elif model_type in ['tresnet_m', 'tresnet_l', 'tresnet_xl', 'tresnet_v2_l']:
         model = get_tresnet_model(model_type, num_classes)
     elif model_type in ['twins_pcpvt_small', 'twins_pcpvt_base', 'twins_pcpvt_large', 'twins_svt_small',

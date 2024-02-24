@@ -6,7 +6,8 @@ def get_tiny_vit_model(tiny_vit_type, num_classes):
     Create and return a Tiny Vision Transformer (TinyViT) model based on the specified architecture.
 
     Parameters:
-    - tiny_vit_type (str): Type of TinyViT architecture ('tiny_vit_5m_224', 'tiny_vit_11m_224', 'tiny_vit_21m_224', 'tiny_vit_21m_384', 'tiny_vit_21m_512').
+    - tiny_vit_type (str): Type of TinyViT architecture ('tiny_vit_5m_224', 'tiny_vit_11m_224', 'tiny_vit_21m_224',
+      'tiny_vit_21m_384', 'tiny_vit_21m_512').
     - num_classes (int): Number of output classes.
 
     Returns:
