@@ -43,6 +43,7 @@ from fl_common.models.resnet import get_resnet_model
 from fl_common.models.resnext import get_resnext_model
 from fl_common.models.selecsls import get_selecsls_model
 from fl_common.models.senet import get_senet_model
+from fl_common.models.sequencer import get_sequencer_model
 from fl_common.models.shufflenet import get_shufflenet_model
 from fl_common.models.squeezenet import get_squeezenet_model
 from fl_common.models.swin_transformer import get_swin_model
@@ -539,6 +540,8 @@ def get_family_model_s(model_type, num_classes):
                         'legacy_seresnet152', 'legacy_senet154', 'legacy_seresnext26_32x4d',
                         'legacy_seresnext50_32x4d', 'legacy_seresnext101_32x4d']:
         model = get_senet_model(model_type, num_classes)
+    elif model_type in ['sequencer2d_s', 'sequencer2d_m', 'sequencer2d_l']:
+        model = get_sequencer_model(model_type, num_classes)
     elif model_type in ['ShuffleNet_V2_X0_5', 'ShuffleNet_V2_X1_0', 'ShuffleNet_V2_X1_5', 'ShuffleNet_V2_X2_0']:
         model = get_shufflenet_model(model_type, num_classes)
     elif model_type in ["SqueezeNet1_0", 'SqueezeNet1_1']:
