@@ -92,5 +92,5 @@ def get_levit_model(levit_type, num_classes):
         # Raise a ValueError if an unknown Davit architecture is specified
         raise ValueError(f'Unknown Levit Architecture: {levit_type}')
 
-    # Return the created Davit model
+    # Return the created Leit model
     return levit_model
