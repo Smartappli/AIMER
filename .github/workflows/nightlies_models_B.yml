@@ -14,12 +14,12 @@ jobs:
     if: github.repository == 'Smartappli/AIMER' # don't run on forks
     uses: Smartappli/AIMER/.github/workflows/UT_common_training.yml@master
 
-  call-UT-common_models_n:
+  call-UT-common_models_N:
     if: github.repository == 'Smartappli/AIMER' # don't run on forks
     needs: call-UT-common_training
     uses: Smartappli/AIMER/.github/workflows/UT_common_models_n.yml@master
 
-  call-UT-common_models_p:
+  call-UT-common_models_P:
     if: github.repository == 'Smartappli/AIMER' # don't run on forks
     needs: call-UT-common_training
     uses: Smartappli/AIMER/.github/workflows/UT_common_models_p.yml@master
