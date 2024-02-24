@@ -30,6 +30,7 @@ from fl_common.models.inception import get_inception_model
 from fl_common.models.levit import get_levit_model
 from fl_common.models.maxvit import get_maxvit_model
 from fl_common.models.metaformer import get_metaformer_model
+from fl_common.models.mlp_mixer import get_mlp_mixer_model
 from fl_common.models.mnasnet import get_mnasnet_model
 from fl_common.models.mobilenet import get_mobilenet_model
 from fl_common.models.nasnet import get_nasnet_model
@@ -421,6 +422,10 @@ def get_family_model_m(model_type, num_classes):
                         'poolformerv2_m48', 'convformer_s18', 'convformer_s36', 'convformer_m36', 'convformer_b36',
                         'caformer_s18', 'caformer_s36', 'caformer_m36', 'caformer_b36']:
         model = get_metaformer_model(model_type, num_classes)
+    elif model_type in ['mixer_s32_224', 'mixer_s16_224', 'mixer_b32_224', 'mixer_b16_224', 'mixer_l32_224',
+                        'mixer_l16_224', 'gmixer_12_224', 'gmixer_24_224', 'resmlp_12_224', 'resmlp_24_224',
+                        'resmlp_36_224', 'resmlp_big_24_224', 'gmlp_ti16_224', 'gmlp_s16_224', 'gmlp_b16_224']:
+        model = get_mlp_mixer_model(model_type, num_classes)
     elif model_type in ['MobileNet_V2', 'MobileNet_V3_Small', 'MobileNet_V3_Large']:
         model = get_mobilenet_model(model_type, num_classes)
 
