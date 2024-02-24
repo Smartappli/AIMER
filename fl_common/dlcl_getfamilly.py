@@ -53,6 +53,7 @@ from fl_common.models.tnt import get_tnt_model
 from fl_common.models.twins import get_twins_model
 from fl_common.models.tresnet import get_tresnet_model
 from fl_common.models.vgg import get_vgg_model
+from fl_common.models.visformer import get_visformer_model
 from fl_common.models.vision_transformer import get_vision_model
 from fl_common.models.volo import get_volo_model
 from fl_common.models.vovnet import get_vovnet_model
@@ -615,6 +616,8 @@ def get_family_model_v(model_type, num_classes):
 
     if model_type in ['VGG11', 'VGG11_BN', 'VGG13', 'VGG13_BN', 'VGG16', 'VGG16_BN', 'VGG19', 'VGG19_BN']:
         model = get_vgg_model(model_type, num_classes)
+    if model_type in ['visformer_tiny', 'visformer_small']:
+        model = get_visformer_model(model_type, num_classes)
     elif model_type in ['ViT_B_16', 'ViT_B_32', 'ViT_L_16', 'ViT_L_32', 'ViT_H_14']:
         model = get_vision_model(model_type, num_classes)
     elif model_type in ['volo_d1_224', 'volo_d1_384', 'volo_d2_224', 'volo_d2_384', 'volo_d3_224', 'volo_d3_448',
