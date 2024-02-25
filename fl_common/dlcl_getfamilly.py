@@ -48,6 +48,7 @@ from fl_common.models.repvit import get_repvit_model
 from fl_common.models.res2net import get_res2net_model
 from fl_common.models.resnet import get_resnet_model
 from fl_common.models.resnext import get_resnext_model
+from fl_common.models.rexnet import get_rexnet_model
 from fl_common.models.selecsls import get_selecsls_model
 from fl_common.models.senet import get_senet_model
 from fl_common.models.sequencer import get_sequencer_model
@@ -570,6 +571,9 @@ def get_family_model_r(model_type, num_classes):
         model = get_resnet_model(model_type, num_classes)
     elif model_type in ['ResNeXt50_32X4D', 'ResNeXt101_32X8D', 'ResNeXt101_64X4D']:
         model = get_resnext_model(model_type, num_classes)
+    elif model_type in ['rexnet_100', 'rexnet_130', 'rexnet_150', 'rexnet_200', 'rexnet_300', 'rexnetr_100',
+                        'rexnetr_130', 'rexnetr_150', 'rexnetr_200', 'rexnetr_300']:
+        model = get_rexnet_model(model_type, num_classes)
 
     return model
 
