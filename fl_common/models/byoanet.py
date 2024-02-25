@@ -36,11 +36,11 @@ def get_byoanet_model(byoanet_type, num_classes):
     elif byoanet_type == 'sebotnet33ts_256':
         byoanet_model = create_model('sebotnet33ts_256',pretrained=True, num_classes=num_classes)
     elif byoanet_type == 'botnet50ts_256':
-        byoanet_model = create_model('botnet50ts_256',pretrained=True, num_classes=num_classes)
+        byoanet_model = create_model('botnet50ts_256',pretrained=False, num_classes=num_classes)
     elif byoanet_type == 'eca_botnext26ts_256':
         byoanet_model = create_model('eca_botnext26ts_256',pretrained=True, num_classes=num_classes)
     elif byoanet_type == 'halonet_h1':
-        byoanet_model = create_model('halonet_h1',pretrained=True, num_classes=num_classes)
+        byoanet_model = create_model('halonet_h1',pretrained=False, num_classes=num_classes)
     elif byoanet_type == 'halonet26t':
         byoanet_model = create_model('halonet26t',pretrained=True, num_classes=num_classes)
     elif byoanet_type == 'sehalonet33ts':
