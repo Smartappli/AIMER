@@ -44,6 +44,7 @@ from fl_common.models.pnasnet import get_pnasnet_model
 from fl_common.models.pvt_v2 import get_pvt_v2_model
 from fl_common.models.regnet import get_regnet_model
 from fl_common.models.repghost import get_repghost_model
+from fl_common.models.repvit import get_repvit_model
 from fl_common.models.resnet import get_resnet_model
 from fl_common.models.resnext import get_resnext_model
 from fl_common.models.selecsls import get_selecsls_model
@@ -533,6 +534,9 @@ def get_family_model_r(model_type, num_classes):
     elif model_type in ['repghostnet_050', 'repghostnet_058', 'repghostnet_080', 'repghostnet_100', 'repghostnet_111',
                         'repghostnet_130', 'repghostnet_150', 'repghostnet_200']:
         model = get_repghost_model(model_type, num_classes)
+    elif model_type in ['repvit_m1', 'repvit_m2', 'repvit_m3', 'repvit_m0_9', 'repvit_m1_0', 'repvit_m1_1',
+                        'repvit_m1_5', 'repvit_m2_3']:
+        model = get_repvit_model(model_type, num_classes)
     elif model_type in ['ResNet18', 'ResNet34', 'ResNet50', 'ResNet101', 'ResNet152', 'ResNeXt50_32X4D',
                         'ResNeXt101_32X4D', 'ResNeXt101_64X4D']:
         model = get_resnet_model(model_type, num_classes)
