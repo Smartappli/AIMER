@@ -7,7 +7,10 @@ os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
 
 
 class ProcessingConvNextTestCase(TestCase):
-    """ConvNeXt Model Unit Test"""
+    """
+    Test case class for processing Canvnext models.
+    """
+
     def test_convnext_model(self):
         """
         Test case for creating ConvNeXt models.

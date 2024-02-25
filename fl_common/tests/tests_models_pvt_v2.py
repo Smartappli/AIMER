@@ -6,7 +6,10 @@ os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
 
 
 class ProcessingPvt_v2TestCase(TestCase):
-    """Pvt_v2 Models Unit Tests"""
+    """
+    Test case class for processing Pvt v2 models.
+    """
+
     def test_known_pvt_v2_types(self):
         """
         Test for known PVTv2 architecture types to ensure they return a model without raising any exceptions.

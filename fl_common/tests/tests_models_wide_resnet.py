@@ -6,7 +6,10 @@ os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
 
 
 class ProcessingWideResnetTestCase(TestCase):
-    """Wide Resnet Model Unit Tests"""
+    """
+    Test case class for processing Wide Resnet models.
+    """
+
     def test_get_wide_resnet_model(self):
         """
         Test case for obtaining a Wide ResNet model.

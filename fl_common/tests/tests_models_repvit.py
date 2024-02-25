@@ -6,7 +6,10 @@ os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
 
 
 class ProcessingRepvitTestCase(TestCase):
-    # Repvit Models Unit tests
+    """
+    Test case class for processing Regvit models.
+    """
+
     def test_known_repvit_type(self):
         """
         Test if the function returns a valid RepVIT model for known RepVIT types.

@@ -7,7 +7,10 @@ os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
 
 
 class ProcessingResnextTestCase(TestCase):
-    """ResNext Model Unit Tests"""
+    """
+    Test case class for processing Resnext models.
+    """
+
     def test_get_resnext_model(self):
         """
         Test case for obtaining various ResNeXt models.

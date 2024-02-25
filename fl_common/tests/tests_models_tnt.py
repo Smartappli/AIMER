@@ -6,7 +6,10 @@ os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
 
 
 class ProcessingTntTestCase(TestCase):
-    """Tnt Models Unit Tests"""
+    """
+    Test case class for processing Tnt models.
+    """
+
     def test_known_tnt_types(self):
         """
         Test for known TnT architecture types to ensure they return a model without raising any exceptions.

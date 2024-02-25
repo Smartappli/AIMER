@@ -6,7 +6,10 @@ os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
 
 
 class ProcessingVisformerTestCase(TestCase):
-    """Visformer Models Unit Tests"""
+    """
+    Test case class for processing Visformer models.
+    """
+
     def test_known_visformer_types(self):
         """
         Test for known Visformer architecture types to ensure they return a model without raising any exceptions.

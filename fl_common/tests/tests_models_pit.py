@@ -6,7 +6,10 @@ os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
 
 
 class ProcessingPitTestCase(TestCase):
-    """Pit Model Unit Tests"""
+    """
+    Test case class for processing Pit models.
+    """
+
     def test_known_pit_types(self):
         """
         Test for known PIT architecture types to ensure they return a model without raising any exceptions.

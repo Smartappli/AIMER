@@ -6,7 +6,9 @@ os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
 
 
 class ProcessingTwinsTestCase(TestCase):
-    """Twins Models Unit Tests"""
+    """
+    Test case class for processing Twins models.
+    """
 
     def test_known_twins_types(self):
         """

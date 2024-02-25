@@ -7,7 +7,10 @@ os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
 
 
 class ProcessingMaxvitTestCase(TestCase):
-    """MaxVit Model Unit Tests"""
+    """
+    Test case class for processing Maxvit models.
+    """
+
     def test_get_maxvit_model(self):
         """
         Test case for obtaining MaxVit models.

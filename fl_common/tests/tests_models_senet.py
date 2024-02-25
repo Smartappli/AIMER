@@ -6,7 +6,10 @@ os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
 
 
 class ProcessingSenetTestCase(TestCase):
-    """Senet Models Unit Tests"""
+    """
+    Test case class for processing Senet models.
+    """
+
     def test_known_types(self):
         """
         Test for known SENet architecture types to ensure they return a model without raising any exceptions.

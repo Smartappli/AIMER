@@ -7,7 +7,9 @@ os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
 
 
 class ProcessingFastVitTestCase(TestCase):
-    """Focalnet models unit tests"""
+    """
+    Test case class for processing Focalnet models.
+    """
 
     def test_known_focalnet_types(self):
         """

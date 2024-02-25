@@ -6,7 +6,10 @@ os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
 
 
 class ProcessingPartXTestCase(TestCase):
-    """XcIt Model Unit Tests"""
+    """
+    Test case class for processing Xcit models.
+    """
+
     def test_xcit_supported_models(self):
         """
         Test function for supported models in XCiT.

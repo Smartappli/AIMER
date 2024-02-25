@@ -6,42 +6,29 @@ os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
 
 
 class ProcessingDavitTestCase(TestCase):
-    """Davit Models Unit Tests"""
-    def test_all_davit_models(self):
+    """
+    Test case class for processing Davit models.
+    """
+
+    def test_known_davit_types(self):
         """
-        Test the creation of all Davit models.
-
-        Iterates through all valid Davit types and checks if the returned model is not None.
-
-        Parameters:
-        - None
-
-        Returns:
-        - None
-
-        Raises:
-        - AssertionError: If any of the Davit models is None.
+        Test if the function returns a valid Davit model for known Davit types.
         """
         davit_types = ['davit_tiny', 'davit_small', 'davit_base', 'davit_large', 'davit_huge', 'davit_giant']
         num_classes = 10
 
         for davit_type in davit_types:
-            with self.subTest(davit_type=davit_type):
-                davit_model = get_davit_model(davit_type, num_classes)
-                self.assertIsNotNone(davit_model)
+            davit_model = get_davit_model(davit_type, num_classes)
+            self.assertIsNotNone(davit_model)
+            # Check if the model has the expected number of output classes
+            self.assertEqual(davit_model.num_classes, num_classes)
 
     def test_unknown_davit_type(self):
         """
-        Test the behavior of get_davit_model when an unknown Davit type is specified.
-
-        Parameters:
-        - None
-
-        Returns:
-        - None
-
-        Raises:
-        - ValueError: If an unknown Davit architecture is specified.
+        Test if the function raises a ValueError for an unknown Davit type.
         """
+        unknown_davit_type = 'unknown_davit_type'
+        num_classes = 10
+
         with self.assertRaises(ValueError):
-            get_davit_model('unknown_type', num_classes=10)
+            get_davit_model(unknown_davit_type, num_classes)

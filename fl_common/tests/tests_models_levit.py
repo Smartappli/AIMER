@@ -8,7 +8,10 @@ os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
 
 
 class ProcessingPartITestCase(TestCase):
-    """Levit Model Unit Tests"""
+    """
+    Test case class for processing Levit models.
+    """
+
     def test_known_levit_types(self):
         """
         Test the function with known Levit types.

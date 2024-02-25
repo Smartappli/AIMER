@@ -527,6 +527,30 @@ def get_family_model_p(model_type, num_classes):
 
 
 def get_family_model_r(model_type, num_classes):
+    """
+    Returns a model based on the provided model type and number of classes.
+
+    Args:
+    - model_type (str): The type of model. It should be one of the following:
+        - For RegNet models: 'RegNet_X_400MF', 'RegNet_X_800MF', 'RegNet_X_1_6GF', 'RegNet_X_3_2GF', 'RegNet_X_16GF',
+                             'RegNet_Y_400MF', 'RegNet_Y_800MF', 'RegNet_Y_1_6GF', 'RegNet_Y_3_2GF', 'RegNet_Y_16GF'
+        - For RepGhost models: 'repghostnet_050', 'repghostnet_058', 'repghostnet_080', 'repghostnet_100', 'repghostnet_111',
+                               'repghostnet_130', 'repghostnet_150', 'repghostnet_200'
+        - For RepVIT models: 'repvit_m1', 'repvit_m2', 'repvit_m3', 'repvit_m0_9', 'repvit_m1_0', 'repvit_m1_1',
+                              'repvit_m1_5', 'repvit_m2_3'
+        - For Res2Net models: 'res2net50_26w_4s', 'res2net101_26w_4s', 'res2net50_26w_6s', 'res2net50_26w_8s',
+                               'res2net50_48w_2s', 'res2net50_14w_8s', 'res2next50', 'res2net50d', 'res2net101d'
+        - For ResNet models: 'ResNet18', 'ResNet34', 'ResNet50', 'ResNet101', 'ResNet152', 'ResNeXt50_32X4D',
+                              'ResNeXt101_32X4D', 'ResNeXt101_64X4D'
+        - For ResNeXt models: 'ResNeXt50_32X4D', 'ResNeXt101_32X8D', 'ResNeXt101_64X4D'
+    - num_classes (int): The number of output classes for the model.
+
+    Returns:
+    - model: The model instantiated based on the specified architecture.
+
+    Raises:
+    - ValueError: If the provided model_type is not recognized.
+    """
     model = "Unknown"
 
     if model_type in ['RegNet_X_400MF', 'RegNet_X_800MF', 'RegNet_X_1_6GF', 'RegNet_X_3_2GF', 'RegNet_X_16GF',

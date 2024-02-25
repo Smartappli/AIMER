@@ -6,7 +6,10 @@ os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
 
 
 class ProcessingGhostnetTestCase(TestCase):
-    """Ghostnet Models Unit Tests"""
+    """
+    Test case class for processing Ghostnet models.
+    """
+
     def test_known_ghostnet_types(self):
         """
         Test case to ensure that known GhostNet architectures can be created successfully.

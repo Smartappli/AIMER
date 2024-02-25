@@ -6,7 +6,9 @@ os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
 
 
 class ProcessingTresnetTestCase(TestCase):
-    """Tresnet Models Unit Tests"""
+    """
+    Test case class for processing Tresnet models.
+    """
 
     def test_known_tresnet_types(self):
         """

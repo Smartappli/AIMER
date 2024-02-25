@@ -7,7 +7,10 @@ os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
 
 
 class ProcessingXceptionTestCase(TestCase):
-    """Xception Model Unit Tests"""
+    """
+    Test case class for processing Xception models.
+    """
+
     def test_all_xception_models(self):
         """
         Test case for obtaining various Xception models.

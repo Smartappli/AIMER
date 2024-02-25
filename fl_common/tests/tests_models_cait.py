@@ -7,7 +7,9 @@ os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
 
 
 class ProcessingCaitTestCase(TestCase):
-    """Cait Model Unit Tests"""
+    """
+    Test case class for processing Cait models.
+    """
 
     def test_known_cait_types(self):
         """

@@ -6,7 +6,10 @@ os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
 
 
 class ProcessingMlpMixerTestCase(TestCase):
-    """MlpMixer Model Unit Tests"""
+    """
+    Test case class for processing Mlp Mixer models.
+    """
+
     def test_known_mlp_mixer_types(self):
         """
         Test for known Mlp Mixer architecture types to ensure they return a model without raising any exceptions.

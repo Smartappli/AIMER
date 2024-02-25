@@ -7,7 +7,10 @@ os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
 
 
 class ProcessingEfficientNetTestCase(TestCase):
-    """EfficientNet Model Unit Tests"""
+    """
+    Test case class for processing EfficientNet models.
+    """
+
     def test_efficientnet_model(self):
         """
         Test case for validating different configurations of EfficientNet models.

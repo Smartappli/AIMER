@@ -6,7 +6,10 @@ os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
 
 
 class ProcessingPnasnetTestCase(TestCase):
-    """Pnasnet Model Unit Tests"""
+    """
+    Test case class for processing Pnasnet models.
+    """
+
     def test_known_pnasnet_type(self):
         """
         Test for known PNASNet architecture types to ensure they return a model without raising any exceptions.

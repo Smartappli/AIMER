@@ -7,7 +7,10 @@ os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
 
 
 class ProcessingVisionTransformerTestCase(TestCase):
-    """Vision Transformer Model Unit Tests"""
+    """
+    Test case class for processing Vision Transformer models.
+    """
+
     def test_get_vision_model(self):
         """
         Test case for obtaining various Vision Transformer models.

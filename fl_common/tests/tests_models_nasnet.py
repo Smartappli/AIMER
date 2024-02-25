@@ -6,7 +6,9 @@ os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
 
 
 class ProcessingNasnetTestCase(TestCase):
-    """Nasnet Model Unit Tests"""
+    """
+    Test case class for processing Nasnet models.
+    """
 
     def test_known_nasnet_type(self):
         """

@@ -6,7 +6,10 @@ os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
 
 
 class ProcessingTinyVitTestCase(TestCase):
-    """Tiny_Vit Models Unit Tests"""
+    """
+    Test case class for processing TinyVit models.
+    """
+
     def test_all_tiny_vit_models(self):
         """
         Test the creation of all Tiny Vision Transformer (TinyViT) models.

@@ -6,7 +6,10 @@ os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
 
 
 class ProcessingSequencerTestCase(TestCase):
-    """Sknet Models Unit Tests"""
+    """
+    Test case class for processing Sknet models.
+    """
+
     def test_known_sknet_types(self):
         """
         Test for known SKNet architecture types to ensure they return a model without raising any exceptions.

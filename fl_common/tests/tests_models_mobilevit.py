@@ -7,7 +7,10 @@ os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
 
 
 class ProcessingMobilevitTestCase(TestCase):
-    # Mobilevit model unit tests
+    """
+    Test case class for processing Mobilevit models.
+    """
+
     def test_known_architecture(self):
         """
         Test if the function returns a valid model for a known MobileViT architecture type.

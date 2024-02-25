@@ -6,7 +6,10 @@ os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
 
 
 class ProcessingHardcorenasTestCase(TestCase):
-    # Hardcorenas model unit tests
+    """
+    Test case class for processing Hardcorenas models.
+    """
+
     def test_known_hardcorenas_types(self):
         """
         Test for known HardcoreNAS architecture types to ensure they return a model without raising any exceptions.

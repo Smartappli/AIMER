@@ -6,7 +6,10 @@ os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
 
 
 class ProcessingRes2netTestCase(TestCase):
-    # Res2net models unit tests
+    """
+    Test case class for processing Res2Net models.
+    """
+
     def test_known_res2net_type(self):
         """
         Test if the function returns a valid Res2Net model for known Res2Net types.

@@ -7,7 +7,10 @@ os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
 
 
 class ProcessingGoogleNetTestCase(TestCase):
-    """GoogleNet Model Unit Tests"""
+    """
+    Test case class for processing GoogleNet models.
+    """
+
     def test_get_googlenet_model(self):
         """
         Test case for obtaining GoogleNet models.

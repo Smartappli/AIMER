@@ -7,7 +7,10 @@ os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
 
 
 class ProcessingGcVitTestCase(TestCase):
-    """Gcvit Models Unit Tests"""
+    """
+    Test case class for processing Gcvit models.
+    """
+
     def test_known_gcvit_types(self):
         """
         Test the get_gcvit_model function with known GCVIT types.

@@ -7,7 +7,9 @@ os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
 
 
 class ProcessinAlexnetTestCase(TestCase):
-    """AlexNet Model Unit Tests"""
+    """
+    Test case class for processing Alexenet model.
+    """
     def test_alexnet_model(self):
         """
         Test case for creating AlexNet models.

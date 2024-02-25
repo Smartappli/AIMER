@@ -6,7 +6,10 @@ os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
 
 
 class ProcessingNestTestCase(TestCase):
-    """Nextvit Model Unit Tests"""
+    """
+    Test case class for processing Nextvit models.
+    """
+
     def test_get_nextvit_model_known_types(self):
         """
         Test for known NEXTVIT architecture types to ensure they return a model without raising any exceptions.

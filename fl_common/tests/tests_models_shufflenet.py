@@ -7,7 +7,10 @@ os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
 
 
 class ProcessingPartSTestCase(TestCase):
-    """ShuffleNet Model Unit Tests"""
+    """
+    Test case class for processing Shufflenet models.
+    """
+
     def test_get_shufflenet_model(self):
         """
         Test case for obtaining various ShuffleNet models.

@@ -7,7 +7,10 @@ os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
 
 
 class ProcessingVoloTestCase(TestCase):
-    """Volo Model Unit Tests"""
+    """
+    Test case class for processing Volo models.
+    """
+
     def test_all_volo_models(self):
         """
         Test case for obtaining various Volo models.

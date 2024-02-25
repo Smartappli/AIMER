@@ -6,7 +6,10 @@ os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
 
 
 class ProcessingSelecslsTestCase(TestCase):
-    """Selecsls Models Unit Tests"""
+    """
+    Test case class for processing Selecsls models.
+    """
+
     def test_known_selecsls_types(self):
         """
         Test for known SelecSLS architecture types to ensure they return a model without raising any exceptions.

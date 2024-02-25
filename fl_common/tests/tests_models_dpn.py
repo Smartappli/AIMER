@@ -6,6 +6,10 @@ os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
 
 
 class ProcessingDpnTestCase(TestCase):
+    """
+    Test case class for processing Dpn models.
+    """
+
     def test_all_dpn_models(self):
         """
         Test case to ensure that all DPN (Dual-Path Network) models can be created successfully.

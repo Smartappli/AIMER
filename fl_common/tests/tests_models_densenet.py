@@ -7,7 +7,10 @@ os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
 
 
 class ProcessingDenseNetTestCase(TestCase):
-    """DenseNet Models Unit Tests"""
+    """
+    Test case class for processing Densenet models.
+    """
+
     def test_densenet_model(self):
         """
         Test case for creating DenseNet models.
