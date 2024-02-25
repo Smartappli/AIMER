@@ -2,6 +2,7 @@ import os
 
 from fl_common.models.alexnet import get_alexnet_model
 from fl_common.models.beit import get_beit_model
+from fl_common.models.byoanet import get_byoanet_model
 from fl_common.models.cait import get_cait_model
 from fl_common.models.coat import get_coat_model
 from fl_common.models.convit import get_convit_model
@@ -111,6 +112,11 @@ def get_family_model_b(model_type, num_classes):
                       'beit_large_patch16_384', 'beit_large_patch16_512', 'beitv2_base_patch16_224',
                       'beitv2_large_patch16_224']:
         model = get_beit_model(model_type, num_classes)
+    elif model_type in ['botnet26t_256', 'sebotnet33ts_256', 'botnet50ts_256', 'eca_botnext26ts_256', 'halonet_h1',
+                        'halonet26t', 'sehalonet33ts', 'halonet50ts', 'eca_halonext26ts', 'lambda_resnet26t',
+                        'lambda_resnet50ts', 'lambda_resnet26rpt_256', 'haloregnetz_b', 'lamhalobotnet50ts_256',
+                        'halo2botnet50ts_256']:
+        model = get_byoanet_model(model_type, num_classes)
 
     return model
 
