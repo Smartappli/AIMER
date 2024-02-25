@@ -18,6 +18,7 @@ concurrency:
 jobs:
   build:
     strategy:
+      max-parallel: 1
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
         python-version: ["3.10"]
@@ -36,10 +37,13 @@ jobs:
         pip install pylint pylint-django
     - name: Analysing the code with pylint
       run: |
-        if [ "${{ runner.os }}" = "Windows" ]; then
+        if [ "$(uname)" == "Darwin" ]; then
+          # For macOS, use the find command for recursive globbing
+          find . -name "*.py" | xargs pylint --load-plugins pylint_django --django-settings-module=lab.settings
+        elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
+          # For Linux, use the find command for recursive globbing
+          find . -name "*.py" | xargs pylint --load-plugins pylint_django --django-settings-module=lab.settings
+        else
           # For Windows, use double quotes around the wildcard to expand correctly
           pylint --load-plugins pylint_django --django-settings-module=lab.settings "**/*.py"
-        else
-          # For Linux and macOS, use single quotes and find command for recursive globbing
-          find . -name "*.py" | xargs pylint --load-plugins pylint_django --django-settings-module=lab.settings
         fi
