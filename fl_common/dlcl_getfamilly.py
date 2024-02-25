@@ -3,6 +3,7 @@ import os
 from fl_common.models.alexnet import get_alexnet_model
 from fl_common.models.beit import get_beit_model
 from fl_common.models.byoanet import get_byoanet_model
+from fl_common.models.byobnet import get_byobnet_model
 from fl_common.models.cait import get_cait_model
 from fl_common.models.coat import get_coat_model
 from fl_common.models.convit import get_convit_model
@@ -94,17 +95,74 @@ def get_family_model_a(model_type, num_classes):
 
 def get_family_model_b(model_type, num_classes):
     """
-    Retrieves a model belonging to family B based on the provided model type and number of classes.
+    Retourne un modèle appartenant à l'une des familles de modèles spécifiées, selon le type spécifié.
 
-    Parameters:
-    - model_type (str): The type of model to retrieve. Should be one of the supported BEiT models:
-                        ['beit_base_patch16_224', 'beit_base_patch16_384', 'beit_large_patch16_224',
-                         'beit_large_patch16_384', 'beit_large_patch16_512', 'beitv2_base_patch16_224',
-                         'beitv2_large_patch16_224'] for family B.
-    - num_classes (int): The number of classes for the model.
+    Args:
+        model_type (str): Le type de modèle à récupérer. Doit être l'un des suivants:
+
+            Pour les modèles BEiT (Bottleneck Transformers):
+            - 'beit_base_patch16_224'
+            - 'beit_base_patch16_384'
+            - 'beit_large_patch16_224'
+            - 'beit_large_patch16_384'
+            - 'beit_large_patch16_512'
+            - 'beitv2_base_patch16_224'
+            - 'beitv2_large_patch16_224'
+
+            Pour les modèles Byoanet :
+            - 'botnet26t_256'
+            - 'sebotnet33ts_256'
+            - 'botnet50ts_256'
+            - 'eca_botnext26ts_256'
+            - 'halonet_h1'
+            - 'halonet26t'
+            - 'sehalonet33ts'
+            - 'halonet50ts'
+            - 'eca_halonext26ts'
+            - 'lambda_resnet26t'
+            - 'lambda_resnet50ts'
+            - 'lambda_resnet26rpt_256'
+            - 'haloregnetz_b'
+            - 'lamhalobotnet50ts_256'
+            - 'halo2botnet50ts_256'
+
+            Pour les modèles Byobnet :
+            - 'gernet_l'
+            - 'gernet_m'
+            - 'gernet_s'
+            - 'repvgg_a0'
+            - 'repvgg_a1'
+            - 'repvgg_a2'
+            - 'repvgg_b0'
+            - 'repvgg_b1'
+            - 'repvgg_b1g4'
+            - 'repvgg_b2'
+            - 'repvgg_b2g4'
+            - 'repvgg_b3'
+            - 'repvgg_b3g4'
+            - 'repvgg_d2se'
+            - 'resnet51q'
+            - 'resnet61q'
+            - 'resnext26ts'
+            - 'gcresnext26ts'
+            - 'seresnext26ts'
+            - 'eca_resnext26ts'
+            - 'bat_resnext26ts'
+            - 'resnet32ts'
+            - 'resnet33ts'
+            - 'gcresnet33ts'
+            - 'seresnet33ts'
+            - 'eca_resnet33ts'
+            - 'gcresnet50t'
+            - 'gcresnext50ts'
+
+        num_classes (int): Le nombre de classes pour la tâche de classification.
 
     Returns:
-    - model: The requested model if available, otherwise 'Unknown'.
+        torch.nn.Module: Le modèle correspondant au type spécifié.
+
+    Raises:
+        ValueError: Si le type de modèle spécifié n'est pas reconnu.
     """
     model = "Unknown"
 
@@ -117,6 +175,12 @@ def get_family_model_b(model_type, num_classes):
                         'lambda_resnet50ts', 'lambda_resnet26rpt_256', 'haloregnetz_b', 'lamhalobotnet50ts_256',
                         'halo2botnet50ts_256']:
         model = get_byoanet_model(model_type, num_classes)
+    elif model_type in ['gernet_l', 'gernet_m', 'gernet_s', 'repvgg_a0', 'repvgg_a1', 'repvgg_a2', 'repvgg_b0',
+                        'repvgg_b1', 'repvgg_b1g4', 'repvgg_b2', 'repvgg_b2g4', 'repvgg_b3', 'repvgg_b3g4',
+                        'repvgg_d2se', 'resnet51q', 'resnet61q', 'resnext26ts', 'gcresnext26ts', 'seresnext26ts',
+                        'eca_resnext26ts', 'bat_resnext26ts', 'resnet32ts', 'resnet33ts', 'gcresnet33ts',
+                        'seresnet33ts', 'eca_resnet33ts', 'gcresnet50t', 'gcresnext50ts']:
+        model = get_byobnet_model(model_type, num_classes)
 
     return model
 
