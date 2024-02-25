@@ -43,6 +43,7 @@ from fl_common.models.pit import get_pit_model
 from fl_common.models.pnasnet import get_pnasnet_model
 from fl_common.models.pvt_v2 import get_pvt_v2_model
 from fl_common.models.regnet import get_regnet_model
+from fl_common.models.repghost import get_repghost_model
 from fl_common.models.resnet import get_resnet_model
 from fl_common.models.resnext import get_resnext_model
 from fl_common.models.selecsls import get_selecsls_model
@@ -524,27 +525,14 @@ def get_family_model_p(model_type, num_classes):
 
 
 def get_family_model_r(model_type, num_classes):
-    """
-    Retrieves a model belonging to family R based on the provided model type and number of classes.
-
-    Parameters:
-    - model_type (str): The type of model to retrieve. Should be one of the supported models:
-                        - For RegNet models: ['RegNet_X_400MF', 'RegNet_X_800MF', 'RegNet_X_1_6GF',
-                                              'RegNet_X_3_2GF', 'RegNet_X_16GF', 'RegNet_Y_400MF', 'RegNet_Y_800MF',
-                                              'RegNet_Y_1_6GF', 'RegNet_Y_3_2GF', 'RegNet_Y_16GF']
-                        - For ResNet models: ['ResNet18', 'ResNet34', 'ResNet50', 'ResNet101', 'ResNet152',
-                                              'ResNeXt50_32X4D', 'ResNeXt101_32X4D', 'ResNeXt101_64X4D']
-                        - For ResNeXt models: ['ResNeXt50_32X4D', 'ResNeXt101_32X8D', 'ResNeXt101_64X4D']
-    - num_classes (int): The number of classes for the model.
-
-    Returns:
-    - model: The requested model if available, otherwise 'Unknown'.
-    """
     model = "Unknown"
 
     if model_type in ['RegNet_X_400MF', 'RegNet_X_800MF', 'RegNet_X_1_6GF', 'RegNet_X_3_2GF', 'RegNet_X_16GF',
                       'RegNet_Y_400MF', 'RegNet_Y_800MF', 'RegNet_Y_1_6GF', 'RegNet_Y_3_2GF', 'RegNet_Y_16GF']:
         model = get_regnet_model(model_type, num_classes)
+    elif model_type in ['repghostnet_050', 'repghostnet_058', 'repghostnet_080', 'repghostnet_100', 'repghostnet_111',
+                        'repghostnet_130', 'repghostnet_150', 'repghostnet_200']:
+        model = get_repghost_model(model_type, num_classes)
     elif model_type in ['ResNet18', 'ResNet34', 'ResNet50', 'ResNet101', 'ResNet152', 'ResNeXt50_32X4D',
                         'ResNeXt101_32X4D', 'ResNeXt101_64X4D']:
         model = get_resnet_model(model_type, num_classes)
