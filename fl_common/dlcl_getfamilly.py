@@ -67,6 +67,7 @@ from fl_common.models.vgg import get_vgg_model
 from fl_common.models.visformer import get_visformer_model
 from fl_common.models.vision_transformer import get_vision_transformer_model
 from fl_common.models.vision_transformer_hybrid import get_vision_transformer_hybrid_model
+from fl_common.models.vision_transformer_relpos import get_vision_transformer_relpos_model
 from fl_common.models.volo import get_volo_model
 from fl_common.models.vovnet import get_vovnet_model
 from fl_common.models.wide_resnet import get_wide_resnet_model
@@ -767,13 +768,19 @@ def get_family_model_v(model_type, num_classes):
     if model_type in ['visformer_tiny', 'visformer_small']:
         model = get_visformer_model(model_type, num_classes)
     elif model_type in ['ViT_B_16', 'ViT_B_32', 'ViT_L_16', 'ViT_L_32', 'ViT_H_14']:
-        model = get_vision_tranformer_model(model_type, num_classes)
+        model = get_vision_transformer_model(model_type, num_classes)
     elif model_type in ['vit_tiny_r_s16_p8_224', 'vit_tiny_r_s16_p8_384', 'vit_small_r26_s32_224',
                        'vit_small_r26_s32_384', 'vit_base_r26_s32_224', 'vit_base_r50_s16_224',
                        'vit_base_r50_s16_384', 'vit_large_r50_s32_224', 'vit_large_r50_s32_384',
                        'vit_small_resnet26d_224', 'vit_small_resnet50d_s16_224', 'vit_base_resnet26d_224',
                        'vit_base_resnet50d_224']:
         model = get_vision_transformer_hybrid_model(model_type, num_classes)
+    elif model_type in ['vit_relpos_base_patch32_plus_rpn_256', 'vit_relpos_base_patch16_plus_240', 'vit_relpos_small_patch16_224',
+                       'vit_relpos_medium_patch16_224', 'vit_relpos_base_patch16_224', 'vit_srelpos_small_patch16_224',
+                       'vit_srelpos_medium_patch16_224', 'vit_relpos_medium_patch16_cls_224', 'vit_relpos_base_patch16_cls_224',
+                       'vit_relpos_base_patch16_clsgap_224', 'vit_relpos_small_patch16_rpn_224', 'vit_relpos_medium_patch16_rpn_224',
+                       'vit_relpos_base_patch16_rpn_224']:
+        model = get_vision_transformer_relpos_model(model_type, num_classes)
     elif model_type in ['volo_d1_224', 'volo_d1_384', 'volo_d2_224', 'volo_d2_384', 'volo_d3_224', 'volo_d3_448',
                         'volo_d4_224', 'volo_d4_448', 'volo_d5_224', 'volo_d5_448', 'volo_d5_512']:
         model = get_volo_model(model_type, num_classes)

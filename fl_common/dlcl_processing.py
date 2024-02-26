@@ -44,7 +44,8 @@ model_list = ['xcit_nano_12_p16_224', 'xception41', 'ResNet18', 'Swin_V2_T', 'Re
               'dm_nfnet_f0', 'pit_b_224', 'pnasnet5large', 'pvt_v2_b0', 'tnt_s_patch16_224', 'selecsls42',
               'legacy_seresnet18', 'sequencer2d_s', 'skresnet18', 'visformer_tiny', 'poolformer_s12', 'mixer_s32_224',
               'mobilevit_xxs', 'mvitv2_tiny', 'repghostnet_050', 'repvit_m1', 'res2net50_26w_4s', 'rexnet_100',
-              'botnet26t_256', 'gernet_l', 'efficientformer_l1', 'vit_tiny_r_s16_p8_224']
+              'botnet26t_256', 'gernet_l', 'efficientformer_l1', 'vit_tiny_r_s16_p8_224',
+              'vit_relpos_base_patch32_plus_rpn_256']
 
 # Model Parameters
 best_val_loss = float('inf')  # Initialize the best validation loss
