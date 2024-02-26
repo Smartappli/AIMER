@@ -2,7 +2,7 @@ import torch.nn as nn
 from torchvision import models
 
 
-def get_vision_model(vision_type, num_classes):
+def get_vision_transformer_model(vision_type, num_classes):
     """
     Returns a modified Vision Transformer (ViT) model based on the specified type.
 

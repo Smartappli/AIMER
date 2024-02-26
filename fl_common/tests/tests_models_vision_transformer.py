@@ -1,7 +1,7 @@
 import os
 import torch.nn as nn
 from django.test import TestCase
-from fl_common.models.vision_transformer import get_vision_model
+from fl_common.models.vision_transformer import get_vision_transformer_model
 
 os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
 
@@ -26,7 +26,7 @@ class ProcessingVisionTransformerTestCase(TestCase):
         for vision_type in vision_types:
             with self.subTest(vision_type=vision_type):
                 # Get the Vision Transformer model for testing
-                model = get_vision_model(vision_type, num_classes)
+                model = get_vision_transformer_model(vision_type, num_classes)
                 # Check if the model is an instance of torch.nn.Module
                 self.assertIsInstance(model, nn.Module, msg=f'get_vision_model {vision_type} KO')
 
@@ -43,7 +43,7 @@ class ProcessingVisionTransformerTestCase(TestCase):
 
         with self.assertRaises(ValueError) as context:
             # Attempt to get a Vision Transformer model with an unknown architecture
-            get_vision_model(vision_type, num_classes)
+            get_vision_transformer_model(vision_type, num_classes)
 
         self.assertEqual(
             str(context.exception),
