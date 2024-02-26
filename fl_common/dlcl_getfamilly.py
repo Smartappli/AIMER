@@ -17,6 +17,7 @@ from fl_common.models.densenet import get_densenet_model
 from fl_common.models.dla import get_dla_model
 from fl_common.models.dpn import get_dpn_model
 from fl_common.models.edgenet import get_edgenet_model
+from fl_common.models.efficientformer import get_efficientformer_model
 from fl_common.models.efficientnet import get_efficientnet_model
 from fl_common.models.eva import get_eva_model
 from fl_common.models.fastvit import get_fastvit_model
@@ -296,31 +297,40 @@ def get_family_model_d(model_type, num_classes):
 
 def get_family_model_e(model_type, num_classes):
     """
-    Get a model from the family of models including EdgeNet, EfficientNet, and Eva.
+    Get a model of the specified type.
 
     Parameters:
-        model_type (str): Type of the model. Options include:
-            - For EdgeNet: 'edgenext_xx_small', 'edgenext_x_small', 'edgenext_small', 'edgenext_base',
-                           'edgenext_small_rw'
-            - For EfficientNet: 'EfficientNetB0', 'EfficientNetB1', 'EfficientNetB2', 'EfficientNetB3',
-                                'EfficientNetB4', 'EfficientNetB5', 'EfficientNetB6', 'EfficientNetB7',
-                                'EfficientNetV2S', 'EfficientNetV2M', 'EfficientNetV2L'
-            - For Eva: 'eva_giant_patch14_224', 'eva_giant_patch14_336', 'eva_giant_patch14_560',
-                       'eva02_tiny_patch14_224', 'eva02_small_patch14_224', 'eva02_base_patch14_224',
-                       'eva02_large_patch14_224', 'eva02_tiny_patch14_336', 'eva02_small_patch14_336',
-                       'eva02_base_patch14_448', 'eva02_large_patch14_448', 'eva_giant_patch14_clip_224',
-                       'eva02_base_patch16_clip_224', 'eva02_large_patch14_clip_224', 'eva02_large_patch14_clip_336',
-                       'eva02_enormous_patch14_clip_224'
-        num_classes (int): Number of output classes.
+        model_type (str): Type of model to retrieve.
+                          Choices:
+                              - For EdgeNext: 'edgenext_xx_small', 'edgenext_x_small', 'edgenext_small',
+                                              'edgenext_base', 'edgenext_small_rw'.
+                              - For Efficientformer: 'efficientformer_l1', 'efficientformer_l3', 'efficientformer_l7'.
+                              - For EfficientNet: 'EfficientNetB0', 'EfficientNetB1', 'EfficientNetB2',
+                                                  'EfficientNetB3', 'EfficientNetB4', 'EfficientNetB5',
+                                                  'EfficientNetB6', 'EfficientNetB7', 'EfficientNetV2S',
+                                                  'EfficientNetV2M', 'EfficientNetV2L'.
+                              - For Eva: 'eva_giant_patch14_224', 'eva_giant_patch14_336', 'eva_giant_patch14_560',
+                                         'eva02_tiny_patch14_224', 'eva02_small_patch14_224', 'eva02_base_patch14_224',
+                                         'eva02_large_patch14_224', 'eva02_tiny_patch14_336', 'eva02_small_patch14_336',
+                                         'eva02_base_patch14_448', 'eva02_large_patch14_448',
+                                         'eva_giant_patch14_clip_224', 'eva02_base_patch16_clip_224',
+                                         'eva02_large_patch14_clip_224', 'eva02_large_patch14_clip_336',
+                                         'eva02_enormous_patch14_clip_224'.
+        num_classes (int): Number of classes for the classification task.
 
     Returns:
-        torch.nn.Module: The selected model.
+        model: The requested model instance.
+
+    Raises:
+        ValueError: If the specified model_type is not one of the supported architectures.
     """
     model = "Unknown"
 
     if model_type in ['edgenext_xx_small', 'edgenext_x_small', 'edgenext_small', 'edgenext_base',
                       'edgenext_small_rw']:
         model = get_edgenet_model(model_type, num_classes)
+    elif model_type in ['efficientformer_l1', 'efficientformer_l3', 'efficientformer_l7']:
+        model = get_efficientformer_model(model_type, num_classes)
     elif model_type in ['EfficientNetB0', 'EfficientNetB1', 'EfficientNetB2', 'EfficientNetB3', 'EfficientNetB4',
                         'EfficientNetB5', 'EfficientNetB6', 'EfficientNetB7', 'EfficientNetV2S', 'EfficientNetV2M',
                         'EfficientNetV2L']:
