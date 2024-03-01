@@ -1,5 +1,4 @@
 django==5.0.2
-#llama-cpp-python==0.2.29
 huggingface-hub==0.21.3
 #pycaret[full]==3.2.0 # 3.2.1
 #git+https://github.com/pycaret/pycaret.git
@@ -23,9 +22,9 @@ psycopg2==2.9.9
 tqdm==4.66.1
 syft==0.8.4
 hagrid==0.3.111
-ansible-core>=2.16.4rc1 # not directly required, pinned by Snyk to avoid a vulnerability
+ansible-core>=2.16.4 # not directly required, pinned by Snyk to avoid a vulnerability
 fonttools>=4.43.0 # not directly required, pinned by Snyk to avoid a vulnerability
 gevent>=23.9.0 # not directly required, pinned by Snyk to avoid a vulnerability
 pillow>=10.2.0 # not directly required, pinned by Snyk to avoid a vulnerability
 setuptools>=65.5.1 # not directly required, pinned by Snyk to avoid a vulnerability
-#llama-cpp-python[server]==0.2.52
+#llama-cpp-python[server]==0.2.53
