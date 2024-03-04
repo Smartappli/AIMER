@@ -39,15 +39,30 @@ def get_cspnet_model(cspnet_type, num_classes):
         ValueError: If the specified CSPNet architecture type is unknown.
     """
     if cspnet_type == "cspresnet50":
-        cspnet_model = create_model('cspresnet50', pretrained=True, num_classes=num_classes)
+        try:
+            cspnet_model = create_model('cspresnet50', pretrained=True, num_classes=num_classes)
+        except:
+            cspnet_model = create_model('cspresnet50', pretrained=False, num_classes=num_classes)
     elif cspnet_type == "cspresnet50d":
-        cspnet_model = create_model('cspresnet50d', pretrained=False, num_classes=num_classes)
+        try:
+            cspnet_model = create_model('cspresnet50d', pretrained=True, num_classes=num_classes)
+        except:
+            cspnet_model = create_model('cspresnet50d', pretrained=False, num_classes=num_classes)
     elif cspnet_type == "cspresnet50w":
-        cspnet_model = create_model('cspresnet50w', pretrained=False, num_classes=num_classes)
+        try:
+            cspnet_model = create_model('cspresnet50w', pretrained=True, num_classes=num_classes)
+        except:
+            cspnet_model = create_model('cspresnet50w', pretrained=False, num_classes=num_classes)
     elif cspnet_type == "cspresnext50":
-        cspnet_model = create_model('cspresnext50', pretrained=True, num_classes=num_classes)
+        try:
+            cspnet_model = create_model('cspresnext50', pretrained=True, num_classes=num_classes)
+        except:
+            cspnet_model = create_model('cspresnext50', pretrained=False, num_classes=num_classes)
     elif cspnet_type == "cspdarknet53":
-        cspnet_model = create_model('cspdarknet53', pretrained=True, num_classes=num_classes)
+        try:
+            cspnet_model = create_model('cspdarknet53', pretrained=True, num_classes=num_classes)
+        except:
+            cspnet_model = create_model('cspdarknet53', pretrained=False, num_classes=num_classes)
     elif cspnet_type == "darknet17":
         cspnet_model = create_model('darknet17', pretrained=False, num_classes=num_classes)
     elif cspnet_type == "darknet21":
