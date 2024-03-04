@@ -15,13 +15,25 @@ def get_davit_model(davit_type, num_classes):
 
     # Check the value of davit_type and create the corresponding Davit model
     if davit_type == "davit_tiny":
-        davit_model = create_model('davit_tiny', pretrained=True, num_classes=num_classes)
+        try:
+            davit_model = create_model('davit_tiny', pretrained=True, num_classes=num_classes)
+        except:
+            davit_model = create_model('davit_tiny', pretrained=False, num_classes=num_classes)
     elif davit_type == "davit_small":
-        davit_model = create_model('davit_small', pretrained=True, num_classes=num_classes)
+        try:
+            davit_model = create_model('davit_small', pretrained=True, num_classes=num_classes)
+        except:
+            davit_model = create_model('davit_small', pretrained=False, num_classes=num_classes)
     elif davit_type == "davit_base":
-        davit_model = create_model('davit_base', pretrained=True, num_classes=num_classes)
+        try:
+            davit_model = create_model('davit_base', pretrained=True, num_classes=num_classes)
+        except:
+            davit_model = create_model('davit_base', pretrained=False, num_classes=num_classes)
     elif davit_type == "davit_large":
-        davit_model = create_model('davit_large', pretrained=False, num_classes=num_classes)
+        try:
+            davit_model = create_model('davit_large', pretrained=True, num_classes=num_classes)
+        except:
+            davit_model = create_model('davit_large', pretrained=False, num_classes=num_classes)
     elif davit_type == "davit_huge":
         try:
             davit_model = create_model('davit_huge', pretrained=True, num_classes=num_classes)
