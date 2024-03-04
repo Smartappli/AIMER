@@ -58,87 +58,210 @@ def get_byobnet_model(byobnet_type, num_classes):
         ValueError: Si le type de modèle Byobnet spécifié n'est pas reconnu.
     """
     if byobnet_type == 'gernet_l':
-        byobnet_model = create_model('gernet_l', pretrained=True, num_classes=num_classes)
+        try:
+            byobnet_model = create_model('gernet_l', pretrained=True, num_classes=num_classes)
+        except:
+            byobnet_model = create_model('gernet_l', pretrained=False, num_classes=num_classes)
     elif byobnet_type == 'gernet_m':
-        byobnet_model = create_model('gernet_m', pretrained=True, num_classes=num_classes)
+        try:
+            byobnet_model = create_model('gernet_m', pretrained=True, num_classes=num_classes)
+        except:
+            byobnet_model = create_model('gernet_m', pretrained=False, num_classes=num_classes)
     elif byobnet_type == 'gernet_s':
-        byobnet_model = create_model('gernet_s', pretrained=True, num_classes=num_classes)
+        try:
+            byobnet_model = create_model('gernet_s', pretrained=True, num_classes=num_classes)
+        except:
+            byobnet_model = create_model('gernet_s', pretrained=False, num_classes=num_classes)
     elif byobnet_type == 'repvgg_a0':
-        byobnet_model = create_model('repvgg_a0', pretrained=True, num_classes=num_classes)
+        try:
+            byobnet_model = create_model('repvgg_a0', pretrained=True, num_classes=num_classes)
+        except:
+            byobnet_model = create_model('repvgg_a0', pretrained=False, num_classes=num_classes)
     elif byobnet_type == 'repvgg_a1':
-        byobnet_model = create_model('repvgg_a1', pretrained=True, num_classes=num_classes)
+        try:
+            byobnet_model = create_model('repvgg_a1', pretrained=True, num_classes=num_classes)
+        except:
+            byobnet_model = create_model('repvgg_a1', pretrained=False, num_classes=num_classes)
     elif byobnet_type == 'repvgg_a2':
-        byobnet_model = create_model('repvgg_a2', pretrained=True, num_classes=num_classes)
+        try:
+            byobnet_model = create_model('repvgg_a2', pretrained=True, num_classes=num_classes)
+        except:
+            byobnet_model = create_model('repvgg_a2', pretrained=False, num_classes=num_classes)
     elif byobnet_type == 'repvgg_b0':
-        byobnet_model = create_model('repvgg_b0', pretrained=True, num_classes=num_classes)
+        try:
+            byobnet_model = create_model('repvgg_b0', pretrained=True, num_classes=num_classes)
+        except:
+            byobnet_model = create_model('repvgg_b0', pretrained=False, num_classes=num_classes)
     elif byobnet_type == 'repvgg_b1':
-        byobnet_model = create_model('repvgg_b1', pretrained=True, num_classes=num_classes)
+        try:
+            byobnet_model = create_model('repvgg_b1', pretrained=True, num_classes=num_classes)
+        except:
+            byobnet_model = create_model('repvgg_b1', pretrained=False, num_classes=num_classes)
     elif byobnet_type == 'repvgg_b1g4':
-        byobnet_model = create_model('repvgg_b1g4', pretrained=True, num_classes=num_classes)
+        try:
+            byobnet_model = create_model('repvgg_b1g4', pretrained=True, num_classes=num_classes)
+        except:
+            byobnet_model = create_model('repvgg_b1g4', pretrained=False, num_classes=num_classes)
     elif byobnet_type == 'repvgg_b2':
-        byobnet_model = create_model('repvgg_b2', pretrained=True, num_classes=num_classes)
+        try:
+            byobnet_model = create_model('repvgg_b2', pretrained=True, num_classes=num_classes)
+        except:
+            byobnet_model = create_model('repvgg_b2', pretrained=False, num_classes=num_classes)
     elif byobnet_type == 'repvgg_b2g4':
-        byobnet_model = create_model('repvgg_b2g4', pretrained=True, num_classes=num_classes)
+        try:
+            byobnet_model = create_model('repvgg_b2g4', pretrained=True, num_classes=num_classes)
+        except:
+            byobnet_model = create_model('repvgg_b2g4', pretrained=False, num_classes=num_classes)
     elif byobnet_type == 'repvgg_b3':
-        byobnet_model = create_model('repvgg_b3', pretrained=True, num_classes=num_classes)
+        try:
+            byobnet_model = create_model('repvgg_b3', pretrained=True, num_classes=num_classes)
+        except:
+            byobnet_model = create_model('repvgg_b3', pretrained=False, num_classes=num_classes)
     elif byobnet_type == 'repvgg_b3g4':
-        byobnet_model = create_model('repvgg_b3g4', pretrained=True, num_classes=num_classes)
+        try:
+            byobnet_model = create_model('repvgg_b3g4', pretrained=True, num_classes=num_classes)
+        except:
+            byobnet_model = create_model('repvgg_b3g4', pretrained=True, num_classes=num_classes)
     elif byobnet_type == 'repvgg_d2se':
-        byobnet_model = create_model('repvgg_d2se', pretrained=True, num_classes=num_classes)
+        try:
+            byobnet_model = create_model('repvgg_d2se', pretrained=True, num_classes=num_classes)
+        except:
+            byobnet_model = create_model('repvgg_d2se', pretrained=False, num_classes=num_classes)
     elif byobnet_type == 'resnet51q':
-        byobnet_model = create_model('resnet51q', pretrained=True, num_classes=num_classes)
+        try:
+            byobnet_model = create_model('resnet51q', pretrained=True, num_classes=num_classes)
+        except:
+            byobnet_model = create_model('resnet51q', pretrained=False, num_classes=num_classes)
     elif byobnet_type == 'resnet61q':
-        byobnet_model = create_model('resnet61q', pretrained=True, num_classes=num_classes)
+        try:
+            byobnet_model = create_model('resnet61q', pretrained=True, num_classes=num_classes)
+        except:
+            byobnet_model = create_model('resnet61q', pretrained=False, num_classes=num_classes)
     elif byobnet_type == 'resnext26ts':
-        byobnet_model = create_model('resnext26ts', pretrained=True, num_classes=num_classes)
+        try:
+            byobnet_model = create_model('resnext26ts', pretrained=True, num_classes=num_classes)
+        except:
+            byobnet_model = create_model('resnext26ts', pretrained=False, num_classes=num_classes)
     elif byobnet_type == 'gcresnext26ts':
-        byobnet_model = create_model('gcresnext26ts', pretrained=True, num_classes=num_classes)
+        try:
+            byobnet_model = create_model('gcresnext26ts', pretrained=True, num_classes=num_classes)
+        except:
+            byobnet_model = create_model('gcresnext26ts', pretrained=False, num_classes=num_classes)
     elif byobnet_type == 'seresnext26ts':
-        byobnet_model = create_model('seresnext26ts', pretrained=True, num_classes=num_classes)
+        try:
+            byobnet_model = create_model('seresnext26ts', pretrained=True, num_classes=num_classes)
+        except:
+            byobnet_model = create_model('seresnext26ts', pretrained=False, num_classes=num_classes)
     elif byobnet_type == 'eca_resnext26ts':
-        byobnet_model = create_model('eca_resnext26ts', pretrained=True, num_classes=num_classes)
+        try:
+            byobnet_model = create_model('eca_resnext26ts', pretrained=True, num_classes=num_classes)
+        except:
+            byobnet_model = create_model('eca_resnext26ts', pretrained=False, num_classes=num_classes)
     elif byobnet_type == 'bat_resnext26ts':
-        byobnet_model = create_model('bat_resnext26ts', pretrained=True, num_classes=num_classes)
+        try:
+            byobnet_model = create_model('bat_resnext26ts', pretrained=True, num_classes=num_classes)
+        except:
+            byobnet_model = create_model('bat_resnext26ts', pretrained=False, num_classes=num_classes)
     elif byobnet_type == 'resnet32ts':
-        byobnet_model = create_model('resnet32ts', pretrained=True, num_classes=num_classes)
+        try:
+            byobnet_model = create_model('resnet32ts', pretrained=True, num_classes=num_classes)
+        except:
+            byobnet_model = create_model('resnet32ts', pretrained=False, num_classes=num_classes)
     elif byobnet_type == 'resnet33ts':
-        byobnet_model = create_model('resnet33ts', pretrained=True, num_classes=num_classes)
+        try:
+            byobnet_model = create_model('resnet33ts', pretrained=True, num_classes=num_classes)
+        except:
+            byobnet_model = create_model('resnet33ts', pretrained=False, num_classes=num_classes)
     elif byobnet_type == 'gcresnet33ts':
-        byobnet_model = create_model('gcresnet33ts', pretrained=True, num_classes=num_classes)
+        try:
+            byobnet_model = create_model('gcresnet33ts', pretrained=True, num_classes=num_classes)
+        except:
+            byobnet_model = create_model('gcresnet33ts', pretrained=False, num_classes=num_classes)
     elif byobnet_type == 'seresnet33ts':
-        byobnet_model = create_model('seresnet33ts', pretrained=True, num_classes=num_classes)
+        try:
+            byobnet_model = create_model('seresnet33ts', pretrained=True, num_classes=num_classes)
+        except:
+            byobnet_model = create_model('seresnet33ts', pretrained=False, num_classes=num_classes)
     elif byobnet_type == 'eca_resnet33ts':
-        byobnet_model = create_model('eca_resnet33ts', pretrained=True, num_classes=num_classes)
+        try:
+            byobnet_model = create_model('eca_resnet33ts', pretrained=True, num_classes=num_classes)
+        except:
+            byobnet_model = create_model('eca_resnet33ts', pretrained=False, num_classes=num_classes)
     elif byobnet_type == 'gcresnet50t':
-        byobnet_model = create_model('gcresnet50t', pretrained=True, num_classes=num_classes)
+        try:
+            byobnet_model = create_model('gcresnet50t', pretrained=True, num_classes=num_classes)
+        except:
+            byobnet_model = create_model('gcresnet50t', pretrained=False, num_classes=num_classes)
     elif byobnet_type == 'gcresnext50ts':
-        byobnet_model = create_model('gcresnext50ts',pretrained=True, num_classes=num_classes)
+        try:
+            byobnet_model = create_model('gcresnext50ts',pretrained=True, num_classes=num_classes)
+        except:
+            byobnet_model = create_model('gcresnext50ts', pretrained=False, num_classes=num_classes)
     elif byobnet_type == 'regnetz_b16':
-        byobnet_model = create_model('regnetz_b16', pretrained=True, num_classes=num_classes)
+        try:
+            byobnet_model = create_model('regnetz_b16', pretrained=True, num_classes=num_classes)
+        except:
+            byobnet_model = create_model('regnetz_b16', pretrained=False, num_classes=num_classes)
     elif byobnet_type == 'regnetz_c16':
-        byobnet_model = create_model('regnetz_c16', pretrained=True, num_classes=num_classes)
+        try:
+            byobnet_model = create_model('regnetz_c16', pretrained=True, num_classes=num_classes)
+        except:
+            byobnet_model = create_model('regnetz_c16', pretrained=False, num_classes=num_classes)
     elif byobnet_type == 'regnetz_d32':
-        byobnet_model = create_model('regnetz_d32', pretrained=True, num_classes=num_classes)
+        try:
+            byobnet_model = create_model('regnetz_d32', pretrained=True, num_classes=num_classes)
+        except:
+            byobnet_model = create_model('regnetz_d32', pretrained=False, num_classes=num_classes)
     elif byobnet_type == 'regnetz_d8':
-        byobnet_model = create_model('regnetz_d8', pretrained=True, num_classes=num_classes)
+        try:
+            byobnet_model = create_model('regnetz_d8', pretrained=True, num_classes=num_classes)
+        except:
+            byobnet_model = create_model('regnetz_d8', pretrained=False, num_classes=num_classes)
     elif byobnet_type == 'regnetz_e8':
-        byobnet_model = create_model('regnetz_e8', pretrained=True, num_classes=num_classes)
+        try:
+            byobnet_model = create_model('regnetz_e8', pretrained=True, num_classes=num_classes)
+        except:
+            byobnet_model = create_model('regnetz_e8', pretrained=False, num_classes=num_classes)
     elif byobnet_type == 'regnetz_b16_evos':
-        byobnet_model = create_model('regnetz_b16_evos', pretrained=True, num_classes=num_classes)
+        try:
+            byobnet_model = create_model('regnetz_b16_evos', pretrained=True, num_classes=num_classes)
+        except:
+            byobnet_model = create_model('regnetz_b16_evos', pretrained=False, num_classes=num_classes)
     elif byobnet_type == 'regnetz_c16_evos':
-        byobnet_model = create_model('regnetz_c16_evos', pretrained=True, num_classes=num_classes)
+        try:
+            byobnet_model = create_model('regnetz_c16_evos', pretrained=True, num_classes=num_classes)
+        except:
+            byobnet_model = create_model('regnetz_c16_evos', pretrained=False, num_classes=num_classes)
     elif byobnet_type == 'regnetz_d8_evos':
-        byobnet_model = create_model('regnetz_d8_evos', pretrained=True, num_classes=num_classes)
+        try:
+            byobnet_model = create_model('regnetz_d8_evos', pretrained=True, num_classes=num_classes)
+        except:
+            byobnet_model = create_model('regnetz_d8_evos', pretrained=False, num_classes=num_classes)
     elif byobnet_type == 'mobileone_s0':
-        byobnet_model = create_model('mobileone_s0', pretrained=True, num_classes=num_classes)
+        try:
+            byobnet_model = create_model('mobileone_s0', pretrained=True, num_classes=num_classes)
+        except:
+            byobnet_model = create_model('mobileone_s0', pretrained=False, num_classes=num_classes)
     elif byobnet_type == 'mobileone_s1':
-        byobnet_model = create_model('mobileone_s1', pretrained=True, num_classes=num_classes)
+        try:
+            byobnet_model = create_model('mobileone_s1', pretrained=True, num_classes=num_classes)
+        except:
+            byobnet_model = create_model('mobileone_s1', pretrained=False, num_classes=num_classes)
     elif byobnet_type == 'mobileone_s2':
-        byobnet_model = create_model('mobileone_s2', pretrained=True, num_classes=num_classes)
+        try:
+            byobnet_model = create_model('mobileone_s2', pretrained=True, num_classes=num_classes)
+        except:
+            byobnet_model = create_model('mobileone_s2', pretrained=False, num_classes=num_classes)
     elif byobnet_type == 'mobileone_s3':
-        byobnet_model = create_model('mobileone_s3', pretrained=True, num_classes=num_classes)
+        try:
+            byobnet_model = create_model('mobileone_s3', pretrained=True, num_classes=num_classes)
+        except:
+            byobnet_model = create_model('mobileone_s3', pretrained=False, num_classes=num_classes)
     elif byobnet_type == 'mobileone_s4':
-        byobnet_model = create_model('mobileone_s4', pretrained=True, num_classes=num_classes)
+        try:
+            byobnet_model = create_model('mobileone_s4', pretrained=True, num_classes=num_classes)
+        except:
+            byobnet_model = create_model('mobileone_s3', pretrained=False, num_classes=num_classes)
     else:
         raise ValueError(f'Unknown Byobnet Architecture: {byobnet_type}')
 
