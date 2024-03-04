@@ -26,7 +26,7 @@ def get_mvitv2_model(mvitv2_type, num_classes):
     elif mvitv2_type == "mvitv2_large":
         mvitv2_model = create_model('mvitv2_large', pretrained=True, num_classes=num_classes)
     elif mvitv2_type == "mvitv2_small_cls":
-        mvitv2_model = create_model('mvitv2_small_cls', pretrained=True, num_classes=num_classes)
+        mvitv2_model = create_model('mvitv2_small_cls', pretrained=False, num_classes=num_classes)
     elif mvitv2_type == "mvitv2_base_cls":
         mvitv2_model = create_model('mvitv2_base_cls', pretrained=True, num_classes=num_classes)
     elif mvitv2_type == "mvitv2_large_cls":
