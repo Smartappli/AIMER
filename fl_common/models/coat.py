@@ -18,21 +18,45 @@ def get_coat_model(coat_type, num_classes):
     - ValueError: If an unknown COAT architecture is specified.
     """
     if coat_type == 'coat_tiny':
-        coat_model = create_model('coat_tiny', pretrained=True, num_classes=num_classes)
+        try:
+            coat_model = create_model('coat_tiny', pretrained=True, num_classes=num_classes)
+        except:
+            coat_model = create_model('coat_tiny', pretrained=False, num_classes=num_classes)
     elif coat_type == 'coat_mini':
-        coat_model = create_model('coat_mini', pretrained=True, num_classes=num_classes)
+        try:
+            coat_model = create_model('coat_mini', pretrained=True, num_classes=num_classes)
+        except:
+            coat_model = create_model('coat_mini', pretrained=False, num_classes=num_classes)
     elif coat_type == 'coat_small':
-        coat_model = create_model('coat_small', pretrained=True, num_classes=num_classes)
+        try:
+            coat_model = create_model('coat_small', pretrained=True, num_classes=num_classes)
+        except:
+            coat_model = create_model('coat_small', pretrained=False, num_classes=num_classes)
     elif coat_type == 'coat_lite_tiny':
-        coat_model = create_model('coat_lite_tiny', pretrained=True, num_classes=num_classes)
+        try:
+            coat_model = create_model('coat_lite_tiny', pretrained=True, num_classes=num_classes)
+        except:
+            coat_model = create_model('coat_lite_tiny', pretrained=False, num_classes=num_classes)
     elif coat_type == 'coat_lite_mini':
-        coat_model = create_model('coat_lite_mini', pretrained=True, num_classes=num_classes)
+        try:
+            coat_model = create_model('coat_lite_mini', pretrained=True, num_classes=num_classes)
+        except:
+            coat_model = create_model('coat_lite_mini', pretrained=False, num_classes=num_classes)
     elif coat_type == 'coat_lite_small':
-        coat_model = create_model('coat_lite_small', pretrained=True, num_classes=num_classes)
+        try:
+            coat_model = create_model('coat_lite_small', pretrained=True, num_classes=num_classes)
+        except:
+            coat_model = create_model('coat_lite_small', pretrained=False, num_classes=num_classes)
     elif coat_type == 'coat_lite_medium':
-        coat_model = create_model('coat_lite_medium', pretrained=True, num_classes=num_classes)
+        try:
+            coat_model = create_model('coat_lite_medium', pretrained=True, num_classes=num_classes)
+        except:
+            coat_model = create_model('coat_lite_medium', pretrained=False, num_classes=num_classes)
     elif coat_type == 'coat_lite_medium_384':
-        coat_model = create_model('coat_lite_medium', pretrained=True, num_classes=num_classes)
+        try:
+            coat_model = create_model('coat_lite_medium', pretrained=True, num_classes=num_classes)
+        except:
+            coat_model = create_model('coat_lite_medium', pretrained=False, num_classes=num_classes)
     else:
         raise ValueError(f'Unknown Cait Architecture: {coat_type}')
 
