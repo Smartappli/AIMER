@@ -23,19 +23,40 @@ def get_beit_model(beit_type, num_classes):
     - ValueError: If the specified `beit_type` is not one of the supported architectures.
     """
     if beit_type == "beit_base_patch16_224":
-        beit_model = create_model('beit_base_patch16_224', pretrained=True, num_classes=num_classes)
+        try:
+            beit_model = create_model('beit_base_patch16_224', pretrained=True, num_classes=num_classes)
+        except:
+            beit_model = create_model('beit_base_patch16_224', pretrained=False, num_classes=num_classes)
     elif beit_type == "beit_base_patch16_384":
-        beit_model = create_model('beit_base_patch16_384', pretrained=True, num_classes=num_classes)
+        try:
+            beit_model = create_model('beit_base_patch16_384', pretrained=True, num_classes=num_classes)
+        except:
+            beit_model = create_model('beit_base_patch16_384', pretrained=False, num_classes=num_classes)
     elif beit_type == "beit_large_patch16_224":
-        beit_model = create_model('beit_large_patch16_224', pretrained=True, num_classes=num_classes)
+        try:
+            beit_model = create_model('beit_large_patch16_224', pretrained=True, num_classes=num_classes)
+        except:
+            beit_model = create_model('beit_large_patch16_224', pretrained=False, num_classes=num_classes)
     elif beit_type == "beit_large_patch16_384":
-        beit_model = create_model('beit_large_patch16_384', pretrained=True, num_classes=num_classes)
+        try:
+            beit_model = create_model('beit_large_patch16_384', pretrained=True, num_classes=num_classes)
+        except:
+            beit_model = create_model('beit_large_patch16_384', pretrained=False, num_classes=num_classes)
     elif beit_type == "beit_large_patch16_512":
-        beit_model = create_model('beit_large_patch16_512', pretrained=True, num_classes=num_classes)
+        try:
+            beit_model = create_model('beit_large_patch16_512', pretrained=True, num_classes=num_classes)
+        except:
+            beit_model = create_model('beit_large_patch16_512', pretrained=False, num_classes=num_classes)
     elif beit_type == "beitv2_base_patch16_224":
-        beit_model = create_model('beitv2_base_patch16_224', pretrained=True, num_classes=num_classes)
+        try:
+            beit_model = create_model('beitv2_base_patch16_224', pretrained=True, num_classes=num_classes)
+        except:
+            beit_model = create_model('beitv2_base_patch16_224', pretrained=False, num_classes=num_classes)
     elif beit_type == "beitv2_large_patch16_224":
-        beit_model = create_model('beitv2_large_patch16_224', pretrained=True, num_classes=num_classes)
+        try:
+            beit_model = create_model('beitv2_large_patch16_224', pretrained=True, num_classes=num_classes)
+        except:
+            beit_model = create_model('beitv2_large_patch16_224', pretrained=False, num_classes=num_classes)
     else:
         raise ValueError(f'Unknown Beit Architecture: {beit_type}')
 
