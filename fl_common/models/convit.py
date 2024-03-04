@@ -21,11 +21,20 @@ def get_convit_model(convit_type, num_classes):
         model = get_convit_model("convit_tiny", num_classes=10)
     """
     if convit_type == "convit_tiny":
-        convit_model = create_model('convit_tiny', pretrained=True, num_classes=num_classes)
+        try:
+            convit_model = create_model('convit_tiny', pretrained=True, num_classes=num_classes)
+        except:
+            convit_model = create_model('convit_tiny', pretrained=False, num_classes=num_classes)
     elif convit_type == "convit_small":
-        convit_model = create_model('convit_small', pretrained=True, num_classes=num_classes)
+        try:
+            convit_model = create_model('convit_small', pretrained=True, num_classes=num_classes)
+        except:
+            convit_model = create_model('convit_small', pretrained=False, num_classes=num_classes)
     elif convit_type == "convit_base":
-        convit_model = create_model('convit_base', pretrained=True, num_classes=num_classes)
+        try:
+            convit_model = create_model('convit_base', pretrained=True, num_classes=num_classes)
+        except:
+            convit_model = create_model('convit_base', pretrained=False, num_classes=num_classes)
     else:
         raise ValueError(f'Unknown Convit Architecture: {convit_type}')
 
