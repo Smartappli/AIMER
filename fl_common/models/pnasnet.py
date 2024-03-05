@@ -17,7 +17,14 @@ def get_pnasnet_model(pnasnet_type, num_classes):
         ValueError: If an unknown PNASNet architecture type is specified.
     """
     if pnasnet_type == 'pnasnet5large':
-        pnasnet_model = create_model('pnasnet5large', pretrained=True, num_classes=num_classes)
+        try:
+            pnasnet_model = create_model('pnasnet5large',
+                                         pretrained=True,
+                                         num_classes=num_classes)
+        except:
+            pnasnet_model = create_model('pnasnet5large',
+                                         pretrained=False,
+                                         num_classes=num_classes)
     else:
         raise ValueError(f'Unknown Pnasnet Architecture: {pnasnet_type}')
 

@@ -21,15 +21,50 @@ def get_selecsls_model(selecsls_type, num_classes):
         ValueError: If an unknown SelecSLS architecture type is specified.
     """
     if selecsls_type == 'selecsls42':
-        selecsls_model = create_model('selecsls42', pretrained=False, num_classes=num_classes)
+        try:
+            selecsls_model = create_model('selecsls42',
+                                          pretrained=True,
+                                          num_classes=num_classes)
+        except:
+            selecsls_model = create_model('selecsls42',
+                                          pretrained=False,
+                                          num_classes=num_classes)
     elif selecsls_type == 'selecsls42b':
-        selecsls_model = create_model('selecsls42b', pretrained=True, num_classes=num_classes)
+        try:
+            selecsls_model = create_model('selecsls42b',
+                                          pretrained=True,
+                                          num_classes=num_classes)
+        except:
+            selecsls_model = create_model('selecsls42b',
+                                          pretrained=False,
+                                          num_classes=num_classes)
     elif selecsls_type == 'selecsls60':
-        selecsls_model = create_model('selecsls60', pretrained=True, num_classes=num_classes)
+        try:
+            selecsls_model = create_model('selecsls60',
+                                          pretrained=True,
+                                          num_classes=num_classes)
+        except:
+            selecsls_model = create_model('selecsls60',
+                                          pretrained=False,
+                                          num_classes=num_classes)
     elif selecsls_type == 'selecsls60b':
-        selecsls_model = create_model('selecsls60b', pretrained=True, num_classes=num_classes)
+        try:
+            selecsls_model = create_model('selecsls60b',
+                                          pretrained=True,
+                                          num_classes=num_classes)
+        except:
+            selecsls_model = create_model('selecsls60b',
+                                          pretrained=False,
+                                          num_classes=num_classes)
     elif selecsls_type == 'selecsls84':
-        selecsls_model = create_model('selecsls84', pretrained=False, num_classes=num_classes)
+        try:
+            selecsls_model = create_model('selecsls84',
+                                          pretrained=True,
+                                          num_classes=num_classes)
+        except:
+            selecsls_model = create_model('selecsls84',
+                                          pretrained=False,
+                                          num_classes=num_classes)
     else:
         raise ValueError(f'Unknown Selecsls Architecture: {selecsls_type}')
 

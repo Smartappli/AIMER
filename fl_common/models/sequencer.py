@@ -19,11 +19,32 @@ def get_sequencer_model(sequencer_type, num_classes):
         ValueError: If an unknown sequencer architecture type is specified.
     """
     if sequencer_type == 'sequencer2d_s':
-        sequencer_model = create_model('sequencer2d_s', pretrained=True, num_classes=num_classes)
+        try:
+            sequencer_model = create_model('sequencer2d_s',
+                                           pretrained=True,
+                                           num_classes=num_classes)
+        except:
+            sequencer_model = create_model('sequencer2d_s',
+                                           pretrained=False,
+                                           num_classes=num_classes)
     elif sequencer_type == 'sequencer2d_m':
-        sequencer_model = create_model('sequencer2d_m', pretrained=True, num_classes=num_classes)
+        try:
+            sequencer_model = create_model('sequencer2d_m',
+                                           pretrained=True,
+                                           num_classes=num_classes)
+        except:
+            sequencer_model = create_model('sequencer2d_m',
+                                           pretrained=False,
+                                           num_classes=num_classes)
     elif sequencer_type == 'sequencer2d_l':
-        sequencer_model = create_model('sequencer2d_l', pretrained=True, num_classes=num_classes)
+        try:
+            sequencer_model = create_model('sequencer2d_l',
+                                           pretrained=True,
+                                           num_classes=num_classes)
+        except:
+            sequencer_model = create_model('sequencer2d_l',
+                                           pretrained=False,
+                                           num_classes=num_classes)
     else:
         raise ValueError(f'Unknown Sequencer Architecture: {sequencer_type}')
 

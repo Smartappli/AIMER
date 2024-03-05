@@ -24,21 +24,77 @@ def get_repghost_model(repghost_type, num_classes):
     - ValueError: If the provided repghost_type is not recognized.
     """
     if repghost_type == 'repghostnet_050':
-        repghost_model = create_model('repghostnet_050',pretrained=True, num_classes=num_classes)
+        try:
+            repghost_model = create_model('repghostnet_050',
+                                          pretrained=True,
+                                          num_classes=num_classes)
+        except:
+            repghost_model = create_model('repghostnet_050',
+                                          pretrained=False,
+                                          num_classes=num_classes)
     elif repghost_type == 'repghostnet_058':
-        repghost_model = create_model('repghostnet_058',pretrained=True, num_classes=num_classes)
+        try:
+            repghost_model = create_model('repghostnet_058',
+                                          pretrained=True,
+                                          num_classes=num_classes)
+        except:
+            repghost_model = create_model('repghostnet_058',
+                                          pretrained=False,
+                                          num_classes=num_classes)
     elif repghost_type == 'repghostnet_080':
-        repghost_model = create_model('repghostnet_080',pretrained=True, num_classes=num_classes)
+        try:
+            repghost_model = create_model('repghostnet_080',
+                                          pretrained=True,
+                                          num_classes=num_classes)
+        except:
+            repghost_model = create_model('repghostnet_080',
+                                          pretrained=False,
+                                          num_classes=num_classes)
     elif repghost_type == 'repghostnet_100':
-        repghost_model = create_model('repghostnet_100',pretrained=True, num_classes=num_classes)
+        try:
+            repghost_model = create_model('repghostnet_100',
+                                          pretrained=True,
+                                          num_classes=num_classes)
+        except:
+            repghost_model = create_model('repghostnet_100',
+                                          pretrained=False,
+                                          num_classes=num_classes)
     elif repghost_type == 'repghostnet_111':
-        repghost_model = create_model('repghostnet_111',pretrained=True,num_classes=num_classes)
+        try:
+            repghost_model = create_model('repghostnet_111',
+                                          pretrained=True,
+                                          num_classes=num_classes)
+        except:
+            repghost_model = create_model('repghostnet_111',
+                                          pretrained=False,
+                                          num_classes=num_classes)
     elif repghost_type == 'repghostnet_130':
-        repghost_model = create_model('repghostnet_130', pretrained=True, num_classes=num_classes)
+        try:
+            repghost_model = create_model('repghostnet_130',
+                                          pretrained=True,
+                                          num_classes=num_classes)
+        except:
+            repghost_model = create_model('repghostnet_130',
+                                          pretrained=False,
+                                          num_classes=num_classes)
     elif repghost_type == 'repghostnet_150':
-        repghost_model = create_model('repghostnet_150',pretrained=True, num_classes=num_classes)
+        try:
+            repghost_model = create_model('repghostnet_150',
+                                          pretrained=True,
+                                          num_classes=num_classes)
+        except:
+            repghost_model = create_model('repghostnet_150',
+                                          pretrained=False,
+                                          num_classes=num_classes)
     elif repghost_type == 'repghostnet_200':
-        repghost_model = create_model('repghostnet_200',pretrained=True, num_classes=num_classes)
+        try:
+            repghost_model = create_model('repghostnet_200',
+                                          pretrained=True,
+                                          num_classes=num_classes)
+        except:
+            repghost_model = create_model('repghostnet_200',
+                                          pretrained=False,
+                                          num_classes=num_classes)
     else:
         raise ValueError(f'Unknown Repghost Architecture: {repghost_type}')
 

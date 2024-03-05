@@ -21,15 +21,50 @@ def get_sknet_model(sknet_type, num_classes):
         ValueError: If an unknown SKNet architecture type is specified.
     """
     if sknet_type == 'skresnet18':
-        sknet_model = create_model('skresnet18', pretrained=True, num_classes=num_classes)
+        try:
+            sknet_model = create_model('skresnet18',
+                                       pretrained=True,
+                                       num_classes=num_classes)
+        except:
+            sknet_model = create_model('skresnet18',
+                                       pretrained=False,
+                                       num_classes=num_classes)
     elif sknet_type == 'skresnet34':
-        sknet_model = create_model('skresnet34', pretrained=True, num_classes=num_classes)
+        try:
+            sknet_model = create_model('skresnet34',
+                                       pretrained=True,
+                                       num_classes=num_classes)
+        except:
+            sknet_model = create_model('skresnet34',
+                                       pretrained=False,
+                                       num_classes=num_classes)
     elif sknet_type == 'skresnet50':
-        sknet_model = create_model('skresnet50', pretrained=False, num_classes=num_classes)
+        try:
+            sknet_model = create_model('skresnet50',
+                                       pretrained=True,
+                                       num_classes=num_classes)
+        except:
+            sknet_model = create_model('skresnet50',
+                                       pretrained=False,
+                                       num_classes=num_classes)
     elif sknet_type == 'skresnet50d':
-        sknet_model = create_model('skresnet50d', pretrained=False, num_classes=num_classes)
+        try:
+            sknet_model = create_model('skresnet50d',
+                                       pretrained=True,
+                                       num_classes=num_classes)
+        except:
+            sknet_model = create_model('skresnet50d',
+                                       pretrained=False,
+                                       num_classes=num_classes)
     elif sknet_type == 'skresnext50_32x4d':
-        sknet_model = create_model('skresnext50_32x4d', pretrained=True, num_classes=num_classes)
+        try:
+            sknet_model = create_model('skresnext50_32x4d',
+                                       pretrained=True,
+                                       num_classes=num_classes)
+        except:
+            sknet_model = create_model('skresnext50_32x4d',
+                                       pretrained=False,
+                                       num_classes=num_classes)
     else:
         raise ValueError(f'Unknown Sknet Architecture: {sknet_type}')
 

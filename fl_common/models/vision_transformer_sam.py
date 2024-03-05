@@ -18,13 +18,41 @@ def get_vision_transformer_sam_model(vision_transformer_sam_type, num_classes):
         ValueError: If the specified vision_transformer_sam_type is not one of the supported architectures.
     """
     if vision_transformer_sam_type == "samvit_base_patch16":
-        vision_transformer_sam_model = create_model('samvit_base_patch16', pretrained=True, num_classes=num_classes)
+        try:
+            vision_transformer_sam_model = create_model('samvit_base_patch16',
+                                                        pretrained=True,
+                                                        num_classes=num_classes)
+        except:
+            vision_transformer_sam_model = create_model('samvit_base_patch16',
+                                                        pretrained=False,
+                                                        num_classes=num_classes)
     elif vision_transformer_sam_type == "samvit_large_patch16":
-        vision_transformer_sam_model = create_model('samvit_large_patch16', pretrained=True, num_classes=num_classes)
+        try:
+            vision_transformer_sam_model = create_model('samvit_large_patch16',
+                                                        pretrained=True,
+                                                        num_classes=num_classes)
+        except:
+            vision_transformer_sam_model = create_model('samvit_large_patch16',
+                                                        pretrained=False,
+                                                        num_classes=num_classes)
     elif vision_transformer_sam_type == "samvit_huge_patch16":
-        vision_transformer_sam_model = create_model('samvit_huge_patch16', pretrained=True, num_classes=num_classes)
+        try:
+            vision_transformer_sam_model = create_model('samvit_huge_patch16',
+                                                        pretrained=True,
+                                                        num_classes=num_classes)
+        except:
+            vision_transformer_sam_model = create_model('samvit_huge_patch16',
+                                                        pretrained=False,
+                                                        num_classes=num_classes)
     elif vision_transformer_sam_type == "samvit_base_patch16_224":
-        vision_transformer_sam_model = create_model('samvit_base_patch16_224', pretrained=False, num_classes=num_classes)
+        try:
+            vision_transformer_sam_model = create_model('samvit_base_patch16_224',
+                                                        pretrained=True,
+                                                        num_classes=num_classes)
+        except:
+            vision_transformer_sam_model = create_model('samvit_base_patch16_224',
+                                                        pretrained=False,
+                                                        num_classes=num_classes)
     else:
         raise ValueError(f'Unknown Vision Transformer Sam Architecture: {vision_transformer_sam_type}')
 

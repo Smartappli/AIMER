@@ -18,9 +18,15 @@ def get_tnt_model(tnt_type, num_classes):
         ValueError: If an unknown TnT architecture type is specified.
     """
     if tnt_type == 'tnt_s_patch16_224':
-        tnt_model = create_model('tnt_s_patch16_224', pretrained=True, num_classes=num_classes)
+        try:
+            tnt_model = create_model('tnt_s_patch16_224', pretrained=True, num_classes=num_classes)
+        except:
+            tnt_model = create_model('tnt_s_patch16_224', pretrained=False, num_classes=num_classes)
     elif tnt_type == 'tnt_b_patch16_224':
-        tnt_model = create_model('tnt_b_patch16_224', pretrained=False, num_classes=num_classes)
+        try:
+            tnt_model = create_model('tnt_b_patch16_224', pretrained=True, num_classes=num_classes)
+        except:
+            tnt_model = create_model('tnt_b_patch16_224', pretrained=False, num_classes=num_classes)
     else:
         # Raise a ValueError if an unknown Tnt architecture is specified
         raise ValueError(f'Unknown TinyViT Architecture: {tnt_type}')

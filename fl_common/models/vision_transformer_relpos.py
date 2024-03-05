@@ -18,31 +18,122 @@ def get_vision_transformer_relpos_model(vision_transformer_relpos_type, num_clas
         ValueError: If the specified vision_transformer_relpos_type is not one of the supported architectures.
     """
     if vision_transformer_relpos_type == "vit_relpos_base_patch32_plus_rpn_256":
-        vision_transformer_relpos_model = create_model('vit_relpos_base_patch32_plus_rpn_256', pretrained=True, num_classes=num_classes)
+        try:
+            vision_transformer_relpos_model = create_model('vit_relpos_base_patch32_plus_rpn_256',
+                                                           pretrained=True,
+                                                           num_classes=num_classes)
+        except:
+            vision_transformer_relpos_model = create_model('vit_relpos_base_patch32_plus_rpn_256',
+                                                           pretrained=False,
+                                                           num_classes=num_classes)
     elif vision_transformer_relpos_type == "vit_relpos_base_patch16_plus_240":
-        vision_transformer_relpos_model = create_model('vit_relpos_base_patch16_plus_240', pretrained=False, num_classes=num_classes)
+        try:
+            vision_transformer_relpos_model = create_model('vit_relpos_base_patch16_plus_240',
+                                                           pretrained=True,
+                                                           num_classes=num_classes)
+        except:
+            vision_transformer_relpos_model = create_model('vit_relpos_base_patch16_plus_240',
+                                                           pretrained=False,
+                                                           num_classes=num_classes)
     elif vision_transformer_relpos_type == "vit_relpos_small_patch16_224":
-        vision_transformer_relpos_model = create_model('vit_relpos_small_patch16_224', pretrained=True, num_classes=num_classes)
+        try:
+            vision_transformer_relpos_model = create_model('vit_relpos_small_patch16_224',
+                                                           pretrained=True,
+                                                           num_classes=num_classes)
+        except:
+            vision_transformer_relpos_model = create_model('vit_relpos_small_patch16_224',
+                                                           pretrained=False,
+                                                           num_classes=num_classes)
     elif vision_transformer_relpos_type == "vit_relpos_medium_patch16_224":
-        vision_transformer_relpos_model = create_model('vit_relpos_medium_patch16_224', pretrained=True, num_classes=num_classes)
+        try:
+            vision_transformer_relpos_model = create_model('vit_relpos_medium_patch16_224',
+                                                           pretrained=True,
+                                                           num_classes=num_classes)
+        except:
+            vision_transformer_relpos_model = create_model('vit_relpos_medium_patch16_224',
+                                                           pretrained=False,
+                                                           num_classes=num_classes)
     elif vision_transformer_relpos_type == "vit_relpos_base_patch16_224":
-        vision_transformer_relpos_model = create_model('vit_relpos_base_patch16_224', pretrained=True, num_classes=num_classes)
+        try:
+            vision_transformer_relpos_model = create_model('vit_relpos_base_patch16_224',
+                                                           pretrained=True,
+                                                           num_classes=num_classes)
+        except:
+            vision_transformer_relpos_model = create_model('vit_relpos_base_patch16_224',
+                                                           pretrained=False,
+                                                           num_classes=num_classes)
     elif vision_transformer_relpos_type == "vit_srelpos_small_patch16_224":
-        vision_transformer_relpos_model = create_model('vit_srelpos_small_patch16_224', pretrained=True, num_classes=num_classes)
+        try:
+            vision_transformer_relpos_model = create_model('vit_srelpos_small_patch16_224',
+                                                           pretrained=True,
+                                                           num_classes=num_classes)
+        except:
+            vision_transformer_relpos_model = create_model('vit_srelpos_small_patch16_224',
+                                                           pretrained=False,
+                                                           num_classes=num_classes)
     elif vision_transformer_relpos_type == "vit_srelpos_medium_patch16_224":
-        vision_transformer_relpos_model = create_model('vit_srelpos_medium_patch16_224', pretrained=True, num_classes=num_classes)
+        try:
+            vision_transformer_relpos_model = create_model('vit_srelpos_medium_patch16_224',
+                                                           pretrained=True,
+                                                           num_classes=num_classes)
+        except:
+            vision_transformer_relpos_model = create_model('vit_srelpos_medium_patch16_224',
+                                                           pretrained=False,
+                                                           num_classes=num_classes)
     elif vision_transformer_relpos_type == "vit_relpos_medium_patch16_cls_224":
-        vision_transformer_relpos_model = create_model('vit_relpos_medium_patch16_cls_224', pretrained=True, num_classes=num_classes)
+        try:
+            vision_transformer_relpos_model = create_model('vit_relpos_medium_patch16_cls_224',
+                                                           pretrained=True,
+                                                           num_classes=num_classes)
+        except:
+            vision_transformer_relpos_model = create_model('vit_relpos_medium_patch16_cls_224',
+                                                           pretrained=False,
+                                                           num_classes=num_classes)
     elif vision_transformer_relpos_type == "vit_relpos_base_patch16_cls_224":
-        vision_transformer_relpos_model = create_model('vit_relpos_base_patch16_cls_224', pretrained=False, num_classes=num_classes)
+        try:
+            vision_transformer_relpos_model = create_model('vit_relpos_base_patch16_cls_224',
+                                                           pretrained=True,
+                                                           num_classes=num_classes)
+        except:
+            vision_transformer_relpos_model = create_model('vit_relpos_base_patch16_cls_224',
+                                                           pretrained=False,
+                                                           num_classes=num_classes)
     elif vision_transformer_relpos_type == "vit_relpos_base_patch16_clsgap_224":
-        vision_transformer_relpos_model = create_model('vit_relpos_base_patch16_clsgap_224', pretrained=True, num_classes=num_classes)
+        try:
+            vision_transformer_relpos_model = create_model('vit_relpos_base_patch16_clsgap_224',
+                                                           pretrained=True,
+                                                           num_classes=num_classes)
+        except:
+            vision_transformer_relpos_model = create_model('vit_relpos_base_patch16_clsgap_224',
+                                                           pretrained=False,
+                                                           num_classes=num_classes)
     elif vision_transformer_relpos_type == "vit_relpos_small_patch16_rpn_224":
-        vision_transformer_relpos_model = create_model('vit_relpos_small_patch16_rpn_224', pretrained=False, num_classes=num_classes)
+        try:
+            vision_transformer_relpos_model = create_model('vit_relpos_small_patch16_rpn_224',
+                                                           pretrained=True,
+                                                           num_classes=num_classes)
+        except:
+            vision_transformer_relpos_model = create_model('vit_relpos_small_patch16_rpn_224',
+                                                           pretrained=False,
+                                                           num_classes=num_classes)
     elif vision_transformer_relpos_type == "vit_relpos_medium_patch16_rpn_224":
-        vision_transformer_relpos_model = create_model('vit_relpos_medium_patch16_rpn_224', pretrained=True, num_classes=num_classes)
+        try:
+            vision_transformer_relpos_model = create_model('vit_relpos_medium_patch16_rpn_224',
+                                                           pretrained=True,
+                                                           num_classes=num_classes)
+        except:
+            vision_transformer_relpos_model = create_model('vit_relpos_medium_patch16_rpn_224',
+                                                           pretrained=False,
+                                                           num_classes=num_classes)
     elif vision_transformer_relpos_type == "vit_relpos_base_patch16_rpn_224":
-        vision_transformer_relpos_model = create_model('vit_relpos_base_patch16_rpn_224', pretrained=False, num_classes=num_classes)
+        try:
+            vision_transformer_relpos_model = create_model('vit_relpos_base_patch16_rpn_224',
+                                                           pretrained=True,
+                                                           num_classes=num_classes)
+        except:
+            vision_transformer_relpos_model = create_model('vit_relpos_base_patch16_rpn_224',
+                                                           pretrained=False,
+                                                           num_classes=num_classes)
     else:
         raise ValueError(f'Unknown Vision Transformer Hybrid Architecture: {vision_transformer_relpos_type}')
 
