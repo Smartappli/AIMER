@@ -22,17 +22,59 @@ def get_nest_model(nest_type, num_classes):
         ValueError: If an unknown NEST architecture type is specified.
     """
     if nest_type == 'nest_base':
-        nest_model = create_model('nest_base',pretrained=False, num_classes=num_classes)
+        try:
+            nest_model = create_model('nest_base',
+                                      pretrained=True,
+                                      num_classes=num_classes)
+        except:
+            nest_model = create_model('nest_base',
+                                      pretrained=False,
+                                      num_classes=num_classes)
     elif nest_type == 'nest_small':
-        nest_model = create_model('nest_small',pretrained=False, num_classes=num_classes)
+        try:
+            nest_model = create_model('nest_small',
+                                      pretrained=True,
+                                      num_classes=num_classes)
+        except:
+            nest_model = create_model('nest_small',
+                                      pretrained=False,
+                                      num_classes=num_classes)
     elif nest_type == 'nest_tiny':
-        nest_model = create_model('nest_tiny',pretrained=False, num_classes=num_classes)
+        try:
+            nest_model = create_model('nest_tiny',
+                                      pretrained=True,
+                                      num_classes=num_classes)
+        except:
+            nest_model = create_model('nest_tiny',
+                                      pretrained=False,
+                                      num_classes=num_classes)
     elif nest_type == 'nest_base_jx':
-        nest_model = create_model('nest_base_jx',pretrained=True, num_classes=num_classes)
+        try:
+            nest_model = create_model('nest_base_jx',
+                                      pretrained=True,
+                                      num_classes=num_classes)
+        except:
+            nest_model = create_model('nest_base_jx',
+                                      pretrained=False,
+                                      num_classes=num_classes)
     elif nest_type == 'nest_small_jx':
-        nest_model = create_model('nest_small_jx',pretrained=True, num_classes=num_classes)
+        try:
+            nest_model = create_model('nest_small_jx',
+                                      pretrained=True,
+                                      num_classes=num_classes)
+        except:
+            nest_model = create_model('nest_small_jx',
+                                      pretrained=False,
+                                      num_classes=num_classes)
     elif nest_type == 'nest_tiny_jx':
-        nest_model = create_model('nest_tiny_jx',pretrained=True,num_classes=num_classes)
+        try:
+            nest_model = create_model('nest_tiny_jx',
+                                      pretrained=True,
+                                      num_classes=num_classes)
+        except:
+            nest_model = create_model('nest_tiny_jx',
+                                      pretrained=False,
+                                      num_classes=num_classes)
     else:
         raise ValueError(f'Unknown Nest Architecture: {nest_type}')
 

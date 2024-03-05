@@ -17,11 +17,32 @@ def get_efficientformer_model(efficientformer_type, num_classes):
         ValueError: If the specified efficientformer_type is not one of the supported architectures.
     """
     if efficientformer_type == 'efficientformer_l1':
-        efficientformer_model = create_model('efficientformer_l1',pretrained=True, num_classes=num_classes)
+        try:
+            efficientformer_model = create_model('efficientformer_l1',
+                                                 pretrained=True,
+                                                 num_classes=num_classes)
+        except:
+            efficientformer_model = create_model('efficientformer_l1',
+                                                 pretrained=False,
+                                                 num_classes=num_classes)
     elif efficientformer_type == 'efficientformer_l3':
-        efficientformer_model = create_model('efficientformer_l3',pretrained=True, num_classes=num_classes)
+        try:
+            efficientformer_model = create_model('efficientformer_l3',
+                                                 pretrained=True,
+                                                 num_classes=num_classes)
+        except:
+            efficientformer_model = create_model('efficientformer_l3',
+                                                 pretrained=False,
+                                                 num_classes=num_classes)
     elif efficientformer_type == 'efficientformer_l7':
-        efficientformer_model = create_model('efficientformer_l7',pretrained=True, num_classes=num_classes)
+        try:
+            efficientformer_model = create_model('efficientformer_l7',
+                                                 pretrained=True,
+                                                 num_classes=num_classes)
+        except:
+            efficientformer_model = create_model('efficientformer_l7',
+                                                 pretrained=False,
+                                                 num_classes=num_classes)
     else:
         raise ValueError(f'Unknown Efficientformer Architecture: {efficientformer_type}')
 

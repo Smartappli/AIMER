@@ -16,19 +16,68 @@ def get_dpn_model(dpn_type, num_classes):
         ValueError: If an unknown DPN architecture type is specified.
     """
     if dpn_type == "dpn48b":
-        dpn_model = create_model('dpn48b', pretrained=False, num_classes=num_classes)
+        try:
+            dpn_model = create_model('dpn48b',
+                                     pretrained=True,
+                                     num_classes=num_classes)
+        except:
+            dpn_model = create_model('dpn48b',
+                                     pretrained=False,
+                                     num_classes=num_classes)
     elif dpn_type == "dpn68":
-        dpn_model = create_model('dpn68', pretrained=True, num_classes=num_classes)
+        try:
+            dpn_model = create_model('dpn68',
+                                     pretrained=True,
+                                     num_classes=num_classes)
+        except:
+            dpn_model = create_model('dpn68',
+                                     pretrained=False,
+                                     num_classes=num_classes)
     elif dpn_type == "dpn68b":
-        dpn_model = create_model('dpn68b', pretrained=True, num_classes=num_classes)
+        try:
+            dpn_model = create_model('dpn68b',
+                                     pretrained=True,
+                                     num_classes=num_classes)
+        except:
+            dpn_model = create_model('dpn68b',
+                                     pretrained=False,
+                                     num_classes=num_classes)
     elif dpn_type == "dpn92":
-        dpn_model = create_model('dpn92', pretrained=True, num_classes=num_classes)
+        try:
+            dpn_model = create_model('dpn92',
+                                     pretrained=True,
+                                     num_classes=num_classes)
+        except:
+            dpn_model = create_model('dpn92',
+                                     pretrained=False,
+                                     num_classes=num_classes)
     elif dpn_type == "dpn98":
-        dpn_model = create_model('dpn98', pretrained=True, num_classes=num_classes)
+        try:
+            dpn_model = create_model('dpn98',
+                                     pretrained=True,
+                                     num_classes=num_classes)
+        except:
+            dpn_model = create_model('dpn98',
+                                     pretrained=False,
+                                     num_classes=num_classes)
     elif dpn_type == "dpn131":
-        dpn_model = create_model('dpn131', pretrained=True, num_classes=num_classes)
+        try:
+            dpn_model = create_model('dpn131',
+                                     pretrained=True,
+                                     num_classes=num_classes)
+        except:
+            dpn_model = create_model('dpn131',
+                                     pretrained=False,
+                                     num_classes=num_classes)
     elif dpn_type == "dpn107":
-        dpn_model = create_model('dpn107', pretrained=True, num_classes=num_classes)
+        try:
+            dpn_model = create_model('dpn107',
+                                     pretrained=True,
+                                     num_classes=num_classes)
+        except:
+            dpn_model = create_model('dpn107',
+                                     pretrained=False,
+                                     num_classes=num_classes)
     else:
         # Raise a ValueError if an unknown DPN architecture is specified
         raise ValueError(f'Unknown DPN Architecture: {dpn_type}')

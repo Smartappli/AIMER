@@ -19,11 +19,32 @@ def get_nextvit_model(nextvit_type, num_classe):
         ValueError: If an unknown NEXTVIT architecture type is specified.
     """
     if nextvit_type == 'nextvit_small':
-        nextvit_model = create_model('nextvit_small', pretrained=True, num_classes=num_classe)
+        try:
+            nextvit_model = create_model('nextvit_small',
+                                         pretrained=True,
+                                         num_classes=num_classe)
+        except:
+            nextvit_model = create_model('nextvit_small',
+                                         pretrained=False,
+                                         num_classes=num_classe)
     elif nextvit_type == 'nextvit_base':
-        nextvit_model = create_model('nextvit_base', pretrained=True, num_classes=num_classe)
+        try:
+            nextvit_model = create_model('nextvit_base',
+                                         pretrained=True,
+                                         num_classes=num_classe)
+        except:
+            nextvit_model = create_model('nextvit_base',
+                                         pretrained=False,
+                                         num_classes=num_classe)
     elif nextvit_type == 'nextvit_large':
-        nextvit_model = create_model('nextvit_large', pretrained=True, num_classes=num_classe)
+        try:
+            nextvit_model = create_model('nextvit_large',
+                                         pretrained=True,
+                                         num_classes=num_classe)
+        except:
+            nextvit_model = create_model('nextvit_large',
+                                         pretrained=False,
+                                         num_classes=num_classe)
     else:
         raise ValueError(f'Unknown Nextvit Architecture: {nextvit_type}')
 

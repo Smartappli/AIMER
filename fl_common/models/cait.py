@@ -19,54 +19,94 @@ def get_cait_model(cait_type, num_classes):
     """
     if cait_type == "cait_xxs24_224":
         try:
-            cait_model = create_model('cait_xxs24_224', pretrained=True, num_classes=num_classes)
+            cait_model = create_model('cait_xxs24_224',
+                                      pretrained=True,
+                                      num_classes=num_classes)
         except:
-            cait_model = create_model('cait_xxs24_224', pretrained=False, num_classes=num_classes)
+            cait_model = create_model('cait_xxs24_224',
+                                      pretrained=False,
+                                      num_classes=num_classes)
     elif cait_type == "cait_xxs24_384":
         try:
-            cait_model = create_model('cait_xxs24_384', pretrained=True, num_classes=num_classes)
+            cait_model = create_model('cait_xxs24_384',
+                                      pretrained=True,
+                                      num_classes=num_classes)
         except:
-            cait_model = create_model('cait_xxs24_384', pretrained=False, num_classes=num_classes)
+            cait_model = create_model('cait_xxs24_384',
+                                      pretrained=False,
+                                      num_classes=num_classes)
     elif cait_type == "cait_xxs36_224":
         try:
-            cait_model = create_model('cait_xxs36_224', pretrained=True, num_classes=num_classes)
+            cait_model = create_model('cait_xxs36_224',
+                                      pretrained=True,
+                                      num_classes=num_classes)
         except:
-            cait_model = create_model('cait_xxs36_224', pretrained=False, num_classes=num_classes)
+            cait_model = create_model('cait_xxs36_224',
+                                      pretrained=False,
+                                      num_classes=num_classes)
     elif cait_type == "cait_xxs36_384":
         try:
-            cait_model = create_model('cait_xxs36_384', pretrained=True, num_classes=num_classes)
+            cait_model = create_model('cait_xxs36_384',
+                                      pretrained=True,
+                                      num_classes=num_classes)
         except:
-            cait_model = create_model('cait_xxs36_384', pretrained=False, num_classes=num_classes)
+            cait_model = create_model('cait_xxs36_384',
+                                      pretrained=False,
+                                      num_classes=num_classes)
     elif cait_type == "cait_xs24_384":
         try:
-            cait_model = create_model('cait_xs24_384', pretrained=True, num_classes=num_classes)
+            cait_model = create_model('cait_xs24_384',
+                                      pretrained=True,
+                                      num_classes=num_classes)
         except:
-            cait_model = create_model('cait_xs24_384', pretrained=False, num_classes=num_classes)
+            cait_model = create_model('cait_xs24_384',
+                                      pretrained=False,
+                                      num_classes=num_classes)
     elif cait_type == "cait_s24_224":
         try:
-            cait_model = create_model('cait_s24_224', pretrained=True, num_classes=num_classes)
+            cait_model = create_model('cait_s24_224',
+                                      pretrained=True,
+                                      num_classes=num_classes)
         except:
-            cait_model = create_model('cait_s24_224', pretrained=False, num_classes=num_classes)
+            cait_model = create_model('cait_s24_224',
+                                      pretrained=False,
+                                      num_classes=num_classes)
     elif cait_type == "cait_s24_384":
         try:
-            cait_model = create_model('cait_s24_384',pretrained=True, num_classes=num_classes)
+            cait_model = create_model('cait_s24_384',
+                                      pretrained=True,
+                                      num_classes=num_classes)
         except:
-            cait_model = create_model('cait_s24_384', pretrained=False, num_classes=num_classes)
+            cait_model = create_model('cait_s24_384',
+                                      pretrained=False,
+                                      num_classes=num_classes)
     elif cait_type == "cait_s36_384":
         try:
-            cait_model = create_model("cait_s36_384", pretrained=True, num_classes=num_classes)
+            cait_model = create_model("cait_s36_384",
+                                      pretrained=True,
+                                      num_classes=num_classes)
         except:
-            cait_model = create_model("cait_s36_384", pretrained=False, num_classes=num_classes)
+            cait_model = create_model("cait_s36_384",
+                                      pretrained=False,
+                                      num_classes=num_classes)
     elif cait_type == "cait_m36_384":
         try:
-            cait_model = create_model("cait_m36_384", pretrained=True, num_classes=num_classes)
+            cait_model = create_model("cait_m36_384",
+                                      pretrained=True,
+                                      num_classes=num_classes)
         except:
-            cait_model = create_model("cait_m36_384", pretrained=False, num_classes=num_classes)
+            cait_model = create_model("cait_m36_384",
+                                      pretrained=False,
+                                      num_classes=num_classes)
     elif cait_type == "cait_m48_448":
         try:
-            cait_model = create_model("cait_m48_448", pretrained=True, num_classes=num_classes)
+            cait_model = create_model("cait_m48_448",
+                                      pretrained=True,
+                                      num_classes=num_classes)
         except:
-            cait_model = create_model("cait_m48_448", pretrained=False, num_classes=num_classes)
+            cait_model = create_model("cait_m48_448",
+                                      pretrained=False,
+                                      num_classes=num_classes)
     else:
         raise ValueError(f'Unknown Cait Architecture: {cait_type}')
 

@@ -18,29 +18,113 @@ def get_dla_model(dla_type, num_classes):
         ValueError: If an unknown DLA architecture type is specified.
     """
     if dla_type == "dla60_res2net":
-        dla_model = create_model('dla60_res2net', pretrained=True, num_classes=num_classes)
+        try:
+            dla_model = create_model('dla60_res2net',
+                                     pretrained=True,
+                                     num_classes=num_classes)
+        except:
+            dla_model = create_model('dla60_res2net',
+                                     pretrained=False,
+                                     num_classes=num_classes)
     elif dla_type == "dla60_res2next":
-        dla_model = create_model('dla60_res2next', pretrained=True, num_classes=num_classes)
+        try:
+            dla_model = create_model('dla60_res2next',
+                                     pretrained=True,
+                                     num_classes=num_classes)
+        except:
+            dla_model = create_model('dla60_res2next',
+                                     pretrained=False,
+                                     num_classes=num_classes)
     elif dla_type == "dla34":
-        dla_model = create_model('dla34', pretrained=True, num_classes=num_classes)
+        try:
+            dla_model = create_model('dla34',
+                                     pretrained=True,
+                                     num_classes=num_classes)
+        except:
+            dla_model = create_model('dla34',
+                                     pretrained=False,
+                                     num_classes=num_classes)
     elif dla_type == "dla46_c":
-        dla_model = create_model('dla46_c', pretrained=True, num_classes=num_classes)
+        try:
+            dla_model = create_model('dla46_c',
+                                     pretrained=True,
+                                     num_classes=num_classes)
+        except:
+            dla_model = create_model('dla46_c',
+                                     pretrained=False,
+                                     num_classes=num_classes)
     elif dla_type == "dla46x_c":
-        dla_model = create_model('dla46x_c', pretrained=True, num_classes=num_classes)
+        try:
+            dla_model = create_model('dla46x_c',
+                                     pretrained=True,
+                                     num_classes=num_classes)
+        except:
+            dla_model = create_model('dla46x_c',
+                                     pretrained=False,
+                                     num_classes=num_classes)
     elif dla_type == "dla60x_c":
-        dla_model = create_model('dla60x_c', pretrained=True, num_classes=num_classes)
+        try:
+            dla_model = create_model('dla60x_c',
+                                     pretrained=True,
+                                     num_classes=num_classes)
+        except:
+            dla_model = create_model('dla60x_c',
+                                     pretrained=False,
+                                     num_classes=num_classes)
     elif dla_type == "dla60":
-        dla_model = create_model('dla60', pretrained=True, num_classes=num_classes)
+        try:
+            dla_model = create_model('dla60',
+                                     pretrained=True,
+                                     num_classes=num_classes)
+        except:
+            dla_model = create_model('dla60',
+                                     pretrained=False,
+                                     num_classes=num_classes)
     elif dla_type == "dla60x":
-        dla_model = create_model('dla60x', pretrained=True, num_classes=num_classes)
+        try:
+            dla_model = create_model('dla60x',
+                                     pretrained=True,
+                                     num_classes=num_classes)
+        except:
+            dla_model = create_model('dla60x',
+                                     pretrained=False,
+                                     num_classes=num_classes)
     elif dla_type == "dla102":
-        dla_model = create_model('dla102', pretrained=True, num_classes=num_classes)
+        try:
+            dla_model = create_model('dla102',
+                                     pretrained=True,
+                                     num_classes=num_classes)
+        except:
+            dla_model = create_model('dla102',
+                                     pretrained=False,
+                                     m_classes=num_classes)
     elif dla_type == "dla102x":
-        dla_model = create_model('dla102x2', pretrained=True, num_classes=num_classes)
+        try:
+            dla_model = create_model('dla102x2',
+                                     pretrained=True,
+                                     num_classes=num_classes)
+        except:
+            dla_model = create_model('dla102x2',
+                                     pretrained=False,
+                                     num_classes=num_classes)
     elif dla_type == "dla102x2":
-        dla_model = create_model('dla102x2', pretrained=True, num_classes=num_classes)
+        try:
+            dla_model = create_model('dla102x2',
+                                     pretrained=True,
+                                     num_classes=num_classes)
+        except:
+            dla_model = create_model('dla102x2',
+                                     pretrained=False,
+                                     num_classes=num_classes)
     elif dla_type == "dla169":
-        dla_model = create_model('dla169', pretrained=True, num_classes=num_classes)
+        try:
+            dla_model = create_model('dla169',
+                                     pretrained=True,
+                                     num_classes=num_classes)
+        except:
+            dla_model = create_model('dla169',
+                                     pretrained=False,
+                                     num_classes=num_classes)
     else:
         # Raise a ValueError if an unknown DLA architecture is specified
         raise ValueError(f'Unknown DLA Architecture: {dla_type}')

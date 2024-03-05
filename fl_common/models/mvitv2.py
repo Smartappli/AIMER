@@ -18,21 +18,77 @@ def get_mvitv2_model(mvitv2_type, num_classes):
     - ValueError: If an unknown MViTv2 architecture type is specified.
     """
     if mvitv2_type == "mvitv2_tiny":
-        mvitv2_model = create_model('mvitv2_tiny', pretrained=True, num_classes=num_classes)
+        try:
+            mvitv2_model = create_model('mvitv2_tiny',
+                                        pretrained=True,
+                                        num_classes=num_classes)
+        except:
+            mvitv2_model = create_model('mvitv2_tiny',
+                                        pretrained=False,
+                                        num_classes=num_classes)
     elif mvitv2_type == "mvitv2_small":
-        mvitv2_model = create_model('mvitv2_small', pretrained=True, num_classes=num_classes)
+        try:
+            mvitv2_model = create_model('mvitv2_small',
+                                        pretrained=True,
+                                        num_classes=num_classes)
+        except:
+            mvitv2_model = create_model('mvitv2_small',
+                                        pretrained=False,
+                                        num_classes=num_classes)
     elif mvitv2_type == "mvitv2_base":
-        mvitv2_model = create_model('mvitv2_base', pretrained=True, num_classes=num_classes)
+        try:
+            mvitv2_model = create_model('mvitv2_base',
+                                        pretrained=True,
+                                        num_classes=num_classes)
+        except:
+            mvitv2_model = create_model('mvitv2_base',
+                                        pretrained=False,
+                                        num_classes=num_classes)
     elif mvitv2_type == "mvitv2_large":
-        mvitv2_model = create_model('mvitv2_large', pretrained=True, num_classes=num_classes)
+        try:
+            mvitv2_model = create_model('mvitv2_large',
+                                        pretrained=True,
+                                        num_classes=num_classes)
+        except:
+            mvitv2_model = create_model('mvitv2_large',
+                                        pretrained=False,
+                                        num_classes=num_classes)
     elif mvitv2_type == "mvitv2_small_cls":
-        mvitv2_model = create_model('mvitv2_small_cls', pretrained=False, num_classes=num_classes)
+        try:
+            mvitv2_model = create_model('mvitv2_small_cls',
+                                        pretrained=True,
+                                        num_classes=num_classes)
+        except:
+            mvitv2_model = create_model('mvitv2_small_cls',
+                                        pretrained=False,
+                                        num_classes=num_classes)
     elif mvitv2_type == "mvitv2_base_cls":
-        mvitv2_model = create_model('mvitv2_base_cls', pretrained=True, num_classes=num_classes)
+        try:
+            mvitv2_model = create_model('mvitv2_base_cls',
+                                        pretrained=True,
+                                        num_classes=num_classes)
+        except:
+            mvitv2_model = create_model('mvitv2_base_cls',
+                                        pretrained=False,
+                                        num_classes=num_classes)
     elif mvitv2_type == "mvitv2_large_cls":
-        mvitv2_model = create_model('mvitv2_large_cls', pretrained=True, num_classes=num_classes)
+        try:
+            mvitv2_model = create_model('mvitv2_large_cls',
+                                        pretrained=True,
+                                        num_classes=num_classes)
+        except:
+            mvitv2_model = create_model('mvitv2_large_cls',
+                                        pretrained=False,
+                                        num_classes=num_classes)
     elif mvitv2_type == 'mvitv2_huge_cls':
-        mvitv2_model = create_model('mvitv2_huge_cls', pretrained=True, num_classes=num_classes)
+        try:
+            mvitv2_model = create_model('mvitv2_huge_cls',
+                                        pretrained=True,
+                                        num_classes=num_classes)
+        except:
+            mvitv2_model = create_model('mvitv2_huge_cls',
+                                        pretrained=False,
+                                        num_classes=num_classes)
     else:
         # Raise a ValueError if an unknown Mvitv2 architecture is specified
         raise ValueError(f'Unknown Mvitv2 Architecture: {mvitv2_type}')

@@ -18,7 +18,14 @@ def get_nasnet_model(nasnet_type, num_classes):
         ValueError: If an unknown NASNet architecture is specified.
     """
     if nasnet_type=='nasnetalarge':
-        nasnet_model = create_model('nasnetalarge', pretrained=True, num_classes=num_classes)
+        try:
+            nasnet_model = create_model('nasnetalarge',
+                                        pretrained=True,
+                                        num_classes=num_classes)
+        except:
+            nasnet_model = create_model('nasnetalarge',
+                                        pretrained=False,
+                                        num_classes=num_classes)
     else:
         raise ValueError(f'Unknown Nasnet Architecture: {nasnet_type}')
 

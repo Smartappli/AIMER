@@ -26,25 +26,95 @@ def get_hgnet_model(hgnet_type, num_classes):
         ValueError: If an unknown HGNet architecture is specified.
     """
     if hgnet_type == 'hgnet_tiny':
-        hgnet_model = create_model('hgnet_tiny', pretrained=True, num_classes=num_classes)
+        try:
+            hgnet_model = create_model('hgnet_tiny',
+                                       pretrained=True,
+                                       num_classes=num_classes)
+        except:
+            hgnet_model = create_model('hgnet_tiny',
+                                       pretrained=False,
+                                       num_classes=num_classes)
     elif hgnet_type == 'hgnet_small':
-        hgnet_model = create_model('hgnet_small', pretrained=True, num_classes=num_classes)
+        try:
+            hgnet_model = create_model('hgnet_small',
+                                       pretrained=True,
+                                       num_classes=num_classes)
+        except:
+            hgnet_model = create_model('hgnet_small',
+                                       pretrained=False,
+                                       num_classes=num_classes)
     elif hgnet_type == 'hgnet_base':
-        hgnet_model = create_model('hgnet_base', pretrained=True, num_classes=num_classes)
+        try:
+            hgnet_model = create_model('hgnet_base',
+                                       pretrained=True,
+                                       num_classes=num_classes)
+        except:
+            hgnet_model = create_model('hgnet_base',
+                                       pretrained=False,
+                                       num_classes=num_classes)
     elif hgnet_type == 'hgnetv2_b0':
-        hgnet_model = create_model('hgnetv2_b0', pretrained=True, num_classes=num_classes)
+        try:
+            hgnet_model = create_model('hgnetv2_b0',
+                                       pretrained=True,
+                                       num_classes=num_classes)
+        except:
+            hgnet_model = create_model('hgnetv2_b0',
+                                       pretrained=False,
+                                       num_classes=num_classes)
     elif hgnet_type == 'hgnetv2_b1':
-        hgnet_model = create_model('hgnetv2_b1', pretrained=True, num_classes=num_classes)
+        try:
+            hgnet_model = create_model('hgnetv2_b1',
+                                       pretrained=True,
+                                       num_classes=num_classes)
+        except:
+            hgnet_model = create_model('hgnetv2_b1',
+                                       pretrained=False,
+                                       num_classes=num_classes)
     elif hgnet_type == 'hgnetv2_b2':
-        hgnet_model = create_model('hgnetv2_b2', pretrained=True, num_classes=num_classes)
+        try:
+            hgnet_model = create_model('hgnetv2_b2',
+                                       pretrained=True,
+                                       num_classes=num_classes)
+        except:
+            hgnet_model = create_model('hgnetv2_b2',
+                                       pretrained=False,
+                                       num_classes=num_classes)
     elif hgnet_type == 'hgnetv2_b3':
-        hgnet_model = create_model('hgnetv2_b3', pretrained=True, num_classes=num_classes)
+        try:
+            hgnet_model = create_model('hgnetv2_b3',
+                                       pretrained=True,
+                                       num_classes=num_classes)
+        except:
+            hgnet_model = create_model('hgnetv2_b3',
+                                       pretrained=False,
+                                       num_classes=num_classes)
     elif hgnet_type == 'hgnetv2_b4':
-        hgnet_model = create_model('hgnetv2_b4', pretrained=True, num_classes=num_classes)
+        try:
+            hgnet_model = create_model('hgnetv2_b4',
+                                       pretrained=True,
+                                       num_classes=num_classes)
+        except:
+            hgnet_model = create_model('hgnetv2_b4',
+                                       pretrained=False,
+                                       num_classes=num_classes)
     elif hgnet_type == 'hgnetv2_b5':
-        hgnet_model = create_model('hgnetv2_b5', pretrained=True, num_classes=num_classes)
+        try:
+            hgnet_model = create_model('hgnetv2_b5',
+                                       pretrained=True,
+                                       num_classes=num_classes)
+        except:
+            hgnet_model = create_model('hgnetv2_b5',
+                                       pretrained=False,
+                                       num_classes=num_classes)
     elif hgnet_type == 'hgnetv2_b6':
-        hgnet_model = create_model('hgnetv2_b6', pretrained=True, num_classes=num_classes)
+        try:
+            hgnet_model = create_model('hgnetv2_b6',
+                                       pretrained=True,
+                                       num_classes=num_classes)
+        except:
+            hgnet_model = create_model('hgnetv2_b6',
+                                       pretrained=False,
+                                       num_classes=num_classes)
     else:
         raise ValueError(f'Unknown Hgnet Architecture: {hgnet_type}')
 
