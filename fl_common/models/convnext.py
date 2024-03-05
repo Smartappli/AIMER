@@ -30,17 +30,29 @@ def get_convnext_model(convnext_type, num_classes):
 
     # Load the pre-trained version of DenseNet
     if convnext_type == 'ConvNeXt_Tiny':
-        weights = models.ConvNeXt_Tiny_Weights.DEFAULT
-        convnext_model = models.convnext_tiny(weights=weights)
+        try:
+            weights = models.ConvNeXt_Tiny_Weights.DEFAULT
+            convnext_model = models.convnext_tiny(weights=weights)
+        except:
+            convnext_model = models.convnext_tiny(weghts=None)
     elif convnext_type == 'ConvNeXt_Small':
-        weights = models.ConvNeXt_Small_Weights.DEFAULT
-        convnext_model = models.convnext_small(weights=weights)
+        try:
+            weights = models.ConvNeXt_Small_Weights.DEFAULT
+            convnext_model = models.convnext_small(weights=weights)
+        except:
+            convnext_model = models.convnext_small(weghts=None)
     elif convnext_type == 'ConvNeXt_Base':
-        weights = models.ConvNeXt_Base_Weights.DEFAULT
-        convnext_model = models.convnext_base(weights=weights)
+        try:
+            weights = models.ConvNeXt_Base_Weights.DEFAULT
+            convnext_model = models.convnext_base(weights=weights)
+        except:
+            convnext_model = models.convnext_base(weghts=None)
     elif convnext_type == 'ConvNeXt_Large':
-        weights = models.ConvNeXt_Large_Weights.DEFAULT
-        convnext_model = models.convnext_large(weights=weights)
+        try:
+            weights = models.ConvNeXt_Large_Weights.DEFAULT
+            convnext_model = models.convnext_large(weights=weights)
+        except:
+            convnext_model = models.convnext_large(weight=None)
     else:
         raise ValueError(f'Unknown ConvNeXt Architecture : {convnext_type}')
 

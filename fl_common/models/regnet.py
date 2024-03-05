@@ -31,35 +31,65 @@ def get_regnet_model(regnet_type, num_classes):
 
     # Load the pre-trained version of RegNet
     if regnet_type == 'RegNet_X_400MF':
-        weights = models.RegNet_X_400MF_Weights.DEFAULT
-        regnet_model = models.regnet_x_400mf(weights=weights)
+        try:
+            weights = models.RegNet_X_400MF_Weights.DEFAULT
+            regnet_model = models.regnet_x_400mf(weights=weights)
+        except:
+            regnet_model = models.regnet_x_400mf(weights=None)
     elif regnet_type == 'RegNet_X_800MF':
-        weights = models.RegNet_X_800MF_Weights.DEFAULT
-        regnet_model = models.regnet_x_800mf(weights=weights)
+        try:
+            weights = models.RegNet_X_800MF_Weights.DEFAULT
+            regnet_model = models.regnet_x_800mf(weights=weights)
+        except:
+            regnet_model = models.regnet_x_800mf(weights=None)
     elif regnet_type == 'RegNet_X_1_6GF':
-        weights = models.RegNet_X_1_6GF_Weights.DEFAULT
-        regnet_model = models.regnet_x_1_6gf(weights=weights)
+        try:
+            weights = models.RegNet_X_1_6GF_Weights.DEFAULT
+            regnet_model = models.regnet_x_1_6gf(weights=weights)
+        except:
+            regnet_model = models.regnet_x_1_6gf(weights=None)
     elif regnet_type == 'RegNet_X_3_2GF':
-        weights = models.RegNet_X_3_2GF_Weights.DEFAULT
-        regnet_model = models.regnet_x_3_2gf(weights=weights)
+        try:
+            weights = models.RegNet_X_3_2GF_Weights.DEFAULT
+            regnet_model = models.regnet_x_3_2gf(weights=weights)
+        except:
+            regnet_model = models.regnet_x_3_2gf(weights=None)
     elif regnet_type == 'RegNet_X_16GF':
-        weights = models.RegNet_X_16GF_Weights.DEFAULT
-        regnet_model = models.regnet_x_16gf(weights=weights)
+        try:
+            weights = models.RegNet_X_16GF_Weights.DEFAULT
+            regnet_model = models.regnet_x_16gf(weights=weights)
+        except:
+            regnet_model = models.regnet_x_16gf(weights=None)
     elif regnet_type == 'RegNet_Y_400MF':
-        weights = models.RegNet_Y_400MF_Weights.DEFAULT
-        regnet_model = models.regnet_y_400mf(weights=weights)
+        try:
+            weights = models.RegNet_Y_400MF_Weights.DEFAULT
+            regnet_model = models.regnet_y_400mf(weights=weights)
+        except:
+            regnet_model = models.regnet_y_400mf(weights=None)
     elif regnet_type == 'RegNet_Y_800MF':
-        weights = models.RegNet_Y_800MF_Weights.DEFAULT
-        regnet_model = models.regnet_y_800mf(weights=weights)
+        try:
+            weights = models.RegNet_Y_800MF_Weights.DEFAULT
+            regnet_model = models.regnet_y_800mf(weights=weights)
+        except:
+            regnet_model = models.regnet_y_800mf(weights=None)
     elif regnet_type == 'RegNet_Y_1_6GF':
-        weights = models.RegNet_Y_1_6GF_Weights.DEFAULT
-        regnet_model = models.regnet_y_1_6gf(weights=weights)
+        try:
+            weights = models.RegNet_Y_1_6GF_Weights.DEFAULT
+            regnet_model = models.regnet_y_1_6gf(weights=weights)
+        except:
+            regnet_model = models.regnet_y_1_6gf(weights=None)
     elif regnet_type == 'RegNet_Y_3_2GF':
-        weights = models.RegNet_Y_3_2GF_Weights.DEFAULT
-        regnet_model = models.regnet_y_3_2gf(weights=weights)
+        try:
+            weights = models.RegNet_Y_3_2GF_Weights.DEFAULT
+            regnet_model = models.regnet_y_3_2gf(weights=weights)
+        except:
+            regnet_model = models.regnet_y_3_2gf(weights=None)
     elif regnet_type == 'RegNet_Y_16GF':
-        weights = models.RegNet_Y_16GF_Weights.DEFAULT
-        regnet_model = models.regnet_y_16gf(weights=weights)
+        try:
+            weights = models.RegNet_Y_16GF_Weights.DEFAULT
+            regnet_model = models.regnet_y_16gf(weights=weights)
+        except:
+            regnet_model = models.regnet_y_16gf(weights=None)
     else:
         raise ValueError(f'Unknown RegNet Architecture: {regnet_type}')
 

@@ -19,14 +19,23 @@ def get_resnext_model(resnext_type, num_classes):
     """
     # Load the pre-trained version of ResNeXt based on the specified type
     if resnext_type == 'ResNeXt50_32X4D':
-        weights = models.ResNeXt50_32X4D_Weights.DEFAULT
-        resnext_model = models.resnext50_32x4d(weights=weights)
+        try:
+            weights = models.ResNeXt50_32X4D_Weights.DEFAULT
+            resnext_model = models.resnext50_32x4d(weights=weights)
+        except:
+            resnext_model = models.resnext50_32x4d(weights=None)
     elif resnext_type == 'ResNeXt101_32X8D':
-        weights = models.ResNeXt101_32X8D_Weights.DEFAULT
-        resnext_model = models.resnext101_32x8d(weights=weights)
+        try:
+            weights = models.ResNeXt101_32X8D_Weights.DEFAULT
+            resnext_model = models.resnext101_32x8d(weights=weights)
+        except:
+            resnext_model = models.resnext101_32x8d(weights=None)
     elif resnext_type == 'ResNeXt101_64X4D':
-        weights = models.ResNeXt101_64X4D_Weights.DEFAULT
-        resnext_model = models.resnext101_64x4d(weights=weights)
+        try:
+            weights = models.ResNeXt101_64X4D_Weights.DEFAULT
+            resnext_model = models.resnext101_64x4d(weights=weights)
+        except:
+            resnext_model = models.resnext101_64x4d(weights=None)
     else:
         raise ValueError(f'Unknown ResNeXt Architecture: {resnext_type}')
 

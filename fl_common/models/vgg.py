@@ -30,29 +30,53 @@ def get_vgg_model(vgg_type, num_classes):
 
     # Load the pre-trained version of VGG
     if vgg_type == 'VGG11':
-        weights = models.VGG11_Weights.DEFAULT
-        vgg_model = models.vgg11(weights=weights)
+        try:
+            weights = models.VGG11_Weights.DEFAULT
+            vgg_model = models.vgg11(weights=weights)
+        except:
+            vgg_model = models.vgg11(weights=None)
     elif vgg_type == 'VGG11_BN':
-        weights = models.VGG11_BN_Weights.DEFAULT
-        vgg_model = models.vgg11_bn(weights=weights)
+        try:
+            weights = models.VGG11_BN_Weights.DEFAULT
+            vgg_model = models.vgg11_bn(weights=weights)
+        except:
+            vgg_model = models.vgg11_bn(weights=None)
     elif vgg_type == 'VGG13':
-        weights = models.VGG13_Weights.DEFAULT
-        vgg_model = models.vgg13(weights=weights)
+        try:
+            weights = models.VGG13_Weights.DEFAULT
+            vgg_model = models.vgg13(weights=weights)
+        except:
+            vgg_model = models.vgg13(weights=None)
     elif vgg_type == 'VGG13_BN':
-        weights = models.VGG13_BN_Weights.DEFAULT
-        vgg_model = models.vgg13_bn(weights=weights)
+        try:
+            weights = models.VGG13_BN_Weights.DEFAULT
+            vgg_model = models.vgg13_bn(weights=weights)
+        except:
+            vgg_model = models.vgg13_bn(weights=None)
     elif vgg_type == 'VGG16':
-        weights = models.VGG16_Weights.DEFAULT
-        vgg_model = models.vgg16(weights=weights)
+        try:
+            weights = models.VGG16_Weights.DEFAULT
+            vgg_model = models.vgg16(weights=weights)
+        except:
+            vgg_model = models.vgg16(weights=None)
     elif vgg_type == 'VGG16_BN':
-        weights = models.VGG16_BN_Weights.DEFAULT
-        vgg_model = models.vgg16_bn(weights=weights)
+        try:
+            weights = models.VGG16_BN_Weights.DEFAULT
+            vgg_model = models.vgg16_bn(weights=weights)
+        except:
+            vgg_model = models.vgg16_bn(weights=None)
     elif vgg_type == 'VGG19':
-        weights = models.VGG19_Weights.DEFAULT
-        vgg_model = models.vgg19(weights=weights)
+        try:
+            weights = models.VGG19_Weights.DEFAULT
+            vgg_model = models.vgg19(weights=weights)
+        except:
+            vgg_model = models.vgg19(weights=None)
     elif vgg_type == 'VGG19_BN':
-        weights = models.VGG19_BN_Weights.DEFAULT
-        vgg_model = models.vgg19_bn(weights=weights)
+        try:
+            weights = models.VGG19_BN_Weights.DEFAULT
+            vgg_model = models.vgg19_bn(weights=weights)
+        except:
+            vgg_model = models.vgg19_bn(weights=None)
     else:
         raise ValueError(f'Unknown VGG Architecture : {vgg_type}')
 

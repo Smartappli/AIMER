@@ -51,75 +51,320 @@ def get_nfnet_model(nfnet_type, num_classes):
         ValueError: If an unknown NFNet architecture type is specified.
     """
     if nfnet_type == 'dm_nfnet_f0':
-        nfnet_model = create_model('dm_nfnet_f0',pretrained=True, num_classes=num_classes)
+        try:
+            nfnet_model = create_model('dm_nfnet_f0',
+                                       pretrained=True,
+                                       num_classes=num_classes)
+        except:
+            nfnet_model = create_model('dm_nfnet_f0',
+                                       pretrained=False,
+                                       num_classes=num_classes)
     elif nfnet_type == 'dm_nfnet_f1':
-        nfnet_model = create_model('dm_nfnet_f1',pretrained=True, num_classes=num_classes)
+        try:
+            nfnet_model = create_model('dm_nfnet_f1',
+                                       pretrained=True,
+                                       num_classes=num_classes)
+        except:
+            nfnet_model = create_model('dm_nfnet_f1',
+                                       pretrained=False,
+                                       num_classes=num_classes)
     elif nfnet_type == 'dm_nfnet_f2':
-        nfnet_model = create_model('dm_nfnet_f2',pretrained=True, num_classes=num_classes)
+        try:
+            nfnet_model = create_model('dm_nfnet_f2',
+                                       pretrained=True,
+                                       num_classes=num_classes)
+        except:
+            nfnet_model = create_model('dm_nfnet_f2',
+                                       pretrained=False,
+                                       num_classes=num_classes)
     elif nfnet_type == 'dm_nfnet_f3':
-        nfnet_model = create_model('dm_nfnet_f1',pretrained=True, num_classes=num_classes)
+        try:
+            nfnet_model = create_model('dm_nfnet_f1',
+                                       pretrained=True,
+                                       num_classes=num_classes)
+        except:
+            nfnet_model = create_model('dm_nfnet_f1',
+                                       pretrained=False,
+                                       num_classes=num_classes)
     elif nfnet_type == 'dm_nfnet_f4':
-        nfnet_model = create_model('dm_nfnet_f4',pretrained=True, num_classes=num_classes)
+        try:
+            nfnet_model = create_model('dm_nfnet_f4',
+                                       pretrained=True,
+                                       num_classes=num_classes)
+        except:
+            nfnet_model = create_model('dm_nfnet_f4',
+                                       pretrained=False,
+                                       num_classes=num_classes)
     elif nfnet_type == 'dm_nfnet_f5':
-        nfnet_model = create_model('dm_nfnet_f5',pretrained=True, num_classes=num_classes)
+        try:
+            nfnet_model = create_model('dm_nfnet_f5',
+                                       pretrained=True,
+                                       num_classes=num_classes)
+        except:
+            nfnet_model = create_model('dm_nfnet_f5',
+                                       pretrained=False,
+                                       num_classes=num_classes)
     elif nfnet_type == 'dm_nfnet_f6':
-        nfnet_model = create_model('dm_nfnet_f6',pretrained=True,num_classes=num_classes)
+        try:
+            nfnet_model = create_model('dm_nfnet_f6',
+                                       pretrained=True,
+                                       num_classes=num_classes)
+        except:
+            nfnet_model = create_model('dm_nfnet_f6',
+                                       pretrained=False,
+                                       num_classes=num_classes)
     elif nfnet_type == 'nfnet_f0':
-        nfnet_model = create_model('nfnet_f0', pretrained=False, num_classes=num_classes)
+        try:
+            nfnet_model = create_model('nfnet_f0',
+                                       pretrained=True,
+                                       num_classes=num_classes)
+        except:
+            nfnet_model = create_model('nfnet_f0',
+                                       pretrained=False,
+                                       num_classes=num_classes)
     elif nfnet_type == 'nfnet_f1':
-        nfnet_model = create_model('nfnet_f1', pretrained=False, num_classes=num_classes)
+        try:
+            nfnet_model = create_model('nfnet_f1',
+                                       pretrained=True,
+                                       num_classes=num_classes)
+        except:
+            nfnet_model = create_model('nfnet_f1',
+                                       pretrained=False,
+                                       num_classes=num_classes)
     elif nfnet_type == 'nfnet_f2':
-        nfnet_model = create_model('nfnet_f2', pretrained=False, num_classes=num_classes)
+        try:
+            nfnet_model = create_model('nfnet_f2',
+                                       pretrained=True,
+                                       num_classes=num_classes)
+        except:
+            nfnet_model = create_model('nfnet_f2',
+                                       pretrained=False,
+                                       num_classes=num_classes)
     elif nfnet_type == 'nfnet_f3':
-        nfnet_model = create_model('nfnet_f3', pretrained=False, num_classes=num_classes)
+        try:
+            nfnet_model = create_model('nfnet_f3',
+                                       pretrained=True,
+                                       num_classes=num_classes)
+        except:
+            nfnet_model = create_model('nfnet_f3',
+                                       pretrained=False,
+                                       num_classes=num_classes)
     elif nfnet_type == 'nfnet_f4':
-        nfnet_model = create_model('nfnet_f4', pretrained=False, num_classes=num_classes)
+        try:
+            nfnet_model = create_model('nfnet_f4',
+                                       pretrained=True,
+                                       num_classes=num_classes)
+        except:
+            nfnet_model = create_model('nfnet_f4',
+                                       pretrained=False,
+                                       num_classes=num_classes)
     elif nfnet_type == 'nfnet_f5':
-        nfnet_model = create_model('nfnet_f5', pretrained=False, num_classes=num_classes)
+        try:
+            nfnet_model = create_model('nfnet_f5',
+                                       pretrained=True,
+                                       num_classes=num_classes)
+        except:
+            nfnet_model = create_model('nfnet_f5',
+                                       pretrained=False,
+                                       num_classes=num_classes)
     elif nfnet_type == 'nfnet_f6':
-        nfnet_model = create_model('nfnet_f6', pretrained=False,num_classes=num_classes)
+        try:
+            nfnet_model = create_model('nfnet_f6',
+                                       pretrained=True,
+                                       num_classes=num_classes)
+        except:
+            nfnet_model = create_model('nfnet_f6',
+                                       pretrained=False,
+                                       num_classes=num_classes)
     elif nfnet_type == 'nfnet_f7':
-        nfnet_model = create_model('nfnet_f7', pretrained=False, num_classes=num_classes)
+        try:
+            nfnet_model = create_model('nfnet_f7',
+                                       pretrained=True,
+                                       num_classes=num_classes)
+        except:
+            nfnet_model = create_model('nfnet_f7',
+                                       pretrained=False,
+                                       num_classes=num_classes)
     elif nfnet_type == 'nfnet_l0':
-        nfnet_model = create_model('nfnet_l0', pretrained=True, num_classes=num_classes)
+        try:
+            nfnet_model = create_model('nfnet_l0',
+                                       pretrained=True,
+                                       num_classes=num_classes)
+        except:
+            nfnet_model = create_model('nfnet_l0',
+                                       pretrained=False,
+                                       num_classes=num_classes)
     elif nfnet_type == 'eca_nfnet_l0':
-        nfnet_model = create_model('eca_nfnet_l0', pretrained=True, num_classes=num_classes)
+        try:
+            nfnet_model = create_model('eca_nfnet_l0',
+                                       pretrained=True,
+                                       num_classes=num_classes)
+        except:
+            nfnet_model = create_model('eca_nfnet_l0',
+                                       pretrained=False,
+                                       num_classes=num_classes)
     elif nfnet_type == 'eca_nfnet_l1':
-        nfnet_model = create_model('eca_nfnet_l1', pretrained=True, num_classes=num_classes)
+        try:
+            nfnet_model = create_model('eca_nfnet_l1',
+                                       pretrained=True,
+                                       num_classes=num_classes)
+        except:
+            nfnet_model = create_model('eca_nfnet_l1',
+                                       pretrained=False,
+                                       num_classes=num_classes)
     elif nfnet_type == 'eca_nfnet_l2':
-        nfnet_model = create_model('eca_nfnet_l2', pretrained=True, num_classes=num_classes)
+        try:
+            nfnet_model = create_model('eca_nfnet_l2',
+                                       pretrained=True,
+                                       num_classes=num_classes)
+        except:
+            nfnet_model = create_model('eca_nfnet_l2',
+                                       pretrained=False,
+                                       num_classes=num_classes)
     elif nfnet_type == 'eca_nfnet_l3':
-        nfnet_model = create_model('eca_nfnet_l3',pretrained=False, num_classes=num_classes)
+        try:
+            nfnet_model = create_model('eca_nfnet_l3',
+                                       pretrained=True,
+                                       num_classes=num_classes)
+        except:
+            nfnet_model = create_model('eca_nfnet_l3',
+                                       pretrained=False,
+                                       num_classes=num_classes)
     elif nfnet_type == 'nf_regnet_b0':
-        nfnet_model = create_model('nf_regnet_b0',pretrained=False, num_classes=num_classes)
+        try:
+            nfnet_model = create_model('nf_regnet_b0',
+                                       pretrained=True,
+                                       num_classes=num_classes)
+        except:
+            nfnet_model = create_model('nf_regnet_b0',
+                                       pretrained=False,
+                                       num_classes=num_classes)
     elif nfnet_type == 'nf_regnet_b1':
-        nfnet_model = create_model('nf_regnet_b1',pretrained=False, num_classes=num_classes)
+        try:
+            nfnet_model = create_model('nf_regnet_b1',
+                                       pretrained=True,
+                                       num_classes=num_classes)
+        except:
+            nfnet_model = create_model('nf_regnet_b1',
+                                       pretrained=False,
+                                       num_classes=num_classes)
     elif nfnet_type == 'nf_regnet_b2':
-        nfnet_model = create_model('nf_regnet_b2', pretrained=False, num_classes=num_classes)
+        try:
+            nfnet_model = create_model('nf_regnet_b2',
+                                       pretrained=True,
+                                       num_classes=num_classes)
+        except:
+            nfnet_model = create_model('nf_regnet_b2',
+                                       pretrained=False,
+                                       num_classes=num_classes)
     elif nfnet_type == 'nf_regnet_b3':
-        nfnet_model = create_model('nf_regnet_b3',pretrained=False, num_classes=num_classes)
+        try:
+            nfnet_model = create_model('nf_regnet_b3',
+                                       pretrained=True,
+                                       num_classes=num_classes)
+        except:
+            nfnet_model = create_model('nf_regnet_b3',
+                                       pretrained=False,
+                                       num_classes=num_classes)
     elif nfnet_type == 'nf_regnet_b4':
-        nfnet_model = create_model('nf_regnet_b4',pretrained=False, num_classes=num_classes)
+        try:
+            nfnet_model = create_model('nf_regnet_b4',
+                                       pretrained=True,
+                                       num_classes=num_classes)
+        except:
+            nfnet_model = create_model('nf_regnet_b4',
+                                       pretrained=False,
+                                       num_classes=num_classes)
     elif nfnet_type == 'nf_regnet_b5':
-        nfnet_model = create_model('nf_regnet_b5',pretrained=False, num_classes=num_classes)
+        try:
+            nfnet_model = create_model('nf_regnet_b5',
+                                       pretrained=True,
+                                       num_classes=num_classes)
+        except:
+            nfnet_model = create_model('nf_regnet_b5',
+                                       pretrained=False,
+                                       num_classes=num_classes)
     elif nfnet_type == 'nf_resnet26':
-        nfnet_model = create_model('nf_resnet26',pretrained=False, num_classes=num_classes)
+        try:
+            nfnet_model = create_model('nf_resnet26',
+                                       pretrained=True,
+                                       num_classes=num_classes)
+        except:
+            nfnet_model = create_model('nf_resnet26',
+                                       pretrained=False,
+                                       num_classes=num_classes)
     elif nfnet_type == 'nf_resnet50':
-        nfnet_model = create_model('nf_resnet50',pretrained=True, num_classes=num_classes)
+        try:
+            nfnet_model = create_model('nf_resnet50',
+                                       pretrained=True,
+                                       num_classes=num_classes)
+        except:
+            nfnet_model = create_model('nf_resnet50',
+                                       pretrained=False,
+                                       num_classes=num_classes)
     elif nfnet_type == 'nf_resnet101':
-        nfnet_model = create_model('nf_resnet101',pretrained=False, num_classes=num_classes)
+        try:
+            nfnet_model = create_model('nf_resnet101',
+                                       pretrained=True,
+                                       num_classes=num_classes)
+        except:
+            nfnet_model = create_model('nf_resnet101',
+                                       pretrained=False,
+                                       num_classes=num_classes)
     elif nfnet_type == 'nf_seresnet26':
-        nfnet_model = create_model('nf_seresnet26',pretrained=False, num_classes=num_classes)
+        try:
+            nfnet_model = create_model('nf_seresnet26',
+                                       pretrained=True,
+                                       num_classes=num_classes)
+        except:
+            nfnet_model = create_model('nf_seresnet26',
+                                       pretrained=False,
+                                       num_classes=num_classes)
     elif nfnet_type == 'nf_seresnet50':
-        nfnet_model = create_model('nf_seresnet50',pretrained=False,num_classes=num_classes)
+        try:
+            nfnet_model = create_model('nf_seresnet50',
+                                       pretrained=True,
+                                       num_classes=num_classes)
+        except:
+            nfnet_model = create_model('nf_seresnet50',
+                                       pretrained=False,
+                                       num_classes=num_classes)
     elif nfnet_type == 'nf_seresnet101':
-        nfnet_model = create_model('nf_seresnet101', pretrained=False, num_classes=num_classes)
+        try:
+            nfnet_model = create_model('nf_seresnet101',
+                                       pretrained=True,
+                                       num_classes=num_classes)
+        except:
+            nfnet_model = create_model('nf_seresnet101',
+                                       pretrained=False,
+                                       num_classes=num_classes)
     elif nfnet_type == 'nf_ecaresnet26':
-        nfnet_model = create_model('nf_ecaresnet26',pretrained=False, num_classes=num_classes)
+        try:
+            nfnet_model = create_model('nf_ecaresnet26',
+                                       pretrained=True,
+                                       num_classes=num_classes)
+        except:
+            nfnet_model = create_model('nf_ecaresnet26',
+                                       pretrained=False,
+                                       num_classes=num_classes)
     elif nfnet_type == 'nf_ecaresnet50':
-        nfnet_model = create_model('nf_ecaresnet50', pretrained=False, num_classes=num_classes)
+        try:
+            nfnet_model = create_model('nf_ecaresnet50',
+                                       pretrained=True,
+                                       num_classes=num_classes)
+        except:
+            nfnet_model = create_model('nf_ecaresnet50',
+                                       pretrained=False,
+                                       num_classes=num_classes)
     elif nfnet_type == 'nf_ecaresnet101':
-        nfnet_model = create_model('nf_ecaresnet101', pretrained=False, num_classes=num_classes)
+        try:
+            nfnet_model = create_model('nf_ecaresnet101',
+                                       pretrained=True,
+                                       num_classes=num_classes)
+        except:
+            nfnet_model = create_model('nf_ecaresnet101',
+                                       pretrained=False,
+                                       num_classes=num_classes)
     else:
         raise ValueError(f'Unknown Nfnet Architecture: {nfnet_type}')
 

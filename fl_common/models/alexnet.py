@@ -21,8 +21,11 @@ def get_alexnet_model(alexnet_type, num_classes):
     """
     # Load the pre-trained version of AlexNet based on the specified type
     if alexnet_type == 'AlexNet':
-        weights = models.AlexNet_Weights.DEFAULT
-        alexnet_model = models.alexnet(weights=weights)
+        try:
+            weights = models.AlexNet_Weights.DEFAULT
+            alexnet_model = models.alexnet(weights=weights)
+        except:
+            alexnet_model = models.alexnet(weights=None)
     else:
         raise ValueError(f'Unknown AlexNet Architecture: {alexnet_type}')
 

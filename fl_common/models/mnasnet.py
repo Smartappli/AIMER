@@ -24,17 +24,29 @@ def get_mnasnet_model(mnasnet_type, num_classes):
     """
     # Load the pre-trained version of MNASNet based on the specified type
     if mnasnet_type == 'MNASNet0_5':
-        weights = models.MNASNet0_5_Weights.DEFAULT
-        mnasnet_model = models.mnasnet.mnasnet0_5(weights=weights)
+        try:
+            weights = models.MNASNet0_5_Weights.DEFAULT
+            mnasnet_model = models.mnasnet.mnasnet0_5(weights=weights)
+        except:
+            mnasnet_model = models.mnasnet.mnasnet0_5(weights=None)
     elif mnasnet_type == 'MNASNet0_75':
-        weights = models.MNASNet0_75_Weights.DEFAULT
-        mnasnet_model = models.mnasnet.mnasnet0_75(weights=weights)
+        try:
+            weights = models.MNASNet0_75_Weights.DEFAULT
+            mnasnet_model = models.mnasnet.mnasnet0_75(weights=weights)
+        except:
+            mnasnet_model = models.mnasnet.mnasnet0_75(weights=None)
     elif mnasnet_type == 'MNASNet1_0':
-        weights = models.MNASNet1_0_Weights.DEFAULT
-        mnasnet_model = models.mnasnet.mnasnet1_0(weights=weights)
+        try:
+            weights = models.MNASNet1_0_Weights.DEFAULT
+            mnasnet_model = models.mnasnet.mnasnet1_0(weights=weights)
+        except:
+            mnanet_model = models.mnasnet.mnasnet1_0(weights=None)
     elif mnasnet_type == 'MNASNet1_3':
-        weights = models.MNASNet1_3_Weights.DEFAULT
-        mnasnet_model = models.mnasnet.mnasnet1_3(weights=weights)
+        try:
+            weights = models.MNASNet1_3_Weights.DEFAULT
+            mnasnet_model = models.mnasnet.mnasnet1_3(weights=weights)
+        except:
+            mnasnet_model = models.mnasnet.mnasnet1_3(weights=None)
     else:
         raise ValueError(f'Unknown MNASNet Architecture: {mnasnet_type}')
 

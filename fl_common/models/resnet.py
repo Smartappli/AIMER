@@ -19,20 +19,35 @@ def get_resnet_model(resnet_type, num_classes):
     """
     # Load the pre-trained version of ResNet based on the specified type
     if resnet_type == 'ResNet18':
-        weights = models.ResNet18_Weights.DEFAULT
-        resnet_model = models.resnet18(weights=weights)
+        try:
+            weights = models.ResNet18_Weights.DEFAULT
+            resnet_model = models.resnet18(weights=weights)
+        except:
+            resnet_model = models.resnet18(weights=None)
     elif resnet_type == 'ResNet34':
-        weights = models.ResNet34_Weights.DEFAULT
-        resnet_model = models.resnet34(weights=weights)
+        try:
+            weights = models.ResNet34_Weights.DEFAULT
+            resnet_model = models.resnet34(weights=weights)
+        except:
+            resnet_model = models.resnet34(weights=None)
     elif resnet_type == 'ResNet50':
-        weights = models.ResNet50_Weights.DEFAULT
-        resnet_model = models.resnet50(weights=weights)
+        try:
+            weights = models.ResNet50_Weights.DEFAULT
+            resnet_model = models.resnet50(weights=weights)
+        except:
+            resnet_model = models.resnet50(weights=None)
     elif resnet_type == 'ResNet101':
-        weights = models.ResNet101_Weights.DEFAULT
-        resnet_model = models.resnet101(weights=weights)
+        try:
+            weights = models.ResNet101_Weights.DEFAULT
+            resnet_model = models.resnet101(weights=weights)
+        except:
+            resnet_model = models.resnet101(weights=None)
     elif resnet_type == 'ResNet152':
-        weights = models.ResNet152_Weights.DEFAULT
-        resnet_model = models.resnet152(weights=weights)
+        try:
+            weights = models.ResNet152_Weights.DEFAULT
+            resnet_model = models.resnet152(weights=weights)
+        except:
+            resnet_model = models.resnet152(weights=None)
     else:
         raise ValueError(f'Unknown ResNet Architecture: {resnet_type}')
 

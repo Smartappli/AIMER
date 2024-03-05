@@ -19,20 +19,35 @@ def get_vision_transformer_model(vision_type, num_classes):
     """
     # Load the pre-trained version of Vision Transformer based on the specified type
     if vision_type == 'ViT_B_16':
-        weights = models.ViT_B_16_Weights.DEFAULT
-        vision_model = models.vit_b_16(weights=weights)
+        try:
+            weights = models.ViT_B_16_Weights.DEFAULT
+            vision_model = models.vit_b_16(weights=weights)
+        except:
+            vision_model = models.vit_b_16(weights=None)
     elif vision_type == 'ViT_B_32':
-        weights = models.ViT_B_32_Weights.DEFAULT
-        vision_model = models.vit_b_32(weights=weights)
+        try:
+            weights = models.ViT_B_32_Weights.DEFAULT
+            vision_model = models.vit_b_32(weights=weights)
+        except:
+            vision_model = models.vit_b_32(weights=None)
     elif vision_type == 'ViT_L_16':
-        weights = models.ViT_L_16_Weights.DEFAULT
-        vision_model = models.vit_l_16(weights=weights)
+        try:
+            weights = models.ViT_L_16_Weights.DEFAULT
+            vision_model = models.vit_l_16(weights=weights)
+        except:
+            vision_model = models.vit_b_16(weights=None)
     elif vision_type == 'ViT_L_32':
-        weights = models.ViT_L_32_Weights.DEFAULT
-        vision_model = models.vit_l_32(weights=weights)
+        try:
+            weights = models.ViT_L_32_Weights.DEFAULT
+            vision_model = models.vit_l_32(weights=weights)
+        except:
+            vision_model = models.vit_l_32(weights=None)
     elif vision_type == 'ViT_H_14':
-        weights = models.ViT_H_14_Weights.DEFAULT
-        vision_model = models.vit_h_14(weights=weights)
+        try:
+            weights = models.ViT_H_14_Weights.DEFAULT
+            vision_model = models.vit_h_14(weights=weights)
+        except:
+            vision_model = models.vit_h_14(weights=None)
     else:
         raise ValueError(f'Unknown Vision Transformer Architecture: {vision_type}')
 

@@ -18,8 +18,11 @@ def get_googlenet_model(googlenet_type, num_classes):
     """
     # Load the pre-trained version of GoogleNet based on the specified type
     if googlenet_type == 'GoogLeNet':
-        weights = models.GoogLeNet_Weights.DEFAULT
-        googlenet_model = models.googlenet(weights=weights)
+        try:
+            weights = models.GoogLeNet_Weights.DEFAULT
+            googlenet_model = models.googlenet(weights=weights)
+        except:
+            googlenet_model = models.googlenet(weights=None)
     else:
         raise ValueError(f'Unknown AlexNet Architecture: {googlenet_type}')
 
