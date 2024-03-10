@@ -19,7 +19,7 @@ prophet==1.1.5
 lightgbm==4.3.0
 captum==0.7.0
 psycopg2==2.9.9
-tqdm==4.66.1
+tqdm==4.66.2
 syft==0.8.5b1
 hagrid==0.3.111
 ansible-core>=2.16.4 # not directly required, pinned by Snyk to avoid a vulnerability
