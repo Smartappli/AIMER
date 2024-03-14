@@ -23,3 +23,4 @@ tqdm==4.66.2
 syft==0.8.5b2
 hagrid==0.3.111
 #llama-cpp-python[server]==0.2.53
+wheel>=0.38.0 # not directly required, pinned by Snyk to avoid a vulnerability
