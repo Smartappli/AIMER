@@ -24,3 +24,6 @@ syft==0.8.5b2
 hagrid==0.3.111
 #llama-cpp-python[server]==0.2.53
 wheel>=0.38.0 # not directly required, pinned by Snyk to avoid a vulnerability
+ansible-core>=2.15.7rc1 # not directly required, pinned by Snyk to avoid a vulnerability
+gevent>=23.9.0 # not directly required, pinned by Snyk to avoid a vulnerability
+setuptools>=65.5.1 # not directly required, pinned by Snyk to avoid a vulnerability
