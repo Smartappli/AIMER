@@ -30,14 +30,23 @@ def get_mobilenet_model(mobilenet_type, num_classes):
 
     # Load the pre-trained version of VGG
     if mobilenet_type == 'MobileNet_V2':
-        weights = models.MobileNet_V2_Weights.DEFAULT
-        mobilenet_model = models.mobilenet_v2(weights=weights)
+        try:
+            weights = models.MobileNet_V2_Weights.DEFAULT
+            mobilenet_model = models.mobilenet_v2(weights=weights)
+        except:
+            mobilenet_model = models.mobilenet_v2(weights=None)
     elif mobilenet_type == 'MobileNet_V3_Small':
-        weights = models.MobileNet_V3_Small_Weights.DEFAULT
-        mobilenet_model = models.mobilenet_v3_small(weights=weights)
+        try:
+            weights = models.MobileNet_V3_Small_Weights.DEFAULT
+            mobilenet_model = models.mobilenet_v3_small(weights=weights)
+        except:
+            mobilenet_model = models.mobilenet_v3_small(weights=None)
     elif mobilenet_type == 'MobileNet_V3_Large':
-        weights = models.MobileNet_V3_Large_Weights.DEFAULT
-        mobilenet_model = models.mobilenet_v3_large(weights=weights)
+        try:
+            weights = models.MobileNet_V3_Large_Weights.DEFAULT
+            mobilenet_model = models.mobilenet_v3_large(weights=weights)
+        except:
+            mobilenet_model = models.mobilenet_v3_large(weights=None)
     else:
         raise ValueError(f'Unknown MobileNet Architecture : {mobilenet_type}')
 

@@ -6,7 +6,10 @@ os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
 
 
 class ProcessingHgnetTestCase(TestCase):
-    # Hgnet modesl unit tests
+    """
+    Test case class for processing Hgnet models.
+    """
+
     def test_known_hgnet_types(self):
         """
         Test for known Hgnet architecture types to ensure they return a model without raising any exceptions.

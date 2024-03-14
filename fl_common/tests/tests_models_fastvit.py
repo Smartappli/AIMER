@@ -7,7 +7,10 @@ os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
 
 
 class ProcessingFastVitTestCase(TestCase):
-    """Fast Vision Models Unit Tests"""
+    """
+    Test case class for processing Fastvit models.
+    """
+
     def test_all_architectures(self):
         """
         Test the creation of FastViT models for all specified architectures.

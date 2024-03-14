@@ -7,7 +7,9 @@ os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
 
 
 class ProcessingConvitTestCase(TestCase):
-    """Convit Models Unit Tests"""
+    """
+    Test case class for processing Canvit models.
+    """
 
     def test_valid_architecture(self):
         """Test for a valid Convit architecture."""

@@ -7,7 +7,10 @@ os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
 
 
 class ProcessingRegnetTestCase(TestCase):
-    # Regnet Models Unit tests
+    """
+    Test case class for processing Regnet models.
+    """
+
     def test_get_regnet_model(self):
         """
         Test case for obtaining various RegNet models.

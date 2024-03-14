@@ -24,16 +24,33 @@ def get_inception_model(inception_type, num_classes):
     """
     # Load the pre-trained version of Inception based on the specified type
     if inception_type == 'Inception_V3':
-        weights = models.Inception_V3_Weights.DEFAULT
-        inception_model = models.inception_v3(weights=weights)
+        try:
+            weights = models.Inception_V3_Weights.DEFAULT
+            inception_model = models.inception_v3(weights=weights)
+        except:
+            inception_model = models.inception_v3(weights=None)
 
         # Modify the last layer to suit the given number of classes
         num_features = inception_model.fc.in_features
         inception_model.fc = nn.Linear(num_features, num_classes)
     elif inception_type == 'inception_v4':
-        inception_model = create_model('inception_v4', pretrained=True, num_classes=num_classes)
+        try:
+            inception_model = create_model('inception_v4',
+                                           pretrained=True,
+                                           num_classes=num_classes)
+        except:
+            inception_model = create_model('inception_v4',
+                                           pretrained=False,
+                                           num_classes=num_classes)
     elif inception_type == 'inception_resnet_v2':
-        inception_model = create_model('inception_resnet_v2', pretrained=True, num_classes=num_classes)
+        try:
+            inception_model = create_model('inception_resnet_v2',
+                                           pretrained=True,
+                                           num_classes=num_classes)
+        except:
+            inception_model = create_model('inception_resnet_v2',
+                                           pretrained=False,
+                                           num_classes=num_classes)
     else:
         raise ValueError(f'Unknown Inception Architecture: {inception_type}')
 

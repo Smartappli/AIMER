@@ -7,6 +7,11 @@ from syft import autocache
 
 
 def launch_node():
+    """
+    Launches three nodes: Humani, Epicura, and Vivalia, registers a user,
+    uploads a dataset, calculates the mean age, and then destroys the nodes.
+    """
+
     sy.requires(SYFT_VERSION)
 
     print(f"Version of PySyft : {sy.__version__ }")

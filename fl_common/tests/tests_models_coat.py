@@ -7,7 +7,9 @@ os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
 
 
 class ProcessingCoatTestCase(TestCase):
-    """Coat Models Unit Tests"""
+    """
+    Test case class for processing Coat models.
+    """
 
     def test_known_coat_types(self):
         """

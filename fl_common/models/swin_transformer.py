@@ -22,23 +22,41 @@ def get_swin_model(swin_type, num_classes):
 
     # Load the pre-trained version of DenseNet
     if swin_type == 'Swin_T':
-        weights = models.Swin_T_Weights.DEFAULT
-        swin_model = models.swin_t(weights=weights)
+        try:
+            weights = models.Swin_T_Weights.DEFAULT
+            swin_model = models.swin_t(weights=weights)
+        except:
+            swin_model = models.swin_t(weights=None)
     elif swin_type == 'Swin_S':
-        weights = models.Swin_S_Weights.DEFAULT
-        swin_model = models.swin_s(weights=weights)
+        try:
+            weights = models.Swin_S_Weights.DEFAULT
+            swin_model = models.swin_s(weights=weights)
+        except:
+            swin_model = models.swin_s(weights=None)
     elif swin_type == 'Swin_B':
-        weights = models.Swin_B_Weights.DEFAULT
-        swin_model = models.swin_b(weights=weights)
+        try:
+            weights = models.Swin_B_Weights.DEFAULT
+            swin_model = models.swin_b(weights=weights)
+        except:
+            swin_model = models.swin_b(weights=None)
     elif swin_type == 'Swin_V2_T':
-        weights = models.Swin_V2_T_Weights.DEFAULT
-        swin_model = models.swin_v2_t(weights=weights)
+        try:
+            weights = models.Swin_V2_T_Weights.DEFAULT
+            swin_model = models.swin_v2_t(weights=weights)
+        except:
+            swin_model = models.swin_v2_t(weights=None)
     elif swin_type == 'Swin_V2_S':
-        weights = models.Swin_V2_S_Weights.DEFAULT
-        swin_model = models.swin_v2_s(weights=weights)
+        try:
+            weights = models.Swin_V2_S_Weights.DEFAULT
+            swin_model = models.swin_v2_s(weights=weights)
+        except:
+            swin_model = models.swin_v2_s(weights=None)
     elif swin_type == 'Swin_V2_B':
-        weights = models.Swin_V2_B_Weights.DEFAULT
-        swin_model = models.swin_v2_b(weights=weights)
+        try:
+            weights = models.Swin_V2_B_Weights.DEFAULT
+            swin_model = models.swin_v2_b(weights=weights)
+        except:
+            swin_model = models.swin_v2_b(weights=None)
     else:
         raise ValueError(f'Unknown DenseNet Architecture : {swin_type}')
 

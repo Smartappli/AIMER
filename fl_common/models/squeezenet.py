@@ -1,6 +1,7 @@
 import torch.nn as nn
 from torchvision import models
 
+
 def get_squeezenet_model(squeezenet_type, num_classes):
     """
     Returns a modified SqueezeNet model based on the specified type.
@@ -18,11 +19,17 @@ def get_squeezenet_model(squeezenet_type, num_classes):
     """
     # Load the pre-trained version of SqueezeNet based on the specified type
     if squeezenet_type == 'SqueezeNet1_0':
-        weights = models.SqueezeNet1_0_Weights.DEFAULT
-        squeezenet_model = models.squeezenet1_0(weights=weights)
+        try:
+            weights = models.SqueezeNet1_0_Weights.DEFAULT
+            squeezenet_model = models.squeezenet1_0(weights=weights)
+        except:
+            squeezenet_model = models.squeezenet1_0(weights=None)
     elif squeezenet_type == 'SqueezeNet1_1':
-        weights = models.SqueezeNet1_1_Weights.DEFAULT
-        squeezenet_model = models.squeezenet1_1(weights=weights)
+        try:
+            weights = models.SqueezeNet1_1_Weights.DEFAULT
+            squeezenet_model = models.squeezenet1_1(weights=weights)
+        except:
+            squeezenet_model = models.squeezenet1_1(weights=None)
     else:
         raise ValueError(f'Unknown SqueezeNet Architecture: {squeezenet_type}')
 

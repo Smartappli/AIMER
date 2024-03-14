@@ -21,17 +21,59 @@ def get_xception_model(xception_type, num_classes):
       and last layer adapted for the given number of classes.
     """
     if xception_type == 'legacy_xception':
-        xception_model = create_model('legacy_xception', pretrained=True, num_classes=num_classes)
+        try:
+            xception_model = create_model('legacy_xception',
+                                          pretrained=True,
+                                          num_classes=num_classes)
+        except:
+            xception_model = create_model('legacy_xception',
+                                          pretrained=False,
+                                          num_classes=num_classes)
     elif xception_type == 'xception41':
-        xception_model = create_model('xception41', pretrained=True, num_classes=num_classes)
+        try:
+            xception_model = create_model('xception41',
+                                          pretrained=True,
+                                          num_classes=num_classes)
+        except:
+            xception_model = create_model('xception41',
+                                          pretrained=False,
+                                          num_classes=num_classes)
     elif xception_type == 'xception65':
-        xception_model = create_model('xception65', pretrained=True, num_classes=num_classes)
+        try:
+            xception_model = create_model('xception65',
+                                          pretrained=True,
+                                          num_classes=num_classes)
+        except:
+            xception_model = create_model('xception65',
+                                          pretrained=False,
+                                          num_classes=num_classes)
     elif xception_type == 'xception71':
-        xception_model = create_model('xception71', pretrained=True, num_classes=num_classes)
+        try:
+            xception_model = create_model('xception71',
+                                          pretrained=True,
+                                          num_classes=num_classes)
+        except:
+            xception_model = create_model('xception71',
+                                          pretrained=False,
+                                          num_classes=num_classes)
     elif xception_type == 'xception41p':
-        xception_model = create_model('xception41', pretrained=True, num_classes=num_classes)
+        try:
+            xception_model = create_model('xception41',
+                                          pretrained=True,
+                                          num_classes=num_classes)
+        except:
+            xception_model = create_model('xception41',
+                                          pretrained=False,
+                                          num_classes=num_classes)
     elif xception_type == 'xception65p':
-        xception_model = create_model('xception65p', pretrained=True, num_classes=num_classes)
+        try:
+            xception_model = create_model('xception65p',
+                                          pretrained=True,
+                                          num_classes=num_classes)
+        except:
+            xception_model = create_model('xception65p',
+                                          pretrained=False,
+                                          num_classes=num_classes)
     else:
         raise ValueError(f'Unknown Xception Architecture: {xception_type}')
 

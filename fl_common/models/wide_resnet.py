@@ -19,11 +19,17 @@ def get_wide_resnet_model(wide_resnet_type, num_classes):
     """
     # Load the pre-trained version of Wide ResNet based on the specified type
     if wide_resnet_type == 'Wide_ResNet50_2':
-        weights = models.Wide_ResNet50_2_Weights.DEFAULT
-        wide_resnet_model = models.wide_resnet50_2(weights=weights)
+        try:
+            weights = models.Wide_ResNet50_2_Weights.DEFAULT
+            wide_resnet_model = models.wide_resnet50_2(weights=weights)
+        except:
+            wide_resnet_model = models.wide_resnet50_2(weights=None)
     elif wide_resnet_type == 'Wide_ResNet101_2':
-        weights = models.Wide_ResNet101_2_Weights.DEFAULT
-        wide_resnet_model = models.wide_resnet101_2(weights=weights)
+        try:
+            weights = models.Wide_ResNet101_2_Weights.DEFAULT
+            wide_resnet_model = models.wide_resnet101_2(weights=weights)
+        except:
+            wide_resnet_model = models.wide_resnet101_2(weights=None)
     else:
         raise ValueError(f'Unknown Wide ResNet Architecture: {wide_resnet_type}')
 

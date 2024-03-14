@@ -6,7 +6,10 @@ os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
 
 
 class ProcessingDeitTestCase(TestCase):
-    """Det Models Unit Tests"""
+    """
+    Test case class for processing Deit models.
+    """
+
     def test_known_deit_types(self):
         """
         Test case to ensure that known DEIT (Data-efficient Image Transformer) architectures can be created.

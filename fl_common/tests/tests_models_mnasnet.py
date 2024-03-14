@@ -7,7 +7,10 @@ os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
 
 
 class ProcessingMNasnetTestCase(TestCase):
-    # Mnasnet model unit tests
+    """
+    Test case class for processing Mnasnet models.
+    """
+
     def test_get_mnasnet_model(self):
         """
         Test case for obtaining various MNASNet models.

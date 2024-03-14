@@ -17,15 +17,50 @@ def get_gcvit_model(gcvit_type, num_classes):
     - ValueError: If an unknown GCVIT architecture is specified.
     """
     if gcvit_type == 'gcvit_xxtiny':
-        gcvit_model = create_model('gcvit_xxtiny', pretrained=True, num_classes=num_classes)
+        try:
+            gcvit_model = create_model('gcvit_xxtiny',
+                                       pretrained=True,
+                                       num_classes=num_classes)
+        except:
+            gcvit_model = create_model('gcvit_xxtiny',
+                                       pretrained=False,
+                                       num_classes=num_classes)
     elif gcvit_type == 'gcvit_xtiny':
-        gcvit_model = create_model('gcvit_xtiny', pretrained=True, num_classes=num_classes)
+        try:
+            gcvit_model = create_model('gcvit_xtiny',
+                                       pretrained=True,
+                                       num_classes=num_classes)
+        except:
+            gcvit_model = create_model('gcvit_xtiny',
+                                       pretrained=False,
+                                       num_classes=num_classes)
     elif gcvit_type == 'gcvit_tiny':
-        gcvit_model = create_model('gcvit_tiny', pretrained=True, num_classes=num_classes)
+        try:
+            gcvit_model = create_model('gcvit_tiny',
+                                       pretrained=True,
+                                       num_classes=num_classes)
+        except:
+            gcvit_model = create_model('gcvit_tiny',
+                                       pretrained=False,
+                                       num_classes=num_classes)
     elif gcvit_type == 'gcvit_small':
-        gcvit_model = create_model('gcvit_small', pretrained=True, num_classes=num_classes)
+        try:
+            gcvit_model = create_model('gcvit_small',
+                                       pretrained=True,
+                                       num_classes=num_classes)
+        except:
+            gcvit_model = create_model('gcvit_small',
+                                       pretrained=False,
+                                       num_classes=num_classes)
     elif gcvit_type == 'gcvit_base':
-        gcvit_model = create_model('gcvit_base', pretrained=True, num_classes=num_classes)
+        try:
+            gcvit_model = create_model('gcvit_base',
+                                       pretrained=True,
+                                       num_classes=num_classes)
+        except:
+            gcvit_model = create_model('gcvit_base',
+                                       pretrained=False,
+                                       num_classes=num_classes)
     else:
         raise ValueError(f'Unknown Gcvit Architecture: {gcvit_type}')
 

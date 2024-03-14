@@ -19,11 +19,32 @@ def get_convmixer_model(convmixer_type, num_classes):
         ValueError: If the specified Convmixer architecture type is unknown.
     """
     if convmixer_type == "convmixer_1536_20":
-        convmixer_model = create_model('convmixer_1536_20', pretrained=True, num_classes=num_classes)
+        try:
+            convmixer_model = create_model('convmixer_1536_20',
+                                           pretrained=True,
+                                           num_classes=num_classes)
+        except:
+            convmixer_model = create_model('convmixer_1536_20',
+                                           pretrained=False,
+                                           num_classes=num_classes)
     elif convmixer_type == "convmixer_768_32":
-        convmixer_model = create_model('convmixer_768_32', pretrained=True, num_classes=num_classes)
+        try:
+            convmixer_model = create_model('convmixer_768_32',
+                                           pretrained=True,
+                                           num_classes=num_classes)
+        except:
+            convmixer_model = create_model('convmixer_768_32',
+                                           pretrained=False,
+                                           num_classes=num_classes)
     elif convmixer_type == "convmixer_1024_20_ks9_p14":
-        convmixer_model = create_model('convmixer_1024_20_ks9_p14', pretrained=True, num_classes=num_classes)
+        try:
+            convmixer_model = create_model('convmixer_1024_20_ks9_p14',
+                                           pretrained=True,
+                                           num_classes=num_classes)
+        except:
+            convmixer_model = create_model('convmixer_1024_20_ks9_p14',
+                                           pretrained=False,
+                                           num_classes=num_classes)
     else:
         raise ValueError(f'Unknown Convmixer Architecture: {convmixer_type}')
 

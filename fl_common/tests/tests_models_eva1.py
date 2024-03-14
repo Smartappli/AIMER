@@ -6,7 +6,10 @@ os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
 
 
 class ProcessingEvaTestCase(TestCase):
-    """Eva Model Unit Tests"""
+    """
+    Test case class for processing Eva models.
+    """
+
     def test_known_eva_types(self):
         """
         Test for known Eva architecture types to ensure they return a model without raising any exceptions.

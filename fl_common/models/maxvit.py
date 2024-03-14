@@ -18,8 +18,11 @@ def get_maxvit_model(maxvit_type, num_classes):
     """
     # Load the pre-trained version of MaxVit based on the specified type
     if maxvit_type == 'MaxVit_T':
-        weights = models.MaxVit_T_Weights.DEFAULT
-        maxvit_model = models.maxvit_t(weights=weights)
+        try:
+            weights = models.MaxVit_T_Weights.DEFAULT
+            maxvit_model = models.maxvit_t(weights=weights)
+        except:
+            maxvit_model = models.maxvit_t(weights=None)
     else:
         raise ValueError(f'Unknown MaxVit Architecture: {maxvit_type}')
 

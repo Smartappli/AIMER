@@ -7,7 +7,10 @@ os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
 
 
 class ProcessingConvmixerTestCase(TestCase):
-    # Convmixer model unit tests
+    """
+    Test case class for processing Convmixer models.
+    """
+
     def test_get_convmixer_model(self):
         """
         Unit test for the `get_convmixer_model` function.

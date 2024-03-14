@@ -30,17 +30,29 @@ def get_densenet_model(densenet_type, num_classes):
 
     # Load the pre-trained version of DenseNet
     if densenet_type == 'DenseNet121':
-        weights = models.DenseNet121_Weights.DEFAULT
-        densenet_model = models.densenet121(weights=weights)
+        try:
+            weights = models.DenseNet121_Weights.DEFAULT
+            densenet_model = models.densenet121(weights=weights)
+        except:
+            densenet_model = models.densenet121(weights=None)
     elif densenet_type == 'DenseNet161':
-        weights = models.DenseNet161_Weights.DEFAULT
-        densenet_model = models.densenet161(weights=weights)
+        try:
+            weights = models.DenseNet161_Weights.DEFAULT
+            densenet_model = models.densenet161(weights=weights)
+        except:
+            densenet_model = models.densenet161(weights=None)
     elif densenet_type == 'DenseNet169':
-        weights = models.DenseNet169_Weights.DEFAULT
-        densenet_model = models.densenet169(weights=weights)
+        try:
+            weights = models.DenseNet169_Weights.DEFAULT
+            densenet_model = models.densenet169(weights=weights)
+        except:
+            densenet_model = models.densenet169(weights=None)
     elif densenet_type == 'DenseNet201':
-        weights = models.DenseNet201_Weights.DEFAULT
-        densenet_model = models.densenet201(weights=weights)
+        try:
+            weights = models.DenseNet201_Weights.DEFAULT
+            densenet_model = models.densenet201(weights=weights)
+        except:
+            densenet_model = models.densenet201(weights=None)
     else:
         raise ValueError(f'Unknown DenseNet Architecture : {densenet_type}')
 

@@ -6,7 +6,10 @@ os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
 
 
 class ProcessingVovnetTestCase(TestCase):
-    """Vovnet Models Unit Tests"""
+    """
+    Test case class for processing Vovnet models.
+    """
+
     def test_known_vovnet_architecture(self):
         """
         Test the function with known architectures.

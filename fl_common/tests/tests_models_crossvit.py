@@ -7,7 +7,10 @@ os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
 
 
 class ProcessingCrossvitTestCase(TestCase):
-    # Crossvit model unit tests
+    """
+    Test case class for processing Crossvit models.
+    """
+
     def test_get_crossvit_model(self):
         """
         Test the get_crossvit_model function.

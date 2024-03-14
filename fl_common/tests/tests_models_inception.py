@@ -8,7 +8,9 @@ os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
 
 
 class ProcessingInceptionTestCase(TestCase):
-    """Inception Model Unit Tests"""
+    """
+    Test case class for processing Inception models.
+    """
 
     def test_get_inception_model(self):
         """

@@ -1,6 +1,7 @@
 import torch.nn as nn
 from torchvision import models
 
+
 def get_shufflenet_model(shufflenet_type, num_classes):
     """
     Load a pre-trained ShuffleNet model of the specified type and modify its
@@ -24,17 +25,29 @@ def get_shufflenet_model(shufflenet_type, num_classes):
 
     # Load the pre-trained version of DenseNet
     if shufflenet_type == 'ShuffleNet_V2_X0_5':
-        weights = models.ShuffleNet_V2_X0_5_Weights.DEFAULT
-        shufflenet_model = models.shufflenet_v2_x0_5(weights=weights)
+        try:
+            weights = models.ShuffleNet_V2_X0_5_Weights.DEFAULT
+            shufflenet_model = models.shufflenet_v2_x0_5(weights=weights)
+        except:
+            shufflenet_model = models.shufflenet_v2_x0_5(weights=None)
     elif shufflenet_type == 'ShuffleNet_V2_X1_0':
-        weights = models.ShuffleNet_V2_X1_0_Weights.DEFAULT
-        shufflenet_model = models.shufflenet_v2_x1_0(weights=weights)
+        try:
+            weights = models.ShuffleNet_V2_X1_0_Weights.DEFAULT
+            shufflenet_model = models.shufflenet_v2_x1_0(weights=weights)
+        except:
+            shufflenet_model = models.shufflenet_v2_x1_0(weights=None)
     elif shufflenet_type == 'ShuffleNet_V2_X1_5':
-        weights = models.ShuffleNet_V2_X1_5_Weights.DEFAULT
-        shufflenet_model = models.shufflenet_v2_x1_5(weights=weights)
+        try:
+            weights = models.ShuffleNet_V2_X1_5_Weights.DEFAULT
+            shufflenet_model = models.shufflenet_v2_x1_5(weights=weights)
+        except:
+            shufflenet_model = models.shufflenet_v2_x1_5(weights=None)
     elif shufflenet_type == 'ShuffleNet_V2_X2_0':
-        weights = models.ShuffleNet_V2_X2_0_Weights.DEFAULT
-        shufflenet_model = models.shufflenet_v2_x2_0(weights=weights)
+        try:
+            weights = models.ShuffleNet_V2_X2_0_Weights.DEFAULT
+            shufflenet_model = models.shufflenet_v2_x2_0(weights=weights)
+        except:
+            shufflenet_model = models.shufflenet_v2_x2_0(weights=None)
     else:
         raise ValueError(f'Unknown ShuffleNet Architecture: {shufflenet_type}')
 

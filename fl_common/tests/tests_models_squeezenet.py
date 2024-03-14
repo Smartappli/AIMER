@@ -7,7 +7,10 @@ os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
 
 
 class ProcessingSqueezenetestCase(TestCase):
-    """SqueezeNet Model Unit Tests"""
+    """
+    Test case class for processing Squeezenet models.
+    """
+
     def test_get_squeezenet_model(self):
         """
         Test case for obtaining various SqueezeNet models.

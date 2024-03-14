@@ -5,8 +5,12 @@ from fl_common.models.hrnet import get_hrnet_model
 os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
 
 
+# Hrnet models unit tests
 class ProcessingHrnetTestCase(TestCase):
-    # Hrnet models unit tests
+    """
+    Test case class for processing Hrnet models.
+    """
+
     def test_hrnet_model_known_types(self):
         """
         Test for known HRNet architecture types to ensure they return a model without raising any exceptions.

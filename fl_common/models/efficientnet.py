@@ -30,38 +30,71 @@ def get_efficientnet_model(efficientnet_type, num_classes):
 
     # Load the pre-trained version of EfficientNet
     if efficientnet_type == 'EfficientNetB0':
-        weights = models.EfficientNet_B0_Weights.DEFAULT
-        efficientnet_model = models.efficientnet_b0(weights=weights)
+        try:
+            weights = models.EfficientNet_B0_Weights.DEFAULT
+            efficientnet_model = models.efficientnet_b0(weights=weights)
+        except:
+            efficientnet_model = models.efficientnet_b0(weights=None)
     elif efficientnet_type == 'EfficientNetB1':
-        weights = models.EfficientNet_B1_Weights.DEFAULT
-        efficientnet_model = models.efficientnet_b1(weights=weights)
+        try:
+            weights = models.EfficientNet_B1_Weights.DEFAULT
+            efficientnet_model = models.efficientnet_b1(weights=weights)
+        except:
+            efficientnet_model = models.efficientnet_b1(weights=None)
     elif efficientnet_type == 'EfficientNetB2':
-        weights = models.EfficientNet_B2_Weights.DEFAULT
-        efficientnet_model = models.efficientnet_b2(weights=weights)
+        try:
+            weights = models.EfficientNet_B2_Weights.DEFAULT
+            efficientnet_model = models.efficientnet_b2(weights=weights)
+        except:
+            efficientnet_model = models.efficientnet_b2(weights=None)
     elif efficientnet_type == 'EfficientNetB3':
-        weights = models.EfficientNet_B3_Weights.DEFAULT
-        efficientnet_model = models.efficientnet_b3(weights=weights)
+        try:
+            weights = models.EfficientNet_B3_Weights.DEFAULT
+            efficientnet_model = models.efficientnet_b3(weights=weights)
+        except:
+            efficientnet_model = models.efficientnet_b3(weights=None)
     elif efficientnet_type == 'EfficientNetB4':
-        weights = models.EfficientNet_B4_Weights.DEFAULT
-        efficientnet_model = models.efficientnet_b4(weights=weights)
+        try:
+            weights = models.EfficientNet_B4_Weights.DEFAULT
+            efficientnet_model = models.efficientnet_b4(weights=weights)
+        except:
+            efficientnet_model = models.efficientnet_b4(weights=None)
     elif efficientnet_type == 'EfficientNetB5':
-        weights = models.EfficientNet_B5_Weights.DEFAULT
-        efficientnet_model = models.efficientnet_b5(weights=weights)
+        try:
+            weights = models.EfficientNet_B5_Weights.DEFAULT
+            efficientnet_model = models.efficientnet_b5(weights=weights)
+        except:
+            efficientnet_model = models.efficientnet_b5(weights=None)
     elif efficientnet_type == 'EfficientNetB6':
-        weights = models.EfficientNet_B6_Weights.DEFAULT
-        efficientnet_model = models.efficientnet_b6(weights=weights)
+        try:
+            weights = models.EfficientNet_B6_Weights.DEFAULT
+            efficientnet_model = models.efficientnet_b6(weights=weights)
+        except:
+            efficientnet_model = models.efficientnet_b6(weights=None)
     elif efficientnet_type == 'EfficientNetB7':
-        weights = models.EfficientNet_B7_Weights.DEFAULT
-        efficientnet_model = models.efficientnet_b7(weights=weights)
+        try:
+            weights = models.EfficientNet_B7_Weights.DEFAULT
+            efficientnet_model = models.efficientnet_b7(weights=weights)
+        except:
+            efficientnet_model = models.efficientnet_b7(weights=None)
     elif efficientnet_type == 'EfficientNetV2S':
-        weights = models.EfficientNet_V2_S_Weights.DEFAULT
-        efficientnet_model = models.efficientnet_v2_s(weights=weights)
+        try:
+            weights = models.EfficientNet_V2_S_Weights.DEFAULT
+            efficientnet_model = models.efficientnet_v2_s(weights=weights)
+        except:
+            efficientnet_model = models.efficientnet_v2_s(weights=None)
     elif efficientnet_type == 'EfficientNetV2M':
-        weights = models.EfficientNet_V2_M_Weights.DEFAULT
-        efficientnet_model = models.efficientnet_v2_m(weights=weights)
+        try:
+            weights = models.EfficientNet_V2_M_Weights.DEFAULT
+            efficientnet_model = models.efficientnet_v2_m(weights=weights)
+        except:
+            efficientnet_model = models.efficientnet_v2_m(weights=None)
     elif efficientnet_type == 'EfficientNetV2L':
-        weights = models.EfficientNet_V2_L_Weights.DEFAULT
-        efficientnet_model = models.efficientnet_v2_l(weights=weights)
+        try:
+            weights = models.EfficientNet_V2_L_Weights.DEFAULT
+            efficientnet_model = models.efficientnet_v2_l(weights=weights)
+        except:
+            efficientnet_model = models.efficientnet_v2_l(weights=None)
     else:
         raise ValueError(f'Unknown EfficientNet Architecture: {efficientnet_type}')
 

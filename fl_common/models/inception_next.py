@@ -19,11 +19,32 @@ def get_inception_next_model(inception_next_type, num_classes):
     - ValueError: If an unknown Inception Next architecture type is provided.
     """
     if inception_next_type == "inception_next_tiny":
-        inception_next_model = create_model('inception_next_tiny', pretrained=True, num_classes=num_classes)
+        try:
+            inception_next_model = create_model('inception_next_tiny',
+                                                pretrained=True,
+                                                num_classes=num_classes)
+        except:
+            inception_next_model = create_model('inception_next_tiny',
+                                                pretrained=False,
+                                                num_classes=num_classes)
     elif inception_next_type == "inception_next_small":
-        inception_next_model = create_model('inception_next_small', pretrained=True, num_classes=num_classes)
+        try:
+            inception_next_model = create_model('inception_next_small',
+                                                pretrained=True,
+                                                num_classes=num_classes)
+        except:
+            inception_next_model = create_model('inception_next_small',
+                                                pretrained=False,
+                                                num_classes=num_classes)
     elif inception_next_type == "inception_next_base":
-        inception_next_model = create_model('inception_next_base', pretrained=True, num_classes=num_classes)
+        try:
+            inception_next_model = create_model('inception_next_base',
+                                                pretrained=True,
+                                                num_classes=num_classes)
+        except:
+            inception_next_model = create_model('inception_next_base',
+                                                pretrained=False,
+                                                num_classes=num_classes)
     else:
         raise ValueError(f'Unknown Inception Next Architecture: {inception_next_type}')
 

@@ -6,7 +6,10 @@ os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
 
 
 class ProcessingDlaTestCase(TestCase):
-    """Dila Models Unit Tests"""
+    """
+    Test case class for processing Dla models.
+    """
+
     def test_known_dila_types(self):
         """
         Test case to ensure that known Dila architectures can be created.

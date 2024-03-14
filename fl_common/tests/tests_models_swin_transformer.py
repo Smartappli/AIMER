@@ -7,7 +7,10 @@ os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
 
 
 class ProcessingSwinTransformerTestCase(TestCase):
-    """Swim Model Unit Tests"""
+    """
+    Test case class for processing Swin Transformer models.
+    """
+
     def test_get_swin_model(self):
         """
         Test case for obtaining various Swin Transformer models.

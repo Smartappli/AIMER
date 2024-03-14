@@ -27,27 +27,104 @@ def get_volo_model(volo_type, num_classes):
     - ValueError: If an unknown Volo architecture type is provided.
     """
     if volo_type == 'volo_d1_224':
-        volo_model = create_model('volo_d1_224', pretrained=True, num_classes=num_classes)
+        try:
+            volo_model = create_model('volo_d1_224',
+                                      pretrained=True,
+                                      num_classes=num_classes)
+        except:
+            volo_model = create_model('volo_d1_224',
+                                      pretrained=False,
+                                      num_classes=num_classes)
     elif volo_type == 'volo_d1_384':
-        volo_model = create_model('volo_d1_384', pretrained=True, num_classes=num_classes)
+        try:
+            volo_model = create_model('volo_d1_384',
+                                      pretrained=True,
+                                      num_classes=num_classes)
+        except:
+            volo_model = create_model('volo_d1_384',
+                                      pretrained=False,
+                                      num_classes=num_classes)
     elif volo_type == 'volo_d2_224':
-        volo_model = create_model('volo_d2_224', pretrained=True, num_classes=num_classes)
+        try:
+            volo_model = create_model('volo_d2_224',
+                                      pretrained=True,
+                                      num_classes=num_classes)
+        except:
+            volo_model = create_model('volo_d2_224',
+                                      pretrained=False,
+                                      num_classes=num_classes)
     elif volo_type == 'volo_d2_384':
-        volo_model = create_model('volo_d2_384', pretrained=True, num_classes=num_classes)
+        try:
+            volo_model = create_model('volo_d2_384',
+                                      pretrained=True,
+                                      num_classes=num_classes)
+        except:
+            volo_model = create_model('volo_d2_384',
+                                      pretrained=False,
+                                      num_classes=num_classes)
     elif volo_type == 'volo_d3_224':
-        volo_model = create_model('volo_d3_224', pretrained=True, num_classes=num_classes)
+        try:
+            volo_model = create_model('volo_d3_224',
+                                      pretrained=True,
+                                      num_classes=num_classes)
+        except:
+            volo_model = create_model('volo_d3_224',
+                                      pretrained=False,
+                                      num_classes=num_classes)
     elif volo_type == 'volo_d3_448':
-        volo_model = create_model('volo_d3_448', pretrained=True, num_classes=num_classes)
+        try:
+            volo_model = create_model('volo_d3_448',
+                                      pretrained=True,
+                                      num_classes=num_classes)
+        except:
+            volo_model = create_model('volo_d3_448',
+                                      pretrained=False,
+                                      num_classes=num_classes)
     elif volo_type == 'volo_d4_224':
-        volo_model = create_model('volo_d4_224', pretrained=True, num_classes=num_classes)
+        try:
+            volo_model = create_model('volo_d4_224',
+                                      pretrained=True,
+                                      num_classes=num_classes)
+        except:
+            volo_model = create_model('volo_d4_224',
+                                      pretrained=False,
+                                      num_classes=num_classes)
     elif volo_type == 'volo_d4_448':
-        volo_model = create_model('volo_d4_448', pretrained=True, num_classes=num_classes)
+        try:
+            volo_model = create_model('volo_d4_448',
+                                      pretrained=True,
+                                      num_classes=num_classes)
+        except:
+            volo_model = create_model('volo_d4_448',
+                                      pretrained=False,
+                                      num_classes=num_classes)
     elif volo_type == 'volo_d5_224':
-        volo_model = create_model('volo_d5_224', pretrained=True, num_classes=num_classes)
+        try:
+            volo_model = create_model('volo_d5_224',
+                                      pretrained=True,
+                                      num_classes=num_classes)
+        except:
+            volo_model = create_model('volo_d5_224',
+                                      pretrained=False,
+                                      num_classes=num_classes)
     elif volo_type == 'volo_d5_448':
-        volo_model = create_model('volo_d5_448', pretrained=True, num_classes=num_classes)
+        try:
+            volo_model = create_model('volo_d5_448',
+                                      pretrained=True,
+                                      num_classes=num_classes)
+        except:
+            volo_model = create_model('volo_d5_448',
+                                      pretrained=False,
+                                      num_classes=num_classes)
     elif volo_type == 'volo_d5_512':
-        volo_model = create_model('volo_d5_512', pretrained=True, num_classes=num_classes)
+        try:
+            volo_model = create_model('volo_d5_512',
+                                      pretrained=True,
+                                      num_classes=num_classes)
+        except:
+            volo_model = create_model('volo_d5_512',
+                                      pretrained=False,
+                                      num_classes=num_classes)
     else:
         raise ValueError(f'Unknown Volo Architecture : {volo_type}')
 

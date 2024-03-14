@@ -7,7 +7,10 @@ os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
 
 
 class ProcessingMobilenetTestCase(TestCase):
-    """MobileNet Model Unit Tests"""
+    """
+    Test case class for processing Mobilenet models.
+    """
+
     def test_get_mobilenet_model(self):
         """
         Test case for obtaining various MobileNet models.

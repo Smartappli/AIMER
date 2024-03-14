@@ -7,7 +7,10 @@ os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
 
 
 class ProcessingResnetTestCase(TestCase):
-    """ResNet Mmodel Unit Tests"""
+    """
+    Test case class for processing Resnet models.
+    """
+
     def test_get_resnet_model(self):
         """
         Test case for obtaining various ResNet models.

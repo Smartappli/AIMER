@@ -6,7 +6,10 @@ os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
 
 
 class ProcessingEdgenetTestCase(TestCase):
-    """EdgeNet Model Unit Tests"""
+    """
+    Test case class for processing Edgenet models.
+    """
+
     def test_valid_edgenet_type(self):
         """
         Test case for validating various EdgeNet model types in get_edgenet_model function.

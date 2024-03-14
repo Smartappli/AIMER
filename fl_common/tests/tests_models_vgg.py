@@ -7,7 +7,9 @@ os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
 
 
 class ProcessingVGGTestCase(TestCase):
-    # VGG Models Unit tests
+    """
+    Test case class for processing VGG models.
+    """
     def test_get_vgg_model(self):
         """
         Test case for obtaining various VGG models.
