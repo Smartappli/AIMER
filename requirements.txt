@@ -24,3 +24,4 @@ syft==0.8.5.post1
 hagrid==0.3.113
 #llama-cpp-python[server]==0.2.53
 wheel>=0.38.0 # not directly required, pinned by Snyk to avoid a vulnerability
+pillow>=10.3.0 # not directly required, pinned by Snyk to avoid a vulnerability
