@@ -4,11 +4,11 @@ huggingface-hub==0.22.2
 #git+https://github.com/pycaret/pycaret.git
 scikit-learn-intelex
 #tensorflow==2.15 # 2.14.1
-tf-nightly==2.17.0.dev20240327
+tf-nightly==2.17.0.dev20240402
 keras==3.1.1 # 2.14
 keras-tuner==1.4.7
 seaborn==0.13.2 # 0.12.2
-numpy==1.24.3 # 1.24.3
+numpy==1.24.4 # 1.24.3
 matplotlib==3.8.3 # 3.7.2
 scikit-learn>=1.4.0 # 1.3.2
 pandas==2.2.1 # 2.0.3
@@ -20,6 +20,10 @@ lightgbm==4.3.0
 captum==0.7.0
 psycopg2==2.9.9
 tqdm==4.66.2
-syft==0.8.5.post1
+syft==0.8.5.post2
 hagrid==0.3.113
 wheel>=0.38.0 # not directly required, pinned by Snyk to avoid a vulnerability
+ansible-core>=2.15.7rc1 # not directly required, pinned by Snyk to avoid a vulnerability
+gevent>=23.9.0 # not directly required, pinned by Snyk to avoid a vulnerability
+setuptools>=65.5.1 # not directly required, pinned by Snyk to avoid a vulnerability
+pillow>=10.3.0 # not directly required, pinned by Snyk to avoid a vulnerability
