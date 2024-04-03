@@ -1,4 +1,4 @@
-django==5.0.3
+django==5.0.4
 huggingface-hub==0.22.2
 #pycaret[full]==3.3.0 # 3.2.1
 #git+https://github.com/pycaret/pycaret.git
