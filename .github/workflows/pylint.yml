@@ -30,21 +30,18 @@ jobs:
     - name: Install dependencies
       if: ${{ matrix.os == 'macos-11' || matrix.os == 'macos-12' || matrix.os == 'macos-13' || matrix.os == 'macos-14' }}
       run: |
-        brew install libffi
         python -m pip install --upgrade pip
         pip install pylint pylint-django
         pip install -r requirements.txt
     - name: Install dependencies on Windows
       if: ${{ matrix.os == 'windows-2019' || matrix.os == 'windows-2022' }}
       run: |
-        choco install -y openssl
         python -m pip install --upgrade pip
         pip install pylint pylint-django
         pip install -r requirements.txt
     - name: Install dependencies on Ubuntu
       if: ${{ matrix.os == 'ubuntu-20.04' || matrix.os == 'ubuntu-22.04' }}
       run: |
-        sudo apt-get install -y libffi-dev python3-cffi
         python -m pip install --upgrade pip
         pip install pylint pylint-django
         pip install -r requirements.txt
