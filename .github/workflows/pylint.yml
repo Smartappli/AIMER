@@ -3,7 +3,7 @@ name: Pylint
 on:
   push:
     branches:
-      - main
+      - master
   workflow_call:
   pull_request:
     branches:
