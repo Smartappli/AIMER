@@ -10,13 +10,13 @@ on:
       - "**"
 
 concurrency:
-  group: linting-${{ github.event_name == 'pull_request' && format('{0}-{1}', github.workflow, github.event.pull_request.number) || github.workflow_ref }}
+  group: pylint-${{ github.event_name == 'pull_request' && format('{0}-{1}', github.workflow, github.event.pull_request.number) || github.workflow_ref }}
   cancel-in-progress: true
 
 jobs:
   build:
     strategy:
-      max-parallel: 99
+      max-parallel: 1
       matrix:
         os: [windows-2019, windows-2022, macos-11, macos-12, macos-13, ubuntu-20.04, ubuntu-22.04]
         python-version: ["3.10","3.11"]
