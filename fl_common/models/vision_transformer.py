@@ -51,7 +51,7 @@ def get_vision_transformer_model(vision_type, num_classes):
             vision_model = models.vit_h_14(weights=None)
     elif vision_type == "vit_tiny_patch16_224":
         try:
-           vision_model = create_model('vit_tiny_patch16_224',
+            vision_model = create_model('vit_tiny_patch16_224',
                                       pretrained=True,
                                       num_classes=num_classes)
         except:
@@ -60,7 +60,7 @@ def get_vision_transformer_model(vision_type, num_classes):
                                       num_classes=num_classes)
     elif vision_type == "vit_tiny_patch16_384":
         try:
-           vision_model = create_model('vit_tiny_patch16_384',
+            vision_model = create_model('vit_tiny_patch16_384',
                                       pretrained=True,
                                       num_classes=num_classes)
         except:
@@ -69,7 +69,7 @@ def get_vision_transformer_model(vision_type, num_classes):
                                       num_classes=num_classes)
     elif vision_type == "vit_small_patch32_224":
         try:
-           vision_model = create_model('vit_small_patch32_224',
+            vision_model = create_model('vit_small_patch32_224',
                                       pretrained=True,
                                       num_classes=num_classes)
         except:
@@ -78,7 +78,7 @@ def get_vision_transformer_model(vision_type, num_classes):
                                       num_classes=num_classes)
     elif vision_type == "vit_small_patch32_384":
         try:
-           vision_model = create_model('vit_small_patch32_384',
+            vision_model = create_model('vit_small_patch32_384',
                                       pretrained=True,
                                       num_classes=num_classes)
         except:
@@ -87,7 +87,7 @@ def get_vision_transformer_model(vision_type, num_classes):
                                       num_classes=num_classes)
     elif vision_type == "vit_small_patch16_224":
         try:
-           vision_model = create_model('vit_small_patch16_224',
+            vision_model = create_model('vit_small_patch16_224',
                                       pretrained=True,
                                       num_classes=num_classes)
         except:
@@ -96,7 +96,7 @@ def get_vision_transformer_model(vision_type, num_classes):
                                       num_classes=num_classes)
     elif vision_type == "vit_small_patch16_384":
         try:
-           vision_model = create_model('vit_small_patch16_384',
+            vision_model = create_model('vit_small_patch16_384',
                                       pretrained=True,
                                       num_classes=num_classes)
         except:
@@ -105,7 +105,7 @@ def get_vision_transformer_model(vision_type, num_classes):
                                       num_classes=num_classes)
     elif vision_type == "vit_small_patch8_224":
         try:
-           vision_model = create_model('vit_small_patch8_224',
+            vision_model = create_model('vit_small_patch8_224',
                                       pretrained=True,
                                       num_classes=num_classes)
         except:
@@ -114,7 +114,7 @@ def get_vision_transformer_model(vision_type, num_classes):
                                       num_classes=num_classes) 
     elif vision_type == "vit_base_patch32_224":
         try:
-           vision_model = create_model('vit_base_patch32_224',
+            vision_model = create_model('vit_base_patch32_224',
                                       pretrained=True,
                                       num_classes=num_classes)
         except:
@@ -123,7 +123,7 @@ def get_vision_transformer_model(vision_type, num_classes):
                                       num_classes=num_classes)
     elif vision_type == "vit_base_patch32_384":
         try:
-           vision_model = create_model('vit_base_patch32_384',
+            vision_model = create_model('vit_base_patch32_384',
                                       pretrained=True,
                                       num_classes=num_classes)
         except:
@@ -132,7 +132,7 @@ def get_vision_transformer_model(vision_type, num_classes):
                                       num_classes=num_classes)
     elif vision_type == "vit_base_patch16_224":
         try:
-           vision_model = create_model('vit_base_patch16_224',
+            vision_model = create_model('vit_base_patch16_224',
                                       pretrained=True,
                                       num_classes=num_classes)
         except:
@@ -141,7 +141,7 @@ def get_vision_transformer_model(vision_type, num_classes):
                                       num_classes=num_classes)
     elif vision_type == "vit_base_patch16_384":
         try:
-           vision_model = create_model('vit_base_patch16_384',
+            vision_model = create_model('vit_base_patch16_384',
                                       pretrained=True,
                                       num_classes=num_classes)
         except:
@@ -150,7 +150,7 @@ def get_vision_transformer_model(vision_type, num_classes):
                                       num_classes=num_classes)
     elif vision_type == "vit_base_patch8_224":
         try:
-           vision_model = create_model('vit_base_patch8_224',
+            vision_model = create_model('vit_base_patch8_224',
                                       pretrained=True,
                                       num_classes=num_classes)
         except:
@@ -159,7 +159,7 @@ def get_vision_transformer_model(vision_type, num_classes):
                                       num_classes=num_classes)
     elif vision_type == "vit_large_patch32_224":
         try:
-           vision_model = create_model('vit_large_patch32_224',
+            vision_model = create_model('vit_large_patch32_224',
                                       pretrained=True,
                                       num_classes=num_classes)
         except:
@@ -168,7 +168,7 @@ def get_vision_transformer_model(vision_type, num_classes):
                                       num_classes=num_classes)
     elif vision_type == "vit_large_patch32_384":
         try:
-           vision_model = create_model('vit_large_patch32_384',
+            vision_model = create_model('vit_large_patch32_384',
                                       pretrained=True,
                                       num_classes=num_classes)
         except:
@@ -177,7 +177,7 @@ def get_vision_transformer_model(vision_type, num_classes):
                                       num_classes=num_classes)
     elif vision_type == "vit_large_patch16_224":
         try:
-           vision_model = create_model('vit_large_patch16_224',
+            vision_model = create_model('vit_large_patch16_224',
                                       pretrained=True,
                                       num_classes=num_classes)
         except:
@@ -186,7 +186,7 @@ def get_vision_transformer_model(vision_type, num_classes):
                                       num_classes=num_classes)
     elif vision_type == "vit_large_patch16_384":
         try:
-           vision_model = create_model('vit_large_patch16_384',
+            vision_model = create_model('vit_large_patch16_384',
                                       pretrained=True,
                                       num_classes=num_classes)
         except:
@@ -195,7 +195,7 @@ def get_vision_transformer_model(vision_type, num_classes):
                                       num_classes=num_classes) 
     elif vision_type == "vit_large_patch14_224":
         try:
-           vision_model = create_model('vit_large_patch14_224',
+            vision_model = create_model('vit_large_patch14_224',
                                       pretrained=True,
                                       num_classes=num_classes)
         except:
@@ -204,7 +204,7 @@ def get_vision_transformer_model(vision_type, num_classes):
                                       num_classes=num_classes)
     elif vision_type == "vit_large_patch14_224":
         try:
-           vision_model = create_model('vit_huge_patch14_224',
+            vision_model = create_model('vit_huge_patch14_224',
                                       pretrained=True,
                                       num_classes=num_classes)
         except:
@@ -213,7 +213,7 @@ def get_vision_transformer_model(vision_type, num_classes):
                                       num_classes=num_classes)
     elif vision_type == "vit_giant_patch14_224":
         try:
-           vision_model = create_model('vit_giant_patch14_224',
+            vision_model = create_model('vit_giant_patch14_224',
                                       pretrained=True,
                                       num_classes=num_classes)
         except:
@@ -222,7 +222,7 @@ def get_vision_transformer_model(vision_type, num_classes):
                                       num_classes=num_classes)
     elif vision_type == "vit_gigantic_patch14_224":
         try:
-           vision_model = create_model('vit_gigantic_patch14_224',
+            vision_model = create_model('vit_gigantic_patch14_224',
                                       pretrained=True,
                                       num_classes=num_classes)
         except:
@@ -231,7 +231,7 @@ def get_vision_transformer_model(vision_type, num_classes):
                                       num_classes=num_classes)
     elif vision_type == "vit_base_patch16_224_miil":
         try:
-           vision_model = create_model('vit_base_patch16_224_miil',
+            vision_model = create_model('vit_base_patch16_224_miil',
                                       pretrained=True,
                                       num_classes=num_classes)
         except:
@@ -240,7 +240,7 @@ def get_vision_transformer_model(vision_type, num_classes):
                                       num_classes=num_classes)
     elif vision_type == "vit_medium_patch16_gap_240":
         try:
-           vision_model = create_model('vit_medium_patch16_gap_240',
+            vision_model = create_model('vit_medium_patch16_gap_240',
                                       pretrained=True,
                                       num_classes=num_classes)
         except:
@@ -249,7 +249,7 @@ def get_vision_transformer_model(vision_type, num_classes):
                                       num_classes=num_classes)
     elif vision_type == "vit_medium_patch16_gap_256":
         try:
-           vision_model = create_model('vit_medium_patch16_gap_256',
+            vision_model = create_model('vit_medium_patch16_gap_256',
                                       pretrained=True,
                                       num_classes=num_classes)
         except:
@@ -258,7 +258,7 @@ def get_vision_transformer_model(vision_type, num_classes):
                                       num_classes=num_classes)
     elif vision_type == "vit_medium_patch16_gap_384":
         try:
-           vision_model = create_model('vit_medium_patch16_gap_384',
+            vision_model = create_model('vit_medium_patch16_gap_384',
                                       pretrained=True,
                                       num_classes=num_classes)
         except:
@@ -267,7 +267,7 @@ def get_vision_transformer_model(vision_type, num_classes):
                                       num_classes=num_classes)
     elif vision_type == "vit_base_patch16_gap_224":
         try:
-           vision_model = create_model('vit_base_patch16_gap_224',
+            vision_model = create_model('vit_base_patch16_gap_224',
                                       pretrained=True,
                                       num_classes=num_classes)
         except:
@@ -276,7 +276,7 @@ def get_vision_transformer_model(vision_type, num_classes):
                                       num_classes=num_classes)
     elif vision_type == "vit_huge_patch14_gap_224":
         try:
-           vision_model = create_model('vit_huge_patch14_gap_224',
+            vision_model = create_model('vit_huge_patch14_gap_224',
                                       pretrained=True,
                                       num_classes=num_classes)
         except:
@@ -285,7 +285,7 @@ def get_vision_transformer_model(vision_type, num_classes):
                                       num_classes=num_classes)
     elif vision_type == "vit_huge_patch16_gap_448":
         try:
-           vision_model = create_model('vit_huge_patch16_gap_448',
+            vision_model = create_model('vit_huge_patch16_gap_448',
                                       pretrained=True,
                                       num_classes=num_classes)
         except:
@@ -294,7 +294,7 @@ def get_vision_transformer_model(vision_type, num_classes):
                                       num_classes=num_classes)
     elif vision_type == "vit_giant_patch16_gap_224":
         try:
-           vision_model = create_model('vit_giant_patch16_gap_224',
+            vision_model = create_model('vit_giant_patch16_gap_224',
                                       pretrained=True,
                                       num_classes=num_classes)
         except:
@@ -303,7 +303,7 @@ def get_vision_transformer_model(vision_type, num_classes):
                                       num_classes=num_classes)
     elif vision_type == "vit_xsmall_patch16_clip_224":
         try:
-           vision_model = create_model('vit_xsmall_patch16_clip_224',
+            vision_model = create_model('vit_xsmall_patch16_clip_224',
                                       pretrained=True,
                                       num_classes=num_classes)
         except:
@@ -312,7 +312,7 @@ def get_vision_transformer_model(vision_type, num_classes):
                                       num_classes=num_classes)
     elif vision_type == "vit_medium_patch32_clip_224":
         try:
-           vision_model = create_model('vit_medium_patch32_clip_224',
+            vision_model = create_model('vit_medium_patch32_clip_224',
                                       pretrained=True,
                                       num_classes=num_classes)
         except:
@@ -321,7 +321,7 @@ def get_vision_transformer_model(vision_type, num_classes):
                                       num_classes=num_classes)
     elif vision_type == "vit_medium_patch16_clip_224":
         try:
-           vision_model = create_model('vit_medium_patch16_clip_224',
+            vision_model = create_model('vit_medium_patch16_clip_224',
                                       pretrained=True,
                                       num_classes=num_classes)
         except:
@@ -330,7 +330,7 @@ def get_vision_transformer_model(vision_type, num_classes):
                                       num_classes=num_classes)
     elif vision_type == "vit_betwixt_patch32_clip_224":
         try:
-           vision_model = create_model('vit_betwixt_patch32_clip_224',
+            vision_model = create_model('vit_betwixt_patch32_clip_224',
                                       pretrained=True,
                                       num_classes=num_classes)
         except:
@@ -339,7 +339,7 @@ def get_vision_transformer_model(vision_type, num_classes):
                                       num_classes=num_classes)
     elif vision_type == "vit_base_patch32_clip_224":
         try:
-           vision_model = create_model('vit_base_patch32_clip_224',
+            vision_model = create_model('vit_base_patch32_clip_224',
                                       pretrained=True,
                                       num_classes=num_classes)
         except:
@@ -348,7 +348,7 @@ def get_vision_transformer_model(vision_type, num_classes):
                                       num_classes=num_classes)
     elif vision_type == "vit_base_patch32_clip_256":
         try:
-           vision_model = create_model('vit_base_patch32_clip_256',
+            vision_model = create_model('vit_base_patch32_clip_256',
                                       pretrained=True,
                                       num_classes=num_classes)
         except:
@@ -357,7 +357,7 @@ def get_vision_transformer_model(vision_type, num_classes):
                                       num_classes=num_classes)
     elif vision_type == "vit_base_patch32_clip_384":
         try:
-           vision_model = create_model('vit_base_patch32_clip_384',
+            vision_model = create_model('vit_base_patch32_clip_384',
                                       pretrained=True,
                                       num_classes=num_classes)
         except:
@@ -366,7 +366,7 @@ def get_vision_transformer_model(vision_type, num_classes):
                                       num_classes=num_classes)
     elif vision_type == "vit_base_patch32_clip_448":
         try:
-           vision_model = create_model('vit_base_patch32_clip_448',
+            vision_model = create_model('vit_base_patch32_clip_448',
                                       pretrained=True,
                                       num_classes=num_classes)
         except:
@@ -375,7 +375,7 @@ def get_vision_transformer_model(vision_type, num_classes):
                                       num_classes=num_classes)
     elif vision_type == "vit_base_patch16_clip_224":
         try:
-           vision_model = create_model('vit_base_patch16_clip_224',
+            vision_model = create_model('vit_base_patch16_clip_224',
                                       pretrained=True,
                                       num_classes=num_classes)
         except:
@@ -384,7 +384,7 @@ def get_vision_transformer_model(vision_type, num_classes):
                                       num_classes=num_classes)
     elif vision_type == "vit_base_patch16_clip_384":
         try:
-           vision_model = create_model('vit_base_patch16_clip_384',
+            vision_model = create_model('vit_base_patch16_clip_384',
                                       pretrained=True,
                                       num_classes=num_classes)
         except:
@@ -393,7 +393,7 @@ def get_vision_transformer_model(vision_type, num_classes):
                                       num_classes=num_classes)
     elif vision_type == "vit_large_patch14_clip_224":
         try:
-           vision_model = create_model('vit_large_patch14_clip_224',
+            vision_model = create_model('vit_large_patch14_clip_224',
                                       pretrained=True,
                                       num_classes=num_classes)
         except:
@@ -402,7 +402,7 @@ def get_vision_transformer_model(vision_type, num_classes):
                                       num_classes=num_classes)
     elif vision_type == "vit_large_patch14_clip_336":
         try:
-           vision_model = create_model('vit_large_patch14_clip_336',
+            vision_model = create_model('vit_large_patch14_clip_336',
                                       pretrained=True,
                                       num_classes=num_classes)
         except:
@@ -411,7 +411,7 @@ def get_vision_transformer_model(vision_type, num_classes):
                                       num_classes=num_classes)
     elif vision_type == "vit_huge_patch14_clip_224":
         try:
-           vision_model = create_model('vit_huge_patch14_clip_224',
+            vision_model = create_model('vit_huge_patch14_clip_224',
                                       pretrained=True,
                                       num_classes=num_classes)
         except:
@@ -420,7 +420,7 @@ def get_vision_transformer_model(vision_type, num_classes):
                                       num_classes=num_classes)
     elif vision_type == "vit_huge_patch14_clip_336":
         try:
-           vision_model = create_model('vit_huge_patch14_clip_336',
+            vision_model = create_model('vit_huge_patch14_clip_336',
                                       pretrained=True,
                                       num_classes=num_classes)
         except:
@@ -429,7 +429,7 @@ def get_vision_transformer_model(vision_type, num_classes):
                                       num_classes=num_classes)
     elif vision_type == "vit_huge_patch14_clip_378":
         try:
-           vision_model = create_model('vit_huge_patch14_clip_378',
+            vision_model = create_model('vit_huge_patch14_clip_378',
                                       pretrained=True,
                                       num_classes=num_classes)
         except:
@@ -438,7 +438,7 @@ def get_vision_transformer_model(vision_type, num_classes):
                                       num_classes=num_classes)
     elif vision_type == "vit_giant_patch14_clip_224":
         try:
-           vision_model = create_model('vit_giant_patch14_clip_224',
+            vision_model = create_model('vit_giant_patch14_clip_224',
                                       pretrained=True,
                                       num_classes=num_classes)
         except:
@@ -447,7 +447,7 @@ def get_vision_transformer_model(vision_type, num_classes):
                                       num_classes=num_classes)
     elif vision_type == "vit_gigantic_patch14_clip_224":
         try:
-           vision_model = create_model('vit_gigantic_patch14_clip_224',
+            vision_model = create_model('vit_gigantic_patch14_clip_224',
                                       pretrained=True,
                                       num_classes=num_classes)
         except:
@@ -456,7 +456,7 @@ def get_vision_transformer_model(vision_type, num_classes):
                                       num_classes=num_classes)
     elif vision_type == "vit_base_patch32_clip_quickgelu_224":
         try:
-           vision_model = create_model('vit_base_patch32_clip_quickgelu_224',
+            vision_model = create_model('vit_base_patch32_clip_quickgelu_224',
                                       pretrained=True,
                                       num_classes=num_classes)
         except:
@@ -465,7 +465,7 @@ def get_vision_transformer_model(vision_type, num_classes):
                                       num_classes=num_classes)
     elif vision_type == "vit_base_patch16_clip_quickgelu_224":
         try:
-           vision_model = create_model('vit_base_patch16_clip_quickgelu_224',
+            vision_model = create_model('vit_base_patch16_clip_quickgelu_224',
                                       pretrained=True,
                                       num_classes=num_classes)
         except:
@@ -474,7 +474,7 @@ def get_vision_transformer_model(vision_type, num_classes):
                                       num_classes=num_classes)
     elif vision_type == "vit_large_patch14_clip_quickgelu_224":
         try:
-           vision_model = create_model('vit_large_patch14_clip_quickgelu_224',
+            vision_model = create_model('vit_large_patch14_clip_quickgelu_224',
                                       pretrained=True,
                                       num_classes=num_classes)
         except:
@@ -483,7 +483,7 @@ def get_vision_transformer_model(vision_type, num_classes):
                                       num_classes=num_classes)
     elif vision_type == "vit_large_patch14_clip_quickgelu_336":
         try:
-           vision_model = create_model('vit_large_patch14_clip_quickgelu_336',
+            vision_model = create_model('vit_large_patch14_clip_quickgelu_336',
                                       pretrained=True,
                                       num_classes=num_classes)
         except:
@@ -492,7 +492,7 @@ def get_vision_transformer_model(vision_type, num_classes):
                                       num_classes=num_classes)
     elif vision_type == "vit_huge_patch14_clip_quickgelu_224":
         try:
-           vision_model = create_model('vit_huge_patch14_clip_quickgelu_224',
+            vision_model = create_model('vit_huge_patch14_clip_quickgelu_224',
                                       pretrained=True,
                                       num_classes=num_classes)
         except:
@@ -501,7 +501,7 @@ def get_vision_transformer_model(vision_type, num_classes):
                                       num_classes=num_classes)
     elif vision_type == "vit_huge_patch14_clip_quickgelu_378":
         try:
-           vision_model = create_model('vit_huge_patch14_clip_quickgelu_378',
+            vision_model = create_model('vit_huge_patch14_clip_quickgelu_378',
                                       pretrained=True,
                                       num_classes=num_classes)
         except:
@@ -510,7 +510,7 @@ def get_vision_transformer_model(vision_type, num_classes):
                                       num_classes=num_classes)
     elif vision_type == "vit_base_patch32_plus_256":
         try:
-           vision_model = create_model('vit_base_patch32_plus_256',
+            vision_model = create_model('vit_base_patch32_plus_256',
                                       pretrained=True,
                                       num_classes=num_classes)
         except:
@@ -519,7 +519,7 @@ def get_vision_transformer_model(vision_type, num_classes):
                                       num_classes=num_classes)
     elif vision_type == "vit_base_patch16_plus_240":
         try:
-           vision_model = create_model('vit_base_patch16_plus_240',
+            vision_model = create_model('vit_base_patch16_plus_240',
                                       pretrained=True,
                                       num_classes=num_classes)
         except:
@@ -528,7 +528,7 @@ def get_vision_transformer_model(vision_type, num_classes):
                                       num_classes=num_classes)
     elif vision_type == "vit_base_patch16_rpn_224":
         try:
-           vision_model = create_model('vit_base_patch16_rpn_224',
+            vision_model = create_model('vit_base_patch16_rpn_224',
                                       pretrained=True,
                                       num_classes=num_classes)
         except:
@@ -537,7 +537,7 @@ def get_vision_transformer_model(vision_type, num_classes):
                                       num_classes=num_classes)
     elif vision_type == "vit_small_patch16_36x1_224":
         try:
-           vision_model = create_model('vit_small_patch16_36x1_224',
+            vision_model = create_model('vit_small_patch16_36x1_224',
                                       pretrained=True,
                                       num_classes=num_classes)
         except:
@@ -546,7 +546,7 @@ def get_vision_transformer_model(vision_type, num_classes):
                                       num_classes=num_classes)
     elif vision_type == "vit_small_patch16_18x2_224":
         try:
-           vision_model = create_model('vit_small_patch16_18x2_224',
+            vision_model = create_model('vit_small_patch16_18x2_224',
                                       pretrained=True,
                                       num_classes=num_classes)
         except:
@@ -555,7 +555,7 @@ def get_vision_transformer_model(vision_type, num_classes):
                                       num_classes=num_classes)
     elif vision_type == "vit_base_patch16_18x2_224":
         try:
-           vision_model = create_model('vit_base_patch16_18x2_224',
+            vision_model = create_model('vit_base_patch16_18x2_224',
                                       pretrained=True,
                                       num_classes=num_classes)
         except:
@@ -564,7 +564,7 @@ def get_vision_transformer_model(vision_type, num_classes):
                                       num_classes=num_classes)
     elif vision_type == "eva_large_patch14_196":
         try:
-           vision_model = create_model('eva_large_patch14_196',
+            vision_model = create_model('eva_large_patch14_196',
                                       pretrained=True,
                                       num_classes=num_classes)
         except:
@@ -573,7 +573,7 @@ def get_vision_transformer_model(vision_type, num_classes):
                                       num_classes=num_classes)
     elif vision_type == "eva_large_patch14_336":
         try:
-           vision_model = create_model('eva_large_patch14_336',
+            vision_model = create_model('eva_large_patch14_336',
                                       pretrained=True,
                                       num_classes=num_classes)
         except:
@@ -582,7 +582,7 @@ def get_vision_transformer_model(vision_type, num_classes):
                                       num_classes=num_classes)
     elif vision_type == "flexivit_small":
         try:
-           vision_model = create_model('flexivit_small',
+            vision_model = create_model('flexivit_small',
                                       pretrained=True,
                                       num_classes=num_classes)
         except:
@@ -591,7 +591,7 @@ def get_vision_transformer_model(vision_type, num_classes):
                                       num_classes=num_classes)
     elif vision_type == "flexivit_base":
         try:
-           vision_model = create_model('flexivit_base',
+            vision_model = create_model('flexivit_base',
                                       pretrained=True,
                                       num_classes=num_classes)
         except:
@@ -600,7 +600,7 @@ def get_vision_transformer_model(vision_type, num_classes):
                                       num_classes=num_classes)
     elif vision_type == "flexivit_large":
         try:
-           vision_model = create_model('flexivit_large',
+            vision_model = create_model('flexivit_large',
                                       pretrained=True,
                                       num_classes=num_classes)
         except:
@@ -609,7 +609,7 @@ def get_vision_transformer_model(vision_type, num_classes):
                                       num_classes=num_classes)
     elif vision_type == "vit_base_patch16_xp_224":
         try:
-           vision_model = create_model('vit_base_patch16_xp_224',
+            vision_model = create_model('vit_base_patch16_xp_224',
                                       pretrained=True,
                                       num_classes=num_classes)
         except:
@@ -618,7 +618,7 @@ def get_vision_transformer_model(vision_type, num_classes):
                                       num_classes=num_classes)
     elif vision_type == "vit_large_patch14_xp_224":
         try:
-           vision_model = create_model('vit_large_patch14_xp_224',
+            vision_model = create_model('vit_large_patch14_xp_224',
                                       pretrained=True,
                                       num_classes=num_classes)
         except:
@@ -627,7 +627,7 @@ def get_vision_transformer_model(vision_type, num_classes):
                                       num_classes=num_classes)
     elif vision_type == "vit_huge_patch14_xp_224":
         try:
-           vision_model = create_model('vit_huge_patch14_xp_224',
+            vision_model = create_model('vit_huge_patch14_xp_224',
                                       pretrained=True,
                                       num_classes=num_classes)
         except:
@@ -636,7 +636,7 @@ def get_vision_transformer_model(vision_type, num_classes):
                                       num_classes=num_classes)
     elif vision_type == "vit_small_patch14_dinov2":
         try:
-           vision_model = create_model('vit_small_patch14_dinov2',
+            vision_model = create_model('vit_small_patch14_dinov2',
                                       pretrained=True,
                                       num_classes=num_classes)
         except:
@@ -645,7 +645,7 @@ def get_vision_transformer_model(vision_type, num_classes):
                                       num_classes=num_classes)
     elif vision_type == "vit_base_patch14_dinov2":
         try:
-           vision_model = create_model('vit_base_patch14_dinov2',
+            vision_model = create_model('vit_base_patch14_dinov2',
                                       pretrained=True,
                                       num_classes=num_classes)
         except:
@@ -654,7 +654,7 @@ def get_vision_transformer_model(vision_type, num_classes):
                                       num_classes=num_classes)
     elif vision_type == "vit_large_patch14_dinov2":
         try:
-           vision_model = create_model('vit_large_patch14_dinov2',
+            vision_model = create_model('vit_large_patch14_dinov2',
                                       pretrained=True,
                                       num_classes=num_classes)
         except:
@@ -663,7 +663,7 @@ def get_vision_transformer_model(vision_type, num_classes):
                                       num_classes=num_classes)
     elif vision_type == "vit_giant_patch14_dinov2":
         try:
-           vision_model = create_model('vit_giant_patch14_dinov2',
+            vision_model = create_model('vit_giant_patch14_dinov2',
                                       pretrained=True,
                                       num_classes=num_classes)
         except:
@@ -672,7 +672,7 @@ def get_vision_transformer_model(vision_type, num_classes):
                                       num_classes=num_classes)
     elif vision_type == "vit_small_patch14_reg4_dinov2":
         try:
-           vision_model = create_model('vit_small_patch14_reg4_dinov2',
+            vision_model = create_model('vit_small_patch14_reg4_dinov2',
                                       pretrained=True,
                                       num_classes=num_classes)
         except:
@@ -681,7 +681,7 @@ def get_vision_transformer_model(vision_type, num_classes):
                                       num_classes=num_classes)
     elif vision_type == "vit_base_patch14_reg4_dinov2":
         try:
-           vision_model = create_model('vit_base_patch14_reg4_dinov2',
+            vision_model = create_model('vit_base_patch14_reg4_dinov2',
                                       pretrained=True,
                                       num_classes=num_classes)
         except:
@@ -690,7 +690,7 @@ def get_vision_transformer_model(vision_type, num_classes):
                                       num_classes=num_classes)
     elif vision_type == "vit_large_patch14_reg4_dinov2":
         try:
-           vision_model = create_model('vit_large_patch14_reg4_dinov2',
+            vision_model = create_model('vit_large_patch14_reg4_dinov2',
                                       pretrained=True,
                                       num_classes=num_classes)
         except:
@@ -699,7 +699,7 @@ def get_vision_transformer_model(vision_type, num_classes):
                                       num_classes=num_classes)
     elif vision_type == "vit_giant_patch14_reg4_dinov2":
         try:
-           vision_model = create_model('vit_giant_patch14_reg4_dinov2',
+            vision_model = create_model('vit_giant_patch14_reg4_dinov2',
                                       pretrained=True,
                                       num_classes=num_classes)
         except:
@@ -708,7 +708,7 @@ def get_vision_transformer_model(vision_type, num_classes):
                                       num_classes=num_classes)
     elif vision_type == "vit_base_patch16_siglip_224":
         try:
-           vision_model = create_model('vit_base_patch16_siglip_224',
+            vision_model = create_model('vit_base_patch16_siglip_224',
                                       pretrained=True,
                                       num_classes=num_classes)
         except:
@@ -717,7 +717,7 @@ def get_vision_transformer_model(vision_type, num_classes):
                                       num_classes=num_classes)
     elif vision_type == "vit_base_patch16_siglip_256":
         try:
-           vision_model = create_model('vit_base_patch16_siglip_256',
+            vision_model = create_model('vit_base_patch16_siglip_256',
                                       pretrained=True,
                                       num_classes=num_classes)
         except:
@@ -726,7 +726,7 @@ def get_vision_transformer_model(vision_type, num_classes):
                                       num_classes=num_classes)
     elif vision_type == "vit_base_patch16_siglip_384":
         try:
-           vision_model = create_model('vit_base_patch16_siglip_384',
+            vision_model = create_model('vit_base_patch16_siglip_384',
                                       pretrained=True,
                                       num_classes=num_classes)
         except:
@@ -735,7 +735,7 @@ def get_vision_transformer_model(vision_type, num_classes):
                                       num_classes=num_classes)
     elif vision_type == "vit_base_patch16_siglip_512":
         try:
-           vision_model = create_model('vit_base_patch16_siglip_512',
+            vision_model = create_model('vit_base_patch16_siglip_512',
                                       pretrained=True,
                                       num_classes=num_classes)
         except:
@@ -744,7 +744,7 @@ def get_vision_transformer_model(vision_type, num_classes):
                                       num_classes=num_classes)
     elif vision_type == "vit_large_patch16_siglip_256":
         try:
-           vision_model = create_model('vit_large_patch16_siglip_256',
+            vision_model = create_model('vit_large_patch16_siglip_256',
                                       pretrained=True,
                                       num_classes=num_classes)
         except:
@@ -753,7 +753,7 @@ def get_vision_transformer_model(vision_type, num_classes):
                                       num_classes=num_classes)
     elif vision_type == "vit_large_patch16_siglip_384":
         try:
-           vision_model = create_model('vit_large_patch16_siglip_384',
+            vision_model = create_model('vit_large_patch16_siglip_384',
                                       pretrained=True,
                                       num_classes=num_classes)
         except:
@@ -762,7 +762,7 @@ def get_vision_transformer_model(vision_type, num_classes):
                                       num_classes=num_classes)
     elif vision_type == "vit_so400m_patch14_siglip_224":
         try:
-           vision_model = create_model('vit_so400m_patch14_siglip_224',
+            vision_model = create_model('vit_so400m_patch14_siglip_224',
                                       pretrained=True,
                                       num_classes=num_classes)
         except:
@@ -771,7 +771,7 @@ def get_vision_transformer_model(vision_type, num_classes):
                                       num_classes=num_classes)
     elif vision_type == "vit_so400m_patch14_siglip_384":
         try:
-           vision_model = create_model('vit_so400m_patch14_siglip_384',
+            vision_model = create_model('vit_so400m_patch14_siglip_384',
                                       pretrained=True,
                                       num_classes=num_classes)
         except:
@@ -780,7 +780,7 @@ def get_vision_transformer_model(vision_type, num_classes):
                                       num_classes=num_classes)
     elif vision_type == "vit_medium_patch16_reg4_256":
         try:
-           vision_model = create_model('vit_medium_patch16_reg4_256',
+            vision_model = create_model('vit_medium_patch16_reg4_256',
                                       pretrained=True,
                                       num_classes=num_classes)
         except:
@@ -789,7 +789,7 @@ def get_vision_transformer_model(vision_type, num_classes):
                                       num_classes=num_classes)
     elif vision_type == "vit_medium_patch16_reg4_gap_256":
         try:
-           vision_model = create_model('vit_medium_patch16_reg4_gap_256',
+            vision_model = create_model('vit_medium_patch16_reg4_gap_256',
                                       pretrained=True,
                                       num_classes=num_classes)
         except:
@@ -798,7 +798,7 @@ def get_vision_transformer_model(vision_type, num_classes):
                                       num_classes=num_classes)
     elif vision_type == "vit_base_patch16_reg4_gap_256":
         try:
-           vision_model = create_model('vit_base_patch16_reg4_gap_256',
+            vision_model = create_model('vit_base_patch16_reg4_gap_256',
                                       pretrained=True,
                                       num_classes=num_classes)
         except:
@@ -807,7 +807,7 @@ def get_vision_transformer_model(vision_type, num_classes):
                                       num_classes=num_classes)
     elif vision_type == "vit_so150m_patch16_reg4_map_256":
         try:
-           vision_model = create_model('vit_so150m_patch16_reg4_map_256',
+            vision_model = create_model('vit_so150m_patch16_reg4_map_256',
                                       pretrained=True,
                                       num_classes=num_classes)
         except:
@@ -816,7 +816,7 @@ def get_vision_transformer_model(vision_type, num_classes):
                                       num_classes=num_classes)
     elif vision_type == "vit_so150m_patch16_reg4_gap_256":
         try:
-           vision_model = create_model('vit_so150m_patch16_reg4_gap_256',
+            vision_model = create_model('vit_so150m_patch16_reg4_gap_256',
                                       pretrained=True,
                                       num_classes=num_classes)
         except:
