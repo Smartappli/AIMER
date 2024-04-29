@@ -18,6 +18,7 @@ def get_vision_transformer_model(vision_type, num_classes):
     Raises:
         - ValueError: If an unknown Vision Transformer architecture is provided.
     """
+    torch_vision = False
     # Load the pre-trained version of Vision Transformer based on the specified type
     if vision_type == 'ViT_B_16':
         try:
@@ -25,30 +26,40 @@ def get_vision_transformer_model(vision_type, num_classes):
             vision_model = models.vit_b_16(weights=weights)
         except:
             vision_model = models.vit_b_16(weights=None)
+
+        torch_vision = True
     elif vision_type == 'ViT_B_32':
         try:
             weights = models.ViT_B_32_Weights.DEFAULT
             vision_model = models.vit_b_32(weights=weights)
         except:
             vision_model = models.vit_b_32(weights=None)
+
+        torch_vision = True
     elif vision_type == 'ViT_L_16':
         try:
             weights = models.ViT_L_16_Weights.DEFAULT
             vision_model = models.vit_l_16(weights=weights)
         except:
             vision_model = models.vit_b_16(weights=None)
+
+        torch_vision = True
     elif vision_type == 'ViT_L_32':
         try:
             weights = models.ViT_L_32_Weights.DEFAULT
             vision_model = models.vit_l_32(weights=weights)
         except:
             vision_model = models.vit_l_32(weights=None)
+
+        torch_vision = True
     elif vision_type == 'ViT_H_14':
         try:
             weights = models.ViT_H_14_Weights.DEFAULT
             vision_model = models.vit_h_14(weights=weights)
         except:
             vision_model = models.vit_h_14(weights=None)
+
+        torch_vision = True
     elif vision_type == "vit_tiny_patch16_224":
         try:
             vision_model = create_model('vit_tiny_patch16_224',
@@ -826,8 +837,9 @@ def get_vision_transformer_model(vision_type, num_classes):
     else:
         raise ValueError(f'Unknown Vision Transformer Architecture: {vision_type}')
 
-    # Replace the last layer with a new linear layer with the specified number of classes
-    last_layer = nn.Linear(in_features=vision_model.heads[-1].in_features, out_features=num_classes)
-    vision_model.heads[-1] = last_layer
+    if torch_vision:
+        # Replace the last layer with a new linear layer with the specified number of classes
+        last_layer = nn.Linear(in_features=vision_model.heads[-1].in_features, out_features=num_classes)
+        vision_model.heads[-1] = last_layer
 
     return vision_model
