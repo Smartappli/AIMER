@@ -576,7 +576,7 @@ def get_family_model_n(model_type, num_classes):
                         'eca_nfnet_l3', 'nf_regnet_b0', 'nf_regnet_b1', 'nf_regnet_b2', 'nf_regnet_b3', 'nf_regnet_b4',
                         'nf_regnet_b5', 'nf_resnet26', 'nf_resnet50', 'nf_resnet101', 'nf_seresnet26', 'nf_seresnet50',
                         'nf_seresnet101', 'nf_ecaresnet26', 'nf_ecaresnet50', 'nf_ecaresnet101']:
-        model = get_nfnet_model(model_type,num_classes)
+        model = get_nfnet_model(model_type, num_classes)
     return model
 
 
@@ -768,13 +768,44 @@ def get_family_model_v(model_type, num_classes):
         model = get_vgg_model(model_type, num_classes)
     if model_type in ['visformer_tiny', 'visformer_small']:
         model = get_visformer_model(model_type, num_classes)
-    elif model_type in ['ViT_B_16', 'ViT_B_32', 'ViT_L_16', 'ViT_L_32', 'ViT_H_14']:
+    elif model_type in ['ViT_B_16', 'ViT_B_32', 'ViT_L_16', 'ViT_L_32', 'ViT_H_14', "vit_tiny_patch16_224",
+                        "vit_tiny_patch16_384", "vit_small_patch32_224", "vit_small_patch32_384",
+                        "vit_small_patch16_224", "vit_small_patch16_384", "vit_small_patch8_224",
+                        "vit_base_patch32_224", "vit_base_patch32_384", "vit_base_patch16_224",
+                        "vit_base_patch16_384", "vit_base_patch8_224", "vit_large_patch32_224",
+                        "vit_large_patch32_384", "vit_large_patch16_224", "vit_large_patch16_384",
+                        "vit_large_patch14_224", "vit_large_patch14_224", "vit_giant_patch14_224",
+                        "vit_gigantic_patch14_224", "vit_base_patch16_224_miil", "vit_medium_patch16_gap_240",
+                        "vit_medium_patch16_gap_256", "vit_medium_patch16_gap_384", "vit_base_patch16_gap_224",
+                        "vit_huge_patch14_gap_224", "vit_huge_patch16_gap_448", "vit_giant_patch16_gap_224",
+                        "vit_xsmall_patch16_clip_224", "vit_medium_patch32_clip_224", "vit_medium_patch16_clip_224",
+                        "vit_betwixt_patch32_clip_224", "vit_base_patch32_clip_224", "vit_base_patch32_clip_256",
+                        "vit_base_patch32_clip_384", "vit_base_patch32_clip_448", "vit_base_patch16_clip_224",
+                        "vit_base_patch16_clip_384", "vit_large_patch14_clip_224", "vit_large_patch14_clip_336",
+                        "vit_huge_patch14_clip_224", "vit_huge_patch14_clip_336", "vit_huge_patch14_clip_378",
+                        "vit_giant_patch14_clip_224", "vit_gigantic_patch14_clip_224",
+                        "vit_base_patch32_clip_quickgelu_224", "vit_base_patch16_clip_quickgelu_224",
+                        "vit_large_patch14_clip_quickgelu_224", "vit_large_patch14_clip_quickgelu_336",
+                        "vit_huge_patch14_clip_quickgelu_224", "vit_huge_patch14_clip_quickgelu_378",
+                        "vit_base_patch32_plus_256", "vit_base_patch16_plus_240", "vit_base_patch16_rpn_224",
+                        "vit_small_patch16_36x1_224", "vit_small_patch16_18x2_224", "vit_base_patch16_18x2_224",
+                        "eva_large_patch14_196", "eva_large_patch14_336", "flexivit_small", "flexivit_base",
+                        "flexivit_large", "vit_base_patch16_xp_224", "vit_large_patch14_xp_224",
+                        "vit_huge_patch14_xp_224", "vit_small_patch14_dinov2", "vit_base_patch14_dinov2",
+                        "vit_large_patch14_dinov2", "vit_giant_patch14_dinov2", "vit_small_patch14_reg4_dinov2",
+                        "vit_base_patch14_reg4_dinov2", "vit_large_patch14_reg4_dinov2",
+                        "vit_giant_patch14_reg4_dinov2", "vit_base_patch16_siglip_224", "vit_base_patch16_siglip_256",
+                        "vit_base_patch16_siglip_384", "vit_base_patch16_siglip_512", "vit_large_patch16_siglip_256",
+                        "vit_large_patch16_siglip_384", "vit_so400m_patch14_siglip_224",
+                        "vit_so400m_patch14_siglip_384", "vit_medium_patch16_reg4_256",
+                        "vit_medium_patch16_reg4_gap_256", "vit_base_patch16_reg4_gap_256",
+                        "vit_so150m_patch16_reg4_map_256", "vit_so150m_patch16_reg4_gap_256"]:
         model = get_vision_transformer_model(model_type, num_classes)
     elif model_type in ['vit_tiny_r_s16_p8_224', 'vit_tiny_r_s16_p8_384', 'vit_small_r26_s32_224',
-                       'vit_small_r26_s32_384', 'vit_base_r26_s32_224', 'vit_base_r50_s16_224',
-                       'vit_base_r50_s16_384', 'vit_large_r50_s32_224', 'vit_large_r50_s32_384',
-                       'vit_small_resnet26d_224', 'vit_small_resnet50d_s16_224', 'vit_base_resnet26d_224',
-                       'vit_base_resnet50d_224']:
+                        'vit_small_r26_s32_384', 'vit_base_r26_s32_224', 'vit_base_r50_s16_224',
+                        'vit_base_r50_s16_384', 'vit_large_r50_s32_224', 'vit_large_r50_s32_384',
+                        'vit_small_resnet26d_224', 'vit_small_resnet50d_s16_224', 'vit_base_resnet26d_224',
+                        'vit_base_resnet50d_224']:
         model = get_vision_transformer_hybrid_model(model_type, num_classes)
     elif model_type in ['vit_relpos_base_patch32_plus_rpn_256', 'vit_relpos_base_patch16_plus_240',
                         'vit_relpos_small_patch16_224', 'vit_relpos_medium_patch16_224', 'vit_relpos_base_patch16_224',
@@ -845,12 +876,15 @@ def get_family_model_x(model_type, num_classes):
     if model_type in ['legacy_xception', 'xception41', 'xception65', 'xception71', 'xception41p', 'xception65p']:
         model = get_xception_model(model_type, num_classes)
     elif model_type in ['xcit_nano_12_p16_224', 'xcit_nano_12_p16_384', 'xcit_tiny_12_p16_224', 'xcit_tiny_12_p16_384',
-                        'xcit_small_12_p16_224', 'xcit_small_12_p16_384', 'xcit_tiny_24_p16_224', 'xcit_tiny_24_p16_384',
+                        'xcit_small_12_p16_224', 'xcit_small_12_p16_384', 'xcit_tiny_24_p16_224',
+                        'xcit_tiny_24_p16_384',
                         'xcit_small_24_p16_224', 'xcit_small_24_p16_384', 'xcit_medium_24_p16_224',
-                        'xcit_medium_24_p16_384', 'xcit_large_24_p16_224', 'xcit_large_24_p16_384', 'xcit_nano_12_p8_224',
+                        'xcit_medium_24_p16_384', 'xcit_large_24_p16_224', 'xcit_large_24_p16_384',
+                        'xcit_nano_12_p8_224',
                         'xcit_nano_12_p8_384', 'xcit_tiny_12_p8_224', 'xcit_tiny_12_p8_384', 'xcit_small_12_p8_224',
                         'xcit_small_12_p8_384', 'xcit_tiny_24_p8_224', 'xcit_tiny_24_p8_384', 'xcit_small_24_p8_224',
-                        'xcit_small_24_p8_384', 'xcit_medium_24_p8_224', 'xcit_medium_24_p8_384', 'xcit_large_24_p8_224',
+                        'xcit_small_24_p8_384', 'xcit_medium_24_p8_224', 'xcit_medium_24_p8_384',
+                        'xcit_large_24_p8_224',
                         'xcit_large_24_p8_384']:
         model = get_xcit_model(model_type, num_classes)
 
