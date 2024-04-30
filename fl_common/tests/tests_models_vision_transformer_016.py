@@ -19,9 +19,7 @@ class ProcessingVisionTransformerTestCase(TestCase):
             AssertionError: If any of the assertions fail.
         """
         # List of Vision Transformer model types to test
-        vision_types = ["vit_huge_patch14_xp_224", "vit_small_patch14_dinov2", "vit_base_patch14_dinov2",
-                        "vit_large_patch14_dinov2", "vit_giant_patch14_dinov2", "vit_small_patch14_reg4_dinov2",
-                        "vit_base_patch14_reg4_dinov2", "vit_large_patch14_reg4_dinov2"]
+        vision_types = ["vit_giant_patch14_reg4_dinov2"]
 
         num_classes = 10  # You can adjust the number of classes as needed
 
