@@ -176,7 +176,7 @@ jobs:
         python-version: ["3.10"]
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    needs: test-vision_transformer-models-1
+    needs: test-visformer-models
     steps:
     - name: ⌛ rate 1
       shell: pwsh
@@ -230,7 +230,7 @@ jobs:
         python-version: ["3.10"]
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    needs: test-vision_transformer-models-2
+    needs: test-visformer-models
     steps:
     - name: ⌛ rate 1
       shell: pwsh
@@ -284,7 +284,7 @@ jobs:
         python-version: ["3.10"]
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    needs: test-vision_transformer-models-3
+    needs: test-visformer-models
     steps:
     - name: ⌛ rate 1
       shell: pwsh
@@ -338,7 +338,7 @@ jobs:
         python-version: ["3.10"]
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    needs: test-vision_transformer-models-4
+    needs: test-visformer-models
     steps:
     - name: ⌛ rate 1
       shell: pwsh
@@ -392,7 +392,7 @@ jobs:
         python-version: ["3.10"]
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    needs: test-vision_transformer-models-5
+    needs: test-visformer-models
     steps:
     - name: ⌛ rate 1
       shell: pwsh
@@ -446,7 +446,7 @@ jobs:
         python-version: ["3.10"]
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    needs: test-vision_transformer-models-6
+    needs: test-visformer-models
     steps:
     - name: ⌛ rate 1
       shell: pwsh
@@ -500,7 +500,7 @@ jobs:
         python-version: ["3.10"]
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    needs: test-vision_transformer-models-7
+    needs: test-visformer-models
     steps:
     - name: ⌛ rate 1
       shell: pwsh
@@ -554,7 +554,7 @@ jobs:
         python-version: ["3.10"]
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    needs: test-vision_transformer-models-8
+    needs: test-visformer-models
     steps:
     - name: ⌛ rate 1
       shell: pwsh
@@ -608,7 +608,7 @@ jobs:
         python-version: ["3.10"]
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    needs: test-vision_transformer-models-9
+    needs: test-visformer-models
     steps:
     - name: ⌛ rate 1
       shell: pwsh
@@ -662,7 +662,7 @@ jobs:
         python-version: ["3.10"]
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    needs: test-vision_transformer-models-10
+    needs: test-visformer-models
     steps:
     - name: ⌛ rate 1
       shell: pwsh
@@ -716,7 +716,7 @@ jobs:
         python-version: ["3.10"]
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    needs: test-vision_transformer-models-11
+    needs: test-visformer-models
     steps:
     - name: ⌛ rate 1
       shell: pwsh
@@ -770,7 +770,7 @@ jobs:
         python-version: ["3.10"]
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    needs: test-vision_transformer-models-12
+    needs: test-visformer-models
     steps:
     - name: ⌛ rate 1
       shell: pwsh
@@ -824,7 +824,7 @@ jobs:
         python-version: ["3.10"]
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    needs: test-vision_transformer-models-13
+    needs: test-visformer-models
     steps:
     - name: ⌛ rate 1
       shell: pwsh
@@ -878,7 +878,7 @@ jobs:
         python-version: ["3.10"]
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    needs: test-vision_transformer-models-14
+    needs: test-visformer-models
     steps:
     - name: ⌛ rate 1
       shell: pwsh
@@ -932,7 +932,7 @@ jobs:
         python-version: ["3.10"]
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    needs: test-vision_transformer-models-15
+    needs: test-visformer-models
     steps:
     - name: ⌛ rate 1
       shell: pwsh
@@ -986,7 +986,7 @@ jobs:
         python-version: ["3.10"]
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    needs: test-vision_transformer-models-16
+    needs: test-visformer-models
     steps:
     - name: ⌛ rate 1
       shell: pwsh
@@ -1040,7 +1040,7 @@ jobs:
         python-version: ["3.10"]
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    needs: test-vision_transformer-models-17
+    needs: test-visformer-models
     steps:
     - name: ⌛ rate 1
       shell: pwsh
@@ -1094,7 +1094,7 @@ jobs:
         python-version: ["3.10"]
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    needs: test-vision_transformer-models-18
+    needs: test-visformer-models
     steps:
     - name: ⌛ rate 1
       shell: pwsh
@@ -1148,7 +1148,14 @@ jobs:
         python-version: ["3.10"]
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    needs: test-vision_transformer-models-19
+    needs: ['test-vision_transformer-models-1', 'test-vision_transformer-models-2', 'test-vision_transformer-models-3',
+            'test-vision_transformer-models-4', 'test-vision_transformer-models-5', 'test-vision_transformer-models-6',
+            'test-vision_transformer-models-7', 'test-vision_transformer-models-8', 'test-vision_transformer-models-9',
+            'test-vision_transformer-models-10', 'test-vision_transformer-models-11',
+            'test-vision_transformer-models-12', 'test-vision_transformer-models-13',
+            'test-vision_transformer-models-14', 'test-vision_transformer-models-15',
+            'test-vision_transformer-models-16', 'test-vision_transformer-models-17',
+            'test-vision_transformer-models-18', 'test-vision_transformer-models-19']
     steps:
     - name: ⌛ rate 1
       shell: pwsh
