@@ -3,12 +3,18 @@ updates:
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
-      interval: "daily"
+      interval: "weekly"
     labels:
       - "🤖 Dependencies"
   - package-ecosystem: "pip"
     directory: "/"
     schedule:
-      interval: "daily"
+      interval: "weekly"
+    labels:
+      - "🤖 Dependencies"
+  - package-ecosystem: "docker"
+    directory: "/"
+    schedule:
+      interval: "weekly"
     labels:
       - "🤖 Dependencies"
