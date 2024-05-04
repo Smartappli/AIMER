@@ -7,7 +7,8 @@ def get_efficientvit_msra_model(efficientvit_msra_type, num_classes):
 
     Args:
         efficientvit_msra_type (str): Type of EfficientViT-MSRA model.
-            It should be one of ['efficientvit_m0', 'efficientvit_m1', 'efficientvit_m2', 'efficientvit_m3', 'efficientvit_m4', 'efficientvit_m5'].
+            It should be one of ['efficientvit_m0', 'efficientvit_m1', 'efficientvit_m2', 'efficientvit_m3',
+            'efficientvit_m4', 'efficientvit_m5'].
         num_classes (int): Number of output classes.
 
     Returns:
