@@ -21,7 +21,7 @@ class ProcessingSwinTransformerTestCase(TestCase):
         swin_types = ['Swin_T', 'Swin_S', 'Swin_B', 'Swin_V2_T', 'Swin_V2_S', 'Swin_V2_B',
                       'swin_tiny_patch4_window7_224', 'swin_small_patch4_window7_224', 'swin_base_patch4_window7_224',
                       'swin_base_patch4_window12_384', 'swin_large_patch4_window7_224', 'swin_s3_tiny_224',
-                      'swin_large_patch4_window12_384', 'swin_s3_small_224', 'swin_s3_base_22']
+                      'swin_large_patch4_window12_384', 'swin_s3_small_224', 'swin_s3_base_224']
         num_classes = 10  # You can adjust the number of classes as needed
 
         # Loop through each Swin Transformer model type
