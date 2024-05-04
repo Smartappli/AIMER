@@ -789,15 +789,6 @@ def get_vision_transformer_model(vision_type, num_classes):
             vision_model = create_model('vit_so400m_patch14_siglip_384',
                                       pretrained=False,
                                       num_classes=num_classes)
-    elif vision_type == "vit_medium_patch16_reg4_256":
-        try:
-            vision_model = create_model('vit_medium_patch16_reg4_256',
-                                      pretrained=True,
-                                      num_classes=num_classes)
-        except:
-            vision_model = create_model('vit_medium_patch16_reg4_256',
-                                      pretrained=False,
-                                      num_classes=num_classes)
     elif vision_type == "vit_medium_patch16_reg4_gap_256":
         try:
             vision_model = create_model('vit_medium_patch16_reg4_gap_256',

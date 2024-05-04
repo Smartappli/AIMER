@@ -812,9 +812,9 @@ def get_family_model_v(model_type, num_classes):
                         "vit_giant_patch14_reg4_dinov2", "vit_base_patch16_siglip_224", "vit_base_patch16_siglip_256",
                         "vit_base_patch16_siglip_384", "vit_base_patch16_siglip_512", "vit_large_patch16_siglip_256",
                         "vit_large_patch16_siglip_384", "vit_so400m_patch14_siglip_224",
-                        "vit_so400m_patch14_siglip_384", "vit_medium_patch16_reg4_256",
-                        "vit_medium_patch16_reg4_gap_256", "vit_base_patch16_reg4_gap_256",
-                        "vit_so150m_patch16_reg4_map_256", "vit_so150m_patch16_reg4_gap_256"]:
+                        "vit_so400m_patch14_siglip_384", "vit_medium_patch16_reg4_gap_256",
+                        "vit_base_patch16_reg4_gap_256", "vit_so150m_patch16_reg4_map_256",
+                        "vit_so150m_patch16_reg4_gap_256"]:
         model = get_vision_transformer_model(model_type, num_classes)
     elif model_type in ['vit_tiny_r_s16_p8_224', 'vit_tiny_r_s16_p8_384', 'vit_small_r26_s32_224',
                         'vit_small_r26_s32_384', 'vit_base_r26_s32_224', 'vit_base_r50_s16_224',
