@@ -7,7 +7,7 @@ os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
 
 class ProcessingEfficientvit_mitTestCase(TestCase):
     """
-    Test case class for processing Efficientformer models.
+    Test case class for processing Efficientvit_mit models.
     """
 
     def test_all_efficientvit_mit_models(self):
