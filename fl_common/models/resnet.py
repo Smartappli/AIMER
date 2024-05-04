@@ -1,5 +1,6 @@
 import torch.nn as nn
 from torchvision import models
+from timm import create_model
 
 
 def get_resnet_model(resnet_type, num_classes):
@@ -18,41 +19,453 @@ def get_resnet_model(resnet_type, num_classes):
         - ValueError: If an unknown ResNet architecture is provided.
     """
     # Load the pre-trained version of ResNet based on the specified type
+    torch_vision = False
     if resnet_type == 'ResNet18':
+        torch_vision = True
         try:
             weights = models.ResNet18_Weights.DEFAULT
             resnet_model = models.resnet18(weights=weights)
         except:
             resnet_model = models.resnet18(weights=None)
     elif resnet_type == 'ResNet34':
+        torch_vision = True
         try:
             weights = models.ResNet34_Weights.DEFAULT
             resnet_model = models.resnet34(weights=weights)
         except:
             resnet_model = models.resnet34(weights=None)
     elif resnet_type == 'ResNet50':
+        torch_vision = True
         try:
             weights = models.ResNet50_Weights.DEFAULT
             resnet_model = models.resnet50(weights=weights)
         except:
             resnet_model = models.resnet50(weights=None)
     elif resnet_type == 'ResNet101':
+        torch_vision = True
         try:
             weights = models.ResNet101_Weights.DEFAULT
             resnet_model = models.resnet101(weights=weights)
         except:
             resnet_model = models.resnet101(weights=None)
     elif resnet_type == 'ResNet152':
+        torch_vision = True
         try:
             weights = models.ResNet152_Weights.DEFAULT
             resnet_model = models.resnet152(weights=weights)
         except:
             resnet_model = models.resnet152(weights=None)
+    elif resnet_type == 'resnet10t':
+        try:
+            resnet_model = create_model('resnet10t',
+                                        pretrained=True,
+                                        num_classes=num_classes)
+        except:
+            resnet_model = create_model('resnet10t',
+                                        pretrained=False,
+                                        num_classes=num_classes)
+    elif resnet_type == 'resnet14t':
+        try:
+            resnet_model = create_model('resnet14t',
+                                        pretrained=True,
+                                        num_classes=num_classes)
+        except:
+            resnet_model = create_model('resnet14t',
+                                        pretrained=False,
+                                        num_classes=num_classes)
+    elif resnet_type == 'resnet18':
+        try:
+            resnet_model = create_model('resnet18',
+                                        pretrained=True,
+                                        num_classes=num_classes)
+        except:
+            resnet_model = create_model('resnet18',
+                                        pretrained=False,
+                                        num_classes=num_classes)
+    elif resnet_type == 'resnet18d':
+        try:
+            resnet_model = create_model('resnet18d',
+                                        pretrained=True,
+                                        num_classes=num_classes)
+        except:
+            resnet_model = create_model('resnet18d',
+                                        pretrained=False,
+                                        num_classes=num_classes)
+    elif resnet_type == 'resnet34':
+        try:
+            resnet_model = create_model('resnet34',
+                                        pretrained=True,
+                                        num_classes=num_classes)
+        except:
+            resnet_model = create_model('resnet34',
+                                        pretrained=False,
+                                        num_classes=num_classes)
+    elif resnet_type == 'resnet34d':
+        try:
+            resnet_model = create_model('resnet34d',
+                                        pretrained=True,
+                                        num_classes=num_classes)
+        except:
+            resnet_model = create_model('resnet34d',
+                                        pretrained=False,
+                                        num_classes=num_classes)
+    elif resnet_type == 'resnet26':
+        try:
+            resnet_model = create_model('resnet26',
+                                        pretrained=True,
+                                        num_classes=num_classes)
+        except:
+            resnet_model = create_model('resnet26',
+                                        pretrained=False,
+                                        num_classes=num_classes)
+    elif resnet_type == 'resnet26t':
+        try:
+            resnet_model = create_model('resnet26t',
+                                        pretrained=True,
+                                        num_classes=num_classes)
+        except:
+            resnet_model = create_model('resnet26t',
+                                        pretrained=False,
+                                        num_classes=num_classes)
+    elif resnet_type == 'resnet26d':
+        try:
+            resnet_model = create_model('resnet26d',
+                                        pretrained=True,
+                                        num_classes=num_classes)
+        except:
+            resnet_model = create_model('resnet26d',
+                                        pretrained=False,
+                                        num_classes=num_classes)
+    elif resnet_type == 'resnet50':
+        try:
+            resnet_model = create_model('resnet50',
+                                        pretrained=True,
+                                        num_classes=num_classes)
+        except:
+            resnet_model = create_model('resnet50',
+                                        pretrained=False,
+                                        num_classes=num_classes)
+    elif resnet_type == 'resnet50c':
+        try:
+            resnet_model = create_model('resnet50c',
+                                        pretrained=True,
+                                        num_classes=num_classes)
+        except:
+            resnet_model = create_model('resnet50c',
+                                        pretrained=False,
+                                        num_classes=num_classes)
+    elif resnet_type == 'resnet50d':
+        try:
+            resnet_model = create_model('resnet50d',
+                                        pretrained=True,
+                                        num_classes=num_classes)
+        except:
+            resnet_model = create_model('resnet50d',
+                                        pretrained=False,
+                                        num_classes=num_classes)
+    elif resnet_type == 'resnet50s':
+        try:
+            resnet_model = create_model('resnet50s',
+                                        pretrained=True,
+                                        num_classes=num_classes)
+        except:
+            resnet_model = create_model('resnet50s',
+                                        pretrained=False,
+                                        num_classes=num_classes)
+    elif resnet_type == 'resnet50t':
+        try:
+            resnet_model = create_model('resnet50t',
+                                        pretrained=True,
+                                        num_classes=num_classes)
+        except:
+            resnet_model = create_model('resnet50t',
+                                        pretrained=False,
+                                        num_classes=num_classes)
+    elif resnet_type == 'resnet101':
+        try:
+            resnet_model = create_model('resnet101',
+                                        pretrained=True,
+                                        num_classes=num_classes)
+        except:
+            resnet_model = create_model('resnet101',
+                                        pretrained=False,
+                                        num_classes=num_classes)
+    elif resnet_type == 'resnet101c':
+        try:
+            resnet_model = create_model('resnet101c',
+                                        pretrained=True,
+                                        num_classes=num_classes)
+        except:
+            resnet_model = create_model('resnet101c',
+                                        pretrained=False,
+                                        num_classes=num_classes)
+    elif resnet_type == 'resnet101d':
+        try:
+            resnet_model = create_model('resnet101d',
+                                        pretrained=True,
+                                        num_classes=num_classes)
+        except:
+            resnet_model = create_model('resnet101d',
+                                        pretrained=False,
+                                        num_classes=num_classes)
+    elif resnet_type == 'resnet101s':
+        try:
+            resnet_model = create_model('resnet101s',
+                                        pretrained=True,
+                                        num_classes=num_classes)
+        except:
+            resnet_model = create_model('resnet101s',
+                                        pretrained=False,
+                                        num_classes=num_classes)
+    elif resnet_type == 'resnet152':
+        try:
+            resnet_model = create_model('resnet152',
+                                        pretrained=True,
+                                        num_classes=num_classes)
+        except:
+            resnet_model = create_model('resnet152',
+                                        pretrained=False,
+                                        num_classes=num_classes)
+    elif resnet_type == 'resnet152c':
+        try:
+            resnet_model = create_model('resnet152c',
+                                        pretrained=True,
+                                        num_classes=num_classes)
+        except:
+            resnet_model = create_model('resnet152c',
+                                        pretrained=False,
+                                        num_classes=num_classes)
+    elif resnet_type == 'resnet152d':
+        try:
+            resnet_model = create_model('resnet152d',
+                                        pretrained=True,
+                                        num_classes=num_classes)
+        except:
+            resnet_model = create_model('resnet152d',
+                                        pretrained=False,
+                                        num_classes=num_classes)
+    elif resnet_type == 'resnet152s':
+        try:
+            resnet_model = create_model('resnet152s',
+                                        pretrained=True,
+                                        num_classes=num_classes)
+        except:
+            resnet_model = create_model('resnet152s',
+                                        pretrained=False,
+                                        num_classes=num_classes)
+    elif resnet_type == 'resnet200':
+        try:
+            resnet_model = create_model('resnet200',
+                                        pretrained=True,
+                                        num_classes=num_classes)
+        except:
+            resnet_model = create_model('resnet200',
+                                        pretrained=False,
+                                        num_classes=num_classes)
+    elif resnet_type == 'resnet200d':
+        try:
+            resnet_model = create_model('resnet200d',
+                                        pretrained=True,
+                                        num_classes=num_classes)
+        except:
+            resnet_model = create_model('resnet200d',
+                                        pretrained=False,
+                                        num_classes=num_classes)
+    elif resnet_type == 'wide_resnet50_2':
+        try:
+            resnet_model = create_model('wide_resnet50_2',
+                                        pretrained=True,
+                                        num_classes=num_classes)
+        except:
+            resnet_model = create_model('wide_resnet50_2',
+                                        pretrained=False,
+                                        num_classes=num_classes)
+    elif resnet_type == 'wide_resnet101_2':
+        try:
+            resnet_model = create_model('wide_resnet101_2',
+                                        pretrained=True,
+                                        num_classes=num_classes)
+        except:
+            resnet_model = create_model('wide_resnet101_2',
+                                        pretrained=False,
+                                        num_classes=num_classes)
+    elif resnet_type == 'resnet50_gn':
+        try:
+            resnet_model = create_model('resnet50_gn',
+                                        pretrained=True,
+                                        num_classes=num_classes)
+        except:
+            resnet_model = create_model('resnet50_gn',
+                                        pretrained=False,
+                                        num_classes=num_classes)
+    elif resnet_type == 'resnext50_32x4d':
+        try:
+            resnet_model = create_model('resnext50_32x4d',
+                                        pretrained=True,
+                                        num_classes=num_classes)
+        except:
+            resnet_model = create_model('resnext50_32x4d',
+                                        pretrained=False,
+                                        num_classes=num_classes)
+    elif resnet_type == 'resnext50d_32x4d':
+        try:
+            resnet_model = create_model('resnext50d_32x4d',
+                                        pretrained=True,
+                                        num_classes=num_classes)
+        except:
+            resnet_model = create_model('resnext50d_32x4d',
+                                        pretrained=False,
+                                        num_classes=num_classes)
+    elif resnet_type == 'resnext101_32x4d':
+        try:
+            resnet_model = create_model('resnext101_32x4d',
+                                        pretrained=True,
+                                        num_classes=num_classes)
+        except:
+            resnet_model = create_model('resnext101_32x4d',
+                                        pretrained=False,
+                                        num_classes=num_classes)
+    elif resnet_type == 'resnext101_32x8d':
+        try:
+            resnet_model = create_model('resnext101_32x8d',
+                                        pretrained=True,
+                                        num_classes=num_classes)
+        except:
+            resnet_model = create_model('resnext101_32x8d',
+                                        pretrained=False,
+                                        num_classes=num_classes)
+    elif resnet_type == 'resnext101_32x16d':
+        try:
+            resnet_model = create_model('resnext101_32x16d',
+                                        pretrained=True,
+                                        num_classes=num_classes)
+        except:
+            resnet_model = create_model('resnext101_32x16d',
+                                        pretrained=False,
+                                        num_classes=num_classes)
+    elif resnet_type == 'resnext101_32x32d':
+        try:
+            resnet_model = create_model('resnext101_32x32d',
+                                        pretrained=True,
+                                        num_classes=num_classes)
+        except:
+            resnet_model = create_model('resnext101_32x32d',
+                                        pretrained=False,
+                                        num_classes=num_classes)
+    elif resnet_type == 'resnext101_64x4d':
+        try:
+            resnet_model = create_model('resnext101_64x4d',
+                                        pretrained=True,
+                                        num_classes=num_classes)
+        except:
+            resnet_model = create_model('resnext101_64x4d',
+                                        pretrained=False,
+                                        num_classes=num_classes)
+    elif resnet_type == 'ecaresnet26t':
+        try:
+            resnet_model = create_model('ecaresnet26t',
+                                        pretrained=True,
+                                        num_classes=num_classes)
+        except:
+            resnet_model = create_model('ecaresnet26t',
+                                        pretrained=False,
+                                        num_classes=num_classes)
+    elif resnet_type == 'ecaresnet50d':
+        try:
+            resnet_model = create_model('ecaresnet50d',
+                                        pretrained=True,
+                                        num_classes=num_classes)
+        except:
+            resnet_model = create_model('ecaresnet50d',
+                                        pretrained=False,
+                                        num_classes=num_classes)
+    elif resnet_type == 'ecaresnet50d_pruned':
+        try:
+            resnet_model = create_model('ecaresnet50d_pruned',
+                                        pretrained=True,
+                                        num_classes=num_classes)
+        except:
+            resnet_model = create_model('ecaresnet50d_pruned',
+                                        pretrained=False,
+                                        num_classes=num_classes)
+    elif resnet_type == 'ecaresnet50t':
+        try:
+            resnet_model = create_model('ecaresnet50t',
+                                        pretrained=True,
+                                        num_classes=num_classes)
+        except:
+            resnet_model = create_model('ecaresnet50t',
+                                        pretrained=False,
+                                        num_classes=num_classes)
+    elif resnet_type == 'ecaresnetlight':
+        try:
+            resnet_model = create_model('ecaresnetlight',
+                                        pretrained=True,
+                                        num_classes=num_classes)
+        except:
+            resnet_model = create_model('ecaresnetlight',
+                                        pretrained=False,
+                                        num_classes=num_classes)
+    elif resnet_type == 'ecaresnet101d':
+        try:
+            resnet_model = create_model('ecaresnet101d',
+                                        pretrained=True,
+                                        num_classes=num_classes)
+        except:
+            resnet_model = create_model('ecaresnet101d',
+                                        pretrained=False,
+                                        num_classes=num_classes)
+    elif resnet_type == 'ecaresnet101d_pruned':
+        try:
+            resnet_model = create_model('ecaresnet101d_pruned',
+                                        pretrained=True,
+                                        num_classes=num_classes)
+        except:
+            resnet_model = create_model('ecaresnet101d_pruned',
+                                        pretrained=False,
+                                        num_classes=num_classes)
+    elif resnet_type == 'ecaresnet200d':
+        try:
+            resnet_model = create_model('ecaresnet200d',
+                                        pretrained=True,
+                                        num_classes=num_classes)
+        except:
+            resnet_model = create_model('ecaresnet200d',
+                                        pretrained=False,
+                                        num_classes=num_classes)
+    elif resnet_type == 'ecaresnet269d':
+        try:
+            resnet_model = create_model('ecaresnet269d',
+                                        pretrained=True,
+                                        num_classes=num_classes)
+        except:
+            resnet_model = create_model('ecaresnet269d',
+                                        pretrained=False,
+                                        num_classes=num_classes)
+    elif resnet_type == 'ecaresnext26t_32x4d':
+        try:
+            resnet_model = create_model('ecaresnext26t_32x4d',
+                                        pretrained=True,
+                                        num_classes=num_classes)
+        except:
+            resnet_model = create_model('ecaresnext26t_32x4d',
+                                        pretrained=False,
+                                        num_classes=num_classes)
+    elif resnet_type == 'ecaresnext50t_32x4d':
+        try:
+            resnet_model = create_model('ecaresnext50t_32x4d',
+                                        pretrained=True,
+                                        num_classes=num_classes)
+        except:
+            resnet_model = create_model('ecaresnext50t_32x4d',
+                                        pretrained=False,
+                                        num_classes=num_classes)
     else:
         raise ValueError(f'Unknown ResNet Architecture: {resnet_type}')
 
-    # Modify the last layer to suit the given number of classes
-    num_features = resnet_model.fc.in_features
-    resnet_model.fc = nn.Linear(num_features, num_classes)
+    if torch_vision:
+        # Modify the last layer to suit the given number of classes
+        num_features = resnet_model.fc.in_features
+        resnet_model.fc = nn.Linear(num_features, num_classes)
 
     return resnet_model
