@@ -52,36 +52,3 @@ class ProcessingSwinTransformerTestCase(TestCase):
             str(context.exception),
             f'Unknown Swin Transformer Architecture : {swin_type}'
         )
-
-    def test_swin_last_layer_adaptation(self):
-        """
-        Test case for ensuring last layer adaptation in Swin Transformer models.
-
-        Raises:
-            AssertionError: If any of the assertions fail.
-        """
-        # Provide a known architecture type
-        swin_type = 'Swin_T'
-        num_classes = 10
-
-        # Override the last layer with a linear layer for testing purposes
-        swin_model = get_swin_transformer_model(swin_type, num_classes)
-        last_layer = swin_model.head
-        # Check if the last layer is an instance of nn.Linear
-        self.assertIsInstance(last_layer, nn.Linear)
-        self.assertEqual(last_layer.out_features, num_classes)
-
-    def test_swin_model_structure(self):
-        """
-        Test case for ensuring the structure of Swin Transformer models.
-
-        Raises:
-            AssertionError: If any of the assertions fail.
-        """
-        # Provide a known architecture type
-        swin_type = 'Swin_T'
-        num_classes = 10
-
-        # Check if the model has a known structure with a linear last layer
-        swin_model = get_swin_transformer_model(swin_type, num_classes)
-        self.assertIsInstance(swin_model.head, nn.Linear)

@@ -18,6 +18,7 @@ from fl_common.models.dla import get_dla_model
 from fl_common.models.dpn import get_dpn_model
 from fl_common.models.edgenet import get_edgenet_model
 from fl_common.models.efficientformer import get_efficientformer_model
+from fl_common.models.efficientformer_v2 import get_efficientformer_v2_model
 from fl_common.models.efficientnet import get_efficientnet_model
 from fl_common.models.eva import get_eva_model
 from fl_common.models.fastvit import get_fastvit_model
@@ -336,6 +337,8 @@ def get_family_model_e(model_type, num_classes):
         model = get_edgenet_model(model_type, num_classes)
     elif model_type in ['efficientformer_l1', 'efficientformer_l3', 'efficientformer_l7']:
         model = get_efficientformer_model(model_type, num_classes)
+    elif model_type in ['efficientformerv2_s0', 'efficientformerv2_s1', 'efficientformerv2_s2', 'efficientformerv2_l']:
+        model = get_efficientformer_v2_model(model_type, num_classes)
     elif model_type in ['EfficientNetB0', 'EfficientNetB1', 'EfficientNetB2', 'EfficientNetB3', 'EfficientNetB4',
                         'EfficientNetB5', 'EfficientNetB6', 'EfficientNetB7', 'EfficientNetV2S', 'EfficientNetV2M',
                         'EfficientNetV2L']:
@@ -706,7 +709,7 @@ def get_family_model_s(model_type, num_classes):
     elif model_type in ['Swin_T', 'Swin_S', 'Swin_B', 'Swin_V2_T', 'Swin_V2_S', 'Swin_V2_B',
                         'swin_tiny_patch4_window7_224', 'swin_small_patch4_window7_224', 'swin_base_patch4_window7_224',
                         'swin_base_patch4_window12_384', 'swin_large_patch4_window7_224', 'swin_s3_tiny_224',
-                        'swin_large_patch4_window12_384', 'swin_s3_small_224', 'swin_s3_base_22']:
+                        'swin_large_patch4_window12_384', 'swin_s3_small_224', 'swin_s3_base_224']:
         model = get_swin_transformer_model(model_type, num_classes)
     elif model_type in ["swinv2_tiny_window16_256", "swinv2_tiny_window8_256", "swinv2_small_window16_256",
                         "swinv2_small_window8_256", "swinv2_base_window16_256", "swinv2_base_window8_256",
