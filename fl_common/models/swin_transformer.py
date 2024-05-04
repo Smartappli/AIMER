@@ -141,7 +141,7 @@ def get_swin_transformer_model(swin_type, num_classes):
                                       pretrained=False,
                                       num_classes=num_classes)
     else:
-        raise ValueError(f'Unknown DenseNet Architecture : {swin_type}')
+        raise ValueError(f'Unknown Swin Transformer Architecture : {swin_type}')
 
     # Modify last layer to suit number of classes
     if torch_vision:
