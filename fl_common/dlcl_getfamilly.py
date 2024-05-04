@@ -58,7 +58,7 @@ from fl_common.models.sequencer import get_sequencer_model
 from fl_common.models.shufflenet import get_shufflenet_model
 from fl_common.models.sknet import get_sknet_model
 from fl_common.models.squeezenet import get_squeezenet_model
-from fl_common.models.swin_transformer import get_swin_model
+from fl_common.models.swin_transformer import get_swin_transformer_model
 from fl_common.models.tiny_vit import get_tiny_vit_model
 from fl_common.models.tnt import get_tnt_model
 from fl_common.models.twins import get_twins_model
@@ -701,8 +701,11 @@ def get_family_model_s(model_type, num_classes):
         model = get_sknet_model(model_type, num_classes)
     elif model_type in ["SqueezeNet1_0", 'SqueezeNet1_1']:
         model = get_squeezenet_model(model_type, num_classes)
-    elif model_type in ['Swin_T', 'Swin_S', 'Swin_B', 'Swin_V2_T', 'Swin_V2_S', 'Swin_V2_B']:
-        model = get_swin_model(model_type, num_classes)
+    elif model_type in ['Swin_T', 'Swin_S', 'Swin_B', 'Swin_V2_T', 'Swin_V2_S', 'Swin_V2_B',
+                        'swin_tiny_patch4_window7_224', 'swin_small_patch4_window7_224', 'swin_base_patch4_window7_224',
+                        'swin_base_patch4_window12_384', 'swin_large_patch4_window7_224', 'swin_s3_tiny_224',
+                        'swin_large_patch4_window12_384', 'swin_s3_small_224', 'swin_s3_base_22']:
+        model = get_swin_transformer_model(model_type, num_classes)
 
     return model
 

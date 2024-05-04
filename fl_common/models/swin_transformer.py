@@ -1,8 +1,9 @@
 import torch.nn as nn
 from torchvision import models
+from timm import create_model
 
 
-def get_swin_model(swin_type, num_classes):
+def get_swin_transformer_model(swin_type, num_classes):
     """
     Loads a pre-trained Swin Transformer model based on the specified Swin type
     and modifies the last layer for a given number of output classes.
@@ -20,6 +21,7 @@ def get_swin_model(swin_type, num_classes):
       a known structure with a linear last layer.
     """
 
+    torch_vision = False
     # Load the pre-trained version of DenseNet
     if swin_type == 'Swin_T':
         try:
@@ -57,14 +59,96 @@ def get_swin_model(swin_type, num_classes):
             swin_model = models.swin_v2_b(weights=weights)
         except:
             swin_model = models.swin_v2_b(weights=None)
+    elif swin_type == "swin_tiny_patch4_window7_224":
+        try:
+            swin_model = create_model('swin_tiny_patch4_window7_224',
+                                      pretrained=True,
+                                      num_classes=num_classes)
+        except:
+            swin_model = create_model('swin_tiny_patch4_window7_224',
+                                      pretrained=False,
+                                      num_classes=num_classes)
+    elif swin_type == "swin_small_patch4_window7_224":
+        try:
+            swin_model = create_model('swin_small_patch4_window7_224',
+                                      pretrained=True,
+                                      num_classes=num_classes)
+        except:
+            swin_model = create_model('swin_small_patch4_window7_224',
+                                      pretrained=False,
+                                      num_classes=num_classes)
+    elif swin_type == "swin_base_patch4_window7_224":
+        try:
+            swin_model = create_model('swin_base_patch4_window7_224',
+                                      pretrained=True,
+                                      num_classes=num_classes)
+        except:
+            swin_model = create_model('swin_base_patch4_window7_224',
+                                      pretrained=False,
+                                      num_classes=num_classes)
+    elif swin_type == "swin_base_patch4_window12_384":
+        try:
+            swin_model = create_model('swin_base_patch4_window12_384',
+                                      pretrained=True,
+                                      num_classes=num_classes)
+        except:
+            swin_model = create_model('swin_base_patch4_window12_384',
+                                      pretrained=False,
+                                      num_classes=num_classes)
+    elif swin_type == "swin_large_patch4_window7_224":
+        try:
+            swin_model = create_model('swin_large_patch4_window7_224',
+                                      pretrained=True,
+                                      num_classes=num_classes)
+        except:
+            swin_model = create_model('swin_large_patch4_window7_224',
+                                      pretrained=False,
+                                      num_classes=num_classes)
+    elif swin_type == "swin_large_patch4_window12_384":
+        try:
+            swin_model = create_model('swin_large_patch4_window12_384',
+                                      pretrained=True,
+                                      num_classes=num_classes)
+        except:
+            swin_model = create_model('swin_large_patch4_window12_384',
+                                      pretrained=False,
+                                      num_classes=num_classes)
+    elif swin_type == "swin_s3_tiny_224":
+        try:
+            swin_model = create_model('swin_s3_tiny_224',
+                                      pretrained=True,
+                                      num_classes=num_classes)
+        except:
+            swin_model = create_model('swin_s3_tiny_224',
+                                      pretrained=False,
+                                      num_classes=num_classes)
+    elif swin_type == "swin_s3_small_224":
+        try:
+            swin_model = create_model('swin_s3_small_224',
+                                      pretrained=True,
+                                      num_classes=num_classes)
+        except:
+            swin_model = create_model('swin_s3_small_224',
+                                      pretrained=False,
+                                      num_classes=num_classes)
+    elif swin_type == "swin_s3_base_224":
+        try:
+            swin_model = create_model('swin_s3_base_224',
+                                      pretrained=True,
+                                      num_classes=num_classes)
+        except:
+            swin_model = create_model('swin_s3_base_224',
+                                      pretrained=False,
+                                      num_classes=num_classes)
     else:
         raise ValueError(f'Unknown DenseNet Architecture : {swin_type}')
 
     # Modify last layer to suit number of classes
-    if hasattr(swin_model, 'head') and isinstance(swin_model.head, nn.Linear):
-        num_features = swin_model.head.in_features
-        swin_model.head = nn.Linear(num_features, num_classes)
-    else:
-        raise ValueError('Model does not have a known structure.')
+    if torch_vision:
+        if hasattr(swin_model, 'head') and isinstance(swin_model.head, nn.Linear):
+            num_features = swin_model.head.in_features
+            swin_model.head = nn.Linear(num_features, num_classes)
+        else:
+            raise ValueError('Model does not have a known structure.')
 
     return swin_model
