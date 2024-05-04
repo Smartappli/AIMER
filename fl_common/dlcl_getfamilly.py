@@ -52,6 +52,7 @@ from fl_common.models.regnet import get_regnet_model
 from fl_common.models.repghost import get_repghost_model
 from fl_common.models.repvit import get_repvit_model
 from fl_common.models.res2net import get_res2net_model
+from fl_common.models.resnest import get_resnest_model
 from fl_common.models.resnet import get_resnet_model
 from fl_common.models.resnext import get_resnext_model
 from fl_common.models.rexnet import get_rexnet_model
@@ -662,6 +663,9 @@ def get_family_model_r(model_type, num_classes):
     elif model_type in ['res2net50_26w_4s', 'res2net101_26w_4s', 'res2net50_26w_6s', 'res2net50_26w_8s',
                         'res2net50_48w_2s', 'res2net50_14w_8s', 'res2next50', 'res2net50d', 'res2net101d']:
         model = get_res2net_model(model_type, num_classes)
+    elif model_type in ['resnest14d', 'resnest26d', 'resnest50d', 'resnest101e', 'resnest200e', 'resnest269e',
+                        'resnest50d_4s2x40d', 'resnest50d_1s4x24d']:
+        model = get_resnest_model(model_type, num_classes)
     elif model_type in ['ResNet18', 'ResNet34', 'ResNet50', 'ResNet101', 'ResNet152', 'ResNeXt50_32X4D',
                         'ResNeXt101_32X4D', 'ResNeXt101_64X4D']:
         model = get_resnet_model(model_type, num_classes)
