@@ -50,7 +50,7 @@ class ProcessingSwinTransformerTestCase(TestCase):
 
         self.assertEqual(
             str(context.exception),
-            f'Unknown DenseNet Architecture : {swin_type}'
+            f'Unknown Swin Transformer Architecture : {swin_type}'
         )
 
     def test_swin_last_layer_adaptation(self):

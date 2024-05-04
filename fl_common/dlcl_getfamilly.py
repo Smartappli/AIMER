@@ -59,6 +59,8 @@ from fl_common.models.shufflenet import get_shufflenet_model
 from fl_common.models.sknet import get_sknet_model
 from fl_common.models.squeezenet import get_squeezenet_model
 from fl_common.models.swin_transformer import get_swin_transformer_model
+from fl_common.models.swin_transformer_v2 import get_swin_transformer_v2_model
+from fl_common.models.swin_transformer_v2_cr import get_swin_transformer_v2_cr_model
 from fl_common.models.tiny_vit import get_tiny_vit_model
 from fl_common.models.tnt import get_tnt_model
 from fl_common.models.twins import get_twins_model
@@ -706,7 +708,17 @@ def get_family_model_s(model_type, num_classes):
                         'swin_base_patch4_window12_384', 'swin_large_patch4_window7_224', 'swin_s3_tiny_224',
                         'swin_large_patch4_window12_384', 'swin_s3_small_224', 'swin_s3_base_22']:
         model = get_swin_transformer_model(model_type, num_classes)
-
+    elif model_type in ["swinv2_tiny_window16_256", "swinv2_tiny_window8_256", "swinv2_small_window16_256",
+                        "swinv2_small_window8_256", "swinv2_base_window16_256", "swinv2_base_window8_256",
+                        "swinv2_base_window12_192", "swinv2_base_window12to16_192to256",
+                        "swinv2_base_window12to24_192to384", "swinv2_large_window12_192",
+                        "swinv2_large_window12to16_192to256", "swinv2_large_window12to24_192to384"]:
+        model = get_swin_transformer_v2_model(model_type, num_classes)
+    elif model_type in ["swinv2_cr_tiny_384", "swinv2_cr_tiny_224", "swinv2_cr_tiny_ns_224", "swinv2_cr_small_384",
+                        "swinv2_cr_small_224", "swinv2_cr_small_ns_224", "swinv2_cr_small_ns_256", "swinv2_cr_base_384",
+                        "swinv2_cr_base_224", "swinv2_cr_base_ns_224", "swinv2_cr_large_384", "swinv2_cr_large_224",
+                        "swinv2_cr_huge_384", "swinv2_cr_huge_224", "swinv2_cr_giant_384", "swinv2_cr_giant_224"]:
+        model = get_swin_transformer_v2_cr_model(model_type, num_classes)
     return model
 
 
