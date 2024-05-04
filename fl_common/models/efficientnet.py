@@ -1,6 +1,7 @@
 import torch.nn as nn
 from torchvision import models
 
+
 def get_efficientnet_model(efficientnet_type, num_classes):
     """
     Obtain an EfficientNet model with a specified architecture type and modify it for the given number of classes.

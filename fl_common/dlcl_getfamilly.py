@@ -19,6 +19,7 @@ from fl_common.models.dpn import get_dpn_model
 from fl_common.models.edgenet import get_edgenet_model
 from fl_common.models.efficientformer import get_efficientformer_model
 from fl_common.models.efficientformer_v2 import get_efficientformer_v2_model
+from fl_common.models.efficientvit_mit import get_efficientvit_mit_model
 from fl_common.models.efficientnet import get_efficientnet_model
 from fl_common.models.eva import get_eva_model
 from fl_common.models.fastvit import get_fastvit_model
@@ -339,6 +340,9 @@ def get_family_model_e(model_type, num_classes):
         model = get_efficientformer_model(model_type, num_classes)
     elif model_type in ['efficientformerv2_s0', 'efficientformerv2_s1', 'efficientformerv2_s2', 'efficientformerv2_l']:
         model = get_efficientformer_v2_model(model_type, num_classes)
+    elif model_type in ['efficientvit_b0', 'efficientvit_b1', 'efficientvit_b2', 'efficientvit_b3', 'efficientvit_l1',
+                        'efficientvit_l2', 'efficientvit_l3']:
+        model = get_efficientvit_mit_model(model_type, num_classes)
     elif model_type in ['EfficientNetB0', 'EfficientNetB1', 'EfficientNetB2', 'EfficientNetB3', 'EfficientNetB4',
                         'EfficientNetB5', 'EfficientNetB6', 'EfficientNetB7', 'EfficientNetV2S', 'EfficientNetV2M',
                         'EfficientNetV2L']:
