@@ -53,6 +53,7 @@ from fl_common.models.repghost import get_repghost_model
 from fl_common.models.repvit import get_repvit_model
 from fl_common.models.res2net import get_res2net_model
 from fl_common.models.resnest import get_resnest_model
+from fl_common.models.resnetv2 import get_resnetv2_model
 from fl_common.models.resnet import get_resnet_model
 from fl_common.models.resnext import get_resnext_model
 from fl_common.models.rexnet import get_rexnet_model
@@ -682,6 +683,11 @@ def get_family_model_r(model_type, num_classes):
                         'resnetaa101d', 'seresnetaa50d', 'seresnextaa101d_32x8d', 'seresnextaa201d_32x8d', 'resnetrs50',
                         'resnetrs101', 'resnetrs152', 'resnetrs200', 'resnetrs270', 'resnetrs350', 'resnetrs420']:
         model = get_resnet_model(model_type, num_classes)
+    elif model_type in ['resnetv2_50x1_bit', 'resnetv2_50x3_bit', 'resnetv2_101x1_bit', 'resnetv2_101x3_bit',
+                        'resnetv2_152x2_bit', 'resnetv2_152x4_bit', 'resnetv2_50', 'resnetv2_50d', 'resnetv2_50t',
+                        'resnetv2_101', 'resnetv2_101d', 'resnetv2_152', 'resnetv2_152d', 'resnetv2_50d_gn',
+                        'resnetv2_50d_evos', 'resnetv2_50d_frn']:
+        model = get_resnetv2_model(model_type, num_classes)
     elif model_type in ['ResNeXt50_32X4D', 'ResNeXt101_32X8D', 'ResNeXt101_64X4D']:
         model = get_resnext_model(model_type, num_classes)
     elif model_type in ['rexnet_100', 'rexnet_130', 'rexnet_150', 'rexnet_200', 'rexnet_300', 'rexnetr_100',
