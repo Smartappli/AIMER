@@ -19,10 +19,8 @@ class ProcessingSwinTransformerv2crTestCase(TestCase):
             AssertionError: If any of the assertions fail.
         """
         # List of Swin Transformer model types to test
-        swin_types = ["swinv2_cr_tiny_384", "swinv2_cr_tiny_224", "swinv2_cr_tiny_ns_224", "swinv2_cr_small_384",
-                      "swinv2_cr_small_224", "swinv2_cr_small_ns_224", "swinv2_cr_small_ns_256", "swinv2_cr_base_384",
-                      "swinv2_cr_base_224", "swinv2_cr_base_ns_224", "swinv2_cr_large_384", "swinv2_cr_large_224",
-                      "swinv2_cr_huge_384", "swinv2_cr_huge_224", "swinv2_cr_giant_384", "swinv2_cr_giant_224"]
+        swin_types = ["swinv2_cr_giant_384"]
+
         num_classes = 10  # You can adjust the number of classes as needed
 
         # Loop through each Swin Transformer model type

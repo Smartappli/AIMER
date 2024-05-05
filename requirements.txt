@@ -23,7 +23,7 @@ captum==0.7.0
 tqdm==4.66.2
 syft==0.8.7b7
 hagrid==0.3.117
-wheel>=0.38.0 # not directly required, pinned by Snyk to avoid a vulnerability
+wheel>=0.40.0 # not directly required, pinned by Snyk to avoid a vulnerability
 ansible-core>=2.16.6 # not directly required, pinned by Snyk to avoid a vulnerability
 gevent>=23.9.0 # not directly required, pinned by Snyk to avoid a vulnerability
 setuptools>=69.5.1 # not directly required, pinned by Snyk to avoid a vulnerability
