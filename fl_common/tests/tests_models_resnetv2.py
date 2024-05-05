@@ -52,4 +52,3 @@ class ProcessingResnetTestCase(TestCase):
             str(context.exception),
             f'Unknown ResNet v2 Architecture: {resnet_type}'
         )
-
