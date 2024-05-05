@@ -37,5 +37,5 @@ class ProcessingEfficientformerv2TestCase(TestCase):
 
         self.assertEqual(
             str(context.exception),
-            f'Unknown Efficientformer Architecture: {model_type}'
+            f'Unknown Efficientformer v2 Architecture: {model_type}'
         )
