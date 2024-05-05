@@ -4,20 +4,6 @@ from timm import create_model
 
 
 def get_resnet_model(resnet_type, num_classes):
-    """
-    Returns a modified ResNet model based on the specified type.
-
-    Parameters:
-        - resnet_type (str): Type of ResNet architecture.
-                           Currently supports 'ResNet18', 'ResNet34', 'ResNet50', 'ResNet101', and 'ResNet152'.
-        - num_classes (int): Number of classes for the modified last layer.
-
-    Returns:
-        - torch.nn.Module: Modified ResNet model with the specified number of classes.
-
-    Raises:
-        - ValueError: If an unknown ResNet architecture is provided.
-    """
     # Load the pre-trained version of ResNet based on the specified type
     torch_vision = False
     if resnet_type == 'ResNet18':
