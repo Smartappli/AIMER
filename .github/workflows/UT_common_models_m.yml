@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.12"]
+        python-version: ["3.11"]
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
@@ -66,7 +66,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.12"]
+        python-version: ["3.11"]
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     needs: test-maxvit-models
@@ -121,7 +121,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.12"]
+        python-version: ["3.11"]
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     needs: test-metaformer-models
@@ -176,7 +176,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.12"]
+        python-version: ["3.11"]
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     needs: test-mlp_mixer-models
@@ -231,7 +231,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.12"]
+        python-version: ["3.11"]
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     needs: test-mnasnet-models
@@ -286,7 +286,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.12"]
+        python-version: ["3.11"]
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     needs: test-mobilenet-models
@@ -341,7 +341,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [ "3.12" ]
+        python-version: [ "3.11" ]
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     needs: test-mobilevit-models
