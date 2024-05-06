@@ -294,7 +294,8 @@ def get_family_model_d(model_type, num_classes):
                         'deit3_base_patch16_384', 'deit3_large_patch16_224', 'deit3_large_patch16_384',
                         'deit3_huge_patch14_224']:
         model = get_deit_model(model_type, num_classes)
-    elif model_type in ['DenseNet121', 'DenseNet161', 'DenseNet169', 'DenseNet201']:
+    elif model_type in ['DenseNet121', 'DenseNet161', 'DenseNet169', 'DenseNet201', 'densenet121', 'densenetblur121d',
+                        'densenet169', 'densenet201', 'densenet161', 'densenet264d']:
         model = get_densenet_model(model_type, num_classes)
     elif model_type in ['dla60_res2net', 'dla60_res2next', 'dla34', 'dla46_c', 'dla46x_c', 'dla60x_c', 'dla60',
                         'dla60x', 'dla102', 'dla102x', 'dla102x2', 'dla169']:
