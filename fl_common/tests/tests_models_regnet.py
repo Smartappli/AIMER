@@ -20,7 +20,9 @@ class ProcessingRegnetTestCase(TestCase):
         """
         # List of RegNet model types to test
         regnet_types = ['RegNet_X_400MF', 'RegNet_X_800MF', 'RegNet_X_1_6GF', 'RegNet_X_3_2GF', 'RegNet_X_16GF',
-                        'RegNet_Y_400MF', 'RegNet_Y_800MF', 'RegNet_Y_1_6GF', 'RegNet_Y_3_2GF', 'RegNet_Y_16GF']
+                        'RegNet_Y_400MF', 'RegNet_Y_800MF', 'RegNet_Y_1_6GF', 'RegNet_Y_3_2GF', 'RegNet_Y_16GF',
+                        'regnetx_002', 'regnetx_004', 'regnetx_004_tv', 'regnetx_006', 'regnetx_008', 'regnetx_016',
+                        'regnetx_032', 'regnetx_040', 'regnetx_064', 'regnetx_080', 'regnetx_120']
         num_classes = 10  # You can adjust the number of classes as needed
 
         # Loop through each RegNet model type

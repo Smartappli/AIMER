@@ -229,6 +229,15 @@ def get_convnext_model(convnext_type, num_classes):
             convnext_model = create_model('convnextv2_pico',
                                            pretrained=False,
                                            num_classes=num_classes)
+    elif convnext_type == "convnextv2_nano":
+        try:
+            convnext_model = create_model('convnextv2_nano',
+                                           pretrained=True,
+                                           num_classes=num_classes)
+        except:
+            convnext_model = create_model('convnextv2_nano',
+                                           pretrained=False,
+                                           num_classes=num_classes)
     elif convnext_type == "convnextv2_tiny":
         try:
             convnext_model = create_model('convnextv2_tiny',

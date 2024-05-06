@@ -250,7 +250,7 @@ def get_family_model_c(model_type, num_classes):
                         'convnext_pico_ols', 'convnext_nano', 'convnext_nano_ols', 'convnext_tiny_hnf',
                         'convnext_tiny', 'convnext_small', 'convnext_base', 'convnext_large', 'convnext_large_mlp',
                         'convnext_xlarge', 'convnext_xxlarge', 'convnextv2_atto', 'convnextv2_femto',
-                        'convnextv2_pic', 'convnextv2_nano', 'convnextv2_tiny', 'convnextv2_small', 'convnextv2_base',
+                        'convnextv2_pico', 'convnextv2_nano', 'convnextv2_tiny', 'convnextv2_small', 'convnextv2_base',
                         'convnextv2_large', 'convnextv2_huge']:
         model = get_convnext_model(model_type, num_classes)
     elif model_type in ['crossvit_tiny_240', 'rossvit_small_240', 'crossvit_base_240', 'crossvit_9_240',
