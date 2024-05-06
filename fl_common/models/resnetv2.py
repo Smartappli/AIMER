@@ -176,6 +176,6 @@ def get_resnetv2_model(resnetv2_type, num_classes):
                                         pretrained=False,
                                         num_classes=num_classes)
     else:
-        raise ValueError(f'Unknown ResNet V2 Architecture: {resnetv2_type}')
+        raise ValueError(f'Unknown ResNet v2 Architecture: {resnetv2_type}')
 
     return resnetv2_model
