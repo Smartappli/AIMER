@@ -573,7 +573,12 @@ def get_family_model_m(model_type, num_classes):
                         'mixer_l16_224', 'gmixer_12_224', 'gmixer_24_224', 'resmlp_12_224', 'resmlp_24_224',
                         'resmlp_36_224', 'resmlp_big_24_224', 'gmlp_ti16_224', 'gmlp_s16_224', 'gmlp_b16_224']:
         model = get_mlp_mixer_model(model_type, num_classes)
-    elif model_type in ['MobileNet_V2', 'MobileNet_V3_Small', 'MobileNet_V3_Large']:
+    elif model_type in ['MobileNet_V2', 'MobileNet_V3_Small', 'MobileNet_V3_Large', 'mobilenetv3_large_075',
+                        'mobilenetv3_large_100', 'mobilenetv3_small_050', 'mobilenetv3_small_075',
+                        'mobilenetv3_small_100', 'mobilenetv3_rw', 'tf_mobilenetv3_large_075',
+                        'tf_mobilenetv3_large_100', 'tf_mobilenetv3_large_minimal_100', 'tf_mobilenetv3_small_075',
+                        'tf_mobilenetv3_small_100', 'tf_mobilenetv3_small_minimal_100', 'fbnetv3_b', 'fbnetv3_d',
+                        'fbnetv3_g', 'lcnet_035', 'lcnet_050', 'lcnet_075', 'lcnet_100', 'lcnet_150']:
         model = get_mobilenet_model(model_type, num_classes)
     elif model_type in ['mobilevit_xxs', 'mobilevit_xs', 'mobilevit_s', 'mobilevitv2_050', 'mobilevitv2_075',
                         'mobilevitv2_100', 'mobilevitv2_125', 'mobilevitv2_150', 'mobilevitv2_175', 'mobilevitv2_200']:
