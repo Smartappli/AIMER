@@ -839,7 +839,8 @@ def get_family_model_v(model_type, num_classes):
     """
     model = "Unknown"
 
-    if model_type in ['VGG11', 'VGG11_BN', 'VGG13', 'VGG13_BN', 'VGG16', 'VGG16_BN', 'VGG19', 'VGG19_BN']:
+    if model_type in ['VGG11', 'VGG11_BN', 'VGG13', 'VGG13_BN', 'VGG16', 'VGG16_BN', 'VGG19', 'VGG19_BN', 'vgg11',
+                      'vgg11_bn', 'vgg13', 'vgg13_bn', 'vgg16', 'vgg16_bn', 'vgg19', 'vgg19_bn']:
         model = get_vgg_model(model_type, num_classes)
     if model_type in ['visformer_tiny', 'visformer_small']:
         model = get_visformer_model(model_type, num_classes)
