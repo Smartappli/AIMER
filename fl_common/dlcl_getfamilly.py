@@ -245,7 +245,13 @@ def get_family_model_c(model_type, num_classes):
         model = get_convmixer_model(model_type, num_classes)
     elif model_type in ['convit_tiny', 'convit_small', 'convit_base']:
         model = get_convit_model(model_type, num_classes)
-    elif model_type in ['ConvNeXt_Tiny', 'ConvNeXt_Small', 'ConvNeXt_Base', 'ConvNeXt_Large']:
+    elif model_type in ['ConvNeXt_Tiny', 'ConvNeXt_Small', 'ConvNeXt_Base', 'ConvNeXt_Large', 'convnext_atto',
+                        'convnext_atto_ols', 'convnext_femto', 'convnext_femto_ols', 'convnext_pico',
+                        'convnext_pico_ols', 'convnext_nano', 'convnext_nano_ols', 'convnext_tiny_hnf',
+                        'convnext_tiny', 'convnext_small', 'convnext_base', 'convnext_large', 'convnext_large_mlp',
+                        'convnext_xlarge', 'convnext_xxlarge', 'convnextv2_atto', 'convnextv2_femto',
+                        'convnextv2_pic', 'convnextv2_nano', 'convnextv2_tiny', 'convnextv2_small', 'convnextv2_base',
+                        'convnextv2_large', 'convnextv2_huge']:
         model = get_convnext_model(model_type, num_classes)
     elif model_type in ['crossvit_tiny_240', 'rossvit_small_240', 'crossvit_base_240', 'crossvit_9_240',
                         'crossvit_15_240', 'crossvit_18_240', 'crossvit_9_dagger_240', 'rossvit_15_dagger_240',
