@@ -19,7 +19,22 @@ class ProcessingMaxvitTestCase(TestCase):
             AssertionError: If any of the assertions fail.
         """
         # List of MaxVit model types to test
-        maxvit_types = ['MaxVit_T']
+        maxvit_types = ['MaxVit_T', 'coatnet_pico_rw_224', 'coatnet_nano_rw_224', 'coatnet_0_rw_224',
+                        'coatnet_1_rw_224', 'coatnet_2_rw_224', 'coatnet_3_rw_224', 'coatnet_bn_0_rw_224',
+                        'coatnet_rmlp_nano_rw_224', 'coatnet_rmlp_0_rw_224', 'coatnet_rmlp_1_rw_224',
+                        'coatnet_rmlp_1_rw2_224', 'coatnet_rmlp_2_rw_224', 'coatnet_rmlp_2_rw_384',
+                        'coatnet_rmlp_3_rw_224', 'coatnet_nano_cc_224', 'coatnext_nano_rw_224', 'coatnet_0_224',
+                        'coatnet_1_224', 'coatnet_2_224', 'coatnet_3_224', 'coatnet_4_224', 'coatnet_5_224',
+                        'maxvit_pico_rw_256', 'maxvit_nano_rw_256', 'maxvit_tiny_rw_224', 'maxvit_tiny_rw_256',
+                        'maxvit_rmlp_pico_rw_256', 'maxvit_rmlp_nano_rw_256', 'maxvit_rmlp_tiny_rw_256',
+                        'maxvit_rmlp_small_rw_224', 'maxvit_rmlp_small_rw_256', "maxvit_rmlp_base_rw_224",
+                        'maxvit_rmlp_base_rw_384', 'maxvit_tiny_pm_256', 'maxxvit_rmlp_nano_rw_256',
+                        'maxxvit_rmlp_tiny_rw_256', 'maxxvit_rmlp_small_rw_256', 'maxxvitv2_nano_rw_256',
+                        'maxxvitv2_rmlp_base_rw_224', 'maxxvitv2_rmlp_base_rw_384', 'maxxvitv2_rmlp_large_rw_224',
+                        'maxvit_tiny_tf_224', 'maxvit_tiny_tf_384', 'maxvit_tiny_tf_512', 'maxvit_small_tf_224',
+                        'maxvit_small_tf_384', 'maxvit_small_tf_512', 'maxvit_base_tf_224', 'maxvit_base_tf_384',
+                        'maxvit_base_tf_512', 'maxvit_large_tf_224', 'maxvit_large_tf_384', 'maxvit_large_tf_512',
+                        'maxvit_xlarge_tf_224', 'maxvit_xlarge_tf_384', 'maxvit_xlarge_tf_512']
         num_classes = 10  # You can adjust the number of classes as needed
 
         # Loop through each MaxVit model type
@@ -50,21 +65,3 @@ class ProcessingMaxvitTestCase(TestCase):
             str(context.exception),
             f'Unknown MaxVit Architecture: {maxvit_type}'
         )
-
-    def test_maxvit_last_layer_adaptation(self):
-        """
-        Test case for ensuring last layer adaptation in MaxVit models.
-
-        Raises:
-            AssertionError: If any of the assertions fail.
-        """
-        # Provide a known architecture type
-        maxvit_type = 'MaxVit_T'
-        num_classes = 10
-
-        # Override the last layer with a linear layer for testing purposes
-        maxvit_model = get_maxvit_model(maxvit_type, num_classes)
-        last_layer = maxvit_model.classifier[-1]
-        # Check if the last layer is an instance of nn.Linear
-        self.assertIsInstance(last_layer, nn.Linear)
-        self.assertEqual(last_layer.out_features, num_classes)

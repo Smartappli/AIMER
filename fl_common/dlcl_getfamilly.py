@@ -566,7 +566,22 @@ def get_family_model_m(model_type, num_classes):
     """
     model = "Unknown"
 
-    if model_type in ['MaxVit_T']:
+    if model_type in ['MaxVit_T', 'coatnet_pico_rw_224', 'coatnet_nano_rw_224', 'coatnet_0_rw_224',
+                      'coatnet_1_rw_224', 'coatnet_2_rw_224', 'coatnet_3_rw_224', 'coatnet_bn_0_rw_224',
+                      'coatnet_rmlp_nano_rw_224', 'coatnet_rmlp_0_rw_224', 'coatnet_rmlp_1_rw_224',
+                      'coatnet_rmlp_1_rw2_224', 'coatnet_rmlp_2_rw_224', 'coatnet_rmlp_2_rw_384',
+                      'coatnet_rmlp_3_rw_224', 'coatnet_nano_cc_224', 'coatnext_nano_rw_224', 'coatnet_0_224',
+                      'coatnet_1_224', 'coatnet_2_224', 'coatnet_3_224', 'coatnet_4_224', 'coatnet_5_224',
+                      'maxvit_pico_rw_256', 'maxvit_nano_rw_256', 'maxvit_tiny_rw_224', 'maxvit_tiny_rw_256',
+                      'maxvit_rmlp_pico_rw_256', 'maxvit_rmlp_nano_rw_256', 'maxvit_rmlp_tiny_rw_256',
+                      'maxvit_rmlp_small_rw_224', 'maxvit_rmlp_small_rw_256', "maxvit_rmlp_base_rw_224",
+                      'maxvit_rmlp_base_rw_384', 'maxvit_tiny_pm_256', 'maxxvit_rmlp_nano_rw_256',
+                      'maxxvit_rmlp_tiny_rw_256', 'maxxvit_rmlp_small_rw_256', 'maxxvitv2_nano_rw_256',
+                      'maxxvitv2_rmlp_base_rw_224', 'maxxvitv2_rmlp_base_rw_384', 'maxxvitv2_rmlp_large_rw_224',
+                      'maxvit_tiny_tf_224', 'maxvit_tiny_tf_384', 'maxvit_tiny_tf_512', 'maxvit_small_tf_224',
+                      'maxvit_small_tf_384', 'maxvit_small_tf_512', 'maxvit_base_tf_224', 'maxvit_base_tf_384',
+                      'maxvit_base_tf_512', 'maxvit_large_tf_224', 'maxvit_large_tf_384', 'maxvit_large_tf_512',
+                      'maxvit_xlarge_tf_224', 'maxvit_xlarge_tf_384', 'maxvit_xlarge_tf_512']:
         model = get_maxvit_model(model_type, num_classes)
     elif model_type in ['MNASNet0_5', 'MNASNet0_75', 'MNASNet1_0', 'MNASNet1_3']:
         model = get_mnasnet_model(model_type, num_classes)

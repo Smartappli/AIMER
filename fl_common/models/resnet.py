@@ -8,7 +8,7 @@ def get_resnet_model(resnet_type, num_classes):
     Load a ResNetV2 model based on the specified type.
 
     Parameters:
-        resnetv2_type (str): The type of ResNetV2 model to load. Options include:
+        resnet_type (str): The type of ResNet model to load. Options include:
             'ResNet18', 'ResNet34', 'ResNet50', 'ResNet101', 'ResNet152', 'resnet10t', 'resnet14t',
             'resnet18', 'resnet18d', 'resnet34', 'resnet34d', 'resnet26', 'resnet26t', 'resnet26d',
             'resnet50', 'resnet50c', 'resnet50d', 'resnet50s', 'resnet50t', 'resnet101', 'resnet101c',

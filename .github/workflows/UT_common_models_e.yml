@@ -390,7 +390,7 @@ jobs:
         pip install -r requirements.txt
     - name: Fl_common Models Eva Part 1
       run: |
-        python manage.py test fl_common.tests.tests_models_eva1
+        python manage.py test fl_common.tests.tests_models_eva_001
 
   test-eva2-models:
     runs-on: ubuntu-latest
@@ -445,4 +445,4 @@ jobs:
         pip install -r requirements.txt
     - name: Fl_common Models Eva Part 2
       run: |
-        python manage.py test fl_common.tests.tests_models_eva2  
+        python manage.py test fl_common.tests.tests_models_eva_002  

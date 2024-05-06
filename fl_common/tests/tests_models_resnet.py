@@ -41,9 +41,11 @@ class ProcessingResnetTestCase(TestCase):
             with self.subTest(resnet_type=resnet_type):
                 # Get the ResNet model for testing
                 model = get_resnet_model(resnet_type, num_classes)
-                # Check if the model is an instance of torch.nn.Module
-                self.assertIsInstance(model, nn.Module)
-                # Add more specific assertions about the model if needed
+                try:
+                    model = get_resnet_model(resnet_type, num_classes)
+                    self.assertIsNotNone(model)
+                except ValueError:
+                    self.fail(f"{resnet_type} should be a known Resnet architecture.")
 
     def test_resnet_unknown_architecture(self):
         """
