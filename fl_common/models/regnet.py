@@ -120,6 +120,15 @@ def get_regnet_model(regnet_type, num_classes):
             regnet_model = create_model('regnetx_004',
                                         pretrained=False,
                                         num_classes=num_classes)
+    elif regnet_type == 'regnetx_004_tv':
+        try:
+            regnet_model = create_model('regnetx_004_tv',
+                                        pretrained=True,
+                                        num_classes=num_classes)
+        except Exception:
+            regnet_model = create_model('regnetx_004_tv',
+                                        pretrained=False,
+                                        num_classes=num_classes)
     elif regnet_type == 'regnetx_006':
         try:
             regnet_model = create_model('regnetx_006',
