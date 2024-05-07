@@ -6,10 +6,7 @@ def get_sequencer_model(sequencer_type, num_classes):
     Get a sequencer model based on the specified type.
 
     Args:
-        sequencer_type (str): The type of sequencer architecture. It can be one of the following:
-            - 'sequencer2d_s': Small sequencer architecture.
-            - 'sequencer2d_m': Medium sequencer architecture.
-            - 'sequencer2d_l': Large sequencer architecture.
+        sequencer_type (str): The type of sequencer architecture.
         num_classes (int): The number of output classes.
 
     Returns:
@@ -18,34 +15,18 @@ def get_sequencer_model(sequencer_type, num_classes):
     Raises:
         ValueError: If an unknown sequencer architecture type is specified.
     """
-    if sequencer_type == 'sequencer2d_s':
-        try:
-            sequencer_model = create_model('sequencer2d_s',
-                                           pretrained=True,
-                                           num_classes=num_classes)
-        except Exception:
-            sequencer_model = create_model('sequencer2d_s',
-                                           pretrained=False,
-                                           num_classes=num_classes)
-    elif sequencer_type == 'sequencer2d_m':
-        try:
-            sequencer_model = create_model('sequencer2d_m',
-                                           pretrained=True,
-                                           num_classes=num_classes)
-        except Exception:
-            sequencer_model = create_model('sequencer2d_m',
-                                           pretrained=False,
-                                           num_classes=num_classes)
-    elif sequencer_type == 'sequencer2d_l':
-        try:
-            sequencer_model = create_model('sequencer2d_l',
-                                           pretrained=True,
-                                           num_classes=num_classes)
-        except Exception:
-            sequencer_model = create_model('sequencer2d_l',
-                                           pretrained=False,
-                                           num_classes=num_classes)
-    else:
+    valid_types = {
+        'sequencer2d_s', 'sequencer2d_m', 'sequencer2d_l'
+    }
+
+    if sequencer_type not in valid_types:
         raise ValueError(f'Unknown Sequencer Architecture: {sequencer_type}')
 
-    return sequencer_model
+    try:
+        return create_model(sequencer_type, pretrained=True, num_classes=num_classes)
+    except OSError as e:
+        print(f"Error loading pretrained model: {e}")
+        return create_model(sequencer_type, pretrained=False, num_classes=num_classes)
+    except Exception as e:
+        print(f"An unexpected error occurred: {e}")
+        return None
