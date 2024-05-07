@@ -19,7 +19,7 @@ def get_davit_model(davit_type, num_classes):
             davit_model = create_model('davit_tiny',
                                        pretrained=True,
                                        num_classes=num_classes)
-        except ValueError:
+        except Exception:
             davit_model = create_model('davit_tiny',
                                        pretrained=False,
                                        num_classes=num_classes)
@@ -28,7 +28,7 @@ def get_davit_model(davit_type, num_classes):
             davit_model = create_model('davit_small',
                                        pretrained=True,
                                        num_classes=num_classes)
-        except ValueError:
+        except Exception:
             davit_model = create_model('davit_small',
                                        pretrained=False,
                                        num_classes=num_classes)
@@ -37,7 +37,7 @@ def get_davit_model(davit_type, num_classes):
             davit_model = create_model('davit_base',
                                        pretrained=True,
                                        num_classes=num_classes)
-        except ValueError:
+        except Exception:
             davit_model = create_model('davit_base',
                                        pretrained=False,
                                        num_classes=num_classes)
@@ -46,7 +46,7 @@ def get_davit_model(davit_type, num_classes):
             davit_model = create_model('davit_large',
                                        pretrained=True,
                                        num_classes=num_classes)
-        except ValueError:
+        except Exception:
             davit_model = create_model('davit_large',
                                        pretrained=False,
                                        num_classes=num_classes)
@@ -55,7 +55,7 @@ def get_davit_model(davit_type, num_classes):
             davit_model = create_model('davit_huge',
                                        pretrained=True,
                                        num_classes=num_classes)
-        except ValueError:
+        except Exception:
             davit_model = create_model('davit_huge',
                                        pretrained=False,
                                        num_classes=num_classes)
@@ -64,7 +64,7 @@ def get_davit_model(davit_type, num_classes):
             davit_model = create_model('davit_giant',
                                        pretrained=True,
                                        num_classes=num_classes)
-        except ValueError:
+        except Exception:
             davit_model = create_model('davit_giant',
                                        pretrained=False,
                                        num_classes=num_classes)

@@ -27,7 +27,7 @@ def get_beit_model(beit_type, num_classes):
             beit_model = create_model('beit_base_patch16_224',
                                       pretrained=True,
                                       num_classes=num_classes)
-        except ValueError:
+        except Exception:
             beit_model = create_model('beit_base_patch16_224',
                                       pretrained=False,
                                       num_classes=num_classes)
@@ -36,7 +36,7 @@ def get_beit_model(beit_type, num_classes):
             beit_model = create_model('beit_base_patch16_384',
                                       pretrained=True,
                                       num_classes=num_classes)
-        except ValueError:
+        except Exception:
             beit_model = create_model('beit_base_patch16_384',
                                       pretrained=False,
                                       num_classes=num_classes)
@@ -45,7 +45,7 @@ def get_beit_model(beit_type, num_classes):
             beit_model = create_model('beit_large_patch16_224',
                                       pretrained=True,
                                       num_classes=num_classes)
-        except ValueError:
+        except Exception:
             beit_model = create_model('beit_large_patch16_224',
                                       pretrained=False,
                                       num_classes=num_classes)
@@ -54,7 +54,7 @@ def get_beit_model(beit_type, num_classes):
             beit_model = create_model('beit_large_patch16_384',
                                       pretrained=True,
                                       num_classes=num_classes)
-        except ValueError:
+        except Exception:
             beit_model = create_model('beit_large_patch16_384',
                                       pretrained=False,
                                       num_classes=num_classes)
@@ -63,7 +63,7 @@ def get_beit_model(beit_type, num_classes):
             beit_model = create_model('beit_large_patch16_512',
                                       pretrained=True,
                                       num_classes=num_classes)
-        except ValueError:
+        except Exception:
             beit_model = create_model('beit_large_patch16_512',
                                       pretrained=False,
                                       num_classes=num_classes)
@@ -72,7 +72,7 @@ def get_beit_model(beit_type, num_classes):
             beit_model = create_model('beitv2_base_patch16_224',
                                       pretrained=True,
                                       num_classes=num_classes)
-        except ValueError:
+        except Exception:
             beit_model = create_model('beitv2_base_patch16_224',
                                       pretrained=False,
                                       num_classes=num_classes)
@@ -81,7 +81,7 @@ def get_beit_model(beit_type, num_classes):
             beit_model = create_model('beitv2_large_patch16_224',
                                       pretrained=True,
                                       num_classes=num_classes)
-        except ValueError:
+        except Exception:
             beit_model = create_model('beitv2_large_patch16_224',
                                       pretrained=False,
                                       num_classes=num_classes)
