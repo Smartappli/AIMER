@@ -22,7 +22,7 @@ def get_cait_model(cait_type, num_classes):
             cait_model = create_model('cait_xxs24_224',
                                       pretrained=True,
                                       num_classes=num_classes)
-        except:
+        except ValueError:
             cait_model = create_model('cait_xxs24_224',
                                       pretrained=False,
                                       num_classes=num_classes)
@@ -31,7 +31,7 @@ def get_cait_model(cait_type, num_classes):
             cait_model = create_model('cait_xxs24_384',
                                       pretrained=True,
                                       num_classes=num_classes)
-        except:
+        except ValueError:
             cait_model = create_model('cait_xxs24_384',
                                       pretrained=False,
                                       num_classes=num_classes)
@@ -40,7 +40,7 @@ def get_cait_model(cait_type, num_classes):
             cait_model = create_model('cait_xxs36_224',
                                       pretrained=True,
                                       num_classes=num_classes)
-        except:
+        except ValueError:
             cait_model = create_model('cait_xxs36_224',
                                       pretrained=False,
                                       num_classes=num_classes)
@@ -49,7 +49,7 @@ def get_cait_model(cait_type, num_classes):
             cait_model = create_model('cait_xxs36_384',
                                       pretrained=True,
                                       num_classes=num_classes)
-        except:
+        except ValueError:
             cait_model = create_model('cait_xxs36_384',
                                       pretrained=False,
                                       num_classes=num_classes)
@@ -58,7 +58,7 @@ def get_cait_model(cait_type, num_classes):
             cait_model = create_model('cait_xs24_384',
                                       pretrained=True,
                                       num_classes=num_classes)
-        except:
+        except ValueError:
             cait_model = create_model('cait_xs24_384',
                                       pretrained=False,
                                       num_classes=num_classes)
@@ -67,7 +67,7 @@ def get_cait_model(cait_type, num_classes):
             cait_model = create_model('cait_s24_224',
                                       pretrained=True,
                                       num_classes=num_classes)
-        except:
+        except ValueError:
             cait_model = create_model('cait_s24_224',
                                       pretrained=False,
                                       num_classes=num_classes)
@@ -76,7 +76,7 @@ def get_cait_model(cait_type, num_classes):
             cait_model = create_model('cait_s24_384',
                                       pretrained=True,
                                       num_classes=num_classes)
-        except:
+        except ValueError:
             cait_model = create_model('cait_s24_384',
                                       pretrained=False,
                                       num_classes=num_classes)
@@ -85,7 +85,7 @@ def get_cait_model(cait_type, num_classes):
             cait_model = create_model("cait_s36_384",
                                       pretrained=True,
                                       num_classes=num_classes)
-        except:
+        except ValueError:
             cait_model = create_model("cait_s36_384",
                                       pretrained=False,
                                       num_classes=num_classes)
@@ -94,7 +94,7 @@ def get_cait_model(cait_type, num_classes):
             cait_model = create_model("cait_m36_384",
                                       pretrained=True,
                                       num_classes=num_classes)
-        except:
+        except ValueError:
             cait_model = create_model("cait_m36_384",
                                       pretrained=False,
                                       num_classes=num_classes)
@@ -103,7 +103,7 @@ def get_cait_model(cait_type, num_classes):
             cait_model = create_model("cait_m48_448",
                                       pretrained=True,
                                       num_classes=num_classes)
-        except:
+        except ValueError:
             cait_model = create_model("cait_m48_448",
                                       pretrained=False,
                                       num_classes=num_classes)

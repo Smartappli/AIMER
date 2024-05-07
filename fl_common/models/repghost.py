@@ -28,7 +28,7 @@ def get_repghost_model(repghost_type, num_classes):
             repghost_model = create_model('repghostnet_050',
                                           pretrained=True,
                                           num_classes=num_classes)
-        except:
+        except ValueError:
             repghost_model = create_model('repghostnet_050',
                                           pretrained=False,
                                           num_classes=num_classes)
@@ -37,7 +37,7 @@ def get_repghost_model(repghost_type, num_classes):
             repghost_model = create_model('repghostnet_058',
                                           pretrained=True,
                                           num_classes=num_classes)
-        except:
+        except ValueError:
             repghost_model = create_model('repghostnet_058',
                                           pretrained=False,
                                           num_classes=num_classes)
@@ -46,7 +46,7 @@ def get_repghost_model(repghost_type, num_classes):
             repghost_model = create_model('repghostnet_080',
                                           pretrained=True,
                                           num_classes=num_classes)
-        except:
+        except ValueError:
             repghost_model = create_model('repghostnet_080',
                                           pretrained=False,
                                           num_classes=num_classes)
@@ -55,7 +55,7 @@ def get_repghost_model(repghost_type, num_classes):
             repghost_model = create_model('repghostnet_100',
                                           pretrained=True,
                                           num_classes=num_classes)
-        except:
+        except ValueError:
             repghost_model = create_model('repghostnet_100',
                                           pretrained=False,
                                           num_classes=num_classes)
@@ -64,7 +64,7 @@ def get_repghost_model(repghost_type, num_classes):
             repghost_model = create_model('repghostnet_111',
                                           pretrained=True,
                                           num_classes=num_classes)
-        except:
+        except ValueError:
             repghost_model = create_model('repghostnet_111',
                                           pretrained=False,
                                           num_classes=num_classes)
@@ -73,7 +73,7 @@ def get_repghost_model(repghost_type, num_classes):
             repghost_model = create_model('repghostnet_130',
                                           pretrained=True,
                                           num_classes=num_classes)
-        except:
+        except ValueError:
             repghost_model = create_model('repghostnet_130',
                                           pretrained=False,
                                           num_classes=num_classes)
@@ -82,7 +82,7 @@ def get_repghost_model(repghost_type, num_classes):
             repghost_model = create_model('repghostnet_150',
                                           pretrained=True,
                                           num_classes=num_classes)
-        except:
+        except ValueError:
             repghost_model = create_model('repghostnet_150',
                                           pretrained=False,
                                           num_classes=num_classes)
@@ -91,7 +91,7 @@ def get_repghost_model(repghost_type, num_classes):
             repghost_model = create_model('repghostnet_200',
                                           pretrained=True,
                                           num_classes=num_classes)
-        except:
+        except ValueError:
             repghost_model = create_model('repghostnet_200',
                                           pretrained=False,
                                           num_classes=num_classes)

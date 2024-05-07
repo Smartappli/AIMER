@@ -36,7 +36,7 @@ def get_byoanet_model(byoanet_type, num_classes):
             byoanet_model = create_model('botnet26t_256',
                                          pretrained=True,
                                          num_classes=num_classes)
-        except:
+        except ValueError:
             byoanet_model = create_model('botnet26t_256',
                                          pretrained=False,
                                          num_classes=num_classes)
@@ -45,7 +45,7 @@ def get_byoanet_model(byoanet_type, num_classes):
             byoanet_model = create_model('sebotnet33ts_256',
                                          pretrained=True,
                                          num_classes=num_classes)
-        except:
+        except ValueError:
             byoanet_model = create_model('sebotnet33ts_256',
                                          pretrained=False,
                                          num_classes=num_classes)
@@ -54,7 +54,7 @@ def get_byoanet_model(byoanet_type, num_classes):
             byoanet_model = create_model('botnet50ts_256',
                                          pretrained=True,
                                          num_classes=num_classes)
-        except:
+        except ValueError:
             byoanet_model = create_model('botnet50ts_256',
                                          pretrained=False,
                                          num_classes=num_classes)
@@ -63,7 +63,7 @@ def get_byoanet_model(byoanet_type, num_classes):
             byoanet_model = create_model('eca_botnext26ts_256',
                                          pretrained=True,
                                          num_classes=num_classes)
-        except:
+        except ValueError:
             byoanet_model = create_model('eca_botnext26ts_256',
                                          pretrained=False,
                                          num_classes=num_classes)
@@ -72,7 +72,7 @@ def get_byoanet_model(byoanet_type, num_classes):
             byoanet_model = create_model('halonet_h1',
                                          pretrained=True,
                                          num_classes=num_classes)
-        except:
+        except ValueError:
             byoanet_model = create_model('halonet_h1',
                                          pretrained=False,
                                          num_classes=num_classes)
@@ -81,7 +81,7 @@ def get_byoanet_model(byoanet_type, num_classes):
             byoanet_model = create_model('halonet26t',
                                          pretrained=True,
                                          num_classes=num_classes)
-        except:
+        except ValueError:
             byoanet_model = create_model('halonet26t',
                                          pretrained=False,
                                          num_classes=num_classes)
@@ -90,7 +90,7 @@ def get_byoanet_model(byoanet_type, num_classes):
             byoanet_model = create_model('sehalonet33ts',
                                          pretrained=True,
                                          num_classes=num_classes)
-        except:
+        except ValueError:
             byoanet_model = create_model('sehalonet33ts',
                                          pretrained=False,
                                          num_classes=num_classes)
@@ -99,7 +99,7 @@ def get_byoanet_model(byoanet_type, num_classes):
             byoanet_model = create_model('halonet50ts',
                                          pretrained=True,
                                          num_classes=num_classes)
-        except:
+        except ValueError:
             byoanet_model = create_model('halonet50ts',
                                          pretrained=False,
                                          num_classes=num_classes)
@@ -108,7 +108,7 @@ def get_byoanet_model(byoanet_type, num_classes):
             byoanet_model = create_model('eca_halonext26ts',
                                          pretrained=True,
                                          num_classes=num_classes)
-        except:
+        except ValueError:
             byoanet_model = create_model('eca_halonext26ts',
                                          pretrained=True,
                                          num_classes=num_classes)
@@ -117,7 +117,7 @@ def get_byoanet_model(byoanet_type, num_classes):
             byoanet_model = create_model('lambda_resnet26t',
                                          pretrained=True,
                                          num_classes=num_classes)
-        except:
+        except ValueError:
             byoanet_model = create_model('lambda_resnet26t',
                                          pretrained=False,
                                          num_classes=num_classes)
@@ -126,7 +126,7 @@ def get_byoanet_model(byoanet_type, num_classes):
             byoanet_model = create_model('lambda_resnet50ts',
                                          pretrained=True,
                                          num_classes=num_classes)
-        except:
+        except ValueError:
             byoanet_model = create_model('lambda_resnet50ts',
                                          pretrained=False,
                                          num_classes=num_classes)
@@ -135,7 +135,7 @@ def get_byoanet_model(byoanet_type, num_classes):
             byoanet_model = create_model('lambda_resnet26rpt_256',
                                          pretrained=True,
                                          num_classes=num_classes)
-        except:
+        except ValueError:
             byoanet_model = create_model('lambda_resnet26rpt_256',
                                          pretrained=False,
                                          num_classes=num_classes)
@@ -144,7 +144,7 @@ def get_byoanet_model(byoanet_type, num_classes):
             byoanet_model = create_model('haloregnetz_b',
                                          pretrained=True,
                                          num_classes=num_classes)
-        except:
+        except ValueError:
             byoanet_model = create_model('haloregnetz_b',
                                          pretrained=False,
                                          num_classes=num_classes)
@@ -153,7 +153,7 @@ def get_byoanet_model(byoanet_type, num_classes):
             byoanet_model = create_model('lamhalobotnet50ts_256',
                                          pretrained=True,
                                          num_classes=num_classes)
-        except:
+        except ValueError:
             byoanet_model = create_model('lamhalobotnet50ts_256',
                                          pretrained=False,
                                          num_classes=num_classes)
@@ -162,7 +162,7 @@ def get_byoanet_model(byoanet_type, num_classes):
             byoanet_model = create_model('halo2botnet50ts_256',
                                          pretrained=True,
                                          num_classes=num_classes)
-        except:
+        except ValueError:
             byoanet_model = create_model('halo2botnet50ts_256',
                                          pretrained=True,
                                          num_classes=num_classes)

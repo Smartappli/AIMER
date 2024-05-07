@@ -21,7 +21,7 @@ def get_pnasnet_model(pnasnet_type, num_classes):
             pnasnet_model = create_model('pnasnet5large',
                                          pretrained=True,
                                          num_classes=num_classes)
-        except:
+        except ValueError:
             pnasnet_model = create_model('pnasnet5large',
                                          pretrained=False,
                                          num_classes=num_classes)

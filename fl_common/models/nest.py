@@ -26,7 +26,7 @@ def get_nest_model(nest_type, num_classes):
             nest_model = create_model('nest_base',
                                       pretrained=True,
                                       num_classes=num_classes)
-        except:
+        except ValueError:
             nest_model = create_model('nest_base',
                                       pretrained=False,
                                       num_classes=num_classes)
@@ -35,7 +35,7 @@ def get_nest_model(nest_type, num_classes):
             nest_model = create_model('nest_small',
                                       pretrained=True,
                                       num_classes=num_classes)
-        except:
+        except ValueError:
             nest_model = create_model('nest_small',
                                       pretrained=False,
                                       num_classes=num_classes)
@@ -44,7 +44,7 @@ def get_nest_model(nest_type, num_classes):
             nest_model = create_model('nest_tiny',
                                       pretrained=True,
                                       num_classes=num_classes)
-        except:
+        except ValueError:
             nest_model = create_model('nest_tiny',
                                       pretrained=False,
                                       num_classes=num_classes)
@@ -53,7 +53,7 @@ def get_nest_model(nest_type, num_classes):
             nest_model = create_model('nest_base_jx',
                                       pretrained=True,
                                       num_classes=num_classes)
-        except:
+        except ValueError:
             nest_model = create_model('nest_base_jx',
                                       pretrained=False,
                                       num_classes=num_classes)
@@ -62,7 +62,7 @@ def get_nest_model(nest_type, num_classes):
             nest_model = create_model('nest_small_jx',
                                       pretrained=True,
                                       num_classes=num_classes)
-        except:
+        except ValueError:
             nest_model = create_model('nest_small_jx',
                                       pretrained=False,
                                       num_classes=num_classes)
@@ -71,7 +71,7 @@ def get_nest_model(nest_type, num_classes):
             nest_model = create_model('nest_tiny_jx',
                                       pretrained=True,
                                       num_classes=num_classes)
-        except:
+        except ValueError:
             nest_model = create_model('nest_tiny_jx',
                                       pretrained=False,
                                       num_classes=num_classes)

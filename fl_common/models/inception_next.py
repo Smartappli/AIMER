@@ -23,7 +23,7 @@ def get_inception_next_model(inception_next_type, num_classes):
             inception_next_model = create_model('inception_next_tiny',
                                                 pretrained=True,
                                                 num_classes=num_classes)
-        except:
+        except ValueError:
             inception_next_model = create_model('inception_next_tiny',
                                                 pretrained=False,
                                                 num_classes=num_classes)
@@ -32,7 +32,7 @@ def get_inception_next_model(inception_next_type, num_classes):
             inception_next_model = create_model('inception_next_small',
                                                 pretrained=True,
                                                 num_classes=num_classes)
-        except:
+        except ValueError:
             inception_next_model = create_model('inception_next_small',
                                                 pretrained=False,
                                                 num_classes=num_classes)
@@ -41,7 +41,7 @@ def get_inception_next_model(inception_next_type, num_classes):
             inception_next_model = create_model('inception_next_base',
                                                 pretrained=True,
                                                 num_classes=num_classes)
-        except:
+        except ValueError:
             inception_next_model = create_model('inception_next_base',
                                                 pretrained=False,
                                                 num_classes=num_classes)

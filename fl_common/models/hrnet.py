@@ -31,7 +31,7 @@ def get_hrnet_model(hrnet_type, num_classes):
             hrnet_model = create_model('hrnet_w18_small',
                                        pretrained=True,
                                        num_classes=num_classes)
-        except:
+        except ValueError:
             hrnet_model = create_model('hrnet_w18_small',
                                        pretrained=False,
                                        num_classes=num_classes)
@@ -40,7 +40,7 @@ def get_hrnet_model(hrnet_type, num_classes):
             hrnet_model = create_model('hrnet_w18_small_v2',
                                        pretrained=True,
                                        num_classes=num_classes)
-        except:
+        except ValueError:
             hrnet_model = create_model('hrnet_w18_small_v2',
                                        pretrained=False,
                                        num_classes=num_classes)
@@ -49,7 +49,7 @@ def get_hrnet_model(hrnet_type, num_classes):
             hrnet_model = create_model('hrnet_w18',
                                        pretrained=True,
                                        num_classes=num_classes)
-        except:
+        except ValueError:
             hrnet_model = create_model('hrnet_w18',
                                        pretrained=False,
                                        num_classes=num_classes)
@@ -58,7 +58,7 @@ def get_hrnet_model(hrnet_type, num_classes):
             hrnet_model = create_model('hrnet_w30',
                                        pretrained=True,
                                        num_classes=num_classes)
-        except:
+        except ValueError:
             hrnet_model = create_model('hrnet_w30',
                                        pretrained=False,
                                        num_classes=num_classes)
@@ -67,7 +67,7 @@ def get_hrnet_model(hrnet_type, num_classes):
             hrnet_model = create_model('hrnet_w32',
                                        pretrained=True,
                                        num_classes=num_classes)
-        except:
+        except ValueError:
             hrnet_model = create_model('hrnet_w32',
                                        pretrained=False,
                                        num_classes=num_classes)
@@ -76,7 +76,7 @@ def get_hrnet_model(hrnet_type, num_classes):
             hrnet_model = create_model('hrnet_w40',
                                        pretrained=True,
                                        num_classes=num_classes)
-        except:
+        except ValueError:
             hrnet_model = create_model('hrnet_w40',
                                        pretrained=False,
                                        num_classes=num_classes)
@@ -85,7 +85,7 @@ def get_hrnet_model(hrnet_type, num_classes):
             hrnet_model = create_model('hrnet_w44',
                                        pretrained=True,
                                        num_classes=num_classes)
-        except:
+        except ValueError:
             hrnet_model = create_model('hrnet_w44',
                                        pretrained=False,
                                        num_classes=num_classes)
@@ -94,7 +94,7 @@ def get_hrnet_model(hrnet_type, num_classes):
             hrnet_model = create_model('hrnet_w48',
                                        pretrained=True,
                                        num_classes=num_classes)
-        except:
+        except ValueError:
             hrnet_model = create_model('hrnet_w48',
                                        pretrained=False,
                                        num_classes=num_classes)
@@ -103,7 +103,7 @@ def get_hrnet_model(hrnet_type, num_classes):
             hrnet_model = create_model('hrnet_w64',
                                        pretrained=True,
                                        num_classes=num_classes)
-        except:
+        except ValueError:
             hrnet_model = create_model('hrnet_w64',
                                        pretrained=False,
                                        num_classes=num_classes)
@@ -112,7 +112,7 @@ def get_hrnet_model(hrnet_type, num_classes):
             hrnet_model = create_model('hrnet_w18_ssld',
                                        pretrained=True,
                                        num_classes=num_classes)
-        except:
+        except ValueError:
             hrnet_model = create_model('hrnet_w18_ssld',
                                        pretrained=False,
                                        num_classes=num_classes)
@@ -121,7 +121,7 @@ def get_hrnet_model(hrnet_type, num_classes):
             hrnet_model = create_model('hrnet_w48_ssld',
                                        pretrained=True,
                                        num_classes=num_classes)
-        except:
+        except ValueError:
             hrnet_model = create_model('hrnet_w48_ssld',
                                        pretrained=False,
                                        num_classes=num_classes)

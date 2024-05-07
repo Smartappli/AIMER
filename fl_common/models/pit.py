@@ -28,7 +28,7 @@ def get_pit_model(pit_type, num_classes):
             pit_model = create_model('pit_b_224',
                                      pretrained=True,
                                      num_classes=num_classes)
-        except:
+        except ValueError:
             pit_model = create_model('pit_b_224',
                                      pretrained=False,
                                      num_classes=num_classes)
@@ -37,7 +37,7 @@ def get_pit_model(pit_type, num_classes):
             pit_model = create_model('pit_s_224',
                                      pretrained=True,
                                      num_classes=num_classes)
-        except:
+        except ValueError:
             pit_model = create_model('pit_s_224',
                                      pretrained=False,
                                      num_classes=num_classes)
@@ -46,7 +46,7 @@ def get_pit_model(pit_type, num_classes):
             pit_model = create_model('pit_xs_224',
                                      pretrained=True,
                                      num_classes=num_classes)
-        except:
+        except ValueError:
             pit_model = create_model('pit_xs_224',
                                      pretrained=False,
                                      num_classes=num_classes)
@@ -55,7 +55,7 @@ def get_pit_model(pit_type, num_classes):
             pit_model = create_model('pit_ti_224',
                                      pretrained=True,
                                      num_classes=num_classes)
-        except:
+        except ValueError:
             pit_model = create_model('pit_ti_224',
                                      pretrained=False,
                                      num_classes=num_classes)
@@ -64,7 +64,7 @@ def get_pit_model(pit_type, num_classes):
             pit_model = create_model('pit_b_distilled_224',
                                      pretrained=True,
                                      num_classes=num_classes)
-        except:
+        except ValueError:
             pit_model = create_model('pit_b_distilled_224',
                                      pretrained=False,
                                      num_classes=num_classes)
@@ -73,7 +73,7 @@ def get_pit_model(pit_type, num_classes):
             pit_model = create_model('pit_s_distilled_224',
                                      pretrained=True,
                                      num_classes=num_classes)
-        except:
+        except ValueError:
             pit_model = create_model('pit_s_distilled_224',
                                      pretrained=False,
                                      num_classes=num_classes)
@@ -82,7 +82,7 @@ def get_pit_model(pit_type, num_classes):
             pit_model = create_model('pit_xs_distilled_224',
                                      pretrained=True,
                                      num_classes=num_classes)
-        except:
+        except ValueError:
             pit_model = create_model('pit_xs_distilled_224',
                                      pretrained=False,
                                      num_classes=num_classes)
@@ -91,7 +91,7 @@ def get_pit_model(pit_type, num_classes):
             pit_model = create_model('pit_ti_distilled_224',
                                      pretrained=True,
                                      num_classes=num_classes)
-        except:
+        except ValueError:
             pit_model = create_model('pit_ti_distilled_224',
                                      pretrained=False,
                                      num_classes=num_classes)

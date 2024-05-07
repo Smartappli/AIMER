@@ -38,7 +38,7 @@ def get_metaformer_model(metaformer_type, num_classes):
             metaformer_model = create_model('poolformer_s12',
                                             pretrained=True,
                                             num_classes=num_classes)
-        except:
+        except ValueError:
             metaformer_model = create_model('poolformer_s12',
                                             pretrained=False,
                                             num_classes=num_classes)
@@ -47,7 +47,7 @@ def get_metaformer_model(metaformer_type, num_classes):
             metaformer_model = create_model('poolformer_s24',
                                             pretrained=True,
                                             num_classes=num_classes)
-        except:
+        except ValueError:
             metaformer_model = create_model('poolformer_s24',
                                             pretrained=False,
                                             num_classes=num_classes)
@@ -56,7 +56,7 @@ def get_metaformer_model(metaformer_type, num_classes):
             metaformer_model = create_model('poolformer_s36',
                                             pretrained=True,
                                             num_classes=num_classes)
-        except:
+        except ValueError:
             metaformer_model = create_model('poolformer_s36',
                                             pretrained=False,
                                             num_classes=num_classes)
@@ -65,7 +65,7 @@ def get_metaformer_model(metaformer_type, num_classes):
             metaformer_model = create_model('poolformer_m36',
                                             pretrained=True,
                                             num_classes=num_classes)
-        except:
+        except ValueError:
             metaformer_model = create_model('poolformer_m36',
                                             pretrained=False,
                                             num_classes=num_classes)
@@ -74,7 +74,7 @@ def get_metaformer_model(metaformer_type, num_classes):
             metaformer_model = create_model('poolformer_m48',
                                             pretrained=True,
                                             num_classes=num_classes)
-        except:
+        except ValueError:
             metaformer_model = create_model('poolformer_m48',
                                             pretrained=False,
                                             num_classes=num_classes)
@@ -83,7 +83,7 @@ def get_metaformer_model(metaformer_type, num_classes):
             metaformer_model = create_model('poolformerv2_s12',
                                             pretrained=True,
                                             num_classes=num_classes)
-        except:
+        except ValueError:
             metaformer_model = create_model('poolformerv2_s12',
                                             pretrained=False,
                                             num_classes=num_classes)
@@ -92,7 +92,7 @@ def get_metaformer_model(metaformer_type, num_classes):
             metaformer_model = create_model('poolformerv2_s24',
                                             pretrained=True,
                                             num_classes=num_classes)
-        except:
+        except ValueError:
             metaformer_model = create_model('poolformerv2_s24',
                                             pretrained=False,
                                             num_classes=num_classes)
@@ -101,7 +101,7 @@ def get_metaformer_model(metaformer_type, num_classes):
             metaformer_model = create_model('poolformerv2_s36',
                                             pretrained=True,
                                             num_classes=num_classes)
-        except:
+        except ValueError:
             metaformer_model = create_model('poolformerv2_s36',
                                             pretrained=False,
                                             num_classes=num_classes)
@@ -110,7 +110,7 @@ def get_metaformer_model(metaformer_type, num_classes):
             metaformer_model = create_model('poolformerv2_m36',
                                             pretrained=True,
                                             num_classes=num_classes)
-        except:
+        except ValueError:
             metaformer_model = create_model('poolformerv2_m36',
                                             pretrained=False,
                                             num_classes=num_classes)
@@ -119,7 +119,7 @@ def get_metaformer_model(metaformer_type, num_classes):
             metaformer_model = create_model('poolformerv2_m48',
                                             pretrained=True,
                                             num_classes=num_classes)
-        except:
+        except ValueError:
             metaformer_model = create_model('poolformerv2_m48',
                                             pretrained=False,
                                             num_classes=num_classes)
@@ -128,7 +128,7 @@ def get_metaformer_model(metaformer_type, num_classes):
             metaformer_model = create_model('convformer_s18',
                                             pretrained=True,
                                             num_classes=num_classes)
-        except:
+        except ValueError:
             metaformer_model = create_model('convformer_s18',
                                             pretrained=False,
                                             num_classes=num_classes)
@@ -137,7 +137,7 @@ def get_metaformer_model(metaformer_type, num_classes):
             metaformer_model = create_model('convformer_s36',
                                             pretrained=True,
                                             num_classes=num_classes)
-        except:
+        except ValueError:
             metaformer_model = create_model('convformer_s36',
                                             pretrained=False,
                                             num_classes=num_classes)
@@ -146,7 +146,7 @@ def get_metaformer_model(metaformer_type, num_classes):
             metaformer_model = create_model('convformer_m36',
                                             pretrained=True,
                                             num_classes=num_classes)
-        except:
+        except ValueError:
             metaformer_model = create_model('convformer_m36',
                                             pretrained=False,
                                             num_classes=num_classes)
@@ -155,7 +155,7 @@ def get_metaformer_model(metaformer_type, num_classes):
             metaformer_model = create_model('convformer_b36',
                                             pretrained=True,
                                             num_classes=num_classes)
-        except:
+        except ValueError:
             metaformer_model = create_model('convformer_b36',
                                             pretrained=False,
                                             num_classes=num_classes)
@@ -164,7 +164,7 @@ def get_metaformer_model(metaformer_type, num_classes):
             metaformer_model = create_model('caformer_s18',
                                             pretrained=True,
                                             num_classes=num_classes)
-        except:
+        except ValueError:
             metaformer_model = create_model('caformer_s18',
                                             pretrained=False,
                                             num_classes=num_classes)
@@ -173,7 +173,7 @@ def get_metaformer_model(metaformer_type, num_classes):
             metaformer_model = create_model('caformer_s36',
                                             pretrained=True,
                                             num_classes=num_classes)
-        except:
+        except ValueError:
             metaformer_model = create_model('caformer_s36',
                                             pretrained=False,
                                             num_classes=num_classes)
@@ -182,7 +182,7 @@ def get_metaformer_model(metaformer_type, num_classes):
             metaformer_model = create_model('caformer_m36',
                                             pretrained=True,
                                             num_classes=num_classes)
-        except:
+        except ValueError:
             metaformer_model = create_model('caformer_m36',
                                             pretrained=False,
                                             num_classes=num_classes)
@@ -191,7 +191,7 @@ def get_metaformer_model(metaformer_type, num_classes):
             metaformer_model = create_model('caformer_b36',
                                             pretrained=True,
                                             num_classes=num_classes)
-        except:
+        except ValueError:
             metaformer_model = create_model('caformer_b36',
                                             pretrained=False,
                                             num_classes=num_classes)

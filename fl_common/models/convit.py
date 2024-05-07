@@ -25,7 +25,7 @@ def get_convit_model(convit_type, num_classes):
             convit_model = create_model('convit_tiny',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except:
+        except ValueError:
             convit_model = create_model('convit_tiny',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -34,7 +34,7 @@ def get_convit_model(convit_type, num_classes):
             convit_model = create_model('convit_small',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except:
+        except ValueError:
             convit_model = create_model('convit_small',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -43,7 +43,7 @@ def get_convit_model(convit_type, num_classes):
             convit_model = create_model('convit_base',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except:
+        except ValueError:
             convit_model = create_model('convit_base',
                                         pretrained=False,
                                         num_classes=num_classes)

@@ -22,7 +22,7 @@ def get_coat_model(coat_type, num_classes):
             coat_model = create_model('coat_tiny',
                                       pretrained=True,
                                       num_classes=num_classes)
-        except:
+        except ValueError:
             coat_model = create_model('coat_tiny',
                                       pretrained=False,
                                       num_classes=num_classes)
@@ -31,7 +31,7 @@ def get_coat_model(coat_type, num_classes):
             coat_model = create_model('coat_mini',
                                       pretrained=True,
                                       num_classes=num_classes)
-        except:
+        except ValueError:
             coat_model = create_model('coat_mini',
                                       pretrained=False,
                                       num_classes=num_classes)
@@ -40,7 +40,7 @@ def get_coat_model(coat_type, num_classes):
             coat_model = create_model('coat_small',
                                       pretrained=True,
                                       num_classes=num_classes)
-        except:
+        except ValueError:
             coat_model = create_model('coat_small',
                                       pretrained=False,
                                       num_classes=num_classes)
@@ -49,7 +49,7 @@ def get_coat_model(coat_type, num_classes):
             coat_model = create_model('coat_lite_tiny',
                                       pretrained=True,
                                       num_classes=num_classes)
-        except:
+        except ValueError:
             coat_model = create_model('coat_lite_tiny',
                                       pretrained=False,
                                       num_classes=num_classes)
@@ -58,7 +58,7 @@ def get_coat_model(coat_type, num_classes):
             coat_model = create_model('coat_lite_mini',
                                       pretrained=True,
                                       num_classes=num_classes)
-        except:
+        except ValueError:
             coat_model = create_model('coat_lite_mini',
                                       pretrained=False,
                                       num_classes=num_classes)
@@ -67,7 +67,7 @@ def get_coat_model(coat_type, num_classes):
             coat_model = create_model('coat_lite_small',
                                       pretrained=True,
                                       num_classes=num_classes)
-        except:
+        except ValueError:
             coat_model = create_model('coat_lite_small',
                                       pretrained=False,
                                       num_classes=num_classes)
@@ -76,7 +76,7 @@ def get_coat_model(coat_type, num_classes):
             coat_model = create_model('coat_lite_medium',
                                       pretrained=True,
                                       num_classes=num_classes)
-        except:
+        except ValueError:
             coat_model = create_model('coat_lite_medium',
                                       pretrained=False,
                                       num_classes=num_classes)
@@ -85,7 +85,7 @@ def get_coat_model(coat_type, num_classes):
             coat_model = create_model('coat_lite_medium',
                                       pretrained=True,
                                       num_classes=num_classes)
-        except:
+        except ValueError:
             coat_model = create_model('coat_lite_medium',
                                       pretrained=False,
                                       num_classes=num_classes)

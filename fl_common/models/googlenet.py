@@ -21,7 +21,7 @@ def get_googlenet_model(googlenet_type, num_classes):
         try:
             weights = models.GoogLeNet_Weights.DEFAULT
             googlenet_model = models.googlenet(weights=weights)
-        except:
+        except ValueError:
             googlenet_model = models.googlenet(weights=None)
     else:
         raise ValueError(f'Unknown AlexNet Architecture: {googlenet_type}')

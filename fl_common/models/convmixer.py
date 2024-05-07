@@ -23,7 +23,7 @@ def get_convmixer_model(convmixer_type, num_classes):
             convmixer_model = create_model('convmixer_1536_20',
                                            pretrained=True,
                                            num_classes=num_classes)
-        except:
+        except ValueError:
             convmixer_model = create_model('convmixer_1536_20',
                                            pretrained=False,
                                            num_classes=num_classes)
@@ -32,7 +32,7 @@ def get_convmixer_model(convmixer_type, num_classes):
             convmixer_model = create_model('convmixer_768_32',
                                            pretrained=True,
                                            num_classes=num_classes)
-        except:
+        except ValueError:
             convmixer_model = create_model('convmixer_768_32',
                                            pretrained=False,
                                            num_classes=num_classes)
@@ -41,7 +41,7 @@ def get_convmixer_model(convmixer_type, num_classes):
             convmixer_model = create_model('convmixer_1024_20_ks9_p14',
                                            pretrained=True,
                                            num_classes=num_classes)
-        except:
+        except ValueError:
             convmixer_model = create_model('convmixer_1024_20_ks9_p14',
                                            pretrained=False,
                                            num_classes=num_classes)

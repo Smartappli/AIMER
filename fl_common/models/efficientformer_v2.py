@@ -18,7 +18,7 @@ def get_efficientformer_v2_model(efficientformer_v2_type, num_classes):
             efficientformer_v2_model = create_model('efficientformerv2_s0',
                                                     pretrained=True,
                                                     num_classes=num_classes)
-        except:
+        except ValueError:
             efficientformer_v2_model = create_model('efficientformerv2_s0',
                                                     pretrained=False,
                                                     num_classes=num_classes)
@@ -27,7 +27,7 @@ def get_efficientformer_v2_model(efficientformer_v2_type, num_classes):
             efficientformer_v2_model = create_model('efficientformerv2_s1',
                                                     pretrained=True,
                                                     num_classes=num_classes)
-        except:
+        except ValueError:
             efficientformer_v2_model = create_model('efficientformerv2_s1',
                                                     pretrained=False,
                                                     num_classes=num_classes)
@@ -36,7 +36,7 @@ def get_efficientformer_v2_model(efficientformer_v2_type, num_classes):
             efficientformer_v2_model = create_model('efficientformerv2_s2',
                                                     pretrained=True,
                                                     num_classes=num_classes)
-        except:
+        except ValueError:
             efficientformer_v2_model = create_model('efficientformerv2_s2',
                                                     pretrained=False,
                                                     num_classes=num_classes)
@@ -45,7 +45,7 @@ def get_efficientformer_v2_model(efficientformer_v2_type, num_classes):
             efficientformer_v2_model = create_model('efficientformerv2_l',
                                                     pretrained=True,
                                                     num_classes=num_classes)
-        except:
+        except ValueError:
             efficientformer_v2_model = create_model('efficientformerv2_l',
                                                     pretrained=False,
                                                     num_classes=num_classes)

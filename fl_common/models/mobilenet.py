@@ -40,28 +40,28 @@ def get_mobilenet_model(mobilenet_type, num_classes):
         try:
             weights = models.MobileNet_V2_Weights.DEFAULT
             mobilenet_model = models.mobilenet_v2(weights=weights)
-        except:
+        except ValueError:
             mobilenet_model = models.mobilenet_v2(weights=None)
     elif mobilenet_type == 'MobileNet_V3_Small':
         torch_vision = True
         try:
             weights = models.MobileNet_V3_Small_Weights.DEFAULT
             mobilenet_model = models.mobilenet_v3_small(weights=weights)
-        except:
+        except ValueError:
             mobilenet_model = models.mobilenet_v3_small(weights=None)
     elif mobilenet_type == 'MobileNet_V3_Large':
         torch_vision = True
         try:
             weights = models.MobileNet_V3_Large_Weights.DEFAULT
             mobilenet_model = models.mobilenet_v3_large(weights=weights)
-        except:
+        except ValueError:
             mobilenet_model = models.mobilenet_v3_large(weights=None)
     elif mobilenet_type == 'mobilenetv3_large_075':
         try:
             mobilenet_model = create_model('mobilenetv3_large_075',
                                            pretrained=True,
                                            num_classes=num_classes)
-        except:
+        except ValueError:
             mobilenet_model = create_model('mobilenetv3_large_075',
                                            pretrained=False,
                                            num_classes=num_classes)
@@ -70,7 +70,7 @@ def get_mobilenet_model(mobilenet_type, num_classes):
             mobilenet_model = create_model('mobilenetv3_large_100',
                                            pretrained=True,
                                            num_classes=num_classes)
-        except:
+        except ValueError:
             mobilenet_model = create_model('mobilenetv3_large_100',
                                            pretrained=False,
                                            num_classes=num_classes)
@@ -79,7 +79,7 @@ def get_mobilenet_model(mobilenet_type, num_classes):
             mobilenet_model = create_model('mobilenetv3_small_050',
                                            pretrained=True,
                                            num_classes=num_classes)
-        except:
+        except ValueError:
             mobilenet_model = create_model('mobilenetv3_small_050',
                                            pretrained=False,
                                            num_classes=num_classes)
@@ -88,7 +88,7 @@ def get_mobilenet_model(mobilenet_type, num_classes):
             mobilenet_model = create_model('mobilenetv3_small_075',
                                            pretrained=True,
                                            num_classes=num_classes)
-        except:
+        except ValueError:
             mobilenet_model = create_model('mobilenetv3_small_075',
                                            pretrained=False,
                                            num_classes=num_classes)
@@ -97,7 +97,7 @@ def get_mobilenet_model(mobilenet_type, num_classes):
             mobilenet_model = create_model('mobilenetv3_small_100',
                                            pretrained=True,
                                            num_classes=num_classes)
-        except:
+        except ValueError:
             mobilenet_model = create_model('mobilenetv3_small_100',
                                            pretrained=False,
                                            num_classes=num_classes)
@@ -106,7 +106,7 @@ def get_mobilenet_model(mobilenet_type, num_classes):
             mobilenet_model = create_model('mobilenetv3_rw',
                                            pretrained=True,
                                            num_classes=num_classes)
-        except:
+        except ValueError:
             mobilenet_model = create_model('mobilenetv3_rw',
                                            pretrained=False,
                                            num_classes=num_classes)
@@ -115,7 +115,7 @@ def get_mobilenet_model(mobilenet_type, num_classes):
             mobilenet_model = create_model('tf_mobilenetv3_large_075',
                                            pretrained=True,
                                            num_classes=num_classes)
-        except:
+        except ValueError:
             mobilenet_model = create_model('tf_mobilenetv3_large_075',
                                            pretrained=False,
                                            num_classes=num_classes)
@@ -124,7 +124,7 @@ def get_mobilenet_model(mobilenet_type, num_classes):
             mobilenet_model = create_model('tf_mobilenetv3_large_100',
                                            pretrained=True,
                                            num_classes=num_classes)
-        except:
+        except ValueError:
             mobilenet_model = create_model('tf_mobilenetv3_large_100',
                                            pretrained=False,
                                            num_classes=num_classes)
@@ -133,7 +133,7 @@ def get_mobilenet_model(mobilenet_type, num_classes):
             mobilenet_model = create_model('tf_mobilenetv3_large_minimal_100',
                                            pretrained=True,
                                            num_classes=num_classes)
-        except:
+        except ValueError:
             mobilenet_model = create_model('tf_mobilenetv3_large_minimal_100',
                                            pretrained=False,
                                            num_classes=num_classes)
@@ -142,7 +142,7 @@ def get_mobilenet_model(mobilenet_type, num_classes):
             mobilenet_model = create_model('tf_mobilenetv3_small_075',
                                            pretrained=True,
                                            num_classes=num_classes)
-        except:
+        except ValueError:
             mobilenet_model = create_model('tf_mobilenetv3_small_075',
                                            pretrained=False,
                                            num_classes=num_classes)
@@ -151,7 +151,7 @@ def get_mobilenet_model(mobilenet_type, num_classes):
             mobilenet_model = create_model('tf_mobilenetv3_small_100',
                                            pretrained=True,
                                            num_classes=num_classes)
-        except:
+        except ValueError:
             mobilenet_model = create_model('tf_mobilenetv3_small_100',
                                            pretrained=False,
                                            num_classes=num_classes)
@@ -160,7 +160,7 @@ def get_mobilenet_model(mobilenet_type, num_classes):
             mobilenet_model = create_model('tf_mobilenetv3_small_minimal_100',
                                            pretrained=True,
                                            num_classes=num_classes)
-        except:
+        except ValueError:
             mobilenet_model = create_model('tf_mobilenetv3_small_minimal_100',
                                            pretrained=False,
                                            num_classes=num_classes)
@@ -169,7 +169,7 @@ def get_mobilenet_model(mobilenet_type, num_classes):
             mobilenet_model = create_model('fbnetv3_b',
                                            pretrained=True,
                                            num_classes=num_classes)
-        except:
+        except ValueError:
             mobilenet_model = create_model('fbnetv3_b',
                                            pretrained=False,
                                            num_classes=num_classes)
@@ -178,7 +178,7 @@ def get_mobilenet_model(mobilenet_type, num_classes):
             mobilenet_model = create_model('fbnetv3_d',
                                            pretrained=True,
                                            num_classes=num_classes)
-        except:
+        except ValueError:
             mobilenet_model = create_model('fbnetv3_d',
                                            pretrained=False,
                                            num_classes=num_classes)
@@ -187,7 +187,7 @@ def get_mobilenet_model(mobilenet_type, num_classes):
             mobilenet_model = create_model('fbnetv3_g',
                                            pretrained=True,
                                            num_classes=num_classes)
-        except:
+        except ValueError:
             mobilenet_model = create_model('fbnetv3_g',
                                            pretrained=False,
                                            num_classes=num_classes)
@@ -196,7 +196,7 @@ def get_mobilenet_model(mobilenet_type, num_classes):
             mobilenet_model = create_model('lcnet_035',
                                            pretrained=True,
                                            num_classes=num_classes)
-        except:
+        except ValueError:
             mobilenet_model = create_model('lcnet_035',
                                            pretrained=False,
                                            num_classes=num_classes)
@@ -205,7 +205,7 @@ def get_mobilenet_model(mobilenet_type, num_classes):
             mobilenet_model = create_model('lcnet_050',
                                            pretrained=True,
                                            num_classes=num_classes)
-        except:
+        except ValueError:
             mobilenet_model = create_model('lcnet_050',
                                            pretrained=False,
                                            num_classes=num_classes)
@@ -214,7 +214,7 @@ def get_mobilenet_model(mobilenet_type, num_classes):
             mobilenet_model = create_model('lcnet_075',
                                            pretrained=True,
                                            num_classes=num_classes)
-        except:
+        except ValueError:
             mobilenet_model = create_model('lcnet_075',
                                            pretrained=False,
                                            num_classes=num_classes)
@@ -223,7 +223,7 @@ def get_mobilenet_model(mobilenet_type, num_classes):
             mobilenet_model = create_model('lcnet_100',
                                            pretrained=True,
                                            num_classes=num_classes)
-        except:
+        except ValueError:
             mobilenet_model = create_model('lcnet_100',
                                            pretrained=False,
                                            num_classes=num_classes)
@@ -232,7 +232,7 @@ def get_mobilenet_model(mobilenet_type, num_classes):
             mobilenet_model = create_model('lcnet_150',
                                            pretrained=True,
                                            num_classes=num_classes)
-        except:
+        except ValueError:
             mobilenet_model = create_model('lcnet_150',
                                            pretrained=False,
                                            num_classes=num_classes)

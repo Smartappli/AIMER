@@ -58,84 +58,84 @@ def get_efficientnet_model(efficientnet_type, num_classes):
         try:
             weights = models.EfficientNet_B0_Weights.DEFAULT
             efficientnet_model = models.efficientnet_b0(weights=weights)
-        except:
+        except ValueError:
             efficientnet_model = models.efficientnet_b0(weights=None)
     elif efficientnet_type == 'EfficientNetB1':
         torch_vision = True
         try:
             weights = models.EfficientNet_B1_Weights.DEFAULT
             efficientnet_model = models.efficientnet_b1(weights=weights)
-        except:
+        except ValueError:
             efficientnet_model = models.efficientnet_b1(weights=None)
     elif efficientnet_type == 'EfficientNetB2':
         torch_vision = True
         try:
             weights = models.EfficientNet_B2_Weights.DEFAULT
             efficientnet_model = models.efficientnet_b2(weights=weights)
-        except:
+        except ValueError:
             efficientnet_model = models.efficientnet_b2(weights=None)
     elif efficientnet_type == 'EfficientNetB3':
         torch_vision = True
         try:
             weights = models.EfficientNet_B3_Weights.DEFAULT
             efficientnet_model = models.efficientnet_b3(weights=weights)
-        except:
+        except ValueError:
             efficientnet_model = models.efficientnet_b3(weights=None)
     elif efficientnet_type == 'EfficientNetB4':
         torch_vision = True
         try:
             weights = models.EfficientNet_B4_Weights.DEFAULT
             efficientnet_model = models.efficientnet_b4(weights=weights)
-        except:
+        except ValueError:
             efficientnet_model = models.efficientnet_b4(weights=None)
     elif efficientnet_type == 'EfficientNetB5':
         torch_vision = True
         try:
             weights = models.EfficientNet_B5_Weights.DEFAULT
             efficientnet_model = models.efficientnet_b5(weights=weights)
-        except:
+        except ValueError:
             efficientnet_model = models.efficientnet_b5(weights=None)
     elif efficientnet_type == 'EfficientNetB6':
         torch_vision = True
         try:
             weights = models.EfficientNet_B6_Weights.DEFAULT
             efficientnet_model = models.efficientnet_b6(weights=weights)
-        except:
+        except ValueError:
             efficientnet_model = models.efficientnet_b6(weights=None)
     elif efficientnet_type == 'EfficientNetB7':
         torch_vision = True
         try:
             weights = models.EfficientNet_B7_Weights.DEFAULT
             efficientnet_model = models.efficientnet_b7(weights=weights)
-        except:
+        except ValueError:
             efficientnet_model = models.efficientnet_b7(weights=None)
     elif efficientnet_type == 'EfficientNetV2S':
         torch_vision = True
         try:
             weights = models.EfficientNet_V2_S_Weights.DEFAULT
             efficientnet_model = models.efficientnet_v2_s(weights=weights)
-        except:
+        except ValueError:
             efficientnet_model = models.efficientnet_v2_s(weights=None)
     elif efficientnet_type == 'EfficientNetV2M':
         torch_vision = True
         try:
             weights = models.EfficientNet_V2_M_Weights.DEFAULT
             efficientnet_model = models.efficientnet_v2_m(weights=weights)
-        except:
+        except ValueError:
             efficientnet_model = models.efficientnet_v2_m(weights=None)
     elif efficientnet_type == 'EfficientNetV2L':
         torch_vision = True
         try:
             weights = models.EfficientNet_V2_L_Weights.DEFAULT
             efficientnet_model = models.efficientnet_v2_l(weights=weights)
-        except:
+        except ValueError:
             efficientnet_model = models.efficientnet_v2_l(weights=None)
     elif efficientnet_type == "mnasnet_050":
         try:
             efficientnet_model = create_model('mnasnet_050',
                                          pretrained=True,
                                          num_classes=num_classes)
-        except:
+        except ValueError:
             efficientnet_model = create_model('mnasnet_050',
                                          pretrained=False,
                                          num_classes=num_classes)
@@ -144,7 +144,7 @@ def get_efficientnet_model(efficientnet_type, num_classes):
             efficientnet_model = create_model('mnasnet_075',
                                          pretrained=True,
                                          num_classes=num_classes)
-        except:
+        except ValueError:
             efficientnet_model = create_model('mnasnet_075',
                                          pretrained=False,
                                          num_classes=num_classes)
@@ -153,7 +153,7 @@ def get_efficientnet_model(efficientnet_type, num_classes):
             efficientnet_model = create_model('mnasnet_100',
                                          pretrained=True,
                                          num_classes=num_classes)
-        except:
+        except ValueError:
             efficientnet_model = create_model('mnasnet_100',
                                          pretrained=False,
                                          num_classes=num_classes)
@@ -162,7 +162,7 @@ def get_efficientnet_model(efficientnet_type, num_classes):
             efficientnet_model = create_model('mnasnet_140',
                                          pretrained=True,
                                          num_classes=num_classes)
-        except:
+        except ValueError:
             efficientnet_model = create_model('mnasnet_140',
                                          pretrained=False,
                                          num_classes=num_classes)
@@ -171,7 +171,7 @@ def get_efficientnet_model(efficientnet_type, num_classes):
             efficientnet_model = create_model('semnasnet_050',
                                          pretrained=True,
                                          num_classes=num_classes)
-        except:
+        except ValueError:
             efficientnet_model = create_model('semnasnet_050',
                                          pretrained=False,
                                          num_classes=num_classes)
@@ -180,7 +180,7 @@ def get_efficientnet_model(efficientnet_type, num_classes):
             efficientnet_model = create_model('semnasnet_075',
                                          pretrained=True,
                                          num_classes=num_classes)
-        except:
+        except ValueError:
             efficientnet_model = create_model('semnasnet_075',
                                          pretrained=False,
                                          num_classes=num_classes)
@@ -189,7 +189,7 @@ def get_efficientnet_model(efficientnet_type, num_classes):
             efficientnet_model = create_model('semnasnet_100',
                                          pretrained=True,
                                          num_classes=num_classes)
-        except:
+        except ValueError:
             efficientnet_model = create_model('semnasnet_100',
                                          pretrained=False,
                                          num_classes=num_classes)
@@ -198,7 +198,7 @@ def get_efficientnet_model(efficientnet_type, num_classes):
             efficientnet_model = create_model('semnasnet_140',
                                          pretrained=True,
                                          num_classes=num_classes)
-        except:
+        except ValueError:
             efficientnet_model = create_model('semnasnet_140',
                                          pretrained=False,
                                          num_classes=num_classes)
@@ -207,7 +207,7 @@ def get_efficientnet_model(efficientnet_type, num_classes):
             efficientnet_model = create_model('mnasnet_small',
                                          pretrained=True,
                                          num_classes=num_classes)
-        except:
+        except ValueError:
             efficientnet_model = create_model('mnasnet_small',
                                          pretrained=False,
                                          num_classes=num_classes)
@@ -216,7 +216,7 @@ def get_efficientnet_model(efficientnet_type, num_classes):
             efficientnet_model = create_model('mobilenetv2_035',
                                          pretrained=True,
                                          num_classes=num_classes)
-        except:
+        except ValueError:
             efficientnet_model = create_model('mobilenetv2_035',
                                          pretrained=False,
                                          num_classes=num_classes)
@@ -225,7 +225,7 @@ def get_efficientnet_model(efficientnet_type, num_classes):
             efficientnet_model = create_model('mobilenetv2_050',
                                          pretrained=True,
                                          num_classes=num_classes)
-        except:
+        except ValueError:
             efficientnet_model = create_model('mobilenetv2_050',
                                          pretrained=False,
                                          num_classes=num_classes)
@@ -234,7 +234,7 @@ def get_efficientnet_model(efficientnet_type, num_classes):
             efficientnet_model = create_model('mobilenetv2_075',
                                          pretrained=True,
                                          num_classes=num_classes)
-        except:
+        except ValueError:
             efficientnet_model = create_model('mobilenetv2_075',
                                          pretrained=False,
                                          num_classes=num_classes)
@@ -243,7 +243,7 @@ def get_efficientnet_model(efficientnet_type, num_classes):
             efficientnet_model = create_model('mobilenetv2_100',
                                          pretrained=True,
                                          num_classes=num_classes)
-        except:
+        except ValueError:
             efficientnet_model = create_model('mobilenetv2_100',
                                          pretrained=False,
                                          num_classes=num_classes)
@@ -252,7 +252,7 @@ def get_efficientnet_model(efficientnet_type, num_classes):
             efficientnet_model = create_model('mobilenetv2_140',
                                          pretrained=True,
                                          num_classes=num_classes)
-        except:
+        except ValueError:
             efficientnet_model = create_model('mobilenetv2_140',
                                          pretrained=False,
                                          num_classes=num_classes)
@@ -261,7 +261,7 @@ def get_efficientnet_model(efficientnet_type, num_classes):
             efficientnet_model = create_model('mobilenetv2_110d',
                                          pretrained=True,
                                          num_classes=num_classes)
-        except:
+        except ValueError:
             efficientnet_model = create_model('mobilenetv2_110d',
                                          pretrained=False,
                                          num_classes=num_classes)
@@ -270,7 +270,7 @@ def get_efficientnet_model(efficientnet_type, num_classes):
             efficientnet_model = create_model('mobilenetv2_120d',
                                          pretrained=True,
                                          num_classes=num_classes)
-        except:
+        except ValueError:
             efficientnet_model = create_model('mobilenetv2_120d',
                                          pretrained=False,
                                          num_classes=num_classes)
@@ -279,7 +279,7 @@ def get_efficientnet_model(efficientnet_type, num_classes):
             efficientnet_model = create_model('fbnetc_100',
                                               pretrained=True,
                                               num_classes=num_classes)
-        except:
+        except ValueError:
             efficientnet_model = create_model('fbnetc_100',
                                               pretrained=False,
                                               num_classes=num_classes)
@@ -288,7 +288,7 @@ def get_efficientnet_model(efficientnet_type, num_classes):
             efficientnet_model = create_model('spnasnet_100',
                                               pretrained=True,
                                               num_classes=num_classes)
-        except:
+        except ValueError:
             efficientnet_model = create_model('spnasnet_100',
                                               pretrained=False,
                                               num_classes=num_classes)
@@ -297,7 +297,7 @@ def get_efficientnet_model(efficientnet_type, num_classes):
             efficientnet_model = create_model('efficientnet_b0',
                                               pretrained=True,
                                               num_classes=num_classes)
-        except:
+        except ValueError:
             efficientnet_model = create_model('efficientnet_b0',
                                               pretrained=False,
                                               num_classes=num_classes)
@@ -306,7 +306,7 @@ def get_efficientnet_model(efficientnet_type, num_classes):
             efficientnet_model = create_model('efficientnet_b1',
                                               pretrained=True,
                                               num_classes=num_classes)
-        except:
+        except ValueError:
             efficientnet_model = create_model('efficientnet_b1',
                                               pretrained=False,
                                               num_classes=num_classes)
@@ -315,7 +315,7 @@ def get_efficientnet_model(efficientnet_type, num_classes):
             efficientnet_model = create_model('efficientnet_b2',
                                               pretrained=True,
                                               num_classes=num_classes)
-        except:
+        except ValueError:
             efficientnet_model = create_model('efficientnet_b2',
                                               pretrained=False,
                                               num_classes=num_classes)
@@ -324,7 +324,7 @@ def get_efficientnet_model(efficientnet_type, num_classes):
             efficientnet_model = create_model('efficientnet_b3',
                                               pretrained=True,
                                               num_classes=num_classes)
-        except:
+        except ValueError:
             efficientnet_model = create_model('efficientnet_b3',
                                               pretrained=False,
                                               num_classes=num_classes)
@@ -333,7 +333,7 @@ def get_efficientnet_model(efficientnet_type, num_classes):
             efficientnet_model = create_model('efficientnet_b4',
                                               pretrained=True,
                                               num_classes=num_classes)
-        except:
+        except ValueError:
             efficientnet_model = create_model('efficientnet_b4',
                                               pretrained=False,
                                               num_classes=num_classes)
@@ -342,7 +342,7 @@ def get_efficientnet_model(efficientnet_type, num_classes):
             efficientnet_model = create_model('efficientnet_b5',
                                               pretrained=True,
                                               num_classes=num_classes)
-        except:
+        except ValueError:
             efficientnet_model = create_model('efficientnet_b5',
                                               pretrained=False,
                                               num_classes=num_classes)
@@ -351,7 +351,7 @@ def get_efficientnet_model(efficientnet_type, num_classes):
             efficientnet_model = create_model('efficientnet_b6',
                                               pretrained=True,
                                               num_classes=num_classes)
-        except:
+        except ValueError:
             efficientnet_model = create_model('efficientnet_b6',
                                               pretrained=False,
                                               num_classes=num_classes)
@@ -360,7 +360,7 @@ def get_efficientnet_model(efficientnet_type, num_classes):
             efficientnet_model = create_model('efficientnet_b7',
                                               pretrained=True,
                                               num_classes=num_classes)
-        except:
+        except ValueError:
             efficientnet_model = create_model('efficientnet_b7',
                                               pretrained=False,
                                               num_classes=num_classes)
@@ -369,7 +369,7 @@ def get_efficientnet_model(efficientnet_type, num_classes):
             efficientnet_model = create_model('efficientnet_b8',
                                               pretrained=True,
                                               num_classes=num_classes)
-        except:
+        except ValueError:
             efficientnet_model = create_model('efficientnet_b8',
                                               pretrained=False,
                                               num_classes=num_classes)
@@ -378,7 +378,7 @@ def get_efficientnet_model(efficientnet_type, num_classes):
             efficientnet_model = create_model('efficientnet_l2',
                                               pretrained=True,
                                               num_classes=num_classes)
-        except:
+        except ValueError:
             efficientnet_model = create_model('efficientnet_l2',
                                               pretrained=False,
                                               num_classes=num_classes)
@@ -387,7 +387,7 @@ def get_efficientnet_model(efficientnet_type, num_classes):
             efficientnet_model = create_model('efficientnet_b0_gn',
                                               pretrained=True,
                                               num_classes=num_classes)
-        except:
+        except ValueError:
             efficientnet_model = create_model('efficientnet_b0_gn',
                                               pretrained=False,
                                               num_classes=num_classes)
@@ -396,7 +396,7 @@ def get_efficientnet_model(efficientnet_type, num_classes):
             efficientnet_model = create_model('efficientnet_b0_g8_gn',
                                               pretrained=True,
                                               num_classes=num_classes)
-        except:
+        except ValueError:
             efficientnet_model = create_model('efficientnet_b0_g8_gn',
                                               pretrained=False,
                                               num_classes=num_classes)
@@ -405,7 +405,7 @@ def get_efficientnet_model(efficientnet_type, num_classes):
             efficientnet_model = create_model('efficientnet_b0_g16_evos',
                                               pretrained=True,
                                               num_classes=num_classes)
-        except:
+        except ValueError:
             efficientnet_model = create_model('efficientnet_b0_g16_evos',
                                               pretrained=False,
                                               num_classes=num_classes)
@@ -414,7 +414,7 @@ def get_efficientnet_model(efficientnet_type, num_classes):
             efficientnet_model = create_model('efficientnet_b3_gn',
                                               pretrained=True,
                                               num_classes=num_classes)
-        except:
+        except ValueError:
             efficientnet_model = create_model('efficientnet_b3_gn',
                                               pretrained=False,
                                               num_classes=num_classes)
@@ -423,7 +423,7 @@ def get_efficientnet_model(efficientnet_type, num_classes):
             efficientnet_model = create_model('efficientnet_b3_g8_gn',
                                               pretrained=True,
                                               num_classes=num_classes)
-        except:
+        except ValueError:
             efficientnet_model = create_model('efficientnet_b3_g8_gn',
                                               pretrained=False,
                                               num_classes=num_classes)
@@ -432,7 +432,7 @@ def get_efficientnet_model(efficientnet_type, num_classes):
             efficientnet_model = create_model('efficientnet_es',
                                               pretrained=True,
                                               num_classes=num_classes)
-        except:
+        except ValueError:
             efficientnet_model = create_model('efficientnet_es',
                                               pretrained=False,
                                               num_classes=num_classes)
@@ -441,7 +441,7 @@ def get_efficientnet_model(efficientnet_type, num_classes):
             efficientnet_model = create_model('efficientnet_es_pruned',
                                               pretrained=True,
                                               num_classes=num_classes)
-        except:
+        except ValueError:
             efficientnet_model = create_model('efficientnet_es_pruned',
                                               pretrained=False,
                                               num_classes=num_classes)
@@ -450,7 +450,7 @@ def get_efficientnet_model(efficientnet_type, num_classes):
             efficientnet_model = create_model('efficientnet_em',
                                               pretrained=True,
                                               num_classes=num_classes)
-        except:
+        except ValueError:
             efficientnet_model = create_model('efficientnet_em',
                                               pretrained=False,
                                               num_classes=num_classes)
@@ -459,7 +459,7 @@ def get_efficientnet_model(efficientnet_type, num_classes):
             efficientnet_model = create_model('efficientnet_el',
                                               pretrained=True,
                                               num_classes=num_classes)
-        except:
+        except ValueError:
             efficientnet_model = create_model('efficientnet_el',
                                               pretrained=False,
                                               num_classes=num_classes)
@@ -468,7 +468,7 @@ def get_efficientnet_model(efficientnet_type, num_classes):
             efficientnet_model = create_model('efficientnet_el_pruned',
                                               pretrained=True,
                                               num_classes=num_classes)
-        except:
+        except ValueError:
             efficientnet_model = create_model('efficientnet_el_pruned',
                                               pretrained=False,
                                               num_classes=num_classes)
@@ -477,7 +477,7 @@ def get_efficientnet_model(efficientnet_type, num_classes):
             efficientnet_model = create_model('efficientnet_cc_b0_4e',
                                               pretrained=True,
                                               num_classes=num_classes)
-        except:
+        except ValueError:
             efficientnet_model = create_model('efficientnet_cc_b0_4e',
                                               pretrained=False,
                                               num_classes=num_classes)
@@ -486,7 +486,7 @@ def get_efficientnet_model(efficientnet_type, num_classes):
             efficientnet_model = create_model('efficientnet_cc_b0_8e',
                                               pretrained=True,
                                               num_classes=num_classes)
-        except:
+        except ValueError:
             efficientnet_model = create_model('efficientnet_cc_b0_8e',
                                               pretrained=False,
                                               num_classes=num_classes)
@@ -495,7 +495,7 @@ def get_efficientnet_model(efficientnet_type, num_classes):
             efficientnet_model = create_model('efficientnet_cc_b1_8e',
                                               pretrained=True,
                                               num_classes=num_classes)
-        except:
+        except ValueError:
             efficientnet_model = create_model('efficientnet_cc_b1_8e',
                                               pretrained=False,
                                               num_classes=num_classes)
@@ -504,7 +504,7 @@ def get_efficientnet_model(efficientnet_type, num_classes):
             efficientnet_model = create_model('efficientnet_lite0',
                                               pretrained=True,
                                               num_classes=num_classes)
-        except:
+        except ValueError:
             efficientnet_model = create_model('efficientnet_lite0',
                                               pretrained=False,
                                               num_classes=num_classes)
@@ -513,7 +513,7 @@ def get_efficientnet_model(efficientnet_type, num_classes):
             efficientnet_model = create_model('efficientnet_lite1',
                                               pretrained=True,
                                               num_classes=num_classes)
-        except:
+        except ValueError:
             efficientnet_model = create_model('efficientnet_lite1',
                                               pretrained=False,
                                               num_classes=num_classes)
@@ -522,7 +522,7 @@ def get_efficientnet_model(efficientnet_type, num_classes):
             efficientnet_model = create_model('efficientnet_lite2',
                                               pretrained=True,
                                               num_classes=num_classes)
-        except:
+        except ValueError:
             efficientnet_model = create_model('efficientnet_lite2',
                                               pretrained=False,
                                               num_classes=num_classes)
@@ -531,7 +531,7 @@ def get_efficientnet_model(efficientnet_type, num_classes):
             efficientnet_model = create_model('efficientnet_lite3',
                                               pretrained=True,
                                               num_classes=num_classes)
-        except:
+        except ValueError:
             efficientnet_model = create_model('efficientnet_lite3',
                                               pretrained=False,
                                               num_classes=num_classes)
@@ -540,7 +540,7 @@ def get_efficientnet_model(efficientnet_type, num_classes):
             efficientnet_model = create_model('efficientnet_lite4',
                                               pretrained=True,
                                               num_classes=num_classes)
-        except:
+        except ValueError:
             efficientnet_model = create_model('efficientnet_lite4',
                                               pretrained=False,
                                               num_classes=num_classes)
@@ -549,7 +549,7 @@ def get_efficientnet_model(efficientnet_type, num_classes):
             efficientnet_model = create_model('efficientnet_b1_pruned',
                                               pretrained=True,
                                               num_classes=num_classes)
-        except:
+        except ValueError:
             efficientnet_model = create_model('efficientnet_b1_pruned',
                                               pretrained=False,
                                               num_classes=num_classes)
@@ -558,7 +558,7 @@ def get_efficientnet_model(efficientnet_type, num_classes):
             efficientnet_model = create_model('efficientnet_b2_pruned',
                                               pretrained=True,
                                               num_classes=num_classes)
-        except:
+        except ValueError:
             efficientnet_model = create_model('efficientnet_b2_pruned',
                                               pretrained=False,
                                               num_classes=num_classes)
@@ -567,7 +567,7 @@ def get_efficientnet_model(efficientnet_type, num_classes):
             efficientnet_model = create_model('efficientnet_b3_pruned',
                                               pretrained=True,
                                               num_classes=num_classes)
-        except:
+        except ValueError:
             efficientnet_model = create_model('efficientnet_b3_pruned',
                                               pretrained=False,
                                               num_classes=num_classes)
@@ -576,7 +576,7 @@ def get_efficientnet_model(efficientnet_type, num_classes):
             efficientnet_model = create_model('efficientnetv2_rw_t',
                                               pretrained=True,
                                               num_classes=num_classes)
-        except:
+        except ValueError:
             efficientnet_model = create_model('efficientnetv2_rw_t',
                                               pretrained=False,
                                               num_classes=num_classes)
@@ -585,7 +585,7 @@ def get_efficientnet_model(efficientnet_type, num_classes):
             efficientnet_model = create_model('gc_efficientnetv2_rw_t',
                                               pretrained=True,
                                               num_classes=num_classes)
-        except:
+        except ValueError:
             efficientnet_model = create_model('gc_efficientnetv2_rw_t',
                                               pretrained=False,
                                               num_classes=num_classes)
@@ -594,7 +594,7 @@ def get_efficientnet_model(efficientnet_type, num_classes):
             efficientnet_model = create_model('efficientnetv2_rw_s',
                                               pretrained=True,
                                               num_classes=num_classes)
-        except:
+        except ValueError:
             efficientnet_model = create_model('efficientnetv2_rw_s',
                                               pretrained=False,
                                               num_classes=num_classes)
@@ -603,7 +603,7 @@ def get_efficientnet_model(efficientnet_type, num_classes):
             efficientnet_model = create_model('efficientnetv2_rw_m',
                                               pretrained=True,
                                               num_classes=num_classes)
-        except:
+        except ValueError:
             efficientnet_model = create_model('efficientnetv2_rw_m',
                                               pretrained=False,
                                               num_classes=num_classes)
@@ -612,7 +612,7 @@ def get_efficientnet_model(efficientnet_type, num_classes):
             efficientnet_model = create_model('efficientnetv2_s',
                                               pretrained=True,
                                               num_classes=num_classes)
-        except:
+        except ValueError:
             efficientnet_model = create_model('efficientnetv2_s',
                                               pretrained=False,
                                               num_classes=num_classes)
@@ -621,7 +621,7 @@ def get_efficientnet_model(efficientnet_type, num_classes):
             efficientnet_model = create_model('efficientnetv2_m',
                                               pretrained=True,
                                               num_classes=num_classes)
-        except:
+        except ValueError:
             efficientnet_model = create_model('efficientnetv2_m',
                                               pretrained=False,
                                               num_classes=num_classes)
@@ -630,7 +630,7 @@ def get_efficientnet_model(efficientnet_type, num_classes):
             efficientnet_model = create_model('efficientnetv2_l',
                                               pretrained=True,
                                               num_classes=num_classes)
-        except:
+        except ValueError:
             efficientnet_model = create_model('efficientnetv2_l',
                                               pretrained=False,
                                               num_classes=num_classes)
@@ -639,7 +639,7 @@ def get_efficientnet_model(efficientnet_type, num_classes):
             efficientnet_model = create_model('efficientnetv2_xl',
                                               pretrained=True,
                                               num_classes=num_classes)
-        except:
+        except ValueError:
             efficientnet_model = create_model('efficientnetv2_xl',
                                               pretrained=False,
                                               num_classes=num_classes)
@@ -648,7 +648,7 @@ def get_efficientnet_model(efficientnet_type, num_classes):
             efficientnet_model = create_model('tf_efficientnet_b0',
                                               pretrained=True,
                                               num_classes=num_classes)
-        except:
+        except ValueError:
             efficientnet_model = create_model('tf_efficientnet_b0',
                                               pretrained=False,
                                               num_classes=num_classes)
@@ -657,7 +657,7 @@ def get_efficientnet_model(efficientnet_type, num_classes):
             efficientnet_model = create_model('tf_efficientnet_b1',
                                               pretrained=True,
                                               num_classes=num_classes)
-        except:
+        except ValueError:
             efficientnet_model = create_model('tf_efficientnet_b1',
                                               pretrained=False,
                                               num_classes=num_classes)
@@ -666,7 +666,7 @@ def get_efficientnet_model(efficientnet_type, num_classes):
             efficientnet_model = create_model('tf_efficientnet_b2',
                                               pretrained=True,
                                               num_classes=num_classes)
-        except:
+        except ValueError:
             efficientnet_model = create_model('tf_efficientnet_b2',
                                               pretrained=False,
                                               num_classes=num_classes)
@@ -675,7 +675,7 @@ def get_efficientnet_model(efficientnet_type, num_classes):
             efficientnet_model = create_model('tf_efficientnet_b3',
                                               pretrained=True,
                                               num_classes=num_classes)
-        except:
+        except ValueError:
             efficientnet_model = create_model('tf_efficientnet_b3',
                                               pretrained=False,
                                               num_classes=num_classes)
@@ -684,7 +684,7 @@ def get_efficientnet_model(efficientnet_type, num_classes):
             efficientnet_model = create_model('tf_efficientnet_b4',
                                               pretrained=True,
                                               num_classes=num_classes)
-        except:
+        except ValueError:
             efficientnet_model = create_model('tf_efficientnet_b4',
                                               pretrained=False,
                                               num_classes=num_classes)
@@ -693,7 +693,7 @@ def get_efficientnet_model(efficientnet_type, num_classes):
             efficientnet_model = create_model('tf_efficientnet_b5',
                                               pretrained=True,
                                               num_classes=num_classes)
-        except:
+        except ValueError:
             efficientnet_model = create_model('tf_efficientnet_b5',
                                               pretrained=False,
                                               num_classes=num_classes)
@@ -702,7 +702,7 @@ def get_efficientnet_model(efficientnet_type, num_classes):
             efficientnet_model = create_model('tf_efficientnet_b6',
                                               pretrained=True,
                                               num_classes=num_classes)
-        except:
+        except ValueError:
             efficientnet_model = create_model('tf_efficientnet_b6',
                                               pretrained=False,
                                               num_classes=num_classes)
@@ -711,7 +711,7 @@ def get_efficientnet_model(efficientnet_type, num_classes):
             efficientnet_model = create_model('tf_efficientnet_b7',
                                               pretrained=True,
                                               num_classes=num_classes)
-        except:
+        except ValueError:
             efficientnet_model = create_model('tf_efficientnet_b7',
                                               pretrained=False,
                                               num_classes=num_classes)
@@ -720,7 +720,7 @@ def get_efficientnet_model(efficientnet_type, num_classes):
             efficientnet_model = create_model('tf_efficientnet_b8',
                                               pretrained=True,
                                               num_classes=num_classes)
-        except:
+        except ValueError:
             efficientnet_model = create_model('tf_efficientnet_b8',
                                               pretrained=False,
                                               num_classes=num_classes)
@@ -729,7 +729,7 @@ def get_efficientnet_model(efficientnet_type, num_classes):
             efficientnet_model = create_model('tf_efficientnet_l2',
                                               pretrained=True,
                                               num_classes=num_classes)
-        except:
+        except ValueError:
             efficientnet_model = create_model('tf_efficientnet_l2',
                                               pretrained=False,
                                               num_classes=num_classes)
@@ -738,7 +738,7 @@ def get_efficientnet_model(efficientnet_type, num_classes):
             efficientnet_model = create_model('tf_efficientnet_es',
                                               pretrained=True,
                                               num_classes=num_classes)
-        except:
+        except ValueError:
             efficientnet_model = create_model('tf_efficientnet_es',
                                               pretrained=False,
                                               num_classes=num_classes)
@@ -747,7 +747,7 @@ def get_efficientnet_model(efficientnet_type, num_classes):
             efficientnet_model = create_model('tf_efficientnet_em',
                                               pretrained=True,
                                               num_classes=num_classes)
-        except:
+        except ValueError:
             efficientnet_model = create_model('tf_efficientnet_em',
                                               pretrained=False,
                                               num_classes=num_classes)
@@ -756,7 +756,7 @@ def get_efficientnet_model(efficientnet_type, num_classes):
             efficientnet_model = create_model('tf_efficientnet_el',
                                               pretrained=True,
                                               num_classes=num_classes)
-        except:
+        except ValueError:
             efficientnet_model = create_model('tf_efficientnet_el',
                                               pretrained=False,
                                               num_classes=num_classes)
@@ -765,7 +765,7 @@ def get_efficientnet_model(efficientnet_type, num_classes):
             efficientnet_model = create_model('tf_efficientnet_cc_b0_4e',
                                               pretrained=True,
                                               num_classes=num_classes)
-        except:
+        except ValueError:
             efficientnet_model = create_model('tf_efficientnet_cc_b0_4e',
                                               pretrained=False,
                                               num_classes=num_classes)
@@ -774,7 +774,7 @@ def get_efficientnet_model(efficientnet_type, num_classes):
             efficientnet_model = create_model('tf_efficientnet_cc_b0_8e',
                                               pretrained=True,
                                               num_classes=num_classes)
-        except:
+        except ValueError:
             efficientnet_model = create_model('tf_efficientnet_cc_b0_8e',
                                               pretrained=False,
                                               num_classes=num_classes)
@@ -783,7 +783,7 @@ def get_efficientnet_model(efficientnet_type, num_classes):
             efficientnet_model = create_model('tf_efficientnet_cc_b1_8e',
                                               pretrained=True,
                                               num_classes=num_classes)
-        except:
+        except ValueError:
             efficientnet_model = create_model('tf_efficientnet_cc_b1_8e',
                                               pretrained=False,
                                               num_classes=num_classes)
@@ -792,7 +792,7 @@ def get_efficientnet_model(efficientnet_type, num_classes):
             efficientnet_model = create_model('tf_efficientnet_lite0',
                                               pretrained=True,
                                               num_classes=num_classes)
-        except:
+        except ValueError:
             efficientnet_model = create_model('tf_efficientnet_lite0',
                                               pretrained=False,
                                               num_classes=num_classes)
@@ -801,7 +801,7 @@ def get_efficientnet_model(efficientnet_type, num_classes):
             efficientnet_model = create_model('tf_efficientnet_lite1',
                                               pretrained=True,
                                               num_classes=num_classes)
-        except:
+        except ValueError:
             efficientnet_model = create_model('tf_efficientnet_lite1',
                                               pretrained=False,
                                               num_classes=num_classes)
@@ -810,7 +810,7 @@ def get_efficientnet_model(efficientnet_type, num_classes):
             efficientnet_model = create_model('tf_efficientnet_lite2',
                                               pretrained=True,
                                               num_classes=num_classes)
-        except:
+        except ValueError:
             efficientnet_model = create_model('tf_efficientnet_lite2',
                                               pretrained=False,
                                               num_classes=num_classes)
@@ -819,7 +819,7 @@ def get_efficientnet_model(efficientnet_type, num_classes):
             efficientnet_model = create_model('tf_efficientnet_lite3',
                                               pretrained=True,
                                               num_classes=num_classes)
-        except:
+        except ValueError:
             efficientnet_model = create_model('tf_efficientnet_lite3',
                                               pretrained=False,
                                               num_classes=num_classes)
@@ -828,7 +828,7 @@ def get_efficientnet_model(efficientnet_type, num_classes):
             efficientnet_model = create_model('tf_efficientnet_lite4',
                                               pretrained=True,
                                               num_classes=num_classes)
-        except:
+        except ValueError:
             efficientnet_model = create_model('tf_efficientnet_lite4',
                                               pretrained=False,
                                               num_classes=num_classes)
@@ -837,7 +837,7 @@ def get_efficientnet_model(efficientnet_type, num_classes):
             efficientnet_model = create_model('tf_efficientnetv2_s',
                                               pretrained=True,
                                               num_classes=num_classes)
-        except:
+        except ValueError:
             efficientnet_model = create_model('tf_efficientnetv2_s',
                                               pretrained=False,
                                               num_classes=num_classes)
@@ -846,7 +846,7 @@ def get_efficientnet_model(efficientnet_type, num_classes):
             efficientnet_model = create_model('tf_efficientnetv2_m',
                                               pretrained=True,
                                               num_classes=num_classes)
-        except:
+        except ValueError:
             efficientnet_model = create_model('tf_efficientnetv2_m',
                                               pretrained=False,
                                               num_classes=num_classes)
@@ -855,7 +855,7 @@ def get_efficientnet_model(efficientnet_type, num_classes):
             efficientnet_model = create_model('tf_efficientnetv2_l',
                                               pretrained=True,
                                               num_classes=num_classes)
-        except:
+        except ValueError:
             efficientnet_model = create_model('tf_efficientnetv2_l',
                                               pretrained=False,
                                               num_classes=num_classes)
@@ -864,7 +864,7 @@ def get_efficientnet_model(efficientnet_type, num_classes):
             efficientnet_model = create_model('tf_efficientnetv2_xl',
                                               pretrained=True,
                                               num_classes=num_classes)
-        except:
+        except ValueError:
             efficientnet_model = create_model('tf_efficientnetv2_xl',
                                               pretrained=False,
                                               num_classes=num_classes)
@@ -873,7 +873,7 @@ def get_efficientnet_model(efficientnet_type, num_classes):
             efficientnet_model = create_model('tf_efficientnetv2_b0',
                                               pretrained=True,
                                               num_classes=num_classes)
-        except:
+        except ValueError:
             efficientnet_model = create_model('tf_efficientnetv2_b0',
                                               pretrained=False,
                                               num_classes=num_classes)
@@ -882,7 +882,7 @@ def get_efficientnet_model(efficientnet_type, num_classes):
             efficientnet_model = create_model('tf_efficientnetv2_b1',
                                               pretrained=True,
                                               num_classes=num_classes)
-        except:
+        except ValueError:
             efficientnet_model = create_model('tf_efficientnetv2_b1',
                                               pretrained=False,
                                               num_classes=num_classes)
@@ -891,7 +891,7 @@ def get_efficientnet_model(efficientnet_type, num_classes):
             efficientnet_model = create_model('tf_efficientnetv2_b2',
                                               pretrained=True,
                                               num_classes=num_classes)
-        except:
+        except ValueError:
             efficientnet_model = create_model('tf_efficientnetv2_b2',
                                               pretrained=False,
                                               num_classes=num_classes)
@@ -900,7 +900,7 @@ def get_efficientnet_model(efficientnet_type, num_classes):
             efficientnet_model = create_model('tf_efficientnetv2_b3',
                                               pretrained=True,
                                               num_classes=num_classes)
-        except:
+        except ValueError:
             efficientnet_model = create_model('tf_efficientnetv2_b3',
                                               pretrained=False,
                                               num_classes=num_classes)
@@ -909,7 +909,7 @@ def get_efficientnet_model(efficientnet_type, num_classes):
             efficientnet_model = create_model('mixnet_s',
                                               pretrained=True,
                                               num_classes=num_classes)
-        except:
+        except ValueError:
             efficientnet_model = create_model('mixnet_s',
                                               pretrained=False,
                                               num_classes=num_classes)
@@ -918,7 +918,7 @@ def get_efficientnet_model(efficientnet_type, num_classes):
             efficientnet_model = create_model('mixnet_m',
                                               pretrained=True,
                                               num_classes=num_classes)
-        except:
+        except ValueError:
             efficientnet_model = create_model('mixnet_m',
                                               pretrained=False,
                                               num_classes=num_classes)
@@ -927,7 +927,7 @@ def get_efficientnet_model(efficientnet_type, num_classes):
             efficientnet_model = create_model('mixnet_l',
                                               pretrained=True,
                                               num_classes=num_classes)
-        except:
+        except ValueError:
             efficientnet_model = create_model('mixnet_l',
                                               pretrained=False,
                                               num_classes=num_classes)
@@ -936,7 +936,7 @@ def get_efficientnet_model(efficientnet_type, num_classes):
             efficientnet_model = create_model('mixnet_xl',
                                               pretrained=True,
                                               num_classes=num_classes)
-        except:
+        except ValueError:
             efficientnet_model = create_model('mixnet_xl',
                                               pretrained=False,
                                               num_classes=num_classes)
@@ -945,7 +945,7 @@ def get_efficientnet_model(efficientnet_type, num_classes):
             efficientnet_model = create_model('mixnet_xxl',
                                               pretrained=True,
                                               num_classes=num_classes)
-        except:
+        except ValueError:
             efficientnet_model = create_model('mixnet_xxl',
                                               pretrained=False,
                                               num_classes=num_classes)
@@ -954,7 +954,7 @@ def get_efficientnet_model(efficientnet_type, num_classes):
             efficientnet_model = create_model('tf_mixnet_s',
                                               pretrained=True,
                                               num_classes=num_classes)
-        except:
+        except ValueError:
             efficientnet_model = create_model('tf_mixnet_s',
                                               pretrained=False,
                                               num_classes=num_classes)
@@ -963,7 +963,7 @@ def get_efficientnet_model(efficientnet_type, num_classes):
             efficientnet_model = create_model('tf_mixnet_m',
                                               pretrained=True,
                                               num_classes=num_classes)
-        except:
+        except ValueError:
             efficientnet_model = create_model('tf_mixnet_m',
                                               pretrained=False,
                                               num_classes=num_classes)
@@ -972,7 +972,7 @@ def get_efficientnet_model(efficientnet_type, num_classes):
             efficientnet_model = create_model('tf_mixnet_l',
                                               pretrained=True,
                                               num_classes=num_classes)
-        except:
+        except ValueError:
             efficientnet_model = create_model('tf_mixnet_l',
                                               pretrained=False,
                                               num_classes=num_classes)
@@ -981,7 +981,7 @@ def get_efficientnet_model(efficientnet_type, num_classes):
             efficientnet_model = create_model('tinynet_a',
                                               pretrained=True,
                                               num_classes=num_classes)
-        except:
+        except ValueError:
             efficientnet_model = create_model('tinynet_a',
                                               pretrained=False,
                                               num_classes=num_classes)
@@ -990,7 +990,7 @@ def get_efficientnet_model(efficientnet_type, num_classes):
             efficientnet_model = create_model('tinynet_b',
                                               pretrained=True,
                                               num_classes=num_classes)
-        except:
+        except ValueError:
             efficientnet_model = create_model('tinynet_b',
                                               pretrained=False,
                                               num_classes=num_classes)
@@ -999,7 +999,7 @@ def get_efficientnet_model(efficientnet_type, num_classes):
             efficientnet_model = create_model('tinynet_c',
                                               pretrained=True,
                                               num_classes=num_classes)
-        except:
+        except ValueError:
             efficientnet_model = create_model('tinynet_c',
                                               pretrained=False,
                                               num_classes=num_classes)
@@ -1008,7 +1008,7 @@ def get_efficientnet_model(efficientnet_type, num_classes):
             efficientnet_model = create_model('tinynet_d',
                                               pretrained=True,
                                               num_classes=num_classes)
-        except:
+        except ValueError:
             efficientnet_model = create_model('tinynet_d',
                                               pretrained=False,
                                               num_classes=num_classes)
@@ -1017,7 +1017,7 @@ def get_efficientnet_model(efficientnet_type, num_classes):
             efficientnet_model = create_model('tinynet_e',
                                               pretrained=True,
                                               num_classes=num_classes)
-        except:
+        except ValueError:
             efficientnet_model = create_model('tinynet_e',
                                               pretrained=False,
                                               num_classes=num_classes)
