@@ -30,7 +30,7 @@ def get_rexnet_model(rexnet_type, num_classes):
             rexnet_model = create_model('rexnet_100',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except:
+        except ValueError:
             rexnet_model = create_model('rexnet_100',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -39,7 +39,7 @@ def get_rexnet_model(rexnet_type, num_classes):
             rexnet_model = create_model('rexnet_130',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except:
+        except ValueError:
             rexnet_model = create_model('rexnet_130',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -48,7 +48,7 @@ def get_rexnet_model(rexnet_type, num_classes):
             rexnet_model = create_model('rexnet_150',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except:
+        except ValueError:
             rexnet_model = create_model('rexnet_150',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -57,7 +57,7 @@ def get_rexnet_model(rexnet_type, num_classes):
             rexnet_model = create_model('rexnet_200',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except:
+        except ValueError:
             rexnet_model = create_model('rexnet_200',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -66,7 +66,7 @@ def get_rexnet_model(rexnet_type, num_classes):
             rexnet_model = create_model('rexnet_300',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except:
+        except ValueError:
             rexnet_model = create_model('rexnet_300',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -75,7 +75,7 @@ def get_rexnet_model(rexnet_type, num_classes):
             rexnet_model = create_model('rexnetr_100',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except:
+        except ValueError:
             rexnet_model = create_model('rexnetr_100',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -84,7 +84,7 @@ def get_rexnet_model(rexnet_type, num_classes):
             rexnet_model = create_model('rexnetr_130',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except:
+        except ValueError:
             rexnet_model = create_model('rexnetr_130',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -93,7 +93,7 @@ def get_rexnet_model(rexnet_type, num_classes):
             rexnet_model = create_model('rexnetr_150',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except:
+        except ValueError:
             rexnet_model = create_model('rexnetr_150',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -102,7 +102,7 @@ def get_rexnet_model(rexnet_type, num_classes):
             rexnet_model = create_model('rexnetr_200',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except:
+        except ValueError:
             rexnet_model = create_model('rexnetr_200',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -111,7 +111,7 @@ def get_rexnet_model(rexnet_type, num_classes):
             rexnet_model = create_model('rexnetr_300',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except:
+        except ValueError:
             rexnet_model = create_model('rexnetr_300',
                                         pretrained=False,
                                         num_classes=num_classes)

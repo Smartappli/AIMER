@@ -48,7 +48,7 @@ def get_xcit_model(xcit_type, num_classes):
             xcit_model = create_model('xcit_nano_12_p16_224',
                                       pretrained=True,
                                       num_classes=num_classes)
-        except:
+        except ValueError:
             xcit_model = create_model('xcit_nano_12_p16_224',
                                       pretrained=False,
                                       num_classes=num_classes)
@@ -57,7 +57,7 @@ def get_xcit_model(xcit_type, num_classes):
             xcit_model = create_model('xcit_nano_12_p16_384',
                                       pretrained=True,
                                       num_classes=num_classes)
-        except:
+        except ValueError:
             xcit_model = create_model('xcit_nano_12_p16_384',
                                       pretrained=False,
                                       num_classes=num_classes)
@@ -66,7 +66,7 @@ def get_xcit_model(xcit_type, num_classes):
             xcit_model = create_model('xcit_tiny_12_p16_224',
                                       pretrained=True,
                                       num_classes=num_classes)
-        except:
+        except ValueError:
             xcit_model = create_model('xcit_tiny_12_p16_224',
                                       pretrained=False,
                                       num_classes=num_classes)
@@ -75,7 +75,7 @@ def get_xcit_model(xcit_type, num_classes):
             xcit_model = create_model('xcit_tiny_12_p16_384',
                                       pretrained=True,
                                       num_classes=num_classes)
-        except:
+        except ValueError:
             xcit_model = create_model('xcit_tiny_12_p16_384',
                                       pretrained=False,
                                       num_classes=num_classes)
@@ -84,7 +84,7 @@ def get_xcit_model(xcit_type, num_classes):
             xcit_model = create_model('xcit_small_12_p16_224',
                                       pretrained=True,
                                       num_classes=num_classes)
-        except:
+        except ValueError:
             xcit_model = create_model('xcit_small_12_p16_224',
                                       pretrained=False,
                                       num_classes=num_classes)
@@ -93,7 +93,7 @@ def get_xcit_model(xcit_type, num_classes):
             xcit_model = create_model('xcit_small_12_p16_384',
                                       pretrained=True,
                                       num_classes=num_classes)
-        except:
+        except ValueError:
             xcit_model = create_model('xcit_small_12_p16_384',
                                       pretrained=False,
                                       num_classes=num_classes)
@@ -102,7 +102,7 @@ def get_xcit_model(xcit_type, num_classes):
             xcit_model = create_model('xcit_tiny_24_p16_224',
                                       pretrained=True,
                                       num_classes=num_classes)
-        except:
+        except ValueError:
             xcit_model = create_model('xcit_tiny_24_p16_224',
                                       pretrained=False,
                                       num_classes=num_classes)
@@ -111,7 +111,7 @@ def get_xcit_model(xcit_type, num_classes):
             xcit_model = create_model('xcit_tiny_24_p16_384',
                                       pretrained=True,
                                       num_classes=num_classes)
-        except:
+        except ValueError:
             xcit_model = create_model('xcit_tiny_24_p16_384',
                                       pretrained=False,
                                       num_classes=num_classes)
@@ -120,7 +120,7 @@ def get_xcit_model(xcit_type, num_classes):
             xcit_model = create_model('xcit_small_24_p16_224',
                                       pretrained=True,
                                       num_classes=num_classes)
-        except:
+        except ValueError:
             xcit_model = create_model('xcit_small_24_p16_224',
                                       pretrained=False,
                                       num_classes=num_classes)
@@ -129,7 +129,7 @@ def get_xcit_model(xcit_type, num_classes):
             xcit_model = create_model('xcit_small_24_p16_384',
                                       pretrained=True,
                                       num_classes=num_classes)
-        except:
+        except ValueError:
             xcit_model = create_model('xcit_small_24_p16_384',
                                       pretrained=False,
                                       num_classes=num_classes)
@@ -138,7 +138,7 @@ def get_xcit_model(xcit_type, num_classes):
             xcit_model = create_model('xcit_medium_24_p16_224',
                                       pretrained=True,
                                       num_classes=num_classes)
-        except:
+        except ValueError:
             xcit_model = create_model('xcit_medium_24_p16_224',
                                       pretrained=False,
                                       num_classes=num_classes)
@@ -147,7 +147,7 @@ def get_xcit_model(xcit_type, num_classes):
             xcit_model = create_model('xcit_medium_24_p16_384',
                                       pretrained=True,
                                       num_classes=num_classes)
-        except:
+        except ValueError:
             xcit_model = create_model('xcit_medium_24_p16_384',
                                       pretrained=False,
                                       num_classes=num_classes)
@@ -156,7 +156,7 @@ def get_xcit_model(xcit_type, num_classes):
             xcit_model = create_model('xcit_large_24_p16_224',
                                       pretrained=True,
                                       num_classes=num_classes)
-        except:
+        except ValueError:
             xcit_model = create_model('xcit_large_24_p16_224',
                                       pretrained=False,
                                       num_classes=num_classes)
@@ -165,7 +165,7 @@ def get_xcit_model(xcit_type, num_classes):
             xcit_model = create_model('xcit_large_24_p16_384',
                                       pretrained=True,
                                       num_classes=num_classes)
-        except:
+        except ValueError:
             xcit_model = create_model('xcit_large_24_p16_384',
                                       pretrained=False,
                                       num_classes=num_classes)
@@ -174,7 +174,7 @@ def get_xcit_model(xcit_type, num_classes):
             xcit_model = create_model('xcit_nano_12_p8_224',
                                       pretrained=True,
                                       num_classes=num_classes)
-        except:
+        except ValueError:
             xcit_model = create_model('xcit_nano_12_p8_224',
                                       pretrained=False,
                                       num_classes=num_classes)
@@ -183,7 +183,7 @@ def get_xcit_model(xcit_type, num_classes):
             xcit_model = create_model('xcit_nano_12_p8_384',
                                       pretrained=True,
                                       num_classes=num_classes)
-        except:
+        except ValueError:
             xcit_model = create_model('xcit_nano_12_p8_384',
                                       pretrained=False,
                                       num_classes=num_classes)
@@ -192,7 +192,7 @@ def get_xcit_model(xcit_type, num_classes):
             xcit_model = create_model('xcit_tiny_12_p8_224',
                                       pretrained=True,
                                       num_classes=num_classes)
-        except:
+        except ValueError:
             xcit_model = create_model('xcit_tiny_12_p8_224',
                                       pretrained=False,
                                       num_classes=num_classes)
@@ -201,7 +201,7 @@ def get_xcit_model(xcit_type, num_classes):
             xcit_model = create_model('xcit_tiny_12_p8_384',
                                       pretrained=True,
                                       num_classes=num_classes)
-        except:
+        except ValueError:
             xcit_model = create_model('xcit_tiny_12_p8_384',
                                       pretrained=False,
                                       num_classes=num_classes)
@@ -210,7 +210,7 @@ def get_xcit_model(xcit_type, num_classes):
             xcit_model = create_model('xcit_small_12_p8_224',
                                       pretrained=True,
                                       num_classes=num_classes)
-        except:
+        except ValueError:
             xcit_model = create_model('xcit_small_12_p8_224',
                                       pretrained=False,
                                       num_classes=num_classes)
@@ -219,7 +219,7 @@ def get_xcit_model(xcit_type, num_classes):
             xcit_model = create_model('xcit_small_12_p8_384',
                                       pretrained=True,
                                       num_classes=num_classes)
-        except:
+        except ValueError:
             xcit_model = create_model('xcit_small_12_p8_384',
                                       pretrained=False,
                                       num_classes=num_classes)
@@ -228,7 +228,7 @@ def get_xcit_model(xcit_type, num_classes):
             xcit_model = create_model('xcit_tiny_24_p8_224',
                                       pretrained=True,
                                       num_classes=num_classes)
-        except:
+        except ValueError:
             xcit_model = create_model('xcit_tiny_24_p8_224',
                                       pretrained=False,
                                       num_classes=num_classes)
@@ -237,7 +237,7 @@ def get_xcit_model(xcit_type, num_classes):
             xcit_model = create_model('xcit_tiny_24_p8_384',
                                       pretrained=True,
                                       num_classes=num_classes)
-        except:
+        except ValueError:
             xcit_model = create_model('xcit_tiny_24_p8_384',
                                       pretrained=False,
                                       num_classes=num_classes)
@@ -246,7 +246,7 @@ def get_xcit_model(xcit_type, num_classes):
             xcit_model = create_model('xcit_small_24_p8_224',
                                       pretrained=True,
                                       num_classes=num_classes)
-        except:
+        except ValueError:
             xcit_model = create_model('xcit_small_24_p8_224',
                                       pretrained=False,
                                       num_classes=num_classes)
@@ -255,7 +255,7 @@ def get_xcit_model(xcit_type, num_classes):
             xcit_model = create_model('xcit_small_24_p8_384',
                                       pretrained=True,
                                       num_classes=num_classes)
-        except:
+        except ValueError:
             xcit_model = create_model('xcit_small_24_p8_384',
                                       pretrained=False,
                                       num_classes=num_classes)
@@ -264,7 +264,7 @@ def get_xcit_model(xcit_type, num_classes):
             xcit_model = create_model('xcit_medium_24_p8_224',
                                       pretrained=True,
                                       num_classes=num_classes)
-        except:
+        except ValueError:
             xcit_model = create_model('xcit_medium_24_p8_224',
                                       pretrained=False,
                                       num_classes=num_classes)
@@ -273,7 +273,7 @@ def get_xcit_model(xcit_type, num_classes):
             xcit_model = create_model('xcit_medium_24_p8_384',
                                       pretrained=True,
                                       num_classes=num_classes)
-        except:
+        except ValueError:
             xcit_model = create_model('xcit_medium_24_p8_384',
                                       pretrained=False,
                                       num_classes=num_classes)
@@ -282,7 +282,7 @@ def get_xcit_model(xcit_type, num_classes):
             xcit_model = create_model('xcit_large_24_p8_224',
                                       pretrained=True,
                                       num_classes=num_classes)
-        except:
+        except ValueError:
             xcit_model = create_model('xcit_large_24_p8_224',
                                       pretrained=False,
                                       num_classes=num_classes)
@@ -291,7 +291,7 @@ def get_xcit_model(xcit_type, num_classes):
             xcit_model = create_model('xcit_large_24_p8_384',
                                       pretrained=True,
                                       num_classes=num_classes)
-        except:
+        except ValueError:
             xcit_model = create_model('xcit_large_24_p8_384',
                                       pretrained=False,
                                       num_classes=num_classes)

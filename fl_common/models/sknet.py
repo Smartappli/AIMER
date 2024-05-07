@@ -25,7 +25,7 @@ def get_sknet_model(sknet_type, num_classes):
             sknet_model = create_model('skresnet18',
                                        pretrained=True,
                                        num_classes=num_classes)
-        except:
+        except ValueError:
             sknet_model = create_model('skresnet18',
                                        pretrained=False,
                                        num_classes=num_classes)
@@ -34,7 +34,7 @@ def get_sknet_model(sknet_type, num_classes):
             sknet_model = create_model('skresnet34',
                                        pretrained=True,
                                        num_classes=num_classes)
-        except:
+        except ValueError:
             sknet_model = create_model('skresnet34',
                                        pretrained=False,
                                        num_classes=num_classes)
@@ -43,7 +43,7 @@ def get_sknet_model(sknet_type, num_classes):
             sknet_model = create_model('skresnet50',
                                        pretrained=True,
                                        num_classes=num_classes)
-        except:
+        except ValueError:
             sknet_model = create_model('skresnet50',
                                        pretrained=False,
                                        num_classes=num_classes)
@@ -52,7 +52,7 @@ def get_sknet_model(sknet_type, num_classes):
             sknet_model = create_model('skresnet50d',
                                        pretrained=True,
                                        num_classes=num_classes)
-        except:
+        except ValueError:
             sknet_model = create_model('skresnet50d',
                                        pretrained=False,
                                        num_classes=num_classes)
@@ -61,7 +61,7 @@ def get_sknet_model(sknet_type, num_classes):
             sknet_model = create_model('skresnext50_32x4d',
                                        pretrained=True,
                                        num_classes=num_classes)
-        except:
+        except ValueError:
             sknet_model = create_model('skresnext50_32x4d',
                                        pretrained=False,
                                        num_classes=num_classes)

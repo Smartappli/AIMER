@@ -25,7 +25,7 @@ def get_selecsls_model(selecsls_type, num_classes):
             selecsls_model = create_model('selecsls42',
                                           pretrained=True,
                                           num_classes=num_classes)
-        except:
+        except ValueError:
             selecsls_model = create_model('selecsls42',
                                           pretrained=False,
                                           num_classes=num_classes)
@@ -34,7 +34,7 @@ def get_selecsls_model(selecsls_type, num_classes):
             selecsls_model = create_model('selecsls42b',
                                           pretrained=True,
                                           num_classes=num_classes)
-        except:
+        except ValueError:
             selecsls_model = create_model('selecsls42b',
                                           pretrained=False,
                                           num_classes=num_classes)
@@ -43,7 +43,7 @@ def get_selecsls_model(selecsls_type, num_classes):
             selecsls_model = create_model('selecsls60',
                                           pretrained=True,
                                           num_classes=num_classes)
-        except:
+        except ValueError:
             selecsls_model = create_model('selecsls60',
                                           pretrained=False,
                                           num_classes=num_classes)
@@ -52,7 +52,7 @@ def get_selecsls_model(selecsls_type, num_classes):
             selecsls_model = create_model('selecsls60b',
                                           pretrained=True,
                                           num_classes=num_classes)
-        except:
+        except ValueError:
             selecsls_model = create_model('selecsls60b',
                                           pretrained=False,
                                           num_classes=num_classes)
@@ -61,7 +61,7 @@ def get_selecsls_model(selecsls_type, num_classes):
             selecsls_model = create_model('selecsls84',
                                           pretrained=True,
                                           num_classes=num_classes)
-        except:
+        except ValueError:
             selecsls_model = create_model('selecsls84',
                                           pretrained=False,
                                           num_classes=num_classes)

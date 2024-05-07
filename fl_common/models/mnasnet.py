@@ -27,25 +27,25 @@ def get_mnasnet_model(mnasnet_type, num_classes):
         try:
             weights = models.MNASNet0_5_Weights.DEFAULT
             mnasnet_model = models.mnasnet.mnasnet0_5(weights=weights)
-        except:
+        except ValueError:
             mnasnet_model = models.mnasnet.mnasnet0_5(weights=None)
     elif mnasnet_type == 'MNASNet0_75':
         try:
             weights = models.MNASNet0_75_Weights.DEFAULT
             mnasnet_model = models.mnasnet.mnasnet0_75(weights=weights)
-        except:
+        except ValueError:
             mnasnet_model = models.mnasnet.mnasnet0_75(weights=None)
     elif mnasnet_type == 'MNASNet1_0':
         try:
             weights = models.MNASNet1_0_Weights.DEFAULT
             mnasnet_model = models.mnasnet.mnasnet1_0(weights=weights)
-        except:
+        except ValueError:
             mnanet_model = models.mnasnet.mnasnet1_0(weights=None)
     elif mnasnet_type == 'MNASNet1_3':
         try:
             weights = models.MNASNet1_3_Weights.DEFAULT
             mnasnet_model = models.mnasnet.mnasnet1_3(weights=weights)
-        except:
+        except ValueError:
             mnasnet_model = models.mnasnet.mnasnet1_3(weights=None)
     else:
         raise ValueError(f'Unknown MNASNet Architecture: {mnasnet_type}')

@@ -23,7 +23,7 @@ def get_nextvit_model(nextvit_type, num_classe):
             nextvit_model = create_model('nextvit_small',
                                          pretrained=True,
                                          num_classes=num_classe)
-        except:
+        except ValueError:
             nextvit_model = create_model('nextvit_small',
                                          pretrained=False,
                                          num_classes=num_classe)
@@ -32,7 +32,7 @@ def get_nextvit_model(nextvit_type, num_classe):
             nextvit_model = create_model('nextvit_base',
                                          pretrained=True,
                                          num_classes=num_classe)
-        except:
+        except ValueError:
             nextvit_model = create_model('nextvit_base',
                                          pretrained=False,
                                          num_classes=num_classe)
@@ -41,7 +41,7 @@ def get_nextvit_model(nextvit_type, num_classe):
             nextvit_model = create_model('nextvit_large',
                                          pretrained=True,
                                          num_classes=num_classe)
-        except:
+        except ValueError:
             nextvit_model = create_model('nextvit_large',
                                          pretrained=False,
                                          num_classes=num_classe)

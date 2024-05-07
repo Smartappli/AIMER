@@ -29,7 +29,7 @@ def get_senet_model(senet_type, num_classes):
             senet_model = create_model('legacy_seresnet18',
                                        pretrained=True,
                                        num_classes=num_classes)
-        except:
+        except ValueError:
             senet_model = create_model('legacy_seresnet18',
                                        pretrained=False,
                                        num_classes=num_classes)
@@ -38,7 +38,7 @@ def get_senet_model(senet_type, num_classes):
             senet_model = create_model('legacy_seresnet34',
                                        pretrained=True,
                                        num_classes=num_classes)
-        except:
+        except ValueError:
             senet_model = create_model('legacy_seresnet34',
                                        pretrained=False,
                                        num_classes=num_classes)
@@ -47,7 +47,7 @@ def get_senet_model(senet_type, num_classes):
             senet_model = create_model('legacy_seresnet50',
                                        pretrained=True,
                                        num_classes=num_classes)
-        except:
+        except ValueError:
             senet_model = create_model('legacy_seresnet34',
                                        pretrained=True,
                                        num_classes=num_classes)
@@ -56,7 +56,7 @@ def get_senet_model(senet_type, num_classes):
             senet_model = create_model('legacy_seresnet101',
                                        pretrained=True,
                                        num_classes=num_classes)
-        except:
+        except ValueError:
             senet_model = create_model('legacy_seresnet101',
                                        pretrained=False,
                                        num_classes=num_classes)
@@ -65,7 +65,7 @@ def get_senet_model(senet_type, num_classes):
             senet_model = create_model('legacy_seresnet152',
                                        pretrained=True,
                                        num_classes=num_classes)
-        except:
+        except ValueError:
             senet_model = create_model('legacy_seresnet152',
                                        pretrained=False,
                                        num_classes=num_classes)
@@ -74,7 +74,7 @@ def get_senet_model(senet_type, num_classes):
             senet_model = create_model('legacy_senet154',
                                        pretrained=True,
                                        num_classes=num_classes)
-        except:
+        except ValueError:
             senet_model = create_model('legacy_senet154',
                                        pretrained=False,
                                        num_classes=num_classes)
@@ -83,7 +83,7 @@ def get_senet_model(senet_type, num_classes):
             senet_model = create_model('legacy_seresnext26_32x4d',
                                        pretrained=True,
                                        num_classes=num_classes)
-        except:
+        except ValueError:
             senet_model = create_model('legacy_seresnext26_32x4d',
                                        pretrained=False,
                                        num_classes=num_classes)
@@ -92,7 +92,7 @@ def get_senet_model(senet_type, num_classes):
             senet_model = create_model('legacy_seresnext50_32x4d',
                                        pretrained=True,
                                        num_classes=num_classes)
-        except:
+        except ValueError:
             senet_model = create_model('legacy_seresnext50_32x4d',
                                        pretrained=False,
                                        num_classes=num_classes)
@@ -101,7 +101,7 @@ def get_senet_model(senet_type, num_classes):
             senet_model = create_model('legacy_seresnext101_32x4d',
                                        pretrained=True,
                                        num_classes=num_classes)
-        except:
+        except ValueError:
             senet_model = create_model('legacy_seresnext101_32x4d',
                                        pretrained=False,
                                        num_classes=num_classes)

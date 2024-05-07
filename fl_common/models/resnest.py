@@ -28,7 +28,7 @@ def get_resnest_model(resnest_type, num_classes):
             resnest_model = create_model('resnest14d',
                                          pretrained=True,
                                          num_classes=num_classes)
-        except:
+        except ValueError:
             resnest_model = create_model('resnest14d',
                                          pretrained=False,
                                          num_classes=num_classes)
@@ -37,7 +37,7 @@ def get_resnest_model(resnest_type, num_classes):
             resnest_model = create_model('resnest26d',
                                          pretrained=True,
                                          num_classes=num_classes)
-        except:
+        except ValueError:
             resnest_model = create_model('resnest26d',
                                          pretrained=False,
                                          num_classes=num_classes)
@@ -46,7 +46,7 @@ def get_resnest_model(resnest_type, num_classes):
             resnest_model = create_model('resnest50d',
                                          pretrained=True,
                                          num_classes=num_classes)
-        except:
+        except ValueError:
             resnest_model = create_model('resnest50d',
                                          pretrained=False,
                                          num_classes=num_classes)
@@ -55,7 +55,7 @@ def get_resnest_model(resnest_type, num_classes):
             resnest_model = create_model('resnest101e',
                                          pretrained=True,
                                          num_classes=num_classes)
-        except:
+        except ValueError:
             resnest_model = create_model('resnest101e',
                                          pretrained=False,
                                          num_classes=num_classes)
@@ -64,7 +64,7 @@ def get_resnest_model(resnest_type, num_classes):
             resnest_model = create_model('resnest200e',
                                          pretrained=True,
                                          num_classes=num_classes)
-        except:
+        except ValueError:
             resnest_model = create_model('resnest200e',
                                          pretrained=False,
                                          num_classes=num_classes)
@@ -73,7 +73,7 @@ def get_resnest_model(resnest_type, num_classes):
             resnest_model = create_model('resnest269e',
                                          pretrained=True,
                                          num_classes=num_classes)
-        except:
+        except ValueError:
             resnest_model = create_model('resnest269e',
                                          pretrained=False,
                                          num_classes=num_classes)
@@ -82,7 +82,7 @@ def get_resnest_model(resnest_type, num_classes):
             resnest_model = create_model('resnest50d_4s2x40d',
                                          pretrained=True,
                                          num_classes=num_classes)
-        except:
+        except ValueError:
             resnest_model = create_model('resnest50d_4s2x40d',
                                          pretrained=False,
                                          num_classes=num_classes)
@@ -91,7 +91,7 @@ def get_resnest_model(resnest_type, num_classes):
             resnest_model = create_model('resnest50d_1s4x24d',
                                          pretrained=True,
                                          num_classes=num_classes)
-        except:
+        except ValueError:
             resnest_model = create_model('resnest50d_1s4x24d',
                                          pretrained=False,
                                          num_classes=num_classes)
