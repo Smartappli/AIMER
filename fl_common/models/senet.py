@@ -6,16 +6,7 @@ def get_senet_model(senet_type, num_classes):
     Get a SENet model based on the specified architecture type.
 
     Args:
-        senet_type (str): The type of SENet architecture. It can be one of the following:
-            - 'legacy_seresnet18': Legacy SE-ResNet18 architecture.
-            - 'legacy_seresnet34': Legacy SE-ResNet34 architecture.
-            - 'legacy_seresnet50': Legacy SE-ResNet50 architecture.
-            - 'legacy_seresnet101': Legacy SE-ResNet101 architecture.
-            - 'legacy_seresnet152': Legacy SE-ResNet152 architecture.
-            - 'legacy_senet154': Legacy SE-Net154 architecture.
-            - 'legacy_seresnext26_32x4d': Legacy SE-ResNeXt26_32x4d architecture.
-            - 'legacy_seresnext50_32x4d': Legacy SE-ResNeXt50_32x4d architecture.
-            - 'legacy_seresnext101_32x4d': Legacy SE-ResNeXt101_32x4d architecture.
+        senet_type (str): The type of SENet architecture.
         num_classes (int): The number of output classes.
 
     Returns:
@@ -24,88 +15,20 @@ def get_senet_model(senet_type, num_classes):
     Raises:
         ValueError: If an unknown SENet architecture type is specified.
     """
-    if senet_type == 'legacy_seresnet18':
-        try:
-            senet_model = create_model('legacy_seresnet18',
-                                       pretrained=True,
-                                       num_classes=num_classes)
-        except Exception:
-            senet_model = create_model('legacy_seresnet18',
-                                       pretrained=False,
-                                       num_classes=num_classes)
-    elif senet_type == 'legacy_seresnet34':
-        try:
-            senet_model = create_model('legacy_seresnet34',
-                                       pretrained=True,
-                                       num_classes=num_classes)
-        except Exception:
-            senet_model = create_model('legacy_seresnet34',
-                                       pretrained=False,
-                                       num_classes=num_classes)
-    elif senet_type == 'legacy_seresnet50':
-        try:
-            senet_model = create_model('legacy_seresnet50',
-                                       pretrained=True,
-                                       num_classes=num_classes)
-        except Exception:
-            senet_model = create_model('legacy_seresnet34',
-                                       pretrained=True,
-                                       num_classes=num_classes)
-    elif senet_type == 'legacy_seresnet101':
-        try:
-            senet_model = create_model('legacy_seresnet101',
-                                       pretrained=True,
-                                       num_classes=num_classes)
-        except Exception:
-            senet_model = create_model('legacy_seresnet101',
-                                       pretrained=False,
-                                       num_classes=num_classes)
-    elif senet_type == 'legacy_seresnet152':
-        try:
-            senet_model = create_model('legacy_seresnet152',
-                                       pretrained=True,
-                                       num_classes=num_classes)
-        except Exception:
-            senet_model = create_model('legacy_seresnet152',
-                                       pretrained=False,
-                                       num_classes=num_classes)
-    elif senet_type == 'legacy_senet154':
-        try:
-            senet_model = create_model('legacy_senet154',
-                                       pretrained=True,
-                                       num_classes=num_classes)
-        except Exception:
-            senet_model = create_model('legacy_senet154',
-                                       pretrained=False,
-                                       num_classes=num_classes)
-    elif senet_type == 'legacy_seresnext26_32x4d':
-        try:
-            senet_model = create_model('legacy_seresnext26_32x4d',
-                                       pretrained=True,
-                                       num_classes=num_classes)
-        except Exception:
-            senet_model = create_model('legacy_seresnext26_32x4d',
-                                       pretrained=False,
-                                       num_classes=num_classes)
-    elif senet_type == 'legacy_seresnext50_32x4d':
-        try:
-            senet_model = create_model('legacy_seresnext50_32x4d',
-                                       pretrained=True,
-                                       num_classes=num_classes)
-        except Exception:
-            senet_model = create_model('legacy_seresnext50_32x4d',
-                                       pretrained=False,
-                                       num_classes=num_classes)
-    elif senet_type == 'legacy_seresnext101_32x4d':
-        try:
-            senet_model = create_model('legacy_seresnext101_32x4d',
-                                       pretrained=True,
-                                       num_classes=num_classes)
-        except Exception:
-            senet_model = create_model('legacy_seresnext101_32x4d',
-                                       pretrained=False,
-                                       num_classes=num_classes)
-    else:
+    valid_types = [
+        'legacy_seresnet18', 'legacy_seresnet34', 'legacy_seresnet50',
+        'legacy_seresnet101', 'legacy_seresnet152', 'legacy_senet154',
+        'legacy_seresnext26_32x4d', 'legacy_seresnext50_32x4d', 'legacy_seresnext101_32x4d'
+    ]
+
+    if senet_type not in valid_types:
         raise ValueError(f'Unknown Senet Architecture: {senet_type}')
 
-    return senet_model
+    try:
+        return create_model(senet_type, pretrained=False, num_classes=num_classes)
+    except OSError as e:
+        print(f"Error loading pretrained model: {e}")
+        return create_model(senet_type, pretrained=False, num_classes=num_classes)
+    except Exception as e:
+        print(f"An unexpected error occurred: {e}")
+        return None
