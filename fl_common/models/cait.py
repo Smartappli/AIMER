@@ -19,7 +19,7 @@ def get_cait_model(cait_type, num_classes):
         'cait_xxs24_224', 'cait_xxs24_384', 'cait_xxs36_224',
         'cait_xxs36_384', 'cait_xs24_384', 'cait_s24_224',
         'cait_s24_384', 'cait_s36_384', 'cait_m36_224',
-        'cait_m48_448'
+        'cait_m36_384', 'cait_m48_448'
     }
 
     if cait_type not in valid_cait_types:
