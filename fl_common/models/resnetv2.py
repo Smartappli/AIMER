@@ -34,147 +34,147 @@ def get_resnetv2_model(resnetv2_type, num_classes):
     if resnetv2_type == 'resnetv2_50x1_bit':
         try:
             resnetv2_model = create_model('resnetv2_50x1_bit',
-                                        pretrained=True,
-                                        num_classes=num_classes)
+                                          pretrained=True,
+                                          num_classes=num_classes)
         except ValueError:
             resnetv2_model = create_model('resnetv2_50x1_bit',
-                                        pretrained=False,
-                                        num_classes=num_classes)
+                                          pretrained=False,
+                                          num_classes=num_classes)
     elif resnetv2_type == 'resnetv2_50x3_bit':
         try:
             resnetv2_model = create_model('resnetv2_50x3_bit',
-                                        pretrained=True,
-                                        num_classes=num_classes)
+                                          pretrained=True,
+                                          num_classes=num_classes)
         except ValueError:
             resnetv2_model = create_model('resnetv2_50x3_bit',
-                                        pretrained=False,
-                                        num_classes=num_classes)
+                                          pretrained=False,
+                                          num_classes=num_classes)
     elif resnetv2_type == 'resnetv2_101x1_bit':
         try:
             resnetv2_model = create_model('resnetv2_101x1_bit',
-                                        pretrained=True,
-                                        num_classes=num_classes)
+                                          pretrained=True,
+                                          num_classes=num_classes)
         except ValueError:
             resnetv2_model = create_model('resnetv2_101x1_bit',
-                                        pretrained=False,
-                                        num_classes=num_classes)
+                                          pretrained=False,
+                                          num_classes=num_classes)
     elif resnetv2_type == 'resnetv2_101x3_bit':
         try:
             resnetv2_model = create_model('resnetv2_101x3_bit',
-                                        pretrained=True,
-                                        num_classes=num_classes)
+                                          pretrained=True,
+                                          num_classes=num_classes)
         except ValueError:
             resnetv2_model = create_model('resnetv2_101x3_bit',
-                                        pretrained=False,
-                                        num_classes=num_classes)
+                                          pretrained=False,
+                                          num_classes=num_classes)
     elif resnetv2_type == 'resnetv2_152x2_bit':
         try:
             resnetv2_model = create_model('resnetv2_152x2_bit',
-                                        pretrained=True,
-                                        num_classes=num_classes)
+                                          pretrained=True,
+                                          num_classes=num_classes)
         except ValueError:
             resnetv2_model = create_model('resnetv2_152x2_bit',
-                                        pretrained=False,
-                                        num_classes=num_classes)
+                                          pretrained=False,
+                                          num_classes=num_classes)
     elif resnetv2_type == 'resnetv2_152x4_bit':
         try:
             resnetv2_model = create_model('resnetv2_152x4_bit',
-                                        pretrained=True,
-                                        num_classes=num_classes)
+                                          pretrained=True,
+                                          num_classes=num_classes)
         except ValueError:
             resnetv2_model = create_model('resnetv2_152x4_bit',
-                                        pretrained=False,
-                                        num_classes=num_classes)
+                                          pretrained=False,
+                                          num_classes=num_classes)
     elif resnetv2_type == 'resnetv2_50':
         try:
             resnetv2_model = create_model('resnetv2_50',
-                                        pretrained=True,
-                                        num_classes=num_classes)
+                                          pretrained=True,
+                                          num_classes=num_classes)
         except ValueError:
             resnetv2_model = create_model('resnetv2_50',
-                                        pretrained=False,
-                                        num_classes=num_classes)
+                                          pretrained=False,
+                                          num_classes=num_classes)
     elif resnetv2_type == 'resnetv2_50d':
         try:
             resnetv2_model = create_model('resnetv2_50d',
-                                        pretrained=True,
-                                        num_classes=num_classes)
+                                          pretrained=True,
+                                          num_classes=num_classes)
         except ValueError:
             resnetv2_model = create_model('resnetv2_50d',
-                                        pretrained=False,
-                                        num_classes=num_classes)
+                                          pretrained=False,
+                                          num_classes=num_classes)
     elif resnetv2_type == 'resnetv2_50t':
         try:
             resnetv2_model = create_model('resnetv2_50t',
-                                        pretrained=True,
-                                        num_classes=num_classes)
+                                          pretrained=True,
+                                          num_classes=num_classes)
         except ValueError:
             resnetv2_model = create_model('resnetv2_50t',
-                                        pretrained=False,
-                                        num_classes=num_classes)
+                                          pretrained=False,
+                                          num_classes=num_classes)
     elif resnetv2_type == 'resnetv2_101':
         try:
             resnetv2_model = create_model('resnetv2_101',
-                                        pretrained=True,
-                                        num_classes=num_classes)
+                                          pretrained=True,
+                                          num_classes=num_classes)
         except ValueError:
             resnetv2_model = create_model('resnetv2_101',
-                                        pretrained=False,
-                                        num_classes=num_classes)
+                                          pretrained=False,
+                                          num_classes=num_classes)
     elif resnetv2_type == 'resnetv2_101d':
         try:
             resnetv2_model = create_model('resnetv2_101d',
-                                        pretrained=True,
-                                        num_classes=num_classes)
+                                          pretrained=True,
+                                          num_classes=num_classes)
         except ValueError:
             resnetv2_model = create_model('resnetv2_101d',
-                                        pretrained=False,
-                                        num_classes=num_classes)
+                                          pretrained=False,
+                                          num_classes=num_classes)
     elif resnetv2_type == 'resnetv2_152':
         try:
             resnetv2_model = create_model('resnetv2_152',
-                                        pretrained=True,
-                                        num_classes=num_classes)
+                                          pretrained=True,
+                                          num_classes=num_classes)
         except ValueError:
             resnetv2_model = create_model('resnetv2_152',
-                                        pretrained=False,
-                                        num_classes=num_classes)
+                                          pretrained=False,
+                                          num_classes=num_classes)
     elif resnetv2_type == 'resnetv2_152d':
         try:
             resnetv2_model = create_model('resnetv2_152d',
-                                        pretrained=True,
-                                        num_classes=num_classes)
+                                          pretrained=True,
+                                          num_classes=num_classes)
         except ValueError:
             resnetv2_model = create_model('resnetv2_152d',
-                                        pretrained=False,
-                                        num_classes=num_classes)
+                                          pretrained=False,
+                                          num_classes=num_classes)
     elif resnetv2_type == 'resnetv2_50d_gn':
         try:
             resnetv2_model = create_model('resnetv2_50d_gn',
-                                        pretrained=True,
-                                        num_classes=num_classes)
+                                          pretrained=True,
+                                          num_classes=num_classes)
         except ValueError:
             resnetv2_model = create_model('resnetv2_50d_gn',
-                                        pretrained=False,
-                                        num_classes=num_classes)
+                                          pretrained=False,
+                                          num_classes=num_classes)
     elif resnetv2_type == 'resnetv2_50d_evos':
         try:
             resnetv2_model = create_model('resnetv2_50d_evos',
-                                        pretrained=True,
-                                        num_classes=num_classes)
+                                          pretrained=True,
+                                          num_classes=num_classes)
         except ValueError:
             resnetv2_model = create_model('resnetv2_50d_evos',
-                                        pretrained=False,
-                                        num_classes=num_classes)
+                                          pretrained=False,
+                                          num_classes=num_classes)
     elif resnetv2_type == 'resnetv2_50d_frn':
         try:
             resnetv2_model = create_model('resnetv2_50d_frn',
-                                        pretrained=True,
-                                        num_classes=num_classes)
+                                          pretrained=True,
+                                          num_classes=num_classes)
         except ValueError:
             resnetv2_model = create_model('resnetv2_50d_frn',
-                                        pretrained=False,
-                                        num_classes=num_classes)
+                                          pretrained=False,
+                                          num_classes=num_classes)
     else:
         raise ValueError(f'Unknown ResNet v2 Architecture: {resnetv2_type}')
 
