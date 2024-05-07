@@ -22,11 +22,23 @@ class ProcessingVisionTransformerSamTestCase(TestCase):
                 self.assertIsNotNone(model)
                 # Add more specific tests if needed
 
-    def test_invalid_type(self):
+    def test_vision_transformer_sam_unknown_architecture(self):
         """
-        Test for getting an invalid Vision Transformer SAM model type.
+        Test case for handling unknown Vision Transformer Hybrid architecture in get_vision_transformer_sam
+        model function.
+
+        Raises:
+            AssertionError: If the assertion fails.
+            ValueError: If an unknown Vision Transformer Sam architecture is provided.
         """
+        vision_type = 'UnknownArchitecture'
         num_classes = 10
-        with self.assertRaises(ValueError):
-            model = get_vision_transformer_sam_model('invalid_type', num_classes)
-            # Ensure it raises ValueError for an unknown vision_transformer_sam_type
+
+        with self.assertRaises(ValueError) as context:
+            # Attempt to get a Vision Transformer model with an unknown architecture
+            get_vision_transformer_sam_model(vision_type, num_classes)
+
+        self.assertEqual(
+            str(context.exception),
+            f'Unknown Vision Transformer Sam Architecture: {vision_type}'
+        )
