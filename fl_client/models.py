@@ -220,9 +220,7 @@ class Document(models.Model):
         ordering = ['document_filename']
 
     def __str__(self):
-        return (self.document_filename +
-                ' ----- ' +
-                self.document_title)
+        return self.document_filename + ' ----- ' + self.document_title
 
 
 class ModelDocument(models.Model):
@@ -248,11 +246,8 @@ class ModelDocument(models.Model):
         ordering = ['modeldoc_model_id']
 
     def __str__(self):
-        return (self.modeldoc_model_id.model_name +
-                ' ----- ' +
-                self.modeldoc_document.document_filename +
-                '  |  ' +
-                self.modeldoc_document.document_title)
+        return (self.modeldoc_model_id.model_name + ' ----- ' + self.modeldoc_document.document_filename + '  |  '
+                + self.modeldoc_document.document_title)
 
 
 class Dataset(models.Model):
