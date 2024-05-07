@@ -9,7 +9,7 @@ from fl_client.models import Queue
 # from pycaret.datasets import get_data
 # from pycaret.classification import *
 
-session_seed = random.randrange(1,1000)
+session_seed = random.randrange(1, 1000)
 
 tasks = Queue.objects.get(queue_state='CR', queue_model_type='MLCL')
 for task in tasks:
