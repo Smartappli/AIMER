@@ -40,7 +40,7 @@ def get_mnasnet_model(mnasnet_type, num_classes):
             weights = models.MNASNet1_0_Weights.DEFAULT
             mnasnet_model = models.mnasnet.mnasnet1_0(weights=weights)
         except Exception:
-            mnanet_model = models.mnasnet.mnasnet1_0(weights=None)
+            mnasnet_model = models.mnasnet.mnasnet1_0(weights=None)
     elif mnasnet_type == 'MNASNet1_3':
         try:
             weights = models.MNASNet1_3_Weights.DEFAULT
