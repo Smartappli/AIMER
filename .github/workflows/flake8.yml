@@ -18,4 +18,4 @@ jobs:
         uses: py-actions/flake8@v2
         with:
           ignore: "E501"
-          max-line-length: "121"
+          max-line-length: "125"
