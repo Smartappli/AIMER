@@ -146,12 +146,7 @@ class Model(models.Model):
 
     def __str__(self):
         if str(self.model_version) != "None":
-            return (self.model_category +
-                    self.model_type +
-                    ' - ' +
-                    self.model_name +
-                    ' - v' +
-                    str(self.model_version))
+            return self.model_category + self.model_type + ' - ' + self.model_name + ' - v' + str(self.model_version)
         else:
             return (self.model_category +
                     self.model_type +
