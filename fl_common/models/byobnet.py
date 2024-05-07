@@ -62,7 +62,7 @@ def get_byobnet_model(byobnet_type, num_classes):
             byobnet_model = create_model('gernet_l',
                                          pretrained=True,
                                          num_classes=num_classes)
-        except ValueError:
+        except Exception:
             byobnet_model = create_model('gernet_l',
                                          pretrained=False,
                                          num_classes=num_classes)
@@ -71,7 +71,7 @@ def get_byobnet_model(byobnet_type, num_classes):
             byobnet_model = create_model('gernet_m',
                                          pretrained=True,
                                          num_classes=num_classes)
-        except ValueError:
+        except Exception:
             byobnet_model = create_model('gernet_m',
                                          pretrained=False,
                                          num_classes=num_classes)
@@ -80,7 +80,7 @@ def get_byobnet_model(byobnet_type, num_classes):
             byobnet_model = create_model('gernet_s',
                                          pretrained=True,
                                          num_classes=num_classes)
-        except ValueError:
+        except Exception:
             byobnet_model = create_model('gernet_s',
                                          pretrained=False,
                                          num_classes=num_classes)
@@ -89,7 +89,7 @@ def get_byobnet_model(byobnet_type, num_classes):
             byobnet_model = create_model('repvgg_a0',
                                          pretrained=True,
                                          num_classes=num_classes)
-        except ValueError:
+        except Exception:
             byobnet_model = create_model('repvgg_a0',
                                          pretrained=False,
                                          num_classes=num_classes)
@@ -98,7 +98,7 @@ def get_byobnet_model(byobnet_type, num_classes):
             byobnet_model = create_model('repvgg_a1',
                                          pretrained=True,
                                          num_classes=num_classes)
-        except ValueError:
+        except Exception:
             byobnet_model = create_model('repvgg_a1',
                                          pretrained=False,
                                          num_classes=num_classes)
@@ -107,7 +107,7 @@ def get_byobnet_model(byobnet_type, num_classes):
             byobnet_model = create_model('repvgg_a2',
                                          pretrained=True,
                                          num_classes=num_classes)
-        except ValueError:
+        except Exception:
             byobnet_model = create_model('repvgg_a2',
                                          pretrained=False,
                                          num_classes=num_classes)
@@ -116,7 +116,7 @@ def get_byobnet_model(byobnet_type, num_classes):
             byobnet_model = create_model('repvgg_b0',
                                          pretrained=True,
                                          num_classes=num_classes)
-        except ValueError:
+        except Exception:
             byobnet_model = create_model('repvgg_b0',
                                          pretrained=False,
                                          num_classes=num_classes)
@@ -125,7 +125,7 @@ def get_byobnet_model(byobnet_type, num_classes):
             byobnet_model = create_model('repvgg_b1',
                                          pretrained=True,
                                          num_classes=num_classes)
-        except ValueError:
+        except Exception:
             byobnet_model = create_model('repvgg_b1',
                                          pretrained=False,
                                          num_classes=num_classes)
@@ -134,7 +134,7 @@ def get_byobnet_model(byobnet_type, num_classes):
             byobnet_model = create_model('repvgg_b1g4',
                                          pretrained=True,
                                          num_classes=num_classes)
-        except ValueError:
+        except Exception:
             byobnet_model = create_model('repvgg_b1g4',
                                          pretrained=False,
                                          num_classes=num_classes)
@@ -143,7 +143,7 @@ def get_byobnet_model(byobnet_type, num_classes):
             byobnet_model = create_model('repvgg_b2',
                                          pretrained=True,
                                          num_classes=num_classes)
-        except ValueError:
+        except Exception:
             byobnet_model = create_model('repvgg_b2',
                                          pretrained=False,
                                          num_classes=num_classes)
@@ -152,7 +152,7 @@ def get_byobnet_model(byobnet_type, num_classes):
             byobnet_model = create_model('repvgg_b2g4',
                                          pretrained=True,
                                          num_classes=num_classes)
-        except ValueError:
+        except Exception:
             byobnet_model = create_model('repvgg_b2g4',
                                          pretrained=False,
                                          num_classes=num_classes)
@@ -161,7 +161,7 @@ def get_byobnet_model(byobnet_type, num_classes):
             byobnet_model = create_model('repvgg_b3',
                                          pretrained=True,
                                          num_classes=num_classes)
-        except ValueError:
+        except Exception:
             byobnet_model = create_model('repvgg_b3',
                                          pretrained=False,
                                          num_classes=num_classes)
@@ -170,7 +170,7 @@ def get_byobnet_model(byobnet_type, num_classes):
             byobnet_model = create_model('repvgg_b3g4',
                                          pretrained=True,
                                          num_classes=num_classes)
-        except ValueError:
+        except Exception:
             byobnet_model = create_model('repvgg_b3g4',
                                          pretrained=True,
                                          num_classes=num_classes)
@@ -179,7 +179,7 @@ def get_byobnet_model(byobnet_type, num_classes):
             byobnet_model = create_model('repvgg_d2se',
                                          pretrained=True,
                                          num_classes=num_classes)
-        except ValueError:
+        except Exception:
             byobnet_model = create_model('repvgg_d2se',
                                          pretrained=False,
                                          num_classes=num_classes)
@@ -188,7 +188,7 @@ def get_byobnet_model(byobnet_type, num_classes):
             byobnet_model = create_model('resnet51q',
                                          pretrained=True,
                                          num_classes=num_classes)
-        except ValueError:
+        except Exception:
             byobnet_model = create_model('resnet51q',
                                          pretrained=False,
                                          num_classes=num_classes)
@@ -197,7 +197,7 @@ def get_byobnet_model(byobnet_type, num_classes):
             byobnet_model = create_model('resnet61q',
                                          pretrained=True,
                                          num_classes=num_classes)
-        except ValueError:
+        except Exception:
             byobnet_model = create_model('resnet61q',
                                          pretrained=False,
                                          num_classes=num_classes)
@@ -206,7 +206,7 @@ def get_byobnet_model(byobnet_type, num_classes):
             byobnet_model = create_model('resnext26ts',
                                          pretrained=True,
                                          num_classes=num_classes)
-        except ValueError:
+        except Exception:
             byobnet_model = create_model('resnext26ts',
                                          pretrained=False,
                                          num_classes=num_classes)
@@ -215,7 +215,7 @@ def get_byobnet_model(byobnet_type, num_classes):
             byobnet_model = create_model('gcresnext26ts',
                                          pretrained=True,
                                          num_classes=num_classes)
-        except ValueError:
+        except Exception:
             byobnet_model = create_model('gcresnext26ts',
                                          pretrained=False,
                                          num_classes=num_classes)
@@ -224,7 +224,7 @@ def get_byobnet_model(byobnet_type, num_classes):
             byobnet_model = create_model('seresnext26ts',
                                          pretrained=True,
                                          num_classes=num_classes)
-        except ValueError:
+        except Exception:
             byobnet_model = create_model('seresnext26ts',
                                          pretrained=False,
                                          num_classes=num_classes)
@@ -233,7 +233,7 @@ def get_byobnet_model(byobnet_type, num_classes):
             byobnet_model = create_model('eca_resnext26ts',
                                          pretrained=True,
                                          num_classes=num_classes)
-        except ValueError:
+        except Exception:
             byobnet_model = create_model('eca_resnext26ts',
                                          pretrained=False,
                                          num_classes=num_classes)
@@ -242,7 +242,7 @@ def get_byobnet_model(byobnet_type, num_classes):
             byobnet_model = create_model('bat_resnext26ts',
                                          pretrained=True,
                                          num_classes=num_classes)
-        except ValueError:
+        except Exception:
             byobnet_model = create_model('bat_resnext26ts',
                                          pretrained=False,
                                          num_classes=num_classes)
@@ -251,7 +251,7 @@ def get_byobnet_model(byobnet_type, num_classes):
             byobnet_model = create_model('resnet32ts',
                                          pretrained=True,
                                          num_classes=num_classes)
-        except ValueError:
+        except Exception:
             byobnet_model = create_model('resnet32ts',
                                          pretrained=False,
                                          num_classes=num_classes)
@@ -260,7 +260,7 @@ def get_byobnet_model(byobnet_type, num_classes):
             byobnet_model = create_model('resnet33ts',
                                          pretrained=True,
                                          num_classes=num_classes)
-        except ValueError:
+        except Exception:
             byobnet_model = create_model('resnet33ts',
                                          pretrained=False,
                                          num_classes=num_classes)
@@ -269,7 +269,7 @@ def get_byobnet_model(byobnet_type, num_classes):
             byobnet_model = create_model('gcresnet33ts',
                                          pretrained=True,
                                          num_classes=num_classes)
-        except ValueError:
+        except Exception:
             byobnet_model = create_model('gcresnet33ts',
                                          pretrained=False,
                                          num_classes=num_classes)
@@ -278,7 +278,7 @@ def get_byobnet_model(byobnet_type, num_classes):
             byobnet_model = create_model('seresnet33ts',
                                          pretrained=True,
                                          num_classes=num_classes)
-        except ValueError:
+        except Exception:
             byobnet_model = create_model('seresnet33ts',
                                          pretrained=False,
                                          num_classes=num_classes)
@@ -287,7 +287,7 @@ def get_byobnet_model(byobnet_type, num_classes):
             byobnet_model = create_model('eca_resnet33ts',
                                          pretrained=True,
                                          num_classes=num_classes)
-        except ValueError:
+        except Exception:
             byobnet_model = create_model('eca_resnet33ts',
                                          pretrained=False,
                                          num_classes=num_classes)
@@ -296,7 +296,7 @@ def get_byobnet_model(byobnet_type, num_classes):
             byobnet_model = create_model('gcresnet50t',
                                          pretrained=True,
                                          num_classes=num_classes)
-        except ValueError:
+        except Exception:
             byobnet_model = create_model('gcresnet50t',
                                          pretrained=False,
                                          num_classes=num_classes)
@@ -305,7 +305,7 @@ def get_byobnet_model(byobnet_type, num_classes):
             byobnet_model = create_model('gcresnext50ts',
                                          pretrained=True,
                                          num_classes=num_classes)
-        except ValueError:
+        except Exception:
             byobnet_model = create_model('gcresnext50ts',
                                          pretrained=False,
                                          num_classes=num_classes)
@@ -314,7 +314,7 @@ def get_byobnet_model(byobnet_type, num_classes):
             byobnet_model = create_model('regnetz_b16',
                                          pretrained=True,
                                          num_classes=num_classes)
-        except ValueError:
+        except Exception:
             byobnet_model = create_model('regnetz_b16',
                                          pretrained=False,
                                          num_classes=num_classes)
@@ -323,7 +323,7 @@ def get_byobnet_model(byobnet_type, num_classes):
             byobnet_model = create_model('regnetz_c16',
                                          pretrained=True,
                                          num_classes=num_classes)
-        except ValueError:
+        except Exception:
             byobnet_model = create_model('regnetz_c16',
                                          pretrained=False,
                                          num_classes=num_classes)
@@ -332,7 +332,7 @@ def get_byobnet_model(byobnet_type, num_classes):
             byobnet_model = create_model('regnetz_d32',
                                          pretrained=True,
                                          num_classes=num_classes)
-        except ValueError:
+        except Exception:
             byobnet_model = create_model('regnetz_d32',
                                          pretrained=False,
                                          num_classes=num_classes)
@@ -341,7 +341,7 @@ def get_byobnet_model(byobnet_type, num_classes):
             byobnet_model = create_model('regnetz_d8',
                                          pretrained=True,
                                          num_classes=num_classes)
-        except ValueError:
+        except Exception:
             byobnet_model = create_model('regnetz_d8',
                                          pretrained=False,
                                          num_classes=num_classes)
@@ -350,7 +350,7 @@ def get_byobnet_model(byobnet_type, num_classes):
             byobnet_model = create_model('regnetz_e8',
                                          pretrained=True,
                                          num_classes=num_classes)
-        except ValueError:
+        except Exception:
             byobnet_model = create_model('regnetz_e8',
                                          pretrained=False,
                                          num_classes=num_classes)
@@ -359,7 +359,7 @@ def get_byobnet_model(byobnet_type, num_classes):
             byobnet_model = create_model('regnetz_b16_evos',
                                          pretrained=True,
                                          num_classes=num_classes)
-        except ValueError:
+        except Exception:
             byobnet_model = create_model('regnetz_b16_evos',
                                          pretrained=False,
                                          num_classes=num_classes)
@@ -368,7 +368,7 @@ def get_byobnet_model(byobnet_type, num_classes):
             byobnet_model = create_model('regnetz_c16_evos',
                                          pretrained=True,
                                          num_classes=num_classes)
-        except ValueError:
+        except Exception:
             byobnet_model = create_model('regnetz_c16_evos',
                                          pretrained=False,
                                          num_classes=num_classes)
@@ -377,7 +377,7 @@ def get_byobnet_model(byobnet_type, num_classes):
             byobnet_model = create_model('regnetz_d8_evos',
                                          pretrained=True,
                                          num_classes=num_classes)
-        except ValueError:
+        except Exception:
             byobnet_model = create_model('regnetz_d8_evos',
                                          pretrained=False,
                                          num_classes=num_classes)
@@ -386,7 +386,7 @@ def get_byobnet_model(byobnet_type, num_classes):
             byobnet_model = create_model('mobileone_s0',
                                          pretrained=True,
                                          num_classes=num_classes)
-        except ValueError:
+        except Exception:
             byobnet_model = create_model('mobileone_s0',
                                          pretrained=False,
                                          num_classes=num_classes)
@@ -395,7 +395,7 @@ def get_byobnet_model(byobnet_type, num_classes):
             byobnet_model = create_model('mobileone_s1',
                                          pretrained=True,
                                          num_classes=num_classes)
-        except ValueError:
+        except Exception:
             byobnet_model = create_model('mobileone_s1',
                                          pretrained=False,
                                          num_classes=num_classes)
@@ -404,7 +404,7 @@ def get_byobnet_model(byobnet_type, num_classes):
             byobnet_model = create_model('mobileone_s2',
                                          pretrained=True,
                                          num_classes=num_classes)
-        except ValueError:
+        except Exception:
             byobnet_model = create_model('mobileone_s2',
                                          pretrained=False,
                                          num_classes=num_classes)
@@ -413,7 +413,7 @@ def get_byobnet_model(byobnet_type, num_classes):
             byobnet_model = create_model('mobileone_s3',
                                          pretrained=True,
                                          num_classes=num_classes)
-        except ValueError:
+        except Exception:
             byobnet_model = create_model('mobileone_s3',
                                          pretrained=False,
                                          num_classes=num_classes)
@@ -422,7 +422,7 @@ def get_byobnet_model(byobnet_type, num_classes):
             byobnet_model = create_model('mobileone_s4',
                                          pretrained=True,
                                          num_classes=num_classes)
-        except ValueError:
+        except Exception:
             byobnet_model = create_model('mobileone_s3',
                                          pretrained=False,
                                          num_classes=num_classes)

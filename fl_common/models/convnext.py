@@ -61,228 +61,228 @@ def get_convnext_model(convnext_type, num_classes):
     elif convnext_type == "convnext_atto":
         try:
             convnext_model = create_model('convnext_atto',
-                                           pretrained=True,
-                                           num_classes=num_classes)
+                                          pretrained=True,
+                                          num_classes=num_classes)
         except ValueError:
             convnext_model = create_model('convnext_atto',
-                                           pretrained=False,
-                                           num_classes=num_classes)
+                                          pretrained=False,
+                                          num_classes=num_classes)
     elif convnext_type == "convnext_atto_ols":
         try:
             convnext_model = create_model('convnext_atto_ols',
-                                           pretrained=True,
-                                           num_classes=num_classes)
+                                          pretrained=True,
+                                          num_classes=num_classes)
         except ValueError:
             convnext_model = create_model('convnext_atto_ols',
-                                           pretrained=False,
-                                           num_classes=num_classes)
+                                          pretrained=False,
+                                          num_classes=num_classes)
     elif convnext_type == "convnext_femto":
         try:
             convnext_model = create_model('convnext_femto',
-                                           pretrained=True,
-                                           num_classes=num_classes)
+                                          pretrained=True,
+                                          num_classes=num_classes)
         except ValueError:
             convnext_model = create_model('convnext_femto',
-                                           pretrained=False,
-                                           num_classes=num_classes)
+                                          pretrained=False,
+                                          num_classes=num_classes)
     elif convnext_type == "convnext_femto_ols":
         try:
             convnext_model = create_model('convnext_femto_ols',
-                                           pretrained=True,
-                                           num_classes=num_classes)
+                                          pretrained=True,
+                                          num_classes=num_classes)
         except ValueError:
             convnext_model = create_model('convnext_femto_ols',
-                                           pretrained=False,
-                                           num_classes=num_classes)
+                                          pretrained=False,
+                                          num_classes=num_classes)
     elif convnext_type == "convnext_pico":
         try:
             convnext_model = create_model('convnext_pico',
-                                           pretrained=True,
-                                           num_classes=num_classes)
+                                          pretrained=True,
+                                          num_classes=num_classes)
         except ValueError:
             convnext_model = create_model('convnext_pico',
-                                           pretrained=False,
-                                           num_classes=num_classes)
+                                          pretrained=False,
+                                          num_classes=num_classes)
     elif convnext_type == "convnext_pico_ols":
         try:
             convnext_model = create_model('convnext_pico_ols',
-                                           pretrained=True,
-                                           num_classes=num_classes)
+                                          pretrained=True,
+                                          num_classes=num_classes)
         except ValueError:
             convnext_model = create_model('convnext_pico_ols',
-                                           pretrained=False,
-                                           num_classes=num_classes)
+                                          pretrained=False,
+                                          num_classes=num_classes)
     elif convnext_type == "convnext_nano":
         try:
             convnext_model = create_model('convnext_nano',
-                                           pretrained=True,
-                                           num_classes=num_classes)
+                                          pretrained=True,
+                                          num_classes=num_classes)
         except ValueError:
             convnext_model = create_model('convnext_nano',
-                                           pretrained=False,
-                                           num_classes=num_classes)
+                                          pretrained=False,
+                                          num_classes=num_classes)
     elif convnext_type == "convnext_nano_ols":
         try:
             convnext_model = create_model('convnext_nano_ols',
-                                           pretrained=True,
-                                           num_classes=num_classes)
+                                          pretrained=True,
+                                          num_classes=num_classes)
         except ValueError:
             convnext_model = create_model('convnext_nano_ols',
-                                           pretrained=False,
-                                           num_classes=num_classes)
+                                          pretrained=False,
+                                          num_classes=num_classes)
     elif convnext_type == "convnext_tiny_hnf":
         try:
             convnext_model = create_model('convnext_tiny_hnf',
-                                           pretrained=True,
-                                           num_classes=num_classes)
+                                          pretrained=True,
+                                          num_classes=num_classes)
         except ValueError:
             convnext_model = create_model('convnext_tiny_hnf',
-                                           pretrained=False,
-                                           num_classes=num_classes)
+                                          pretrained=False,
+                                          num_classes=num_classes)
     elif convnext_type == "convnext_tiny":
         try:
             convnext_model = create_model('convnext_tiny',
-                                           pretrained=True,
-                                           num_classes=num_classes)
+                                          pretrained=True,
+                                          num_classes=num_classes)
         except ValueError:
             convnext_model = create_model('convnext_tiny',
-                                           pretrained=False,
-                                           num_classes=num_classes)
+                                          pretrained=False,
+                                          num_classes=num_classes)
     elif convnext_type == "convnext_small":
         try:
             convnext_model = create_model('convnext_small',
-                                           pretrained=True,
-                                           num_classes=num_classes)
+                                          pretrained=True,
+                                          num_classes=num_classes)
         except ValueError:
             convnext_model = create_model('convnext_small',
-                                           pretrained=False,
-                                           num_classes=num_classes)
+                                          pretrained=False,
+                                          num_classes=num_classes)
     elif convnext_type == "convnext_base":
         try:
             convnext_model = create_model('convnext_base',
-                                           pretrained=True,
-                                           num_classes=num_classes)
+                                          pretrained=True,
+                                          num_classes=num_classes)
         except ValueError:
             convnext_model = create_model('convnext_base',
-                                           pretrained=False,
-                                           num_classes=num_classes)
+                                          pretrained=False,
+                                          num_classes=num_classes)
     elif convnext_type == "convnext_large":
         try:
             convnext_model = create_model('convnext_large',
-                                           pretrained=True,
-                                           num_classes=num_classes)
+                                          pretrained=True,
+                                          num_classes=num_classes)
         except ValueError:
             convnext_model = create_model('convnext_large',
-                                           pretrained=False,
-                                           num_classes=num_classes)
+                                          pretrained=False,
+                                          num_classes=num_classes)
     elif convnext_type == "convnext_large_mlp":
         try:
             convnext_model = create_model('convnext_large_mlp',
-                                           pretrained=True,
-                                           num_classes=num_classes)
+                                          pretrained=True,
+                                          num_classes=num_classes)
         except ValueError:
             convnext_model = create_model('convnext_large_mlp',
-                                           pretrained=False,
-                                           num_classes=num_classes)
+                                          pretrained=False,
+                                          num_classes=num_classes)
     elif convnext_type == "convnext_xlarge":
         try:
             convnext_model = create_model('convnext_xlarge',
-                                           pretrained=True,
-                                           num_classes=num_classes)
+                                          pretrained=True,
+                                          num_classes=num_classes)
         except ValueError:
             convnext_model = create_model('convnext_xlarge',
-                                           pretrained=False,
-                                           num_classes=num_classes)
+                                          pretrained=False,
+                                          num_classes=num_classes)
     elif convnext_type == "convnext_xxlarge":
         try:
             convnext_model = create_model('convnext_xxlarge',
-                                           pretrained=True,
-                                           num_classes=num_classes)
+                                          pretrained=True,
+                                          num_classes=num_classes)
         except ValueError:
             convnext_model = create_model('convnext_xxlarge',
-                                           pretrained=False,
-                                           num_classes=num_classes)
+                                          pretrained=False,
+                                          num_classes=num_classes)
     elif convnext_type == "convnextv2_atto":
         try:
             convnext_model = create_model('convnextv2_atto',
-                                           pretrained=True,
-                                           num_classes=num_classes)
+                                          pretrained=True,
+                                          num_classes=num_classes)
         except ValueError:
             convnext_model = create_model('convnextv2_atto',
-                                           pretrained=False,
-                                           num_classes=num_classes)
+                                          pretrained=False,
+                                          num_classes=num_classes)
     elif convnext_type == "convnextv2_femto":
         try:
             convnext_model = create_model('convnextv2_femto',
-                                           pretrained=True,
-                                           num_classes=num_classes)
+                                          pretrained=True,
+                                          num_classes=num_classes)
         except ValueError:
             convnext_model = create_model('convnextv2_femto',
-                                           pretrained=False,
-                                           num_classes=num_classes)
+                                          pretrained=False,
+                                          num_classes=num_classes)
     elif convnext_type == "convnextv2_pico":
         try:
             convnext_model = create_model('convnextv2_pico',
-                                           pretrained=True,
-                                           num_classes=num_classes)
+                                          pretrained=True,
+                                          num_classes=num_classes)
         except ValueError:
             convnext_model = create_model('convnextv2_pico',
-                                           pretrained=False,
-                                           num_classes=num_classes)
+                                          pretrained=False,
+                                          num_classes=num_classes)
     elif convnext_type == "convnextv2_nano":
         try:
             convnext_model = create_model('convnextv2_nano',
-                                           pretrained=True,
-                                           num_classes=num_classes)
+                                          pretrained=True,
+                                          num_classes=num_classes)
         except ValueError:
             convnext_model = create_model('convnextv2_nano',
-                                           pretrained=False,
-                                           num_classes=num_classes)
+                                          pretrained=False,
+                                          num_classes=num_classes)
     elif convnext_type == "convnextv2_tiny":
         try:
             convnext_model = create_model('convnextv2_tiny',
-                                           pretrained=True,
-                                           num_classes=num_classes)
+                                          pretrained=True,
+                                          num_classes=num_classes)
         except ValueError:
             convnext_model = create_model('convnextv2_tiny',
-                                           pretrained=False,
-                                           num_classes=num_classes)
+                                          pretrained=False,
+                                          num_classes=num_classes)
     elif convnext_type == "convnextv2_small":
         try:
             convnext_model = create_model('convnextv2_small',
-                                           pretrained=True,
-                                           num_classes=num_classes)
+                                          pretrained=True,
+                                          num_classes=num_classes)
         except ValueError:
             convnext_model = create_model('convnextv2_small',
-                                           pretrained=False,
-                                           num_classes=num_classes)
+                                          pretrained=False,
+                                          num_classes=num_classes)
     elif convnext_type == "convnextv2_base":
         try:
             convnext_model = create_model('convnextv2_base',
-                                           pretrained=True,
-                                           num_classes=num_classes)
+                                          pretrained=True,
+                                          num_classes=num_classes)
         except ValueError:
             convnext_model = create_model('convnextv2_base',
-                                           pretrained=False,
-                                           num_classes=num_classes)
+                                          pretrained=False,
+                                          num_classes=num_classes)
     elif convnext_type == "convnextv2_large":
         try:
             convnext_model = create_model('convnextv2_large',
-                                           pretrained=True,
-                                           num_classes=num_classes)
+                                          pretrained=True,
+                                          num_classes=num_classes)
         except ValueError:
             convnext_model = create_model('convnextv2_large',
-                                           pretrained=False,
-                                           num_classes=num_classes)
+                                          pretrained=False,
+                                          num_classes=num_classes)
     elif convnext_type == "convnextv2_huge":
         try:
             convnext_model = create_model('convnextv2_huge',
-                                           pretrained=True,
-                                           num_classes=num_classes)
+                                          pretrained=True,
+                                          num_classes=num_classes)
         except ValueError:
             convnext_model = create_model('convnextv2_huge',
-                                           pretrained=False,
-                                           num_classes=num_classes)
+                                          pretrained=False,
+                                          num_classes=num_classes)
     else:
         raise ValueError(f'Unknown ConvNeXt Architecture : {convnext_type}')
 

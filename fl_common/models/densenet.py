@@ -53,57 +53,57 @@ def get_densenet_model(densenet_type, num_classes):
     elif densenet_type == "densenet121":
         try:
             densenet_model = create_model('densenet121',
-                                      pretrained=True,
-                                      num_classes=num_classes)
+                                          pretrained=True,
+                                          num_classes=num_classes)
         except ValueError:
             densenet_model = create_model('densenet121',
-                                      pretrained=False,
-                                      num_classes=num_classes)
+                                          pretrained=False,
+                                          num_classes=num_classes)
     elif densenet_type == "densenetblur121d":
         try:
             densenet_model = create_model('densenetblur121d',
-                                      pretrained=True,
-                                      num_classes=num_classes)
+                                          pretrained=True,
+                                          num_classes=num_classes)
         except ValueError:
             densenet_model = create_model('densenetblur121d',
-                                      pretrained=False,
-                                      num_classes=num_classes)
+                                          pretrained=False,
+                                          num_classes=num_classes)
     elif densenet_type == "densenet169":
         try:
             densenet_model = create_model('densenet169',
-                                      pretrained=True,
-                                      num_classes=num_classes)
+                                          pretrained=True,
+                                          num_classes=num_classes)
         except ValueError:
             densenet_model = create_model('densenet169',
-                                      pretrained=False,
-                                      num_classes=num_classes)
+                                          pretrained=False,
+                                          num_classes=num_classes)
     elif densenet_type == "densenet201":
         try:
             densenet_model = create_model('densenet201',
-                                      pretrained=True,
-                                      num_classes=num_classes)
+                                          pretrained=True,
+                                          num_classes=num_classes)
         except ValueError:
             densenet_model = create_model('densenet201',
-                                      pretrained=False,
-                                      num_classes=num_classes)
+                                          pretrained=False,
+                                          num_classes=num_classes)
     elif densenet_type == "densenet161":
         try:
             densenet_model = create_model('densenet161',
-                                      pretrained=True,
-                                      num_classes=num_classes)
+                                          pretrained=True,
+                                          num_classes=num_classes)
         except ValueError:
             densenet_model = create_model('densenet161',
-                                      pretrained=False,
-                                      num_classes=num_classes)
+                                          pretrained=False,
+                                          num_classes=num_classes)
     elif densenet_type == "densenet264d":
         try:
             densenet_model = create_model('densenet264d',
-                                      pretrained=True,
-                                      num_classes=num_classes)
+                                          pretrained=True,
+                                          num_classes=num_classes)
         except ValueError:
             densenet_model = create_model('densenet264d',
-                                      pretrained=False,
-                                      num_classes=num_classes)
+                                          pretrained=False,
+                                          num_classes=num_classes)
     else:
         raise ValueError(f'Unknown DenseNet Architecture : {densenet_type}')
 
