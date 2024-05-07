@@ -8,10 +8,11 @@ from django.test import TestCase
 from fl_common.models.utils import (create_transform,
                                     get_optimizer,
                                     get_criterion,
-                                    get_scheduler,
-                                    generate_xai_heatmaps,
-                                    get_dataset,
-                                    EarlyStopping)
+                                    get_scheduler)
+
+# generate_xai_heatmaps,
+# get_dataset,
+# EarlyStopping
 
 os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
 
