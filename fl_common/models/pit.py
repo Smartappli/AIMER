@@ -26,5 +26,9 @@ def get_pit_model(pit_type, num_classes):
 
     try:
         return create_model(pit_type, pretrained=True, num_classes=num_classes)
-    except Exception:
+    except OSError as e:
+        print(f"Error loading pretrained model: {e}")
         return create_model(pit_type, pretrained=False, num_classes=num_classes)
+    except Exception as e:
+        print(f"An unexpected error occurred: {e}")
+        return None
