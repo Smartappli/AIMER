@@ -62,9 +62,7 @@ class License(models.Model):
         ordering = ['license_short_name']
 
     def __str__(self):
-        return (self.license_short_name +
-                ' - ' +
-                self.license_name)
+        return self.license_short_name + ' - ' + self.license_name
 
 
 # ---- Model tables ----
