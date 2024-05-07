@@ -9,7 +9,6 @@ from fl_common.models.utils import (create_transform,
                                     get_optimizer,
                                     get_criterion,
                                     get_scheduler)
-
 # generate_xai_heatmaps,
 # get_dataset,
 # EarlyStopping
@@ -96,7 +95,7 @@ class ProcessingTestCase(TestCase):
         self.assertGreater(len(train_loader), 0)
         self.assertGreater(len(val_loader), 0)
         self.assertGreater(len(test_loader), 0)
-        
+
     def test_transform_creation(self):
         # Mock dataset directory and parameters
         dataset_path = '/path/to/dataset'
@@ -108,7 +107,7 @@ class ProcessingTestCase(TestCase):
         transform = create_transform(**augmentation_params, normalize=normalize_params)
 
         # Check if the transform is a torchvision.transforms.Compose object
-        self.assertIsInstance(transform, transforms.Compose)        
+        self.assertIsInstance(transform, transforms.Compose)
     """
 
     def test_known_criterion(self):
