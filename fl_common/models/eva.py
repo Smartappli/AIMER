@@ -36,7 +36,7 @@ def get_eva_model(eva_type, num_classes):
             eva_model = create_model('eva_giant_patch14_224',
                                      pretrained=True,
                                      num_classes=num_classes)
-        except ValueError:
+        except Exception:
             eva_model = create_model('eva_giant_patch14_224',
                                      pretrained=False,
                                      num_classes=num_classes)
@@ -45,7 +45,7 @@ def get_eva_model(eva_type, num_classes):
             eva_model = create_model('eva_giant_patch14_336',
                                      pretrained=True,
                                      num_classes=num_classes)
-        except ValueError:
+        except Exception:
             eva_model = create_model('eva_giant_patch14_336',
                                      pretrained=False,
                                      num_classes=num_classes)
@@ -54,7 +54,7 @@ def get_eva_model(eva_type, num_classes):
             eva_model = create_model('eva_giant_patch14_560',
                                      pretrained=True,
                                      num_classes=num_classes)
-        except ValueError:
+        except Exception:
             eva_model = create_model('eva_giant_patch14_560',
                                      pretrained=False,
                                      num_classes=num_classes)
@@ -63,7 +63,7 @@ def get_eva_model(eva_type, num_classes):
             eva_model = create_model('eva02_tiny_patch14_224',
                                      pretrained=True,
                                      num_classes=num_classes)
-        except ValueError:
+        except Exception:
             eva_model = create_model('eva02_tiny_patch14_224',
                                      pretrained=False,
                                      num_classes=num_classes)
@@ -72,7 +72,7 @@ def get_eva_model(eva_type, num_classes):
             eva_model = create_model('eva02_small_patch14_224',
                                      pretrained=True,
                                      num_classes=num_classes)
-        except ValueError:
+        except Exception:
             eva_model = create_model('eva02_small_patch14_224',
                                      pretrained=False,
                                      num_classes=num_classes)
@@ -81,7 +81,7 @@ def get_eva_model(eva_type, num_classes):
             eva_model = create_model('eva02_base_patch14_224',
                                      pretrained=True,
                                      num_classes=num_classes)
-        except ValueError:
+        except Exception:
             eva_model = create_model('eva02_base_patch14_224',
                                      pretrained=False,
                                      num_classes=num_classes)
@@ -90,7 +90,7 @@ def get_eva_model(eva_type, num_classes):
             eva_model = create_model('eva02_large_patch14_224',
                                      pretrained=True,
                                      num_classes=num_classes)
-        except ValueError:
+        except Exception:
             eva_model = create_model('eva02_large_patch14_224',
                                      pretrained=False,
                                      num_classes=num_classes)
@@ -99,7 +99,7 @@ def get_eva_model(eva_type, num_classes):
             eva_model = create_model('eva02_tiny_patch14_336',
                                      pretrained=True,
                                      num_classes=num_classes)
-        except ValueError:
+        except Exception:
             eva_model = create_model('eva02_tiny_patch14_336',
                                      pretrained=False,
                                      num_classes=num_classes)
@@ -108,7 +108,7 @@ def get_eva_model(eva_type, num_classes):
             eva_model = create_model('eva02_small_patch14_336',
                                      pretrained=True,
                                      num_classes=num_classes)
-        except ValueError:
+        except Exception:
             eva_model = create_model('eva02_small_patch14_336',
                                      pretrained=False,
                                      num_classes=num_classes)
@@ -117,7 +117,7 @@ def get_eva_model(eva_type, num_classes):
             eva_model = create_model('eva02_base_patch14_448',
                                      pretrained=True,
                                      num_classes=num_classes)
-        except ValueError:
+        except Exception:
             eva_model = create_model('eva02_base_patch14_448',
                                      pretrained=False,
                                      num_classes=num_classes)
@@ -126,7 +126,7 @@ def get_eva_model(eva_type, num_classes):
             eva_model = create_model('eva02_large_patch14_448',
                                      pretrained=True,
                                      num_classes=num_classes)
-        except ValueError:
+        except Exception:
             eva_model = create_model('eva02_large_patch14_448',
                                      pretrained=False,
                                      num_classes=num_classes)
@@ -135,7 +135,7 @@ def get_eva_model(eva_type, num_classes):
             eva_model = create_model('eva_giant_patch14_clip_224',
                                      pretrained=True,
                                      num_classes=num_classes)
-        except ValueError:
+        except Exception:
             eva_model = create_model('eva_giant_patch14_clip_224',
                                      pretrained=False,
                                      num_classes=num_classes)
@@ -144,7 +144,7 @@ def get_eva_model(eva_type, num_classes):
             eva_model = create_model('eva02_base_patch16_clip_224',
                                      pretrained=True,
                                      num_classes=num_classes)
-        except ValueError:
+        except Exception:
             eva_model = create_model('eva02_base_patch16_clip_224',
                                      pretrained=False,
                                      num_classes=num_classes)
@@ -153,7 +153,7 @@ def get_eva_model(eva_type, num_classes):
             eva_model = create_model('eva02_large_patch14_clip_224',
                                      pretrained=True,
                                      num_classes=num_classes)
-        except ValueError:
+        except Exception:
             eva_model = create_model('eva02_large_patch14_clip_224',
                                      pretrained=False,
                                      num_classes=num_classes)
@@ -162,7 +162,7 @@ def get_eva_model(eva_type, num_classes):
             eva_model = create_model('eva02_large_patch14_clip_336',
                                      pretrained=True,
                                      num_classes=num_classes)
-        except ValueError:
+        except Exception:
             eva_model = create_model('eva02_large_patch14_clip_336',
                                      pretrained=False,
                                      num_classes=num_classes)
@@ -171,7 +171,7 @@ def get_eva_model(eva_type, num_classes):
             eva_model = create_model('eva02_enormous_patch14_clip_224',
                                      pretrained=True,
                                      num_classes=num_classes)
-        except ValueError:
+        except Exception:
             eva_model = create_model('eva02_enormous_patch14_clip_224',
                                      pretrained=False,
                                      num_classes=num_classes)

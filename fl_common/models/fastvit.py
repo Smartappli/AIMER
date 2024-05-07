@@ -20,7 +20,7 @@ def get_fastvit_model(fastvit_type, num_classes):
             fastvit_model = create_model('fastvit_t8',
                                          pretrained=True,
                                          num_classes=num_classes)
-        except ValueError:
+        except Exception:
             fastvit_model = create_model('fastvit_t8',
                                          pretrained=False,
                                          num_classes=num_classes)
@@ -29,7 +29,7 @@ def get_fastvit_model(fastvit_type, num_classes):
             fastvit_model = create_model('fastvit_t12',
                                          pretrained=True,
                                          num_classes=num_classes)
-        except ValueError:
+        except Exception:
             fastvit_model = create_model('fastvit_t12',
                                          pretrained=False,
                                          num_classes=num_classes)
@@ -38,7 +38,7 @@ def get_fastvit_model(fastvit_type, num_classes):
             fastvit_model = create_model('fastvit_s12',
                                          pretrained=True,
                                          num_classes=num_classes)
-        except ValueError:
+        except Exception:
             fastvit_model = create_model('fastvit_s12',
                                          pretrained=False,
                                          num_classes=num_classes)
@@ -47,7 +47,7 @@ def get_fastvit_model(fastvit_type, num_classes):
             fastvit_model = create_model('fastvit_sa12',
                                          pretrained=True,
                                          num_classes=num_classes)
-        except ValueError:
+        except Exception:
             fastvit_model = create_model('fastvit_sa12',
                                          pretrained=False,
                                          num_classes=num_classes)
@@ -56,7 +56,7 @@ def get_fastvit_model(fastvit_type, num_classes):
             fastvit_model = create_model('fastvit_sa24',
                                          pretrained=True,
                                          num_classes=num_classes)
-        except ValueError:
+        except Exception:
             fastvit_model = create_model('fastvit_sa24',
                                          pretrained=False,
                                          num_classes=num_classes)
@@ -65,7 +65,7 @@ def get_fastvit_model(fastvit_type, num_classes):
             fastvit_model = create_model('fastvit_sa36',
                                          pretrained=True,
                                          num_classes=num_classes)
-        except ValueError:
+        except Exception:
             fastvit_model = create_model('fastvit_sa36',
                                          pretrained=False,
                                          num_classes=num_classes)
@@ -74,7 +74,7 @@ def get_fastvit_model(fastvit_type, num_classes):
             fastvit_model = create_model('fastvit_ma36',
                                          pretrained=True,
                                          num_classes=num_classes)
-        except ValueError:
+        except Exception:
             fastvit_model = create_model('fastvit_ma36',
                                          pretrained=False,
                                          num_classes=num_classes)

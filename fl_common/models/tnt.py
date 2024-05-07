@@ -22,7 +22,7 @@ def get_tnt_model(tnt_type, num_classes):
             tnt_model = create_model('tnt_s_patch16_224',
                                      pretrained=True,
                                      num_classes=num_classes)
-        except ValueError:
+        except Exception:
             tnt_model = create_model('tnt_s_patch16_224',
                                      pretrained=False,
                                      num_classes=num_classes)
@@ -31,7 +31,7 @@ def get_tnt_model(tnt_type, num_classes):
             tnt_model = create_model('tnt_b_patch16_224',
                                      pretrained=True,
                                      num_classes=num_classes)
-        except ValueError:
+        except Exception:
             tnt_model = create_model('tnt_b_patch16_224',
                                      pretrained=False,
                                      num_classes=num_classes)

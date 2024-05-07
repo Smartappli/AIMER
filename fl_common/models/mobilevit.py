@@ -23,7 +23,7 @@ def get_mobilevit_model(mobilevit_type, num_classes):
             mobilevit_model = create_model('mobilevit_xxs',
                                            pretrained=True,
                                            num_classes=num_classes)
-        except ValueError:
+        except Exception:
             mobilevit_model = create_model('mobilevit_xxs',
                                            pretrained=False,
                                            num_classes=num_classes)
@@ -32,7 +32,7 @@ def get_mobilevit_model(mobilevit_type, num_classes):
             mobilevit_model = create_model('mobilevit_xs',
                                            pretrained=True,
                                            num_classes=num_classes)
-        except ValueError:
+        except Exception:
             mobilevit_model = create_model('mobilevit_xs',
                                            pretrained=False,
                                            num_classes=num_classes)
@@ -41,7 +41,7 @@ def get_mobilevit_model(mobilevit_type, num_classes):
             mobilevit_model = create_model('mobilevit_s',
                                            pretrained=True,
                                            num_classes=num_classes)
-        except ValueError:
+        except Exception:
             mobilevit_model = create_model('mobilevit_s',
                                            pretrained=False,
                                            num_classes=num_classes)
@@ -50,7 +50,7 @@ def get_mobilevit_model(mobilevit_type, num_classes):
             mobilevit_model = create_model('mobilevitv2_050',
                                            pretrained=True,
                                            num_classes=num_classes)
-        except ValueError:
+        except Exception:
             mobilevit_model = create_model('mobilevitv2_050',
                                            pretrained=False,
                                            num_classes=num_classes)
@@ -59,7 +59,7 @@ def get_mobilevit_model(mobilevit_type, num_classes):
             mobilevit_model = create_model('mobilevitv2_075',
                                            pretrained=True,
                                            num_classes=num_classes)
-        except ValueError:
+        except Exception:
             mobilevit_model = create_model('mobilevitv2_075',
                                            pretrained=False,
                                            num_classes=num_classes)
@@ -68,7 +68,7 @@ def get_mobilevit_model(mobilevit_type, num_classes):
             mobilevit_model = create_model('mobilevitv2_100',
                                            pretrained=True,
                                            num_classes=num_classes)
-        except ValueError:
+        except Exception:
             mobilevit_model = create_model('mobilevitv2_100',
                                            pretrained=False,
                                            num_classes=num_classes)
@@ -77,7 +77,7 @@ def get_mobilevit_model(mobilevit_type, num_classes):
             mobilevit_model = create_model('mobilevitv2_125',
                                            pretrained=True,
                                            num_classes=num_classes)
-        except ValueError:
+        except Exception:
             mobilevit_model = create_model('mobilevitv2_125',
                                            pretrained=False,
                                            num_classes=num_classes)
@@ -86,7 +86,7 @@ def get_mobilevit_model(mobilevit_type, num_classes):
             mobilevit_model = create_model('mobilevitv2_150',
                                            pretrained=True,
                                            num_classes=num_classes)
-        except ValueError:
+        except Exception:
             mobilevit_model = create_model('mobilevitv2_150',
                                            pretrained=False,
                                            num_classes=num_classes)
@@ -95,7 +95,7 @@ def get_mobilevit_model(mobilevit_type, num_classes):
             mobilevit_model = create_model('mobilevitv2_175',
                                            pretrained=True,
                                            num_classes=num_classes)
-        except ValueError:
+        except Exception:
             mobilevit_model = create_model('mobilevitv2_175',
                                            pretrained=False,
                                            num_classes=num_classes)
@@ -104,7 +104,7 @@ def get_mobilevit_model(mobilevit_type, num_classes):
             mobilevit_model = create_model('mobilevitv2_200',
                                            pretrained=True,
                                            num_classes=num_classes)
-        except ValueError:
+        except Exception:
             mobilevit_model = create_model('mobilevitv2_200',
                                            pretrained=False,
                                            num_classes=num_classes)

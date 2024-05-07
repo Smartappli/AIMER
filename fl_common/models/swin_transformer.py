@@ -28,49 +28,49 @@ def get_swin_transformer_model(swin_type, num_classes):
         try:
             weights = models.Swin_T_Weights.DEFAULT
             swin_model = models.swin_t(weights=weights)
-        except ValueError:
+        except Exception:
             swin_model = models.swin_t(weights=None)
     elif swin_type == 'Swin_S':
         torch_vision = True
         try:
             weights = models.Swin_S_Weights.DEFAULT
             swin_model = models.swin_s(weights=weights)
-        except ValueError:
+        except Exception:
             swin_model = models.swin_s(weights=None)
     elif swin_type == 'Swin_B':
         torch_vision = True
         try:
             weights = models.Swin_B_Weights.DEFAULT
             swin_model = models.swin_b(weights=weights)
-        except ValueError:
+        except Exception:
             swin_model = models.swin_b(weights=None)
     elif swin_type == 'Swin_V2_T':
         torch_vision = True
         try:
             weights = models.Swin_V2_T_Weights.DEFAULT
             swin_model = models.swin_v2_t(weights=weights)
-        except ValueError:
+        except Exception:
             swin_model = models.swin_v2_t(weights=None)
     elif swin_type == 'Swin_V2_S':
         torch_vision = True
         try:
             weights = models.Swin_V2_S_Weights.DEFAULT
             swin_model = models.swin_v2_s(weights=weights)
-        except ValueError:
+        except Exception:
             swin_model = models.swin_v2_s(weights=None)
     elif swin_type == 'Swin_V2_B':
         torch_vision = True
         try:
             weights = models.Swin_V2_B_Weights.DEFAULT
             swin_model = models.swin_v2_b(weights=weights)
-        except ValueError:
+        except Exception:
             swin_model = models.swin_v2_b(weights=None)
     elif swin_type == "swin_tiny_patch4_window7_224":
         try:
             swin_model = create_model('swin_tiny_patch4_window7_224',
                                       pretrained=True,
                                       num_classes=num_classes)
-        except ValueError:
+        except Exception:
             swin_model = create_model('swin_tiny_patch4_window7_224',
                                       pretrained=False,
                                       num_classes=num_classes)
@@ -79,7 +79,7 @@ def get_swin_transformer_model(swin_type, num_classes):
             swin_model = create_model('swin_small_patch4_window7_224',
                                       pretrained=True,
                                       num_classes=num_classes)
-        except ValueError:
+        except Exception:
             swin_model = create_model('swin_small_patch4_window7_224',
                                       pretrained=False,
                                       num_classes=num_classes)
@@ -88,7 +88,7 @@ def get_swin_transformer_model(swin_type, num_classes):
             swin_model = create_model('swin_base_patch4_window7_224',
                                       pretrained=True,
                                       num_classes=num_classes)
-        except ValueError:
+        except Exception:
             swin_model = create_model('swin_base_patch4_window7_224',
                                       pretrained=False,
                                       num_classes=num_classes)
@@ -97,7 +97,7 @@ def get_swin_transformer_model(swin_type, num_classes):
             swin_model = create_model('swin_base_patch4_window12_384',
                                       pretrained=True,
                                       num_classes=num_classes)
-        except ValueError:
+        except Exception:
             swin_model = create_model('swin_base_patch4_window12_384',
                                       pretrained=False,
                                       num_classes=num_classes)
@@ -106,7 +106,7 @@ def get_swin_transformer_model(swin_type, num_classes):
             swin_model = create_model('swin_large_patch4_window7_224',
                                       pretrained=True,
                                       num_classes=num_classes)
-        except ValueError:
+        except Exception:
             swin_model = create_model('swin_large_patch4_window7_224',
                                       pretrained=False,
                                       num_classes=num_classes)
@@ -115,7 +115,7 @@ def get_swin_transformer_model(swin_type, num_classes):
             swin_model = create_model('swin_large_patch4_window12_384',
                                       pretrained=True,
                                       num_classes=num_classes)
-        except ValueError:
+        except Exception:
             swin_model = create_model('swin_large_patch4_window12_384',
                                       pretrained=False,
                                       num_classes=num_classes)
@@ -124,7 +124,7 @@ def get_swin_transformer_model(swin_type, num_classes):
             swin_model = create_model('swin_s3_tiny_224',
                                       pretrained=True,
                                       num_classes=num_classes)
-        except ValueError:
+        except Exception:
             swin_model = create_model('swin_s3_tiny_224',
                                       pretrained=False,
                                       num_classes=num_classes)
@@ -133,7 +133,7 @@ def get_swin_transformer_model(swin_type, num_classes):
             swin_model = create_model('swin_s3_small_224',
                                       pretrained=True,
                                       num_classes=num_classes)
-        except ValueError:
+        except Exception:
             swin_model = create_model('swin_s3_small_224',
                                       pretrained=False,
                                       num_classes=num_classes)
@@ -142,7 +142,7 @@ def get_swin_transformer_model(swin_type, num_classes):
             swin_model = create_model('swin_s3_base_224',
                                       pretrained=True,
                                       num_classes=num_classes)
-        except ValueError:
+        except Exception:
             swin_model = create_model('swin_s3_base_224',
                                       pretrained=False,
                                       num_classes=num_classes)

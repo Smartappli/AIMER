@@ -26,7 +26,7 @@ def get_hardcorenas_model(hardcorenas_type, num_classes):
             hardcorenas_model = create_model('hardcorenas_a',
                                              pretrained=True,
                                              num_classes=num_classes)
-        except ValueError:
+        except Exception:
             hardcorenas_model = create_model('hardcorenas_a',
                                              pretrained=False,
                                              num_classes=num_classes)
@@ -35,7 +35,7 @@ def get_hardcorenas_model(hardcorenas_type, num_classes):
             hardcorenas_model = create_model('hardcorenas_b',
                                              pretrained=True,
                                              num_classes=num_classes)
-        except ValueError:
+        except Exception:
             hardcorenas_model = create_model('hardcorenas_b',
                                              pretrained=False,
                                              num_classes=num_classes)
@@ -44,7 +44,7 @@ def get_hardcorenas_model(hardcorenas_type, num_classes):
             hardcorenas_model = create_model('hardcorenas_c',
                                              pretrained=True,
                                              num_classes=num_classes)
-        except ValueError:
+        except Exception:
             hardcorenas_model = create_model('hardcorenas_c',
                                              pretrained=False,
                                              num_classes=num_classes)
@@ -53,7 +53,7 @@ def get_hardcorenas_model(hardcorenas_type, num_classes):
             hardcorenas_model = create_model('hardcorenas_d',
                                              pretrained=True,
                                              num_classes=num_classes)
-        except ValueError:
+        except Exception:
             hardcorenas_model = create_model('hardcorenas_d',
                                              pretrained=False,
                                              num_classes=num_classes)
@@ -62,7 +62,7 @@ def get_hardcorenas_model(hardcorenas_type, num_classes):
             hardcorenas_model = create_model('hardcorenas_e',
                                              pretrained=True,
                                              num_classes=num_classes)
-        except ValueError:
+        except Exception:
             hardcorenas_model = create_model('hardcorenas_e',
                                              pretrained=False,
                                              num_classes=num_classes)
@@ -71,7 +71,7 @@ def get_hardcorenas_model(hardcorenas_type, num_classes):
             hardcorenas_model = create_model('hardcorenas_f',
                                              pretrained=True,
                                              num_classes=num_classes)
-        except ValueError:
+        except Exception:
             hardcorenas_model = create_model('hardcorenas_f',
                                              pretrained=False,
                                              num_classes=num_classes)

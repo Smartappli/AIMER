@@ -27,7 +27,7 @@ def get_inception_model(inception_type, num_classes):
         try:
             weights = models.Inception_V3_Weights.DEFAULT
             inception_model = models.inception_v3(weights=weights)
-        except ValueError:
+        except Exception:
             inception_model = models.inception_v3(weights=None)
 
         # Modify the last layer to suit the given number of classes
@@ -38,7 +38,7 @@ def get_inception_model(inception_type, num_classes):
             inception_model = create_model('inception_v4',
                                            pretrained=True,
                                            num_classes=num_classes)
-        except ValueError:
+        except Exception:
             inception_model = create_model('inception_v4',
                                            pretrained=False,
                                            num_classes=num_classes)
@@ -47,7 +47,7 @@ def get_inception_model(inception_type, num_classes):
             inception_model = create_model('inception_resnet_v2',
                                            pretrained=True,
                                            num_classes=num_classes)
-        except ValueError:
+        except Exception:
             inception_model = create_model('inception_resnet_v2',
                                            pretrained=False,
                                            num_classes=num_classes)

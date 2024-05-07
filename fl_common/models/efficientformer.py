@@ -21,7 +21,7 @@ def get_efficientformer_model(efficientformer_type, num_classes):
             efficientformer_model = create_model('efficientformer_l1',
                                                  pretrained=True,
                                                  num_classes=num_classes)
-        except ValueError:
+        except Exception:
             efficientformer_model = create_model('efficientformer_l1',
                                                  pretrained=False,
                                                  num_classes=num_classes)
@@ -30,7 +30,7 @@ def get_efficientformer_model(efficientformer_type, num_classes):
             efficientformer_model = create_model('efficientformer_l3',
                                                  pretrained=True,
                                                  num_classes=num_classes)
-        except ValueError:
+        except Exception:
             efficientformer_model = create_model('efficientformer_l3',
                                                  pretrained=False,
                                                  num_classes=num_classes)
@@ -39,7 +39,7 @@ def get_efficientformer_model(efficientformer_type, num_classes):
             efficientformer_model = create_model('efficientformer_l7',
                                                  pretrained=True,
                                                  num_classes=num_classes)
-        except ValueError:
+        except Exception:
             efficientformer_model = create_model('efficientformer_l7',
                                                  pretrained=False,
                                                  num_classes=num_classes)

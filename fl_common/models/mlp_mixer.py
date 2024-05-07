@@ -23,7 +23,7 @@ def get_mlp_mixer_model(mlp_mixer_type, num_classes):
             mlp_mixer_model = create_model('mixer_s32_224',
                                            pretrained=True,
                                            num_classes=num_classes)
-        except ValueError:
+        except Exception:
             mlp_mixer_model = create_model('mixer_s32_224',
                                            pretrained=False,
                                            num_classes=num_classes)
@@ -32,7 +32,7 @@ def get_mlp_mixer_model(mlp_mixer_type, num_classes):
             mlp_mixer_model = create_model('mixer_s16_224',
                                            pretrained=True,
                                            num_classes=num_classes)
-        except ValueError:
+        except Exception:
             mlp_mixer_model = create_model('mixer_s16_224',
                                            pretrained=False,
                                            num_classes=num_classes)
@@ -41,7 +41,7 @@ def get_mlp_mixer_model(mlp_mixer_type, num_classes):
             mlp_mixer_model = create_model('mixer_b32_224',
                                            pretrained=True,
                                            num_classes=num_classes)
-        except ValueError:
+        except Exception:
             mlp_mixer_model = create_model('mixer_b32_224',
                                            pretrained=False,
                                            num_classes=num_classes)
@@ -50,7 +50,7 @@ def get_mlp_mixer_model(mlp_mixer_type, num_classes):
             mlp_mixer_model = create_model('mixer_b16_224',
                                            pretrained=True,
                                            num_classes=num_classes)
-        except ValueError:
+        except Exception:
             mlp_mixer_model = create_model('mixer_b16_224',
                                            pretrained=False,
                                            num_classes=num_classes)
@@ -59,7 +59,7 @@ def get_mlp_mixer_model(mlp_mixer_type, num_classes):
             mlp_mixer_model = create_model('mixer_l32_224',
                                            pretrained=True,
                                            num_classes=num_classes)
-        except ValueError:
+        except Exception:
             mlp_mixer_model = create_model('mixer_l32_224',
                                            pretrained=False,
                                            num_classes=num_classes)
@@ -68,7 +68,7 @@ def get_mlp_mixer_model(mlp_mixer_type, num_classes):
             mlp_mixer_model = create_model('mixer_l16_224',
                                            pretrained=True,
                                            num_classes=num_classes)
-        except ValueError:
+        except Exception:
             mlp_mixer_model = create_model('mixer_l16_224',
                                            pretrained=False,
                                            num_classes=num_classes)
@@ -77,7 +77,7 @@ def get_mlp_mixer_model(mlp_mixer_type, num_classes):
             mlp_mixer_model = create_model('gmixer_12_224',
                                            pretrained=True,
                                            num_classes=num_classes)
-        except ValueError:
+        except Exception:
             mlp_mixer_model = create_model('gmixer_12_224',
                                            pretrained=False,
                                            num_classes=num_classes)
@@ -86,7 +86,7 @@ def get_mlp_mixer_model(mlp_mixer_type, num_classes):
             mlp_mixer_model = create_model('gmixer_24_224',
                                            pretrained=True,
                                            num_classes=num_classes)
-        except ValueError:
+        except Exception:
             mlp_mixer_model = create_model('gmixer_24_224',
                                            pretrained=False,
                                            num_classes=num_classes)
@@ -95,7 +95,7 @@ def get_mlp_mixer_model(mlp_mixer_type, num_classes):
             mlp_mixer_model = create_model('resmlp_12_224',
                                            pretrained=True,
                                            num_classes=num_classes)
-        except ValueError:
+        except Exception:
             mlp_mixer_model = create_model('resmlp_12_224',
                                            pretrained=False,
                                            num_classes=num_classes)
@@ -104,7 +104,7 @@ def get_mlp_mixer_model(mlp_mixer_type, num_classes):
             mlp_mixer_model = create_model('resmlp_24_224',
                                            pretrained=True,
                                            num_classes=num_classes)
-        except ValueError:
+        except Exception:
             mlp_mixer_model = create_model('resmlp_24_224',
                                            pretrained=False,
                                            num_classes=num_classes)
@@ -113,7 +113,7 @@ def get_mlp_mixer_model(mlp_mixer_type, num_classes):
             mlp_mixer_model = create_model('resmlp_36_224',
                                            pretrained=True,
                                            num_classes=num_classes)
-        except ValueError:
+        except Exception:
             mlp_mixer_model = create_model('resmlp_36_224',
                                            pretrained=False,
                                            num_classes=num_classes)
@@ -122,7 +122,7 @@ def get_mlp_mixer_model(mlp_mixer_type, num_classes):
             mlp_mixer_model = create_model('resmlp_big_24_224',
                                            pretrained=True,
                                            num_classes=num_classes)
-        except ValueError:
+        except Exception:
             mlp_mixer_model = create_model('resmlp_big_24_224',
                                            pretrained=False,
                                            num_classes=num_classes)
@@ -131,7 +131,7 @@ def get_mlp_mixer_model(mlp_mixer_type, num_classes):
             mlp_mixer_model = create_model('gmlp_ti16_224',
                                            pretrained=True,
                                            num_classes=num_classes)
-        except ValueError:
+        except Exception:
             mlp_mixer_model = create_model('gmlp_ti16_224',
                                            pretrained=False,
                                            num_classes=num_classes)
@@ -140,7 +140,7 @@ def get_mlp_mixer_model(mlp_mixer_type, num_classes):
             mlp_mixer_model = create_model('gmlp_s16_224',
                                            pretrained=True,
                                            num_classes=num_classes)
-        except ValueError:
+        except Exception:
             mlp_mixer_model = create_model('gmlp_s16_224',
                                            pretrained=False,
                                            num_classes=num_classes)
@@ -149,7 +149,7 @@ def get_mlp_mixer_model(mlp_mixer_type, num_classes):
             mlp_mixer_model = create_model('gmlp_b16_224',
                                            pretrained=True,
                                            num_classes=num_classes)
-        except ValueError:
+        except Exception:
             mlp_mixer_model = create_model('gmlp_b16_224',
                                            pretrained=False,
                                            num_classes=num_classes)

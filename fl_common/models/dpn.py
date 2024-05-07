@@ -20,7 +20,7 @@ def get_dpn_model(dpn_type, num_classes):
             dpn_model = create_model('dpn48b',
                                      pretrained=True,
                                      num_classes=num_classes)
-        except ValueError:
+        except Exception:
             dpn_model = create_model('dpn48b',
                                      pretrained=False,
                                      num_classes=num_classes)
@@ -29,7 +29,7 @@ def get_dpn_model(dpn_type, num_classes):
             dpn_model = create_model('dpn68',
                                      pretrained=True,
                                      num_classes=num_classes)
-        except ValueError:
+        except Exception:
             dpn_model = create_model('dpn68',
                                      pretrained=False,
                                      num_classes=num_classes)
@@ -38,7 +38,7 @@ def get_dpn_model(dpn_type, num_classes):
             dpn_model = create_model('dpn68b',
                                      pretrained=True,
                                      num_classes=num_classes)
-        except ValueError:
+        except Exception:
             dpn_model = create_model('dpn68b',
                                      pretrained=False,
                                      num_classes=num_classes)
@@ -47,7 +47,7 @@ def get_dpn_model(dpn_type, num_classes):
             dpn_model = create_model('dpn92',
                                      pretrained=True,
                                      num_classes=num_classes)
-        except ValueError:
+        except Exception:
             dpn_model = create_model('dpn92',
                                      pretrained=False,
                                      num_classes=num_classes)
@@ -56,7 +56,7 @@ def get_dpn_model(dpn_type, num_classes):
             dpn_model = create_model('dpn98',
                                      pretrained=True,
                                      num_classes=num_classes)
-        except ValueError:
+        except Exception:
             dpn_model = create_model('dpn98',
                                      pretrained=False,
                                      num_classes=num_classes)
@@ -65,7 +65,7 @@ def get_dpn_model(dpn_type, num_classes):
             dpn_model = create_model('dpn131',
                                      pretrained=True,
                                      num_classes=num_classes)
-        except ValueError:
+        except Exception:
             dpn_model = create_model('dpn131',
                                      pretrained=False,
                                      num_classes=num_classes)
@@ -74,7 +74,7 @@ def get_dpn_model(dpn_type, num_classes):
             dpn_model = create_model('dpn107',
                                      pretrained=True,
                                      num_classes=num_classes)
-        except ValueError:
+        except Exception:
             dpn_model = create_model('dpn107',
                                      pretrained=False,
                                      num_classes=num_classes)

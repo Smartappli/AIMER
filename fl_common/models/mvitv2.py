@@ -22,7 +22,7 @@ def get_mvitv2_model(mvitv2_type, num_classes):
             mvitv2_model = create_model('mvitv2_tiny',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except ValueError:
+        except Exception:
             mvitv2_model = create_model('mvitv2_tiny',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -31,7 +31,7 @@ def get_mvitv2_model(mvitv2_type, num_classes):
             mvitv2_model = create_model('mvitv2_small',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except ValueError:
+        except Exception:
             mvitv2_model = create_model('mvitv2_small',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -40,7 +40,7 @@ def get_mvitv2_model(mvitv2_type, num_classes):
             mvitv2_model = create_model('mvitv2_base',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except ValueError:
+        except Exception:
             mvitv2_model = create_model('mvitv2_base',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -49,7 +49,7 @@ def get_mvitv2_model(mvitv2_type, num_classes):
             mvitv2_model = create_model('mvitv2_large',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except ValueError:
+        except Exception:
             mvitv2_model = create_model('mvitv2_large',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -58,7 +58,7 @@ def get_mvitv2_model(mvitv2_type, num_classes):
             mvitv2_model = create_model('mvitv2_small_cls',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except ValueError:
+        except Exception:
             mvitv2_model = create_model('mvitv2_small_cls',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -67,7 +67,7 @@ def get_mvitv2_model(mvitv2_type, num_classes):
             mvitv2_model = create_model('mvitv2_base_cls',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except ValueError:
+        except Exception:
             mvitv2_model = create_model('mvitv2_base_cls',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -76,7 +76,7 @@ def get_mvitv2_model(mvitv2_type, num_classes):
             mvitv2_model = create_model('mvitv2_large_cls',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except ValueError:
+        except Exception:
             mvitv2_model = create_model('mvitv2_large_cls',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -85,7 +85,7 @@ def get_mvitv2_model(mvitv2_type, num_classes):
             mvitv2_model = create_model('mvitv2_huge_cls',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except ValueError:
+        except Exception:
             mvitv2_model = create_model('mvitv2_huge_cls',
                                         pretrained=False,
                                         num_classes=num_classes)

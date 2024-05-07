@@ -1,15 +1,11 @@
 from timm import create_model
 
-
-def get_nextvit_model(nextvit_type, num_classe):
+def get_nextvit_model(nextvit_type, num_classes):
     """
     Get a NEXTVIT model based on the specified architecture type.
 
     Args:
-        nextvit_type (str): The type of NEXTVIT architecture. It can be one of the following:
-            - 'nextvit_small': Small NEXTVIT architecture.
-            - 'nextvit_base': Base NEXTVIT architecture.
-            - 'nextvit_large': Large NEXTVIT architecture.
+        nextvit_type (str): The type of NEXTVIT architecture.
         num_classes (int): The number of output classes.
 
     Returns:
@@ -18,34 +14,12 @@ def get_nextvit_model(nextvit_type, num_classe):
     Raises:
         ValueError: If an unknown NEXTVIT architecture type is specified.
     """
-    if nextvit_type == 'nextvit_small':
-        try:
-            nextvit_model = create_model('nextvit_small',
-                                         pretrained=True,
-                                         num_classes=num_classe)
-        except ValueError:
-            nextvit_model = create_model('nextvit_small',
-                                         pretrained=False,
-                                         num_classes=num_classe)
-    elif nextvit_type == 'nextvit_base':
-        try:
-            nextvit_model = create_model('nextvit_base',
-                                         pretrained=True,
-                                         num_classes=num_classe)
-        except ValueError:
-            nextvit_model = create_model('nextvit_base',
-                                         pretrained=False,
-                                         num_classes=num_classe)
-    elif nextvit_type == 'nextvit_large':
-        try:
-            nextvit_model = create_model('nextvit_large',
-                                         pretrained=True,
-                                         num_classes=num_classe)
-        except ValueError:
-            nextvit_model = create_model('nextvit_large',
-                                         pretrained=False,
-                                         num_classes=num_classe)
-    else:
-        raise ValueError(f'Unknown Nextvit Architecture: {nextvit_type}')
+    valid_nextvit_types = ['nextvit_small', 'nextvit_base', 'nextvit_large']
 
-    return nextvit_model
+    if nextvit_type not in valid_nextvit_types:
+        raise ValueError(f'Unknown NEXTVIT Architecture: {nextvit_type}')
+
+    try:
+        return create_model(nextvit_type, pretrained=True, num_classes=num_classes)
+    except Exception:
+        return create_model(nextvit_type, pretrained=False, num_classes=num_classes)

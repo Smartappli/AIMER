@@ -20,12 +20,12 @@ def get_visformer_model(visformer_type, num_classes):
     if visformer_type == 'visformer_tiny':
         try:
             visformer_model = create_model('visformer_tiny', pretrained=True, num_classes=num_classes)
-        except ValueError:
+        except Exception:
             visformer_model = create_model('visformer_tiny', pretrained=False, num_classes=num_classes)
     elif visformer_type == 'visformer_small':
         try:
             visformer_model = create_model('visformer_small', pretrained=True, num_classes=num_classes)
-        except ValueError:
+        except Exception:
             visformer_model = create_model('visformer_small', pretrained=False, num_classes=num_classes)
     else:
         raise ValueError(f'Unknown Visformer Architecture: {visformer_type}')

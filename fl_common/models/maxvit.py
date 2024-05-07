@@ -25,14 +25,14 @@ def get_maxvit_model(maxvit_type, num_classes):
         try:
             weights = models.MaxVit_T_Weights.DEFAULT
             maxvit_model = models.maxvit_t(weights=weights)
-        except ValueError:
+        except Exception:
             maxvit_model = models.maxvit_t(weights=None)
     elif maxvit_type == "coatnet_pico_rw_224":
         try:
             maxvit_model = create_model('coatnet_pico_rw_224',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except ValueError:
+        except Exception:
             maxvit_model = create_model('coatnet_pico_rw_224',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -41,7 +41,7 @@ def get_maxvit_model(maxvit_type, num_classes):
             maxvit_model = create_model('coatnet_nano_rw_224',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except ValueError:
+        except Exception:
             maxvit_model = create_model('coatnet_nano_rw_224',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -50,7 +50,7 @@ def get_maxvit_model(maxvit_type, num_classes):
             maxvit_model = create_model('coatnet_0_rw_224',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except ValueError:
+        except Exception:
             maxvit_model = create_model('coatnet_0_rw_224',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -59,7 +59,7 @@ def get_maxvit_model(maxvit_type, num_classes):
             maxvit_model = create_model('coatnet_1_rw_224',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except ValueError:
+        except Exception:
             maxvit_model = create_model('coatnet_1_rw_224',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -68,7 +68,7 @@ def get_maxvit_model(maxvit_type, num_classes):
             maxvit_model = create_model('coatnet_2_rw_224',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except ValueError:
+        except Exception:
             maxvit_model = create_model('coatnet_2_rw_224',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -77,7 +77,7 @@ def get_maxvit_model(maxvit_type, num_classes):
             maxvit_model = create_model('coatnet_3_rw_224',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except ValueError:
+        except Exception:
             maxvit_model = create_model('coatnet_3_rw_224',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -86,7 +86,7 @@ def get_maxvit_model(maxvit_type, num_classes):
             maxvit_model = create_model('coatnet_bn_0_rw_224',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except ValueError:
+        except Exception:
             maxvit_model = create_model('coatnet_bn_0_rw_224',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -95,7 +95,7 @@ def get_maxvit_model(maxvit_type, num_classes):
             maxvit_model = create_model('coatnet_rmlp_nano_rw_224',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except ValueError:
+        except Exception:
             maxvit_model = create_model('coatnet_rmlp_nano_rw_224',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -104,7 +104,7 @@ def get_maxvit_model(maxvit_type, num_classes):
             maxvit_model = create_model('coatnet_rmlp_0_rw_224',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except ValueError:
+        except Exception:
             maxvit_model = create_model('coatnet_rmlp_0_rw_224',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -113,7 +113,7 @@ def get_maxvit_model(maxvit_type, num_classes):
             maxvit_model = create_model('coatnet_rmlp_1_rw_224',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except ValueError:
+        except Exception:
             maxvit_model = create_model('coatnet_rmlp_1_rw_224',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -122,7 +122,7 @@ def get_maxvit_model(maxvit_type, num_classes):
             maxvit_model = create_model('coatnet_rmlp_1_rw2_224',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except ValueError:
+        except Exception:
             maxvit_model = create_model('coatnet_rmlp_1_rw2_224',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -131,7 +131,7 @@ def get_maxvit_model(maxvit_type, num_classes):
             maxvit_model = create_model('coatnet_rmlp_2_rw_224',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except ValueError:
+        except Exception:
             maxvit_model = create_model('coatnet_rmlp_2_rw_224',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -140,7 +140,7 @@ def get_maxvit_model(maxvit_type, num_classes):
             maxvit_model = create_model('coatnet_rmlp_2_rw_384',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except ValueError:
+        except Exception:
             maxvit_model = create_model('coatnet_rmlp_2_rw_384',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -149,7 +149,7 @@ def get_maxvit_model(maxvit_type, num_classes):
             maxvit_model = create_model('coatnet_rmlp_3_rw_224',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except ValueError:
+        except Exception:
             maxvit_model = create_model('coatnet_rmlp_3_rw_224',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -158,7 +158,7 @@ def get_maxvit_model(maxvit_type, num_classes):
             maxvit_model = create_model('coatnet_nano_cc_224',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except ValueError:
+        except Exception:
             maxvit_model = create_model('coatnet_nano_cc_224',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -167,7 +167,7 @@ def get_maxvit_model(maxvit_type, num_classes):
             maxvit_model = create_model('coatnext_nano_rw_224',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except ValueError:
+        except Exception:
             maxvit_model = create_model('coatnext_nano_rw_224',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -176,7 +176,7 @@ def get_maxvit_model(maxvit_type, num_classes):
             maxvit_model = create_model('coatnet_0_224',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except ValueError:
+        except Exception:
             maxvit_model = create_model('coatnet_0_224',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -185,7 +185,7 @@ def get_maxvit_model(maxvit_type, num_classes):
             maxvit_model = create_model('coatnet_1_224',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except ValueError:
+        except Exception:
             maxvit_model = create_model('coatnet_1_224',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -194,7 +194,7 @@ def get_maxvit_model(maxvit_type, num_classes):
             maxvit_model = create_model('coatnet_2_224',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except ValueError:
+        except Exception:
             maxvit_model = create_model('coatnet_2_224',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -203,7 +203,7 @@ def get_maxvit_model(maxvit_type, num_classes):
             maxvit_model = create_model('coatnet_3_224',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except ValueError:
+        except Exception:
             maxvit_model = create_model('coatnet_3_224',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -212,7 +212,7 @@ def get_maxvit_model(maxvit_type, num_classes):
             maxvit_model = create_model('coatnet_4_224',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except ValueError:
+        except Exception:
             maxvit_model = create_model('coatnet_4_224',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -221,7 +221,7 @@ def get_maxvit_model(maxvit_type, num_classes):
             maxvit_model = create_model('coatnet_5_224',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except ValueError:
+        except Exception:
             maxvit_model = create_model('coatnet_5_224',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -230,7 +230,7 @@ def get_maxvit_model(maxvit_type, num_classes):
             maxvit_model = create_model('maxvit_pico_rw_256',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except ValueError:
+        except Exception:
             maxvit_model = create_model('maxvit_pico_rw_256',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -239,7 +239,7 @@ def get_maxvit_model(maxvit_type, num_classes):
             maxvit_model = create_model('maxvit_nano_rw_256',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except ValueError:
+        except Exception:
             maxvit_model = create_model('maxvit_nano_rw_256',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -248,7 +248,7 @@ def get_maxvit_model(maxvit_type, num_classes):
             maxvit_model = create_model('maxvit_tiny_rw_224',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except ValueError:
+        except Exception:
             maxvit_model = create_model('maxvit_tiny_rw_224',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -257,7 +257,7 @@ def get_maxvit_model(maxvit_type, num_classes):
             maxvit_model = create_model('maxvit_tiny_rw_256',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except ValueError:
+        except Exception:
             maxvit_model = create_model('maxvit_tiny_rw_256',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -266,7 +266,7 @@ def get_maxvit_model(maxvit_type, num_classes):
             maxvit_model = create_model('maxvit_rmlp_pico_rw_256',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except ValueError:
+        except Exception:
             maxvit_model = create_model('maxvit_rmlp_pico_rw_256',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -275,7 +275,7 @@ def get_maxvit_model(maxvit_type, num_classes):
             maxvit_model = create_model('maxvit_rmlp_nano_rw_256',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except ValueError:
+        except Exception:
             maxvit_model = create_model('maxvit_rmlp_nano_rw_256',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -284,7 +284,7 @@ def get_maxvit_model(maxvit_type, num_classes):
             maxvit_model = create_model('maxvit_rmlp_tiny_rw_256',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except ValueError:
+        except Exception:
             maxvit_model = create_model('maxvit_rmlp_tiny_rw_256',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -293,7 +293,7 @@ def get_maxvit_model(maxvit_type, num_classes):
             maxvit_model = create_model('maxvit_rmlp_small_rw_224',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except ValueError:
+        except Exception:
             maxvit_model = create_model('maxvit_rmlp_small_rw_224',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -302,7 +302,7 @@ def get_maxvit_model(maxvit_type, num_classes):
             maxvit_model = create_model('maxvit_rmlp_small_rw_256',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except ValueError:
+        except Exception:
             maxvit_model = create_model('maxvit_rmlp_small_rw_256',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -311,7 +311,7 @@ def get_maxvit_model(maxvit_type, num_classes):
             maxvit_model = create_model('maxvit_rmlp_base_rw_224',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except ValueError:
+        except Exception:
             maxvit_model = create_model('maxvit_rmlp_base_rw_224',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -320,7 +320,7 @@ def get_maxvit_model(maxvit_type, num_classes):
             maxvit_model = create_model('maxvit_rmlp_base_rw_384',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except ValueError:
+        except Exception:
             maxvit_model = create_model('maxvit_rmlp_base_rw_384',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -329,7 +329,7 @@ def get_maxvit_model(maxvit_type, num_classes):
             maxvit_model = create_model('maxvit_tiny_pm_256',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except ValueError:
+        except Exception:
             maxvit_model = create_model('maxvit_tiny_pm_256',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -338,7 +338,7 @@ def get_maxvit_model(maxvit_type, num_classes):
             maxvit_model = create_model('maxxvit_rmlp_nano_rw_256',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except ValueError:
+        except Exception:
             maxvit_model = create_model('maxxvit_rmlp_nano_rw_256',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -347,7 +347,7 @@ def get_maxvit_model(maxvit_type, num_classes):
             maxvit_model = create_model('maxxvit_rmlp_tiny_rw_256',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except ValueError:
+        except Exception:
             maxvit_model = create_model('maxxvit_rmlp_tiny_rw_256',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -356,7 +356,7 @@ def get_maxvit_model(maxvit_type, num_classes):
             maxvit_model = create_model('maxxvit_rmlp_small_rw_256',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except ValueError:
+        except Exception:
             maxvit_model = create_model('maxxvit_rmlp_small_rw_256',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -365,7 +365,7 @@ def get_maxvit_model(maxvit_type, num_classes):
             maxvit_model = create_model('maxxvitv2_nano_rw_256',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except ValueError:
+        except Exception:
             maxvit_model = create_model('maxxvitv2_nano_rw_256',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -374,7 +374,7 @@ def get_maxvit_model(maxvit_type, num_classes):
             maxvit_model = create_model('maxxvitv2_rmlp_base_rw_224',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except ValueError:
+        except Exception:
             maxvit_model = create_model('maxxvitv2_rmlp_base_rw_224',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -383,7 +383,7 @@ def get_maxvit_model(maxvit_type, num_classes):
             maxvit_model = create_model('maxxvitv2_rmlp_base_rw_384',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except ValueError:
+        except Exception:
             maxvit_model = create_model('maxxvitv2_rmlp_base_rw_384',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -392,7 +392,7 @@ def get_maxvit_model(maxvit_type, num_classes):
             maxvit_model = create_model('maxxvitv2_rmlp_large_rw_224',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except ValueError:
+        except Exception:
             maxvit_model = create_model('maxxvitv2_rmlp_large_rw_224',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -401,7 +401,7 @@ def get_maxvit_model(maxvit_type, num_classes):
             maxvit_model = create_model('maxvit_tiny_tf_224',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except ValueError:
+        except Exception:
             maxvit_model = create_model('maxvit_tiny_tf_224',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -410,7 +410,7 @@ def get_maxvit_model(maxvit_type, num_classes):
             maxvit_model = create_model('maxvit_tiny_tf_384',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except ValueError:
+        except Exception:
             maxvit_model = create_model('maxvit_tiny_tf_384',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -419,7 +419,7 @@ def get_maxvit_model(maxvit_type, num_classes):
             maxvit_model = create_model('maxvit_tiny_tf_512',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except ValueError:
+        except Exception:
             maxvit_model = create_model('maxvit_tiny_tf_512',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -428,7 +428,7 @@ def get_maxvit_model(maxvit_type, num_classes):
             maxvit_model = create_model('maxvit_small_tf_224',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except ValueError:
+        except Exception:
             maxvit_model = create_model('maxvit_small_tf_224',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -437,7 +437,7 @@ def get_maxvit_model(maxvit_type, num_classes):
             maxvit_model = create_model('maxvit_small_tf_384',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except ValueError:
+        except Exception:
             maxvit_model = create_model('maxvit_small_tf_384',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -446,7 +446,7 @@ def get_maxvit_model(maxvit_type, num_classes):
             maxvit_model = create_model('maxvit_small_tf_512',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except ValueError:
+        except Exception:
             maxvit_model = create_model('maxvit_small_tf_512',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -455,7 +455,7 @@ def get_maxvit_model(maxvit_type, num_classes):
             maxvit_model = create_model('maxvit_base_tf_224',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except ValueError:
+        except Exception:
             maxvit_model = create_model('maxvit_base_tf_224',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -464,7 +464,7 @@ def get_maxvit_model(maxvit_type, num_classes):
             maxvit_model = create_model('maxvit_base_tf_384',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except ValueError:
+        except Exception:
             maxvit_model = create_model('maxvit_base_tf_384',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -473,7 +473,7 @@ def get_maxvit_model(maxvit_type, num_classes):
             maxvit_model = create_model('maxvit_base_tf_512',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except ValueError:
+        except Exception:
             maxvit_model = create_model('maxvit_base_tf_512',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -482,7 +482,7 @@ def get_maxvit_model(maxvit_type, num_classes):
             maxvit_model = create_model('maxvit_large_tf_224',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except ValueError:
+        except Exception:
             maxvit_model = create_model('maxvit_large_tf_224',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -491,7 +491,7 @@ def get_maxvit_model(maxvit_type, num_classes):
             maxvit_model = create_model('maxvit_large_tf_384',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except ValueError:
+        except Exception:
             maxvit_model = create_model('maxvit_large_tf_384',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -500,7 +500,7 @@ def get_maxvit_model(maxvit_type, num_classes):
             maxvit_model = create_model('maxvit_large_tf_512',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except ValueError:
+        except Exception:
             maxvit_model = create_model('maxvit_large_tf_512',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -509,7 +509,7 @@ def get_maxvit_model(maxvit_type, num_classes):
             maxvit_model = create_model('maxvit_xlarge_tf_224',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except ValueError:
+        except Exception:
             maxvit_model = create_model('maxvit_xlarge_tf_224',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -518,7 +518,7 @@ def get_maxvit_model(maxvit_type, num_classes):
             maxvit_model = create_model('maxvit_xlarge_tf_384',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except ValueError:
+        except Exception:
             maxvit_model = create_model('maxvit_xlarge_tf_384',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -527,7 +527,7 @@ def get_maxvit_model(maxvit_type, num_classes):
             maxvit_model = create_model('maxvit_xlarge_tf_512',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except ValueError:
+        except Exception:
             maxvit_model = create_model('maxvit_xlarge_tf_512',
                                         pretrained=False,
                                         num_classes=num_classes)

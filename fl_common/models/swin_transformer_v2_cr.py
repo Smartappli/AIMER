@@ -33,7 +33,7 @@ def get_swin_transformer_v2_cr_model(swin_type, num_classes):
             swin_model = create_model('swinv2_cr_tiny_384',
                                       pretrained=True,
                                       num_classes=num_classes)
-        except ValueError:
+        except Exception:
             swin_model = create_model('swinv2_cr_tiny_384',
                                       pretrained=False,
                                       num_classes=num_classes)
@@ -42,7 +42,7 @@ def get_swin_transformer_v2_cr_model(swin_type, num_classes):
             swin_model = create_model('swinv2_cr_tiny_224',
                                       pretrained=True,
                                       num_classes=num_classes)
-        except ValueError:
+        except Exception:
             swin_model = create_model('swinv2_cr_tiny_224',
                                       pretrained=False,
                                       num_classes=num_classes)
@@ -51,7 +51,7 @@ def get_swin_transformer_v2_cr_model(swin_type, num_classes):
             swin_model = create_model('swinv2_cr_tiny_ns_224',
                                       pretrained=True,
                                       num_classes=num_classes)
-        except ValueError:
+        except Exception:
             swin_model = create_model('swinv2_cr_tiny_ns_224',
                                       pretrained=False,
                                       num_classes=num_classes)
@@ -60,7 +60,7 @@ def get_swin_transformer_v2_cr_model(swin_type, num_classes):
             swin_model = create_model('swinv2_cr_small_384',
                                       pretrained=True,
                                       num_classes=num_classes)
-        except ValueError:
+        except Exception:
             swin_model = create_model('swinv2_cr_small_384',
                                       pretrained=False,
                                       num_classes=num_classes)
@@ -69,7 +69,7 @@ def get_swin_transformer_v2_cr_model(swin_type, num_classes):
             swin_model = create_model('swinv2_cr_small_224',
                                       pretrained=True,
                                       num_classes=num_classes)
-        except ValueError:
+        except Exception:
             swin_model = create_model('swinv2_cr_small_224',
                                       pretrained=False,
                                       num_classes=num_classes)
@@ -78,7 +78,7 @@ def get_swin_transformer_v2_cr_model(swin_type, num_classes):
             swin_model = create_model('swinv2_cr_small_ns_224',
                                       pretrained=True,
                                       num_classes=num_classes)
-        except ValueError:
+        except Exception:
             swin_model = create_model('swinv2_cr_small_ns_224',
                                       pretrained=False,
                                       num_classes=num_classes)
@@ -87,7 +87,7 @@ def get_swin_transformer_v2_cr_model(swin_type, num_classes):
             swin_model = create_model('swinv2_cr_small_ns_256',
                                       pretrained=True,
                                       num_classes=num_classes)
-        except ValueError:
+        except Exception:
             swin_model = create_model('swinv2_cr_small_ns_256',
                                       pretrained=False,
                                       num_classes=num_classes)
@@ -96,7 +96,7 @@ def get_swin_transformer_v2_cr_model(swin_type, num_classes):
             swin_model = create_model('swinv2_cr_base_384',
                                       pretrained=True,
                                       num_classes=num_classes)
-        except ValueError:
+        except Exception:
             swin_model = create_model('swinv2_cr_base_384',
                                       pretrained=False,
                                       num_classes=num_classes)
@@ -105,7 +105,7 @@ def get_swin_transformer_v2_cr_model(swin_type, num_classes):
             swin_model = create_model('swinv2_cr_base_224',
                                       pretrained=True,
                                       num_classes=num_classes)
-        except ValueError:
+        except Exception:
             swin_model = create_model('swinv2_cr_base_224',
                                       pretrained=False,
                                       num_classes=num_classes)
@@ -114,7 +114,7 @@ def get_swin_transformer_v2_cr_model(swin_type, num_classes):
             swin_model = create_model('swinv2_cr_base_ns_224',
                                       pretrained=True,
                                       num_classes=num_classes)
-        except ValueError:
+        except Exception:
             swin_model = create_model('swinv2_cr_base_ns_224',
                                       pretrained=False,
                                       num_classes=num_classes)
@@ -123,7 +123,7 @@ def get_swin_transformer_v2_cr_model(swin_type, num_classes):
             swin_model = create_model('swinv2_cr_large_384',
                                       pretrained=True,
                                       num_classes=num_classes)
-        except ValueError:
+        except Exception:
             swin_model = create_model('swinv2_cr_large_384',
                                       pretrained=False,
                                       num_classes=num_classes)
@@ -132,7 +132,7 @@ def get_swin_transformer_v2_cr_model(swin_type, num_classes):
             swin_model = create_model('swinv2_cr_large_224',
                                       pretrained=True,
                                       num_classes=num_classes)
-        except ValueError:
+        except Exception:
             swin_model = create_model('swinv2_cr_large_224',
                                       pretrained=False,
                                       num_classes=num_classes)
@@ -141,7 +141,7 @@ def get_swin_transformer_v2_cr_model(swin_type, num_classes):
             swin_model = create_model('swinv2_cr_huge_384',
                                       pretrained=True,
                                       num_classes=num_classes)
-        except ValueError:
+        except Exception:
             swin_model = create_model('swinv2_cr_huge_384',
                                       pretrained=False,
                                       num_classes=num_classes)
@@ -150,7 +150,7 @@ def get_swin_transformer_v2_cr_model(swin_type, num_classes):
             swin_model = create_model('swinv2_cr_huge_224',
                                       pretrained=True,
                                       num_classes=num_classes)
-        except ValueError:
+        except Exception:
             swin_model = create_model('swinv2_cr_huge_224',
                                       pretrained=False,
                                       num_classes=num_classes)
@@ -159,7 +159,7 @@ def get_swin_transformer_v2_cr_model(swin_type, num_classes):
             swin_model = create_model('swinv2_cr_giant_384',
                                       pretrained=True,
                                       num_classes=num_classes)
-        except ValueError:
+        except Exception:
             swin_model = create_model('swinv2_cr_giant_384',
                                       pretrained=False,
                                       num_classes=num_classes)
@@ -168,7 +168,7 @@ def get_swin_transformer_v2_cr_model(swin_type, num_classes):
             swin_model = create_model('swinv2_cr_giant_224',
                                       pretrained=True,
                                       num_classes=num_classes)
-        except ValueError:
+        except Exception:
             swin_model = create_model('swinv2_cr_giant_224',
                                       pretrained=False,
                                       num_classes=num_classes)

@@ -22,13 +22,13 @@ def get_squeezenet_model(squeezenet_type, num_classes):
         try:
             weights = models.SqueezeNet1_0_Weights.DEFAULT
             squeezenet_model = models.squeezenet1_0(weights=weights)
-        except ValueError:
+        except Exception:
             squeezenet_model = models.squeezenet1_0(weights=None)
     elif squeezenet_type == 'SqueezeNet1_1':
         try:
             weights = models.SqueezeNet1_1_Weights.DEFAULT
             squeezenet_model = models.squeezenet1_1(weights=weights)
-        except ValueError:
+        except Exception:
             squeezenet_model = models.squeezenet1_1(weights=None)
     else:
         raise ValueError(f'Unknown SqueezeNet Architecture: {squeezenet_type}')

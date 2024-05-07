@@ -23,7 +23,7 @@ def get_tiny_vit_model(tiny_vit_type, num_classes):
             tiny_vit_model = create_model('tiny_vit_5m_224',
                                           pretrained=True,
                                           num_classes=num_classes)
-        except ValueError:
+        except Exception:
             tiny_vit_model = create_model('tiny_vit_5m_224',
                                           pretrained=False,
                                           num_classes=num_classes)
@@ -32,7 +32,7 @@ def get_tiny_vit_model(tiny_vit_type, num_classes):
             tiny_vit_model = create_model('tiny_vit_11m_224',
                                           pretrained=True,
                                           num_classes=num_classes)
-        except ValueError:
+        except Exception:
             tiny_vit_model = create_model('tiny_vit_11m_224',
                                           pretrained=False,
                                           num_classes=num_classes)
@@ -41,7 +41,7 @@ def get_tiny_vit_model(tiny_vit_type, num_classes):
             tiny_vit_model = create_model("tiny_vit_21m_224",
                                           pretrained=True,
                                           num_classes=num_classes)
-        except ValueError:
+        except Exception:
             tiny_vit_model = create_model("tiny_vit_21m_224",
                                           pretrained=False,
                                           num_classes=num_classes)
@@ -50,7 +50,7 @@ def get_tiny_vit_model(tiny_vit_type, num_classes):
             tiny_vit_model = create_model("tiny_vit_21m_384",
                                           pretrained=True,
                                           num_classes=num_classes)
-        except ValueError:
+        except Exception:
             tiny_vit_model = create_model("tiny_vit_21m_384",
                                           pretrained=False,
                                           num_classes=num_classes)
@@ -59,7 +59,7 @@ def get_tiny_vit_model(tiny_vit_type, num_classes):
             tiny_vit_model = create_model("tiny_vit_21m_512",
                                           pretrained=True,
                                           num_classes=num_classes)
-        except ValueError:
+        except Exception:
             tiny_vit_model = create_model("tiny_vit_21m_512",
                                           pretrained=False,
                                           num_classes=num_classes)

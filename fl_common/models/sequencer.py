@@ -23,7 +23,7 @@ def get_sequencer_model(sequencer_type, num_classes):
             sequencer_model = create_model('sequencer2d_s',
                                            pretrained=True,
                                            num_classes=num_classes)
-        except ValueError:
+        except Exception:
             sequencer_model = create_model('sequencer2d_s',
                                            pretrained=False,
                                            num_classes=num_classes)
@@ -32,7 +32,7 @@ def get_sequencer_model(sequencer_type, num_classes):
             sequencer_model = create_model('sequencer2d_m',
                                            pretrained=True,
                                            num_classes=num_classes)
-        except ValueError:
+        except Exception:
             sequencer_model = create_model('sequencer2d_m',
                                            pretrained=False,
                                            num_classes=num_classes)
@@ -41,7 +41,7 @@ def get_sequencer_model(sequencer_type, num_classes):
             sequencer_model = create_model('sequencer2d_l',
                                            pretrained=True,
                                            num_classes=num_classes)
-        except ValueError:
+        except Exception:
             sequencer_model = create_model('sequencer2d_l',
                                            pretrained=False,
                                            num_classes=num_classes)

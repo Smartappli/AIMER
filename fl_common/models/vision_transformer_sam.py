@@ -22,7 +22,7 @@ def get_vision_transformer_sam_model(vision_transformer_sam_type, num_classes):
             vision_transformer_sam_model = create_model('samvit_base_patch16',
                                                         pretrained=True,
                                                         num_classes=num_classes)
-        except ValueError:
+        except Exception:
             vision_transformer_sam_model = create_model('samvit_base_patch16',
                                                         pretrained=False,
                                                         num_classes=num_classes)
@@ -31,7 +31,7 @@ def get_vision_transformer_sam_model(vision_transformer_sam_type, num_classes):
             vision_transformer_sam_model = create_model('samvit_large_patch16',
                                                         pretrained=True,
                                                         num_classes=num_classes)
-        except ValueError:
+        except Exception:
             vision_transformer_sam_model = create_model('samvit_large_patch16',
                                                         pretrained=False,
                                                         num_classes=num_classes)
@@ -40,7 +40,7 @@ def get_vision_transformer_sam_model(vision_transformer_sam_type, num_classes):
             vision_transformer_sam_model = create_model('samvit_huge_patch16',
                                                         pretrained=True,
                                                         num_classes=num_classes)
-        except ValueError:
+        except Exception:
             vision_transformer_sam_model = create_model('samvit_huge_patch16',
                                                         pretrained=False,
                                                         num_classes=num_classes)
@@ -49,7 +49,7 @@ def get_vision_transformer_sam_model(vision_transformer_sam_type, num_classes):
             vision_transformer_sam_model = create_model('samvit_base_patch16_224',
                                                         pretrained=True,
                                                         num_classes=num_classes)
-        except ValueError:
+        except Exception:
             vision_transformer_sam_model = create_model('samvit_base_patch16_224',
                                                         pretrained=False,
                                                         num_classes=num_classes)

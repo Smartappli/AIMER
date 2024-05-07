@@ -22,7 +22,7 @@ def get_efficientvit_mit_model(efficientvit_mit_type, num_classes):
             efficientvit_mit_model = create_model('efficientvit_b0',
                                                   pretrained=True,
                                                   num_classes=num_classes)
-        except ValueError:
+        except Exception:
             efficientvit_mit_model = create_model('efficientvit_b0',
                                                   pretrained=False,
                                                   num_classes=num_classes)
@@ -31,7 +31,7 @@ def get_efficientvit_mit_model(efficientvit_mit_type, num_classes):
             efficientvit_mit_model = create_model('efficientvit_b1',
                                                   pretrained=True,
                                                   num_classes=num_classes)
-        except ValueError:
+        except Exception:
             efficientvit_mit_model = create_model('efficientvit_b1',
                                                   pretrained=False,
                                                   num_classes=num_classes)
@@ -40,7 +40,7 @@ def get_efficientvit_mit_model(efficientvit_mit_type, num_classes):
             efficientvit_mit_model = create_model('efficientvit_b2',
                                                   pretrained=True,
                                                   num_classes=num_classes)
-        except ValueError:
+        except Exception:
             efficientvit_mit_model = create_model('efficientvit_b2',
                                                   pretrained=False,
                                                   num_classes=num_classes)
@@ -49,7 +49,7 @@ def get_efficientvit_mit_model(efficientvit_mit_type, num_classes):
             efficientvit_mit_model = create_model('efficientvit_b3',
                                                   pretrained=True,
                                                   num_classes=num_classes)
-        except ValueError:
+        except Exception:
             efficientvit_mit_model = create_model('efficientvit_b3',
                                                   pretrained=False,
                                                   num_classes=num_classes)
@@ -58,7 +58,7 @@ def get_efficientvit_mit_model(efficientvit_mit_type, num_classes):
             efficientvit_mit_model = create_model('efficientvit_l1',
                                                   pretrained=True,
                                                   num_classes=num_classes)
-        except ValueError:
+        except Exception:
             efficientvit_mit_model = create_model('efficientvit_l1',
                                                   pretrained=False,
                                                   num_classes=num_classes)
@@ -67,7 +67,7 @@ def get_efficientvit_mit_model(efficientvit_mit_type, num_classes):
             efficientvit_mit_model = create_model('efficientvit_l2',
                                                   pretrained=True,
                                                   num_classes=num_classes)
-        except ValueError:
+        except Exception:
             efficientvit_mit_model = create_model('efficientvit_l2',
                                                   pretrained=False,
                                                   num_classes=num_classes)
@@ -76,7 +76,7 @@ def get_efficientvit_mit_model(efficientvit_mit_type, num_classes):
             efficientvit_mit_model = create_model('efficientvit_l3',
                                                   pretrained=True,
                                                   num_classes=num_classes)
-        except ValueError:
+        except Exception:
             efficientvit_mit_model = create_model('efficientvit_l3',
                                                   pretrained=False,
                                                   num_classes=num_classes)

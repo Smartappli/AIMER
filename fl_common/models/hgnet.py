@@ -30,7 +30,7 @@ def get_hgnet_model(hgnet_type, num_classes):
             hgnet_model = create_model('hgnet_tiny',
                                        pretrained=True,
                                        num_classes=num_classes)
-        except ValueError:
+        except Exception:
             hgnet_model = create_model('hgnet_tiny',
                                        pretrained=False,
                                        num_classes=num_classes)
@@ -39,7 +39,7 @@ def get_hgnet_model(hgnet_type, num_classes):
             hgnet_model = create_model('hgnet_small',
                                        pretrained=True,
                                        num_classes=num_classes)
-        except ValueError:
+        except Exception:
             hgnet_model = create_model('hgnet_small',
                                        pretrained=False,
                                        num_classes=num_classes)
@@ -48,7 +48,7 @@ def get_hgnet_model(hgnet_type, num_classes):
             hgnet_model = create_model('hgnet_base',
                                        pretrained=True,
                                        num_classes=num_classes)
-        except ValueError:
+        except Exception:
             hgnet_model = create_model('hgnet_base',
                                        pretrained=False,
                                        num_classes=num_classes)
@@ -57,7 +57,7 @@ def get_hgnet_model(hgnet_type, num_classes):
             hgnet_model = create_model('hgnetv2_b0',
                                        pretrained=True,
                                        num_classes=num_classes)
-        except ValueError:
+        except Exception:
             hgnet_model = create_model('hgnetv2_b0',
                                        pretrained=False,
                                        num_classes=num_classes)
@@ -66,7 +66,7 @@ def get_hgnet_model(hgnet_type, num_classes):
             hgnet_model = create_model('hgnetv2_b1',
                                        pretrained=True,
                                        num_classes=num_classes)
-        except ValueError:
+        except Exception:
             hgnet_model = create_model('hgnetv2_b1',
                                        pretrained=False,
                                        num_classes=num_classes)
@@ -75,7 +75,7 @@ def get_hgnet_model(hgnet_type, num_classes):
             hgnet_model = create_model('hgnetv2_b2',
                                        pretrained=True,
                                        num_classes=num_classes)
-        except ValueError:
+        except Exception:
             hgnet_model = create_model('hgnetv2_b2',
                                        pretrained=False,
                                        num_classes=num_classes)
@@ -84,7 +84,7 @@ def get_hgnet_model(hgnet_type, num_classes):
             hgnet_model = create_model('hgnetv2_b3',
                                        pretrained=True,
                                        num_classes=num_classes)
-        except ValueError:
+        except Exception:
             hgnet_model = create_model('hgnetv2_b3',
                                        pretrained=False,
                                        num_classes=num_classes)
@@ -93,7 +93,7 @@ def get_hgnet_model(hgnet_type, num_classes):
             hgnet_model = create_model('hgnetv2_b4',
                                        pretrained=True,
                                        num_classes=num_classes)
-        except ValueError:
+        except Exception:
             hgnet_model = create_model('hgnetv2_b4',
                                        pretrained=False,
                                        num_classes=num_classes)
@@ -102,7 +102,7 @@ def get_hgnet_model(hgnet_type, num_classes):
             hgnet_model = create_model('hgnetv2_b5',
                                        pretrained=True,
                                        num_classes=num_classes)
-        except ValueError:
+        except Exception:
             hgnet_model = create_model('hgnetv2_b5',
                                        pretrained=False,
                                        num_classes=num_classes)
@@ -111,7 +111,7 @@ def get_hgnet_model(hgnet_type, num_classes):
             hgnet_model = create_model('hgnetv2_b6',
                                        pretrained=True,
                                        num_classes=num_classes)
-        except ValueError:
+        except Exception:
             hgnet_model = create_model('hgnetv2_b6',
                                        pretrained=False,
                                        num_classes=num_classes)

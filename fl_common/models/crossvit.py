@@ -31,7 +31,7 @@ def get_crossvit_model(crossvit_type, num_classes):
             crossvit_model = create_model('crossvit_tiny_240',
                                           pretrained=True,
                                           num_classes=num_classes)
-        except ValueError:
+        except Exception:
             crossvit_model = create_model('crossvit_tiny_240',
                                           pretrained=False,
                                           num_classes=num_classes)
@@ -40,7 +40,7 @@ def get_crossvit_model(crossvit_type, num_classes):
             crossvit_model = create_model('crossvit_small_240',
                                           pretrained=True,
                                           num_classes=num_classes)
-        except ValueError:
+        except Exception:
             crossvit_model = create_model('crossvit_small_240',
                                           pretrained=False,
                                           num_classes=num_classes)
@@ -49,7 +49,7 @@ def get_crossvit_model(crossvit_type, num_classes):
             crossvit_model = create_model('crossvit_base_240',
                                           pretrained=True,
                                           num_classes=num_classes)
-        except ValueError:
+        except Exception:
             crossvit_model = create_model('crossvit_base_240',
                                           pretrained=False,
                                           num_classes=num_classes)
@@ -58,7 +58,7 @@ def get_crossvit_model(crossvit_type, num_classes):
             crossvit_model = create_model('crossvit_9_240',
                                           pretrained=True,
                                           num_classes=num_classes)
-        except ValueError:
+        except Exception:
             crossvit_model = create_model('crossvit_9_240',
                                           pretrained=False,
                                           num_classes=num_classes)
@@ -67,7 +67,7 @@ def get_crossvit_model(crossvit_type, num_classes):
             crossvit_model = create_model('crossvit_15_240',
                                           pretrained=True,
                                           num_classes=num_classes)
-        except ValueError:
+        except Exception:
             crossvit_model = create_model('crossvit_15_240',
                                           pretrained=False,
                                           num_classes=num_classes)
@@ -76,7 +76,7 @@ def get_crossvit_model(crossvit_type, num_classes):
             crossvit_model = create_model('crossvit_18_240',
                                           pretrained=True,
                                           num_classes=num_classes)
-        except ValueError:
+        except Exception:
             crossvit_model = create_model('crossvit_18_240',
                                           pretrained=False,
                                           num_classes=num_classes)
@@ -85,7 +85,7 @@ def get_crossvit_model(crossvit_type, num_classes):
             crossvit_model = create_model('crossvit_9_dagger_240',
                                           pretrained=True,
                                           num_classes=num_classes)
-        except ValueError:
+        except Exception:
             crossvit_model = create_model('crossvit_9_dagger_240',
                                           pretrained=False,
                                           num_classes=num_classes)
@@ -94,7 +94,7 @@ def get_crossvit_model(crossvit_type, num_classes):
             crossvit_model = create_model('crossvit_15_dagger_240',
                                           pretrained=True,
                                           num_classes=num_classes)
-        except ValueError:
+        except Exception:
             crossvit_model = create_model('crossvit_15_dagger_240',
                                           pretrained=False,
                                           num_classes=num_classes)
@@ -103,7 +103,7 @@ def get_crossvit_model(crossvit_type, num_classes):
             crossvit_model = create_model('crossvit_15_dagger_408',
                                           pretrained=True,
                                           num_classes=num_classes)
-        except ValueError:
+        except Exception:
             crossvit_model = create_model('crossvit_15_dagger_408',
                                           pretrained=False,
                                           num_classes=num_classes)
@@ -112,7 +112,7 @@ def get_crossvit_model(crossvit_type, num_classes):
             crossvit_model = create_model('crossvit_18_dagger_240',
                                           pretrained=True,
                                           num_classes=num_classes)
-        except ValueError:
+        except Exception:
             crossvit_model = create_model('crossvit_18_dagger_240',
                                           pretrained=False,
                                           num_classes=num_classes)
@@ -121,7 +121,7 @@ def get_crossvit_model(crossvit_type, num_classes):
             crossvit_model = create_model('crossvit_18_dagger_408',
                                           pretrained=True,
                                           num_classes=num_classes)
-        except ValueError:
+        except Exception:
             crossvit_model = create_model('crossvit_18_dagger_408',
                                           pretrained=False,
                                           num_classes=num_classes)

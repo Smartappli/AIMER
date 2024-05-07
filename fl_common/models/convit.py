@@ -5,9 +5,8 @@ def get_convit_model(convit_type, num_classes):
     """
     Get a Convit model based on the specified architecture.
 
-    Parameters:
+    Args:
         convit_type (str): Type of Convit architecture to be used.
-                          Supported values: "convit_tiny", "convit_small", "convit_base".
         num_classes (int): Number of output classes for the model.
 
     Returns:
@@ -15,39 +14,13 @@ def get_convit_model(convit_type, num_classes):
 
     Raises:
         ValueError: If the provided convit_type is not recognized.
-
-    Example:
-        To get a Convit Tiny model with 10 output classes:
-        model = get_convit_model("convit_tiny", num_classes=10)
     """
-    if convit_type == "convit_tiny":
-        try:
-            convit_model = create_model('convit_tiny',
-                                        pretrained=True,
-                                        num_classes=num_classes)
-        except ValueError:
-            convit_model = create_model('convit_tiny',
-                                        pretrained=False,
-                                        num_classes=num_classes)
-    elif convit_type == "convit_small":
-        try:
-            convit_model = create_model('convit_small',
-                                        pretrained=True,
-                                        num_classes=num_classes)
-        except ValueError:
-            convit_model = create_model('convit_small',
-                                        pretrained=False,
-                                        num_classes=num_classes)
-    elif convit_type == "convit_base":
-        try:
-            convit_model = create_model('convit_base',
-                                        pretrained=True,
-                                        num_classes=num_classes)
-        except ValueError:
-            convit_model = create_model('convit_base',
-                                        pretrained=False,
-                                        num_classes=num_classes)
-    else:
+    valid_convit_types = {'convit_tiny', 'convit_small', 'convit_base'}
+
+    if convit_type not in valid_convit_types:
         raise ValueError(f'Unknown Convit Architecture: {convit_type}')
 
-    return convit_model
+    try:
+        return create_model(convit_type, pretrained=True, num_classes=num_classes)
+    except Exception:
+        return create_model(convit_type, pretrained=False, num_classes=num_classes)
