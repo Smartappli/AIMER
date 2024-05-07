@@ -133,147 +133,147 @@ def get_efficientnet_model(efficientnet_type, num_classes):
     elif efficientnet_type == "mnasnet_050":
         try:
             efficientnet_model = create_model('mnasnet_050',
-                                         pretrained=True,
-                                         num_classes=num_classes)
+                                              pretrained=True,
+                                              num_classes=num_classes)
         except Exception:
             efficientnet_model = create_model('mnasnet_050',
-                                         pretrained=False,
-                                         num_classes=num_classes)
+                                              pretrained=False,
+                                              num_classes=num_classes)
     elif efficientnet_type == "mnasnet_075":
         try:
             efficientnet_model = create_model('mnasnet_075',
-                                         pretrained=True,
-                                         num_classes=num_classes)
+                                              pretrained=True,
+                                              num_classes=num_classes)
         except Exception:
             efficientnet_model = create_model('mnasnet_075',
-                                         pretrained=False,
-                                         num_classes=num_classes)
+                                              pretrained=False,
+                                              num_classes=num_classes)
     elif efficientnet_type == "mnasnet_100":
         try:
             efficientnet_model = create_model('mnasnet_100',
-                                         pretrained=True,
-                                         num_classes=num_classes)
+                                              pretrained=True,
+                                              num_classes=num_classes)
         except Exception:
             efficientnet_model = create_model('mnasnet_100',
-                                         pretrained=False,
-                                         num_classes=num_classes)
+                                              pretrained=False,
+                                              num_classes=num_classes)
     elif efficientnet_type == "mnasnet_140":
         try:
             efficientnet_model = create_model('mnasnet_140',
-                                         pretrained=True,
-                                         num_classes=num_classes)
+                                              pretrained=True,
+                                              num_classes=num_classes)
         except Exception:
             efficientnet_model = create_model('mnasnet_140',
-                                         pretrained=False,
-                                         num_classes=num_classes)
+                                              pretrained=False,
+                                              num_classes=num_classes)
     elif efficientnet_type == "semnasnet_050":
         try:
             efficientnet_model = create_model('semnasnet_050',
-                                         pretrained=True,
-                                         num_classes=num_classes)
+                                              pretrained=True,
+                                              num_classes=num_classes)
         except Exception:
             efficientnet_model = create_model('semnasnet_050',
-                                         pretrained=False,
-                                         num_classes=num_classes)
+                                              pretrained=False,
+                                              num_classes=num_classes)
     elif efficientnet_type == "semnasnet_075":
         try:
             efficientnet_model = create_model('semnasnet_075',
-                                         pretrained=True,
-                                         num_classes=num_classes)
+                                              pretrained=True,
+                                              num_classes=num_classes)
         except Exception:
             efficientnet_model = create_model('semnasnet_075',
-                                         pretrained=False,
-                                         num_classes=num_classes)
+                                              pretrained=False,
+                                              num_classes=num_classes)
     elif efficientnet_type == "semnasnet_100":
         try:
             efficientnet_model = create_model('semnasnet_100',
-                                         pretrained=True,
-                                         num_classes=num_classes)
+                                              pretrained=True,
+                                              num_classes=num_classes)
         except Exception:
             efficientnet_model = create_model('semnasnet_100',
-                                         pretrained=False,
-                                         num_classes=num_classes)
+                                              pretrained=False,
+                                              num_classes=num_classes)
     elif efficientnet_type == "semnasnet_140":
         try:
             efficientnet_model = create_model('semnasnet_140',
-                                         pretrained=True,
-                                         num_classes=num_classes)
+                                              pretrained=True,
+                                              num_classes=num_classes)
         except Exception:
             efficientnet_model = create_model('semnasnet_140',
-                                         pretrained=False,
-                                         num_classes=num_classes)
+                                              pretrained=False,
+                                              num_classes=num_classes)
     elif efficientnet_type == "mnasnet_small":
         try:
             efficientnet_model = create_model('mnasnet_small',
-                                         pretrained=True,
-                                         num_classes=num_classes)
+                                              pretrained=True,
+                                              num_classes=num_classes)
         except Exception:
             efficientnet_model = create_model('mnasnet_small',
-                                         pretrained=False,
-                                         num_classes=num_classes)
+                                              pretrained=False,
+                                              num_classes=num_classes)
     elif efficientnet_type == "mobilenetv2_035":
         try:
             efficientnet_model = create_model('mobilenetv2_035',
-                                         pretrained=True,
-                                         num_classes=num_classes)
+                                              pretrained=True,
+                                              num_classes=num_classes)
         except Exception:
             efficientnet_model = create_model('mobilenetv2_035',
-                                         pretrained=False,
-                                         num_classes=num_classes)
+                                              pretrained=False,
+                                              num_classes=num_classes)
     elif efficientnet_type == "mobilenetv2_050":
         try:
             efficientnet_model = create_model('mobilenetv2_050',
-                                         pretrained=True,
-                                         num_classes=num_classes)
+                                              pretrained=True,
+                                              num_classes=num_classes)
         except Exception:
             efficientnet_model = create_model('mobilenetv2_050',
-                                         pretrained=False,
-                                         num_classes=num_classes)
+                                              pretrained=False,
+                                              num_classes=num_classes)
     elif efficientnet_type == "mobilenetv2_075":
         try:
             efficientnet_model = create_model('mobilenetv2_075',
-                                         pretrained=True,
-                                         num_classes=num_classes)
+                                              pretrained=True,
+                                              num_classes=num_classes)
         except Exception:
             efficientnet_model = create_model('mobilenetv2_075',
-                                         pretrained=False,
-                                         num_classes=num_classes)
+                                              pretrained=False,
+                                              num_classes=num_classes)
     elif efficientnet_type == "mobilenetv2_100":
         try:
             efficientnet_model = create_model('mobilenetv2_100',
-                                         pretrained=True,
-                                         num_classes=num_classes)
+                                              pretrained=True,
+                                              num_classes=num_classes)
         except Exception:
             efficientnet_model = create_model('mobilenetv2_100',
-                                         pretrained=False,
-                                         num_classes=num_classes)
+                                              pretrained=False,
+                                              num_classes=num_classes)
     elif efficientnet_type == "mobilenetv2_140":
         try:
             efficientnet_model = create_model('mobilenetv2_140',
-                                         pretrained=True,
-                                         num_classes=num_classes)
+                                              pretrained=True,
+                                              num_classes=num_classes)
         except Exception:
             efficientnet_model = create_model('mobilenetv2_140',
-                                         pretrained=False,
-                                         num_classes=num_classes)
+                                              pretrained=False,
+                                              num_classes=num_classes)
     elif efficientnet_type == "mobilenetv2_110d":
         try:
             efficientnet_model = create_model('mobilenetv2_110d',
-                                         pretrained=True,
-                                         num_classes=num_classes)
+                                              pretrained=True,
+                                              num_classes=num_classes)
         except Exception:
             efficientnet_model = create_model('mobilenetv2_110d',
-                                         pretrained=False,
-                                         num_classes=num_classes)
+                                              pretrained=False,
+                                              num_classes=num_classes)
     elif efficientnet_type == "mobilenetv2_120d":
         try:
             efficientnet_model = create_model('mobilenetv2_120d',
-                                         pretrained=True,
-                                         num_classes=num_classes)
+                                              pretrained=True,
+                                              num_classes=num_classes)
         except Exception:
             efficientnet_model = create_model('mobilenetv2_120d',
-                                         pretrained=False,
-                                         num_classes=num_classes)
+                                              pretrained=False,
+                                              num_classes=num_classes)
     elif efficientnet_type == "fbnetc_100":
         try:
             efficientnet_model = create_model('fbnetc_100',
