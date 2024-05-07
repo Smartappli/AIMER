@@ -15,42 +15,42 @@ def launch_node():
 
     sy.requires(SYFT_VERSION)
 
-    print(f"Version of PySyft : {sy.__version__ }")
+    print(f"Version of PySyft : {sy.__version__}")
 
     print("\n--- Démarrage du noeud Humani ---")
-    node_humani = sy.Orchestra.launch(name="do-humani",  port=9000, local_db=True, dev_mode=True, reset=True)
+    node_humani = sy.Orchestra.launch(name="do-humani", port=9000, local_db=True, dev_mode=True, reset=True)
     root_domain_humani_client = node_humani.login(email="info@openmined.org", password="changethis")
     root_domain_humani_client.register(
-       name="Jane Doe",
-       email="janedoe@caltech.edu",
-       password="abc123",
-       password_verify="abc123",
-       institution="Caltech",
-       website="https://www.caltech.edu/",
+        name="Jane Doe",
+        email="janedoe@caltech.edu",
+        password="abc123",
+        password_verify="abc123",
+        institution="Caltech",
+        website="https://www.caltech.edu/",
     )
 
     print("\n--- Démarrage du noeud Epicura ---")
-    node_epicura = sy.orchestra.launch(name="do-epicura", port=9001, local_db=True, dev_mode=True, reset=True)
+    node_epicura = sy.Orchestra.launch(name="do-epicura", port=9001, local_db=True, dev_mode=True, reset=True)
     root_domain_epicura_client = node_epicura.login(email="info@openmined.org", password="changethis")
     root_domain_epicura_client.register(
-       name="Jane Doe",
-       email="janedoe@caltech.edu",
-       password="abc123",
-       password_verify="abc123",
-       institution="Caltech",
-       website="https://www.caltech.edu/",
+        name="Jane Doe",
+        email="janedoe@caltech.edu",
+        password="abc123",
+        password_verify="abc123",
+        institution="Caltech",
+        website="https://www.caltech.edu/",
     )
 
     print("\n--- Démarrage du noeud Vivalia ---")
-    node_vivalia = sy.orchestra.launch(name="do-vivalia", port=9003, local_db=True, dev_mode=True, reset=True)
+    node_vivalia = sy.Orchestra.launch(name="do-vivalia", port=9003, local_db=True, dev_mode=True, reset=True)
     root_domain_vivalia_client = node_vivalia.login(email="info@openmined.org", password="changethis")
     root_domain_vivalia_client.register(
-       name="Jane Doe",
-       email="janedoe@caltech.edu",
-       password="abc123",
-       password_verify="abc123",
-       institution="Caltech",
-       website="https://www.caltech.edu/",
+        name="Jane Doe",
+        email="janedoe@caltech.edu",
+        password="abc123",
+        password_verify="abc123",
+        institution="Caltech",
+        website="https://www.caltech.edu/",
     )
 
     ds_client = node_humani.login(email="janedoe@caltech.edu", password="abc123")
