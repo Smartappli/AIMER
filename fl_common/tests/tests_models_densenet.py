@@ -1,5 +1,4 @@
 import os
-import torch.nn as nn
 from django.test import TestCase
 from fl_common.models.densenet import get_densenet_model
 

@@ -1,5 +1,4 @@
 import os
-import torch.nn as nn
 from django.test import TestCase
 from fl_common.models.vgg import get_vgg_model
 
