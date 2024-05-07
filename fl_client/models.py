@@ -148,10 +148,7 @@ class Model(models.Model):
         if str(self.model_version) != "None":
             return self.model_category + self.model_type + ' - ' + self.model_name + ' - v' + str(self.model_version)
         else:
-            return (self.model_category +
-                    self.model_type +
-                    ' - ' +
-                    self.model_name)
+            return self.model_category + self.model_type + ' - ' + self.model_name
 
 
 class ModelFile(models.Model):
@@ -201,13 +198,8 @@ class ModelFile(models.Model):
         ordering = ['model_file_filename']
 
     def __str__(self):
-        return (self.model_file_model_id.model_name +
-                ' | ' +
-                self.model_file_type +
-                " --- " +
-                self.model_file_extension +
-                ' --- ' +
-                self.model_file_filename)
+        return (self.model_file_model_id.model_name + ' | ' + self.model_file_type + " --- " + self.model_file_extension
+                + ' --- ' + self.model_file_filename)
 
 
 class Document(models.Model):

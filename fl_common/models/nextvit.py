@@ -1,5 +1,6 @@
 from timm import create_model
 
+
 def get_nextvit_model(nextvit_type, num_classes):
     """
     Get a NEXTVIT model based on the specified architecture type.
