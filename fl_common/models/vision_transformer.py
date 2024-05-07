@@ -9,7 +9,7 @@ def get_vision_transformer_model(vision_type, num_classes):
 
     Parameters:
         - vision_type (str): Type of Vision Transformer architecture.
-                            Currently supports 'ViT_B_16', 'ViT_B_32', 'ViT_L_16', 'ViT_L_32', and 'ViT_H_14'.
+            Currently, supports 'ViT_B_16', 'ViT_B_32', 'ViT_L_16', 'ViT_L_32', and 'ViT_H_14'.
         - num_classes (int): Number of classes for the modified last layer.
 
     Returns:

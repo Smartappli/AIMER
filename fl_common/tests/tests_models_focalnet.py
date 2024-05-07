@@ -47,9 +47,11 @@ class ProcessingFastVitTestCase(TestCase):
 
     def test_unknown_focalnet_type(self):
         """
-        Test case to ensure that attempting to create a FocalNet model with an unknown architecture type raises a ValueError.
+        Test case to ensure that attempting to create a FocalNet model with an unknown architecture type raises a
+        ValueError.
 
-        Verifies that a ValueError is raised when attempting to create a FocalNet model with an unknown architecture type.
+        Verifies that a ValueError is raised when attempting to create a FocalNet model with an unknown architecture
+        type.
 
         Raises:
             AssertionError: If creating a FocalNet model with an unknown architecture type does not raise a ValueError.
