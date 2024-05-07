@@ -2,5 +2,7 @@
 
 [![Nightlies Models - PART A](https://github.com/Smartappli/AIMER/actions/workflows/nightlies_models_A.yml/badge.svg)](https://github.com/Smartappli/AIMER/actions/workflows/nightlies_models_A.yml)
 [![Nightlies Models - PART B](https://github.com/Smartappli/AIMER/actions/workflows/nightlies_models_B.yml/badge.svg)](https://github.com/Smartappli/AIMER/actions/workflows/nightlies_models_B.yml)
-[![Dependencies license compliance checker](https://github.com/Smartappli/AIMER/actions/workflows/liccheck.yml/badge.svg)](https://github.com/Smartappli/AIMER/actions/workflows/liccheck.yml)
+[![Nightlies Models - PART C](https://github.com/Smartappli/AIMER/actions/workflows/nightlies_models_C.yml/badge.svg)](https://github.com/Smartappli/AIMER/actions/workflows/nightlies_models_C.yml)
 [![Pylint](https://github.com/Smartappli/AIMER/actions/workflows/pylint.yml/badge.svg)](https://github.com/Smartappli/AIMER/actions/workflows/pylint.yml)
+[![flake8 Lint](https://github.com/Smartappli/AIMER/actions/workflows/flake8.yml/badge.svg)](https://github.com/Smartappli/AIMER/actions/workflows/flake8.yml)
+[![Dependencies license compliance checker](https://github.com/Smartappli/AIMER/actions/workflows/liccheck.yml/badge.svg)](https://github.com/Smartappli/AIMER/actions/workflows/liccheck.yml)
