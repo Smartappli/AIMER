@@ -1,5 +1,6 @@
 from timm import create_model
 
+
 def get_nest_model(nest_type, num_classes):
     """
     Get a NEST model based on the specified architecture type.
