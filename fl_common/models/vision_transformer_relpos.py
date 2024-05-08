@@ -135,6 +135,6 @@ def get_vision_transformer_relpos_model(vision_transformer_relpos_type, num_clas
                                                            pretrained=False,
                                                            num_classes=num_classes)
     else:
-        raise ValueError(f'Unknown Vision Transformer Hybrid Architecture: {vision_transformer_relpos_type}')
+        raise ValueError(f'Unknown Vision Transformer Relpos Architecture: {vision_transformer_relpos_type}')
 
     return vision_transformer_relpos_model
