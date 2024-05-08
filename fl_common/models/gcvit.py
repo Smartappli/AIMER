@@ -16,52 +16,16 @@ def get_gcvit_model(gcvit_type, num_classes):
     Raises:
     - ValueError: If an unknown GCVIT architecture is specified.
     """
-    if gcvit_type == 'gcvit_xxtiny':
-        try:
-            gcvit_model = create_model('gcvit_xxtiny',
-                                       pretrained=True,
-                                       num_classes=num_classes)
-        except RuntimeError:
-            gcvit_model = create_model('gcvit_xxtiny',
-                                       pretrained=False,
-                                       num_classes=num_classes)
-    elif gcvit_type == 'gcvit_xtiny':
-        try:
-            gcvit_model = create_model('gcvit_xtiny',
-                                       pretrained=True,
-                                       num_classes=num_classes)
-        except RuntimeError:
-            gcvit_model = create_model('gcvit_xtiny',
-                                       pretrained=False,
-                                       num_classes=num_classes)
-    elif gcvit_type == 'gcvit_tiny':
-        try:
-            gcvit_model = create_model('gcvit_tiny',
-                                       pretrained=True,
-                                       num_classes=num_classes)
-        except RuntimeError:
-            gcvit_model = create_model('gcvit_tiny',
-                                       pretrained=False,
-                                       num_classes=num_classes)
-    elif gcvit_type == 'gcvit_small':
-        try:
-            gcvit_model = create_model('gcvit_small',
-                                       pretrained=True,
-                                       num_classes=num_classes)
-        except RuntimeError:
-            gcvit_model = create_model('gcvit_small',
-                                       pretrained=False,
-                                       num_classes=num_classes)
-    elif gcvit_type == 'gcvit_base':
-        try:
-            gcvit_model = create_model('gcvit_base',
-                                       pretrained=True,
-                                       num_classes=num_classes)
-        except RuntimeError:
-            gcvit_model = create_model('gcvit_base',
-                                       pretrained=False,
-                                       num_classes=num_classes)
-    else:
-        raise ValueError(f'Unknown Gcvit Architecture: {gcvit_type}')
+    supported_types = {
+        'gcvit_xxtiny', 'gcvit_xtiny', 'gcvit_tiny',
+        'gcvit_small', 'gcvit_base'
+    }
 
-    return gcvit_model
+    if gcvit_type not in supported_types:
+        raise ValueError(f'Unknown GCVIT Architecture: {gcvit_type}')
+
+    try:
+        return create_model(gcvit_type, pretrained=True, num_classes=num_classes)
+    except RuntimeError as e:
+        print(f"Error loading pretrained model: {e}")
+        return create_model(gcvit_type, pretrained=False, num_classes=num_classes)

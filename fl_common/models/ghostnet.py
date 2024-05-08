@@ -10,66 +10,21 @@ def get_ghostnet_model(ghostnet_type, num_classes):
         num_classes (int): Number of output classes.
 
     Returns:
-        ghostnet_model: The selected GhostNet model instance.
+        torch.nn.Module: The selected GhostNet model instance.
 
     Raises:
         ValueError: If an unknown GhostNet architecture type is specified.
     """
-    if ghostnet_type == 'ghostnet_050':
-        try:
-            ghostnet_model = create_model('ghostnet_050',
-                                          pretrained=True,
-                                          num_classes=num_classes)
-        except RuntimeError:
-            ghostnet_model = create_model('ghostnet_050',
-                                          pretrained=False,
-                                          num_classes=num_classes)
-    elif ghostnet_type == 'ghostnet_100':
-        try:
-            ghostnet_model = create_model('ghostnet_100',
-                                          pretrained=True,
-                                          num_classes=num_classes)
-        except RuntimeError:
-            ghostnet_model = create_model('ghostnet_100',
-                                          pretrained=False,
-                                          num_classes=num_classes)
-    elif ghostnet_type == 'ghostnet_130':
-        try:
-            ghostnet_model = create_model('ghostnet_130',
-                                          pretrained=True,
-                                          num_classes=num_classes)
-        except RuntimeError:
-            ghostnet_model = create_model('ghostnet_130',
-                                          pretrained=False,
-                                          num_classes=num_classes)
-    elif ghostnet_type == 'ghostnetv2_100':
-        try:
-            ghostnet_model = create_model('ghostnetv2_100',
-                                          pretrained=True,
-                                          num_classes=num_classes)
-        except RuntimeError:
-            ghostnet_model = create_model('ghostnetv2_100',
-                                          pretrained=False,
-                                          num_classes=num_classes)
-    elif ghostnet_type == 'ghostnetv2_130':
-        try:
-            ghostnet_model = create_model('ghostnetv2_130',
-                                          pretrained=True,
-                                          num_classes=num_classes)
-        except RuntimeError:
-            ghostnet_model = create_model('ghostnetv2_130',
-                                          pretrained=False,
-                                          num_classes=num_classes)
-    elif ghostnet_type == 'ghostnetv2_160':
-        try:
-            ghostnet_model = create_model('ghostnetv2_160',
-                                          pretrained=True,
-                                          num_classes=num_classes)
-        except RuntimeError:
-            ghostnet_model = create_model('ghostnetv2_130',
-                                          pretrained=False,
-                                          num_classes=num_classes)
-    else:
-        raise ValueError(f'Unknown Ghostnet Architecture: {ghostnet_type}')
+    supported_types = {
+        'ghostnet_050', 'ghostnet_100', 'ghostnet_130',
+        'ghostnetv2_100', 'ghostnetv2_130', 'ghostnetv2_160'
+    }
 
-    return ghostnet_model
+    if ghostnet_type not in supported_types:
+        raise ValueError(f'Unknown GhostNet Architecture: {ghostnet_type}')
+
+    try:
+        return create_model(ghostnet_type, pretrained=True, num_classes=num_classes)
+    except RuntimeError as e:
+        print(f"Error loading pretrained model: {e}")
+        return create_model(ghostnet_type, pretrained=False, num_classes=num_classes)
