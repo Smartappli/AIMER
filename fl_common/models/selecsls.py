@@ -27,4 +27,3 @@ def get_selecsls_model(selecsls_type, num_classes):
     except OSError as e:
         print(f"Error loading pretrained model: {e}")
         return create_model(selecsls_type, pretrained=False, num_classes=num_classes)
-
