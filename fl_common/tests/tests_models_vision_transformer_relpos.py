@@ -45,5 +45,5 @@ class ProcessingVisionTransformerRelposTestCase(TestCase):
 
         self.assertEqual(
             str(context.exception),
-            f'Unknown Vision Transformer Relpos Architecture: {vision_type}'
+            f'Unknown Vision Transformer Relative Position Architecture: {vision_type}'
         )
