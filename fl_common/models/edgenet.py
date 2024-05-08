@@ -1,5 +1,6 @@
 from timm import create_model
 
+
 def get_edgenet_model(edgenet_type, num_classes):
     """
     Retrieves a pre-trained EdgeNet model based on the specified architecture.
