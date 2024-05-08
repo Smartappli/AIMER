@@ -1,5 +1,6 @@
 from timm import create_model
 
+
 def get_byobnet_model(byobnet_type, num_classes):
     """
     Creates a Byobnet model according to the specified type.

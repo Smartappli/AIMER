@@ -33,171 +33,23 @@ def get_metaformer_model(metaformer_type, num_classes):
     Raises:
         ValueError: If an unknown Metaformer architecture type is specified.
     """
-    if metaformer_type == 'poolformer_s12':
-        try:
-            metaformer_model = create_model('poolformer_s12',
-                                            pretrained=True,
-                                            num_classes=num_classes)
-        except Exception:
-            metaformer_model = create_model('poolformer_s12',
-                                            pretrained=False,
-                                            num_classes=num_classes)
-    elif metaformer_type == 'poolformer_s24':
-        try:
-            metaformer_model = create_model('poolformer_s24',
-                                            pretrained=True,
-                                            num_classes=num_classes)
-        except Exception:
-            metaformer_model = create_model('poolformer_s24',
-                                            pretrained=False,
-                                            num_classes=num_classes)
-    elif metaformer_type == 'poolformer_s36':
-        try:
-            metaformer_model = create_model('poolformer_s36',
-                                            pretrained=True,
-                                            num_classes=num_classes)
-        except Exception:
-            metaformer_model = create_model('poolformer_s36',
-                                            pretrained=False,
-                                            num_classes=num_classes)
-    elif metaformer_type == 'poolformer_m36':
-        try:
-            metaformer_model = create_model('poolformer_m36',
-                                            pretrained=True,
-                                            num_classes=num_classes)
-        except Exception:
-            metaformer_model = create_model('poolformer_m36',
-                                            pretrained=False,
-                                            num_classes=num_classes)
-    elif metaformer_type == 'poolformer_m48':
-        try:
-            metaformer_model = create_model('poolformer_m48',
-                                            pretrained=True,
-                                            num_classes=num_classes)
-        except Exception:
-            metaformer_model = create_model('poolformer_m48',
-                                            pretrained=False,
-                                            num_classes=num_classes)
-    elif metaformer_type == 'poolformerv2_s12':
-        try:
-            metaformer_model = create_model('poolformerv2_s12',
-                                            pretrained=True,
-                                            num_classes=num_classes)
-        except Exception:
-            metaformer_model = create_model('poolformerv2_s12',
-                                            pretrained=False,
-                                            num_classes=num_classes)
-    elif metaformer_type == 'poolformerv2_s24':
-        try:
-            metaformer_model = create_model('poolformerv2_s24',
-                                            pretrained=True,
-                                            num_classes=num_classes)
-        except Exception:
-            metaformer_model = create_model('poolformerv2_s24',
-                                            pretrained=False,
-                                            num_classes=num_classes)
-    elif metaformer_type == 'poolformerv2_s36':
-        try:
-            metaformer_model = create_model('poolformerv2_s36',
-                                            pretrained=True,
-                                            num_classes=num_classes)
-        except Exception:
-            metaformer_model = create_model('poolformerv2_s36',
-                                            pretrained=False,
-                                            num_classes=num_classes)
-    elif metaformer_type == 'poolformerv2_m36':
-        try:
-            metaformer_model = create_model('poolformerv2_m36',
-                                            pretrained=True,
-                                            num_classes=num_classes)
-        except Exception:
-            metaformer_model = create_model('poolformerv2_m36',
-                                            pretrained=False,
-                                            num_classes=num_classes)
-    elif metaformer_type == 'poolformerv2_m48':
-        try:
-            metaformer_model = create_model('poolformerv2_m48',
-                                            pretrained=True,
-                                            num_classes=num_classes)
-        except Exception:
-            metaformer_model = create_model('poolformerv2_m48',
-                                            pretrained=False,
-                                            num_classes=num_classes)
-    elif metaformer_type == 'convformer_s18':
-        try:
-            metaformer_model = create_model('convformer_s18',
-                                            pretrained=True,
-                                            num_classes=num_classes)
-        except Exception:
-            metaformer_model = create_model('convformer_s18',
-                                            pretrained=False,
-                                            num_classes=num_classes)
-    elif metaformer_type == 'convformer_s36':
-        try:
-            metaformer_model = create_model('convformer_s36',
-                                            pretrained=True,
-                                            num_classes=num_classes)
-        except Exception:
-            metaformer_model = create_model('convformer_s36',
-                                            pretrained=False,
-                                            num_classes=num_classes)
-    elif metaformer_type == 'convformer_m36':
-        try:
-            metaformer_model = create_model('convformer_m36',
-                                            pretrained=True,
-                                            num_classes=num_classes)
-        except Exception:
-            metaformer_model = create_model('convformer_m36',
-                                            pretrained=False,
-                                            num_classes=num_classes)
-    elif metaformer_type == 'convformer_b36':
-        try:
-            metaformer_model = create_model('convformer_b36',
-                                            pretrained=True,
-                                            num_classes=num_classes)
-        except Exception:
-            metaformer_model = create_model('convformer_b36',
-                                            pretrained=False,
-                                            num_classes=num_classes)
-    elif metaformer_type == 'caformer_s18':
-        try:
-            metaformer_model = create_model('caformer_s18',
-                                            pretrained=True,
-                                            num_classes=num_classes)
-        except Exception:
-            metaformer_model = create_model('caformer_s18',
-                                            pretrained=False,
-                                            num_classes=num_classes)
-    elif metaformer_type == 'caformer_s36':
-        try:
-            metaformer_model = create_model('caformer_s36',
-                                            pretrained=True,
-                                            num_classes=num_classes)
-        except Exception:
-            metaformer_model = create_model('caformer_s36',
-                                            pretrained=False,
-                                            num_classes=num_classes)
-    elif metaformer_type == 'caformer_m36':
-        try:
-            metaformer_model = create_model('caformer_m36',
-                                            pretrained=True,
-                                            num_classes=num_classes)
-        except Exception:
-            metaformer_model = create_model('caformer_m36',
-                                            pretrained=False,
-                                            num_classes=num_classes)
-    elif metaformer_type == 'caformer_b36':
-        try:
-            metaformer_model = create_model('caformer_b36',
-                                            pretrained=True,
-                                            num_classes=num_classes)
-        except Exception:
-            metaformer_model = create_model('caformer_b36',
-                                            pretrained=False,
-                                            num_classes=num_classes)
-    else:
-        # Raise a ValueError if an unknown Metaformer architecture is specified
+    metaformer_options = [
+        'poolformer_s12', 'poolformer_s24', 'poolformer_s36',
+        'poolformer_m36', 'poolformer_m48', 'poolformerv2_s12',
+        'poolformerv2_s24', 'poolformerv2_s36', 'poolformerv2_m36',
+        'poolformerv2_m48', 'convformer_s18', 'convformer_s36',
+        'convformer_m36', 'convformer_b36', 'caformer_s18',
+        'caformer_s36', 'caformer_m36', 'caformer_b36'
+    ]
+
+    if metaformer_type not in metaformer_options:
         raise ValueError(f'Unknown Metaformer Architecture: {metaformer_type}')
 
-    # Return the created Metaformer model
-    return metaformer_model
+    try:
+        return create_model(metaformer_type, pretrained=True, num_classes=num_classes)
+    except OSError as e:
+        print(f"Error loading pretrained model: {e}")
+        return create_model(metaformer_type, pretrained=False, num_classes=num_classes)
+    except Exception as e:
+        print(f"An unexpected error occurred: {e}")
+        return None

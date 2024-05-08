@@ -1,5 +1,6 @@
 from timm import create_model
 
+
 def get_byoanet_model(byoanet_type, num_classes):
     """
     Creates a Byoanet model according to the specified type.

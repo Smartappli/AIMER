@@ -1,5 +1,6 @@
 from timm import create_model
 
+
 def get_convmixer_model(convmixer_type, num_classes):
     """
     Creates and returns a Convmixer model based on the specified architecture type.
