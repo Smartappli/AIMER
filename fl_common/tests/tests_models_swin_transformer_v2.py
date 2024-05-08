@@ -51,5 +51,5 @@ class ProcessingSwinTransformerv2TestCase(TestCase):
 
         self.assertEqual(
             str(context.exception),
-            f'Unknown Swin Transformer v2 Architecture : {swin_type}'
+            f'Unknown Swin Transformer v2 Architecture: {swin_type}'
         )
