@@ -23,7 +23,7 @@ def get_efficientvit_mit_model(efficientvit_mit_type, num_classes):
     }
 
     if efficientvit_mit_type not in supported_types:
-        raise ValueError(f'Unknown EfficientViT Architecture: {efficientvit_mit_type}')
+        raise ValueError(f'Unknown EfficientViT-MIT Architecture: {efficientvit_mit_type}')
 
     try:
         return create_model(efficientvit_mit_type, pretrained=True, num_classes=num_classes)

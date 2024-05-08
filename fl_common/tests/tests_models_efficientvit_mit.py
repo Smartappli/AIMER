@@ -38,5 +38,5 @@ class ProcessingEfficientvit_mitTestCase(TestCase):
 
         self.assertEqual(
             str(context.exception),
-            f'Unknown EfficientViT Architecture: {model_type}'
+            f'Unknown EfficientViT-MIT Architecture: {model_type}'
         )

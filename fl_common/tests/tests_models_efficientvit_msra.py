@@ -37,5 +37,5 @@ class ProcessingEfficientvit_msraTestCase(TestCase):
 
         self.assertEqual(
             str(context.exception),
-            f'Unknown Efficientvit_msra Architecture: {model_type}'
+            f'Unknown EfficientViT-MSRA Architecture: {model_type}'
         )
