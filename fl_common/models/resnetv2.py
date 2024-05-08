@@ -24,7 +24,7 @@ def get_resnetv2_model(resnetv2_type, num_classes):
     }
 
     if resnetv2_type not in valid_types:
-        raise ValueError(f'Unknown ResNetV2 Architecture: {resnetv2_type}')
+        raise ValueError(f'Unknown ResNet v2 Architecture: {resnetv2_type}')
 
     try:
         return create_model(resnetv2_type, pretrained=True, num_classes=num_classes)
