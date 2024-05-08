@@ -31,7 +31,7 @@ def get_volo_model(volo_type, num_classes):
             volo_model = create_model('volo_d1_224',
                                       pretrained=True,
                                       num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             volo_model = create_model('volo_d1_224',
                                       pretrained=False,
                                       num_classes=num_classes)
@@ -40,7 +40,7 @@ def get_volo_model(volo_type, num_classes):
             volo_model = create_model('volo_d1_384',
                                       pretrained=True,
                                       num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             volo_model = create_model('volo_d1_384',
                                       pretrained=False,
                                       num_classes=num_classes)
@@ -49,7 +49,7 @@ def get_volo_model(volo_type, num_classes):
             volo_model = create_model('volo_d2_224',
                                       pretrained=True,
                                       num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             volo_model = create_model('volo_d2_224',
                                       pretrained=False,
                                       num_classes=num_classes)
@@ -58,7 +58,7 @@ def get_volo_model(volo_type, num_classes):
             volo_model = create_model('volo_d2_384',
                                       pretrained=True,
                                       num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             volo_model = create_model('volo_d2_384',
                                       pretrained=False,
                                       num_classes=num_classes)
@@ -67,7 +67,7 @@ def get_volo_model(volo_type, num_classes):
             volo_model = create_model('volo_d3_224',
                                       pretrained=True,
                                       num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             volo_model = create_model('volo_d3_224',
                                       pretrained=False,
                                       num_classes=num_classes)
@@ -76,7 +76,7 @@ def get_volo_model(volo_type, num_classes):
             volo_model = create_model('volo_d3_448',
                                       pretrained=True,
                                       num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             volo_model = create_model('volo_d3_448',
                                       pretrained=False,
                                       num_classes=num_classes)
@@ -85,7 +85,7 @@ def get_volo_model(volo_type, num_classes):
             volo_model = create_model('volo_d4_224',
                                       pretrained=True,
                                       num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             volo_model = create_model('volo_d4_224',
                                       pretrained=False,
                                       num_classes=num_classes)
@@ -94,7 +94,7 @@ def get_volo_model(volo_type, num_classes):
             volo_model = create_model('volo_d4_448',
                                       pretrained=True,
                                       num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             volo_model = create_model('volo_d4_448',
                                       pretrained=False,
                                       num_classes=num_classes)
@@ -103,7 +103,7 @@ def get_volo_model(volo_type, num_classes):
             volo_model = create_model('volo_d5_224',
                                       pretrained=True,
                                       num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             volo_model = create_model('volo_d5_224',
                                       pretrained=False,
                                       num_classes=num_classes)
@@ -112,7 +112,7 @@ def get_volo_model(volo_type, num_classes):
             volo_model = create_model('volo_d5_448',
                                       pretrained=True,
                                       num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             volo_model = create_model('volo_d5_448',
                                       pretrained=False,
                                       num_classes=num_classes)
@@ -121,7 +121,7 @@ def get_volo_model(volo_type, num_classes):
             volo_model = create_model('volo_d5_512',
                                       pretrained=True,
                                       num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             volo_model = create_model('volo_d5_512',
                                       pretrained=False,
                                       num_classes=num_classes)

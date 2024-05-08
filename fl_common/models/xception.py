@@ -25,7 +25,7 @@ def get_xception_model(xception_type, num_classes):
             xception_model = create_model('legacy_xception',
                                           pretrained=True,
                                           num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             xception_model = create_model('legacy_xception',
                                           pretrained=False,
                                           num_classes=num_classes)
@@ -34,7 +34,7 @@ def get_xception_model(xception_type, num_classes):
             xception_model = create_model('xception41',
                                           pretrained=True,
                                           num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             xception_model = create_model('xception41',
                                           pretrained=False,
                                           num_classes=num_classes)
@@ -43,7 +43,7 @@ def get_xception_model(xception_type, num_classes):
             xception_model = create_model('xception65',
                                           pretrained=True,
                                           num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             xception_model = create_model('xception65',
                                           pretrained=False,
                                           num_classes=num_classes)
@@ -52,7 +52,7 @@ def get_xception_model(xception_type, num_classes):
             xception_model = create_model('xception71',
                                           pretrained=True,
                                           num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             xception_model = create_model('xception71',
                                           pretrained=False,
                                           num_classes=num_classes)
@@ -61,7 +61,7 @@ def get_xception_model(xception_type, num_classes):
             xception_model = create_model('xception41',
                                           pretrained=True,
                                           num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             xception_model = create_model('xception41',
                                           pretrained=False,
                                           num_classes=num_classes)
@@ -70,7 +70,7 @@ def get_xception_model(xception_type, num_classes):
             xception_model = create_model('xception65p',
                                           pretrained=True,
                                           num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             xception_model = create_model('xception65p',
                                           pretrained=False,
                                           num_classes=num_classes)

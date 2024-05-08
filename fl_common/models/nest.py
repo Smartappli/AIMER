@@ -25,5 +25,5 @@ def get_nest_model(nest_type, num_classes):
 
     try:
         return create_model(nest_type, pretrained=True, num_classes=num_classes)
-    except OSError:
+    except RuntimeError:
         return create_model(nest_type, pretrained=False, num_classes=num_classes)

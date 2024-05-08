@@ -24,7 +24,7 @@ def get_tresnet_model(tresnet_type, num_classes):
             tresnet_model = create_model('tresnet_m',
                                          pretrained=True,
                                          num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             tresnet_model = create_model('tresnet_m',
                                          pretrained=False,
                                          num_classes=num_classes)
@@ -33,7 +33,7 @@ def get_tresnet_model(tresnet_type, num_classes):
             tresnet_model = create_model('tresnet_l',
                                          pretrained=True,
                                          num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             tresnet_model = create_model('tresnet_l',
                                          pretrained=False,
                                          num_classes=num_classes)
@@ -42,7 +42,7 @@ def get_tresnet_model(tresnet_type, num_classes):
             tresnet_model = create_model('tresnet_xl',
                                          pretrained=True,
                                          num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             tresnet_model = create_model('tresnet_xl',
                                          pretrained=False,
                                          num_classes=num_classes)
@@ -51,7 +51,7 @@ def get_tresnet_model(tresnet_type, num_classes):
             tresnet_model = create_model('tresnet_v2_l',
                                          pretrained=True,
                                          num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             tresnet_model = create_model('tresnet_v2_l',
                                          pretrained=False,
                                          num_classes=num_classes)

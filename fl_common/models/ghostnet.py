@@ -20,7 +20,7 @@ def get_ghostnet_model(ghostnet_type, num_classes):
             ghostnet_model = create_model('ghostnet_050',
                                           pretrained=True,
                                           num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             ghostnet_model = create_model('ghostnet_050',
                                           pretrained=False,
                                           num_classes=num_classes)
@@ -29,7 +29,7 @@ def get_ghostnet_model(ghostnet_type, num_classes):
             ghostnet_model = create_model('ghostnet_100',
                                           pretrained=True,
                                           num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             ghostnet_model = create_model('ghostnet_100',
                                           pretrained=False,
                                           num_classes=num_classes)
@@ -38,7 +38,7 @@ def get_ghostnet_model(ghostnet_type, num_classes):
             ghostnet_model = create_model('ghostnet_130',
                                           pretrained=True,
                                           num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             ghostnet_model = create_model('ghostnet_130',
                                           pretrained=False,
                                           num_classes=num_classes)
@@ -47,7 +47,7 @@ def get_ghostnet_model(ghostnet_type, num_classes):
             ghostnet_model = create_model('ghostnetv2_100',
                                           pretrained=True,
                                           num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             ghostnet_model = create_model('ghostnetv2_100',
                                           pretrained=False,
                                           num_classes=num_classes)
@@ -56,7 +56,7 @@ def get_ghostnet_model(ghostnet_type, num_classes):
             ghostnet_model = create_model('ghostnetv2_130',
                                           pretrained=True,
                                           num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             ghostnet_model = create_model('ghostnetv2_130',
                                           pretrained=False,
                                           num_classes=num_classes)
@@ -65,7 +65,7 @@ def get_ghostnet_model(ghostnet_type, num_classes):
             ghostnet_model = create_model('ghostnetv2_160',
                                           pretrained=True,
                                           num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             ghostnet_model = create_model('ghostnetv2_130',
                                           pretrained=False,
                                           num_classes=num_classes)

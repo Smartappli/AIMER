@@ -38,42 +38,42 @@ def get_resnet_model(resnet_type, num_classes):
         try:
             weights = models.ResNet18_Weights.DEFAULT
             resnet_model = models.resnet18(weights=weights)
-        except OSError:
+        except RuntimeError:
             resnet_model = models.resnet18(weights=None)
     elif resnet_type == 'ResNet34':
         torch_vision = True
         try:
             weights = models.ResNet34_Weights.DEFAULT
             resnet_model = models.resnet34(weights=weights)
-        except OSError:
+        except RuntimeError:
             resnet_model = models.resnet34(weights=None)
     elif resnet_type == 'ResNet50':
         torch_vision = True
         try:
             weights = models.ResNet50_Weights.DEFAULT
             resnet_model = models.resnet50(weights=weights)
-        except OSError:
+        except RuntimeError:
             resnet_model = models.resnet50(weights=None)
     elif resnet_type == 'ResNet101':
         torch_vision = True
         try:
             weights = models.ResNet101_Weights.DEFAULT
             resnet_model = models.resnet101(weights=weights)
-        except OSError:
+        except RuntimeError:
             resnet_model = models.resnet101(weights=None)
     elif resnet_type == 'ResNet152':
         torch_vision = True
         try:
             weights = models.ResNet152_Weights.DEFAULT
             resnet_model = models.resnet152(weights=weights)
-        except OSError:
+        except RuntimeError:
             resnet_model = models.resnet152(weights=None)
     elif resnet_type == 'resnet10t':
         try:
             resnet_model = create_model('resnet10t',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             resnet_model = create_model('resnet10t',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -82,7 +82,7 @@ def get_resnet_model(resnet_type, num_classes):
             resnet_model = create_model('resnet14t',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             resnet_model = create_model('resnet14t',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -91,7 +91,7 @@ def get_resnet_model(resnet_type, num_classes):
             resnet_model = create_model('resnet18',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             resnet_model = create_model('resnet18',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -100,7 +100,7 @@ def get_resnet_model(resnet_type, num_classes):
             resnet_model = create_model('resnet18d',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             resnet_model = create_model('resnet18d',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -109,7 +109,7 @@ def get_resnet_model(resnet_type, num_classes):
             resnet_model = create_model('resnet34',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             resnet_model = create_model('resnet34',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -118,7 +118,7 @@ def get_resnet_model(resnet_type, num_classes):
             resnet_model = create_model('resnet34d',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             resnet_model = create_model('resnet34d',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -127,7 +127,7 @@ def get_resnet_model(resnet_type, num_classes):
             resnet_model = create_model('resnet26',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             resnet_model = create_model('resnet26',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -136,7 +136,7 @@ def get_resnet_model(resnet_type, num_classes):
             resnet_model = create_model('resnet26t',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             resnet_model = create_model('resnet26t',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -145,7 +145,7 @@ def get_resnet_model(resnet_type, num_classes):
             resnet_model = create_model('resnet26d',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             resnet_model = create_model('resnet26d',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -154,7 +154,7 @@ def get_resnet_model(resnet_type, num_classes):
             resnet_model = create_model('resnet50',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             resnet_model = create_model('resnet50',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -163,7 +163,7 @@ def get_resnet_model(resnet_type, num_classes):
             resnet_model = create_model('resnet50c',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             resnet_model = create_model('resnet50c',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -172,7 +172,7 @@ def get_resnet_model(resnet_type, num_classes):
             resnet_model = create_model('resnet50d',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             resnet_model = create_model('resnet50d',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -181,7 +181,7 @@ def get_resnet_model(resnet_type, num_classes):
             resnet_model = create_model('resnet50s',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             resnet_model = create_model('resnet50s',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -190,7 +190,7 @@ def get_resnet_model(resnet_type, num_classes):
             resnet_model = create_model('resnet50t',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             resnet_model = create_model('resnet50t',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -199,7 +199,7 @@ def get_resnet_model(resnet_type, num_classes):
             resnet_model = create_model('resnet101',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             resnet_model = create_model('resnet101',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -208,7 +208,7 @@ def get_resnet_model(resnet_type, num_classes):
             resnet_model = create_model('resnet101c',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             resnet_model = create_model('resnet101c',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -217,7 +217,7 @@ def get_resnet_model(resnet_type, num_classes):
             resnet_model = create_model('resnet101d',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             resnet_model = create_model('resnet101d',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -226,7 +226,7 @@ def get_resnet_model(resnet_type, num_classes):
             resnet_model = create_model('resnet101s',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             resnet_model = create_model('resnet101s',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -235,7 +235,7 @@ def get_resnet_model(resnet_type, num_classes):
             resnet_model = create_model('resnet152',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             resnet_model = create_model('resnet152',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -244,7 +244,7 @@ def get_resnet_model(resnet_type, num_classes):
             resnet_model = create_model('resnet152c',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             resnet_model = create_model('resnet152c',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -253,7 +253,7 @@ def get_resnet_model(resnet_type, num_classes):
             resnet_model = create_model('resnet152d',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             resnet_model = create_model('resnet152d',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -262,7 +262,7 @@ def get_resnet_model(resnet_type, num_classes):
             resnet_model = create_model('resnet152s',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             resnet_model = create_model('resnet152s',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -271,7 +271,7 @@ def get_resnet_model(resnet_type, num_classes):
             resnet_model = create_model('resnet200',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             resnet_model = create_model('resnet200',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -280,7 +280,7 @@ def get_resnet_model(resnet_type, num_classes):
             resnet_model = create_model('resnet200d',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             resnet_model = create_model('resnet200d',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -289,7 +289,7 @@ def get_resnet_model(resnet_type, num_classes):
             resnet_model = create_model('wide_resnet50_2',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             resnet_model = create_model('wide_resnet50_2',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -298,7 +298,7 @@ def get_resnet_model(resnet_type, num_classes):
             resnet_model = create_model('wide_resnet101_2',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             resnet_model = create_model('wide_resnet101_2',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -307,7 +307,7 @@ def get_resnet_model(resnet_type, num_classes):
             resnet_model = create_model('resnet50_gn',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             resnet_model = create_model('resnet50_gn',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -316,7 +316,7 @@ def get_resnet_model(resnet_type, num_classes):
             resnet_model = create_model('resnext50_32x4d',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             resnet_model = create_model('resnext50_32x4d',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -325,7 +325,7 @@ def get_resnet_model(resnet_type, num_classes):
             resnet_model = create_model('resnext50d_32x4d',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             resnet_model = create_model('resnext50d_32x4d',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -334,7 +334,7 @@ def get_resnet_model(resnet_type, num_classes):
             resnet_model = create_model('resnext101_32x4d',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             resnet_model = create_model('resnext101_32x4d',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -343,7 +343,7 @@ def get_resnet_model(resnet_type, num_classes):
             resnet_model = create_model('resnext101_32x8d',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             resnet_model = create_model('resnext101_32x8d',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -352,7 +352,7 @@ def get_resnet_model(resnet_type, num_classes):
             resnet_model = create_model('resnext101_32x16d',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             resnet_model = create_model('resnext101_32x16d',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -361,7 +361,7 @@ def get_resnet_model(resnet_type, num_classes):
             resnet_model = create_model('resnext101_32x32d',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             resnet_model = create_model('resnext101_32x32d',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -370,7 +370,7 @@ def get_resnet_model(resnet_type, num_classes):
             resnet_model = create_model('resnext101_64x4d',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             resnet_model = create_model('resnext101_64x4d',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -379,7 +379,7 @@ def get_resnet_model(resnet_type, num_classes):
             resnet_model = create_model('ecaresnet26t',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             resnet_model = create_model('ecaresnet26t',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -388,7 +388,7 @@ def get_resnet_model(resnet_type, num_classes):
             resnet_model = create_model('ecaresnet50d',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             resnet_model = create_model('ecaresnet50d',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -397,7 +397,7 @@ def get_resnet_model(resnet_type, num_classes):
             resnet_model = create_model('ecaresnet50d_pruned',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             resnet_model = create_model('ecaresnet50d_pruned',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -406,7 +406,7 @@ def get_resnet_model(resnet_type, num_classes):
             resnet_model = create_model('ecaresnet50t',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             resnet_model = create_model('ecaresnet50t',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -415,7 +415,7 @@ def get_resnet_model(resnet_type, num_classes):
             resnet_model = create_model('ecaresnetlight',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             resnet_model = create_model('ecaresnetlight',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -424,7 +424,7 @@ def get_resnet_model(resnet_type, num_classes):
             resnet_model = create_model('ecaresnet101d',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             resnet_model = create_model('ecaresnet101d',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -433,7 +433,7 @@ def get_resnet_model(resnet_type, num_classes):
             resnet_model = create_model('ecaresnet101d_pruned',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             resnet_model = create_model('ecaresnet101d_pruned',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -442,7 +442,7 @@ def get_resnet_model(resnet_type, num_classes):
             resnet_model = create_model('ecaresnet200d',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             resnet_model = create_model('ecaresnet200d',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -451,7 +451,7 @@ def get_resnet_model(resnet_type, num_classes):
             resnet_model = create_model('ecaresnet269d',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             resnet_model = create_model('ecaresnet269d',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -460,7 +460,7 @@ def get_resnet_model(resnet_type, num_classes):
             resnet_model = create_model('ecaresnext26t_32x4d',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             resnet_model = create_model('ecaresnext26t_32x4d',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -469,7 +469,7 @@ def get_resnet_model(resnet_type, num_classes):
             resnet_model = create_model('ecaresnext50t_32x4d',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             resnet_model = create_model('ecaresnext50t_32x4d',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -478,7 +478,7 @@ def get_resnet_model(resnet_type, num_classes):
             resnet_model = create_model('seresnet18',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             resnet_model = create_model('seresnet18',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -487,7 +487,7 @@ def get_resnet_model(resnet_type, num_classes):
             resnet_model = create_model('seresnet34',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             resnet_model = create_model('seresnet34',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -496,7 +496,7 @@ def get_resnet_model(resnet_type, num_classes):
             resnet_model = create_model('seresnet50',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             resnet_model = create_model('seresnet50',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -505,7 +505,7 @@ def get_resnet_model(resnet_type, num_classes):
             resnet_model = create_model('seresnet50t',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             resnet_model = create_model('seresnet50t',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -514,7 +514,7 @@ def get_resnet_model(resnet_type, num_classes):
             resnet_model = create_model('seresnet101',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             resnet_model = create_model('seresnet101',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -523,7 +523,7 @@ def get_resnet_model(resnet_type, num_classes):
             resnet_model = create_model('seresnet152',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             resnet_model = create_model('seresnet152',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -532,7 +532,7 @@ def get_resnet_model(resnet_type, num_classes):
             resnet_model = create_model('seresnet152d',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             resnet_model = create_model('seresnet152d',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -541,7 +541,7 @@ def get_resnet_model(resnet_type, num_classes):
             resnet_model = create_model('seresnet200d',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             resnet_model = create_model('seresnet200d',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -550,7 +550,7 @@ def get_resnet_model(resnet_type, num_classes):
             resnet_model = create_model('seresnet269d',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             resnet_model = create_model('seresnet269d',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -559,7 +559,7 @@ def get_resnet_model(resnet_type, num_classes):
             resnet_model = create_model('seresnext26d_32x4d',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             resnet_model = create_model('seresnext26d_32x4d',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -568,7 +568,7 @@ def get_resnet_model(resnet_type, num_classes):
             resnet_model = create_model('seresnext26t_32x4d',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             resnet_model = create_model('seresnext26t_32x4d',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -577,7 +577,7 @@ def get_resnet_model(resnet_type, num_classes):
             resnet_model = create_model('seresnext50_32x4d',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             resnet_model = create_model('seresnext50_32x4d',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -586,7 +586,7 @@ def get_resnet_model(resnet_type, num_classes):
             resnet_model = create_model('seresnext101_32x4d',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             resnet_model = create_model('seresnext101_32x4d',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -595,7 +595,7 @@ def get_resnet_model(resnet_type, num_classes):
             resnet_model = create_model('seresnext101_32x8d',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             resnet_model = create_model('seresnext101_32x8d',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -604,7 +604,7 @@ def get_resnet_model(resnet_type, num_classes):
             resnet_model = create_model('seresnext101d_32x8d',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             resnet_model = create_model('seresnext101d_32x8d',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -613,7 +613,7 @@ def get_resnet_model(resnet_type, num_classes):
             resnet_model = create_model('seresnext101_64x4d',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             resnet_model = create_model('seresnext101_64x4d',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -622,7 +622,7 @@ def get_resnet_model(resnet_type, num_classes):
             resnet_model = create_model('senet154',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             resnet_model = create_model('senet154',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -631,7 +631,7 @@ def get_resnet_model(resnet_type, num_classes):
             resnet_model = create_model('resnetblur18',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             resnet_model = create_model('resnetblur18',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -640,7 +640,7 @@ def get_resnet_model(resnet_type, num_classes):
             resnet_model = create_model('resnetblur50',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             resnet_model = create_model('resnetblur50',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -649,7 +649,7 @@ def get_resnet_model(resnet_type, num_classes):
             resnet_model = create_model('resnetblur50d',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             resnet_model = create_model('resnetblur50d',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -658,7 +658,7 @@ def get_resnet_model(resnet_type, num_classes):
             resnet_model = create_model('resnetblur101d',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             resnet_model = create_model('resnetblur101d',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -667,7 +667,7 @@ def get_resnet_model(resnet_type, num_classes):
             resnet_model = create_model('resnetaa34d',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             resnet_model = create_model('resnetaa34d',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -676,7 +676,7 @@ def get_resnet_model(resnet_type, num_classes):
             resnet_model = create_model('resnetaa50',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             resnet_model = create_model('resnetaa50',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -685,7 +685,7 @@ def get_resnet_model(resnet_type, num_classes):
             resnet_model = create_model('resnetaa50d',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             resnet_model = create_model('resnetaa50d',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -694,7 +694,7 @@ def get_resnet_model(resnet_type, num_classes):
             resnet_model = create_model('resnetaa101d',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             resnet_model = create_model('resnetaa101d',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -703,7 +703,7 @@ def get_resnet_model(resnet_type, num_classes):
             resnet_model = create_model('seresnetaa50d',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             resnet_model = create_model('seresnetaa50d',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -712,7 +712,7 @@ def get_resnet_model(resnet_type, num_classes):
             resnet_model = create_model('seresnextaa101d_32x8d',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             resnet_model = create_model('seresnextaa101d_32x8d',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -721,7 +721,7 @@ def get_resnet_model(resnet_type, num_classes):
             resnet_model = create_model('seresnextaa201d_32x8d',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             resnet_model = create_model('seresnextaa201d_32x8d',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -730,7 +730,7 @@ def get_resnet_model(resnet_type, num_classes):
             resnet_model = create_model('resnetrs50',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             resnet_model = create_model('resnetrs50',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -739,7 +739,7 @@ def get_resnet_model(resnet_type, num_classes):
             resnet_model = create_model('resnetrs101',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             resnet_model = create_model('resnetrs101',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -748,7 +748,7 @@ def get_resnet_model(resnet_type, num_classes):
             resnet_model = create_model('resnetrs152',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             resnet_model = create_model('resnetrs152',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -757,7 +757,7 @@ def get_resnet_model(resnet_type, num_classes):
             resnet_model = create_model('resnetrs200',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             resnet_model = create_model('resnetrs200',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -766,7 +766,7 @@ def get_resnet_model(resnet_type, num_classes):
             resnet_model = create_model('resnetrs270',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             resnet_model = create_model('resnetrs270',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -775,7 +775,7 @@ def get_resnet_model(resnet_type, num_classes):
             resnet_model = create_model('resnetrs350',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             resnet_model = create_model('resnetrs350',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -784,7 +784,7 @@ def get_resnet_model(resnet_type, num_classes):
             resnet_model = create_model('resnetrs420',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             resnet_model = create_model('resnetrs420',
                                         pretrained=False,
                                         num_classes=num_classes)

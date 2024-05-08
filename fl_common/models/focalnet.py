@@ -24,7 +24,7 @@ def get_focalnet_model(focalnet_type, num_classes):
             focalnet_model = create_model('focalnet_tiny_srf',
                                           pretrained=True,
                                           num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             focalnet_model = create_model('focalnet_tiny_srf',
                                           pretrained=False,
                                           num_classes=num_classes)
@@ -33,7 +33,7 @@ def get_focalnet_model(focalnet_type, num_classes):
             focalnet_model = create_model('focalnet_small_srf',
                                           pretrained=True,
                                           num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             focalnet_model = create_model('focalnet_small_srf',
                                           pretrained=False,
                                           num_classes=num_classes)
@@ -42,7 +42,7 @@ def get_focalnet_model(focalnet_type, num_classes):
             focalnet_model = create_model('focalnet_base_srf',
                                           pretrained=True,
                                           num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             focalnet_model = create_model('focalnet_base_srf',
                                           pretrained=False,
                                           num_classes=num_classes)
@@ -51,7 +51,7 @@ def get_focalnet_model(focalnet_type, num_classes):
             focalnet_model = create_model('focalnet_tiny_lrf',
                                           pretrained=True,
                                           num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             focalnet_model = create_model('focalnet_base_srf',
                                           pretrained=False,
                                           num_classes=num_classes)
@@ -60,7 +60,7 @@ def get_focalnet_model(focalnet_type, num_classes):
             focalnet_model = create_model('focalnet_small_lrf',
                                           pretrained=True,
                                           num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             focalnet_model = create_model('focalnet_small_lrf',
                                           pretrained=False,
                                           num_classes=num_classes)
@@ -69,7 +69,7 @@ def get_focalnet_model(focalnet_type, num_classes):
             focalnet_model = create_model('focalnet_base_lrf',
                                           pretrained=True,
                                           num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             focalnet_model = create_model('focalnet_base_lrf',
                                           pretrained=False,
                                           num_classes=num_classes)
@@ -78,7 +78,7 @@ def get_focalnet_model(focalnet_type, num_classes):
             focalnet_model = create_model('focalnet_large_fl3',
                                           pretrained=True,
                                           num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             focalnet_model = create_model('focalnet_large_fl3',
                                           pretrained=False,
                                           num_classes=num_classes)
@@ -87,7 +87,7 @@ def get_focalnet_model(focalnet_type, num_classes):
             focalnet_model = create_model('focalnet_large_fl4',
                                           pretrained=True,
                                           num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             focalnet_model = create_model('focalnet_large_fl4',
                                           pretrained=False,
                                           num_classes=num_classes)
@@ -96,7 +96,7 @@ def get_focalnet_model(focalnet_type, num_classes):
             focalnet_model = create_model('focalnet_xlarge_fl3',
                                           pretrained=True,
                                           num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             focalnet_model = create_model('focalnet_xlarge_fl3',
                                           pretrained=False,
                                           num_classes=num_classes)
@@ -105,7 +105,7 @@ def get_focalnet_model(focalnet_type, num_classes):
             focalnet_model = create_model('focalnet_xlarge_fl4',
                                           pretrained=True,
                                           num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             focalnet_model = create_model('focalnet_xlarge_fl4',
                                           pretrained=False,
                                           num_classes=num_classes)
@@ -114,7 +114,7 @@ def get_focalnet_model(focalnet_type, num_classes):
             focalnet_model = create_model('focalnet_huge_fl3',
                                           pretrained=True,
                                           num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             focalnet_model = create_model('focalnet_huge_fl3',
                                           pretrained=False,
                                           num_classes=num_classes)
@@ -123,7 +123,7 @@ def get_focalnet_model(focalnet_type, num_classes):
             focalnet_model = create_model('focalnet_huge_fl4',
                                           pretrained=True,
                                           num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             focalnet_model = create_model('focalnet_huge_fl4',
                                           pretrained=False,
                                           num_classes=num_classes)

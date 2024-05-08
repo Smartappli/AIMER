@@ -29,7 +29,7 @@ def get_edgenet_model(edgenet_type, num_classes):
             edgenet_model = create_model('edgenext_xx_small',
                                          pretrained=True,
                                          num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             edgenet_model = create_model('edgenext_xx_small',
                                          pretrained=False,
                                          num_classes=num_classes)
@@ -38,7 +38,7 @@ def get_edgenet_model(edgenet_type, num_classes):
             edgenet_model = create_model('edgenext_x_small',
                                          pretrained=True,
                                          num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             edgenet_model = create_model('edgenext_x_small',
                                          pretrained=False,
                                          num_classes=num_classes)
@@ -47,7 +47,7 @@ def get_edgenet_model(edgenet_type, num_classes):
             edgenet_model = create_model('edgenext_small',
                                          pretrained=True,
                                          num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             edgenet_model = create_model('edgenext_small',
                                          pretrained=False,
                                          num_classes=num_classes)
@@ -56,7 +56,7 @@ def get_edgenet_model(edgenet_type, num_classes):
             edgenet_model = create_model('edgenext_base',
                                          pretrained=True,
                                          num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             edgenet_model = create_model('edgenext_base',
                                          pretrained=False,
                                          num_classes=num_classes)
@@ -65,7 +65,7 @@ def get_edgenet_model(edgenet_type, num_classes):
             edgenet_model = create_model('edgenext_small_rw',
                                          pretrained=True,
                                          num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             edgenet_model = create_model('edgenext_small_rw',
                                          pretrained=False,
                                          num_classes=num_classes)

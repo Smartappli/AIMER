@@ -19,7 +19,7 @@ def get_efficientvit_msra_model(efficientvit_msra_type, num_classes):
             efficientvit_msra_model = create_model('efficientvit_m0',
                                                    pretrained=True,
                                                    num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             efficientvit_msra_model = create_model('efficientvit_m0',
                                                    pretrained=False,
                                                    num_classes=num_classes)
@@ -28,7 +28,7 @@ def get_efficientvit_msra_model(efficientvit_msra_type, num_classes):
             efficientvit_msra_model = create_model('efficientvit_m1',
                                                    pretrained=True,
                                                    num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             efficientvit_msra_model = create_model('efficientvit_m1',
                                                    pretrained=False,
                                                    num_classes=num_classes)
@@ -37,7 +37,7 @@ def get_efficientvit_msra_model(efficientvit_msra_type, num_classes):
             efficientvit_msra_model = create_model('efficientvit_m2',
                                                    pretrained=True,
                                                    num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             efficientvit_msra_model = create_model('efficientvit_m2',
                                                    pretrained=False,
                                                    num_classes=num_classes)
@@ -46,7 +46,7 @@ def get_efficientvit_msra_model(efficientvit_msra_type, num_classes):
             efficientvit_msra_model = create_model('efficientvit_m3',
                                                    pretrained=True,
                                                    num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             efficientvit_msra_model = create_model('efficientvit_m3',
                                                    pretrained=False,
                                                    num_classes=num_classes)
@@ -55,7 +55,7 @@ def get_efficientvit_msra_model(efficientvit_msra_type, num_classes):
             efficientvit_msra_model = create_model('efficientvit_m4',
                                                    pretrained=True,
                                                    num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             efficientvit_msra_model = create_model('efficientvit_m4',
                                                    pretrained=False,
                                                    num_classes=num_classes)
@@ -64,7 +64,7 @@ def get_efficientvit_msra_model(efficientvit_msra_type, num_classes):
             efficientvit_msra_model = create_model('efficientvit_m5',
                                                    pretrained=True,
                                                    num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             efficientvit_msra_model = create_model('efficientvit_m5',
                                                    pretrained=False,
                                                    num_classes=num_classes)

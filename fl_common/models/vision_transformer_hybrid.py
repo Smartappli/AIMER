@@ -34,7 +34,7 @@ def get_vision_transformer_hybrid_model(vision_transformer_hybrid_type, num_clas
             vision_transformer_hybrid_model = create_model('vit_tiny_r_s16_p8_224',
                                                            pretrained=True,
                                                            num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             vision_transformer_hybrid_model = create_model('vit_tiny_r_s16_p8_224',
                                                            pretrained=False,
                                                            num_classes=num_classes)
@@ -43,7 +43,7 @@ def get_vision_transformer_hybrid_model(vision_transformer_hybrid_type, num_clas
             vision_transformer_hybrid_model = create_model('vit_tiny_r_s16_p8_384',
                                                            pretrained=True,
                                                            num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             vision_transformer_hybrid_model = create_model('vit_tiny_r_s16_p8_384',
                                                            pretrained=False,
                                                            num_classes=num_classes)
@@ -52,7 +52,7 @@ def get_vision_transformer_hybrid_model(vision_transformer_hybrid_type, num_clas
             vision_transformer_hybrid_model = create_model('vit_small_r26_s32_224',
                                                            pretrained=True,
                                                            num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             vision_transformer_hybrid_model = create_model('vit_small_r26_s32_224',
                                                            pretrained=False,
                                                            num_classes=num_classes)
@@ -61,7 +61,7 @@ def get_vision_transformer_hybrid_model(vision_transformer_hybrid_type, num_clas
             vision_transformer_hybrid_model = create_model('vit_small_r26_s32_384',
                                                            pretrained=True,
                                                            num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             vision_transformer_hybrid_model = create_model('vit_small_r26_s32_384',
                                                            pretrained=False,
                                                            num_classes=num_classes)
@@ -70,7 +70,7 @@ def get_vision_transformer_hybrid_model(vision_transformer_hybrid_type, num_clas
             vision_transformer_hybrid_model = create_model('vit_base_r26_s32_224',
                                                            pretrained=True,
                                                            num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             vision_transformer_hybrid_model = create_model('vit_base_r26_s32_224',
                                                            pretrained=False,
                                                            num_classes=num_classes)
@@ -79,7 +79,7 @@ def get_vision_transformer_hybrid_model(vision_transformer_hybrid_type, num_clas
             vision_transformer_hybrid_model = create_model('vit_base_r50_s16_224',
                                                            pretrained=True,
                                                            num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             vision_transformer_hybrid_model = create_model('vit_base_r50_s16_224',
                                                            pretrained=False,
                                                            num_classes=num_classes)
@@ -88,7 +88,7 @@ def get_vision_transformer_hybrid_model(vision_transformer_hybrid_type, num_clas
             vision_transformer_hybrid_model = create_model('vit_base_r50_s16_384',
                                                            pretrained=True,
                                                            num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             vision_transformer_hybrid_model = create_model('vit_base_r50_s16_384',
                                                            pretrained=False,
                                                            num_classes=num_classes)
@@ -97,7 +97,7 @@ def get_vision_transformer_hybrid_model(vision_transformer_hybrid_type, num_clas
             vision_transformer_hybrid_model = create_model('vit_large_r50_s32_224',
                                                            pretrained=True,
                                                            num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             vision_transformer_hybrid_model = create_model('vit_large_r50_s32_224',
                                                            pretrained=False,
                                                            num_classes=num_classes)
@@ -106,7 +106,7 @@ def get_vision_transformer_hybrid_model(vision_transformer_hybrid_type, num_clas
             vision_transformer_hybrid_model = create_model('vit_large_r50_s32_384',
                                                            pretrained=True,
                                                            num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             vision_transformer_hybrid_model = create_model('vit_large_r50_s32_384',
                                                            pretrained=False,
                                                            num_classes=num_classes)
@@ -115,7 +115,7 @@ def get_vision_transformer_hybrid_model(vision_transformer_hybrid_type, num_clas
             vision_transformer_hybrid_model = create_model('vit_small_resnet26d_224',
                                                            pretrained=True,
                                                            num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             vision_transformer_hybrid_model = create_model('vit_small_resnet26d_224',
                                                            pretrained=False,
                                                            num_classes=num_classes)
@@ -124,7 +124,7 @@ def get_vision_transformer_hybrid_model(vision_transformer_hybrid_type, num_clas
             vision_transformer_hybrid_model = create_model('vit_small_resnet50d_s16_224',
                                                            pretrained=True,
                                                            num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             vision_transformer_hybrid_model = create_model('vit_small_resnet50d_s16_224',
                                                            pretrained=False,
                                                            num_classes=num_classes)
@@ -133,7 +133,7 @@ def get_vision_transformer_hybrid_model(vision_transformer_hybrid_type, num_clas
             vision_transformer_hybrid_model = create_model('vit_base_resnet26d_224',
                                                            pretrained=True,
                                                            num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             vision_transformer_hybrid_model = create_model('vit_base_resnet26d_224',
                                                            pretrained=False,
                                                            num_classes=num_classes)
@@ -142,7 +142,7 @@ def get_vision_transformer_hybrid_model(vision_transformer_hybrid_type, num_clas
             vision_transformer_hybrid_model = create_model('vit_base_resnet50d_224',
                                                            pretrained=True,
                                                            num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             vision_transformer_hybrid_model = create_model('vit_base_resnet50d_224',
                                                            pretrained=False,
                                                            num_classes=num_classes)

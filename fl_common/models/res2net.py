@@ -26,6 +26,6 @@ def get_res2net_model(res2net_type, num_classes):
 
     try:
         return create_model(res2net_type, pretrained=True, num_classes=num_classes)
-    except OSError as e:
+    except RuntimeError as e:
         print(f"Error loading pretrained model: {e}")
         return create_model(res2net_type, pretrained=False, num_classes=num_classes)

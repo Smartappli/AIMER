@@ -27,7 +27,7 @@ def get_xcit_model(xcit_type, num_classes):
 
     try:
         xcit_model = create_model(xcit_type, pretrained=True, num_classes=num_classes)
-    except OSError:
+    except RuntimeError:
         xcit_model = create_model(xcit_type, pretrained=False, num_classes=num_classes)
 
     return xcit_model

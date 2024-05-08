@@ -22,7 +22,7 @@ def get_vision_transformer_relpos_model(vision_transformer_relpos_type, num_clas
             vision_transformer_relpos_model = create_model('vit_relpos_base_patch32_plus_rpn_256',
                                                            pretrained=True,
                                                            num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             vision_transformer_relpos_model = create_model('vit_relpos_base_patch32_plus_rpn_256',
                                                            pretrained=False,
                                                            num_classes=num_classes)
@@ -31,7 +31,7 @@ def get_vision_transformer_relpos_model(vision_transformer_relpos_type, num_clas
             vision_transformer_relpos_model = create_model('vit_relpos_base_patch16_plus_240',
                                                            pretrained=True,
                                                            num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             vision_transformer_relpos_model = create_model('vit_relpos_base_patch16_plus_240',
                                                            pretrained=False,
                                                            num_classes=num_classes)
@@ -40,7 +40,7 @@ def get_vision_transformer_relpos_model(vision_transformer_relpos_type, num_clas
             vision_transformer_relpos_model = create_model('vit_relpos_small_patch16_224',
                                                            pretrained=True,
                                                            num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             vision_transformer_relpos_model = create_model('vit_relpos_small_patch16_224',
                                                            pretrained=False,
                                                            num_classes=num_classes)
@@ -49,7 +49,7 @@ def get_vision_transformer_relpos_model(vision_transformer_relpos_type, num_clas
             vision_transformer_relpos_model = create_model('vit_relpos_medium_patch16_224',
                                                            pretrained=True,
                                                            num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             vision_transformer_relpos_model = create_model('vit_relpos_medium_patch16_224',
                                                            pretrained=False,
                                                            num_classes=num_classes)
@@ -58,7 +58,7 @@ def get_vision_transformer_relpos_model(vision_transformer_relpos_type, num_clas
             vision_transformer_relpos_model = create_model('vit_relpos_base_patch16_224',
                                                            pretrained=True,
                                                            num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             vision_transformer_relpos_model = create_model('vit_relpos_base_patch16_224',
                                                            pretrained=False,
                                                            num_classes=num_classes)
@@ -67,7 +67,7 @@ def get_vision_transformer_relpos_model(vision_transformer_relpos_type, num_clas
             vision_transformer_relpos_model = create_model('vit_srelpos_small_patch16_224',
                                                            pretrained=True,
                                                            num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             vision_transformer_relpos_model = create_model('vit_srelpos_small_patch16_224',
                                                            pretrained=False,
                                                            num_classes=num_classes)
@@ -76,7 +76,7 @@ def get_vision_transformer_relpos_model(vision_transformer_relpos_type, num_clas
             vision_transformer_relpos_model = create_model('vit_srelpos_medium_patch16_224',
                                                            pretrained=True,
                                                            num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             vision_transformer_relpos_model = create_model('vit_srelpos_medium_patch16_224',
                                                            pretrained=False,
                                                            num_classes=num_classes)
@@ -85,7 +85,7 @@ def get_vision_transformer_relpos_model(vision_transformer_relpos_type, num_clas
             vision_transformer_relpos_model = create_model('vit_relpos_medium_patch16_cls_224',
                                                            pretrained=True,
                                                            num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             vision_transformer_relpos_model = create_model('vit_relpos_medium_patch16_cls_224',
                                                            pretrained=False,
                                                            num_classes=num_classes)
@@ -94,7 +94,7 @@ def get_vision_transformer_relpos_model(vision_transformer_relpos_type, num_clas
             vision_transformer_relpos_model = create_model('vit_relpos_base_patch16_cls_224',
                                                            pretrained=True,
                                                            num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             vision_transformer_relpos_model = create_model('vit_relpos_base_patch16_cls_224',
                                                            pretrained=False,
                                                            num_classes=num_classes)
@@ -103,7 +103,7 @@ def get_vision_transformer_relpos_model(vision_transformer_relpos_type, num_clas
             vision_transformer_relpos_model = create_model('vit_relpos_base_patch16_clsgap_224',
                                                            pretrained=True,
                                                            num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             vision_transformer_relpos_model = create_model('vit_relpos_base_patch16_clsgap_224',
                                                            pretrained=False,
                                                            num_classes=num_classes)
@@ -112,7 +112,7 @@ def get_vision_transformer_relpos_model(vision_transformer_relpos_type, num_clas
             vision_transformer_relpos_model = create_model('vit_relpos_small_patch16_rpn_224',
                                                            pretrained=True,
                                                            num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             vision_transformer_relpos_model = create_model('vit_relpos_small_patch16_rpn_224',
                                                            pretrained=False,
                                                            num_classes=num_classes)
@@ -121,7 +121,7 @@ def get_vision_transformer_relpos_model(vision_transformer_relpos_type, num_clas
             vision_transformer_relpos_model = create_model('vit_relpos_medium_patch16_rpn_224',
                                                            pretrained=True,
                                                            num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             vision_transformer_relpos_model = create_model('vit_relpos_medium_patch16_rpn_224',
                                                            pretrained=False,
                                                            num_classes=num_classes)
@@ -130,7 +130,7 @@ def get_vision_transformer_relpos_model(vision_transformer_relpos_type, num_clas
             vision_transformer_relpos_model = create_model('vit_relpos_base_patch16_rpn_224',
                                                            pretrained=True,
                                                            num_classes=num_classes)
-        except OSError:
+        except RuntimeError:
             vision_transformer_relpos_model = create_model('vit_relpos_base_patch16_rpn_224',
                                                            pretrained=False,
                                                            num_classes=num_classes)

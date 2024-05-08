@@ -32,6 +32,6 @@ def get_nfnet_model(nfnet_type, num_classes):
 
     try:
         return create_model(nfnet_type, pretrained=True, num_classes=num_classes)
-    except OSError as e:
+    except RuntimeError as e:
         print(f"Error loading pretrained model: {e}")
         return create_model(nfnet_type, pretrained=False, num_classes=num_classes)
