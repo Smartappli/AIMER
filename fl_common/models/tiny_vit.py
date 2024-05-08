@@ -17,55 +17,16 @@ def get_tiny_vit_model(tiny_vit_type, num_classes):
     - ValueError: If an unknown TinyViT architecture is specified.
     """
 
-    # Check the value of tiny_vit_type and create the corresponding TinyViT model
-    if tiny_vit_type == 'tiny_vit_5m_224':
-        try:
-            tiny_vit_model = create_model('tiny_vit_5m_224',
-                                          pretrained=True,
-                                          num_classes=num_classes)
-        except RuntimeError:
-            tiny_vit_model = create_model('tiny_vit_5m_224',
-                                          pretrained=False,
-                                          num_classes=num_classes)
-    elif tiny_vit_type == 'tiny_vit_11m_224':
-        try:
-            tiny_vit_model = create_model('tiny_vit_11m_224',
-                                          pretrained=True,
-                                          num_classes=num_classes)
-        except RuntimeError:
-            tiny_vit_model = create_model('tiny_vit_11m_224',
-                                          pretrained=False,
-                                          num_classes=num_classes)
-    elif tiny_vit_type == 'tiny_vit_21m_224':
-        try:
-            tiny_vit_model = create_model("tiny_vit_21m_224",
-                                          pretrained=True,
-                                          num_classes=num_classes)
-        except RuntimeError:
-            tiny_vit_model = create_model("tiny_vit_21m_224",
-                                          pretrained=False,
-                                          num_classes=num_classes)
-    elif tiny_vit_type == 'tiny_vit_21m_384':
-        try:
-            tiny_vit_model = create_model("tiny_vit_21m_384",
-                                          pretrained=True,
-                                          num_classes=num_classes)
-        except RuntimeError:
-            tiny_vit_model = create_model("tiny_vit_21m_384",
-                                          pretrained=False,
-                                          num_classes=num_classes)
-    elif tiny_vit_type == 'tiny_vit_21m_512':
-        try:
-            tiny_vit_model = create_model("tiny_vit_21m_512",
-                                          pretrained=True,
-                                          num_classes=num_classes)
-        except RuntimeError:
-            tiny_vit_model = create_model("tiny_vit_21m_512",
-                                          pretrained=False,
-                                          num_classes=num_classes)
-    else:
-        # Raise a ValueError if an unknown TinyViT architecture is specified
+    supported_types = {
+        'tiny_vit_5m_224', 'tiny_vit_11m_224', 'tiny_vit_21m_224',
+        'tiny_vit_21m_384', 'tiny_vit_21m_512'
+    }
+
+    if tiny_vit_type not in supported_types:
         raise ValueError(f'Unknown TinyViT Architecture: {tiny_vit_type}')
 
-    # Return the created TinyViT model
-    return tiny_vit_model
+    try:
+        return create_model(tiny_vit_type, pretrained=True, num_classes=num_classes)
+    except RuntimeError as e:
+        print(f"Error loading pretrained model: {e}")
+        return create_model(tiny_vit_type, pretrained=False, num_classes=num_classes)
