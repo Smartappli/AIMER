@@ -21,7 +21,7 @@ def get_gcvit_model(gcvit_type, num_classes):
             gcvit_model = create_model('gcvit_xxtiny',
                                        pretrained=True,
                                        num_classes=num_classes)
-        except Exception:
+        except OSError:
             gcvit_model = create_model('gcvit_xxtiny',
                                        pretrained=False,
                                        num_classes=num_classes)
@@ -30,7 +30,7 @@ def get_gcvit_model(gcvit_type, num_classes):
             gcvit_model = create_model('gcvit_xtiny',
                                        pretrained=True,
                                        num_classes=num_classes)
-        except Exception:
+        except OSError:
             gcvit_model = create_model('gcvit_xtiny',
                                        pretrained=False,
                                        num_classes=num_classes)
@@ -39,7 +39,7 @@ def get_gcvit_model(gcvit_type, num_classes):
             gcvit_model = create_model('gcvit_tiny',
                                        pretrained=True,
                                        num_classes=num_classes)
-        except Exception:
+        except OSError:
             gcvit_model = create_model('gcvit_tiny',
                                        pretrained=False,
                                        num_classes=num_classes)
@@ -48,7 +48,7 @@ def get_gcvit_model(gcvit_type, num_classes):
             gcvit_model = create_model('gcvit_small',
                                        pretrained=True,
                                        num_classes=num_classes)
-        except Exception:
+        except OSError:
             gcvit_model = create_model('gcvit_small',
                                        pretrained=False,
                                        num_classes=num_classes)
@@ -57,7 +57,7 @@ def get_gcvit_model(gcvit_type, num_classes):
             gcvit_model = create_model('gcvit_base',
                                        pretrained=True,
                                        num_classes=num_classes)
-        except Exception:
+        except OSError:
             gcvit_model = create_model('gcvit_base',
                                        pretrained=False,
                                        num_classes=num_classes)

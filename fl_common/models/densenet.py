@@ -27,35 +27,35 @@ def get_densenet_model(densenet_type, num_classes):
         try:
             weights = models.DenseNet121_Weights.DEFAULT
             densenet_model = models.densenet121(weights=weights)
-        except Exception:
+        except OSError:
             densenet_model = models.densenet121(weights=None)
     elif densenet_type == 'DenseNet161':
         torch_vision = True
         try:
             weights = models.DenseNet161_Weights.DEFAULT
             densenet_model = models.densenet161(weights=weights)
-        except Exception:
+        except OSError:
             densenet_model = models.densenet161(weights=None)
     elif densenet_type == 'DenseNet169':
         torch_vision = True
         try:
             weights = models.DenseNet169_Weights.DEFAULT
             densenet_model = models.densenet169(weights=weights)
-        except Exception:
+        except OSError:
             densenet_model = models.densenet169(weights=None)
     elif densenet_type == 'DenseNet201':
         torch_vision = True
         try:
             weights = models.DenseNet201_Weights.DEFAULT
             densenet_model = models.densenet201(weights=weights)
-        except Exception:
+        except OSError:
             densenet_model = models.densenet201(weights=None)
     elif densenet_type == "densenet121":
         try:
             densenet_model = create_model('densenet121',
                                           pretrained=True,
                                           num_classes=num_classes)
-        except Exception:
+        except OSError:
             densenet_model = create_model('densenet121',
                                           pretrained=False,
                                           num_classes=num_classes)
@@ -64,7 +64,7 @@ def get_densenet_model(densenet_type, num_classes):
             densenet_model = create_model('densenetblur121d',
                                           pretrained=True,
                                           num_classes=num_classes)
-        except Exception:
+        except OSError:
             densenet_model = create_model('densenetblur121d',
                                           pretrained=False,
                                           num_classes=num_classes)
@@ -73,7 +73,7 @@ def get_densenet_model(densenet_type, num_classes):
             densenet_model = create_model('densenet169',
                                           pretrained=True,
                                           num_classes=num_classes)
-        except Exception:
+        except OSError:
             densenet_model = create_model('densenet169',
                                           pretrained=False,
                                           num_classes=num_classes)
@@ -82,7 +82,7 @@ def get_densenet_model(densenet_type, num_classes):
             densenet_model = create_model('densenet201',
                                           pretrained=True,
                                           num_classes=num_classes)
-        except Exception:
+        except OSError:
             densenet_model = create_model('densenet201',
                                           pretrained=False,
                                           num_classes=num_classes)
@@ -91,7 +91,7 @@ def get_densenet_model(densenet_type, num_classes):
             densenet_model = create_model('densenet161',
                                           pretrained=True,
                                           num_classes=num_classes)
-        except Exception:
+        except OSError:
             densenet_model = create_model('densenet161',
                                           pretrained=False,
                                           num_classes=num_classes)
@@ -100,7 +100,7 @@ def get_densenet_model(densenet_type, num_classes):
             densenet_model = create_model('densenet264d',
                                           pretrained=True,
                                           num_classes=num_classes)
-        except Exception:
+        except OSError:
             densenet_model = create_model('densenet264d',
                                           pretrained=False,
                                           num_classes=num_classes)

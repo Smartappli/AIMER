@@ -24,7 +24,7 @@ def get_alexnet_model(alexnet_type, num_classes):
         try:
             weights = models.AlexNet_Weights.DEFAULT
             alexnet_model = models.alexnet(weights=weights)
-        except Exception:
+        except OSError:
             alexnet_model = models.alexnet(weights=None)
     else:
         raise ValueError(f'Unknown AlexNet Architecture: {alexnet_type}')

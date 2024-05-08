@@ -29,6 +29,3 @@ def get_coat_model(coat_type, num_classes):
     except OSError as e:
         print(f"Error loading pretrained model: {e}")
         return create_model(coat_type, pretrained=False, num_classes=num_classes)
-    except Exception as e:
-        print(f"An unexpected error occurred: {e}")
-        return None

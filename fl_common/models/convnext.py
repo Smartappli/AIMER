@@ -35,35 +35,35 @@ def get_convnext_model(convnext_type, num_classes):
         try:
             weights = models.ConvNeXt_Tiny_Weights.DEFAULT
             convnext_model = models.convnext_tiny(weights=weights)
-        except Exception:
+        except OSError:
             convnext_model = models.convnext_tiny(weghts=None)
     elif convnext_type == 'ConvNeXt_Small':
         torch_vision = True
         try:
             weights = models.ConvNeXt_Small_Weights.DEFAULT
             convnext_model = models.convnext_small(weights=weights)
-        except Exception:
+        except OSError:
             convnext_model = models.convnext_small(weghts=None)
     elif convnext_type == 'ConvNeXt_Base':
         torch_vision = True
         try:
             weights = models.ConvNeXt_Base_Weights.DEFAULT
             convnext_model = models.convnext_base(weights=weights)
-        except Exception:
+        except OSError:
             convnext_model = models.convnext_base(weghts=None)
     elif convnext_type == 'ConvNeXt_Large':
         torch_vision = True
         try:
             weights = models.ConvNeXt_Large_Weights.DEFAULT
             convnext_model = models.convnext_large(weights=weights)
-        except Exception:
+        except OSError:
             convnext_model = models.convnext_large(weight=None)
     elif convnext_type == "convnext_atto":
         try:
             convnext_model = create_model('convnext_atto',
                                           pretrained=True,
                                           num_classes=num_classes)
-        except Exception:
+        except OSError:
             convnext_model = create_model('convnext_atto',
                                           pretrained=False,
                                           num_classes=num_classes)
@@ -72,7 +72,7 @@ def get_convnext_model(convnext_type, num_classes):
             convnext_model = create_model('convnext_atto_ols',
                                           pretrained=True,
                                           num_classes=num_classes)
-        except Exception:
+        except OSError:
             convnext_model = create_model('convnext_atto_ols',
                                           pretrained=False,
                                           num_classes=num_classes)
@@ -81,7 +81,7 @@ def get_convnext_model(convnext_type, num_classes):
             convnext_model = create_model('convnext_femto',
                                           pretrained=True,
                                           num_classes=num_classes)
-        except Exception:
+        except OSError:
             convnext_model = create_model('convnext_femto',
                                           pretrained=False,
                                           num_classes=num_classes)
@@ -90,7 +90,7 @@ def get_convnext_model(convnext_type, num_classes):
             convnext_model = create_model('convnext_femto_ols',
                                           pretrained=True,
                                           num_classes=num_classes)
-        except Exception:
+        except OSError:
             convnext_model = create_model('convnext_femto_ols',
                                           pretrained=False,
                                           num_classes=num_classes)
@@ -99,7 +99,7 @@ def get_convnext_model(convnext_type, num_classes):
             convnext_model = create_model('convnext_pico',
                                           pretrained=True,
                                           num_classes=num_classes)
-        except Exception:
+        except OSError:
             convnext_model = create_model('convnext_pico',
                                           pretrained=False,
                                           num_classes=num_classes)
@@ -108,7 +108,7 @@ def get_convnext_model(convnext_type, num_classes):
             convnext_model = create_model('convnext_pico_ols',
                                           pretrained=True,
                                           num_classes=num_classes)
-        except Exception:
+        except OSError:
             convnext_model = create_model('convnext_pico_ols',
                                           pretrained=False,
                                           num_classes=num_classes)
@@ -117,7 +117,7 @@ def get_convnext_model(convnext_type, num_classes):
             convnext_model = create_model('convnext_nano',
                                           pretrained=True,
                                           num_classes=num_classes)
-        except Exception:
+        except OSError:
             convnext_model = create_model('convnext_nano',
                                           pretrained=False,
                                           num_classes=num_classes)
@@ -126,7 +126,7 @@ def get_convnext_model(convnext_type, num_classes):
             convnext_model = create_model('convnext_nano_ols',
                                           pretrained=True,
                                           num_classes=num_classes)
-        except Exception:
+        except OSError:
             convnext_model = create_model('convnext_nano_ols',
                                           pretrained=False,
                                           num_classes=num_classes)
@@ -135,7 +135,7 @@ def get_convnext_model(convnext_type, num_classes):
             convnext_model = create_model('convnext_tiny_hnf',
                                           pretrained=True,
                                           num_classes=num_classes)
-        except Exception:
+        except OSError:
             convnext_model = create_model('convnext_tiny_hnf',
                                           pretrained=False,
                                           num_classes=num_classes)
@@ -144,7 +144,7 @@ def get_convnext_model(convnext_type, num_classes):
             convnext_model = create_model('convnext_tiny',
                                           pretrained=True,
                                           num_classes=num_classes)
-        except Exception:
+        except OSError:
             convnext_model = create_model('convnext_tiny',
                                           pretrained=False,
                                           num_classes=num_classes)
@@ -153,7 +153,7 @@ def get_convnext_model(convnext_type, num_classes):
             convnext_model = create_model('convnext_small',
                                           pretrained=True,
                                           num_classes=num_classes)
-        except Exception:
+        except OSError:
             convnext_model = create_model('convnext_small',
                                           pretrained=False,
                                           num_classes=num_classes)
@@ -162,7 +162,7 @@ def get_convnext_model(convnext_type, num_classes):
             convnext_model = create_model('convnext_base',
                                           pretrained=True,
                                           num_classes=num_classes)
-        except Exception:
+        except OSError:
             convnext_model = create_model('convnext_base',
                                           pretrained=False,
                                           num_classes=num_classes)
@@ -171,7 +171,7 @@ def get_convnext_model(convnext_type, num_classes):
             convnext_model = create_model('convnext_large',
                                           pretrained=True,
                                           num_classes=num_classes)
-        except Exception:
+        except OSError:
             convnext_model = create_model('convnext_large',
                                           pretrained=False,
                                           num_classes=num_classes)
@@ -180,7 +180,7 @@ def get_convnext_model(convnext_type, num_classes):
             convnext_model = create_model('convnext_large_mlp',
                                           pretrained=True,
                                           num_classes=num_classes)
-        except Exception:
+        except OSError:
             convnext_model = create_model('convnext_large_mlp',
                                           pretrained=False,
                                           num_classes=num_classes)
@@ -189,7 +189,7 @@ def get_convnext_model(convnext_type, num_classes):
             convnext_model = create_model('convnext_xlarge',
                                           pretrained=True,
                                           num_classes=num_classes)
-        except Exception:
+        except OSError:
             convnext_model = create_model('convnext_xlarge',
                                           pretrained=False,
                                           num_classes=num_classes)
@@ -198,7 +198,7 @@ def get_convnext_model(convnext_type, num_classes):
             convnext_model = create_model('convnext_xxlarge',
                                           pretrained=True,
                                           num_classes=num_classes)
-        except Exception:
+        except OSError:
             convnext_model = create_model('convnext_xxlarge',
                                           pretrained=False,
                                           num_classes=num_classes)
@@ -207,7 +207,7 @@ def get_convnext_model(convnext_type, num_classes):
             convnext_model = create_model('convnextv2_atto',
                                           pretrained=True,
                                           num_classes=num_classes)
-        except Exception:
+        except OSError:
             convnext_model = create_model('convnextv2_atto',
                                           pretrained=False,
                                           num_classes=num_classes)
@@ -216,7 +216,7 @@ def get_convnext_model(convnext_type, num_classes):
             convnext_model = create_model('convnextv2_femto',
                                           pretrained=True,
                                           num_classes=num_classes)
-        except Exception:
+        except OSError:
             convnext_model = create_model('convnextv2_femto',
                                           pretrained=False,
                                           num_classes=num_classes)
@@ -225,7 +225,7 @@ def get_convnext_model(convnext_type, num_classes):
             convnext_model = create_model('convnextv2_pico',
                                           pretrained=True,
                                           num_classes=num_classes)
-        except Exception:
+        except OSError:
             convnext_model = create_model('convnextv2_pico',
                                           pretrained=False,
                                           num_classes=num_classes)
@@ -234,7 +234,7 @@ def get_convnext_model(convnext_type, num_classes):
             convnext_model = create_model('convnextv2_nano',
                                           pretrained=True,
                                           num_classes=num_classes)
-        except Exception:
+        except OSError:
             convnext_model = create_model('convnextv2_nano',
                                           pretrained=False,
                                           num_classes=num_classes)
@@ -243,7 +243,7 @@ def get_convnext_model(convnext_type, num_classes):
             convnext_model = create_model('convnextv2_tiny',
                                           pretrained=True,
                                           num_classes=num_classes)
-        except Exception:
+        except OSError:
             convnext_model = create_model('convnextv2_tiny',
                                           pretrained=False,
                                           num_classes=num_classes)
@@ -252,7 +252,7 @@ def get_convnext_model(convnext_type, num_classes):
             convnext_model = create_model('convnextv2_small',
                                           pretrained=True,
                                           num_classes=num_classes)
-        except Exception:
+        except OSError:
             convnext_model = create_model('convnextv2_small',
                                           pretrained=False,
                                           num_classes=num_classes)
@@ -261,7 +261,7 @@ def get_convnext_model(convnext_type, num_classes):
             convnext_model = create_model('convnextv2_base',
                                           pretrained=True,
                                           num_classes=num_classes)
-        except Exception:
+        except OSError:
             convnext_model = create_model('convnextv2_base',
                                           pretrained=False,
                                           num_classes=num_classes)
@@ -270,7 +270,7 @@ def get_convnext_model(convnext_type, num_classes):
             convnext_model = create_model('convnextv2_large',
                                           pretrained=True,
                                           num_classes=num_classes)
-        except Exception:
+        except OSError:
             convnext_model = create_model('convnextv2_large',
                                           pretrained=False,
                                           num_classes=num_classes)
@@ -279,7 +279,7 @@ def get_convnext_model(convnext_type, num_classes):
             convnext_model = create_model('convnextv2_huge',
                                           pretrained=True,
                                           num_classes=num_classes)
-        except Exception:
+        except OSError:
             convnext_model = create_model('convnextv2_huge',
                                           pretrained=False,
                                           num_classes=num_classes)
