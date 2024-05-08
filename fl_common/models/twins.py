@@ -26,7 +26,7 @@ def get_twins_model(twins_type, num_classes):
             twins_model = create_model('twins_pcpvt_small',
                                        pretrained=True,
                                        num_classes=num_classes)
-        except Exception:
+        except OSError:
             twins_model = create_model('twins_pcpvt_small',
                                        pretrained=False,
                                        num_classes=num_classes)
@@ -35,7 +35,7 @@ def get_twins_model(twins_type, num_classes):
             twins_model = create_model('twins_pcpvt_base',
                                        pretrained=True,
                                        num_classes=num_classes)
-        except Exception:
+        except OSError:
             twins_model = create_model('twins_pcpvt_base',
                                        pretrained=False,
                                        num_classes=num_classes)
@@ -44,7 +44,7 @@ def get_twins_model(twins_type, num_classes):
             twins_model = create_model('twins_pcpvt_large',
                                        pretrained=True,
                                        num_classes=num_classes)
-        except Exception:
+        except OSError:
             twins_model = create_model('twins_pcpvt_large',
                                        pretrained=False,
                                        num_classes=num_classes)
@@ -53,7 +53,7 @@ def get_twins_model(twins_type, num_classes):
             twins_model = create_model('twins_svt_small',
                                        pretrained=True,
                                        num_classes=num_classes)
-        except Exception:
+        except OSError:
             twins_model = create_model('twins_svt_small',
                                        pretrained=False,
                                        num_classes=num_classes)
@@ -62,7 +62,7 @@ def get_twins_model(twins_type, num_classes):
             twins_model = create_model('twins_svt_base',
                                        pretrained=True,
                                        num_classes=num_classes)
-        except Exception:
+        except OSError:
             twins_model = create_model('twins_svt_base',
                                        pretrained=False,
                                        num_classes=num_classes)
@@ -71,7 +71,7 @@ def get_twins_model(twins_type, num_classes):
             twins_model = create_model('twins_svt_large',
                                        pretrained=True,
                                        num_classes=num_classes)
-        except Exception:
+        except OSError:
             twins_model = create_model('twins_svt_large',
                                        pretrained=False,
                                        num_classes=num_classes)

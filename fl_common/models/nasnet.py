@@ -22,7 +22,7 @@ def get_nasnet_model(nasnet_type, num_classes):
             nasnet_model = create_model('nasnetalarge',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except Exception:
+        except OSError:
             nasnet_model = create_model('nasnetalarge',
                                         pretrained=False,
                                         num_classes=num_classes)

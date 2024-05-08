@@ -29,7 +29,7 @@ def get_swin_transformer_v2_model(swin_type, num_classes):
             swin_model = create_model('swinv2_tiny_window16_256',
                                       pretrained=True,
                                       num_classes=num_classes)
-        except Exception:
+        except OSError:
             swin_model = create_model('swinv2_tiny_window16_256',
                                       pretrained=False,
                                       num_classes=num_classes)
@@ -38,7 +38,7 @@ def get_swin_transformer_v2_model(swin_type, num_classes):
             swin_model = create_model('swinv2_tiny_window8_256',
                                       pretrained=True,
                                       num_classes=num_classes)
-        except Exception:
+        except OSError:
             swin_model = create_model('swinv2_tiny_window8_256',
                                       pretrained=False,
                                       num_classes=num_classes)
@@ -47,7 +47,7 @@ def get_swin_transformer_v2_model(swin_type, num_classes):
             swin_model = create_model('swinv2_small_window16_256',
                                       pretrained=True,
                                       num_classes=num_classes)
-        except Exception:
+        except OSError:
             swin_model = create_model('swinv2_small_window16_256',
                                       pretrained=False,
                                       num_classes=num_classes)
@@ -56,7 +56,7 @@ def get_swin_transformer_v2_model(swin_type, num_classes):
             swin_model = create_model('swinv2_small_window8_256',
                                       pretrained=True,
                                       num_classes=num_classes)
-        except Exception:
+        except OSError:
             swin_model = create_model('swinv2_small_window8_256',
                                       pretrained=False,
                                       num_classes=num_classes)
@@ -65,7 +65,7 @@ def get_swin_transformer_v2_model(swin_type, num_classes):
             swin_model = create_model('swinv2_base_window16_256',
                                       pretrained=True,
                                       num_classes=num_classes)
-        except Exception:
+        except OSError:
             swin_model = create_model('swinv2_base_window16_256',
                                       pretrained=False,
                                       num_classes=num_classes)
@@ -74,7 +74,7 @@ def get_swin_transformer_v2_model(swin_type, num_classes):
             swin_model = create_model('swinv2_base_window8_256',
                                       pretrained=True,
                                       num_classes=num_classes)
-        except Exception:
+        except OSError:
             swin_model = create_model('swinv2_base_window8_256',
                                       pretrained=False,
                                       num_classes=num_classes)
@@ -83,7 +83,7 @@ def get_swin_transformer_v2_model(swin_type, num_classes):
             swin_model = create_model('swinv2_base_window12_192',
                                       pretrained=True,
                                       num_classes=num_classes)
-        except Exception:
+        except OSError:
             swin_model = create_model('swinv2_base_window12_192',
                                       pretrained=False,
                                       num_classes=num_classes)
@@ -92,7 +92,7 @@ def get_swin_transformer_v2_model(swin_type, num_classes):
             swin_model = create_model('swinv2_base_window12to16_192to256',
                                       pretrained=True,
                                       num_classes=num_classes)
-        except Exception:
+        except OSError:
             swin_model = create_model('swinv2_base_window12to16_192to256',
                                       pretrained=False,
                                       num_classes=num_classes)
@@ -101,7 +101,7 @@ def get_swin_transformer_v2_model(swin_type, num_classes):
             swin_model = create_model('swinv2_base_window12to24_192to384',
                                       pretrained=True,
                                       num_classes=num_classes)
-        except Exception:
+        except OSError:
             swin_model = create_model('swinv2_base_window12to24_192to384',
                                       pretrained=False,
                                       num_classes=num_classes)
@@ -110,7 +110,7 @@ def get_swin_transformer_v2_model(swin_type, num_classes):
             swin_model = create_model('swinv2_large_window12_192',
                                       pretrained=True,
                                       num_classes=num_classes)
-        except Exception:
+        except OSError:
             swin_model = create_model('swinv2_large_window12_192',
                                       pretrained=False,
                                       num_classes=num_classes)
@@ -119,7 +119,7 @@ def get_swin_transformer_v2_model(swin_type, num_classes):
             swin_model = create_model('swinv2_large_window12to16_192to256',
                                       pretrained=True,
                                       num_classes=num_classes)
-        except Exception:
+        except OSError:
             swin_model = create_model('swinv2_large_window12to16_192to256',
                                       pretrained=False,
                                       num_classes=num_classes)
@@ -128,7 +128,7 @@ def get_swin_transformer_v2_model(swin_type, num_classes):
             swin_model = create_model('swinv2_large_window12to24_192to384',
                                       pretrained=True,
                                       num_classes=num_classes)
-        except Exception:
+        except OSError:
             swin_model = create_model('swinv2_large_window12to24_192to384',
                                       pretrained=False,
                                       num_classes=num_classes)

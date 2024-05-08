@@ -30,7 +30,7 @@ def get_vovnet_model(vovnet_type, num_classes):
             vovnet_model = create_model('vovnet39a',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except Exception:
+        except OSError:
             vovnet_model = create_model('vovnet39a',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -39,7 +39,7 @@ def get_vovnet_model(vovnet_type, num_classes):
             vovnet_model = create_model('vovnet57a',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except Exception:
+        except OSError:
             vovnet_model = create_model('vovnet57a',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -48,7 +48,7 @@ def get_vovnet_model(vovnet_type, num_classes):
             vovnet_model = create_model('ese_vovnet19b_slim_dw',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except Exception:
+        except OSError:
             vovnet_model = create_model('ese_vovnet19b_slim_dw',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -57,7 +57,7 @@ def get_vovnet_model(vovnet_type, num_classes):
             vovnet_model = create_model('ese_vovnet19b_dw',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except Exception:
+        except OSError:
             vovnet_model = create_model('ese_vovnet19b_dw',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -66,7 +66,7 @@ def get_vovnet_model(vovnet_type, num_classes):
             vovnet_model = create_model('ese_vovnet19b_slim',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except Exception:
+        except OSError:
             vovnet_model = create_model('ese_vovnet19b_slim',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -75,7 +75,7 @@ def get_vovnet_model(vovnet_type, num_classes):
             vovnet_model = create_model('ese_vovnet39b',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except Exception:
+        except OSError:
             vovnet_model = create_model('ese_vovnet39b',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -84,7 +84,7 @@ def get_vovnet_model(vovnet_type, num_classes):
             vovnet_model = create_model('ese_vovnet57b',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except Exception:
+        except OSError:
             vovnet_model = create_model('ese_vovnet57b',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -93,7 +93,7 @@ def get_vovnet_model(vovnet_type, num_classes):
             vovnet_model = create_model('ese_vovnet99b',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except Exception:
+        except OSError:
             vovnet_model = create_model('ese_vovnet99b',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -102,7 +102,7 @@ def get_vovnet_model(vovnet_type, num_classes):
             vovnet_model = create_model('eca_vovnet39b',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except Exception:
+        except OSError:
             vovnet_model = create_model('eca_vovnet39b',
                                         pretrained=False,
                                         num_classes=num_classes)
@@ -111,7 +111,7 @@ def get_vovnet_model(vovnet_type, num_classes):
             vovnet_model = create_model('ese_vovnet39b_evos',
                                         pretrained=True,
                                         num_classes=num_classes)
-        except Exception:
+        except OSError:
             vovnet_model = create_model('ese_vovnet39b_evos',
                                         pretrained=False,
                                         num_classes=num_classes)

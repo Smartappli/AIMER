@@ -36,63 +36,63 @@ def get_vgg_model(vgg_type, num_classes):
         try:
             weights = models.VGG11_Weights.DEFAULT
             vgg_model = models.vgg11(weights=weights)
-        except Exception:
+        except OSError:
             vgg_model = models.vgg11(weights=None)
     elif vgg_type == 'VGG11_BN':
         torch_vision = True
         try:
             weights = models.VGG11_BN_Weights.DEFAULT
             vgg_model = models.vgg11_bn(weights=weights)
-        except Exception:
+        except OSError:
             vgg_model = models.vgg11_bn(weights=None)
     elif vgg_type == 'VGG13':
         torch_vision = True
         try:
             weights = models.VGG13_Weights.DEFAULT
             vgg_model = models.vgg13(weights=weights)
-        except Exception:
+        except OSError:
             vgg_model = models.vgg13(weights=None)
     elif vgg_type == 'VGG13_BN':
         torch_vision = True
         try:
             weights = models.VGG13_BN_Weights.DEFAULT
             vgg_model = models.vgg13_bn(weights=weights)
-        except Exception:
+        except OSError:
             vgg_model = models.vgg13_bn(weights=None)
     elif vgg_type == 'VGG16':
         torch_vision = True
         try:
             weights = models.VGG16_Weights.DEFAULT
             vgg_model = models.vgg16(weights=weights)
-        except Exception:
+        except OSError:
             vgg_model = models.vgg16(weights=None)
     elif vgg_type == 'VGG16_BN':
         torch_vision = True
         try:
             weights = models.VGG16_BN_Weights.DEFAULT
             vgg_model = models.vgg16_bn(weights=weights)
-        except Exception:
+        except OSError:
             vgg_model = models.vgg16_bn(weights=None)
     elif vgg_type == 'VGG19':
         torch_vision = True
         try:
             weights = models.VGG19_Weights.DEFAULT
             vgg_model = models.vgg19(weights=weights)
-        except Exception:
+        except OSError:
             vgg_model = models.vgg19(weights=None)
     elif vgg_type == 'VGG19_BN':
         torch_vision = True
         try:
             weights = models.VGG19_BN_Weights.DEFAULT
             vgg_model = models.vgg19_bn(weights=weights)
-        except Exception:
+        except OSError:
             vgg_model = models.vgg19_bn(weights=None)
     elif vgg_type == "vgg11":
         try:
             vgg_model = create_model('vgg11',
                                      pretrained=True,
                                      num_classes=num_classes)
-        except Exception:
+        except OSError:
             vgg_model = create_model('vgg11',
                                      pretrained=False,
                                      num_classes=num_classes)
@@ -101,7 +101,7 @@ def get_vgg_model(vgg_type, num_classes):
             vgg_model = create_model('vgg11_bn',
                                      pretrained=True,
                                      num_classes=num_classes)
-        except Exception:
+        except OSError:
             vgg_model = create_model('vgg11_bn',
                                      pretrained=False,
                                      num_classes=num_classes)
@@ -110,7 +110,7 @@ def get_vgg_model(vgg_type, num_classes):
             vgg_model = create_model('vgg13',
                                      pretrained=True,
                                      num_classes=num_classes)
-        except Exception:
+        except OSError:
             vgg_model = create_model('vgg13',
                                      pretrained=False,
                                      num_classes=num_classes)
@@ -119,7 +119,7 @@ def get_vgg_model(vgg_type, num_classes):
             vgg_model = create_model('vgg13_bn',
                                      pretrained=True,
                                      num_classes=num_classes)
-        except Exception:
+        except OSError:
             vgg_model = create_model('vgg13_bn',
                                      pretrained=False,
                                      num_classes=num_classes)
@@ -128,7 +128,7 @@ def get_vgg_model(vgg_type, num_classes):
             vgg_model = create_model('vgg16',
                                      pretrained=True,
                                      num_classes=num_classes)
-        except Exception:
+        except OSError:
             vgg_model = create_model('vgg16',
                                      pretrained=False,
                                      num_classes=num_classes)
@@ -137,7 +137,7 @@ def get_vgg_model(vgg_type, num_classes):
             vgg_model = create_model('vgg16_bn',
                                      pretrained=True,
                                      num_classes=num_classes)
-        except Exception:
+        except OSError:
             vgg_model = create_model('vgg16_bn',
                                      pretrained=False,
                                      num_classes=num_classes)
@@ -146,7 +146,7 @@ def get_vgg_model(vgg_type, num_classes):
             vgg_model = create_model('vgg19',
                                      pretrained=True,
                                      num_classes=num_classes)
-        except Exception:
+        except OSError:
             vgg_model = create_model('vgg19',
                                      pretrained=False,
                                      num_classes=num_classes)
@@ -155,7 +155,7 @@ def get_vgg_model(vgg_type, num_classes):
             vgg_model = create_model('vgg19_bn',
                                      pretrained=True,
                                      num_classes=num_classes)
-        except Exception:
+        except OSError:
             vgg_model = create_model('vgg19_bn',
                                      pretrained=False,
                                      num_classes=num_classes)
