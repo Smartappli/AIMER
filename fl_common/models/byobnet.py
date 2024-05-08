@@ -16,10 +16,11 @@ def get_byobnet_model(byobnet_type, num_classes):
         ValueError: If the specified Byobnet model type is not recognized.
     """
     model_types = [
-        'gernet_l', 'gernet_m', 'gernet_s', 'repvgg_a0', 'repvgg_a1', 'repvgg_a2',
-        'repvgg_b0', 'repvgg_b1', 'repvgg_b1g4', 'repvgg_b2', 'repvgg_b2g4',
-        'repvgg_b3', 'repvgg_b3g4', 'repvgg_d2se', 'resnet51q', 'resnet61q',
-        # Add other model types here
+        'gernet_l', 'gernet_m', 'gernet_s', 'repvgg_a0', 'repvgg_a1', 'repvgg_a2', 'repvgg_b0',
+        'repvgg_b1', 'repvgg_b1g4', 'repvgg_b2', 'repvgg_b2g4', 'repvgg_b3', 'repvgg_b3g4',
+        'repvgg_d2se', 'resnet51q', 'resnet61q', 'resnext26ts', 'gcresnext26ts', 'seresnext26ts',
+        'eca_resnext26ts', 'bat_resnext26ts', 'resnet32ts', 'resnet33ts', 'gcresnet33ts',
+        'seresnet33ts', 'eca_resnet33ts', 'gcresnet50t', 'gcresnext50ts'
     ]
 
     if byobnet_type not in model_types:
