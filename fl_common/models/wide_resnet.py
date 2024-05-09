@@ -17,19 +17,21 @@ def get_wide_resnet_model(wide_resnet_type, num_classes):
     Raises:
         - ValueError: If an unknown Wide ResNet architecture is provided.
     """
-    # Load the pre-trained version of Wide ResNet based on the specified type
-    if wide_resnet_type == 'Wide_ResNet50_2':
+    # Dictionary mapping model types to their corresponding functions and default weights
+    wide_resnet_models = {
+        'Wide_ResNet50_2': (models.wide_resnet50_2, models.Wide_ResNet50_2_Weights),
+        'Wide_ResNet101_2': (models.wide_resnet101_2, models.Wide_ResNet101_2_Weights)
+    }
+
+    # Get the model function and default weights based on the specified type
+    if wide_resnet_type in wide_resnet_models:
+        model_func, weights_class = wide_resnet_models[wide_resnet_type]
         try:
-            weights = models.Wide_ResNet50_2_Weights.DEFAULT
-            wide_resnet_model = models.wide_resnet50_2(weights=weights)
-        except RuntimeError:
-            wide_resnet_model = models.wide_resnet50_2(weights=None)
-    elif wide_resnet_type == 'Wide_ResNet101_2':
-        try:
-            weights = models.Wide_ResNet101_2_Weights.DEFAULT
-            wide_resnet_model = models.wide_resnet101_2(weights=weights)
-        except RuntimeError:
-            wide_resnet_model = models.wide_resnet101_2(weights=None)
+            weights = weights_class.DEFAULT
+            wide_resnet_model = model_func(weights=weights)
+        except RuntimeError as e:
+            print(f"Error loading pretrained model: {e}")
+            wide_resnet_model = model_func(weights=None)
     else:
         raise ValueError(f'Unknown Wide ResNet Architecture: {wide_resnet_type}')
 
