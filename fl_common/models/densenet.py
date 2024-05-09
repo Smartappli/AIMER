@@ -29,7 +29,7 @@ def get_densenet_model(densenet_type, num_classes):
     }
 
     timm_models = [
-        "densenet121", "densenetblur121d", "densenet169", "densenet201", "densenet161", 
+        "densenet121", "densenetblur121d", "densenet169", "densenet201", "densenet161",
         "densenet264d"
     ]
 
