@@ -40,5 +40,5 @@ class ProcessingVisionTransformerSamTestCase(TestCase):
 
         self.assertEqual(
             str(context.exception),
-            f'Unknown Vision Transformer Sam Architecture: {vision_type}'
+            f'Unknown Vision Transformer SAM Architecture: {vision_type}'
         )
