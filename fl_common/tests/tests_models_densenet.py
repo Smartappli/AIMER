@@ -21,7 +21,9 @@ class ProcessingDenseNetTestCase(TestCase):
             AssertionError: If the assertion fails.
         """
         # List of DenseNet architectures to test
-        densenet_types = ['DenseNet121', 'DenseNet161', 'DenseNet169', 'DenseNet201']
+        densenet_types = ['DenseNet121', 'DenseNet161', 'DenseNet169', 'DenseNet201', 'densenet121',
+                          'densenetblur121d', 'densenet169', 'densenet201', 'densenet161',
+                          'densenet264d']
         num_classes = 10  # You can adjust the number of classes as needed
 
         for densenet_type in densenet_types:
