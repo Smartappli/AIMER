@@ -63,7 +63,7 @@ def get_efficientnet_model(efficientnet_type, num_classes):
         "mobilenetv2_110d", "mobilenetv2_120d", "fbnetc_100", "spnasnet_100", "efficientnet_b0",
         "efficientnet_b1", "efficientnet_b2", "efficientnet_b3", "efficientnet_b4",
         "efficientnet_b5", "efficientnet_b6", "efficientnet_b7", "efficientnet_b8",
-        "efficientnet_l2", "efficientnet_b0_gn", "efficientnet_b0_g8_gn", 
+        "efficientnet_l2", "efficientnet_b0_gn", "efficientnet_b0_g8_gn",
         "efficientnet_b0_g16_evos", "efficientnet_b3_gn", "efficientnet_b3_g8_gn",
         "efficientnet_es", "efficientnet_es_pruned", "efficientnet_em", "efficientnet_el",
         "efficientnet_el_pruned", "efficientnet_cc_b0_4e", "efficientnet_cc_b0_8e",
@@ -112,4 +112,3 @@ def get_efficientnet_model(efficientnet_type, num_classes):
         raise ValueError(f'Unknown EfficientNet Architecture: {efficientnet_type}')
 
     return efficientnet_model
-    
