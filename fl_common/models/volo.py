@@ -17,9 +17,8 @@ def get_volo_model(volo_type, num_classes):
     """
     valid_types = {
         'volo_d1_224', 'volo_d1_384', 'volo_d2_224', 'volo_d2_384',
-        'volo_d3_224', 'volo_d3_384', 'volo_a4_224', 'volo_a4_448',
-        'volo_a5_224', 'volo_a5_448', 'volo_a5_512'
-        # Add other supported types here
+        'volo_d3_224', 'volo_d3_448', 'volo_d4_224', 'volo_d4_448',
+        'volo_d5_224', 'volo_d5_448', 'volo_d5_512'
     }
 
     if volo_type not in valid_types:
