@@ -109,7 +109,7 @@ def get_efficientnet_model(efficientnet_type, num_classes):
             print(f"Error loading pretrained model: {e}")
             efficientnet_model = create_model(efficientnet_type, pretrained=False, num_classes=num_classes)
     else:
-        raise ValueError(f'Unknown Efficientnet Architecture: {efficientnet_type}')
+        raise ValueError(f'Unknown EfficientNet Architecture: {efficientnet_type}')
 
     return efficientnet_model
     
