@@ -32,3 +32,10 @@ setuptools==65.5.0 # not directly required, pinned by Snyk to avoid a vulnerabil
 pillow>=10.3.0 # not directly required, pinned by Snyk to avoid a vulnerability
 #llama-cpp-python==0.2.60 --prefer-binary --extra-index-url=https://smartappli.github.io/llama-cpp-python-cuBLAS-wheels/AVX2/cpu
 #llama-cpp-python==0.2.60 --extra-index-url https://abetlen.github.io/llama-cpp-python/whl/cpu
+certifi>=2023.7.22 # not directly required, pinned by Snyk to avoid a vulnerability
+cryptography>=42.0.2 # not directly required, pinned by Snyk to avoid a vulnerability
+gitpython>=3.1.41 # not directly required, pinned by Snyk to avoid a vulnerability
+idna>=3.7 # not directly required, pinned by Snyk to avoid a vulnerability
+jinja2>=3.1.4 # not directly required, pinned by Snyk to avoid a vulnerability
+paramiko>=3.4.0 # not directly required, pinned by Snyk to avoid a vulnerability
+requests>=2.31.0 # not directly required, pinned by Snyk to avoid a vulnerability
