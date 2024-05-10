@@ -26,7 +26,7 @@ def get_maxvit_model(maxvit_type, num_classes):
     timm_models = [
         "coatnet_pico_rw_224", "coatnet_nano_rw_224", "coatnet_0_rw_224", "coatnet_1_rw_224",
         "coatnet_2_rw_224", "coatnet_3_rw_224", "coatnet_bn_0_rw_224", "coatnet_rmlp_nano_rw_224",
-        "coatnet_rmlp_0_rw_224", "coatnet_rmlp_1_rw_224", "coatnet_rmlp_1_rw2_224", 
+        "coatnet_rmlp_0_rw_224", "coatnet_rmlp_1_rw_224", "coatnet_rmlp_1_rw2_224",
         "coatnet_rmlp_2_rw_224", "coatnet_rmlp_2_rw_384", "coatnet_rmlp_3_rw_224",
         "coatnet_nano_cc_224", "coatnext_nano_rw_224", "coatnet_0_224", "coatnet_1_224",
         "coatnet_2_224", "coatnet_3_224", "coatnet_4_224", "coatnet_5_224", "maxvit_pico_rw_256",
