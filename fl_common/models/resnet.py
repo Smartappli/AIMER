@@ -62,7 +62,7 @@ def get_resnet_model(resnet_type, num_classes):
         "resnetrs50", "resnetrs101", "resnetrs152", "resnetrs270", "resnetrs350",
         "resnetrs420"
     ]
-    
+
     # Check if the vision type is from torchvision
     if resnet_type in torchvision_models:
         model_func, weights_class = torchvision_models[resnet_type]
