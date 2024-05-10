@@ -20,10 +20,10 @@ def get_convnext_model(convnext_type, num_classes):
     """
     # Mapping of vision types to their corresponding torchvision models and weights
     torchvision_models = {
-        'ConvNeXt_Tiny': (models.convnext_tiny, models.ConvNeXt_Tiny_Weights.DEFAULTs),
-        'ConvNeXt_Small': (models.convnext_small, models.ConvNeXt_Small_Weights.DEFAULT),
-        'ConvNeXt_Base': (models.convnext_base, models.ConvNeXt_Base_Weights.DEFAULT),
-        'ConvNeXt_Large': (models.convnext_large, models.ConvNeXt_Large_Weights.DEFAULT)
+        'ConvNeXt_Tiny': (models.convnext_tiny, models.ConvNeXt_Tiny_Weights),
+        'ConvNeXt_Small': (models.convnext_small, models.ConvNeXt_Small_Weights),
+        'ConvNeXt_Base': (models.convnext_base, models.ConvNeXt_Base_Weights),
+        'ConvNeXt_Large': (models.convnext_large, models.ConvNeXt_Large_Weights)
     }
 
     timm_models = [
