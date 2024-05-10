@@ -43,7 +43,7 @@ def get_convnext_model(convnext_type, num_classes):
         except RuntimeError as e:
             print(f"{convnext_type} - Error loading pretrained model: {e}")
             convnext_model = model_func(weights=None)
-            
+
         # Modify last layer to suit number of classes
         for layer in reversed(convnext_model.classifier):
             if isinstance(layer, nn.Linear):
