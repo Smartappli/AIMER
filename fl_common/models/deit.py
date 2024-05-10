@@ -30,5 +30,5 @@ def get_deit_model(deit_type, num_classes):
     try:
         return create_model(deit_type, pretrained=True, num_classes=num_classes)
     except RuntimeError as e:
-        print(f"Error loading pretrained model: {e}")
+        print(f"{deit_type} - Error loading pretrained model: {e}")
         return create_model(deit_type, pretrained=False, num_classes=num_classes)
