@@ -43,10 +43,13 @@ def get_convnext_model(convnext_type, num_classes):
         except RuntimeError as e:
             print(f"{convnext_type} - Error loading pretrained model: {e}")
             convnext_model = model_func(weights=None)
-
+            
         # Modify last layer to suit number of classes
-        num_features = convnext_model.classifier.in_features
-        convnext_model.classifier = nn.Linear(num_features, num_classes)
+        for layer in reversed(convnext_model.classifier):
+            if isinstance(layer, nn.Linear):
+                # num_features = layer.in_features
+                layer.out_features = num_classes
+                break
 
     # Check if the vision type is from the 'timm' library
     elif convnext_type in timm_models:
