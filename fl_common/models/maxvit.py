@@ -57,11 +57,11 @@ def get_maxvit_model(maxvit_type, num_classes):
         maxvit_model.classifier[-1] = nn.Linear(num_features, num_classes)
 
     # Check if the vision type is from the 'timm' library
-    elif convnext_type in timm_models:
+    elif maxvit_type in timm_models:
         try:
             maxvit_model = create_model(maxvit_type, pretrained=True, num_classes=num_classes)
         except RuntimeError as e:
-            print(f"{maxvitt_type} - Error loading pretrained model: {e}")
+            print(f"{maxvit_type} - Error loading pretrained model: {e}")
             maxvit_model = create_model(maxvit_type, pretrained=False, num_classes=num_classes)
     else:
         raise ValueError(f'Unknown MaxVit Architecture: {maxvit_type}')
