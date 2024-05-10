@@ -17,281 +17,48 @@ def get_convnext_model(convnext_type, num_classes):
 
     Raises:
     - ValueError: If the provided convnext_type is not recognized or the model structure is not as expected.
-
-    Note:
-    - This function loads a pre-trained ConvNeXt model and modifies its last fully connected layer to
-      match the specified number of output classes.
-
-    Example Usage:
-    ```python
-    # Obtain a ConvNeXt model with 10 output classes
-    model = get_convnext_model(convnext_type='ConvNeXt_Small', num_classes=10)
-    ```
     """
     torch_vision = False
-    # Load the pre-trained version of DenseNet
-    if convnext_type == 'ConvNeXt_Tiny':
-        torch_vision = True
+    # Mapping of vision types to their corresponding torchvision models and weights
+    torchvision_models = {
+        'ConvNeXt_Tiny': (models.convnext_tiny, models.ConvNeXt_Tiny_Weights.DEFAULTs),
+        'ConvNeXt_Small': (models.convnext_small, models.ConvNeXt_Small_Weights.DEFAULT),
+        'ConvNeXt_Base': (models.convnext_base, models.ConvNeXt_Base_Weights.DEFAULT),
+        'ConvNeXt_Large': ( models.convnext_large, models.ConvNeXt_Large_Weights.DEFAULT)
+    }
+
+
+    timm_models = [
+        "convnext_atto", "convnext_atto_ols", "convnext_femto", "convnext_femto_ols", "convnext_pico",
+        "convnext_pico_ols", "convnext_nano", "convnext_nano_ols", "convnext_tiny_hnf", "convnext_tiny",
+        "convnext_small", "convnext_base", "convnext_large", "convnext_large_mlp", "convnext_xlarge",
+        "convnext_xxlarge", "convnextv2_atto", "convnextv2_femto", "convnextv2_pico", "convnextv2_nano",
+        "convnextv2_small", "convnextv2_tiny", "convnextv2_base", "convnextv2_large", "convnextv2_huge",
+        
+    ]
+
+    # Check if the vision type is from torchvision
+    if convnext_type in torchvision_models:
+        model_func, weights_class = torchvision_models[convnext_type]
         try:
-            weights = models.ConvNeXt_Tiny_Weights.DEFAULT
-            convnext_model = models.convnext_tiny(weights=weights)
-        except RuntimeError:
-            convnext_model = models.convnext_tiny(weghts=None)
-    elif convnext_type == 'ConvNeXt_Small':
-        torch_vision = True
+            weights = weights_class.DEFAULT
+            convnext_model = model_func(weights=weights)
+        except RuntimeError as e:
+            print(f"{convnext_type} - Error loading pretrained model: {e}")
+            convnext_model = model_func(weights=None)
+
+        # Modify last layer to suit number of classes
+        num_features = convnext_model.classifier.in_features
+        convnext_model.classifier = nn.Linear(num_features, num_classes)
+
+    # Check if the vision type is from the 'timm' library
+    elif convnext_type in timm_models:
         try:
-            weights = models.ConvNeXt_Small_Weights.DEFAULT
-            convnext_model = models.convnext_small(weights=weights)
-        except RuntimeError:
-            convnext_model = models.convnext_small(weghts=None)
-    elif convnext_type == 'ConvNeXt_Base':
-        torch_vision = True
-        try:
-            weights = models.ConvNeXt_Base_Weights.DEFAULT
-            convnext_model = models.convnext_base(weights=weights)
-        except RuntimeError:
-            convnext_model = models.convnext_base(weghts=None)
-    elif convnext_type == 'ConvNeXt_Large':
-        torch_vision = True
-        try:
-            weights = models.ConvNeXt_Large_Weights.DEFAULT
-            convnext_model = models.convnext_large(weights=weights)
-        except RuntimeError:
-            convnext_model = models.convnext_large(weight=None)
-    elif convnext_type == "convnext_atto":
-        try:
-            convnext_model = create_model('convnext_atto',
-                                          pretrained=True,
-                                          num_classes=num_classes)
-        except RuntimeError:
-            convnext_model = create_model('convnext_atto',
-                                          pretrained=False,
-                                          num_classes=num_classes)
-    elif convnext_type == "convnext_atto_ols":
-        try:
-            convnext_model = create_model('convnext_atto_ols',
-                                          pretrained=True,
-                                          num_classes=num_classes)
-        except RuntimeError:
-            convnext_model = create_model('convnext_atto_ols',
-                                          pretrained=False,
-                                          num_classes=num_classes)
-    elif convnext_type == "convnext_femto":
-        try:
-            convnext_model = create_model('convnext_femto',
-                                          pretrained=True,
-                                          num_classes=num_classes)
-        except RuntimeError:
-            convnext_model = create_model('convnext_femto',
-                                          pretrained=False,
-                                          num_classes=num_classes)
-    elif convnext_type == "convnext_femto_ols":
-        try:
-            convnext_model = create_model('convnext_femto_ols',
-                                          pretrained=True,
-                                          num_classes=num_classes)
-        except RuntimeError:
-            convnext_model = create_model('convnext_femto_ols',
-                                          pretrained=False,
-                                          num_classes=num_classes)
-    elif convnext_type == "convnext_pico":
-        try:
-            convnext_model = create_model('convnext_pico',
-                                          pretrained=True,
-                                          num_classes=num_classes)
-        except RuntimeError:
-            convnext_model = create_model('convnext_pico',
-                                          pretrained=False,
-                                          num_classes=num_classes)
-    elif convnext_type == "convnext_pico_ols":
-        try:
-            convnext_model = create_model('convnext_pico_ols',
-                                          pretrained=True,
-                                          num_classes=num_classes)
-        except RuntimeError:
-            convnext_model = create_model('convnext_pico_ols',
-                                          pretrained=False,
-                                          num_classes=num_classes)
-    elif convnext_type == "convnext_nano":
-        try:
-            convnext_model = create_model('convnext_nano',
-                                          pretrained=True,
-                                          num_classes=num_classes)
-        except RuntimeError:
-            convnext_model = create_model('convnext_nano',
-                                          pretrained=False,
-                                          num_classes=num_classes)
-    elif convnext_type == "convnext_nano_ols":
-        try:
-            convnext_model = create_model('convnext_nano_ols',
-                                          pretrained=True,
-                                          num_classes=num_classes)
-        except RuntimeError:
-            convnext_model = create_model('convnext_nano_ols',
-                                          pretrained=False,
-                                          num_classes=num_classes)
-    elif convnext_type == "convnext_tiny_hnf":
-        try:
-            convnext_model = create_model('convnext_tiny_hnf',
-                                          pretrained=True,
-                                          num_classes=num_classes)
-        except RuntimeError:
-            convnext_model = create_model('convnext_tiny_hnf',
-                                          pretrained=False,
-                                          num_classes=num_classes)
-    elif convnext_type == "convnext_tiny":
-        try:
-            convnext_model = create_model('convnext_tiny',
-                                          pretrained=True,
-                                          num_classes=num_classes)
-        except RuntimeError:
-            convnext_model = create_model('convnext_tiny',
-                                          pretrained=False,
-                                          num_classes=num_classes)
-    elif convnext_type == "convnext_small":
-        try:
-            convnext_model = create_model('convnext_small',
-                                          pretrained=True,
-                                          num_classes=num_classes)
-        except RuntimeError:
-            convnext_model = create_model('convnext_small',
-                                          pretrained=False,
-                                          num_classes=num_classes)
-    elif convnext_type == "convnext_base":
-        try:
-            convnext_model = create_model('convnext_base',
-                                          pretrained=True,
-                                          num_classes=num_classes)
-        except RuntimeError:
-            convnext_model = create_model('convnext_base',
-                                          pretrained=False,
-                                          num_classes=num_classes)
-    elif convnext_type == "convnext_large":
-        try:
-            convnext_model = create_model('convnext_large',
-                                          pretrained=True,
-                                          num_classes=num_classes)
-        except RuntimeError:
-            convnext_model = create_model('convnext_large',
-                                          pretrained=False,
-                                          num_classes=num_classes)
-    elif convnext_type == "convnext_large_mlp":
-        try:
-            convnext_model = create_model('convnext_large_mlp',
-                                          pretrained=True,
-                                          num_classes=num_classes)
-        except RuntimeError:
-            convnext_model = create_model('convnext_large_mlp',
-                                          pretrained=False,
-                                          num_classes=num_classes)
-    elif convnext_type == "convnext_xlarge":
-        try:
-            convnext_model = create_model('convnext_xlarge',
-                                          pretrained=True,
-                                          num_classes=num_classes)
-        except RuntimeError:
-            convnext_model = create_model('convnext_xlarge',
-                                          pretrained=False,
-                                          num_classes=num_classes)
-    elif convnext_type == "convnext_xxlarge":
-        try:
-            convnext_model = create_model('convnext_xxlarge',
-                                          pretrained=True,
-                                          num_classes=num_classes)
-        except RuntimeError:
-            convnext_model = create_model('convnext_xxlarge',
-                                          pretrained=False,
-                                          num_classes=num_classes)
-    elif convnext_type == "convnextv2_atto":
-        try:
-            convnext_model = create_model('convnextv2_atto',
-                                          pretrained=True,
-                                          num_classes=num_classes)
-        except RuntimeError:
-            convnext_model = create_model('convnextv2_atto',
-                                          pretrained=False,
-                                          num_classes=num_classes)
-    elif convnext_type == "convnextv2_femto":
-        try:
-            convnext_model = create_model('convnextv2_femto',
-                                          pretrained=True,
-                                          num_classes=num_classes)
-        except RuntimeError:
-            convnext_model = create_model('convnextv2_femto',
-                                          pretrained=False,
-                                          num_classes=num_classes)
-    elif convnext_type == "convnextv2_pico":
-        try:
-            convnext_model = create_model('convnextv2_pico',
-                                          pretrained=True,
-                                          num_classes=num_classes)
-        except RuntimeError:
-            convnext_model = create_model('convnextv2_pico',
-                                          pretrained=False,
-                                          num_classes=num_classes)
-    elif convnext_type == "convnextv2_nano":
-        try:
-            convnext_model = create_model('convnextv2_nano',
-                                          pretrained=True,
-                                          num_classes=num_classes)
-        except RuntimeError:
-            convnext_model = create_model('convnextv2_nano',
-                                          pretrained=False,
-                                          num_classes=num_classes)
-    elif convnext_type == "convnextv2_tiny":
-        try:
-            convnext_model = create_model('convnextv2_tiny',
-                                          pretrained=True,
-                                          num_classes=num_classes)
-        except RuntimeError:
-            convnext_model = create_model('convnextv2_tiny',
-                                          pretrained=False,
-                                          num_classes=num_classes)
-    elif convnext_type == "convnextv2_small":
-        try:
-            convnext_model = create_model('convnextv2_small',
-                                          pretrained=True,
-                                          num_classes=num_classes)
-        except RuntimeError:
-            convnext_model = create_model('convnextv2_small',
-                                          pretrained=False,
-                                          num_classes=num_classes)
-    elif convnext_type == "convnextv2_base":
-        try:
-            convnext_model = create_model('convnextv2_base',
-                                          pretrained=True,
-                                          num_classes=num_classes)
-        except RuntimeError:
-            convnext_model = create_model('convnextv2_base',
-                                          pretrained=False,
-                                          num_classes=num_classes)
-    elif convnext_type == "convnextv2_large":
-        try:
-            convnext_model = create_model('convnextv2_large',
-                                          pretrained=True,
-                                          num_classes=num_classes)
-        except RuntimeError:
-            convnext_model = create_model('convnextv2_large',
-                                          pretrained=False,
-                                          num_classes=num_classes)
-    elif convnext_type == "convnextv2_huge":
-        try:
-            convnext_model = create_model('convnextv2_huge',
-                                          pretrained=True,
-                                          num_classes=num_classes)
-        except RuntimeError:
-            convnext_model = create_model('convnextv2_huge',
-                                          pretrained=False,
-                                          num_classes=num_classes)
+            convnext_model = create_model(convnext_type, pretrained=True, num_classes=num_classes)
+        except RuntimeError as e:
+            print(f"{convnext_type} - Error loading pretrained model: {e}")
+            convnext_model = create_model(convnext_type, pretrained=False, num_classes=num_classes)
     else:
         raise ValueError(f'Unknown ConvNeXt Architecture : {convnext_type}')
-
-    if torch_vision:
-        # Modify last layer to suit number of classes
-        for layer in reversed(convnext_model.classifier):
-            if isinstance(layer, nn.Linear):
-                # num_features = layer.in_features
-                layer.out_features = num_classes
-                break
 
     return convnext_model
