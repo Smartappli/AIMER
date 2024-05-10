@@ -40,7 +40,7 @@ def get_densenet_model(densenet_type, num_classes):
             weights = weights_class.DEFAULT
             densenet_model = model_func(weights=weights)
         except RuntimeError as e:
-            print(f"Error loading pretrained model: {e}")
+            print(f"{densenet_type} - Error loading pretrained model: {e}")
             densenet_model = model_func(weights=None)
 
         # Modify last layer to suit number of classes
@@ -52,7 +52,7 @@ def get_densenet_model(densenet_type, num_classes):
         try:
             densenet_model = create_model(densenet_type, pretrained=True, num_classes=num_classes)
         except RuntimeError as e:
-            print(f"Error loading pretrained model: {e}")
+            print(f"{densenet_type} - Error loading pretrained model: {e}")
             densenet_model = create_model(densenet_type, pretrained=False, num_classes=num_classes)
     else:
         raise ValueError(f'Unknown DenseNet Architecture : {densenet_type}')
