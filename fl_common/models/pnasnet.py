@@ -1,7 +1,7 @@
 from timm import create_model
 
 
-def get_pnasnet_model(pnasnet_type: str, num_classes: int) -> nn.Module:
+def get_pnasnet_model(pnasnet_type, num_classes):
     """
     Get a PNASNet model based on the specified architecture type.
     """
