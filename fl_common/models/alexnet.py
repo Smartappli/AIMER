@@ -24,7 +24,8 @@ def get_alexnet_model(alexnet_type, num_classes):
         try:
             weights = models.AlexNet_Weights.DEFAULT
             alexnet_model = models.alexnet(weights=weights)
-        except RuntimeError:
+        except RuntimeError as e:
+            print(f"{alexnet_type} - Error loading pretrained model: {e}")
             alexnet_model = models.alexnet(weights=None)
     else:
         raise ValueError(f'Unknown AlexNet Architecture: {alexnet_type}')
