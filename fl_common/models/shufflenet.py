@@ -1,6 +1,7 @@
 import torch.nn as nn
 from torchvision import models
 
+
 def get_shufflenet_model(shufflenet_type, num_classes):
     """
     Load a pre-trained ShuffleNet model of the specified type and modify its
