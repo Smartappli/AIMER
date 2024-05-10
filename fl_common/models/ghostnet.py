@@ -26,5 +26,5 @@ def get_ghostnet_model(ghostnet_type, num_classes):
     try:
         return create_model(ghostnet_type, pretrained=True, num_classes=num_classes)
     except RuntimeError as e:
-        print(f"Error loading pretrained model: {e}")
+        print(f"{ghostnet_type} - Error loading pretrained model: {e}")
         return create_model(ghostnet_type, pretrained=False, num_classes=num_classes)
