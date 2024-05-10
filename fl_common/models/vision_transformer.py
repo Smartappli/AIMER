@@ -64,7 +64,7 @@ def get_vision_transformer_model(vision_type, num_classes):
             weights = weights_class.DEFAULT
             vision_model = model_func(weights=weights)
         except RuntimeError as e:
-            print(f"Error loading pretrained model: {e}")
+            print(f"{vision_type} - Error loading pretrained model: {e}")
             vision_model = model_func(weights=None)
 
         # Replace the last layer with a new linear layer with the specified number of classes
@@ -76,7 +76,7 @@ def get_vision_transformer_model(vision_type, num_classes):
         try:
             vision_model = create_model(vision_type, pretrained=True, num_classes=num_classes)
         except RuntimeError as e:
-            print(f"Error loading pretrained model: {e}")
+            print(f"{vision_type} - Error loading pretrained model: {e}")
             vision_model = create_model(vision_type, pretrained=False, num_classes=num_classes)
     else:
         raise ValueError(f'Unknown Vision Transformer Architecture: {vision_type}')
