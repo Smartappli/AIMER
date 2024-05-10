@@ -30,5 +30,5 @@ def get_mlp_mixer_model(mlp_mixer_type, num_classes):
     try:
         return create_model(mlp_mixer_type, pretrained=True, num_classes=num_classes)
     except RuntimeError as e:
-        print(f"Error loading pretrained model: {e}")
+        print(f"{mlp_mixer_type} - Error loading pretrained model: {e}")
         return create_model(mlp_mixer_type, pretrained=False, num_classes=num_classes)
