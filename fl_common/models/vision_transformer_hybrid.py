@@ -31,5 +31,5 @@ def get_vision_transformer_hybrid_model(vision_transformer_hybrid_type, num_clas
     try:
         return create_model(vision_transformer_hybrid_type, pretrained=True, num_classes=num_classes)
     except RuntimeError as e:
-        print(f"Error loading pretrained model: {e}")
+        print(f"{vision_transformer_hybrid_type} - Error loading pretrained model: {e}")
         return create_model(vision_transformer_hybrid_type, pretrained=False, num_classes=num_classes)
