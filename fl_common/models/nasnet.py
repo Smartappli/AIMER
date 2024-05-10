@@ -1,5 +1,6 @@
 from timm import create_model
 
+
 def get_nasnet_model(nasnet_type, num_classes):
     """
     Get a NASNet model.
