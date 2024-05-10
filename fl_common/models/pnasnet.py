@@ -1,31 +1,17 @@
 from timm import create_model
 
-
-def get_pnasnet_model(pnasnet_type, num_classes):
+def get_pnasnet_model(pnasnet_type: str, num_classes: int) -> nn.Module:
     """
     Get a PNASNet model based on the specified architecture type.
-
-    Args:
-        pnasnet_type (str): The type of PNASNet architecture. It can be one of the following:
-            - 'pnasnet5large': PNASNet-5 architecture.
-        num_classes (int): The number of output classes.
-
-    Returns:
-        torch.nn.Module: The PNASNet model.
-
-    Raises:
-        ValueError: If an unknown PNASNet architecture type is specified.
     """
-    if pnasnet_type == 'pnasnet5large':
-        try:
-            pnasnet_model = create_model('pnasnet5large',
-                                         pretrained=True,
-                                         num_classes=num_classes)
-        except RuntimeError:
-            pnasnet_model = create_model('pnasnet5large',
-                                         pretrained=False,
-                                         num_classes=num_classes)
-    else:
+    # Validate the architecture type
+    valid_types = ['pnasnet5large']
+    if pnasnet_type not in valid_types:
         raise ValueError(f'Unknown Pnasnet Architecture: {pnasnet_type}')
 
-    return pnasnet_model
+    # Attempt to create the model with pretrained weights
+    try:
+        return create_model(pnasnet_type, pretrained=True, num_classes=num_classes)
+    except RuntimeError as e:
+        print(f"{pnasnet_type} - Error loading pretrained model: {e}")
+        return create_model(pnasnet_type, pretrained=False, num_classes=num_classes)
