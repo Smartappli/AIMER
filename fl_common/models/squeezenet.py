@@ -1,6 +1,7 @@
 import torch.nn as nn
 from torchvision import models
 
+
 def get_squeezenet_model(squeezenet_type, num_classes):
     """
     Returns a modified SqueezeNet model based on the specified type.
