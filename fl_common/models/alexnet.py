@@ -1,6 +1,7 @@
 import torch.nn as nn
 from torchvision import models
 
+
 def get_alexnet_model(alexnet_type, num_classes):
     """
     Load a pre-trained AlexNet model of the specified type and modify its
