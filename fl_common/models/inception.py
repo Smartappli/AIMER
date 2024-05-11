@@ -41,9 +41,9 @@ def get_inception_model(inception_type, num_classes):
             print(f"{inception_type} - Error loading pretrained model: {e}")
             inception_model = model_func(weights=None)
 
-        # Modify last layer to suit number of classes
-        num_features = inception_model.classifier.in_features
-        inception_model.classifier = nn.Linear(num_features, num_classes)
+        # Modify the last layer to suit the given number of classes
+        num_features = inception_model.fc.in_features
+        inception_model.fc = nn.Linear(num_features, num_classes)
 
     # Check if the vision type is from the 'timm' library
     elif inception_type in timm_models:
