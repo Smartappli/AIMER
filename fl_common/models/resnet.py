@@ -38,7 +38,7 @@ def get_resnet_model(resnet_type, num_classes):
         'ResNet34': (models.resnet_small, models.ResNet34_Weights),
         'ResNet50': (models.resnet50, models.ResNet50_Weights),
         'ResNet101': (models.resnet101, models.ResNet101_Weights),
-        'ResNet152': (models.resnet152, models.ResNet152_Weights)        
+        'ResNet152': (models.resnet152, models.ResNet152_Weights)
     }
 
     timm_models = [
