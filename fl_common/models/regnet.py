@@ -67,6 +67,6 @@ def get_regnet_model(regnet_type, num_classes):
             print(f"{regnet_type} - Error loading pretrained model: {e}")
             regnet_model = create_model(regnet_type, pretrained=False, num_classes=num_classes)
     else:
-        raise ValueError(f'Unknown ConvNeXt Architecture : {regnet_type}')
+        raise ValueError(f'Unknown Regnet Architecture : {regnet_type}')
 
     return regnet_model
