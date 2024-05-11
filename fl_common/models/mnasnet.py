@@ -23,7 +23,8 @@ def get_mnasnet_model(mnasnet_type: str, num_classes: int) -> nn.Module:
     try:
         weights = weight_classes[mnasnet_type].DEFAULT
         mnasnet_model = getattr(models.mnasnet, mnasnet_type.lower())(weights=weights)
-    except RuntimeError:
+    except RuntimeError as e:
+        print(f"{mnasnet_type} - Error loading pretrained model: {e}")
         mnasnet_model = getattr(models.mnasnet, mnasnet_type.lower())(weights=None)
 
     # Modify the last layer
