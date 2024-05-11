@@ -1,6 +1,7 @@
 import torch.nn as nn
 from torchvision import models
 
+
 def get_googlenet_model(googlenet_type, num_classes):
     """
     Load a pre-trained GoogLeNet model of the specified type and modify its
