@@ -346,7 +346,7 @@ def get_family_model_e(model_type, num_classes):
         'eva02_base_patch16_clip_224': get_eva_model, 'eva02_large_patch14_clip_224': get_eva_model,
         'eva02_large_patch14_clip_336': get_eva_model, 'eva02_enormous_patch14_clip_224': get_eva_model,
     }
-    
+
     if model_type not in model_retrieval_functions:
         raise ValueError(f"Unknown model_type provided: {model_type}")
 
@@ -404,7 +404,7 @@ def get_family_model_g(model_type, num_classes):
         'gcvit_xxtiny': get_gcvit_model, 'gcvit_xtiny': get_gcvit_model,
         'gcvit_tiny': get_gcvit_model, 'gcvit_small': get_gcvit_model,
         'gcvit_base': get_gcvit_model, 'ghostnet_050': get_ghostnet_model,
-        'ghostnet_100': get_ghostnet_model, 'ghostnet_130': get_ghostnet_model, 
+        'ghostnet_100': get_ghostnet_model, 'ghostnet_130': get_ghostnet_model,
         'ghostnetv2_100': get_ghostnet_model, 'ghostnetv2_130': get_ghostnet_model,
         'ghostnetv2_160': get_ghostnet_model, 'GoogLeNet': get_googlenet_model,
     }
@@ -528,7 +528,7 @@ def get_family_model_m(model_type, num_classes):
         'coatnext_nano_rw_224': get_maxvit_model, 'coatnet_0_224': get_maxvit_model,
         'coatnet_1_224': get_maxvit_model, 'coatnet_2_224': get_maxvit_model, 'coatnet_3_224': get_maxvit_model,
         'coatnet_4_224': get_maxvit_model, 'coatnet_5_224': get_maxvit_model, 'maxvit_pico_rw_256': get_maxvit_model,
-        'maxvit_nano_rw_256': get_maxvit_model, 'maxvit_tiny_rw_224': get_maxvit_model, 
+        'maxvit_nano_rw_256': get_maxvit_model, 'maxvit_tiny_rw_224': get_maxvit_model,
         'maxvit_tiny_rw_256': get_maxvit_model, 'maxvit_rmlp_pico_rw_256': get_maxvit_model,
         'maxvit_rmlp_nano_rw_256': get_maxvit_model, 'maxvit_rmlp_tiny_rw_256': get_maxvit_model,
         'maxvit_rmlp_small_rw_224': get_maxvit_model, 'maxvit_rmlp_small_rw_256': get_maxvit_model,
@@ -800,7 +800,7 @@ def get_family_model_s(model_type, num_classes):
         'legacy_seresnext50_32x4d': get_senet_model, 'legacy_seresnext101_32x4d': get_senet_model, 'sequencer2d_s': get_sequencer_model,
         'sequencer2d_m': get_sequencer_model, 'sequencer2d_l': get_sequencer_model, 'ShuffleNet_V2_X0_5': get_shufflenet_model,
         'ShuffleNet_V2_X1_0': get_shufflenet_model, 'ShuffleNet_V2_X1_5': get_shufflenet_model, 'ShuffleNet_V2_X2_0': get_shufflenet_model,
-        'skresnet18': get_sknet_model, 'skresnet34': get_sknet_model, 'skresnet50': get_sknet_model, 'skresnet50d': get_sknet_model, 
+        'skresnet18': get_sknet_model, 'skresnet34': get_sknet_model, 'skresnet50': get_sknet_model, 'skresnet50d': get_sknet_model,
         'skresnext50_32x4d': get_sknet_model, 'SqueezeNet1_0': get_squeezenet_model, 'SqueezeNet1_1': get_squeezenet_model,
         'Swin_T': get_swin_transformer_model, 'Swin_S': get_swin_transformer_model, 'Swin_B': get_swin_transformer_model,
         'Swin_V2_T': get_swin_transformer_model, 'Swin_V2_S': get_swin_transformer_model, 'Swin_V2_B': get_swin_transformer_model,
