@@ -151,7 +151,7 @@ def get_family_model_b(model_type, num_classes):
     if model_type in model_retrieval_functions:
         return model_retrieval_functions[model_type](model_type, num_classes)
     else:
-        raise ValueError("Unknown model_type provided: {}".format(model_type))
+        raise ValueError(f"Unknown model_type provided: {model_type}")
 
 
 def get_family_model_c(model_type, num_classes):
@@ -259,7 +259,7 @@ def get_family_model_c(model_type, num_classes):
     }
 
     if model_type not in model_retrieval_functions:
-        raise ValueError("Unknown model_type provided")
+        raise ValueError(f"Unknown model_type provided: {model_type}")
 
     return model_retrieval_functions[model_type](model_type, num_classes)
 
@@ -333,7 +333,7 @@ def get_family_model_d(model_type, num_classes):
     }
 
     if model_type not in model_retrieval_functions:
-        raise ValueError("Unknown model_type provided")
+        raise ValueError(f"Unknown model_type provided: {model_type}")
 
     return model_retrieval_functions[model_type](model_type, num_classes)
 
@@ -435,7 +435,7 @@ def get_family_model_e(model_type, num_classes):
     if model_type in model_retrieval_functions:
         return model_retrieval_functions[model_type](model_type, num_classes)
     else:
-        raise ValueError("Unknown model_type provided: {}".format(model_type))
+        raise ValueError(f"Unknown model_type provided: {model_type}")
 
 
 def get_family_model_f(model_type, num_classes):
@@ -475,7 +475,7 @@ def get_family_model_f(model_type, num_classes):
     }
 
     if model_type not in model_retrieval_functions:
-        raise ValueError("Unknown model_type provided")
+        raise ValueError(f"Unknown model_type provided: {model_type}")
 
     return model_retrieval_functions[model_type](model_type, num_classes)
 
@@ -510,7 +510,7 @@ def get_family_model_g(model_type, num_classes):
     }
 
     if model_type not in model_retrieval_functions:
-        raise ValueError("Unknown model_type provided")
+        raise ValueError(f"Unknown model_type provided: {model_type}")
 
     return model_retrieval_functions[model_type](model_type, num_classes)
 
@@ -560,7 +560,7 @@ def get_family_model_h(model_type, num_classes):
     }
 
     if model_type not in model_retrieval_functions:
-        raise ValueError("Unknown model_type provided")
+        raise ValueError(f"Unknown model_type provided: {model_type}")
 
     return model_retrieval_functions[model_type](model_type, num_classes)
 
@@ -589,7 +589,7 @@ def get_family_model_i(model_type, num_classes):
     }
 
     if model_type not in model_retrieval_functions:
-        raise ValueError("Unknown model_type provided")
+        raise ValueError(f"Unknown model_type provided: {model_type}")
 
     return model_retrieval_functions[model_type](model_type, num_classes)
 
@@ -632,7 +632,7 @@ def get_family_model_l(model_type, num_classes):
     }
 
     if model_type not in model_retrieval_functions:
-        raise ValueError("Unknown model_type provided")
+        raise ValueError(f"Unknown model_type provided: {model_type}")
 
     return model_retrieval_functions[model_type](model_type, num_classes)
 
@@ -790,7 +790,7 @@ def get_family_model_m(model_type, num_classes):
     }
 
     if model_type not in model_retrieval_functions:
-        raise ValueError("Unknown model_type provided")
+        raise ValueError(f"Unknown model_type provided: {model_type}")
 
     return model_retrieval_functions[model_type](model_type, num_classes)
 
@@ -858,7 +858,7 @@ def get_family_model_n(model_type, num_classes):
     }
 
     if model_type not in model_retrieval_functions:
-        raise ValueError("Unknown model_type provided")
+        raise ValueError(f"Unknown model_type provided: {model_type}")
 
     return model_retrieval_functions[model_type](model_type, num_classes)
 
@@ -897,7 +897,7 @@ def get_family_model_p(model_type, num_classes):
     }
 
     if model_type not in model_retrieval_functions:
-        raise ValueError("Unknown model_type provided")
+        raise ValueError(f"Unknown model_type provided: {model_type}")
 
     return model_retrieval_functions[model_type](model_type, num_classes)
 
@@ -1114,7 +1114,7 @@ def get_family_model_r(model_type, num_classes):
     if model_type in model_retrieval_functions:
         return model_retrieval_functions[model_type](model_type, num_classes)
     else:
-        raise ValueError("Unknown model_type provided: {}".format(model_type))
+        raise ValueError(f"Unknown model_type provided: {model_type}")
 
 
 def get_family_model_s(model_type, num_classes):
@@ -1209,7 +1209,7 @@ def get_family_model_s(model_type, num_classes):
     if model_type in model_retrieval_functions:
         return model_retrieval_functions[model_type](model_type, num_classes)
     else:
-        raise ValueError("Unknown model_type provided: {}".format(model_type))
+        raise ValueError(f"Unknown model_type provided: {model_type}")
 
 
 def get_family_model_t(model_type, num_classes):
@@ -1250,7 +1250,7 @@ def get_family_model_t(model_type, num_classes):
     if model_type in model_retrieval_functions:
         return model_retrieval_functions[model_type](model_type, num_classes)
     else:
-        raise ValueError("Unknown model_type provided: {}".format(model_type))
+        raise ValueError(f"Unknown model_type provided: {model_type}")
 
 
 def get_family_model_v(model_type, num_classes):
@@ -1284,24 +1284,27 @@ def get_family_model_v(model_type, num_classes):
         "vit_base_patch16_224": get_vision_transformer_model, "vit_base_patch16_384": get_vision_transformer_model,
         "vit_base_patch8_224": get_vision_transformer_model, "vit_large_patch32_224": get_vision_transformer_model,
         "vit_large_patch32_384": get_vision_transformer_model, "vit_large_patch16_224": get_vision_transformer_model,
-        "vit_large_patch16_384": get_vision_transformer_model, "vit_large_patch14_224": get_vision_transformer_model,
-        "vit_large_patch14_224": get_vision_transformer_model, "vit_giant_patch14_224": get_vision_transformer_model,
-        "vit_gigantic_patch14_224": get_vision_transformer_model, "vit_base_patch16_224_miil": get_vision_transformer_model,
-        "vit_medium_patch16_gap_240": get_vision_transformer_model, "vit_medium_patch16_gap_256": get_vision_transformer_model,
-        "vit_medium_patch16_gap_384": get_vision_transformer_model, "vit_base_patch16_gap_224": get_vision_transformer_model,
-        "vit_huge_patch14_gap_224": get_vision_transformer_model, "vit_huge_patch16_gap_448": get_vision_transformer_model,
-        "vit_giant_patch16_gap_224": get_vision_transformer_model, "vit_xsmall_patch16_clip_224": get_vision_transformer_model,
-        "vit_medium_patch32_clip_224": get_vision_transformer_model, "vit_medium_patch16_clip_224": get_vision_transformer_model,
-        "vit_betwixt_patch32_clip_224": get_vision_transformer_model, "vit_base_patch32_clip_224": get_vision_transformer_model,
-        "vit_base_patch32_clip_256": get_vision_transformer_model, "vit_base_patch32_clip_384": get_vision_transformer_model,
-        "vit_base_patch32_clip_448": get_vision_transformer_model, "vit_base_patch16_clip_224": get_vision_transformer_model,
-        "vit_base_patch16_clip_384": get_vision_transformer_model, "vit_large_patch14_clip_224": get_vision_transformer_model,
-        "vit_large_patch14_clip_336": get_vision_transformer_model, "vit_huge_patch14_clip_224": get_vision_transformer_model,
-        "vit_huge_patch14_clip_336": get_vision_transformer_model, "vit_huge_patch14_clip_378": get_vision_transformer_model,
-        "vit_giant_patch14_clip_224": get_vision_transformer_model, "vit_gigantic_patch14_clip_224": get_vision_transformer_model,
-        "vit_base_patch32_clip_quickgelu_224": get_vision_transformer_model, "vit_base_patch16_clip_quickgelu_224": get_vision_transformer_model,
-        "vit_large_patch14_clip_quickgelu_224": get_vision_transformer_model, "vit_large_patch14_clip_quickgelu_336": get_vision_transformer_model,
-        "vit_huge_patch14_clip_quickgelu_224": get_vision_transformer_model, "vit_huge_patch14_clip_quickgelu_378": get_vision_transformer_model,
+        "vit_large_patch16_384": get_vision_transformer_model, "vit_large_patch14_224": get_vision_transformer_model, 
+        "vit_giant_patch14_224": get_vision_transformer_model, "vit_gigantic_patch14_224": get_vision_transformer_model,
+        "vit_base_patch16_224_miil": get_vision_transformer_model, "vit_medium_patch16_gap_240": get_vision_transformer_model,
+        "vit_medium_patch16_gap_256": get_vision_transformer_model, "vit_medium_patch16_gap_384": get_vision_transformer_model,
+        "vit_base_patch16_gap_224": get_vision_transformer_model, "vit_huge_patch14_gap_224": get_vision_transformer_model,
+        "vit_huge_patch16_gap_448": get_vision_transformer_model, "vit_giant_patch16_gap_224": get_vision_transformer_model,
+        "vit_xsmall_patch16_clip_224": get_vision_transformer_model, "vit_medium_patch32_clip_224": get_vision_transformer_model,
+        "vit_medium_patch16_clip_224": get_vision_transformer_model, "vit_betwixt_patch32_clip_224": get_vision_transformer_model,
+        "vit_base_patch32_clip_224": get_vision_transformer_model, "vit_base_patch32_clip_256": get_vision_transformer_model,
+        "vit_base_patch32_clip_384": get_vision_transformer_model, "vit_base_patch32_clip_448": get_vision_transformer_model,
+        "vit_base_patch16_clip_224": get_vision_transformer_model, "vit_base_patch16_clip_384": get_vision_transformer_model,
+        "vit_large_patch14_clip_224": get_vision_transformer_model, "vit_large_patch14_clip_336": get_vision_transformer_model,
+        "vit_huge_patch14_clip_224": get_vision_transformer_model, "vit_huge_patch14_clip_336": get_vision_transformer_model,
+        "vit_huge_patch14_clip_378": get_vision_transformer_model, "vit_giant_patch14_clip_224": get_vision_transformer_model,
+        "vit_gigantic_patch14_clip_224": get_vision_transformer_model,
+        "vit_base_patch32_clip_quickgelu_224": get_vision_transformer_model,
+        "vit_base_patch16_clip_quickgelu_224": get_vision_transformer_model,
+        "vit_large_patch14_clip_quickgelu_224": get_vision_transformer_model,
+        "vit_large_patch14_clip_quickgelu_336": get_vision_transformer_model,
+        "vit_huge_patch14_clip_quickgelu_224": get_vision_transformer_model,
+        "vit_huge_patch14_clip_quickgelu_378": get_vision_transformer_model,
         "vit_base_patch32_plus_256": get_vision_transformer_model, "vit_base_patch16_plus_240": get_vision_transformer_model,
         "vit_base_patch16_rpn_224": get_vision_transformer_model, "vit_small_patch16_36x1_224": get_vision_transformer_model,
         "vit_small_patch16_18x2_224": get_vision_transformer_model, "vit_base_patch16_18x2_224": get_vision_transformer_model,
@@ -1318,14 +1321,13 @@ def get_family_model_v(model_type, num_classes):
         "vit_large_patch16_siglip_256": get_vision_transformer_model, "vit_large_patch16_siglip_384": get_vision_transformer_model,
         "vit_so400m_patch14_siglip_224": get_vision_transformer_model, "vit_so400m_patch14_siglip_384": get_vision_transformer_model,
         "vit_medium_patch16_reg4_gap_256": get_vision_transformer_model, "vit_base_patch16_reg4_gap_256": get_vision_transformer_model,
-        "vit_so150m_patch16_reg4_map_256": get_vision_transformer_model, "vit_so150m_patch16_reg4_gap_256": get_vision_transformer_model,
         "vit_so150m_patch16_reg4_map_256": get_vision_transformer_model, "vit_so150m_patch16_reg4_gap_256": get_vision_transformer_model
     }
 
     if model_type in model_retrieval_functions:
         return model_retrieval_functions[model_type](model_type, num_classes)
     else:
-        raise ValueError("Unknown model_type provided: {}".format(model_type))
+        raise ValueError(f"Unknown model_type provided: {model_type}")
 
 
 def get_family_model_w(model_type, num_classes):
@@ -1350,7 +1352,7 @@ def get_family_model_w(model_type, num_classes):
     if model_type in model_mapping:
         return model_mapping[model_type](model_type, num_classes)
     else:
-        raise ValueError("Unknown model_type: {}".format(model_type))
+        raise ValueError(f"Unknown model_type provided: {model_type}")
 
 
 def get_family_model_x(model_type, num_classes):
@@ -1408,7 +1410,7 @@ def get_family_model_x(model_type, num_classes):
     if model_type in model_mapping:
         return model_mapping[model_type](model_type, num_classes)
     else:
-        raise ValueError("Unknown model_type: {}".format(model_type))
+        raise ValueError(f"Unknown model_type provided: {model_type}")
 
 
 def get_family_model(model_type, num_classes):
