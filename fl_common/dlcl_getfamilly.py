@@ -106,74 +106,17 @@ def get_family_model_a(model_type, num_classes):
 
 def get_family_model_b(model_type, num_classes):
     """
-    Retourne un modèle appartenant à l'une des familles de modèles spécifiées, selon le type spécifié.
+    Retrieves a model from various families based on the provided model_type.
 
     Args:
-        model_type (str): Le type de modèle à récupérer. Doit être l'un des suivants:
-
-            Pour les modèles BEiT (Bottleneck Transformers):
-            - 'beit_base_patch16_224'
-            - 'beit_base_patch16_384'
-            - 'beit_large_patch16_224'
-            - 'beit_large_patch16_384'
-            - 'beit_large_patch16_512'
-            - 'beitv2_base_patch16_224'
-            - 'beitv2_large_patch16_224'
-
-            Pour les modèles Byoanet :
-            - 'botnet26t_256'
-            - 'sebotnet33ts_256'
-            - 'botnet50ts_256'
-            - 'eca_botnext26ts_256'
-            - 'halonet_h1'
-            - 'halonet26t'
-            - 'sehalonet33ts'
-            - 'halonet50ts'
-            - 'eca_halonext26ts'
-            - 'lambda_resnet26t'
-            - 'lambda_resnet50ts'
-            - 'lambda_resnet26rpt_256'
-            - 'haloregnetz_b'
-            - 'lamhalobotnet50ts_256'
-            - 'halo2botnet50ts_256'
-
-            Pour les modèles Byobnet :
-            - 'gernet_l'
-            - 'gernet_m'
-            - 'gernet_s'
-            - 'repvgg_a0'
-            - 'repvgg_a1'
-            - 'repvgg_a2'
-            - 'repvgg_b0'
-            - 'repvgg_b1'
-            - 'repvgg_b1g4'
-            - 'repvgg_b2'
-            - 'repvgg_b2g4'
-            - 'repvgg_b3'
-            - 'repvgg_b3g4'
-            - 'repvgg_d2se'
-            - 'resnet51q'
-            - 'resnet61q'
-            - 'resnext26ts'
-            - 'gcresnext26ts'
-            - 'seresnext26ts'
-            - 'eca_resnext26ts'
-            - 'bat_resnext26ts'
-            - 'resnet32ts'
-            - 'resnet33ts'
-            - 'gcresnet33ts'
-            - 'seresnet33ts'
-            - 'eca_resnet33ts'
-            - 'gcresnet50t'
-            - 'gcresnext50ts'
-
-        num_classes (int): Le nombre de classes pour la tâche de classification.
+        model_type (str): Type of the model to retrieve.
+        num_classes (int): Number of output classes for the model.
 
     Returns:
-        torch.nn.Module: Le modèle correspondant au type spécifié.
+        str: The retrieved model.
 
     Raises:
-        ValueError: Si le type de modèle spécifié n'est pas reconnu.
+        ValueError: If an unknown model_type is provided.
     """
     model = "Unknown"
 
@@ -201,40 +144,17 @@ def get_family_model_b(model_type, num_classes):
 
 def get_family_model_c(model_type, num_classes):
     """
-    Selects and returns a model from a family of different architectures based on the provided model type.
+    Retrieves a model from various families based on the provided model_type.
 
-    Parameters:
-        model_type (str): The type of model to retrieve. It can be one of the following:
-                          - For CAIT models: ['cait_xxs24_224', 'cait_xxs24_384', 'cait_xxs36_224', 'cait_xxs36_384',
-                                               'cait_xs24_384', 'cait_s24_224', 'cait_s24_384', 'cait_s36_224',
-                                               'cait_m36_224', 'cait_m48_448']
-                          - For COAT models: ['coat_tiny', 'coat_mini', 'coat_small', 'coat_lite_tiny',
-                                               'coat_lite_mini', 'coat_lite_small', 'coat_lite_medium',
-                                               'coat_lite_medium_384']
-                          - For Convmixer models: ['convmixer_1536_20', 'convmixer_768_32',
-                                                    'convmixer_1024_20_ks9_p14']
-                          - For Convit models: ['convit_tiny', 'convit_small', 'convit_base']
-                          - For ConvNeXt models: ['ConvNeXt_Tiny', 'ConvNeXt_Small', 'ConvNeXt_Base',
-                                                   'ConvNeXt_Large']
-                          - For Crossvit models: ['crossvit_tiny_240', 'rossvit_small_240', 'crossvit_base_240',
-                                                   'crossvit_9_240', 'crossvit_15_240', 'crossvit_18_240',
-                                                   'crossvit_9_dagger_240', 'rossvit_15_dagger_240',
-                                                   'crossvit_15_dagger_408', 'crossvit_18_dagger_240',
-                                                   'crossvit_18_dagger_408']
-                          - For CSPNet models: ["cspresnet50", "cspresnet50d", "cspresnet50w", "cspresnext50",
-                                                "cspdarknet53", "darknet17", "darknet21", "sedarknet21",
-                                                "darknet53", "darknetaa53", "cs3darknet_s", "cs3darknet_m",
-                                                "cs3darknet_l", "cs3darknet_x", "cs3darknet_focus_s",
-                                                "cs3darknet_focus_m", "cs3darknet_focus_l", "cs3darknet_focus_x",
-                                                "cs3sedarknet_l", "cs3sedarknet_x", "cs3sedarknet_xdw",
-                                                "cs3edgenet_x", "cs3se_edgenet_x"]
-        num_classes (int): The number of classes for the final classification layer.
+    Args:
+        model_type (str): Type of the model to retrieve.
+        num_classes (int): Number of output classes for the model.
 
     Returns:
-        torch.nn.Module: The selected model instance.
+        str: The retrieved model.
 
     Raises:
-        ValueError: If the specified model type is unknown.
+        ValueError: If an unknown model_type is provided.
     """
     model = "Unknown"
 
@@ -272,25 +192,17 @@ def get_family_model_c(model_type, num_classes):
 
 def get_family_model_d(model_type, num_classes):
     """
-    Get a model from the family of models including Davit, DeiT, DenseNet, DLA, and DPN.
+    Retrieves a model from various families based on the provided model_type.
 
-    Parameters:
-        model_type (str): Type of the model. Options include:
-            - For Davit: 'davit_tiny', 'davit_small', 'davit_base', 'davit_large', 'davit_huge', 'davit_giant'
-            - For DeiT: 'deit_tiny_patch16_224', 'deit_small_patch16_224', 'deit_base_patch16_224',
-                        'deit_base_patch16_384', 'deit_tiny_distilled_patch16_224', 'deit_small_distilled_patch16_224',
-                        'deit_base_distilled_patch16_224', 'deit_base_distilled_patch16_384', 'deit3_small_patch16_224',
-                        'deit3_small_patch16_384', 'deit3_medium_patch16_224', 'deit3_base_patch16_224',
-                        'deit3_base_patch16_384', 'deit3_large_patch16_224', 'deit3_large_patch16_384',
-                        'deit3_huge_patch14_224'
-            - For DenseNet: 'DenseNet121', 'DenseNet161', 'DenseNet169', 'DenseNet201'
-            - For DLA: 'dla60_res2net', 'dla60_res2next', 'dla34', 'dla46_c', 'dla46x_c', 'dla60x_c', 'dla60', 'dla60x',
-                       'dla102', 'dla102x', 'dla102x2', 'dla169'
-            - For DPN: 'dpn48b', 'dpn68', 'dpn68b', 'dpn92', 'dpn98', 'dpn131', 'dpn107'
-        num_classes (int): Number of output classes.
+    Args:
+        model_type (str): Type of the model to retrieve.
+        num_classes (int): Number of output classes for the model.
 
     Returns:
-        torch.nn.Module: The selected model.
+        str: The retrieved model.
+
+    Raises:
+        ValueError: If an unknown model_type is provided.
     """
     model = "Unknown"
 
@@ -317,32 +229,17 @@ def get_family_model_d(model_type, num_classes):
 
 def get_family_model_e(model_type, num_classes):
     """
-    Get a model of the specified type.
+    Retrieves a model from various families based on the provided model_type.
 
-    Parameters:
-        model_type (str): Type of model to retrieve.
-                          Choices:
-                              - For EdgeNext: 'edgenext_xx_small', 'edgenext_x_small', 'edgenext_small',
-                                              'edgenext_base', 'edgenext_small_rw'.
-                              - For Efficientformer: 'efficientformer_l1', 'efficientformer_l3', 'efficientformer_l7'.
-                              - For EfficientNet: 'EfficientNetB0', 'EfficientNetB1', 'EfficientNetB2',
-                                                  'EfficientNetB3', 'EfficientNetB4', 'EfficientNetB5',
-                                                  'EfficientNetB6', 'EfficientNetB7', 'EfficientNetV2S',
-                                                  'EfficientNetV2M', 'EfficientNetV2L'.
-                              - For Eva: 'eva_giant_patch14_224', 'eva_giant_patch14_336', 'eva_giant_patch14_560',
-                                         'eva02_tiny_patch14_224', 'eva02_small_patch14_224', 'eva02_base_patch14_224',
-                                         'eva02_large_patch14_224', 'eva02_tiny_patch14_336', 'eva02_small_patch14_336',
-                                         'eva02_base_patch14_448', 'eva02_large_patch14_448',
-                                         'eva_giant_patch14_clip_224', 'eva02_base_patch16_clip_224',
-                                         'eva02_large_patch14_clip_224', 'eva02_large_patch14_clip_336',
-                                         'eva02_enormous_patch14_clip_224'.
-        num_classes (int): Number of classes for the classification task.
+    Args:
+        model_type (str): Type of the model to retrieve.
+        num_classes (int): Number of output classes for the model.
 
     Returns:
-        model: The requested model instance.
+        str: The retrieved model.
 
     Raises:
-        ValueError: If the specified model_type is not one of the supported architectures.
+        ValueError: If an unknown model_type is provided.
     """
     model = "Unknown"
 
@@ -401,19 +298,17 @@ def get_family_model_e(model_type, num_classes):
 
 def get_family_model_f(model_type, num_classes):
     """
-    Get a model from the family of models including FastViT and FocalNet.
+    Retrieves a model from various families based on the provided model_type.
 
-    Parameters:
-        model_type (str): Type of the model. Options include:
-            - For FastViT: 'fastvit_t8', 'fastvit_t12', 'fastvit_s12', 'fastvit_sa12', 'fastvit_sa24', 'fastvit_sa36',
-                           'fastvit_ma36'
-            - For FocalNet: 'focalnet_tiny_srf', 'focalnet_small_srf', 'focalnet_base_srf', 'focalnet_tiny_lrf',
-                            'focalnet_small_lrf', 'focalnet_base_lrf', 'focalnet_large_fl3', 'focalnet_large_fl4',
-                            'focalnet_xlarge_fl3', 'focalnet_xlarge_fl4', 'focalnet_huge_fl3', 'focalnet_huge_fl4'
-        num_classes (int): Number of output classes.
+    Args:
+        model_type (str): Type of the model to retrieve.
+        num_classes (int): Number of output classes for the model.
 
     Returns:
-        torch.nn.Module: The selected model.
+        str: The retrieved model.
+
+    Raises:
+        ValueError: If an unknown model_type is provided.
     """
     model = "Unknown"
 
@@ -429,18 +324,17 @@ def get_family_model_f(model_type, num_classes):
 
 def get_family_model_g(model_type, num_classes):
     """
-    Get a model from the family of models including GCViT, GhostNet, and GoogLeNet.
+    Retrieves a model from various families based on the provided model_type.
 
-    Parameters:
-        model_type (str): Type of the model. Options include:
-            - For GCViT: 'gcvit_xxtiny', 'gcvit_xtiny', 'gcvit_tiny', 'gcvit_small', 'gcvit_base'
-            - For GhostNet: 'ghostnet_050', 'ghostnet_100', 'ghostnet_130', 'ghostnetv2_100', 'ghostnetv2_130',
-                            'ghostnetv2_160'
-            - For GoogLeNet: 'GoogLeNet'
-        num_classes (int): Number of output classes.
+    Args:
+        model_type (str): Type of the model to retrieve.
+        num_classes (int): Number of output classes for the model.
 
     Returns:
-        torch.nn.Module: The selected model.
+        str: The retrieved model.
+
+    Raises:
+        ValueError: If an unknown model_type is provided.
     """
     model = "Unknown"
 
@@ -456,20 +350,17 @@ def get_family_model_g(model_type, num_classes):
 
 def get_family_model_h(model_type, num_classes):
     """
-    Get a model from the family of models including HardcoreNAS, HGNet, and HRNet.
+    Retrieves a model from various families based on the provided model_type.
 
-    Parameters:
-        model_type (str): Type of the model. Options include:
-            - For HardcoreNAS: 'hardcorenas_a', 'hardcorenas_b', 'hardcorenas_c', 'hardcorenas_d', 'hardcorenas_e',
-                               'hardcorenas_f'
-            - For HGNet: 'hgnet_tiny', 'hgnet_small', 'hgnet_base', 'hgnetv2_b0', 'hgnetv2_b1', 'hgnetv2_b2',
-                         'hgnetv2_b3', 'hgnetv2_b4', 'hgnetv2_b5', 'hgnetv2_b6'
-            - For HRNet: 'hrnet_w18_small', 'hrnet_w18_small_v2', 'hrnet_w18', 'hrnet_w30', 'hrnet_w32', 'hrnet_w40',
-                         'hrnet_w44', 'hrnet_w48', 'hrnet_w64', 'hrnet_w18_ssld', 'hrnet_w48_ssld'
-        num_classes (int): Number of output classes.
+    Args:
+        model_type (str): Type of the model to retrieve.
+        num_classes (int): Number of output classes for the model.
 
     Returns:
-        torch.nn.Module: The selected model.
+        str: The retrieved model.
+
+    Raises:
+        ValueError: If an unknown model_type is provided.
     """
     model = "Unknown"
 
@@ -487,17 +378,17 @@ def get_family_model_h(model_type, num_classes):
 
 def get_family_model_i(model_type, num_classes):
     """
-    Retrieves a model belonging to family I based on the provided model type and number of classes.
+    Retrieves a model from various families based on the provided model_type.
 
-    Parameters:
-    - model_type (str): The type of model to retrieve. Should be one of the supported models:
-                        - For Inception models: ['Inception_V3', 'inception_v4', 'inception_resnet_v2']
-                        - For InceptionNext models: ['inception_next_tiny', 'inception_next_small',
-                                                      'inception_next_base']
-    - num_classes (int): The number of classes for the model.
+    Args:
+        model_type (str): Type of the model to retrieve.
+        num_classes (int): Number of output classes for the model.
 
     Returns:
-    - model: The requested model if available, otherwise 'Unknown'.
+        str: The retrieved model.
+
+    Raises:
+        ValueError: If an unknown model_type is provided.
     """
     model = "Unknown"
 
@@ -511,19 +402,17 @@ def get_family_model_i(model_type, num_classes):
 
 def get_family_model_l(model_type, num_classes):
     """
-    Retrieves a model belonging to family L based on the provided model type and number of classes.
+    Retrieves a model from various families based on the provided model_type.
 
-    Parameters:
-    - model_type (str): The type of model to retrieve. Should be one of the supported models:
-                        - For LeViT models: ['levit_128s', 'levit_128', 'levit_192', 'levit_256', 'levit_384',
-                                             'levit_384_s8', 'levit_512_s8', 'levit_512', 'levit_256d', 'levit_512d',
-                                             'levit_conv_128s', 'levit_conv_128', 'levit_conv_192', 'levit_conv_256',
-                                             'levit_conv_384', 'levit_conv_384_s8', 'levit_conv_512_s8', 'levit_conv_512',
-                                             'levit_conv_256d', 'levit_conv_512d']
-    - num_classes (int): The number of classes for the model.
+    Args:
+        model_type (str): Type of the model to retrieve.
+        num_classes (int): Number of output classes for the model.
 
     Returns:
-    - model: The requested model if available, otherwise 'Unknown'.
+        str: The retrieved model.
+
+    Raises:
+        ValueError: If an unknown model_type is provided.
     """
     model = "Unknown"
 
@@ -538,34 +427,17 @@ def get_family_model_l(model_type, num_classes):
 
 def get_family_model_m(model_type, num_classes):
     """
-    Create and return an instance of a specified deep learning model architecture.
+    Retrieves a model from various families based on the provided model_type.
 
     Args:
-    - model_type (str): The type of model architecture to create. It should be one of the following:
-        - 'MaxVit_T' for MaxVit architecture.
-        - 'MNASNet0_5', 'MNASNet0_75', 'MNASNet1_0', 'MNASNet1_3' for MNASNet architectures.
-        - 'poolformer_s12', 'poolformer_s24', 'poolformer_s36', 'poolformer_m36', 'poolformer_m48',
-          'poolformerv2_s12', 'poolformerv2_s24', 'poolformerv2_s36', 'poolformerv2_m36',
-          'poolformerv2_m48', 'convformer_s18', 'convformer_s36', 'convformer_m36', 'convformer_b36',
-          'caformer_s18', 'caformer_s36', 'caformer_m36', 'caformer_b36' for Poolformer, Convformer,
-          CAformer architectures.
-        - 'mixer_s32_224', 'mixer_s16_224', 'mixer_b32_224', 'mixer_b16_224', 'mixer_l32_224',
-          'mixer_l16_224', 'gmixer_12_224', 'gmixer_24_224', 'resmlp_12_224', 'resmlp_24_224',
-          'resmlp_36_224', 'resmlp_big_24_224', 'gmlp_ti16_224', 'gmlp_s16_224', 'gmlp_b16_224'
-          for MLP-Mixer architectures.
-        - 'MobileNet_V2', 'MobileNet_V3_Small', 'MobileNet_V3_Large' for MobileNet architectures.
-        - 'mobilevit_xxs', 'mobilevit_xs', 'mobilevit_s', 'mobilevitv2_050', 'mobilevitv2_075',
-          'mobilevitv2_100', 'mobilevitv2_125', 'mobilevitv2_150', 'mobilevitv2_175', 'mobilevitv2_200'
-          for MobileViT architectures.
-        - 'mvitv2_tiny', 'mvitv2_small', 'mvitv2_base', 'mvitv2_large', 'mvitv2_small_cls',
-          'mvitv2_base_cls', 'mvitv2_large_cls', 'mvitv2_huge_cls' for MViTv2 architectures.
-    - num_classes (int): The number of output classes for the model.
+        model_type (str): Type of the model to retrieve.
+        num_classes (int): Number of output classes for the model.
 
     Returns:
-    - torch.nn.Module: An instance of the specified deep learning model architecture.
+        str: The retrieved model.
 
     Raises:
-    - ValueError: If an unknown model architecture type is specified.
+        ValueError: If an unknown model_type is provided.
     """
     model = "Unknown"
 
@@ -615,22 +487,17 @@ def get_family_model_m(model_type, num_classes):
 
 def get_family_model_n(model_type, num_classes):
     """
-    Get a model from the 'N' family based on the specified model type.
+    Retrieves a model from various families based on the provided model_type.
 
     Args:
-        model_type (str): The type of model from the 'N' family. It can be one of the following:
-            - 'nasnetalarge': NASNet-A Large model.
-            - 'nest_base', 'nest_small', 'nest_tiny', 'nest_base_jx', 'nest_small_jx', 'nest_tiny_jx':
-              Various NEST architectures.
-            - 'nextvit_small', 'nextvit_base', 'nextvit_large': NEXTVIT architectures.
-            - 'dm_nfnet_f0' to 'nf_ecaresnet101': Different architectures from the NFNet family.
-        num_classes (int): The number of output classes.
+        model_type (str): Type of the model to retrieve.
+        num_classes (int): Number of output classes for the model.
 
     Returns:
-        torch.nn.Module: The selected model from the 'N' family.
+        str: The retrieved model.
 
     Raises:
-        ValueError: If an unknown model type is specified.
+        ValueError: If an unknown model_type is provided.
     """
     model = "Unknown"
 
@@ -652,21 +519,17 @@ def get_family_model_n(model_type, num_classes):
 
 def get_family_model_p(model_type, num_classes):
     """
-    Get a model from the family of models including PIT, PNASNet, and PVTv2.
+    Retrieves a model from various families based on the provided model_type.
 
     Args:
-        model_type (str): The type of the model architecture.
-            - For PIT: 'pit_b_224', 'pit_s_224', 'pit_xs_224', 'pit_ti_224', 'pit_b_distilled_224',
-              'pit_s_distilled_224', 'pit_xs_distilled_224', 'pit_ti_distilled_224'
-            - For PNASNet: 'pnasnet5large'
-            - For PVTv2: 'pvt_v2_b0', 'pvt_v2_b1', 'pvt_v2_b2', 'pvt_v2_b3', 'pvt_v2_b4', 'pvt_v2_b5', 'pvt_v2_b2_li'
-        num_classes (int): The number of output classes.
+        model_type (str): Type of the model to retrieve.
+        num_classes (int): Number of output classes for the model.
 
     Returns:
-        torch.nn.Module: The requested model.
+        str: The retrieved model.
 
     Raises:
-        ValueError: If the specified model_type is unknown.
+        ValueError: If an unknown model_type is provided.
     """
     model = "Unknown"
 
@@ -682,28 +545,17 @@ def get_family_model_p(model_type, num_classes):
 
 def get_family_model_r(model_type, num_classes):
     """
-    Returns a model based on the provided model type and number of classes.
+    Retrieves a model from various families based on the provided model_type.
 
     Args:
-    - model_type (str): The type of model. It should be one of the following:
-        - For RegNet models: 'RegNet_X_400MF', 'RegNet_X_800MF', 'RegNet_X_1_6GF', 'RegNet_X_3_2GF', 'RegNet_X_16GF',
-                             'RegNet_Y_400MF', 'RegNet_Y_800MF', 'RegNet_Y_1_6GF', 'RegNet_Y_3_2GF', 'RegNet_Y_16GF'
-        - For RepGhost models: 'repghostnet_050', 'repghostnet_058', 'repghostnet_080', 'repghostnet_100', 'repghostnet_111',
-                               'repghostnet_130', 'repghostnet_150', 'repghostnet_200'
-        - For RepVIT models: 'repvit_m1', 'repvit_m2', 'repvit_m3', 'repvit_m0_9', 'repvit_m1_0', 'repvit_m1_1',
-                              'repvit_m1_5', 'repvit_m2_3'
-        - For Res2Net models: 'res2net50_26w_4s', 'res2net101_26w_4s', 'res2net50_26w_6s', 'res2net50_26w_8s',
-                               'res2net50_48w_2s', 'res2net50_14w_8s', 'res2next50', 'res2net50d', 'res2net101d'
-        - For ResNet models: 'ResNet18', 'ResNet34', 'ResNet50', 'ResNet101', 'ResNet152', 'ResNeXt50_32X4D',
-                              'ResNeXt101_32X4D', 'ResNeXt101_64X4D'
-        - For ResNeXt models: 'ResNeXt50_32X4D', 'ResNeXt101_32X8D', 'ResNeXt101_64X4D'
-    - num_classes (int): The number of output classes for the model.
+        model_type (str): Type of the model to retrieve.
+        num_classes (int): Number of output classes for the model.
 
     Returns:
-    - model: The model instantiated based on the specified architecture.
+        str: The retrieved model.
 
     Raises:
-    - ValueError: If the provided model_type is not recognized.
+        ValueError: If an unknown model_type is provided.
     """
     model = "Unknown"
 
@@ -760,27 +612,17 @@ def get_family_model_r(model_type, num_classes):
 
 def get_family_model_s(model_type, num_classes):
     """
-    Create and return an instance of a specified deep learning model architecture.
+    Retrieves a model from various families based on the provided model_type.
 
     Args:
-    - model_type (str): The type of model architecture to create. It should be one of the following:
-        - 'selecsls42', 'selecsls42b', 'selecsls60', 'selecsls60b', 'selecsls84' for SelecSLS architectures.
-        - 'legacy_seresnet18', 'legacy_seresnet34', 'legacy_seresnet50', 'legacy_seresnet101',
-          'legacy_seresnet152', 'legacy_senet154', 'legacy_seresnext26_32x4d',
-          'legacy_seresnext50_32x4d', 'legacy_seresnext101_32x4d' for Legacy SEResNet and SENet architectures.
-        - 'sequencer2d_s', 'sequencer2d_m', 'sequencer2d_l' for Sequencer2D architectures.
-        - 'ShuffleNet_V2_X0_5', 'ShuffleNet_V2_X1_0', 'ShuffleNet_V2_X1_5', 'ShuffleNet_V2_X2_0'
-          for ShuffleNetV2 architectures.
-        - 'skresnet18', 'skresnet34', 'skresnet50', 'skresnet50d', 'skresnext50_32x4d' for SKNet architectures.
-        - 'SqueezeNet1_0', 'SqueezeNet1_1' for SqueezeNet architectures.
-        - 'Swin_T', 'Swin_S', 'Swin_B', 'Swin_V2_T', 'Swin_V2_S', 'Swin_V2_B' for Swin Transformer architectures.
-    - num_classes (int): The number of output classes for the model.
+        model_type (str): Type of the model to retrieve.
+        num_classes (int): Number of output classes for the model.
 
     Returns:
-    - torch.nn.Module: An instance of the specified deep learning model architecture.
+        str: The retrieved model.
 
     Raises:
-    - ValueError: If an unknown model architecture type is specified.
+        ValueError: If an unknown model_type is provided.
     """
     model = "Unknown"
 
@@ -819,23 +661,17 @@ def get_family_model_s(model_type, num_classes):
 
 def get_family_model_t(model_type, num_classes):
     """
-    Create and return an instance of a specified deep learning model architecture.
+    Retrieves a model from various families based on the provided model_type.
 
     Args:
-    - model_type (str): The type of model architecture to create. It should be one of the following:
-        - 'tiny_vit_5m_224', 'tiny_vit_11m_224', 'tiny_vit_21m_224', 'tiny_vit_21m_384', 'tiny_vit_21m_512'
-        for TinyViT architectures.
-        - 'tnt_s_patch16_224', 'tnt_b_patch16_224' for TNT architectures.
-        - 'tresnet_m', 'tresnet_l', 'tresnet_xl', 'tresnet_v2_l' for TResNet architectures.
-        - 'twins_pcpvt_small', 'twins_pcpvt_base', 'twins_pcpvt_large', 'twins_svt_small',
-          'twins_svt_base', 'twins_svt_large' for Twins architectures.
-    - num_classes (int): The number of output classes for the model.
+        model_type (str): Type of the model to retrieve.
+        num_classes (int): Number of output classes for the model.
 
     Returns:
-    - torch.nn.Module: An instance of the specified deep learning model architecture.
+        str: The retrieved model.
 
     Raises:
-    - ValueError: If an unknown model architecture type is specified.
+        ValueError: If an unknown model_type is provided.
     """
     model = "Unknown"
 
@@ -854,23 +690,17 @@ def get_family_model_t(model_type, num_classes):
 
 def get_family_model_v(model_type, num_classes):
     """
-    Retrieves a model belonging to family V based on the provided model type and number of classes.
+    Retrieves a model from various families based on the provided model_type.
 
-    Parameters:
-    - model_type (str): The type of model to retrieve. Should be one of the supported models:
-                        - For VGG models: ['VGG11', 'VGG11_BN', 'VGG13', 'VGG13_BN', 'VGG16', 'VGG16_BN', 'VGG19',
-                                          'VGG19_BN']
-                        - For Vision Transformer models: ['ViT_B_16', 'ViT_B_32', 'ViT_L_16', 'ViT_L_32', 'ViT_H_14']
-                        - For VOLO models: ['volo_d1_224', 'volo_d1_384', 'volo_d2_224', 'volo_d2_384', 'volo_d3_224',
-                                             'volo_d3_448', 'volo_d4_224', 'volo_d4_448', 'volo_d5_224', 'volo_d5_448',
-                                             'volo_d5_512']
-                        - For VOvNet models: ['vovnet39a', 'vovnet57a', 'ese_vovnet19b_slim_dw', 'ese_vovnet19b_slim_dw',
-                                               'ese_vovnet19b_slim', 'ese_vovnet39b', 'ese_vovnet57b', 'ese_vovnet99b',
-                                               'eca_vovnet39b', 'eca_vovnet39b_evos']
-    - num_classes (int): The number of classes for the model.
+    Args:
+        model_type (str): Type of the model to retrieve.
+        num_classes (int): Number of output classes for the model.
 
     Returns:
-    - model: The requested model if available, otherwise 'Unknown'.
+        str: The retrieved model.
+
+    Raises:
+        ValueError: If an unknown model_type is provided.
     """
     model = "Unknown"
 
@@ -941,65 +771,85 @@ def get_family_model_v(model_type, num_classes):
 
 def get_family_model_w(model_type, num_classes):
     """
-    Retrieves a model belonging to family W based on the provided model type and number of classes.
+    Retrieves a model from various families based on the provided model_type.
 
-    Parameters:
-    - model_type (str): The type of model to retrieve. Should be one of the supported models:
-                        - For Wide ResNet models: ['Wide_ResNet50_2', 'Wide_ResNet101_2']
-    - num_classes (int): The number of classes for the model.
+    Args:
+        model_type (str): Type of the model to retrieve.
+        num_classes (int): Number of output classes for the model.
 
     Returns:
-    - model: The requested model if available, otherwise 'Unknown'.
+        str: The retrieved model.
+
+    Raises:
+        ValueError: If an unknown model_type is provided.
     """
-    model = "Unknown"
+    model_mapping = {
+        'Wide_ResNet50_2': get_wide_resnet_model,
+        'Wide_ResNet101_2': get_wide_resnet_model
+    }
 
-    if model_type in ['Wide_ResNet50_2', 'Wide_ResNet101_2']:
-        model = get_wide_resnet_model(model_type, num_classes)
-
-    return model
+    if model_type in model_mapping:
+        return model_mapping[model_type](model_type, num_classes)
+    else:
+        raise ValueError("Unknown model_type: {}".format(model_type))
 
 
 def get_family_model_x(model_type, num_classes):
     """
-    Retrieves a model belonging to family X based on the provided model type and number of classes.
+    Retrieves a model from various families based on the provided model_type.
 
-    Parameters:
-    - model_type (str): The type of model to retrieve. Should be one of the supported models:
-                        - For Xception models: ['legacy_xception', 'xception41', 'xception65', 'xception71',
-                                                'xception41p', 'xception65p']
-                        - For XCiT models: ['xcit_nano_12_p16_224', 'xcit_nano_12_p16_384', 'xcit_tiny_12_p16_224',
-                                            'xcit_tiny_12_p16_384', 'xcit_small_12_p16_224', 'xcit_small_12_p16_384',
-                                            'xcit_tiny_24_p16_224', 'xcit_tiny_24_p16_384', 'xcit_small_24_p16_224',
-                                            'xcit_small_24_p16_384', 'xcit_medium_24_p16_224', 'xcit_medium_24_p16_384',
-                                            'xcit_large_24_p16_224', 'xcit_large_24_p16_384', 'xcit_nano_12_p8_224',
-                                            'xcit_nano_12_p8_384', 'xcit_tiny_12_p8_224', 'xcit_tiny_12_p8_384',
-                                            'xcit_small_12_p8_224', 'xcit_small_12_p8_384', 'xcit_tiny_24_p8_224',
-                                            'xcit_tiny_24_p8_384', 'xcit_small_24_p8_224', 'xcit_small_24_p8_384',
-                                            'xcit_medium_24_p8_224', 'xcit_medium_24_p8_384', 'xcit_large_24_p8_224',
-                                            'xcit_large_24_p8_384']
-    - num_classes (int): The number of classes for the model.
+    Args:
+        model_type (str): Type of the model to retrieve.
+        num_classes (int): Number of output classes for the model.
 
     Returns:
-    - model: The requested model if available, otherwise 'Unknown'.
+        str: The retrieved model.
+
+    Raises:
+        ValueError: If an unknown model_type is provided.
     """
-    model = "Unknown"
+    model_mapping = {
+        'legacy_xception': get_xception_model,
+        'xception41': get_xception_model,
+        'xception65': get_xception_model,
+        'xception71': get_xception_model,
+        'xception41p': get_xception_model,
+        'xception65p': get_xception_model,
+        'xcit_nano_12_p16_224': get_xcit_model,
+        'xcit_nano_12_p16_384': get_xcit_model,
+        'xcit_tiny_12_p16_224': get_xcit_model,
+        'xcit_tiny_12_p16_384': get_xcit_model,
+        'xcit_small_12_p16_224': get_xcit_model,
+        'xcit_small_12_p16_384': get_xcit_model,
+        'xcit_tiny_24_p16_224': get_xcit_model,
+        'xcit_tiny_24_p16_384': get_xcit_model,
+        'xcit_small_24_p16_224': get_xcit_model,
+        'xcit_small_24_p16_384': get_xcit_model,
+        'xcit_medium_24_p16_224': get_xcit_model,
+        'xcit_medium_24_p16_384': get_xcit_model,
+        'xcit_large_24_p16_224': get_xcit_model,
+        'xcit_large_24_p16_384': get_xcit_model,
+        'xcit_nano_12_p8_224': get_xcit_model,
+        'xcit_nano_12_p8_384': get_xcit_model,
+        'xcit_tiny_12_p8_224': get_xcit_model,
+        'xcit_tiny_12_p8_384': get_xcit_model,
+        'xcit_small_12_p8_224': get_xcit_model,
+        'xcit_small_12_p8_384': get_xcit_model,
+        'xcit_tiny_24_p8_224': get_xcit_model,
+        'xcit_tiny_24_p8_384': get_xcit_model,
+        'xcit_small_24_p8_224': get_xcit_model,
+        'xcit_small_24_p8_384': get_xcit_model,
+        'xcit_medium_24_p8_224': get_xcit_model,
+        'xcit_medium_24_p8_384': get_xcit_model,
+        'xcit_large_24_p8_224': get_xcit_model,
+        'xcit_large_24_p8_384': get_xcit_model,
+    }
 
-    if model_type in ['legacy_xception', 'xception41', 'xception65', 'xception71', 'xception41p', 'xception65p']:
-        model = get_xception_model(model_type, num_classes)
-    elif model_type in ['xcit_nano_12_p16_224', 'xcit_nano_12_p16_384', 'xcit_tiny_12_p16_224', 'xcit_tiny_12_p16_384',
-                        'xcit_small_12_p16_224', 'xcit_small_12_p16_384', 'xcit_tiny_24_p16_224',
-                        'xcit_tiny_24_p16_384',
-                        'xcit_small_24_p16_224', 'xcit_small_24_p16_384', 'xcit_medium_24_p16_224',
-                        'xcit_medium_24_p16_384', 'xcit_large_24_p16_224', 'xcit_large_24_p16_384',
-                        'xcit_nano_12_p8_224',
-                        'xcit_nano_12_p8_384', 'xcit_tiny_12_p8_224', 'xcit_tiny_12_p8_384', 'xcit_small_12_p8_224',
-                        'xcit_small_12_p8_384', 'xcit_tiny_24_p8_224', 'xcit_tiny_24_p8_384', 'xcit_small_24_p8_224',
-                        'xcit_small_24_p8_384', 'xcit_medium_24_p8_224', 'xcit_medium_24_p8_384',
-                        'xcit_large_24_p8_224',
-                        'xcit_large_24_p8_384']:
-        model = get_xcit_model(model_type, num_classes)
-
-    return model
+    # Check if model_type is in the mapping, otherwise raise an error
+    if model_type in model_mapping:
+        return model_mapping[model_type](model_type, num_classes)
+    else:
+        raise ValueError("Unknown model_type: {}".format(model_type))
 
 
 def get_family_model(model_type, num_classes):
@@ -1013,47 +863,36 @@ def get_family_model(model_type, num_classes):
     Returns:
     - model: The requested model based on the provided model type and number of classes.
     """
+    # Define a dictionary mapping first letters to functions
+    model_functions = {
+        'a': get_family_model_a,
+        'b': get_family_model_b,
+        'c': get_family_model_c,
+        'e': get_family_model_e,
+        'f': get_family_model_f,
+        'g': get_family_model_g,
+        'h': get_family_model_h,
+        'i': get_family_model_i,
+        'l': get_family_model_l,
+        'm': get_family_model_m,
+        'n': get_family_model_n,
+        'p': get_family_model_p,
+        'r': get_family_model_r,
+        's': get_family_model_s,
+        't': get_family_model_t,
+        'v': get_family_model_v,
+        'w': get_family_model_w,
+        'x': get_family_model_x,
+    }
+
     # Convert the first letter of the model_type to lowercase
     first_letter = model_type[0].lower()
-    model = "Error"  # Default value if no matching case is found
 
-    # Choose the appropriate model based on the first letter of model_type
-    match first_letter:
-        case 'a':
-            model = get_family_model_a(model_type, num_classes)
-        case 'b':
-            model = get_family_model_b(model_type, num_classes)
-        case 'c':
-            model = get_family_model_c(model_type, num_classes)
-        case 'e':
-            model = get_family_model_e(model_type, num_classes)
-        case 'f':
-            model = get_family_model_f(model_type, num_classes)
-        case 'g':
-            model = get_family_model_g(model_type, num_classes)
-        case 'h':
-            model = get_family_model_h(model_type, num_classes)
-        case 'i':
-            model = get_family_model_i(model_type, num_classes)
-        case 'l':
-            model = get_family_model_l(model_type, num_classes)
-        case 'm':
-            model = get_family_model_m(model_type, num_classes)
-        case 'n':
-            model = get_family_model_n(model_type, num_classes)
-        case 'p':
-            model = get_family_model_p(model_type, num_classes)
-        case 'r':
-            model = get_family_model_r(model_type, num_classes)
-        case 's':
-            model = get_family_model_s(model_type, num_classes)
-        case 't':
-            model = get_family_model_t(model_type, num_classes)
-        case 'v':
-            model = get_family_model_v(model_type, num_classes)
-        case 'w':
-            model = get_family_model_w(model_type, num_classes)
-        case 'x':
-            model = get_family_model_x(model_type, num_classes)
+    # Default value if no matching case is found
+    model = "Error"
+
+    # Retrieve the corresponding function and call it
+    if first_letter in model_functions:
+        model = model_functions[first_letter](model_type, num_classes)
 
     return model
