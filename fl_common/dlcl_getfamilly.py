@@ -1284,7 +1284,7 @@ def get_family_model_v(model_type, num_classes):
         "vit_base_patch16_224": get_vision_transformer_model, "vit_base_patch16_384": get_vision_transformer_model,
         "vit_base_patch8_224": get_vision_transformer_model, "vit_large_patch32_224": get_vision_transformer_model,
         "vit_large_patch32_384": get_vision_transformer_model, "vit_large_patch16_224": get_vision_transformer_model,
-        "vit_large_patch16_384": get_vision_transformer_model, "vit_large_patch14_224": get_vision_transformer_model, 
+        "vit_large_patch16_384": get_vision_transformer_model, "vit_large_patch14_224": get_vision_transformer_model,
         "vit_giant_patch14_224": get_vision_transformer_model, "vit_gigantic_patch14_224": get_vision_transformer_model,
         "vit_base_patch16_224_miil": get_vision_transformer_model, "vit_medium_patch16_gap_240": get_vision_transformer_model,
         "vit_medium_patch16_gap_256": get_vision_transformer_model, "vit_medium_patch16_gap_384": get_vision_transformer_model,
