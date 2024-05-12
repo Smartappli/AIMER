@@ -118,8 +118,6 @@ def get_family_model_b(model_type, num_classes):
     Raises:
         ValueError: If an unknown model_type is provided.
     """
-    model = "Unknown"
-
     # Dictionary mapping model_type to retrieval functions
     model_retrieval_functions = {
         'beit_base_patch16_224': get_beit_model, 'beit_base_patch16_384': get_beit_model,
@@ -354,8 +352,6 @@ def get_family_model_e(model_type, num_classes):
     Raises:
         ValueError: If an unknown model_type is provided.
     """
-    model = "Unknown"
-
     # Dictionary mapping model_type to retrieval functions
     model_retrieval_functions = {
         'edgenext_xx_small': get_edgenet_model, 'edgenext_x_small': get_edgenet_model, 'edgenext_small': get_edgenet_model,
@@ -1135,8 +1131,6 @@ def get_family_model_s(model_type, num_classes):
     Raises:
         ValueError: If an unknown model_type is provided.
     """
-    model = "Unknown"
-
     # Dictionary mapping model_type to retrieval functions
     model_retrieval_functions = {
         'selecsls42': get_selecsls_model,
@@ -1232,8 +1226,6 @@ def get_family_model_t(model_type, num_classes):
     Raises:
         ValueError: If an unknown model_type is provided.
     """
-    model = "Unknown"
-
     # Dictionary mapping model_type to retrieval functions
     model_retrieval_functions = {
         'tiny_vit_5m_224': get_tiny_vit_model,
@@ -1275,8 +1267,6 @@ def get_family_model_v(model_type, num_classes):
     Raises:
         ValueError: If an unknown model_type is provided.
     """
-    model = "Unknown"
-
     # Dictionary mapping model_type to retrieval functions
     model_retrieval_functions = {
         'VGG11': get_vgg_model, 'VGG11_BN': get_vgg_model, 'VGG13': get_vgg_model, 'VGG13_BN': get_vgg_model,
