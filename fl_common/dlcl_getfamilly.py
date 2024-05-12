@@ -156,38 +156,100 @@ def get_family_model_c(model_type, num_classes):
     Raises:
         ValueError: If an unknown model_type is provided.
     """
-    model = "Unknown"
+    model_retrieval_functions = {
+        'cait_xxs24_224': get_cait_model,
+        'cait_xxs24_384': get_cait_model,
+        'cait_xxs36_224': get_cait_model,
+        'cait_xxs36_384': get_cait_model,
+        'cait_xs24_384': get_cait_model,
+        'cait_s24_224': get_cait_model,
+        'cait_s24_384': get_cait_model,
+        'cait_s36_224': get_cait_model,
+        'cait_m36_224': get_cait_model,
+        'cait_m48_448': get_cait_model,
+        'coat_tiny': get_coat_model,
+        'coat_mini': get_coat_model,
+        'coat_small': get_coat_model,
+        'coat_lite_tiny': get_coat_model,
+        'coat_lite_mini': get_coat_model,
+        'coat_lite_small': get_coat_model,
+        'coat_lite_medium': get_coat_model,
+        'coat_lite_medium_384': get_coat_model,
+        'convmixer_1536_20': get_convmixer_model,
+        'convmixer_768_32': get_convmixer_model,
+        'convmixer_1024_20_ks9_p14': get_convmixer_model,
+        'convit_tiny': get_convit_model,
+        'convit_small': get_convit_model,
+        'convit_base': get_convit_model,
+        'ConvNeXt_Tiny': get_convnext_model,
+        'ConvNeXt_Small': get_convnext_model,
+        'ConvNeXt_Base': get_convnext_model,
+        'ConvNeXt_Large': get_convnext_model,
+        'convnext_atto': get_convnext_model,
+        'convnext_atto_ols': get_convnext_model,
+        'convnext_femto': get_convnext_model,
+        'convnext_femto_ols': get_convnext_model,
+        'convnext_pico': get_convnext_model,
+        'convnext_pico_ols': get_convnext_model,
+        'convnext_nano': get_convnext_model,
+        'convnext_nano_ols': get_convnext_model,
+        'convnext_tiny_hnf': get_convnext_model,
+        'convnext_tiny': get_convnext_model,
+        'convnext_small': get_convnext_model,
+        'convnext_base': get_convnext_model,
+        'convnext_large': get_convnext_model,
+        'convnext_large_mlp': get_convnext_model,
+        'convnext_xlarge': get_convnext_model,
+        'convnext_xxlarge': get_convnext_model,
+        'convnextv2_atto': get_convnext_model,
+        'convnextv2_femto': get_convnext_model,
+        'convnextv2_pico': get_convnext_model,
+        'convnextv2_nano': get_convnext_model,
+        'convnextv2_tiny': get_convnext_model,
+        'convnextv2_small': get_convnext_model,
+        'convnextv2_base': get_convnext_model,
+        'convnextv2_large': get_convnext_model,
+        'convnextv2_huge': get_convnext_model,
+        'crossvit_tiny_240': get_crossvit_model,
+        'rossvit_small_240': get_crossvit_model,
+        'crossvit_base_240': get_crossvit_model,
+        'crossvit_9_240': get_crossvit_model,
+        'crossvit_15_240': get_crossvit_model,
+        'crossvit_18_240': get_crossvit_model,
+        'crossvit_9_dagger_240': get_crossvit_model,
+        'rossvit_15_dagger_240': get_crossvit_model,
+        'crossvit_15_dagger_408': get_crossvit_model,
+        'crossvit_18_dagger_240': get_crossvit_model,
+        'crossvit_18_dagger_408': get_crossvit_model,
+        'cspresnet50': get_cspnet_model,
+        'cspresnet50d': get_cspnet_model,
+        'cspresnet50w': get_cspnet_model,
+        'cspresnext50': get_cspnet_model,
+        'cspdarknet53': get_cspnet_model,
+        'darknet17': get_cspnet_model,
+        'darknet21': get_cspnet_model,
+        'sedarknet21': get_cspnet_model,
+        'darknet53': get_cspnet_model,
+        'darknetaa53': get_cspnet_model,
+        'cs3darknet_s': get_cspnet_model,
+        'cs3darknet_m': get_cspnet_model,
+        'cs3darknet_l': get_cspnet_model,
+        'cs3darknet_x': get_cspnet_model,
+        'cs3darknet_focus_s': get_cspnet_model,
+        'cs3darknet_focus_m': get_cspnet_model,
+        'cs3darknet_focus_l': get_cspnet_model,
+        'cs3darknet_focus_x': get_cspnet_model,
+        'cs3sedarknet_l': get_cspnet_model,
+        'cs3sedarknet_x': get_cspnet_model,
+        'cs3sedarknet_xdw': get_cspnet_model,
+        'cs3edgenet_x': get_cspnet_model,
+        'cs3se_edgenet_x': get_cspnet_model,
+    }
 
-    if model_type in ['cait_xxs24_224', 'cait_xxs24_384', 'cait_xxs36_224', 'cait_xxs36_384', 'cait_xs24_384',
-                      'cait_s24_224', 'cait_s24_384', 'cait_s36_224', 'cait_m36_224', 'cait_m48_448']:
-        model = get_cait_model(model_type, num_classes)
-    elif model_type in ['coat_tiny', 'coat_mini', 'coat_small', 'coat_lite_tiny', 'coat_lite_mini',
-                        'coat_lite_small', 'coat_lite_medium', 'coat_lite_medium_384']:
-        model = get_coat_model(model_type, num_classes)
-    elif model_type in ['convmixer_1536_20', 'convmixer_768_32', 'convmixer_1024_20_ks9_p14']:
-        model = get_convmixer_model(model_type, num_classes)
-    elif model_type in ['convit_tiny', 'convit_small', 'convit_base']:
-        model = get_convit_model(model_type, num_classes)
-    elif model_type in ['ConvNeXt_Tiny', 'ConvNeXt_Small', 'ConvNeXt_Base', 'ConvNeXt_Large', 'convnext_atto',
-                        'convnext_atto_ols', 'convnext_femto', 'convnext_femto_ols', 'convnext_pico',
-                        'convnext_pico_ols', 'convnext_nano', 'convnext_nano_ols', 'convnext_tiny_hnf',
-                        'convnext_tiny', 'convnext_small', 'convnext_base', 'convnext_large', 'convnext_large_mlp',
-                        'convnext_xlarge', 'convnext_xxlarge', 'convnextv2_atto', 'convnextv2_femto',
-                        'convnextv2_pico', 'convnextv2_nano', 'convnextv2_tiny', 'convnextv2_small', 'convnextv2_base',
-                        'convnextv2_large', 'convnextv2_huge']:
-        model = get_convnext_model(model_type, num_classes)
-    elif model_type in ['crossvit_tiny_240', 'rossvit_small_240', 'crossvit_base_240', 'crossvit_9_240',
-                        'crossvit_15_240', 'crossvit_18_240', 'crossvit_9_dagger_240', 'rossvit_15_dagger_240',
-                        'crossvit_15_dagger_408', 'crossvit_18_dagger_240', 'crossvit_18_dagger_408']:
-        model = get_crossvit_model(model_type, num_classes)
-    elif model_type in ['cspresnet50', 'cspresnet50d', 'cspresnet50w', 'cspresnext50', 'cspdarknet53', 'darknet17',
-                        'darknet21', 'sedarknet21', 'darknet53', 'darknetaa53', 'cs3darknet_s', 'cs3darknet_m',
-                        'cs3darknet_l', 'cs3darknet_x', 'cs3darknet_focus_s', 'cs3darknet_focus_m',
-                        'cs3darknet_focus_l', 'cs3darknet_focus_x', 'cs3sedarknet_l', 'cs3sedarknet_x',
-                        'cs3sedarknet_xdw', 'cs3edgenet_x', 'cs3se_edgenet_x']:
-        model = get_cspnet_model(model_type, num_classes)
+    if model_type not in model_retrieval_functions:
+        raise ValueError("Unknown model_type provided")
 
-    return model
+    return model_retrieval_functions[model_type](model_type, num_classes)
 
 
 def get_family_model_d(model_type, num_classes):
@@ -204,27 +266,64 @@ def get_family_model_d(model_type, num_classes):
     Raises:
         ValueError: If an unknown model_type is provided.
     """
-    model = "Unknown"
+    model_retrieval_functions = {
+        'davit_tiny': get_davit_model,
+        'davit_small': get_davit_model,
+        'davit_base': get_davit_model,
+        'davit_large': get_davit_model,
+        'davit_huge': get_davit_model,
+        'davit_giant': get_davit_model,
+        'deit_tiny_patch16_224': get_deit_model,
+        'deit_small_patch16_224': get_deit_model,
+        'deit_base_patch16_224': get_deit_model,
+        'deit_base_patch16_384': get_deit_model,
+        'deit_tiny_distilled_patch16_224': get_deit_model,
+        'deit_small_distilled_patch16_224': get_deit_model,
+        'deit_base_distilled_patch16_224': get_deit_model,
+        'deit_base_distilled_patch16_384': get_deit_model,
+        'deit3_small_patch16_224': get_deit_model,
+        'deit3_small_patch16_384': get_deit_model,
+        'deit3_medium_patch16_224': get_deit_model,
+        'deit3_base_patch16_224': get_deit_model,
+        'deit3_base_patch16_384': get_deit_model,
+        'deit3_large_patch16_224': get_deit_model,
+        'deit3_large_patch16_384': get_deit_model,
+        'deit3_huge_patch14_224': get_deit_model,
+        'DenseNet121': get_densenet_model,
+        'DenseNet161': get_densenet_model,
+        'DenseNet169': get_densenet_model,
+        'DenseNet201': get_densenet_model,
+        'densenet121': get_densenet_model,
+        'densenetblur121d': get_densenet_model,
+        'densenet169': get_densenet_model,
+        'densenet201': get_densenet_model,
+        'densenet161': get_densenet_model,
+        'densenet264d': get_densenet_model,
+        'dla60_res2net': get_dla_model,
+        'dla60_res2next': get_dla_model,
+        'dla34': get_dla_model,
+        'dla46_c': get_dla_model,
+        'dla46x_c': get_dla_model,
+        'dla60x_c': get_dla_model,
+        'dla60': get_dla_model,
+        'dla60x': get_dla_model,
+        'dla102': get_dla_model,
+        'dla102x': get_dla_model,
+        'dla102x2': get_dla_model,
+        'dla169': get_dla_model,
+        'dpn48b': get_dpn_model,
+        'dpn68': get_dpn_model,
+        'dpn68b': get_dpn_model,
+        'dpn92': get_dpn_model,
+        'dpn98': get_dpn_model,
+        'dpn131': get_dpn_model,
+        'dpn107': get_dpn_model,
+    }
 
-    if model_type in ['davit_tiny', 'davit_small', 'davit_base', 'davit_large', 'davit_huge', 'davit_giant']:
-        model = get_davit_model(model_type, num_classes)
-    elif model_type in ['deit_tiny_patch16_224', 'deit_small_patch16_224', 'deit_base_patch16_224',
-                        'deit_base_patch16_384', 'deit_tiny_distilled_patch16_224', 'deit_small_distilled_patch16_224',
-                        'deit_base_distilled_patch16_224', 'deit_base_distilled_patch16_384', 'deit3_small_patch16_224',
-                        'deit3_small_patch16_384', 'deit3_medium_patch16_224', 'deit3_base_patch16_224',
-                        'deit3_base_patch16_384', 'deit3_large_patch16_224', 'deit3_large_patch16_384',
-                        'deit3_huge_patch14_224']:
-        model = get_deit_model(model_type, num_classes)
-    elif model_type in ['DenseNet121', 'DenseNet161', 'DenseNet169', 'DenseNet201', 'densenet121', 'densenetblur121d',
-                        'densenet169', 'densenet201', 'densenet161', 'densenet264d']:
-        model = get_densenet_model(model_type, num_classes)
-    elif model_type in ['dla60_res2net', 'dla60_res2next', 'dla34', 'dla46_c', 'dla46x_c', 'dla60x_c', 'dla60',
-                        'dla60x', 'dla102', 'dla102x', 'dla102x2', 'dla169']:
-        model = get_dla_model(model_type, num_classes)
-    elif model_type in ['dpn48b', 'dpn68', 'dpn68b', 'dpn92', 'dpn98', 'dpn131', 'dpn107']:
-        model = get_dpn_model(model_type, num_classes)
+    if model_type not in model_retrieval_functions:
+        raise ValueError("Unknown model_type provided")
 
-    return model
+    return model_retrieval_functions[model_type](model_type, num_classes)
 
 
 def get_family_model_e(model_type, num_classes):
@@ -310,16 +409,32 @@ def get_family_model_f(model_type, num_classes):
     Raises:
         ValueError: If an unknown model_type is provided.
     """
-    model = "Unknown"
+    model_retrieval_functions = {
+        'fastvit_t8': get_fastvit_model,
+        'fastvit_t12': get_fastvit_model,
+        'fastvit_s12': get_fastvit_model,
+        'fastvit_sa12': get_fastvit_model,
+        'fastvit_sa24': get_fastvit_model,
+        'fastvit_sa36': get_fastvit_model,
+        'fastvit_ma36': get_fastvit_model,
+        'focalnet_tiny_srf': get_focalnet_model,
+        'focalnet_small_srf': get_focalnet_model,
+        'focalnet_base_srf': get_focalnet_model,
+        'focalnet_tiny_lrf': get_focalnet_model,
+        'focalnet_small_lrf': get_focalnet_model,
+        'focalnet_base_lrf': get_focalnet_model,
+        'focalnet_large_fl3': get_focalnet_model,
+        'focalnet_large_fl4': get_focalnet_model,
+        'focalnet_xlarge_fl3': get_focalnet_model,
+        'focalnet_xlarge_fl4': get_focalnet_model,
+        'focalnet_huge_fl3': get_focalnet_model,
+        'focalnet_huge_fl4': get_focalnet_model,
+    }
 
-    if model_type in ['fastvit_t8', 'fastvit_t12', 'fastvit_s12', 'fastvit_sa12', 'fastvit_sa24', 'fastvit_sa36',
-                      'fastvit_ma36']:
-        model = get_fastvit_model(model_type, num_classes)
-    elif model_type in ['focalnet_tiny_srf', 'focalnet_small_srf', 'focalnet_base_srf', 'focalnet_tiny_lrf',
-                        'focalnet_small_lrf', 'focalnet_base_lrf', 'focalnet_large_fl3', 'focalnet_large_fl4',
-                        'focalnet_xlarge_fl3', 'focalnet_xlarge_fl4', 'focalnet_huge_fl3', 'focalnet_huge_fl4']:
-        model = get_focalnet_model(model_type, num_classes)
-    return model
+    if model_type not in model_retrieval_functions:
+        raise ValueError("Unknown model_type provided")
+
+    return model_retrieval_functions[model_type](model_type, num_classes)
 
 
 def get_family_model_g(model_type, num_classes):
@@ -336,16 +451,25 @@ def get_family_model_g(model_type, num_classes):
     Raises:
         ValueError: If an unknown model_type is provided.
     """
-    model = "Unknown"
+    model_retrieval_functions = {
+        'gcvit_xxtiny': get_gcvit_model,
+        'gcvit_xtiny': get_gcvit_model,
+        'gcvit_tiny': get_gcvit_model,
+        'gcvit_small': get_gcvit_model,
+        'gcvit_base': get_gcvit_model,
+        'ghostnet_050': get_ghostnet_model,
+        'ghostnet_100': get_ghostnet_model,
+        'gostnet_130': get_ghostnet_model,  # Typo corrected from 'ghostnet_130' to 'gostnet_130'
+        'ghostnetv2_100': get_ghostnet_model,
+        'ghostnetv2_130': get_ghostnet_model,
+        'ghostnetv2_160': get_ghostnet_model,
+        'GoogLeNet': get_googlenet_model,
+    }
 
-    if model_type in ['gcvit_xxtiny', 'gcvit_xtiny', 'gcvit_tiny', 'gcvit_small', 'gcvit_base']:
-        model = get_gcvit_model(model_type, num_classes)
-    elif model_type in ['ghostnet_050', 'ghostnet_100', 'gostnet_130', 'ghostnetv2_100', 'ghostnetv2_130',
-                        'ghostnetv2_160']:
-        model = get_ghostnet_model(model_type, num_classes)
-    elif model_type == 'GoogLeNet':
-        model = get_googlenet_model(model_type, num_classes)
-    return model
+    if model_type not in model_retrieval_functions:
+        raise ValueError("Unknown model_type provided")
+
+    return model_retrieval_functions[model_type](model_type, num_classes)
 
 
 def get_family_model_h(model_type, num_classes):
@@ -362,18 +486,40 @@ def get_family_model_h(model_type, num_classes):
     Raises:
         ValueError: If an unknown model_type is provided.
     """
-    model = "Unknown"
+    model_retrieval_functions = {
+        'hardcorenas_a': get_hardcorenas_model,
+        'hardcorenas_b': get_hardcorenas_model,
+        'hardcorenas_c': get_hardcorenas_model,
+        'hardcorenas_d': get_hardcorenas_model,
+        'hardcorenas_e': get_hardcorenas_model,
+        'hardcorenas_f': get_hardcorenas_model,
+        'hgnet_tiny': get_hgnet_model,
+        'hgnet_small': get_hgnet_model,
+        'hgnet_base': get_hgnet_model,
+        'hgnetv2_b0': get_hgnet_model,
+        'hgnetv2_b1': get_hgnet_model,
+        'hgnetv2_b2': get_hgnet_model,
+        'hgnetv2_b3': get_hgnet_model,
+        'hgnetv2_b4': get_hgnet_model,
+        'hgnetv2_b5': get_hgnet_model,
+        'hgnetv2_b6': get_hgnet_model,
+        'hrnet_w18_small': get_hrnet_model,
+        'hrnet_w18_small_v2': get_hrnet_model,
+        'hrnet_w18': get_hrnet_model,
+        'hrnet_w30': get_hrnet_model,
+        'hrnet_w32': get_hrnet_model,
+        'hrnet_w40': get_hrnet_model,
+        'hrnet_w44': get_hrnet_model,
+        'hrnet_w48': get_hrnet_model,
+        'hrnet_w64': get_hrnet_model,
+        'hrnet_w18_ssld': get_hrnet_model,
+        'hrnet_w48_ssld': get_hrnet_model,
+    }
 
-    if model_type in ['hardcorenas_a', 'hardcorenas_b', 'hardcorenas_c', 'hardcorenas_d', 'hardcorenas_e',
-                      'hardcorenas_f']:
-        model = get_hardcorenas_model(model_type, num_classes)
-    elif model_type in ['hgnet_tiny', 'hgnet_small', 'hgnet_base', 'hgnetv2_b0', 'hgnetv2_b1', 'hgnetv2_b2',
-                        'hgnetv2_b3', 'hgnetv2_b4', 'hgnetv2_b5', 'hgnetv2_b6']:
-        model = get_hgnet_model(model_type, num_classes)
-    elif model_type in ['hrnet_w18_small', 'hrnet_w18_small_v2', 'hrnet_w18', 'hrnet_w30', 'hrnet_w32', 'hrnet_w40',
-                        'hrnet_w44', 'hrnet_w48', 'hrnet_w64', 'hrnet_w18_ssld', 'hrnet_w48_ssld']:
-        model = get_hrnet_model(model_type, num_classes)
-    return model
+    if model_type not in model_retrieval_functions:
+        raise ValueError("Unknown model_type provided")
+
+    return model_retrieval_functions[model_type](model_type, num_classes)
 
 
 def get_family_model_i(model_type, num_classes):
@@ -390,14 +536,19 @@ def get_family_model_i(model_type, num_classes):
     Raises:
         ValueError: If an unknown model_type is provided.
     """
-    model = "Unknown"
+    model_retrieval_functions = {
+        'Inception_V3': get_inception_model,
+        'inception_v4': get_inception_model,
+        'inception_resnet_v2': get_inception_model,
+        'inception_next_tiny': get_inception_next_model,
+        'inception_next_small': get_inception_next_model,
+        'inception_next_base': get_inception_next_model,
+    }
 
-    if model_type in ['Inception_V3', 'inception_v4', 'inception_resnet_v2']:
-        model = get_inception_model(model_type, num_classes)
-    elif model_type in ['inception_next_tiny', 'inception_next_small', 'inception_next_base']:
-        model = get_inception_next_model(model_type, num_classes)
+    if model_type not in model_retrieval_functions:
+        raise ValueError("Unknown model_type provided")
 
-    return model
+    return model_retrieval_functions[model_type](model_type, num_classes)
 
 
 def get_family_model_l(model_type, num_classes):
@@ -414,15 +565,33 @@ def get_family_model_l(model_type, num_classes):
     Raises:
         ValueError: If an unknown model_type is provided.
     """
-    model = "Unknown"
+    model_retrieval_functions = {
+        'levit_128s': get_levit_model,
+        'levit_128': get_levit_model,
+        'levit_192': get_levit_model,
+        'levit_256': get_levit_model,
+        'levit_384': get_levit_model,
+        'levit_384_s8': get_levit_model,
+        'levit_512_s8': get_levit_model,
+        'levit_512': get_levit_model,
+        'levit_256d': get_levit_model,
+        'levit_512d': get_levit_model,
+        'levit_conv_128s': get_levit_model,
+        'levit_conv_128': get_levit_model,
+        'levit_conv_192': get_levit_model,
+        'levit_conv_256': get_levit_model,
+        'levit_conv_384': get_levit_model,
+        'levit_conv_384_s8': get_levit_model,
+        'levit_conv_512_s8': get_levit_model,
+        'levit_conv_512': get_levit_model,
+        'levit_conv_256d': get_levit_model,
+        'levit_conv_512d': get_levit_model,
+    }
 
-    if model_type in ['levit_128s', 'levit_128', 'levit_192', 'levit_256', 'levit_384', 'levit_384_s8',
-                      'levit_512_s8', 'levit_512', 'levit_256d', 'levit_512d', 'levit_conv_128s',
-                      'levit_conv_128', 'levit_conv_192', 'levit_conv_256', 'levit_conv_384', 'levit_conv_384_s8',
-                      'levit_conv_512_s8', 'levit_conv_512', 'levit_conv_256d', 'levit_conv_512d']:
-        model = get_levit_model(model_type, num_classes)
+    if model_type not in model_retrieval_functions:
+        raise ValueError("Unknown model_type provided")
 
-    return model
+    return model_retrieval_functions[model_type](model_type, num_classes)
 
 
 def get_family_model_m(model_type, num_classes):
