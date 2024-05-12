@@ -120,26 +120,40 @@ def get_family_model_b(model_type, num_classes):
     """
     model = "Unknown"
 
-    if model_type in ['beit_base_patch16_224', 'beit_base_patch16_384', 'beit_large_patch16_224',
-                      'beit_large_patch16_384', 'beit_large_patch16_512', 'beitv2_base_patch16_224',
-                      'beitv2_large_patch16_224']:
-        model = get_beit_model(model_type, num_classes)
-    elif model_type in ['botnet26t_256', 'sebotnet33ts_256', 'botnet50ts_256', 'eca_botnext26ts_256', 'halonet_h1',
-                        'halonet26t', 'sehalonet33ts', 'halonet50ts', 'eca_halonext26ts', 'lambda_resnet26t',
-                        'lambda_resnet50ts', 'lambda_resnet26rpt_256', 'haloregnetz_b', 'lamhalobotnet50ts_256',
-                        'halo2botnet50ts_256']:
-        model = get_byoanet_model(model_type, num_classes)
-    elif model_type in ['gernet_l', 'gernet_m', 'gernet_s', 'repvgg_a0', 'repvgg_a1', 'repvgg_a2', 'repvgg_b0',
-                        'repvgg_b1', 'repvgg_b1g4', 'repvgg_b2', 'repvgg_b2g4', 'repvgg_b3', 'repvgg_b3g4',
-                        'repvgg_d2se', 'resnet51q', 'resnet61q', 'resnext26ts', 'gcresnext26ts', 'seresnext26ts',
-                        'eca_resnext26ts', 'bat_resnext26ts', 'resnet32ts', 'resnet33ts', 'gcresnet33ts',
-                        'seresnet33ts', 'eca_resnet33ts', 'gcresnet50t', 'gcresnext50ts', 'regnetz_b16',
-                        'regnetz_c16', 'regnetz_d32', 'regnetz_d8', 'regnetz_e8', 'regnetz_b16_evos',
-                        'regnetz_c16_evos', 'regnetz_d8_evos', 'mobileone_s0', 'mobileone_s1', 'mobileone_s2',
-                        'mobileone_s3', "mobileone_s4"]:
-        model = get_byobnet_model(model_type, num_classes)
+    # Dictionary mapping model_type to retrieval functions
+    model_retrieval_functions = {
+        'beit_base_patch16_224': get_beit_model, 'beit_base_patch16_384': get_beit_model,
+        'beit_large_patch16_224': get_beit_model, 'beit_large_patch16_384': get_beit_model,
+        'beit_large_patch16_512': get_beit_model, 'beitv2_base_patch16_224': get_beit_model,
+        'beitv2_large_patch16_224': get_beit_model,
+        'botnet26t_256': get_byoanet_model, 'sebotnet33ts_256': get_byoanet_model,
+        'botnet50ts_256': get_byoanet_model, 'eca_botnext26ts_256': get_byoanet_model,
+        'halonet_h1': get_byoanet_model, 'halonet26t': get_byoanet_model,
+        'sehalonet33ts': get_byoanet_model, 'halonet50ts': get_byoanet_model,
+        'eca_halonext26ts': get_byoanet_model, 'lambda_resnet26t': get_byoanet_model,
+        'lambda_resnet50ts': get_byoanet_model, 'lambda_resnet26rpt_256': get_byoanet_model,
+        'haloregnetz_b': get_byoanet_model, 'lamhalobotnet50ts_256': get_byoanet_model,
+        'halo2botnet50ts_256': get_byoanet_model,
+        'gernet_l': get_byobnet_model, 'gernet_m': get_byobnet_model, 'gernet_s': get_byobnet_model,
+        'repvgg_a0': get_byobnet_model, 'repvgg_a1': get_byobnet_model, 'repvgg_a2': get_byobnet_model,
+        'repvgg_b0': get_byobnet_model, 'repvgg_b1': get_byobnet_model, 'repvgg_b1g4': get_byobnet_model,
+        'repvgg_b2': get_byobnet_model, 'repvgg_b2g4': get_byobnet_model, 'repvgg_b3': get_byobnet_model,
+        'repvgg_b3g4': get_byobnet_model, 'repvgg_d2se': get_byobnet_model, 'resnet51q': get_byobnet_model,
+        'resnet61q': get_byobnet_model, 'resnext26ts': get_byobnet_model, 'gcresnext26ts': get_byobnet_model,
+        'seresnext26ts': get_byobnet_model, 'eca_resnext26ts': get_byobnet_model, 'bat_resnext26ts': get_byobnet_model,
+        'resnet32ts': get_byobnet_model, 'resnet33ts': get_byobnet_model, 'gcresnet33ts': get_byobnet_model,
+        'seresnet33ts': get_byobnet_model, 'eca_resnet33ts': get_byobnet_model, 'gcresnet50t': get_byobnet_model,
+        'gcresnext50ts': get_byobnet_model, 'regnetz_b16': get_byobnet_model, 'regnetz_c16': get_byobnet_model,
+        'regnetz_d32': get_byobnet_model, 'regnetz_d8': get_byobnet_model, 'regnetz_e8': get_byobnet_model,
+        'regnetz_b16_evos': get_byobnet_model, 'regnetz_c16_evos': get_byobnet_model,
+        'regnetz_d8_evos': get_byobnet_model, 'mobileone_s0': get_byobnet_model, 'mobileone_s1': get_byobnet_model,
+        'mobileone_s2': get_byobnet_model, 'mobileone_s3': get_byobnet_model, 'mobileone_s4': get_byobnet_model,
+    }
 
-    return model
+    if model_type in model_retrieval_functions:
+        return model_retrieval_functions[model_type](model_type, num_classes)
+    else:
+        raise ValueError("Unknown model_type provided: {}".format(model_type))
 
 
 def get_family_model_c(model_type, num_classes):
@@ -342,57 +356,90 @@ def get_family_model_e(model_type, num_classes):
     """
     model = "Unknown"
 
-    if model_type in ['edgenext_xx_small', 'edgenext_x_small', 'edgenext_small', 'edgenext_base',
-                      'edgenext_small_rw']:
-        model = get_edgenet_model(model_type, num_classes)
-    elif model_type in ['efficientformer_l1', 'efficientformer_l3', 'efficientformer_l7']:
-        model = get_efficientformer_model(model_type, num_classes)
-    elif model_type in ['efficientformerv2_s0', 'efficientformerv2_s1', 'efficientformerv2_s2', 'efficientformerv2_l']:
-        model = get_efficientformer_v2_model(model_type, num_classes)
-    elif model_type in ['efficientvit_b0', 'efficientvit_b1', 'efficientvit_b2', 'efficientvit_b3', 'efficientvit_l1',
-                        'efficientvit_l2', 'efficientvit_l3']:
-        model = get_efficientvit_mit_model(model_type, num_classes)
-    elif model_type in ['efficientvit_m0', 'efficientvit_m1', 'efficientvit_m2', 'efficientvit_m3', 'efficientvit_m4',
-                        'efficientvit_m5']:
-        model = get_efficientvit_msra_model(model_type, num_classes)
-    elif model_type in ['EfficientNetB0', 'EfficientNetB1', 'EfficientNetB2', 'EfficientNetB3', 'EfficientNetB4',
-                        'EfficientNetB5', 'EfficientNetB6', 'EfficientNetB7', 'EfficientNetV2S',
-                        'EfficientNetV2M', 'EfficientNetV2L', 'mnasnet_050', 'mnasnet_075', 'mnasnet_100',
-                        'mnasnet_140', 'semnasnet_050', 'semnasnet_075', 'semnasnet_100', 'semnasnet_140',
-                        'mnasnet_small', 'mobilenetv2_035', 'mobilenetv2_050', 'mobilenetv2_075',
-                        'mobilenetv2_100', 'mobilenetv2_140', 'mobilenetv2_110d', 'mobilenetv2_120d', 'fbnetc_100',
-                        'spnasnet_100', 'efficientnet_b0', 'efficientnet_b1', 'efficientnet_b2', 'efficientnet_b3',
-                        'efficientnet_b4', 'efficientnet_b5', 'efficientnet_b6', 'efficientnet_b7',
-                        'efficientnet_b8', 'efficientnet_l2', 'efficientnet_b0_gn', 'efficientnet_b0_g8_gn',
-                        'efficientnet_b0_g16_evos', 'efficientnet_b3_gn', 'efficientnet_b3_g8_gn',
-                        'efficientnet_es', 'efficientnet_es_pruned', 'efficientnet_em', 'efficientnet_el',
-                        'efficientnet_el_pruned', 'efficientnet_cc_b0_4e', 'efficientnet_cc_b0_8e',
-                        'efficientnet_cc_b1_8e', 'efficientnet_lite0', 'efficientnet_lite1', 'efficientnet_lite2',
-                        'efficientnet_lite3', 'efficientnet_lite4', 'efficientnet_b1_pruned',
-                        'efficientnet_b2_pruned', 'efficientnet_b3_pruned', 'efficientnetv2_rw_t',
-                        'gc_efficientnetv2_rw_t', 'efficientnetv2_rw_s', 'efficientnetv2_rw_m', 'efficientnetv2_s',
-                        'efficientnetv2_m', 'efficientnetv2_l', 'efficientnetv2_xl', 'tf_efficientnet_b0',
-                        'tf_efficientnet_b1', 'tf_efficientnet_b2', 'tf_efficientnet_b3', 'tf_efficientnet_b4',
-                        'tf_efficientnet_b5', 'tf_efficientnet_b6', 'tf_efficientnet_b7', 'tf_efficientnet_b8',
-                        'tf_efficientnet_l2', 'tf_efficientnet_es', 'tf_efficientnet_em', 'tf_efficientnet_el',
-                        'tf_efficientnet_cc_b0_4e', 'tf_efficientnet_cc_b0_8e', 'tf_efficientnet_cc_b1_8e',
-                        'tf_efficientnet_lite0', 'tf_efficientnet_lite1', 'tf_efficientnet_lite2',
-                        'tf_efficientnet_lite3', 'tf_efficientnet_lite4', 'tf_efficientnetv2_s',
-                        'tf_efficientnetv2_m', 'tf_efficientnetv2_l', 'tf_efficientnetv2_xl',
-                        'tf_efficientnetv2_b0', 'tf_efficientnetv2_b1', 'tf_efficientnetv2_b2',
-                        'tf_efficientnetv2_b3', 'mixnet_s', 'mixnet_m', 'mixnet_l', 'mixnet_xl', 'mixnet_xxl',
-                        'tf_mixnet_s', 'tf_mixnet_m', 'tf_mixnet_l', 'tinynet_a', 'tinynet_b', 'tinynet_c',
-                        'tinynet_d', 'tinynet_e']:
-        model = get_efficientnet_model(model_type, num_classes)
-    elif model_type in ['eva_giant_patch14_224', 'eva_giant_patch14_336', 'eva_giant_patch14_560',
-                        'eva02_tiny_patch14_224', 'eva02_small_patch14_224', 'eva02_base_patch14_224',
-                        'eva02_large_patch14_224', 'eva02_tiny_patch14_336', 'eva02_small_patch14_336',
-                        'eva02_base_patch14_448', 'eva02_large_patch14_448', 'eva_giant_patch14_clip_224',
-                        'eva02_base_patch16_clip_224', 'eva02_large_patch14_clip_224', 'eva02_large_patch14_clip_336',
-                        'eva02_enormous_patch14_clip_224']:
-        model = get_eva_model(model_type, num_classes)
+    # Dictionary mapping model_type to retrieval functions
+    model_retrieval_functions = {
+        'edgenext_xx_small': get_edgenet_model, 'edgenext_x_small': get_edgenet_model, 'edgenext_small': get_edgenet_model,
+        'edgenext_base': get_edgenet_model, 'edgenext_small_rw': get_edgenet_model,
+        'efficientformer_l1': get_efficientformer_model, 'efficientformer_l3': get_efficientformer_model,
+        'efficientformer_l7': get_efficientformer_model,
+        'efficientformerv2_s0': get_efficientformer_v2_model, 'efficientformerv2_s1': get_efficientformer_v2_model,
+        'efficientformerv2_s2': get_efficientformer_v2_model, 'efficientformerv2_l': get_efficientformer_v2_model,
+        'efficientvit_b0': get_efficientvit_mit_model, 'efficientvit_b1': get_efficientvit_mit_model,
+        'efficientvit_b2': get_efficientvit_mit_model, 'efficientvit_b3': get_efficientvit_mit_model,
+        'efficientvit_l1': get_efficientvit_mit_model, 'efficientvit_l2': get_efficientvit_mit_model,
+        'efficientvit_l3': get_efficientvit_mit_model,
+        'efficientvit_m0': get_efficientvit_msra_model, 'efficientvit_m1': get_efficientvit_msra_model,
+        'efficientvit_m2': get_efficientvit_msra_model, 'efficientvit_m3': get_efficientvit_msra_model,
+        'efficientvit_m4': get_efficientvit_msra_model, 'efficientvit_m5': get_efficientvit_msra_model,
+        'EfficientNetB0': get_efficientnet_model, 'EfficientNetB1': get_efficientnet_model,
+        'EfficientNetB2': get_efficientnet_model, 'EfficientNetB3': get_efficientnet_model,
+        'EfficientNetB4': get_efficientnet_model, 'EfficientNetB5': get_efficientnet_model,
+        'EfficientNetB6': get_efficientnet_model, 'EfficientNetB7': get_efficientnet_model,
+        'EfficientNetV2S': get_efficientnet_model, 'EfficientNetV2M': get_efficientnet_model,
+        'EfficientNetV2L': get_efficientnet_model, 'mnasnet_050': get_efficientnet_model,
+        'mnasnet_075': get_efficientnet_model, 'mnasnet_100': get_efficientnet_model,
+        'mnasnet_140': get_efficientnet_model, 'semnasnet_050': get_efficientnet_model,
+        'semnasnet_075': get_efficientnet_model, 'semnasnet_100': get_efficientnet_model,
+        'semnasnet_140': get_efficientnet_model, 'mnasnet_small': get_efficientnet_model,
+        'mobilenetv2_035': get_efficientnet_model, 'mobilenetv2_050': get_efficientnet_model,
+        'mobilenetv2_075': get_efficientnet_model, 'mobilenetv2_100': get_efficientnet_model,
+        'mobilenetv2_140': get_efficientnet_model, 'mobilenetv2_110d': get_efficientnet_model,
+        'mobilenetv2_120d': get_efficientnet_model, 'fbnetc_100': get_efficientnet_model,
+        'spnasnet_100': get_efficientnet_model, 'efficientnet_b0': get_efficientnet_model,
+        'efficientnet_b1': get_efficientnet_model, 'efficientnet_b2': get_efficientnet_model,
+        'efficientnet_b3': get_efficientnet_model, 'efficientnet_b4': get_efficientnet_model,
+        'efficientnet_b5': get_efficientnet_model, 'efficientnet_b6': get_efficientnet_model,
+        'efficientnet_b7': get_efficientnet_model, 'efficientnet_b8': get_efficientnet_model,
+        'efficientnet_l2': get_efficientnet_model, 'efficientnet_b0_gn': get_efficientnet_model,
+        'efficientnet_b0_g8_gn': get_efficientnet_model, 'efficientnet_b0_g16_evos': get_efficientnet_model,
+        'efficientnet_b3_gn': get_efficientnet_model, 'efficientnet_b3_g8_gn': get_efficientnet_model,
+        'efficientnet_es': get_efficientnet_model, 'efficientnet_es_pruned': get_efficientnet_model,
+        'efficientnet_em': get_efficientnet_model, 'efficientnet_el': get_efficientnet_model,
+        'efficientnet_el_pruned': get_efficientnet_model, 'efficientnet_cc_b0_4e': get_efficientnet_model,
+        'efficientnet_cc_b0_8e': get_efficientnet_model, 'efficientnet_cc_b1_8e': get_efficientnet_model,
+        'efficientnet_lite0': get_efficientnet_model, 'efficientnet_lite1': get_efficientnet_model,
+        'efficientnet_lite2': get_efficientnet_model, 'efficientnet_lite3': get_efficientnet_model,
+        'efficientnet_lite4': get_efficientnet_model, 'efficientnet_b1_pruned': get_efficientnet_model,
+        'efficientnet_b2_pruned': get_efficientnet_model, 'efficientnet_b3_pruned': get_efficientnet_model,
+        'efficientnetv2_rw_t': get_efficientnet_model, 'gc_efficientnetv2_rw_t': get_efficientnet_model,
+        'efficientnetv2_rw_s': get_efficientnet_model, 'efficientnetv2_rw_m': get_efficientnet_model,
+        'efficientnetv2_s': get_efficientnet_model, 'efficientnetv2_m': get_efficientnet_model,
+        'efficientnetv2_l': get_efficientnet_model, 'efficientnetv2_xl': get_efficientnet_model,
+        'tf_efficientnet_b0': get_efficientnet_model, 'tf_efficientnet_b1': get_efficientnet_model,
+        'tf_efficientnet_b2': get_efficientnet_model, 'tf_efficientnet_b3': get_efficientnet_model,
+        'tf_efficientnet_b4': get_efficientnet_model, 'tf_efficientnet_b5': get_efficientnet_model,
+        'tf_efficientnet_b6': get_efficientnet_model, 'tf_efficientnet_b7': get_efficientnet_model,
+        'tf_efficientnet_b8': get_efficientnet_model, 'tf_efficientnet_l2': get_efficientnet_model,
+        'tf_efficientnet_es': get_efficientnet_model, 'tf_efficientnet_em': get_efficientnet_model,
+        'tf_efficientnet_el': get_efficientnet_model, 'tf_efficientnet_cc_b0_4e': get_efficientnet_model,
+        'tf_efficientnet_cc_b0_8e': get_efficientnet_model, 'tf_efficientnet_cc_b1_8e': get_efficientnet_model,
+        'tf_efficientnet_lite0': get_efficientnet_model, 'tf_efficientnet_lite1': get_efficientnet_model,
+        'tf_efficientnet_lite2': get_efficientnet_model, 'tf_efficientnet_lite3': get_efficientnet_model,
+        'tf_efficientnet_lite4': get_efficientnet_model, 'tf_efficientnetv2_s': get_efficientnet_model,
+        'tf_efficientnetv2_m': get_efficientnet_model, 'tf_efficientnetv2_l': get_efficientnet_model,
+        'tf_efficientnetv2_xl': get_efficientnet_model, 'tf_efficientnetv2_b0': get_efficientnet_model,
+        'tf_efficientnetv2_b1': get_efficientnet_model, 'tf_efficientnetv2_b2': get_efficientnet_model,
+        'tf_efficientnetv2_b3': get_efficientnet_model, 'mixnet_s': get_efficientnet_model,
+        'mixnet_m': get_efficientnet_model, 'mixnet_l': get_efficientnet_model, 'mixnet_xl': get_efficientnet_model,
+        'mixnet_xxl': get_efficientnet_model, 'tf_mixnet_s': get_efficientnet_model,
+        'tf_mixnet_m': get_efficientnet_model, 'tf_mixnet_l': get_efficientnet_model,
+        'tinynet_a': get_efficientnet_model, 'tinynet_b': get_efficientnet_model,
+        'tinynet_c': get_efficientnet_model, 'tinynet_d': get_efficientnet_model,
+        'tinynet_e': get_efficientnet_model,
+        'eva_giant_patch14_224': get_eva_model, 'eva_giant_patch14_336': get_eva_model,
+        'eva_giant_patch14_560': get_eva_model, 'eva02_tiny_patch14_224': get_eva_model,
+        'eva02_small_patch14_224': get_eva_model, 'eva02_base_patch14_224': get_eva_model,
+        'eva02_large_patch14_224': get_eva_model, 'eva02_tiny_patch14_336': get_eva_model,
+        'eva02_small_patch14_336': get_eva_model, 'eva02_base_patch14_448': get_eva_model,
+        'eva02_large_patch14_448': get_eva_model, 'eva_giant_patch14_clip_224': get_eva_model,
+        'eva02_base_patch16_clip_224': get_eva_model, 'eva02_large_patch14_clip_224': get_eva_model,
+        'eva02_large_patch14_clip_336': get_eva_model, 'eva02_enormous_patch14_clip_224': get_eva_model,
+    }
 
-    return model
+    if model_type in model_retrieval_functions:
+        return model_retrieval_functions[model_type](model_type, num_classes)
+    else:
+        raise ValueError("Unknown model_type provided: {}".format(model_type))
 
 
 def get_family_model_f(model_type, num_classes):
@@ -608,50 +655,148 @@ def get_family_model_m(model_type, num_classes):
     Raises:
         ValueError: If an unknown model_type is provided.
     """
-    model = "Unknown"
+    model_retrieval_functions = {
+        'MaxVit_T': get_maxvit_model,
+        'coatnet_pico_rw_224': get_maxvit_model,
+        'coatnet_nano_rw_224': get_maxvit_model,
+        'coatnet_0_rw_224': get_maxvit_model,
+        'coatnet_1_rw_224': get_maxvit_model,
+        'coatnet_2_rw_224': get_maxvit_model,
+        'coatnet_3_rw_224': get_maxvit_model,
+        'coatnet_bn_0_rw_224': get_maxvit_model,
+        'coatnet_rmlp_nano_rw_224': get_maxvit_model,
+        'coatnet_rmlp_0_rw_224': get_maxvit_model,
+        'coatnet_rmlp_1_rw_224': get_maxvit_model,
+        'coatnet_rmlp_1_rw2_224': get_maxvit_model,
+        'coatnet_rmlp_2_rw_224': get_maxvit_model,
+        'coatnet_rmlp_2_rw_384': get_maxvit_model,
+        'coatnet_rmlp_3_rw_224': get_maxvit_model,
+        'coatnet_nano_cc_224': get_maxvit_model,
+        'coatnext_nano_rw_224': get_maxvit_model,
+        'coatnet_0_224': get_maxvit_model,
+        'coatnet_1_224': get_maxvit_model,
+        'coatnet_2_224': get_maxvit_model,
+        'coatnet_3_224': get_maxvit_model,
+        'coatnet_4_224': get_maxvit_model,
+        'coatnet_5_224': get_maxvit_model,
+        'maxvit_pico_rw_256': get_maxvit_model,
+        'maxvit_nano_rw_256': get_maxvit_model,
+        'maxvit_tiny_rw_224': get_maxvit_model,
+        'maxvit_tiny_rw_256': get_maxvit_model,
+        'maxvit_rmlp_pico_rw_256': get_maxvit_model,
+        'maxvit_rmlp_nano_rw_256': get_maxvit_model,
+        'maxvit_rmlp_tiny_rw_256': get_maxvit_model,
+        'maxvit_rmlp_small_rw_224': get_maxvit_model,
+        'maxvit_rmlp_small_rw_256': get_maxvit_model,
+        'maxvit_rmlp_base_rw_224': get_maxvit_model,
+        'maxvit_rmlp_base_rw_384': get_maxvit_model,
+        'maxvit_tiny_pm_256': get_maxvit_model,
+        'maxxvit_rmlp_nano_rw_256': get_maxvit_model,
+        'maxxvit_rmlp_tiny_rw_256': get_maxvit_model,
+        'maxxvit_rmlp_small_rw_256': get_maxvit_model,
+        'maxxvitv2_nano_rw_256': get_maxvit_model,
+        'maxxvitv2_rmlp_base_rw_224': get_maxvit_model,
+        'maxxvitv2_rmlp_base_rw_384': get_maxvit_model,
+        'maxxvitv2_rmlp_large_rw_224': get_maxvit_model,
+        'maxvit_tiny_tf_224': get_maxvit_model,
+        'maxvit_tiny_tf_384': get_maxvit_model,
+        'maxvit_tiny_tf_512': get_maxvit_model,
+        'maxvit_small_tf_224': get_maxvit_model,
+        'maxvit_small_tf_384': get_maxvit_model,
+        'maxvit_small_tf_512': get_maxvit_model,
+        'maxvit_base_tf_224': get_maxvit_model,
+        'maxvit_base_tf_384': get_maxvit_model,
+        'maxvit_base_tf_512': get_maxvit_model,
+        'maxvit_large_tf_224': get_maxvit_model,
+        'maxvit_large_tf_384': get_maxvit_model,
+        'maxvit_large_tf_512': get_maxvit_model,
+        'maxvit_xlarge_tf_224': get_maxvit_model,
+        'maxvit_xlarge_tf_384': get_maxvit_model,
+        'maxvit_xlarge_tf_512': get_maxvit_model,
+        'MNASNet0_5': get_mnasnet_model,
+        'MNASNet0_75': get_mnasnet_model,
+        'MNASNet1_0': get_mnasnet_model,
+        'MNASNet1_3': get_mnasnet_model,
+        'poolformer_s12': get_metaformer_model,
+        'poolformer_s24': get_metaformer_model,
+        'poolformer_s36': get_metaformer_model,
+        'poolformer_m36': get_metaformer_model,
+        'poolformer_m48': get_metaformer_model,
+        'poolformerv2_s12': get_metaformer_model,
+        'poolformerv2_s24': get_metaformer_model,
+        'poolformerv2_s36': get_metaformer_model,
+        'poolformerv2_m36': get_metaformer_model,
+        'poolformerv2_m48': get_metaformer_model,
+        'convformer_s18': get_metaformer_model,
+        'convformer_s36': get_metaformer_model,
+        'convformer_m36': get_metaformer_model,
+        'convformer_b36': get_metaformer_model,
+        'caformer_s18': get_metaformer_model,
+        'caformer_s36': get_metaformer_model,
+        'caformer_m36': get_metaformer_model,
+        'caformer_b36': get_metaformer_model,
+        'mixer_s32_224': get_mlp_mixer_model,
+        'mixer_s16_224': get_mlp_mixer_model,
+        'mixer_b32_224': get_mlp_mixer_model,
+        'mixer_b16_224': get_mlp_mixer_model,
+        'mixer_l32_224': get_mlp_mixer_model,
+        'mixer_l16_224': get_mlp_mixer_model,
+        'gmixer_12_224': get_mlp_mixer_model,
+        'gmixer_24_224': get_mlp_mixer_model,
+        'resmlp_12_224': get_mlp_mixer_model,
+        'resmlp_24_224': get_mlp_mixer_model,
+        'resmlp_36_224': get_mlp_mixer_model,
+        'resmlp_big_24_224': get_mlp_mixer_model,
+        'gmlp_ti16_224': get_mlp_mixer_model,
+        'gmlp_s16_224': get_mlp_mixer_model,
+        'gmlp_b16_224': get_mlp_mixer_model,
+        'MobileNet_V2': get_mobilenet_model,
+        'MobileNet_V3_Small': get_mobilenet_model,
+        'MobileNet_V3_Large': get_mobilenet_model,
+        'mobilenetv3_large_075': get_mobilenet_model,
+        'mobilenetv3_large_100': get_mobilenet_model,
+        'mobilenetv3_small_050': get_mobilenet_model,
+        'mobilenetv3_small_075': get_mobilenet_model,
+        'mobilenetv3_small_100': get_mobilenet_model,
+        'mobilenetv3_rw': get_mobilenet_model,
+        'tf_mobilenetv3_large_075': get_mobilenet_model,
+        'tf_mobilenetv3_large_100': get_mobilenet_model,
+        'tf_mobilenetv3_large_minimal_100': get_mobilenet_model,
+        'tf_mobilenetv3_small_075': get_mobilenet_model,
+        'tf_mobilenetv3_small_100': get_mobilenet_model,
+        'tf_mobilenetv3_small_minimal_100': get_mobilenet_model,
+        'fbnetv3_b': get_mobilenet_model,
+        'fbnetv3_d': get_mobilenet_model,
+        'fbnetv3_g': get_mobilenet_model,
+        'lcnet_035': get_mobilenet_model,
+        'lcnet_050': get_mobilenet_model,
+        'lcnet_075': get_mobilenet_model,
+        'lcnet_100': get_mobilenet_model,
+        'lcnet_150': get_mobilenet_model,
+        'mobilevit_xxs': get_mobilevit_model,
+        'mobilevit_xs': get_mobilevit_model,
+        'mobilevit_s': get_mobilevit_model,
+        'mobilevitv2_050': get_mobilevit_model,
+        'mobilevitv2_075': get_mobilevit_model,
+        'mobilevitv2_100': get_mobilevit_model,
+        'mobilevitv2_125': get_mobilevit_model,
+        'mobilevitv2_150': get_mobilevit_model,
+        'mobilevitv2_175': get_mobilevit_model,
+        'mobilevitv2_200': get_mobilevit_model,
+        'mvitv2_tiny': get_mvitv2_model,
+        'mvitv2_small': get_mvitv2_model,
+        'mvitv2_base': get_mvitv2_model,
+        'mvitv2_large': get_mvitv2_model,
+        'mvitv2_small_cls': get_mvitv2_model,
+        'mvitv2_base_cls': get_mvitv2_model,
+        'mvitv2_large_cls': get_mvitv2_model,
+        'mvitv2_huge_cls': get_mvitv2_model,
+    }
 
-    if model_type in ['MaxVit_T', 'coatnet_pico_rw_224', 'coatnet_nano_rw_224', 'coatnet_0_rw_224',
-                      'coatnet_1_rw_224', 'coatnet_2_rw_224', 'coatnet_3_rw_224', 'coatnet_bn_0_rw_224',
-                      'coatnet_rmlp_nano_rw_224', 'coatnet_rmlp_0_rw_224', 'coatnet_rmlp_1_rw_224',
-                      'coatnet_rmlp_1_rw2_224', 'coatnet_rmlp_2_rw_224', 'coatnet_rmlp_2_rw_384',
-                      'coatnet_rmlp_3_rw_224', 'coatnet_nano_cc_224', 'coatnext_nano_rw_224', 'coatnet_0_224',
-                      'coatnet_1_224', 'coatnet_2_224', 'coatnet_3_224', 'coatnet_4_224', 'coatnet_5_224',
-                      'maxvit_pico_rw_256', 'maxvit_nano_rw_256', 'maxvit_tiny_rw_224', 'maxvit_tiny_rw_256',
-                      'maxvit_rmlp_pico_rw_256', 'maxvit_rmlp_nano_rw_256', 'maxvit_rmlp_tiny_rw_256',
-                      'maxvit_rmlp_small_rw_224', 'maxvit_rmlp_small_rw_256', "maxvit_rmlp_base_rw_224",
-                      'maxvit_rmlp_base_rw_384', 'maxvit_tiny_pm_256', 'maxxvit_rmlp_nano_rw_256',
-                      'maxxvit_rmlp_tiny_rw_256', 'maxxvit_rmlp_small_rw_256', 'maxxvitv2_nano_rw_256',
-                      'maxxvitv2_rmlp_base_rw_224', 'maxxvitv2_rmlp_base_rw_384', 'maxxvitv2_rmlp_large_rw_224',
-                      'maxvit_tiny_tf_224', 'maxvit_tiny_tf_384', 'maxvit_tiny_tf_512', 'maxvit_small_tf_224',
-                      'maxvit_small_tf_384', 'maxvit_small_tf_512', 'maxvit_base_tf_224', 'maxvit_base_tf_384',
-                      'maxvit_base_tf_512', 'maxvit_large_tf_224', 'maxvit_large_tf_384', 'maxvit_large_tf_512',
-                      'maxvit_xlarge_tf_224', 'maxvit_xlarge_tf_384', 'maxvit_xlarge_tf_512']:
-        model = get_maxvit_model(model_type, num_classes)
-    elif model_type in ['MNASNet0_5', 'MNASNet0_75', 'MNASNet1_0', 'MNASNet1_3']:
-        model = get_mnasnet_model(model_type, num_classes)
-    elif model_type in ['poolformer_s12', 'poolformer_s24', 'poolformer_s36', 'poolformer_m36', 'poolformer_m48',
-                        'poolformerv2_s12', 'poolformerv2_s24', 'poolformerv2_s36', 'poolformerv2_m36',
-                        'poolformerv2_m48', 'convformer_s18', 'convformer_s36', 'convformer_m36', 'convformer_b36',
-                        'caformer_s18', 'caformer_s36', 'caformer_m36', 'caformer_b36']:
-        model = get_metaformer_model(model_type, num_classes)
-    elif model_type in ['mixer_s32_224', 'mixer_s16_224', 'mixer_b32_224', 'mixer_b16_224', 'mixer_l32_224',
-                        'mixer_l16_224', 'gmixer_12_224', 'gmixer_24_224', 'resmlp_12_224', 'resmlp_24_224',
-                        'resmlp_36_224', 'resmlp_big_24_224', 'gmlp_ti16_224', 'gmlp_s16_224', 'gmlp_b16_224']:
-        model = get_mlp_mixer_model(model_type, num_classes)
-    elif model_type in ['MobileNet_V2', 'MobileNet_V3_Small', 'MobileNet_V3_Large', 'mobilenetv3_large_075',
-                        'mobilenetv3_large_100', 'mobilenetv3_small_050', 'mobilenetv3_small_075',
-                        'mobilenetv3_small_100', 'mobilenetv3_rw', 'tf_mobilenetv3_large_075',
-                        'tf_mobilenetv3_large_100', 'tf_mobilenetv3_large_minimal_100', 'tf_mobilenetv3_small_075',
-                        'tf_mobilenetv3_small_100', 'tf_mobilenetv3_small_minimal_100', 'fbnetv3_b', 'fbnetv3_d',
-                        'fbnetv3_g', 'lcnet_035', 'lcnet_050', 'lcnet_075', 'lcnet_100', 'lcnet_150']:
-        model = get_mobilenet_model(model_type, num_classes)
-    elif model_type in ['mobilevit_xxs', 'mobilevit_xs', 'mobilevit_s', 'mobilevitv2_050', 'mobilevitv2_075',
-                        'mobilevitv2_100', 'mobilevitv2_125', 'mobilevitv2_150', 'mobilevitv2_175', 'mobilevitv2_200']:
-        model = get_mobilevit_model(model_type, num_classes)
-    elif model_type in ['mvitv2_tiny', 'mvitv2_small', 'mvitv2_base', 'mvitv2_large', 'mvitv2_small_cls',
-                        'mvitv2_base_cls', 'mvitv2_large_cls', 'mvitv2_huge_cls']:
-        model = get_mvitv2_model(model_type, num_classes)
-    return model
+    if model_type not in model_retrieval_functions:
+        raise ValueError("Unknown model_type provided")
+
+    return model_retrieval_functions[model_type](model_type, num_classes)
 
 
 def get_family_model_n(model_type, num_classes):
@@ -668,22 +813,58 @@ def get_family_model_n(model_type, num_classes):
     Raises:
         ValueError: If an unknown model_type is provided.
     """
-    model = "Unknown"
+    model_retrieval_functions = {
+        'nasnetalarge': get_nasnet_model,
+        'nest_base': get_nest_model,
+        'nest_small': get_nest_model,
+        'nest_tiny': get_nest_model,
+        'nest_base_jx': get_nest_model,
+        'nest_small_jx': get_nest_model,
+        'nest_tiny_jx': get_nest_model,
+        'nextvit_small': get_nextvit_model,
+        'nextvit_base': get_nextvit_model,
+        'nextvit_large': get_nextvit_model,
+        'dm_nfnet_f0': get_nfnet_model,
+        'dm_nfnet_f1': get_nfnet_model,
+        'dm_nfnet_f2': get_nfnet_model,
+        'dm_nfnet_f3': get_nfnet_model,
+        'dm_nfnet_f4': get_nfnet_model,
+        'dm_nfnet_f5': get_nfnet_model,
+        'dm_nfnet_f6': get_nfnet_model,
+        'nfnet_f0': get_nfnet_model,
+        'nfnet_f1': get_nfnet_model,
+        'nfnet_f2': get_nfnet_model,
+        'nfnet_f3': get_nfnet_model,
+        'nfnet_f4': get_nfnet_model,
+        'nfnet_f5': get_nfnet_model,
+        'nfnet_f6': get_nfnet_model,
+        'nfnet_f7': get_nfnet_model,
+        'nfnet_l0': get_nfnet_model,
+        'eca_nfnet_l0': get_nfnet_model,
+        'eca_nfnet_l1': get_nfnet_model,
+        'eca_nfnet_l2': get_nfnet_model,
+        'eca_nfnet_l3': get_nfnet_model,
+        'nf_regnet_b0': get_nfnet_model,
+        'nf_regnet_b1': get_nfnet_model,
+        'nf_regnet_b2': get_nfnet_model,
+        'nf_regnet_b3': get_nfnet_model,
+        'nf_regnet_b4': get_nfnet_model,
+        'nf_regnet_b5': get_nfnet_model,
+        'nf_resnet26': get_nfnet_model,
+        'nf_resnet50': get_nfnet_model,
+        'nf_resnet101': get_nfnet_model,
+        'nf_seresnet26': get_nfnet_model,
+        'nf_seresnet50': get_nfnet_model,
+        'nf_seresnet101': get_nfnet_model,
+        'nf_ecaresnet26': get_nfnet_model,
+        'nf_ecaresnet50': get_nfnet_model,
+        'nf_ecaresnet101': get_nfnet_model,
+    }
 
-    if model_type in ['nasnetalarge']:
-        model = get_nasnet_model(model_type, num_classes)
-    elif model_type in ['nest_base', 'nest_small', 'nest_tiny', 'nest_base_jx', 'nest_small_jx', 'nest_tiny_jx']:
-        model = get_nest_model(model_type, num_classes)
-    elif model_type in ['nextvit_small', 'nextvit_base', 'nextvit_large']:
-        model = get_nextvit_model(model_type, num_classes)
-    elif model_type in ['dm_nfnet_f0', 'dm_nfnet_f1', 'dm_nfnet_f2', 'dm_nfnet_f3', 'dm_nfnet_f4', 'dm_nfnet_f5',
-                        'dm_nfnet_f6', 'nfnet_f0', 'nfnet_f1', 'nfnet_f2', 'nfnet_f3', 'nfnet_f4', 'nfnet_f5',
-                        'nfnet_f6', 'nfnet_f7', 'nfnet_l0', 'eca_nfnet_l0', 'eca_nfnet_l1', 'eca_nfnet_l2',
-                        'eca_nfnet_l3', 'nf_regnet_b0', 'nf_regnet_b1', 'nf_regnet_b2', 'nf_regnet_b3', 'nf_regnet_b4',
-                        'nf_regnet_b5', 'nf_resnet26', 'nf_resnet50', 'nf_resnet101', 'nf_seresnet26', 'nf_seresnet50',
-                        'nf_seresnet101', 'nf_ecaresnet26', 'nf_ecaresnet50', 'nf_ecaresnet101']:
-        model = get_nfnet_model(model_type, num_classes)
-    return model
+    if model_type not in model_retrieval_functions:
+        raise ValueError("Unknown model_type provided")
+
+    return model_retrieval_functions[model_type](model_type, num_classes)
 
 
 def get_family_model_p(model_type, num_classes):
@@ -700,16 +881,29 @@ def get_family_model_p(model_type, num_classes):
     Raises:
         ValueError: If an unknown model_type is provided.
     """
-    model = "Unknown"
+    model_retrieval_functions = {
+        'pit_b_224': get_pit_model,
+        'pit_s_224': get_pit_model,
+        'pit_xs_224': get_pit_model,
+        'pit_ti_224': get_pit_model,
+        'pit_b_distilled_224': get_pit_model,
+        'pit_s_distilled_224': get_pit_model,
+        'pit_xs_distilled_224': get_pit_model,
+        'pit_ti_distilled_224': get_pit_model,
+        'pnasnet5large': get_pnasnet_model,
+        'pvt_v2_b0': get_pvt_v2_model,
+        'pvt_v2_b1': get_pvt_v2_model,
+        'pvt_v2_b2': get_pvt_v2_model,
+        'pvt_v2_b3': get_pvt_v2_model,
+        'pvt_v2_b4': get_pvt_v2_model,
+        'pvt_v2_b5': get_pvt_v2_model,
+        'pvt_v2_b2_li': get_pvt_v2_model,
+    }
 
-    if model_type in ['pit_b_224', 'pit_s_224', 'pit_xs_224', 'pit_ti_224', 'pit_b_distilled_224',
-                      'pit_s_distilled_224', 'pit_xs_distilled_224', 'pit_ti_distilled_224']:
-        model = get_pit_model(model_type, num_classes)
-    elif model_type == 'pnasnet5large':
-        model = get_pnasnet_model(model_type, num_classes)
-    elif model_type in ['pvt_v2_b0', 'pvt_v2_b1', 'pvt_v2_b2', 'pvt_v2_b3', 'pvt_v2_b4', 'pvt_v2_b5', 'pvt_v2_b2_li']:
-        model = get_pvt_v2_model(model_type, num_classes)
-    return model
+    if model_type not in model_retrieval_functions:
+        raise ValueError("Unknown model_type provided")
+
+    return model_retrieval_functions[model_type](model_type, num_classes)
 
 
 def get_family_model_r(model_type, num_classes):
@@ -726,57 +920,205 @@ def get_family_model_r(model_type, num_classes):
     Raises:
         ValueError: If an unknown model_type is provided.
     """
-    model = "Unknown"
+    model_retrieval_functions = {
+        'RegNet_X_400MF': get_regnet_model,
+        'RegNet_X_800MF': get_regnet_model,
+        'RegNet_X_1_6GF': get_regnet_model,
+        'RegNet_X_3_2GF': get_regnet_model,
+        'RegNet_X_16GF': get_regnet_model,
+        'RegNet_Y_400MF': get_regnet_model,
+        'RegNet_Y_800MF': get_regnet_model,
+        'RegNet_Y_1_6GF': get_regnet_model,
+        'RegNet_Y_3_2GF': get_regnet_model,
+        'RegNet_Y_16GF': get_regnet_model,
+        'regnetx_002': get_regnet_model,
+        'regnetx_004': get_regnet_model,
+        'regnetx_004_tv': get_regnet_model,
+        'regnetx_006': get_regnet_model,
+        'regnetx_008': get_regnet_model,
+        'regnetx_016': get_regnet_model,
+        'regnetx_032': get_regnet_model,
+        'regnetx_040': get_regnet_model,
+        'regnetx_064': get_regnet_model,
+        'regnetx_080': get_regnet_model,
+        'regnetx_120': get_regnet_model,
+        'regnetx_160': get_regnet_model,
+        'regnetx_320': get_regnet_model,
+        'regnety_002': get_regnet_model,
+        'regnety_004': get_regnet_model,
+        'regnety_006': get_regnet_model,
+        'regnety_008': get_regnet_model,
+        'regnety_008_tv': get_regnet_model,
+        'regnety_016': get_regnet_model,
+        'regnety_032': get_regnet_model,
+        'regnety_040': get_regnet_model,
+        'regnety_064': get_regnet_model,
+        'regnety_080': get_regnet_model,
+        'regnety_080_tv': get_regnet_model,
+        'regnety_120': get_regnet_model,
+        'regnety_160': get_regnet_model,
+        'regnety_320': get_regnet_model,
+        'regnety_640': get_regnet_model,
+        'regnety_1280': get_regnet_model,
+        'regnety_2560': get_regnet_model,
+        'regnety_040_sgn': get_regnet_model,
+        'regnetv_040': get_regnet_model,
+        'regnetv_064': get_regnet_model,
+        'regnetz_005': get_regnet_model,
+        'regnetz_040': get_regnet_model,
+        'regnetz_040_h': get_regnet_model,
+        'repghostnet_050': get_repghost_model,
+        'repghostnet_058': get_repghost_model,
+        'repghostnet_080': get_repghost_model,
+        'repghostnet_100': get_repghost_model,
+        'repghostnet_111': get_repghost_model,
+        'repghostnet_130': get_repghost_model,
+        'repghostnet_150': get_repghost_model,
+        'repghostnet_200': get_repghost_model,
+        'repvit_m1': get_repvit_model,
+        'repvit_m2': get_repvit_model,
+        'repvit_m3': get_repvit_model,
+        'repvit_m0_9': get_repvit_model,
+        'repvit_m1_0': get_repvit_model,
+        'repvit_m1_1': get_repvit_model,
+        'repvit_m1_5': get_repvit_model,
+        'repvit_m2_3': get_repvit_model,
+        'res2net50_26w_4s': get_res2net_model,
+        'res2net101_26w_4s': get_res2net_model,
+        'res2net50_26w_6s': get_res2net_model,
+        'res2net50_26w_8s': get_res2net_model,
+        'res2net50_48w_2s': get_res2net_model,
+        'res2net50_14w_8s': get_res2net_model,
+        'res2next50': get_res2net_model,
+        'res2net50d': get_res2net_model,
+        'res2net101d': get_res2net_model,
+        'resnest14d': get_resnest_model,
+        'resnest26d': get_resnest_model,
+        'resnest50d': get_resnest_model,
+        'resnest101e': get_resnest_model,
+        'resnest200e': get_resnest_model,
+        'resnest269e': get_resnest_model,
+        'resnest50d_4s2x40d': get_resnest_model,
+        'resnest50d_1s4x24d': get_resnest_model,
+        'ResNet18': get_resnet_model,
+        'ResNet34': get_resnet_model,
+        'ResNet50': get_resnet_model,
+        'ResNet101': get_resnet_model,
+        'ResNet152': get_resnet_model,
+        'resnet10t': get_resnet_model,
+        'resnet14t': get_resnet_model,
+        'resnet18': get_resnet_model,
+        'resnet18d': get_resnet_model,
+        'resnet34': get_resnet_model,
+        'resnet34d': get_resnet_model,
+        'resnet26': get_resnet_model,
+        'resnet26t': get_resnet_model,
+        'resnet26d': get_resnet_model,
+        'resnet50': get_resnet_model,
+        'resnet50c': get_resnet_model,
+        'resnet50d': get_resnet_model,
+        'resnet50s': get_resnet_model,
+        'resnet50t': get_resnet_model,
+        'resnet101': get_resnet_model,
+        'resnet101c': get_resnet_model,
+        'resnet101d': get_resnet_model,
+        'resnet101s': get_resnet_model,
+        'resnet152': get_resnet_model,
+        'resnet152c': get_resnet_model,
+        'resnet152d': get_resnet_model,
+        'resnet152s': get_resnet_model,
+        'resnet200': get_resnet_model,
+        'resnet200d': get_resnet_model,
+        'wide_resnet50_2': get_resnet_model,
+        'wide_resnet101_2': get_resnet_model,
+        'resnet50_gn': get_resnet_model,
+        'resnext50_32x4d': get_resnet_model,
+        'resnext50d_32x4d': get_resnet_model,
+        'resnext101_32x4d': get_resnet_model,
+        'resnext101_32x8d': get_resnet_model,
+        'resnext101_32x16d': get_resnet_model,
+        'resnext101_32x32d': get_resnet_model,
+        'resnext101_64x4d': get_resnet_model,
+        'ecaresnet26t': get_resnet_model,
+        'ecaresnet50d': get_resnet_model,
+        'ecaresnet50d_pruned': get_resnet_model,
+        'ecaresnet50t': get_resnet_model,
+        'ecaresnetlight': get_resnet_model,
+        'ecaresnet101d': get_resnet_model,
+        'ecaresnet101d_pruned': get_resnet_model,
+        'ecaresnet200d': get_resnet_model,
+        'ecaresnet269d': get_resnet_model,
+        'ecaresnext26t_32x4d': get_resnet_model,
+        'ecaresnext50t_32x4d': get_resnet_model,
+        'seresnet18': get_resnet_model,
+        'seresnet34': get_resnet_model,
+        'seresnet50': get_resnet_model,
+        'seresnet50t': get_resnet_model,
+        'seresnet101': get_resnet_model,
+        'seresnet152': get_resnet_model,
+        'seresnet152d': get_resnet_model,
+        'seresnet200d': get_resnet_model,
+        'seresnet269d': get_resnet_model,
+        'seresnext26d_32x4d': get_resnet_model,
+        'seresnext26t_32x4d': get_resnet_model,
+        'seresnext50_32x4d': get_resnet_model,
+        'seresnext101_32x8d': get_resnet_model,
+        'seresnext101d_32x8d': get_resnet_model,
+        'seresnext101_64x4d': get_resnet_model,
+        'senet154': get_resnet_model,
+        'resnetblur18': get_resnet_model,
+        'resnetblur50': get_resnet_model,
+        'resnetblur50d': get_resnet_model,
+        'resnetblur101d': get_resnet_model,
+        'resnetaa34d': get_resnet_model,
+        'resnetaa50': get_resnet_model,
+        'resnetaa50d': get_resnet_model,
+        'resnetaa101d': get_resnet_model,
+        'seresnetaa50d': get_resnet_model,
+        'seresnextaa101d_32x8d': get_resnet_model,
+        'seresnextaa201d_32x8d': get_resnet_model,
+        'resnetrs50': get_resnet_model,
+        'resnetrs101': get_resnet_model,
+        'resnetrs152': get_resnet_model,
+        'resnetrs200': get_resnet_model,
+        'resnetrs270': get_resnet_model,
+        'resnetrs350': get_resnet_model,
+        'resnetrs420': get_resnet_model,
+        'resnetv2_50x1_bit': get_resnetv2_model,
+        'resnetv2_50x3_bit': get_resnetv2_model,
+        'resnetv2_101x1_bit': get_resnetv2_model,
+        'resnetv2_101x3_bit': get_resnetv2_model,
+        'resnetv2_152x2_bit': get_resnetv2_model,
+        'resnetv2_152x4_bit': get_resnetv2_model,
+        'resnetv2_50': get_resnetv2_model,
+        'resnetv2_50d': get_resnetv2_model,
+        'resnetv2_50t': get_resnetv2_model,
+        'resnetv2_101': get_resnetv2_model,
+        'resnetv2_101d': get_resnetv2_model,
+        'resnetv2_152': get_resnetv2_model,
+        'resnetv2_152d': get_resnetv2_model,
+        'resnetv2_50d_gn': get_resnetv2_model,
+        'resnetv2_50d_evos': get_resnetv2_model,
+        'resnetv2_50d_frn': get_resnetv2_model,
+        'ResNeXt50_32X4D': get_resnext_model,
+        'ResNeXt101_32X8D': get_resnext_model,
+        'ResNeXt101_64X4D': get_resnext_model,
+        'rexnet_100': get_rexnet_model,
+        'rexnet_130': get_rexnet_model,
+        'rexnet_150': get_rexnet_model,
+        'rexnet_200': get_rexnet_model,
+        'rexnet_300': get_rexnet_model,
+        'rexnetr_100': get_rexnet_model,
+        'rexnetr_130': get_rexnet_model,
+        'rexnetr_150': get_rexnet_model,
+        'rexnetr_200': get_rexnet_model,
+        'rexnetr_300': get_rexnet_model
+    }
 
-    if model_type in ['RegNet_X_400MF', 'RegNet_X_800MF', 'RegNet_X_1_6GF', 'RegNet_X_3_2GF', 'RegNet_X_16GF',
-                      'RegNet_Y_400MF', 'RegNet_Y_800MF', 'RegNet_Y_1_6GF', 'RegNet_Y_3_2GF', 'RegNet_Y_16GF',
-                      'regnetx_002', 'regnetx_004', 'regnetx_004_tv', 'regnetx_006', 'regnetx_008', 'regnetx_016',
-                      'regnetx_032', 'regnetx_040', 'regnetx_064', 'regnetx_080', 'regnetx_120', 'regnetx_160',
-                      'regnetx_320', 'regnety_002', 'regnety_004', 'regnety_006', 'regnety_008', 'regnety_008_tv',
-                      'regnety_016', 'regnety_032', 'regnety_040', 'regnety_064', 'regnety_080', 'regnety_080_tv',
-                      'regnety_120', 'regnety_160', 'regnety_320', 'regnety_640', 'regnety_1280', 'regnety_2560',
-                      'regnety_040_sgn', 'regnetv_040', 'regnetv_064', 'regnetz_005', 'regnetz_040', 'regnetz_040_h']:
-        model = get_regnet_model(model_type, num_classes)
-    elif model_type in ['repghostnet_050', 'repghostnet_058', 'repghostnet_080', 'repghostnet_100', 'repghostnet_111',
-                        'repghostnet_130', 'repghostnet_150', 'repghostnet_200']:
-        model = get_repghost_model(model_type, num_classes)
-    elif model_type in ['repvit_m1', 'repvit_m2', 'repvit_m3', 'repvit_m0_9', 'repvit_m1_0', 'repvit_m1_1',
-                        'repvit_m1_5', 'repvit_m2_3']:
-        model = get_repvit_model(model_type, num_classes)
-    elif model_type in ['res2net50_26w_4s', 'res2net101_26w_4s', 'res2net50_26w_6s', 'res2net50_26w_8s',
-                        'res2net50_48w_2s', 'res2net50_14w_8s', 'res2next50', 'res2net50d', 'res2net101d']:
-        model = get_res2net_model(model_type, num_classes)
-    elif model_type in ['resnest14d', 'resnest26d', 'resnest50d', 'resnest101e', 'resnest200e', 'resnest269e',
-                        'resnest50d_4s2x40d', 'resnest50d_1s4x24d']:
-        model = get_resnest_model(model_type, num_classes)
-    elif model_type in ['ResNet18', 'ResNet34', 'ResNet50', 'ResNet101', 'ResNet152', 'resnet10t', 'resnet14t',
-                        'resnet18', 'resnet18d', 'resnet34', 'resnet34d', 'resnet26', 'resnet26t', 'resnet26d',
-                        'resnet50', 'resnet50c', 'resnet50d', 'resnet50s', 'resnet50t', 'resnet101', 'resnet101c',
-                        'resnet101d', 'resnet101s', 'resnet152', 'resnet152c', 'resnet152d', 'resnet152s', 'resnet200',
-                        'resnet200d', 'wide_resnet50_2', 'wide_resnet101_2', 'resnet50_gn', 'resnext50_32x4d',
-                        'resnext50d_32x4d', 'resnext101_32x4d', 'resnext101_32x8d', 'resnext101_32x16d',
-                        'resnext101_32x32d', 'resnext101_64x4d', 'ecaresnet26t', 'ecaresnet50d', 'ecaresnet50d_pruned',
-                        'ecaresnet50t', 'ecaresnetlight', 'ecaresnet101d', 'ecaresnet101d_pruned', 'ecaresnet200d',
-                        'ecaresnet269d', 'ecaresnext26t_32x4d', 'ecaresnext50t_32x4d', 'seresnet18', 'seresnet34',
-                        'seresnet50', 'seresnet50t', 'seresnet101', 'seresnet152', 'seresnet152d', 'seresnet200d',
-                        'seresnet269d', 'seresnext26d_32x4d', 'seresnext26t_32x4d', 'seresnext50_32x4d',
-                        'seresnext101_32x8d', 'seresnext101d_32x8d', 'seresnext101_64x4d', 'senet154', 'resnetblur18',
-                        'resnetblur50', 'resnetblur50d', 'resnetblur101d', 'resnetaa34d', 'resnetaa50', 'resnetaa50d',
-                        'resnetaa101d', 'seresnetaa50d', 'seresnextaa101d_32x8d', 'seresnextaa201d_32x8d', 'resnetrs50',
-                        'resnetrs101', 'resnetrs152', 'resnetrs200', 'resnetrs270', 'resnetrs350', 'resnetrs420']:
-        model = get_resnet_model(model_type, num_classes)
-    elif model_type in ['resnetv2_50x1_bit', 'resnetv2_50x3_bit', 'resnetv2_101x1_bit', 'resnetv2_101x3_bit',
-                        'resnetv2_152x2_bit', 'resnetv2_152x4_bit', 'resnetv2_50', 'resnetv2_50d', 'resnetv2_50t',
-                        'resnetv2_101', 'resnetv2_101d', 'resnetv2_152', 'resnetv2_152d', 'resnetv2_50d_gn',
-                        'resnetv2_50d_evos', 'resnetv2_50d_frn']:
-        model = get_resnetv2_model(model_type, num_classes)
-    elif model_type in ['ResNeXt50_32X4D', 'ResNeXt101_32X8D', 'ResNeXt101_64X4D']:
-        model = get_resnext_model(model_type, num_classes)
-    elif model_type in ['rexnet_100', 'rexnet_130', 'rexnet_150', 'rexnet_200', 'rexnet_300', 'rexnetr_100',
-                        'rexnetr_130', 'rexnetr_150', 'rexnetr_200', 'rexnetr_300']:
-        model = get_rexnet_model(model_type, num_classes)
-
-    return model
+    if model_type in model_retrieval_functions:
+        return model_retrieval_functions[model_type](model_type, num_classes)
+    else:
+        raise ValueError("Unknown model_type provided: {}".format(model_type))
 
 
 def get_family_model_s(model_type, num_classes):
@@ -795,37 +1137,85 @@ def get_family_model_s(model_type, num_classes):
     """
     model = "Unknown"
 
-    if model_type in ['selecsls42', 'selecsls42b', 'selecsls60', 'selecsls60b', 'selecsls84']:
-        model = get_selecsls_model(model_type, num_classes)
-    elif model_type in ['legacy_seresnet18', 'legacy_seresnet34', 'legacy_seresnet50', 'legacy_seresnet101',
-                        'legacy_seresnet152', 'legacy_senet154', 'legacy_seresnext26_32x4d',
-                        'legacy_seresnext50_32x4d', 'legacy_seresnext101_32x4d']:
-        model = get_senet_model(model_type, num_classes)
-    elif model_type in ['sequencer2d_s', 'sequencer2d_m', 'sequencer2d_l']:
-        model = get_sequencer_model(model_type, num_classes)
-    elif model_type in ['ShuffleNet_V2_X0_5', 'ShuffleNet_V2_X1_0', 'ShuffleNet_V2_X1_5', 'ShuffleNet_V2_X2_0']:
-        model = get_shufflenet_model(model_type, num_classes)
-    elif model_type in ['skresnet18', 'skresnet34', 'skresnet50', 'skresnet50d', 'skresnext50_32x4d']:
-        model = get_sknet_model(model_type, num_classes)
-    elif model_type in ["SqueezeNet1_0", 'SqueezeNet1_1']:
-        model = get_squeezenet_model(model_type, num_classes)
-    elif model_type in ['Swin_T', 'Swin_S', 'Swin_B', 'Swin_V2_T', 'Swin_V2_S', 'Swin_V2_B',
-                        'swin_tiny_patch4_window7_224', 'swin_small_patch4_window7_224', 'swin_base_patch4_window7_224',
-                        'swin_base_patch4_window12_384', 'swin_large_patch4_window7_224', 'swin_s3_tiny_224',
-                        'swin_large_patch4_window12_384', 'swin_s3_small_224', 'swin_s3_base_224']:
-        model = get_swin_transformer_model(model_type, num_classes)
-    elif model_type in ["swinv2_tiny_window16_256", "swinv2_tiny_window8_256", "swinv2_small_window16_256",
-                        "swinv2_small_window8_256", "swinv2_base_window16_256", "swinv2_base_window8_256",
-                        "swinv2_base_window12_192", "swinv2_base_window12to16_192to256",
-                        "swinv2_base_window12to24_192to384", "swinv2_large_window12_192",
-                        "swinv2_large_window12to16_192to256", "swinv2_large_window12to24_192to384"]:
-        model = get_swin_transformer_v2_model(model_type, num_classes)
-    elif model_type in ["swinv2_cr_tiny_384", "swinv2_cr_tiny_224", "swinv2_cr_tiny_ns_224", "swinv2_cr_small_384",
-                        "swinv2_cr_small_224", "swinv2_cr_small_ns_224", "swinv2_cr_small_ns_256", "swinv2_cr_base_384",
-                        "swinv2_cr_base_224", "swinv2_cr_base_ns_224", "swinv2_cr_large_384", "swinv2_cr_large_224",
-                        "swinv2_cr_huge_384", "swinv2_cr_huge_224", "swinv2_cr_giant_384", "swinv2_cr_giant_224"]:
-        model = get_swin_transformer_v2_cr_model(model_type, num_classes)
-    return model
+    # Dictionary mapping model_type to retrieval functions
+    model_retrieval_functions = {
+        'selecsls42': get_selecsls_model,
+        'selecsls42b': get_selecsls_model,
+        'selecsls60': get_selecsls_model,
+        'selecsls60b': get_selecsls_model,
+        'selecsls84': get_selecsls_model,
+        'legacy_seresnet18': get_senet_model,
+        'legacy_seresnet34': get_senet_model,
+        'legacy_seresnet50': get_senet_model,
+        'legacy_seresnet101': get_senet_model,
+        'legacy_seresnet152': get_senet_model,
+        'legacy_senet154': get_senet_model,
+        'legacy_seresnext26_32x4d': get_senet_model,
+        'legacy_seresnext50_32x4d': get_senet_model,
+        'legacy_seresnext101_32x4d': get_senet_model,
+        'sequencer2d_s': get_sequencer_model,
+        'sequencer2d_m': get_sequencer_model,
+        'sequencer2d_l': get_sequencer_model,
+        'ShuffleNet_V2_X0_5': get_shufflenet_model,
+        'ShuffleNet_V2_X1_0': get_shufflenet_model,
+        'ShuffleNet_V2_X1_5': get_shufflenet_model,
+        'ShuffleNet_V2_X2_0': get_shufflenet_model,
+        'skresnet18': get_sknet_model,
+        'skresnet34': get_sknet_model,
+        'skresnet50': get_sknet_model,
+        'skresnet50d': get_sknet_model,
+        'skresnext50_32x4d': get_sknet_model,
+        'SqueezeNet1_0': get_squeezenet_model,
+        'SqueezeNet1_1': get_squeezenet_model,
+        'Swin_T': get_swin_transformer_model,
+        'Swin_S': get_swin_transformer_model,
+        'Swin_B': get_swin_transformer_model,
+        'Swin_V2_T': get_swin_transformer_model,
+        'Swin_V2_S': get_swin_transformer_model,
+        'Swin_V2_B': get_swin_transformer_model,
+        'swin_tiny_patch4_window7_224': get_swin_transformer_model,
+        'swin_small_patch4_window7_224': get_swin_transformer_model,
+        'swin_base_patch4_window7_224': get_swin_transformer_model,
+        'swin_base_patch4_window12_384': get_swin_transformer_model,
+        'swin_large_patch4_window7_224': get_swin_transformer_model,
+        'swin_s3_tiny_224': get_swin_transformer_model,
+        'swin_large_patch4_window12_384': get_swin_transformer_model,
+        'swin_s3_small_224': get_swin_transformer_model,
+        'swin_s3_base_224': get_swin_transformer_model,
+        'swinv2_tiny_window16_256': get_swin_transformer_v2_model,
+        "swinv2_tiny_window8_256": get_swin_transformer_v2_model,
+        "swinv2_small_window16_256": get_swin_transformer_v2_model,
+        "swinv2_small_window8_256": get_swin_transformer_v2_model,
+        "swinv2_base_window16_256": get_swin_transformer_v2_model,
+        "swinv2_base_window8_256": get_swin_transformer_v2_model,
+        "swinv2_base_window12_192": get_swin_transformer_v2_model,
+        "swinv2_base_window12to16_192to256": get_swin_transformer_v2_model,
+        "swinv2_base_window12to24_192to384": get_swin_transformer_v2_model,
+        "swinv2_large_window12_192": get_swin_transformer_v2_model,
+        "swinv2_large_window12to16_192to256": get_swin_transformer_v2_model,
+        "swinv2_large_window12to24_192to384": get_swin_transformer_v2_model,
+        "swinv2_cr_tiny_384": get_swin_transformer_v2_cr_model,
+        "swinv2_cr_tiny_224": get_swin_transformer_v2_cr_model,
+        "swinv2_cr_tiny_ns_224": get_swin_transformer_v2_cr_model,
+        "swinv2_cr_small_384": get_swin_transformer_v2_cr_model,
+        "swinv2_cr_small_224": get_swin_transformer_v2_cr_model,
+        "swinv2_cr_small_ns_224": get_swin_transformer_v2_cr_model,
+        "swinv2_cr_small_ns_256": get_swin_transformer_v2_cr_model,
+        "swinv2_cr_base_384": get_swin_transformer_v2_cr_model,
+        "swinv2_cr_base_224": get_swin_transformer_v2_cr_model,
+        "swinv2_cr_base_ns_224": get_swin_transformer_v2_cr_model,
+        "swinv2_cr_large_384": get_swin_transformer_v2_cr_model,
+        "swinv2_cr_large_224": get_swin_transformer_v2_cr_model,
+        "swinv2_cr_huge_384": get_swin_transformer_v2_cr_model,
+        "swinv2_cr_huge_224": get_swin_transformer_v2_cr_model,
+        "swinv2_cr_giant_384": get_swin_transformer_v2_cr_model,
+        "swinv2_cr_giant_224": get_swin_transformer_v2_cr_model
+    }
+
+    if model_type in model_retrieval_functions:
+        return model_retrieval_functions[model_type](model_type, num_classes)
+    else:
+        raise ValueError("Unknown model_type provided: {}".format(model_type))
 
 
 def get_family_model_t(model_type, num_classes):
@@ -844,17 +1234,31 @@ def get_family_model_t(model_type, num_classes):
     """
     model = "Unknown"
 
-    if model_type in ['tiny_vit_5m_224', 'tiny_vit_11m_224', 'tiny_vit_21m_224', 'tiny_vit_21m_384',
-                      'tiny_vit_21m_512']:
-        model = get_tiny_vit_model(model_type, num_classes)
-    if model_type in ['tnt_s_patch16_224', 'tnt_b_patch16_224']:
-        model = get_tnt_model(model_type, num_classes)
-    elif model_type in ['tresnet_m', 'tresnet_l', 'tresnet_xl', 'tresnet_v2_l']:
-        model = get_tresnet_model(model_type, num_classes)
-    elif model_type in ['twins_pcpvt_small', 'twins_pcpvt_base', 'twins_pcpvt_large', 'twins_svt_small',
-                        'twins_svt_base', 'twins_svt_large']:
-        model = get_twins_model(model_type, num_classes)
-    return model
+    # Dictionary mapping model_type to retrieval functions
+    model_retrieval_functions = {
+        'tiny_vit_5m_224': get_tiny_vit_model,
+        'tiny_vit_11m_224': get_tiny_vit_model,
+        'tiny_vit_21m_224': get_tiny_vit_model,
+        'tiny_vit_21m_384': get_tiny_vit_model,
+        'tiny_vit_21m_512': get_tiny_vit_model,
+        'tnt_s_patch16_224': get_tnt_model,
+        'tnt_b_patch16_224': get_tnt_model,
+        'tresnet_m': get_tresnet_model,
+        'tresnet_l': get_tresnet_model,
+        'tresnet_xl': get_tresnet_model,
+        'tresnet_v2_l': get_tresnet_model,
+        'twins_pcpvt_small': get_twins_model,
+        'twins_pcpvt_base': get_twins_model,
+        'twins_pcpvt_large': get_twins_model,
+        'twins_svt_small': get_twins_model,
+        'twins_svt_base': get_twins_model,
+        'twins_svt_large': get_twins_model
+    }
+
+    if model_type in model_retrieval_functions:
+        return model_retrieval_functions[model_type](model_type, num_classes)
+    else:
+        raise ValueError("Unknown model_type provided: {}".format(model_type))
 
 
 def get_family_model_v(model_type, num_classes):
@@ -873,69 +1277,65 @@ def get_family_model_v(model_type, num_classes):
     """
     model = "Unknown"
 
-    if model_type in ['VGG11', 'VGG11_BN', 'VGG13', 'VGG13_BN', 'VGG16', 'VGG16_BN', 'VGG19', 'VGG19_BN', 'vgg11',
-                      'vgg11_bn', 'vgg13', 'vgg13_bn', 'vgg16', 'vgg16_bn', 'vgg19', 'vgg19_bn']:
-        model = get_vgg_model(model_type, num_classes)
-    if model_type in ['visformer_tiny', 'visformer_small']:
-        model = get_visformer_model(model_type, num_classes)
-    elif model_type in ['ViT_B_16', 'ViT_B_32', 'ViT_L_16', 'ViT_L_32', 'ViT_H_14', "vit_tiny_patch16_224",
-                        "vit_tiny_patch16_384", "vit_small_patch32_224", "vit_small_patch32_384",
-                        "vit_small_patch16_224", "vit_small_patch16_384", "vit_small_patch8_224",
-                        "vit_base_patch32_224", "vit_base_patch32_384", "vit_base_patch16_224",
-                        "vit_base_patch16_384", "vit_base_patch8_224", "vit_large_patch32_224",
-                        "vit_large_patch32_384", "vit_large_patch16_224", "vit_large_patch16_384",
-                        "vit_large_patch14_224", "vit_large_patch14_224", "vit_giant_patch14_224",
-                        "vit_gigantic_patch14_224", "vit_base_patch16_224_miil", "vit_medium_patch16_gap_240",
-                        "vit_medium_patch16_gap_256", "vit_medium_patch16_gap_384", "vit_base_patch16_gap_224",
-                        "vit_huge_patch14_gap_224", "vit_huge_patch16_gap_448", "vit_giant_patch16_gap_224",
-                        "vit_xsmall_patch16_clip_224", "vit_medium_patch32_clip_224", "vit_medium_patch16_clip_224",
-                        "vit_betwixt_patch32_clip_224", "vit_base_patch32_clip_224", "vit_base_patch32_clip_256",
-                        "vit_base_patch32_clip_384", "vit_base_patch32_clip_448", "vit_base_patch16_clip_224",
-                        "vit_base_patch16_clip_384", "vit_large_patch14_clip_224", "vit_large_patch14_clip_336",
-                        "vit_huge_patch14_clip_224", "vit_huge_patch14_clip_336", "vit_huge_patch14_clip_378",
-                        "vit_giant_patch14_clip_224", "vit_gigantic_patch14_clip_224",
-                        "vit_base_patch32_clip_quickgelu_224", "vit_base_patch16_clip_quickgelu_224",
-                        "vit_large_patch14_clip_quickgelu_224", "vit_large_patch14_clip_quickgelu_336",
-                        "vit_huge_patch14_clip_quickgelu_224", "vit_huge_patch14_clip_quickgelu_378",
-                        "vit_base_patch32_plus_256", "vit_base_patch16_plus_240", "vit_base_patch16_rpn_224",
-                        "vit_small_patch16_36x1_224", "vit_small_patch16_18x2_224", "vit_base_patch16_18x2_224",
-                        "eva_large_patch14_196", "eva_large_patch14_336", "flexivit_small", "flexivit_base",
-                        "flexivit_large", "vit_base_patch16_xp_224", "vit_large_patch14_xp_224",
-                        "vit_huge_patch14_xp_224", "vit_small_patch14_dinov2", "vit_base_patch14_dinov2",
-                        "vit_large_patch14_dinov2", "vit_giant_patch14_dinov2", "vit_small_patch14_reg4_dinov2",
-                        "vit_base_patch14_reg4_dinov2", "vit_large_patch14_reg4_dinov2",
-                        "vit_giant_patch14_reg4_dinov2", "vit_base_patch16_siglip_224", "vit_base_patch16_siglip_256",
-                        "vit_base_patch16_siglip_384", "vit_base_patch16_siglip_512", "vit_large_patch16_siglip_256",
-                        "vit_large_patch16_siglip_384", "vit_so400m_patch14_siglip_224",
-                        "vit_so400m_patch14_siglip_384", "vit_medium_patch16_reg4_gap_256",
-                        "vit_base_patch16_reg4_gap_256", "vit_so150m_patch16_reg4_map_256",
-                        "vit_so150m_patch16_reg4_gap_256"]:
-        model = get_vision_transformer_model(model_type, num_classes)
-    elif model_type in ['vit_tiny_r_s16_p8_224', 'vit_tiny_r_s16_p8_384', 'vit_small_r26_s32_224',
-                        'vit_small_r26_s32_384', 'vit_base_r26_s32_224', 'vit_base_r50_s16_224',
-                        'vit_base_r50_s16_384', 'vit_large_r50_s32_224', 'vit_large_r50_s32_384',
-                        'vit_small_resnet26d_224', 'vit_small_resnet50d_s16_224', 'vit_base_resnet26d_224',
-                        'vit_base_resnet50d_224']:
-        model = get_vision_transformer_hybrid_model(model_type, num_classes)
-    elif model_type in ['vit_relpos_base_patch32_plus_rpn_256', 'vit_relpos_base_patch16_plus_240',
-                        'vit_relpos_small_patch16_224', 'vit_relpos_medium_patch16_224', 'vit_relpos_base_patch16_224',
-                        'vit_srelpos_small_patch16_224', 'vit_srelpos_medium_patch16_224',
-                        'vit_relpos_medium_patch16_cls_224', 'vit_relpos_base_patch16_cls_224',
-                        'vit_relpos_base_patch16_clsgap_224', 'vit_relpos_small_patch16_rpn_224',
-                        'vit_relpos_medium_patch16_rpn_224', 'vit_relpos_base_patch16_rpn_224']:
-        model = get_vision_transformer_relpos_model(model_type, num_classes)
-    elif model_type in ['samvit_base_patch16', 'samvit_large_patch16', 'samvit_huge_patch16',
-                        'samvit_base_patch16_224']:
-        model = get_vision_transformer_sam_model(model_type, num_classes)
-    elif model_type in ['volo_d1_224', 'volo_d1_384', 'volo_d2_224', 'volo_d2_384', 'volo_d3_224', 'volo_d3_448',
-                        'volo_d4_224', 'volo_d4_448', 'volo_d5_224', 'volo_d5_448', 'volo_d5_512']:
-        model = get_volo_model(model_type, num_classes)
-    elif model_type in ['vovnet39a', 'vovnet57a', 'ese_vovnet19b_slim_dw', 'ese_vovnet19b_slim_dw',
-                        'ese_vovnet19b_slim', 'ese_vovnet39b', 'ese_vovnet57b', 'ese_vovnet99b',
-                        'eca_vovnet39b', 'eca_vovnet39b_evos']:
-        model = get_vovnet_model(model_type, num_classes)
+    # Dictionary mapping model_type to retrieval functions
+    model_retrieval_functions = {
+        'VGG11': get_vgg_model, 'VGG11_BN': get_vgg_model, 'VGG13': get_vgg_model, 'VGG13_BN': get_vgg_model,
+        'VGG16': get_vgg_model, 'VGG16_BN': get_vgg_model, 'VGG19': get_vgg_model, 'VGG19_BN': get_vgg_model,
+        'vgg11': get_vgg_model, 'vgg11_bn': get_vgg_model, 'vgg13': get_vgg_model, 'vgg13_bn': get_vgg_model,
+        'vgg16': get_vgg_model, 'vgg16_bn': get_vgg_model, 'vgg19': get_vgg_model, 'vgg19_bn': get_vgg_model,
+        'visformer_tiny': get_visformer_model, 'visformer_small': get_visformer_model,
+        'ViT_B_16': get_vision_transformer_model, 'ViT_B_32': get_vision_transformer_model,
+        'ViT_L_16': get_vision_transformer_model, 'ViT_L_32': get_vision_transformer_model,
+        'ViT_H_14': get_vision_transformer_model, "vit_tiny_patch16_224": get_vision_transformer_model,
+        "vit_tiny_patch16_384": get_vision_transformer_model, "vit_small_patch32_224": get_vision_transformer_model,
+        "vit_small_patch32_384": get_vision_transformer_model, "vit_small_patch16_224": get_vision_transformer_model,
+        "vit_small_patch16_384": get_vision_transformer_model, "vit_small_patch8_224": get_vision_transformer_model,
+        "vit_base_patch32_224": get_vision_transformer_model, "vit_base_patch32_384": get_vision_transformer_model,
+        "vit_base_patch16_224": get_vision_transformer_model, "vit_base_patch16_384": get_vision_transformer_model,
+        "vit_base_patch8_224": get_vision_transformer_model, "vit_large_patch32_224": get_vision_transformer_model,
+        "vit_large_patch32_384": get_vision_transformer_model, "vit_large_patch16_224": get_vision_transformer_model,
+        "vit_large_patch16_384": get_vision_transformer_model, "vit_large_patch14_224": get_vision_transformer_model,
+        "vit_large_patch14_224": get_vision_transformer_model, "vit_giant_patch14_224": get_vision_transformer_model,
+        "vit_gigantic_patch14_224": get_vision_transformer_model, "vit_base_patch16_224_miil": get_vision_transformer_model,
+        "vit_medium_patch16_gap_240": get_vision_transformer_model, "vit_medium_patch16_gap_256": get_vision_transformer_model,
+        "vit_medium_patch16_gap_384": get_vision_transformer_model, "vit_base_patch16_gap_224": get_vision_transformer_model,
+        "vit_huge_patch14_gap_224": get_vision_transformer_model, "vit_huge_patch16_gap_448": get_vision_transformer_model,
+        "vit_giant_patch16_gap_224": get_vision_transformer_model, "vit_xsmall_patch16_clip_224": get_vision_transformer_model,
+        "vit_medium_patch32_clip_224": get_vision_transformer_model, "vit_medium_patch16_clip_224": get_vision_transformer_model,
+        "vit_betwixt_patch32_clip_224": get_vision_transformer_model, "vit_base_patch32_clip_224": get_vision_transformer_model,
+        "vit_base_patch32_clip_256": get_vision_transformer_model, "vit_base_patch32_clip_384": get_vision_transformer_model,
+        "vit_base_patch32_clip_448": get_vision_transformer_model, "vit_base_patch16_clip_224": get_vision_transformer_model,
+        "vit_base_patch16_clip_384": get_vision_transformer_model, "vit_large_patch14_clip_224": get_vision_transformer_model,
+        "vit_large_patch14_clip_336": get_vision_transformer_model, "vit_huge_patch14_clip_224": get_vision_transformer_model,
+        "vit_huge_patch14_clip_336": get_vision_transformer_model, "vit_huge_patch14_clip_378": get_vision_transformer_model,
+        "vit_giant_patch14_clip_224": get_vision_transformer_model, "vit_gigantic_patch14_clip_224": get_vision_transformer_model,
+        "vit_base_patch32_clip_quickgelu_224": get_vision_transformer_model, "vit_base_patch16_clip_quickgelu_224": get_vision_transformer_model,
+        "vit_large_patch14_clip_quickgelu_224": get_vision_transformer_model, "vit_large_patch14_clip_quickgelu_336": get_vision_transformer_model,
+        "vit_huge_patch14_clip_quickgelu_224": get_vision_transformer_model, "vit_huge_patch14_clip_quickgelu_378": get_vision_transformer_model,
+        "vit_base_patch32_plus_256": get_vision_transformer_model, "vit_base_patch16_plus_240": get_vision_transformer_model,
+        "vit_base_patch16_rpn_224": get_vision_transformer_model, "vit_small_patch16_36x1_224": get_vision_transformer_model,
+        "vit_small_patch16_18x2_224": get_vision_transformer_model, "vit_base_patch16_18x2_224": get_vision_transformer_model,
+        "eva_large_patch14_196": get_vision_transformer_model, "eva_large_patch14_336": get_vision_transformer_model,
+        "flexivit_small": get_vision_transformer_model, "flexivit_base": get_vision_transformer_model,
+        "flexivit_large": get_vision_transformer_model, "vit_base_patch16_xp_224": get_vision_transformer_model,
+        "vit_large_patch14_xp_224": get_vision_transformer_model, "vit_huge_patch14_xp_224": get_vision_transformer_model,
+        "vit_small_patch14_dinov2": get_vision_transformer_model, "vit_base_patch14_dinov2": get_vision_transformer_model,
+        "vit_large_patch14_dinov2": get_vision_transformer_model, "vit_giant_patch14_dinov2": get_vision_transformer_model,
+        "vit_small_patch14_reg4_dinov2": get_vision_transformer_model, "vit_base_patch14_reg4_dinov2": get_vision_transformer_model,
+        "vit_large_patch14_reg4_dinov2": get_vision_transformer_model, "vit_giant_patch14_reg4_dinov2": get_vision_transformer_model,
+        "vit_base_patch16_siglip_224": get_vision_transformer_model, "vit_base_patch16_siglip_256": get_vision_transformer_model,
+        "vit_base_patch16_siglip_384": get_vision_transformer_model, "vit_base_patch16_siglip_512": get_vision_transformer_model,
+        "vit_large_patch16_siglip_256": get_vision_transformer_model, "vit_large_patch16_siglip_384": get_vision_transformer_model,
+        "vit_so400m_patch14_siglip_224": get_vision_transformer_model, "vit_so400m_patch14_siglip_384": get_vision_transformer_model,
+        "vit_medium_patch16_reg4_gap_256": get_vision_transformer_model, "vit_base_patch16_reg4_gap_256": get_vision_transformer_model,
+        "vit_so150m_patch16_reg4_map_256": get_vision_transformer_model, "vit_so150m_patch16_reg4_gap_256": get_vision_transformer_model,
+        "vit_so150m_patch16_reg4_map_256": get_vision_transformer_model, "vit_so150m_patch16_reg4_gap_256": get_vision_transformer_model
+    }
 
-    return model
+    if model_type in model_retrieval_functions:
+        return model_retrieval_functions[model_type](model_type, num_classes)
+    else:
+        raise ValueError("Unknown model_type provided: {}".format(model_type))
 
 
 def get_family_model_w(model_type, num_classes):
