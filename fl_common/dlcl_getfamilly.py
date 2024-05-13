@@ -1,4 +1,4 @@
-aaimport os
+import os
 
 from fl_common.models.alexnet import get_alexnet_model
 from fl_common.models.beit import get_beit_model
