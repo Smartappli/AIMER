@@ -99,7 +99,7 @@ def get_family_model_a(model_type, num_classes):
     # Dictionary mapping model_type to retrieval functions
     model_retrieval_functions = {
         'AlexNet': get_alexnet_model
-    ]
+    }
 
     if model_type not in model_retrieval_functions:
         raise ValueError(f"Unknown model_type provided: {model_type}")
