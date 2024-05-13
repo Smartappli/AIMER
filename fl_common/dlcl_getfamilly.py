@@ -1,4 +1,4 @@
-import os
+aaimport os
 
 from fl_common.models.alexnet import get_alexnet_model
 from fl_common.models.beit import get_beit_model
@@ -689,7 +689,7 @@ def get_family_model_r(model_type, num_classes):
         'repghostnet_080': get_repghost_model, 'repghostnet_100': get_repghost_model, 'repghostnet_111': get_repghost_model,
         'repghostnet_130': get_repghost_model, 'repghostnet_150': get_repghost_model, 'repghostnet_200': get_repghost_model,
         'repvit_m1': get_repvit_model, 'repvit_m2': get_repvit_model, 'repvit_m3': get_repvit_model, 'repvit_m0_9': get_repvit_model,
-        'repvit_m1_0': get_repvit_model, 'repvit_m1_1': get_repvit_model, 'repvit_m1_5': get_repvit_model, 
+        'repvit_m1_0': get_repvit_model, 'repvit_m1_1': get_repvit_model, 'repvit_m1_5': get_repvit_model,
         'repvit_m2_3': get_repvit_model, 'res2net50_26w_4s': get_res2net_model, 'res2net101_26w_4s': get_res2net_model,
         'res2net50_26w_6s': get_res2net_model, 'res2net50_26w_8s': get_res2net_model, 'res2net50_48w_2s': get_res2net_model,
         'res2net50_14w_8s': get_res2net_model, 'res2next50': get_res2net_model, 'res2net50d': get_res2net_model,
@@ -724,8 +724,8 @@ def get_family_model_r(model_type, num_classes):
         'seresnextaa101d_32x8d': get_resnet_model, 'seresnextaa201d_32x8d': get_resnet_model, 'resnetrs50': get_resnet_model,
         'resnetrs101': get_resnet_model, 'resnetrs152': get_resnet_model, 'resnetrs200': get_resnet_model,
         'resnetrs270': get_resnet_model, 'resnetrs350': get_resnet_model, 'resnetrs420': get_resnet_model,
-        'resnetv2_50x1_bit': get_resnetv2_model, 'resnetv2_50x3_bit': get_resnetv2_model, 
-        'resnetv2_101x1_bit': get_resnetv2_model, 'resnetv2_101x3_bit': get_resnetv2_model, 
+        'resnetv2_50x1_bit': get_resnetv2_model, 'resnetv2_50x3_bit': get_resnetv2_model,
+        'resnetv2_101x1_bit': get_resnetv2_model, 'resnetv2_101x3_bit': get_resnetv2_model,
         'resnetv2_152x2_bit': get_resnetv2_model, 'resnetv2_152x4_bit': get_resnetv2_model,
         'resnetv2_50': get_resnetv2_model, 'resnetv2_50d': get_resnetv2_model, 'resnetv2_50t': get_resnetv2_model,
         'resnetv2_101': get_resnetv2_model, 'resnetv2_101d': get_resnetv2_model, 'resnetv2_152': get_resnetv2_model,
