@@ -96,12 +96,15 @@ def get_family_model_a(model_type, num_classes):
     Returns:
     - model: The requested model if available, otherwise 'Unknown'.
     """
-    model = "Unknown"
+    # Dictionary mapping model_type to retrieval functions
+    model_retrieval_functions = {
+        'AlexNet': get_alexnet_model
+    ]
 
-    if model_type in ['AlexNet']:
-        model = get_alexnet_model(alexnet_type='AlexNet', num_classes=num_classes)
+    if model_type not in model_retrieval_functions:
+        raise ValueError(f"Unknown model_type provided: {model_type}")
 
-    return model
+    return model_retrieval_functions[model_type](model_type, num_classes)
 
 
 def get_family_model_b(model_type, num_classes):
