@@ -24,9 +24,23 @@ class ProcessingVisionTransformerHybridTestCase(TestCase):
                 self.assertIsNotNone(model)
                 # Add more specific tests if needed
 
-    def test_invalid_type(self):
-        """Test for getting an invalid Vision Transformer Hybrid model type"""
+    def test_vision_transformer_hybrid_unknown_architecture(self):
+        """
+        Test case for handling unknown Vision Transformer Hybrid architecture in get_vision_transformer_hybrid
+        model function.
+
+        Raises:
+            AssertionError: If the assertion fails.
+            ValueError: If an unknown Vision Transformer Hybrid architecture is provided.
+        """
+        vision_type = 'UnknownArchitecture'
         num_classes = 10
-        with self.assertRaises(ValueError):
-            model = get_vision_transformer_hybrid_model('invalid_type', num_classes)
-            # Ensure it raises ValueError for an unknown vision_transformer_hybrid_type
+
+        with self.assertRaises(ValueError) as context:
+            # Attempt to get a Vision Transformer model with an unknown architecture
+            get_vision_transformer_hybrid_model(vision_type, num_classes)
+
+        self.assertEqual(
+            str(context.exception),
+            f'Unknown Vision Transformer Hybrid Architecture: {vision_type}'
+        )

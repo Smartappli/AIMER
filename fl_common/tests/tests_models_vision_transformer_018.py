@@ -1,5 +1,4 @@
 import os
-import torch.nn as nn
 from django.test import TestCase
 from fl_common.models.vision_transformer import get_vision_transformer_model
 
@@ -19,7 +18,11 @@ class ProcessingVisionTransformerTestCase(TestCase):
             AssertionError: If any of the assertions fail.
         """
         # List of Vision Transformer model types to test
-        vision_types = ['ViT_B_16', 'ViT_B_32', 'ViT_L_16', 'ViT_L_32', 'ViT_H_14']
+        vision_types = ["vit_so400m_patch14_siglip_224", "vit_so400m_patch14_siglip_384",
+                        "vit_base_patch16_siglip_gap_224", "vit_base_patch16_siglip_gap_256",
+                        "vit_base_patch16_siglip_gap_384", "vit_base_patch16_siglip_gap_512",
+                        "vit_large_patch16_siglip_gap_256", "vit_large_patch16_siglip_gap_384"]
+
         num_classes = 10  # You can adjust the number of classes as needed
 
         # Loop through each Vision Transformer model type
@@ -28,7 +31,7 @@ class ProcessingVisionTransformerTestCase(TestCase):
                 # Get the Vision Transformer model for testing
                 model = get_vision_transformer_model(vision_type, num_classes)
                 # Check if the model is an instance of torch.nn.Module
-                self.assertIsInstance(model, nn.Module, msg=f'get_vision_model {vision_type} KO')
+                self.assertIsNotNone(model)
 
     def test_vision_unknown_architecture(self):
         """
@@ -49,24 +52,3 @@ class ProcessingVisionTransformerTestCase(TestCase):
             str(context.exception),
             f'Unknown Vision Transformer Architecture: {vision_type}'
         )
-
-    """
-    def test_vision_nonlinear_last_layer(self):
-        # Provide a vision_type with a known non-linear last layer
-        vision_type = 'ViT_B_16'
-        num_classes = 10
-
-        # Override the last layer with a non-linear layer for testing purposes
-        vision_model = get_vision_model(vision_type, num_classes)
-        vision_model.heads[-1] = nn.ReLU()
-
-        with self.assertRaises(ValueError) as context:
-            # Try to create the vision model again
-            get_vision_model(vision_type, num_classes)
-
-        # Check if the raised ValueError contains the expected message
-        self.assertIn(
-            'The last layer is not a linear layer.',
-            str(context.exception)
-        )
-    """

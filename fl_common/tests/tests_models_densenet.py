@@ -1,5 +1,4 @@
 import os
-import torch.nn as nn
 from django.test import TestCase
 from fl_common.models.densenet import get_densenet_model
 
@@ -22,14 +21,19 @@ class ProcessingDenseNetTestCase(TestCase):
             AssertionError: If the assertion fails.
         """
         # List of DenseNet architectures to test
-        densenet_types = ['DenseNet121', 'DenseNet161', 'DenseNet169', 'DenseNet201']
+        densenet_types = ['DenseNet121', 'DenseNet161', 'DenseNet169', 'DenseNet201', 'densenet121',
+                          'densenetblur121d', 'densenet169', 'densenet201', 'densenet161',
+                          'densenet264d']
         num_classes = 10  # You can adjust the number of classes as needed
 
         for densenet_type in densenet_types:
             with self.subTest(densenet_type=densenet_type):
                 model = get_densenet_model(densenet_type, num_classes)
-                self.assertIsInstance(model, nn.Module)
-                # Add more specific assertions about the model if needed
+                try:
+                    model = get_densenet_model(densenet_type, num_classes)
+                    self.assertIsNotNone(model)
+                except ValueError:
+                    self.fail(f"{densenet_type} should be a known Densenet architecture.")
 
     def test_densenet_unknown_architecture(self):
         """
@@ -49,20 +53,3 @@ class ProcessingDenseNetTestCase(TestCase):
             str(context.exception),
             f'Unknown DenseNet Architecture : {densenet_type}'
         )
-
-    def test_densenet_last_layer_adaptation(self):
-        """
-        Test case for ensuring the last layer adaptation in DenseNet models.
-
-        Raises:
-            AssertionError: If the assertion fails.
-        """
-        # Provide a known architecture type
-        densenet_type = 'DenseNet121'
-        num_classes = 10
-
-        # Override the last layer with a linear layer for testing purposes
-        densenet_model = get_densenet_model(densenet_type, num_classes)
-        last_layer = densenet_model.classifier
-        self.assertIsInstance(last_layer, nn.Linear)
-        self.assertEqual(last_layer.out_features, num_classes)

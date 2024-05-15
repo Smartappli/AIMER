@@ -1,5 +1,7 @@
 import torch.nn as nn
 from torchvision import models
+from timm import create_model
+
 
 def get_efficientnet_model(efficientnet_type, num_classes):
     """
@@ -7,8 +9,30 @@ def get_efficientnet_model(efficientnet_type, num_classes):
 
     Args:
     - efficientnet_type (str): Type of EfficientNet architecture to be loaded.
-      Options: 'EfficientNetB0' to 'EfficientNetB7', 'EfficientNetV2S', 'EfficientNetV2M', 'EfficientNetV2L'.
-      Default is 'EfficientNetB0'.
+      Options: 'EfficientNetB0', 'EfficientNetB1', 'EfficientNetB2', 'EfficientNetB3', 'EfficientNetB4',
+               'EfficientNetB5', 'EfficientNetB6', 'EfficientNetB7', 'EfficientNetV2S', 'EfficientNetV2M',
+               'EfficientNetV2L', 'mnasnet_050', 'mnasnet_075', 'mnasnet_100', 'mnasnet_140', 'semnasnet_050',
+               'semnasnet_075', 'semnasnet_100', 'semnasnet_140', 'mnasnet_small', 'mobilenetv2_035', 'mobilenetv2_050',
+               'mobilenetv2_075', 'mobilenetv2_100', 'mobilenetv2_140', 'mobilenetv2_110d', 'mobilenetv2_120d',
+               'fbnetc_100', 'spnasnet_100', 'efficientnet_b0', 'efficientnet_b1', 'efficientnet_b2', 'efficientnet_b3',
+               'efficientnet_b4', 'efficientnet_b5', 'efficientnet_b6', 'efficientnet_b7', 'efficientnet_b8',
+               'efficientnet_l2', 'efficientnet_b0_gn', 'efficientnet_b0_g8_gn', 'efficientnet_b0_g16_evos',
+               'efficientnet_b3_gn', 'efficientnet_b3_g8_gn', 'efficientnet_es', 'efficientnet_es_pruned',
+               'efficientnet_em', 'efficientnet_el', 'efficientnet_el_pruned', 'efficientnet_cc_b0_4e',
+               'efficientnet_cc_b0_8e', 'efficientnet_cc_b1_8e', 'efficientnet_lite0', 'efficientnet_lite1',
+               'efficientnet_lite2', 'efficientnet_lite3', 'efficientnet_lite4', 'efficientnet_b1_pruned',
+               'efficientnet_b2_pruned', 'efficientnet_b3_pruned', 'efficientnetv2_rw_t', 'gc_efficientnetv2_rw_t',
+               'efficientnetv2_rw_s', 'efficientnetv2_rw_m', 'efficientnetv2_s', 'efficientnetv2_m', 'efficientnetv2_l',
+               'efficientnetv2_xl', 'tf_efficientnet_b0', 'tf_efficientnet_b1', 'tf_efficientnet_b2',
+               'tf_efficientnet_b3', 'tf_efficientnet_b4', 'tf_efficientnet_b5', 'tf_efficientnet_b6',
+               'tf_efficientnet_b7', 'tf_efficientnet_b8', 'tf_efficientnet_l2', 'tf_efficientnet_es',
+               'tf_efficientnet_em', 'tf_efficientnet_el', 'tf_efficientnet_cc_b0_4e', 'tf_efficientnet_cc_b0_8e',
+               'tf_efficientnet_cc_b1_8e', 'tf_efficientnet_lite0', 'tf_efficientnet_lite1', 'tf_efficientnet_lite2',
+               'tf_efficientnet_lite3', 'tf_efficientnet_lite4', 'tf_efficientnetv2_s', 'tf_efficientnetv2_m',
+               'tf_efficientnetv2_l', 'tf_efficientnetv2_xl', 'tf_efficientnetv2_b0', 'tf_efficientnetv2_b1',
+               'tf_efficientnetv2_b2', 'tf_efficientnetv2_b3', 'mixnet_s', 'mixnet_m', 'mixnet_l', 'mixnet_xl',
+               'mixnet_xxl', 'tf_mixnet_s', 'tf_mixnet_m', 'tf_mixnet_l', 'tinynet_a', 'tinynet_b', 'tinynet_c',
+               'tinynet_d', 'tinynet_e'
     - num_classes (int): Number of output classes for the modified model. Default is 1000.
 
     Returns:
@@ -16,90 +40,75 @@ def get_efficientnet_model(efficientnet_type, num_classes):
 
     Raises:
     - ValueError: If the provided efficientnet_type is not recognized.
-
-    Note:
-    - This function loads a pre-trained EfficientNet model and modifies its last fully connected layer
-      to match the specified number of output classes.
-
-    Example Usage:
-    ```python
-    # Obtain an EfficientNetB0 model with 10 output classes
-    model = get_efficientnet_model(efficientnet_type='EfficientNetB0', num_classes=10)
-    ```
     """
+    # Mapping of vision types to their corresponding torchvision models and weights
+    torchvision_models = {
+        'EfficientNetB0': (models.efficientnet_b0, models.EfficientNet_B0_Weights),
+        'EfficientNetB1': (models.efficientnet_b1, models.EfficientNet_B1_Weights),
+        'EfficientNetB2': (models.efficientnet_b2, models.EfficientNet_B2_Weights),
+        'EfficientNetB3': (models.efficientnet_b3, models.EfficientNet_B3_Weights),
+        'EfficientNetB4': (models.efficientnet_b4, models.EfficientNet_B4_Weights),
+        'EfficientNetB5': (models.efficientnet_b5, models.EfficientNet_B5_Weights),
+        'EfficientNetB6': (models.efficientnet_b6, models.EfficientNet_B6_Weights),
+        'EfficientNetB7': (models.efficientnet_b7, models.EfficientNet_B7_Weights),
+        'EfficientNetV2S': (models.efficientnet_v2_s, models.EfficientNet_V2_S_Weights),
+        'EfficientNetV2M': (models.efficientnet_v2_m, models.EfficientNet_V2_M_Weights),
+        'EfficientNetV2L': (models.efficientnet_v2_l, models.EfficientNet_V2_L_Weights)
+    }
 
-    # Load the pre-trained version of EfficientNet
-    if efficientnet_type == 'EfficientNetB0':
+    timm_models = [
+        "mnasnet_050", "mnasnet_075", "mnasnet_100", "mnasnet_140", "semnasnet_050",
+        "semnasnet_075", "semnasnet_100", "semnasnet_140", "mnasnet_small", "mobilenetv2_035",
+        "mobilenetv2_050", "mobilenetv2_075", "mobilenetv2_100", "mobilenetv2_140",
+        "mobilenetv2_110d", "mobilenetv2_120d", "fbnetc_100", "spnasnet_100", "efficientnet_b0",
+        "efficientnet_b1", "efficientnet_b2", "efficientnet_b3", "efficientnet_b4",
+        "efficientnet_b5", "efficientnet_b6", "efficientnet_b7", "efficientnet_b8",
+        "efficientnet_l2", "efficientnet_b0_gn", "efficientnet_b0_g8_gn",
+        "efficientnet_b0_g16_evos", "efficientnet_b3_gn", "efficientnet_b3_g8_gn",
+        "efficientnet_es", "efficientnet_es_pruned", "efficientnet_em", "efficientnet_el",
+        "efficientnet_el_pruned", "efficientnet_cc_b0_4e", "efficientnet_cc_b0_8e",
+        "efficientnet_cc_b1_8e", "efficientnet_lite0", "efficientnet_lite1",
+        "efficientnet_lite2", "efficientnet_lite3", "efficientnet_lite4",
+        "efficientnet_b1_pruned", "efficientnet_b2_pruned", "efficientnet_b3_pruned",
+        "efficientnetv2_rw_t", "gc_efficientnetv2_rw_t", "efficientnetv2_rw_s",
+        "efficientnetv2_rw_m", "efficientnetv2_s", "efficientnetv2_m",
+        "efficientnetv2_l", "efficientnetv2_xl", "tf_efficientnet_b0",
+        "tf_efficientnet_b1", "tf_efficientnet_b2", "tf_efficientnet_b3",
+        "tf_efficientnet_b4", "tf_efficientnet_b5", "tf_efficientnet_b6",
+        "tf_efficientnet_b7", "tf_efficientnet_b8", "tf_efficientnet_l2",
+        "tf_efficientnet_es", "tf_efficientnet_em", "tf_efficientnet_el",
+        "tf_efficientnet_cc_b0_4e", "tf_efficientnet_cc_b0_8e", "tf_efficientnet_cc_b1_8e",
+        "tf_efficientnet_lite0", "tf_efficientnet_lite1", "tf_efficientnet_lite2",
+        "tf_efficientnet_lite3", "tf_efficientnet_lite4", "tf_efficientnetv2_s",
+        "tf_efficientnetv2_m", "tf_efficientnetv2_l", "tf_efficientnetv2_xl",
+        "tf_efficientnetv2_b0", "tf_efficientnetv2_b1", "tf_efficientnetv2_b2",
+        "tf_efficientnetv2_b3", "mixnet_s", "mixnet_m", "mixnet_l", "mixnet_xl",
+        "mixnet_xxl", "tf_mixnet_s", "tf_mixnet_m", "tf_mixnet_l", "tinynet_a",
+        "tinynet_b", "tinynet_c", "tinynet_d", "tinynet_e"
+    ]
+
+    # Check if the vision type is from torchvision
+    if efficientnet_type in torchvision_models:
+        model_func, weights_class = torchvision_models[efficientnet_type]
         try:
-            weights = models.EfficientNet_B0_Weights.DEFAULT
-            efficientnet_model = models.efficientnet_b0(weights=weights)
-        except:
-            efficientnet_model = models.efficientnet_b0(weights=None)
-    elif efficientnet_type == 'EfficientNetB1':
+            weights = weights_class.DEFAULT
+            efficientnet_model = model_func(weights=weights)
+        except RuntimeError as e:
+            print(f"{efficientnet_type} - Error loading pretrained model: {e}")
+            efficientnet_model = model_func(weights=None)
+
+        # Modify last layer to suit number of classes
+        num_features = efficientnet_model.classifier[-1].in_features
+        efficientnet_model.classifier[-1] = nn.Linear(num_features, num_classes)
+
+    # Check if the vision type is from the 'timm' library
+    elif efficientnet_type in timm_models:
         try:
-            weights = models.EfficientNet_B1_Weights.DEFAULT
-            efficientnet_model = models.efficientnet_b1(weights=weights)
-        except:
-            efficientnet_model = models.efficientnet_b1(weights=None)
-    elif efficientnet_type == 'EfficientNetB2':
-        try:
-            weights = models.EfficientNet_B2_Weights.DEFAULT
-            efficientnet_model = models.efficientnet_b2(weights=weights)
-        except:
-            efficientnet_model = models.efficientnet_b2(weights=None)
-    elif efficientnet_type == 'EfficientNetB3':
-        try:
-            weights = models.EfficientNet_B3_Weights.DEFAULT
-            efficientnet_model = models.efficientnet_b3(weights=weights)
-        except:
-            efficientnet_model = models.efficientnet_b3(weights=None)
-    elif efficientnet_type == 'EfficientNetB4':
-        try:
-            weights = models.EfficientNet_B4_Weights.DEFAULT
-            efficientnet_model = models.efficientnet_b4(weights=weights)
-        except:
-            efficientnet_model = models.efficientnet_b4(weights=None)
-    elif efficientnet_type == 'EfficientNetB5':
-        try:
-            weights = models.EfficientNet_B5_Weights.DEFAULT
-            efficientnet_model = models.efficientnet_b5(weights=weights)
-        except:
-            efficientnet_model = models.efficientnet_b5(weights=None)
-    elif efficientnet_type == 'EfficientNetB6':
-        try:
-            weights = models.EfficientNet_B6_Weights.DEFAULT
-            efficientnet_model = models.efficientnet_b6(weights=weights)
-        except:
-            efficientnet_model = models.efficientnet_b6(weights=None)
-    elif efficientnet_type == 'EfficientNetB7':
-        try:
-            weights = models.EfficientNet_B7_Weights.DEFAULT
-            efficientnet_model = models.efficientnet_b7(weights=weights)
-        except:
-            efficientnet_model = models.efficientnet_b7(weights=None)
-    elif efficientnet_type == 'EfficientNetV2S':
-        try:
-            weights = models.EfficientNet_V2_S_Weights.DEFAULT
-            efficientnet_model = models.efficientnet_v2_s(weights=weights)
-        except:
-            efficientnet_model = models.efficientnet_v2_s(weights=None)
-    elif efficientnet_type == 'EfficientNetV2M':
-        try:
-            weights = models.EfficientNet_V2_M_Weights.DEFAULT
-            efficientnet_model = models.efficientnet_v2_m(weights=weights)
-        except:
-            efficientnet_model = models.efficientnet_v2_m(weights=None)
-    elif efficientnet_type == 'EfficientNetV2L':
-        try:
-            weights = models.EfficientNet_V2_L_Weights.DEFAULT
-            efficientnet_model = models.efficientnet_v2_l(weights=weights)
-        except:
-            efficientnet_model = models.efficientnet_v2_l(weights=None)
+            efficientnet_model = create_model(efficientnet_type, pretrained=True, num_classes=num_classes)
+        except RuntimeError as e:
+            print(f"{efficientnet_type} - Error loading pretrained model: {e}")
+            efficientnet_model = create_model(efficientnet_type, pretrained=False, num_classes=num_classes)
     else:
         raise ValueError(f'Unknown EfficientNet Architecture: {efficientnet_type}')
-
-    # Modify last layer to suit number of classes
-    num_features = efficientnet_model.classifier[-1].in_features
-    efficientnet_model.classifier[-1] = nn.Linear(num_features, num_classes)
 
     return efficientnet_model

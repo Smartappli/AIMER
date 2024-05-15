@@ -16,34 +16,12 @@ def get_efficientformer_model(efficientformer_type, num_classes):
     Raises:
         ValueError: If the specified efficientformer_type is not one of the supported architectures.
     """
-    if efficientformer_type == 'efficientformer_l1':
-        try:
-            efficientformer_model = create_model('efficientformer_l1',
-                                                 pretrained=True,
-                                                 num_classes=num_classes)
-        except:
-            efficientformer_model = create_model('efficientformer_l1',
-                                                 pretrained=False,
-                                                 num_classes=num_classes)
-    elif efficientformer_type == 'efficientformer_l3':
-        try:
-            efficientformer_model = create_model('efficientformer_l3',
-                                                 pretrained=True,
-                                                 num_classes=num_classes)
-        except:
-            efficientformer_model = create_model('efficientformer_l3',
-                                                 pretrained=False,
-                                                 num_classes=num_classes)
-    elif efficientformer_type == 'efficientformer_l7':
-        try:
-            efficientformer_model = create_model('efficientformer_l7',
-                                                 pretrained=True,
-                                                 num_classes=num_classes)
-        except:
-            efficientformer_model = create_model('efficientformer_l7',
-                                                 pretrained=False,
-                                                 num_classes=num_classes)
-    else:
+    supported_types = ['efficientformer_l1', 'efficientformer_l3', 'efficientformer_l7']
+    if efficientformer_type not in supported_types:
         raise ValueError(f'Unknown Efficientformer Architecture: {efficientformer_type}')
 
-    return efficientformer_model
+    try:
+        return create_model(efficientformer_type, pretrained=True, num_classes=num_classes)
+    except RuntimeError as e:
+        print(f"{efficientformer_type} - Error loading pretrained model: {e}")
+        return create_model(efficientformer_type, pretrained=False, num_classes=num_classes)

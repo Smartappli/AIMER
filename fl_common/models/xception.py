@@ -7,74 +7,26 @@ def get_xception_model(xception_type, num_classes):
     last layer to accommodate the given number of classes.
 
     Parameters:
-    - xception_type (str): Type of Xception architecture, supported types:
-        - 'legacy_xception'
-        - 'xception41'
-        - 'xception65'
-        - 'xception71'
-        - 'xception41p'
-        - 'xception65p'
+    - xception_type (str): Type of Xception architecture.
     - num_classes (int): Number of output classes for the modified last layer.
 
     Returns:
     - torch.nn.Module: Modified Xception model with the specified architecture
       and last layer adapted for the given number of classes.
+
+    Raises:
+    - ValueError: If an unknown Xception architecture type is provided.
     """
-    if xception_type == 'legacy_xception':
-        try:
-            xception_model = create_model('legacy_xception',
-                                          pretrained=True,
-                                          num_classes=num_classes)
-        except:
-            xception_model = create_model('legacy_xception',
-                                          pretrained=False,
-                                          num_classes=num_classes)
-    elif xception_type == 'xception41':
-        try:
-            xception_model = create_model('xception41',
-                                          pretrained=True,
-                                          num_classes=num_classes)
-        except:
-            xception_model = create_model('xception41',
-                                          pretrained=False,
-                                          num_classes=num_classes)
-    elif xception_type == 'xception65':
-        try:
-            xception_model = create_model('xception65',
-                                          pretrained=True,
-                                          num_classes=num_classes)
-        except:
-            xception_model = create_model('xception65',
-                                          pretrained=False,
-                                          num_classes=num_classes)
-    elif xception_type == 'xception71':
-        try:
-            xception_model = create_model('xception71',
-                                          pretrained=True,
-                                          num_classes=num_classes)
-        except:
-            xception_model = create_model('xception71',
-                                          pretrained=False,
-                                          num_classes=num_classes)
-    elif xception_type == 'xception41p':
-        try:
-            xception_model = create_model('xception41',
-                                          pretrained=True,
-                                          num_classes=num_classes)
-        except:
-            xception_model = create_model('xception41',
-                                          pretrained=False,
-                                          num_classes=num_classes)
-    elif xception_type == 'xception65p':
-        try:
-            xception_model = create_model('xception65p',
-                                          pretrained=True,
-                                          num_classes=num_classes)
-        except:
-            xception_model = create_model('xception65p',
-                                          pretrained=False,
-                                          num_classes=num_classes)
-    else:
+    valid_types = {
+        'legacy_xception', 'xception41', 'xception65', 'xception71',
+        'xception41p', 'xception65p'
+    }
+
+    if xception_type not in valid_types:
         raise ValueError(f'Unknown Xception Architecture: {xception_type}')
 
-    return xception_model
+    try:
+        return create_model(xception_type, pretrained=True, num_classes=num_classes)
+    except RuntimeError as e:
+        print(f"{xception_type} - Error loading pretrained model: {e}")
+        return create_model(xception_type, pretrained=False, num_classes=num_classes)

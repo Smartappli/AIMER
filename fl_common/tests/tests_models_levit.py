@@ -1,6 +1,4 @@
 import os
-import torch
-import torch.nn as nn
 from django.test import TestCase
 from fl_common.models.levit import get_levit_model
 

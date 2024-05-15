@@ -6,16 +6,7 @@ def get_res2net_model(res2net_type, num_classes):
     Returns a Res2Net model based on the provided Res2Net type and number of classes.
 
     Args:
-    - res2net_type (str): The type of Res2Net model. It should be one of the following:
-        - 'res2net50_26w_4s'
-        - 'res2net101_26w_4s'
-        - 'res2net50_26w_6s'
-        - 'res2net50_26w_8s'
-        - 'res2net50_48w_2s'
-        - 'res2net50_14w_8s'
-        - 'res2next50'
-        - 'res2net50d'
-        - 'res2net101d'
+    - res2net_type (str): The type of Res2Net model.
     - num_classes (int): The number of output classes for the model.
 
     Returns:
@@ -24,88 +15,17 @@ def get_res2net_model(res2net_type, num_classes):
     Raises:
     - ValueError: If the provided res2net_type is not recognized.
     """
-    if res2net_type == 'res2net50_26w_4s':
-        try:
-            res2net_model = create_model('res2net50_26w_4s',
-                                         pretrained=True,
-                                         num_classes=num_classes)
-        except:
-            res2net_model = create_model('res2net50_26w_4s',
-                                         pretrained=False,
-                                         num_classes=num_classes)
-    elif res2net_type == 'res2net101_26w_4s':
-        try:
-            res2net_model = create_model('res2net101_26w_4s',
-                                         pretrained=True,
-                                         num_classes=num_classes)
-        except:
-            res2net_model = create_model('res2net101_26w_4s',
-                                         pretrained=False,
-                                         num_classes=num_classes)
-    elif res2net_type == 'res2net50_26w_6s':
-        try:
-            res2net_model = create_model('res2net50_26w_6s',
-                                         pretrained=True,
-                                         num_classes=num_classes)
-        except:
-            res2net_model = create_model('res2net50_26w_6s',
-                                         pretrained=False,
-                                         num_classes=num_classes)
-    elif res2net_type == 'res2net50_26w_8s':
-        try:
-            res2net_model = create_model('res2net50_26w_8s',
-                                         pretrained=True,
-                                         num_classes=num_classes)
-        except:
-            res2net_model = create_model('res2net50_26w_8s',
-                                         pretrained=False,
-                                         num_classes=num_classes)
-    elif res2net_type == 'res2net50_48w_2s':
-        try:
-            res2net_model = create_model('res2net50_48w_2s',
-                                         pretrained=True,
-                                         num_classes=num_classes)
-        except:
-            res2net_model = create_model('res2net50_48w_2s',
-                                         pretrained=False,
-                                         num_classes=num_classes)
-    elif res2net_type == 'res2net50_14w_8s':
-        try:
-            res2net_model = create_model('res2net50_14w_8s',
-                                         pretrained=True,
-                                         num_classes=num_classes)
-        except:
-            res2net_model = create_model('res2net50_14w_8s',
-                                         pretrained=False,
-                                         num_classes=num_classes)
-    elif res2net_type == 'res2next50':
-        try:
-            res2net_model = create_model('res2next50',
-                                         pretrained=True,
-                                         num_classes=num_classes)
-        except:
-            res2net_model = create_model('res2next50',
-                                         pretrained=False,
-                                         num_classes=num_classes)
-    elif res2net_type == 'res2net50d':
-        try:
-            res2net_model = create_model('res2net50d',
-                                         pretrained=True,
-                                         num_classes=num_classes)
-        except:
-            res2net_model = create_model('res2net50d',
-                                         pretrained=False,
-                                         num_classes=num_classes)
-    elif res2net_type == 'res2net101d':
-        try:
-            res2net_model = create_model('res2net101d',
-                                         pretrained=True,
-                                         num_classes=num_classes)
-        except:
-            res2net_model = create_model('res2net101d',
-                                         pretrained=False,
-                                         num_classes=num_classes)
-    else:
-        raise ValueError(f'Unknown Res2net Architecture: {res2net_type}')
+    valid_types = {
+        'res2net50_26w_4s', 'res2net101_26w_4s', 'res2net50_26w_6s',
+        'res2net50_26w_8s', 'res2net50_48w_2s', 'res2net50_14w_8s',
+        'res2next50', 'res2net50d', 'res2net101d'
+    }
 
-    return res2net_model
+    if res2net_type not in valid_types:
+        raise ValueError(f'Unknown Res2Net Architecture: {res2net_type}')
+
+    try:
+        return create_model(res2net_type, pretrained=True, num_classes=num_classes)
+    except RuntimeError as e:
+        print(f"{res2net_type} - Error loading pretrained model: {e}")
+        return create_model(res2net_type, pretrained=False, num_classes=num_classes)

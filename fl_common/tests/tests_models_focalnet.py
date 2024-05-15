@@ -22,18 +22,9 @@ class ProcessingFastVitTestCase(TestCase):
             AssertionError: If any known FocalNet architecture fails to be created.
         """
         known_focalnet_types = [
-            "focalnet_tiny_srf",
-            "focalnet_small_srf",
-            "focalnet_base_srf",
-            "focalnet_tiny_lrf",
-            "focalnet_small_lrf",
-            "focalnet_base_lrf",
-            "focalnet_large_fl3",
-            "focalnet_large_fl4",
-            "focalnet_xlarge_fl3",
-            "focalnet_xlarge_fl4",
-            "focalnet_huge_fl3",
-            "focalnet_huge_fl4"
+            "focalnet_tiny_srf", "focalnet_small_srf", "focalnet_base_srf", "focalnet_tiny_lrf",
+            "focalnet_small_lrf", "focalnet_base_lrf", "focalnet_large_fl3", "focalnet_large_fl4",
+            "focalnet_xlarge_fl3", "focalnet_xlarge_fl4", "focalnet_huge_fl3", "focalnet_huge_fl4"
         ]
         num_classes = 1000  # Example number of classes
 
@@ -47,9 +38,11 @@ class ProcessingFastVitTestCase(TestCase):
 
     def test_unknown_focalnet_type(self):
         """
-        Test case to ensure that attempting to create a FocalNet model with an unknown architecture type raises a ValueError.
+        Test case to ensure that attempting to create a FocalNet model with an unknown architecture type raises a
+        ValueError.
 
-        Verifies that a ValueError is raised when attempting to create a FocalNet model with an unknown architecture type.
+        Verifies that a ValueError is raised when attempting to create a FocalNet model with an unknown architecture
+        type.
 
         Raises:
             AssertionError: If creating a FocalNet model with an unknown architecture type does not raise a ValueError.

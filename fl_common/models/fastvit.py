@@ -15,70 +15,16 @@ def get_fastvit_model(fastvit_type, num_classes):
     Raises:
     - ValueError: If an unknown FastViT architecture type is provided.
     """
-    if fastvit_type == 'fastvit_t8':
-        try:
-            fastvit_model = create_model('fastvit_t8',
-                                         pretrained=True,
-                                         num_classes=num_classes)
-        except:
-            fastvit_model = create_model('fastvit_t8',
-                                         pretrained=False,
-                                         num_classes=num_classes)
-    elif fastvit_type == 'fastvit_t12':
-        try:
-            fastvit_model = create_model('fastvit_t12',
-                                         pretrained=True,
-                                         num_classes=num_classes)
-        except:
-            fastvit_model = create_model('fastvit_t12',
-                                         pretrained=False,
-                                         num_classes=num_classes)
-    elif fastvit_type == 'fastvit_s12':
-        try:
-            fastvit_model = create_model('fastvit_s12',
-                                         pretrained=True,
-                                         num_classes=num_classes)
-        except:
-            fastvit_model = create_model('fastvit_s12',
-                                         pretrained=False,
-                                         num_classes=num_classes)
-    elif fastvit_type == 'fastvit_sa12':
-        try:
-            fastvit_model = create_model('fastvit_sa12',
-                                         pretrained=True,
-                                         num_classes=num_classes)
-        except:
-            fastvit_model = create_model('fastvit_sa12',
-                                         pretrained=False,
-                                         num_classes=num_classes)
-    elif fastvit_type == 'fastvit_sa24':
-        try:
-            fastvit_model = create_model('fastvit_sa24',
-                                         pretrained=True,
-                                         num_classes=num_classes)
-        except:
-            fastvit_model = create_model('fastvit_sa24',
-                                         pretrained=False,
-                                         num_classes=num_classes)
-    elif fastvit_type == 'fastvit_sa36':
-        try:
-            fastvit_model = create_model('fastvit_sa36',
-                                         pretrained=True,
-                                         num_classes=num_classes)
-        except:
-            fastvit_model = create_model('fastvit_sa36',
-                                         pretrained=False,
-                                         num_classes=num_classes)
-    elif fastvit_type == 'fastvit_ma36':
-        try:
-            fastvit_model = create_model('fastvit_ma36',
-                                         pretrained=True,
-                                         num_classes=num_classes)
-        except:
-            fastvit_model = create_model('fastvit_ma36',
-                                         pretrained=False,
-                                         num_classes=num_classes)
-    else:
-        raise ValueError(f'Unknown Fastvit Architecture: {fastvit_type}')
+    supported_types = {
+        'fastvit_t8', 'fastvit_t12', 'fastvit_s12', 'fastvit_sa12',
+        'fastvit_sa24', 'fastvit_sa36', 'fastvit_ma36'
+    }
 
-    return fastvit_model
+    if fastvit_type not in supported_types:
+        raise ValueError(f'Unknown FastViT Architecture: {fastvit_type}')
+
+    try:
+        return create_model(fastvit_type, pretrained=True, num_classes=num_classes)
+    except RuntimeError as e:
+        print(f"{fastvit_type} - Error loading pretrained model: {e}")
+        return create_model(fastvit_type, pretrained=False, num_classes=num_classes)

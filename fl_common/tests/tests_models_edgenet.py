@@ -17,7 +17,8 @@ class ProcessingEdgenetTestCase(TestCase):
         Raises:
             AssertionError: If any of the assertions fail.
         """
-        edgenet_types = ["edgenext_xx_small", "edgenext_x_small", "edgenext_small", "edgenext_base", "edgenext_small_rw"]
+        edgenet_types = ["edgenext_xx_small", "edgenext_x_small", "edgenext_small", "edgenext_base",
+                         "edgenext_small_rw"]
         num_classes = 10
 
         for edgenet_type in edgenet_types:

@@ -24,52 +24,19 @@ def get_edgenet_model(edgenet_type, num_classes):
     Example:
     >>> model = get_edgenet_model("edgenext_small", num_classes=10)
     """
-    if edgenet_type == "edgenext_xx_small":
-        try:
-            edgenet_model = create_model('edgenext_xx_small',
-                                         pretrained=True,
-                                         num_classes=num_classes)
-        except:
-            edgenet_model = create_model('edgenext_xx_small',
-                                         pretrained=False,
-                                         num_classes=num_classes)
-    elif edgenet_type == "edgenext_x_small":
-        try:
-            edgenet_model = create_model('edgenext_x_small',
-                                         pretrained=True,
-                                         num_classes=num_classes)
-        except:
-            edgenet_model = create_model('edgenext_x_small',
-                                         pretrained=False,
-                                         num_classes=num_classes)
-    elif edgenet_type == "edgenext_small":
-        try:
-            edgenet_model = create_model('edgenext_small',
-                                         pretrained=True,
-                                         num_classes=num_classes)
-        except:
-            edgenet_model = create_model('edgenext_small',
-                                         pretrained=False,
-                                         num_classes=num_classes)
-    elif edgenet_type == "edgenext_base":
-        try:
-            edgenet_model = create_model('edgenext_base',
-                                         pretrained=True,
-                                         num_classes=num_classes)
-        except:
-            edgenet_model = create_model('edgenext_base',
-                                         pretrained=False,
-                                         num_classes=num_classes)
-    elif edgenet_type == "edgenext_small_rw":
-        try:
-            edgenet_model = create_model('edgenext_small_rw',
-                                         pretrained=True,
-                                         num_classes=num_classes)
-        except:
-            edgenet_model = create_model('edgenext_small_rw',
-                                         pretrained=False,
-                                         num_classes=num_classes)
-    else:
-        raise ValueError(f'Unknown Inception Next Architecture: {edgenet_type}')
+    edgenet_options = [
+        "edgenext_xx_small",
+        "edgenext_x_small",
+        "edgenext_small",
+        "edgenext_base",
+        "edgenext_small_rw"
+    ]
 
-    return edgenet_model
+    if edgenet_type not in edgenet_options:
+        raise ValueError(f'Unknown EdgeNet Architecture: {edgenet_type}')
+
+    try:
+        return create_model(edgenet_type, pretrained=True, num_classes=num_classes)
+    except RuntimeError as e:
+        print(f"{edgenet_type} - Error loading pretrained model: {e}")
+        return create_model(edgenet_type, pretrained=False, num_classes=num_classes)

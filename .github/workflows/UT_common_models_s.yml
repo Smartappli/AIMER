@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [ "3.10" ]
+        python-version: ["3.12"]
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
@@ -53,11 +53,11 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
+          cache: 'pip'
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-          pip install git+https://github.com/pycaret/pycaret.git
       - name: Fl_common Models Selecsls
         run: |
           python manage.py test fl_common.tests.tests_models_selecsls
@@ -66,7 +66,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [ "3.10" ]
+        python-version: ["3.12"]
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     needs: tests-selecsls-models
@@ -108,6 +108,7 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
+          cache: 'pip'
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
@@ -120,7 +121,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [ "3.10" ]
+        python-version: ["3.12"]
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     needs: tests-senet-models
@@ -162,6 +163,7 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
+          cache: 'pip'
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
@@ -174,7 +176,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.10"]
+        python-version: ["3.12"]
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     needs: tests-sequencer-models
@@ -216,6 +218,7 @@ jobs:
       uses: actions/setup-python@v5
       with:
         python-version: ${{ matrix.python-version }}
+        cache: 'pip'
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
@@ -228,7 +231,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.10"]
+        python-version: ["3.12"]
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     needs: tests-shufflenet-models
@@ -270,6 +273,7 @@ jobs:
       uses: actions/setup-python@v5
       with:
         python-version: ${{ matrix.python-version }}
+        cache: 'pip'
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
@@ -282,7 +286,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.10"]
+        python-version: ["3.12"]
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     needs: tests-sknet-models
@@ -324,6 +328,7 @@ jobs:
       uses: actions/setup-python@v5
       with:
         python-version: ${{ matrix.python-version }}
+        cache: 'pip'
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
@@ -336,7 +341,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.10"]
+        python-version: ["3.12"]
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     needs: tests-squeezenet-models
@@ -378,6 +383,7 @@ jobs:
       uses: actions/setup-python@v5
       with:
         python-version: ${{ matrix.python-version }}
+        cache: 'pip'
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
@@ -385,3 +391,223 @@ jobs:
     - name: Fl_common Models Swin Transformer
       run: |
         python manage.py test fl_common.tests.tests_models_swin_transformer
+
+  tests-swin_transformer-v2-models:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.12"]
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    needs: tests-swin_transformer-models
+    steps:
+    - name: ⌛ rate 1
+      shell: pwsh
+      run: |
+        # add random sleep since we run on fixed schedule
+        sleep (get-random -max 1200)
+        
+        # get currently authenticated user rate limit info
+        $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
+    
+        # if we don't have at least 100 requests left, wait until reset
+        if ($rate.remaining -lt 350) {
+            $wait = ($rate.reset - (Get-Date (Get-Date).ToUniversalTime() -UFormat %s))
+            echo "Rate limit remaining is $($rate.remaining), waiting for $($wait) seconds to reset"
+            sleep $wait
+            $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
+            echo "Rate limit has reset to $($rate.remaining) requests"
+        }
+    - name: Free Disk Space (Ubuntu)
+      uses: jlumbroso/free-disk-space@main
+      with:
+        # this might remove tools that are actually needed,
+        # if set to "true" but frees about 6 GB
+        tool-cache: false
+
+        # all of these default to true, but feel free to set to
+        # "false" if necessary for your workflow
+        android: true
+        dotnet: true
+        haskell: true
+        large-packages: true
+        docker-images: true
+        swap-storage: true
+    - uses: actions/checkout@v4
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ matrix.python-version }}
+        cache: 'pip'
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    - name: Fl_common Models Swin Transformer v2
+      run: |
+        python manage.py test fl_common.tests.tests_models_swin_transformer_v2
+
+  tests-swin_transformer-v2-cr-001-models:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.12"]
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    needs: tests-swin_transformer-v2-models
+    steps:
+    - name: ⌛ rate 1
+      shell: pwsh
+      run: |
+        # add random sleep since we run on fixed schedule
+        sleep (get-random -max 1200)
+        
+        # get currently authenticated user rate limit info
+        $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
+    
+        # if we don't have at least 100 requests left, wait until reset
+        if ($rate.remaining -lt 350) {
+            $wait = ($rate.reset - (Get-Date (Get-Date).ToUniversalTime() -UFormat %s))
+            echo "Rate limit remaining is $($rate.remaining), waiting for $($wait) seconds to reset"
+            sleep $wait
+            $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
+            echo "Rate limit has reset to $($rate.remaining) requests"
+        }
+    - name: Free Disk Space (Ubuntu)
+      uses: jlumbroso/free-disk-space@main
+      with:
+        # this might remove tools that are actually needed,
+        # if set to "true" but frees about 6 GB
+        tool-cache: false
+
+        # all of these default to true, but feel free to set to
+        # "false" if necessary for your workflow
+        android: true
+        dotnet: true
+        haskell: true
+        large-packages: true
+        docker-images: true
+        swap-storage: true
+    - uses: actions/checkout@v4
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ matrix.python-version }}
+        cache: 'pip'
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    - name: Fl_common Models Swin Transformer v2 cr 001
+      run: |
+        python manage.py test fl_common.tests.tests_models_swin_transformer_v2_cr_001
+        
+  tests-swin_transformer-v2-cr-002-models:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.12"]
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    needs: tests-swin_transformer-v2-models
+    steps:
+    - name: ⌛ rate 1
+      shell: pwsh
+      run: |
+        # add random sleep since we run on fixed schedule
+        sleep (get-random -max 1200)
+        
+        # get currently authenticated user rate limit info
+        $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
+    
+        # if we don't have at least 100 requests left, wait until reset
+        if ($rate.remaining -lt 350) {
+            $wait = ($rate.reset - (Get-Date (Get-Date).ToUniversalTime() -UFormat %s))
+            echo "Rate limit remaining is $($rate.remaining), waiting for $($wait) seconds to reset"
+            sleep $wait
+            $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
+            echo "Rate limit has reset to $($rate.remaining) requests"
+        }
+    - name: Free Disk Space (Ubuntu)
+      uses: jlumbroso/free-disk-space@main
+      with:
+        # this might remove tools that are actually needed,
+        # if set to "true" but frees about 6 GB
+        tool-cache: false
+
+        # all of these default to true, but feel free to set to
+        # "false" if necessary for your workflow
+        android: true
+        dotnet: true
+        haskell: true
+        large-packages: true
+        docker-images: true
+        swap-storage: true
+    - uses: actions/checkout@v4
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ matrix.python-version }}
+        cache: 'pip'
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    - name: Fl_common Models Swin Transformer v2 cr 002
+      run: |
+        python manage.py test fl_common.tests.tests_models_swin_transformer_v2_cr_002
+        
+  tests-swin_transformer-v2-cr-003-models:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.12"]
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    needs: tests-swin_transformer-v2-models
+    steps:
+    - name: ⌛ rate 1
+      shell: pwsh
+      run: |
+        # add random sleep since we run on fixed schedule
+        sleep (get-random -max 1200)
+        
+        # get currently authenticated user rate limit info
+        $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
+    
+        # if we don't have at least 100 requests left, wait until reset
+        if ($rate.remaining -lt 350) {
+            $wait = ($rate.reset - (Get-Date (Get-Date).ToUniversalTime() -UFormat %s))
+            echo "Rate limit remaining is $($rate.remaining), waiting for $($wait) seconds to reset"
+            sleep $wait
+            $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
+            echo "Rate limit has reset to $($rate.remaining) requests"
+        }
+    - name: Free Disk Space (Ubuntu)
+      uses: jlumbroso/free-disk-space@main
+      with:
+        # this might remove tools that are actually needed,
+        # if set to "true" but frees about 6 GB
+        tool-cache: false
+
+        # all of these default to true, but feel free to set to
+        # "false" if necessary for your workflow
+        android: true
+        dotnet: true
+        haskell: true
+        large-packages: true
+        docker-images: true
+        swap-storage: true
+    - uses: actions/checkout@v4
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ matrix.python-version }}
+        cache: 'pip'
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    - name: Fl_common Models Swin Transformer v2 cr 003
+      run: |
+        python manage.py test fl_common.tests.tests_models_swin_transformer_v2_cr_003

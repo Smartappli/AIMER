@@ -48,7 +48,7 @@ class ProcessingGoogleNetTestCase(TestCase):
 
         self.assertEqual(
             str(context.exception),
-            f'Unknown AlexNet Architecture: {googlenet_type}'
+            f'Unknown GoogLeNet Architecture: {googlenet_type}'
         )
 
     def test_googlenet_last_layer_adaptation(self):

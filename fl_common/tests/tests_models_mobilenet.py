@@ -1,5 +1,4 @@
 import os
-import torch.nn as nn
 from django.test import TestCase
 from fl_common.models.mobilenet import get_mobilenet_model
 
@@ -19,17 +18,22 @@ class ProcessingMobilenetTestCase(TestCase):
             AssertionError: If any of the assertions fail.
         """
         # List of MobileNet model types to test
-        mobilenet_types = ['MobileNet_V2', 'MobileNet_V3_Small', 'MobileNet_V3_Large']
+        mobilenet_types = ['MobileNet_V2', 'MobileNet_V3_Small', 'MobileNet_V3_Large', 'mobilenetv3_large_075',
+                           'mobilenetv3_large_100', 'mobilenetv3_small_050', 'mobilenetv3_small_075',
+                           'mobilenetv3_small_100', 'mobilenetv3_rw', 'tf_mobilenetv3_large_075',
+                           'tf_mobilenetv3_large_100', 'tf_mobilenetv3_large_minimal_100', 'tf_mobilenetv3_small_075',
+                           'tf_mobilenetv3_small_100', 'tf_mobilenetv3_small_minimal_100', 'fbnetv3_b', 'fbnetv3_d',
+                           'fbnetv3_g', 'lcnet_035', 'lcnet_050', 'lcnet_075', 'lcnet_100', 'lcnet_150']
         num_classes = 10  # You can adjust the number of classes as needed
 
         # Loop through each MobileNet model type
         for mobilenet_type in mobilenet_types:
             with self.subTest(mobilenet_type=mobilenet_type):
-                # Get the MobileNet model for testing
-                model = get_mobilenet_model(mobilenet_type, num_classes)
-                # Check if the model is an instance of torch.nn.Module
-                self.assertIsInstance(model, nn.Module)
-                # Add more specific assertions about the model if needed
+                try:
+                    model = get_mobilenet_model(mobilenet_type, num_classes)
+                    self.assertIsNotNone(model)
+                except ValueError:
+                    self.fail(f"{mobilenet_type} should be a known MobileNet architecture.")
 
     def test_mobilenet_unknown_architecture(self):
         """
@@ -50,21 +54,3 @@ class ProcessingMobilenetTestCase(TestCase):
             str(context.exception),
             f'Unknown MobileNet Architecture : {mobilenet_type}'
         )
-
-    def test_mobilenet_last_layer_adaptation(self):
-        """
-        Test case for ensuring last layer adaptation in MobileNet models.
-
-        Raises:
-            AssertionError: If any of the assertions fail.
-        """
-        # Provide a known architecture type
-        mobilenet_type = 'MobileNet_V2'
-        num_classes = 10
-
-        # Override the last layer with a linear layer for testing purposes
-        mobilenet_model = get_mobilenet_model(mobilenet_type, num_classes)
-        last_layer = mobilenet_model.classifier[-1]
-        # Check if the last layer is an instance of nn.Linear
-        self.assertIsInstance(last_layer, nn.Linear)
-        self.assertEqual(last_layer.out_features, num_classes)

@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.10"]
+        python-version: ["3.12"]
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
@@ -25,7 +25,7 @@ jobs:
         # get currently authenticated user rate limit info
         $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
     
-        # if we don't have at least 100 requests left, wait until reset
+        # if we don't have at least 350 requests left, wait until reset
         if ($rate.remaining -lt 350) {
             $wait = ($rate.reset - (Get-Date (Get-Date).ToUniversalTime() -UFormat %s))
             echo "Rate limit remaining is $($rate.remaining), waiting for $($wait) seconds to reset"
@@ -53,6 +53,7 @@ jobs:
       uses: actions/setup-python@v5
       with:
         python-version: ${{ matrix.python-version }}
+        cache: 'pip'
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
@@ -65,7 +66,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.10"]
+        python-version: ["3.12"]
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     needs: test-vgg-models
@@ -79,7 +80,7 @@ jobs:
         # get currently authenticated user rate limit info
         $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
     
-        # if we don't have at least 100 requests left, wait until reset
+        # if we don't have at least 350 requests left, wait until reset
         if ($rate.remaining -lt 350) {
             $wait = ($rate.reset - (Get-Date (Get-Date).ToUniversalTime() -UFormat %s))
             echo "Rate limit remaining is $($rate.remaining), waiting for $($wait) seconds to reset"
@@ -107,6 +108,7 @@ jobs:
       uses: actions/setup-python@v5
       with:
         python-version: ${{ matrix.python-version }}
+        cache: 'pip'
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
@@ -115,11 +117,11 @@ jobs:
       run: |
         python manage.py test fl_common.tests.tests_models_visformer
 
-  test-vision_transformer-models:
+  test-vision_transformer-models-1:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.10"]
+        python-version: ["3.12"]
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     needs: test-visformer-models
@@ -133,7 +135,7 @@ jobs:
         # get currently authenticated user rate limit info
         $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
     
-        # if we don't have at least 100 requests left, wait until reset
+        # if we don't have at least 350 requests left, wait until reset
         if ($rate.remaining -lt 350) {
             $wait = ($rate.reset - (Get-Date (Get-Date).ToUniversalTime() -UFormat %s))
             echo "Rate limit remaining is $($rate.remaining), waiting for $($wait) seconds to reset"
@@ -161,22 +163,23 @@ jobs:
       uses: actions/setup-python@v5
       with:
         python-version: ${{ matrix.python-version }}
+        cache: 'pip'
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
     - name: Fl_common Models Vision Transformer
       run: |
-        python manage.py test fl_common.tests.tests_models_vision_transformer
+        python manage.py test fl_common.tests.tests_models_vision_transformer_001
 
-  test-vision_transformer_hybrid-models:
+  test-vision_transformer-models-2:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.10"]
+        python-version: ["3.12"]
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    needs: test-vision_transformer-models
+    needs: test-visformer-models
     steps:
     - name: ⌛ rate 1
       shell: pwsh
@@ -187,7 +190,7 @@ jobs:
         # get currently authenticated user rate limit info
         $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
     
-        # if we don't have at least 100 requests left, wait until reset
+        # if we don't have at least 350 requests left, wait until reset
         if ($rate.remaining -lt 350) {
             $wait = ($rate.reset - (Get-Date (Get-Date).ToUniversalTime() -UFormat %s))
             echo "Rate limit remaining is $($rate.remaining), waiting for $($wait) seconds to reset"
@@ -215,6 +218,1061 @@ jobs:
       uses: actions/setup-python@v5
       with:
         python-version: ${{ matrix.python-version }}
+        cache: 'pip'
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    - name: Fl_common Models Vision Transformer
+      run: |
+        python manage.py test fl_common.tests.tests_models_vision_transformer_002
+
+  test-vision_transformer-models-3:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.12"]
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    needs: test-visformer-models
+    steps:
+    - name: ⌛ rate 1
+      shell: pwsh
+      run: |
+        # add random sleep since we run on fixed schedule
+        sleep (get-random -max 1200)
+        
+        # get currently authenticated user rate limit info
+        $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
+    
+        # if we don't have at least 350 requests left, wait until reset
+        if ($rate.remaining -lt 350) {
+            $wait = ($rate.reset - (Get-Date (Get-Date).ToUniversalTime() -UFormat %s))
+            echo "Rate limit remaining is $($rate.remaining), waiting for $($wait) seconds to reset"
+            sleep $wait
+            $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
+            echo "Rate limit has reset to $($rate.remaining) requests"
+        }
+    - name: Free Disk Space (Ubuntu)
+      uses: jlumbroso/free-disk-space@main
+      with:
+        # this might remove tools that are actually needed,
+        # if set to "true" but frees about 6 GB
+        tool-cache: false
+
+        # all of these default to true, but feel free to set to
+        # "false" if necessary for your workflow
+        android: true
+        dotnet: true
+        haskell: true
+        large-packages: true
+        docker-images: true
+        swap-storage: true
+    - uses: actions/checkout@v4
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ matrix.python-version }}
+        cache: 'pip'
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    - name: Fl_common Models Vision Transformer
+      run: |
+        python manage.py test fl_common.tests.tests_models_vision_transformer_003
+
+  test-vision_transformer-models-4:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.12"]
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    needs: test-visformer-models
+    steps:
+    - name: ⌛ rate 1
+      shell: pwsh
+      run: |
+        # add random sleep since we run on fixed schedule
+        sleep (get-random -max 1200)
+        
+        # get currently authenticated user rate limit info
+        $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
+    
+        # if we don't have at least 350 requests left, wait until reset
+        if ($rate.remaining -lt 350) {
+            $wait = ($rate.reset - (Get-Date (Get-Date).ToUniversalTime() -UFormat %s))
+            echo "Rate limit remaining is $($rate.remaining), waiting for $($wait) seconds to reset"
+            sleep $wait
+            $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
+            echo "Rate limit has reset to $($rate.remaining) requests"
+        }
+    - name: Free Disk Space (Ubuntu)
+      uses: jlumbroso/free-disk-space@main
+      with:
+        # this might remove tools that are actually needed,
+        # if set to "true" but frees about 6 GB
+        tool-cache: false
+
+        # all of these default to true, but feel free to set to
+        # "false" if necessary for your workflow
+        android: true
+        dotnet: true
+        haskell: true
+        large-packages: true
+        docker-images: true
+        swap-storage: true
+    - uses: actions/checkout@v4
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ matrix.python-version }}
+        cache: 'pip'
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    - name: Fl_common Models Vision Transformer
+      run: |
+        python manage.py test fl_common.tests.tests_models_vision_transformer_004
+
+  test-vision_transformer-models-5:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.12"]
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    needs: test-visformer-models
+    steps:
+    - name: ⌛ rate 1
+      shell: pwsh
+      run: |
+        # add random sleep since we run on fixed schedule
+        sleep (get-random -max 1200)
+        
+        # get currently authenticated user rate limit info
+        $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
+    
+        # if we don't have at least 350 requests left, wait until reset
+        if ($rate.remaining -lt 350) {
+            $wait = ($rate.reset - (Get-Date (Get-Date).ToUniversalTime() -UFormat %s))
+            echo "Rate limit remaining is $($rate.remaining), waiting for $($wait) seconds to reset"
+            sleep $wait
+            $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
+            echo "Rate limit has reset to $($rate.remaining) requests"
+        }
+    - name: Free Disk Space (Ubuntu)
+      uses: jlumbroso/free-disk-space@main
+      with:
+        # this might remove tools that are actually needed,
+        # if set to "true" but frees about 6 GB
+        tool-cache: false
+
+        # all of these default to true, but feel free to set to
+        # "false" if necessary for your workflow
+        android: true
+        dotnet: true
+        haskell: true
+        large-packages: true
+        docker-images: true
+        swap-storage: true
+    - uses: actions/checkout@v4
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ matrix.python-version }}
+        cache: 'pip'
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    - name: Fl_common Models Vision Transformer
+      run: |
+        python manage.py test fl_common.tests.tests_models_vision_transformer_005
+
+  test-vision_transformer-models-6:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.12"]
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    needs: test-visformer-models
+    steps:
+    - name: ⌛ rate 1
+      shell: pwsh
+      run: |
+        # add random sleep since we run on fixed schedule
+        sleep (get-random -max 1200)
+        
+        # get currently authenticated user rate limit info
+        $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
+    
+        # if we don't have at least 350 requests left, wait until reset
+        if ($rate.remaining -lt 350) {
+            $wait = ($rate.reset - (Get-Date (Get-Date).ToUniversalTime() -UFormat %s))
+            echo "Rate limit remaining is $($rate.remaining), waiting for $($wait) seconds to reset"
+            sleep $wait
+            $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
+            echo "Rate limit has reset to $($rate.remaining) requests"
+        }
+    - name: Free Disk Space (Ubuntu)
+      uses: jlumbroso/free-disk-space@main
+      with:
+        # this might remove tools that are actually needed,
+        # if set to "true" but frees about 6 GB
+        tool-cache: false
+
+        # all of these default to true, but feel free to set to
+        # "false" if necessary for your workflow
+        android: true
+        dotnet: true
+        haskell: true
+        large-packages: true
+        docker-images: true
+        swap-storage: true
+    - uses: actions/checkout@v4
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ matrix.python-version }}
+        cache: 'pip'
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    - name: Fl_common Models Vision Transformer
+      run: |
+        python manage.py test fl_common.tests.tests_models_vision_transformer_006
+
+  test-vision_transformer-models-7:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.12"]
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    needs: test-visformer-models
+    steps:
+    - name: ⌛ rate 1
+      shell: pwsh
+      run: |
+        # add random sleep since we run on fixed schedule
+        sleep (get-random -max 1200)
+        
+        # get currently authenticated user rate limit info
+        $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
+    
+        # if we don't have at least 350 requests left, wait until reset
+        if ($rate.remaining -lt 350) {
+            $wait = ($rate.reset - (Get-Date (Get-Date).ToUniversalTime() -UFormat %s))
+            echo "Rate limit remaining is $($rate.remaining), waiting for $($wait) seconds to reset"
+            sleep $wait
+            $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
+            echo "Rate limit has reset to $($rate.remaining) requests"
+        }
+    - name: Free Disk Space (Ubuntu)
+      uses: jlumbroso/free-disk-space@main
+      with:
+        # this might remove tools that are actually needed,
+        # if set to "true" but frees about 6 GB
+        tool-cache: false
+
+        # all of these default to true, but feel free to set to
+        # "false" if necessary for your workflow
+        android: true
+        dotnet: true
+        haskell: true
+        large-packages: true
+        docker-images: true
+        swap-storage: true
+    - uses: actions/checkout@v4
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ matrix.python-version }}
+        cache: 'pip'
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    - name: Fl_common Models Vision Transformer
+      run: |
+        python manage.py test fl_common.tests.tests_models_vision_transformer_007
+
+  test-vision_transformer-models-8:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.12"]
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    needs: test-visformer-models
+    steps:
+    - name: ⌛ rate 1
+      shell: pwsh
+      run: |
+        # add random sleep since we run on fixed schedule
+        sleep (get-random -max 1200)
+        
+        # get currently authenticated user rate limit info
+        $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
+    
+        # if we don't have at least 350 requests left, wait until reset
+        if ($rate.remaining -lt 350) {
+            $wait = ($rate.reset - (Get-Date (Get-Date).ToUniversalTime() -UFormat %s))
+            echo "Rate limit remaining is $($rate.remaining), waiting for $($wait) seconds to reset"
+            sleep $wait
+            $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
+            echo "Rate limit has reset to $($rate.remaining) requests"
+        }
+    - name: Free Disk Space (Ubuntu)
+      uses: jlumbroso/free-disk-space@main
+      with:
+        # this might remove tools that are actually needed,
+        # if set to "true" but frees about 6 GB
+        tool-cache: false
+
+        # all of these default to true, but feel free to set to
+        # "false" if necessary for your workflow
+        android: true
+        dotnet: true
+        haskell: true
+        large-packages: true
+        docker-images: true
+        swap-storage: true
+    - uses: actions/checkout@v4
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ matrix.python-version }}
+        cache: 'pip'
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    - name: Fl_common Models Vision Transformer
+      run: |
+        python manage.py test fl_common.tests.tests_models_vision_transformer_008
+
+  test-vision_transformer-models-9:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.12"]
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    needs: test-visformer-models
+    steps:
+    - name: ⌛ rate 1
+      shell: pwsh
+      run: |
+        # add random sleep since we run on fixed schedule
+        sleep (get-random -max 1200)
+        
+        # get currently authenticated user rate limit info
+        $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
+    
+        # if we don't have at least 350 requests left, wait until reset
+        if ($rate.remaining -lt 350) {
+            $wait = ($rate.reset - (Get-Date (Get-Date).ToUniversalTime() -UFormat %s))
+            echo "Rate limit remaining is $($rate.remaining), waiting for $($wait) seconds to reset"
+            sleep $wait
+            $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
+            echo "Rate limit has reset to $($rate.remaining) requests"
+        }
+    - name: Free Disk Space (Ubuntu)
+      uses: jlumbroso/free-disk-space@main
+      with:
+        # this might remove tools that are actually needed,
+        # if set to "true" but frees about 6 GB
+        tool-cache: false
+
+        # all of these default to true, but feel free to set to
+        # "false" if necessary for your workflow
+        android: true
+        dotnet: true
+        haskell: true
+        large-packages: true
+        docker-images: true
+        swap-storage: true
+    - uses: actions/checkout@v4
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ matrix.python-version }}
+        cache: 'pip'
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    - name: Fl_common Models Vision Transformer
+      run: |
+        python manage.py test fl_common.tests.tests_models_vision_transformer_009
+
+  test-vision_transformer-models-10:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.12"]
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    needs: test-visformer-models
+    steps:
+    - name: ⌛ rate 1
+      shell: pwsh
+      run: |
+        # add random sleep since we run on fixed schedule
+        sleep (get-random -max 1200)
+        
+        # get currently authenticated user rate limit info
+        $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
+    
+        # if we don't have at least 350 requests left, wait until reset
+        if ($rate.remaining -lt 350) {
+            $wait = ($rate.reset - (Get-Date (Get-Date).ToUniversalTime() -UFormat %s))
+            echo "Rate limit remaining is $($rate.remaining), waiting for $($wait) seconds to reset"
+            sleep $wait
+            $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
+            echo "Rate limit has reset to $($rate.remaining) requests"
+        }
+    - name: Free Disk Space (Ubuntu)
+      uses: jlumbroso/free-disk-space@main
+      with:
+        # this might remove tools that are actually needed,
+        # if set to "true" but frees about 6 GB
+        tool-cache: false
+
+        # all of these default to true, but feel free to set to
+        # "false" if necessary for your workflow
+        android: true
+        dotnet: true
+        haskell: true
+        large-packages: true
+        docker-images: true
+        swap-storage: true
+    - uses: actions/checkout@v4
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ matrix.python-version }}
+        cache: 'pip'
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    - name: Fl_common Models Vision Transformer
+      run: |
+        python manage.py test fl_common.tests.tests_models_vision_transformer_010
+
+  test-vision_transformer-models-11:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.12"]
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    needs: test-visformer-models
+    steps:
+    - name: ⌛ rate 1
+      shell: pwsh
+      run: |
+        # add random sleep since we run on fixed schedule
+        sleep (get-random -max 1200)
+        
+        # get currently authenticated user rate limit info
+        $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
+    
+        # if we don't have at least 350 requests left, wait until reset
+        if ($rate.remaining -lt 350) {
+            $wait = ($rate.reset - (Get-Date (Get-Date).ToUniversalTime() -UFormat %s))
+            echo "Rate limit remaining is $($rate.remaining), waiting for $($wait) seconds to reset"
+            sleep $wait
+            $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
+            echo "Rate limit has reset to $($rate.remaining) requests"
+        }
+    - name: Free Disk Space (Ubuntu)
+      uses: jlumbroso/free-disk-space@main
+      with:
+        # this might remove tools that are actually needed,
+        # if set to "true" but frees about 6 GB
+        tool-cache: false
+
+        # all of these default to true, but feel free to set to
+        # "false" if necessary for your workflow
+        android: true
+        dotnet: true
+        haskell: true
+        large-packages: true
+        docker-images: true
+        swap-storage: true
+    - uses: actions/checkout@v4
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ matrix.python-version }}
+        cache: 'pip'
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    - name: Fl_common Models Vision Transformer
+      run: |
+        python manage.py test fl_common.tests.tests_models_vision_transformer_011
+
+  test-vision_transformer-models-12:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.12"]
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    needs: test-visformer-models
+    steps:
+    - name: ⌛ rate 1
+      shell: pwsh
+      run: |
+        # add random sleep since we run on fixed schedule
+        sleep (get-random -max 1200)
+        
+        # get currently authenticated user rate limit info
+        $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
+    
+        # if we don't have at least 350 requests left, wait until reset
+        if ($rate.remaining -lt 350) {
+            $wait = ($rate.reset - (Get-Date (Get-Date).ToUniversalTime() -UFormat %s))
+            echo "Rate limit remaining is $($rate.remaining), waiting for $($wait) seconds to reset"
+            sleep $wait
+            $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
+            echo "Rate limit has reset to $($rate.remaining) requests"
+        }
+    - name: Free Disk Space (Ubuntu)
+      uses: jlumbroso/free-disk-space@main
+      with:
+        # this might remove tools that are actually needed,
+        # if set to "true" but frees about 6 GB
+        tool-cache: false
+
+        # all of these default to true, but feel free to set to
+        # "false" if necessary for your workflow
+        android: true
+        dotnet: true
+        haskell: true
+        large-packages: true
+        docker-images: true
+        swap-storage: true
+    - uses: actions/checkout@v4
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ matrix.python-version }}
+        cache: 'pip'
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    - name: Fl_common Models Vision Transformer
+      run: |
+        python manage.py test fl_common.tests.tests_models_vision_transformer_012
+
+  test-vision_transformer-models-13:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.12"]
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    needs: test-visformer-models
+    steps:
+    - name: ⌛ rate 1
+      shell: pwsh
+      run: |
+        # add random sleep since we run on fixed schedule
+        sleep (get-random -max 1200)
+        
+        # get currently authenticated user rate limit info
+        $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
+    
+        # if we don't have at least 350 requests left, wait until reset
+        if ($rate.remaining -lt 350) {
+            $wait = ($rate.reset - (Get-Date (Get-Date).ToUniversalTime() -UFormat %s))
+            echo "Rate limit remaining is $($rate.remaining), waiting for $($wait) seconds to reset"
+            sleep $wait
+            $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
+            echo "Rate limit has reset to $($rate.remaining) requests"
+        }
+    - name: Free Disk Space (Ubuntu)
+      uses: jlumbroso/free-disk-space@main
+      with:
+        # this might remove tools that are actually needed,
+        # if set to "true" but frees about 6 GB
+        tool-cache: false
+
+        # all of these default to true, but feel free to set to
+        # "false" if necessary for your workflow
+        android: true
+        dotnet: true
+        haskell: true
+        large-packages: true
+        docker-images: true
+        swap-storage: true
+    - uses: actions/checkout@v4
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ matrix.python-version }}
+        cache: 'pip'
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    - name: Fl_common Models Vision Transformer
+      run: |
+        python manage.py test fl_common.tests.tests_models_vision_transformer_013
+
+  test-vision_transformer-models-14:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.12"]
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    needs: test-visformer-models
+    steps:
+    - name: ⌛ rate 1
+      shell: pwsh
+      run: |
+        # add random sleep since we run on fixed schedule
+        sleep (get-random -max 1200)
+        
+        # get currently authenticated user rate limit info
+        $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
+    
+        # if we don't have at least 350 requests left, wait until reset
+        if ($rate.remaining -lt 350) {
+            $wait = ($rate.reset - (Get-Date (Get-Date).ToUniversalTime() -UFormat %s))
+            echo "Rate limit remaining is $($rate.remaining), waiting for $($wait) seconds to reset"
+            sleep $wait
+            $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
+            echo "Rate limit has reset to $($rate.remaining) requests"
+        }
+    - name: Free Disk Space (Ubuntu)
+      uses: jlumbroso/free-disk-space@main
+      with:
+        # this might remove tools that are actually needed,
+        # if set to "true" but frees about 6 GB
+        tool-cache: false
+
+        # all of these default to true, but feel free to set to
+        # "false" if necessary for your workflow
+        android: true
+        dotnet: true
+        haskell: true
+        large-packages: true
+        docker-images: true
+        swap-storage: true
+    - uses: actions/checkout@v4
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ matrix.python-version }}
+        cache: 'pip'
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    - name: Fl_common Models Vision Transformer
+      run: |
+        python manage.py test fl_common.tests.tests_models_vision_transformer_014
+
+  test-vision_transformer-models-15:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.12"]
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    needs: test-visformer-models
+    steps:
+    - name: ⌛ rate 1
+      shell: pwsh
+      run: |
+        # add random sleep since we run on fixed schedule
+        sleep (get-random -max 1200)
+        
+        # get currently authenticated user rate limit info
+        $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
+    
+        # if we don't have at least 350 requests left, wait until reset
+        if ($rate.remaining -lt 350) {
+            $wait = ($rate.reset - (Get-Date (Get-Date).ToUniversalTime() -UFormat %s))
+            echo "Rate limit remaining is $($rate.remaining), waiting for $($wait) seconds to reset"
+            sleep $wait
+            $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
+            echo "Rate limit has reset to $($rate.remaining) requests"
+        }
+    - name: Free Disk Space (Ubuntu)
+      uses: jlumbroso/free-disk-space@main
+      with:
+        # this might remove tools that are actually needed,
+        # if set to "true" but frees about 6 GB
+        tool-cache: false
+
+        # all of these default to true, but feel free to set to
+        # "false" if necessary for your workflow
+        android: true
+        dotnet: true
+        haskell: true
+        large-packages: true
+        docker-images: true
+        swap-storage: true
+    - uses: actions/checkout@v4
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ matrix.python-version }}
+        cache: 'pip'
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    - name: Fl_common Models Vision Transformer
+      run: |
+        python manage.py test fl_common.tests.tests_models_vision_transformer_015
+
+  test-vision_transformer-models-16:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.12"]
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    needs: test-visformer-models
+    steps:
+    - name: ⌛ rate 1
+      shell: pwsh
+      run: |
+        # add random sleep since we run on fixed schedule
+        sleep (get-random -max 1200)
+        
+        # get currently authenticated user rate limit info
+        $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
+    
+        # if we don't have at least 350 requests left, wait until reset
+        if ($rate.remaining -lt 350) {
+            $wait = ($rate.reset - (Get-Date (Get-Date).ToUniversalTime() -UFormat %s))
+            echo "Rate limit remaining is $($rate.remaining), waiting for $($wait) seconds to reset"
+            sleep $wait
+            $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
+            echo "Rate limit has reset to $($rate.remaining) requests"
+        }
+    - name: Free Disk Space (Ubuntu)
+      uses: jlumbroso/free-disk-space@main
+      with:
+        # this might remove tools that are actually needed,
+        # if set to "true" but frees about 6 GB
+        tool-cache: false
+
+        # all of these default to true, but feel free to set to
+        # "false" if necessary for your workflow
+        android: true
+        dotnet: true
+        haskell: true
+        large-packages: true
+        docker-images: true
+        swap-storage: true
+    - uses: actions/checkout@v4
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ matrix.python-version }}
+        cache: 'pip'
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    - name: Fl_common Models Vision Transformer
+      run: |
+        python manage.py test fl_common.tests.tests_models_vision_transformer_016
+
+  test-vision_transformer-models-17:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.12"]
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    needs: test-visformer-models
+    steps:
+    - name: ⌛ rate 1
+      shell: pwsh
+      run: |
+        # add random sleep since we run on fixed schedule
+        sleep (get-random -max 1200)
+        
+        # get currently authenticated user rate limit info
+        $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
+    
+        # if we don't have at least 350 requests left, wait until reset
+        if ($rate.remaining -lt 350) {
+            $wait = ($rate.reset - (Get-Date (Get-Date).ToUniversalTime() -UFormat %s))
+            echo "Rate limit remaining is $($rate.remaining), waiting for $($wait) seconds to reset"
+            sleep $wait
+            $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
+            echo "Rate limit has reset to $($rate.remaining) requests"
+        }
+    - name: Free Disk Space (Ubuntu)
+      uses: jlumbroso/free-disk-space@main
+      with:
+        # this might remove tools that are actually needed,
+        # if set to "true" but frees about 6 GB
+        tool-cache: false
+
+        # all of these default to true, but feel free to set to
+        # "false" if necessary for your workflow
+        android: true
+        dotnet: true
+        haskell: true
+        large-packages: true
+        docker-images: true
+        swap-storage: true
+    - uses: actions/checkout@v4
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ matrix.python-version }}
+        cache: 'pip'
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    - name: Fl_common Models Vision Transformer
+      run: |
+        python manage.py test fl_common.tests.tests_models_vision_transformer_017
+
+  test-vision_transformer-models-18:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.12"]
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    needs: test-visformer-models
+    steps:
+    - name: ⌛ rate 1
+      shell: pwsh
+      run: |
+        # add random sleep since we run on fixed schedule
+        sleep (get-random -max 1200)
+        
+        # get currently authenticated user rate limit info
+        $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
+    
+        # if we don't have at least 350 requests left, wait until reset
+        if ($rate.remaining -lt 350) {
+            $wait = ($rate.reset - (Get-Date (Get-Date).ToUniversalTime() -UFormat %s))
+            echo "Rate limit remaining is $($rate.remaining), waiting for $($wait) seconds to reset"
+            sleep $wait
+            $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
+            echo "Rate limit has reset to $($rate.remaining) requests"
+        }
+    - name: Free Disk Space (Ubuntu)
+      uses: jlumbroso/free-disk-space@main
+      with:
+        # this might remove tools that are actually needed,
+        # if set to "true" but frees about 6 GB
+        tool-cache: false
+
+        # all of these default to true, but feel free to set to
+        # "false" if necessary for your workflow
+        android: true
+        dotnet: true
+        haskell: true
+        large-packages: true
+        docker-images: true
+        swap-storage: true
+    - uses: actions/checkout@v4
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ matrix.python-version }}
+        cache: 'pip'
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    - name: Fl_common Models Vision Transformer
+      run: |
+        python manage.py test fl_common.tests.tests_models_vision_transformer_018
+
+  test-vision_transformer-models-19:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.12"]
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    needs: test-visformer-models
+    steps:
+    - name: ⌛ rate 1
+      shell: pwsh
+      run: |
+        # add random sleep since we run on fixed schedule
+        sleep (get-random -max 1200)
+        
+        # get currently authenticated user rate limit info
+        $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
+    
+        # if we don't have at least 350 requests left, wait until reset
+        if ($rate.remaining -lt 350) {
+            $wait = ($rate.reset - (Get-Date (Get-Date).ToUniversalTime() -UFormat %s))
+            echo "Rate limit remaining is $($rate.remaining), waiting for $($wait) seconds to reset"
+            sleep $wait
+            $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
+            echo "Rate limit has reset to $($rate.remaining) requests"
+        }
+    - name: Free Disk Space (Ubuntu)
+      uses: jlumbroso/free-disk-space@main
+      with:
+        # this might remove tools that are actually needed,
+        # if set to "true" but frees about 6 GB
+        tool-cache: false
+
+        # all of these default to true, but feel free to set to
+        # "false" if necessary for your workflow
+        android: true
+        dotnet: true
+        haskell: true
+        large-packages: true
+        docker-images: true
+        swap-storage: true
+    - uses: actions/checkout@v4
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ matrix.python-version }}
+        cache: 'pip'
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    - name: Fl_common Models Vision Transformer
+      run: |
+        python manage.py test fl_common.tests.tests_models_vision_transformer_019
+
+  test-vision_transformer-models-20:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.12"]
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    needs: test-visformer-models
+    steps:
+    - name: ⌛ rate 1
+      shell: pwsh
+      run: |
+        # add random sleep since we run on fixed schedule
+        sleep (get-random -max 1200)
+        
+        # get currently authenticated user rate limit info
+        $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
+    
+        # if we don't have at least 350 requests left, wait until reset
+        if ($rate.remaining -lt 350) {
+            $wait = ($rate.reset - (Get-Date (Get-Date).ToUniversalTime() -UFormat %s))
+            echo "Rate limit remaining is $($rate.remaining), waiting for $($wait) seconds to reset"
+            sleep $wait
+            $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
+            echo "Rate limit has reset to $($rate.remaining) requests"
+        }
+    - name: Free Disk Space (Ubuntu)
+      uses: jlumbroso/free-disk-space@main
+      with:
+        # this might remove tools that are actually needed,
+        # if set to "true" but frees about 6 GB
+        tool-cache: false
+
+        # all of these default to true, but feel free to set to
+        # "false" if necessary for your workflow
+        android: true
+        dotnet: true
+        haskell: true
+        large-packages: true
+        docker-images: true
+        swap-storage: true
+    - uses: actions/checkout@v4
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ matrix.python-version }}
+        cache: 'pip'
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    - name: Fl_common Models Vision Transformer
+      run: |
+        python manage.py test fl_common.tests.tests_models_vision_transformer_020
+
+  test-vision_transformer_hybrid-models:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.12"]
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    needs: ['test-vision_transformer-models-1', 'test-vision_transformer-models-2',
+            'test-vision_transformer-models-3', 'test-vision_transformer-models-4',
+            'test-vision_transformer-models-5', 'test-vision_transformer-models-6',
+            'test-vision_transformer-models-7', 'test-vision_transformer-models-8',
+            'test-vision_transformer-models-9', 'test-vision_transformer-models-10',
+            'test-vision_transformer-models-11', 'test-vision_transformer-models-12',
+            'test-vision_transformer-models-13', 'test-vision_transformer-models-14', 
+            'test-vision_transformer-models-15', 'test-vision_transformer-models-16', 
+            'test-vision_transformer-models-17', 'test-vision_transformer-models-18',
+            'test-vision_transformer-models-19', 'test-vision_transformer-models-20']
+    steps:
+    - name: ⌛ rate 1
+      shell: pwsh
+      run: |
+        # add random sleep since we run on fixed schedule
+        sleep (get-random -max 1200)
+        
+        # get currently authenticated user rate limit info
+        $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
+    
+        # if we don't have at least 350 requests left, wait until reset
+        if ($rate.remaining -lt 350) {
+            $wait = ($rate.reset - (Get-Date (Get-Date).ToUniversalTime() -UFormat %s))
+            echo "Rate limit remaining is $($rate.remaining), waiting for $($wait) seconds to reset"
+            sleep $wait
+            $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
+            echo "Rate limit has reset to $($rate.remaining) requests"
+        }
+    - name: Free Disk Space (Ubuntu)
+      uses: jlumbroso/free-disk-space@main
+      with:
+        # this might remove tools that are actually needed,
+        # if set to "true" but frees about 6 GB
+        tool-cache: false
+
+        # all of these default to true, but feel free to set to
+        # "false" if necessary for your workflow
+        android: true
+        dotnet: true
+        haskell: true
+        large-packages: true
+        docker-images: true
+        swap-storage: true
+    - uses: actions/checkout@v4
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ matrix.python-version }}
+        cache: 'pip'
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
@@ -227,7 +1285,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.10"]
+        python-version: ["3.12"]
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     needs: test-vision_transformer_hybrid-models
@@ -241,7 +1299,7 @@ jobs:
         # get currently authenticated user rate limit info
         $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
     
-        # if we don't have at least 100 requests left, wait until reset
+        # if we don't have at least 350 requests left, wait until reset
         if ($rate.remaining -lt 350) {
             $wait = ($rate.reset - (Get-Date (Get-Date).ToUniversalTime() -UFormat %s))
             echo "Rate limit remaining is $($rate.remaining), waiting for $($wait) seconds to reset"
@@ -269,6 +1327,7 @@ jobs:
       uses: actions/setup-python@v5
       with:
         python-version: ${{ matrix.python-version }}
+        cache: 'pip'
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
@@ -281,7 +1340,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.10"]
+        python-version: ["3.12"]
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     needs: test-vision_transformer_relpos-models
@@ -295,7 +1354,7 @@ jobs:
         # get currently authenticated user rate limit info
         $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
     
-        # if we don't have at least 100 requests left, wait until reset
+        # if we don't have at least 350 requests left, wait until reset
         if ($rate.remaining -lt 350) {
             $wait = ($rate.reset - (Get-Date (Get-Date).ToUniversalTime() -UFormat %s))
             echo "Rate limit remaining is $($rate.remaining), waiting for $($wait) seconds to reset"
@@ -323,6 +1382,7 @@ jobs:
       uses: actions/setup-python@v5
       with:
         python-version: ${{ matrix.python-version }}
+        cache: 'pip'
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
@@ -331,11 +1391,11 @@ jobs:
       run: |
         python manage.py test fl_common.tests.tests_models_vision_transformer_sam
 
-  test-volo-models:
+  test-vitamin-models:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.10"]
+        python-version: ["3.12"]
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     needs: test-vision_transformer_sam-models
@@ -349,7 +1409,7 @@ jobs:
         # get currently authenticated user rate limit info
         $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
     
-        # if we don't have at least 100 requests left, wait until reset
+        # if we don't have at least 350 requests left, wait until reset
         if ($rate.remaining -lt 350) {
             $wait = ($rate.reset - (Get-Date (Get-Date).ToUniversalTime() -UFormat %s))
             echo "Rate limit remaining is $($rate.remaining), waiting for $($wait) seconds to reset"
@@ -377,6 +1437,62 @@ jobs:
       uses: actions/setup-python@v5
       with:
         python-version: ${{ matrix.python-version }}
+        cache: 'pip'
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    - name: Fl_common Models ViTamin
+      run: |
+        python manage.py test fl_common.tests.tests_models_vitamin
+
+  test-volo-models:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.12"]
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    needs: test-vitamin-models
+    steps:
+    - name: ⌛ rate 1
+      shell: pwsh
+      run: |
+        # add random sleep since we run on fixed schedule
+        sleep (get-random -max 1200)
+        
+        # get currently authenticated user rate limit info
+        $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
+    
+        # if we don't have at least 350 requests left, wait until reset
+        if ($rate.remaining -lt 350) {
+            $wait = ($rate.reset - (Get-Date (Get-Date).ToUniversalTime() -UFormat %s))
+            echo "Rate limit remaining is $($rate.remaining), waiting for $($wait) seconds to reset"
+            sleep $wait
+            $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
+            echo "Rate limit has reset to $($rate.remaining) requests"
+        }
+    - name: Free Disk Space (Ubuntu)
+      uses: jlumbroso/free-disk-space@main
+      with:
+        # this might remove tools that are actually needed,
+        # if set to "true" but frees about 6 GB
+        tool-cache: false
+
+        # all of these default to true, but feel free to set to
+        # "false" if necessary for your workflow
+        android: true
+        dotnet: true
+        haskell: true
+        large-packages: true
+        docker-images: true
+        swap-storage: true
+    - uses: actions/checkout@v4
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ matrix.python-version }}
+        cache: 'pip'
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
@@ -389,7 +1505,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.10"]
+        python-version: ["3.12"]
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     needs: test-volo-models
@@ -403,7 +1519,7 @@ jobs:
         # get currently authenticated user rate limit info
         $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
     
-        # if we don't have at least 100 requests left, wait until reset
+        # if we don't have at least 350 requests left, wait until reset
         if ($rate.remaining -lt 350) {
             $wait = ($rate.reset - (Get-Date (Get-Date).ToUniversalTime() -UFormat %s))
             echo "Rate limit remaining is $($rate.remaining), waiting for $($wait) seconds to reset"
@@ -431,6 +1547,7 @@ jobs:
       uses: actions/setup-python@v5
       with:
         python-version: ${{ matrix.python-version }}
+        cache: 'pip'
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip

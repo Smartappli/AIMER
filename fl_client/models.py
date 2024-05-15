@@ -62,9 +62,7 @@ class License(models.Model):
         ordering = ['license_short_name']
 
     def __str__(self):
-        return (self.license_short_name
-                + ' - '
-                + self.license_name)
+        return self.license_short_name + ' - ' + self.license_name
 
 
 # ---- Model tables ----
@@ -148,17 +146,9 @@ class Model(models.Model):
 
     def __str__(self):
         if str(self.model_version) != "None":
-            return (self.model_category
-                    + self.model_type
-                    + ' - '
-                    + self.model_name
-                    + ' - v'
-                    + str(self.model_version))
+            return self.model_category + self.model_type + ' - ' + self.model_name + ' - v' + str(self.model_version)
         else:
-            return (self.model_category
-                    + self.model_type
-                    + ' - '
-                    + self.model_name)
+            return self.model_category + self.model_type + ' - ' + self.model_name
 
 
 class ModelFile(models.Model):
@@ -208,13 +198,8 @@ class ModelFile(models.Model):
         ordering = ['model_file_filename']
 
     def __str__(self):
-        return (self.model_file_model_id.model_name
-                + ' | '
-                + self.model_file_type
-                + " --- "
-                + self.model_file_extension
-                + ' --- '
-                + self.model_file_filename)
+        return (self.model_file_model_id.model_name + ' | ' + self.model_file_type + " --- " + self.model_file_extension
+                + ' --- ' + self.model_file_filename)
 
 
 class Document(models.Model):
@@ -235,9 +220,7 @@ class Document(models.Model):
         ordering = ['document_filename']
 
     def __str__(self):
-        return (self.document_filename
-                + ' ----- '
-                + self.document_title)
+        return self.document_filename + ' ----- ' + self.document_title
 
 
 class ModelDocument(models.Model):
@@ -263,10 +246,7 @@ class ModelDocument(models.Model):
         ordering = ['modeldoc_model_id']
 
     def __str__(self):
-        return (self.modeldoc_model_id.model_name
-                + ' ----- '
-                + self.modeldoc_document.document_filename
-                + '  |  '
+        return (self.modeldoc_model_id.model_name + ' ----- ' + self.modeldoc_document.document_filename + '  |  '
                 + self.modeldoc_document.document_title)
 
 
@@ -393,9 +373,9 @@ class DatasetCentralData(models.Model):
         ordering = ['dataset_central_data_link']
 
     def __str__(self):
-        return (self.dataset_central_data_dataset_id.dataset_name
-                + ' - '
-                + str(self.dataset_central_data_link))
+        return (self.dataset_central_data_dataset_id.dataset_name +
+                ' - ' +
+                str(self.dataset_central_data_link))
 
 
 class DatasetFile(models.Model):
@@ -470,6 +450,6 @@ class Help(models.Model):
         ordering = ['help_key']
 
     def __str__(self):
-        return (self.help_key
-                + ' : '
-                + self.help_value)
+        return (self.help_key +
+                ' : ' +
+                self.help_value)

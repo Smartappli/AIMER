@@ -21,12 +21,7 @@ class ProcessingGhostnetTestCase(TestCase):
             AssertionError: If any known GhostNet architecture fails to be created.
         """
         known_ghostnet_types = [
-            "ghostnet_050",
-            "ghostnet_100",
-            "ghostnet_130",
-            "ghostnetv2_100",
-            "ghostnetv2_130",
-            "ghostnetv2_160"
+            "ghostnet_050", "ghostnet_100", "ghostnet_130", "ghostnetv2_100", "ghostnetv2_130", "ghostnetv2_160"
         ]
         num_classes = 1000  # Example number of classes
 

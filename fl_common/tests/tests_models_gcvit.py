@@ -1,5 +1,4 @@
 import os
-import torch.nn as nn
 from django.test import TestCase
 from fl_common.models.gcvit import get_gcvit_model
 
@@ -28,8 +27,7 @@ class ProcessingGcVitTestCase(TestCase):
         - AssertionError: If the function returns None for any known GCVIT type.
         """
         known_types = [
-            "gcvit_xxtiny", "gcvit_xtiny", "gcvit_tiny",
-            "gcvit_small", "gcvit_base"
+            "gcvit_xxtiny", "gcvit_xtiny", "gcvit_tiny", "gcvit_small", "gcvit_base"
         ]
 
         for gcvit_type in known_types:
