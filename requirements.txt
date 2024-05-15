@@ -16,8 +16,8 @@ scikit-learn>=1.4.0 # 1.3.2
 pandas==2.2.1 # 2.0.3
 torch==2.2.2
 torchvision==0.17.2
-#timm==0.9.16
-git+https://github.com/huggingface/pytorch-image-models.git
+timm==1.0.3
+#git+https://github.com/huggingface/pytorch-image-models.git
 prophet==1.1.5
 lightgbm==4.3.0
 captum==0.7.0
