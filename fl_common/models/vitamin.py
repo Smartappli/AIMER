@@ -6,8 +6,8 @@ def get_vitamin_model(vitamin_type, num_classes):
     Retrieves a pre-trained ViTamin model based on the specified architecture.
 
     Parameters:
-    - vitamin_type (str): The type of vitamin architecture to be retrieved.
-    - num_classes (int): The number of output classes for the classification task.
+    - vitamin_type (str): The type of vitamin architecture to be retrieved. Must be one of the valid types.
+    - num_classes (int): The number of output classes for the classification task. Must be a positive integer.
 
     Returns:
     - torch.nn.Module: A pre-trained vitamin model with the specified architecture and number of classes.
