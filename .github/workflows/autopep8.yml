@@ -3,7 +3,7 @@ on: pull_request
 jobs:
   autopep8:
     # Check if the PR is not raised by this workflow and is not from a fork
-    if: startsWith(github.head_ref, 'master') == false && github.event.pull_request.head.repo.full_name == github.repository
+    if: github.event.pull_request.head.repo.full_name == github.repository
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
