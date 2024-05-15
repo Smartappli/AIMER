@@ -77,6 +77,7 @@ from fl_common.models.vision_transformer import get_vision_transformer_model
 from fl_common.models.vision_transformer_hybrid import get_vision_transformer_hybrid_model
 from fl_common.models.vision_transformer_relpos import get_vision_transformer_relpos_model
 from fl_common.models.vision_transformer_sam import get_vision_transformer_sam_model
+from fl_common.models.vitamin import get_vitamin_model
 from fl_common.models.volo import get_volo_model
 from fl_common.models.vovnet import get_vovnet_model
 from fl_common.models.wide_resnet import get_wide_resnet_model
@@ -906,7 +907,10 @@ def get_family_model_v(model_type, num_classes):
         "vit_medium_patch16_reg4_gap_256": get_vision_transformer_model, "vit_mediumd_patch16_reg4_gap_256": get_vision_transformer_model,
         "vit_betwixt_patch16_reg1_gap_256": get_vision_transformer_model, "vit_betwixt_patch16_reg4_gap_256": get_vision_transformer_model,
         "vit_base_patch16_reg4_gap_256": get_vision_transformer_model, "vit_so150m_patch16_reg4_map_256": get_vision_transformer_model,
-        "vit_so150m_patch16_reg4_gap_256": get_vision_transformer_model
+        "vit_so150m_patch16_reg4_gap_256": get_vision_transformer_model, "vitamin_small": get_vitamin_model, "vitamin_base": get_vitamin_model,
+        "vitamin_large": get_vitamin_model, "vitamin_large_256": get_vitamin_model, "vitamin_large_336": get_vitamin_model,
+        "vitamin_large_384": get_vitamin_model, "vitamin_xlarge_256": get_vitamin_model, "vitamin_xlarge_336": get_vitamin_model,
+        "vitamin_xlarge_384": get_vitamin_model
     }
 
     if model_type not in model_retrieval_functions:
