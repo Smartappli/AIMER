@@ -33,7 +33,7 @@ class ProcessingViTaminTestCase(TestCase):
         ]
 
         for vitamin_type in known_types:
-            with self.subTest(vitaamin_type=ViTamin_type):
+            with self.subTest(vitamin_type=vitamin_type):
                 vitamin_model = get_vitamin_model(vitamin_type, num_classes=10)
                 self.assertIsNotNone(vitamin_model)
 
