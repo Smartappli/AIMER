@@ -77,6 +77,7 @@ from fl_common.models.vision_transformer import get_vision_transformer_model
 from fl_common.models.vision_transformer_hybrid import get_vision_transformer_hybrid_model
 from fl_common.models.vision_transformer_relpos import get_vision_transformer_relpos_model
 from fl_common.models.vision_transformer_sam import get_vision_transformer_sam_model
+from fl_common.models.vitamin import get_vitamin_model
 from fl_common.models.volo import get_volo_model
 from fl_common.models.vovnet import get_vovnet_model
 from fl_common.models.wide_resnet import get_wide_resnet_model
@@ -906,7 +907,37 @@ def get_family_model_v(model_type, num_classes):
         "vit_medium_patch16_reg4_gap_256": get_vision_transformer_model, "vit_mediumd_patch16_reg4_gap_256": get_vision_transformer_model,
         "vit_betwixt_patch16_reg1_gap_256": get_vision_transformer_model, "vit_betwixt_patch16_reg4_gap_256": get_vision_transformer_model,
         "vit_base_patch16_reg4_gap_256": get_vision_transformer_model, "vit_so150m_patch16_reg4_map_256": get_vision_transformer_model,
-        "vit_so150m_patch16_reg4_gap_256": get_vision_transformer_model
+        "vit_so150m_patch16_reg4_gap_256": get_vision_transformer_model, 'vit_tiny_r_s16_p8_224': get_vision_transformer_hybrid_model,
+        'vit_tiny_r_s16_p8_384': get_vision_transformer_hybrid_model, 'vit_small_r26_s32_224': get_vision_transformer_hybrid_model,
+        'vit_small_r26_s32_384': get_vision_transformer_hybrid_model, 'vit_base_r26_s32_224': get_vision_transformer_hybrid_model,
+        'vit_base_r50_s16_224': get_vision_transformer_hybrid_model, 'vit_base_r50_s16_384': get_vision_transformer_hybrid_model,
+        'vit_large_r50_s32_224': get_vision_transformer_hybrid_model, 'vit_large_r50_s32_384': get_vision_transformer_hybrid_model,
+        'vit_small_resnet26d_224': get_vision_transformer_hybrid_model, 'vit_small_resnet50d_s16_224': get_vision_transformer_hybrid_model,
+        'vit_base_resnet26d_224': get_vision_transformer_hybrid_model, 'vit_base_resnet50d_224': get_vision_transformer_hybrid_model,
+        'vit_relpos_base_patch32_plus_rpn_256': get_vision_transformer_relpos_model,
+        'vit_relpos_base_patch16_plus_240': get_vision_transformer_relpos_model,
+        'vit_relpos_small_patch16_224': get_vision_transformer_relpos_model,
+        'vit_relpos_medium_patch16_224': get_vision_transformer_relpos_model,
+        'vit_relpos_base_patch16_224': get_vision_transformer_relpos_model,
+        'vit_srelpos_small_patch16_224': get_vision_transformer_relpos_model,
+        'vit_srelpos_medium_patch16_224': get_vision_transformer_relpos_model,
+        'vit_relpos_medium_patch16_cls_224': get_vision_transformer_relpos_model,
+        'vit_relpos_base_patch16_cls_224': get_vision_transformer_relpos_model,
+        'vit_relpos_base_patch16_clsgap_224': get_vision_transformer_relpos_model,
+        'vit_relpos_small_patch16_rpn_224': get_vision_transformer_relpos_model,
+        'vit_relpos_medium_patch16_rpn_224': get_vision_transformer_relpos_model,
+        'vit_relpos_base_patch16_rpn_224': get_vision_transformer_relpos_model,
+        'samvit_base_patch16': get_vision_transformer_sam_model, 'samvit_large_patch16': get_vision_transformer_sam_model,
+        'samvit_huge_patch16': get_vision_transformer_sam_model, 'samvit_base_patch16_224': get_vision_transformer_sam_model,
+        "vitamin_small": get_vitamin_model, "vitamin_base": get_vitamin_model, "vitamin_large": get_vitamin_model,
+        "vitamin_large_256": get_vitamin_model, "vitamin_large_336": get_vitamin_model, "vitamin_large_384": get_vitamin_model,
+        "vitamin_xlarge_256": get_vitamin_model, "vitamin_xlarge_336": get_vitamin_model, "vitamin_xlarge_384": get_vitamin_model,
+        'volo_d1_224': get_volo_model, 'volo_d1_384': get_volo_model, 'volo_d2_224': get_volo_model, 'volo_d2_384': get_volo_model,
+        'volo_d3_224': get_volo_model, 'volo_d3_448': get_volo_model, 'volo_d4_224': get_volo_model, 'volo_d4_448': get_volo_model,
+        'volo_d5_224': get_volo_model, 'volo_d5_448': get_volo_model, 'volo_d5_512': get_volo_model, 'vovnet39a': get_vovnet_model,
+        'vovnet57a': get_vovnet_model, 'ese_vovnet19b_slim_dw': get_vovnet_model, 'ese_vovnet19b_dw': get_vovnet_model,
+        'ese_vovnet19b_slim': get_vovnet_model, 'ese_vovnet39b': get_vovnet_model, 'ese_vovnet57b': get_vovnet_model,
+        'ese_vovnet99b': get_vovnet_model, 'eca_vovnet39b': get_vovnet_model, 'ese_vovnet39b_evos': get_vovnet_model
     }
 
     if model_type not in model_retrieval_functions:

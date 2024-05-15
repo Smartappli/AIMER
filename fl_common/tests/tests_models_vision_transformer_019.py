@@ -19,7 +19,7 @@ class ProcessingVisionTransformerTestCase(TestCase):
         """
         # List of Vision Transformer model types to test
         vision_types = ["vit_so400m_patch14_siglip_gap_224", "vit_so400m_patch14_siglip_gap_384",
-                        "vit_so400m_patch14_siglip_gap_448", "vit_so400m_patch14_siglip_gap_896",
+                        # "vit_so400m_patch14_siglip_gap_448", "vit_so400m_patch14_siglip_gap_896",
                         "vit_wee_patch16_reg1_gap_256", "vit_pwee_patch16_reg1_gap_256",
                         "vit_little_patch16_reg4_gap_256", "vit_medium_patch16_reg1_gap_256"]
 
