@@ -893,8 +893,17 @@ def get_family_model_v(model_type, num_classes):
         "vit_base_patch16_siglip_384": get_vision_transformer_model, "vit_base_patch16_siglip_512": get_vision_transformer_model,
         "vit_large_patch16_siglip_256": get_vision_transformer_model, "vit_large_patch16_siglip_384": get_vision_transformer_model,
         "vit_so400m_patch14_siglip_224": get_vision_transformer_model, "vit_so400m_patch14_siglip_384": get_vision_transformer_model,
-        "vit_medium_patch16_reg4_gap_256": get_vision_transformer_model, "vit_base_patch16_reg4_gap_256": get_vision_transformer_model,
-        "vit_so150m_patch16_reg4_map_256": get_vision_transformer_model, "vit_so150m_patch16_reg4_gap_256": get_vision_transformer_model
+        "vit_base_patch16_siglip_gap_224": get_vision_transformer_model, "vit_base_patch16_siglip_gap_256": get_vision_transformer_model,
+        "vit_base_patch16_siglip_gap_384": get_vision_transformer_model, "vit_base_patch16_siglip_gap_512": get_vision_transformer_model,
+        "vit_large_patch16_siglip_gap_256": get_vision_transformer_model, "vit_large_patch16_siglip_gap_384": get_vision_transformer_model,
+        "vit_so400m_patch14_siglip_gap_224": get_vision_transformer_model, "vit_so400m_patch14_siglip_gap_384": get_vision_transformer_model,
+        "vit_so400m_patch14_siglip_gap_448": get_vision_transformer_model, "vit_so400m_patch14_siglip_gap_896": get_vision_transformer_model,
+        "vit_wee_patch16_reg1_gap_256": get_vision_transformer_model, "vit_pwee_patch16_reg1_gap_256": get_vision_transformer_model,
+        "vit_little_patch16_reg4_gap_256": get_vision_transformer_model, "vit_medium_patch16_reg1_gap_256": get_vision_transformer_model,
+        "vit_medium_patch16_reg4_gap_256": get_vision_transformer_model, "vit_mediumd_patch16_reg4_gap_256": get_vision_transformer_model,
+        "vit_betwixt_patch16_reg1_gap_256": get_vision_transformer_model, "vit_betwixt_patch16_reg4_gap_256": get_vision_transformer_model,
+        "vit_base_patch16_reg4_gap_256": get_vision_transformer_model, "vit_so150m_patch16_reg4_map_256": get_vision_transformer_model,
+        "vit_so150m_patch16_reg4_gap_256": get_vision_transformer_model
     }
 
     if model_type not in model_retrieval_functions:
