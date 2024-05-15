@@ -53,8 +53,14 @@ def get_vision_transformer_model(vision_type, num_classes):
         "vit_large_patch14_reg4_dinov2", "vit_giant_patch14_reg4_dinov2", "vit_base_patch16_siglip_224",
         "vit_base_patch16_siglip_256", "vit_base_patch16_siglip_384", "vit_base_patch16_siglip_512",
         "vit_large_patch16_siglip_256", "vit_large_patch16_siglip_384", "vit_so400m_patch14_siglip_224",
-        "vit_so400m_patch14_siglip_384", "vit_medium_patch16_reg4_gap_256", "vit_base_patch16_reg4_gap_256",
-        "vit_so150m_patch16_reg4_map_256", "vit_so150m_patch16_reg4_gap_256"
+        "vit_so400m_patch14_siglip_384", "vit_base_patch16_siglip_gap_224", "vit_medium_patch16_reg4_gap_256",
+        "vit_base_patch16_siglip_gap_384", "vit_base_patch16_siglip_gap_512", "vit_large_patch16_siglip_gap_256",
+        "vit_large_patch16_siglip_gap_384", "vit_so400m_patch14_siglip_gap_224", "vit_so400m_patch14_siglip_gap_384",
+        "vit_so400m_patch14_siglip_gap_448", "vit_so400m_patch14_siglip_gap_896", "vit_wee_patch16_reg1_gap_256",
+        "vit_pwee_patch16_reg1_gap_256", "vit_little_patch16_reg4_gap_256", "vit_medium_patch16_reg1_gap_256",
+        "vit_medium_patch16_reg4_gap_256", "vit_mediumd_patch16_reg4_gap_256", "vit_betwixt_patch16_reg1_gap_256",
+        "vit_betwixt_patch16_reg4_gap_256", "vit_base_patch16_reg4_gap_256", "vit_so150m_patch16_reg4_map_256",
+        "vit_so150m_patch16_reg4_gap_256"
     ]
 
     # Check if the vision type is from torchvision
