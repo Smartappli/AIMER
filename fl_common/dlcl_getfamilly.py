@@ -30,6 +30,7 @@ from fl_common.models.ghostnet import get_ghostnet_model
 from fl_common.models.googlenet import get_googlenet_model
 from fl_common.models.hardcorenas import get_hardcorenas_model
 from fl_common.models.hgnet import get_hgnet_model
+from fl_common.models.hiera import get_hiera_model
 from fl_common.models.hrnet import get_hrnet_model
 from fl_common.models.inception_next import get_inception_next_model
 from fl_common.models.inception import get_inception_model
@@ -434,7 +435,9 @@ def get_family_model_h(model_type, num_classes):
         'hardcorenas_d': get_hardcorenas_model, 'hardcorenas_e': get_hardcorenas_model, 'hardcorenas_f': get_hardcorenas_model,
         'hgnet_tiny': get_hgnet_model, 'hgnet_small': get_hgnet_model, 'hgnet_base': get_hgnet_model, 'hgnetv2_b0': get_hgnet_model,
         'hgnetv2_b1': get_hgnet_model, 'hgnetv2_b2': get_hgnet_model, 'hgnetv2_b3': get_hgnet_model, 'hgnetv2_b4': get_hgnet_model,
-        'hgnetv2_b5': get_hgnet_model, 'hgnetv2_b6': get_hgnet_model, 'hrnet_w18_small': get_hrnet_model,
+        'hgnetv2_b5': get_hgnet_model, 'hgnetv2_b6': get_hgnet_model, 'hiera_tiny_224': get_hiera_model,
+        'hiera_small_224': get_hiera_model, 'hiera_base_224': get_hiera_model, 'hiera_base_plus_224': get_hiera_model,
+        'hiera_large_224': get_hiera_model, 'hiera_huge_224': get_hiera_model, 'hrnet_w18_small': get_hrnet_model,
         'hrnet_w18_small_v2': get_hrnet_model, 'hrnet_w18': get_hrnet_model, 'hrnet_w30': get_hrnet_model,
         'hrnet_w32': get_hrnet_model, 'hrnet_w40': get_hrnet_model, 'hrnet_w44': get_hrnet_model, 'hrnet_w48': get_hrnet_model,
         'hrnet_w64': get_hrnet_model, 'hrnet_w18_ssld': get_hrnet_model, 'hrnet_w48_ssld': get_hrnet_model,
