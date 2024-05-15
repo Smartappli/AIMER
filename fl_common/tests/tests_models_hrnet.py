@@ -16,9 +16,17 @@ class ProcessingHrnetTestCase(TestCase):
         Test for known HRNet architecture types to ensure they return a model without raising any exceptions.
         """
         known_hrnet_types = [
-            'hrnet_w18_small', 'hrnet_w18_small_v2', 'hrnet_w18', 'hrnet_w30', 'hrnet_w32', 'hrnet_w40', 'hrnet_w44',
-            'hrnet_w48', 'hrnet_w64', 'hrnet_w18_ssld', 'hrnet_w48_ssld'
-        ]
+            'hrnet_w18_small',
+            'hrnet_w18_small_v2',
+            'hrnet_w18',
+            'hrnet_w30',
+            'hrnet_w32',
+            'hrnet_w40',
+            'hrnet_w44',
+            'hrnet_w48',
+            'hrnet_w64',
+            'hrnet_w18_ssld',
+            'hrnet_w48_ssld']
 
         num_classes = 1000  # Assuming 1000 classes for the test
 
@@ -28,7 +36,8 @@ class ProcessingHrnetTestCase(TestCase):
                     model = get_hrnet_model(hrnet_type, num_classes)
                     self.assertIsNotNone(model)
                 except ValueError:
-                    self.fail(f"{hrnet_type} should be a known HRNet architecture.")
+                    self.fail(
+                        f"{hrnet_type} should be a known HRNet architecture.")
 
     def test_hrnet_model_unknown_type(self):
         """

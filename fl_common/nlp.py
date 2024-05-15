@@ -25,7 +25,9 @@ for task in tasks:
         elif filepath is _CACHED_NO_EXIST:
             # non-existence of file is cached
             print("File in download")
-            hf_hub_download(repo_id=p.model_repo, filename=q.model_file_filename)
+            hf_hub_download(
+                repo_id=p.model_repo,
+                filename=q.model_file_filename)
             print("File downloaded")
         else:
             print("File in download")

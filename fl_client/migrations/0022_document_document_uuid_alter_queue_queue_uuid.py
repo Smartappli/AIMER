@@ -3,6 +3,7 @@
 import uuid
 from django.db import migrations, models
 
+
 def create_uuid(apps, schema_editor):
     Document = apps.get_model('fl_client', 'Document')
     for document in Document.objects.all():

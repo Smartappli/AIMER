@@ -46,7 +46,8 @@ def import_data(request):
 
             fichier_split = fichier.path.split('.')
 
-            if (fichier_split[-1] == "gguf") or (fichier_split[-1].split('-')[0] == 'gguf'):
+            if (fichier_split[-1] ==
+                    "gguf") or (fichier_split[-1].split('-')[0] == 'gguf'):
                 q = fichier_split[-2]
                 path = fichier.path
                 file_size = int(fichier.lfs["size"])
@@ -134,8 +135,9 @@ def download_data(request):
     for p in my_models:
         print(p.model_repo)
 
-        my_files = ModelFile.objects.filter(model_file_model_id=p.model_id,
-                                            model_file_type='Q4KM').order_by('model_file_filename')
+        my_files = ModelFile.objects.filter(
+            model_file_model_id=p.model_id,
+            model_file_type='Q4KM').order_by('model_file_filename')
 
         model_listing = []
         for q in my_files:
@@ -162,9 +164,11 @@ def download_data(request):
 
                 print("File downloaded")
 
-            model_listing.append(try_to_load_from_cache(repo_id=p.model_repo,
-                                                        filename=q.model_file_filename,
-                                                        repo_type="model"))
+            model_listing.append(
+                try_to_load_from_cache(
+                    repo_id=p.model_repo,
+                    filename=q.model_file_filename,
+                    repo_type="model"))
 
             if len(model_listing) > 1:
                 model_listing.sort()
@@ -181,11 +185,14 @@ def download_data(request):
                 i = 0
                 for q2 in my_files:
                     if i == 0:
-                        ModelFile.objects.filter(pk=q2.model_file_model_id).update(
-                            model_file_filename=q2.model_file_filename.replace('-split-a', ''))
+                        ModelFile.objects.filter(
+                            pk=q2.model_file_model_id).update(
+                            model_file_filename=q2.model_file_filename.replace(
+                                '-split-a', ''))
                         i = 1
                     else:
-                        ModelFile.objects.get(pk=q2.model_file_model_id).delete()
+                        ModelFile.objects.get(
+                            pk=q2.model_file_model_id).delete()
 
     logo = ['share', 'hospital', 'data', 'cpu', 'gpu']
     return render(request,
@@ -295,32 +302,35 @@ def deep_learning_classification_run(request):
                 model_name = model_key.split('_')
 
                 try:
-                    model_id = Model.objects.get(model_short_name=model_name[1])
+                    model_id = Model.objects.get(
+                        model_short_name=model_name[1])
                 except Model.DoesNotExist:
                     model_id = None
 
                 if model_id is not None:
                     params = {}
 
-                    augmentation = {'cropping': cd['dpcla_data_augmentation_cropping'],
-                                    'horizontal_flip': cd['dpcla_data_augmentation_horizontal_flip'],
-                                    'vertical_flip': cd['dpcla_data_augmentation_vertical_flip'],
-                                    'translation': cd['dpcla_data_augmentation_translation'],
-                                    'rotation': cd['dpcla_data_augmentation_rotation'],
-                                    'zoom': cd['dpcla_data_augmentation_zoom'],
-                                    'contrast': cd['dpcla_data_augmentation_contrast'],
-                                    'brightness': cd['dpcla_data_augmentation_brightness']}
+                    augmentation = {
+                        'cropping': cd['dpcla_data_augmentation_cropping'],
+                        'horizontal_flip': cd['dpcla_data_augmentation_horizontal_flip'],
+                        'vertical_flip': cd['dpcla_data_augmentation_vertical_flip'],
+                        'translation': cd['dpcla_data_augmentation_translation'],
+                        'rotation': cd['dpcla_data_augmentation_rotation'],
+                        'zoom': cd['dpcla_data_augmentation_zoom'],
+                        'contrast': cd['dpcla_data_augmentation_contrast'],
+                        'brightness': cd['dpcla_data_augmentation_brightness']}
 
                     params['augmentation'] = augmentation
 
-                    xai = {'activation_maximization': cd['dpcla_activationmaximization'],
-                           'gradcam': cd['dpcla_gradcam'],
-                           'gradcamplusplus': cd['dpcla_gradcamplusplus'],
-                           'scorecam': cd['dpcla_scorecam'],
-                           'fasterscorecam': cd['dpcla_fasterscorecam'],
-                           'layercam': cd['dpcla_layercam'],
-                           'vanillasaliency': cd['dpcla_vanillasaliency'],
-                           'smoothgrad': cd['dpcla_smoothgrad']}
+                    xai = {
+                        'activation_maximization': cd['dpcla_activationmaximization'],
+                        'gradcam': cd['dpcla_gradcam'],
+                        'gradcamplusplus': cd['dpcla_gradcamplusplus'],
+                        'scorecam': cd['dpcla_scorecam'],
+                        'fasterscorecam': cd['dpcla_fasterscorecam'],
+                        'layercam': cd['dpcla_layercam'],
+                        'vanillasaliency': cd['dpcla_vanillasaliency'],
+                        'smoothgrad': cd['dpcla_smoothgrad']}
 
                     params['xai'] = xai
 
@@ -479,7 +489,11 @@ def natural_language_processing(request):
     form2 = NLPEmotionalAnalysisForm()
     return render(request,
                   "natural_language_processing/natural_language_processing.html",
-                  {"logo": logo, "form1": form1, "form2": form2, "section": 'nlp', "pdf": True})
+                  {"logo": logo,
+                   "form1": form1,
+                   "form2": form2,
+                   "section": 'nlp',
+                   "pdf": True})
 
 
 def natural_language_processing_emotional_analysis_run(request):

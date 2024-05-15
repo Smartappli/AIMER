@@ -14,7 +14,13 @@ class ProcessingNestTestCase(TestCase):
         """
         Test for known Nest architecture types to ensure they return a model without raising any exceptions.
         """
-        known_nest_types = ['nest_base', 'nest_small', 'nest_tiny', 'nest_base_jx', 'nest_small_jx', 'nest_tiny_jx']
+        known_nest_types = [
+            'nest_base',
+            'nest_small',
+            'nest_tiny',
+            'nest_base_jx',
+            'nest_small_jx',
+            'nest_tiny_jx']
         num_classes = 1000  # Assuming 1000 classes for the test
 
         for nest_type in known_nest_types:
@@ -23,7 +29,8 @@ class ProcessingNestTestCase(TestCase):
                     model = get_nest_model(nest_type, num_classes)
                     self.assertIsNotNone(model)
                 except ValueError:
-                    self.fail(f"{nest_type} should be a known Nest architecture.")
+                    self.fail(
+                        f"{nest_type} should be a known Nest architecture.")
 
     def test_unknown_nest_type(self):
         """

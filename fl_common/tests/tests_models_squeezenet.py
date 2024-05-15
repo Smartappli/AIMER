@@ -62,7 +62,8 @@ class ProcessingSqueezenetestCase(TestCase):
         squeezenet_type = 'SqueezeNet1_0'
         num_classes = 10
 
-        # Override the last layer with a convolutional layer for testing purposes
+        # Override the last layer with a convolutional layer for testing
+        # purposes
         squeezenet_model = get_squeezenet_model(squeezenet_type, num_classes)
         last_layer = squeezenet_model.classifier[1]
         # Check if the last layer is an instance of nn.Conv2d

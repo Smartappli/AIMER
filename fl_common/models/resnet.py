@@ -32,7 +32,8 @@ def get_resnet_model(resnet_type, num_classes):
     Raises:
         ValueError: If the specified ResNetV2 architecture is unknown.
     """
-    # Mapping of vision types to their corresponding torchvision models and weights
+    # Mapping of vision types to their corresponding torchvision models and
+    # weights
     torchvision_models = {
         'ResNet18': (models.resnet18, models.ResNet18_Weights),
         'ResNet34': (models.resnet34, models.ResNet34_Weights),
@@ -80,10 +81,12 @@ def get_resnet_model(resnet_type, num_classes):
     # Check if the vision type is from the 'timm' library
     elif resnet_type in timm_models:
         try:
-            resnet_model = create_model(resnet_type, pretrained=True, num_classes=num_classes)
+            resnet_model = create_model(
+                resnet_type, pretrained=True, num_classes=num_classes)
         except RuntimeError as e:
             print(f"{resnet_type} - Error loading pretrained model: {e}")
-            resnet_model = create_model(resnet_type, pretrained=False, num_classes=num_classes)
+            resnet_model = create_model(
+                resnet_type, pretrained=False, num_classes=num_classes)
     else:
         raise ValueError(f'Unknown ResNet Architecture: {resnet_type}')
 

@@ -12,19 +12,39 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AlterModelOptions(
             name='dataset',
-            options={'ordering': ['dataset_name']},
+            options={
+                'ordering': ['dataset_name']},
         ),
         migrations.AlterModelOptions(
             name='license',
-            options={'ordering': ['license_short_name']},
+            options={
+                'ordering': ['license_short_name']},
         ),
         migrations.AlterModelOptions(
             name='model_file',
-            options={'ordering': ['model_file_filename']},
+            options={
+                'ordering': ['model_file_filename']},
         ),
         migrations.AddField(
             model_name='dataset',
             name='dataset_format',
-            field=models.TextField(choices=[('CSV', 'Comma-separated values'), ('DICOM', 'DICOM'), ('FHIR', 'FHIR'), ('SNOMED', 'SNOMED CT'), ('IMG', 'Image'), ('JSON', 'JavaScript Object Notation'), ('TXT', 'Text')], default='CSV', max_length=6),
+            field=models.TextField(
+                choices=[
+                    ('CSV',
+                     'Comma-separated values'),
+                    ('DICOM',
+                     'DICOM'),
+                    ('FHIR',
+                     'FHIR'),
+                    ('SNOMED',
+                     'SNOMED CT'),
+                    ('IMG',
+                     'Image'),
+                    ('JSON',
+                     'JavaScript Object Notation'),
+                    ('TXT',
+                     'Text')],
+                default='CSV',
+                max_length=6),
         ),
     ]

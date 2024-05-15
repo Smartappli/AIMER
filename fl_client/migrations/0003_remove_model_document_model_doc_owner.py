@@ -6,8 +6,7 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('fl_client', '0002_remove_model_id_remove_model_file_model_id_and_more'),
-    ]
+        ('fl_client', '0002_remove_model_id_remove_model_file_model_id_and_more'), ]
 
     operations = [
         migrations.RemoveField(

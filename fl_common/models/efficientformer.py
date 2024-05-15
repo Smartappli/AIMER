@@ -16,12 +16,22 @@ def get_efficientformer_model(efficientformer_type, num_classes):
     Raises:
         ValueError: If the specified efficientformer_type is not one of the supported architectures.
     """
-    supported_types = ['efficientformer_l1', 'efficientformer_l3', 'efficientformer_l7']
+    supported_types = [
+        'efficientformer_l1',
+        'efficientformer_l3',
+        'efficientformer_l7']
     if efficientformer_type not in supported_types:
-        raise ValueError(f'Unknown Efficientformer Architecture: {efficientformer_type}')
+        raise ValueError(
+            f'Unknown Efficientformer Architecture: {efficientformer_type}')
 
     try:
-        return create_model(efficientformer_type, pretrained=True, num_classes=num_classes)
+        return create_model(
+            efficientformer_type,
+            pretrained=True,
+            num_classes=num_classes)
     except RuntimeError as e:
         print(f"{efficientformer_type} - Error loading pretrained model: {e}")
-        return create_model(efficientformer_type, pretrained=False, num_classes=num_classes)
+        return create_model(
+            efficientformer_type,
+            pretrained=False,
+            num_classes=num_classes)

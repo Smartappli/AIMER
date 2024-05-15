@@ -15,15 +15,24 @@ class ProcessingVisionTransformerRelposTestCase(TestCase):
         Test all Vision Transformer Relative Position models.
         """
         num_classes = 10
-        model_types = ['vit_relpos_base_patch32_plus_rpn_256', 'vit_relpos_base_patch16_plus_240',
-                       'vit_relpos_small_patch16_224', 'vit_relpos_medium_patch16_224', 'vit_relpos_base_patch16_224',
-                       'vit_srelpos_small_patch16_224', 'vit_srelpos_medium_patch16_224',
-                       'vit_relpos_medium_patch16_cls_224', 'vit_relpos_base_patch16_cls_224',
-                       'vit_relpos_base_patch16_clsgap_224', 'vit_relpos_small_patch16_rpn_224',
-                       'vit_relpos_medium_patch16_rpn_224', 'vit_relpos_base_patch16_rpn_224']
+        model_types = [
+            'vit_relpos_base_patch32_plus_rpn_256',
+            'vit_relpos_base_patch16_plus_240',
+            'vit_relpos_small_patch16_224',
+            'vit_relpos_medium_patch16_224',
+            'vit_relpos_base_patch16_224',
+            'vit_srelpos_small_patch16_224',
+            'vit_srelpos_medium_patch16_224',
+            'vit_relpos_medium_patch16_cls_224',
+            'vit_relpos_base_patch16_cls_224',
+            'vit_relpos_base_patch16_clsgap_224',
+            'vit_relpos_small_patch16_rpn_224',
+            'vit_relpos_medium_patch16_rpn_224',
+            'vit_relpos_base_patch16_rpn_224']
         for model_type in model_types:
             with self.subTest(model_type=model_type):
-                model = get_vision_transformer_relpos_model(model_type, num_classes)
+                model = get_vision_transformer_relpos_model(
+                    model_type, num_classes)
                 self.assertIsNotNone(model)
                 # Add more specific tests if needed
 
@@ -40,7 +49,8 @@ class ProcessingVisionTransformerRelposTestCase(TestCase):
         num_classes = 10
 
         with self.assertRaises(ValueError) as context:
-            # Attempt to get a Vision Transformer Relpos model with an unknown architecture
+            # Attempt to get a Vision Transformer Relpos model with an unknown
+            # architecture
             get_vision_transformer_relpos_model(vision_type, num_classes)
 
         self.assertEqual(

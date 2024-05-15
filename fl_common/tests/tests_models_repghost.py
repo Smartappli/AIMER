@@ -15,9 +15,15 @@ class ProcessingRepghostTestCase(TestCase):
         """
         Test if the function returns a valid Repghost model for known Repghost types.
         """
-        repghost_types = ['repghostnet_050', 'repghostnet_058', 'repghostnet_080',
-                          'repghostnet_100', 'repghostnet_111', 'repghostnet_130',
-                          'repghostnet_150', 'repghostnet_200']
+        repghost_types = [
+            'repghostnet_050',
+            'repghostnet_058',
+            'repghostnet_080',
+            'repghostnet_100',
+            'repghostnet_111',
+            'repghostnet_130',
+            'repghostnet_150',
+            'repghostnet_200']
         num_classes = 10  # Just for testing purposes
 
         for repghost_type in repghost_types:

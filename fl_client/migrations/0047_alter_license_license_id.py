@@ -13,6 +13,9 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='license',
             name='license_id',
-            field=models.BigAutoField(editable=False, primary_key=True, serialize=False),
+            field=models.BigAutoField(
+                editable=False,
+                primary_key=True,
+                serialize=False),
         ),
     ]

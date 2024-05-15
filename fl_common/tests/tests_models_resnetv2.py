@@ -18,10 +18,23 @@ class ProcessingResnetTestCase(TestCase):
             AssertionError: If any of the assertions fail.
         """
         # List of ResNet model types to test
-        resnet_types = ['resnetv2_50x1_bit', 'resnetv2_50x3_bit', 'resnetv2_101x1_bit', 'resnetv2_101x3_bit',
-                        'resnetv2_152x2_bit', 'resnetv2_152x4_bit', 'resnetv2_50', 'resnetv2_50d', 'resnetv2_50t',
-                        'resnetv2_101', 'resnetv2_101d', 'resnetv2_152', 'resnetv2_152d', 'resnetv2_50d_gn',
-                        'resnetv2_50d_evos', 'resnetv2_50d_frn']
+        resnet_types = [
+            'resnetv2_50x1_bit',
+            'resnetv2_50x3_bit',
+            'resnetv2_101x1_bit',
+            'resnetv2_101x3_bit',
+            'resnetv2_152x2_bit',
+            'resnetv2_152x4_bit',
+            'resnetv2_50',
+            'resnetv2_50d',
+            'resnetv2_50t',
+            'resnetv2_101',
+            'resnetv2_101d',
+            'resnetv2_152',
+            'resnetv2_152d',
+            'resnetv2_50d_gn',
+            'resnetv2_50d_evos',
+            'resnetv2_50d_frn']
         num_classes = 10  # You can adjust the number of classes as needed
 
         # Loop through each ResNet model type

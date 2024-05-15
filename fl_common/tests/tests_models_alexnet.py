@@ -10,6 +10,7 @@ class ProcessinAlexnetTestCase(TestCase):
     """
     Test case class for processing Alexenet model.
     """
+
     def test_alexnet_model(self):
         """
         Test case for creating AlexNet models.

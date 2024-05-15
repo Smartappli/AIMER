@@ -79,13 +79,19 @@ def create_transform(resize=None,
             transform_list.append(transforms.RandomCrop(random_crop))
 
         if random_horizontal_flip:
-            transform_list.append(transforms.RandomHorizontalFlip(p=horizontal_flip_prob))
+            transform_list.append(
+                transforms.RandomHorizontalFlip(
+                    p=horizontal_flip_prob))
 
         if random_vertical_flip:
-            transform_list.append(transforms.RandomVerticalFlip(p=vertical_flip_prob))
+            transform_list.append(
+                transforms.RandomVerticalFlip(
+                    p=vertical_flip_prob))
 
         if random_rotation is not None:
-            transform_list.append(transforms.RandomRotation(degrees=rotation_range))
+            transform_list.append(
+                transforms.RandomRotation(
+                    degrees=rotation_range))
 
         if color_jitter is not None:
             transform_list.append(transforms.ColorJitter(*color_jitter))
@@ -97,13 +103,20 @@ def create_transform(resize=None,
             transform_list.append(transforms.ToTensor())
 
         if normalize is not None:
-            transform_list.append(transforms.Normalize(mean=normalize[0], std=normalize[1]))
+            transform_list.append(
+                transforms.Normalize(
+                    mean=normalize[0],
+                    std=normalize[1]))
 
     transform = transforms.Compose(transform_list)
     return transform
 
 
-def get_dataset(dataset_path, batch_size, augmentation_params, normalize_params):
+def get_dataset(
+        dataset_path,
+        batch_size,
+        augmentation_params,
+        normalize_params):
     """
     Create and configure data loaders for a custom dataset.
 
@@ -141,15 +154,19 @@ def get_dataset(dataset_path, batch_size, augmentation_params, normalize_params)
     """
 
     # Load your custom dataset
-    dataset = datasets.ImageFolder(root=dataset_path,
-                                   transform=create_transform(**augmentation_params,
-                                                              normalize=normalize_params))
+    dataset = datasets.ImageFolder(
+        root=dataset_path,
+        transform=create_transform(
+            **augmentation_params,
+            normalize=normalize_params))
 
     # Split the dataset into training and testing sets
-    train_indices, test_indices = train_test_split(list(range(len(dataset))), test_size=0.1, random_state=42)
+    train_indices, test_indices = train_test_split(
+        list(range(len(dataset))), test_size=0.1, random_state=42)
 
     # Further split the training set into training and validation sets
-    train_indices, val_indices = train_test_split(train_indices, test_size=0.222222, random_state=42)
+    train_indices, val_indices = train_test_split(
+        train_indices, test_size=0.222222, random_state=42)
 
     # Create SubsetRandomSampler for each set
     train_sampler = SubsetRandomSampler(train_indices)
@@ -164,14 +181,24 @@ def get_dataset(dataset_path, batch_size, augmentation_params, normalize_params)
 
     # Print the information
     print(f"Nombre total d'images dans le dataset: {total_images}")
-    print(f"Nombre d'images dans l'ensemble d'entraînement: {num_train_images}")
+    print(
+        f"Nombre d'images dans l'ensemble d'entraînement: {num_train_images}")
     print(f"Nombre d'images dans l'ensemble de validation: {num_val_images}")
     print(f"Nombre d'images dans l'ensemble de test: {num_test_images}")
 
     # Define data loaders
-    train_loader = DataLoader(dataset, batch_size=batch_size, sampler=train_sampler)
-    val_loader = DataLoader(dataset, batch_size=batch_size, sampler=val_sampler)
-    test_loader = DataLoader(dataset, batch_size=batch_size, sampler=test_sampler)
+    train_loader = DataLoader(
+        dataset,
+        batch_size=batch_size,
+        sampler=train_sampler)
+    val_loader = DataLoader(
+        dataset,
+        batch_size=batch_size,
+        sampler=val_sampler)
+    test_loader = DataLoader(
+        dataset,
+        batch_size=batch_size,
+        sampler=test_sampler)
 
     num_classes = len(dataset.classes)
     class_names = dataset.classes
@@ -364,7 +391,8 @@ def get_scheduler(optimizer, scheduler_type='step', **kwargs):
         raise ValueError(f"Invalid scheduler_type: {scheduler_type}")
 
 
-# Function to generate and save XAI heatmap for a specific image using selected methods
+# Function to generate and save XAI heatmap for a specific image using
+# selected methods
 def generate_xai_heatmaps(model, image_tensor, label, save_dir, methods=None):
     """
     Generate and save XAI (Explainable AI) heatmaps using various attribution methods.
@@ -432,7 +460,8 @@ def generate_xai_heatmaps(model, image_tensor, label, save_dir, methods=None):
         attributions = attributions.sum(dim=1)
 
         # Normalize attributions to [0, 1]
-        attributions = (attributions - attributions.min()) / (attributions.max() - attributions.min())
+        attributions = (attributions - attributions.min()) / \
+            (attributions.max() - attributions.min())
 
         # Convert to numpy array for plotting
         attributions_np = attributions.squeeze(0).cpu().detach().numpy()
@@ -443,7 +472,8 @@ def generate_xai_heatmaps(model, image_tensor, label, save_dir, methods=None):
         plt.imshow(attributions_np, cmap='viridis')
         plt.title(f'XAI Heatmap for {method_name} (Label: {label})')
         plt.colorbar()
-        save_path = os.path.join(save_dir, f'xai_heatmap_{method_name}_{label}.png')
+        save_path = os.path.join(
+            save_dir, f'xai_heatmap_{method_name}_{label}.png')
         plt.savefig(save_path)
         plt.show()
 
@@ -490,6 +520,7 @@ class EarlyStopping:
             break
     ```
     """
+
     def __init__(self, patience=7, verbose=False):
         self.patience = patience
         self.verbose = verbose
@@ -513,7 +544,8 @@ class EarlyStopping:
         elif val_loss > self.best_loss:
             self.counter += 1
             if self.verbose:
-                print(f"EarlyStopping counter: {self.counter} out of {self.patience}")
+                print(
+                    f"EarlyStopping counter: {self.counter} out of {self.patience}")
             if self.counter >= self.patience:
                 self.early_stop = True
         else:

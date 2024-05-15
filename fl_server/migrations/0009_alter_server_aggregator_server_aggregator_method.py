@@ -13,6 +13,21 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='server_aggregator',
             name='server_aggregator_method',
-            field=models.CharField(choices=[('FA', 'FedAvg'), ('FC', 'FedCurv'), ('FP', 'FedProx'), ('GM', 'Geometric median'), ('CM', 'Coordinate-wise median'), ('KA', 'Krum algorithm')], default='FA', max_length=2),
+            field=models.CharField(
+                choices=[
+                    ('FA',
+                     'FedAvg'),
+                    ('FC',
+                     'FedCurv'),
+                    ('FP',
+                     'FedProx'),
+                    ('GM',
+                     'Geometric median'),
+                    ('CM',
+                     'Coordinate-wise median'),
+                    ('KA',
+                     'Krum algorithm')],
+                default='FA',
+                max_length=2),
         ),
     ]

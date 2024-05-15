@@ -16,6 +16,10 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='model_document',
             name='model_doc_owner',
-            field=models.ForeignKey(default=1, on_delete=django.db.models.deletion.DO_NOTHING, related_name='model_doc_owner', to=settings.AUTH_USER_MODEL),
+            field=models.ForeignKey(
+                default=1,
+                on_delete=django.db.models.deletion.DO_NOTHING,
+                related_name='model_doc_owner',
+                to=settings.AUTH_USER_MODEL),
         ),
     ]

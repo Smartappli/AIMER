@@ -27,11 +27,17 @@ class ProcessingCrossvitTestCase(TestCase):
         """
         num_classes = 1000  # Example number of classes
         crossvit_types = [
-            "crossvit_tiny_240", "crossvit_small_240", "crossvit_base_240",
-            "crossvit_9_240", "crossvit_15_240", "crossvit_18_240",
-            "crossvit_9_dagger_240", "crossvit_15_dagger_240", "crossvit_15_dagger_408",
-            "crossvit_18_dagger_240", "crossvit_18_dagger_408"
-        ]
+            "crossvit_tiny_240",
+            "crossvit_small_240",
+            "crossvit_base_240",
+            "crossvit_9_240",
+            "crossvit_15_240",
+            "crossvit_18_240",
+            "crossvit_9_dagger_240",
+            "crossvit_15_dagger_240",
+            "crossvit_15_dagger_408",
+            "crossvit_18_dagger_240",
+            "crossvit_18_dagger_408"]
 
         for crossvit_type in crossvit_types:
             with self.subTest(crossvit_type=crossvit_type):

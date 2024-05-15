@@ -18,12 +18,26 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Server_Project',
             fields=[
-                ('server_project_id', models.BigAutoField(primary_key=True, serialize=False)),
-                ('server_project_title', models.CharField(max_length=250)),
-                ('server_project_description', models.TextField()),
-                ('server_project_creation_date', models.DateTimeField(auto_now_add=True)),
-                ('server_project_updated_date', models.DateTimeField(auto_now=True)),
-                ('server_project_owner', models.ForeignKey(on_delete=django.db.models.deletion.DO_NOTHING, related_name='server_project_owner', to=settings.AUTH_USER_MODEL)),
+                ('server_project_id',
+                 models.BigAutoField(
+                     primary_key=True,
+                     serialize=False)),
+                ('server_project_title',
+                 models.CharField(
+                     max_length=250)),
+                ('server_project_description',
+                 models.TextField()),
+                ('server_project_creation_date',
+                 models.DateTimeField(
+                     auto_now_add=True)),
+                ('server_project_updated_date',
+                 models.DateTimeField(
+                     auto_now=True)),
+                ('server_project_owner',
+                 models.ForeignKey(
+                     on_delete=django.db.models.deletion.DO_NOTHING,
+                     related_name='server_project_owner',
+                     to=settings.AUTH_USER_MODEL)),
             ],
         ),
     ]

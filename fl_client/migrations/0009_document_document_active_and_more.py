@@ -16,46 +16,80 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='document',
             name='document_active',
-            field=models.BooleanField(default=True),
+            field=models.BooleanField(
+                default=True),
         ),
         migrations.AddField(
             model_name='local_project',
             name='local_project_active',
-            field=models.BooleanField(default=True),
+            field=models.BooleanField(
+                default=True),
         ),
         migrations.AddField(
             model_name='model',
             name='model_active',
-            field=models.BooleanField(default=True),
+            field=models.BooleanField(
+                default=True),
         ),
         migrations.AddField(
             model_name='model_document',
             name='modeldoc_active',
-            field=models.BooleanField(default=True),
+            field=models.BooleanField(
+                default=True),
         ),
         migrations.AddField(
             model_name='model_document',
             name='modeldoc_owner',
-            field=models.ForeignKey(default=1, on_delete=django.db.models.deletion.DO_NOTHING, related_name='modeldoc_owner', to=settings.AUTH_USER_MODEL),
+            field=models.ForeignKey(
+                default=1,
+                on_delete=django.db.models.deletion.DO_NOTHING,
+                related_name='modeldoc_owner',
+                to=settings.AUTH_USER_MODEL),
         ),
         migrations.AddField(
             model_name='model_family',
             name='model_family_active',
-            field=models.BooleanField(default=True),
+            field=models.BooleanField(
+                default=True),
         ),
         migrations.AlterField(
             model_name='document',
             name='document_filename',
-            field=models.CharField(default='', max_length=250),
+            field=models.CharField(
+                default='',
+                max_length=250),
         ),
         migrations.AlterField(
             model_name='document',
             name='document_owner',
-            field=models.ForeignKey(default=1, on_delete=django.db.models.deletion.DO_NOTHING, related_name='document_owner', to=settings.AUTH_USER_MODEL),
+            field=models.ForeignKey(
+                default=1,
+                on_delete=django.db.models.deletion.DO_NOTHING,
+                related_name='document_owner',
+                to=settings.AUTH_USER_MODEL),
         ),
         migrations.AlterField(
             model_name='model',
             name='model_type',
-            field=models.CharField(choices=[('AD', 'Anomaly Detection'), ('CL', 'Classification'), ('CU', 'Clustering'), ('RG', 'Regression'), ('SG', 'Segmentation'), ('TC', 'Text-Classification'), ('TG', 'Text-Generation'), ('TS', 'Time-Series')], default='AD', max_length=2),
+            field=models.CharField(
+                choices=[
+                    ('AD',
+                     'Anomaly Detection'),
+                    ('CL',
+                     'Classification'),
+                    ('CU',
+                     'Clustering'),
+                    ('RG',
+                     'Regression'),
+                    ('SG',
+                     'Segmentation'),
+                    ('TC',
+                     'Text-Classification'),
+                    ('TG',
+                     'Text-Generation'),
+                    ('TS',
+                     'Time-Series')],
+                default='AD',
+                max_length=2),
         ),
     ]

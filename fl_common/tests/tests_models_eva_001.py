@@ -15,11 +15,17 @@ class ProcessingEvaTestCase(TestCase):
         Test for known Eva architecture types to ensure they return a model without raising any exceptions.
         """
         known_eva_types = [
-            'eva_giant_patch14_224', 'eva_giant_patch14_336', 'eva_giant_patch14_560', 'eva02_tiny_patch14_224',
-            'eva02_small_patch14_224', 'eva02_base_patch14_224', 'eva02_large_patch14_224',
-            'eva02_tiny_patch14_336', 'eva02_small_patch14_336', 'eva02_base_patch14_448',
-            'eva02_large_patch14_448'
-        ]
+            'eva_giant_patch14_224',
+            'eva_giant_patch14_336',
+            'eva_giant_patch14_560',
+            'eva02_tiny_patch14_224',
+            'eva02_small_patch14_224',
+            'eva02_base_patch14_224',
+            'eva02_large_patch14_224',
+            'eva02_tiny_patch14_336',
+            'eva02_small_patch14_336',
+            'eva02_base_patch14_448',
+            'eva02_large_patch14_448']
 
         num_classes = 1000  # Assuming 1000 classes for the test
 
@@ -29,7 +35,8 @@ class ProcessingEvaTestCase(TestCase):
                     model = get_eva_model(eva_type, num_classes)
                     self.assertIsNotNone(model)
                 except ValueError:
-                    self.fail(f"{eva_type} should be a known Eva architecture.")
+                    self.fail(
+                        f"{eva_type} should be a known Eva architecture.")
 
     def test_unknown_eva_type(self):
         """

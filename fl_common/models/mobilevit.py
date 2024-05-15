@@ -19,15 +19,28 @@ def get_mobilevit_model(mobilevit_type, num_classes):
         ValueError: If an unknown MobileViT architecture type is specified.
     """
     mobilevit_options = [
-        'mobilevit_xxs', 'mobilevit_xs', 'mobilevit_s', 'mobilevitv2_050', 'mobilevitv2_075',
-        'mobilevitv2_100', 'mobilevitv2_125', 'mobilevitv2_150', 'mobilevitv2_175', 'mobilevitv2_200'
-    ]
+        'mobilevit_xxs',
+        'mobilevit_xs',
+        'mobilevit_s',
+        'mobilevitv2_050',
+        'mobilevitv2_075',
+        'mobilevitv2_100',
+        'mobilevitv2_125',
+        'mobilevitv2_150',
+        'mobilevitv2_175',
+        'mobilevitv2_200']
 
     if mobilevit_type not in mobilevit_options:
         raise ValueError(f'Unknown MobileViT Architecture: {mobilevit_type}')
 
     try:
-        return create_model(mobilevit_type, pretrained=True, num_classes=num_classes)
+        return create_model(
+            mobilevit_type,
+            pretrained=True,
+            num_classes=num_classes)
     except RuntimeError as e:
         print(f"{mobilevit_type} - Error loading pretrained model: {e}")
-        return create_model(mobilevit_type, pretrained=False, num_classes=num_classes)
+        return create_model(
+            mobilevit_type,
+            pretrained=False,
+            num_classes=num_classes)
