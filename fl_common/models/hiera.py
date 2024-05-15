@@ -21,11 +21,10 @@ def get_hiera_model(hiera_type, num_classes):
     }
 
     if hiera_type not in valid_hiera_types:
-        raise ValueError(f'Unknown HIERA Architecture: {cait_type}')
+        raise ValueError(f'Unknown HIERA Architecture: {hiera_type}')
 
     try:
         return create_model(hiera_type, pretrained=True, num_classes=num_classes)
     except RuntimeError as e:
         print(f"{hiera_type} - Error loading pretrained model: {e}")
         return create_model(hiera_type, pretrained=False, num_classes=num_classes)
-      
