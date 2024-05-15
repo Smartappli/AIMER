@@ -22,10 +22,18 @@ class ProcessingFastVitTestCase(TestCase):
             AssertionError: If any known FocalNet architecture fails to be created.
         """
         known_focalnet_types = [
-            "focalnet_tiny_srf", "focalnet_small_srf", "focalnet_base_srf", "focalnet_tiny_lrf",
-            "focalnet_small_lrf", "focalnet_base_lrf", "focalnet_large_fl3", "focalnet_large_fl4",
-            "focalnet_xlarge_fl3", "focalnet_xlarge_fl4", "focalnet_huge_fl3", "focalnet_huge_fl4"
-        ]
+            "focalnet_tiny_srf",
+            "focalnet_small_srf",
+            "focalnet_base_srf",
+            "focalnet_tiny_lrf",
+            "focalnet_small_lrf",
+            "focalnet_base_lrf",
+            "focalnet_large_fl3",
+            "focalnet_large_fl4",
+            "focalnet_xlarge_fl3",
+            "focalnet_xlarge_fl4",
+            "focalnet_huge_fl3",
+            "focalnet_huge_fl4"]
         num_classes = 1000  # Example number of classes
 
         for focalnet_type in known_focalnet_types:
@@ -34,7 +42,8 @@ class ProcessingFastVitTestCase(TestCase):
                     model = get_focalnet_model(focalnet_type, num_classes)
                     self.assertIsNotNone(model)
                 except ValueError:
-                    self.fail(f"{focalnet_type} should be a known Focalnet architecture.")
+                    self.fail(
+                        f"{focalnet_type} should be a known Focalnet architecture.")
 
     def test_unknown_focalnet_type(self):
         """

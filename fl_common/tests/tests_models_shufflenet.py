@@ -19,7 +19,11 @@ class ProcessingPartSTestCase(TestCase):
             AssertionError: If any of the assertions fail.
         """
         # List of ShuffleNet model types to test
-        shufflenet_types = ['ShuffleNet_V2_X0_5', 'ShuffleNet_V2_X1_0', 'ShuffleNet_V2_X1_5', 'ShuffleNet_V2_X2_0']
+        shufflenet_types = [
+            'ShuffleNet_V2_X0_5',
+            'ShuffleNet_V2_X1_0',
+            'ShuffleNet_V2_X1_5',
+            'ShuffleNet_V2_X2_0']
         num_classes = 10  # You can adjust the number of classes as needed
 
         # Loop through each ShuffleNet model type

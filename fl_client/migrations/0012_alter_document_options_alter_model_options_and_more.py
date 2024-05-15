@@ -12,19 +12,33 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AlterModelOptions(
             name='document',
-            options={'ordering': ['document_filename']},
+            options={
+                'ordering': ['document_filename']},
         ),
         migrations.AlterModelOptions(
             name='model',
-            options={'ordering': ['model_name']},
+            options={
+                'ordering': ['model_name']},
         ),
         migrations.AlterModelOptions(
             name='model_family',
-            options={'ordering': ['model_family_name']},
+            options={
+                'ordering': ['model_family_name']},
         ),
         migrations.AlterField(
             model_name='model',
             name='model_provider',
-            field=models.CharField(choices=[('HF', 'Hugging Face'), ('KE', 'Keras'), ('PC', 'PyCaret'), ('PT', 'PyTorch')], default='HF', max_length=2),
+            field=models.CharField(
+                choices=[
+                    ('HF',
+                     'Hugging Face'),
+                    ('KE',
+                     'Keras'),
+                    ('PC',
+                     'PyCaret'),
+                    ('PT',
+                     'PyTorch')],
+                default='HF',
+                max_length=2),
         ),
     ]

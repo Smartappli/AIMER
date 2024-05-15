@@ -13,6 +13,15 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='model_file',
             name='model_file_extension',
-            field=models.CharField(choices=[('NA', 'N/A'), ('BIN', 'Binary'), ('GGUF', 'GGUF')], default='NA', max_length=6),
+            field=models.CharField(
+                choices=[
+                    ('NA',
+                     'N/A'),
+                    ('BIN',
+                     'Binary'),
+                    ('GGUF',
+                     'GGUF')],
+                default='NA',
+                max_length=6),
         ),
     ]

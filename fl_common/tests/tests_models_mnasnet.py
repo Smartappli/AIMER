@@ -19,7 +19,11 @@ class ProcessingMNasnetTestCase(TestCase):
             AssertionError: If any of the assertions fail.
         """
         # List of MNASNet model types to test
-        mnasnet_types = ['MNASNet0_5', 'MNASNet0_75', 'MNASNet1_0', 'MNASNet1_3']
+        mnasnet_types = [
+            'MNASNet0_5',
+            'MNASNet0_75',
+            'MNASNet1_0',
+            'MNASNet1_3']
         num_classes = 10  # You can adjust the number of classes as needed
 
         # Loop through each MNASNet model type

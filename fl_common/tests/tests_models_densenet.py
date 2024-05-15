@@ -21,9 +21,17 @@ class ProcessingDenseNetTestCase(TestCase):
             AssertionError: If the assertion fails.
         """
         # List of DenseNet architectures to test
-        densenet_types = ['DenseNet121', 'DenseNet161', 'DenseNet169', 'DenseNet201', 'densenet121',
-                          'densenetblur121d', 'densenet169', 'densenet201', 'densenet161',
-                          'densenet264d']
+        densenet_types = [
+            'DenseNet121',
+            'DenseNet161',
+            'DenseNet169',
+            'DenseNet201',
+            'densenet121',
+            'densenetblur121d',
+            'densenet169',
+            'densenet201',
+            'densenet161',
+            'densenet264d']
         num_classes = 10  # You can adjust the number of classes as needed
 
         for densenet_type in densenet_types:
@@ -33,7 +41,8 @@ class ProcessingDenseNetTestCase(TestCase):
                     model = get_densenet_model(densenet_type, num_classes)
                     self.assertIsNotNone(model)
                 except ValueError:
-                    self.fail(f"{densenet_type} should be a known Densenet architecture.")
+                    self.fail(
+                        f"{densenet_type} should be a known Densenet architecture.")
 
     def test_densenet_unknown_architecture(self):
         """

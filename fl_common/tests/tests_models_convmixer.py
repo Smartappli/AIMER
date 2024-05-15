@@ -25,7 +25,10 @@ class ProcessingConvmixerTestCase(TestCase):
             None
         """
         num_classes = 1000  # Example number of classes
-        convmixer_types = ["convmixer_1536_20", "convmixer_768_32", "convmixer_1024_20_ks9_p14"]
+        convmixer_types = [
+            "convmixer_1536_20",
+            "convmixer_768_32",
+            "convmixer_1024_20_ks9_p14"]
 
         for convmixer_type in convmixer_types:
             with self.subTest(convmixer_type=convmixer_type):

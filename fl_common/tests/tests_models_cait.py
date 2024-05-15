@@ -27,10 +27,16 @@ class ProcessingCaitTestCase(TestCase):
         - AssertionError: If the function returns None for any known CAIT type.
         """
         known_types = [
-            "cait_xxs24_224", "cait_xxs24_384", "cait_xxs36_224", "cait_xxs36_384",
-            "cait_xs24_384", "cait_s24_224", "cait_s24_384", "cait_s36_384",
-            "cait_m36_384", "cait_m48_448"
-        ]
+            "cait_xxs24_224",
+            "cait_xxs24_384",
+            "cait_xxs36_224",
+            "cait_xxs36_384",
+            "cait_xs24_384",
+            "cait_s24_224",
+            "cait_s24_384",
+            "cait_s36_384",
+            "cait_m36_384",
+            "cait_m48_448"]
 
         for cait_type in known_types:
             with self.subTest(cait_type=cait_type):

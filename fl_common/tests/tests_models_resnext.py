@@ -19,7 +19,10 @@ class ProcessingResnextTestCase(TestCase):
             AssertionError: If any of the assertions fail.
         """
         # List of ResNeXt model types to test
-        resnext_types = ['ResNeXt50_32X4D', 'ResNeXt101_32X8D', 'ResNeXt101_64X4D']
+        resnext_types = [
+            'ResNeXt50_32X4D',
+            'ResNeXt101_32X8D',
+            'ResNeXt101_64X4D']
         num_classes = 10  # You can adjust the number of classes as needed
 
         # Loop through each ResNeXt model type

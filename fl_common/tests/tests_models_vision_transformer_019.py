@@ -45,7 +45,8 @@ class ProcessingVisionTransformerTestCase(TestCase):
         num_classes = 10
 
         with self.assertRaises(ValueError) as context:
-            # Attempt to get a Vision Transformer model with an unknown architecture
+            # Attempt to get a Vision Transformer model with an unknown
+            # architecture
             get_vision_transformer_model(vision_type, num_classes)
 
         self.assertEqual(

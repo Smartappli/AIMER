@@ -18,10 +18,14 @@ class ProcessingVisionTransformerTestCase(TestCase):
             AssertionError: If any of the assertions fail.
         """
         # List of Vision Transformer model types to test
-        vision_types = ["vit_medium_patch16_reg4_gap_256", "vit_mediumd_patch16_reg4_gap_256",
-                        "vit_betwixt_patch16_reg1_gap_256", "vit_betwixt_patch16_reg4_gap_256",
-                        "vit_base_patch16_reg4_gap_256", "vit_so150m_patch16_reg4_map_256",
-                        "vit_so150m_patch16_reg4_gap_256"]
+        vision_types = [
+            "vit_medium_patch16_reg4_gap_256",
+            "vit_mediumd_patch16_reg4_gap_256",
+            "vit_betwixt_patch16_reg1_gap_256",
+            "vit_betwixt_patch16_reg4_gap_256",
+            "vit_base_patch16_reg4_gap_256",
+            "vit_so150m_patch16_reg4_map_256",
+            "vit_so150m_patch16_reg4_gap_256"]
 
         num_classes = 10  # You can adjust the number of classes as needed
 
@@ -45,7 +49,8 @@ class ProcessingVisionTransformerTestCase(TestCase):
         num_classes = 10
 
         with self.assertRaises(ValueError) as context:
-            # Attempt to get a Vision Transformer model with an unknown architecture
+            # Attempt to get a Vision Transformer model with an unknown
+            # architecture
             get_vision_transformer_model(vision_type, num_classes)
 
         self.assertEqual(

@@ -14,9 +14,22 @@ class ProcessingMlpMixerTestCase(TestCase):
         """
         Test for known Mlp Mixer architecture types to ensure they return a model without raising any exceptions.
         """
-        known_mlp_mixer_types = ['mixer_s32_224', 'mixer_s16_224', 'mixer_b32_224', 'mixer_b16_224', 'mixer_l32_224',
-                                 'mixer_l16_224', 'gmixer_12_224', 'gmixer_24_224', 'resmlp_12_224', 'resmlp_24_224',
-                                 'resmlp_36_224', 'resmlp_big_24_224', 'gmlp_ti16_224', 'gmlp_s16_224', 'gmlp_b16_224']
+        known_mlp_mixer_types = [
+            'mixer_s32_224',
+            'mixer_s16_224',
+            'mixer_b32_224',
+            'mixer_b16_224',
+            'mixer_l32_224',
+            'mixer_l16_224',
+            'gmixer_12_224',
+            'gmixer_24_224',
+            'resmlp_12_224',
+            'resmlp_24_224',
+            'resmlp_36_224',
+            'resmlp_big_24_224',
+            'gmlp_ti16_224',
+            'gmlp_s16_224',
+            'gmlp_b16_224']
         num_classes = 1000  # Assuming 1000 classes for the test
 
         for mlp_mixer_type in known_mlp_mixer_types:
@@ -25,7 +38,8 @@ class ProcessingMlpMixerTestCase(TestCase):
                     model = get_mlp_mixer_model(mlp_mixer_type, num_classes)
                     self.assertIsNotNone(model)
                 except ValueError:
-                    self.fail(f"{mlp_mixer_type} should be a known Mlp Mixer architecture.")
+                    self.fail(
+                        f"{mlp_mixer_type} should be a known Mlp Mixer architecture.")
 
     def test_unknown_mlp_mixer_type(self):
         """

@@ -29,7 +29,8 @@ class ProcessingTresnetTestCase(TestCase):
                     model = get_tresnet_model(tresnet_type, num_classes)
                     self.assertIsNotNone(model)
                 except ValueError:
-                    self.fail(f"{tresnet_type} should be a known TResNet architecture.")
+                    self.fail(
+                        f"{tresnet_type} should be a known TResNet architecture.")
 
     def test_unknown_tresnet_type(self):
         """

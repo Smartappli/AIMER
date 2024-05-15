@@ -30,9 +30,16 @@ class ProcessingVovnetTestCase(TestCase):
         - 'ese_vovnet39b_evos'
         """
         architectures = [
-            'vovnet39a', 'vovnet57a', 'ese_vovnet19b_slim_dw', 'ese_vovnet19b_dw', 'ese_vovnet19b_slim',
-            'ese_vovnet39b', 'ese_vovnet57b', 'ese_vovnet99b', 'eca_vovnet39b', 'ese_vovnet39b_evos'
-        ]
+            'vovnet39a',
+            'vovnet57a',
+            'ese_vovnet19b_slim_dw',
+            'ese_vovnet19b_dw',
+            'ese_vovnet19b_slim',
+            'ese_vovnet39b',
+            'ese_vovnet57b',
+            'ese_vovnet99b',
+            'eca_vovnet39b',
+            'ese_vovnet39b_evos']
 
         for arch in architectures:
             with self.subTest(architecture=arch):

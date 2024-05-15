@@ -14,8 +14,15 @@ class ProcessingResnestTestCase(TestCase):
         """
         Test if the function returns a valid Res2Net model for known Res2Net types.
         """
-        resnest_types = ['resnest14d', 'resnest26d', 'resnest50d', 'resnest101e', 'resnest200e', 'resnest269e',
-                         'resnest50d_4s2x40d', 'resnest50d_1s4x24d']
+        resnest_types = [
+            'resnest14d',
+            'resnest26d',
+            'resnest50d',
+            'resnest101e',
+            'resnest200e',
+            'resnest269e',
+            'resnest50d_4s2x40d',
+            'resnest50d_1s4x24d']
         num_classes = 10  # Just for testing purposes
 
         for resnest_type in resnest_types:

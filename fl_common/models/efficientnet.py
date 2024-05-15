@@ -41,7 +41,8 @@ def get_efficientnet_model(efficientnet_type, num_classes):
     Raises:
     - ValueError: If the provided efficientnet_type is not recognized.
     """
-    # Mapping of vision types to their corresponding torchvision models and weights
+    # Mapping of vision types to their corresponding torchvision models and
+    # weights
     torchvision_models = {
         'EfficientNetB0': (models.efficientnet_b0, models.EfficientNet_B0_Weights),
         'EfficientNetB1': (models.efficientnet_b1, models.EfficientNet_B1_Weights),
@@ -99,16 +100,20 @@ def get_efficientnet_model(efficientnet_type, num_classes):
 
         # Modify last layer to suit number of classes
         num_features = efficientnet_model.classifier[-1].in_features
-        efficientnet_model.classifier[-1] = nn.Linear(num_features, num_classes)
+        efficientnet_model.classifier[-1] = nn.Linear(
+            num_features, num_classes)
 
     # Check if the vision type is from the 'timm' library
     elif efficientnet_type in timm_models:
         try:
-            efficientnet_model = create_model(efficientnet_type, pretrained=True, num_classes=num_classes)
+            efficientnet_model = create_model(
+                efficientnet_type, pretrained=True, num_classes=num_classes)
         except RuntimeError as e:
             print(f"{efficientnet_type} - Error loading pretrained model: {e}")
-            efficientnet_model = create_model(efficientnet_type, pretrained=False, num_classes=num_classes)
+            efficientnet_model = create_model(
+                efficientnet_type, pretrained=False, num_classes=num_classes)
     else:
-        raise ValueError(f'Unknown EfficientNet Architecture: {efficientnet_type}')
+        raise ValueError(
+            f'Unknown EfficientNet Architecture: {efficientnet_type}')
 
     return efficientnet_model

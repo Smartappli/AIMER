@@ -67,7 +67,8 @@ class ProcessingPartXTestCase(TestCase):
 
         for model_type in supported_models:
             with self.subTest(model_type=model_type):
-                model = get_xcit_model(model_type, num_classes=10)  # Specify the number of classes as needed
+                # Specify the number of classes as needed
+                model = get_xcit_model(model_type, num_classes=10)
                 self.assertIsNotNone(model)
 
     def test_unknown_xcit_model(self):

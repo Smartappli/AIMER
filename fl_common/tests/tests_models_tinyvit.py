@@ -25,7 +25,12 @@ class ProcessingTinyVitTestCase(TestCase):
         Raises:
         - AssertionError: If any of the TinyViT models is None.
         """
-        tiny_vit_types = ['tiny_vit_5m_224', 'tiny_vit_11m_224', 'tiny_vit_21m_224', 'tiny_vit_21m_384', 'tiny_vit_21m_512']
+        tiny_vit_types = [
+            'tiny_vit_5m_224',
+            'tiny_vit_11m_224',
+            'tiny_vit_21m_224',
+            'tiny_vit_21m_384',
+            'tiny_vit_21m_512']
         num_classes = 10
 
         for tiny_vit_type in tiny_vit_types:
