@@ -17,4 +17,4 @@ jobs:
           body: This is an auto-generated PR with fixes by autopep8.
           labels: autopep8, automated pr
           reviewers: peter-evans
-          branch: master
+          branch: autopep8-patches
