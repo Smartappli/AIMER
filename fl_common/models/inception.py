@@ -22,7 +22,8 @@ def get_inception_model(inception_type, num_classes):
     Raises:
     - ValueError: If an unknown Inception architecture type is provided.
     """
-    # Mapping of vision types to their corresponding torchvision models and weights
+    # Mapping of vision types to their corresponding torchvision models and
+    # weights
     torchvision_models = {
         'Inception_V3': (models.inception_v3, models.Inception_V3_Weights)
     }
@@ -48,10 +49,12 @@ def get_inception_model(inception_type, num_classes):
     # Check if the vision type is from the 'timm' library
     elif inception_type in timm_models:
         try:
-            inception_model = create_model(inception_type, pretrained=True, num_classes=num_classes)
+            inception_model = create_model(
+                inception_type, pretrained=True, num_classes=num_classes)
         except RuntimeError as e:
             print(f"{inception_type} - Error loading pretrained model: {e}")
-            inception_model = create_model(inception_type, pretrained=False, num_classes=num_classes)
+            inception_model = create_model(
+                inception_type, pretrained=False, num_classes=num_classes)
     else:
         raise ValueError(f'Unknown Inception Architecture: {inception_type}')
 

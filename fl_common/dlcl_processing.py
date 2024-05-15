@@ -33,19 +33,78 @@ augmentation_params = {
 }
 batch_size = 16
 
-model_list = ['xcit_nano_12_p16_224', 'xception41', 'ResNet18', 'Swin_V2_T', 'RegNet_X_400MF', 'MobileNet_V3_Small',
-              'ConvNeXt_Tiny', 'AlexNet', 'GoogLeNet', 'Inception_V3', 'VGG11', 'DenseNet121', 'EfficientNetB0',
-              'ShuffleNet_V2_X0_5', 'MNASNet0_5', 'Wide_ResNet50_2', 'ResNeXt50_32X4D', 'MaxVit_T', 'SqueezeNet1_0',
-              'ViT_B_16', 'volo_d1_224', 'edgenext_small', 'beit_base_patch16_224', 'convit_tiny', 'davit_tiny',
-              'tiny_vit_5m_224', 'fastvit_t8', 'coat_tiny', 'cait_xxs24_224', 'gcvit_xxtiny', 'vovnet39a',
-              'levit_128s', 'convmixer_1536_20', 'crossvit_tiny_240', 'cspresnet50', 'deit_tiny_patch16_224',
-              'focalnet_tiny_srf', 'ghostnet_050', 'eva_giant_patch14_224', 'hardcorenas_a', 'hgnet_tiny',
-              'hrnet_w18_small', 'tresnet_m', 'twins_pcpvt_small', 'nasnetalarge', 'nest_base', 'nextvit_small',
-              'dm_nfnet_f0', 'pit_b_224', 'pnasnet5large', 'pvt_v2_b0', 'tnt_s_patch16_224', 'selecsls42',
-              'legacy_seresnet18', 'sequencer2d_s', 'skresnet18', 'visformer_tiny', 'poolformer_s12', 'mixer_s32_224',
-              'mobilevit_xxs', 'mvitv2_tiny', 'repghostnet_050', 'repvit_m1', 'res2net50_26w_4s', 'rexnet_100',
-              'botnet26t_256', 'gernet_l', 'efficientformer_l1', 'vit_tiny_r_s16_p8_224',
-              'vit_relpos_base_patch32_plus_rpn_256', 'samvit_base_patch16']
+model_list = [
+    'xcit_nano_12_p16_224',
+    'xception41',
+    'ResNet18',
+    'Swin_V2_T',
+    'RegNet_X_400MF',
+    'MobileNet_V3_Small',
+    'ConvNeXt_Tiny',
+    'AlexNet',
+    'GoogLeNet',
+    'Inception_V3',
+    'VGG11',
+    'DenseNet121',
+    'EfficientNetB0',
+    'ShuffleNet_V2_X0_5',
+    'MNASNet0_5',
+    'Wide_ResNet50_2',
+    'ResNeXt50_32X4D',
+    'MaxVit_T',
+    'SqueezeNet1_0',
+    'ViT_B_16',
+    'volo_d1_224',
+    'edgenext_small',
+    'beit_base_patch16_224',
+    'convit_tiny',
+    'davit_tiny',
+    'tiny_vit_5m_224',
+    'fastvit_t8',
+    'coat_tiny',
+    'cait_xxs24_224',
+    'gcvit_xxtiny',
+    'vovnet39a',
+    'levit_128s',
+    'convmixer_1536_20',
+    'crossvit_tiny_240',
+    'cspresnet50',
+    'deit_tiny_patch16_224',
+    'focalnet_tiny_srf',
+    'ghostnet_050',
+    'eva_giant_patch14_224',
+    'hardcorenas_a',
+    'hgnet_tiny',
+    'hrnet_w18_small',
+    'tresnet_m',
+    'twins_pcpvt_small',
+    'nasnetalarge',
+    'nest_base',
+    'nextvit_small',
+    'dm_nfnet_f0',
+    'pit_b_224',
+    'pnasnet5large',
+    'pvt_v2_b0',
+    'tnt_s_patch16_224',
+    'selecsls42',
+    'legacy_seresnet18',
+    'sequencer2d_s',
+    'skresnet18',
+    'visformer_tiny',
+    'poolformer_s12',
+    'mixer_s32_224',
+    'mobilevit_xxs',
+    'mvitv2_tiny',
+    'repghostnet_050',
+    'repvit_m1',
+    'res2net50_26w_4s',
+    'rexnet_100',
+    'botnet26t_256',
+    'gernet_l',
+    'efficientformer_l1',
+    'vit_tiny_r_s16_p8_224',
+    'vit_relpos_base_patch32_plus_rpn_256',
+    'samvit_base_patch16']
 
 # Model Parameters
 best_val_loss = float('inf')  # Initialize the best validation loss
@@ -79,14 +138,13 @@ early_stopping_patience_phase3 = 5
 xai = False
 
 for model_type in model_list:
-    save_dir = 'c:/TFE/Models/' + model_type + '/'  # Replace with the actual path where to save results
+    # Replace with the actual path where to save results
+    save_dir = 'c:/TFE/Models/' + model_type + '/'
     os.makedirs(save_dir, exist_ok=True)
 
     # Load your custom dataset
-    train_loader, val_loader, test_loader, num_classes, class_names = get_dataset(dataset_path,
-                                                                                  batch_size,
-                                                                                  augmentation_params,
-                                                                                  normalize_params)
+    train_loader, val_loader, test_loader, num_classes, class_names = get_dataset(
+        dataset_path, batch_size, augmentation_params, normalize_params)
 
     print(f"Model: {model_type}")
 
@@ -103,18 +161,28 @@ for model_type in model_list:
     # Define the loss criterion and optimizer
     model_parameters = model.parameters()
     criterion = get_criterion(criterion_name_phase1)
-    optimizer = get_optimizer(optimizer_name_phase1, model_parameters, learning_rate_phase1)
+    optimizer = get_optimizer(
+        optimizer_name_phase1,
+        model_parameters,
+        learning_rate_phase1)
 
     # scheduler = get_scheduler(optimizer, scheduler_type='step', step_size=10, gamma=0.5)
     # scheduler = get_scheduler(optimizer, scheduler_type='multi_step', milestones=[30, 60, 90], gamma=0.5)
     # scheduler = get_scheduler(optimizer, scheduler_type='exponential', gamma=0.95)
 
-    scheduler = get_scheduler(optimizer, scheduler_type='step', step_size=10, gamma=0.5)
+    scheduler = get_scheduler(
+        optimizer,
+        scheduler_type='step',
+        step_size=10,
+        gamma=0.5)
 
     # Training loop
-    early_stopping_phase1 = EarlyStopping(patience=early_stopping_patience_phase1, verbose=verbose)
-    early_stopping_phase2 = EarlyStopping(patience=early_stopping_patience_phase2, verbose=verbose)
-    early_stopping_phase3 = EarlyStopping(patience=early_stopping_patience_phase3, verbose=verbose)
+    early_stopping_phase1 = EarlyStopping(
+        patience=early_stopping_patience_phase1, verbose=verbose)
+    early_stopping_phase2 = EarlyStopping(
+        patience=early_stopping_patience_phase2, verbose=verbose)
+    early_stopping_phase3 = EarlyStopping(
+        patience=early_stopping_patience_phase3, verbose=verbose)
 
     train_losses = []
     val_losses = []
@@ -132,7 +200,8 @@ for model_type in model_list:
         correct_train = 0
         total_train = 0
 
-        print(f"\nEpoch {epoch + 1}/{num_epochs_phase1}, Learning Rate: {optimizer.param_groups[0]['lr']}")
+        print(
+            f"\nEpoch {epoch + 1}/{num_epochs_phase1}, Learning Rate: {optimizer.param_groups[0]['lr']}")
 
         # Use tqdm for a progress bar over the training batches
         with tqdm(enumerate(train_loader), total=len(train_loader),
@@ -156,7 +225,9 @@ for model_type in model_list:
                 if (batch_idx + 1) % 10 == 0 or (batch_idx + 1) == len(train_loader):
                     avg_batch_loss = running_loss / (batch_idx + 1)
                     batch_accuracy = correct_train / total_train
-                    progress_bar.set_postfix(Batch_Loss=f"{avg_batch_loss:.4f}", Batch_Accuracy=f"{batch_accuracy:.4f}")
+                    progress_bar.set_postfix(
+                        Batch_Loss=f"{avg_batch_loss:.4f}",
+                        Batch_Accuracy=f"{batch_accuracy:.4f}")
 
         avg_train_loss = running_loss / len(train_loader)
         train_losses.append(avg_train_loss)
@@ -215,24 +286,34 @@ for model_type in model_list:
         else:
             elapsed_time_msg += f"{elapsed_time:.2f} seconds"
 
-        print(f"Epoch {epoch + 1}/{num_epochs_phase1} => "
-              f"Train Loss: {avg_train_loss:.4f}, Train Accuracy: {train_accuracy:.4f}, "
-              f"Validation Loss: {avg_val_loss:.4f}, Validation Accuracy: {val_accuracy:.4f}, "
-              f"{elapsed_time_msg}")
+        print(
+            f"Epoch {epoch + 1}/{num_epochs_phase1} => "
+            f"Train Loss: {avg_train_loss:.4f}, Train Accuracy: {train_accuracy:.4f}, "
+            f"Validation Loss: {avg_val_loss:.4f}, Validation Accuracy: {val_accuracy:.4f}, "
+            f"{elapsed_time_msg}")
 
-    if perform_second_training and not early_stopping_phase1.early_stop:  # Proceed only if the first phase didn't early stop
+    # Proceed only if the first phase didn't early stop
+    if perform_second_training and not early_stopping_phase1.early_stop:
         print("\nStarting the second training phase...\n")
 
-        # Optionally reset the optimizer, criterion and scheduler for the second phase
+        # Optionally reset the optimizer, criterion and scheduler for the
+        # second phase
         model_parameters = model.parameters()
         criterion = get_criterion(criterion_name_phase2)
-        optimizer = get_optimizer(optimizer_name_phase2, model_parameters, learning_rate_phase2)
+        optimizer = get_optimizer(
+            optimizer_name_phase2,
+            model_parameters,
+            learning_rate_phase2)
 
         # scheduler = get_scheduler(optimizer, scheduler_type='step', step_size=10, gamma=0.5)
         # scheduler = get_scheduler(optimizer, scheduler_type='multi_step', milestones=[30, 60, 90], gamma=0.5)
         # scheduler = get_scheduler(optimizer, scheduler_type='exponential', gamma=0.95)
 
-        scheduler = get_scheduler(optimizer, scheduler_type='step', step_size=10, gamma=0.5)
+        scheduler = get_scheduler(
+            optimizer,
+            scheduler_type='step',
+            step_size=10,
+            gamma=0.5)
 
         for epoch in range(num_epochs_phase2):
             epoch_start_time = time.time()
@@ -242,7 +323,8 @@ for model_type in model_list:
             correct_train = 0
             total_train = 0
 
-            print(f"\nEpoch {epoch + 1}/{num_epochs_phase2}, Learning Rate: {optimizer.param_groups[0]['lr']}")
+            print(
+                f"\nEpoch {epoch + 1}/{num_epochs_phase2}, Learning Rate: {optimizer.param_groups[0]['lr']}")
 
             # Use tqdm for a progress bar over the training batches
             with tqdm(enumerate(train_loader), total=len(train_loader),
@@ -263,11 +345,13 @@ for model_type in model_list:
                     correct_train += (predicted == labels).sum().item()
 
                     # Print progress within the epoch
-                    if (batch_idx + 1) % 10 == 0 or (batch_idx + 1) == len(train_loader):
+                    if (batch_idx + 1) % 10 == 0 or (batch_idx +
+                                                     1) == len(train_loader):
                         avg_batch_loss = running_loss / (batch_idx + 1)
                         batch_accuracy = correct_train / total_train
-                        progress_bar.set_postfix(Batch_Loss=f"{avg_batch_loss:.4f}",
-                                                 Batch_Accuracy=f"{batch_accuracy:.4f}")
+                        progress_bar.set_postfix(
+                            Batch_Loss=f"{avg_batch_loss:.4f}",
+                            Batch_Accuracy=f"{batch_accuracy:.4f}")
 
             avg_train_loss = running_loss / len(train_loader)
             train_losses.append(avg_train_loss)
@@ -326,25 +410,35 @@ for model_type in model_list:
             else:
                 elapsed_time_msg += f"{elapsed_time:.2f} seconds"
 
-            print(f"\nEpoch {epoch + 1}/{num_epochs_phase2} (Phase 2) => "
-                  f"Train Loss: {avg_train_loss:.4f}, Train Accuracy: {train_accuracy:.4f}, "
-                  f"Validation Loss: {avg_val_loss:.4f}, Validation Accuracy: {val_accuracy:.4f}, "
-                  f"{elapsed_time_msg}")
+            print(
+                f"\nEpoch {epoch + 1}/{num_epochs_phase2} (Phase 2) => "
+                f"Train Loss: {avg_train_loss:.4f}, Train Accuracy: {train_accuracy:.4f}, "
+                f"Validation Loss: {avg_val_loss:.4f}, Validation Accuracy: {val_accuracy:.4f}, "
+                f"{elapsed_time_msg}")
 
     # Third Training Phase (Optional)
-    if perform_third_training and not early_stopping_phase2.early_stop:  # Proceed only if the second phase didn't early stop
+    # Proceed only if the second phase didn't early stop
+    if perform_third_training and not early_stopping_phase2.early_stop:
         print("\nStarting the third training phase...\n")
 
-        # Optionally reset the optimizer, criterion and scheduler for the second phase
+        # Optionally reset the optimizer, criterion and scheduler for the
+        # second phase
         model_parameters = model.parameters()
         criterion = get_criterion(criterion_name_phase3)
-        optimizer = get_optimizer(optimizer_name_phase3, model_parameters, learning_rate_phase3)
+        optimizer = get_optimizer(
+            optimizer_name_phase3,
+            model_parameters,
+            learning_rate_phase3)
 
         # scheduler = get_scheduler(optimizer, scheduler_type='step', step_size=10, gamma=0.5)
         # scheduler = get_scheduler(optimizer, scheduler_type='multi_step', milestones=[30, 60, 90], gamma=0.5)
         # scheduler = get_scheduler(optimizer, scheduler_type='exponential', gamma=0.95)
 
-        scheduler = get_scheduler(optimizer, scheduler_type='step', step_size=10, gamma=0.5)
+        scheduler = get_scheduler(
+            optimizer,
+            scheduler_type='step',
+            step_size=10,
+            gamma=0.5)
 
         for epoch in range(num_epochs_phase3):
             epoch_start_time = time.time()
@@ -354,7 +448,8 @@ for model_type in model_list:
             correct_train = 0
             total_train = 0
 
-            print(f"\nEpoch {epoch + 1}/{num_epochs_phase3}, Learning Rate: {optimizer.param_groups[0]['lr']}")
+            print(
+                f"\nEpoch {epoch + 1}/{num_epochs_phase3}, Learning Rate: {optimizer.param_groups[0]['lr']}")
 
             # Use tqdm for a progress bar over the training batches
             with tqdm(enumerate(train_loader), total=len(train_loader),
@@ -375,11 +470,13 @@ for model_type in model_list:
                     correct_train += (predicted == labels).sum().item()
 
                     # Print progress within the epoch
-                    if (batch_idx + 1) % 10 == 0 or (batch_idx + 1) == len(train_loader):
+                    if (batch_idx + 1) % 10 == 0 or (batch_idx +
+                                                     1) == len(train_loader):
                         avg_batch_loss = running_loss / (batch_idx + 1)
                         batch_accuracy = correct_train / total_train
-                        progress_bar.set_postfix(Batch_Loss=f"{avg_batch_loss:.4f}",
-                                                 Batch_Accuracy=f"{batch_accuracy:.4f}")
+                        progress_bar.set_postfix(
+                            Batch_Loss=f"{avg_batch_loss:.4f}",
+                            Batch_Accuracy=f"{batch_accuracy:.4f}")
 
             avg_train_loss = running_loss / len(train_loader)
             train_losses.append(avg_train_loss)
@@ -438,10 +535,11 @@ for model_type in model_list:
             else:
                 elapsed_time_msg += f"{elapsed_time:.2f} seconds"
 
-            print(f"\nEpoch {epoch + 1}/{num_epochs_phase3} (Phase 3) => "
-                  f"Train Loss: {avg_train_loss:.4f}, Train Accuracy: {train_accuracy:.4f}, "
-                  f"Validation Loss: {avg_val_loss:.4f}, Validation Accuracy: {val_accuracy:.4f}, "
-                  f"{elapsed_time_msg}")
+            print(
+                f"\nEpoch {epoch + 1}/{num_epochs_phase3} (Phase 3) => "
+                f"Train Loss: {avg_train_loss:.4f}, Train Accuracy: {train_accuracy:.4f}, "
+                f"Validation Loss: {avg_val_loss:.4f}, Validation Accuracy: {val_accuracy:.4f}, "
+                f"{elapsed_time_msg}")
 
     # Calculate total training time
     total_training_time = time.time() - start_time
@@ -509,15 +607,24 @@ for model_type in model_list:
     # Generate and plot confusion matrix
     conf_matrix = confusion_matrix(all_labels, all_preds)
     plt.figure(figsize=(10, 8))
-    sns.heatmap(conf_matrix, annot=True, fmt="d", cmap=plt.cm.Blues, cbar=False, annot_kws={"size": 14})
+    sns.heatmap(
+        conf_matrix,
+        annot=True,
+        fmt="d",
+        cmap=plt.cm.Blues,
+        cbar=False,
+        annot_kws={
+            "size": 14})
     plt.title('Confusion Matrix')
     plt.xlabel('Predicted Label')
     plt.ylabel('True Label')
-    plt.savefig(save_dir + 'confusion_matrix.png')  # Saving the confusion matrix
+    # Saving the confusion matrix
+    plt.savefig(save_dir + 'confusion_matrix.png')
     plt.show()  # Confusion matrix display
 
     # Print classification report
-    class_report = classification_report(all_labels, all_preds, target_names=class_names)
+    class_report = classification_report(
+        all_labels, all_preds, target_names=class_names)
     print("\nClassification Report:\n", class_report)
 
     # Save classification report to a text file
@@ -527,7 +634,8 @@ for model_type in model_list:
     # Loop through test dataset and generate XAI heatmaps for specific methods
     if xai:
         save_dir += 'xai_heatmaps/'
-        # Loop through test dataset and generate XAI heatmaps for specific methods
+        # Loop through test dataset and generate XAI heatmaps for specific
+        # methods
         for i, (inputs, labels) in enumerate(test_loader):
             inputs, labels = inputs.to(device), labels.to(device)
 
@@ -538,17 +646,26 @@ for model_type in model_list:
             predicted_scalars = predicted.tolist()  # Convert to list
             labels_scalars = labels.tolist()  # Convert to list
 
-            for j, (predicted_scalar, label_scalar) in enumerate(zip(predicted_scalars, labels_scalars)):
+            for j, (predicted_scalar, label_scalar) in enumerate(
+                    zip(predicted_scalars, labels_scalars)):
                 if predicted_scalar != label_scalar:
                     print(
                         f"Example {i * test_loader.batch_size + j + 1}: Prediction: {predicted_scalar}, Actual: {label_scalar}")
 
-                    # Specify the methods you want to use (e.g., 'GuidedBackprop' and 'IntegratedGradients')
-                    specific_methods = [GuidedBackprop(model), IntegratedGradients(model)]
+                    # Specify the methods you want to use (e.g.,
+                    # 'GuidedBackprop' and 'IntegratedGradients')
+                    specific_methods = [
+                        GuidedBackprop(model),
+                        IntegratedGradients(model)]
 
-                    # Create a directory for XAI heatmaps based on the specific example
+                    # Create a directory for XAI heatmaps based on the specific
+                    # example
                     example_dir = f"{save_dir}/example_{i * test_loader.batch_size + j + 1}/"
                     os.makedirs(example_dir, exist_ok=True)
 
-                    generate_xai_heatmaps(model, inputs[j], label_scalar, save_dir=example_dir,
-                                          methods=specific_methods)
+                    generate_xai_heatmaps(
+                        model,
+                        inputs[j],
+                        label_scalar,
+                        save_dir=example_dir,
+                        methods=specific_methods)

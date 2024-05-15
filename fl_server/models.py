@@ -26,9 +26,10 @@ class ServerProject(models.Model):
     server_project_id = models.BigAutoField(primary_key=True)
     server_project_title = models.CharField(max_length=250)
     server_project_description = models.TextField(null=True, blank=True)
-    server_project_owner = models.ForeignKey(User,
-                                             on_delete=models.DO_NOTHING,
-                                             related_name='server_project_owner')
+    server_project_owner = models.ForeignKey(
+        User,
+        on_delete=models.DO_NOTHING,
+        related_name='server_project_owner')
     server_project_creation_date = models.DateTimeField(auto_now_add=True)
     server_project_updated_date = models.DateTimeField(auto_now=True)
 
@@ -76,9 +77,10 @@ class ServerAggregator(models.Model):
         KA = 'KA', 'Krum algorithm'
 
     server_aggregator_id = models.BigAutoField(primary_key=True)
-    server_aggregator_model_id = models.ForeignKey(ServerModel,
-                                                   on_delete=models.DO_NOTHING,
-                                                   related_name='server_aggregator_model_id')
+    server_aggregator_model_id = models.ForeignKey(
+        ServerModel,
+        on_delete=models.DO_NOTHING,
+        related_name='server_aggregator_model_id')
     server_aggregator_method = models.CharField(max_length=2,
                                                 choices=Method.choices,
                                                 default=Method.FA)
@@ -100,17 +102,19 @@ class FederatedAuthorisation(models.Model):
         AC = 'AC', 'Accepted'
         SP = 'SP', 'Suspended'
 
-    federated_autorisation_model_id = models.ForeignKey(ServerModel,
-                                                        on_delete=models.DO_NOTHING,
-                                                        related_name='fd_authorisation_model_id')
-    federated_autorisation_agent_id = models.ForeignKey(AgentConfiguration,
-                                                        on_delete=models.CASCADE,
-                                                        related_name='fd_authorisation_agent_id')
-    federated_autorisation_permission = models.CharField(max_length=2,
-                                                         choices=Permission.choices,
-                                                         default=Permission.IC)
+    federated_autorisation_model_id = models.ForeignKey(
+        ServerModel,
+        on_delete=models.DO_NOTHING,
+        related_name='fd_authorisation_model_id')
+    federated_autorisation_agent_id = models.ForeignKey(
+        AgentConfiguration,
+        on_delete=models.CASCADE,
+        related_name='fd_authorisation_agent_id')
+    federated_autorisation_permission = models.CharField(
+        max_length=2, choices=Permission.choices, default=Permission.IC)
     federated_autorisation_state = models.CharField(max_length=2,
                                                     choices=State.choices,
                                                     default=State.IN)
-    federated_autorisation_creation_date = models.DateTimeField(auto_now_add=True)
+    federated_autorisation_creation_date = models.DateTimeField(
+        auto_now_add=True)
     federated_autorisation_updated_date = models.DateTimeField(auto_now=True)

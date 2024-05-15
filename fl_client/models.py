@@ -27,7 +27,8 @@ class LocalProject(models.Model):
         FD = 'FD', 'Federated Project'
 
     local_project_id = models.BigAutoField(primary_key=True, default=1)
-    local_project_uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
+    local_project_uuid = models.UUIDField(
+        default=uuid.uuid4, editable=False, unique=True)
     local_project_title = models.CharField(max_length=250)
     local_project_description = models.TextField()
     local_project_type = models.CharField(max_length=2,
@@ -47,7 +48,8 @@ class LocalProject(models.Model):
 class License(models.Model):
     """Class to represent a license"""
     license_id = models.BigAutoField(primary_key=True, editable=False)
-    license_uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
+    license_uuid = models.UUIDField(
+        default=uuid.uuid4, editable=False, unique=True)
     license_short_name = models.CharField(max_length=30, null=True, blank=True)
     license_name = models.CharField(max_length=250)
     license_description = models.TextField(blank=True)
@@ -69,7 +71,8 @@ class License(models.Model):
 class ModelFamily(models.Model):
     """Class representing a family of model"""
     model_family_id = models.BigAutoField(primary_key=True)
-    model_family_uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
+    model_family_uuid = models.UUIDField(
+        default=uuid.uuid4, editable=False, unique=True)
     model_family_name = models.CharField(max_length=100)
     model_family_active = models.BooleanField(default=True)
     model_family_owner = models.ForeignKey(User,
@@ -112,7 +115,10 @@ class Model(models.Model):
         TS = 'TS', 'Time-Series'
 
     model_id = models.BigAutoField(primary_key=True, editable=False)
-    model_uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
+    model_uuid = models.UUIDField(
+        default=uuid.uuid4,
+        editable=False,
+        unique=True)
     model_name = models.CharField(max_length=200)
     model_short_name = models.CharField(max_length=200, blank=True, null=True)
     model_description = models.TextField(null=True, blank=True)
@@ -146,7 +152,8 @@ class Model(models.Model):
 
     def __str__(self):
         if str(self.model_version) != "None":
-            return self.model_category + self.model_type + ' - ' + self.model_name + ' - v' + str(self.model_version)
+            return self.model_category + self.model_type + ' - ' + \
+                self.model_name + ' - v' + str(self.model_version)
         else:
             return self.model_category + self.model_type + ' - ' + self.model_name
 
@@ -177,7 +184,8 @@ class ModelFile(models.Model):
         BIN = 'BIN', 'Binary'
         GGUF = 'GGUF', 'GGUF'
 
-    model_file_uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
+    model_file_uuid = models.UUIDField(
+        default=uuid.uuid4, editable=False, unique=True)
     model_file_model_id = models.ForeignKey(Model,
                                             on_delete=models.CASCADE,
                                             default=1,
@@ -198,14 +206,21 @@ class ModelFile(models.Model):
         ordering = ['model_file_filename']
 
     def __str__(self):
-        return (self.model_file_model_id.model_name + ' | ' + self.model_file_type + " --- " + self.model_file_extension
-                + ' --- ' + self.model_file_filename)
+        return (
+            self.model_file_model_id.model_name +
+            ' | ' +
+            self.model_file_type +
+            " --- " +
+            self.model_file_extension +
+            ' --- ' +
+            self.model_file_filename)
 
 
 class Document(models.Model):
     """Class representing a document"""
     document_model_id = models.BigAutoField(primary_key=True, editable=False)
-    document_uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
+    document_uuid = models.UUIDField(
+        default=uuid.uuid4, editable=False, unique=True)
     document_title = models.CharField(max_length=250)
     document_filename = models.CharField(max_length=250, default="")
     document_active = models.BooleanField(default=True)
@@ -225,7 +240,8 @@ class Document(models.Model):
 
 class ModelDocument(models.Model):
     """Class representing a link between a model and a document"""
-    modeldoc_uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
+    modeldoc_uuid = models.UUIDField(
+        default=uuid.uuid4, editable=False, unique=True)
     modeldoc_model_id = models.ForeignKey(Model,
                                           on_delete=models.CASCADE,
                                           default=1,
@@ -239,15 +255,21 @@ class ModelDocument(models.Model):
                                        on_delete=models.DO_NOTHING,
                                        default=1,
                                        related_name='modeldoc_owner')
-    modeldoc_creation_date = models.DateTimeField(auto_now_add=True, blank=True, null=True)
-    modeldoc_updated_date = models.DateTimeField(auto_now=True, blank=True, null=True)
+    modeldoc_creation_date = models.DateTimeField(
+        auto_now_add=True, blank=True, null=True)
+    modeldoc_updated_date = models.DateTimeField(
+        auto_now=True, blank=True, null=True)
 
     class Meta:
         ordering = ['modeldoc_model_id']
 
     def __str__(self):
-        return (self.modeldoc_model_id.model_name + ' ----- ' + self.modeldoc_document.document_filename + '  |  '
-                + self.modeldoc_document.document_title)
+        return (
+            self.modeldoc_model_id.model_name +
+            ' ----- ' +
+            self.modeldoc_document.document_filename +
+            '  |  ' +
+            self.modeldoc_document.document_title)
 
 
 class Dataset(models.Model):
@@ -269,7 +291,8 @@ class Dataset(models.Model):
         EH = 'EH', 'Externally Hosted'
 
     dataset_id = models.BigAutoField(primary_key=True, editable=False)
-    dataset_uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
+    dataset_uuid = models.UUIDField(
+        default=uuid.uuid4, editable=False, unique=True)
     dataset_name = models.CharField(max_length=250)
     dataset_description = models.TextField(blank=True)
     dataset_type = models.CharField(max_length=6,
@@ -298,15 +321,20 @@ class Dataset(models.Model):
 
 class DatasetLocalData(models.Model):
     """Class representing a dataset hosted on the local machine"""
-    dataset_local_data_id = models.BigAutoField(primary_key=True, editable=False)
-    dataset_local_data_uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
-    dataset_local_data_dataset_id = models.ForeignKey(Dataset,
-                                                      on_delete=models.DO_NOTHING,
-                                                      default=1,
-                                                      related_name='ds_local_data_dataset_id')
+    dataset_local_data_id = models.BigAutoField(
+        primary_key=True, editable=False)
+    dataset_local_data_uuid = models.UUIDField(
+        default=uuid.uuid4, editable=False, unique=True)
+    dataset_local_data_dataset_id = models.ForeignKey(
+        Dataset,
+        on_delete=models.DO_NOTHING,
+        default=1,
+        related_name='ds_local_data_dataset_id')
     dataset_local_data_link = models.URLField(max_length=255)
-    dataset_local_data_username = models.CharField(max_length=30, blank=True, null=True)
-    dataset_local_data_password = models.CharField(max_length=30, blank=True, null=True)
+    dataset_local_data_username = models.CharField(
+        max_length=30, blank=True, null=True)
+    dataset_local_data_password = models.CharField(
+        max_length=30, blank=True, null=True)
     dataset_local_data_creation_date = models.DateTimeField(auto_now_add=True)
     dataset_local_data_updated_date = models.DateTimeField(auto_now=True)
 
@@ -330,19 +358,26 @@ class DatasetRemoteData(models.Model):
         SCP = 'SCP', 'SCP'
         SFTP = 'SFTP', 'SFTP'
 
-    dataset_remote_data_id = models.BigAutoField(primary_key=True, editable=False)
-    dataset_remote_data_uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
-    dataset_remote_data_dataset_id = models.ForeignKey(Dataset,
-                                                       on_delete=models.DO_NOTHING,
-                                                       default=1,
-                                                       related_name='ds_remote_data_dataset_id')
+    dataset_remote_data_id = models.BigAutoField(
+        primary_key=True, editable=False)
+    dataset_remote_data_uuid = models.UUIDField(
+        default=uuid.uuid4, editable=False, unique=True)
+    dataset_remote_data_dataset_id = models.ForeignKey(
+        Dataset,
+        on_delete=models.DO_NOTHING,
+        default=1,
+        related_name='ds_remote_data_dataset_id')
     dataset_remote_data_protocol = models.CharField(max_length=6,
                                                     choices=Protocol.choices,
                                                     default=Protocol.HTTP)
-    dataset_remote_data_username = models.CharField(max_length=30, blank=True, null=True)
-    dataset_remote_data_password = models.CharField(max_length=30, blank=True, null=True)
-    dataset_remote_data_ip = models.CharField(max_length=40, blank=True, null=True)
-    dataset_remote_data_path = models.CharField(max_length=255, blank=True, null=True)
+    dataset_remote_data_username = models.CharField(
+        max_length=30, blank=True, null=True)
+    dataset_remote_data_password = models.CharField(
+        max_length=30, blank=True, null=True)
+    dataset_remote_data_ip = models.CharField(
+        max_length=40, blank=True, null=True)
+    dataset_remote_data_path = models.CharField(
+        max_length=255, blank=True, null=True)
     dataset_remote_creation_date = models.DateTimeField(auto_now_add=True)
     dataset_remote_updated_date = models.DateTimeField(auto_now=True)
 
@@ -359,12 +394,15 @@ class DatasetRemoteData(models.Model):
 
 class DatasetCentralData(models.Model):
     """Class to represent a dataset hosted on the central server"""
-    dataset_central_data_id = models.BigAutoField(primary_key=True, editable=False)
-    dataset_central_data_uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
-    dataset_central_data_dataset_id = models.ForeignKey(Dataset,
-                                                        on_delete=models.DO_NOTHING,
-                                                        default=1,
-                                                        related_name='ds_central_data_dataset_id')
+    dataset_central_data_id = models.BigAutoField(
+        primary_key=True, editable=False)
+    dataset_central_data_uuid = models.UUIDField(
+        default=uuid.uuid4, editable=False, unique=True)
+    dataset_central_data_dataset_id = models.ForeignKey(
+        Dataset,
+        on_delete=models.DO_NOTHING,
+        default=1,
+        related_name='ds_central_data_dataset_id')
     dataset_central_data_link = models.CharField(max_length=255, blank=True)
     dataset_central_creation_date = models.DateTimeField(auto_now_add=True)
     dataset_central_updated_date = models.DateTimeField(auto_now=True)
@@ -382,10 +420,11 @@ class DatasetFile(models.Model):
     """Class representing the file associated with a dataset."""
     dataset_file_id = models.BigAutoField(primary_key=True, editable=False)
     dataset_file_uuid = models.UUIDField(default=uuid.uuid4, editable=False)
-    dataset_file_dataset_id = models.ForeignKey(Dataset,
-                                                on_delete=models.DO_NOTHING,
-                                                default=1,
-                                                related_name='dataset_file_dataset_id')
+    dataset_file_dataset_id = models.ForeignKey(
+        Dataset,
+        on_delete=models.DO_NOTHING,
+        default=1,
+        related_name='dataset_file_dataset_id')
     dataset_file_filename = models.CharField(max_length=255)
     dataset_file_creation_date = models.DateTimeField(auto_now_add=True)
     dataset_file_updated_date = models.DateTimeField(auto_now=True)
@@ -409,7 +448,10 @@ class Queue(models.Model):
         UP = 'UP', 'Updated'
 
     queue_id = models.BigAutoField(primary_key=True, default=1, editable=False)
-    queue_uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
+    queue_uuid = models.UUIDField(
+        default=uuid.uuid4,
+        editable=False,
+        unique=True)
     queue_model_id = models.ForeignKey(Model,
                                        on_delete=models.CASCADE,
                                        related_name='queue_model_id')
@@ -440,11 +482,16 @@ class Queue(models.Model):
 
 class Help(models.Model):
     """Class representing the help"""
-    help_uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
+    help_uuid = models.UUIDField(
+        default=uuid.uuid4,
+        editable=False,
+        unique=True)
     help_key = models.CharField(max_length=15, unique=True)
     help_value = models.CharField(max_length=255)
-    help_creation_date = models.DateTimeField(auto_now_add=True, blank=True, null=True)
-    help_updated_date = models.DateTimeField(auto_now=True, blank=True, null=True)
+    help_creation_date = models.DateTimeField(
+        auto_now_add=True, blank=True, null=True)
+    help_updated_date = models.DateTimeField(
+        auto_now=True, blank=True, null=True)
 
     class Meta:
         ordering = ['help_key']

@@ -29,7 +29,8 @@ class ProcessingInceptionNextTestCase(TestCase):
         for inception_next_type in inception_next_types:
             with self.subTest(inception_next_type=inception_next_type):
                 # Get the Inception-Next model for testing
-                model = get_inception_next_model(inception_next_type, num_classes=10)
+                model = get_inception_next_model(
+                    inception_next_type, num_classes=10)
                 # Check if the model is an instance of torch.nn.Module
                 self.assertTrue(isinstance(model, torch.nn.Module))
 
@@ -42,5 +43,6 @@ class ProcessingInceptionNextTestCase(TestCase):
             ValueError: If an unknown Inception-Next architecture is provided.
         """
         with self.assertRaises(ValueError):
-            # Attempt to get an Inception-Next model with an unknown architecture
+            # Attempt to get an Inception-Next model with an unknown
+            # architecture
             get_inception_next_model('unknown_type', num_classes=10)

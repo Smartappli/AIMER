@@ -36,7 +36,8 @@ class ProcessingByaonetTestCase(TestCase):
             with self.subTest(byoanet_type=byoanet_type):
                 model = get_byoanet_model(byoanet_type, num_classes)
                 self.assertIsNotNone(model)
-                # Vérifier que le modèle retourné a bien le nombre de classes spécifié
+                # Vérifier que le modèle retourné a bien le nombre de classes
+                # spécifié
                 self.assertEqual(model.num_classes, num_classes)
 
     def test_unknown_byoanet_type(self):

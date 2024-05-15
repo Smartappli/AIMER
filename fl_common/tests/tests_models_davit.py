@@ -14,7 +14,13 @@ class ProcessingDavitTestCase(TestCase):
         """
         Test if the function returns a valid Davit model for known Davit types.
         """
-        davit_types = ['davit_tiny', 'davit_small', 'davit_base', 'davit_large', 'davit_huge', 'davit_giant']
+        davit_types = [
+            'davit_tiny',
+            'davit_small',
+            'davit_base',
+            'davit_large',
+            'davit_huge',
+            'davit_giant']
         num_classes = 10
 
         for davit_type in davit_types:

@@ -27,6 +27,9 @@ def get_squeezenet_model(squeezenet_type, num_classes):
 
     # Modify the last layer to suit the given number of classes
     num_features = squeezenet_model.classifier[1].in_channels
-    squeezenet_model.classifier[1] = nn.Conv2d(num_features, num_classes, kernel_size=(1, 1), stride=(1, 1))
+    squeezenet_model.classifier[1] = nn.Conv2d(
+        num_features, num_classes, kernel_size=(
+            1, 1), stride=(
+            1, 1))
 
     return squeezenet_model

@@ -1,7 +1,8 @@
 from timm import create_model
 
 
-def get_vision_transformer_hybrid_model(vision_transformer_hybrid_type, num_classes):
+def get_vision_transformer_hybrid_model(
+        vision_transformer_hybrid_type, num_classes):
     """
     Retrieves a Vision Transformer Hybrid model based on the specified architecture.
 
@@ -26,10 +27,17 @@ def get_vision_transformer_hybrid_model(vision_transformer_hybrid_type, num_clas
     }
 
     if vision_transformer_hybrid_type not in valid_types:
-        raise ValueError(f'Unknown Vision Transformer Hybrid Architecture: {vision_transformer_hybrid_type}')
+        raise ValueError(
+            f'Unknown Vision Transformer Hybrid Architecture: {vision_transformer_hybrid_type}')
 
     try:
-        return create_model(vision_transformer_hybrid_type, pretrained=True, num_classes=num_classes)
+        return create_model(
+            vision_transformer_hybrid_type,
+            pretrained=True,
+            num_classes=num_classes)
     except RuntimeError as e:
         print(f"{vision_transformer_hybrid_type} - Error loading pretrained model: {e}")
-        return create_model(vision_transformer_hybrid_type, pretrained=False, num_classes=num_classes)
+        return create_model(
+            vision_transformer_hybrid_type,
+            pretrained=False,
+            num_classes=num_classes)

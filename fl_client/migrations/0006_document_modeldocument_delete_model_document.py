@@ -16,20 +16,53 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Document',
             fields=[
-                ('document_model_id', models.BigAutoField(default=1, editable=False, primary_key=True, serialize=False)),
-                ('document_title', models.CharField(max_length=250)),
-                ('document_filename', models.CharField(max_length=250)),
-                ('document_creation_date', models.DateTimeField(auto_now_add=True)),
-                ('document_updated_date', models.DateTimeField(auto_now=True)),
-                ('document_owner', models.ForeignKey(default=1, on_delete=django.db.models.deletion.DO_NOTHING, related_name='model_doc_owner', to=settings.AUTH_USER_MODEL)),
+                ('document_model_id',
+                 models.BigAutoField(
+                     default=1,
+                     editable=False,
+                     primary_key=True,
+                     serialize=False)),
+                ('document_title',
+                 models.CharField(
+                     max_length=250)),
+                ('document_filename',
+                 models.CharField(
+                     max_length=250)),
+                ('document_creation_date',
+                 models.DateTimeField(
+                     auto_now_add=True)),
+                ('document_updated_date',
+                 models.DateTimeField(
+                     auto_now=True)),
+                ('document_owner',
+                 models.ForeignKey(
+                     default=1,
+                     on_delete=django.db.models.deletion.DO_NOTHING,
+                     related_name='model_doc_owner',
+                     to=settings.AUTH_USER_MODEL)),
             ],
         ),
         migrations.CreateModel(
             name='ModelDocument',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('modeldoc_document', models.ForeignKey(default=1, on_delete=django.db.models.deletion.CASCADE, related_name='modeldoc_document_id', to='fl_client.document')),
-                ('modeldoc_model_id', models.ForeignKey(default=1, on_delete=django.db.models.deletion.CASCADE, related_name='modeldoc_model_id', to='fl_client.model')),
+                ('id',
+                 models.BigAutoField(
+                     auto_created=True,
+                     primary_key=True,
+                     serialize=False,
+                     verbose_name='ID')),
+                ('modeldoc_document',
+                 models.ForeignKey(
+                     default=1,
+                     on_delete=django.db.models.deletion.CASCADE,
+                     related_name='modeldoc_document_id',
+                     to='fl_client.document')),
+                ('modeldoc_model_id',
+                 models.ForeignKey(
+                     default=1,
+                     on_delete=django.db.models.deletion.CASCADE,
+                     related_name='modeldoc_model_id',
+                     to='fl_client.model')),
             ],
         ),
         migrations.DeleteModel(

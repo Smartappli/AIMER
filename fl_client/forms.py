@@ -8,7 +8,8 @@ class DLClassificationForm(forms.Form):
     # --- DATA AUGMENTATION ---
 
     dpcla_data_augmentation_cropping = forms.BooleanField(required=False)
-    dpcla_data_augmentation_horizontal_flip = forms.BooleanField(required=False)
+    dpcla_data_augmentation_horizontal_flip = forms.BooleanField(
+        required=False)
     dpcla_data_augmentation_vertical_flip = forms.BooleanField(required=False)
     dpcla_data_augmentation_translation = forms.BooleanField(required=False)
     dpcla_data_augmentation_rotation = forms.BooleanField(required=False)

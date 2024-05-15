@@ -3,11 +3,13 @@
 import uuid
 from django.db import migrations, models
 
+
 def create_uuid(apps, schema_editor):
     Local_Project = apps.get_model('fl_client', 'Local_Project')
     for local_project in Local_Project.objects.all():
         local_project.local_project_uuid = uuid.uuid4()
         local_project.save()
+
 
 class Migration(migrations.Migration):
 

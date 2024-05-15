@@ -20,7 +20,8 @@ def get_regnet_model(regnet_type, num_classes):
     Raises:
     - ValueError: If the provided regnet_type is not recognized.
     """
-    # Mapping of vision types to their corresponding torchvision models and weights
+    # Mapping of vision types to their corresponding torchvision models and
+    # weights
     torchvision_models = {
         'RegNet_X_400MF': (models.regnet_x_400mf, models.RegNet_X_400MF_Weights),
         'RegNet_X_800MF': (models.regnet_x_800mf, models.RegNet_X_800MF_Weights),
@@ -35,15 +36,42 @@ def get_regnet_model(regnet_type, num_classes):
     }
 
     timm_models = [
-        "regnetx_002", "regnetx_004", "regnetx_004_tv", "regnetx_006", "regnetx_008",
-        "regnetx_016", "regnetx_032", "regnetx_040", "regnetx_064", "regnetx_080",
-        "regnetx_120", "regnetx_160", "regnetx_320", "regnety_002", "regnety_004",
-        "regnety_006", "regnety_008", "regnety_008_tv", "regnety_016", "regnety_032",
-        "regnety_040", "regnety_064", "regnety_080", "regnety_080_tv", "regnety_120",
-        "regnety_160", "regnety_320", "regnety_640", "regnety_1280", "regnety_2560",
-        "regnety_040_sgn", "regnetv_040", "regnetv_064", "regnetz_005", "regnetz_040",
-        "regnetz_040_h"
-    ]
+        "regnetx_002",
+        "regnetx_004",
+        "regnetx_004_tv",
+        "regnetx_006",
+        "regnetx_008",
+        "regnetx_016",
+        "regnetx_032",
+        "regnetx_040",
+        "regnetx_064",
+        "regnetx_080",
+        "regnetx_120",
+        "regnetx_160",
+        "regnetx_320",
+        "regnety_002",
+        "regnety_004",
+        "regnety_006",
+        "regnety_008",
+        "regnety_008_tv",
+        "regnety_016",
+        "regnety_032",
+        "regnety_040",
+        "regnety_064",
+        "regnety_080",
+        "regnety_080_tv",
+        "regnety_120",
+        "regnety_160",
+        "regnety_320",
+        "regnety_640",
+        "regnety_1280",
+        "regnety_2560",
+        "regnety_040_sgn",
+        "regnetv_040",
+        "regnetv_064",
+        "regnetz_005",
+        "regnetz_040",
+        "regnetz_040_h"]
 
     # Check if the vision type is from torchvision
     if regnet_type in torchvision_models:
@@ -62,10 +90,12 @@ def get_regnet_model(regnet_type, num_classes):
     # Check if the vision type is from the 'timm' library
     elif regnet_type in timm_models:
         try:
-            regnet_model = create_model(regnet_type, pretrained=True, num_classes=num_classes)
+            regnet_model = create_model(
+                regnet_type, pretrained=True, num_classes=num_classes)
         except RuntimeError as e:
             print(f"{regnet_type} - Error loading pretrained model: {e}")
-            regnet_model = create_model(regnet_type, pretrained=False, num_classes=num_classes)
+            regnet_model = create_model(
+                regnet_type, pretrained=False, num_classes=num_classes)
     else:
         raise ValueError(f'Unknown RegNet Architecture: {regnet_type}')
 

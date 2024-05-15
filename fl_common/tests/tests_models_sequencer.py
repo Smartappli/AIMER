@@ -23,7 +23,8 @@ class ProcessingSequencerTestCase(TestCase):
                     model = get_sequencer_model(sequencer_type, num_classes)
                     self.assertIsNotNone(model)
                 except ValueError:
-                    self.fail(f"{sequencer_type} should be a known sequencer architecture.")
+                    self.fail(
+                        f"{sequencer_type} should be a known sequencer architecture.")
 
     def test_unknown_type(self):
         """

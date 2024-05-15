@@ -3,11 +3,13 @@ from __future__ import unicode_literals
 import uuid
 from django.db import migrations, models
 
+
 def create_uuid(apps, schema_editor):
     Model_File = apps.get_model('fl_client', 'Model_File')
     for model_file in Model_File.objects.all():
         model_file.model_file_uuid = uuid.uuid4()
         model_file.save()
+
 
 class Migration(migrations.Migration):
 

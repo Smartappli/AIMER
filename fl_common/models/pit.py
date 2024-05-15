@@ -28,4 +28,7 @@ def get_pit_model(pit_type, num_classes):
         return create_model(pit_type, pretrained=True, num_classes=num_classes)
     except RuntimeError as e:
         print(f"{pit_type} - Error loading pretrained model: {e}")
-        return create_model(pit_type, pretrained=False, num_classes=num_classes)
+        return create_model(
+            pit_type,
+            pretrained=False,
+            num_classes=num_classes)

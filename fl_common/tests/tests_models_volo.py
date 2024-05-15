@@ -18,8 +18,18 @@ class ProcessingVoloTestCase(TestCase):
         Raises:
             AssertionError: If any of the assertions fail.
         """
-        volo_types = ['volo_d1_224', 'volo_d1_384', 'volo_d2_224', 'volo_d2_384', 'volo_d3_224', 'volo_d3_448',
-                      'volo_d4_224', 'volo_d4_448', 'volo_d5_224', 'volo_d5_448', 'volo_d5_512']
+        volo_types = [
+            'volo_d1_224',
+            'volo_d1_384',
+            'volo_d2_224',
+            'volo_d2_384',
+            'volo_d3_224',
+            'volo_d3_448',
+            'volo_d4_224',
+            'volo_d4_448',
+            'volo_d5_224',
+            'volo_d5_448',
+            'volo_d5_512']
 
         for volo_type in volo_types:
             with self.subTest(volo_type=volo_type):

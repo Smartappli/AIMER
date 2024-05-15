@@ -27,10 +27,15 @@ class ProcessingViTaminTestCase(TestCase):
         - AssertionError: If the function returns None for any known ViTamin type.
         """
         known_types = [
-            "vitamin_small", "vitamin_base", "vitamin_large", "vitamin_large_256",
-            "vitamin_large_336", "vitamin_large_384", "vitamin_xlarge_256",
-            "vitamin_xlarge_336", "vitamin_xlarge_384"
-        ]
+            "vitamin_small",
+            "vitamin_base",
+            "vitamin_large",
+            "vitamin_large_256",
+            "vitamin_large_336",
+            "vitamin_large_384",
+            "vitamin_xlarge_256",
+            "vitamin_xlarge_336",
+            "vitamin_xlarge_384"]
 
         for vitamin_type in known_types:
             with self.subTest(vitamin_type=vitamin_type):
