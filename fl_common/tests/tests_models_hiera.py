@@ -22,7 +22,7 @@ class ProcessingHieraTestCase(TestCase):
         """
         known_hiera_types = [
             "hiera_tiny_224", "hiera_small_224", "hiera_base_224",
-            "hiera_base_224", "hiera_large_224", "hiera_large_224"
+            "hiera_base_plus_224", "hiera_large_224", "hiera_huge_224"
         ]
 
         num_classes = 1000  # Assuming 1000 classes for the test
