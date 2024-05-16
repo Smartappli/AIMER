@@ -108,8 +108,7 @@ def create_transform(
                 transforms.Normalize(mean=normalize[0], std=normalize[1])
             )
 
-    transform = transforms.Compose(transform_list)
-    return transform
+    return transforms.Compose(transform_list)
 
 
 def get_dataset(dataset_path, batch_size, augmentation_params, normalize_params):
@@ -235,54 +234,34 @@ def get_criterion(criterion_name):
     criterion = get_criterion(criterion_name)
     ```
     """
-    if criterion_name == "MSELoss":
-        return nn.MSELoss()
-    elif criterion_name == "L1Loss":
-        return nn.L1Loss()
-    elif criterion_name == "CTCLoss":
-        return nn.CTCLoss()
-    elif criterion_name == "KLDivLoss":
-        return nn.KLDivLoss()
-    elif criterion_name == "GaussianNLLLoss":
-        return nn.GaussianNLLLoss()
-    elif criterion_name == "SmoothL1Loss":
-        return nn.SmoothL1Loss()
-    elif criterion_name == "CrossEntropyLoss":
-        return nn.CrossEntropyLoss()
-    elif criterion_name == "BCELoss":
-        return nn.BCELoss()
-    elif criterion_name == "BCEWithLogitsLoss":
-        return nn.BCEWithLogitsLoss()
-    elif criterion_name == "NLLLoss":
-        return nn.NLLLoss()
-    elif criterion_name == "PoissonNLLLoss":
-        return nn.PoissonNLLLoss()
-    elif criterion_name == "KLDivLoss":
-        return nn.KLDivLoss()
-    elif criterion_name == "MarginRankingLoss":
-        return nn.MarginRankingLoss()
-    elif criterion_name == "HingeEmbeddingLoss":
-        return nn.HingeEmbeddingLoss()
-    elif criterion_name == "MultiLabelMarginLoss":
-        return nn.MultiLabelMarginLoss()
-    elif criterion_name == "SmoothL1Loss":
-        return nn.SmoothL1Loss()
-    elif criterion_name == "HuberLoss":
-        return nn.HuberLoss()
-    elif criterion_name == "SoftMarginLoss":
-        return nn.SoftMarginLoss()
-    elif criterion_name == "MultiLabelSoftMarginLoss":
-        return nn.MultiLabelSoftMarginLoss()
-    elif criterion_name == "CosineEmbeddingLoss":
-        return nn.CosineEmbeddingLoss()
-    elif criterion_name == "MultiMarginLoss":
-        return nn.MultiMarginLoss()
-    elif criterion_name == "TripletMarginLoss":
-        return nn.TripletMarginLoss()
-    elif criterion_name == "TripletMarginWithDistanceLoss":
-        return nn.TripletMarginWithDistanceLoss()
-    else:
-        raise ValueError(f"Unknown Criterion : {criterion_name}")
+    criterion_dict = {
+        "MSELoss": nn.MSELoss,
+        "L1Loss": nn.L1Loss,
+        "CTCLoss": nn.CTCLoss,
+        "KLDivLoss": nn.KLDivLoss,
+        "GaussianNLLLoss": nn.GaussianNLLLoss,
+        "SmoothL1Loss": nn.SmoothL1Loss,
+        "CrossEntropyLoss": nn.CrossEntropyLoss,
+        "BCELoss": nn.BCELoss,
+        "BCEWithLogitsLoss": nn.BCEWithLogitsLoss,
+        "NLLLoss": nn.NLLLoss,
+        "PoissonNLLLoss": nn.PoissonNLLLoss,
+        "MarginRankingLoss": nn.MarginRankingLoss,
+        "HingeEmbeddingLoss": nn.HingeEmbeddingLoss,
+        "MultiLabelMarginLoss": nn.MultiLabelMarginLoss,
+        "HuberLoss": nn.HuberLoss,
+        "SoftMarginLoss": nn.SoftMarginLoss,
+        "MultiLabelSoftMarginLoss": nn.MultiLabelSoftMarginLoss,
+        "CosineEmbeddingLoss": nn.CosineEmbeddingLoss,
+        "MultiMarginLoss": nn.MultiMarginLoss,
+        "TripletMarginLoss": nn.TripletMarginLoss,
+        "TripletMarginWithDistanceLoss": nn.TripletMarginWithDistanceLoss
+    }
+
+    try:
+        return criterion_dict[criterion_name]()
+    except KeyError:
+        raise ValueError(f"Unknown Criterion: {criterion_name}")
 
 
 def get_optimizer(optimizer_name, model_parameters, learning_rate):
@@ -323,34 +302,26 @@ def get_optimizer(optimizer_name, model_parameters, learning_rate):
     optimizer = get_optimizer(optimizer_name, model_parameters, learning_rate)
     ```
     """
-    if optimizer_name == "SGD":
-        return optim.SGD(model_parameters, lr=learning_rate)
-    elif optimizer_name == "Adam":
-        return optim.Adam(model_parameters, lr=learning_rate)
-    elif optimizer_name == "RMSprop":
-        return optim.RMSprop(model_parameters, lr=learning_rate)
-    elif optimizer_name == "Adagrad":
-        return optim.Adagrad(model_parameters, lr=learning_rate)
-    elif optimizer_name == "Adadelta":
-        return optim.Adadelta(model_parameters, lr=learning_rate)
-    elif optimizer_name == "AdamW":
-        return optim.AdamW(model_parameters, lr=learning_rate)
-    elif optimizer_name == "SparseAdam":
-        return optim.SparseAdam(model_parameters, lr=learning_rate)
-    elif optimizer_name == "Adamax":
-        return optim.Adamax(model_parameters, lr=learning_rate)
-    elif optimizer_name == "ASGD":
-        return optim.ASGD(model_parameters, lr=learning_rate)
-    elif optimizer_name == "LBFGS":
-        return optim.LBFGS(model_parameters, lr=learning_rate)
-    elif optimizer_name == "Rprop":
-        return optim.Rprop(model_parameters, lr=learning_rate)
-    elif optimizer_name == "NAdam":
-        return optim.NAdam(model_parameters, lr=learning_rate)
-    elif optimizer_name == "RAdam":
-        return optim.RAdam(model_parameters, lr=learning_rate)
-    else:
-        raise ValueError(f"Unknown Optimizer : {optimizer_name}")
+    optimizer_dict = {
+        "SGD": optim.SGD,
+        "Adam": optim.Adam,
+        "RMSprop": optim.RMSprop,
+        "Adagrad": optim.Adagrad,
+        "Adadelta": optim.Adadelta,
+        "AdamW": optim.AdamW,
+        "SparseAdam": optim.SparseAdam,
+        "Adamax": optim.Adamax,
+        "ASGD": optim.ASGD,
+        "LBFGS": optim.LBFGS,
+        "Rprop": optim.Rprop,
+        "NAdam": optim.NAdam,
+        "RAdam": optim.RAdam
+    }
+
+    try:
+        return optimizer_dict[optimizer_name](model_parameters, lr=learning_rate)
+    except KeyError:
+        raise ValueError(f"Unknown Optimizer: {optimizer_name}")
 
 
 def get_scheduler(optimizer, scheduler_type="step", **kwargs):
@@ -364,17 +335,19 @@ def get_scheduler(optimizer, scheduler_type="step", **kwargs):
 
     Returns:
         torch.optim.lr_scheduler._LRScheduler: Learning rate scheduler.
+
+    Raises:
+        ValueError: If the provided scheduler_type is not recognized.
     """
-    if scheduler_type == "step":
-        # Example: StepLR
-        return lr_scheduler.StepLR(optimizer, **kwargs)
-    elif scheduler_type == "multi_step":
-        # Example: MultiStepLR
-        return lr_scheduler.MultiStepLR(optimizer, **kwargs)
-    elif scheduler_type == "exponential":
-        # Example: ExponentialLR
-        return lr_scheduler.ExponentialLR(optimizer, **kwargs)
-    else:
+    scheduler_dict = {
+        "step": lr_scheduler.StepLR,
+        "multi_step": lr_scheduler.MultiStepLR,
+        "exponential": lr_scheduler.ExponentialLR
+    }
+
+    try:
+        return scheduler_dict[scheduler_type](optimizer, **kwargs)
+    except KeyError:
         raise ValueError(f"Invalid scheduler_type: {scheduler_type}")
 
 
