@@ -1,5 +1,10 @@
 name: Black Formatter
 on: [push, pull_request]
+
+concurrency:
+  group: black-${{ github.event_name == 'pull_request' && format('{0}-{1}', github.workflow, github.event.pull_request.number) || github.workflow_ref }}
+  cancel-in-progress: true
+
 jobs:
   linter_name:
     name: runner / black
