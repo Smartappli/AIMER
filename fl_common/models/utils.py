@@ -348,11 +348,9 @@ def get_scheduler(optimizer, scheduler_type="step", **kwargs):
     try:
         return scheduler_dict[scheduler_type](optimizer, **kwargs)
     except KeyError as exc:
-        raise ValueError(f'Invalid scheduler_type: {scheduler_type}') from exc
-        
+        raise ValueError(f'Invalid scheduler_type: {scheduler_type}') from exc  
 
-# Function to generate and save XAI heatmap for a specific image using
-# selected methods
+
 def generate_xai_heatmaps(model, image_tensor, label, save_dir, methods=None):
     """
     Generate and save XAI (Explainable AI) heatmaps using various attribution methods.
