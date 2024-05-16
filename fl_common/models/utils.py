@@ -320,8 +320,8 @@ def get_optimizer(optimizer_name, model_parameters, learning_rate):
 
     try:
         return optimizer_dict[optimizer_name](model_parameters, lr=learning_rate)
-    except KeyError:
-        raise ValueError(f"Unknown Optimizer: {optimizer_name}")
+    except KeyError as exc:
+        raise ValueError(f'Unknown Optimizer: {optimizer_name}') from exc
 
 
 def get_scheduler(optimizer, scheduler_type="step", **kwargs):
@@ -347,9 +347,9 @@ def get_scheduler(optimizer, scheduler_type="step", **kwargs):
 
     try:
         return scheduler_dict[scheduler_type](optimizer, **kwargs)
-    except KeyError:
-        raise ValueError(f"Invalid scheduler_type: {scheduler_type}")
-
+    except KeyError as exc:
+        raise ValueError(f'Invalid scheduler_type: {scheduler_type}') from exc
+        
 
 # Function to generate and save XAI heatmap for a specific image using
 # selected methods
