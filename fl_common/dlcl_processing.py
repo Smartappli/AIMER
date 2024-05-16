@@ -271,7 +271,7 @@ for model_type in model_list:
         # Early stopping check
         early_stopping_phase1(avg_val_loss, model)
         if early_stopping_phase1.early_stop:
-            print("Early stopping after {} epochs".format(epoch + 1))
+            print(f"Early stopping after {epoch + 1} epochs")
             break
 
         # Save the model if the current validation loss is the best
@@ -645,7 +645,7 @@ for model_type in model_list:
     print("\nClassification Report:\n", class_report)
 
     # Save classification report to a text file
-    with open(save_dir + "classification_report.txt", "w") as report_file:
+    with open(save_dir + "classification_report.txt", "w", 'utf-8') as report_file:
         report_file.write(save_dir + "Classification Report:\n" + class_report)
 
     # Loop through test dataset and generate XAI heatmaps for specific methods
