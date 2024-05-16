@@ -645,7 +645,9 @@ for model_type in model_list:
     print("\nClassification Report:\n", class_report)
 
     # Save classification report to a text file
-    with open(save_dir + "classification_report.txt", "w", encoding="UTF-8") as report_file:
+    with open(
+        save_dir + "classification_report.txt", "w", encoding="UTF-8"
+    ) as report_file:
         report_file.write(save_dir + "Classification Report:\n" + class_report)
 
     # Loop through test dataset and generate XAI heatmaps for specific methods
