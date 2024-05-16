@@ -255,13 +255,13 @@ def get_criterion(criterion_name):
         "CosineEmbeddingLoss": nn.CosineEmbeddingLoss,
         "MultiMarginLoss": nn.MultiMarginLoss,
         "TripletMarginLoss": nn.TripletMarginLoss,
-        "TripletMarginWithDistanceLoss": nn.TripletMarginWithDistanceLoss
+        "TripletMarginWithDistanceLoss": nn.TripletMarginWithDistanceLoss,
     }
 
     try:
         return criterion_dict[criterion_name]()
     except KeyError as exc:
-        raise ValueError(f'Unknown Criterion: {criterion_name}') from exc
+        raise ValueError(f"Unknown Criterion: {criterion_name}") from exc
 
 
 def get_optimizer(optimizer_name, model_parameters, learning_rate):
@@ -315,13 +315,13 @@ def get_optimizer(optimizer_name, model_parameters, learning_rate):
         "LBFGS": optim.LBFGS,
         "Rprop": optim.Rprop,
         "NAdam": optim.NAdam,
-        "RAdam": optim.RAdam
+        "RAdam": optim.RAdam,
     }
 
     try:
         return optimizer_dict[optimizer_name](model_parameters, lr=learning_rate)
     except KeyError as exc:
-        raise ValueError(f'Unknown Optimizer: {optimizer_name}') from exc
+        raise ValueError(f"Unknown Optimizer: {optimizer_name}") from exc
 
 
 def get_scheduler(optimizer, scheduler_type="step", **kwargs):
@@ -342,13 +342,13 @@ def get_scheduler(optimizer, scheduler_type="step", **kwargs):
     scheduler_dict = {
         "step": lr_scheduler.StepLR,
         "multi_step": lr_scheduler.MultiStepLR,
-        "exponential": lr_scheduler.ExponentialLR
+        "exponential": lr_scheduler.ExponentialLR,
     }
 
     try:
         return scheduler_dict[scheduler_type](optimizer, **kwargs)
     except KeyError as exc:
-        raise ValueError(f'Invalid scheduler_type: {scheduler_type}') from exc
+        raise ValueError(f"Invalid scheduler_type: {scheduler_type}") from exc
 
 
 def generate_xai_heatmaps(model, image_tensor, label, save_dir, methods=None):
