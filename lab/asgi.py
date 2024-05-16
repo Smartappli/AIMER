@@ -1,4 +1,3 @@
-
 """
 ASGI config for lab project.
 
@@ -12,6 +11,6 @@ import os
 
 from django.core.asgi import get_asgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'lab.settings')
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "lab.settings")
 
 application = get_asgi_application()

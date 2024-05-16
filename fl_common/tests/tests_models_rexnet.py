@@ -15,16 +15,17 @@ class ProcessingRexnetTestCase(TestCase):
         Test if the function returns a valid Rexnet model for known Rexnet architectures.
         """
         architectures = [
-            'rexnet_100',
-            'rexnet_130',
-            'rexnet_150',
-            'rexnet_200',
-            'rexnet_300',
-            'rexnetr_100',
-            'rexnetr_130',
-            'rexnetr_150',
-            'rexnetr_200',
-            'rexnetr_300']
+            "rexnet_100",
+            "rexnet_130",
+            "rexnet_150",
+            "rexnet_200",
+            "rexnet_300",
+            "rexnetr_100",
+            "rexnetr_130",
+            "rexnetr_150",
+            "rexnetr_200",
+            "rexnetr_300",
+        ]
         num_classes = 10  # Just an example number of classes
         for arch in architectures:
             with self.subTest(architecture=arch):
@@ -38,7 +39,7 @@ class ProcessingRexnetTestCase(TestCase):
         """
         Test if the function raises a ValueError for an unknown Rexnet architecture.
         """
-        unknown_architecture = 'unknown_architecture'
+        unknown_architecture = "unknown_architecture"
         num_classes = 10
         with self.assertRaises(ValueError):
             get_rexnet_model(unknown_architecture, num_classes)

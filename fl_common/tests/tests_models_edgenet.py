@@ -22,7 +22,8 @@ class ProcessingEdgenetTestCase(TestCase):
             "edgenext_x_small",
             "edgenext_small",
             "edgenext_base",
-            "edgenext_small_rw"]
+            "edgenext_small_rw",
+        ]
         num_classes = 10
 
         for edgenet_type in edgenet_types:

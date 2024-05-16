@@ -4,20 +4,19 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('fl_client', '0042_alter_queue_options_and_more'),
+        ("fl_client", "0042_alter_queue_options_and_more"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='model_document',
-            name='modeldoc_creation_date',
+            model_name="model_document",
+            name="modeldoc_creation_date",
             field=models.DateTimeField(auto_now_add=True),
         ),
         migrations.AlterField(
-            model_name='model_document',
-            name='modeldoc_updated_date',
+            model_name="model_document",
+            name="modeldoc_updated_date",
             field=models.DateTimeField(auto_now=True),
         ),
     ]

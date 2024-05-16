@@ -19,22 +19,23 @@ class ProcessingVGGTestCase(TestCase):
         """
         # List of VGG model types to test
         vgg_types = [
-            'VGG11',
-            'VGG11_BN',
-            'VGG13',
-            'VGG13_BN',
-            'VGG16',
-            'VGG16_BN',
-            'VGG19',
-            'VGG19_BN',
-            'vgg11',
-            'vgg11_bn',
-            'vgg13',
-            'vgg13_bn',
-            'vgg16',
-            'vgg16_bn',
-            'vgg19',
-            'vgg19_bn']
+            "VGG11",
+            "VGG11_BN",
+            "VGG13",
+            "VGG13_BN",
+            "VGG16",
+            "VGG16_BN",
+            "VGG19",
+            "VGG19_BN",
+            "vgg11",
+            "vgg11_bn",
+            "vgg13",
+            "vgg13_bn",
+            "vgg16",
+            "vgg16_bn",
+            "vgg19",
+            "vgg19_bn",
+        ]
         num_classes = 10  # You can adjust the number of classes as needed
 
         # Loop through each VGG model type
@@ -44,8 +45,7 @@ class ProcessingVGGTestCase(TestCase):
                     model = get_vgg_model(vgg_type, num_classes)
                     self.assertIsNotNone(model)
                 except ValueError:
-                    self.fail(
-                        f"{vgg_type} should be a known VGG architecture.")
+                    self.fail(f"{vgg_type} should be a known VGG architecture.")
 
     def test_vgg_unknown_architecture(self):
         """
@@ -55,7 +55,7 @@ class ProcessingVGGTestCase(TestCase):
             AssertionError: If the assertion fails.
             ValueError: If an unknown VGG architecture is provided.
         """
-        vgg_type = 'UnknownArchitecture'
+        vgg_type = "UnknownArchitecture"
         num_classes = 10
 
         with self.assertRaises(ValueError) as context:
@@ -63,6 +63,5 @@ class ProcessingVGGTestCase(TestCase):
             get_vgg_model(vgg_type, num_classes)
 
         self.assertEqual(
-            str(context.exception),
-            f'Unknown VGG Architecture : {vgg_type}'
+            str(context.exception), f"Unknown VGG Architecture : {vgg_type}"
         )

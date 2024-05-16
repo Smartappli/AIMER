@@ -14,13 +14,14 @@ class ProcessingEfficientvit_mitTestCase(TestCase):
         """Test all Efficientvit_mit models"""
         num_classes = 10
         model_types = [
-            'efficientvit_b0',
-            'efficientvit_b1',
-            'efficientvit_b2',
-            'efficientvit_b3',
-            'efficientvit_l1',
-            'efficientvit_l2',
-            'efficientvit_l3']
+            "efficientvit_b0",
+            "efficientvit_b1",
+            "efficientvit_b2",
+            "efficientvit_b3",
+            "efficientvit_l1",
+            "efficientvit_l2",
+            "efficientvit_l3",
+        ]
         for model_type in model_types:
             with self.subTest(model_type=model_type):
                 model = get_efficientvit_mit_model(model_type, num_classes)
@@ -35,7 +36,7 @@ class ProcessingEfficientvit_mitTestCase(TestCase):
             AssertionError: If the assertion fails.
             ValueError: If an unknown Efficientvit_mit architecture is provided.
         """
-        model_type = 'UnknownArchitecture'
+        model_type = "UnknownArchitecture"
         num_classes = 10
 
         with self.assertRaises(ValueError) as context:
@@ -45,5 +46,5 @@ class ProcessingEfficientvit_mitTestCase(TestCase):
 
         self.assertEqual(
             str(context.exception),
-            f'Unknown EfficientViT-MIT Architecture: {model_type}'
+            f"Unknown EfficientViT-MIT Architecture: {model_type}",
         )

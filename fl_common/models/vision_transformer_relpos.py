@@ -1,8 +1,7 @@
 from timm import create_model
 
 
-def get_vision_transformer_relpos_model(
-        vision_transformer_relpos_type, num_classes):
+def get_vision_transformer_relpos_model(vision_transformer_relpos_type, num_classes):
     """
     Function to get a Vision Transformer Relative Position model of a specified type.
 
@@ -17,32 +16,32 @@ def get_vision_transformer_relpos_model(
         ValueError: If the specified vision_transformer_relpos_type is not one of the supported architectures.
     """
     valid_types = {
-        'vit_relpos_base_patch32_plus_rpn_256',
-        'vit_relpos_base_patch16_plus_240',
-        'vit_relpos_small_patch16_224',
-        'vit_relpos_medium_patch16_224',
-        'vit_relpos_base_patch16_224',
-        'vit_srelpos_small_patch16_224',
-        'vit_srelpos_medium_patch16_224',
-        'vit_relpos_medium_patch16_cls_224',
-        'vit_relpos_base_patch16_cls_224',
-        'vit_relpos_base_patch16_clsgap_224',
-        'vit_relpos_small_patch16_rpn_224',
-        'vit_relpos_medium_patch16_rpn_224',
-        'vit_relpos_base_patch16_rpn_224'}
+        "vit_relpos_base_patch32_plus_rpn_256",
+        "vit_relpos_base_patch16_plus_240",
+        "vit_relpos_small_patch16_224",
+        "vit_relpos_medium_patch16_224",
+        "vit_relpos_base_patch16_224",
+        "vit_srelpos_small_patch16_224",
+        "vit_srelpos_medium_patch16_224",
+        "vit_relpos_medium_patch16_cls_224",
+        "vit_relpos_base_patch16_cls_224",
+        "vit_relpos_base_patch16_clsgap_224",
+        "vit_relpos_small_patch16_rpn_224",
+        "vit_relpos_medium_patch16_rpn_224",
+        "vit_relpos_base_patch16_rpn_224",
+    }
 
     if vision_transformer_relpos_type not in valid_types:
         raise ValueError(
-            f'Unknown Vision Transformer Relative Position Architecture: {vision_transformer_relpos_type}')
+            f"Unknown Vision Transformer Relative Position Architecture: {vision_transformer_relpos_type}"
+        )
 
     try:
         return create_model(
-            vision_transformer_relpos_type,
-            pretrained=True,
-            num_classes=num_classes)
+            vision_transformer_relpos_type, pretrained=True, num_classes=num_classes
+        )
     except RuntimeError as e:
         print(f"{vision_transformer_relpos_type} - Error loading pretrained model: {e}")
         return create_model(
-            vision_transformer_relpos_type,
-            pretrained=False,
-            num_classes=num_classes)
+            vision_transformer_relpos_type, pretrained=False, num_classes=num_classes
+        )

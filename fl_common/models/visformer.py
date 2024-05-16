@@ -15,18 +15,12 @@ def get_visformer_model(visformer_type, num_classes):
     Raises:
         ValueError: If an unknown Visformer architecture type is specified.
     """
-    valid_types = {'visformer_tiny', 'visformer_small'}
+    valid_types = {"visformer_tiny", "visformer_small"}
     if visformer_type not in valid_types:
-        raise ValueError(f'Unknown Visformer Architecture: {visformer_type}')
+        raise ValueError(f"Unknown Visformer Architecture: {visformer_type}")
 
     try:
-        return create_model(
-            visformer_type,
-            pretrained=True,
-            num_classes=num_classes)
+        return create_model(visformer_type, pretrained=True, num_classes=num_classes)
     except RuntimeError as e:
         print(f"{visformer_type} - Error loading pretrained model: {e}")
-        return create_model(
-            visformer_type,
-            pretrained=False,
-            num_classes=num_classes)
+        return create_model(visformer_type, pretrained=False, num_classes=num_classes)

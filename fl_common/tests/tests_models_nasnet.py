@@ -14,7 +14,7 @@ class ProcessingNasnetTestCase(TestCase):
         """
         Test for known NASNet architecture types to ensure they return a model without raising any exceptions.
         """
-        known_nasnet_types = ['nasnetalarge']
+        known_nasnet_types = ["nasnetalarge"]
         num_classes = 1000  # Assuming 1000 classes for the test
 
         for nasnet_type in known_nasnet_types:
@@ -23,8 +23,7 @@ class ProcessingNasnetTestCase(TestCase):
                     model = get_nasnet_model(nasnet_type, num_classes)
                     self.assertIsNotNone(model)
                 except ValueError:
-                    self.fail(
-                        f"{nasnet_type} should be a known NASNet architecture.")
+                    self.fail(f"{nasnet_type} should be a known NASNet architecture.")
 
     def test_unknown_nasnet_type(self):
         """

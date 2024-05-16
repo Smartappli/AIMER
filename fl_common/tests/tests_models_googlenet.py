@@ -19,7 +19,7 @@ class ProcessingGoogleNetTestCase(TestCase):
             AssertionError: If any of the assertions fail.
         """
         # List of GoogleNet model types to test
-        googlenet_types = ['GoogLeNet']
+        googlenet_types = ["GoogLeNet"]
         num_classes = 10  # You can adjust the number of classes as needed
 
         # Loop through each GoogleNet model type
@@ -39,7 +39,7 @@ class ProcessingGoogleNetTestCase(TestCase):
             AssertionError: If the assertion fails.
             ValueError: If an unknown GoogleNet architecture is provided.
         """
-        googlenet_type = 'UnknownArchitecture'
+        googlenet_type = "UnknownArchitecture"
         num_classes = 10
 
         with self.assertRaises(ValueError) as context:
@@ -47,8 +47,7 @@ class ProcessingGoogleNetTestCase(TestCase):
             get_googlenet_model(googlenet_type, num_classes)
 
         self.assertEqual(
-            str(context.exception),
-            f'Unknown GoogLeNet Architecture: {googlenet_type}'
+            str(context.exception), f"Unknown GoogLeNet Architecture: {googlenet_type}"
         )
 
     def test_googlenet_last_layer_adaptation(self):
@@ -59,7 +58,7 @@ class ProcessingGoogleNetTestCase(TestCase):
             AssertionError: If the assertion fails.
         """
         # Provide a known architecture type
-        googlenet_type = 'GoogLeNet'
+        googlenet_type = "GoogLeNet"
         num_classes = 10
 
         # Override the last layer with a linear layer for testing purposes

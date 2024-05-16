@@ -49,20 +49,34 @@ class ProcessingPartXTestCase(TestCase):
         For each model, it attempts to load the model with the specified number of classes (10 in this case).
         """
         supported_models = [
-            'xcit_nano_12_p16_224', 'xcit_nano_12_p16_384',
-            'xcit_tiny_12_p16_224', 'xcit_tiny_12_p16_384',
-            'xcit_small_12_p16_224', 'xcit_small_12_p16_384',
-            'xcit_tiny_24_p16_224', 'xcit_tiny_24_p16_384',
-            'xcit_small_24_p16_224', 'xcit_small_24_p16_384',
-            'xcit_medium_24_p16_224', 'xcit_medium_24_p16_384',
-            'xcit_large_24_p16_224', 'xcit_large_24_p16_384',
-            'xcit_nano_12_p8_224', 'xcit_nano_12_p8_384',
-            'xcit_tiny_12_p8_224', 'xcit_tiny_12_p8_384',
-            'xcit_small_12_p8_224', 'xcit_small_12_p8_384',
-            'xcit_tiny_24_p8_224', 'xcit_tiny_24_p8_384',
-            'xcit_small_24_p8_224', 'xcit_small_24_p8_384',
-            'xcit_medium_24_p8_224', 'xcit_medium_24_p8_384',
-            'xcit_large_24_p8_224', 'xcit_large_24_p8_384'
+            "xcit_nano_12_p16_224",
+            "xcit_nano_12_p16_384",
+            "xcit_tiny_12_p16_224",
+            "xcit_tiny_12_p16_384",
+            "xcit_small_12_p16_224",
+            "xcit_small_12_p16_384",
+            "xcit_tiny_24_p16_224",
+            "xcit_tiny_24_p16_384",
+            "xcit_small_24_p16_224",
+            "xcit_small_24_p16_384",
+            "xcit_medium_24_p16_224",
+            "xcit_medium_24_p16_384",
+            "xcit_large_24_p16_224",
+            "xcit_large_24_p16_384",
+            "xcit_nano_12_p8_224",
+            "xcit_nano_12_p8_384",
+            "xcit_tiny_12_p8_224",
+            "xcit_tiny_12_p8_384",
+            "xcit_small_12_p8_224",
+            "xcit_small_12_p8_384",
+            "xcit_tiny_24_p8_224",
+            "xcit_tiny_24_p8_384",
+            "xcit_small_24_p8_224",
+            "xcit_small_24_p8_384",
+            "xcit_medium_24_p8_224",
+            "xcit_medium_24_p8_384",
+            "xcit_large_24_p8_224",
+            "xcit_large_24_p8_384",
         ]
 
         for model_type in supported_models:
@@ -76,4 +90,4 @@ class ProcessingPartXTestCase(TestCase):
         Test that attempting to create an XCiT model with an unknown model type raises a ValueError.
         """
         with self.assertRaises(ValueError):
-            get_xcit_model('unknown_model', num_classes=10)
+            get_xcit_model("unknown_model", num_classes=10)

@@ -27,8 +27,7 @@ class ProcessingSwinTransformerv2crTestCase(TestCase):
         for swin_type in swin_types:
             with self.subTest(swin_type=swin_type):
                 # Get the Swin Transformer model for testing
-                model = get_swin_transformer_v2_cr_model(
-                    swin_type, num_classes)
+                model = get_swin_transformer_v2_cr_model(swin_type, num_classes)
                 # Check if the model is an instance of torch.nn.Module
                 self.assertIsNotNone(model)
 
@@ -40,7 +39,7 @@ class ProcessingSwinTransformerv2crTestCase(TestCase):
             AssertionError: If the assertion fails.
             ValueError: If an unknown Swin Transformer architecture is provided.
         """
-        swin_type = 'UnknownArchitecture'
+        swin_type = "UnknownArchitecture"
         num_classes = 10
 
         with self.assertRaises(ValueError) as context:
@@ -50,5 +49,5 @@ class ProcessingSwinTransformerv2crTestCase(TestCase):
 
         self.assertEqual(
             str(context.exception),
-            f'Unknown Swin Transformer v2 cr Architecture: {swin_type}'
+            f"Unknown Swin Transformer v2 cr Architecture: {swin_type}",
         )

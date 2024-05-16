@@ -4,19 +4,19 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('fl_client', '0048_alter_dataset_options_alter_license_options_and_more'), ]
+        ("fl_client", "0048_alter_dataset_options_alter_license_options_and_more"),
+    ]
 
     operations = [
         migrations.AddField(
-            model_name='help',
-            name='help_creation_date',
+            model_name="help",
+            name="help_creation_date",
             field=models.DateTimeField(auto_now_add=True, null=True),
         ),
         migrations.AddField(
-            model_name='help',
-            name='help_updated_date',
+            model_name="help",
+            name="help_updated_date",
             field=models.DateTimeField(auto_now=True, null=True),
         ),
     ]

@@ -4,18 +4,16 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('fl_client', '0046_license_license_short_name'),
+        ("fl_client", "0046_license_license_short_name"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='license',
-            name='license_id',
+            model_name="license",
+            name="license_id",
             field=models.BigAutoField(
-                editable=False,
-                primary_key=True,
-                serialize=False),
+                editable=False, primary_key=True, serialize=False
+            ),
         ),
     ]

@@ -15,15 +15,16 @@ class ProcessingRes2netTestCase(TestCase):
         Test if the function returns a valid Res2Net model for known Res2Net types.
         """
         res2net_types = [
-            'res2net50_26w_4s',
-            'res2net101_26w_4s',
-            'res2net50_26w_6s',
-            'res2net50_26w_8s',
-            'res2net50_48w_2s',
-            'res2net50_14w_8s',
-            'res2next50',
-            'res2net50d',
-            'res2net101d']
+            "res2net50_26w_4s",
+            "res2net101_26w_4s",
+            "res2net50_26w_6s",
+            "res2net50_26w_8s",
+            "res2net50_48w_2s",
+            "res2net50_14w_8s",
+            "res2next50",
+            "res2net50d",
+            "res2net101d",
+        ]
         num_classes = 10  # Just for testing purposes
 
         for res2net_type in res2net_types:
@@ -36,7 +37,7 @@ class ProcessingRes2netTestCase(TestCase):
         """
         Test if the function raises a ValueError for an unknown Res2Net type.
         """
-        unknown_res2net_type = 'unknown_res2net_type'
+        unknown_res2net_type = "unknown_res2net_type"
         num_classes = 10
 
         with self.assertRaises(ValueError):

@@ -31,7 +31,8 @@ class ProcessingGcVitTestCase(TestCase):
             "gcvit_xtiny",
             "gcvit_tiny",
             "gcvit_small",
-            "gcvit_base"]
+            "gcvit_base",
+        ]
 
         for gcvit_type in known_types:
             with self.subTest(gcvit_type=gcvit_type):

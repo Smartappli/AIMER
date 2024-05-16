@@ -16,23 +16,18 @@ def get_sknet_model(sknet_type, num_classes):
         ValueError: If an unknown SKNet architecture type is specified.
     """
     valid_types = {
-        'skresnet18',
-        'skresnet34',
-        'skresnet50',
-        'skresnet50d',
-        'skresnext50_32x4d'}
+        "skresnet18",
+        "skresnet34",
+        "skresnet50",
+        "skresnet50d",
+        "skresnext50_32x4d",
+    }
 
     if sknet_type not in valid_types:
-        raise ValueError(f'Unknown SKNet Architecture: {sknet_type}')
+        raise ValueError(f"Unknown SKNet Architecture: {sknet_type}")
 
     try:
-        return create_model(
-            sknet_type,
-            pretrained=True,
-            num_classes=num_classes)
+        return create_model(sknet_type, pretrained=True, num_classes=num_classes)
     except RuntimeError as e:
         print(f"{sknet_type} - Error loading pretrained model: {e}")
-        return create_model(
-            sknet_type,
-            pretrained=False,
-            num_classes=num_classes)
+        return create_model(sknet_type, pretrained=False, num_classes=num_classes)

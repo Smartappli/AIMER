@@ -15,14 +15,15 @@ class ProcessingMvitv2TestCase(TestCase):
         Test if the function returns a valid MViT-V2 model for known MViT-V2 architectures.
         """
         architectures = [
-            'mvitv2_tiny',
-            'mvitv2_small',
-            'mvitv2_base',
-            'mvitv2_large',
-            'mvitv2_small_cls',
-            'mvitv2_base_cls',
-            'mvitv2_large_cls',
-            'mvitv2_huge_cls']
+            "mvitv2_tiny",
+            "mvitv2_small",
+            "mvitv2_base",
+            "mvitv2_large",
+            "mvitv2_small_cls",
+            "mvitv2_base_cls",
+            "mvitv2_large_cls",
+            "mvitv2_huge_cls",
+        ]
         num_classes = 10  # just an example number of classes
         for arch in architectures:
             with self.subTest(architecture=arch):
@@ -36,7 +37,7 @@ class ProcessingMvitv2TestCase(TestCase):
         """
         Test if the function raises a ValueError for an unknown MViT-V2 architecture.
         """
-        unknown_architecture = 'unknown_architecture'
+        unknown_architecture = "unknown_architecture"
         num_classes = 10
         with self.assertRaises(ValueError):
             get_mvitv2_model(unknown_architecture, num_classes)

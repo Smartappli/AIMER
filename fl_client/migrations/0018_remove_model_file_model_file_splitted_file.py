@@ -4,14 +4,13 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('fl_client', '0017_alter_model_file_model_file_type'),
+        ("fl_client", "0017_alter_model_file_model_file_type"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='model_file',
-            name='model_file_splitted_file',
+            model_name="model_file",
+            name="model_file_splitted_file",
         ),
     ]

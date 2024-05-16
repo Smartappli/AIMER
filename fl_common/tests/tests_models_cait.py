@@ -36,7 +36,8 @@ class ProcessingCaitTestCase(TestCase):
             "cait_s24_384",
             "cait_s36_384",
             "cait_m36_384",
-            "cait_m48_448"]
+            "cait_m48_448",
+        ]
 
         for cait_type in known_types:
             with self.subTest(cait_type=cait_type):
