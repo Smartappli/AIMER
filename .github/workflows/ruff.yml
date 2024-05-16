@@ -2,6 +2,7 @@ name: Ruff
 on: [push, pull_request]
 jobs:
   ruff:
+    name: Ruff
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
