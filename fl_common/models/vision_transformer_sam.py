@@ -16,22 +16,23 @@ def get_vision_transformer_sam_model(vision_transformer_sam_type, num_classes):
         ValueError: If the specified vision_transformer_sam_type is not one of the supported architectures.
     """
     valid_types = {
-        'samvit_base_patch16', 'samvit_large_patch16', 'samvit_huge_patch16',
-        'samvit_base_patch16_224'
+        "samvit_base_patch16",
+        "samvit_large_patch16",
+        "samvit_huge_patch16",
+        "samvit_base_patch16_224",
     }
 
     if vision_transformer_sam_type not in valid_types:
         raise ValueError(
-            f'Unknown Vision Transformer SAM Architecture: {vision_transformer_sam_type}')
+            f"Unknown Vision Transformer SAM Architecture: {vision_transformer_sam_type}"
+        )
 
     try:
         return create_model(
-            vision_transformer_sam_type,
-            pretrained=True,
-            num_classes=num_classes)
+            vision_transformer_sam_type, pretrained=True, num_classes=num_classes
+        )
     except RuntimeError as e:
         print(f"{vision_transformer_sam_type} - Error loading pretrained model: {e}")
         return create_model(
-            vision_transformer_sam_type,
-            pretrained=False,
-            num_classes=num_classes)
+            vision_transformer_sam_type, pretrained=False, num_classes=num_classes
+        )

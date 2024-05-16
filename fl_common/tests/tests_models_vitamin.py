@@ -35,7 +35,8 @@ class ProcessingViTaminTestCase(TestCase):
             "vitamin_large_384",
             "vitamin_xlarge_256",
             "vitamin_xlarge_336",
-            "vitamin_xlarge_384"]
+            "vitamin_xlarge_384",
+        ]
 
         for vitamin_type in known_types:
             with self.subTest(vitamin_type=vitamin_type):

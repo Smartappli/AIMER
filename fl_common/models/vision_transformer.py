@@ -22,11 +22,11 @@ def get_vision_transformer_model(vision_type, num_classes):
     # Mapping of vision types to their corresponding torchvision models and
     # weights
     torchvision_models = {
-        'ViT_B_16': (models.vit_b_16, models.ViT_B_16_Weights),
-        'ViT_B_32': (models.vit_b_32, models.ViT_B_32_Weights),
-        'ViT_L_16': (models.vit_l_16, models.ViT_L_16_Weights),
-        'ViT_L_32': (models.vit_l_32, models.ViT_L_32_Weights),
-        'ViT_H_14': (models.vit_h_14, models.ViT_H_14_Weights)
+        "ViT_B_16": (models.vit_b_16, models.ViT_B_16_Weights),
+        "ViT_B_32": (models.vit_b_32, models.ViT_B_32_Weights),
+        "ViT_L_16": (models.vit_l_16, models.ViT_L_16_Weights),
+        "ViT_L_32": (models.vit_l_32, models.ViT_L_32_Weights),
+        "ViT_H_14": (models.vit_h_14, models.ViT_H_14_Weights),
     }
 
     timm_models = [
@@ -131,7 +131,8 @@ def get_vision_transformer_model(vision_type, num_classes):
         "vit_betwixt_patch16_reg4_gap_256",
         "vit_base_patch16_reg4_gap_256",
         "vit_so150m_patch16_reg4_map_256",
-        "vit_so150m_patch16_reg4_gap_256"]
+        "vit_so150m_patch16_reg4_gap_256",
+    ]
 
     # Check if the vision type is from torchvision
     if vision_type in torchvision_models:
@@ -146,20 +147,22 @@ def get_vision_transformer_model(vision_type, num_classes):
         # Replace the last layer with a new linear layer with the specified
         # number of classes
         last_layer = nn.Linear(
-            in_features=vision_model.heads[-1].in_features, out_features=num_classes)
+            in_features=vision_model.heads[-1].in_features, out_features=num_classes
+        )
         vision_model.heads[-1] = last_layer
 
     # Check if the vision type is from the 'timm' library
     elif vision_type in timm_models:
         try:
             vision_model = create_model(
-                vision_type, pretrained=True, num_classes=num_classes)
+                vision_type, pretrained=True, num_classes=num_classes
+            )
         except RuntimeError as e:
             print(f"{vision_type} - Error loading pretrained model: {e}")
             vision_model = create_model(
-                vision_type, pretrained=False, num_classes=num_classes)
+                vision_type, pretrained=False, num_classes=num_classes
+            )
     else:
-        raise ValueError(
-            f'Unknown Vision Transformer Architecture: {vision_type}')
+        raise ValueError(f"Unknown Vision Transformer Architecture: {vision_type}")
 
     return vision_model

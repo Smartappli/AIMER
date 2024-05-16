@@ -4,14 +4,13 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('fl_client', '0006_document_modeldocument_delete_model_document'),
+        ("fl_client", "0006_document_modeldocument_delete_model_document"),
     ]
 
     operations = [
         migrations.RenameModel(
-            old_name='ModelDocument',
-            new_name='Model_Document',
+            old_name="ModelDocument",
+            new_name="Model_Document",
         ),
     ]

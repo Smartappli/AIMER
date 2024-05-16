@@ -22,7 +22,8 @@ class ProcessingVisionTransformerTestCase(TestCase):
             "vit_base_patch32_clip_quickgelu_224",
             "vit_base_patch16_clip_quickgelu_224",
             "vit_large_patch14_clip_quickgelu_224",
-            "vit_large_patch14_clip_quickgelu_336"]
+            "vit_large_patch14_clip_quickgelu_336",
+        ]
 
         num_classes = 10  # You can adjust the number of classes as needed
 
@@ -42,7 +43,7 @@ class ProcessingVisionTransformerTestCase(TestCase):
             AssertionError: If the assertion fails.
             ValueError: If an unknown Vision Transformer architecture is provided.
         """
-        vision_type = 'UnknownArchitecture'
+        vision_type = "UnknownArchitecture"
         num_classes = 10
 
         with self.assertRaises(ValueError) as context:
@@ -52,5 +53,5 @@ class ProcessingVisionTransformerTestCase(TestCase):
 
         self.assertEqual(
             str(context.exception),
-            f'Unknown Vision Transformer Architecture: {vision_type}'
+            f"Unknown Vision Transformer Architecture: {vision_type}",
         )

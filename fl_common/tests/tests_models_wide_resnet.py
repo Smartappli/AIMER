@@ -17,5 +17,5 @@ class ProcessingWideResnetTestCase(TestCase):
         Raises:
             AssertionError: If the assertion fails.
         """
-        wide_resnet_model = get_wide_resnet_model('Wide_ResNet50_2', 1000)
+        wide_resnet_model = get_wide_resnet_model("Wide_ResNet50_2", 1000)
         self.assertIsNotNone(wide_resnet_model, msg="Wide ResNet KO")

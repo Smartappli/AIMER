@@ -15,19 +15,13 @@ def get_convit_model(convit_type, num_classes):
     Raises:
         ValueError: If the provided convit_type is not recognized.
     """
-    valid_convit_types = {'convit_tiny', 'convit_small', 'convit_base'}
+    valid_convit_types = {"convit_tiny", "convit_small", "convit_base"}
 
     if convit_type not in valid_convit_types:
-        raise ValueError(f'Unknown Convit Architecture: {convit_type}')
+        raise ValueError(f"Unknown Convit Architecture: {convit_type}")
 
     try:
-        return create_model(
-            convit_type,
-            pretrained=True,
-            num_classes=num_classes)
+        return create_model(convit_type, pretrained=True, num_classes=num_classes)
     except RuntimeError as e:
         print(f"{convit_type} - Error loading pretrained model: {e}")
-        return create_model(
-            convit_type,
-            pretrained=False,
-            num_classes=num_classes)
+        return create_model(convit_type, pretrained=False, num_classes=num_classes)

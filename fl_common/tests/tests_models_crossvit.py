@@ -37,7 +37,8 @@ class ProcessingCrossvitTestCase(TestCase):
             "crossvit_15_dagger_240",
             "crossvit_15_dagger_408",
             "crossvit_18_dagger_240",
-            "crossvit_18_dagger_408"]
+            "crossvit_18_dagger_408",
+        ]
 
         for crossvit_type in crossvit_types:
             with self.subTest(crossvit_type=crossvit_type):

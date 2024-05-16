@@ -15,21 +15,21 @@ class ProcessingByaonetTestCase(TestCase):
         Vérifie si les modèles sont correctement créés pour les types de Byoanet connus.
         """
         known_types = [
-            'botnet26t_256',
-            'sebotnet33ts_256',
-            'botnet50ts_256',
-            'eca_botnext26ts_256',
-            'halonet_h1',
-            'halonet26t',
-            'sehalonet33ts',
-            'halonet50ts',
-            'eca_halonext26ts',
-            'lambda_resnet26t',
-            'lambda_resnet50ts',
-            'lambda_resnet26rpt_256',
-            'haloregnetz_b',
-            'lamhalobotnet50ts_256',
-            'halo2botnet50ts_256'
+            "botnet26t_256",
+            "sebotnet33ts_256",
+            "botnet50ts_256",
+            "eca_botnext26ts_256",
+            "halonet_h1",
+            "halonet26t",
+            "sehalonet33ts",
+            "halonet50ts",
+            "eca_halonext26ts",
+            "lambda_resnet26t",
+            "lambda_resnet50ts",
+            "lambda_resnet26rpt_256",
+            "haloregnetz_b",
+            "lamhalobotnet50ts_256",
+            "halo2botnet50ts_256",
         ]
         num_classes = 1000
         for byoanet_type in known_types:
@@ -44,7 +44,7 @@ class ProcessingByaonetTestCase(TestCase):
         """
         Vérifie si la fonction lève une exception ValueError pour un type de Byoanet inconnu.
         """
-        unknown_type = 'unknown_type'
+        unknown_type = "unknown_type"
         num_classes = 1000
         with self.assertRaises(ValueError):
             get_byoanet_model(unknown_type, num_classes)

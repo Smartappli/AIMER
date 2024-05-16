@@ -34,5 +34,6 @@ class ProfileAdmin(admin.ModelAdmin):
     - The "list_display" specifies the fields to be shown in the list view.
     - The "raw_id_fields" provide a raw input field for the "user" field, facilitating user selection.
     """
-    list_display = ["user", 'date_of_birth', 'photo']
-    raw_id_fields = ['user']
+
+    list_display = ["user", "date_of_birth", "photo"]
+    raw_id_fields = ["user"]

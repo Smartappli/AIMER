@@ -31,7 +31,8 @@ class ProcessingSwinTransformerv2TestCase(TestCase):
             "swinv2_base_window12to24_192to384",
             "swinv2_large_window12_192",
             "swinv2_large_window12to16_192to256",
-            "swinv2_large_window12to24_192to384"]
+            "swinv2_large_window12to24_192to384",
+        ]
         num_classes = 10  # You can adjust the number of classes as needed
 
         # Loop through each Swin Transformer model type
@@ -50,7 +51,7 @@ class ProcessingSwinTransformerv2TestCase(TestCase):
             AssertionError: If the assertion fails.
             ValueError: If an unknown Swin Transformer architecture is provided.
         """
-        swin_type = 'UnknownArchitecture'
+        swin_type = "UnknownArchitecture"
         num_classes = 10
 
         with self.assertRaises(ValueError) as context:
@@ -60,5 +61,5 @@ class ProcessingSwinTransformerv2TestCase(TestCase):
 
         self.assertEqual(
             str(context.exception),
-            f'Unknown Swin Transformer v2 Architecture: {swin_type}'
+            f"Unknown Swin Transformer v2 Architecture: {swin_type}",
         )

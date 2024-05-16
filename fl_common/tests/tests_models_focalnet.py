@@ -33,7 +33,8 @@ class ProcessingFastVitTestCase(TestCase):
             "focalnet_xlarge_fl3",
             "focalnet_xlarge_fl4",
             "focalnet_huge_fl3",
-            "focalnet_huge_fl4"]
+            "focalnet_huge_fl4",
+        ]
         num_classes = 1000  # Example number of classes
 
         for focalnet_type in known_focalnet_types:
@@ -43,7 +44,8 @@ class ProcessingFastVitTestCase(TestCase):
                     self.assertIsNotNone(model)
                 except ValueError:
                     self.fail(
-                        f"{focalnet_type} should be a known Focalnet architecture.")
+                        f"{focalnet_type} should be a known Focalnet architecture."
+                    )
 
     def test_unknown_focalnet_type(self):
         """

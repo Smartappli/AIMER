@@ -4,14 +4,14 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('fl_client', '0045_remove_model_file_model_file_max_ram_required_and_more'), ]
+        ("fl_client", "0045_remove_model_file_model_file_max_ram_required_and_more"),
+    ]
 
     operations = [
         migrations.AddField(
-            model_name='license',
-            name='license_short_name',
+            model_name="license",
+            name="license_short_name",
             field=models.CharField(blank=True, max_length=30, null=True),
         ),
     ]

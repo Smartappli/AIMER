@@ -27,9 +27,14 @@ class ProcessingCoatTestCase(TestCase):
         - AssertionError: If the function returns None for any known COAT type.
         """
         known_types = [
-            "coat_tiny", "coat_mini", "coat_small",
-            "coat_lite_tiny", "coat_lite_mini", "coat_lite_small",
-            "coat_lite_medium", "coat_lite_medium_384"
+            "coat_tiny",
+            "coat_mini",
+            "coat_small",
+            "coat_lite_tiny",
+            "coat_lite_mini",
+            "coat_lite_small",
+            "coat_lite_medium",
+            "coat_lite_medium_384",
         ]
 
         for coat_type in known_types:
