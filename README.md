@@ -5,4 +5,5 @@
 [![Nightlies Models - PART C](https://github.com/Smartappli/AIMER/actions/workflows/nightlies_models_C.yml/badge.svg)](https://github.com/Smartappli/AIMER/actions/workflows/nightlies_models_C.yml)
 [![Pylint](https://github.com/Smartappli/AIMER/actions/workflows/pylint.yml/badge.svg)](https://github.com/Smartappli/AIMER/actions/workflows/pylint.yml)
 [![flake8 Lint](https://github.com/Smartappli/AIMER/actions/workflows/flake8.yml/badge.svg)](https://github.com/Smartappli/AIMER/actions/workflows/flake8.yml)
+[![Black Formatter](https://github.com/Smartappli/AIMER/actions/workflows/black.yml/badge.svg)](https://github.com/Smartappli/AIMER/actions/workflows/black.yml)
 [![Dependencies license compliance checker](https://github.com/Smartappli/AIMER/actions/workflows/liccheck.yml/badge.svg)](https://github.com/Smartappli/AIMER/actions/workflows/liccheck.yml)
