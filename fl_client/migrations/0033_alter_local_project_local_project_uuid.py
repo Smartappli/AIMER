@@ -13,6 +13,9 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="local_project",
             name="local_project_uuid",
-            field=models.UUIDField(default=uuid.uuid4, editable=False, unique=True),
+            field=models.UUIDField(
+                default=uuid.uuid4,
+                editable=False,
+                unique=True),
         ),
     ]

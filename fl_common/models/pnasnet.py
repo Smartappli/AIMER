@@ -12,7 +12,13 @@ def get_pnasnet_model(pnasnet_type, num_classes):
 
     # Attempt to create the model with pretrained weights
     try:
-        return create_model(pnasnet_type, pretrained=True, num_classes=num_classes)
+        return create_model(
+            pnasnet_type,
+            pretrained=True,
+            num_classes=num_classes)
     except RuntimeError as e:
         print(f"{pnasnet_type} - Error loading pretrained model: {e}")
-        return create_model(pnasnet_type, pretrained=False, num_classes=num_classes)
+        return create_model(
+            pnasnet_type,
+            pretrained=False,
+            num_classes=num_classes)

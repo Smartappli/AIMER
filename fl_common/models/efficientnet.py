@@ -171,7 +171,8 @@ def get_efficientnet_model(efficientnet_type, num_classes):
 
         # Modify last layer to suit number of classes
         num_features = efficientnet_model.classifier[-1].in_features
-        efficientnet_model.classifier[-1] = nn.Linear(num_features, num_classes)
+        efficientnet_model.classifier[-1] = nn.Linear(
+            num_features, num_classes)
 
     # Check if the vision type is from the 'timm' library
     elif efficientnet_type in timm_models:
@@ -185,6 +186,7 @@ def get_efficientnet_model(efficientnet_type, num_classes):
                 efficientnet_type, pretrained=False, num_classes=num_classes
             )
     else:
-        raise ValueError(f"Unknown EfficientNet Architecture: {efficientnet_type}")
+        raise ValueError(
+            f"Unknown EfficientNet Architecture: {efficientnet_type}")
 
     return efficientnet_model

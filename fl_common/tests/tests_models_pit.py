@@ -32,7 +32,8 @@ class ProcessingPitTestCase(TestCase):
                     model = get_pit_model(pit_type, num_classes)
                     self.assertIsNotNone(model)
                 except ValueError:
-                    self.fail(f"{pit_type} should be a known PIT architecture.")
+                    self.fail(
+                        f"{pit_type} should be a known PIT architecture.")
 
     def test_unknown_pit_type(self):
         """

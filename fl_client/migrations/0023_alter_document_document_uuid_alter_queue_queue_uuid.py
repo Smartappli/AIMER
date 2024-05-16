@@ -13,11 +13,16 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="document",
             name="document_uuid",
-            field=models.UUIDField(default=uuid.uuid4, editable=False, unique=True),
+            field=models.UUIDField(
+                default=uuid.uuid4,
+                editable=False,
+                unique=True),
         ),
         migrations.AlterField(
             model_name="queue",
             name="queue_uuid",
-            field=models.UUIDField(default=uuid.uuid4, editable=False),
+            field=models.UUIDField(
+                default=uuid.uuid4,
+                editable=False),
         ),
     ]

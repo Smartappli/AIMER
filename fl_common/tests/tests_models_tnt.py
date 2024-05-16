@@ -23,7 +23,8 @@ class ProcessingTntTestCase(TestCase):
                     model = get_tnt_model(tnt_type, num_classes)
                     self.assertIsNotNone(model)
                 except ValueError:
-                    self.fail(f"{tnt_type} should be a known TnT architecture.")
+                    self.fail(
+                        f"{tnt_type} should be a known TnT architecture.")
 
     def test_unknown_tnt_type(self):
         """

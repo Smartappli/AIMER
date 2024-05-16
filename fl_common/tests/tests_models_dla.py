@@ -43,7 +43,8 @@ class ProcessingDlaTestCase(TestCase):
                     model = get_dla_model(dila_type, num_classes)
                     self.assertIsNotNone(model)
                 except ValueError:
-                    self.fail(f"{dila_type} should be a known Dila architecture.")
+                    self.fail(
+                        f"{dila_type} should be a known Dila architecture.")
 
     def test_unknown_dila_type(self):
         """

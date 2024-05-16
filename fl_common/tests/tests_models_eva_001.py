@@ -36,7 +36,8 @@ class ProcessingEvaTestCase(TestCase):
                     model = get_eva_model(eva_type, num_classes)
                     self.assertIsNotNone(model)
                 except ValueError:
-                    self.fail(f"{eva_type} should be a known Eva architecture.")
+                    self.fail(
+                        f"{eva_type} should be a known Eva architecture.")
 
     def test_unknown_eva_type(self):
         """

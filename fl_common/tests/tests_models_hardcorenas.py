@@ -28,7 +28,8 @@ class ProcessingHardcorenasTestCase(TestCase):
         for hardcorenas_type in known_hardcorenas_types:
             with self.subTest(hardcorenas_type=hardcorenas_type):
                 try:
-                    model = get_hardcorenas_model(hardcorenas_type, num_classes)
+                    model = get_hardcorenas_model(
+                        hardcorenas_type, num_classes)
                     self.assertIsNotNone(model)
                 except ValueError:
                     self.fail(

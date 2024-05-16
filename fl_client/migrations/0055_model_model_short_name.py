@@ -5,8 +5,7 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
     dependencies = [
-        ("fl_client", "0054_rename_dataset_central_data_datasetcentraldata_and_more"),
-    ]
+        ("fl_client", "0054_rename_dataset_central_data_datasetcentraldata_and_more"), ]
 
     operations = [
         migrations.AddField(

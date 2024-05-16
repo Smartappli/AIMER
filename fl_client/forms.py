@@ -9,7 +9,8 @@ class DLClassificationForm(forms.Form):
     # --- DATA AUGMENTATION ---
 
     dpcla_data_augmentation_cropping = forms.BooleanField(required=False)
-    dpcla_data_augmentation_horizontal_flip = forms.BooleanField(required=False)
+    dpcla_data_augmentation_horizontal_flip = forms.BooleanField(
+        required=False)
     dpcla_data_augmentation_vertical_flip = forms.BooleanField(required=False)
     dpcla_data_augmentation_translation = forms.BooleanField(required=False)
     dpcla_data_augmentation_rotation = forms.BooleanField(required=False)
@@ -401,7 +402,9 @@ class UserRegistrationForm(forms.ModelForm):
     """Class for creating user registration form."""
 
     password = forms.CharField(label="Password", widget=forms.PasswordInput)
-    password2 = forms.CharField(label="Repeat Password", widget=forms.PasswordInput)
+    password2 = forms.CharField(
+        label="Repeat Password",
+        widget=forms.PasswordInput)
 
     class Meta:
         model = User

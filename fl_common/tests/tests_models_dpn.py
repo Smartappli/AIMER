@@ -20,7 +20,14 @@ class ProcessingDpnTestCase(TestCase):
         Raises:
             AssertionError: If any DPN model fails to be created.
         """
-        dpn_types = ["dpn48b", "dpn68", "dpn68b", "dpn92", "dpn98", "dpn131", "dpn107"]
+        dpn_types = [
+            "dpn48b",
+            "dpn68",
+            "dpn68b",
+            "dpn92",
+            "dpn98",
+            "dpn131",
+            "dpn107"]
         num_classes = 10  # Example number of classes
 
         for dpn_type in dpn_types:

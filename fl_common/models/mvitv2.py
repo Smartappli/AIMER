@@ -32,7 +32,13 @@ def get_mvitv2_model(mvitv2_type, num_classes):
         raise ValueError(f"Unknown MViTv2 Architecture: {mvitv2_type}")
 
     try:
-        return create_model(mvitv2_type, pretrained=True, num_classes=num_classes)
+        return create_model(
+            mvitv2_type,
+            pretrained=True,
+            num_classes=num_classes)
     except RuntimeError as e:
         print(f"{mvitv2_type} - Error loading pretrained model: {e}")
-        return create_model(mvitv2_type, pretrained=False, num_classes=num_classes)
+        return create_model(
+            mvitv2_type,
+            pretrained=False,
+            num_classes=num_classes)

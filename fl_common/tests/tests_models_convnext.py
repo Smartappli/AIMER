@@ -78,6 +78,5 @@ class ProcessingConvNextTestCase(TestCase):
         with self.assertRaises(ValueError) as context:
             get_convnext_model(convnext_type, num_classes)
 
-        self.assertEqual(
-            str(context.exception), f"Unknown ConvNeXt Architecture : {convnext_type}"
-        )
+        self.assertEqual(str(context.exception),
+                         f"Unknown ConvNeXt Architecture : {convnext_type}")

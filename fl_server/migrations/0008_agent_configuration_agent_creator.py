@@ -7,11 +7,11 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
     dependencies = [
-        (
-            "fl_server",
-            "0007_server_model_agent_configuration_agent_creation_date_and_more",
-        ),
-        migrations.swappable_dependency(settings.AUTH_USER_MODEL),
+        ("fl_server",
+         "0007_server_model_agent_configuration_agent_creation_date_and_more",
+         ),
+        migrations.swappable_dependency(
+            settings.AUTH_USER_MODEL),
     ]
 
     operations = [

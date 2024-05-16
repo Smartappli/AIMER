@@ -57,7 +57,13 @@ def get_nfnet_model(nfnet_type, num_classes):
         raise ValueError(f"Unknown NFNet Architecture: {nfnet_type}")
 
     try:
-        return create_model(nfnet_type, pretrained=True, num_classes=num_classes)
+        return create_model(
+            nfnet_type,
+            pretrained=True,
+            num_classes=num_classes)
     except RuntimeError as e:
         print(f"{nfnet_type} - Error loading pretrained model: {e}")
-        return create_model(nfnet_type, pretrained=False, num_classes=num_classes)
+        return create_model(
+            nfnet_type,
+            pretrained=False,
+            num_classes=num_classes)

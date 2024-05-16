@@ -46,9 +46,8 @@ class ProcessingGoogleNetTestCase(TestCase):
             # Attempt to get a GoogleNet model with an unknown architecture
             get_googlenet_model(googlenet_type, num_classes)
 
-        self.assertEqual(
-            str(context.exception), f"Unknown GoogLeNet Architecture: {googlenet_type}"
-        )
+        self.assertEqual(str(context.exception),
+                         f"Unknown GoogLeNet Architecture: {googlenet_type}")
 
     def test_googlenet_last_layer_adaptation(self):
         """

@@ -13,24 +13,29 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name="Help",
             fields=[
-                (
-                    "id",
-                    models.BigAutoField(
-                        auto_created=True,
-                        primary_key=True,
-                        serialize=False,
-                        verbose_name="ID",
-                    ),
-                ),
-                (
-                    "help_uuid",
-                    models.UUIDField(default=uuid.uuid4, editable=False, unique=True),
-                ),
-                (
-                    "help_key",
-                    models.CharField(editable=False, max_length=15, unique=True),
-                ),
-                ("help_value", models.CharField(max_length=250)),
+                ("id",
+                 models.BigAutoField(
+                     auto_created=True,
+                     primary_key=True,
+                     serialize=False,
+                     verbose_name="ID",
+                 ),
+                 ),
+                ("help_uuid",
+                 models.UUIDField(
+                     default=uuid.uuid4,
+                     editable=False,
+                     unique=True),
+                 ),
+                ("help_key",
+                 models.CharField(
+                     editable=False,
+                     max_length=15,
+                     unique=True),
+                 ),
+                ("help_value",
+                 models.CharField(
+                     max_length=250)),
             ],
         ),
     ]

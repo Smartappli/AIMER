@@ -71,6 +71,5 @@ class ProcessingMobilenetTestCase(TestCase):
             # Attempt to get a MobileNet model with an unknown architecture
             get_mobilenet_model(mobilenet_type, num_classes)
 
-        self.assertEqual(
-            str(context.exception), f"Unknown MobileNet Architecture : {mobilenet_type}"
-        )
+        self.assertEqual(str(context.exception),
+                         f"Unknown MobileNet Architecture : {mobilenet_type}")

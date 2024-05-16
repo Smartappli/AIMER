@@ -24,7 +24,13 @@ def get_hgnet_model(hgnet_type, num_classes):
         raise ValueError(f"Unknown HGNet Architecture: {hgnet_type}")
 
     try:
-        return create_model(hgnet_type, pretrained=True, num_classes=num_classes)
+        return create_model(
+            hgnet_type,
+            pretrained=True,
+            num_classes=num_classes)
     except RuntimeError as e:
         print(f"{hgnet_type} - Error loading pretrained model: {e}")
-        return create_model(hgnet_type, pretrained=False, num_classes=num_classes)
+        return create_model(
+            hgnet_type,
+            pretrained=False,
+            num_classes=num_classes)

@@ -66,7 +66,9 @@ def launch_node():
         website="https://www.caltech.edu/",
     )
 
-    ds_client = node_humani.login(email="janedoe@caltech.edu", password="abc123")
+    ds_client = node_humani.login(
+        email="janedoe@caltech.edu",
+        password="abc123")
 
     data_subjects = root_domain_humani_client.data_subject_registry.get_all()
     print(data_subjects)

@@ -144,8 +144,9 @@ def download_data(request):
         model_listing = []
         for q in my_files:
             filepath = try_to_load_from_cache(
-                repo_id=p.model_repo, filename=q.model_file_filename, repo_type="model"
-            )
+                repo_id=p.model_repo,
+                filename=q.model_file_filename,
+                repo_type="model")
             if isinstance(filepath, str):
                 # file exists and is cached
                 print("File in cache")
@@ -154,13 +155,17 @@ def download_data(request):
             elif filepath is _CACHED_NO_EXIST:
                 # non-existence of file is cached
                 print("File in download")
-                hf_hub_download(repo_id=p.model_repo, filename=q.model_file_filename)
+                hf_hub_download(
+                    repo_id=p.model_repo,
+                    filename=q.model_file_filename)
                 print("File downloaded")
 
             else:
                 print("File in download")
 
-                hf_hub_download(repo_id=p.model_repo, filename=q.model_file_filename)
+                hf_hub_download(
+                    repo_id=p.model_repo,
+                    filename=q.model_file_filename)
 
                 print("File downloaded")
 
@@ -187,14 +192,14 @@ def download_data(request):
                 i = 0
                 for q2 in my_files:
                     if i == 0:
-                        ModelFile.objects.filter(pk=q2.model_file_model_id).update(
+                        ModelFile.objects.filter(
+                            pk=q2.model_file_model_id).update(
                             model_file_filename=q2.model_file_filename.replace(
-                                "-split-a", ""
-                            )
-                        )
+                                "-split-a", ""))
                         i = 1
                     else:
-                        ModelFile.objects.get(pk=q2.model_file_model_id).delete()
+                        ModelFile.objects.get(
+                            pk=q2.model_file_model_id).delete()
 
     logo = ["share", "hospital", "data", "cpu", "gpu"]
     return render(request, "core/index.html", {"logo": logo})
@@ -322,7 +327,8 @@ def deep_learning_classification_run(request):
                 model_name = model_key.split("_")
 
                 try:
-                    model_id = Model.objects.get(model_short_name=model_name[1])
+                    model_id = Model.objects.get(
+                        model_short_name=model_name[1])
                 except Model.DoesNotExist:
                     model_id = None
 
@@ -331,9 +337,7 @@ def deep_learning_classification_run(request):
 
                     augmentation = {
                         "cropping": cd["dpcla_data_augmentation_cropping"],
-                        "horizontal_flip": cd[
-                            "dpcla_data_augmentation_horizontal_flip"
-                        ],
+                        "horizontal_flip": cd["dpcla_data_augmentation_horizontal_flip"],
                         "vertical_flip": cd["dpcla_data_augmentation_vertical_flip"],
                         "translation": cd["dpcla_data_augmentation_translation"],
                         "rotation": cd["dpcla_data_augmentation_rotation"],
@@ -600,7 +604,9 @@ def register(request):
             new_user.save()
             # Create the user profile
             Profile.objects.create(user=new_user)
-            return render(request, "account/register_done.html", {"new_user": new_user})
+            return render(request,
+                          "account/register_done.html",
+                          {"new_user": new_user})
 
     else:
         user_form = UserRegistrationForm()
@@ -613,8 +619,9 @@ def edit(request):
     if request.method == "POST":
         user_form = UserEditForm(instance=request.user, data=request.POST)
         profile_form = ProfileEditForm(
-            instance=request.user.profile, date=request.POST, files=request.FILES
-        )
+            instance=request.user.profile,
+            date=request.POST,
+            files=request.FILES)
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
             profile_form.save()

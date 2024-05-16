@@ -20,10 +20,14 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name="model",
             name="model_uuid",
-            field=models.UUIDField(default=uuid.uuid4, editable=False),
+            field=models.UUIDField(
+                default=uuid.uuid4,
+                editable=False),
         ),
         migrations.RunPython(create_uuid),
         migrations.AlterField(
-            model_name="model", name="model_uuid", field=models.UUIDField(unique=True)
-        ),
+            model_name="model",
+            name="model_uuid",
+            field=models.UUIDField(
+                unique=True)),
     ]

@@ -54,7 +54,11 @@ def get_swin_transformer_model(swin_type, num_classes):
             swin_model = model_func(weights=None)
 
         # Modify last layer to suit number of classes
-        if hasattr(swin_model, "head") and isinstance(swin_model.head, nn.Linear):
+        if hasattr(
+                swin_model,
+                "head") and isinstance(
+                swin_model.head,
+                nn.Linear):
             num_features = swin_model.head.in_features
             swin_model.head = nn.Linear(num_features, num_classes)
         else:

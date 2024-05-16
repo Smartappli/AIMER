@@ -89,10 +89,14 @@ def create_transform(
             )
 
         if random_vertical_flip:
-            transform_list.append(transforms.RandomVerticalFlip(p=vertical_flip_prob))
+            transform_list.append(
+                transforms.RandomVerticalFlip(
+                    p=vertical_flip_prob))
 
         if random_rotation is not None:
-            transform_list.append(transforms.RandomRotation(degrees=rotation_range))
+            transform_list.append(
+                transforms.RandomRotation(
+                    degrees=rotation_range))
 
         if color_jitter is not None:
             transform_list.append(transforms.ColorJitter(*color_jitter))
@@ -112,7 +116,11 @@ def create_transform(
     return transform
 
 
-def get_dataset(dataset_path, batch_size, augmentation_params, normalize_params):
+def get_dataset(
+        dataset_path,
+        batch_size,
+        augmentation_params,
+        normalize_params):
     """
     Create and configure data loaders for a custom dataset.
 
@@ -152,7 +160,9 @@ def get_dataset(dataset_path, batch_size, augmentation_params, normalize_params)
     # Load your custom dataset
     dataset = datasets.ImageFolder(
         root=dataset_path,
-        transform=create_transform(**augmentation_params, normalize=normalize_params),
+        transform=create_transform(
+            **augmentation_params,
+            normalize=normalize_params),
     )
 
     # Split the dataset into training and testing sets
@@ -178,14 +188,24 @@ def get_dataset(dataset_path, batch_size, augmentation_params, normalize_params)
 
     # Print the information
     print(f"Nombre total d'images dans le dataset: {total_images}")
-    print(f"Nombre d'images dans l'ensemble d'entraînement: {num_train_images}")
+    print(
+        f"Nombre d'images dans l'ensemble d'entraînement: {num_train_images}")
     print(f"Nombre d'images dans l'ensemble de validation: {num_val_images}")
     print(f"Nombre d'images dans l'ensemble de test: {num_test_images}")
 
     # Define data loaders
-    train_loader = DataLoader(dataset, batch_size=batch_size, sampler=train_sampler)
-    val_loader = DataLoader(dataset, batch_size=batch_size, sampler=val_sampler)
-    test_loader = DataLoader(dataset, batch_size=batch_size, sampler=test_sampler)
+    train_loader = DataLoader(
+        dataset,
+        batch_size=batch_size,
+        sampler=train_sampler)
+    val_loader = DataLoader(
+        dataset,
+        batch_size=batch_size,
+        sampler=val_sampler)
+    test_loader = DataLoader(
+        dataset,
+        batch_size=batch_size,
+        sampler=test_sampler)
 
     num_classes = len(dataset.classes)
     class_names = dataset.classes
@@ -460,7 +480,8 @@ def generate_xai_heatmaps(model, image_tensor, label, save_dir, methods=None):
         plt.imshow(attributions_np, cmap="viridis")
         plt.title(f"XAI Heatmap for {method_name} (Label: {label})")
         plt.colorbar()
-        save_path = os.path.join(save_dir, f"xai_heatmap_{method_name}_{label}.png")
+        save_path = os.path.join(
+            save_dir, f"xai_heatmap_{method_name}_{label}.png")
         plt.savefig(save_path)
         plt.show()
 
@@ -531,7 +552,8 @@ class EarlyStopping:
         elif val_loss > self.best_loss:
             self.counter += 1
             if self.verbose:
-                print(f"EarlyStopping counter: {self.counter} out of {self.patience}")
+                print(
+                    f"EarlyStopping counter: {self.counter} out of {self.patience}")
             if self.counter >= self.patience:
                 self.early_stop = True
         else:

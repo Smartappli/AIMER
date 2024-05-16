@@ -45,7 +45,8 @@ class ProcessingVGGTestCase(TestCase):
                     model = get_vgg_model(vgg_type, num_classes)
                     self.assertIsNotNone(model)
                 except ValueError:
-                    self.fail(f"{vgg_type} should be a known VGG architecture.")
+                    self.fail(
+                        f"{vgg_type} should be a known VGG architecture.")
 
     def test_vgg_unknown_architecture(self):
         """

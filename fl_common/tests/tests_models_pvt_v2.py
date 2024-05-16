@@ -31,7 +31,8 @@ class ProcessingPvt_v2TestCase(TestCase):
                     model = get_pvt_v2_model(pvt_v2_type, num_classes)
                     self.assertIsNotNone(model)
                 except ValueError:
-                    self.fail(f"{pvt_v2_type} should be a known PVTv2 architecture.")
+                    self.fail(
+                        f"{pvt_v2_type} should be a known PVTv2 architecture.")
 
     def test_unknown_pvt_v2_type(self):
         """

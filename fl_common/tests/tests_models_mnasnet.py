@@ -19,7 +19,11 @@ class ProcessingMNasnetTestCase(TestCase):
             AssertionError: If any of the assertions fail.
         """
         # List of MNASNet model types to test
-        mnasnet_types = ["MNASNet0_5", "MNASNet0_75", "MNASNet1_0", "MNASNet1_3"]
+        mnasnet_types = [
+            "MNASNet0_5",
+            "MNASNet0_75",
+            "MNASNet1_0",
+            "MNASNet1_3"]
         num_classes = 10  # You can adjust the number of classes as needed
 
         # Loop through each MNASNet model type
@@ -46,9 +50,8 @@ class ProcessingMNasnetTestCase(TestCase):
             # Attempt to get an MNASNet model with an unknown architecture
             get_mnasnet_model(mnasnet_type, num_classes)
 
-        self.assertEqual(
-            str(context.exception), f"Unknown MNASNet Architecture: {mnasnet_type}"
-        )
+        self.assertEqual(str(context.exception),
+                         f"Unknown MNASNet Architecture: {mnasnet_type}")
 
     def test_mnasnet_last_layer_adaptation(self):
         """

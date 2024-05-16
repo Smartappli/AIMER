@@ -9,8 +9,10 @@ class AgentConfiguration(models.Model):
     agent_name = models.CharField(max_length=250)
     agent_description = models.CharField(max_length=250)
     agent_creator = models.ForeignKey(
-        User, on_delete=models.DO_NOTHING, default=1, related_name="agent_creator"
-    )
+        User,
+        on_delete=models.DO_NOTHING,
+        default=1,
+        related_name="agent_creator")
     agent_ip = models.GenericIPAddressField(default="127.0.0.1")
     agent_port = models.CharField(max_length=5, default="8765")
     agent_state = models.CharField(max_length=10, default="offline")
@@ -127,5 +129,6 @@ class FederatedAuthorisation(models.Model):
     federated_autorisation_state = models.CharField(
         max_length=2, choices=State.choices, default=State.IN
     )
-    federated_autorisation_creation_date = models.DateTimeField(auto_now_add=True)
+    federated_autorisation_creation_date = models.DateTimeField(
+        auto_now_add=True)
     federated_autorisation_updated_date = models.DateTimeField(auto_now=True)

@@ -6,11 +6,11 @@ from django.db import migrations
 
 class Migration(migrations.Migration):
     dependencies = [
-        (
-            "fl_client",
-            "0053_alter_dataset_central_data_dataset_central_data_dataset_id_and_more",
-        ),
-        migrations.swappable_dependency(settings.AUTH_USER_MODEL),
+        ("fl_client",
+         "0053_alter_dataset_central_data_dataset_central_data_dataset_id_and_more",
+         ),
+        migrations.swappable_dependency(
+            settings.AUTH_USER_MODEL),
     ]
 
     operations = [

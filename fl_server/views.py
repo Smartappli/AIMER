@@ -17,17 +17,15 @@ def index(request):
 def dashboard(request):
     """Class method that create the main page"""
     logo = ["share", "hospital", "data", "cpu", "gpu"]
-    return render(
-        request, "server/server_dashboard.html", {"section": "Dashboard", "logo": logo}
-    )
+    return render(request, "server/server_dashboard.html",
+                  {"section": "Dashboard", "logo": logo})
 
 
 def server_projects(request):
     """Class method that create projects page"""
     logo = ["share", "hospital", "data", "cpu", "gpu"]
-    return render(
-        request, "server/server_projects.html", {"section": "projects", "logo": logo}
-    )
+    return render(request, "server/server_projects.html",
+                  {"section": "projects", "logo": logo})
 
 
 def server_stakeholders(request):

@@ -147,8 +147,7 @@ for model_type in model_list:
 
     # Load your custom dataset
     train_loader, val_loader, test_loader, num_classes, class_names = get_dataset(
-        dataset_path, batch_size, augmentation_params, normalize_params
-    )
+        dataset_path, batch_size, augmentation_params, normalize_params)
 
     print(f"Model: {model_type}")
 
@@ -173,7 +172,11 @@ for model_type in model_list:
     # scheduler = get_scheduler(optimizer, scheduler_type='multi_step', milestones=[30, 60, 90], gamma=0.5)
     # scheduler = get_scheduler(optimizer, scheduler_type='exponential', gamma=0.95)
 
-    scheduler = get_scheduler(optimizer, scheduler_type="step", step_size=10, gamma=0.5)
+    scheduler = get_scheduler(
+        optimizer,
+        scheduler_type="step",
+        step_size=10,
+        gamma=0.5)
 
     # Training loop
     early_stopping_phase1 = EarlyStopping(
@@ -297,8 +300,7 @@ for model_type in model_list:
             f"Epoch {epoch + 1}/{num_epochs_phase1} => "
             f"Train Loss: {avg_train_loss:.4f}, Train Accuracy: {train_accuracy:.4f}, "
             f"Validation Loss: {avg_val_loss:.4f}, Validation Accuracy: {val_accuracy:.4f}, "
-            f"{elapsed_time_msg}"
-        )
+            f"{elapsed_time_msg}")
 
     # Proceed only if the first phase didn't early stop
     if perform_second_training and not early_stopping_phase1.early_stop:
@@ -425,8 +427,7 @@ for model_type in model_list:
                 f"\nEpoch {epoch + 1}/{num_epochs_phase2} (Phase 2) => "
                 f"Train Loss: {avg_train_loss:.4f}, Train Accuracy: {train_accuracy:.4f}, "
                 f"Validation Loss: {avg_val_loss:.4f}, Validation Accuracy: {val_accuracy:.4f}, "
-                f"{elapsed_time_msg}"
-            )
+                f"{elapsed_time_msg}")
 
     # Third Training Phase (Optional)
     # Proceed only if the second phase didn't early stop
@@ -554,8 +555,7 @@ for model_type in model_list:
                 f"\nEpoch {epoch + 1}/{num_epochs_phase3} (Phase 3) => "
                 f"Train Loss: {avg_train_loss:.4f}, Train Accuracy: {train_accuracy:.4f}, "
                 f"Validation Loss: {avg_val_loss:.4f}, Validation Accuracy: {val_accuracy:.4f}, "
-                f"{elapsed_time_msg}"
-            )
+                f"{elapsed_time_msg}")
 
     # Calculate total training time
     total_training_time = time.time() - start_time

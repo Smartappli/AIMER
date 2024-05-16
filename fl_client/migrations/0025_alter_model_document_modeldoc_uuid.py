@@ -13,6 +13,9 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="model_document",
             name="modeldoc_uuid",
-            field=models.UUIDField(default=uuid.uuid4, editable=False, unique=True),
+            field=models.UUIDField(
+                default=uuid.uuid4,
+                editable=False,
+                unique=True),
         ),
     ]

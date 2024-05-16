@@ -20,7 +20,10 @@ class ProcessingInceptionTestCase(TestCase):
             AssertionError: If any of the assertions fail.
         """
         # List of Inception model types to test
-        inception_types = ["Inception_V3", "inception_v4", "inception_resnet_v2"]
+        inception_types = [
+            "Inception_V3",
+            "inception_v4",
+            "inception_resnet_v2"]
 
         # Loop through each Inception model type
         for inception_type in inception_types:
@@ -45,9 +48,8 @@ class ProcessingInceptionTestCase(TestCase):
             # Attempt to get an Inception model with an unknown architecture
             get_inception_model(inception_type, num_classes)
 
-        self.assertEqual(
-            str(context.exception), f"Unknown Inception Architecture: {inception_type}"
-        )
+        self.assertEqual(str(context.exception),
+                         f"Unknown Inception Architecture: {inception_type}")
 
     def test_inception_last_layer_adaptation(self):
         """

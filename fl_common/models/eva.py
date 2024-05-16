@@ -57,4 +57,7 @@ def get_eva_model(eva_type, num_classes):
         return create_model(eva_type, pretrained=True, num_classes=num_classes)
     except RuntimeError as e:
         print(f"{eva_type} - Error loading pretrained model: {e}")
-        return create_model(eva_type, pretrained=False, num_classes=num_classes)
+        return create_model(
+            eva_type,
+            pretrained=False,
+            num_classes=num_classes)

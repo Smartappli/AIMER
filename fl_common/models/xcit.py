@@ -40,7 +40,13 @@ def get_xcit_model(xcit_type, num_classes):
         raise ValueError(f"Unsupported XCiT type: {xcit_type}")
 
     try:
-        return create_model(xcit_type, pretrained=True, num_classes=num_classes)
+        return create_model(
+            xcit_type,
+            pretrained=True,
+            num_classes=num_classes)
     except RuntimeError as e:
         print(f"{xcit_type} - Error loading pretrained model: {e}")
-        return create_model(xcit_type, pretrained=False, num_classes=num_classes)
+        return create_model(
+            xcit_type,
+            pretrained=False,
+            num_classes=num_classes)

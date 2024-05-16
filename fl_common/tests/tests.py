@@ -51,12 +51,10 @@ class ProcessingTestCase(TestCase):
         self.assertTrue(
             any(isinstance(t, transforms.Resize) for t in transform.transforms)
         )
-        self.assertTrue(
-            any(isinstance(t, transforms.CenterCrop) for t in transform.transforms)
-        )
-        self.assertTrue(
-            any(isinstance(t, transforms.RandomCrop) for t in transform.transforms)
-        )
+        self.assertTrue(any(isinstance(t, transforms.CenterCrop)
+                            for t in transform.transforms))
+        self.assertTrue(any(isinstance(t, transforms.RandomCrop)
+                            for t in transform.transforms))
         self.assertTrue(
             any(
                 isinstance(t, transforms.RandomHorizontalFlip)
@@ -69,39 +67,37 @@ class ProcessingTestCase(TestCase):
                 for t in transform.transforms
             )
         )
-        self.assertTrue(
-            any(isinstance(t, transforms.RandomRotation) for t in transform.transforms)
-        )
-        self.assertTrue(
-            any(isinstance(t, transforms.ColorJitter) for t in transform.transforms)
-        )
-        self.assertTrue(
-            any(isinstance(t, transforms.GaussianBlur) for t in transform.transforms)
-        )
-        self.assertTrue(
-            any(isinstance(t, transforms.ToTensor) for t in transform.transforms)
-        )
-        self.assertTrue(
-            any(isinstance(t, transforms.Normalize) for t in transform.transforms)
-        )
+        self.assertTrue(any(isinstance(t, transforms.RandomRotation)
+                            for t in transform.transforms))
+        self.assertTrue(any(isinstance(t, transforms.ColorJitter)
+                            for t in transform.transforms))
+        self.assertTrue(any(isinstance(t, transforms.GaussianBlur)
+                            for t in transform.transforms))
+        self.assertTrue(any(isinstance(t, transforms.ToTensor)
+                            for t in transform.transforms))
+        self.assertTrue(any(isinstance(t, transforms.Normalize)
+                            for t in transform.transforms))
 
     def test_no_to_tensor(self):
         # Test without converting to tensor
         transform = create_transform(resize=(256, 256), to_tensor=False)
 
         self.assertIsInstance(transform, transforms.Compose)
-        self.assertTrue(
-            all(not isinstance(t, transforms.ToTensor) for t in transform.transforms)
-        )
+        self.assertTrue(all(not isinstance(t, transforms.ToTensor)
+                            for t in transform.transforms))
 
     def test_no_normalize(self):
         # Test without normalization
-        transform = create_transform(resize=(256, 256), to_tensor=True, normalize=None)
+        transform = create_transform(
+            resize=(
+                256,
+                256),
+            to_tensor=True,
+            normalize=None)
 
         self.assertIsInstance(transform, transforms.Compose)
-        self.assertTrue(
-            all(not isinstance(t, transforms.Normalize) for t in transform.transforms)
-        )
+        self.assertTrue(all(not isinstance(t, transforms.Normalize)
+                            for t in transform.transforms))
 
     """
     def test_get_dataset(self):
@@ -181,7 +177,8 @@ class ProcessingTestCase(TestCase):
         with self.assertRaises(ValueError) as context:
             get_criterion("UnknownLoss")
 
-        self.assertEqual(str(context.exception), "Unknown Criterion : UnknownLoss")
+        self.assertEqual(str(context.exception),
+                         "Unknown Criterion : UnknownLoss")
 
     def test_known_optimizer(self):
         # Test with all known optimizers
@@ -219,11 +216,13 @@ class ProcessingTestCase(TestCase):
         with self.assertRaises(ValueError) as context:
             get_optimizer("UnknownOptimizer", model_parameters, learning_rate)
 
-        self.assertEqual(str(context.exception), "Unknown Optimizer : UnknownOptimizer")
+        self.assertEqual(str(context.exception),
+                         "Unknown Optimizer : UnknownOptimizer")
 
     def test_step_scheduler(self):
         # Test with StepLR scheduler
-        optimizer = optim.SGD([torch.tensor(1.0, requires_grad=True)], lr=0.001)
+        optimizer = optim.SGD(
+            [torch.tensor(1.0, requires_grad=True)], lr=0.001)
         scheduler = get_scheduler(
             optimizer, scheduler_type="step", step_size=5, gamma=0.1
         )
@@ -233,30 +232,37 @@ class ProcessingTestCase(TestCase):
 
     def test_multi_step_scheduler(self):
         # Test with MultiStepLR scheduler
-        optimizer = optim.SGD([torch.tensor(1.0, requires_grad=True)], lr=0.001)
+        optimizer = optim.SGD(
+            [torch.tensor(1.0, requires_grad=True)], lr=0.001)
         scheduler = get_scheduler(
-            optimizer, scheduler_type="multi_step", milestones=[5, 10, 15], gamma=0.1
-        )
+            optimizer, scheduler_type="multi_step", milestones=[
+                5, 10, 15], gamma=0.1)
         self.assertIsInstance(scheduler, lr_scheduler.MultiStepLR)
         # self.assertEqual(scheduler.milestones, [5, 10, 15])
         self.assertEqual(scheduler.gamma, 0.1)
 
     def test_exponential_scheduler(self):
         # Test with ExponentialLR scheduler
-        optimizer = optim.SGD([torch.tensor(1.0, requires_grad=True)], lr=0.001)
-        scheduler = get_scheduler(optimizer, scheduler_type="exponential", gamma=0.9)
+        optimizer = optim.SGD(
+            [torch.tensor(1.0, requires_grad=True)], lr=0.001)
+        scheduler = get_scheduler(
+            optimizer, scheduler_type="exponential", gamma=0.9)
         self.assertIsInstance(scheduler, lr_scheduler.ExponentialLR)
         self.assertEqual(scheduler.gamma, 0.9)
 
     def test_invalid_scheduler(self):
         # Test with an invalid scheduler
-        optimizer = optim.SGD([torch.tensor(1.0, requires_grad=True)], lr=0.001)
+        optimizer = optim.SGD(
+            [torch.tensor(1.0, requires_grad=True)], lr=0.001)
         with self.assertRaises(ValueError) as context:
             get_scheduler(
-                optimizer, scheduler_type="invalid_type", step_size=5, gamma=0.1
-            )
+                optimizer,
+                scheduler_type="invalid_type",
+                step_size=5,
+                gamma=0.1)
 
-        self.assertEqual(str(context.exception), "Invalid scheduler_type: invalid_type")
+        self.assertEqual(str(context.exception),
+                         "Invalid scheduler_type: invalid_type")
 
     """
     def test_early_stopping(self):

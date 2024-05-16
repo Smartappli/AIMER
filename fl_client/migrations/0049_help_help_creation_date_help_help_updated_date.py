@@ -5,8 +5,7 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
     dependencies = [
-        ("fl_client", "0048_alter_dataset_options_alter_license_options_and_more"),
-    ]
+        ("fl_client", "0048_alter_dataset_options_alter_license_options_and_more"), ]
 
     operations = [
         migrations.AddField(
