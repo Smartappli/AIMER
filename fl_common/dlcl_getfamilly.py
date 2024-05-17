@@ -221,7 +221,7 @@ def get_family_model_c(model_type, num_classes):
         "cait_s24_224": get_cait_model,
         "cait_s24_384": get_cait_model,
         "cait_s36_224": get_cait_model,
-        "cait_m36_224": get_cait_model,
+        "cait_m36_384": get_cait_model,
         "cait_m48_448": get_cait_model,
         "coat_tiny": get_coat_model,
         "coat_mini": get_coat_model,
