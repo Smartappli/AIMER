@@ -18,7 +18,7 @@ class ProcessingEvaTestCase(TestCase):
             "vit_medium_patch16_rope_reg1_gap_256",
             "vit_mediumd_patch16_rope_reg1_gap_256",
             "vit_betwixt_patch16_rope_reg4_gap_256",
-            "vit_base_patch16_rope_reg1_gap_256"
+            "vit_base_patch16_rope_reg1_gap_256",
         ]
 
         num_classes = 1000  # Assuming 1000 classes for the test
