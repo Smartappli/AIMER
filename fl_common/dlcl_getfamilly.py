@@ -549,6 +549,10 @@ def get_family_model_e(model_type, num_classes):
         "eva02_large_patch14_clip_224": get_eva_model,
         "eva02_large_patch14_clip_336": get_eva_model,
         "eva02_enormous_patch14_clip_224": get_eva_model,
+        "vit_medium_patch16_rope_reg1_gap_256": get_eva_model,
+        "vit_mediumd_patch16_rope_reg1_gap_256": get_eva_model,
+        "vit_betwixt_patch16_rope_reg4_gap_256": get_eva_model,
+        "vit_base_patch16_rope_reg1_gap_256": get_eva_model,
     }
 
     if model_type not in model_retrieval_functions:
