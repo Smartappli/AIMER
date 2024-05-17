@@ -24,7 +24,6 @@ def get_cait_model(cait_type, num_classes):
         "cait_s24_224",
         "cait_s24_384",
         "cait_s36_384",
-        "cait_m36_224",
         "cait_m36_384",
         "cait_m48_448",
     }
