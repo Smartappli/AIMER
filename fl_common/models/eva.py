@@ -48,6 +48,10 @@ def get_eva_model(eva_type, num_classes):
         "eva02_large_patch14_clip_224",
         "eva02_large_patch14_clip_336",
         "eva02_enormous_patch14_clip_224",
+        "vit_medium_patch16_rope_reg1_gap_256",
+        "vit_mediumd_patch16_rope_reg1_gap_256",
+        "vit_betwixt_patch16_rope_reg4_gap_256",
+        "vit_base_patch16_rope_reg1_gap_256",
     }
 
     if eva_type not in supported_types:
