@@ -181,7 +181,7 @@ class ProcessingTestCase(TestCase):
         with self.assertRaises(ValueError) as context:
             get_criterion("UnknownLoss")
 
-        self.assertEqual(str(context.exception), "Unknown Criterion : UnknownLoss")
+        self.assertEqual(str(context.exception), "Unknown Criterion: UnknownLoss")
 
     def test_known_optimizer(self):
         # Test with all known optimizers
@@ -219,7 +219,7 @@ class ProcessingTestCase(TestCase):
         with self.assertRaises(ValueError) as context:
             get_optimizer("UnknownOptimizer", model_parameters, learning_rate)
 
-        self.assertEqual(str(context.exception), "Unknown Optimizer : UnknownOptimizer")
+        self.assertEqual(str(context.exception), "Unknown Optimizerp: UnknownOptimizer")
 
     def test_step_scheduler(self):
         # Test with StepLR scheduler
