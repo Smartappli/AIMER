@@ -27,7 +27,7 @@ def get_eva_model(eva_type, num_classes):
             - "vit_mediumd_patch16_rope_reg1_gap_256"
             - "vit_betwixt_patch16_rope_reg4_gap_256"
             - "vit_base_patch16_rope_reg1_gap_256"
-            
+
         num_classes (int): Number of output classes.
 
     Returns:
