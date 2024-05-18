@@ -5,15 +5,19 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('fl_client', '0049_help_help_creation_date_help_help_updated_date'),
+        ("fl_client", "0049_help_help_creation_date_help_help_updated_date"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='queue',
-            name='queue_dataset_id',
-            field=models.ForeignKey(default=1, on_delete=django.db.models.deletion.CASCADE, related_name='queue_dataset_id', to='fl_client.dataset'),
+            model_name="queue",
+            name="queue_dataset_id",
+            field=models.ForeignKey(
+                default=1,
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="queue_dataset_id",
+                to="fl_client.dataset",
+            ),
         ),
     ]

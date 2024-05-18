@@ -6,11 +6,7 @@ def get_tresnet_model(tresnet_type, num_classes):
     Get a TResNet model.
 
     Parameters:
-        tresnet_type (str): Type of TResNet architecture. Options include:
-            - "tresnet_m"
-            - "tresnet_l"
-            - "tresnet_xl"
-            - "tresnet_v2_l"
+        tresnet_type (str): Type of TResNet architecture.
         num_classes (int): Number of output classes.
 
     Returns:
@@ -19,43 +15,12 @@ def get_tresnet_model(tresnet_type, num_classes):
     Raises:
         ValueError: If an unknown TResNet architecture is specified.
     """
-    if tresnet_type == 'tresnet_m':
-        try:
-            tresnet_model = create_model('tresnet_m',
-                                         pretrained=True,
-                                         num_classes=num_classes)
-        except:
-            tresnet_model = create_model('tresnet_m',
-                                         pretrained=False,
-                                         num_classes=num_classes)
-    elif tresnet_type == 'tresnet_l':
-        try:
-            tresnet_model = create_model('tresnet_l',
-                                         pretrained=True,
-                                         num_classes=num_classes)
-        except:
-            tresnet_model = create_model('tresnet_l',
-                                         pretrained=False,
-                                         num_classes=num_classes)
-    elif tresnet_type == 'tresnet_xl':
-        try:
-            tresnet_model = create_model('tresnet_xl',
-                                         pretrained=True,
-                                         num_classes=num_classes)
-        except:
-            tresnet_model = create_model('tresnet_xl',
-                                         pretrained=False,
-                                         num_classes=num_classes)
-    elif tresnet_type == 'tresnet_v2_l':
-        try:
-            tresnet_model = create_model('tresnet_v2_l',
-                                         pretrained=True,
-                                         num_classes=num_classes)
-        except:
-            tresnet_model = create_model('tresnet_v2_l',
-                                         pretrained=False,
-                                         num_classes=num_classes)
-    else:
-        raise ValueError(f'Unknown Tresnet Architecture: {tresnet_type}')
+    valid_types = {"tresnet_m", "tresnet_l", "tresnet_xl", "tresnet_v2_l"}
+    if tresnet_type not in valid_types:
+        raise ValueError(f"Unknown TResNet Architecture: {tresnet_type}")
 
-    return tresnet_model
+    try:
+        return create_model(tresnet_type, pretrained=True, num_classes=num_classes)
+    except RuntimeError as e:
+        print(f"{tresnet_type} - Error loading pretrained model: {e}")
+        return create_model(tresnet_type, pretrained=False, num_classes=num_classes)

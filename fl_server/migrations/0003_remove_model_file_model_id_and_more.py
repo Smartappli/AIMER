@@ -4,34 +4,33 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('fl_server', '0002_remove_nlp_model_file_nlp_model_id_and_more'),
+        ("fl_server", "0002_remove_nlp_model_file_nlp_model_id_and_more"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='model_file',
-            name='model_id',
+            model_name="model_file",
+            name="model_id",
         ),
         migrations.RemoveField(
-            model_name='model_family',
-            name='model_family_owner',
+            model_name="model_family",
+            name="model_family_owner",
         ),
         migrations.RemoveField(
-            model_name='profile',
-            name='user',
+            model_name="profile",
+            name="user",
         ),
         migrations.DeleteModel(
-            name='Model',
+            name="Model",
         ),
         migrations.DeleteModel(
-            name='Model_File',
+            name="Model_File",
         ),
         migrations.DeleteModel(
-            name='Model_Family',
+            name="Model_Family",
         ),
         migrations.DeleteModel(
-            name='Profile',
+            name="Profile",
         ),
     ]

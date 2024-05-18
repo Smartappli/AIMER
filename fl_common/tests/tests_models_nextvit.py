@@ -14,7 +14,7 @@ class ProcessingNestTestCase(TestCase):
         """
         Test for known NEXTVIT architecture types to ensure they return a model without raising any exceptions.
         """
-        known_nextvit_types = ['nextvit_small', 'nextvit_base', 'nextvit_large']
+        known_nextvit_types = ["nextvit_small", "nextvit_base", "nextvit_large"]
         num_classes = 1000  # Assuming 1000 classes for the test
 
         for nextvit_type in known_nextvit_types:

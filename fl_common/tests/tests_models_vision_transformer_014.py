@@ -1,5 +1,4 @@
 import os
-import torch.nn as nn
 from django.test import TestCase
 from fl_common.models.vision_transformer import get_vision_transformer_model
 
@@ -19,10 +18,21 @@ class ProcessingVisionTransformerTestCase(TestCase):
             AssertionError: If any of the assertions fail.
         """
         # List of Vision Transformer model types to test
-        vision_types = ["vit_base_patch32_plus_256", "vit_base_patch16_plus_240", "vit_base_patch16_rpn_224",
-                        "vit_small_patch16_36x1_224", "vit_small_patch16_18x2_224", "vit_base_patch16_18x2_224",
-                        "eva_large_patch14_196", "eva_large_patch14_336", "flexivit_small", "flexivit_base",
-                        "flexivit_large", "vit_base_patch16_xp_224", "vit_large_patch14_xp_224"]
+        vision_types = [
+            "vit_base_patch32_plus_256",
+            "vit_base_patch16_plus_240",
+            "vit_base_patch16_rpn_224",
+            "vit_small_patch16_36x1_224",
+            "vit_small_patch16_18x2_224",
+            "vit_base_patch16_18x2_224",
+            "eva_large_patch14_196",
+            "eva_large_patch14_336",
+            "flexivit_small",
+            "flexivit_base",
+            "flexivit_large",
+            "vit_base_patch16_xp_224",
+            "vit_large_patch14_xp_224",
+        ]
 
         num_classes = 10  # You can adjust the number of classes as needed
 
@@ -42,14 +52,15 @@ class ProcessingVisionTransformerTestCase(TestCase):
             AssertionError: If the assertion fails.
             ValueError: If an unknown Vision Transformer architecture is provided.
         """
-        vision_type = 'UnknownArchitecture'
+        vision_type = "UnknownArchitecture"
         num_classes = 10
 
         with self.assertRaises(ValueError) as context:
-            # Attempt to get a Vision Transformer model with an unknown architecture
+            # Attempt to get a Vision Transformer model with an unknown
+            # architecture
             get_vision_transformer_model(vision_type, num_classes)
 
         self.assertEqual(
             str(context.exception),
-            f'Unknown Vision Transformer Architecture: {vision_type}'
+            f"Unknown Vision Transformer Architecture: {vision_type}",
         )

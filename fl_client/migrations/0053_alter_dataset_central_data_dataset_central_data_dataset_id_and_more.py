@@ -5,25 +5,39 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('fl_client', '0052_alter_model_model_name'),
+        ("fl_client", "0052_alter_model_model_name"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='dataset_central_data',
-            name='dataset_central_data_dataset_id',
-            field=models.ForeignKey(default=1, on_delete=django.db.models.deletion.DO_NOTHING, related_name='ds_central_data_dataset_id', to='fl_client.dataset'),
+            model_name="dataset_central_data",
+            name="dataset_central_data_dataset_id",
+            field=models.ForeignKey(
+                default=1,
+                on_delete=django.db.models.deletion.DO_NOTHING,
+                related_name="ds_central_data_dataset_id",
+                to="fl_client.dataset",
+            ),
         ),
         migrations.AlterField(
-            model_name='dataset_local_data',
-            name='dataset_local_data_dataset_id',
-            field=models.ForeignKey(default=1, on_delete=django.db.models.deletion.DO_NOTHING, related_name='ds_local_data_dataset_id', to='fl_client.dataset'),
+            model_name="dataset_local_data",
+            name="dataset_local_data_dataset_id",
+            field=models.ForeignKey(
+                default=1,
+                on_delete=django.db.models.deletion.DO_NOTHING,
+                related_name="ds_local_data_dataset_id",
+                to="fl_client.dataset",
+            ),
         ),
         migrations.AlterField(
-            model_name='dataset_remote_data',
-            name='dataset_remote_data_dataset_id',
-            field=models.ForeignKey(default=1, on_delete=django.db.models.deletion.DO_NOTHING, related_name='ds_remote_data_dataset_id', to='fl_client.dataset'),
+            model_name="dataset_remote_data",
+            name="dataset_remote_data_dataset_id",
+            field=models.ForeignKey(
+                default=1,
+                on_delete=django.db.models.deletion.DO_NOTHING,
+                related_name="ds_remote_data_dataset_id",
+                to="fl_client.dataset",
+            ),
         ),
     ]

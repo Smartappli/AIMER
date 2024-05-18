@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [ "3.11" ]
+        python-version: ["3.12"]
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
@@ -58,7 +58,6 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-          pip install git+https://github.com/pycaret/pycaret.git
       - name: Fl_common Models Selecsls
         run: |
           python manage.py test fl_common.tests.tests_models_selecsls
@@ -67,7 +66,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [ "3.11" ]
+        python-version: ["3.12"]
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     needs: tests-selecsls-models
@@ -122,7 +121,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [ "3.11" ]
+        python-version: ["3.12"]
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     needs: tests-senet-models
@@ -177,7 +176,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.11"]
+        python-version: ["3.12"]
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     needs: tests-sequencer-models
@@ -232,7 +231,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.11"]
+        python-version: ["3.12"]
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     needs: tests-shufflenet-models
@@ -287,7 +286,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.11"]
+        python-version: ["3.12"]
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     needs: tests-sknet-models
@@ -342,7 +341,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.11"]
+        python-version: ["3.12"]
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     needs: tests-squeezenet-models
@@ -397,7 +396,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.11"]
+        python-version: ["3.12"]
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     needs: tests-swin_transformer-models
@@ -452,7 +451,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.11"]
+        python-version: ["3.12"]
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     needs: tests-swin_transformer-v2-models
@@ -507,7 +506,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.11"]
+        python-version: ["3.12"]
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     needs: tests-swin_transformer-v2-models
@@ -562,7 +561,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.11"]
+        python-version: ["3.12"]
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     needs: tests-swin_transformer-v2-models

@@ -14,7 +14,14 @@ class ProcessingNestTestCase(TestCase):
         """
         Test for known Nest architecture types to ensure they return a model without raising any exceptions.
         """
-        known_nest_types = ['nest_base', 'nest_small', 'nest_tiny', 'nest_base_jx', 'nest_small_jx', 'nest_tiny_jx']
+        known_nest_types = [
+            "nest_base",
+            "nest_small",
+            "nest_tiny",
+            "nest_base_jx",
+            "nest_small_jx",
+            "nest_tiny_jx",
+        ]
         num_classes = 1000  # Assuming 1000 classes for the test
 
         for nest_type in known_nest_types:

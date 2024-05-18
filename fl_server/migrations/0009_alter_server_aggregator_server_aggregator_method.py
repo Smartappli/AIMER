@@ -4,15 +4,25 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('fl_server', '0008_agent_configuration_agent_creator'),
+        ("fl_server", "0008_agent_configuration_agent_creator"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='server_aggregator',
-            name='server_aggregator_method',
-            field=models.CharField(choices=[('FA', 'FedAvg'), ('FC', 'FedCurv'), ('FP', 'FedProx'), ('GM', 'Geometric median'), ('CM', 'Coordinate-wise median'), ('KA', 'Krum algorithm')], default='FA', max_length=2),
+            model_name="server_aggregator",
+            name="server_aggregator_method",
+            field=models.CharField(
+                choices=[
+                    ("FA", "FedAvg"),
+                    ("FC", "FedCurv"),
+                    ("FP", "FedProx"),
+                    ("GM", "Geometric median"),
+                    ("CM", "Coordinate-wise median"),
+                    ("KA", "Krum algorithm"),
+                ],
+                default="FA",
+                max_length=2,
+            ),
         ),
     ]

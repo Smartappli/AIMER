@@ -6,17 +6,7 @@ def get_rexnet_model(rexnet_type, num_classes):
     Create and return a Rexnet model based on the specified architecture type.
 
     Parameters:
-        rexnet_type (str): The type of Rexnet architecture to use. It can be one of the following:
-                           - 'rexnet_100'
-                           - 'rexnet_130'
-                           - 'rexnet_150'
-                           - 'rexnet_200'
-                           - 'rexnet_300'
-                           - 'rexnetr_100'
-                           - 'rexnetr_130'
-                           - 'rexnetr_150'
-                           - 'rexnetr_200'
-                           - 'rexnetr_300'
+        rexnet_type (str): The type of Rexnet architecture to use.
         num_classes (int): The number of classes for the final classification layer.
 
     Returns:
@@ -25,97 +15,24 @@ def get_rexnet_model(rexnet_type, num_classes):
     Raises:
         ValueError: If the specified Rexnet architecture type is unknown.
     """
-    if rexnet_type == 'rexnet_100':
-        try:
-            rexnet_model = create_model('rexnet_100',
-                                        pretrained=True,
-                                        num_classes=num_classes)
-        except:
-            rexnet_model = create_model('rexnet_100',
-                                        pretrained=False,
-                                        num_classes=num_classes)
-    elif rexnet_type == 'rexnet_130':
-        try:
-            rexnet_model = create_model('rexnet_130',
-                                        pretrained=True,
-                                        num_classes=num_classes)
-        except:
-            rexnet_model = create_model('rexnet_130',
-                                        pretrained=False,
-                                        num_classes=num_classes)
-    elif rexnet_type == 'rexnet_150':
-        try:
-            rexnet_model = create_model('rexnet_150',
-                                        pretrained=True,
-                                        num_classes=num_classes)
-        except:
-            rexnet_model = create_model('rexnet_150',
-                                        pretrained=False,
-                                        num_classes=num_classes)
-    elif rexnet_type == 'rexnet_200':
-        try:
-            rexnet_model = create_model('rexnet_200',
-                                        pretrained=True,
-                                        num_classes=num_classes)
-        except:
-            rexnet_model = create_model('rexnet_200',
-                                        pretrained=False,
-                                        num_classes=num_classes)
-    elif rexnet_type == 'rexnet_300':
-        try:
-            rexnet_model = create_model('rexnet_300',
-                                        pretrained=True,
-                                        num_classes=num_classes)
-        except:
-            rexnet_model = create_model('rexnet_300',
-                                        pretrained=False,
-                                        num_classes=num_classes)
-    elif rexnet_type == 'rexnetr_100':
-        try:
-            rexnet_model = create_model('rexnetr_100',
-                                        pretrained=True,
-                                        num_classes=num_classes)
-        except:
-            rexnet_model = create_model('rexnetr_100',
-                                        pretrained=False,
-                                        num_classes=num_classes)
-    elif rexnet_type == 'rexnetr_130':
-        try:
-            rexnet_model = create_model('rexnetr_130',
-                                        pretrained=True,
-                                        num_classes=num_classes)
-        except:
-            rexnet_model = create_model('rexnetr_130',
-                                        pretrained=False,
-                                        num_classes=num_classes)
-    elif rexnet_type == 'rexnetr_150':
-        try:
-            rexnet_model = create_model('rexnetr_150',
-                                        pretrained=True,
-                                        num_classes=num_classes)
-        except:
-            rexnet_model = create_model('rexnetr_150',
-                                        pretrained=False,
-                                        num_classes=num_classes)
-    elif rexnet_type == 'rexnetr_200':
-        try:
-            rexnet_model = create_model('rexnetr_200',
-                                        pretrained=True,
-                                        num_classes=num_classes)
-        except:
-            rexnet_model = create_model('rexnetr_200',
-                                        pretrained=False,
-                                        num_classes=num_classes)
-    elif rexnet_type == 'rexnetr_300':
-        try:
-            rexnet_model = create_model('rexnetr_300',
-                                        pretrained=True,
-                                        num_classes=num_classes)
-        except:
-            rexnet_model = create_model('rexnetr_300',
-                                        pretrained=False,
-                                        num_classes=num_classes)
-    else:
-        raise ValueError(f'Unknown Rexnet Architecture: {rexnet_type}')
+    valid_types = {
+        "rexnet_100",
+        "rexnet_130",
+        "rexnet_150",
+        "rexnet_200",
+        "rexnet_300",
+        "rexnetr_100",
+        "rexnetr_130",
+        "rexnetr_150",
+        "rexnetr_200",
+        "rexnetr_300",
+    }
 
-    return rexnet_model
+    if rexnet_type not in valid_types:
+        raise ValueError(f"Unknown Rexnet Architecture: {rexnet_type}")
+
+    try:
+        return create_model(rexnet_type, pretrained=True, num_classes=num_classes)
+    except RuntimeError as e:
+        print(f"{rexnet_type} - Error loading pretrained model: {e}")
+        return create_model(rexnet_type, pretrained=False, num_classes=num_classes)

@@ -33,7 +33,7 @@ class ProcessingFastVitTestCase(TestCase):
             "focalnet_xlarge_fl3",
             "focalnet_xlarge_fl4",
             "focalnet_huge_fl3",
-            "focalnet_huge_fl4"
+            "focalnet_huge_fl4",
         ]
         num_classes = 1000  # Example number of classes
 
@@ -43,13 +43,17 @@ class ProcessingFastVitTestCase(TestCase):
                     model = get_focalnet_model(focalnet_type, num_classes)
                     self.assertIsNotNone(model)
                 except ValueError:
-                    self.fail(f"{focalnet_type} should be a known Focalnet architecture.")
+                    self.fail(
+                        f"{focalnet_type} should be a known Focalnet architecture."
+                    )
 
     def test_unknown_focalnet_type(self):
         """
-        Test case to ensure that attempting to create a FocalNet model with an unknown architecture type raises a ValueError.
+        Test case to ensure that attempting to create a FocalNet model with an unknown architecture type raises a
+        ValueError.
 
-        Verifies that a ValueError is raised when attempting to create a FocalNet model with an unknown architecture type.
+        Verifies that a ValueError is raised when attempting to create a FocalNet model with an unknown architecture
+        type.
 
         Raises:
             AssertionError: If creating a FocalNet model with an unknown architecture type does not raise a ValueError.

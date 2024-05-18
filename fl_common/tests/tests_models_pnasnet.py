@@ -14,7 +14,7 @@ class ProcessingPnasnetTestCase(TestCase):
         """
         Test for known PNASNet architecture types to ensure they return a model without raising any exceptions.
         """
-        known_pnasnet_types = ['pnasnet5large']
+        known_pnasnet_types = ["pnasnet5large"]
         num_classes = 1000  # Assuming 1000 classes for the test
 
         for pnasnet_type in known_pnasnet_types:

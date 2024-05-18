@@ -17,70 +17,27 @@ def get_efficientvit_mit_model(efficientvit_mit_type, num_classes):
     Raises:
         ValueError: If the specified EfficientViT model type is not recognized.
     """
-    if efficientvit_mit_type == 'efficientvit_b0':
-        try:
-            efficientvit_mit_model = create_model('efficientvit_b0',
-                                                 pretrained=True,
-                                                 num_classes=num_classes)
-        except:
-            efficientvit_mit_model = create_model('efficientvit_b0',
-                                                 pretrained=False,
-                                                 num_classes=num_classes)
-    elif efficientvit_mit_type == 'efficientvit_b1':
-        try:
-            efficientvit_mit_model = create_model('efficientvit_b1',
-                                                 pretrained=True,
-                                                 num_classes=num_classes)
-        except:
-            efficientvit_mit_model = create_model('efficientvit_b1',
-                                                 pretrained=False,
-                                                 num_classes=num_classes)
-    elif efficientvit_mit_type == 'efficientvit_b2':
-        try:
-            efficientvit_mit_model = create_model('efficientvit_b2',
-                                                 pretrained=True,
-                                                 num_classes=num_classes)
-        except:
-            efficientvit_mit_model = create_model('efficientvit_b2',
-                                                 pretrained=False,
-                                                 num_classes=num_classes)
-    elif efficientvit_mit_type == 'efficientvit_b3':
-        try:
-            efficientvit_mit_model = create_model('efficientvit_b3',
-                                                 pretrained=True,
-                                                 num_classes=num_classes)
-        except:
-            efficientvit_mit_model = create_model('efficientvit_b3',
-                                                 pretrained=False,
-                                                 num_classes=num_classes)
-    elif efficientvit_mit_type == 'efficientvit_l1':
-        try:
-            efficientvit_mit_model = create_model('efficientvit_l1',
-                                                 pretrained=True,
-                                                 num_classes=num_classes)
-        except:
-            efficientvit_mit_model = create_model('efficientvit_l1',
-                                                 pretrained=False,
-                                                 num_classes=num_classes)
-    elif efficientvit_mit_type == 'efficientvit_l2':
-        try:
-            efficientvit_mit_model = create_model('efficientvit_l2',
-                                                 pretrained=True,
-                                                 num_classes=num_classes)
-        except:
-            efficientvit_mit_model = create_model('efficientvit_l2',
-                                                 pretrained=False,
-                                                 num_classes=num_classes)
-    elif efficientvit_mit_type == 'efficientvit_l3':
-        try:
-            efficientvit_mit_model = create_model('efficientvit_l3',
-                                                 pretrained=True,
-                                                 num_classes=num_classes)
-        except:
-            efficientvit_mit_model = create_model('efficientvit_l3',
-                                                 pretrained=False,
-                                                 num_classes=num_classes)
-    else:
-        raise ValueError(f'Unknown Efficientvit_mit Architecture: {efficientvit_mit_type}')
+    supported_types = {
+        "efficientvit_b0",
+        "efficientvit_b1",
+        "efficientvit_b2",
+        "efficientvit_b3",
+        "efficientvit_l1",
+        "efficientvit_l2",
+        "efficientvit_l3",
+    }
 
-    return efficientvit_mit_model
+    if efficientvit_mit_type not in supported_types:
+        raise ValueError(
+            f"Unknown EfficientViT-MIT Architecture: {efficientvit_mit_type}"
+        )
+
+    try:
+        return create_model(
+            efficientvit_mit_type, pretrained=True, num_classes=num_classes
+        )
+    except RuntimeError as e:
+        print(f"{efficientvit_mit_type} - Error loading pretrained model: {e}")
+        return create_model(
+            efficientvit_mit_type, pretrained=False, num_classes=num_classes
+        )
