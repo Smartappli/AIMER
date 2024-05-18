@@ -19,10 +19,7 @@ class ProcessingResnextTestCase(TestCase):
             AssertionError: If any of the assertions fail.
         """
         # List of ResNeXt model types to test
-        resnext_types = [
-            'ResNeXt50_32X4D',
-            'ResNeXt101_32X8D',
-            'ResNeXt101_64X4D']
+        resnext_types = ["ResNeXt50_32X4D", "ResNeXt101_32X8D", "ResNeXt101_64X4D"]
         num_classes = 10  # You can adjust the number of classes as needed
 
         # Loop through each ResNeXt model type
@@ -42,7 +39,7 @@ class ProcessingResnextTestCase(TestCase):
             AssertionError: If the assertion fails.
             ValueError: If an unknown ResNeXt architecture is provided.
         """
-        resnext_type = 'UnknownArchitecture'
+        resnext_type = "UnknownArchitecture"
         num_classes = 10
 
         with self.assertRaises(ValueError) as context:
@@ -50,8 +47,7 @@ class ProcessingResnextTestCase(TestCase):
             get_resnext_model(resnext_type, num_classes)
 
         self.assertEqual(
-            str(context.exception),
-            f'Unknown ResNeXt Architecture: {resnext_type}'
+            str(context.exception), f"Unknown ResNeXt Architecture: {resnext_type}"
         )
 
     def test_resnext_last_layer_adaptation(self):
@@ -62,7 +58,7 @@ class ProcessingResnextTestCase(TestCase):
             AssertionError: If any of the assertions fail.
         """
         # Provide a known architecture type
-        resnext_type = 'ResNeXt50_32X4D'
+        resnext_type = "ResNeXt50_32X4D"
         num_classes = 10
 
         # Override the last layer with a linear layer for testing purposes

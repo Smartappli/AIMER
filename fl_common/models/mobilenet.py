@@ -36,15 +36,16 @@ def get_mobilenet_model(mobilenet_type, num_classes):
     # Mapping of vision types to their corresponding torchvision models and
     # weights
     torchvision_models = {
-        'MobileNet_V2': (
-            models.mobilenet_v2,
-            models.MobileNet_V2_Weights),
-        'MobileNet_V3_Small': (
+        "MobileNet_V2": (models.mobilenet_v2, models.MobileNet_V2_Weights),
+        "MobileNet_V3_Small": (
             models.mobilenet_v3_small,
-            models.MobileNet_V3_Small_Weights),
-        'MobileNet_V3_Large': (
+            models.MobileNet_V3_Small_Weights,
+        ),
+        "MobileNet_V3_Large": (
             models.mobilenet_v3_large,
-            models.MobileNet_V3_Large_Weights)}
+            models.MobileNet_V3_Large_Weights,
+        ),
+    }
 
     timm_models = [
         "mobilenetv3_large_075",
@@ -67,7 +68,8 @@ def get_mobilenet_model(mobilenet_type, num_classes):
         "lcnet_050",
         "lcnet_075",
         "lcnet_100",
-        "lcnet_150"]
+        "lcnet_150",
+    ]
 
     # Check if the vision type is from torchvision
     if mobilenet_type in torchvision_models:
@@ -87,12 +89,14 @@ def get_mobilenet_model(mobilenet_type, num_classes):
     elif mobilenet_type in timm_models:
         try:
             mobilenet_model = create_model(
-                mobilenet_type, pretrained=True, num_classes=num_classes)
+                mobilenet_type, pretrained=True, num_classes=num_classes
+            )
         except RuntimeError as e:
             print(f"{mobilenet_type} - Error loading pretrained model: {e}")
             mobilenet_model = create_model(
-                mobilenet_type, pretrained=False, num_classes=num_classes)
+                mobilenet_type, pretrained=False, num_classes=num_classes
+            )
     else:
-        raise ValueError(f'Unknown MobileNet Architecture : {mobilenet_type}')
+        raise ValueError(f"Unknown MobileNet Architecture : {mobilenet_type}")
 
     return mobilenet_model

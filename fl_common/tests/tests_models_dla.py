@@ -21,9 +21,18 @@ class ProcessingDlaTestCase(TestCase):
             AssertionError: If any known Dila architecture fails to be created or if any architecture is unknown.
         """
         known_dila_types = [
-            "dla60_res2net", "dla60_res2next", "dla34", "dla46_c",
-            "dla46x_c", "dla60x_c", "dla60", "dla60x", "dla102",
-            "dla102x", "dla102x2", "dla169"
+            "dla60_res2net",
+            "dla60_res2next",
+            "dla34",
+            "dla46_c",
+            "dla46x_c",
+            "dla60x_c",
+            "dla60",
+            "dla60x",
+            "dla102",
+            "dla102x",
+            "dla102x2",
+            "dla169",
         ]
 
         num_classes = 1000  # Assuming 1000 classes for the test
@@ -34,8 +43,7 @@ class ProcessingDlaTestCase(TestCase):
                     model = get_dla_model(dila_type, num_classes)
                     self.assertIsNotNone(model)
                 except ValueError:
-                    self.fail(
-                        f"{dila_type} should be a known Dila architecture.")
+                    self.fail(f"{dila_type} should be a known Dila architecture.")
 
     def test_unknown_dila_type(self):
         """

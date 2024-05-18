@@ -16,22 +16,21 @@ def get_repghost_model(repghost_type, num_classes):
     - ValueError: If the provided repghost_type is not recognized.
     """
     valid_types = [
-        'repghostnet_050', 'repghostnet_058', 'repghostnet_080',
-        'repghostnet_100', 'repghostnet_111', 'repghostnet_130',
-        'repghostnet_150', 'repghostnet_200'
+        "repghostnet_050",
+        "repghostnet_058",
+        "repghostnet_080",
+        "repghostnet_100",
+        "repghostnet_111",
+        "repghostnet_130",
+        "repghostnet_150",
+        "repghostnet_200",
     ]
 
     if repghost_type not in valid_types:
-        raise ValueError(f'Unknown Repghost Architecture: {repghost_type}')
+        raise ValueError(f"Unknown Repghost Architecture: {repghost_type}")
 
     try:
-        return create_model(
-            repghost_type,
-            pretrained=True,
-            num_classes=num_classes)
+        return create_model(repghost_type, pretrained=True, num_classes=num_classes)
     except RuntimeError as e:
         print(f"{repghost_type} - Error loading pretrained model: {e}")
-        return create_model(
-            repghost_type,
-            pretrained=False,
-            num_classes=num_classes)
+        return create_model(repghost_type, pretrained=False, num_classes=num_classes)

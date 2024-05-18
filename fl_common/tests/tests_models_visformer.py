@@ -14,7 +14,7 @@ class ProcessingVisformerTestCase(TestCase):
         """
         Test for known Visformer architecture types to ensure they return a model without raising any exceptions.
         """
-        known_visformer_types = ['visformer_tiny', 'visformer_small']
+        known_visformer_types = ["visformer_tiny", "visformer_small"]
         num_classes = 1000  # Assuming 1000 classes for the test
 
         for visformer_type in known_visformer_types:
@@ -24,7 +24,8 @@ class ProcessingVisformerTestCase(TestCase):
                     self.assertIsNotNone(model)
                 except ValueError:
                     self.fail(
-                        f"{visformer_type} should be a known Visformer architecture.")
+                        f"{visformer_type} should be a known Visformer architecture."
+                    )
 
     def test_unknown_visformer_type(self):
         """

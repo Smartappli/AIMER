@@ -6,20 +6,20 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('fl_client', '0003_remove_model_document_model_doc_owner'),
+        ("fl_client", "0003_remove_model_document_model_doc_owner"),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='model_document',
-            name='model_doc_owner',
+            model_name="model_document",
+            name="model_doc_owner",
             field=models.ForeignKey(
                 default=1,
                 on_delete=django.db.models.deletion.DO_NOTHING,
-                related_name='model_doc_owner',
-                to=settings.AUTH_USER_MODEL),
+                related_name="model_doc_owner",
+                to=settings.AUTH_USER_MODEL,
+            ),
         ),
     ]

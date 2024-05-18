@@ -7,7 +7,7 @@ os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
 
 
 class ProcessingInceptionNextTestCase(TestCase):
-    """"
+    """ "
     Test case class for processing Inception Next models.
     """
 
@@ -20,17 +20,16 @@ class ProcessingInceptionNextTestCase(TestCase):
         """
         # List of Inception-Next model types to test
         inception_next_types = [
-            'inception_next_tiny',
-            'inception_next_small',
-            'inception_next_base'
+            "inception_next_tiny",
+            "inception_next_small",
+            "inception_next_base",
         ]
 
         # Loop through each Inception-Next model type
         for inception_next_type in inception_next_types:
             with self.subTest(inception_next_type=inception_next_type):
                 # Get the Inception-Next model for testing
-                model = get_inception_next_model(
-                    inception_next_type, num_classes=10)
+                model = get_inception_next_model(inception_next_type, num_classes=10)
                 # Check if the model is an instance of torch.nn.Module
                 self.assertTrue(isinstance(model, torch.nn.Module))
 
@@ -45,4 +44,4 @@ class ProcessingInceptionNextTestCase(TestCase):
         with self.assertRaises(ValueError):
             # Attempt to get an Inception-Next model with an unknown
             # architecture
-            get_inception_next_model('unknown_type', num_classes=10)
+            get_inception_next_model("unknown_type", num_classes=10)

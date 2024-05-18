@@ -4,15 +4,14 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('fl_client', '0040_alter_model_file_options_queue_queue_params'),
+        ("fl_client", "0040_alter_model_file_options_queue_queue_params"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='queue',
-            name='queue_model_type',
+            model_name="queue",
+            name="queue_model_type",
             field=models.CharField(blank=True, max_length=4, null=True),
         ),
     ]

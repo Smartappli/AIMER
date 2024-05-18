@@ -4,18 +4,16 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('fl_client', '0007_rename_modeldocument_model_document'),
+        ("fl_client", "0007_rename_modeldocument_model_document"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='document',
-            name='document_model_id',
+            model_name="document",
+            name="document_model_id",
             field=models.BigAutoField(
-                editable=False,
-                primary_key=True,
-                serialize=False),
+                editable=False, primary_key=True, serialize=False
+            ),
         ),
     ]

@@ -15,12 +15,12 @@ class ProcessingTwinsTestCase(TestCase):
         Test for known Twins architecture types to ensure they return a model without raising any exceptions.
         """
         known_twins_types = [
-            'twins_pcpvt_small',
-            'twins_pcpvt_base',
-            'twins_pcpvt_large',
-            'twins_svt_small',
-            'twins_svt_base',
-            'twins_svt_large'
+            "twins_pcpvt_small",
+            "twins_pcpvt_base",
+            "twins_pcpvt_large",
+            "twins_svt_small",
+            "twins_svt_base",
+            "twins_svt_large",
         ]
 
         num_classes = 1000  # Assuming 1000 classes for the test
@@ -31,8 +31,7 @@ class ProcessingTwinsTestCase(TestCase):
                     model = get_twins_model(twins_type, num_classes)
                     self.assertIsNotNone(model)
                 except ValueError:
-                    self.fail(
-                        f"{twins_type} should be a known Twins architecture.")
+                    self.fail(f"{twins_type} should be a known Twins architecture.")
 
     def test_unknown_twins_type(self):
         """

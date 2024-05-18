@@ -17,16 +17,16 @@ class ProcessingMobilevitTestCase(TestCase):
         """
         # Define a list of known MobileViT architecture types
         known_architectures = [
-            'mobilevit_xxs',
-            'mobilevit_xs',
-            'mobilevit_s',
-            'mobilevitv2_050',
-            'mobilevitv2_075',
-            'mobilevitv2_100',
-            'mobilevitv2_125',
-            'mobilevitv2_150',
-            'mobilevitv2_175',
-            'mobilevitv2_200'
+            "mobilevit_xxs",
+            "mobilevit_xs",
+            "mobilevit_s",
+            "mobilevitv2_050",
+            "mobilevitv2_075",
+            "mobilevitv2_100",
+            "mobilevitv2_125",
+            "mobilevitv2_150",
+            "mobilevitv2_175",
+            "mobilevitv2_200",
         ]
         # Iterate over each known architecture type and test the function
         for architecture in known_architectures:
@@ -41,4 +41,4 @@ class ProcessingMobilevitTestCase(TestCase):
         """
         # Test for an unknown MobileViT architecture type
         with self.assertRaises(ValueError):
-            get_mobilevit_model('unknown_architecture', num_classes=1000)
+            get_mobilevit_model("unknown_architecture", num_classes=1000)

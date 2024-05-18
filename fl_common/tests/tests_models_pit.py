@@ -15,14 +15,15 @@ class ProcessingPitTestCase(TestCase):
         Test for known PIT architecture types to ensure they return a model without raising any exceptions.
         """
         known_pit_types = [
-            'pit_b_224',
-            'pit_s_224',
-            'pit_xs_224',
-            'pit_ti_224',
-            'pit_b_distilled_224',
-            'pit_s_distilled_224',
-            'pit_xs_distilled_224',
-            'pit_ti_distilled_224']
+            "pit_b_224",
+            "pit_s_224",
+            "pit_xs_224",
+            "pit_ti_224",
+            "pit_b_distilled_224",
+            "pit_s_distilled_224",
+            "pit_xs_distilled_224",
+            "pit_ti_distilled_224",
+        ]
         num_classes = 1000  # Assuming 1000 classes for the test
 
         for pit_type in known_pit_types:
@@ -31,8 +32,7 @@ class ProcessingPitTestCase(TestCase):
                     model = get_pit_model(pit_type, num_classes)
                     self.assertIsNotNone(model)
                 except ValueError:
-                    self.fail(
-                        f"{pit_type} should be a known PIT architecture.")
+                    self.fail(f"{pit_type} should be a known PIT architecture.")
 
     def test_unknown_pit_type(self):
         """

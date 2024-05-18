@@ -1,4 +1,4 @@
-name: Dependencies license checker
+name: Dependencies License Checker
 
 on:
   push:

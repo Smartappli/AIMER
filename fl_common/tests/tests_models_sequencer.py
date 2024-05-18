@@ -14,7 +14,7 @@ class ProcessingSequencerTestCase(TestCase):
         """
         Test for known sequencer architecture types to ensure they return a model without raising any exceptions.
         """
-        known_types = ['sequencer2d_s', 'sequencer2d_m', 'sequencer2d_l']
+        known_types = ["sequencer2d_s", "sequencer2d_m", "sequencer2d_l"]
         num_classes = 1000  # Assuming 1000 classes for the test
 
         for sequencer_type in known_types:
@@ -24,7 +24,8 @@ class ProcessingSequencerTestCase(TestCase):
                     self.assertIsNotNone(model)
                 except ValueError:
                     self.fail(
-                        f"{sequencer_type} should be a known sequencer architecture.")
+                        f"{sequencer_type} should be a known sequencer architecture."
+                    )
 
     def test_unknown_type(self):
         """

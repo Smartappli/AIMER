@@ -47,7 +47,8 @@ class ProcessingPartITestCase(TestCase):
             "levit_conv_512_s8",
             "levit_conv_512",
             "levit_conv_256d",
-            "levit_conv_512d"]
+            "levit_conv_512d",
+        ]
 
         for levit_type in known_types:
             with self.subTest(levit_type=levit_type):
