@@ -5,15 +5,14 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('fl_client', '0028_model_file_model_file_uuid'),
+        ("fl_client", "0028_model_file_model_file_uuid"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='model_file',
-            name='model_file_uuid',
+            model_name="model_file",
+            name="model_file_uuid",
             field=models.UUIDField(default=uuid.uuid4, editable=False, unique=True),
         ),
     ]

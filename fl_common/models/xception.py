@@ -18,12 +18,16 @@ def get_xception_model(xception_type, num_classes):
     - ValueError: If an unknown Xception architecture type is provided.
     """
     valid_types = {
-        'legacy_xception', 'xception41', 'xception65', 'xception71',
-        'xception41p', 'xception65p'
+        "legacy_xception",
+        "xception41",
+        "xception65",
+        "xception71",
+        "xception41p",
+        "xception65p",
     }
 
     if xception_type not in valid_types:
-        raise ValueError(f'Unknown Xception Architecture: {xception_type}')
+        raise ValueError(f"Unknown Xception Architecture: {xception_type}")
 
     try:
         return create_model(xception_type, pretrained=True, num_classes=num_classes)

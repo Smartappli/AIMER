@@ -6,24 +6,36 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
     dependencies = [
-        ('fl_server', '0003_remove_model_file_model_id_and_more'),
+        ("fl_server", "0003_remove_model_file_model_id_and_more"),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Server_Project',
+            name="Server_Project",
             fields=[
-                ('server_project_id', models.BigAutoField(primary_key=True, serialize=False)),
-                ('server_project_title', models.CharField(max_length=250)),
-                ('server_project_description', models.TextField()),
-                ('server_project_creation_date', models.DateTimeField(auto_now_add=True)),
-                ('server_project_updated_date', models.DateTimeField(auto_now=True)),
-                ('server_project_owner', models.ForeignKey(on_delete=django.db.models.deletion.DO_NOTHING, related_name='server_project_owner', to=settings.AUTH_USER_MODEL)),
+                (
+                    "server_project_id",
+                    models.BigAutoField(primary_key=True, serialize=False),
+                ),
+                ("server_project_title", models.CharField(max_length=250)),
+                ("server_project_description", models.TextField()),
+                (
+                    "server_project_creation_date",
+                    models.DateTimeField(auto_now_add=True),
+                ),
+                ("server_project_updated_date", models.DateTimeField(auto_now=True)),
+                (
+                    "server_project_owner",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.DO_NOTHING,
+                        related_name="server_project_owner",
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
         ),
     ]

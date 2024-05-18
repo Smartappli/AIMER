@@ -5,6 +5,7 @@ import torch.optim as optim
 import torch.optim.lr_scheduler as lr_scheduler
 from torch.utils.data import DataLoader
 from torchvision import datasets, transforms
+
 # from tqdm import tqdm
 from captum.attr import (
     Saliency,
@@ -16,28 +17,32 @@ from captum.attr import (
     Occlusion,
     ShapleyValueSampling,
 )
+
 # from sklearn.metrics import confusion_matrix, classification_report
 from torch.utils.data.sampler import SubsetRandomSampler
 from sklearn.model_selection import train_test_split
 import matplotlib.pyplot as plt
+
 # import seaborn as sns
 # import time
 
 
-def create_transform(resize=None,
-                     center_crop=None,
-                     random_crop=None,
-                     random_horizontal_flip=False,
-                     random_vertical_flip=False,
-                     to_tensor=True,
-                     normalize=None,
-                     random_rotation=None,
-                     color_jitter=None,
-                     gaussian_blur=None,
-                     data_augmentation=False,
-                     rotation_range=45,
-                     horizontal_flip_prob=0.5,
-                     vertical_flip_prob=0.5):
+def create_transform(
+    resize=None,
+    center_crop=None,
+    random_crop=None,
+    random_horizontal_flip=False,
+    random_vertical_flip=False,
+    to_tensor=True,
+    normalize=None,
+    random_rotation=None,
+    color_jitter=None,
+    gaussian_blur=None,
+    data_augmentation=False,
+    rotation_range=45,
+    horizontal_flip_prob=0.5,
+    vertical_flip_prob=0.5,
+):
     """
     Create a PyTorch transform based on the specified parameters.
 
@@ -79,7 +84,9 @@ def create_transform(resize=None,
             transform_list.append(transforms.RandomCrop(random_crop))
 
         if random_horizontal_flip:
-            transform_list.append(transforms.RandomHorizontalFlip(p=horizontal_flip_prob))
+            transform_list.append(
+                transforms.RandomHorizontalFlip(p=horizontal_flip_prob)
+            )
 
         if random_vertical_flip:
             transform_list.append(transforms.RandomVerticalFlip(p=vertical_flip_prob))
@@ -97,10 +104,11 @@ def create_transform(resize=None,
             transform_list.append(transforms.ToTensor())
 
         if normalize is not None:
-            transform_list.append(transforms.Normalize(mean=normalize[0], std=normalize[1]))
+            transform_list.append(
+                transforms.Normalize(mean=normalize[0], std=normalize[1])
+            )
 
-    transform = transforms.Compose(transform_list)
-    return transform
+    return transforms.Compose(transform_list)
 
 
 def get_dataset(dataset_path, batch_size, augmentation_params, normalize_params):
@@ -141,15 +149,20 @@ def get_dataset(dataset_path, batch_size, augmentation_params, normalize_params)
     """
 
     # Load your custom dataset
-    dataset = datasets.ImageFolder(root=dataset_path,
-                                   transform=create_transform(**augmentation_params,
-                                                              normalize=normalize_params))
+    dataset = datasets.ImageFolder(
+        root=dataset_path,
+        transform=create_transform(**augmentation_params, normalize=normalize_params),
+    )
 
     # Split the dataset into training and testing sets
-    train_indices, test_indices = train_test_split(list(range(len(dataset))), test_size=0.1, random_state=42)
+    train_indices, test_indices = train_test_split(
+        list(range(len(dataset))), test_size=0.1, random_state=42
+    )
 
     # Further split the training set into training and validation sets
-    train_indices, val_indices = train_test_split(train_indices, test_size=0.222222, random_state=42)
+    train_indices, val_indices = train_test_split(
+        train_indices, test_size=0.222222, random_state=42
+    )
 
     # Create SubsetRandomSampler for each set
     train_sampler = SubsetRandomSampler(train_indices)
@@ -221,54 +234,34 @@ def get_criterion(criterion_name):
     criterion = get_criterion(criterion_name)
     ```
     """
-    if criterion_name == 'MSELoss':
-        return nn.MSELoss()
-    elif criterion_name == 'L1Loss':
-        return nn.L1Loss()
-    elif criterion_name == 'CTCLoss':
-        return nn.CTCLoss()
-    elif criterion_name == 'KLDivLoss':
-        return nn.KLDivLoss()
-    elif criterion_name == 'GaussianNLLLoss':
-        return nn.GaussianNLLLoss()
-    elif criterion_name == 'SmoothL1Loss':
-        return nn.SmoothL1Loss()
-    elif criterion_name == 'CrossEntropyLoss':
-        return nn.CrossEntropyLoss()
-    elif criterion_name == 'BCELoss':
-        return nn.BCELoss()
-    elif criterion_name == 'BCEWithLogitsLoss':
-        return nn.BCEWithLogitsLoss()
-    elif criterion_name == 'NLLLoss':
-        return nn.NLLLoss()
-    elif criterion_name == 'PoissonNLLLoss':
-        return nn.PoissonNLLLoss()
-    elif criterion_name == 'KLDivLoss':
-        return nn.KLDivLoss()
-    elif criterion_name == 'MarginRankingLoss':
-        return nn.MarginRankingLoss()
-    elif criterion_name == 'HingeEmbeddingLoss':
-        return nn.HingeEmbeddingLoss()
-    elif criterion_name == 'MultiLabelMarginLoss':
-        return nn.MultiLabelMarginLoss()
-    elif criterion_name == 'SmoothL1Loss':
-        return nn.SmoothL1Loss()
-    elif criterion_name == 'HuberLoss':
-        return nn.HuberLoss()
-    elif criterion_name == 'SoftMarginLoss':
-        return nn.SoftMarginLoss()
-    elif criterion_name == 'MultiLabelSoftMarginLoss':
-        return nn.MultiLabelSoftMarginLoss()
-    elif criterion_name == 'CosineEmbeddingLoss':
-        return nn.CosineEmbeddingLoss()
-    elif criterion_name == 'MultiMarginLoss':
-        return nn.MultiMarginLoss()
-    elif criterion_name == 'TripletMarginLoss':
-        return nn.TripletMarginLoss()
-    elif criterion_name == 'TripletMarginWithDistanceLoss':
-        return nn.TripletMarginWithDistanceLoss()
-    else:
-        raise ValueError(f'Unknown Criterion : {criterion_name}')
+    criterion_dict = {
+        "MSELoss": nn.MSELoss,
+        "L1Loss": nn.L1Loss,
+        "CTCLoss": nn.CTCLoss,
+        "KLDivLoss": nn.KLDivLoss,
+        "GaussianNLLLoss": nn.GaussianNLLLoss,
+        "SmoothL1Loss": nn.SmoothL1Loss,
+        "CrossEntropyLoss": nn.CrossEntropyLoss,
+        "BCELoss": nn.BCELoss,
+        "BCEWithLogitsLoss": nn.BCEWithLogitsLoss,
+        "NLLLoss": nn.NLLLoss,
+        "PoissonNLLLoss": nn.PoissonNLLLoss,
+        "MarginRankingLoss": nn.MarginRankingLoss,
+        "HingeEmbeddingLoss": nn.HingeEmbeddingLoss,
+        "MultiLabelMarginLoss": nn.MultiLabelMarginLoss,
+        "HuberLoss": nn.HuberLoss,
+        "SoftMarginLoss": nn.SoftMarginLoss,
+        "MultiLabelSoftMarginLoss": nn.MultiLabelSoftMarginLoss,
+        "CosineEmbeddingLoss": nn.CosineEmbeddingLoss,
+        "MultiMarginLoss": nn.MultiMarginLoss,
+        "TripletMarginLoss": nn.TripletMarginLoss,
+        "TripletMarginWithDistanceLoss": nn.TripletMarginWithDistanceLoss,
+    }
+
+    try:
+        return criterion_dict[criterion_name]()
+    except KeyError as exc:
+        raise ValueError(f"Unknown Criterion: {criterion_name}") from exc
 
 
 def get_optimizer(optimizer_name, model_parameters, learning_rate):
@@ -309,37 +302,29 @@ def get_optimizer(optimizer_name, model_parameters, learning_rate):
     optimizer = get_optimizer(optimizer_name, model_parameters, learning_rate)
     ```
     """
-    if optimizer_name == 'SGD':
-        return optim.SGD(model_parameters, lr=learning_rate)
-    elif optimizer_name == 'Adam':
-        return optim.Adam(model_parameters, lr=learning_rate)
-    elif optimizer_name == 'RMSprop':
-        return optim.RMSprop(model_parameters, lr=learning_rate)
-    elif optimizer_name == 'Adagrad':
-        return optim.Adagrad(model_parameters, lr=learning_rate)
-    elif optimizer_name == 'Adadelta':
-        return optim.Adadelta(model_parameters, lr=learning_rate)
-    elif optimizer_name == 'AdamW':
-        return optim.AdamW(model_parameters, lr=learning_rate)
-    elif optimizer_name == 'SparseAdam':
-        return optim.SparseAdam(model_parameters, lr=learning_rate)
-    elif optimizer_name == 'Adamax':
-        return optim.Adamax(model_parameters, lr=learning_rate)
-    elif optimizer_name == 'ASGD':
-        return optim.ASGD(model_parameters, lr=learning_rate)
-    elif optimizer_name == 'LBFGS':
-        return optim.LBFGS(model_parameters, lr=learning_rate)
-    elif optimizer_name == 'Rprop':
-        return optim.Rprop(model_parameters, lr=learning_rate)
-    elif optimizer_name == 'NAdam':
-        return optim.NAdam(model_parameters, lr=learning_rate)
-    elif optimizer_name == 'RAdam':
-        return optim.RAdam(model_parameters, lr=learning_rate)
-    else:
-        raise ValueError(f'Unknown Optimizer : {optimizer_name}')
+    optimizer_dict = {
+        "SGD": optim.SGD,
+        "Adam": optim.Adam,
+        "RMSprop": optim.RMSprop,
+        "Adagrad": optim.Adagrad,
+        "Adadelta": optim.Adadelta,
+        "AdamW": optim.AdamW,
+        "SparseAdam": optim.SparseAdam,
+        "Adamax": optim.Adamax,
+        "ASGD": optim.ASGD,
+        "LBFGS": optim.LBFGS,
+        "Rprop": optim.Rprop,
+        "NAdam": optim.NAdam,
+        "RAdam": optim.RAdam,
+    }
+
+    try:
+        return optimizer_dict[optimizer_name](model_parameters, lr=learning_rate)
+    except KeyError as exc:
+        raise ValueError(f"Unknown Optimizer: {optimizer_name}") from exc
 
 
-def get_scheduler(optimizer, scheduler_type='step', **kwargs):
+def get_scheduler(optimizer, scheduler_type="step", **kwargs):
     """
     Get a learning rate scheduler for the optimizer.
 
@@ -350,21 +335,22 @@ def get_scheduler(optimizer, scheduler_type='step', **kwargs):
 
     Returns:
         torch.optim.lr_scheduler._LRScheduler: Learning rate scheduler.
+
+    Raises:
+        ValueError: If the provided scheduler_type is not recognized.
     """
-    if scheduler_type == 'step':
-        # Example: StepLR
-        return lr_scheduler.StepLR(optimizer, **kwargs)
-    elif scheduler_type == 'multi_step':
-        # Example: MultiStepLR
-        return lr_scheduler.MultiStepLR(optimizer, **kwargs)
-    elif scheduler_type == 'exponential':
-        # Example: ExponentialLR
-        return lr_scheduler.ExponentialLR(optimizer, **kwargs)
-    else:
-        raise ValueError(f"Invalid scheduler_type: {scheduler_type}")
+    scheduler_dict = {
+        "step": lr_scheduler.StepLR,
+        "multi_step": lr_scheduler.MultiStepLR,
+        "exponential": lr_scheduler.ExponentialLR,
+    }
+
+    try:
+        return scheduler_dict[scheduler_type](optimizer, **kwargs)
+    except KeyError as exc:
+        raise ValueError(f"Invalid scheduler_type: {scheduler_type}") from exc
 
 
-# Function to generate and save XAI heatmap for a specific image using selected methods
 def generate_xai_heatmaps(model, image_tensor, label, save_dir, methods=None):
     """
     Generate and save XAI (Explainable AI) heatmaps using various attribution methods.
@@ -432,18 +418,20 @@ def generate_xai_heatmaps(model, image_tensor, label, save_dir, methods=None):
         attributions = attributions.sum(dim=1)
 
         # Normalize attributions to [0, 1]
-        attributions = (attributions - attributions.min()) / (attributions.max() - attributions.min())
+        attributions = (attributions - attributions.min()) / (
+            attributions.max() - attributions.min()
+        )
 
         # Convert to numpy array for plotting
         attributions_np = attributions.squeeze(0).cpu().detach().numpy()
 
         # Plot and save the heatmap
         # method_name = str(method).split('.')[-1].split(' ')[0]
-        method_name = str(method).rsplit('.', maxsplit=1)[-1].split(' ')[0]
-        plt.imshow(attributions_np, cmap='viridis')
-        plt.title(f'XAI Heatmap for {method_name} (Label: {label})')
+        method_name = str(method).rsplit(".", maxsplit=1)[-1].split(" ")[0]
+        plt.imshow(attributions_np, cmap="viridis")
+        plt.title(f"XAI Heatmap for {method_name} (Label: {label})")
         plt.colorbar()
-        save_path = os.path.join(save_dir, f'xai_heatmap_{method_name}_{label}.png')
+        save_path = os.path.join(save_dir, f"xai_heatmap_{method_name}_{label}.png")
         plt.savefig(save_path)
         plt.show()
 
@@ -490,6 +478,7 @@ class EarlyStopping:
             break
     ```
     """
+
     def __init__(self, patience=7, verbose=False):
         self.patience = patience
         self.verbose = verbose

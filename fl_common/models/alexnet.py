@@ -20,8 +20,8 @@ def get_alexnet_model(alexnet_type, num_classes):
     - ValueError: If an unknown AlexNet architecture type is provided.
     """
     # Validate the alexnet_type before proceeding
-    if alexnet_type != 'AlexNet':
-        raise ValueError(f'Unknown AlexNet Architecture: {alexnet_type}')
+    if alexnet_type != "AlexNet":
+        raise ValueError(f"Unknown AlexNet Architecture: {alexnet_type}")
 
     # Load the pre-trained version of AlexNet
     try:
@@ -32,6 +32,8 @@ def get_alexnet_model(alexnet_type, num_classes):
         alexnet_model = models.alexnet(weights=None)
 
     # Modify the classifier to suit the given number of classes
-    alexnet_model.classifier[6] = nn.Linear(alexnet_model.classifier[6].in_features, num_classes)
+    alexnet_model.classifier[6] = nn.Linear(
+        alexnet_model.classifier[6].in_features, num_classes
+    )
 
     return alexnet_model

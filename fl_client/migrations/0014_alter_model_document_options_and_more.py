@@ -4,28 +4,27 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('fl_client', '0013_model_model_repo'),
+        ("fl_client", "0013_model_model_repo"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='model_document',
-            options={'ordering': ['modeldoc_model_id']},
+            name="model_document",
+            options={"ordering": ["modeldoc_model_id"]},
         ),
         migrations.AlterModelOptions(
-            name='model_file',
-            options={'ordering': ['model_file_model_id']},
+            name="model_file",
+            options={"ordering": ["model_file_model_id"]},
         ),
         migrations.RenameField(
-            model_name='model_file',
-            old_name='model_filesize',
-            new_name='model_file_size',
+            model_name="model_file",
+            old_name="model_filesize",
+            new_name="model_file_size",
         ),
         migrations.AddField(
-            model_name='model_file',
-            name='model_file_sha256',
+            model_name="model_file",
+            name="model_file_sha256",
             field=models.CharField(blank=True, max_length=64, null=True),
         ),
     ]

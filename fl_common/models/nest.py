@@ -16,12 +16,16 @@ def get_nest_model(nest_type, num_classes):
         ValueError: If an unknown NEST architecture type is specified.
     """
     valid_nest_types = [
-        'nest_base', 'nest_small', 'nest_tiny',
-        'nest_base_jx', 'nest_small_jx', 'nest_tiny_jx'
+        "nest_base",
+        "nest_small",
+        "nest_tiny",
+        "nest_base_jx",
+        "nest_small_jx",
+        "nest_tiny_jx",
     ]
 
     if nest_type not in valid_nest_types:
-        raise ValueError(f'Unknown NEST Architecture: {nest_type}')
+        raise ValueError(f"Unknown NEST Architecture: {nest_type}")
 
     try:
         return create_model(nest_type, pretrained=True, num_classes=num_classes)

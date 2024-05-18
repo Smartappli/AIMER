@@ -4,19 +4,18 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('fl_client', '0014_alter_model_document_options_and_more'),
+        ("fl_client", "0014_alter_model_document_options_and_more"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='model_file',
-            options={'ordering': ['-model_file_model_id', '-model_file_type']},
+            name="model_file",
+            options={"ordering": ["-model_file_model_id", "-model_file_type"]},
         ),
         migrations.AddField(
-            model_name='model_file',
-            name='model_file_splitted_file',
+            model_name="model_file",
+            name="model_file_splitted_file",
             field=models.BooleanField(default=False),
         ),
     ]

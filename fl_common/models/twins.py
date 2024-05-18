@@ -16,12 +16,16 @@ def get_twins_model(twins_type, num_classes):
         ValueError: If an unknown Twins architecture is specified.
     """
     valid_types = {
-        'twins_pcpvt_small', 'twins_pcpvt_base', 'twins_pcpvt_large',
-        'twins_svt_small', 'twins_svt_base', 'twins_svt_large'
+        "twins_pcpvt_small",
+        "twins_pcpvt_base",
+        "twins_pcpvt_large",
+        "twins_svt_small",
+        "twins_svt_base",
+        "twins_svt_large",
     }
 
     if twins_type not in valid_types:
-        raise ValueError(f'Unknown Twins Architecture: {twins_type}')
+        raise ValueError(f"Unknown Twins Architecture: {twins_type}")
 
     try:
         return create_model(twins_type, pretrained=True, num_classes=num_classes)

@@ -20,21 +20,27 @@ def get_swin_transformer_model(swin_type, num_classes):
     - ValueError: If the specified Swin type is unknown or if the model does not have
       a known structure with a linear last layer.
     """
-    # Mapping of vision types to their corresponding torchvision models and weights
+    # Mapping of vision types to their corresponding torchvision models and
+    # weights
     torchvision_models = {
-        'Swin_T': (models.swin_t, models.Swin_T_Weights),
-        'Swin_S': (models.swin_s, models.Swin_S_Weights),
-        'Swin_B': (models.swin_b, models.Swin_B_Weights),
-        'Swin_V2_T': (models.swin_v2_t, models.Swin_V2_T_Weights),
-        'Swin_V2_S': (models.swin_v2_s, models.Swin_V2_S_Weights),
-        'Swin_V2_B': (models.swin_v2_b, models.Swin_V2_B_Weights)
+        "Swin_T": (models.swin_t, models.Swin_T_Weights),
+        "Swin_S": (models.swin_s, models.Swin_S_Weights),
+        "Swin_B": (models.swin_b, models.Swin_B_Weights),
+        "Swin_V2_T": (models.swin_v2_t, models.Swin_V2_T_Weights),
+        "Swin_V2_S": (models.swin_v2_s, models.Swin_V2_S_Weights),
+        "Swin_V2_B": (models.swin_v2_b, models.Swin_V2_B_Weights),
     }
 
     timm_models = [
-        "swin_tiny_patch4_window7_224", "swin_small_patch4_window7_224",
-        "swin_base_patch4_window7_224", "swin_base_patch4_window12_384",
-        "swin_large_patch4_window7_224", "swin_large_patch4_window12_384",
-        "swin_s3_tiny_224", "swin_s3_small_224", "swin_s3_base_224"
+        "swin_tiny_patch4_window7_224",
+        "swin_small_patch4_window7_224",
+        "swin_base_patch4_window7_224",
+        "swin_base_patch4_window12_384",
+        "swin_large_patch4_window7_224",
+        "swin_large_patch4_window12_384",
+        "swin_s3_tiny_224",
+        "swin_s3_small_224",
+        "swin_s3_base_224",
     ]
 
     # Check if the vision type is from torchvision
@@ -48,20 +54,24 @@ def get_swin_transformer_model(swin_type, num_classes):
             swin_model = model_func(weights=None)
 
         # Modify last layer to suit number of classes
-        if hasattr(swin_model, 'head') and isinstance(swin_model.head, nn.Linear):
+        if hasattr(swin_model, "head") and isinstance(swin_model.head, nn.Linear):
             num_features = swin_model.head.in_features
             swin_model.head = nn.Linear(num_features, num_classes)
         else:
-            raise ValueError('Model does not have a known structure.')
+            raise ValueError("Model does not have a known structure.")
 
     # Check if the vision type is from the 'timm' library
     elif swin_type in timm_models:
         try:
-            swin_model = create_model(swin_type, pretrained=True, num_classes=num_classes)
+            swin_model = create_model(
+                swin_type, pretrained=True, num_classes=num_classes
+            )
         except RuntimeError as e:
             print(f"{swin_type} - Error loading pretrained model: {e}")
-            swin_model = create_model(swin_type, pretrained=False, num_classes=num_classes)
+            swin_model = create_model(
+                swin_type, pretrained=False, num_classes=num_classes
+            )
     else:
-        raise ValueError(f'Unknown Swin Transformer Architecture: {swin_type}')
+        raise ValueError(f"Unknown Swin Transformer Architecture: {swin_type}")
 
     return swin_model

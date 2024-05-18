@@ -17,8 +17,13 @@ class ProcessingEdgenetTestCase(TestCase):
         Raises:
             AssertionError: If any of the assertions fail.
         """
-        edgenet_types = ["edgenext_xx_small", "edgenext_x_small", "edgenext_small", "edgenext_base",
-                         "edgenext_small_rw"]
+        edgenet_types = [
+            "edgenext_xx_small",
+            "edgenext_x_small",
+            "edgenext_small",
+            "edgenext_base",
+            "edgenext_small_rw",
+        ]
         num_classes = 10
 
         for edgenet_type in edgenet_types:
@@ -53,7 +58,8 @@ class ProcessingEdgenetTestCase(TestCase):
         invalid_num_classes = "not_an_integer"
 
         with self.assertRaises(ValueError):
-            # Ajout d'une vérification pour s'assurer que invalid_num_classes est un entier
+            # Ajout d'une vérification pour s'assurer que invalid_num_classes
+            # est un entier
             if not isinstance(invalid_num_classes, int):
                 raise ValueError("invalid_num_classes doit être un entier")
 

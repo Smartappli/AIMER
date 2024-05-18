@@ -6,42 +6,88 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('fl_server', '0009_alter_server_aggregator_server_aggregator_method'),
+        ("fl_server", "0009_alter_server_aggregator_server_aggregator_method"),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
     operations = [
         migrations.RenameModel(
-            old_name='Server_Aggregator',
-            new_name='ServerAggregator',
+            old_name="Server_Aggregator",
+            new_name="ServerAggregator",
         ),
         migrations.RenameModel(
-            old_name='Server_Project',
-            new_name='ServerProject',
+            old_name="Server_Project",
+            new_name="ServerProject",
         ),
         migrations.RenameModel(
-            old_name='Agent_Configuration',
-            new_name='AgentConfiguration',
+            old_name="Agent_Configuration",
+            new_name="AgentConfiguration",
         ),
         migrations.RenameModel(
-            old_name='Server_Model',
-            new_name='ServerModel',
+            old_name="Server_Model",
+            new_name="ServerModel",
         ),
         migrations.CreateModel(
-            name='FederatedAuthorisation',
+            name="FederatedAuthorisation",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('federated_autorisation_permission', models.CharField(choices=[('IC', 'Included'), ('EC', 'Excluded')], default='IC', max_length=2)),
-                ('federated_autorisation_state', models.CharField(choices=[('IN', 'Invited'), ('RJ', 'Rejected'), ('AC', 'Accepted'), ('SP', 'Suspended')], default='IN', max_length=2)),
-                ('federated_autorisation_creation_date', models.DateTimeField(auto_now_add=True)),
-                ('federated_autorisation_updated_date', models.DateTimeField(auto_now=True)),
-                ('federated_autorisation_agent_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='fd_authorisation_agent_id', to='fl_server.agentconfiguration')),
-                ('federated_autorisation_model_id', models.ForeignKey(on_delete=django.db.models.deletion.DO_NOTHING, related_name='fd_authorisation_model_id', to='fl_server.servermodel')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "federated_autorisation_permission",
+                    models.CharField(
+                        choices=[("IC", "Included"), ("EC", "Excluded")],
+                        default="IC",
+                        max_length=2,
+                    ),
+                ),
+                (
+                    "federated_autorisation_state",
+                    models.CharField(
+                        choices=[
+                            ("IN", "Invited"),
+                            ("RJ", "Rejected"),
+                            ("AC", "Accepted"),
+                            ("SP", "Suspended"),
+                        ],
+                        default="IN",
+                        max_length=2,
+                    ),
+                ),
+                (
+                    "federated_autorisation_creation_date",
+                    models.DateTimeField(auto_now_add=True),
+                ),
+                (
+                    "federated_autorisation_updated_date",
+                    models.DateTimeField(auto_now=True),
+                ),
+                (
+                    "federated_autorisation_agent_id",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="fd_authorisation_agent_id",
+                        to="fl_server.agentconfiguration",
+                    ),
+                ),
+                (
+                    "federated_autorisation_model_id",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.DO_NOTHING,
+                        related_name="fd_authorisation_model_id",
+                        to="fl_server.servermodel",
+                    ),
+                ),
             ],
         ),
         migrations.DeleteModel(
-            name='Federated_Authorisation',
+            name="Federated_Authorisation",
         ),
     ]

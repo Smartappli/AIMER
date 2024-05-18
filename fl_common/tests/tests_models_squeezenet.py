@@ -19,7 +19,7 @@ class ProcessingSqueezenetestCase(TestCase):
             AssertionError: If any of the assertions fail.
         """
         # List of SqueezeNet model types to test
-        squeezenet_types = ['SqueezeNet1_0', 'SqueezeNet1_1']
+        squeezenet_types = ["SqueezeNet1_0", "SqueezeNet1_1"]
         num_classes = 10  # You can adjust the number of classes as needed
 
         # Loop through each SqueezeNet model type
@@ -39,7 +39,7 @@ class ProcessingSqueezenetestCase(TestCase):
             AssertionError: If the assertion fails.
             ValueError: If an unknown SqueezeNet architecture is provided.
         """
-        squeezenet_type = 'UnknownArchitecture'
+        squeezenet_type = "UnknownArchitecture"
         num_classes = 10
 
         with self.assertRaises(ValueError) as context:
@@ -48,7 +48,7 @@ class ProcessingSqueezenetestCase(TestCase):
 
         self.assertEqual(
             str(context.exception),
-            f'Unknown SqueezeNet Architecture: {squeezenet_type}'
+            f"Unknown SqueezeNet Architecture: {squeezenet_type}",
         )
 
     def test_squeezenet_last_layer_adaptation(self):
@@ -59,10 +59,11 @@ class ProcessingSqueezenetestCase(TestCase):
             AssertionError: If any of the assertions fail.
         """
         # Provide a known architecture type
-        squeezenet_type = 'SqueezeNet1_0'
+        squeezenet_type = "SqueezeNet1_0"
         num_classes = 10
 
-        # Override the last layer with a convolutional layer for testing purposes
+        # Override the last layer with a convolutional layer for testing
+        # purposes
         squeezenet_model = get_squeezenet_model(squeezenet_type, num_classes)
         last_layer = squeezenet_model.classifier[1]
         # Check if the last layer is an instance of nn.Conv2d

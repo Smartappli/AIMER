@@ -30,8 +30,16 @@ class ProcessingVovnetTestCase(TestCase):
         - 'ese_vovnet39b_evos'
         """
         architectures = [
-            'vovnet39a', 'vovnet57a', 'ese_vovnet19b_slim_dw', 'ese_vovnet19b_dw', 'ese_vovnet19b_slim',
-            'ese_vovnet39b', 'ese_vovnet57b', 'ese_vovnet99b', 'eca_vovnet39b', 'ese_vovnet39b_evos'
+            "vovnet39a",
+            "vovnet57a",
+            "ese_vovnet19b_slim_dw",
+            "ese_vovnet19b_dw",
+            "ese_vovnet19b_slim",
+            "ese_vovnet39b",
+            "ese_vovnet57b",
+            "ese_vovnet99b",
+            "eca_vovnet39b",
+            "ese_vovnet39b_evos",
         ]
 
         for arch in architectures:
@@ -47,4 +55,4 @@ class ProcessingVovnetTestCase(TestCase):
         """
         # Test the function with an unknown architecture
         with self.assertRaises(ValueError):
-            get_vovnet_model('unknown_architecture', num_classes=10)
+            get_vovnet_model("unknown_architecture", num_classes=10)

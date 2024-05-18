@@ -16,12 +16,18 @@ def get_repvit_model(repvit_type, num_classes):
     - ValueError: If the provided repvit_type is not recognized.
     """
     valid_types = {
-        'repvit_m1', 'repvit_m2', 'repvit_m3', 'repvit_m0_9',
-        'repvit_m1_0', 'repvit_m1_1', 'repvit_m1_5', 'repvit_m2_3'
+        "repvit_m1",
+        "repvit_m2",
+        "repvit_m3",
+        "repvit_m0_9",
+        "repvit_m1_0",
+        "repvit_m1_1",
+        "repvit_m1_5",
+        "repvit_m2_3",
     }
 
     if repvit_type not in valid_types:
-        raise ValueError(f'Unknown RepVIT Architecture: {repvit_type}')
+        raise ValueError(f"Unknown RepVIT Architecture: {repvit_type}")
 
     try:
         return create_model(repvit_type, pretrained=True, num_classes=num_classes)

@@ -19,8 +19,16 @@ class ProcessingSwinTransformerv2crTestCase(TestCase):
             AssertionError: If any of the assertions fail.
         """
         # List of Swin Transformer model types to test
-        swin_types = ["swinv2_cr_tiny_384", "swinv2_cr_tiny_224", "swinv2_cr_tiny_ns_224", "swinv2_cr_small_384",
-                      "swinv2_cr_small_224", "swinv2_cr_small_ns_224", "swinv2_cr_small_ns_256", "swinv2_cr_base_384"]
+        swin_types = [
+            "swinv2_cr_tiny_384",
+            "swinv2_cr_tiny_224",
+            "swinv2_cr_tiny_ns_224",
+            "swinv2_cr_small_384",
+            "swinv2_cr_small_224",
+            "swinv2_cr_small_ns_224",
+            "swinv2_cr_small_ns_256",
+            "swinv2_cr_base_384",
+        ]
 
         num_classes = 10  # You can adjust the number of classes as needed
 
@@ -40,14 +48,15 @@ class ProcessingSwinTransformerv2crTestCase(TestCase):
             AssertionError: If the assertion fails.
             ValueError: If an unknown Swin Transformer architecture is provided.
         """
-        swin_type = 'UnknownArchitecture'
+        swin_type = "UnknownArchitecture"
         num_classes = 10
 
         with self.assertRaises(ValueError) as context:
-            # Attempt to get a Swin Transformer model with an unknown architecture
+            # Attempt to get a Swin Transformer model with an unknown
+            # architecture
             get_swin_transformer_v2_cr_model(swin_type, num_classes)
 
         self.assertEqual(
             str(context.exception),
-            f'Unknown Swin Transformer v2 cr Architecture: {swin_type}'
+            f"Unknown Swin Transformer v2 cr Architecture: {swin_type}",
         )

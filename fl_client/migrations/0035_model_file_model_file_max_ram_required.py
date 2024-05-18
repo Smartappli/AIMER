@@ -4,15 +4,14 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('fl_client', '0034_alter_queue_queue_uuid'),
+        ("fl_client", "0034_alter_queue_queue_uuid"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='model_file',
-            name='model_file_max_ram_required',
+            model_name="model_file",
+            name="model_file_max_ram_required",
             field=models.CharField(blank=True, max_length=10, null=True),
         ),
     ]

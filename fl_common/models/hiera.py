@@ -16,12 +16,16 @@ def get_hiera_model(hiera_type, num_classes):
         ValueError: If an unknown HIERA architecture is specified.
     """
     valid_hiera_types = {
-        'hiera_tiny_224', 'hiera_small_224', 'hiera_base_224',
-        'hiera_base_plus_224', 'hiera_large_224', 'hiera_huge_224'
+        "hiera_tiny_224",
+        "hiera_small_224",
+        "hiera_base_224",
+        "hiera_base_plus_224",
+        "hiera_large_224",
+        "hiera_huge_224",
     }
 
     if hiera_type not in valid_hiera_types:
-        raise ValueError(f'Unknown HIERA Architecture: {hiera_type}')
+        raise ValueError(f"Unknown HIERA Architecture: {hiera_type}")
 
     try:
         return create_model(hiera_type, pretrained=True, num_classes=num_classes)

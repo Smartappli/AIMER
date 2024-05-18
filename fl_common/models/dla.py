@@ -16,13 +16,22 @@ def get_dla_model(dla_type, num_classes):
         ValueError: If an unknown DLA architecture type is specified.
     """
     valid_dla_types = [
-        "dla60_res2net", "dla60_res2next", "dla34", "dla46_c",
-        "dla46x_c", "dla60x_c", "dla60", "dla60x", "dla102",
-        "dla102x", "dla102x2", "dla169"
+        "dla60_res2net",
+        "dla60_res2next",
+        "dla34",
+        "dla46_c",
+        "dla46x_c",
+        "dla60x_c",
+        "dla60",
+        "dla60x",
+        "dla102",
+        "dla102x",
+        "dla102x2",
+        "dla169",
     ]
 
     if dla_type not in valid_dla_types:
-        raise ValueError(f'Unknown DLA Architecture: {dla_type}')
+        raise ValueError(f"Unknown DLA Architecture: {dla_type}")
 
     try:
         return create_model(dla_type, pretrained=True, num_classes=num_classes)

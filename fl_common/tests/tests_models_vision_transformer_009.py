@@ -18,10 +18,20 @@ class ProcessingVisionTransformerTestCase(TestCase):
             AssertionError: If any of the assertions fail.
         """
         # List of Vision Transformer model types to test
-        vision_types = ["vit_xsmall_patch16_clip_224", "vit_medium_patch32_clip_224", "vit_medium_patch16_clip_224",
-                        "vit_betwixt_patch32_clip_224", "vit_base_patch32_clip_224", "vit_base_patch32_clip_256",
-                        "vit_base_patch32_clip_384", "vit_base_patch32_clip_448", "vit_base_patch16_clip_224",
-                        "vit_base_patch16_clip_384", "vit_large_patch14_clip_224", "vit_large_patch14_clip_336"]
+        vision_types = [
+            "vit_xsmall_patch16_clip_224",
+            "vit_medium_patch32_clip_224",
+            "vit_medium_patch16_clip_224",
+            "vit_betwixt_patch32_clip_224",
+            "vit_base_patch32_clip_224",
+            "vit_base_patch32_clip_256",
+            "vit_base_patch32_clip_384",
+            "vit_base_patch32_clip_448",
+            "vit_base_patch16_clip_224",
+            "vit_base_patch16_clip_384",
+            "vit_large_patch14_clip_224",
+            "vit_large_patch14_clip_336",
+        ]
 
         num_classes = 10  # You can adjust the number of classes as needed
 
@@ -41,14 +51,15 @@ class ProcessingVisionTransformerTestCase(TestCase):
             AssertionError: If the assertion fails.
             ValueError: If an unknown Vision Transformer architecture is provided.
         """
-        vision_type = 'UnknownArchitecture'
+        vision_type = "UnknownArchitecture"
         num_classes = 10
 
         with self.assertRaises(ValueError) as context:
-            # Attempt to get a Vision Transformer model with an unknown architecture
+            # Attempt to get a Vision Transformer model with an unknown
+            # architecture
             get_vision_transformer_model(vision_type, num_classes)
 
         self.assertEqual(
             str(context.exception),
-            f'Unknown Vision Transformer Architecture: {vision_type}'
+            f"Unknown Vision Transformer Architecture: {vision_type}",
         )

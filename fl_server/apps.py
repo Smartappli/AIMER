@@ -2,5 +2,5 @@ from django.apps import AppConfig
 
 
 class FlServerConfig(AppConfig):
-    default_auto_field = 'django.db.models.BigAutoField'
-    name = 'fl_server'
+    default_auto_field = "django.db.models.BigAutoField"
+    name = "fl_server"

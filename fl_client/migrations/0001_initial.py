@@ -6,7 +6,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
     dependencies = [
@@ -15,51 +14,171 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Model_Family',
+            name="Model_Family",
             fields=[
-                ('model_family_creation_date', models.DateTimeField(auto_created=True)),
-                ('model_family_id', models.BigAutoField(primary_key=True, serialize=False)),
-                ('model_family_name', models.CharField(max_length=100)),
-                ('model_family_updated_date', models.DateTimeField(auto_now_add=True)),
-                ('model_family_owner', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='model_family_owner', to=settings.AUTH_USER_MODEL)),
+                ("model_family_creation_date", models.DateTimeField(auto_created=True)),
+                (
+                    "model_family_id",
+                    models.BigAutoField(primary_key=True, serialize=False),
+                ),
+                ("model_family_name", models.CharField(max_length=100)),
+                ("model_family_updated_date", models.DateTimeField(auto_now_add=True)),
+                (
+                    "model_family_owner",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="model_family_owner",
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='Model',
+            name="Model",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('model_name', models.CharField(max_length=100)),
-                ('model_description', models.TextField()),
-                ('model_version', models.CharField(max_length=15)),
-                ('model_category', models.CharField(choices=[('DL', 'Deep Learning'), ('ML', 'Machine Learning'), ('NL', 'Natural Language Processing')], default='ML', max_length=2)),
-                ('model_type', models.CharField(choices=[('AD', 'Anomaly Detection'), ('CL', 'Classification'), ('SG', 'Segmentation'), ('TC', 'Text-Classification'), ('TG', 'Text-Generation')], default='AD', max_length=2)),
-                ('model_creation_date', models.DateTimeField(auto_now_add=True)),
-                ('model_updated_date', models.DateTimeField(auto_now=True)),
-                ('model_provider', models.CharField(choices=[('HF', 'Hugging Face'), ('KE', 'Keras'), ('PT', 'PyTorch')], default='HF', max_length=2)),
-                ('model_owner', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='model_owner', to=settings.AUTH_USER_MODEL)),
-                ('model_family', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='family_model', to='fl_client.model_family')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("model_name", models.CharField(max_length=100)),
+                ("model_description", models.TextField()),
+                ("model_version", models.CharField(max_length=15)),
+                (
+                    "model_category",
+                    models.CharField(
+                        choices=[
+                            ("DL", "Deep Learning"),
+                            ("ML", "Machine Learning"),
+                            ("NL", "Natural Language Processing"),
+                        ],
+                        default="ML",
+                        max_length=2,
+                    ),
+                ),
+                (
+                    "model_type",
+                    models.CharField(
+                        choices=[
+                            ("AD", "Anomaly Detection"),
+                            ("CL", "Classification"),
+                            ("SG", "Segmentation"),
+                            ("TC", "Text-Classification"),
+                            ("TG", "Text-Generation"),
+                        ],
+                        default="AD",
+                        max_length=2,
+                    ),
+                ),
+                ("model_creation_date", models.DateTimeField(auto_now_add=True)),
+                ("model_updated_date", models.DateTimeField(auto_now=True)),
+                (
+                    "model_provider",
+                    models.CharField(
+                        choices=[
+                            ("HF", "Hugging Face"),
+                            ("KE", "Keras"),
+                            ("PT", "PyTorch"),
+                        ],
+                        default="HF",
+                        max_length=2,
+                    ),
+                ),
+                (
+                    "model_owner",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="model_owner",
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
+                (
+                    "model_family",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="family_model",
+                        to="fl_client.model_family",
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='Model_File',
+            name="Model_File",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('model_file_type', models.CharField(choices=[('NA', 'N/A'), ('Q2K', 'Q2_K'), ('Q3KL', 'Q3_K_L'), ('Q3KM', 'Q3_K_M'), ('Q3KS', 'Q3_K_S'), ('Q40', 'Q4_0'), ('Q4KM', 'Q4_K_M'), ('Q4KS', 'Q4_K_S'), ('Q50', 'Q5_0'), ('Q5KM', 'Q5_K_M'), ('Q5KS', 'Q5_K_S'), ('Q6K', 'Q6_K'), ('Q80', 'Q8_0')], default='NA', max_length=4)),
-                ('model_file_filename', models.CharField(max_length=250)),
-                ('model_file_extension', models.CharField(blank=True, max_length=6, null=True)),
-                ('model_filesize', models.BigIntegerField(blank=True, null=True)),
-                ('model_file_creation_date', models.DateTimeField(auto_now_add=True)),
-                ('model_file_updated_date', models.DateTimeField(auto_now=True)),
-                ('model_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='model_id', to='fl_client.model')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "model_file_type",
+                    models.CharField(
+                        choices=[
+                            ("NA", "N/A"),
+                            ("Q2K", "Q2_K"),
+                            ("Q3KL", "Q3_K_L"),
+                            ("Q3KM", "Q3_K_M"),
+                            ("Q3KS", "Q3_K_S"),
+                            ("Q40", "Q4_0"),
+                            ("Q4KM", "Q4_K_M"),
+                            ("Q4KS", "Q4_K_S"),
+                            ("Q50", "Q5_0"),
+                            ("Q5KM", "Q5_K_M"),
+                            ("Q5KS", "Q5_K_S"),
+                            ("Q6K", "Q6_K"),
+                            ("Q80", "Q8_0"),
+                        ],
+                        default="NA",
+                        max_length=4,
+                    ),
+                ),
+                ("model_file_filename", models.CharField(max_length=250)),
+                (
+                    "model_file_extension",
+                    models.CharField(blank=True, max_length=6, null=True),
+                ),
+                ("model_filesize", models.BigIntegerField(blank=True, null=True)),
+                ("model_file_creation_date", models.DateTimeField(auto_now_add=True)),
+                ("model_file_updated_date", models.DateTimeField(auto_now=True)),
+                (
+                    "model_id",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="model_id",
+                        to="fl_client.model",
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='Profile',
+            name="Profile",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('date_of_birth', models.DateField(blank=True, null=True)),
-                ('photo', models.ImageField(blank=True, upload_to='users/%Y/%m/%d/')),
-                ('user', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("date_of_birth", models.DateField(blank=True, null=True)),
+                ("photo", models.ImageField(blank=True, upload_to="users/%Y/%m/%d/")),
+                (
+                    "user",
+                    models.OneToOneField(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
         ),
     ]

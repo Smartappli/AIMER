@@ -15,7 +15,12 @@ class ProcessingHardcorenasTestCase(TestCase):
         Test for known HardcoreNAS architecture types to ensure they return a model without raising any exceptions.
         """
         known_hardcorenas_types = [
-            'hardcorenas_a', 'hardcorenas_b', 'hardcorenas_c', 'hardcorenas_d', 'hardcorenas_e', 'hardcorenas_f'
+            "hardcorenas_a",
+            "hardcorenas_b",
+            "hardcorenas_c",
+            "hardcorenas_d",
+            "hardcorenas_e",
+            "hardcorenas_f",
         ]
 
         num_classes = 1000  # Assuming 1000 classes for the test
@@ -26,7 +31,9 @@ class ProcessingHardcorenasTestCase(TestCase):
                     model = get_hardcorenas_model(hardcorenas_type, num_classes)
                     self.assertIsNotNone(model)
                 except ValueError:
-                    self.fail(f"{hardcorenas_type} should be a known HardcoreNAS architecture.")
+                    self.fail(
+                        f"{hardcorenas_type} should be a known HardcoreNAS architecture."
+                    )
 
     def test_unknown_hardcorenas_type(self):
         """

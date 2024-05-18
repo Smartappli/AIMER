@@ -16,16 +16,26 @@ def get_deit_model(deit_type, num_classes):
         ValueError: If an unknown Deit architecture is specified.
     """
     valid_deit_types = [
-        "deit_tiny_patch16_224", "deit_small_patch16_224", "deit_base_patch16_224",
-        "deit_base_patch16_384", "deit_tiny_distilled_patch16_224", "deit_small_distilled_patch16_224",
-        "deit_base_distilled_patch16_224", "deit_base_distilled_patch16_384", "deit3_small_patch16_224",
-        "deit3_small_patch16_384", "deit3_medium_patch16_224", "deit3_base_patch16_224",
-        "deit3_base_patch16_384", "deit3_large_patch16_224", "deit3_large_patch16_384",
-        "deit3_huge_patch14_224"
+        "deit_tiny_patch16_224",
+        "deit_small_patch16_224",
+        "deit_base_patch16_224",
+        "deit_base_patch16_384",
+        "deit_tiny_distilled_patch16_224",
+        "deit_small_distilled_patch16_224",
+        "deit_base_distilled_patch16_224",
+        "deit_base_distilled_patch16_384",
+        "deit3_small_patch16_224",
+        "deit3_small_patch16_384",
+        "deit3_medium_patch16_224",
+        "deit3_base_patch16_224",
+        "deit3_base_patch16_384",
+        "deit3_large_patch16_224",
+        "deit3_large_patch16_384",
+        "deit3_huge_patch14_224",
     ]
 
     if deit_type not in valid_deit_types:
-        raise ValueError(f'Unknown Deit Architecture: {deit_type}')
+        raise ValueError(f"Unknown Deit Architecture: {deit_type}")
 
     try:
         return create_model(deit_type, pretrained=True, num_classes=num_classes)

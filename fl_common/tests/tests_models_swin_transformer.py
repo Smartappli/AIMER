@@ -18,10 +18,23 @@ class ProcessingSwinTransformerTestCase(TestCase):
             AssertionError: If any of the assertions fail.
         """
         # List of Swin Transformer model types to test
-        swin_types = ['Swin_T', 'Swin_S', 'Swin_B', 'Swin_V2_T', 'Swin_V2_S', 'Swin_V2_B',
-                      'swin_tiny_patch4_window7_224', 'swin_small_patch4_window7_224', 'swin_base_patch4_window7_224',
-                      'swin_base_patch4_window12_384', 'swin_large_patch4_window7_224', 'swin_s3_tiny_224',
-                      'swin_large_patch4_window12_384', 'swin_s3_small_224', 'swin_s3_base_224']
+        swin_types = [
+            "Swin_T",
+            "Swin_S",
+            "Swin_B",
+            "Swin_V2_T",
+            "Swin_V2_S",
+            "Swin_V2_B",
+            "swin_tiny_patch4_window7_224",
+            "swin_small_patch4_window7_224",
+            "swin_base_patch4_window7_224",
+            "swin_base_patch4_window12_384",
+            "swin_large_patch4_window7_224",
+            "swin_s3_tiny_224",
+            "swin_large_patch4_window12_384",
+            "swin_s3_small_224",
+            "swin_s3_base_224",
+        ]
         num_classes = 10  # You can adjust the number of classes as needed
 
         # Loop through each Swin Transformer model type
@@ -40,14 +53,15 @@ class ProcessingSwinTransformerTestCase(TestCase):
             AssertionError: If the assertion fails.
             ValueError: If an unknown Swin Transformer architecture is provided.
         """
-        swin_type = 'UnknownArchitecture'
+        swin_type = "UnknownArchitecture"
         num_classes = 10
 
         with self.assertRaises(ValueError) as context:
-            # Attempt to get a Swin Transformer model with an unknown architecture
+            # Attempt to get a Swin Transformer model with an unknown
+            # architecture
             get_swin_transformer_model(swin_type, num_classes)
 
         self.assertEqual(
             str(context.exception),
-            f'Unknown Swin Transformer Architecture: {swin_type}'
+            f"Unknown Swin Transformer Architecture: {swin_type}",
         )
