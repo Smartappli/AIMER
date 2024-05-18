@@ -6,28 +6,25 @@ from django.db import migrations, models
 
 
 def create_uuid(apps, schema_editor):
-    Queue = apps.get_model('fl_client', 'Queue')
+    Queue = apps.get_model("fl_client", "Queue")
     for queue in Queue.objects.all():
         queue.queue_uuid = uuid.uuid4()
         queue.save()
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('fl_client', '0020_alter_model_file_model_file_size'),
+        ("fl_client", "0020_alter_model_file_model_file_size"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='queue',
-            name='queue_uuid',
+            model_name="queue",
+            name="queue_uuid",
             field=models.UUIDField(default=uuid.uuid4, editable=False),
         ),
         migrations.RunPython(create_uuid),
         migrations.AlterField(
-            model_name='queue',
-            name='queue_uuid',
-            field=models.UUIDField(unique=True)
-        )
+            model_name="queue", name="queue_uuid", field=models.UUIDField(unique=True)
+        ),
     ]

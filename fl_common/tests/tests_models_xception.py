@@ -20,12 +20,12 @@ class ProcessingXceptionTestCase(TestCase):
         """
         # List of Xception model types to test
         xception_types = [
-            'legacy_xception',
-            'xception41',
-            'xception65',
-            'xception71',
-            'xception41p',
-            'xception65p'
+            "legacy_xception",
+            "xception41",
+            "xception65",
+            "xception71",
+            "xception41p",
+            "xception65p",
         ]
 
         # Loop through each Xception model type
@@ -46,4 +46,4 @@ class ProcessingXceptionTestCase(TestCase):
         """
         with self.assertRaises(ValueError):
             # Attempt to get an Xception model with an unknown type
-            get_xception_model('unknown_type', num_classes=10)
+            get_xception_model("unknown_type", num_classes=10)

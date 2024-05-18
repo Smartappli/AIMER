@@ -14,7 +14,13 @@ class ProcessingSelecslsTestCase(TestCase):
         """
         Test for known SelecSLS architecture types to ensure they return a model without raising any exceptions.
         """
-        known_selecsls_types = ['selecsls42', 'selecsls42b', 'selecsls60', 'selecsls60b', 'selecsls84']
+        known_selecsls_types = [
+            "selecsls42",
+            "selecsls42b",
+            "selecsls60",
+            "selecsls60b",
+            "selecsls84",
+        ]
         num_classes = 1000  # Assuming 1000 classes for the test
 
         for selecsls_type in known_selecsls_types:
@@ -23,7 +29,9 @@ class ProcessingSelecslsTestCase(TestCase):
                     model = get_selecsls_model(selecsls_type, num_classes)
                     self.assertIsNotNone(model)
                 except ValueError:
-                    self.fail(f"{selecsls_type} should be a known SelecSLS architecture.")
+                    self.fail(
+                        f"{selecsls_type} should be a known SelecSLS architecture."
+                    )
 
     def test_unknown_selecsls_type(self):
         """

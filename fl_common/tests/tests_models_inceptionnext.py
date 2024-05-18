@@ -7,7 +7,7 @@ os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
 
 
 class ProcessingInceptionNextTestCase(TestCase):
-    """"
+    """ "
     Test case class for processing Inception Next models.
     """
 
@@ -20,9 +20,9 @@ class ProcessingInceptionNextTestCase(TestCase):
         """
         # List of Inception-Next model types to test
         inception_next_types = [
-            'inception_next_tiny',
-            'inception_next_small',
-            'inception_next_base'
+            "inception_next_tiny",
+            "inception_next_small",
+            "inception_next_base",
         ]
 
         # Loop through each Inception-Next model type
@@ -42,5 +42,6 @@ class ProcessingInceptionNextTestCase(TestCase):
             ValueError: If an unknown Inception-Next architecture is provided.
         """
         with self.assertRaises(ValueError):
-            # Attempt to get an Inception-Next model with an unknown architecture
-            get_inception_next_model('unknown_type', num_classes=10)
+            # Attempt to get an Inception-Next model with an unknown
+            # architecture
+            get_inception_next_model("unknown_type", num_classes=10)

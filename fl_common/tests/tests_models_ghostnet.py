@@ -26,7 +26,7 @@ class ProcessingGhostnetTestCase(TestCase):
             "ghostnet_130",
             "ghostnetv2_100",
             "ghostnetv2_130",
-            "ghostnetv2_160"
+            "ghostnetv2_160",
         ]
         num_classes = 1000  # Example number of classes
 
@@ -36,7 +36,9 @@ class ProcessingGhostnetTestCase(TestCase):
                     model = get_ghostnet_model(ghostnet_type, num_classes)
                     self.assertIsNotNone(model)
                 except ValueError:
-                    self.fail(f"{ghostnet_type} should be a known GhostNet architecture.")
+                    self.fail(
+                        f"{ghostnet_type} should be a known GhostNet architecture."
+                    )
 
     def test_unknown_ghostnet_type(self):
         """

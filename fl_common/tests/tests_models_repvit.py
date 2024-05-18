@@ -14,9 +14,16 @@ class ProcessingRepvitTestCase(TestCase):
         """
         Test if the function returns a valid RepVIT model for known RepVIT types.
         """
-        repvit_types = ['repvit_m1', 'repvit_m2', 'repvit_m3',
-                        'repvit_m0_9', 'repvit_m1_0', 'repvit_m1_1',
-                        'repvit_m1_5', 'repvit_m2_3']
+        repvit_types = [
+            "repvit_m1",
+            "repvit_m2",
+            "repvit_m3",
+            "repvit_m0_9",
+            "repvit_m1_0",
+            "repvit_m1_1",
+            "repvit_m1_5",
+            "repvit_m2_3",
+        ]
         num_classes = 10  # Just for testing purposes
 
         for repvit_type in repvit_types:
@@ -29,7 +36,7 @@ class ProcessingRepvitTestCase(TestCase):
         """
         Test if the function raises a ValueError for an unknown RepVIT type.
         """
-        unknown_repvit_type = 'unknown_repvit_type'
+        unknown_repvit_type = "unknown_repvit_type"
         num_classes = 10
 
         with self.assertRaises(ValueError):

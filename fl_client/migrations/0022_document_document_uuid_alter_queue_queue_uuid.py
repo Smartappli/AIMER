@@ -3,29 +3,29 @@
 import uuid
 from django.db import migrations, models
 
+
 def create_uuid(apps, schema_editor):
-    Document = apps.get_model('fl_client', 'Document')
+    Document = apps.get_model("fl_client", "Document")
     for document in Document.objects.all():
         document.document_uuid = uuid.uuid4()
         document.save()
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('fl_client', '0021_queue_queue_uuid'),
+        ("fl_client", "0021_queue_queue_uuid"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='document',
-            name='document_uuid',
+            model_name="document",
+            name="document_uuid",
             field=models.UUIDField(default=uuid.uuid4, editable=False),
         ),
         migrations.RunPython(create_uuid),
         migrations.AlterField(
-            model_name='document',
-            name='document_uuid',
-            field=models.UUIDField(unique=True)
-        )
+            model_name="document",
+            name="document_uuid",
+            field=models.UUIDField(unique=True),
+        ),
     ]

@@ -2,12 +2,16 @@ name: Nightlies Models - PART B
 
 on:
   schedule:
-    - cron: "0 12 * * */7" # 12am UTC, 5:30pm Indian, 9pm Brazil, 11am AEDT
+    - cron: "0 08 * * */7" # 12am UTC, 5:30pm Indian, 9pm Brazil, 11am AEDT
   workflow_dispatch:
     inputs:
       none:
         description: "Run Nightlies Tests Manually"
         required: false
+
+concurrency:
+  group: nightlies_modesl_B-${{ github.event_name == 'pull_request' && format('{0}-{1}', github.workflow, github.event.pull_request.number) || github.workflow_ref }}
+  cancel-in-progress: true
 
 jobs:
   call-UT-common_training:
@@ -39,23 +43,8 @@ jobs:
     needs: call-UT-common_training
     uses: Smartappli/AIMER/.github/workflows/UT_common_models_t.yml@master
 
-  call-UT-common_models_V:
-    if: github.repository == 'Smartappli/AIMER' # don't run on forks
-    needs: call-UT-common_training
-    uses: Smartappli/AIMER/.github/workflows/UT_common_models_v.yml@master
-
-  call-UT-common_models_W:
-    if: github.repository == 'Smartappli/AIMER' # don't run on forks
-    needs: call-UT-common_training
-    uses: Smartappli/AIMER/.github/workflows/UT_common_models_w.yml@master
-
-  call-UT-common_models_X:
-    if: github.repository == 'Smartappli/AIMER' # don't run on forks
-    needs: call-UT-common_training
-    uses: Smartappli/AIMER/.github/workflows/UT_common_models_x.yml@master
-
   call-Licenses-Check:
     if: github.repository == 'Smartappli/AIMER' # don't run on forks
     needs: ['call-UT-common_models_N', 'call-UT-common_models_P', 'call-UT-common_models_R', 'call-UT-common_models_S',
-            'call-UT-common_models_T', 'call-UT-common_models_V', 'call-UT-common_models_W', 'call-UT-common_models_X']
+            'call-UT-common_models_T']
     uses: Smartappli/AIMER/.github/workflows/liccheck.yml@master

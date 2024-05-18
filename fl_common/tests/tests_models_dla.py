@@ -32,7 +32,7 @@ class ProcessingDlaTestCase(TestCase):
             "dla102",
             "dla102x",
             "dla102x2",
-            "dla169"
+            "dla169",
         ]
 
         num_classes = 1000  # Assuming 1000 classes for the test

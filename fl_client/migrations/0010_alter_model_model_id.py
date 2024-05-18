@@ -4,15 +4,16 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('fl_client', '0009_document_document_active_and_more'),
+        ("fl_client", "0009_document_document_active_and_more"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='model',
-            name='model_id',
-            field=models.BigAutoField(editable=False, primary_key=True, serialize=False),
+            model_name="model",
+            name="model_id",
+            field=models.BigAutoField(
+                editable=False, primary_key=True, serialize=False
+            ),
         ),
     ]

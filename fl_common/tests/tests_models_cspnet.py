@@ -1,5 +1,4 @@
 import os
-import torch.nn as nn
 from django.test import TestCase
 from fl_common.models.cspnet import get_cspnet_model
 
@@ -16,10 +15,29 @@ class ProcessingCspnetTestCase(TestCase):
         Test if the function returns a valid CSPNet model for known CSPNet types.
         """
         cspnet_types = [
-            'cspresnet50', 'cspresnet50d', 'cspresnet50w', 'cspresnext50', 'cspdarknet53', 'darknet17', 'darknet21',
-            'sedarknet21', 'darknet53', 'darknetaa53', 'cs3darknet_s', 'cs3darknet_m', 'cs3darknet_l', 'cs3darknet_x',
-            'cs3darknet_focus_s', 'cs3darknet_focus_m', 'cs3darknet_focus_l', 'cs3darknet_focus_x', 'cs3sedarknet_l',
-            'cs3sedarknet_x', 'cs3sedarknet_xdw', 'cs3edgenet_x', 'cs3se_edgenet_x'
+            "cspresnet50",
+            "cspresnet50d",
+            "cspresnet50w",
+            "cspresnext50",
+            "cspdarknet53",
+            "darknet17",
+            "darknet21",
+            "sedarknet21",
+            "darknet53",
+            "darknetaa53",
+            "cs3darknet_s",
+            "cs3darknet_m",
+            "cs3darknet_l",
+            "cs3darknet_x",
+            "cs3darknet_focus_s",
+            "cs3darknet_focus_m",
+            "cs3darknet_focus_l",
+            "cs3darknet_focus_x",
+            "cs3sedarknet_l",
+            "cs3sedarknet_x",
+            "cs3sedarknet_xdw",
+            "cs3edgenet_x",
+            "cs3se_edgenet_x",
         ]
         num_classes = 10
 
@@ -33,7 +51,7 @@ class ProcessingCspnetTestCase(TestCase):
         """
         Test if the function raises a ValueError for an unknown CSPNet type.
         """
-        unknown_cspnet_type = 'unknown_cspnet_type'
+        unknown_cspnet_type = "unknown_cspnet_type"
         num_classes = 10
 
         with self.assertRaises(ValueError):

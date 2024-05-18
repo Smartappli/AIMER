@@ -20,7 +20,7 @@ class ProcessingBeitTestCase(TestCase):
             "beit_large_patch16_384",
             "beit_large_patch16_512",
             "beitv2_base_patch16_224",
-            "beitv2_large_patch16_224"
+            "beitv2_large_patch16_224",
         ]
         num_classes = 1000  # Change this to the appropriate number of classes
 
@@ -45,7 +45,7 @@ class ProcessingBeitTestCase(TestCase):
             "beit_large_patch16_384",
             "beit_large_patch16_512",
             "beitv2_base_patch16_224",
-            "beitv2_large_patch16_224"
+            "beitv2_large_patch16_224",
         ]
         num_classes = 500  # Change this to a custom number of classes
 

@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.10"]
+        python-version: ["3.12"]
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
@@ -53,6 +53,7 @@ jobs:
       uses: actions/setup-python@v5
       with:
         python-version: ${{ matrix.python-version }}
+        cache: 'pip'
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
@@ -65,7 +66,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.10"]
+        python-version: ["3.12"]
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     needs: test-edgenet-models
@@ -107,19 +108,20 @@ jobs:
       uses: actions/setup-python@v5
       with:
         python-version: ${{ matrix.python-version }}
+        cache: 'pip'
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
     - name: Fl_common Models Efficientformer
       run: |
-        python manage.py test fl_common.tests.tests_models_efficientformer       
+        python manage.py test fl_common.tests.tests_models_efficientformer
 
-  test-efficienet-models:
+  test-efficientformer-v2-models:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.10"]
+        python-version: ["3.12"]
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     needs: test-efficientformer-models
@@ -161,6 +163,172 @@ jobs:
       uses: actions/setup-python@v5
       with:
         python-version: ${{ matrix.python-version }}
+        cache: 'pip'
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    - name: Fl_common Models Efficientformer v2
+      run: |
+        python manage.py test fl_common.tests.tests_models_efficientformer_v2
+
+  test-efficienet-mit-models:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.12"]
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    needs: test-efficientformer-v2-models
+    steps:
+    - name: ⌛ rate 1
+      shell: pwsh
+      run: |
+        # add random sleep since we run on fixed schedule
+        sleep (get-random -max 1200)
+        
+        # get currently authenticated user rate limit info
+        $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
+    
+        # if we don't have at least 100 requests left, wait until reset
+        if ($rate.remaining -lt 350) {
+            $wait = ($rate.reset - (Get-Date (Get-Date).ToUniversalTime() -UFormat %s))
+            echo "Rate limit remaining is $($rate.remaining), waiting for $($wait) seconds to reset"
+            sleep $wait
+            $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
+            echo "Rate limit has reset to $($rate.remaining) requests"
+        }
+    - name: Free Disk Space (Ubuntu)
+      uses: jlumbroso/free-disk-space@main
+      with:
+        # this might remove tools that are actually needed,
+        # if set to "true" but frees about 6 GB
+        tool-cache: false
+
+        # all of these default to true, but feel free to set to
+        # "false" if necessary for your workflow
+        android: true
+        dotnet: true
+        haskell: true
+        large-packages: true
+        docker-images: true
+        swap-storage: true
+    - uses: actions/checkout@v4
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ matrix.python-version }}
+        cache: 'pip'
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    - name: Fl_common Models Efficientvit_mit
+      run: |
+        python manage.py test fl_common.tests.tests_models_efficientvit_mit
+
+  test-efficienet-msra-models:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.12"]
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    needs: test-efficienet-mit-models
+    steps:
+    - name: ⌛ rate 1
+      shell: pwsh
+      run: |
+        # add random sleep since we run on fixed schedule
+        sleep (get-random -max 1200)
+        
+        # get currently authenticated user rate limit info
+        $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
+    
+        # if we don't have at least 100 requests left, wait until reset
+        if ($rate.remaining -lt 350) {
+            $wait = ($rate.reset - (Get-Date (Get-Date).ToUniversalTime() -UFormat %s))
+            echo "Rate limit remaining is $($rate.remaining), waiting for $($wait) seconds to reset"
+            sleep $wait
+            $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
+            echo "Rate limit has reset to $($rate.remaining) requests"
+        }
+    - name: Free Disk Space (Ubuntu)
+      uses: jlumbroso/free-disk-space@main
+      with:
+        # this might remove tools that are actually needed,
+        # if set to "true" but frees about 6 GB
+        tool-cache: false
+
+        # all of these default to true, but feel free to set to
+        # "false" if necessary for your workflow
+        android: true
+        dotnet: true
+        haskell: true
+        large-packages: true
+        docker-images: true
+        swap-storage: true
+    - uses: actions/checkout@v4
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ matrix.python-version }}
+        cache: 'pip'
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    - name: Fl_common Models Efficientvit_msra
+      run: |
+        python manage.py test fl_common.tests.tests_models_efficientvit_msra
+
+  test-efficienet-models:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.12"]
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    needs: test-efficienet-msra-models
+    steps:
+    - name: ⌛ rate 1
+      shell: pwsh
+      run: |
+        # add random sleep since we run on fixed schedule
+        sleep (get-random -max 1200)
+        
+        # get currently authenticated user rate limit info
+        $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
+    
+        # if we don't have at least 100 requests left, wait until reset
+        if ($rate.remaining -lt 350) {
+            $wait = ($rate.reset - (Get-Date (Get-Date).ToUniversalTime() -UFormat %s))
+            echo "Rate limit remaining is $($rate.remaining), waiting for $($wait) seconds to reset"
+            sleep $wait
+            $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
+            echo "Rate limit has reset to $($rate.remaining) requests"
+        }
+    - name: Free Disk Space (Ubuntu)
+      uses: jlumbroso/free-disk-space@main
+      with:
+        # this might remove tools that are actually needed,
+        # if set to "true" but frees about 6 GB
+        tool-cache: false
+
+        # all of these default to true, but feel free to set to
+        # "false" if necessary for your workflow
+        android: true
+        dotnet: true
+        haskell: true
+        large-packages: true
+        docker-images: true
+        swap-storage: true
+    - uses: actions/checkout@v4
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ matrix.python-version }}
+        cache: 'pip'
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
@@ -173,7 +341,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.10"]
+        python-version: ["3.12"]
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     needs: test-efficienet-models
@@ -215,19 +383,20 @@ jobs:
       uses: actions/setup-python@v5
       with:
         python-version: ${{ matrix.python-version }}
+        cache: 'pip'
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
     - name: Fl_common Models Eva Part 1
       run: |
-        python manage.py test fl_common.tests.tests_models_eva1
+        python manage.py test fl_common.tests.tests_models_eva_001
 
   test-eva2-models:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.10"]
+        python-version: ["3.12"]
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     needs: test-eva1-models
@@ -269,10 +438,66 @@ jobs:
       uses: actions/setup-python@v5
       with:
         python-version: ${{ matrix.python-version }}
+        cache: 'pip'
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
     - name: Fl_common Models Eva Part 2
       run: |
-        python manage.py test fl_common.tests.tests_models_eva2  
+        python manage.py test fl_common.tests.tests_models_eva_002
+
+  test-eva3-models:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.12"]
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    needs: test-eva2-models
+    steps:
+    - name: ⌛ rate 1
+      shell: pwsh
+      run: |
+        # add random sleep since we run on fixed schedule
+        sleep (get-random -max 1200)
+        
+        # get currently authenticated user rate limit info
+        $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
+    
+        # if we don't have at least 100 requests left, wait until reset
+        if ($rate.remaining -lt 350) {
+            $wait = ($rate.reset - (Get-Date (Get-Date).ToUniversalTime() -UFormat %s))
+            echo "Rate limit remaining is $($rate.remaining), waiting for $($wait) seconds to reset"
+            sleep $wait
+            $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
+            echo "Rate limit has reset to $($rate.remaining) requests"
+        }
+    - name: Free Disk Space (Ubuntu)
+      uses: jlumbroso/free-disk-space@main
+      with:
+        # this might remove tools that are actually needed,
+        # if set to "true" but frees about 6 GB
+        tool-cache: false
+
+        # all of these default to true, but feel free to set to
+        # "false" if necessary for your workflow
+        android: true
+        dotnet: true
+        haskell: true
+        large-packages: true
+        docker-images: true
+        swap-storage: true
+    - uses: actions/checkout@v4
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ matrix.python-version }}
+        cache: 'pip'
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    - name: Fl_common Models Eva Part 2
+      run: |
+        python manage.py test fl_common.tests.tests_models_eva_003
