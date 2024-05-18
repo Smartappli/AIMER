@@ -1,12 +1,12 @@
 ![WhatsApp Image 2024-03-10 à 12 37 41_6c6c0c4d](https://github.com/Smartappli/AIMER/assets/26173534/1614c965-5bb9-425c-b1e4-48bd38671507)
 
-<p align="center">
 [![Nightlies Models - PART A](https://github.com/Smartappli/AIMER/actions/workflows/nightlies_models_A.yml/badge.svg)](https://github.com/Smartappli/AIMER/actions/workflows/nightlies_models_A.yml)
 [![Nightlies Models - PART B](https://github.com/Smartappli/AIMER/actions/workflows/nightlies_models_B.yml/badge.svg)](https://github.com/Smartappli/AIMER/actions/workflows/nightlies_models_B.yml)
 [![Nightlies Models - PART C](https://github.com/Smartappli/AIMER/actions/workflows/nightlies_models_C.yml/badge.svg)](https://github.com/Smartappli/AIMER/actions/workflows/nightlies_models_C.yml)
-</p>
+
 [![Pylint](https://github.com/Smartappli/AIMER/actions/workflows/pylint.yml/badge.svg)](https://github.com/Smartappli/AIMER/actions/workflows/pylint.yml)
 [![flake8 Lint](https://github.com/Smartappli/AIMER/actions/workflows/flake8.yml/badge.svg)](https://github.com/Smartappli/AIMER/actions/workflows/flake8.yml)
 [![Ruff](https://github.com/Smartappli/AIMER/actions/workflows/ruff.yml/badge.svg)](https://github.com/Smartappli/AIMER/actions/workflows/ruff.yml)
+
 [![Black Formatter](https://github.com/Smartappli/AIMER/actions/workflows/black.yml/badge.svg)](https://github.com/Smartappli/AIMER/actions/workflows/black.yml)
 [![Dependencies license compliance checker](https://github.com/Smartappli/AIMER/actions/workflows/liccheck.yml/badge.svg)](https://github.com/Smartappli/AIMER/actions/workflows/liccheck.yml)
