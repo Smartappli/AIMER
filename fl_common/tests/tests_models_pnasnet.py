@@ -14,7 +14,7 @@ class ProcessingPnasnetTestCase(TestCase):
         """
         Test for known PNASNet architecture types to ensure they return a model without raising any exceptions.
         """
-        known_pnasnet_types = ['pnasnet5large']
+        known_pnasnet_types = ["pnasnet5large"]
         num_classes = 1000  # Assuming 1000 classes for the test
 
         for pnasnet_type in known_pnasnet_types:
@@ -23,8 +23,7 @@ class ProcessingPnasnetTestCase(TestCase):
                     model = get_pnasnet_model(pnasnet_type, num_classes)
                     self.assertIsNotNone(model)
                 except ValueError:
-                    self.fail(
-                        f"{pnasnet_type} should be a known PNASNet architecture.")
+                    self.fail(f"{pnasnet_type} should be a known PNASNet architecture.")
 
     def test_unknown_pnasnet_type(self):
         """

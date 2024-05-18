@@ -19,47 +19,48 @@ class ProcessingRegnetTestCase(TestCase):
         """
         # List of RegNet model types to test
         regnet_types = [
-            'RegNet_Y_400MF',
-            'RegNet_Y_800MF',
-            'RegNet_Y_1_6GF',
-            'RegNet_Y_3_2GF',
-            'RegNet_Y_16GF',
-            'regnetx_002',
-            'regnetx_004',
-            'regnetx_004_tv',
-            'regnetx_006',
-            'regnetx_008',
-            'regnetx_016',
-            'regnetx_032',
-            'regnetx_040',
-            'regnetx_064',
-            'regnetx_080',
-            'regnetx_120',
-            'regnetx_160',
-            'regnetx_320',
-            'regnety_002',
-            'regnety_004',
-            'regnety_006',
-            'regnety_008',
-            'regnety_008_tv',
-            'regnety_016',
-            'regnety_032',
-            'regnety_040',
-            'regnety_064',
-            'regnety_080',
-            'regnety_080_tv',
-            'regnety_120',
-            'regnety_160',
-            'regnety_320',
-            'regnety_640',
-            'regnety_1280',
-            'regnety_2560',
-            'regnety_040_sgn',
-            'regnetv_040',
-            'regnetv_064',
-            'regnetz_005',
-            'regnetz_040',
-            'regnetz_040_h']
+            "RegNet_Y_400MF",
+            "RegNet_Y_800MF",
+            "RegNet_Y_1_6GF",
+            "RegNet_Y_3_2GF",
+            "RegNet_Y_16GF",
+            "regnetx_002",
+            "regnetx_004",
+            "regnetx_004_tv",
+            "regnetx_006",
+            "regnetx_008",
+            "regnetx_016",
+            "regnetx_032",
+            "regnetx_040",
+            "regnetx_064",
+            "regnetx_080",
+            "regnetx_120",
+            "regnetx_160",
+            "regnetx_320",
+            "regnety_002",
+            "regnety_004",
+            "regnety_006",
+            "regnety_008",
+            "regnety_008_tv",
+            "regnety_016",
+            "regnety_032",
+            "regnety_040",
+            "regnety_064",
+            "regnety_080",
+            "regnety_080_tv",
+            "regnety_120",
+            "regnety_160",
+            "regnety_320",
+            "regnety_640",
+            "regnety_1280",
+            "regnety_2560",
+            "regnety_040_sgn",
+            "regnetv_040",
+            "regnetv_064",
+            "regnetz_005",
+            "regnetz_040",
+            "regnetz_040_h",
+        ]
         num_classes = 10  # You can adjust the number of classes as needed
 
         # Loop through each RegNet model type
@@ -70,8 +71,7 @@ class ProcessingRegnetTestCase(TestCase):
                     model = get_regnet_model(regnet_type, num_classes)
                     self.assertIsNotNone(model)
                 except ValueError:
-                    self.fail(
-                        f"{regnet_type} should be a known Regnet architecture.")
+                    self.fail(f"{regnet_type} should be a known Regnet architecture.")
 
     def test_regnet_unknown_architecture(self):
         """
@@ -81,7 +81,7 @@ class ProcessingRegnetTestCase(TestCase):
             AssertionError: If the assertion fails.
             ValueError: If an unknown RegNet architecture is provided.
         """
-        regnet_type = 'UnknownArchitecture'
+        regnet_type = "UnknownArchitecture"
         num_classes = 10
 
         with self.assertRaises(ValueError) as context:
@@ -89,6 +89,5 @@ class ProcessingRegnetTestCase(TestCase):
             get_regnet_model(regnet_type, num_classes)
 
         self.assertEqual(
-            str(context.exception),
-            f'Unknown RegNet Architecture: {regnet_type}'
+            str(context.exception), f"Unknown RegNet Architecture: {regnet_type}"
         )

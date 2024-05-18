@@ -5,28 +5,27 @@ from django.db import migrations, models
 
 
 def create_uuid(apps, schema_editor):
-    Model_Family = apps.get_model('fl_client', 'Model_Family')
+    Model_Family = apps.get_model("fl_client", "Model_Family")
     for model_family in Model_Family.objects.all():
         model_family.model_family_uuid = uuid.uuid4()
         model_family.save()
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('fl_client', '0029_alter_model_file_model_file_uuid'),
+        ("fl_client", "0029_alter_model_file_model_file_uuid"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='model_family',
-            name='model_family_uuid',
+            model_name="model_family",
+            name="model_family_uuid",
             field=models.UUIDField(default=uuid.uuid4, editable=False),
         ),
         migrations.RunPython(create_uuid),
         migrations.AlterField(
-            model_name='model_family',
-            name='model_family_uuid',
-            field=models.UUIDField(unique=True)
-        )
+            model_name="model_family",
+            name="model_family_uuid",
+            field=models.UUIDField(unique=True),
+        ),
     ]

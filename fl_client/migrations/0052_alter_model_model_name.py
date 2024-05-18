@@ -4,16 +4,17 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('fl_client',
-         '0051_dataset_dataset_type_alter_dataset_dataset_format_and_more'),
+        (
+            "fl_client",
+            "0051_dataset_dataset_type_alter_dataset_dataset_format_and_more",
+        ),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='model',
-            name='model_name',
+            model_name="model",
+            name="model_name",
             field=models.CharField(max_length=200),
         ),
     ]

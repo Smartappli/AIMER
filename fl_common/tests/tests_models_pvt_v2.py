@@ -15,13 +15,14 @@ class ProcessingPvt_v2TestCase(TestCase):
         Test for known PVTv2 architecture types to ensure they return a model without raising any exceptions.
         """
         known_pvt_v2_types = [
-            'pvt_v2_b0',
-            'pvt_v2_b1',
-            'pvt_v2_b2',
-            'pvt_v2_b3',
-            'pvt_v2_b4',
-            'pvt_v2_b5',
-            'pvt_v2_b2_li']
+            "pvt_v2_b0",
+            "pvt_v2_b1",
+            "pvt_v2_b2",
+            "pvt_v2_b3",
+            "pvt_v2_b4",
+            "pvt_v2_b5",
+            "pvt_v2_b2_li",
+        ]
         num_classes = 1000  # Assuming 1000 classes for the test
 
         for pvt_v2_type in known_pvt_v2_types:
@@ -30,8 +31,7 @@ class ProcessingPvt_v2TestCase(TestCase):
                     model = get_pvt_v2_model(pvt_v2_type, num_classes)
                     self.assertIsNotNone(model)
                 except ValueError:
-                    self.fail(
-                        f"{pvt_v2_type} should be a known PVTv2 architecture.")
+                    self.fail(f"{pvt_v2_type} should be a known PVTv2 architecture.")
 
     def test_unknown_pvt_v2_type(self):
         """

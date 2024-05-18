@@ -20,19 +20,25 @@ def get_vgg_model(vgg_type, num_classes):
     - ValueError: If the provided vgg_type is not recognized.
     """
     torchvision_models = {
-        'VGG11': (models.vgg11, models.VGG11_Weights),
-        'VGG11_BN': (models.vgg11_bn, models.VGG11_BN_Weights),
-        'VGG13': (models.vgg13, models.VGG13_Weights),
-        'VGG13_BN': (models.vgg13_bn, models.VGG13_BN_Weights),
-        'VGG16': (models.vgg16, models.VGG16_Weights),
-        'VGG16_BN': (models.vgg16_bn, models.VGG16_BN_Weights),
-        'VGG19': (models.vgg19, models.VGG19_Weights),
-        'VGG19_BN': (models.vgg19_bn, models.VGG19_BN_Weights)
+        "VGG11": (models.vgg11, models.VGG11_Weights),
+        "VGG11_BN": (models.vgg11_bn, models.VGG11_BN_Weights),
+        "VGG13": (models.vgg13, models.VGG13_Weights),
+        "VGG13_BN": (models.vgg13_bn, models.VGG13_BN_Weights),
+        "VGG16": (models.vgg16, models.VGG16_Weights),
+        "VGG16_BN": (models.vgg16_bn, models.VGG16_BN_Weights),
+        "VGG19": (models.vgg19, models.VGG19_Weights),
+        "VGG19_BN": (models.vgg19_bn, models.VGG19_BN_Weights),
     }
 
     timm_models = [
-        "vgg11", "vgg11_bn", "vgg13", "vgg13_bn", "vgg16",
-        "vgg16_bn", "vgg19", "vgg19_bn"
+        "vgg11",
+        "vgg11_bn",
+        "vgg13",
+        "vgg13_bn",
+        "vgg16",
+        "vgg16_bn",
+        "vgg19",
+        "vgg19_bn",
     ]
 
     # Check if the vision type is from torchvision
@@ -52,13 +58,13 @@ def get_vgg_model(vgg_type, num_classes):
     # Check if the vision type is from the 'timm' library
     elif vgg_type in timm_models:
         try:
-            vgg_model = create_model(
-                vgg_type, pretrained=True, num_classes=num_classes)
+            vgg_model = create_model(vgg_type, pretrained=True, num_classes=num_classes)
         except RuntimeError as e:
             print(f"{vgg_type} - Error loading pretrained model: {e}")
             vgg_model = create_model(
-                vgg_type, pretrained=False, num_classes=num_classes)
+                vgg_type, pretrained=False, num_classes=num_classes
+            )
     else:
-        raise ValueError(f'Unknown VGG Architecture : {vgg_type}')
+        raise ValueError(f"Unknown VGG Architecture : {vgg_type}")
 
     return vgg_model

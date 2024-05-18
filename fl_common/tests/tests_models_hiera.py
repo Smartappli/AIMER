@@ -21,8 +21,12 @@ class ProcessingHieraTestCase(TestCase):
             AssertionError: If any known hiera architecture fails to be created or if any architecture is unknown.
         """
         known_hiera_types = [
-            "hiera_tiny_224", "hiera_small_224", "hiera_base_224",
-            "hiera_base_plus_224", "hiera_large_224", "hiera_huge_224"
+            "hiera_tiny_224",
+            "hiera_small_224",
+            "hiera_base_224",
+            "hiera_base_plus_224",
+            "hiera_large_224",
+            "hiera_huge_224",
         ]
 
         num_classes = 1000  # Assuming 1000 classes for the test
@@ -33,8 +37,7 @@ class ProcessingHieraTestCase(TestCase):
                     model = get_hiera_model(hiera_type, num_classes)
                     self.assertIsNotNone(model)
                 except ValueError:
-                    self.fail(
-                        f"{hiera_type} should be a known hiera architecture.")
+                    self.fail(f"{hiera_type} should be a known hiera architecture.")
 
     def test_unknown_hiera_type(self):
         """

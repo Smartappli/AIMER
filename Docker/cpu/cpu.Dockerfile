@@ -7,7 +7,7 @@ ENV PORT 8008
 COPY . .
 
 # Install the package
-RUN apt update && apt install -y libopenblas-dev ninja-build build-essential pkg-config
+RUN apt update && apt install -y libopenblas-dev ninja-build build-essential pkg-config && apt-get clean
 RUN python -m pip install --upgrade pip pytest cmake scikit-build setuptools fastapi uvicorn sse-starlette pydantic-settings starlette-context
 
 RUN CMAKE_ARGS="-DLLAMA_BLAS=ON -DLLAMA_BLAS_VENDOR=OpenBLAS" pip install 'llama-cpp-python[server]==0.2.65' --verbose

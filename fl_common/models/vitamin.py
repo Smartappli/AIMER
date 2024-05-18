@@ -16,22 +16,22 @@ def get_vitamin_model(vitamin_type, num_classes):
     - ValueError: If the specified `vitamin_type` is not one of the supported architectures.
     """
     valid_types = {
-        'vitamin_small', 'vitamin_base', 'vitamin_large', 'vitamin_large_256',
-        'vitamin_large_336', 'vitamin_large_384', 'vitamin_xlarge_256',
-        'vitamin_xlarge_336', 'vitamin_xlarge_384'
+        "vitamin_small",
+        "vitamin_base",
+        "vitamin_large",
+        "vitamin_large_256",
+        "vitamin_large_336",
+        "vitamin_large_384",
+        "vitamin_xlarge_256",
+        "vitamin_xlarge_336",
+        "vitamin_xlarge_384",
     }
 
     if vitamin_type not in valid_types:
-        raise ValueError(f'Unknown vitamin Architecture: {vitamin_type}')
+        raise ValueError(f"Unknown vitamin Architecture: {vitamin_type}")
 
     try:
-        return create_model(
-            vitamin_type,
-            pretrained=True,
-            num_classes=num_classes)
+        return create_model(vitamin_type, pretrained=True, num_classes=num_classes)
     except RuntimeError as e:
         print(f"{vitamin_type} - Error loading pretrained model: {e}")
-        return create_model(
-            vitamin_type,
-            pretrained=False,
-            num_classes=num_classes)
+        return create_model(vitamin_type, pretrained=False, num_classes=num_classes)

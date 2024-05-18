@@ -14,7 +14,7 @@ class ProcessingTntTestCase(TestCase):
         """
         Test for known TnT architecture types to ensure they return a model without raising any exceptions.
         """
-        known_tnt_types = ['tnt_s_patch16_224', 'tnt_b_patch16_224']
+        known_tnt_types = ["tnt_s_patch16_224", "tnt_b_patch16_224"]
         num_classes = 1000  # Assuming 1000 classes for the test
 
         for tnt_type in known_tnt_types:
@@ -23,8 +23,7 @@ class ProcessingTntTestCase(TestCase):
                     model = get_tnt_model(tnt_type, num_classes)
                     self.assertIsNotNone(model)
                 except ValueError:
-                    self.fail(
-                        f"{tnt_type} should be a known TnT architecture.")
+                    self.fail(f"{tnt_type} should be a known TnT architecture.")
 
     def test_unknown_tnt_type(self):
         """

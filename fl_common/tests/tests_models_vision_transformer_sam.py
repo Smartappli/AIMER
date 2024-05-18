@@ -16,14 +16,14 @@ class ProcessingVisionTransformerSamTestCase(TestCase):
         """
         num_classes = 10
         model_types = [
-            'samvit_base_patch16',
-            'samvit_large_patch16',
-            'samvit_huge_patch16',
-            'samvit_base_patch16_224']
+            "samvit_base_patch16",
+            "samvit_large_patch16",
+            "samvit_huge_patch16",
+            "samvit_base_patch16_224",
+        ]
         for model_type in model_types:
             with self.subTest(model_type=model_type):
-                model = get_vision_transformer_sam_model(
-                    model_type, num_classes)
+                model = get_vision_transformer_sam_model(model_type, num_classes)
                 self.assertIsNotNone(model)
                 # Add more specific tests if needed
 
@@ -36,7 +36,7 @@ class ProcessingVisionTransformerSamTestCase(TestCase):
             AssertionError: If the assertion fails.
             ValueError: If an unknown Vision Transformer Sam architecture is provided.
         """
-        vision_type = 'UnknownArchitecture'
+        vision_type = "UnknownArchitecture"
         num_classes = 10
 
         with self.assertRaises(ValueError) as context:
@@ -46,5 +46,5 @@ class ProcessingVisionTransformerSamTestCase(TestCase):
 
         self.assertEqual(
             str(context.exception),
-            f'Unknown Vision Transformer SAM Architecture: {vision_type}'
+            f"Unknown Vision Transformer SAM Architecture: {vision_type}",
         )

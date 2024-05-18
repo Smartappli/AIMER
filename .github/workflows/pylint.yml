@@ -15,6 +15,7 @@ concurrency:
 
 jobs:
   build:
+    name: PyLint
     strategy:
       max-parallel: 10
       matrix:

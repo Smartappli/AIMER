@@ -11,7 +11,7 @@ from fl_client.models import Queue
 
 session_seed = random.randrange(1, 1000)
 
-tasks = Queue.objects.get(queue_state='CR', queue_model_type='MLCL')
+tasks = Queue.objects.get(queue_state="CR", queue_model_type="MLCL")
 for task in tasks:
     model_id = task.queue_model_id
     dataset_id = task.queue_dataset_id

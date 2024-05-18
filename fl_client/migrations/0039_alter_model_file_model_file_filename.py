@@ -4,15 +4,14 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('fl_client', '0038_alter_help_options'),
+        ("fl_client", "0038_alter_help_options"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='model_file',
-            name='model_file_filename',
+            model_name="model_file",
+            name="model_file_filename",
             field=models.CharField(max_length=250, unique=True),
         ),
     ]

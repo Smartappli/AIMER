@@ -34,25 +34,31 @@ def get_metaformer_model(metaformer_type, num_classes):
         ValueError: If an unknown Metaformer architecture type is specified.
     """
     metaformer_options = [
-        'poolformer_s12', 'poolformer_s24', 'poolformer_s36',
-        'poolformer_m36', 'poolformer_m48', 'poolformerv2_s12',
-        'poolformerv2_s24', 'poolformerv2_s36', 'poolformerv2_m36',
-        'poolformerv2_m48', 'convformer_s18', 'convformer_s36',
-        'convformer_m36', 'convformer_b36', 'caformer_s18',
-        'caformer_s36', 'caformer_m36', 'caformer_b36'
+        "poolformer_s12",
+        "poolformer_s24",
+        "poolformer_s36",
+        "poolformer_m36",
+        "poolformer_m48",
+        "poolformerv2_s12",
+        "poolformerv2_s24",
+        "poolformerv2_s36",
+        "poolformerv2_m36",
+        "poolformerv2_m48",
+        "convformer_s18",
+        "convformer_s36",
+        "convformer_m36",
+        "convformer_b36",
+        "caformer_s18",
+        "caformer_s36",
+        "caformer_m36",
+        "caformer_b36",
     ]
 
     if metaformer_type not in metaformer_options:
-        raise ValueError(f'Unknown Metaformer Architecture: {metaformer_type}')
+        raise ValueError(f"Unknown Metaformer Architecture: {metaformer_type}")
 
     try:
-        return create_model(
-            metaformer_type,
-            pretrained=True,
-            num_classes=num_classes)
+        return create_model(metaformer_type, pretrained=True, num_classes=num_classes)
     except RuntimeError as e:
         print(f"{metaformer_type} - Error loading pretrained model: {e}")
-        return create_model(
-            metaformer_type,
-            pretrained=False,
-            num_classes=num_classes)
+        return create_model(metaformer_type, pretrained=False, num_classes=num_classes)

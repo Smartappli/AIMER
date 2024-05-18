@@ -4,47 +4,38 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('fl_client', '0047_alter_license_license_id'),
+        ("fl_client", "0047_alter_license_license_id"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='dataset',
-            options={
-                'ordering': ['dataset_name']},
+            name="dataset",
+            options={"ordering": ["dataset_name"]},
         ),
         migrations.AlterModelOptions(
-            name='license',
-            options={
-                'ordering': ['license_short_name']},
+            name="license",
+            options={"ordering": ["license_short_name"]},
         ),
         migrations.AlterModelOptions(
-            name='model_file',
-            options={
-                'ordering': ['model_file_filename']},
+            name="model_file",
+            options={"ordering": ["model_file_filename"]},
         ),
         migrations.AddField(
-            model_name='dataset',
-            name='dataset_format',
+            model_name="dataset",
+            name="dataset_format",
             field=models.TextField(
                 choices=[
-                    ('CSV',
-                     'Comma-separated values'),
-                    ('DICOM',
-                     'DICOM'),
-                    ('FHIR',
-                     'FHIR'),
-                    ('SNOMED',
-                     'SNOMED CT'),
-                    ('IMG',
-                     'Image'),
-                    ('JSON',
-                     'JavaScript Object Notation'),
-                    ('TXT',
-                     'Text')],
-                default='CSV',
-                max_length=6),
+                    ("CSV", "Comma-separated values"),
+                    ("DICOM", "DICOM"),
+                    ("FHIR", "FHIR"),
+                    ("SNOMED", "SNOMED CT"),
+                    ("IMG", "Image"),
+                    ("JSON", "JavaScript Object Notation"),
+                    ("TXT", "Text"),
+                ],
+                default="CSV",
+                max_length=6,
+            ),
         ),
     ]

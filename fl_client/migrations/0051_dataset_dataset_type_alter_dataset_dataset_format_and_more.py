@@ -6,89 +6,221 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('fl_client', '0050_queue_queue_dataset_id'),
+        ("fl_client", "0050_queue_queue_dataset_id"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='dataset',
-            name='dataset_type',
-            field=models.CharField(choices=[('LC', 'Lolly hosted'), ('CS', 'On the central server'), ('EH', 'Externally Hosted')], default='LC', max_length=6),
+            model_name="dataset",
+            name="dataset_type",
+            field=models.CharField(
+                choices=[
+                    ("LC", "Lolly hosted"),
+                    ("CS", "On the central server"),
+                    ("EH", "Externally Hosted"),
+                ],
+                default="LC",
+                max_length=6,
+            ),
         ),
         migrations.AlterField(
-            model_name='dataset',
-            name='dataset_format',
-            field=models.CharField(choices=[('CSV', 'Comma-separated values'), ('DICOM', 'DICOM'), ('FHIR', 'FHIR'), ('SNOMED', 'SNOMED CT'), ('IMG', 'Images'), ('JSON', 'JavaScript Object Notation'), ('TXT', 'Text')], default='CSV', max_length=6),
+            model_name="dataset",
+            name="dataset_format",
+            field=models.CharField(
+                choices=[
+                    ("CSV", "Comma-separated values"),
+                    ("DICOM", "DICOM"),
+                    ("FHIR", "FHIR"),
+                    ("SNOMED", "SNOMED CT"),
+                    ("IMG", "Images"),
+                    ("JSON", "JavaScript Object Notation"),
+                    ("TXT", "Text"),
+                ],
+                default="CSV",
+                max_length=6,
+            ),
         ),
         migrations.AlterField(
-            model_name='dataset',
-            name='dataset_id',
-            field=models.BigAutoField(editable=False, primary_key=True, serialize=False),
+            model_name="dataset",
+            name="dataset_id",
+            field=models.BigAutoField(
+                editable=False, primary_key=True, serialize=False
+            ),
         ),
         migrations.AlterField(
-            model_name='help',
-            name='help_value',
+            model_name="help",
+            name="help_value",
             field=models.CharField(max_length=255),
         ),
         migrations.CreateModel(
-            name='Dataset_Central_Data',
+            name="Dataset_Central_Data",
             fields=[
-                ('dataset_central_data_id', models.BigAutoField(editable=False, primary_key=True, serialize=False)),
-                ('dataset_central_data_uuid', models.UUIDField(default=uuid.uuid4, editable=False, unique=True)),
-                ('dataset_central_data_link', models.CharField(blank=True, max_length=255)),
-                ('dataset_central_creation_date', models.DateTimeField(auto_now_add=True)),
-                ('dataset_central_updated_date', models.DateTimeField(auto_now=True)),
-                ('dataset_central_data_dataset_id', models.ForeignKey(default=1, on_delete=django.db.models.deletion.DO_NOTHING, related_name='dataset_central_data_dataset_id', to='fl_client.dataset')),
+                (
+                    "dataset_central_data_id",
+                    models.BigAutoField(
+                        editable=False, primary_key=True, serialize=False
+                    ),
+                ),
+                (
+                    "dataset_central_data_uuid",
+                    models.UUIDField(default=uuid.uuid4, editable=False, unique=True),
+                ),
+                (
+                    "dataset_central_data_link",
+                    models.CharField(blank=True, max_length=255),
+                ),
+                (
+                    "dataset_central_creation_date",
+                    models.DateTimeField(auto_now_add=True),
+                ),
+                ("dataset_central_updated_date", models.DateTimeField(auto_now=True)),
+                (
+                    "dataset_central_data_dataset_id",
+                    models.ForeignKey(
+                        default=1,
+                        on_delete=django.db.models.deletion.DO_NOTHING,
+                        related_name="dataset_central_data_dataset_id",
+                        to="fl_client.dataset",
+                    ),
+                ),
             ],
             options={
-                'ordering': ['dataset_central_data_link'],
+                "ordering": ["dataset_central_data_link"],
             },
         ),
         migrations.CreateModel(
-            name='Dataset_File',
+            name="Dataset_File",
             fields=[
-                ('dataset_file_id', models.BigAutoField(editable=False, primary_key=True, serialize=False)),
-                ('dataset_file_uuid', models.UUIDField(default=uuid.uuid4, editable=False)),
-                ('dataset_file_filename', models.CharField(max_length=255)),
-                ('dataset_file_creation_date', models.DateTimeField(auto_now_add=True)),
-                ('dataset_file_updated_date', models.DateTimeField(auto_now=True)),
-                ('dataset_file_dataset_id', models.ForeignKey(default=1, on_delete=django.db.models.deletion.DO_NOTHING, related_name='dataset_file_dataset_id', to='fl_client.dataset')),
+                (
+                    "dataset_file_id",
+                    models.BigAutoField(
+                        editable=False, primary_key=True, serialize=False
+                    ),
+                ),
+                (
+                    "dataset_file_uuid",
+                    models.UUIDField(default=uuid.uuid4, editable=False),
+                ),
+                ("dataset_file_filename", models.CharField(max_length=255)),
+                ("dataset_file_creation_date", models.DateTimeField(auto_now_add=True)),
+                ("dataset_file_updated_date", models.DateTimeField(auto_now=True)),
+                (
+                    "dataset_file_dataset_id",
+                    models.ForeignKey(
+                        default=1,
+                        on_delete=django.db.models.deletion.DO_NOTHING,
+                        related_name="dataset_file_dataset_id",
+                        to="fl_client.dataset",
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='Dataset_Local_Data',
+            name="Dataset_Local_Data",
             fields=[
-                ('dataset_local_data_id', models.BigAutoField(editable=False, primary_key=True, serialize=False)),
-                ('dataset_local_data_uuid', models.UUIDField(default=uuid.uuid4, editable=False, unique=True)),
-                ('dataset_local_data_link', models.URLField(max_length=255)),
-                ('dataset_local_data_username', models.CharField(blank=True, max_length=30, null=True)),
-                ('dataset_local_data_password', models.CharField(blank=True, max_length=30, null=True)),
-                ('dataset_local_data_creation_date', models.DateTimeField(auto_now_add=True)),
-                ('dataset_local_data_updated_date', models.DateTimeField(auto_now=True)),
-                ('dataset_local_data_dataset_id', models.ForeignKey(default=1, on_delete=django.db.models.deletion.DO_NOTHING, related_name='dataset_local_data_dataset_id', to='fl_client.dataset')),
+                (
+                    "dataset_local_data_id",
+                    models.BigAutoField(
+                        editable=False, primary_key=True, serialize=False
+                    ),
+                ),
+                (
+                    "dataset_local_data_uuid",
+                    models.UUIDField(default=uuid.uuid4, editable=False, unique=True),
+                ),
+                ("dataset_local_data_link", models.URLField(max_length=255)),
+                (
+                    "dataset_local_data_username",
+                    models.CharField(blank=True, max_length=30, null=True),
+                ),
+                (
+                    "dataset_local_data_password",
+                    models.CharField(blank=True, max_length=30, null=True),
+                ),
+                (
+                    "dataset_local_data_creation_date",
+                    models.DateTimeField(auto_now_add=True),
+                ),
+                (
+                    "dataset_local_data_updated_date",
+                    models.DateTimeField(auto_now=True),
+                ),
+                (
+                    "dataset_local_data_dataset_id",
+                    models.ForeignKey(
+                        default=1,
+                        on_delete=django.db.models.deletion.DO_NOTHING,
+                        related_name="dataset_local_data_dataset_id",
+                        to="fl_client.dataset",
+                    ),
+                ),
             ],
             options={
-                'ordering': ['dataset_local_data_link'],
+                "ordering": ["dataset_local_data_link"],
             },
         ),
         migrations.CreateModel(
-            name='Dataset_Remote_Data',
+            name="Dataset_Remote_Data",
             fields=[
-                ('dataset_remote_data_id', models.BigAutoField(editable=False, primary_key=True, serialize=False)),
-                ('dataset_remote_data_uuid', models.UUIDField(default=uuid.uuid4, editable=False, unique=True)),
-                ('dataset_remote_data_protocol', models.CharField(choices=[('HTTP', 'HTTP'), ('HTTPS', 'HTTPS'), ('FTP', 'FTP'), ('FTPS', 'FTPS'), ('SCP', 'SCP'), ('SFTP', 'SFTP')], default='HTTP', max_length=6)),
-                ('dataset_remote_data_username', models.CharField(blank=True, max_length=30, null=True)),
-                ('dataset_remote_data_password', models.CharField(blank=True, max_length=30, null=True)),
-                ('dataset_remote_data_ip', models.CharField(blank=True, max_length=40, null=True)),
-                ('dataset_remote_data_path', models.CharField(blank=True, max_length=255, null=True)),
-                ('dataset_remote_creation_date', models.DateTimeField(auto_now_add=True)),
-                ('dataset_remote_updated_date', models.DateTimeField(auto_now=True)),
-                ('dataset_remote_data_dataset_id', models.ForeignKey(default=1, on_delete=django.db.models.deletion.DO_NOTHING, related_name='dataset_remote_data_dataset_id', to='fl_client.dataset')),
+                (
+                    "dataset_remote_data_id",
+                    models.BigAutoField(
+                        editable=False, primary_key=True, serialize=False
+                    ),
+                ),
+                (
+                    "dataset_remote_data_uuid",
+                    models.UUIDField(default=uuid.uuid4, editable=False, unique=True),
+                ),
+                (
+                    "dataset_remote_data_protocol",
+                    models.CharField(
+                        choices=[
+                            ("HTTP", "HTTP"),
+                            ("HTTPS", "HTTPS"),
+                            ("FTP", "FTP"),
+                            ("FTPS", "FTPS"),
+                            ("SCP", "SCP"),
+                            ("SFTP", "SFTP"),
+                        ],
+                        default="HTTP",
+                        max_length=6,
+                    ),
+                ),
+                (
+                    "dataset_remote_data_username",
+                    models.CharField(blank=True, max_length=30, null=True),
+                ),
+                (
+                    "dataset_remote_data_password",
+                    models.CharField(blank=True, max_length=30, null=True),
+                ),
+                (
+                    "dataset_remote_data_ip",
+                    models.CharField(blank=True, max_length=40, null=True),
+                ),
+                (
+                    "dataset_remote_data_path",
+                    models.CharField(blank=True, max_length=255, null=True),
+                ),
+                (
+                    "dataset_remote_creation_date",
+                    models.DateTimeField(auto_now_add=True),
+                ),
+                ("dataset_remote_updated_date", models.DateTimeField(auto_now=True)),
+                (
+                    "dataset_remote_data_dataset_id",
+                    models.ForeignKey(
+                        default=1,
+                        on_delete=django.db.models.deletion.DO_NOTHING,
+                        related_name="dataset_remote_data_dataset_id",
+                        to="fl_client.dataset",
+                    ),
+                ),
             ],
             options={
-                'ordering': ['dataset_remote_data_path'],
+                "ordering": ["dataset_remote_data_path"],
             },
         ),
     ]

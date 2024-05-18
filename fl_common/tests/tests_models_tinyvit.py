@@ -26,11 +26,12 @@ class ProcessingTinyVitTestCase(TestCase):
         - AssertionError: If any of the TinyViT models is None.
         """
         tiny_vit_types = [
-            'tiny_vit_5m_224',
-            'tiny_vit_11m_224',
-            'tiny_vit_21m_224',
-            'tiny_vit_21m_384',
-            'tiny_vit_21m_512']
+            "tiny_vit_5m_224",
+            "tiny_vit_11m_224",
+            "tiny_vit_21m_224",
+            "tiny_vit_21m_384",
+            "tiny_vit_21m_512",
+        ]
         num_classes = 10
 
         for tiny_vit_type in tiny_vit_types:
@@ -52,4 +53,4 @@ class ProcessingTinyVitTestCase(TestCase):
         - ValueError: If an unknown TinyViT architecture is specified.
         """
         with self.assertRaises(ValueError):
-            get_tiny_vit_model('unknown_type', num_classes=10)
+            get_tiny_vit_model("unknown_type", num_classes=10)
