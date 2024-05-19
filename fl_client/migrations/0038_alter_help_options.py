@@ -4,14 +4,13 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('fl_client', '0037_alter_help_help_key'),
+        ("fl_client", "0037_alter_help_help_key"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='help',
-            options={'ordering': ['help_key']},
+            name="help",
+            options={"ordering": ["help_key"]},
         ),
     ]

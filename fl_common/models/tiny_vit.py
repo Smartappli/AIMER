@@ -18,15 +18,18 @@ def get_tiny_vit_model(tiny_vit_type, num_classes):
     """
 
     supported_types = {
-        'tiny_vit_5m_224', 'tiny_vit_11m_224', 'tiny_vit_21m_224',
-        'tiny_vit_21m_384', 'tiny_vit_21m_512'
+        "tiny_vit_5m_224",
+        "tiny_vit_11m_224",
+        "tiny_vit_21m_224",
+        "tiny_vit_21m_384",
+        "tiny_vit_21m_512",
     }
 
     if tiny_vit_type not in supported_types:
-        raise ValueError(f'Unknown TinyViT Architecture: {tiny_vit_type}')
+        raise ValueError(f"Unknown TinyViT Architecture: {tiny_vit_type}")
 
     try:
         return create_model(tiny_vit_type, pretrained=True, num_classes=num_classes)
     except RuntimeError as e:
-        print(f"Error loading pretrained model: {e}")
+        print(f"{tiny_vit_type} - Error loading pretrained model: {e}")
         return create_model(tiny_vit_type, pretrained=False, num_classes=num_classes)

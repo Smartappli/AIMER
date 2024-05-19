@@ -15,8 +15,16 @@ class ProcessingHgnetTestCase(TestCase):
         Test for known Hgnet architecture types to ensure they return a model without raising any exceptions.
         """
         known_hgnet_types = [
-            'hgnet_tiny', 'hgnet_small', 'hgnet_base', 'hgnetv2_b0', 'hgnetv2_b1', 'hgnetv2_b2', 'hgnetv2_b3',
-            'hgnetv2_b4', 'hgnetv2_b5', 'hgnetv2_b6'
+            "hgnet_tiny",
+            "hgnet_small",
+            "hgnet_base",
+            "hgnetv2_b0",
+            "hgnetv2_b1",
+            "hgnetv2_b2",
+            "hgnetv2_b3",
+            "hgnetv2_b4",
+            "hgnetv2_b5",
+            "hgnetv2_b6",
         ]
 
         num_classes = 1000  # Assuming 1000 classes for the test

@@ -17,7 +17,7 @@ def get_dpn_model(dpn_type, num_classes):
     """
     dpn_options = ["dpn48b", "dpn68", "dpn68b", "dpn92", "dpn98", "dpn131", "dpn107"]
     if dpn_type not in dpn_options:
-        raise ValueError(f'Unknown DPN Architecture: {dpn_type}')
+        raise ValueError(f"Unknown DPN Architecture: {dpn_type}")
 
     try:
         return create_model(dpn_type, pretrained=True, num_classes=num_classes)

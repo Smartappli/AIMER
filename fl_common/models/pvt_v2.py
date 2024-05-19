@@ -16,12 +16,17 @@ def get_pvt_v2_model(pvt_v2_type, num_classes):
         ValueError: If an unknown PVTv2 architecture type is specified.
     """
     valid_pvt_v2_types = {
-        'pvt_v2_b0', 'pvt_v2_b1', 'pvt_v2_b2', 'pvt_v2_b3',
-        'pvt_v2_b4', 'pvt_v2_b5', 'pvt_v2_b2_li'
+        "pvt_v2_b0",
+        "pvt_v2_b1",
+        "pvt_v2_b2",
+        "pvt_v2_b3",
+        "pvt_v2_b4",
+        "pvt_v2_b5",
+        "pvt_v2_b2_li",
     }
 
     if pvt_v2_type not in valid_pvt_v2_types:
-        raise ValueError(f'Unknown PVTv2 Architecture: {pvt_v2_type}')
+        raise ValueError(f"Unknown PVTv2 Architecture: {pvt_v2_type}")
 
     try:
         return create_model(pvt_v2_type, pretrained=True, num_classes=num_classes)

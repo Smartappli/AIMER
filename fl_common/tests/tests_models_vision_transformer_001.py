@@ -19,7 +19,14 @@ class ProcessingVisionTransformerTestCase(TestCase):
             AssertionError: If any of the assertions fail.
         """
         # List of Vision Transformer model types to test
-        vision_types = ['ViT_B_16', 'ViT_B_32', 'ViT_L_16', 'ViT_L_32', 'ViT_H_14', "vit_tiny_patch16_224"]
+        vision_types = [
+            "ViT_B_16",
+            "ViT_B_32",
+            "ViT_L_16",
+            "ViT_L_32",
+            "ViT_H_14",
+            "vit_tiny_patch16_224",
+        ]
 
         num_classes = 10  # You can adjust the number of classes as needed
 
@@ -29,7 +36,9 @@ class ProcessingVisionTransformerTestCase(TestCase):
                 # Get the Vision Transformer model for testing
                 model = get_vision_transformer_model(vision_type, num_classes)
                 # Check if the model is an instance of torch.nn.Module
-                self.assertIsInstance(model, nn.Module, msg=f'get_vision_model {vision_type} KO')
+                self.assertIsInstance(
+                    model, nn.Module, msg=f"get_vision_model {vision_type} KO"
+                )
 
     def test_vision_unknown_architecture(self):
         """
@@ -39,14 +48,15 @@ class ProcessingVisionTransformerTestCase(TestCase):
             AssertionError: If the assertion fails.
             ValueError: If an unknown Vision Transformer architecture is provided.
         """
-        vision_type = 'UnknownArchitecture'
+        vision_type = "UnknownArchitecture"
         num_classes = 10
 
         with self.assertRaises(ValueError) as context:
-            # Attempt to get a Vision Transformer model with an unknown architecture
+            # Attempt to get a Vision Transformer model with an unknown
+            # architecture
             get_vision_transformer_model(vision_type, num_classes)
 
         self.assertEqual(
             str(context.exception),
-            f'Unknown Vision Transformer Architecture: {vision_type}'
+            f"Unknown Vision Transformer Architecture: {vision_type}",
         )

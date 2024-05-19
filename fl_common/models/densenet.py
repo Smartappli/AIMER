@@ -20,17 +20,22 @@ def get_densenet_model(densenet_type, num_classes):
     Raises:
         ValueError: If an unknown DenseNet architecture is provided.
     """
-    # Mapping of vision types to their corresponding torchvision models and weights
+    # Mapping of vision types to their corresponding torchvision models and
+    # weights
     torchvision_models = {
-        'DenseNet121': (models.densenet121, models.DenseNet121_Weights),
-        'DenseNet161': (models.densenet161, models.DenseNet161_Weights),
-        'DenseNet169': (models.densenet169, models.DenseNet169_Weights),
-        'DenseNet201': (models.densenet201, models.DenseNet201_Weights)
+        "DenseNet121": (models.densenet121, models.DenseNet121_Weights),
+        "DenseNet161": (models.densenet161, models.DenseNet161_Weights),
+        "DenseNet169": (models.densenet169, models.DenseNet169_Weights),
+        "DenseNet201": (models.densenet201, models.DenseNet201_Weights),
     }
 
     timm_models = [
-        "densenet121", "densenetblur121d", "densenet169", "densenet201", "densenet161",
-        "densenet264d"
+        "densenet121",
+        "densenetblur121d",
+        "densenet169",
+        "densenet201",
+        "densenet161",
+        "densenet264d",
     ]
 
     # Check if the vision type is from torchvision
@@ -50,11 +55,15 @@ def get_densenet_model(densenet_type, num_classes):
     # Check if the vision type is from the 'timm' library
     elif densenet_type in timm_models:
         try:
-            densenet_model = create_model(densenet_type, pretrained=True, num_classes=num_classes)
+            densenet_model = create_model(
+                densenet_type, pretrained=True, num_classes=num_classes
+            )
         except RuntimeError as e:
             print(f"{densenet_type} - Error loading pretrained model: {e}")
-            densenet_model = create_model(densenet_type, pretrained=False, num_classes=num_classes)
+            densenet_model = create_model(
+                densenet_type, pretrained=False, num_classes=num_classes
+            )
     else:
-        raise ValueError(f'Unknown DenseNet Architecture : {densenet_type}')
+        raise ValueError(f"Unknown DenseNet Architecture : {densenet_type}")
 
     return densenet_model

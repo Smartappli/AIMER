@@ -9,6 +9,10 @@ on:
         description: "Run Nightlies Tests Manually"
         required: false
 
+concurrency:
+  group: nightlies_modesl_B-${{ github.event_name == 'pull_request' && format('{0}-{1}', github.workflow, github.event.pull_request.number) || github.workflow_ref }}
+  cancel-in-progress: true
+
 jobs:
   call-UT-common_training:
     if: github.repository == 'Smartappli/AIMER' # don't run on forks

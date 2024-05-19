@@ -4,15 +4,14 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('fl_server', '0005_agent_configuration'),
+        ("fl_server", "0005_agent_configuration"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='agent_configuration',
-            name='agent_id',
+            model_name="agent_configuration",
+            name="agent_id",
             field=models.BigAutoField(primary_key=True, serialize=False),
         ),
     ]

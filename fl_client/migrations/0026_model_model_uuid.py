@@ -3,28 +3,27 @@ from __future__ import unicode_literals
 import uuid
 from django.db import migrations, models
 
+
 def create_uuid(apps, schema_editor):
-    Model = apps.get_model('fl_client', 'Model')
+    Model = apps.get_model("fl_client", "Model")
     for model in Model.objects.all():
         model.model_uuid = uuid.uuid4()
         model.save()
 
-class Migration(migrations.Migration):
 
+class Migration(migrations.Migration):
     dependencies = [
-        ('fl_client', '0025_alter_model_document_modeldoc_uuid'),
+        ("fl_client", "0025_alter_model_document_modeldoc_uuid"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='model',
-            name='model_uuid',
+            model_name="model",
+            name="model_uuid",
             field=models.UUIDField(default=uuid.uuid4, editable=False),
         ),
         migrations.RunPython(create_uuid),
         migrations.AlterField(
-            model_name='model',
-            name='model_uuid',
-            field=models.UUIDField(unique=True)
-        )
+            model_name="model", name="model_uuid", field=models.UUIDField(unique=True)
+        ),
     ]

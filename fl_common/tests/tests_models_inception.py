@@ -20,11 +20,7 @@ class ProcessingInceptionTestCase(TestCase):
             AssertionError: If any of the assertions fail.
         """
         # List of Inception model types to test
-        inception_types = [
-            'Inception_V3',
-            'inception_v4',
-            'inception_resnet_v2'
-        ]
+        inception_types = ["Inception_V3", "inception_v4", "inception_resnet_v2"]
 
         # Loop through each Inception model type
         for inception_type in inception_types:
@@ -42,7 +38,7 @@ class ProcessingInceptionTestCase(TestCase):
             AssertionError: If the assertion fails.
             ValueError: If an unknown Inception architecture is provided.
         """
-        inception_type = 'UnknownArchitecture'
+        inception_type = "UnknownArchitecture"
         num_classes = 10
 
         with self.assertRaises(ValueError) as context:
@@ -50,8 +46,7 @@ class ProcessingInceptionTestCase(TestCase):
             get_inception_model(inception_type, num_classes)
 
         self.assertEqual(
-            str(context.exception),
-            f'Unknown Inception Architecture: {inception_type}'
+            str(context.exception), f"Unknown Inception Architecture: {inception_type}"
         )
 
     def test_inception_last_layer_adaptation(self):
@@ -62,7 +57,7 @@ class ProcessingInceptionTestCase(TestCase):
             AssertionError: If the assertion fails.
         """
         # Provide a known architecture type
-        inception_type = 'Inception_V3'
+        inception_type = "Inception_V3"
         num_classes = 10
 
         # Override the last layer with a linear layer for testing purposes

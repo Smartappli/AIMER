@@ -21,12 +21,22 @@ class ProcessingDeitTestCase(TestCase):
             AssertionError: If any known DEIT architecture fails to be created or if any architecture is unknown.
         """
         known_deit_types = [
-            "deit_tiny_patch16_224", "deit_small_patch16_224", "deit_base_patch16_224",
-            "deit_base_patch16_384", "deit_tiny_distilled_patch16_224", "deit_small_distilled_patch16_224",
-            "deit_base_distilled_patch16_224", "deit_base_distilled_patch16_384", "deit3_small_patch16_224",
-            "deit3_small_patch16_384", "deit3_medium_patch16_224", "deit3_base_patch16_224",
-            "deit3_base_patch16_384", "deit3_large_patch16_224", "deit3_large_patch16_384",
-            "deit3_huge_patch14_224"
+            "deit_tiny_patch16_224",
+            "deit_small_patch16_224",
+            "deit_base_patch16_224",
+            "deit_base_patch16_384",
+            "deit_tiny_distilled_patch16_224",
+            "deit_small_distilled_patch16_224",
+            "deit_base_distilled_patch16_224",
+            "deit_base_distilled_patch16_384",
+            "deit3_small_patch16_224",
+            "deit3_small_patch16_384",
+            "deit3_medium_patch16_224",
+            "deit3_base_patch16_224",
+            "deit3_base_patch16_384",
+            "deit3_large_patch16_224",
+            "deit3_large_patch16_384",
+            "deit3_huge_patch14_224",
         ]
 
         num_classes = 1000  # Assuming 1000 classes for the test

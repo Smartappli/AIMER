@@ -4,19 +4,18 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('fl_client', '0039_alter_model_file_model_file_filename'),
+        ("fl_client", "0039_alter_model_file_model_file_filename"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='model_file',
-            options={'ordering': ['model_file_model_id', 'model_file_type']},
+            name="model_file",
+            options={"ordering": ["model_file_model_id", "model_file_type"]},
         ),
         migrations.AddField(
-            model_name='queue',
-            name='queue_params',
+            model_name="queue",
+            name="queue_params",
             field=models.JSONField(default=dict),
         ),
     ]

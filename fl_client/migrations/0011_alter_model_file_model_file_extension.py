@@ -4,15 +4,18 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('fl_client', '0010_alter_model_model_id'),
+        ("fl_client", "0010_alter_model_model_id"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='model_file',
-            name='model_file_extension',
-            field=models.CharField(choices=[('NA', 'N/A'), ('BIN', 'Binary'), ('GGUF', 'GGUF')], default='NA', max_length=6),
+            model_name="model_file",
+            name="model_file_extension",
+            field=models.CharField(
+                choices=[("NA", "N/A"), ("BIN", "Binary"), ("GGUF", "GGUF")],
+                default="NA",
+                max_length=6,
+            ),
         ),
     ]
