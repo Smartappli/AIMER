@@ -1,13 +1,14 @@
 from timm import create_model
 
-def get_pnasnet_model(pnasnet_type: str, num_classes: int) -> nn.Module:
+
+def get_pnasnet_model(pnasnet_type, num_classes):
     """
     Get a PNASNet model based on the specified architecture type.
     """
     # Validate the architecture type
-    valid_types = ['pnasnet5large']
+    valid_types = ["pnasnet5large"]
     if pnasnet_type not in valid_types:
-        raise ValueError(f'Unknown Pnasnet Architecture: {pnasnet_type}')
+        raise ValueError(f"Unknown Pnasnet Architecture: {pnasnet_type}")
 
     # Attempt to create the model with pretrained weights
     try:

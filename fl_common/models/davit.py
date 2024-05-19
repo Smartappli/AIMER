@@ -15,13 +15,17 @@ def get_davit_model(davit_type, num_classes):
 
     # List of valid Davit architectures
     valid_davit_types = [
-        'davit_tiny', 'davit_small', 'davit_base',
-        'davit_large', 'davit_huge', 'davit_giant'
+        "davit_tiny",
+        "davit_small",
+        "davit_base",
+        "davit_large",
+        "davit_huge",
+        "davit_giant",
     ]
 
     # Check if the davit_type is valid
     if davit_type not in valid_davit_types:
-        raise ValueError(f'Unknown Davit Architecture: {davit_type}')
+        raise ValueError(f"Unknown Davit Architecture: {davit_type}")
 
     try:
         return create_model(davit_type, pretrained=True, num_classes=num_classes)

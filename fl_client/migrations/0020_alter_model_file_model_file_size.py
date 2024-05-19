@@ -4,15 +4,14 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('fl_client', '0019_alter_model_file_model_file_size'),
+        ("fl_client", "0019_alter_model_file_model_file_size"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='model_file',
-            name='model_file_size',
+            model_name="model_file",
+            name="model_file_size",
             field=models.BigIntegerField(blank=True, null=True),
         ),
     ]

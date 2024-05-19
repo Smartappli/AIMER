@@ -18,153 +18,53 @@ def get_vgg_model(vgg_type, num_classes):
 
     Raises:
     - ValueError: If the provided vgg_type is not recognized.
-
-    Note:
-    - This function loads a pre-trained VGG model and modifies its last fully connected layer
-      to match the specified number of output classes.
-
-    Example Usage:
-    ```python
-    # Obtain a VGG16 model with 10 output classes
-    model = get_vgg_model(vgg_type='VGG16', num_classes=10)
-    ```
     """
-    torch_vision = False
-    # Load the pre-trained version of VGG
-    if vgg_type == 'VGG11':
-        torch_vision = True
-        try:
-            weights = models.VGG11_Weights.DEFAULT
-            vgg_model = models.vgg11(weights=weights)
-        except RuntimeError:
-            vgg_model = models.vgg11(weights=None)
-    elif vgg_type == 'VGG11_BN':
-        torch_vision = True
-        try:
-            weights = models.VGG11_BN_Weights.DEFAULT
-            vgg_model = models.vgg11_bn(weights=weights)
-        except RuntimeError:
-            vgg_model = models.vgg11_bn(weights=None)
-    elif vgg_type == 'VGG13':
-        torch_vision = True
-        try:
-            weights = models.VGG13_Weights.DEFAULT
-            vgg_model = models.vgg13(weights=weights)
-        except RuntimeError:
-            vgg_model = models.vgg13(weights=None)
-    elif vgg_type == 'VGG13_BN':
-        torch_vision = True
-        try:
-            weights = models.VGG13_BN_Weights.DEFAULT
-            vgg_model = models.vgg13_bn(weights=weights)
-        except RuntimeError:
-            vgg_model = models.vgg13_bn(weights=None)
-    elif vgg_type == 'VGG16':
-        torch_vision = True
-        try:
-            weights = models.VGG16_Weights.DEFAULT
-            vgg_model = models.vgg16(weights=weights)
-        except RuntimeError:
-            vgg_model = models.vgg16(weights=None)
-    elif vgg_type == 'VGG16_BN':
-        torch_vision = True
-        try:
-            weights = models.VGG16_BN_Weights.DEFAULT
-            vgg_model = models.vgg16_bn(weights=weights)
-        except RuntimeError:
-            vgg_model = models.vgg16_bn(weights=None)
-    elif vgg_type == 'VGG19':
-        torch_vision = True
-        try:
-            weights = models.VGG19_Weights.DEFAULT
-            vgg_model = models.vgg19(weights=weights)
-        except RuntimeError:
-            vgg_model = models.vgg19(weights=None)
-    elif vgg_type == 'VGG19_BN':
-        torch_vision = True
-        try:
-            weights = models.VGG19_BN_Weights.DEFAULT
-            vgg_model = models.vgg19_bn(weights=weights)
-        except RuntimeError:
-            vgg_model = models.vgg19_bn(weights=None)
-    elif vgg_type == "vgg11":
-        try:
-            vgg_model = create_model('vgg11',
-                                     pretrained=True,
-                                     num_classes=num_classes)
-        except RuntimeError:
-            vgg_model = create_model('vgg11',
-                                     pretrained=False,
-                                     num_classes=num_classes)
-    elif vgg_type == "vgg11_bn":
-        try:
-            vgg_model = create_model('vgg11_bn',
-                                     pretrained=True,
-                                     num_classes=num_classes)
-        except RuntimeError:
-            vgg_model = create_model('vgg11_bn',
-                                     pretrained=False,
-                                     num_classes=num_classes)
-    elif vgg_type == "vgg13":
-        try:
-            vgg_model = create_model('vgg13',
-                                     pretrained=True,
-                                     num_classes=num_classes)
-        except RuntimeError:
-            vgg_model = create_model('vgg13',
-                                     pretrained=False,
-                                     num_classes=num_classes)
-    elif vgg_type == "vgg13_bn":
-        try:
-            vgg_model = create_model('vgg13_bn',
-                                     pretrained=True,
-                                     num_classes=num_classes)
-        except RuntimeError:
-            vgg_model = create_model('vgg13_bn',
-                                     pretrained=False,
-                                     num_classes=num_classes)
-    elif vgg_type == "vgg16":
-        try:
-            vgg_model = create_model('vgg16',
-                                     pretrained=True,
-                                     num_classes=num_classes)
-        except RuntimeError:
-            vgg_model = create_model('vgg16',
-                                     pretrained=False,
-                                     num_classes=num_classes)
-    elif vgg_type == "vgg16_bn":
-        try:
-            vgg_model = create_model('vgg16_bn',
-                                     pretrained=True,
-                                     num_classes=num_classes)
-        except RuntimeError:
-            vgg_model = create_model('vgg16_bn',
-                                     pretrained=False,
-                                     num_classes=num_classes)
-    elif vgg_type == "vgg19":
-        try:
-            vgg_model = create_model('vgg19',
-                                     pretrained=True,
-                                     num_classes=num_classes)
-        except RuntimeError:
-            vgg_model = create_model('vgg19',
-                                     pretrained=False,
-                                     num_classes=num_classes)
-    elif vgg_type == "vgg19_bn":
-        try:
-            vgg_model = create_model('vgg19_bn',
-                                     pretrained=True,
-                                     num_classes=num_classes)
-        except RuntimeError:
-            vgg_model = create_model('vgg19_bn',
-                                     pretrained=False,
-                                     num_classes=num_classes)
-    else:
-        raise ValueError(f'Unknown VGG Architecture : {vgg_type}')
+    torchvision_models = {
+        "VGG11": (models.vgg11, models.VGG11_Weights),
+        "VGG11_BN": (models.vgg11_bn, models.VGG11_BN_Weights),
+        "VGG13": (models.vgg13, models.VGG13_Weights),
+        "VGG13_BN": (models.vgg13_bn, models.VGG13_BN_Weights),
+        "VGG16": (models.vgg16, models.VGG16_Weights),
+        "VGG16_BN": (models.vgg16_bn, models.VGG16_BN_Weights),
+        "VGG19": (models.vgg19, models.VGG19_Weights),
+        "VGG19_BN": (models.vgg19_bn, models.VGG19_BN_Weights),
+    }
 
-    if torch_vision:
+    timm_models = [
+        "vgg11",
+        "vgg11_bn",
+        "vgg13",
+        "vgg13_bn",
+        "vgg16",
+        "vgg16_bn",
+        "vgg19",
+        "vgg19_bn",
+    ]
+
+    # Check if the vision type is from torchvision
+    if vgg_type in torchvision_models:
+        model_func, weights_class = torchvision_models[vgg_type]
+        try:
+            weights = weights_class.DEFAULT
+            vgg_model = model_func(weights=weights)
+        except RuntimeError as e:
+            print(f"{vgg_type} - Error loading pretrained model: {e}")
+            vgg_model = model_func(weights=None)
+
         # Modify last layer to suit number of classes
         num_features = vgg_model.classifier[-1].in_features
         vgg_model.classifier[-1] = nn.Linear(num_features, num_classes)
+
+    # Check if the vision type is from the 'timm' library
+    elif vgg_type in timm_models:
+        try:
+            vgg_model = create_model(vgg_type, pretrained=True, num_classes=num_classes)
+        except RuntimeError as e:
+            print(f"{vgg_type} - Error loading pretrained model: {e}")
+            vgg_model = create_model(
+                vgg_type, pretrained=False, num_classes=num_classes
+            )
+    else:
+        raise ValueError(f"Unknown VGG Architecture : {vgg_type}")
 
     return vgg_model

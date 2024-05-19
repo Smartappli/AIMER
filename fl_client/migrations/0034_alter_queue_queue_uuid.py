@@ -5,15 +5,14 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('fl_client', '0033_alter_local_project_local_project_uuid'),
+        ("fl_client", "0033_alter_local_project_local_project_uuid"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='queue',
-            name='queue_uuid',
+            model_name="queue",
+            name="queue_uuid",
             field=models.UUIDField(default=uuid.uuid4, editable=False, unique=True),
         ),
     ]

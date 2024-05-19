@@ -10,6 +10,7 @@ class ProcessinAlexnetTestCase(TestCase):
     """
     Test case class for processing Alexenet model.
     """
+
     def test_alexnet_model(self):
         """
         Test case for creating AlexNet models.
@@ -20,7 +21,7 @@ class ProcessinAlexnetTestCase(TestCase):
         Raises:
             AssertionError: If the assertion fails.
         """
-        alexnet_types = ['AlexNet']
+        alexnet_types = ["AlexNet"]
         num_classes = 10  # You can adjust the number of classes as needed
 
         for alexnet_type in alexnet_types:
@@ -37,15 +38,14 @@ class ProcessinAlexnetTestCase(TestCase):
             ValueError: If an unknown AlexNet architecture is encountered.
             AssertionError: If the assertion fails.
         """
-        alexnet_type = 'UnknownArchitecture'
+        alexnet_type = "UnknownArchitecture"
         num_classes = 10
 
         with self.assertRaises(ValueError) as context:
             get_alexnet_model(alexnet_type, num_classes)
 
         self.assertEqual(
-            str(context.exception),
-            f'Unknown AlexNet Architecture: {alexnet_type}'
+            str(context.exception), f"Unknown AlexNet Architecture: {alexnet_type}"
         )
 
     def test_alexnet_last_layer_adaptation(self):
@@ -56,7 +56,7 @@ class ProcessinAlexnetTestCase(TestCase):
             AssertionError: If the assertion fails.
         """
         # Provide a known architecture type
-        alexnet_type = 'AlexNet'
+        alexnet_type = "AlexNet"
         num_classes = 10
 
         # Override the last layer with a linear layer for testing purposes

@@ -4,15 +4,14 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('fl_client', '0012_alter_document_options_alter_model_options_and_more'),
+        ("fl_client", "0012_alter_document_options_alter_model_options_and_more"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='model',
-            name='model_repo',
+            model_name="model",
+            name="model_repo",
             field=models.CharField(blank=True, max_length=250, null=True),
         ),
     ]

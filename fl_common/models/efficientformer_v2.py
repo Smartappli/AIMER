@@ -13,12 +13,23 @@ def get_efficientformer_v2_model(efficientformer_v2_type, num_classes):
     Returns:
         torch.nn.Module: Efficientformer v2 model.
     """
-    supported_types = ['efficientformerv2_s0', 'efficientformerv2_s1', 'efficientformerv2_s2', 'efficientformerv2_l']
+    supported_types = [
+        "efficientformerv2_s0",
+        "efficientformerv2_s1",
+        "efficientformerv2_s2",
+        "efficientformerv2_l",
+    ]
     if efficientformer_v2_type not in supported_types:
-        raise ValueError(f'Unknown Efficientformer v2 Architecture: {efficientformer_v2_type}')
+        raise ValueError(
+            f"Unknown Efficientformer v2 Architecture: {efficientformer_v2_type}"
+        )
 
     try:
-        return create_model(efficientformer_v2_type, pretrained=True, num_classes=num_classes)
+        return create_model(
+            efficientformer_v2_type, pretrained=True, num_classes=num_classes
+        )
     except RuntimeError as e:
         print(f"{efficientformer_v2_type} - Error loading pretrained model: {e}")
-        return create_model(efficientformer_v2_type, pretrained=False, num_classes=num_classes)
+        return create_model(
+            efficientformer_v2_type, pretrained=False, num_classes=num_classes
+        )

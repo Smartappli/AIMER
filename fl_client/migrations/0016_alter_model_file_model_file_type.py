@@ -4,15 +4,33 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('fl_client', '0015_alter_model_file_options_and_more'),
+        ("fl_client", "0015_alter_model_file_options_and_more"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='model_file',
-            name='model_file_type',
-            field=models.CharField(choices=[('NA', 'N/A'), ('Q2K', 'Q2_K'), ('Q3KL', 'Q3_K_L'), ('Q3KM', 'Q3_K_M'), ('Q3KS', 'Q3_K_S'), ('Q40', 'Q4_0'), ('Q41', 'Q4_1'), ('Q4KM', 'Q4_K_M'), ('Q4KS', 'Q4_K_S'), ('Q50', 'Q5_0'), ('Q5KM', 'Q5_K_M'), ('Q5KS', 'Q5_K_S'), ('Q6K', 'Q6_K'), ('Q80', 'Q8_0')], default='NA', max_length=4),
+            model_name="model_file",
+            name="model_file_type",
+            field=models.CharField(
+                choices=[
+                    ("NA", "N/A"),
+                    ("Q2K", "Q2_K"),
+                    ("Q3KL", "Q3_K_L"),
+                    ("Q3KM", "Q3_K_M"),
+                    ("Q3KS", "Q3_K_S"),
+                    ("Q40", "Q4_0"),
+                    ("Q41", "Q4_1"),
+                    ("Q4KM", "Q4_K_M"),
+                    ("Q4KS", "Q4_K_S"),
+                    ("Q50", "Q5_0"),
+                    ("Q5KM", "Q5_K_M"),
+                    ("Q5KS", "Q5_K_S"),
+                    ("Q6K", "Q6_K"),
+                    ("Q80", "Q8_0"),
+                ],
+                default="NA",
+                max_length=4,
+            ),
         ),
     ]

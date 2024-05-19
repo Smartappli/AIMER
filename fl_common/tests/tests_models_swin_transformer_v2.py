@@ -19,11 +19,20 @@ class ProcessingSwinTransformerv2TestCase(TestCase):
             AssertionError: If any of the assertions fail.
         """
         # List of Swin Transformer model types to test
-        swin_types = ["swinv2_tiny_window16_256", "swinv2_tiny_window8_256", "swinv2_small_window16_256",
-                      "swinv2_small_window8_256", "swinv2_base_window16_256", "swinv2_base_window8_256",
-                      "swinv2_base_window12_192", "swinv2_base_window12to16_192to256",
-                      "swinv2_base_window12to24_192to384", "swinv2_large_window12_192",
-                      "swinv2_large_window12to16_192to256", "swinv2_large_window12to24_192to384"]
+        swin_types = [
+            "swinv2_tiny_window16_256",
+            "swinv2_tiny_window8_256",
+            "swinv2_small_window16_256",
+            "swinv2_small_window8_256",
+            "swinv2_base_window16_256",
+            "swinv2_base_window8_256",
+            "swinv2_base_window12_192",
+            "swinv2_base_window12to16_192to256",
+            "swinv2_base_window12to24_192to384",
+            "swinv2_large_window12_192",
+            "swinv2_large_window12to16_192to256",
+            "swinv2_large_window12to24_192to384",
+        ]
         num_classes = 10  # You can adjust the number of classes as needed
 
         # Loop through each Swin Transformer model type
@@ -42,14 +51,15 @@ class ProcessingSwinTransformerv2TestCase(TestCase):
             AssertionError: If the assertion fails.
             ValueError: If an unknown Swin Transformer architecture is provided.
         """
-        swin_type = 'UnknownArchitecture'
+        swin_type = "UnknownArchitecture"
         num_classes = 10
 
         with self.assertRaises(ValueError) as context:
-            # Attempt to get a Swin Transformer model with an unknown architecture
+            # Attempt to get a Swin Transformer model with an unknown
+            # architecture
             get_swin_transformer_v2_model(swin_type, num_classes)
 
         self.assertEqual(
             str(context.exception),
-            f'Unknown Swin Transformer v2 Architecture: {swin_type}'
+            f"Unknown Swin Transformer v2 Architecture: {swin_type}",
         )

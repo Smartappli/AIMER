@@ -14,7 +14,7 @@ class ProcessingTntTestCase(TestCase):
         """
         Test for known TnT architecture types to ensure they return a model without raising any exceptions.
         """
-        known_tnt_types = ['tnt_s_patch16_224', 'tnt_b_patch16_224']
+        known_tnt_types = ["tnt_s_patch16_224", "tnt_b_patch16_224"]
         num_classes = 1000  # Assuming 1000 classes for the test
 
         for tnt_type in known_tnt_types:

@@ -24,11 +24,10 @@ admin.site.site_title = "Ai Toolbox Admin Portal"
 admin.site.index_title = "Welcome to Ai Toolbox Researcher Portal"
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('server/', include('fl_server.urls')),
-    path('', include('fl_client.urls'))
+    path("admin/", admin.site.urls),
+    path("server/", include("fl_server.urls")),
+    path("", include("fl_client.urls")),
 ]
 
 if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL,
-                          document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

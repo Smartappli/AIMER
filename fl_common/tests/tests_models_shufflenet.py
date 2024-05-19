@@ -19,7 +19,12 @@ class ProcessingPartSTestCase(TestCase):
             AssertionError: If any of the assertions fail.
         """
         # List of ShuffleNet model types to test
-        shufflenet_types = ['ShuffleNet_V2_X0_5', 'ShuffleNet_V2_X1_0', 'ShuffleNet_V2_X1_5', 'ShuffleNet_V2_X2_0']
+        shufflenet_types = [
+            "ShuffleNet_V2_X0_5",
+            "ShuffleNet_V2_X1_0",
+            "ShuffleNet_V2_X1_5",
+            "ShuffleNet_V2_X2_0",
+        ]
         num_classes = 10  # You can adjust the number of classes as needed
 
         # Loop through each ShuffleNet model type
@@ -39,7 +44,7 @@ class ProcessingPartSTestCase(TestCase):
             AssertionError: If the assertion fails.
             ValueError: If an unknown ShuffleNet architecture is provided.
         """
-        shufflenet_type = 'UnknownArchitecture'
+        shufflenet_type = "UnknownArchitecture"
         num_classes = 10
 
         with self.assertRaises(ValueError) as context:
@@ -48,7 +53,7 @@ class ProcessingPartSTestCase(TestCase):
 
         self.assertEqual(
             str(context.exception),
-            f'Unknown ShuffleNet Architecture: {shufflenet_type}'
+            f"Unknown ShuffleNet Architecture: {shufflenet_type}",
         )
 
     def test_shufflenet_last_layer_adaptation(self):
@@ -59,7 +64,7 @@ class ProcessingPartSTestCase(TestCase):
             AssertionError: If any of the assertions fail.
         """
         # Provide a known architecture type
-        shufflenet_type = 'ShuffleNet_V2_X0_5'
+        shufflenet_type = "ShuffleNet_V2_X0_5"
         num_classes = 10
 
         # Override the last layer with a linear layer for testing purposes

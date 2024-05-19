@@ -33,19 +33,42 @@ def get_mobilenet_model(mobilenet_type, num_classes):
     model = get_mobilenet_model(mobilenet_type='MobileNet_V2', num_classes=10)
     ```
     """
-    # Mapping of vision types to their corresponding torchvision models and weights
+    # Mapping of vision types to their corresponding torchvision models and
+    # weights
     torchvision_models = {
-        'MobileNet_V2': (models.mobilenet_v2, models.MobileNet_V2_Weights),
-        'MobileNet_V3_Small': (models.mobilenet_v3_small, models.MobileNet_V3_Small_Weights),
-        'MobileNet_V3_Large': (models.mobilenet_v3_large, models.MobileNet_V3_Large_Weights)
+        "MobileNet_V2": (models.mobilenet_v2, models.MobileNet_V2_Weights),
+        "MobileNet_V3_Small": (
+            models.mobilenet_v3_small,
+            models.MobileNet_V3_Small_Weights,
+        ),
+        "MobileNet_V3_Large": (
+            models.mobilenet_v3_large,
+            models.MobileNet_V3_Large_Weights,
+        ),
     }
 
     timm_models = [
-        "mobilenetv3_large_075", "mobilenetv3_large_100", "mobilenetv3_small_050", "mobilenetv3_small_075",
-        "mobilenetv3_small_075", "mobilenetv3_small_100", "mobilenetv3_rw", "tf_mobilenetv3_large_075",
-        "tf_mobilenetv3_large_100", "tf_mobilenetv3_large_minimal_100", "tf_mobilenetv3_small_075",
-        "tf_mobilenetv3_small_100", "tf_mobilenetv3_small_minimal_100", "fbnetv3_b", "fbnetv3_d",
-        "fbnetv3_g", "lcnet_035", "lcnet_050", "lcnet_075", "lcnet_100", "lcnet_150"
+        "mobilenetv3_large_075",
+        "mobilenetv3_large_100",
+        "mobilenetv3_small_050",
+        "mobilenetv3_small_075",
+        "mobilenetv3_small_075",
+        "mobilenetv3_small_100",
+        "mobilenetv3_rw",
+        "tf_mobilenetv3_large_075",
+        "tf_mobilenetv3_large_100",
+        "tf_mobilenetv3_large_minimal_100",
+        "tf_mobilenetv3_small_075",
+        "tf_mobilenetv3_small_100",
+        "tf_mobilenetv3_small_minimal_100",
+        "fbnetv3_b",
+        "fbnetv3_d",
+        "fbnetv3_g",
+        "lcnet_035",
+        "lcnet_050",
+        "lcnet_075",
+        "lcnet_100",
+        "lcnet_150",
     ]
 
     # Check if the vision type is from torchvision
@@ -65,11 +88,15 @@ def get_mobilenet_model(mobilenet_type, num_classes):
     # Check if the vision type is from the 'timm' library
     elif mobilenet_type in timm_models:
         try:
-            mobilenet_model = create_model(mobilenet_type, pretrained=True, num_classes=num_classes)
+            mobilenet_model = create_model(
+                mobilenet_type, pretrained=True, num_classes=num_classes
+            )
         except RuntimeError as e:
             print(f"{mobilenet_type} - Error loading pretrained model: {e}")
-            mobilenet_model = create_model(mobilenet_type, pretrained=False, num_classes=num_classes)
+            mobilenet_model = create_model(
+                mobilenet_type, pretrained=False, num_classes=num_classes
+            )
     else:
-        raise ValueError(f'Unknown MobileNet Architecture : {mobilenet_type}')
+        raise ValueError(f"Unknown MobileNet Architecture : {mobilenet_type}")
 
     return mobilenet_model
