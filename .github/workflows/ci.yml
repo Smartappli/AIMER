@@ -39,7 +39,7 @@ jobs:
         with:
           file: ./Docker/cpu/cpu.Dockerfile
           push: true
-          tags: smartappli/llama-cpp-python-server-cpu:latest
+          tags: smartappli/llm-server-cpu:latest
 
   docker-cuda:
     runs-on: ubuntu-latest
@@ -61,4 +61,4 @@ jobs:
         with:
           file: ./Docker/cuda/cuda.Dockerfile
           push: true
-          tags: smartappli/llama-cpp-python-server-cuda:latest
+          tags: smartappli/llm-server-cuda:latest
