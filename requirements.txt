@@ -28,7 +28,7 @@ hagrid==0.3.121
 wheel>=0.40.0 # not directly required, pinned by Snyk to avoid a vulnerability
 ansible-core>=2.16.6 # not directly required, pinned by Snyk to avoid a vulnerability
 gevent>=23.9.0 # not directly required, pinned by Snyk to avoid a vulnerability
-setuptools==65.5.0 # not directly required, pinned by Snyk to avoid a vulnerability
+setuptools==65.5.1 # not directly required, pinned by Snyk to avoid a vulnerability
 pillow>=10.3.0 # not directly required, pinned by Snyk to avoid a vulnerability
-#llama-cpp-python==0.2.60 --prefer-binary --extra-index-url=https://smartappli.github.io/llama-cpp-python-cuBLAS-wheels/AVX2/cpu
-#llama-cpp-python==0.2.60 --extra-index-url https://abetlen.github.io/llama-cpp-python/whl/cpu
+#llama-cpp-python==0.2.75 --prefer-binary --extra-index-url=https://smartappli.github.io/llama-cpp-python-cuBLAS-wheels/AVX2/cpu
+#llama-cpp-python==0.2.75 --extra-index-url https://abetlen.github.io/llama-cpp-python/whl/cpu
