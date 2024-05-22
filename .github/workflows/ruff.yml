@@ -8,4 +8,8 @@ jobs:
       - uses: actions/checkout@v4
       - uses: chartboost/ruff-action@v1
         with:
-          args: 'check --select ALL --ignore F401 --unsafe-fixes --fix'
+          args: 'check --select ALL --ignore F401'
+          fix_args: '--unsafe-fixes --fix'
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: 'style fixes by ruff'
