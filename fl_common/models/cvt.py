@@ -29,4 +29,3 @@ def get_cvt_model(cvt_type, num_classes):
     except RuntimeError as e:
         print(f"{cvt_type} - Error loading pretrained model: {e}")
         return create_model(cvt_type, pretrained=False, num_classes=num_classes)
-      
