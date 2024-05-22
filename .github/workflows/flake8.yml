@@ -25,4 +25,4 @@ jobs:
           exclude: "fl_client/migrations/*.py"
           ignore: "E501,F401,W503,W504"
           max-line-length: "125"
-          plugins: "flake8-bugbear flake8-django"
+          plugins: "flake8-bugbear flake8-django flake8-bandit"
