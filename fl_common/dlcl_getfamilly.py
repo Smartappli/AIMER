@@ -11,6 +11,7 @@ from fl_common.models.convmixer import get_convmixer_model
 from fl_common.models.convnext import get_convnext_model
 from fl_common.models.crossvit import get_crossvit_model
 from fl_common.models.cspnet import get_cspnet_model
+from fl_common.models.cvt import get_cvt_model
 from fl_common.models.davit import get_davit_model
 from fl_common.models.deit import get_deit_model
 from fl_common.models.densenet import get_densenet_model
@@ -300,6 +301,9 @@ def get_family_model_c(model_type, num_classes):
         "cs3sedarknet_xdw": get_cspnet_model,
         "cs3edgenet_x": get_cspnet_model,
         "cs3se_edgenet_x": get_cspnet_model,
+        "cvt_13": get_cvt_model,
+        "cvt_21": get_cvt_model,
+        "cvt_w24": get_cvt_model,
     }
 
     if model_type not in model_retrieval_functions:
