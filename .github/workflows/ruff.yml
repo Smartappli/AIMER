@@ -11,5 +11,7 @@ jobs:
         with:
           args: 'check --select F,UP --ignore F401 --fixable ALL --fix'
       - uses: stefanzweifel/git-auto-commit-action@v4
-        with:
+        with
+          branch: 'ruff'
+          create_branch: true
           commit_message: 'style fixes by ruff'
