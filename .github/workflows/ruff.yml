@@ -9,7 +9,7 @@ jobs:
       - uses: actions/setup-python@v5
       - uses: chartboost/ruff-action@v1
         with:
-          args: 'check --select F --ignore F401'
+          args: 'check --select F,UP --ignore F401'
           fix_args: '--fixable ALL --fix'
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
