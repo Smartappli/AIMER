@@ -1,5 +1,5 @@
 import os
-import torch as nn
+from torch import nn
 from django.test import TestCase
 from fl_common.models.squeezenet import get_squeezenet_model
 
