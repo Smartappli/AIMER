@@ -10,7 +10,7 @@ class ProcessingViTaminTestCase(TestCase):
     Test case class for processing ViTamin models.
     """
 
-    def test_known_ViTamin_types(self):
+    def test_known_vitamin_types(self):
         """
         Test the get_ViTamin_model function with known ViTamin types.
 
