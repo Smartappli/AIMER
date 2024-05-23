@@ -1,5 +1,5 @@
 import os
-import torch.nn as nn
+feom torch import nn
 from django.test import TestCase
 from fl_common.models.vision_transformer import get_vision_transformer_model
 
