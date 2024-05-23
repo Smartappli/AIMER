@@ -2,7 +2,7 @@ import os
 import torch
 from torch import nn
 from torch import optim
-import torch.optim.lr_scheduler as lr_scheduler
+from torch.optim import lr_scheduler
 from torchvision import transforms, utils
 from django.test import TestCase
 from fl_common.models.utils import (
