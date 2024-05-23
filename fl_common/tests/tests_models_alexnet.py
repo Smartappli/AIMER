@@ -1,5 +1,5 @@
 import os
-import torch as nn
+from torch import nn
 from django.test import TestCase
 from fl_common.models.alexnet import get_alexnet_model
 
