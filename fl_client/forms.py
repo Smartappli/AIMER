@@ -20,13 +20,13 @@ class DLClassificationForm(forms.Form):
     # --- MODELS ---
 
     # Xception #
-    dpcla_Xception = forms.BooleanField(required=False)
+    dpcla_xception = forms.BooleanField(required=False)
 
     # VGG
-    dpcla_VGG11 = forms.BooleanField(required=False)
-    dpcla_VGG13 = forms.BooleanField(required=False)
-    dpcla_VGG16 = forms.BooleanField(required=False)
-    dpcla_VGG19 = forms.BooleanField(required=False)
+    dpcla_vgg11 = forms.BooleanField(required=False)
+    dpcla_vgg13 = forms.BooleanField(required=False)
+    dpcla_vgg16 = forms.BooleanField(required=False)
+    dpcla_vgg19 = forms.BooleanField(required=False)
 
     # ResNet, ResNet V2, ResNetRS
     dpcla_ResNet18 = forms.BooleanField(required=False)
