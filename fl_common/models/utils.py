@@ -1,8 +1,8 @@
 import os
 import torch
-import torch.nn as nn
-import torch.optim as optim
-import torch.optim.lr_scheduler as lr_scheduler
+from torch import nn
+from torch import optim
+from torch.optim import lr_scheduler
 from torch.utils.data import DataLoader
 from torchvision import datasets, transforms
 
