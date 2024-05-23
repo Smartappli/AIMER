@@ -5,7 +5,7 @@ from fl_common.models.efficientvit_msra import get_efficientvit_msra_model
 os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
 
 
-class ProcessingEfficientVit_msraTestCase(TestCase):
+class ProcessingEfficientVit_MsraTestCase(TestCase):
     """
     Test case class for processing Efficientvit_msramodels.
     """
