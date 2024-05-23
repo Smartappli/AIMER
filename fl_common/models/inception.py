@@ -1,4 +1,4 @@
-import torch.nn as nn
+from torch as nn
 from torchvision import models
 from timm import create_model
 
