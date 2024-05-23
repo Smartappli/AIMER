@@ -25,4 +25,4 @@ jobs:
           exclude: "fl_client/migrations/*.py,fl_server/migrations/*.py"
           ignore: "E501,F401,W503,W504"
           max-line-length: "125"
-          plugins: "flake8-builtins flake8-commas flake8-errmsg flake8-fixme flake8-logging-format flake8-naming flake8-pie flake8-use-pathlib flake8-return flake8-type-checling flake8-todo flake8-tidy-imports flake8-bugbear flake8-django flake8-bandit TorchFix pandas-vet"
+          plugins: "flake8-builtins flake8-commas flake8-errmsg flake8-fixme flake8-logging-format pep8-naming flake8-pie flake8-use-pathlib flake8-return flake8-type-checling flake8-todo flake8-tidy-imports flake8-bugbear flake8-django flake8-bandit TorchFix pandas-vet"
