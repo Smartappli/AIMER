@@ -1,6 +1,6 @@
 import os
 import torch
-import torch.nn as nn
+from torch import nn
 from django.test import TestCase
 from fl_common.models.inception import get_inception_model
 
