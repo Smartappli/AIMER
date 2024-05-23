@@ -1,5 +1,5 @@
 import os
-import torch.nn as nn
+from torch import nn
 from django.test import TestCase
 from fl_common.models.resnext import get_resnext_model
 
