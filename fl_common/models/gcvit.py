@@ -25,7 +25,8 @@ def get_gcvit_model(gcvit_type, num_classes):
     }
 
     if gcvit_type not in supported_types:
-        raise ValueError(f"Unknown GCVIT Architecture: {gcvit_type}")
+        msg = f"Unknown GCVIT Architecture: {gcvit_type}"
+        raise ValueError(msg)
 
     try:
         return create_model(gcvit_type, pretrained=True, num_classes=num_classes)
