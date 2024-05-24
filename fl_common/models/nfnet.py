@@ -55,7 +55,7 @@ def get_nfnet_model(nfnet_type, num_classes):
 
     if nfnet_type not in valid_nfnet_types:
         msg = f"Unknown NFNet Architecture: {nfnet_type}"
-        raise ValueError(f"Unknown NFNet Architecture: {nfnet_type}")
+        raise ValueError(msg)
 
     try:
         return create_model(
