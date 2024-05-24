@@ -84,6 +84,7 @@ def get_convnext_model(convnext_type, num_classes):
                 convnext_type, pretrained=False, num_classes=num_classes
             )
     else:
-        raise ValueError(f"Unknown ConvNeXt Architecture : {convnext_type}")
+        msg = f"Unknown ConvNeXt Architecture : {convnext_type}"
+        raise ValueError(msg)
 
     return convnext_model
