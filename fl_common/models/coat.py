@@ -27,7 +27,8 @@ def get_coat_model(coat_type, num_classes):
     }
 
     if coat_type not in valid_coat_types:
-        raise ValueError(f"Unknown COAT Architecture: {coat_type}")
+        msg = f"Unknown COAT Architecture: {coat_type}"
+        raise ValueError(msg)
 
     try:
         return create_model(coat_type, pretrained=True, num_classes=num_classes)
