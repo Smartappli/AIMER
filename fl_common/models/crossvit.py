@@ -35,10 +35,10 @@ def get_crossvit_model(crossvit_type, num_classes):
 
     try:
         return create_model(
-            crossvit_type, pretrained=True, num_classes=num_classes
+            crossvit_type, pretrained=True, num_classes=num_classes,
         )
     except RuntimeError as e:
         print(f"{crossvit_type} - Error loading pretrained model: {e}")
         return create_model(
-            crossvit_type, pretrained=False, num_classes=num_classes
+            crossvit_type, pretrained=False, num_classes=num_classes,
         )
