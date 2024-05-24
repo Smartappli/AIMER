@@ -25,7 +25,8 @@ def get_ghostnet_model(ghostnet_type, num_classes):
     }
 
     if ghostnet_type not in supported_types:
-        raise ValueError(f"Unknown GhostNet Architecture: {ghostnet_type}")
+        msg = f"Unknown GhostNet Architecture: {ghostnet_type}"
+        raise ValueError(msg)
 
     try:
         return create_model(ghostnet_type, pretrained=True, num_classes=num_classes)
