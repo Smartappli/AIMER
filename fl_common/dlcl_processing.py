@@ -147,7 +147,7 @@ for model_type in model_list:
 
     # Load your custom dataset
     train_loader, val_loader, test_loader, num_classes, class_names = get_dataset(
-        dataset_path, batch_size, augmentation_params, normalize_params
+        dataset_path, batch_size, augmentation_params, normalize_params,
     )
 
     print(f"Model: {model_type}")
@@ -166,7 +166,7 @@ for model_type in model_list:
     model_parameters = model.parameters()
     criterion = get_criterion(criterion_name_phase1)
     optimizer = get_optimizer(
-        optimizer_name_phase1, model_parameters, learning_rate_phase1
+        optimizer_name_phase1, model_parameters, learning_rate_phase1,
     )
 
     # scheduler = get_scheduler(optimizer, scheduler_type='step', step_size=10, gamma=0.5)
@@ -177,13 +177,13 @@ for model_type in model_list:
 
     # Training loop
     early_stopping_phase1 = EarlyStopping(
-        patience=early_stopping_patience_phase1, verbose=verbose
+        patience=early_stopping_patience_phase1, verbose=verbose,
     )
     early_stopping_phase2 = EarlyStopping(
-        patience=early_stopping_patience_phase2, verbose=verbose
+        patience=early_stopping_patience_phase2, verbose=verbose,
     )
     early_stopping_phase3 = EarlyStopping(
-        patience=early_stopping_patience_phase3, verbose=verbose
+        patience=early_stopping_patience_phase3, verbose=verbose,
     )
 
     train_losses = []
@@ -203,7 +203,7 @@ for model_type in model_list:
         total_train = 0
 
         print(
-            f"\nEpoch {epoch + 1}/{num_epochs_phase1}, Learning Rate: {optimizer.param_groups[0]['lr']}"
+            f"\nEpoch {epoch + 1}/{num_epochs_phase1}, Learning Rate: {optimizer.param_groups[0]['lr']}",
         )
 
         # Use tqdm for a progress bar over the training batches
