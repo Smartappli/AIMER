@@ -76,12 +76,12 @@ def get_convnext_model(convnext_type, num_classes):
     elif convnext_type in timm_models:
         try:
             convnext_model = create_model(
-                convnext_type, pretrained=True, num_classes=num_classes
+                convnext_type, pretrained=True, num_classes=num_classes,
             )
         except RuntimeError as e:
             print(f"{convnext_type} - Error loading pretrained model: {e}")
             convnext_model = create_model(
-                convnext_type, pretrained=False, num_classes=num_classes
+                convnext_type, pretrained=False, num_classes=num_classes,
             )
     else:
         msg = f"Unknown ConvNeXt Architecture : {convnext_type}"
