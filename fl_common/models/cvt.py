@@ -22,7 +22,8 @@ def get_cvt_model(cvt_type, num_classes):
     ]
 
     if cvt_type not in cvt_architectures:
-        raise ValueError(f"Unknown cvt Architecture: {cvt_type}")
+        msg = f"Unknown cvt Architecture: {cvt_type}"
+        raise ValueError(msg)
 
     try:
         return create_model(cvt_type, pretrained=True, num_classes=num_classes)
