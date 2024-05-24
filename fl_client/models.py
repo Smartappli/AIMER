@@ -233,7 +233,7 @@ class Document(models.Model):
     document_filename = models.CharField(max_length=250, default="")
     document_active = models.BooleanField(default=True)
     document_owner = models.ForeignKey(
-        User, on_delete=models.DO_NOTHING, default=1, related_name="document_owner"
+        User, on_delete=models.DO_NOTHING, default=1, related_name="document_owner",
     )
     document_creation_date = models.DateTimeField(auto_now_add=True)
     document_updated_date = models.DateTimeField(auto_now=True)
@@ -310,7 +310,7 @@ class Dataset(models.Model):
         max_length=6, choices=Format.choices, default=Format.CSV,
     )
     dataset_licence = models.ForeignKey(
-        License, on_delete=models.DO_NOTHING, default=1, related_name="dataset_license"
+        License, on_delete=models.DO_NOTHING, default=1, related_name="dataset_license",
     )
     dataset_owner = models.ForeignKey(
         User, on_delete=models.DO_NOTHING, default=1, related_name="dataset_owner",
@@ -330,7 +330,7 @@ class DatasetLocalData(models.Model):
 
     dataset_local_data_id = models.BigAutoField(primary_key=True, editable=False)
     dataset_local_data_uuid = models.UUIDField(
-        default=uuid.uuid4, editable=False, unique=True
+        default=uuid.uuid4, editable=False, unique=True,
     )
     dataset_local_data_dataset_id = models.ForeignKey(
         Dataset,
@@ -370,7 +370,7 @@ class DatasetRemoteData(models.Model):
 
     dataset_remote_data_id = models.BigAutoField(primary_key=True, editable=False)
     dataset_remote_data_uuid = models.UUIDField(
-        default=uuid.uuid4, editable=False, unique=True
+        default=uuid.uuid4, editable=False, unique=True,
     )
     dataset_remote_data_dataset_id = models.ForeignKey(
         Dataset,
