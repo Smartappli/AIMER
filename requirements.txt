@@ -21,7 +21,7 @@ prophet==1.1.5
 lightgbm
 captum==0.7.0
 # psycopg2==2.9.9
-tqdm==4.66.2
+tqdm==4.66.3
 syft==0.8.7b7
 wheel>=0.40.0 # not directly required, pinned by Snyk to avoid a vulnerability
 gevent>=23.9.0 # not directly required, pinned by Snyk to avoid a vulnerability
@@ -29,3 +29,6 @@ setuptools==65.5.1 # not directly required, pinned by Snyk to avoid a vulnerabil
 pillow>=10.3.0 # not directly required, pinned by Snyk to avoid a vulnerability
 #llama-cpp-python==0.2.75 --prefer-binary --extra-index-url=https://smartappli.github.io/llama-cpp-python-cuBLAS-wheels/AVX2/cpu
 #llama-cpp-python==0.2.75 --extra-index-url https://abetlen.github.io/llama-cpp-python/whl/cpu
+fonttools>=4.43.0 # not directly required, pinned by Snyk to avoid a vulnerability
+holidays>=0.45 # not directly required, pinned by Snyk to avoid a vulnerability
+requests>=2.32.0 # not directly required, pinned by Snyk to avoid a vulnerability
