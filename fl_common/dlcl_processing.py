@@ -666,7 +666,7 @@ for model_type in model_list:
             labels_scalars = labels.tolist()  # Convert to list
 
             for j, (predicted_scalar, label_scalar) in enumerate(
-                zip(predicted_scalars, labels_scalars)
+                zip(predicted_scalars, labels_scalars),
             ):
                 if predicted_scalar != label_scalar:
                     print(
