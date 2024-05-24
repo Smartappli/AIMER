@@ -25,7 +25,8 @@ def get_hiera_model(hiera_type, num_classes):
     }
 
     if hiera_type not in valid_hiera_types:
-        raise ValueError(f"Unknown HIERA Architecture: {hiera_type}")
+        msg = f"Unknown HIERA Architecture: {hiera_type}"
+        raise ValueError(msg)
 
     try:
         return create_model(hiera_type, pretrained=True, num_classes=num_classes)
