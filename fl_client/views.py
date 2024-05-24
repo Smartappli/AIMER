@@ -25,7 +25,7 @@ def import_data(request):
     from huggingface_hub import list_repo_tree
 
     my_model = Model.objects.filter(
-        model_category="NL", model_type="TG", model_provider="HF"
+        model_category="NL", model_type="TG", model_provider="HF",
     )
     grandtotal = 0
     for p in my_model:
@@ -131,20 +131,20 @@ def download_data(request):
     )
 
     my_models = Model.objects.filter(
-        model_category="NL", model_type="TG", model_provider="HF"
+        model_category="NL", model_type="TG", model_provider="HF",
     )
 
     for p in my_models:
         print(p.model_repo)
 
         my_files = ModelFile.objects.filter(
-            model_file_model_id=p.model_id, model_file_type="Q4KM"
+            model_file_model_id=p.model_id, model_file_type="Q4KM",
         ).order_by("model_file_filename")
 
         model_listing = []
         for q in my_files:
             filepath = try_to_load_from_cache(
-                repo_id=p.model_repo, filename=q.model_file_filename, repo_type="model"
+                repo_id=p.model_repo, filename=q.model_file_filename, repo_type="model",
             )
             if isinstance(filepath, str):
                 # file exists and is cached
@@ -169,7 +169,7 @@ def download_data(request):
                     repo_id=p.model_repo,
                     filename=q.model_file_filename,
                     repo_type="model",
-                )
+                ),
             )
 
             if len(model_listing) > 1:
@@ -190,7 +190,7 @@ def download_data(request):
                         ModelFile.objects.filter(pk=q2.model_file_model_id).update(
                             model_file_filename=q2.model_file_filename.replace(
                                 "-split-a", ""
-                            )
+                            ),
                         )
                         i = 1
                     else:
@@ -613,7 +613,7 @@ def edit(request):
     if request.method == "POST":
         user_form = UserEditForm(instance=request.user, data=request.POST)
         profile_form = ProfileEditForm(
-            instance=request.user.profile, date=request.POST, files=request.FILES
+            instance=request.user.profile, date=request.POST, files=request.FILES,
         )
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
