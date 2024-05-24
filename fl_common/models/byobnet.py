@@ -60,7 +60,8 @@ def get_byobnet_model(byobnet_type, num_classes):
     ]
 
     if byobnet_type not in model_types:
-        raise ValueError(f"The Byobnet model type '{byobnet_type}' is not recognized.")
+        msg = f"The Byobnet model type '{byobnet_type}' is not recognized."
+        raise ValueError(msg)
 
     try:
         return create_model(byobnet_type, pretrained=True, num_classes=num_classes)
