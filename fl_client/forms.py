@@ -419,7 +419,8 @@ class UserRegistrationForm(forms.ModelForm):
         """Validate email"""
         data = self.cleaned_data["email"]
         if User.objects.filter(email=data).exists():
-            raise forms.ValidationError("Email already registered.")
+            msg = "Email already registered."
+            raise forms.ValidationError(msg)
         return data
 
 
@@ -435,7 +436,8 @@ class UserEditForm(forms.ModelForm):
         data = self.cleaned_data["email"]
         qs = User.objects.exclude(id=self.instance.id).filter(email=data)
         if qs.exists():
-            raise forms.ValidationError("Emaii already registered")
+            msg = "Emaii already registered."
+            raise forms.ValidationError(msg)
         return data
 
 
