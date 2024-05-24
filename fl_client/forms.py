@@ -111,7 +111,7 @@ class DLClassificationForm(forms.Form):
     dpcla_regnet_y_120 = forms.BooleanField(required=False)
     dpcla_regnet_x_160 = forms.BooleanField(required=False)
     dpcla_regnet_y_160 = forms.BooleanField(required=False)
-    dpcla_regnet_X_320 = forms.BooleanField(required=False)
+    dpcla_regnet_x_320 = forms.BooleanField(required=False)
     dpcla_regnet_y_320 = forms.BooleanField(required=False)
 
     # --- TRAINING STRATEGY ---
