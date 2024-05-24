@@ -37,7 +37,8 @@ def get_resnext_model(resnext_type, num_classes):
         except RuntimeError:
             resnext_model = models.resnext101_64x4d(weights=None)
     else:
-        raise ValueError(f"Unknown ResNeXt Architecture: {resnext_type}")
+        msg = f"Unknown ResNeXt Architecture: {resnext_type}"
+        raise ValueError(msg)
 
     # Modify the last layer to suit the given number of classes
     num_features = resnext_model.fc.in_features
