@@ -116,14 +116,15 @@ def get_regnet_model(regnet_type, num_classes):
     elif regnet_type in timm_models:
         try:
             regnet_model = create_model(
-                regnet_type, pretrained=True, num_classes=num_classes
+                regnet_type, pretrained=True, num_classes=num_classes,
             )
         except RuntimeError as e:
             print(f"{regnet_type} - Error loading pretrained model: {e}")
             regnet_model = create_model(
-                regnet_type, pretrained=False, num_classes=num_classes
+                regnet_type, pretrained=False, num_classes=num_classes,
             )
     else:
-        raise ValueError(f"Unknown RegNet Architecture: {regnet_type}")
+        msg = f"Unknown RegNet Architecture: {regnet_type}"
+        raise ValueError(msg)
 
     return regnet_model
