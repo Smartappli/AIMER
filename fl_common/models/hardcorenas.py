@@ -31,7 +31,8 @@ def get_hardcorenas_model(hardcorenas_type, num_classes):
     }
 
     if hardcorenas_type not in supported_types:
-        raise ValueError(f"Unknown HardcoreNAS Architecture: {hardcorenas_type}")
+        msg = f"Unknown HardcoreNAS Architecture: {hardcorenas_type}"
+        raise ValueError(msg)
 
     try:
         return create_model(hardcorenas_type, pretrained=True, num_classes=num_classes)
