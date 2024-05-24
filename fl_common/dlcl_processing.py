@@ -185,7 +185,7 @@ for model_type in model_list:
     # scheduler = get_scheduler(optimizer, scheduler_type='exponential', gamma=0.95)
 
     scheduler = get_scheduler(
-        optimizer, scheduler_type="step", step_size=10, gamma=0.5
+        optimizer, scheduler_type="step", step_size=10, gamma=0.5,
     )
 
     # Training loop
@@ -245,7 +245,7 @@ for model_type in model_list:
 
                 # Print progress within the epoch
                 if (batch_idx + 1) % 10 == 0 or (batch_idx + 1) == len(
-                    train_loader
+                    train_loader,
                 ):
                     avg_batch_loss = running_loss / (batch_idx + 1)
                     batch_accuracy = correct_train / total_train
