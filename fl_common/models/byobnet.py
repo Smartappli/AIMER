@@ -60,7 +60,7 @@ def get_byobnet_model(byobnet_type, num_classes):
     ]
 
     if byobnet_type not in model_types:
-        msg = f"The Byobnet model type '{byobnet_type}' is not recognized."
+        msg = f"Unknown Byobnet Architecture: {byobnet_type}"
         raise ValueError(msg)
 
     try:
