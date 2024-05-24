@@ -189,7 +189,7 @@ def download_data(request):
                     if i == 0:
                         ModelFile.objects.filter(pk=q2.model_file_model_id).update(
                             model_file_filename=q2.model_file_filename.replace(
-                                "-split-a", ""
+                                "-split-a", "",
                             ),
                         )
                         i = 1
