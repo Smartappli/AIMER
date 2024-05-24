@@ -120,9 +120,9 @@ class DLClassificationForm(forms.Form):
     dpcla_optimizer2 = forms.CharField(max_length=100, required=False)
     dpcla_optimizer3 = forms.CharField(max_length=100, required=False)
 
-    dpcla_Loss1 = forms.CharField(max_length=100, required=True)
-    dpcla_Loss2 = forms.CharField(max_length=100, required=False)
-    dpcla_Loss3 = forms.CharField(max_length=100, required=False)
+    dpcla_loss1 = forms.CharField(max_length=100, required=True)
+    dpcla_loss2 = forms.CharField(max_length=100, required=False)
+    dpcla_loss3 = forms.CharField(max_length=100, required=False)
 
     dpcla_lr1 = forms.FloatField(required=True)
     dpcla_lr2 = forms.FloatField(required=False)
