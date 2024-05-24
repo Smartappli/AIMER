@@ -15,7 +15,15 @@ def get_dpn_model(dpn_type, num_classes):
     Raises:
         ValueError: If an unknown DPN architecture type is specified.
     """
-    dpn_options = ["dpn48b", "dpn68", "dpn68b", "dpn92", "dpn98", "dpn131", "dpn107"]
+    dpn_options = [
+        "dpn48b",
+        "dpn68",
+        "dpn68b",
+        "dpn92",
+        "dpn98",
+        "dpn131",
+        "dpn107",
+    ]
     if dpn_type not in dpn_options:
         msg = f"Unknown DPN Architecture: {dpn_type}"
         raise ValueError(msg)

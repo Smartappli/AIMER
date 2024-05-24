@@ -31,7 +31,11 @@ def get_res2net_model(res2net_type, num_classes):
         raise ValueError(f"Unknown Res2Net Architecture: {res2net_type}")
 
     try:
-        return create_model(res2net_type, pretrained=True, num_classes=num_classes)
+        return create_model(
+            res2net_type, pretrained=True, num_classes=num_classes
+        )
     except RuntimeError as e:
         print(f"{res2net_type} - Error loading pretrained model: {e}")
-        return create_model(res2net_type, pretrained=False, num_classes=num_classes)
+        return create_model(
+            res2net_type, pretrained=False, num_classes=num_classes
+        )

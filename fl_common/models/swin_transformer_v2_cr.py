@@ -48,10 +48,14 @@ def get_swin_transformer_v2_cr_model(swin_type, num_classes):
     }
 
     if swin_type not in supported_types:
-        raise ValueError(f"Unknown Swin Transformer v2 cr Architecture: {swin_type}")
+        raise ValueError(
+            f"Unknown Swin Transformer v2 cr Architecture: {swin_type}"
+        )
 
     try:
         return create_model(swin_type, pretrained=True, num_classes=num_classes)
     except RuntimeError as e:
         print(f"{swin_type} - Error loading pretrained model: {e}")
-        return create_model(swin_type, pretrained=False, num_classes=num_classes)
+        return create_model(
+            swin_type, pretrained=False, num_classes=num_classes
+        )

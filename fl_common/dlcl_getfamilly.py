@@ -67,7 +67,9 @@ from fl_common.models.sknet import get_sknet_model
 from fl_common.models.squeezenet import get_squeezenet_model
 from fl_common.models.swin_transformer import get_swin_transformer_model
 from fl_common.models.swin_transformer_v2 import get_swin_transformer_v2_model
-from fl_common.models.swin_transformer_v2_cr import get_swin_transformer_v2_cr_model
+from fl_common.models.swin_transformer_v2_cr import (
+    get_swin_transformer_v2_cr_model,
+)
 from fl_common.models.tiny_vit import get_tiny_vit_model
 from fl_common.models.tnt import get_tnt_model
 from fl_common.models.twins import get_twins_model
@@ -81,7 +83,9 @@ from fl_common.models.vision_transformer_hybrid import (
 from fl_common.models.vision_transformer_relpos import (
     get_vision_transformer_relpos_model,
 )
-from fl_common.models.vision_transformer_sam import get_vision_transformer_sam_model
+from fl_common.models.vision_transformer_sam import (
+    get_vision_transformer_sam_model,
+)
 from fl_common.models.vitamin import get_vitamin_model
 from fl_common.models.volo import get_volo_model
 from fl_common.models.vovnet import get_vovnet_model

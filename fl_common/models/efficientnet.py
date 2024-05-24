@@ -44,17 +44,50 @@ def get_efficientnet_model(efficientnet_type, num_classes):
     # Mapping of vision types to their corresponding torchvision models and
     # weights
     torchvision_models = {
-        "EfficientNetB0": (models.efficientnet_b0, models.EfficientNet_B0_Weights),
-        "EfficientNetB1": (models.efficientnet_b1, models.EfficientNet_B1_Weights),
-        "EfficientNetB2": (models.efficientnet_b2, models.EfficientNet_B2_Weights),
-        "EfficientNetB3": (models.efficientnet_b3, models.EfficientNet_B3_Weights),
-        "EfficientNetB4": (models.efficientnet_b4, models.EfficientNet_B4_Weights),
-        "EfficientNetB5": (models.efficientnet_b5, models.EfficientNet_B5_Weights),
-        "EfficientNetB6": (models.efficientnet_b6, models.EfficientNet_B6_Weights),
-        "EfficientNetB7": (models.efficientnet_b7, models.EfficientNet_B7_Weights),
-        "EfficientNetV2S": (models.efficientnet_v2_s, models.EfficientNet_V2_S_Weights),
-        "EfficientNetV2M": (models.efficientnet_v2_m, models.EfficientNet_V2_M_Weights),
-        "EfficientNetV2L": (models.efficientnet_v2_l, models.EfficientNet_V2_L_Weights),
+        "EfficientNetB0": (
+            models.efficientnet_b0,
+            models.EfficientNet_B0_Weights,
+        ),
+        "EfficientNetB1": (
+            models.efficientnet_b1,
+            models.EfficientNet_B1_Weights,
+        ),
+        "EfficientNetB2": (
+            models.efficientnet_b2,
+            models.EfficientNet_B2_Weights,
+        ),
+        "EfficientNetB3": (
+            models.efficientnet_b3,
+            models.EfficientNet_B3_Weights,
+        ),
+        "EfficientNetB4": (
+            models.efficientnet_b4,
+            models.EfficientNet_B4_Weights,
+        ),
+        "EfficientNetB5": (
+            models.efficientnet_b5,
+            models.EfficientNet_B5_Weights,
+        ),
+        "EfficientNetB6": (
+            models.efficientnet_b6,
+            models.EfficientNet_B6_Weights,
+        ),
+        "EfficientNetB7": (
+            models.efficientnet_b7,
+            models.EfficientNet_B7_Weights,
+        ),
+        "EfficientNetV2S": (
+            models.efficientnet_v2_s,
+            models.EfficientNet_V2_S_Weights,
+        ),
+        "EfficientNetV2M": (
+            models.efficientnet_v2_m,
+            models.EfficientNet_V2_M_Weights,
+        ),
+        "EfficientNetV2L": (
+            models.efficientnet_v2_l,
+            models.EfficientNet_V2_L_Weights,
+        ),
     }
 
     timm_models = [
@@ -177,12 +210,16 @@ def get_efficientnet_model(efficientnet_type, num_classes):
     elif efficientnet_type in timm_models:
         try:
             efficientnet_model = create_model(
-                efficientnet_type, pretrained=True, num_classes=num_classes,
+                efficientnet_type,
+                pretrained=True,
+                num_classes=num_classes,
             )
         except RuntimeError as e:
             print(f"{efficientnet_type} - Error loading pretrained model: {e}")
             efficientnet_model = create_model(
-                efficientnet_type, pretrained=False, num_classes=num_classes,
+                efficientnet_type,
+                pretrained=False,
+                num_classes=num_classes,
             )
     else:
         msg = f"Unknown EfficientNet Architecture: {efficientnet_type}"

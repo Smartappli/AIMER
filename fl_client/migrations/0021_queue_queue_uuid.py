@@ -25,6 +25,8 @@ class Migration(migrations.Migration):
         ),
         migrations.RunPython(create_uuid),
         migrations.AlterField(
-            model_name="queue", name="queue_uuid", field=models.UUIDField(unique=True)
+            model_name="queue",
+            name="queue_uuid",
+            field=models.UUIDField(unique=True),
         ),
     ]

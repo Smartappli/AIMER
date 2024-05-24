@@ -6,7 +6,10 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
     dependencies = [
-        ("fl_client", "0044_alter_model_document_modeldoc_creation_date_and_more"),
+        (
+            "fl_client",
+            "0044_alter_model_document_modeldoc_creation_date_and_more",
+        ),
     ]
 
     operations = [

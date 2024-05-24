@@ -35,7 +35,11 @@ def get_hrnet_model(hrnet_type, num_classes):
         raise ValueError(msg)
 
     try:
-        return create_model(hrnet_type, pretrained=True, num_classes=num_classes)
+        return create_model(
+            hrnet_type, pretrained=True, num_classes=num_classes
+        )
     except RuntimeError as e:
         print(f"{hrnet_type} - Error loading pretrained model: {e}")
-        return create_model(hrnet_type, pretrained=False, num_classes=num_classes)
+        return create_model(
+            hrnet_type, pretrained=False, num_classes=num_classes
+        )

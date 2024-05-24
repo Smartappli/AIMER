@@ -29,7 +29,9 @@ class ProcessingInceptionNextTestCase(TestCase):
         for inception_next_type in inception_next_types:
             with self.subTest(inception_next_type=inception_next_type):
                 # Get the Inception-Next model for testing
-                model = get_inception_next_model(inception_next_type, num_classes=10)
+                model = get_inception_next_model(
+                    inception_next_type, num_classes=10
+                )
                 # Check if the model is an instance of torch.nn.Module
                 self.assertTrue(isinstance(model, torch.nn.Module))
 

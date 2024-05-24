@@ -31,7 +31,9 @@ class ProcessingTwinsTestCase(TestCase):
                     model = get_twins_model(twins_type, num_classes)
                     self.assertIsNotNone(model)
                 except ValueError:
-                    self.fail(f"{twins_type} should be a known Twins architecture.")
+                    self.fail(
+                        f"{twins_type} should be a known Twins architecture."
+                    )
 
     def test_unknown_twins_type(self):
         """

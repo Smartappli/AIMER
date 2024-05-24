@@ -47,7 +47,8 @@ class ProcessingGoogleNetTestCase(TestCase):
             get_googlenet_model(googlenet_type, num_classes)
 
         self.assertEqual(
-            str(context.exception), f"Unknown GoogLeNet Architecture: {googlenet_type}"
+            str(context.exception),
+            f"Unknown GoogLeNet Architecture: {googlenet_type}",
         )
 
     def test_googlenet_last_layer_adaptation(self):

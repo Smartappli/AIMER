@@ -34,7 +34,9 @@ class ProcessingVisionTransformerRelposTestCase(TestCase):
         ]
         for model_type in model_types:
             with self.subTest(model_type=model_type):
-                model = get_vision_transformer_relpos_model(model_type, num_classes)
+                model = get_vision_transformer_relpos_model(
+                    model_type, num_classes
+                )
                 self.assertIsNotNone(model)
                 # Add more specific tests if needed
 

@@ -18,12 +18,18 @@ class Migration(migrations.Migration):
                 (
                     "document_model_id",
                     models.BigAutoField(
-                        default=1, editable=False, primary_key=True, serialize=False
+                        default=1,
+                        editable=False,
+                        primary_key=True,
+                        serialize=False,
                     ),
                 ),
                 ("document_title", models.CharField(max_length=250)),
                 ("document_filename", models.CharField(max_length=250)),
-                ("document_creation_date", models.DateTimeField(auto_now_add=True)),
+                (
+                    "document_creation_date",
+                    models.DateTimeField(auto_now_add=True),
+                ),
                 ("document_updated_date", models.DateTimeField(auto_now=True)),
                 (
                     "document_owner",

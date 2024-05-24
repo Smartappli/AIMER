@@ -21,7 +21,11 @@ def get_sequencer_model(sequencer_type, num_classes):
         raise ValueError(f"Unknown Sequencer Architecture: {sequencer_type}")
 
     try:
-        return create_model(sequencer_type, pretrained=True, num_classes=num_classes)
+        return create_model(
+            sequencer_type, pretrained=True, num_classes=num_classes
+        )
     except RuntimeError as e:
         print(f"{sequencer_type} - Error loading pretrained model: {e}")
-        return create_model(sequencer_type, pretrained=False, num_classes=num_classes)
+        return create_model(
+            sequencer_type, pretrained=False, num_classes=num_classes
+        )

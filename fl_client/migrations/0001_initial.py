@@ -16,13 +16,19 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name="Model_Family",
             fields=[
-                ("model_family_creation_date", models.DateTimeField(auto_created=True)),
+                (
+                    "model_family_creation_date",
+                    models.DateTimeField(auto_created=True),
+                ),
                 (
                     "model_family_id",
                     models.BigAutoField(primary_key=True, serialize=False),
                 ),
                 ("model_family_name", models.CharField(max_length=100)),
-                ("model_family_updated_date", models.DateTimeField(auto_now_add=True)),
+                (
+                    "model_family_updated_date",
+                    models.DateTimeField(auto_now_add=True),
+                ),
                 (
                     "model_family_owner",
                     models.ForeignKey(
@@ -74,7 +80,10 @@ class Migration(migrations.Migration):
                         max_length=2,
                     ),
                 ),
-                ("model_creation_date", models.DateTimeField(auto_now_add=True)),
+                (
+                    "model_creation_date",
+                    models.DateTimeField(auto_now_add=True),
+                ),
                 ("model_updated_date", models.DateTimeField(auto_now=True)),
                 (
                     "model_provider",
@@ -145,9 +154,18 @@ class Migration(migrations.Migration):
                     "model_file_extension",
                     models.CharField(blank=True, max_length=6, null=True),
                 ),
-                ("model_filesize", models.BigIntegerField(blank=True, null=True)),
-                ("model_file_creation_date", models.DateTimeField(auto_now_add=True)),
-                ("model_file_updated_date", models.DateTimeField(auto_now=True)),
+                (
+                    "model_filesize",
+                    models.BigIntegerField(blank=True, null=True),
+                ),
+                (
+                    "model_file_creation_date",
+                    models.DateTimeField(auto_now_add=True),
+                ),
+                (
+                    "model_file_updated_date",
+                    models.DateTimeField(auto_now=True),
+                ),
                 (
                     "model_id",
                     models.ForeignKey(
@@ -171,7 +189,10 @@ class Migration(migrations.Migration):
                     ),
                 ),
                 ("date_of_birth", models.DateField(blank=True, null=True)),
-                ("photo", models.ImageField(blank=True, upload_to="users/%Y/%m/%d/")),
+                (
+                    "photo",
+                    models.ImageField(blank=True, upload_to="users/%Y/%m/%d/"),
+                ),
                 (
                     "user",
                     models.OneToOneField(

@@ -27,7 +27,10 @@ class Migration(migrations.Migration):
                     "server_project_creation_date",
                     models.DateTimeField(auto_now_add=True),
                 ),
-                ("server_project_updated_date", models.DateTimeField(auto_now=True)),
+                (
+                    "server_project_updated_date",
+                    models.DateTimeField(auto_now=True),
+                ),
                 (
                     "server_project_owner",
                     models.ForeignKey(

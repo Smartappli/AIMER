@@ -29,7 +29,9 @@ def get_googlenet_model(googlenet_type, num_classes):
         weights = models.GoogLeNet_Weights.DEFAULT
         googlenet_model = models.googlenet(weights=weights)
     except RuntimeError as e:
-        print(f"{googlenet_type} - Error loading pretrained GoogLeNet model: {e}")
+        print(
+            f"{googlenet_type} - Error loading pretrained GoogLeNet model: {e}"
+        )
         googlenet_model = models.googlenet(weights=None)
 
     # Modify the fully connected layer to suit the given number of classes

@@ -71,7 +71,9 @@ class ProcessingRegnetTestCase(TestCase):
                     model = get_regnet_model(regnet_type, num_classes)
                     self.assertIsNotNone(model)
                 except ValueError:
-                    self.fail(f"{regnet_type} should be a known Regnet architecture.")
+                    self.fail(
+                        f"{regnet_type} should be a known Regnet architecture."
+                    )
 
     def test_regnet_unknown_architecture(self):
         """
@@ -89,5 +91,6 @@ class ProcessingRegnetTestCase(TestCase):
             get_regnet_model(regnet_type, num_classes)
 
         self.assertEqual(
-            str(context.exception), f"Unknown RegNet Architecture: {regnet_type}"
+            str(context.exception),
+            f"Unknown RegNet Architecture: {regnet_type}",
         )

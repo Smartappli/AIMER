@@ -105,5 +105,6 @@ class ProcessingMaxvitTestCase(TestCase):
             get_maxvit_model(maxvit_type, num_classes)
 
         self.assertEqual(
-            str(context.exception), f"Unknown MaxVit Architecture: {maxvit_type}"
+            str(context.exception),
+            f"Unknown MaxVit Architecture: {maxvit_type}",
         )

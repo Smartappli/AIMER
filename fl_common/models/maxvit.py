@@ -20,7 +20,9 @@ def get_maxvit_model(maxvit_type, num_classes):
     """
     # Mapping of vision types to their corresponding torchvision models and
     # weights
-    torchvision_models = {"MaxVit_T": (models.maxvit_t, models.MaxVit_T_Weights)}
+    torchvision_models = {
+        "MaxVit_T": (models.maxvit_t, models.MaxVit_T_Weights)
+    }
 
     timm_models = [
         "coatnet_pico_rw_224",
