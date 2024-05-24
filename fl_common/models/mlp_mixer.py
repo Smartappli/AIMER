@@ -37,14 +37,15 @@ def get_mlp_mixer_model(mlp_mixer_type, num_classes):
     ]
 
     if mlp_mixer_type not in mlp_mixer_options:
-        raise ValueError(f"Unknown MLP Mixer Architecture: {mlp_mixer_type}")
+        msg = f"Unknown MLP Mixer Architecture: {mlp_mixer_type}"
+        raise ValueError(msg)
 
     try:
         return create_model(
-            mlp_mixer_type, pretrained=True, num_classes=num_classes
+            mlp_mixer_type, pretrained=True, num_classes=num_classes,
         )
     except RuntimeError as e:
         print(f"{mlp_mixer_type} - Error loading pretrained model: {e}")
         return create_model(
-            mlp_mixer_type, pretrained=False, num_classes=num_classes
+            mlp_mixer_type, pretrained=False, num_classes=num_classes,
         )
