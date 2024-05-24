@@ -26,7 +26,8 @@ def get_fastvit_model(fastvit_type, num_classes):
     }
 
     if fastvit_type not in supported_types:
-        raise ValueError(f"Unknown FastViT Architecture: {fastvit_type}")
+        msg = f"Unknown FastViT Architecture: {fastvit_type}"
+        raise ValueError(msg)
 
     try:
         return create_model(fastvit_type, pretrained=True, num_classes=num_classes)
