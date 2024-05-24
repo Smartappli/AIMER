@@ -56,9 +56,9 @@ class DLClassificationForm(forms.Form):
     dpcla_mobilenetv3large = forms.BooleanField(required=False)
 
     # DenseNet
-    dpcla_DenseNet121 = forms.BooleanField(required=False)
-    dpcla_DenseNet169 = forms.BooleanField(required=False)
-    dpcla_DenseNet201 = forms.BooleanField(required=False)
+    dpcla_densenet121 = forms.BooleanField(required=False)
+    dpcla_densenet169 = forms.BooleanField(required=False)
+    dpcla_densenet201 = forms.BooleanField(required=False)
 
     # NasNet
     dpcla_NASNetMobile = forms.BooleanField(required=False)
