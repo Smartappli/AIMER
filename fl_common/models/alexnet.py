@@ -33,7 +33,8 @@ def get_alexnet_model(alexnet_type, num_classes):
 
     # Modify the classifier to suit the given number of classes
     alexnet_model.classifier[6] = nn.Linear(
-        alexnet_model.classifier[6].in_features, num_classes,
+        alexnet_model.classifier[6].in_features,
+        num_classes,
     )
 
     return alexnet_model
