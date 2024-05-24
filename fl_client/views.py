@@ -8,7 +8,12 @@ from .forms import MLTimeSeriesForm
 from .forms import MLClusteringForm, MLAnomalyDetectionForm
 from .forms import NLPTextGenerationForm, NLPEmotionalAnalysisForm
 from .forms import UserRegistrationForm, UserEditForm, ProfileEditForm
-from .models import Profile, Model, ModelFile, Queue  # ModelFamily, ModelDocument,
+from .models import (
+    Profile,
+    Model,
+    ModelFile,
+    Queue,
+)  # ModelFamily, ModelDocument,
 
 # from fl_common.models.xception import xception
 # from fl_common.models.alexnet import alexnet
@@ -25,7 +30,9 @@ def import_data(request):
     from huggingface_hub import list_repo_tree
 
     my_model = Model.objects.filter(
-        model_category="NL", model_type="TG", model_provider="HF",
+        model_category="NL",
+        model_type="TG",
+        model_provider="HF",
     )
     grandtotal = 0
     for p in my_model:
@@ -114,7 +121,9 @@ def import_data(request):
 
         print(p.model_repo + ": " + str(total))
 
-    print("TOTAL: " + str(format(grandtotal / 1024 / 1024 / 1024, ".2f")) + " GB")
+    print(
+        "TOTAL: " + str(format(grandtotal / 1024 / 1024 / 1024, ".2f")) + " GB"
+    )
 
     logo = ["share", "hospital", "data", "cpu", "gpu"]
     return render(request, "core/index.html", {"logo": logo})
@@ -131,20 +140,25 @@ def download_data(request):
     )
 
     my_models = Model.objects.filter(
-        model_category="NL", model_type="TG", model_provider="HF",
+        model_category="NL",
+        model_type="TG",
+        model_provider="HF",
     )
 
     for p in my_models:
         print(p.model_repo)
 
         my_files = ModelFile.objects.filter(
-            model_file_model_id=p.model_id, model_file_type="Q4KM",
+            model_file_model_id=p.model_id,
+            model_file_type="Q4KM",
         ).order_by("model_file_filename")
 
         model_listing = []
         for q in my_files:
             filepath = try_to_load_from_cache(
-                repo_id=p.model_repo, filename=q.model_file_filename, repo_type="model",
+                repo_id=p.model_repo,
+                filename=q.model_file_filename,
+                repo_type="model",
             )
             if isinstance(filepath, str):
                 # file exists and is cached
@@ -154,13 +168,17 @@ def download_data(request):
             elif filepath is _CACHED_NO_EXIST:
                 # non-existence of file is cached
                 print("File in download")
-                hf_hub_download(repo_id=p.model_repo, filename=q.model_file_filename)
+                hf_hub_download(
+                    repo_id=p.model_repo, filename=q.model_file_filename
+                )
                 print("File downloaded")
 
             else:
                 print("File in download")
 
-                hf_hub_download(repo_id=p.model_repo, filename=q.model_file_filename)
+                hf_hub_download(
+                    repo_id=p.model_repo, filename=q.model_file_filename
+                )
 
                 print("File downloaded")
 
@@ -178,7 +196,9 @@ def download_data(request):
                 target = new_name.replace("-split-a", "")
 
                 for file in model_listing[1:]:
-                    with open(new_name, "ab") as out_file, open(file, "rb") as in_file:
+                    with open(new_name, "ab") as out_file, open(
+                        file, "rb"
+                    ) as in_file:
                         shutil.copyfileobj(in_file, out_file)
                         os.remove(file)
 
@@ -187,14 +207,19 @@ def download_data(request):
                 i = 0
                 for q2 in my_files:
                     if i == 0:
-                        ModelFile.objects.filter(pk=q2.model_file_model_id).update(
+                        ModelFile.objects.filter(
+                            pk=q2.model_file_model_id
+                        ).update(
                             model_file_filename=q2.model_file_filename.replace(
-                                "-split-a", "",
+                                "-split-a",
+                                "",
                             ),
                         )
                         i = 1
                     else:
-                        ModelFile.objects.get(pk=q2.model_file_model_id).delete()
+                        ModelFile.objects.get(
+                            pk=q2.model_file_model_id
+                        ).delete()
 
     logo = ["share", "hospital", "data", "cpu", "gpu"]
     return render(request, "core/index.html", {"logo": logo})
@@ -334,8 +359,12 @@ def deep_learning_classification_run(request):
                         "horizontal_flip": cd[
                             "dpcla_data_augmentation_horizontal_flip"
                         ],
-                        "vertical_flip": cd["dpcla_data_augmentation_vertical_flip"],
-                        "translation": cd["dpcla_data_augmentation_translation"],
+                        "vertical_flip": cd[
+                            "dpcla_data_augmentation_vertical_flip"
+                        ],
+                        "translation": cd[
+                            "dpcla_data_augmentation_translation"
+                        ],
                         "rotation": cd["dpcla_data_augmentation_rotation"],
                         "zoom": cd["dpcla_data_augmentation_zoom"],
                         "contrast": cd["dpcla_data_augmentation_contrast"],
@@ -345,7 +374,9 @@ def deep_learning_classification_run(request):
                     params["augmentation"] = augmentation
 
                     xai = {
-                        "activation_maximization": cd["dpcla_activationmaximization"],
+                        "activation_maximization": cd[
+                            "dpcla_activationmaximization"
+                        ],
                         "gradcam": cd["dpcla_gradcam"],
                         "gradcamplusplus": cd["dpcla_gradcamplusplus"],
                         "scorecam": cd["dpcla_scorecam"],
@@ -529,7 +560,13 @@ def natural_language_processing(request):
     return render(
         request,
         "natural_language_processing/natural_language_processing.html",
-        {"logo": logo, "form1": form1, "form2": form2, "section": "nlp", "pdf": True},
+        {
+            "logo": logo,
+            "form1": form1,
+            "form2": form2,
+            "section": "nlp",
+            "pdf": True,
+        },
     )
 
 
@@ -600,7 +637,9 @@ def register(request):
             new_user.save()
             # Create the user profile
             Profile.objects.create(user=new_user)
-            return render(request, "account/register_done.html", {"new_user": new_user})
+            return render(
+                request, "account/register_done.html", {"new_user": new_user}
+            )
 
     else:
         user_form = UserRegistrationForm()
@@ -613,7 +652,9 @@ def edit(request):
     if request.method == "POST":
         user_form = UserEditForm(instance=request.user, data=request.POST)
         profile_form = ProfileEditForm(
-            instance=request.user.profile, date=request.POST, files=request.FILES,
+            instance=request.user.profile,
+            date=request.POST,
+            files=request.FILES,
         )
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()

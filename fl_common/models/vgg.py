@@ -58,7 +58,9 @@ def get_vgg_model(vgg_type, num_classes):
     # Check if the vision type is from the 'timm' library
     elif vgg_type in timm_models:
         try:
-            vgg_model = create_model(vgg_type, pretrained=True, num_classes=num_classes)
+            vgg_model = create_model(
+                vgg_type, pretrained=True, num_classes=num_classes
+            )
         except RuntimeError as e:
             print(f"{vgg_type} - Error loading pretrained model: {e}")
             vgg_model = create_model(

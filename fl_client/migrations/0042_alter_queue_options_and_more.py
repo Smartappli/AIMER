@@ -33,16 +33,24 @@ class Migration(migrations.Migration):
                 (
                     "license_id",
                     models.BigAutoField(
-                        default=1, editable=False, primary_key=True, serialize=False
+                        default=1,
+                        editable=False,
+                        primary_key=True,
+                        serialize=False,
                     ),
                 ),
                 (
                     "license_uuid",
-                    models.UUIDField(default=uuid.uuid4, editable=False, unique=True),
+                    models.UUIDField(
+                        default=uuid.uuid4, editable=False, unique=True
+                    ),
                 ),
                 ("license_name", models.CharField(max_length=250)),
                 ("license_description", models.TextField(blank=True)),
-                ("license_creation_date", models.DateTimeField(auto_now_add=True)),
+                (
+                    "license_creation_date",
+                    models.DateTimeField(auto_now_add=True),
+                ),
                 ("license_updated_date", models.DateTimeField(auto_now=True)),
                 (
                     "license_owner",
@@ -64,16 +72,24 @@ class Migration(migrations.Migration):
                 (
                     "dataset_id",
                     models.BigAutoField(
-                        default=1, editable=False, primary_key=True, serialize=False
+                        default=1,
+                        editable=False,
+                        primary_key=True,
+                        serialize=False,
                     ),
                 ),
                 (
                     "dataset_uuid",
-                    models.UUIDField(default=uuid.uuid4, editable=False, unique=True),
+                    models.UUIDField(
+                        default=uuid.uuid4, editable=False, unique=True
+                    ),
                 ),
                 ("dataset_name", models.CharField(max_length=250)),
                 ("dataset_description", models.TextField(blank=True)),
-                ("dataset_creation_date", models.DateTimeField(auto_now_add=True)),
+                (
+                    "dataset_creation_date",
+                    models.DateTimeField(auto_now_add=True),
+                ),
                 ("dataset_updated_date", models.DateTimeField(auto_now=True)),
                 (
                     "dataset_owner",

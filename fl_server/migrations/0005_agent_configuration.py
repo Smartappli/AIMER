@@ -12,12 +12,18 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name="Agent_Configuration",
             fields=[
-                ("agent_id", models.AutoField(primary_key=True, serialize=False)),
+                (
+                    "agent_id",
+                    models.AutoField(primary_key=True, serialize=False),
+                ),
                 ("agent_name", models.CharField(max_length=250)),
                 ("agent_description", models.CharField(max_length=250)),
                 ("agent_ip", models.GenericIPAddressField(default="127.0.0.1")),
                 ("agent_port", models.CharField(default="8765", max_length=5)),
-                ("agent_state", models.CharField(default="offline", max_length=10)),
+                (
+                    "agent_state",
+                    models.CharField(default="offline", max_length=10),
+                ),
             ],
         ),
     ]

@@ -61,7 +61,9 @@ class Migration(migrations.Migration):
             fields=[
                 (
                     "local_project_id",
-                    models.BigAutoField(default=1, primary_key=True, serialize=False),
+                    models.BigAutoField(
+                        default=1, primary_key=True, serialize=False
+                    ),
                 ),
                 ("local_project_title", models.CharField(max_length=250)),
                 ("local_project_description", models.TextField()),
@@ -81,7 +83,10 @@ class Migration(migrations.Migration):
                     "local_project_creation_date",
                     models.DateTimeField(auto_now_add=True),
                 ),
-                ("local_project_updated_date", models.DateTimeField(auto_now=True)),
+                (
+                    "local_project_updated_date",
+                    models.DateTimeField(auto_now=True),
+                ),
                 (
                     "local_project_owner",
                     models.ForeignKey(
@@ -106,7 +111,10 @@ class Migration(migrations.Migration):
                 ),
                 ("model_doc_title", models.CharField(max_length=250)),
                 ("model_doc_filename", models.CharField(max_length=250)),
-                ("model_doc_creation_date", models.DateTimeField(auto_now_add=True)),
+                (
+                    "model_doc_creation_date",
+                    models.DateTimeField(auto_now_add=True),
+                ),
                 ("model_doc_updated_date", models.DateTimeField(auto_now=True)),
                 (
                     "model_doc_model_id",
@@ -132,7 +140,10 @@ class Migration(migrations.Migration):
                 (
                     "queue_id",
                     models.BigAutoField(
-                        default=1, editable=False, primary_key=True, serialize=False
+                        default=1,
+                        editable=False,
+                        primary_key=True,
+                        serialize=False,
                     ),
                 ),
                 (
@@ -155,7 +166,10 @@ class Migration(migrations.Migration):
                         max_length=2,
                     ),
                 ),
-                ("queue_creation_date", models.DateTimeField(auto_now_add=True)),
+                (
+                    "queue_creation_date",
+                    models.DateTimeField(auto_now_add=True),
+                ),
                 ("queue_updated_date", models.DateTimeField(auto_now=True)),
                 (
                     "queue_model_id",

@@ -13,7 +13,10 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name="Server_Model",
             fields=[
-                ("model_id", models.BigAutoField(primary_key=True, serialize=False)),
+                (
+                    "model_id",
+                    models.BigAutoField(primary_key=True, serialize=False),
+                ),
                 ("model_name", models.CharField(max_length=250)),
                 ("model_description", models.TextField(blank=True, null=True)),
                 (
@@ -36,12 +39,18 @@ class Migration(migrations.Migration):
                 (
                     "model_origin",
                     models.CharField(
-                        choices=[("AG", "Local Agent"), ("AS", "Aggregator Server")],
+                        choices=[
+                            ("AG", "Local Agent"),
+                            ("AS", "Aggregator Server"),
+                        ],
                         default="AG",
                         max_length=2,
                     ),
                 ),
-                ("model_creation_date", models.DateTimeField(auto_now_add=True)),
+                (
+                    "model_creation_date",
+                    models.DateTimeField(auto_now_add=True),
+                ),
                 ("model_updated_date", models.DateTimeField(auto_now=True)),
             ],
         ),
@@ -77,7 +86,10 @@ class Migration(migrations.Migration):
                     "server_aggregator_creation_date",
                     models.DateTimeField(auto_now_add=True),
                 ),
-                ("server_aggregator_updated_date", models.DateTimeField(auto_now=True)),
+                (
+                    "server_aggregator_updated_date",
+                    models.DateTimeField(auto_now=True),
+                ),
                 (
                     "server_aggregator_model_id",
                     models.ForeignKey(

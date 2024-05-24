@@ -48,12 +48,16 @@ def get_inception_model(inception_type, num_classes):
     elif inception_type in timm_models:
         try:
             inception_model = create_model(
-                inception_type, pretrained=True, num_classes=num_classes,
+                inception_type,
+                pretrained=True,
+                num_classes=num_classes,
             )
         except RuntimeError as e:
             print(f"{inception_type} - Error loading pretrained model: {e}")
             inception_model = create_model(
-                inception_type, pretrained=False, num_classes=num_classes,
+                inception_type,
+                pretrained=False,
+                num_classes=num_classes,
             )
     else:
         msg = f"Unknown Inception Architecture: {inception_type}"

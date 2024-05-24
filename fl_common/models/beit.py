@@ -33,4 +33,6 @@ def get_beit_model(beit_type, num_classes):
         return create_model(beit_type, pretrained=True, num_classes=num_classes)
     except RuntimeError as e:
         print(f"{beit_type} - Error loading pretrained model: {e}")
-        return create_model(beit_type, pretrained=False, num_classes=num_classes)
+        return create_model(
+            beit_type, pretrained=False, num_classes=num_classes
+        )

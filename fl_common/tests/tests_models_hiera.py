@@ -37,7 +37,9 @@ class ProcessingHieraTestCase(TestCase):
                     model = get_hiera_model(hiera_type, num_classes)
                     self.assertIsNotNone(model)
                 except ValueError:
-                    self.fail(f"{hiera_type} should be a known hiera architecture.")
+                    self.fail(
+                        f"{hiera_type} should be a known hiera architecture."
+                    )
 
     def test_unknown_hiera_type(self):
         """

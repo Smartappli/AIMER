@@ -45,7 +45,8 @@ class ProcessinAlexnetTestCase(TestCase):
             get_alexnet_model(alexnet_type, num_classes)
 
         self.assertEqual(
-            str(context.exception), f"Unknown AlexNet Architecture: {alexnet_type}"
+            str(context.exception),
+            f"Unknown AlexNet Architecture: {alexnet_type}",
         )
 
     def test_alexnet_last_layer_adaptation(self):

@@ -63,5 +63,6 @@ class ProcessingResnetTestCase(TestCase):
             get_resnetv2_model(resnet_type, num_classes)
 
         self.assertEqual(
-            str(context.exception), f"Unknown ResNet v2 Architecture: {resnet_type}"
+            str(context.exception),
+            f"Unknown ResNet v2 Architecture: {resnet_type}",
         )

@@ -20,7 +20,11 @@ def get_tresnet_model(tresnet_type, num_classes):
         raise ValueError(f"Unknown TResNet Architecture: {tresnet_type}")
 
     try:
-        return create_model(tresnet_type, pretrained=True, num_classes=num_classes)
+        return create_model(
+            tresnet_type, pretrained=True, num_classes=num_classes
+        )
     except RuntimeError as e:
         print(f"{tresnet_type} - Error loading pretrained model: {e}")
-        return create_model(tresnet_type, pretrained=False, num_classes=num_classes)
+        return create_model(
+            tresnet_type, pretrained=False, num_classes=num_classes
+        )

@@ -61,5 +61,6 @@ class ProcessingDenseNetTestCase(TestCase):
             get_densenet_model(densenet_type, num_classes)
 
         self.assertEqual(
-            str(context.exception), f"Unknown DenseNet Architecture : {densenet_type}"
+            str(context.exception),
+            f"Unknown DenseNet Architecture : {densenet_type}",
         )

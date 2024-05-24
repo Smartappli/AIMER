@@ -401,7 +401,9 @@ class UserRegistrationForm(forms.ModelForm):
     """Class for creating user registration form."""
 
     password = forms.CharField(label="Password", widget=forms.PasswordInput)
-    password2 = forms.CharField(label="Repeat Password", widget=forms.PasswordInput)
+    password2 = forms.CharField(
+        label="Repeat Password", widget=forms.PasswordInput
+    )
 
     class Meta:
         model = User
