@@ -31,7 +31,8 @@ def get_hrnet_model(hrnet_type, num_classes):
     ]
 
     if hrnet_type not in hrnet_options:
-        raise ValueError(f"Unknown HRNet Architecture: {hrnet_type}")
+        msg = f"Unknown HRNet Architecture: {hrnet_type}"
+        raise ValueError(msg)
 
     try:
         return create_model(hrnet_type, pretrained=True, num_classes=num_classes)
