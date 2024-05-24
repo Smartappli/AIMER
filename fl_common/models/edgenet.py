@@ -33,7 +33,8 @@ def get_edgenet_model(edgenet_type, num_classes):
     ]
 
     if edgenet_type not in edgenet_options:
-        raise ValueError(f"Unknown EdgeNet Architecture: {edgenet_type}")
+        msg = f"Unknown EdgeNet Architecture: {edgenet_type}"
+        raise ValueError(msg)
 
     try:
         return create_model(edgenet_type, pretrained=True, num_classes=num_classes)
