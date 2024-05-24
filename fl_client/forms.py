@@ -50,10 +50,10 @@ class DLClassificationForm(forms.Form):
     dpcla_inceptionresnetv2 = forms.BooleanField(required=False)
 
     # MobileNet
-    dpcla_MobileNet = forms.BooleanField(required=False)
-    dpcla_MobileNetV2 = forms.BooleanField(required=False)
-    dpcla_MobileNetV3Small = forms.BooleanField(required=False)
-    dpcla_MobileNetV3Large = forms.BooleanField(required=False)
+    dpcla_mobilenet = forms.BooleanField(required=False)
+    dpcla_mobilenetb2 = forms.BooleanField(required=False)
+    dpcla_mobilenetv3small = forms.BooleanField(required=False)
+    dpcla_mobilenetv3large = forms.BooleanField(required=False)
 
     # DenseNet
     dpcla_DenseNet121 = forms.BooleanField(required=False)
@@ -116,9 +116,9 @@ class DLClassificationForm(forms.Form):
 
     # --- TRAINING STRATEGY ---
 
-    dpcla_Optimizer1 = forms.CharField(max_length=100, required=True)
-    dpcla_Optimizer2 = forms.CharField(max_length=100, required=False)
-    dpcla_Optimizer3 = forms.CharField(max_length=100, required=False)
+    dpcla_optimizer1 = forms.CharField(max_length=100, required=True)
+    dpcla_optimizer2 = forms.CharField(max_length=100, required=False)
+    dpcla_optimizer3 = forms.CharField(max_length=100, required=False)
 
     dpcla_Loss1 = forms.CharField(max_length=100, required=True)
     dpcla_Loss2 = forms.CharField(max_length=100, required=False)
