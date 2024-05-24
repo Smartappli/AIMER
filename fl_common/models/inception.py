@@ -56,6 +56,7 @@ def get_inception_model(inception_type, num_classes):
                 inception_type, pretrained=False, num_classes=num_classes,
             )
     else:
-        raise ValueError(f"Unknown Inception Architecture: {inception_type}")
+        msg = f"Unknown Inception Architecture: {inception_type}"
+        raise ValueError(msg)
 
     return inception_model
