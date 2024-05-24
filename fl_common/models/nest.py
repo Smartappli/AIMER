@@ -33,5 +33,7 @@ def get_nest_model(nest_type, num_classes):
     except RuntimeError as e:
         print(f"{nest_type} - Error loading pretrained model: {e}")
         return create_model(
-            nest_type, pretrained=False, num_classes=num_classes,
+            nest_type,
+            pretrained=False,
+            num_classes=num_classes,
         )
