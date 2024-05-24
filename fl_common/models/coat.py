@@ -35,5 +35,7 @@ def get_coat_model(coat_type, num_classes):
     except RuntimeError as e:
         print(f"{coat_type} - Error loading pretrained model: {e}")
         return create_model(
-            coat_type, pretrained=False, num_classes=num_classes,
+            coat_type,
+            pretrained=False,
+            num_classes=num_classes,
         )
