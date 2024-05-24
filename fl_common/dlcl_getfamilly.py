@@ -1258,7 +1258,8 @@ def get_family_model_r(model_type, num_classes):
     }
 
     if model_type not in model_retrieval_functions:
-        raise ValueError(f"Unknown model_type provided: {model_type}")
+        msg = f"Unknown model_type provided: {model_type}"
+        raise ValueError(msg)
 
     return model_retrieval_functions[model_type](model_type, num_classes)
 
@@ -1353,7 +1354,8 @@ def get_family_model_s(model_type, num_classes):
     }
 
     if model_type not in model_retrieval_functions:
-        raise ValueError(f"Unknown model_type provided: {model_type}")
+        msg = f"Unknown model_type provided: {model_type}"
+        raise ValueError(msg)
 
     return model_retrieval_functions[model_type](model_type, num_classes)
 
@@ -1393,7 +1395,8 @@ def get_family_model_t(model_type, num_classes):
         "twins_svt_large": get_twins_model,
     }
     if model_type not in model_retrieval_functions:
-        raise ValueError(f"Unknown model_type provided: {model_type}")
+        msg = f"Unknown model_type provided: {model_type}"
+        raise ValueError(msg)
 
     return model_retrieval_functions[model_type](model_type, num_classes)
 
@@ -1601,7 +1604,8 @@ def get_family_model_v(model_type, num_classes):
     }
 
     if model_type not in model_retrieval_functions:
-        raise ValueError(f"Unknown model_type provided: {model_type}")
+        msg = f"Unknown model_type provided: {model_type}"
+        raise ValueError(msg)
 
     return model_retrieval_functions[model_type](model_type, num_classes)
 
@@ -1626,7 +1630,8 @@ def get_family_model_w(model_type, num_classes):
     }
 
     if model_type not in model_retrieval_functions:
-        raise ValueError(f"Unknown model_type provided: {model_type}")
+        msg = f"Unknown model_type provided: {model_type}"
+        raise ValueError(msg)
 
     return model_retrieval_functions[model_type](model_type, num_classes)
 
@@ -1683,7 +1688,8 @@ def get_family_model_x(model_type, num_classes):
     }
 
     if model_type not in model_retrieval_functions:
-        raise ValueError(f"Unknown model_type provided: {model_type}")
+        msg = f"Unknown model_type provided: {model_type}"
+        raise ValueError(msg)
 
     return model_retrieval_functions[model_type](model_type, num_classes)
 
