@@ -21,7 +21,8 @@ def get_googlenet_model(googlenet_type, num_classes):
     """
     # Validate the googlenet_type before proceeding
     if googlenet_type != "GoogLeNet":
-        raise ValueError(f"Unknown GoogLeNet Architecture: {googlenet_type}")
+        msg = f"Unknown GoogLeNet Architecture: {googlenet_type}"
+        raise ValueError(msg)
 
     # Load the pre-trained version of GoogLeNet
     try:
