@@ -26,14 +26,15 @@ def get_pvt_v2_model(pvt_v2_type, num_classes):
     }
 
     if pvt_v2_type not in valid_pvt_v2_types:
-        raise ValueError(f"Unknown PVTv2 Architecture: {pvt_v2_type}")
+        msg = f"Unknown PVTv2 Architecture: {pvt_v2_type}"
+        raise ValueError(msg)
 
     try:
         return create_model(
-            pvt_v2_type, pretrained=True, num_classes=num_classes
+            pvt_v2_type, pretrained=True, num_classes=num_classes,
         )
     except RuntimeError as e:
         print(f"{pvt_v2_type} - Error loading pretrained model: {e}")
         return create_model(
-            pvt_v2_type, pretrained=False, num_classes=num_classes
+            pvt_v2_type, pretrained=False, num_classes=num_classes,
         )
