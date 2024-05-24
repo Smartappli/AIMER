@@ -177,14 +177,15 @@ def get_efficientnet_model(efficientnet_type, num_classes):
     elif efficientnet_type in timm_models:
         try:
             efficientnet_model = create_model(
-                efficientnet_type, pretrained=True, num_classes=num_classes
+                efficientnet_type, pretrained=True, num_classes=num_classes,
             )
         except RuntimeError as e:
             print(f"{efficientnet_type} - Error loading pretrained model: {e}")
             efficientnet_model = create_model(
-                efficientnet_type, pretrained=False, num_classes=num_classes
+                efficientnet_type, pretrained=False, num_classes=num_classes,
             )
     else:
-        raise ValueError(f"Unknown EfficientNet Architecture: {efficientnet_type}")
+        msg = f"Unknown EfficientNet Architecture: {efficientnet_type}"
+        raise ValueError(msg)
 
     return efficientnet_model
