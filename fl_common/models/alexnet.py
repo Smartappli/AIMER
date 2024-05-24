@@ -21,15 +21,15 @@ def get_alexnet_model(alexnet_type, num_classes):
     """
     # Validate the alexnet_type before proceeding
     if alexnet_type != "AlexNet":
-        raise ValueError(f"Unknown AlexNet Architecture: {alexnet_type}")
+        msg = f"Unknown AlexNet Architecture: {alexnet_type}"
+        raise ValueError(msg)
 
     # Load the pre-trained version of AlexNet
     try:
         weights = models.AlexNet_Weights.DEFAULT
         alexnet_model = models.alexnet(weights=weights)
     except RuntimeError as e:
-        msg = f"{alexnet_type} - Error loading pretrained model: {e}"
-        print(msg)
+        print(f"{alexnet_type} - Error loading pretrained model: {e}")
         alexnet_model = models.alexnet(weights=None)
 
     # Modify the classifier to suit the given number of classes
