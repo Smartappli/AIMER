@@ -26,7 +26,8 @@ def get_beit_model(beit_type, num_classes):
     }
 
     if beit_type not in valid_types:
-        raise ValueError(f"Unknown BEiT Architecture: {beit_type}")
+        msg = f"Unknown BEiT Architecture: {beit_type}"
+        raise ValueError(msg)
 
     try:
         return create_model(beit_type, pretrained=True, num_classes=num_classes)
