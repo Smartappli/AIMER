@@ -195,7 +195,8 @@ def get_family_model_b(model_type, num_classes):
     }
 
     if model_type not in model_retrieval_functions:
-        raise ValueError(f"Unknown model_type provided: {model_type}")
+        msg = f"Unknown model_type provided: {model_type}"
+        raise ValueError(msg)
 
     return model_retrieval_functions[model_type](model_type, num_classes)
 
@@ -308,7 +309,8 @@ def get_family_model_c(model_type, num_classes):
     }
 
     if model_type not in model_retrieval_functions:
-        raise ValueError(f"Unknown model_type provided: {model_type}")
+        msg = f"Unknown model_type provided: {model_type}"
+        raise ValueError(msg)
 
     return model_retrieval_functions[model_type](model_type, num_classes)
 
@@ -382,7 +384,8 @@ def get_family_model_d(model_type, num_classes):
     }
 
     if model_type not in model_retrieval_functions:
-        raise ValueError(f"Unknown model_type provided: {model_type}")
+        msg = f"Unknown model_type provided: {model_type}"
+        raise ValueError(msg)
 
     return model_retrieval_functions[model_type](model_type, num_classes)
 
@@ -561,7 +564,8 @@ def get_family_model_e(model_type, num_classes):
     }
 
     if model_type not in model_retrieval_functions:
-        raise ValueError(f"Unknown model_type provided: {model_type}")
+        msg = f"Unknown model_type provided: {model_type}"
+        raise ValueError(msg)
 
     return model_retrieval_functions[model_type](model_type, num_classes)
 
@@ -603,7 +607,8 @@ def get_family_model_f(model_type, num_classes):
     }
 
     if model_type not in model_retrieval_functions:
-        raise ValueError(f"Unknown model_type provided: {model_type}")
+        msg = f"Unknown model_type provided: {model_type}"
+        raise ValueError(msg)
 
     return model_retrieval_functions[model_type](model_type, num_classes)
 
@@ -638,7 +643,8 @@ def get_family_model_g(model_type, num_classes):
     }
 
     if model_type not in model_retrieval_functions:
-        raise ValueError(f"Unknown model_type provided: {model_type}")
+        msg = f"Unknown model_type provided: {model_type}"
+        raise ValueError(msg)
 
     return model_retrieval_functions[model_type](model_type, num_classes)
 
@@ -694,7 +700,8 @@ def get_family_model_h(model_type, num_classes):
     }
 
     if model_type not in model_retrieval_functions:
-        raise ValueError(f"Unknown model_type provided: {model_type}")
+        msg = f"Unknown model_type provided: {model_type}"
+        raise ValueError(msg)
 
     return model_retrieval_functions[model_type](model_type, num_classes)
 
@@ -723,7 +730,8 @@ def get_family_model_i(model_type, num_classes):
     }
 
     if model_type not in model_retrieval_functions:
-        raise ValueError(f"Unknown model_type provided: {model_type}")
+        msg = f"Unknown model_type provided: {model_type}"
+        raise ValueError(msg)
 
     return model_retrieval_functions[model_type](model_type, num_classes)
 
@@ -766,7 +774,8 @@ def get_family_model_l(model_type, num_classes):
     }
 
     if model_type not in model_retrieval_functions:
-        raise ValueError(f"Unknown model_type provided: {model_type}")
+        msg = f"Unknown model_type provided: {model_type}"
+        raise ValueError(msg)
 
     return model_retrieval_functions[model_type](model_type, num_classes)
 
@@ -924,7 +933,8 @@ def get_family_model_m(model_type, num_classes):
     }
 
     if model_type not in model_retrieval_functions:
-        raise ValueError(f"Unknown model_type provided: {model_type}")
+        msg = f"Unknown model_type provided: {model_type}"
+        raise ValueError(msg)
 
     return model_retrieval_functions[model_type](model_type, num_classes)
 
@@ -992,7 +1002,8 @@ def get_family_model_n(model_type, num_classes):
     }
 
     if model_type not in model_retrieval_functions:
-        raise ValueError(f"Unknown model_type provided: {model_type}")
+        msg = f"Unknown model_type provided: {model_type}"
+        raise ValueError(msg)
 
     return model_retrieval_functions[model_type](model_type, num_classes)
 
@@ -1031,7 +1042,8 @@ def get_family_model_p(model_type, num_classes):
     }
 
     if model_type not in model_retrieval_functions:
-        raise ValueError(f"Unknown model_type provided: {model_type}")
+        msg = f"Unknown model_type provided: {model_type}"
+        raise ValueError(msg)
 
     return model_retrieval_functions[model_type](model_type, num_classes)
 
