@@ -28,7 +28,8 @@ def get_alexnet_model(alexnet_type, num_classes):
         weights = models.AlexNet_Weights.DEFAULT
         alexnet_model = models.alexnet(weights=weights)
     except RuntimeError as e:
-        print(f"{alexnet_type} - Error loading pretrained model: {e}")
+        msg = f"{alexnet_type} - Error loading pretrained model: {e}"
+        print(msg)
         alexnet_model = models.alexnet(weights=None)
 
     # Modify the classifier to suit the given number of classes
