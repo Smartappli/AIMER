@@ -30,7 +30,8 @@ def get_crossvit_model(crossvit_type, num_classes):
     ]
 
     if crossvit_type not in crossvit_architectures:
-        raise ValueError(f"Unknown Crossvit Architecture: {crossvit_type}")
+        msg = f"Unknown Crossvit Architecture: {crossvit_type}"
+        raise ValueError(msg)
 
     try:
         return create_model(crossvit_type, pretrained=True, num_classes=num_classes)
