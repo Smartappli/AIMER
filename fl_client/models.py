@@ -137,7 +137,7 @@ class Model(models.Model):
     model_provider = models.CharField(
         max_length=2, choices=Provider.choices, default=Provider.HF,
     )
-    model_repo = models.CharField(max_length=250, null=True, blank=True,)
+    model_repo = models.CharField(max_length=250, null=True, blank=True)
     model_license = models.ForeignKey(
         License, on_delete=models.DO_NOTHING, default=1, related_name="model_license",
     )
@@ -161,8 +161,7 @@ class Model(models.Model):
                 + " - v"
                 + str(self.model_version)
             )
-        else:
-            return self.model_category + self.model_type + " - " + self.model_name
+        return self.model_category + self.model_type + " - " + self.model_name
 
 
 class ModelFile(models.Model):
@@ -196,14 +195,14 @@ class ModelFile(models.Model):
 
     model_file_uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
     model_file_model_id = models.ForeignKey(
-        Model, on_delete=models.CASCADE, default=1, related_name="model_file_model_id"
+        Model, on_delete=models.CASCADE, default=1, related_name="model_file_model_id",
     )
     model_file_type = models.CharField(
-        max_length=4, choices=Type.choices, default=Type.NONE
+        max_length=4, choices=Type.choices, default=Type.NONE,
     )
     model_file_filename = models.CharField(max_length=250, unique=True)
     model_file_extension = models.CharField(
-        max_length=6, choices=Extension.choices, default=Extension.NONE
+        max_length=6, choices=Extension.choices, default=Extension.NONE,
     )
     model_file_size = models.BigIntegerField(blank=True, null=True)
     model_file_sha256 = models.CharField(max_length=64, blank=True, null=True)
@@ -251,7 +250,7 @@ class ModelDocument(models.Model):
 
     modeldoc_uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
     modeldoc_model_id = models.ForeignKey(
-        Model, on_delete=models.CASCADE, default=1, related_name="modeldoc_model_id"
+        Model, on_delete=models.CASCADE, default=1, related_name="modeldoc_model_id",
     )
     modeldoc_document = models.ForeignKey(
         Document,
@@ -261,10 +260,10 @@ class ModelDocument(models.Model):
     )
     modeldoc_active = models.BooleanField(default=True)
     modeldoc_owner = models.ForeignKey(
-        User, on_delete=models.DO_NOTHING, default=1, related_name="modeldoc_owner"
+        User, on_delete=models.DO_NOTHING, default=1, related_name="modeldoc_owner",
     )
     modeldoc_creation_date = models.DateTimeField(
-        auto_now_add=True, blank=True, null=True
+        auto_now_add=True, blank=True, null=True,
     )
     modeldoc_updated_date = models.DateTimeField(auto_now=True, blank=True, null=True)
 
@@ -308,13 +307,13 @@ class Dataset(models.Model):
     dataset_description = models.TextField(blank=True)
     dataset_type = models.CharField(max_length=6, choices=Type.choices, default=Type.LC)
     dataset_format = models.CharField(
-        max_length=6, choices=Format.choices, default=Format.CSV
+        max_length=6, choices=Format.choices, default=Format.CSV,
     )
     dataset_licence = models.ForeignKey(
         License, on_delete=models.DO_NOTHING, default=1, related_name="dataset_license"
     )
     dataset_owner = models.ForeignKey(
-        User, on_delete=models.DO_NOTHING, default=1, related_name="dataset_owner"
+        User, on_delete=models.DO_NOTHING, default=1, related_name="dataset_owner",
     )
     dataset_creation_date = models.DateTimeField(auto_now_add=True)
     dataset_updated_date = models.DateTimeField(auto_now=True)
@@ -380,13 +379,13 @@ class DatasetRemoteData(models.Model):
         related_name="ds_remote_data_dataset_id",
     )
     dataset_remote_data_protocol = models.CharField(
-        max_length=6, choices=Protocol.choices, default=Protocol.HTTP
+        max_length=6, choices=Protocol.choices, default=Protocol.HTTP,
     )
     dataset_remote_data_username = models.CharField(
-        max_length=30, blank=True, null=True
+        max_length=30, blank=True, null=True,
     )
     dataset_remote_data_password = models.CharField(
-        max_length=30, blank=True, null=True
+        max_length=30, blank=True, null=True,
     )
     dataset_remote_data_ip = models.CharField(max_length=40, blank=True, null=True)
     dataset_remote_data_path = models.CharField(max_length=255, blank=True, null=True)
@@ -411,7 +410,7 @@ class DatasetCentralData(models.Model):
 
     dataset_central_data_id = models.BigAutoField(primary_key=True, editable=False)
     dataset_central_data_uuid = models.UUIDField(
-        default=uuid.uuid4, editable=False, unique=True
+        default=uuid.uuid4, editable=False, unique=True,
     )
     dataset_central_data_dataset_id = models.ForeignKey(
         Dataset,
@@ -472,18 +471,18 @@ class Queue(models.Model):
     queue_id = models.BigAutoField(primary_key=True, default=1, editable=False)
     queue_uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
     queue_model_id = models.ForeignKey(
-        Model, on_delete=models.CASCADE, related_name="queue_model_id"
+        Model, on_delete=models.CASCADE, related_name="queue_model_id",
     )
     queue_model_type = models.CharField(max_length=4, null=True, blank=True)
     queue_params = models.JSONField(default=dict)
     queue_dataset_id = models.ForeignKey(
-        Dataset, default=1, on_delete=models.CASCADE, related_name="queue_dataset_id"
+        Dataset, default=1, on_delete=models.CASCADE, related_name="queue_dataset_id",
     )
     queue_state = models.CharField(
-        max_length=2, choices=State.choices, default=State.CR
+        max_length=2, choices=State.choices, default=State.CR,
     )
     queue_owner = models.ForeignKey(
-        User, on_delete=models.CASCADE, default=1, related_name="queue_owner"
+        User, on_delete=models.CASCADE, default=1, related_name="queue_owner",
     )
     queue_creation_date = models.DateTimeField(auto_now_add=True)
     queue_updated_date = models.DateTimeField(auto_now=True)
