@@ -1,0 +1,26 @@
+name: Django Lint
+
+on: [push, pull_request]
+
+concurrency:
+  group: djlint-${{ github.event_name == 'pull_request' && format('{0}-{1}', github.workflow, github.event.pull_request.number) || github.workflow_ref }}
+  cancel-in-progress: true
+
+jobs:
+  flake8-lint:
+    runs-on: ubuntu-latest
+    name: Flake8 Lint
+    steps:
+      - name: Check out source repository
+        uses: actions/checkout@v4
+      - name: Set up Python environment
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: 'pip'
+      - name: DjLint
+        run: |
+          python -m pip install --upgrade pip
+          pip install djlint
+          djlint ./templates --extension=html.j2 --lint
+          
