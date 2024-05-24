@@ -297,7 +297,7 @@ for model_type in model_list:
             f"Epoch {epoch + 1}/{num_epochs_phase1} => "
             f"Train Loss: {avg_train_loss:.4f}, Train Accuracy: {train_accuracy:.4f}, "
             f"Validation Loss: {avg_val_loss:.4f}, Validation Accuracy: {val_accuracy:.4f}, "
-            f"{elapsed_time_msg}"
+            f"{elapsed_time_msg}",
         )
 
     # Proceed only if the first phase didn't early stop
@@ -309,7 +309,7 @@ for model_type in model_list:
         model_parameters = model.parameters()
         criterion = get_criterion(criterion_name_phase2)
         optimizer = get_optimizer(
-            optimizer_name_phase2, model_parameters, learning_rate_phase2
+            optimizer_name_phase2, model_parameters, learning_rate_phase2,
         )
 
         # scheduler = get_scheduler(optimizer, scheduler_type='step', step_size=10, gamma=0.5)
@@ -317,7 +317,7 @@ for model_type in model_list:
         # scheduler = get_scheduler(optimizer, scheduler_type='exponential', gamma=0.95)
 
         scheduler = get_scheduler(
-            optimizer, scheduler_type="step", step_size=10, gamma=0.5
+            optimizer, scheduler_type="step", step_size=10, gamma=0.5,
         )
 
         for epoch in range(num_epochs_phase2):
@@ -329,7 +329,7 @@ for model_type in model_list:
             total_train = 0
 
             print(
-                f"\nEpoch {epoch + 1}/{num_epochs_phase2}, Learning Rate: {optimizer.param_groups[0]['lr']}"
+                f"\nEpoch {epoch + 1}/{num_epochs_phase2}, Learning Rate: {optimizer.param_groups[0]['lr']}",
             )
 
             # Use tqdm for a progress bar over the training batches
@@ -355,7 +355,7 @@ for model_type in model_list:
 
                     # Print progress within the epoch
                     if (batch_idx + 1) % 10 == 0 or (batch_idx + 1) == len(
-                        train_loader
+                        train_loader,
                     ):
                         avg_batch_loss = running_loss / (batch_idx + 1)
                         batch_accuracy = correct_train / total_train
@@ -425,7 +425,7 @@ for model_type in model_list:
                 f"\nEpoch {epoch + 1}/{num_epochs_phase2} (Phase 2) => "
                 f"Train Loss: {avg_train_loss:.4f}, Train Accuracy: {train_accuracy:.4f}, "
                 f"Validation Loss: {avg_val_loss:.4f}, Validation Accuracy: {val_accuracy:.4f}, "
-                f"{elapsed_time_msg}"
+                f"{elapsed_time_msg}",
             )
 
     # Third Training Phase (Optional)
