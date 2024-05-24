@@ -1730,11 +1730,8 @@ def get_family_model(model_type, num_classes):
     # Convert the first letter of the model_type to lowercase
     first_letter = model_type[0].lower()
 
-    # Default value if no matching case is found
-    model = "Error"
-
     # Retrieve the corresponding function and call it
     if first_letter in model_functions:
-        model = model_functions[first_letter](model_type, num_classes)
+        return model_functions[first_letter](model_type, num_classes)
 
-    return model
+    return "Error"
