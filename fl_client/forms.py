@@ -46,8 +46,8 @@ class DLClassificationForm(forms.Form):
     dpcla_resnetrs420 = forms.BooleanField(required=False)
 
     # Inception
-    dpcla_InceptionV3 = forms.BooleanField(required=False)
-    dpcla_InceptionResNetV2 = forms.BooleanField(required=False)
+    dpcla_inceptionv3 = forms.BooleanField(required=False)
+    dpcla_inceptionresnetv2 = forms.BooleanField(required=False)
 
     # MobileNet
     dpcla_MobileNet = forms.BooleanField(required=False)
