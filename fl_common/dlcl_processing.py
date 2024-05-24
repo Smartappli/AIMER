@@ -1,7 +1,7 @@
 import os
 import time
 import torch
-import torch.nn as nn
+from torch import nn
 from tqdm import tqdm
 from captum.attr import (
     IntegratedGradients,
