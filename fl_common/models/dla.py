@@ -31,7 +31,8 @@ def get_dla_model(dla_type, num_classes):
     ]
 
     if dla_type not in valid_dla_types:
-        raise ValueError(f"Unknown DLA Architecture: {dla_type}")
+        msg = f"Unknown DLA Architecture: {dla_type}"
+        raise ValueError(msg)
 
     try:
         return create_model(dla_type, pretrained=True, num_classes=num_classes)
