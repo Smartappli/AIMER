@@ -30,10 +30,10 @@ def get_efficientvit_msra_model(efficientvit_msra_type, num_classes):
 
     try:
         return create_model(
-            efficientvit_msra_type, pretrained=True, num_classes=num_classes
+            efficientvit_msra_type, pretrained=True, num_classes=num_classes,
         )
     except RuntimeError as e:
         print(f"{efficientvit_msra_type} - Error loading pretrained model: {e}")
         return create_model(
-            efficientvit_msra_type, pretrained=False, num_classes=num_classes
+            efficientvit_msra_type, pretrained=False, num_classes=num_classes,
         )
