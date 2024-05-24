@@ -29,7 +29,7 @@ class LocalProject(models.Model):
 
     local_project_id = models.BigAutoField(primary_key=True, default=1)
     local_project_uuid = models.UUIDField(
-        default=uuid.uuid4, editable=False, unique=True
+        default=uuid.uuid4, editable=False, unique=True,
     )
     local_project_title = models.CharField(max_length=250)
     local_project_description = models.TextField()
