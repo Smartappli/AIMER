@@ -107,7 +107,8 @@ def get_family_model_a(model_type, num_classes):
     model_retrieval_functions = {"AlexNet": get_alexnet_model}
 
     if model_type not in model_retrieval_functions:
-        raise ValueError(f"Unknown model_type provided: {model_type}")
+        msg = f"Unknown model_type provided: {model_type}"
+        raise ValueError(msg)
 
     return model_retrieval_functions[model_type](model_type, num_classes)
 
