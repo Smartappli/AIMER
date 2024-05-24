@@ -34,11 +34,11 @@ class LocalProject(models.Model):
     local_project_title = models.CharField(max_length=250)
     local_project_description = models.TextField()
     local_project_type = models.CharField(
-        max_length=2, choices=ProjectType.choices, default=ProjectType.LC
+        max_length=2, choices=ProjectType.choices, default=ProjectType.LC,
     )
     local_project_active = models.BooleanField(default=True)
     local_project_owner = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name="local_project_owner"
+        User, on_delete=models.CASCADE, related_name="local_project_owner",
     )
     local_project_creation_date = models.DateTimeField(auto_now_add=True)
     local_project_updated_date = models.DateTimeField(auto_now=True)
@@ -56,7 +56,7 @@ class License(models.Model):
     license_name = models.CharField(max_length=250)
     license_description = models.TextField(blank=True)
     license_owner = models.ForeignKey(
-        User, on_delete=models.DO_NOTHING, default=1, related_name="license_owner"
+        User, on_delete=models.DO_NOTHING, default=1, related_name="license_owner",
     )
     license_creation_date = models.DateTimeField(auto_now_add=True)
     license_updated_date = models.DateTimeField(auto_now=True)
@@ -74,12 +74,12 @@ class ModelFamily(models.Model):
 
     model_family_id = models.BigAutoField(primary_key=True)
     model_family_uuid = models.UUIDField(
-        default=uuid.uuid4, editable=False, unique=True
+        default=uuid.uuid4, editable=False, unique=True,
     )
     model_family_name = models.CharField(max_length=100)
     model_family_active = models.BooleanField(default=True)
     model_family_owner = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name="model_family_owner"
+        User, on_delete=models.CASCADE, related_name="model_family_owner",
     )
     model_family_creation_date = models.DateTimeField(auto_now_add=True)
     model_family_updated_date = models.DateTimeField(auto_now_add=True)
@@ -128,22 +128,22 @@ class Model(models.Model):
     model_description = models.TextField(null=True, blank=True)
     model_version = models.CharField(max_length=15, null=True, blank=True)
     model_category = models.CharField(
-        max_length=2, choices=Category.choices, default=Category.ML
+        max_length=2, choices=Category.choices, default=Category.ML,
     )
     model_type = models.CharField(max_length=2, choices=Type.choices, default=Type.AD)
     model_family = models.ForeignKey(
-        ModelFamily, on_delete=models.CASCADE, related_name="family_model"
+        ModelFamily, on_delete=models.CASCADE, related_name="family_model",
     )
     model_provider = models.CharField(
-        max_length=2, choices=Provider.choices, default=Provider.HF
+        max_length=2, choices=Provider.choices, default=Provider.HF,
     )
-    model_repo = models.CharField(max_length=250, null=True, blank=True)
+    model_repo = models.CharField(max_length=250, null=True, blank=True,)
     model_license = models.ForeignKey(
-        License, on_delete=models.DO_NOTHING, default=1, related_name="model_license"
+        License, on_delete=models.DO_NOTHING, default=1, related_name="model_license",
     )
     model_active = models.BooleanField(default=True)
     model_owner = models.ForeignKey(
-        User, on_delete=models.DO_NOTHING, related_name="model_owner"
+        User, on_delete=models.DO_NOTHING, related_name="model_owner",
     )
     model_creation_date = models.DateTimeField(auto_now_add=True)
     model_updated_date = models.DateTimeField(auto_now=True)
