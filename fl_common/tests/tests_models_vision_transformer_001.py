@@ -37,7 +37,9 @@ class ProcessingVisionTransformerTestCase(TestCase):
                 model = get_vision_transformer_model(vision_type, num_classes)
                 # Check if the model is an instance of torch.nn.Module
                 self.assertIsInstance(
-                    model, nn.Module, msg=f"get_vision_model {vision_type} KO",
+                    model,
+                    nn.Module,
+                    msg=f"get_vision_model {vision_type} KO",
                 )
 
     def test_vision_unknown_architecture(self):

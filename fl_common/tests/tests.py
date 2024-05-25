@@ -49,10 +49,7 @@ class ProcessingTestCase(TestCase):
 
         # self.assertIsInstance(transform, transforms.Compose)
         self.assertTrue(
-            any(
-                isinstance(t, transforms.Resize)
-                for t in transform.transforms
-            ),
+            any(isinstance(t, transforms.Resize) for t in transform.transforms),
         )
         self.assertTrue(
             any(
@@ -98,8 +95,7 @@ class ProcessingTestCase(TestCase):
         )
         self.assertTrue(
             any(
-                isinstance(t, transforms.ToTensor)
-                for t in transform.transforms
+                isinstance(t, transforms.ToTensor) for t in transform.transforms
             ),
         )
         self.assertTrue(
@@ -305,7 +301,10 @@ class ProcessingTestCase(TestCase):
         optimizer = optim.SGD([torch.tensor(1.0, requires_grad=True)], lr=0.001)
         with self.assertRaises(ValueError) as context:
             get_scheduler(
-                optimizer, scheduler_type="invalid_type", step_size=5, gamma=0.1,
+                optimizer,
+                scheduler_type="invalid_type",
+                step_size=5,
+                gamma=0.1,
             )
 
         self.assertEqual(
