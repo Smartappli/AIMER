@@ -61,6 +61,7 @@ class ProcessingEdgenetTestCase(TestCase):
             # Ajout d'une vérification pour s'assurer que invalid_num_classes
             # est un entier
             if not isinstance(invalid_num_classes, int):
-                raise ValueError("invalid_num_classes doit être un entier")
+                msg = "invalid_num_classes doit être un entier"
+                raise ValueError(msg)
 
             get_edgenet_model(edgenet_type, invalid_num_classes)
