@@ -37,7 +37,7 @@ class ProcessingGhostnetTestCase(TestCase):
                     self.assertIsNotNone(model)
                 except ValueError:
                     self.fail(
-                        f"{ghostnet_type} should be a known GhostNet architecture."
+                        f"{ghostnet_type} should be a known GhostNet architecture.",
                     )
 
     def test_unknown_ghostnet_type(self):
