@@ -40,7 +40,7 @@ class ProcessingMlpMixerTestCase(TestCase):
                     self.assertIsNotNone(model)
                 except ValueError:
                     self.fail(
-                        f"{mlp_mixer_type} should be a known Mlp Mixer architecture."
+                        f"{mlp_mixer_type} should be a known Mlp Mixer architecture.",
                     )
 
     def test_unknown_mlp_mixer_type(self):
