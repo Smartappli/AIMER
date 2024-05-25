@@ -55,14 +55,19 @@ def get_metaformer_model(metaformer_type, num_classes):
     ]
 
     if metaformer_type not in metaformer_options:
-        raise ValueError(f"Unknown Metaformer Architecture: {metaformer_type}")
+        msg = f"Unknown Metaformer Architecture: {metaformer_type}"
+        raise ValueError(msg)
 
     try:
         return create_model(
-            metaformer_type, pretrained=True, num_classes=num_classes
+            metaformer_type,
+            pretrained=True,
+            num_classes=num_classes,
         )
     except RuntimeError as e:
         print(f"{metaformer_type} - Error loading pretrained model: {e}")
         return create_model(
-            metaformer_type, pretrained=False, num_classes=num_classes
+            metaformer_type,
+            pretrained=False,
+            num_classes=num_classes,
         )

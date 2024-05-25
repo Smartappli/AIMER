@@ -25,12 +25,15 @@ def get_nest_model(nest_type, num_classes):
     ]
 
     if nest_type not in valid_nest_types:
-        raise ValueError(f"Unknown NEST Architecture: {nest_type}")
+        msg = f"Unknown NEST Architecture: {nest_type}"
+        raise ValueError(msg)
 
     try:
         return create_model(nest_type, pretrained=True, num_classes=num_classes)
     except RuntimeError as e:
         print(f"{nest_type} - Error loading pretrained model: {e}")
         return create_model(
-            nest_type, pretrained=False, num_classes=num_classes
+            nest_type,
+            pretrained=False,
+            num_classes=num_classes,
         )

@@ -30,7 +30,8 @@ def get_volo_model(volo_type, num_classes):
     }
 
     if volo_type not in valid_types:
-        raise ValueError(f"Unknown Volo Architecture: {volo_type}")
+        msg = f"Unknown Volo Architecture: {volo_type}"
+        raise ValueError(msg)
 
     try:
         return create_model(volo_type, pretrained=True, num_classes=num_classes)

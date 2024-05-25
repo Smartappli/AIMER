@@ -54,14 +54,19 @@ def get_nfnet_model(nfnet_type, num_classes):
     ]
 
     if nfnet_type not in valid_nfnet_types:
-        raise ValueError(f"Unknown NFNet Architecture: {nfnet_type}")
+        msg = f"Unknown NFNet Architecture: {nfnet_type}"
+        raise ValueError(msg)
 
     try:
         return create_model(
-            nfnet_type, pretrained=True, num_classes=num_classes
+            nfnet_type,
+            pretrained=True,
+            num_classes=num_classes,
         )
     except RuntimeError as e:
         print(f"{nfnet_type} - Error loading pretrained model: {e}")
         return create_model(
-            nfnet_type, pretrained=False, num_classes=num_classes
+            nfnet_type,
+            pretrained=False,
+            num_classes=num_classes,
         )

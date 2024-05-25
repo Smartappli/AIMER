@@ -38,10 +38,14 @@ def get_edgenet_model(edgenet_type, num_classes):
 
     try:
         return create_model(
-            edgenet_type, pretrained=True, num_classes=num_classes,
+            edgenet_type,
+            pretrained=True,
+            num_classes=num_classes,
         )
     except RuntimeError as e:
         print(f"{edgenet_type} - Error loading pretrained model: {e}")
         return create_model(
-            edgenet_type, pretrained=False, num_classes=num_classes,
+            edgenet_type,
+            pretrained=False,
+            num_classes=num_classes,
         )

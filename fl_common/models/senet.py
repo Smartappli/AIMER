@@ -28,14 +28,19 @@ def get_senet_model(senet_type, num_classes):
     ]
 
     if senet_type not in valid_types:
-        raise ValueError(f"Unknown Senet Architecture: {senet_type}")
+        msg = f"Unknown Senet Architecture: {senet_type}"
+        raise ValueError(msg)
 
     try:
         return create_model(
-            senet_type, pretrained=False, num_classes=num_classes
+            senet_type,
+            pretrained=False,
+            num_classes=num_classes,
         )
     except RuntimeError as e:
         print(f"{senet_type} - Error loading pretrained model: {e}")
         return create_model(
-            senet_type, pretrained=False, num_classes=num_classes
+            senet_type,
+            pretrained=False,
+            num_classes=num_classes,
         )

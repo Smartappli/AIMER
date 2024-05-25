@@ -27,7 +27,8 @@ def get_xception_model(xception_type, num_classes):
     }
 
     if xception_type not in valid_types:
-        raise ValueError(f"Unknown Xception Architecture: {xception_type}")
+        msg = f"Unknown Xception Architecture: {xception_type}"
+        raise ValueError(msg)
 
     try:
         return create_model(
