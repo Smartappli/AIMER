@@ -29,9 +29,9 @@ class ServerProject(models.Model):
 
     server_project_id = models.BigAutoField(primary_key=True)
     server_project_title = models.CharField(max_length=250)
-    server_project_description = models.TextField(null=True, blank=True)
+    server_project_description = models.TextField(blank=True)
     server_project_owner = models.ForeignKey(
-        User, on_delete=models.DO_NOTHING, related_name="server_project_owner"
+        User, on_delete=models.DO_NOTHING, related_name="server_project_owner",
     )
     server_project_creation_date = models.DateTimeField(auto_now_add=True)
     server_project_updated_date = models.DateTimeField(auto_now=True)
@@ -60,12 +60,12 @@ class ServerModel(models.Model):
 
     model_id = models.BigAutoField(primary_key=True)
     model_name = models.CharField(max_length=250)
-    model_description = models.TextField(null=True, blank=True)
+    model_description = models.TextField(blank=True)
     model_training = models.CharField(
-        max_length=2, choices=Training.choices, default=Training.LA
+        max_length=2, choices=Training.choices, default=Training.LA,
     )
     model_origin = models.CharField(
-        max_length=2, choices=Origin.choices, default=Origin.AG
+        max_length=2, choices=Origin.choices, default=Origin.AG,
     )
     model_creation_date = models.DateTimeField(auto_now_add=True)
     model_updated_date = models.DateTimeField(auto_now=True)
@@ -91,7 +91,7 @@ class ServerAggregator(models.Model):
         related_name="server_aggregator_model_id",
     )
     server_aggregator_method = models.CharField(
-        max_length=2, choices=Method.choices, default=Method.FA
+        max_length=2, choices=Method.choices, default=Method.FA,
     )
     server_aggregator_creation_date = models.DateTimeField(auto_now_add=True)
     server_aggregator_updated_date = models.DateTimeField(auto_now=True)
@@ -125,12 +125,12 @@ class FederatedAuthorisation(models.Model):
         related_name="fd_authorisation_agent_id",
     )
     federated_autorisation_permission = models.CharField(
-        max_length=2, choices=Permission.choices, default=Permission.IC
+        max_length=2, choices=Permission.choices, default=Permission.IC,
     )
     federated_autorisation_state = models.CharField(
-        max_length=2, choices=State.choices, default=State.IN
+        max_length=2, choices=State.choices, default=State.IN,
     )
     federated_autorisation_creation_date = models.DateTimeField(
-        auto_now_add=True
+        auto_now_add=True,
     )
     federated_autorisation_updated_date = models.DateTimeField(auto_now=True)
