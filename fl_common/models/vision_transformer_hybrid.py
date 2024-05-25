@@ -2,7 +2,8 @@ from timm import create_model
 
 
 def get_vision_transformer_hybrid_model(
-    vision_transformer_hybrid_type, num_classes,
+    vision_transformer_hybrid_type,
+    num_classes,
 ):
     """
     Retrieves a Vision Transformer Hybrid model based on the specified architecture.

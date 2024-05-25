@@ -116,7 +116,10 @@ def create_transform(
 
 
 def get_dataset(
-    dataset_path, batch_size, augmentation_params, normalize_params,
+    dataset_path,
+    batch_size,
+    augmentation_params,
+    normalize_params,
 ):
     """
     Create and configure data loaders for a custom dataset.
@@ -158,18 +161,23 @@ def get_dataset(
     dataset = datasets.ImageFolder(
         root=dataset_path,
         transform=create_transform(
-            **augmentation_params, normalize=normalize_params,
+            **augmentation_params,
+            normalize=normalize_params,
         ),
     )
 
     # Split the dataset into training and testing sets
     train_indices, test_indices = train_test_split(
-        list(range(len(dataset))), test_size=0.1, random_state=42,
+        list(range(len(dataset))),
+        test_size=0.1,
+        random_state=42,
     )
 
     # Further split the training set into training and validation sets
     train_indices, val_indices = train_test_split(
-        train_indices, test_size=0.222222, random_state=42,
+        train_indices,
+        test_size=0.222222,
+        random_state=42,
     )
 
     # Create SubsetRandomSampler for each set
@@ -191,11 +199,15 @@ def get_dataset(
 
     # Define data loaders
     train_loader = DataLoader(
-        dataset, batch_size=batch_size, sampler=train_sampler,
+        dataset,
+        batch_size=batch_size,
+        sampler=train_sampler,
     )
     val_loader = DataLoader(dataset, batch_size=batch_size, sampler=val_sampler)
     test_loader = DataLoader(
-        dataset, batch_size=batch_size, sampler=test_sampler,
+        dataset,
+        batch_size=batch_size,
+        sampler=test_sampler,
     )
 
     num_classes = len(dataset.classes)
@@ -332,10 +344,11 @@ def get_optimizer(optimizer_name, model_parameters, learning_rate):
 
     try:
         return optimizer_dict[optimizer_name](
-            model_parameters, lr=learning_rate,
+            model_parameters,
+            lr=learning_rate,
         )
     except KeyError as exc:
-        msg =f"Unknown Optimizer: {optimizer_name}"
+        msg = f"Unknown Optimizer: {optimizer_name}"
         raise ValueError(msg) from exc
 
 
@@ -448,7 +461,8 @@ def generate_xai_heatmaps(model, image_tensor, label, save_dir, methods=None):
         plt.title(f"XAI Heatmap for {method_name} (Label: {label})")
         plt.colorbar()
         save_path = os.path.join(
-            save_dir, f"xai_heatmap_{method_name}_{label}.png",
+            save_dir,
+            f"xai_heatmap_{method_name}_{label}.png",
         )
         plt.savefig(save_path)
         plt.show()
