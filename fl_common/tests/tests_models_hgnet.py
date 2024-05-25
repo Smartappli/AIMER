@@ -36,7 +36,7 @@ class ProcessingHgnetTestCase(TestCase):
                     self.assertIsNotNone(model)
                 except ValueError:
                     self.fail(
-                        f"{hgnet_type} should be a known Hgnet architecture."
+                        f"{hgnet_type} should be a known Hgnet architecture.",
                     )
 
     def test_unknown_hgnet_type(self):
