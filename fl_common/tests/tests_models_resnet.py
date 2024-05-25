@@ -116,7 +116,7 @@ class ProcessingResnetTestCase(TestCase):
                     self.assertIsNotNone(model)
                 except ValueError:
                     self.fail(
-                        f"{resnet_type} should be a known Resnet architecture."
+                        f"{resnet_type} should be a known Resnet architecture.",
                     )
 
     def test_resnet_unknown_architecture(self):
