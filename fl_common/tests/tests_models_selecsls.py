@@ -30,7 +30,7 @@ class ProcessingSelecslsTestCase(TestCase):
                     self.assertIsNotNone(model)
                 except ValueError:
                     self.fail(
-                        f"{selecsls_type} should be a known SelecSLS architecture."
+                        f"{selecsls_type} should be a known SelecSLS architecture.",
                     )
 
     def test_unknown_selecsls_type(self):
