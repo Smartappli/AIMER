@@ -34,7 +34,7 @@ class ProcessingSenetTestCase(TestCase):
                     self.assertIsNotNone(model)
                 except ValueError:
                     self.fail(
-                        f"{senet_type} should be a known SENet architecture."
+                        f"{senet_type} should be a known SENet architecture.",
                     )
 
     def test_unknown_type(self):
