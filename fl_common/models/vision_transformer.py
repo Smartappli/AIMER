@@ -156,12 +156,12 @@ def get_vision_transformer_model(vision_type, num_classes):
     elif vision_type in timm_models:
         try:
             vision_model = create_model(
-                vision_type, pretrained=True, num_classes=num_classes
+                vision_type, pretrained=True, num_classes=num_classes,
             )
         except RuntimeError as e:
             print(f"{vision_type} - Error loading pretrained model: {e}")
             vision_model = create_model(
-                vision_type, pretrained=False, num_classes=num_classes
+                vision_type, pretrained=False, num_classes=num_classes,
             )
     else:
         msg = f"Unknown Vision Transformer Architecture: {vision_type}"
