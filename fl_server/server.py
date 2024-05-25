@@ -27,7 +27,8 @@ def launch_node():
         reset=True,
     )
     root_domain_humani_client = node_humani.login(
-        email="info@openmined.org", password="changethis",
+        email="info@openmined.org",
+        password="changethis",
     )
     root_domain_humani_client.register(
         name="Jane Doe",
