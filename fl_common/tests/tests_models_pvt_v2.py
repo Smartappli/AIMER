@@ -5,7 +5,7 @@ from fl_common.models.pvt_v2 import get_pvt_v2_model
 os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
 
 
-class ProcessingPvt_V2TestCase(TestCase):
+class ProcessingPvtV2TestCase(TestCase):
     """
     Test case class for processing Pvt v2 models.
     """
