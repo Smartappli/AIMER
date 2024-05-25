@@ -171,7 +171,7 @@ class Model(models.Model):
         choices=Provider.choices,
         default=Provider.HF,
     )
-    model_repo = models.CharField(max_length=250, null=True, blank=True)
+    model_repo = models.CharField(max_length=250, blank=True)
     model_license = models.ForeignKey(
         License,
         on_delete=models.DO_NOTHING,
@@ -255,7 +255,7 @@ class ModelFile(models.Model):
         default=Extension.NONE,
     )
     model_file_size = models.BigIntegerField(blank=True, null=True)
-    model_file_sha256 = models.CharField(max_length=64, blank=True, null=True)
+    model_file_sha256 = models.CharField(max_length=64, blank=True)
     model_file_creation_date = models.DateTimeField(auto_now_add=True)
     model_file_updated_date = models.DateTimeField(auto_now=True)
 
@@ -436,12 +436,10 @@ class DatasetLocalData(models.Model):
     dataset_local_data_username = models.CharField(
         max_length=30,
         blank=True,
-        null=True,
     )
     dataset_local_data_password = models.CharField(
         max_length=30,
         blank=True,
-        null=True,
     )
     dataset_local_data_creation_date = models.DateTimeField(auto_now_add=True)
     dataset_local_data_updated_date = models.DateTimeField(auto_now=True)
@@ -493,22 +491,18 @@ class DatasetRemoteData(models.Model):
     dataset_remote_data_username = models.CharField(
         max_length=30,
         blank=True,
-        null=True,
     )
     dataset_remote_data_password = models.CharField(
         max_length=30,
         blank=True,
-        null=True,
     )
     dataset_remote_data_ip = models.CharField(
         max_length=40,
         blank=True,
-        null=True,
     )
     dataset_remote_data_path = models.CharField(
         max_length=255,
         blank=True,
-        null=True,
     )
     dataset_remote_creation_date = models.DateTimeField(auto_now_add=True)
     dataset_remote_updated_date = models.DateTimeField(auto_now=True)
@@ -605,7 +599,7 @@ class Queue(models.Model):
         on_delete=models.CASCADE,
         related_name="queue_model_id",
     )
-    queue_model_type = models.CharField(max_length=4, null=True, blank=True)
+    queue_model_type = models.CharField(max_length=4, blank=True)
     queue_params = models.JSONField(default=dict)
     queue_dataset_id = models.ForeignKey(
         Dataset,
