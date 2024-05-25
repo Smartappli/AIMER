@@ -24,7 +24,7 @@ class ProcessingPnasnetTestCase(TestCase):
                     self.assertIsNotNone(model)
                 except ValueError:
                     self.fail(
-                        f"{pnasnet_type} should be a known PNASNet architecture."
+                        f"{pnasnet_type} should be a known PNASNet architecture.",
                     )
 
     def test_unknown_pnasnet_type(self):
