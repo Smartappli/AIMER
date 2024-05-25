@@ -63,5 +63,6 @@ class ProcessingVGGTestCase(TestCase):
             get_vgg_model(vgg_type, num_classes)
 
         self.assertEqual(
-            str(context.exception), f"Unknown VGG Architecture : {vgg_type}",
+            str(context.exception),
+            f"Unknown VGG Architecture : {vgg_type}",
         )
