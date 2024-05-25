@@ -67,6 +67,7 @@ def get_vgg_model(vgg_type, num_classes):
                 vgg_type, pretrained=False, num_classes=num_classes
             )
     else:
-        raise ValueError(f"Unknown VGG Architecture : {vgg_type}")
+        msg = f"Unknown VGG Architecture : {vgg_type}"
+        raise ValueError(msg)
 
     return vgg_model
