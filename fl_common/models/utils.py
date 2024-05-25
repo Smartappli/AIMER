@@ -335,7 +335,8 @@ def get_optimizer(optimizer_name, model_parameters, learning_rate):
             model_parameters, lr=learning_rate,
         )
     except KeyError as exc:
-        raise ValueError(f"Unknown Optimizer: {optimizer_name}") from exc
+        msg =f"Unknown Optimizer: {optimizer_name}"
+        raise ValueError(msg) from exc
 
 
 def get_scheduler(optimizer, scheduler_type="step", **kwargs):
@@ -362,7 +363,8 @@ def get_scheduler(optimizer, scheduler_type="step", **kwargs):
     try:
         return scheduler_dict[scheduler_type](optimizer, **kwargs)
     except KeyError as exc:
-        raise ValueError(f"Invalid scheduler_type: {scheduler_type}") from exc
+        msg = f"Invalid scheduler_type: {scheduler_type}"
+        raise ValueError(msg) from exc
 
 
 def generate_xai_heatmaps(model, image_tensor, label, save_dir, methods=None):
