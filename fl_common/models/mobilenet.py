@@ -89,12 +89,16 @@ def get_mobilenet_model(mobilenet_type, num_classes):
     elif mobilenet_type in timm_models:
         try:
             mobilenet_model = create_model(
-                mobilenet_type, pretrained=True, num_classes=num_classes,
+                mobilenet_type,
+                pretrained=True,
+                num_classes=num_classes,
             )
         except RuntimeError as e:
             print(f"{mobilenet_type} - Error loading pretrained model: {e}")
             mobilenet_model = create_model(
-                mobilenet_type, pretrained=False, num_classes=num_classes,
+                mobilenet_type,
+                pretrained=False,
+                num_classes=num_classes,
             )
     else:
         msg = f"Unknown MobileNet Architecture : {mobilenet_type}"

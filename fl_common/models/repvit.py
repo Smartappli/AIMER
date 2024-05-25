@@ -32,10 +32,14 @@ def get_repvit_model(repvit_type, num_classes):
 
     try:
         return create_model(
-            repvit_type, pretrained=True, num_classes=num_classes,
+            repvit_type,
+            pretrained=True,
+            num_classes=num_classes,
         )
     except RuntimeError as e:
         print(f"{repvit_type} - Error loading pretrained model: {e}")
         return create_model(
-            repvit_type, pretrained=False, num_classes=num_classes,
+            repvit_type,
+            pretrained=False,
+            num_classes=num_classes,
         )
