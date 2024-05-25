@@ -24,7 +24,7 @@ class ProcessingNestTestCase(TestCase):
                     self.assertIsNotNone(model)
                 except ValueError:
                     self.fail(
-                        f"{nextvit_type} should be a known NEXTVIT architecture."
+                        f"{nextvit_type} should be a known NEXTVIT architecture.",
                     )
 
     def test_get_nextvit_model_unknown_type(self):
