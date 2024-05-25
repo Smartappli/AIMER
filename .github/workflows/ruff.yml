@@ -11,7 +11,7 @@ jobs:
           cache: 'pip'
       - uses: chartboost/ruff-action@v1
         with:
-          args: 'check --select C90,D,E,F,I,NPY,RUF,UP,W --ignore D100,D102,D200,E501,F401 --fixable ALL --unsafe-fixes --fix'
+          args: 'check --select C90,E,F,I,NPY,RUF,UP,W --ignore E501,F401 --fixable ALL --unsafe-fixes --fix'
       - uses: stefanzweifel/git-auto-commit-action@v5
         with:
           branch: 'ruff'
