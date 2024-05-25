@@ -30,7 +30,7 @@ class ProcessingSequencerTestCase(TestCase):
                     self.assertIsNotNone(model)
                 except ValueError:
                     self.fail(
-                        f"{sknet_type} should be a known SKNet architecture."
+                        f"{sknet_type} should be a known SKNet architecture.",
                     )
 
     def test_unknown_sknet_type(self):
