@@ -101,12 +101,16 @@ def get_maxvit_model(maxvit_type, num_classes):
     elif maxvit_type in timm_models:
         try:
             maxvit_model = create_model(
-                maxvit_type, pretrained=True, num_classes=num_classes,
+                maxvit_type,
+                pretrained=True,
+                num_classes=num_classes,
             )
         except RuntimeError as e:
             print(f"{maxvit_type} - Error loading pretrained model: {e}")
             maxvit_model = create_model(
-                maxvit_type, pretrained=False, num_classes=num_classes,
+                maxvit_type,
+                pretrained=False,
+                num_classes=num_classes,
             )
     else:
         msg = f"Unknown MaxVit Architecture: {maxvit_type}"

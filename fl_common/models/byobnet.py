@@ -65,10 +65,14 @@ def get_byobnet_model(byobnet_type, num_classes):
 
     try:
         return create_model(
-            byobnet_type, pretrained=True, num_classes=num_classes,
+            byobnet_type,
+            pretrained=True,
+            num_classes=num_classes,
         )
     except RuntimeError as e:
         print(f"{byobnet_type} - Error loading pretrained model: {e}")
         return create_model(
-            byobnet_type, pretrained=False, num_classes=num_classes,
+            byobnet_type,
+            pretrained=False,
+            num_classes=num_classes,
         )

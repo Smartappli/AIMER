@@ -56,5 +56,7 @@ def get_swin_transformer_v2_cr_model(swin_type, num_classes):
     except RuntimeError as e:
         print(f"{swin_type} - Error loading pretrained model: {e}")
         return create_model(
-            swin_type, pretrained=False, num_classes=num_classes,
+            swin_type,
+            pretrained=False,
+            num_classes=num_classes,
         )
