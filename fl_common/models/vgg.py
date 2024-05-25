@@ -59,12 +59,12 @@ def get_vgg_model(vgg_type, num_classes):
     elif vgg_type in timm_models:
         try:
             vgg_model = create_model(
-                vgg_type, pretrained=True, num_classes=num_classes
+                vgg_type, pretrained=True, num_classes=num_classes,
             )
         except RuntimeError as e:
             print(f"{vgg_type} - Error loading pretrained model: {e}")
             vgg_model = create_model(
-                vgg_type, pretrained=False, num_classes=num_classes
+                vgg_type, pretrained=False, num_classes=num_classes,
             )
     else:
         msg = f"Unknown VGG Architecture : {vgg_type}"
