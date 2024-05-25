@@ -32,7 +32,7 @@ class ProcessingHardcorenasTestCase(TestCase):
                     self.assertIsNotNone(model)
                 except ValueError:
                     self.fail(
-                        f"{hardcorenas_type} should be a known HardcoreNAS architecture."
+                        f"{hardcorenas_type} should be a known HardcoreNAS architecture.",
                     )
 
     def test_unknown_hardcorenas_type(self):
