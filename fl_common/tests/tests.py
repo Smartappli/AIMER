@@ -49,7 +49,9 @@ class ProcessingTestCase(TestCase):
 
         # self.assertIsInstance(transform, transforms.Compose)
         self.assertTrue(
-            any(isinstance(t, transforms.Resize) for t in transform.transforms),
+            any(
+                isinstance(t, transforms.Resize)
+                for t in transform.transforms)
         )
         self.assertTrue(
             any(
@@ -95,7 +97,8 @@ class ProcessingTestCase(TestCase):
         )
         self.assertTrue(
             any(
-                isinstance(t, transforms.ToTensor) for t in transform.transforms,
+                isinstance(t, transforms.ToTensor)
+                for t in transform.transforms
             )
         )
         self.assertTrue(
