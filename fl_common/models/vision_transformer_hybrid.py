@@ -45,7 +45,7 @@ def get_vision_transformer_hybrid_model(
         )
     except RuntimeError as e:
         print(
-            f"{vision_transformer_hybrid_type} - Error loading pretrained model: {e}"
+            f"{vision_transformer_hybrid_type} - Error loading pretrained model: {e}",
         )
         return create_model(
             vision_transformer_hybrid_type,
