@@ -120,7 +120,9 @@ class ProcessingTestCase(TestCase):
     def test_no_normalize(self):
         # Test without normalization
         transform = create_transform(
-            resize=(256, 256), to_tensor=True, normalize=None,
+            resize=(256, 256),
+            to_tensor=True,
+            normalize=None,
         )
 
         self.assertIsInstance(transform, transforms.Compose)
@@ -210,7 +212,8 @@ class ProcessingTestCase(TestCase):
             get_criterion("UnknownLoss")
 
         self.assertEqual(
-            str(context.exception), "Unknown Criterion: UnknownLoss",
+            str(context.exception),
+            "Unknown Criterion: UnknownLoss",
         )
 
     def test_known_optimizer(self):
@@ -237,7 +240,9 @@ class ProcessingTestCase(TestCase):
         for optimizer_name in known_optimizers:
             with self.subTest(optimizer_name=optimizer_name):
                 optimizer = get_optimizer(
-                    optimizer_name, model_parameters, learning_rate,
+                    optimizer_name,
+                    model_parameters,
+                    learning_rate,
                 )
                 self.assertIsInstance(optimizer, optim.Optimizer)
 
@@ -250,14 +255,18 @@ class ProcessingTestCase(TestCase):
             get_optimizer("UnknownOptimizer", model_parameters, learning_rate)
 
         self.assertEqual(
-            str(context.exception), "Unknown Optimizer: UnknownOptimizer",
+            str(context.exception),
+            "Unknown Optimizer: UnknownOptimizer",
         )
 
     def test_step_scheduler(self):
         # Test with StepLR scheduler
         optimizer = optim.SGD([torch.tensor(1.0, requires_grad=True)], lr=0.001)
         scheduler = get_scheduler(
-            optimizer, scheduler_type="step", step_size=5, gamma=0.1,
+            optimizer,
+            scheduler_type="step",
+            step_size=5,
+            gamma=0.1,
         )
         self.assertIsInstance(scheduler, lr_scheduler.StepLR)
         self.assertEqual(scheduler.step_size, 5)
@@ -280,7 +289,9 @@ class ProcessingTestCase(TestCase):
         # Test with ExponentialLR scheduler
         optimizer = optim.SGD([torch.tensor(1.0, requires_grad=True)], lr=0.001)
         scheduler = get_scheduler(
-            optimizer, scheduler_type="exponential", gamma=0.9,
+            optimizer,
+            scheduler_type="exponential",
+            gamma=0.9,
         )
         self.assertIsInstance(scheduler, lr_scheduler.ExponentialLR)
         self.assertEqual(scheduler.gamma, 0.9)
@@ -294,7 +305,8 @@ class ProcessingTestCase(TestCase):
             )
 
         self.assertEqual(
-            str(context.exception), "Invalid scheduler_type: invalid_type",
+            str(context.exception),
+            "Invalid scheduler_type: invalid_type",
         )
 
     """
