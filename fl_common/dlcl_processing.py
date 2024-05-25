@@ -185,7 +185,10 @@ for model_type in model_list:
     # scheduler = get_scheduler(optimizer, scheduler_type='exponential', gamma=0.95)
 
     scheduler = get_scheduler(
-        optimizer, scheduler_type="step", step_size=10, gamma=0.5,
+        optimizer,
+        scheduler_type="step",
+        step_size=10,
+        gamma=0.5,
     )
 
     # Training loop

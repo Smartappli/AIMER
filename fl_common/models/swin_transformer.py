@@ -55,7 +55,8 @@ def get_swin_transformer_model(swin_type, num_classes):
 
         # Modify last layer to suit number of classes
         if hasattr(swin_model, "head") and isinstance(
-            swin_model.head, nn.Linear,
+            swin_model.head,
+            nn.Linear,
         ):
             num_features = swin_model.head.in_features
             swin_model.head = nn.Linear(num_features, num_classes)
@@ -67,12 +68,16 @@ def get_swin_transformer_model(swin_type, num_classes):
     elif swin_type in timm_models:
         try:
             swin_model = create_model(
-                swin_type, pretrained=True, num_classes=num_classes,
+                swin_type,
+                pretrained=True,
+                num_classes=num_classes,
             )
         except RuntimeError as e:
             print(f"{swin_type} - Error loading pretrained model: {e}")
             swin_model = create_model(
-                swin_type, pretrained=False, num_classes=num_classes,
+                swin_type,
+                pretrained=False,
+                num_classes=num_classes,
             )
     else:
         msg = f"Unknown Swin Transformer Architecture: {swin_type}"

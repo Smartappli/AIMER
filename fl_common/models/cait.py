@@ -37,5 +37,7 @@ def get_cait_model(cait_type, num_classes):
     except RuntimeError as e:
         print(f"{cait_type} - Error loading pretrained model: {e}")
         return create_model(
-            cait_type, pretrained=False, num_classes=num_classes,
+            cait_type,
+            pretrained=False,
+            num_classes=num_classes,
         )

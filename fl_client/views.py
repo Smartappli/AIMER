@@ -169,7 +169,8 @@ def download_data(request):
                 # non-existence of file is cached
                 print("File in download")
                 hf_hub_download(
-                    repo_id=p.model_repo, filename=q.model_file_filename,
+                    repo_id=p.model_repo,
+                    filename=q.model_file_filename,
                 )
                 print("File downloaded")
 
@@ -177,7 +178,8 @@ def download_data(request):
                 print("File in download")
 
                 hf_hub_download(
-                    repo_id=p.model_repo, filename=q.model_file_filename,
+                    repo_id=p.model_repo,
+                    filename=q.model_file_filename,
                 )
 
                 print("File downloaded")
@@ -197,7 +199,8 @@ def download_data(request):
 
                 for file in model_listing[1:]:
                     with open(new_name, "ab") as out_file, open(
-                        file, "rb",
+                        file,
+                        "rb",
                     ) as in_file:
                         shutil.copyfileobj(in_file, out_file)
                         os.remove(file)
@@ -638,7 +641,9 @@ def register(request):
             # Create the user profile
             Profile.objects.create(user=new_user)
             return render(
-                request, "account/register_done.html", {"new_user": new_user},
+                request,
+                "account/register_done.html",
+                {"new_user": new_user},
             )
 
     else:

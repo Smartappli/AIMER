@@ -30,10 +30,14 @@ def get_twins_model(twins_type, num_classes):
 
     try:
         return create_model(
-            twins_type, pretrained=True, num_classes=num_classes,
+            twins_type,
+            pretrained=True,
+            num_classes=num_classes,
         )
     except RuntimeError as e:
         print(f"{twins_type} - Error loading pretrained model: {e}")
         return create_model(
-            twins_type, pretrained=False, num_classes=num_classes,
+            twins_type,
+            pretrained=False,
+            num_classes=num_classes,
         )
