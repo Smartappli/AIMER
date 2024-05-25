@@ -285,7 +285,8 @@ def get_criterion(criterion_name):
     try:
         return criterion_dict[criterion_name]()
     except KeyError as exc:
-        raise ValueError(f"Unknown Criterion: {criterion_name}") from exc
+        msg = f"Unknown Criterion: {criterion_name}"
+        raise ValueError(msg) from exc
 
 
 def get_optimizer(optimizer_name, model_parameters, learning_rate):
