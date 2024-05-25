@@ -48,7 +48,7 @@ class ProcessingDeitTestCase(TestCase):
                     self.assertIsNotNone(model)
                 except ValueError:
                     self.fail(
-                        f"{deit_type} should be a known Deit architecture."
+                        f"{deit_type} should be a known Deit architecture.",
                     )
 
     def test_unknown_deit_type(self):
