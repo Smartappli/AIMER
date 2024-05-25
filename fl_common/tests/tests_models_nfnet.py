@@ -58,7 +58,7 @@ class ProcessingNfnetTestCase(TestCase):
                     self.assertIsNotNone(model)
                 except ValueError:
                     self.fail(
-                        f"{nfnet_type} should be a known NFNet architecture."
+                        f"{nfnet_type} should be a known NFNet architecture.",
                     )
 
     def test_unknown_nfnet_type(self):
