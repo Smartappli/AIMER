@@ -24,14 +24,15 @@ def get_sknet_model(sknet_type, num_classes):
     }
 
     if sknet_type not in valid_types:
-        raise ValueError(f"Unknown SKNet Architecture: {sknet_type}")
+        msg = f"Unknown SKNet Architecture: {sknet_type}"
+        raise ValueError(msg)
 
     try:
         return create_model(
-            sknet_type, pretrained=True, num_classes=num_classes
+            sknet_type, pretrained=True, num_classes=num_classes,
         )
     except RuntimeError as e:
         print(f"{sknet_type} - Error loading pretrained model: {e}")
         return create_model(
-            sknet_type, pretrained=False, num_classes=num_classes
+            sknet_type, pretrained=False, num_classes=num_classes,
         )

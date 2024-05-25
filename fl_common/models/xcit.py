@@ -37,7 +37,8 @@ def get_xcit_model(xcit_type, num_classes):
     ]
 
     if xcit_type not in supported_types:
-        raise ValueError(f"Unsupported XCiT type: {xcit_type}")
+        msg = f"Unsupported XCiT type: {xcit_type}"
+        raise ValueError(msg)
 
     try:
         return create_model(xcit_type, pretrained=True, num_classes=num_classes)

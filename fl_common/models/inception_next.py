@@ -25,16 +25,15 @@ def get_inception_next_model(inception_next_type, num_classes):
     ]
 
     if inception_next_type not in inception_next_options:
-        raise ValueError(
-            f"Unknown Inception Next Architecture: {inception_next_type}"
-        )
+        msg = f"Unknown Inception Next Architecture: {inception_next_type}"
+        raise ValueError(msg)
 
     try:
         return create_model(
-            inception_next_type, pretrained=True, num_classes=num_classes
+            inception_next_type, pretrained=True, num_classes=num_classes,
         )
     except RuntimeError as e:
         print(f"{inception_next_type} - Error loading pretrained model: {e}")
         return create_model(
-            inception_next_type, pretrained=False, num_classes=num_classes
+            inception_next_type, pretrained=False, num_classes=num_classes,
         )

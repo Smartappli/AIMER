@@ -15,7 +15,8 @@ def get_squeezenet_model(squeezenet_type, num_classes):
 
     # Validate squeezenet_type
     if squeezenet_type not in squeezenet_versions:
-        raise ValueError(f"Unknown SqueezeNet Architecture: {squeezenet_type}")
+        msg = f"Unknown SqueezeNet Architecture: {squeezenet_type}"
+        raise ValueError(msg)
 
     # Load the pre-trained model
     model_func, weights = squeezenet_versions[squeezenet_type]
@@ -28,7 +29,7 @@ def get_squeezenet_model(squeezenet_type, num_classes):
     # Modify the last layer to suit the given number of classes
     num_features = squeezenet_model.classifier[1].in_channels
     squeezenet_model.classifier[1] = nn.Conv2d(
-        num_features, num_classes, kernel_size=(1, 1), stride=(1, 1)
+        num_features, num_classes, kernel_size=(1, 1), stride=(1, 1),
     )
 
     return squeezenet_model
