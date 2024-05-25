@@ -65,7 +65,7 @@ class License(models.Model):
         editable=False,
         unique=True,
     )
-    license_short_name = models.CharField(max_length=30, null=True, blank=True)
+    license_short_name = models.CharField(max_length=30, blank=True)
     license_name = models.CharField(max_length=250)
     license_description = models.TextField(blank=True)
     license_owner = models.ForeignKey(
@@ -148,9 +148,9 @@ class Model(models.Model):
         unique=True,
     )
     model_name = models.CharField(max_length=200)
-    model_short_name = models.CharField(max_length=200, blank=True, null=True)
-    model_description = models.TextField(null=True, blank=True)
-    model_version = models.CharField(max_length=15, null=True, blank=True)
+    model_short_name = models.CharField(max_length=200, blank=True)
+    model_description = models.TextField(blank=True)
+    model_version = models.CharField(max_length=15, blank=True)
     model_category = models.CharField(
         max_length=2,
         choices=Category.choices,
