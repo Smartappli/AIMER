@@ -43,7 +43,7 @@ class ProcessingDenseNetTestCase(TestCase):
                     self.assertIsNotNone(model)
                 except ValueError:
                     self.fail(
-                        f"{densenet_type} should be a known Densenet architecture."
+                        f"{densenet_type} should be a known Densenet architecture.",
                     )
 
     def test_densenet_unknown_architecture(self):
