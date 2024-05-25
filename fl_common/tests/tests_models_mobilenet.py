@@ -61,7 +61,7 @@ class ProcessingMobilenetTestCase(TestCase):
                     self.assertIsNotNone(model)
                 except ValueError:
                     self.fail(
-                        f"{mobilenet_type} should be a known MobileNet architecture."
+                        f"{mobilenet_type} should be a known MobileNet architecture.",
                     )
 
     def test_mobilenet_unknown_architecture(self):
