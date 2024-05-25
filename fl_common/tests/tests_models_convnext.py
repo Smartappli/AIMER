@@ -61,7 +61,7 @@ class ProcessingConvNextTestCase(TestCase):
                     self.assertIsNotNone(model)
                 except ValueError:
                     self.fail(
-                        f"{convnext_type} should be a known Convnext architecture."
+                        f"{convnext_type} should be a known Convnext architecture.",
                     )
 
     def test_convnext_unknown_architecture(self):
