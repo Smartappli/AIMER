@@ -43,7 +43,7 @@ class ProcessingMetaformerTestCase(TestCase):
                     self.assertIsNotNone(model)
                 except ValueError:
                     self.fail(
-                        f"{metaformer_type} should be a known Metaformer architecture."
+                        f"{metaformer_type} should be a known Metaformer architecture.",
                     )
 
     def test_unknown_metaformer_type(self):
