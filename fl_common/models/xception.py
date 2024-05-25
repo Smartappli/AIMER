@@ -32,10 +32,10 @@ def get_xception_model(xception_type, num_classes):
 
     try:
         return create_model(
-            xception_type, pretrained=True, num_classes=num_classes
+            xception_type, pretrained=True, num_classes=num_classes,
         )
     except RuntimeError as e:
         print(f"{xception_type} - Error loading pretrained model: {e}")
         return create_model(
-            xception_type, pretrained=False, num_classes=num_classes
+            xception_type, pretrained=False, num_classes=num_classes,
         )
