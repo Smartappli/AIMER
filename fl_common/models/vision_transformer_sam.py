@@ -34,7 +34,7 @@ def get_vision_transformer_sam_model(vision_transformer_sam_type, num_classes):
         )
     except RuntimeError as e:
         print(
-            f"{vision_transformer_sam_type} - Error loading pretrained model: {e}"
+            f"{vision_transformer_sam_type} - Error loading pretrained model: {e}",
         )
         return create_model(
             vision_transformer_sam_type,
