@@ -2,7 +2,7 @@ from timm import create_model
 
 
 def get_vision_transformer_relpos_model(
-    vision_transformer_relpos_type, num_classes
+    vision_transformer_relpos_type, num_classes,
 ):
     """
     Function to get a Vision Transformer Relative Position model of a specified type.
@@ -45,7 +45,7 @@ def get_vision_transformer_relpos_model(
         )
     except RuntimeError as e:
         print(
-            f"{vision_transformer_relpos_type} - Error loading pretrained model: {e}"
+            f"{vision_transformer_relpos_type} - Error loading pretrained model: {e}",
         )
         return create_model(
             vision_transformer_relpos_type,
