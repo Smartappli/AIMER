@@ -34,9 +34,8 @@ def get_vision_transformer_relpos_model(
     }
 
     if vision_transformer_relpos_type not in valid_types:
-        raise ValueError(
-            f"Unknown Vision Transformer Relative Position Architecture: {vision_transformer_relpos_type}"
-        )
+        msg = f"Unknown Vision Transformer Relative Position Architecture: {vision_transformer_relpos_type}"
+        raise ValueError(msg)
 
     try:
         return create_model(
