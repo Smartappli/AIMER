@@ -30,8 +30,9 @@ def get_efficientnet_model(efficientnet_type, num_classes):
                'tf_efficientnet_cc_b1_8e', 'tf_efficientnet_lite0', 'tf_efficientnet_lite1', 'tf_efficientnet_lite2',
                'tf_efficientnet_lite3', 'tf_efficientnet_lite4', 'tf_efficientnetv2_s', 'tf_efficientnetv2_m',
                'tf_efficientnetv2_l', 'tf_efficientnetv2_xl', 'tf_efficientnetv2_b0', 'tf_efficientnetv2_b1',
-               'tf_efficientnetv2_b2', 'tf_efficientnetv2_b3', 'mixnet_s', 'mixnet_m', 'mixnet_l', 'mixnet_xl',
-               'mixnet_xxl', 'tf_mixnet_s', 'tf_mixnet_m', 'tf_mixnet_l', 'tinynet_a', 'tinynet_b', 'tinynet_c',
+               'tf_efficientnetv2_b2', 'tf_efficientnetv2_b3', 'efficientnet_x_b3', 'efficientnet_x_b5',
+               'efficientnet_h_b5', 'mixnet_s', 'mixnet_m', 'mixnet_l', 'mixnet_xl', 'mixnet_xxl',
+               'tf_mixnet_s', 'tf_mixnet_m', 'tf_mixnet_l', 'tinynet_a', 'tinynet_b', 'tinynet_c',
                'tinynet_d', 'tinynet_e'
     - num_classes (int): Number of output classes for the modified model. Default is 1000.
 
