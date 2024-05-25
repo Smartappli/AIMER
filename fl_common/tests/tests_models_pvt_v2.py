@@ -5,7 +5,7 @@ from fl_common.models.pvt_v2 import get_pvt_v2_model
 os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
 
 
-class ProcessingPvt_v2TestCase(TestCase):
+class ProcessingPvt_V2TestCase(TestCase):
     """
     Test case class for processing Pvt v2 models.
     """
@@ -32,7 +32,7 @@ class ProcessingPvt_v2TestCase(TestCase):
                     self.assertIsNotNone(model)
                 except ValueError:
                     self.fail(
-                        f"{pvt_v2_type} should be a known PVTv2 architecture."
+                        f"{pvt_v2_type} should be a known PVTv2 architecture.",
                     )
 
     def test_unknown_pvt_v2_type(self):
