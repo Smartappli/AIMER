@@ -461,7 +461,7 @@ def generate_xai_heatmaps(model, image_tensor, label, save_dir, methods=None):
         plt.imshow(attributions_np, cmap="viridis")
         plt.title(f"XAI Heatmap for {method_name} (Label: {label})")
         plt.colorbar()
-        save_path = save_dir, +"/" + f"xai_heatmap_{method_name}_{label}.png"
+        save_path = save_dir, + '/' + f"xai_heatmap_{method_name}_{label}.png"
         plt.savefig(save_path)
         plt.show()
 
