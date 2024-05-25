@@ -50,6 +50,7 @@ def get_mobilenet_model(mobilenet_type, num_classes):
     timm_models = [
         "mobilenetv3_large_075",
         "mobilenetv3_large_100",
+        "mobilenetv3_large_150",
         "mobilenetv3_small_050",
         "mobilenetv3_small_075",
         "mobilenetv3_small_075",
@@ -69,6 +70,13 @@ def get_mobilenet_model(mobilenet_type, num_classes):
         "lcnet_075",
         "lcnet_100",
         "lcnet_150",
+        "mobilenetv4_conv_small",
+        "mobilenetv4_conv_medium",
+        "mobilenetv4_conv_large",
+        "mobilenetv4_hybrid_medium_075",
+        "mobilenetv4_hybrid_medium",
+        "mobilenetv4_hybrid_medium_150",
+        "mobilenetv4_hybrid_large",
     ]
 
     # Check if the vision type is from torchvision
