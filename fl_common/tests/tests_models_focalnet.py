@@ -44,7 +44,7 @@ class ProcessingFastVitTestCase(TestCase):
                     self.assertIsNotNone(model)
                 except ValueError:
                     self.fail(
-                        f"{focalnet_type} should be a known Focalnet architecture."
+                        f"{focalnet_type} should be a known Focalnet architecture.",
                     )
 
     def test_unknown_focalnet_type(self):
