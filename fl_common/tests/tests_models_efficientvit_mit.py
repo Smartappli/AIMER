@@ -5,7 +5,7 @@ from fl_common.models.efficientvit_mit import get_efficientvit_mit_model
 os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
 
 
-class ProcessingEfficientVit_MitTestCase(TestCase):
+class ProcessingEfficientVitMitTestCase(TestCase):
     """
     Test case class for processing Efficientvit_mit models.
     """
