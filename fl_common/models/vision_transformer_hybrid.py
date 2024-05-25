@@ -34,9 +34,8 @@ def get_vision_transformer_hybrid_model(
     }
 
     if vision_transformer_hybrid_type not in valid_types:
-        raise ValueError(
-            f"Unknown Vision Transformer Hybrid Architecture: {vision_transformer_hybrid_type}"
-        )
+        msg = f"Unknown Vision Transformer Hybrid Architecture: {vision_transformer_hybrid_type}"
+        raise ValueError(msg)
 
     try:
         return create_model(
