@@ -164,8 +164,7 @@ def get_vision_transformer_model(vision_type, num_classes):
                 vision_type, pretrained=False, num_classes=num_classes
             )
     else:
-        raise ValueError(
-            f"Unknown Vision Transformer Architecture: {vision_type}"
-        )
+        msg = f"Unknown Vision Transformer Architecture: {vision_type}"
+        raise ValueError(msg)
 
     return vision_model

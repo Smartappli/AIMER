@@ -30,7 +30,8 @@ def get_shufflenet_model(shufflenet_type, num_classes):
 
     # Validate shufflenet_type
     if shufflenet_type not in model_funcs:
-        raise ValueError(f"Unknown ShuffleNet Architecture: {shufflenet_type}")
+        msg = f"Unknown ShuffleNet Architecture: {shufflenet_type}"
+        raise ValueError(msg)
 
     # Load the pre-trained model
     model_func, weights = model_funcs[shufflenet_type]

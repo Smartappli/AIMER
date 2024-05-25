@@ -40,9 +40,8 @@ def get_wide_resnet_model(wide_resnet_type, num_classes):
             print(f"{wide_resnet_type} - Error loading pretrained model: {e}")
             wide_resnet_model = model_func(weights=None)
     else:
-        raise ValueError(
-            f"Unknown Wide ResNet Architecture: {wide_resnet_type}"
-        )
+        msg = f"Unknown Wide ResNet Architecture: {wide_resnet_type}"
+        raise ValueError(msg)
 
     # Modify the last layer to suit the given number of classes
     num_features = wide_resnet_model.fc.in_features

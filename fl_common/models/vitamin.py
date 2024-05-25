@@ -28,7 +28,8 @@ def get_vitamin_model(vitamin_type, num_classes):
     }
 
     if vitamin_type not in valid_types:
-        raise ValueError(f"Unknown vitamin Architecture: {vitamin_type}")
+        msg = f"Unknown vitamin Architecture: {vitamin_type}"
+        raise ValueError(msg)
 
     try:
         return create_model(

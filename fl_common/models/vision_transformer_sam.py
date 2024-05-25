@@ -23,9 +23,8 @@ def get_vision_transformer_sam_model(vision_transformer_sam_type, num_classes):
     }
 
     if vision_transformer_sam_type not in valid_types:
-        raise ValueError(
-            f"Unknown Vision Transformer SAM Architecture: {vision_transformer_sam_type}"
-        )
+        msg = f"Unknown Vision Transformer SAM Architecture: {vision_transformer_sam_type}"
+        raise ValueError(msg)
 
     try:
         return create_model(

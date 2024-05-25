@@ -29,7 +29,8 @@ def get_vovnet_model(vovnet_type, num_classes):
     }
 
     if vovnet_type not in valid_types:
-        raise ValueError(f"Unknown Vovnet Architecture: {vovnet_type}")
+        msg = f"Unknown Vovnet Architecture: {vovnet_type}"
+        raise ValueError(msg)
 
     try:
         return create_model(
