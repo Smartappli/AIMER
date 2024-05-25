@@ -24,7 +24,7 @@ class ProcessingVisformerTestCase(TestCase):
                     self.assertIsNotNone(model)
                 except ValueError:
                     self.fail(
-                        f"{visformer_type} should be a known Visformer architecture."
+                        f"{visformer_type} should be a known Visformer architecture.",
                     )
 
     def test_unknown_visformer_type(self):
