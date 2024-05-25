@@ -33,12 +33,14 @@ for task in tasks:
             # non-existence of file is cached
             print("File in download")
             hf_hub_download(
-                repo_id=p.model_repo, filename=q.model_file_filename,
+                repo_id=p.model_repo,
+                filename=q.model_file_filename,
             )
             print("File downloaded")
         else:
             print("File in download")
             hf_hub_download(
-                repo_id=p.model_repo, filename=q.model_file_filename,
+                repo_id=p.model_repo,
+                filename=q.model_file_filename,
             )
             print("File downloaded")
