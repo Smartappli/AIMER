@@ -31,7 +31,7 @@ class ProcessingNestTestCase(TestCase):
                     self.assertIsNotNone(model)
                 except ValueError:
                     self.fail(
-                        f"{nest_type} should be a known Nest architecture."
+                        f"{nest_type} should be a known Nest architecture.",
                     )
 
     def test_unknown_nest_type(self):
