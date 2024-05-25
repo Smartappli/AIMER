@@ -38,7 +38,7 @@ class ProcessingHrnetTestCase(TestCase):
                     self.assertIsNotNone(model)
                 except ValueError:
                     self.fail(
-                        f"{hrnet_type} should be a known HRNet architecture."
+                        f"{hrnet_type} should be a known HRNet architecture.",
                     )
 
     def test_hrnet_model_unknown_type(self):
