@@ -72,7 +72,7 @@ class ProcessingRegnetTestCase(TestCase):
                     self.assertIsNotNone(model)
                 except ValueError:
                     self.fail(
-                        f"{regnet_type} should be a known Regnet architecture."
+                        f"{regnet_type} should be a known Regnet architecture.",
                     )
 
     def test_regnet_unknown_architecture(self):
