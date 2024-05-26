@@ -1,4 +1,4 @@
-name: Django Lint
+name: DjLint
 
 on: [push, pull_request]
 
