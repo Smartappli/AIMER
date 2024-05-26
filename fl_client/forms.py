@@ -408,7 +408,7 @@ class UserRegistrationForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ["username", "first_name", "last_name", "email"]
+        fields: ClassVar[list[str]] = ["username", "first_name", "last_name", "email"]
 
     def clean_password2(self):
         """Validate password"""
@@ -432,7 +432,7 @@ class UserEditForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ["first_name", "last_name", "email"]
+        fields: ClassVar[list[str]] = ["first_name", "last_name", "email"]
 
     def clean_email(self):
         """Validate email"""
@@ -449,4 +449,4 @@ class ProfileEditForm(forms.ModelForm):
 
     class Meta:
         model = Profile
-        fields = ["date_of_birth", "photo"]
+        fields: ClassVar[list[str]] = ["date_of_birth", "photo"]
