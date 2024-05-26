@@ -624,7 +624,7 @@ for model_type in model_list:
     # Saving the graph
     # save_path = os.path.join(save_dir, "training_curves.png")
     save_dir_path = Path(save_dir + "/training_curves.png")
-    fig.savefig(save_path)
+    fig.savefig(save_dir_path)
 
     plt.show()
 
