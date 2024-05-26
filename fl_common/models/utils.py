@@ -82,13 +82,13 @@ def create_transform(
 
     if data_augmentation:
         maybe_add_transform(
-            transform_list, resize, transforms.Resize, size=resize
+            transform_list, resize, transforms.Resize, size=resize,
         )
         maybe_add_transform(
-            transform_list, center_crop, transforms.CenterCrop, size=center_crop
+            transform_list, center_crop, transforms.CenterCrop, size=center_crop,
         )
         maybe_add_transform(
-            transform_list, random_crop, transforms.RandomCrop, size=random_crop
+            transform_list, random_crop, transforms.RandomCrop, size=random_crop,
         )
         maybe_add_transform(
             transform_list,
@@ -109,7 +109,7 @@ def create_transform(
             degrees=rotation_range,
         )
         maybe_add_transform(
-            transform_list, color_jitter, transforms.ColorJitter, *color_jitter
+            transform_list, color_jitter, transforms.ColorJitter, *color_jitter,
         )
         maybe_add_transform(
             transform_list,
