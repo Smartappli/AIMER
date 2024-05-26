@@ -23,4 +23,5 @@ jobs:
           python -m pip install --upgrade pip
           pip install djlint
           djlint ./templates --extension=html --lint
-          
+          djlint ./templates --check
+          djlint ./templates --reformat
