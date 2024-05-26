@@ -35,6 +35,7 @@ def maybe_add_transform(transform_list, condition, transform, *args, **kwargs):
             condition = (condition, condition)
         transform_list.append(transform(*args, **kwargs))
 
+
 def create_transform(
     resize=None,
     center_crop=None,
