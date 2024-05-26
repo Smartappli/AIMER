@@ -3,6 +3,7 @@ import uuid
 from django.contrib.auth.models import User
 from django.conf import settings
 from django.db import models
+from typing import ClassVar, List
 
 
 class Profile(models.Model):
@@ -78,7 +79,7 @@ class License(models.Model):
     license_updated_date = models.DateTimeField(auto_now=True)
 
     class Meta:
-        ordering = ["license_short_name"]
+        ordering: ClassVar[List[str]] = ["license_short_name"]
 
     def __str__(self):
         return self.license_short_name + " - " + self.license_name
@@ -105,7 +106,7 @@ class ModelFamily(models.Model):
     model_family_updated_date = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        ordering = ["model_family_name"]
+        ordering: ClassVar[List[str]] = ["model_family_name"]
 
     def __str__(self):
         return self.model_family_name
@@ -188,7 +189,7 @@ class Model(models.Model):
     model_updated_date = models.DateTimeField(auto_now=True)
 
     class Meta:
-        ordering = ["model_name"]
+        ordering: ClassVar[List[str]] = ["model_name"]
 
     def __str__(self):
         if str(self.model_version) != "None":
@@ -260,7 +261,7 @@ class ModelFile(models.Model):
     model_file_updated_date = models.DateTimeField(auto_now=True)
 
     class Meta:
-        ordering = ["model_file_filename"]
+        ordering: ClassVar[List[str]] = ["model_file_filename"]
 
     def __str__(self):
         return (
@@ -296,7 +297,7 @@ class Document(models.Model):
     document_updated_date = models.DateTimeField(auto_now=True)
 
     class Meta:
-        ordering = ["document_filename"]
+        ordering: ClassVar[List[str]] = ["document_filename"]
 
     def __str__(self):
         return self.document_filename + " ----- " + self.document_title
@@ -341,7 +342,7 @@ class ModelDocument(models.Model):
     )
 
     class Meta:
-        ordering = ["modeldoc_model_id"]
+        ordering: ClassVar[List[str]] = ["modeldoc_model_id"]
 
     def __str__(self):
         return (
@@ -408,7 +409,7 @@ class Dataset(models.Model):
     dataset_updated_date = models.DateTimeField(auto_now=True)
 
     class Meta:
-        ordering = ["dataset_name"]
+        ordering: ClassVar[List[str]] = ["dataset_name"]
 
     def __str__(self):
         return self.dataset_name
@@ -445,7 +446,7 @@ class DatasetLocalData(models.Model):
     dataset_local_data_updated_date = models.DateTimeField(auto_now=True)
 
     class Meta:
-        ordering = ["dataset_local_data_link"]
+        ordering: ClassVar[List[str]] = ["dataset_local_data_link"]
 
     def __str__(self):
         return (
@@ -508,7 +509,7 @@ class DatasetRemoteData(models.Model):
     dataset_remote_updated_date = models.DateTimeField(auto_now=True)
 
     class Meta:
-        ordering = ["dataset_remote_data_path"]
+        ordering: ClassVar[List[str]] = ["dataset_remote_data_path"]
 
     def __str__(self):
         return (
@@ -543,7 +544,7 @@ class DatasetCentralData(models.Model):
     dataset_central_updated_date = models.DateTimeField(auto_now=True)
 
     class Meta:
-        ordering = ["dataset_central_data_link"]
+        ordering: ClassVar[List[str]] = ["dataset_central_data_link"]
 
     def __str__(self):
         return (
@@ -622,7 +623,7 @@ class Queue(models.Model):
     queue_updated_date = models.DateTimeField(auto_now=True)
 
     class Meta:
-        ordering = ["queue_model_type", "queue_state"]
+        ordering: ClassVar[List[str]] = ["queue_model_type", "queue_state"]
 
     def __str__(self):
         return str(self.queue_uuid)
@@ -650,7 +651,7 @@ class Help(models.Model):
     )
 
     class Meta:
-        ordering = ["help_key"]
+        ordering: ClassVar[List[str]] = ["help_key"]
 
     def __str__(self):
         return self.help_key + " : " + self.help_value
