@@ -37,4 +37,4 @@ class ProfileAdmin(admin.ModelAdmin):
     """
 
     list_display: ClassVar[List[str]] = ["user", "date_of_birth", "photo"]
-    raw_id_fields: ClassVar[List[str]] = = ["user"]
+    raw_id_fields: ClassVar[List[str]] = ["user"]
