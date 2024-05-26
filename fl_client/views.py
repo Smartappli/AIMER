@@ -418,33 +418,27 @@ def deep_learning_segmentation_run(request):
         if form.is_valid():
             cd = form.cleaned_data
 
+            # Default model_id
             model_id = 1
-            if cd["dpseg_unet"]:
-                model_id = Model.objects.get(pk=67)
 
-            if cd["dpseg_unetplusplus"]:
-                model_id = Model.objects.get(pk=67)
+            # Mapping of form fields to model primary keys
+            model_mapping = {
+                "dpseg_unet": 67,
+                "dpseg_unetplusplus": 67,
+                "dpseg_manet": 67,
+                "dpseg_linknet": 67,
+                "dpseg_fpn": 67,
+                "dpseg_pspnet": 67,
+                "dpseg_pan": 67,
+                "dpseg_deeplabv3": 67,
+                "dpseg_deeplabv3plus": 67,
+            }
 
-            if cd["dpseg_manet"]:
-                model_id = Model.objects.get(pk=67)
-
-            if cd["dpseg_linknet"]:
-                model_id = Model.objects.get(pk=67)
-
-            if cd["dpseg_fpn"]:
-                model_id = Model.objects.get(pk=67)
-
-            if cd["dpseg_pspnet"]:
-                model_id = Model.objects.get(pk=67)
-
-            if cd["dpseg_pan"]:
-                model_id = Model.objects.get(pk=67)
-
-            if cd["dpseg_deeplabv3"]:
-                model_id = Model.objects.get(pk=67)
-
-            if cd["dpseg_deeplabv3plus"]:
-                model_id = Model.objects.get(pk=67)
+            # Update model_id based on form input
+            for field, pk in model_mapping.items():
+                if cd.get(field):
+                    model_id = Model.objects.get(pk=pk)
+                    break  # Assuming only one model can be selected
 
             print(model_id)
 
