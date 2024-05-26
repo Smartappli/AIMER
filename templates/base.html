@@ -1,37 +1,40 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Ai Toolbox - Machine Learning algorithms for Medical Research">
-    <meta name="author" content="Olivier DEBAUCHE - https://debauche.info">
-    <title>{% block title %}{% endblock title %}</title>
-    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
-    <link href="{% static 'css/aitoolbox.css' %}" rel="stylesheet">
-  </head>
-  <body>
-    {% include 'core/icons.html' %}
-    <div class="container">
-      {% include 'core/header.html' %}
-      {% if messages %}
-          {% for message in messages %}
-            <div class="alert alert-{%  if message.tags == "success" %}success{% endif %}{% if message.tags == "info" %}info{% endif %}{% if message.tags == "warning" %}warning{% endif %}{% if message.tags == "error" %}danger{% endif %}{% if message.tags == "debug" %}secondary{% endif %} alert-dismissible fade show" role="alert">
-              <strong>{{ message|safe }}</strong>
-              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="Ai Toolbox - Machine Learning algorithms for Medical Research">
+        <meta name="author" content="Olivier DEBAUCHE - https://debauche.info">
+        <title>{% block title %}{% endblock title %}</title>
+        <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+        <link href="{% static 'css/aitoolbox.css' %}" rel="stylesheet">
+    </head>
+    <body>
+        {% include 'core/icons.html' %}
+        <div class="container">
+            {% include 'core/header.html' %}
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{%  if message.tags == "success" %}success{% endif %}{% if message.tags == "info" %}info{% endif %}{% if message.tags == "warning" %}warning{% endif %}{% if message.tags == "error" %}danger{% endif %}{% if message.tags == "debug" %}secondary{% endif %} alert-dismissible fade show" role="alert">
+                        <strong>{{ message|safe }}</strong>
+                        <button type="button"
+                                class="btn-close"
+                                data-bs-dismiss="alert"
+                                aria-label="Close"></button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+            <div id="content">
+                {% block content %}
+                {% endblock content %}
             </div>
-          {% endfor %}
-      {% endif %}
-      <div id="content">
-        {% block content %}
-        {% endblock content %}
-      </div>
-      {% include 'core/footer.html' %}
-    </div>
-    {% block script %}
-    {% endblock script %}
-    {% include 'core/theme.html' %}
-    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
-    <script src="{% static 'js/color-modes.js' %}" async></script>
-  </body>
+            {% include 'core/footer.html' %}
+        </div>
+        {% block script %}
+        {% endblock script %}
+        {% include 'core/theme.html' %}
+        <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+        <script src="{% static 'js/color-modes.js' %}" async></script>
+    </body>
 </html>
