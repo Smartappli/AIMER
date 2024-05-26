@@ -1,4 +1,5 @@
 from django.contrib import admin
+from typing import ClassVar, List
 from .models import ModelFamily, Model, ModelFile
 from .models import Document, ModelDocument
 from .models import Profile, Queue, Help, License
@@ -35,5 +36,5 @@ class ProfileAdmin(admin.ModelAdmin):
     - The "raw_id_fields" provide a raw input field for the "user" field, facilitating user selection.
     """
 
-    list_display = ["user", "date_of_birth", "photo"]
-    raw_id_fields = ["user"]
+    list_display: ClassVar[List[str]] = ["user", "date_of_birth", "photo"]
+    raw_id_fields: ClassVar[List[str]] = = ["user"]
