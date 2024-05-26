@@ -31,9 +31,14 @@ def maybe_add_transform(transform_list, condition, transform, *args, **kwargs):
     """Helper function to add a transform to the list if the condition is met."""
     if condition:
         # Convert single integers to tuples for resize, crop operations
-        if isinstance(condition, int) and transform in {transforms.Resize, transforms.CenterCrop, transforms.RandomCrop}:
+        if isinstance(condition, int) and transform in {
+            transforms.Resize,
+            transforms.CenterCrop,
+            transforms.RandomCrop,
+        }:
             condition = (condition, condition)
         transform_list.append(transform(*args, **kwargs))
+
 
 def create_transform(
     resize=None,
@@ -76,16 +81,50 @@ def create_transform(
     transform_list = []
 
     if data_augmentation:
-        maybe_add_transform(transform_list, resize, transforms.Resize, size=resize)
-        maybe_add_transform(transform_list, center_crop, transforms.CenterCrop, size=center_crop)
-        maybe_add_transform(transform_list, random_crop, transforms.RandomCrop, size=random_crop)
-        maybe_add_transform(transform_list, random_horizontal_flip, transforms.RandomHorizontalFlip, p=horizontal_flip_prob)
-        maybe_add_transform(transform_list, random_vertical_flip, transforms.RandomVerticalFlip, p=vertical_flip_prob)
-        maybe_add_transform(transform_list, random_rotation, transforms.RandomRotation, degrees=rotation_range)
-        maybe_add_transform(transform_list, color_jitter, transforms.ColorJitter, *color_jitter)
-        maybe_add_transform(transform_list, gaussian_blur, transforms.GaussianBlur, kernel_size=gaussian_blur)
+        maybe_add_transform(
+            transform_list, resize, transforms.Resize, size=resize,
+        )
+        maybe_add_transform(
+            transform_list, center_crop, transforms.CenterCrop, size=center_crop,
+        )
+        maybe_add_transform(
+            transform_list, random_crop, transforms.RandomCrop, size=random_crop,
+        )
+        maybe_add_transform(
+            transform_list,
+            random_horizontal_flip,
+            transforms.RandomHorizontalFlip,
+            p=horizontal_flip_prob,
+        )
+        maybe_add_transform(
+            transform_list,
+            random_vertical_flip,
+            transforms.RandomVerticalFlip,
+            p=vertical_flip_prob,
+        )
+        maybe_add_transform(
+            transform_list,
+            random_rotation,
+            transforms.RandomRotation,
+            degrees=rotation_range,
+        )
+        maybe_add_transform(
+            transform_list, color_jitter, transforms.ColorJitter, *color_jitter,
+        )
+        maybe_add_transform(
+            transform_list,
+            gaussian_blur,
+            transforms.GaussianBlur,
+            kernel_size=gaussian_blur,
+        )
         maybe_add_transform(transform_list, to_tensor, transforms.ToTensor)
-        maybe_add_transform(transform_list, normalize, transforms.Normalize, mean=normalize[0], std=normalize[1])
+        maybe_add_transform(
+            transform_list,
+            normalize,
+            transforms.Normalize,
+            mean=normalize[0],
+            std=normalize[1],
+        )
 
     return transforms.Compose(transform_list)
 
