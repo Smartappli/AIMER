@@ -2,6 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.shortcuts import render
 
+from pathlib import Path
 from .forms import DLClassificationForm, DLSegmentation
 from .forms import MLClassificationForm, MLRegressionForm
 from .forms import MLTimeSeriesForm
@@ -198,14 +199,15 @@ def download_data(request):
                 target = new_name.replace("-split-a", "")
 
                 for file in model_listing[1:]:
-                    with open(new_name, "ab") as out_file, open(
-                        file,
+                    with Path(new_name).open("ab") as out_file, Path(file).open(
                         "rb",
                     ) as in_file:
                         shutil.copyfileobj(in_file, out_file)
-                        os.remove(file)
+                        file_path = Path(file)
+                        file_path.unlink()
 
-                    os.rename(new_name, target)
+                    new_name_path = Path(new_name)
+                    new_name_path.rename(Path(target))
 
                 i = 0
                 for q2 in my_files:
