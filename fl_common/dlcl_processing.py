@@ -142,9 +142,9 @@ xai = False
 
 for model_type in model_list:
     # Replace with the actual path where to save results
-    save_dir = "c:/TFE/Models/" + model_type + "/"
-    os.makedirs(save_dir, exist_ok=True)
-
+    save_dir = "c:/TFE/Models/" + model_type
+    Path(save_dir).mkdir(parents=True, exist_ok=True)
+    
     # Load your custom dataset
     (
         train_loader,
@@ -298,7 +298,7 @@ for model_type in model_list:
         # Save the model if the current validation loss is the best
         if avg_val_loss < best_val_loss:
             best_val_loss = avg_val_loss
-            torch.save(model.state_dict(), save_dir + "best_model.pth")
+            torch.save(model.state_dict(), save_dir + "/best_model.pth")
 
         epoch_end_time = time.time()
         elapsed_time = epoch_end_time - epoch_start_time
@@ -621,7 +621,8 @@ for model_type in model_list:
     fig.tight_layout()
 
     # Saving the graph
-    save_path = os.path.join(save_dir, "training_curves.png")
+    # save_path = os.path.join(save_dir, "training_curves.png")
+    save_dir_path = Path(save_dir + "/training_curves.png") 
     fig.savefig(save_path)
 
     plt.show()
@@ -666,7 +667,7 @@ for model_type in model_list:
     plt.xlabel("Predicted Label")
     plt.ylabel("True Label")
     # Saving the confusion matrix
-    plt.savefig(save_dir + "confusion_matrix.png")
+    plt.savefig(save_dir + "/confusion_matrix.png")
     plt.show()  # Confusion matrix display
 
     # Print classification report
@@ -678,8 +679,8 @@ for model_type in model_list:
     print("\nClassification Report:\n", class_report)
 
     # Save classification report to a text file
-    with open(
-        save_dir + "classification_report.txt",
+    save_classification = Path(save_dir + "/classification_report.txt")
+    with save_classification.open(
         "w",
         encoding="UTF-8",
     ) as report_file:
@@ -687,7 +688,7 @@ for model_type in model_list:
 
     # Loop through test dataset and generate XAI heatmaps for specific methods
     if xai:
-        save_dir += "xai_heatmaps/"
+        save_dir += "/xai_heatmaps/"
         # Loop through test dataset and generate XAI heatmaps for specific
         # methods
         for i, (inputs, labels) in enumerate(test_loader):
@@ -718,7 +719,7 @@ for model_type in model_list:
                     # Create a directory for XAI heatmaps based on the specific
                     # example
                     example_dir = f"{save_dir}/example_{i * test_loader.batch_size + j + 1}/"
-                    os.makedirs(example_dir, exist_ok=True)
+                    Path(example_dir).mkdir(parents=True, exist_ok=True)
 
                     generate_xai_heatmaps(
                         model,
