@@ -409,7 +409,12 @@ class UserRegistrationForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields: ClassVar[list[str]] = ["username", "first_name", "last_name", "email"]
+        fields: ClassVar[list[str]] = [
+            "username",
+            "first_name",
+            "last_name",
+            "email",
+        ]
 
     def clean_password2(self):
         """Validate password"""
