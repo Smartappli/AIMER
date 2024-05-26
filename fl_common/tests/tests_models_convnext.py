@@ -1,5 +1,7 @@
 import os
+
 from django.test import TestCase
+
 from fl_common.models.convnext import get_convnext_model
 
 os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"

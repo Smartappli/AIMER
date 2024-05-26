@@ -1,6 +1,8 @@
 import os
-from torch import nn
+
 from django.test import TestCase
+from torch import nn
+
 from fl_common.models.convmixer import get_convmixer_model
 
 os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"

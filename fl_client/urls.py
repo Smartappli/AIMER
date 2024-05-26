@@ -1,4 +1,5 @@
-from django.urls import path, include
+from django.urls import include, path
+
 from fl_client import views
 
 app_name = "fl_client"

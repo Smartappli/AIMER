@@ -1,7 +1,9 @@
+from typing import ClassVar
+
 from django import forms
 from django.contrib.auth.models import User
+
 from .models import AgentConfiguration
-from typing import ClassVar
 
 
 class AgentEditForm(forms.ModelForm):

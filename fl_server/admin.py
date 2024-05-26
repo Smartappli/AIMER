@@ -1,9 +1,12 @@
 from django.contrib import admin
-from .models import ServerProject
-from .models import AgentConfiguration
-from .models import ServerModel
-from .models import ServerAggregator
-from .models import FederatedAuthorisation
+
+from .models import (
+    AgentConfiguration,
+    FederatedAuthorisation,
+    ServerAggregator,
+    ServerModel,
+    ServerProject,
+)
 
 admin.site.register(ServerProject)
 admin.site.register(AgentConfiguration)

@@ -1,6 +1,8 @@
 import os
-from torch import nn
+
 from django.test import TestCase
+from torch import nn
+
 from fl_common.models.alexnet import get_alexnet_model
 
 os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"

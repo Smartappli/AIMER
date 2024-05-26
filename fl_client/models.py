@@ -1,9 +1,9 @@
 import uuid
-
-from django.contrib.auth.models import User
-from django.conf import settings
-from django.db import models
 from typing import ClassVar, List
+
+from django.conf import settings
+from django.contrib.auth.models import User
+from django.db import models
 
 
 class Profile(models.Model):

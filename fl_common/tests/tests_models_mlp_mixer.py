@@ -1,5 +1,7 @@
 import os
+
 from django.test import TestCase
+
 from fl_common.models.mlp_mixer import get_mlp_mixer_model
 
 os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"

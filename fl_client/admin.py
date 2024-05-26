@@ -1,10 +1,23 @@
-from django.contrib import admin
 from typing import ClassVar, List
-from .models import ModelFamily, Model, ModelFile
-from .models import Document, ModelDocument
-from .models import Profile, Queue, Help, License
-from .models import Dataset, DatasetFile
-from .models import DatasetLocalData, DatasetRemoteData, DatasetCentralData
+
+from django.contrib import admin
+
+from .models import (
+    Dataset,
+    DatasetCentralData,
+    DatasetFile,
+    DatasetLocalData,
+    DatasetRemoteData,
+    Document,
+    Help,
+    License,
+    Model,
+    ModelDocument,
+    ModelFamily,
+    ModelFile,
+    Profile,
+    Queue,
+)
 
 admin.site.register(ModelFamily)
 admin.site.register(Model)

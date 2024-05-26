@@ -1,6 +1,6 @@
+from timm import create_model
 from torch import nn
 from torchvision import models
-from timm import create_model
 
 
 def get_swin_transformer_model(swin_type, num_classes):

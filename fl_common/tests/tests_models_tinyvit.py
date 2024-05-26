@@ -1,5 +1,7 @@
 import os
+
 from django.test import TestCase
+
 from fl_common.models.tiny_vit import get_tiny_vit_model
 
 os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
