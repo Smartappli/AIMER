@@ -1,6 +1,7 @@
 import os
 import time
 import torch
+from pathlib import Path
 from torch import nn
 from tqdm import tqdm
 from captum.attr import (
@@ -144,7 +145,7 @@ for model_type in model_list:
     # Replace with the actual path where to save results
     save_dir = "c:/TFE/Models/" + model_type
     Path(save_dir).mkdir(parents=True, exist_ok=True)
-    
+
     # Load your custom dataset
     (
         train_loader,
@@ -622,7 +623,7 @@ for model_type in model_list:
 
     # Saving the graph
     # save_path = os.path.join(save_dir, "training_curves.png")
-    save_dir_path = Path(save_dir + "/training_curves.png") 
+    save_dir_path = Path(save_dir + "/training_curves.png")
     fig.savefig(save_path)
 
     plt.show()
