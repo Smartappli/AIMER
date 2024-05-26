@@ -18,10 +18,14 @@ jobs:
         with:
           python-version: "3.11"
           cache: 'pip'
-      - name: DjLint
+      - name: DjLint Formater
+        run: |
+          python -m pip install --upgrade pip
+          pip install djlint
+          djlint ./templates --check
+          djlint ./templates --reformat
+      - name: DjLint Linter
         run: |
           python -m pip install --upgrade pip
           pip install djlint
           djlint ./templates --extension=html --lint
-          djlint ./templates --check
-          djlint ./templates --reformat
