@@ -1,6 +1,8 @@
 import os
+
 import torch
 from django.test import TestCase
+
 from fl_common.models.xception import get_xception_model
 
 os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"

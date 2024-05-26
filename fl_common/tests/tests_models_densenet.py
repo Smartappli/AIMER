@@ -1,5 +1,7 @@
 import os
+
 from django.test import TestCase
+
 from fl_common.models.densenet import get_densenet_model
 
 os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"

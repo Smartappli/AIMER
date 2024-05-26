@@ -1,14 +1,15 @@
 import os
+
 import torch
-from torch import nn
-from torch import optim
+from django.test import TestCase
+from torch import nn, optim
 from torch.optim import lr_scheduler
 from torchvision import transforms, utils
-from django.test import TestCase
+
 from fl_common.models.utils import (
     create_transform,
-    get_optimizer,
     get_criterion,
+    get_optimizer,
     get_scheduler,
 )
 

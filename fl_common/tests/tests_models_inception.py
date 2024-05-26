@@ -1,7 +1,9 @@
 import os
+
 import torch
-from torch import nn
 from django.test import TestCase
+from torch import nn
+
 from fl_common.models.inception import get_inception_model
 
 os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"

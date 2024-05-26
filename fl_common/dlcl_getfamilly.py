@@ -20,9 +20,9 @@ from fl_common.models.dpn import get_dpn_model
 from fl_common.models.edgenet import get_edgenet_model
 from fl_common.models.efficientformer import get_efficientformer_model
 from fl_common.models.efficientformer_v2 import get_efficientformer_v2_model
+from fl_common.models.efficientnet import get_efficientnet_model
 from fl_common.models.efficientvit_mit import get_efficientvit_mit_model
 from fl_common.models.efficientvit_msra import get_efficientvit_msra_model
-from fl_common.models.efficientnet import get_efficientnet_model
 from fl_common.models.eva import get_eva_model
 from fl_common.models.fastvit import get_fastvit_model
 from fl_common.models.focalnet import get_focalnet_model
@@ -33,8 +33,8 @@ from fl_common.models.hardcorenas import get_hardcorenas_model
 from fl_common.models.hgnet import get_hgnet_model
 from fl_common.models.hiera import get_hiera_model
 from fl_common.models.hrnet import get_hrnet_model
-from fl_common.models.inception_next import get_inception_next_model
 from fl_common.models.inception import get_inception_model
+from fl_common.models.inception_next import get_inception_next_model
 from fl_common.models.levit import get_levit_model
 from fl_common.models.maxvit import get_maxvit_model
 from fl_common.models.metaformer import get_metaformer_model
@@ -55,8 +55,8 @@ from fl_common.models.repghost import get_repghost_model
 from fl_common.models.repvit import get_repvit_model
 from fl_common.models.res2net import get_res2net_model
 from fl_common.models.resnest import get_resnest_model
-from fl_common.models.resnetv2 import get_resnetv2_model
 from fl_common.models.resnet import get_resnet_model
+from fl_common.models.resnetv2 import get_resnetv2_model
 from fl_common.models.resnext import get_resnext_model
 from fl_common.models.rexnet import get_rexnet_model
 from fl_common.models.selecsls import get_selecsls_model
@@ -72,8 +72,8 @@ from fl_common.models.swin_transformer_v2_cr import (
 )
 from fl_common.models.tiny_vit import get_tiny_vit_model
 from fl_common.models.tnt import get_tnt_model
-from fl_common.models.twins import get_twins_model
 from fl_common.models.tresnet import get_tresnet_model
+from fl_common.models.twins import get_twins_model
 from fl_common.models.vgg import get_vgg_model
 from fl_common.models.visformer import get_visformer_model
 from fl_common.models.vision_transformer import get_vision_transformer_model

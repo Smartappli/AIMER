@@ -1,20 +1,29 @@
-from django.contrib.auth.decorators import login_required
+from pathlib import Path
+
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 
-from pathlib import Path
-from .forms import DLClassificationForm, DLSegmentation
-from .forms import MLClassificationForm, MLRegressionForm
-from .forms import MLTimeSeriesForm
-from .forms import MLClusteringForm, MLAnomalyDetectionForm
-from .forms import NLPTextGenerationForm, NLPEmotionalAnalysisForm
-from .forms import UserRegistrationForm, UserEditForm, ProfileEditForm
+from .forms import (
+    DLClassificationForm,
+    DLSegmentation,
+    MLAnomalyDetectionForm,
+    MLClassificationForm,
+    MLClusteringForm,
+    MLRegressionForm,
+    MLTimeSeriesForm,
+    NLPEmotionalAnalysisForm,
+    NLPTextGenerationForm,
+    ProfileEditForm,
+    UserEditForm,
+    UserRegistrationForm,
+)
 from .models import (
-    Profile,
     Model,
     ModelFile,
+    Profile,
     Queue,
-)  # ModelFamily, ModelDocument,
+)
 
 # from fl_common.models.xception import xception
 # from fl_common.models.alexnet import alexnet
@@ -134,10 +143,11 @@ def download_data(request):
     """Method to download the data from Hugging Face"""
     import os
     import shutil
+
     from huggingface_hub import (
+        _CACHED_NO_EXIST,
         hf_hub_download,
         try_to_load_from_cache,
-        _CACHED_NO_EXIST,
     )
 
     my_models = Model.objects.filter(

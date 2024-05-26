@@ -1,6 +1,6 @@
+from timm import create_model
 from torch import nn
 from torchvision import models
-from timm import create_model
 
 
 def get_convnext_model(convnext_type, num_classes):
