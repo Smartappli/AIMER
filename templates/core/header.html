@@ -1,24 +1,41 @@
-      <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
-        <div class="col-md-3 mb-2 mb-md-0">
-          <a href="/" class="d-inline-flex link-body-emphasis text-decoration-none">
-            <svg class="bi" width="45" height="32" role="img" aria-label="Ai Medical Toolbox"><use href="#{{ logo|random }}"></use></svg>
+<header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+    <div class="col-md-3 mb-2 mb-md-0">
+        <a href="/"
+           class="d-inline-flex link-body-emphasis text-decoration-none">
+            <svg class="bi"
+                 width="45"
+                 height="32"
+                 role="img"
+                 aria-label="Ai Medical Toolbox">
+                <use href="#{{ logo|random }}"></use>
+            </svg>
             <span class="fs-4">Ai Medical Toolbox</span>
-          </a>
-        </div>
-
-        <ul class="nav nav-underline col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-          <li><a href="/data_processing" class="link-success nav-link px-2 {% if section == "data" %}active{% endif %}">Data Processing</a></li>
-          <li><a href="/machine_learning" class="link-danger nav-link px-2 {% if section == "ml" %}active{% endif %}">Machine Learning</a></li>
-          <li><a href="/deep_learning" class="link-info nav-link px-2 {% if section == "dl" %}active{% endif %}">Deep Learning</a></li>
-          <li><a href="/natural_language_processing" class="link-warning nav-link px-2 {% if section == "nlp" %}active{% endif %}">NLP</a></li>
-        </ul>
-
-        <div class="col-md-3 text-end">
-          {%  if request.user.is_authenticated %}
+        </a>
+    </div>
+    <ul class="nav nav-underline col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+        <li>
+            <a href="/data_processing"
+               class="link-success nav-link px-2 {% if section == "data" %}active{% endif %}">Data Processing</a>
+        </li>
+        <li>
+            <a href="/machine_learning"
+               class="link-danger nav-link px-2 {% if section == "ml" %}active{% endif %}">Machine Learning</a>
+        </li>
+        <li>
+            <a href="/deep_learning"
+               class="link-info nav-link px-2 {% if section == "dl" %}active{% endif %}">Deep Learning</a>
+        </li>
+        <li>
+            <a href="/natural_language_processing"
+               class="link-warning nav-link px-2 {% if section == "nlp" %}active{% endif %}">NLP</a>
+        </li>
+    </ul>
+    <div class="col-md-3 text-end">
+        {% if request.user.is_authenticated %}
             <a class="btn btn-secondary" href="/logout" role="button">Logged out</a>
-          {% else %}
+        {% else %}
             <a class="btn btn-outline-secondary me-2" href="/login" role="button">Log-in</a>  
             <a class="btn btn-primary" href="/register" role="button">Sign-up</a>
-          {% endif %}
-        </div>
-      </header>
+        {% endif %}
+    </div>
+</header>
