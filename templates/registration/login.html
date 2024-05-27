@@ -1,10 +1,8 @@
-{%  extends "base.html" %}
-
-{%  block title %}Log-in{%  endblock %}
-
+{% extends "base.html" %}
+{% block title %}Log-in{%  endblock %}
 {% block content %}
     <h1>Log-in</h1>
-    {%  if form.errors %}
+    {% if form.errors %}
         <p>
             Your username and password didn't match.
             Please try again.
@@ -16,16 +14,16 @@
         </p>
     {% endif %}
     <div class="login-form">
-        <form action="{%  url 'fl_client:login' %}" method="post">
+        <form action="{% url 'fl_client:login' %}" method="post">
             {{ form.as_p }}
             {% csrf_token %}
             <input type="hidden" name="next" value="{{ next }}" />
-            <p><input type="submit" value="log-in"></p>
+            <p>
+                <input type="submit" value="log-in">
+            </p>
         </form>
         <p>
-            <a href="{%  url 'fl_client:password_reset' %}">
-                Forgotten your password
-            </a>
+            <a href="{%  url 'fl_client:password_reset' %}">Forgotten your password</a>
         </p>
     </div>
 {% endblock content %}
