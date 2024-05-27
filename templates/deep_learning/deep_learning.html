@@ -2,7 +2,7 @@
 {% load static %}
 {% block title %}Deep learning{% endblock %}
 {% block content %}
-    {% if request.user.is_authenticated %}    
+    {% if request.user.is_authenticated %}
         <div class="accordion accordion-flush" id="DeepAssistant">
             <div class="accordion-item">
                 <h2 class="accordion-header">
@@ -16,20 +16,20 @@
                 <div id="DeepAssistant-collapseOne"
                      class="accordion-collapse collapse"
                      data-bs-parent="#DeepAssistant">
-                   <div class="accordion-body">
-                       <form class="row g-3" action="/dl_classifier_processing/" method="post">
-                           {% csrf_token %}
-                           <h5>Data Augmentation</h5>
-                           <!--
-                           <div class="col-md-3 col-sm-6">
-                            <div class="form-check form-switch">
-                              <input class="form-check-input" name="{{ form1.dpcla_data_augmentation_cropping.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_data_augmentation_cropping.id_for_label }}">
-                                <label class="form-check-label" for="{{ form1.dpcla_data_augmentation_cropping.id_for_label }}">Image Cropping</label>
+                    <div class="accordion-body">
+                        <form class="row g-3" action="/dl_classifier_processing/" method="post">
+                            {% csrf_token %}
+                            <h5>Data Augmentation</h5>
+                            <!--
+                            <div class="col-md-3 col-sm-6">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" name="{{ form1.dpcla_data_augmentation_cropping.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_data_augmentation_cropping.id_for_label }}">
+                                    <label class="form-check-label" for="{{ form1.dpcla_data_augmentation_cropping.id_for_label }}">Image Cropping</label>
+                                </div>
                             </div>
-                          </div>
-                          -->
-                       </form>
-                   </div>
+                            -->
+                        </form>
+                    </div>
                 </div>
             </div>
             <div class="accordion-item">
