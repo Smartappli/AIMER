@@ -53,68 +53,128 @@
                                     </label>
                                 </div>
                             </div>
-              <div class="col-md-4 col-sm-6">
-                <div class="form-check form-switch">
-                  <input class="form-check-input" name="{{ form5.mlad_iforest.html_name }}" type="checkbox" role="switch" id="{{ form5.mlad_iforest.id_for_label }}">
-                  <label class="form-check-label" for="{{ form5.mlad_iforest.id_for_label }}">Isolation Forest (<i>iforest</i>)</label>
+                            <div class="col-md-4 col-sm-6">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input"
+                                           name="{{ form5.mlad_iforest.html_name }}"
+                                           type="checkbox"
+                                           role="switch"
+                                           id="{{ form5.mlad_iforest.id_for_label }}">
+                                    <label class="form-check-label" for="{{ form5.mlad_iforest.id_for_label }}">
+                                        Isolation Forest (<i>iforest</i>)
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input"
+                                           name="{{ form5.mlad_histogram.html_name }}"
+                                           type="checkbox"
+                                           role="switch"
+                                           id="{{ form5.mlad_histogram.id_for_label }}">
+                                    <label class="form-check-label" for="{{ form5.mlad_histogram.id_for_label }}">
+                                        Histogram-based Outlier Detection (<i>histogram</i>)
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input"
+                                           name="{{ form5.mlad_knn.html_name }}"
+                                           type="checkbox"
+                                           role="switch"
+                                           id="{{ form5.mlad_knn.id_for_label }}">
+                                    <label class="form-check-label" for="{{ form5.mlad_knn.id_for_label }}">
+                                        K-Nearest Neighbors Detector (knn)
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input"
+                                           name="{{ form5.mlad_lof.html_name }}"
+                                           type="checkbox"
+                                           role="switch"
+                                           id="{{ form5.mlad_lof.id_for_label }}">
+                                    <label class="form-check-label" for="{{ form5.mlad_lof.id_for_label }}">
+                                        Local Outlier Factor (lof)
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input"
+                                           name="{{ form5.mlad_svm.html_name }}"
+                                           type="checkbox"
+                                           role="switch"
+                                           id="{{ form5.mlad_svm.id_for_label }}">
+                                    <label class="form-check-label" for="{{ form5.mlad_svm.id_for_label }}">
+                                        One-class SVM detector (svm)
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input"
+                                           name="{{ form5.mlad_pca.html_name }}"
+                                           type="checkbox"
+                                           role="switch"
+                                           id="{{ form5.mlad_pca.id_for_label }}">
+                                    <label class="form-check-label" for="{{ form5.mlad_pca.id_for_label }}">
+                                        Principal Component Analysis (pca)
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input"
+                                           name="{{ form5.mlad_mcd.html_name }}"
+                                           type="checkbox"
+                                           role="switch"
+                                           id="{{ form5.mlad_mcd.id_for_label }}">
+                                    <label class="form-check-label" for="{{ form5.mlad_mcd.id_for_label }}">
+                                        Minimum Covariance Determinant (mcd)
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input"
+                                           name="{{ form5.mlad_sod.html_name }}"
+                                           type="checkbox"
+                                           role="switch"
+                                           id="{{ form5.mlad_sod.id_for_label }}">
+                                    <label class="form-check-label" for="{{ form5.mlad_sod.id_for_label }}">
+                                        Subspace Outlier Detection (sod)
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input"
+                                           name="{{ form5.mlad_sos.html_name }}"
+                                           type="checkbox"
+                                           role="switch"
+                                           id="{{ form5.mlad_sos.id_for_label }}">
+                                    <label class="form-check-label" for="{{ form5.mlad_sos.id_for_label }}">
+                                        Stochastic Outlier Selection (sos)
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-end col-md-12">
+                                <button type="button" class="btn btn-success mb-3" onclick="adSelectModel();">
+                                    Select All
+                                </button>
+                                <button type="button" class="btn btn-danger mb-3" onclick="adUnselectModel();">
+                                    Unselect All
+                                </button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-              </div>
-              <div class="col-md-4 col-sm-6">
-                <div class="form-check form-switch">
-                  <input class="form-check-input" name="{{ form5.mlad_histogram.html_name }}" type="checkbox" role="switch" id="{{ form5.mlad_histogram.id_for_label }}">
-                  <label class="form-check-label" for="{{ form5.mlad_histogram.id_for_label }}">Histogram-based Outlier Detection (<i>histogram</i>)</label>
-                </div>
-              </div>
-              <div class="col-md-4 col-sm-6">
-                <div class="form-check form-switch">
-                  <input class="form-check-input" name="{{ form5.mlad_knn.html_name }}" type="checkbox" role="switch" id="{{ form5.mlad_knn.id_for_label }}">
-                  <label class="form-check-label" for="{{ form5.mlad_knn.id_for_label }}">K-Nearest Neighbors Detector (knn)</label>
-                </div>
-              </div>
-              <div class="col-md-4 col-sm-6">
-                <div class="form-check form-switch">
-                  <input class="form-check-input" name="{{ form5.mlad_lof.html_name }}" type="checkbox" role="switch" id="{{ form5.mlad_lof.id_for_label }}">
-                  <label class="form-check-label" for="{{ form5.mlad_lof.id_for_label }}">Local Outlier Factor (lof)</label>
-                </div>
-              </div>
-              <div class="col-md-4 col-sm-6">
-                <div class="form-check form-switch">
-                  <input class="form-check-input" name="{{ form5.mlad_svm.html_name }}" type="checkbox" role="switch" id="{{ form5.mlad_svm.id_for_label }}">
-                  <label class="form-check-label" for="{{ form5.mlad_svm.id_for_label }}">One-class SVM detector (svm)</label>
-                </div>
-              </div>
-              <div class="col-md-4 col-sm-6">
-                <div class="form-check form-switch">
-                  <input class="form-check-input" name="{{ form5.mlad_pca.html_name }}" type="checkbox" role="switch" id="{{ form5.mlad_pca.id_for_label }}">
-                  <label class="form-check-label" for="{{ form5.mlad_pca.id_for_label }}">Principal Component Analysis (pca)</label>
-                </div>
-              </div>
-              <div class="col-md-4 col-sm-6">
-                <div class="form-check form-switch">
-                  <input class="form-check-input" name="{{ form5.mlad_mcd.html_name }}" type="checkbox" role="switch" id="{{ form5.mlad_mcd.id_for_label }}">
-                  <label class="form-check-label" for="{{ form5.mlad_mcd.id_for_label }}">Minimum Covariance Determinant (mcd)</label>
-                </div>
-              </div>
-              <div class="col-md-4 col-sm-6">
-                <div class="form-check form-switch">
-                  <input class="form-check-input" name="{{ form5.mlad_sod.html_name }}" type="checkbox" role="switch" id="{{ form5.mlad_sod.id_for_label }}">
-                  <label class="form-check-label" for="{{ form5.mlad_sod.id_for_label }}">Subspace Outlier Detection (sod)</label>
-                </div>
-              </div>
-              <div class="col-md-4 col-sm-6">
-                <div class="form-check form-switch">
-                  <input class="form-check-input" name="{{ form5.mlad_sos.html_name }}" type="checkbox" role="switch" id="{{ form5.mlad_sos.id_for_label }}">
-                  <label class="form-check-label" for="{{ form5.mlad_sos.id_for_label }}">Stochastic Outlier Selection (sos)</label>
-                </div>
-              </div>
-              <div class="d-grid gap-2 d-md-flex justify-content-md-end col-md-12">
-                <button type="button" class="btn btn-success mb-3" onclick="adSelectModel();">Select All</button>
-                <button type="button" class="btn btn-danger mb-3" onclick="adUnselectModel();">Unselect All</button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
+            </div>
+
+            
       <div class="accordion-item">
         <h2 class="accordion-header">
           <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#MLAssistant-collapseTwo" aria-expanded="false" aria-controls="MLAssistant-collapseTwo">
