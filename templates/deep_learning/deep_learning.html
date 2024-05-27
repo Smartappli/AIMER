@@ -173,34 +173,71 @@
                                     <label class="form-check-label"
                                            for="{{ form1.dpcla_xception.id_for_label }}">
                                         Xception <a href="{% static 'pdf/1610.02357.pdf' %}" target="_blank">
-                                            <svg class="bi" width="16" height="16" role="img" aria-label="Exception">
+                                        <svg class="bi" width="16" height="16" role="img" aria-label="Exception">
+                                            <use href="#pdf"></use>
+                                        </svg>
+                                        </a>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-6">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input"
+                                           name="{{ form1.dpcla_vgg_11.html_name }}"
+                                           type="checkbox"
+                                           role="switch"
+                                           id="{{ form1.dpcla_vgg_11.id_for_label }}">
+                                    <label class="form-check-label"
+                                           for="{{ form1.dpcla_vgg_11.id_for_label }}">
+                                        VGG 11 <a href="{% static 'pdf/1409.1556.pdf' %}" target="_blank">
+                                            <svg class="bi" width="16" height="16" role="img" aria-label="VGG 11">
                                                 <use href="#pdf"></use>
                                             </svg>
                                         </a>
                                     </label>
                                 </div>
                             </div>
-                  <div class="col-md-3 col-sm-6">
-                    <div class="form-check form-switch">
-                      <input class="form-check-input" name="{{ form1.dpcla_vgg_11.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_vgg_11.id_for_label }}">
-                      <label class="form-check-label" for="{{ form1.dpcla_vgg_11.id_for_label }}">VGG 11 <a href="{% static 'pdf/1409.1556.pdf' %}" target="_blank"><svg class="bi" width="16" height="16" role="img" aria-label="VGG 11"><use href="#pdf"></use></svg></a></label>
-                    </div>
-                  </div>
-                  <div class="col-md-3 col-sm-6">
-                    <div class="form-check form-switch">
-                      <input class="form-check-input" name="{{ form1.dpcla_vgg_13.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_vgg_13.id_for_label }}">
-                      <label class="form-check-label" for="{{ form1.dpcla_vgg_13.id_for_label }}">VGG 13 <a href="{% static 'pdf/1409.1556.pdf' %}" target="_blank"><svg class="bi" width="16" height="16" role="img" aria-label="VGG 13"><use href="#pdf"></use></svg></a></label>
-                    </div>
-                  </div>
-                  <div class="col-md-3 col-sm-6">
-                    <div class="form-check form-switch">
-                      <input class="form-check-input" name="{{ form1.dpcla_vgg_16.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_vgg_16.id_for_label }}">
-                      <label class="form-check-label" for="{{ form1.dpcla_vgg_16.id_for_label }}">VGG 16 <a href="{% static 'pdf/1409.1556.pdf' %}" target="_blank"><svg class="bi" width="16" height="16" role="img" aria-label="VGG 16"><use href="#pdf"></use></svg></a></label>
-                    </div>
-                  </div>
-                  <div class="col-md-3 col-sm-6">
-                    <div class="form-check form-switch">
-                      <input class="form-check-input" name="{{ form1.dpcla_vgg_19.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_vgg_19.id_for_label }}">
+                            <div class="col-md-3 col-sm-6">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input"
+                                           name="{{ form1.dpcla_vgg_13.html_name }}"
+                                           type="checkbox"
+                                           role="switch"
+                                           id="{{ form1.dpcla_vgg_13.id_for_label }}">
+                                    <label class="form-check-label"
+                                           for="{{ form1.dpcla_vgg_13.id_for_label }}">
+                                        VGG 13 <a href="{% static 'pdf/1409.1556.pdf' %}" target="_blank">
+                                            <svg class="bi" width="16" height="16" role="img" aria-label="VGG 13">
+                                                <use href="#pdf"></use>
+                                            </svg>
+                                        </a>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-6">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input"
+                                           name="{{ form1.dpcla_vgg_16.html_name }}"
+                                           type="checkbox"
+                                           role="switch"
+                                           id="{{ form1.dpcla_vgg_16.id_for_label }}">
+                                    <label class="form-check-label"
+                                           for="{{ form1.dpcla_vgg_16.id_for_label }}">
+                                        VGG 16 <a href="{% static 'pdf/1409.1556.pdf' %}" target="_blank">
+                                            <svg class="bi" width="16" height="16" role="img" aria-label="VGG 16">
+                                                <use href="#pdf"></use>
+                                            </svg>
+                                        </a>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-6">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input"
+                                           name="{{ form1.dpcla_vgg_19.html_name }}"
+                                           type="checkbox"
+                                           role="switch"
+                                           id="{{ form1.dpcla_vgg_19.id_for_label }}">
                       <label class="form-check-label" for="{{ form1.dpcla_vgg_19.id_for_label }}">VGG 19 <a href="{% static 'pdf/1409.1556.pdf' %}" target="_blank"><svg class="bi" width="16" height="16" role="img" aria-label="VGG 19"><use href="#pdf"></use></svg></a></label>
                     </div>
                   </div>
