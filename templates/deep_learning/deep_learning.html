@@ -170,7 +170,8 @@
                                            type="checkbox"
                                            role="switch"
                                            id="{{ form1.dpcla_xception.id_for_label }}">
-                                    <label class="form-check-label" for="{{ form1.dpcla_xception.id_for_label }}">
+                                    <label class="form-check-label"
+                                           for="{{ form1.dpcla_xception.id_for_label }}">
                                         Xception
                                         <a href="{% static 'pdf/1610.02357.pdf' %}" target="_blank">
                                             <svg class="bi" width="16" height="16" role="img" aria-label="Exception">
@@ -187,8 +188,7 @@
                                            type="checkbox"
                                            role="switch"
                                            id="{{ form1.dpcla_vgg_11.id_for_label }}">
-                                    <label class="form-check-label"
-                                           for="{{ form1.dpcla_vgg_11.id_for_label }}">
+                                    <label class="form-check-label" for="{{ form1.dpcla_vgg_11.id_for_label }}">
                                         VGG 11 
                                         <a href="{% static 'pdf/1409.1556.pdf' %}" target="_blank">
                                             <svg class="bi" width="16" height="16" role="img" aria-label="VGG 11">
@@ -205,8 +205,7 @@
                                            type="checkbox"
                                            role="switch"
                                            id="{{ form1.dpcla_vgg_13.id_for_label }}">
-                                    <label class="form-check-label"
-                                           for="{{ form1.dpcla_vgg_13.id_for_label }}">
+                                    <label class="form-check-label" for="{{ form1.dpcla_vgg_13.id_for_label }}">
                                         VGG 13
                                         <a href="{% static 'pdf/1409.1556.pdf' %}" target="_blank">
                                             <svg class="bi" width="16" height="16" role="img" aria-label="VGG 13">
@@ -223,8 +222,7 @@
                                            type="checkbox"
                                            role="switch"
                                            id="{{ form1.dpcla_vgg_16.id_for_label }}">
-                                    <label class="form-check-label"
-                                           for="{{ form1.dpcla_vgg_16.id_for_label }}">
+                                    <label class="form-check-label" for="{{ form1.dpcla_vgg_16.id_for_label }}">
                                         VGG 16
                                         <a href="{% static 'pdf/1409.1556.pdf' %}" target="_blank">
                                             <svg class="bi" width="16" height="16" role="img" aria-label="VGG 16">
@@ -241,69 +239,190 @@
                                            type="checkbox"
                                            role="switch"
                                            id="{{ form1.dpcla_vgg_19.id_for_label }}">
-                      <label class="form-check-label" for="{{ form1.dpcla_vgg_19.id_for_label }}">VGG 19 <a href="{% static 'pdf/1409.1556.pdf' %}" target="_blank"><svg class="bi" width="16" height="16" role="img" aria-label="VGG 19"><use href="#pdf"></use></svg></a></label>
-                    </div>
-                  </div>
-                  <div class="col-md-3 col-sm-6">
-                    <div class="form-check form-switch">
-                      <input class="form-check-input" name="{{ form1.dpcla_resnet_18.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_resnet_18.id_for_label }}">
-                      <label class="form-check-label" for="{{ form1.dpcla_resnet_18.id_for_label }}">ResNet 18 <a href="{% static 'pdf/1512.03385.pdf' %}" target="_blank"><svg class="bi" width="16" height="16" role="img" aria-label="ResNet 18"><use href="#pdf"></use></svg></a></label>
-                    </div>
-                  </div>
-                  <div class="col-md-3 col-sm-6">
-                    <div class="form-check form-switch">
-                      <input class="form-check-input" name="{{ form1.dpcla_resnet_34.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_resnet_34.id_for_label }}">
-                      <label class="form-check-label" for="{{ form1.dpcla_resnet_34.id_for_label }}">ResNet 34 <a href="{% static 'pdf/1512.03385.pdf' %}" target="_blank"><svg class="bi" width="16" height="16" role="img" aria-label="ResNet 34"><use href="#pdf"></use></svg></a></label>
-                    </div>
-                  </div>
-                  <div class="col-md-3 col-sm-6">
-                    <div class="form-check form-switch">
-                      <input class="form-check-input" name="{{ form1.dpcla_resnet_50.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_resnet_50.id_for_label }}">
-                      <label class="form-check-label" for="{{ form1.dpcla_resnet_50.id_for_label }}">ResNet 50 <a href="{% static 'pdf/1512.03385.pdf' %}" target="_blank"><svg class="bi" width="16" height="16" role="img" aria-label="ResNet 50"><use href="#pdf"></use></svg></a></label>
-                    </div>
-                  </div>
-                  <div class="col-md-3 col-sm-6">
-                    <div class="form-check form-switch">
-                      <input class="form-check-input" name="{{ form1.dpcla_resnet_50_v2.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_resnet_50_v2.id_for_label }}">
-                      <label class="form-check-label" for="{{ form1.dpcla_resnet_50_v2.id_for_label }}">ResNet 50 V2 <a href="{% static 'pdf/1603.05027.pdf' %}" target="_blank"><svg class="bi" width="16" height="16" role="img" aria-label="ResNet 50 V2"><use href="#pdf"></use></svg></a></label>
-                    </div>
-                  </div>
-                  <div class="col-md-3 col-sm-6">
-                    <div class="form-check form-switch">
-                      <input class="form-check-input" name="{{ form1.dpcla_resnet_rs_50.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_resnet_rs_50.id_for_label }}">
-                      <label class="form-check-label" for="{{ form1.dpcla_resnet_rs_50.id_for_label }}">ResNet RS 50 <a href="{% static 'pdf/2103.07579.pdf' %}" target="_blank"><svg class="bi" width="16" height="16" role="img" aria-label="ResNet RS 50"><use href="#pdf"></use></svg></a></label>
-                    </div>
-                  </div>
-                  <div class="col-md-3 col-sm-6">
-                    <div class="form-check form-switch">
-                      <input class="form-check-input" name="{{ form1.dpcla_resnet_101.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_resnet_101.id_for_label }}">
-                      <label class="form-check-label" for="{{ form1.dpcla_resnet_101.id_for_label }}">ResNet 101 <a href="{% static 'pdf/1512.03385.pdf' %}" target="_blank"><svg class="bi" width="16" height="16" role="img" aria-label="ResNet 101"><use href="#pdf"></use></svg></a></label>
-                    </div>
-                  </div>
-                  <div class="col-md-3 col-sm-6">
-                    <div class="form-check form-switch">
-                      <input class="form-check-input" name="{{ form1.dpcla_resnet_101_v2.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_resnet_101_v2.id_for_label }}">
-                      <label class="form-check-label" for="{{ form1.dpcla_resnet_101_v2.id_for_label }}">ResNet 101 V2 <a href="{% static 'pdf/1603.05027.pdf' %}" target="_blank"><svg class="bi" width="16" height="16" role="img" aria-label="ResNet 101 V2"><use href="#pdf"></use></svg></a></label>
-                    </div>
-                  </div>
-                  <div class="col-md-3 col-sm-6">
-                    <div class="form-check form-switch">
-                      <input class="form-check-input" name="{{ form1.dpcla_resnet_rs_101.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_resnet_rs_101.id_for_label }}">
-                      <label class="form-check-label" for="{{ form1.dpcla_resnet_rs_101.id_for_label }}">ResNet RS 101 <a href="{% static 'pdf/2103.07579.pdf' %}" target="_blank"><svg class="bi" width="16" height="16" role="img" aria-label="ResNet RS 101"><use href="#pdf"></use></svg></a></label>
-                    </div>
-                  </div>
-                  <div class="col-md-3 col-sm-6">
-                    <div class="form-check form-switch">
-                      <input class="form-check-input" name="{{ form1.dpcla_resnet_152.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_resnet_152.id_for_label }}">
-                      <label class="form-check-label" for="{{ form1.dpcla_resnet_152.id_for_label }}">ResNet 152 <a href="{% static 'pdf/1512.03385.pdf' %}" target="_blank"><svg class="bi" width="16" height="16" role="img" aria-label="ResNet 152"><use href="#pdf"></use></svg></a></label>
-                    </div>
-                  </div>
-                  <div class="col-md-3 col-sm-6">
-                    <div class="form-check form-switch">
-                      <input class="form-check-input" name="{{ form1.dpcla_resnet_152_v2.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_resnet_152_v2.id_for_label }}">
-                      <label class="form-check-label" for="{{ form1.dpcla_resnet_152_v2.id_for_label }}">ResNet 152 V2 <a href="{% static 'pdf/1603.05027.pdf' %}" target="_blank"><svg class="bi" width="16" height="16" role="img" aria-label="ResNet 152 V2"><use href="#pdf"></use></svg></a></label>
-                    </div>
-                  </div>
+                                    <label class="form-check-label"
+                                           for="{{ form1.dpcla_vgg_19.id_for_label }}">
+                                        VGG 19
+                                        <a href="{% static 'pdf/1409.1556.pdf' %}" target="_blank">
+                                            <svg class="bi" width="16" height="16" role="img" aria-label="VGG 19">
+                                                <use href="#pdf"></use>
+                                            </svg>
+                                        </a>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-6">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input"
+                                           name="{{ form1.dpcla_resnet_18.html_name }}"
+                                           type="checkbox"
+                                           role="switch"
+                                           id="{{ form1.dpcla_resnet_18.id_for_label }}">
+                                    <label class="form-check-label"
+                                           for="{{ form1.dpcla_resnet_18.id_for_label }}">
+                                        ResNet 18
+                                        <a href="{% static 'pdf/1512.03385.pdf' %}" target="_blank">
+                                            <svg class="bi" width="16" height="16" role="img" aria-label="ResNet 18">
+                                                <use href="#pdf"></use>
+                                            </svg>
+                                        </a>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-6">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input"
+                                           name="{{ form1.dpcla_resnet_34.html_name }}"
+                                           type="checkbox"
+                                           role="switch"
+                                           id="{{ form1.dpcla_resnet_34.id_for_label }}">
+                                    <label class="form-check-label"
+                                           for="{{ form1.dpcla_resnet_34.id_for_label }}">
+                                        ResNet 34 
+                                        <a href="{% static 'pdf/1512.03385.pdf' %}" target="_blank">
+                                            <svg class="bi" width="16" height="16" role="img" aria-label="ResNet 34">
+                                                <use href="#pdf"></use>
+                                            </svg>
+                                        </a>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-6">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input"
+                                           name="{{ form1.dpcla_resnet_50.html_name }}"
+                                           type="checkbox"
+                                           role="switch"
+                                           id="{{ form1.dpcla_resnet_50.id_for_label }}">
+                                    <label class="form-check-label"
+                                           for="{{ form1.dpcla_resnet_50.id_for_label }}">
+                                        ResNet 50
+                                        <a href="{% static 'pdf/1512.03385.pdf' %}" target="_blank">
+                                            <svg class="bi" width="16" height="16" role="img" aria-label="ResNet 50">
+                                                <use href="#pdf"></use>
+                                            </svg>
+                                        </a>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-6">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input"
+                                           name="{{ form1.dpcla_resnet_50_v2.html_name }}"
+                                           type="checkbox"
+                                           role="switch"
+                                           id="{{ form1.dpcla_resnet_50_v2.id_for_label }}">
+                                    <label class="form-check-label" for="{{ form1.dpcla_resnet_50_v2.id_for_label }}">
+                                        ResNet 50 V2 
+                                        <a href="{% static 'pdf/1603.05027.pdf' %}" target="_blank">
+                                            <svg class="bi" width="16" height="16" role="img" aria-label="ResNet 50 V2">
+                                                <use href="#pdf"></use>
+                                            </svg>
+                                        </a>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-6">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input"
+                                           name="{{ form1.dpcla_resnet_rs_50.html_name }}"
+                                           type="checkbox"
+                                           role="switch"
+                                           id="{{ form1.dpcla_resnet_rs_50.id_for_label }}">
+                                    <label class="form-check-label" for="{{ form1.dpcla_resnet_rs_50.id_for_label }}">
+                                        ResNet RS 50
+                                        <a href="{% static 'pdf/2103.07579.pdf' %}" target="_blank">
+                                            <svg class="bi" width="16" height="16" role="img" aria-label="ResNet RS 50">
+                                                <use href="#pdf"></use>
+                                            </svg>
+                                        </a>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-6">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input"
+                                           name="{{ form1.dpcla_resnet_101.html_name }}"
+                                           type="checkbox"
+                                           role="switch"
+                                           id="{{ form1.dpcla_resnet_101.id_for_label }}">
+                                    <label class="form-check-label" for="{{ form1.dpcla_resnet_101.id_for_label }}">
+                                        ResNet 101
+                                        <a href="{% static 'pdf/1512.03385.pdf' %}" target="_blank">
+                                            <svg class="bi" width="16" height="16" role="img" aria-label="ResNet 101">
+                                                <use href="#pdf"></use>
+                                            </svg>
+                                        </a>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-6">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input"
+                                           name="{{ form1.dpcla_resnet_101_v2.html_name }}"
+                                           type="checkbox"
+                                           role="switch"
+                                           id="{{ form1.dpcla_resnet_101_v2.id_for_label }}">
+                                    <label class="form-check-label" for="{{ form1.dpcla_resnet_101_v2.id_for_label }}">
+                                        ResNet 101 V2
+                                        <a href="{% static 'pdf/1603.05027.pdf' %}" target="_blank">
+                                            <svg class="bi" width="16" height="16" role="img" aria-label="ResNet 101 V2">
+                                                <use href="#pdf"></use>
+                                            </svg>
+                                        </a>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-6">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input"
+                                           name="{{ form1.dpcla_resnet_rs_101.html_name }}"
+                                           type="checkbox"
+                                           role="switch"
+                                           id="{{ form1.dpcla_resnet_rs_101.id_for_label }}">
+                                    <label class="form-check-label" for="{{ form1.dpcla_resnet_rs_101.id_for_label }}">
+                                        ResNet RS 101
+                                        <a href="{% static 'pdf/2103.07579.pdf' %}" target="_blank">
+                                            <svg class="bi" width="16" height="16" role="img" aria-label="ResNet RS 101">
+                                                <use href="#pdf"></use>
+                                            </svg>
+                                        </a>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-6">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input"
+                                           name="{{ form1.dpcla_resnet_152.html_name }}"
+                                           type="checkbox"
+                                           role="switch"
+                                           id="{{ form1.dpcla_resnet_152.id_for_label }}">
+                                    <label class="form-check-label" for="{{ form1.dpcla_resnet_152.id_for_label }}">
+                                        ResNet 152
+                                        <a href="{% static 'pdf/1512.03385.pdf' %}" target="_blank">
+                                            <svg class="bi" width="16" height="16" role="img" aria-label="ResNet 152">
+                                                <use href="#pdf"></use>
+                                            </svg>
+                                        </a>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-6">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input"
+                                           name="{{ form1.dpcla_resnet_152_v2.html_name }}" 
+                                           type="checkbox" 
+                                           role="switch" 
+                                           id="{{ form1.dpcla_resnet_152_v2.id_for_label }}">
+                                    <label class="form-check-label" for="{{ form1.dpcla_resnet_152_v2.id_for_label }}">
+                                        ResNet 152 V2
+                                        <a href="{% static 'pdf/1603.05027.pdf' %}" target="_blank">
+                                            <svg class="bi" width="16" height="16" role="img" aria-label="ResNet 152 V2">
+                                                <use href="#pdf"></use>
+                                            </svg>
+                                        </a>
+                                    </label>
+                                </div>
+                            </div>
                   <div class="col-md-3 col-sm-6">
                     <div class="form-check form-switch">
                       <input class="form-check-input" name="{{ form1.dpcla_resnet_rs_152.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_resnet_rs_152.id_for_label }}">
