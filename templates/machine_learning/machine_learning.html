@@ -1,39 +1,58 @@
 {%  extends 'base.html' %}
-
 {% block title %}Machine learning{% endblock %}
-
 {% block content %}
-{%  if request.user.is_authenticated %}    
-    <div class="accordion accordion-flush" id="MLAssistant">
-      <div class="accordion-item">
-        <h2 class="accordion-header">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#MLAssistant-collapseOne" aria-expanded="false" aria-controls="MLAssistant-collapseOne">
-            Anomaly Detection
-          </button>
-        </h2>
-        <div id="MLAssistant-collapseOne" class="accordion-collapse collapse" data-bs-parent="#MLAssistant">
-          <div class="accordion-body">
-    
-            <form class="row g-3" action="/ml_mlad_processing/" method="post">
-              {% csrf_token %}
-              <div class="col-md-4 col-sm-6">
-                <div class="form-check form-switch">
-                  <input class="form-check-input" name="{{ form5.mlad_abod.html_name }}" type="checkbox" role="switch" id="{{ form5.mlad_abod.id_for_label }}">
-                  <label class="form-check-label" for="{{ form5.mlad_abod.id_for_label }}">Angle-base Outlier Detection (<i>abod</i>)</label>
-                </div>
-              </div>
-              <div class="col-md-4 col-sm-6">
-                <div class="form-check form-switch">
-                  <input class="form-check-input" name="{{ form5.mlad_cluster.html_name }}" type="checkbox" role="switch" id="{{ form5.mlad_cluster.id_for_label }}">
-                  <label class="form-check-label" for="{{ form5.mlad_cluster.id_for_label }}">Clustering-Based Local Outlier (<i>cluster</i>)</label>
-                </div>
-              </div>
-              <div class="col-md-4 col-sm-6">
-                <div class="form-check form-switch">
-                  <input class="form-check-input" name="{{ form5.mlad_cof.html_name }}" type="checkbox" role="switch" id="{{ form5.mlad_cof.id_for_label }}">
-                  <label class="form-check-label" for="{{ form5.mlad_cof.id_for_label }}">Connectivity-Based Local Outlier (<i>cof</i>)</label>
-                </div>
-              </div>
+    {%  if request.user.is_authenticated %}    
+        <div class="accordion accordion-flush" id="MLAssistant">
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#MLAssistant-collapseOne"
+                            aria-expanded="false"
+                            aria-controls="MLAssistant-collapseOne">Anomaly Detection</button>
+                </h2>
+                <div id="MLAssistant-collapseOne"
+                     class="accordion-collapse
+                     collapse" data-bs-parent="#MLAssistant">
+                    <div class="accordion-body">
+                        <form class="row g-3" action="/ml_mlad_processing/" method="post">
+                            {% csrf_token %}
+                            <div class="col-md-4 col-sm-6">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input"
+                                           name="{{ form5.mlad_abod.html_name }}"
+                                           type="checkbox" role="switch"
+                                           id="{{ form5.mlad_abod.id_for_label }}">
+                                    <label class="form-check-label" for="{{ form5.mlad_abod.id_for_label }}">
+                                        Angle-base Outlier Detection (<i>abod</i>)
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input"
+                                           name="{{ form5.mlad_cluster.html_name }}"
+                                           type="checkbox"
+                                           role="switch"
+                                           id="{{ form5.mlad_cluster.id_for_label }}">
+                                    <label class="form-check-label" for="{{ form5.mlad_cluster.id_for_label }}">
+                                        Clustering-Based Local Outlier (<i>cluster</i>)
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input"
+                                           name="{{ form5.mlad_cof.html_name }}"
+                                           type="checkbox"
+                                           role="switch"
+                                           id="{{ form5.mlad_cof.id_for_label }}">
+                                    <label class="form-check-label" for="{{ form5.mlad_cof.id_for_label }}">
+                                        Connectivity-Based Local Outlier (<i>cof</i>)
+                                    </label>
+                                </div>
+                            </div>
               <div class="col-md-4 col-sm-6">
                 <div class="form-check form-switch">
                   <input class="form-check-input" name="{{ form5.mlad_iforest.html_name }}" type="checkbox" role="switch" id="{{ form5.mlad_iforest.id_for_label }}">
