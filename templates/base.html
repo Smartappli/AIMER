@@ -20,7 +20,7 @@
             {% include 'core/header.html' %}
             {% if messages %}
                 {% for message in messages %}
-                    <div class="alert alert-{%  if message.tags == "success" %}success{% endif %}{% if message.tags == "info" %}info{% endif %}{% if message.tags == "warning" %}warning{% endif %}{% if message.tags == "error" %}danger{% endif %}{% if message.tags == "debug" %}secondary{% endif %} alert-dismissible fade show"
+                    <div class="alert alert-{% if message.tags == "success" %}success{% endif %}{% if message.tags == "info" %}info{% endif %}{% if message.tags == "warning" %}warning{% endif %}{% if message.tags == "error" %}danger{% endif %}{% if message.tags == "debug" %}secondary{% endif %} alert-dismissible fade show"
                          role="alert">
                         <strong>{{ message|safe }}</strong>
                         <button type="button"
