@@ -173,157 +173,295 @@
                     </div>
                 </div>
             </div>
-
-            
-      <div class="accordion-item">
-        <h2 class="accordion-header">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#MLAssistant-collapseTwo" aria-expanded="false" aria-controls="MLAssistant-collapseTwo">
-            Regression
-          </button>
-        </h2>
-        <div id="MLAssistant-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#MLAssistant">
-          <div class="accordion-body">
-    
-            <form class="row g-3" action="/ml_mlreg_processing/" method="post">
-              {% csrf_token %}
-              <div class="col-md-4 col-sm-6">
-                <div class="form-check form-switch">
-                  <input class="form-check-input" name="{{ form2.mlreg_lr.html_name }}" type="checkbox" role="switch" id="{{ form2.mlreg_lr.id_for_label }}">
-                  <label class="form-check-label" for="{{ form2.mlreg_lr.id_for_label }}">Linear Regression (lr)</label>
-                </div>
-              </div>
-              <div class="col-md-4 col-sm-6">
-                <div class="form-check form-switch">
-                  <input class="form-check-input" name="{{ form2.mlreg_lasso.html_name }}" type="checkbox" role="switch" id="{{ form2.mlreg_lasso.id_for_label }}">
-                  <label class="form-check-label" for="{{ form2.mlreg_lasso.id_for_label }}">Lasso Regression (lasso)</label>
-                </div>
-              </div>
-              <div class="col-md-4 col-sm-6">
-                <div class="form-check form-switch">
-                  <input class="form-check-input" name="{{ form2.mlreg_ridge.html_name }}" type="checkbox" role="switch" id="{{ form2.mlreg_ridge.id_for_label }}">
-                  <label class="form-check-label" for="{{ form2.mlreg_ridge.id_for_label }}">Ridge Regression (ridge)</label>
-                </div>
-              </div>
-              <div class="col-md-4 col-sm-6">
-                <div class="form-check form-switch">
-                  <input class="form-check-input" name="{{ form2.mlreg_en.html_name }}" type="checkbox" role="switch" id="{{ form2.mlreg_en.id_for_label }}">
-                  <label class="form-check-label" for="{{ form2.mlreg_en.id_for_label }}">Elastic Net (en)</label>
-                </div>
-              </div>
-              <div class="col-md-4 col-sm-6">
-                <div class="form-check form-switch">
-                  <input class="form-check-input" name="{{ form2.mlreg_lar.html_name }}" type="checkbox" role="switch" id="{{ form2.mlreg_lar.id_for_label }}">
-                  <label class="form-check-label" for="{{ form2.mlreg_lar.id_for_label }}">Least Angle Regression (lar)</label>
-                </div>
-              </div>
-              <div class="col-md-4 col-sm-6">
-                <div class="form-check form-switch">
-                  <input class="form-check-input" name="{{ form2.mlreg_llar.html_name }}" type="checkbox" role="switch" id="{{ form2.mlreg_llar.id_for_label }}">
-                  <label class="form-check-label" for="{{ form2.mlreg_llar.id_for_label }}">Lasso Least Angle Regression (llar)</label>
-                </div>
-              </div>
-              <div class="col-md-4 col-sm-6">
-                <div class="form-check form-switch">
-                  <input class="form-check-input" name="{{ form2.mlreg_omp.html_name }}" type="checkbox" role="switch" id="{{ form2.mlreg_omp.id_for_label }}">
-                  <label class="form-check-label" for="{{ form2.mlreg_omp.id_for_label }}">Orthogonal Matching Pursuit (omp)</label>
-                </div>
-              </div>
-              <div class="col-md-4 col-sm-6">
-                <div class="form-check form-switch">
-                  <input class="form-check-input" name="{{ form2.mlreg_br.html_name }}" type="checkbox" role="switch" id="{{ form2.mlreg_br.id_for_label }}">
-                  <label class="form-check-label" for="{{ form2.mlreg_br.id_for_label }}">Bayesian Ridge (br)</label>
-                </div>
-              </div>
-              <div class="col-md-4 col-sm-6">
-                <div class="form-check form-switch">
-                  <input class="form-check-input" name="{{ form2.mlreg_ard.html_name }}" type="checkbox" role="switch" id="{{ form2.mlreg_ard.id_for_label }}">
-                  <label class="form-check-label" for="{{ form2.mlreg_ard.id_for_label }}">Automatic Relevance Determination (ard)</label>
-                </div>
-              </div>
-              <div class="col-md-4 col-sm-6">
-                <div class="form-check form-switch">
-                  <input class="form-check-input" name="{{ form2.mlreg_par.html_name }}" type="checkbox" role="switch" id="{{ form2.mlreg_par.id_for_label }}">
-                  <label class="form-check-label" for="{{ form2.mlreg_par.id_for_label }}">Passive Aggressive Regressor (par)</label>
-                </div>
-              </div>
-              <div class="col-md-4 col-sm-6">
-                <div class="form-check form-switch">
-                  <input class="form-check-input" name="{{ form2.mlreg_ransac.html_name }}" type="checkbox" role="switch" id="{{ form2.mlreg_ransac.id_for_label }}">
-                  <label class="form-check-label" for="{{ form2.mlreg_ransac.id_for_label }}">Random Sample Consensus (ransac)</label>
-                </div>
-              </div>
-              <div class="col-md-4 col-sm-6">
-                <div class="form-check form-switch">
-                  <input class="form-check-input" name="{{ form2.mlreg_tr.html_name }}" type="checkbox" role="switch" id="{{ form2.mlreg_tr.id_for_label }}">
-                  <label class="form-check-label" for="{{ form2.mlreg_tr.id_for_label }}">TheilSen Regressor (tr)</label>
-                </div>
-              </div>
-              <div class="col-md-4 col-sm-6">
-                <div class="form-check form-switch">
-                  <input class="form-check-input" name="{{ form2.mlreg_huber.html_name }}" type="checkbox" role="switch" id="{{ form2.mlreg_huber.id_for_label }}">
-                  <label class="form-check-label" for="{{ form2.mlreg_huber.id_for_label }}">Huber Regressor (huber)</label>
-                </div>
-              </div>
-              <div class="col-md-4 col-sm-6">
-                <div class="form-check form-switch">
-                  <input class="form-check-input" name="{{ form2.mlreg_kr.html_name }}" type="checkbox" role="switch" id="{{ form2.mlreg_kr.id_for_label }}">
-                  <label class="form-check-label" for="{{ form2.mlreg_kr.id_for_label }}">Kernel Ridge (kr)</label>
-                </div>
-              </div>
-              <div class="col-md-4 col-sm-6">
-                <div class="form-check form-switch">
-                  <input class="form-check-input" name="{{ form2.mlreg_svm.html_name }}" type="checkbox" role="switch" id="{{ form2.mlreg_svm.id_for_label }}">
-                  <label class="form-check-label" for="{{ form2.mlreg_svm.id_for_label }}">Support Vector Regression (svm)</label>
-                </div>
-              </div>
-              <div class="col-md-4 col-sm-6">
-                <div class="form-check form-switch">
-                  <input class="form-check-input" name="{{ form2.mlreg_knn.html_name }}" type="checkbox" role="switch" id="{{ form2.mlreg_knn.id_for_label }}">
-                  <label class="form-check-label" for="{{ form2.mlreg_knn.id_for_label }}">K Neighbors Regressor (knn)</label>
-                </div>
-              </div>
-              <div class="col-md-4 col-sm-6">
-                <div class="form-check form-switch">
-                  <input class="form-check-input" name="{{ form2.mlreg_dt.html_name }}" type="checkbox" role="switch" id="{{ form2.mlreg_dt.id_for_label }}">
-                  <label class="form-check-label" for="{{ form2.mlreg_dt.id_for_label }}">Decision Tree Regressor (dt)</label>
-                </div>
-              </div>
-              <div class="col-md-4 col-sm-6">
-                <div class="form-check form-switch">
-                  <input class="form-check-input" name="{{ form2.mlreg_rf.html_name }}" type="checkbox" role="switch" id="{{ form2.mlreg_rf.id_for_label }}">
-                  <label class="form-check-label" for="{{ form2.mlreg_rf.id_for_label }}">Random Forest Regressor (rf)</label>
-                </div>
-              </div>
-              <div class="col-md-4 col-sm-6">
-                <div class="form-check form-switch">
-                  <input class="form-check-input" name="{{ form2.mlreg_et.html_name }}" type="checkbox" role="switch" id="{{ form2.mlreg_et.id_for_label }}">
-                  <label class="form-check-label" for="{{ form2.mlreg_et.id_for_label }}">Extra Trees Regressor (et)</label>
-                </div>
-              </div>
-              <div class="col-md-4 col-sm-6">
-                <div class="form-check form-switch">
-                  <input class="form-check-input" name="{{ form2.mlreg_ada.html_name }}" type="checkbox" role="switch" id="{{ form2.mlreg_ada.id_for_label }}">
-                  <label class="form-check-label" for="{{ form2.mlreg_ada.id_for_label }}">AdaBoost Regressor (ada)</label>
-                </div>
-              </div>
-              <div class="col-md-4 col-sm-6">
-                <div class="form-check form-switch">
-                  <input class="form-check-input" name="{{ form2.mlreg_gbr.html_name }}" type="checkbox" role="switch" id="{{ form2.mlreg_gbr.id_for_label }}">
-                  <label class="form-check-label" for="{{ form2.mlreg_gbr.id_for_label }}">Gradient Boosting Regressor (gbr)</label>
-                </div>
-              </div>
-              <div class="col-md-4 col-sm-6">
-                <div class="form-check form-switch">
-                  <input class="form-check-input" name="{{ form2.mlreg_mlp.html_name }}" type="checkbox" role="switch" id="{{ form2.mlreg_mlp.id_for_label }}">
-                  <label class="form-check-label" for="{{ form2.mlreg_mlp.id_for_label }}">MLP Regressor (mlp)</label>
-                </div>
-              </div>
-              <div class="col-md-4 col-sm-6">
-                <div class="form-check form-switch">
-                  <input class="form-check-input" name="{{ form2.mlreg_xgboost.html_name }}" type="checkbox" role="switch" id="{{ form2.mlreg_xgboost.id_for_label }}">
-                  <label class="form-check-label" for="{{ form2.mlreg_xgboost.id_for_label }}">Extreme Gradient Boosting (xgboost)</label>
-                </div>
-              </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#MLAssistant-collapseTwo"
+                            aria-expanded="false"
+                            aria-controls="MLAssistant-collapseTwo">Regression</button>
+                </h2>
+                <div id="MLAssistant-collapseTwo"
+                     class="accordion-collapse collapse"
+                     data-bs-parent="#MLAssistant">
+                    <div class="accordion-body">
+                        <form class="row g-3" action="/ml_mlreg_processing/" method="post">
+                            {% csrf_token %}
+                            <div class="col-md-4 col-sm-6">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input"
+                                           name="{{ form2.mlreg_lr.html_name }}"
+                                           type="checkbox" role="switch"
+                                           id="{{ form2.mlreg_lr.id_for_label }}">
+                                    <label class="form-check-label" for="{{ form2.mlreg_lr.id_for_label }}">
+                                        Linear Regression (lr)
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input"
+                                           name="{{ form2.mlreg_lasso.html_name }}"
+                                           type="checkbox" role="switch"
+                                           id="{{ form2.mlreg_lasso.id_for_label }}">
+                                    <label class="form-check-label" for="{{ form2.mlreg_lasso.id_for_label }}">
+                                        Lasso Regression (lasso)
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input"
+                                           name="{{ form2.mlreg_ridge.html_name }}"
+                                           type="checkbox"
+                                           role="switch"
+                                           id="{{ form2.mlreg_ridge.id_for_label }}">
+                                    <label class="form-check-label" for="{{ form2.mlreg_ridge.id_for_label }}">
+                                        Ridge Regression (ridge)
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input"
+                                           name="{{ form2.mlreg_en.html_name }}"
+                                           type="checkbox"
+                                           role="switch"
+                                           id="{{ form2.mlreg_en.id_for_label }}">
+                                    <label class="form-check-label" for="{{ form2.mlreg_en.id_for_label }}">
+                                        Elastic Net (en)
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input"
+                                           name="{{ form2.mlreg_lar.html_name }}"
+                                           type="checkbox"
+                                           role="switch"
+                                           id="{{ form2.mlreg_lar.id_for_label }}">
+                                    <label class="form-check-label" for="{{ form2.mlreg_lar.id_for_label }}">
+                                        Least Angle Regression (lar)
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input"
+                                           name="{{ form2.mlreg_llar.html_name }}"
+                                           type="checkbox"
+                                           role="switch"
+                                           id="{{ form2.mlreg_llar.id_for_label }}">
+                                    <label class="form-check-label" for="{{ form2.mlreg_llar.id_for_label }}">
+                                        Lasso Least Angle Regression (llar)
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input"
+                                           name="{{ form2.mlreg_omp.html_name }}"
+                                           type="checkbox"
+                                           role="switch"
+                                           id="{{ form2.mlreg_omp.id_for_label }}">
+                                    <label class="form-check-label" for="{{ form2.mlreg_omp.id_for_label }}">
+                                        Orthogonal Matching Pursuit (omp)
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input"
+                                           name="{{ form2.mlreg_br.html_name }}"
+                                           type="checkbox"
+                                           role="switch"
+                                           id="{{ form2.mlreg_br.id_for_label }}">
+                                    <label class="form-check-label" for="{{ form2.mlreg_br.id_for_label }}">
+                                        Bayesian Ridge (br)
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input"
+                                           name="{{ form2.mlreg_ard.html_name }}"
+                                           type="checkbox"
+                                           role="switch"
+                                           id="{{ form2.mlreg_ard.id_for_label }}">
+                                    <label class="form-check-label" for="{{ form2.mlreg_ard.id_for_label }}">
+                                        Automatic Relevance Determination (ard)
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input"
+                                           name="{{ form2.mlreg_par.html_name }}"
+                                           type="checkbox"
+                                           role="switch"
+                                           id="{{ form2.mlreg_par.id_for_label }}">
+                                    <label class="form-check-label" for="{{ form2.mlreg_par.id_for_label }}">
+                                        Passive Aggressive Regressor (par)
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input"
+                                           name="{{ form2.mlreg_ransac.html_name }}"
+                                           type="checkbox"
+                                           role="switch"
+                                           id="{{ form2.mlreg_ransac.id_for_label }}">
+                                    <label class="form-check-label" for="{{ form2.mlreg_ransac.id_for_label }}">
+                                        Random Sample Consensus (ransac)
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input"
+                                           name="{{ form2.mlreg_tr.html_name }}"
+                                           type="checkbox"
+                                           role="switch"
+                                           id="{{ form2.mlreg_tr.id_for_label }}">
+                                    <label class="form-check-label" for="{{ form2.mlreg_tr.id_for_label }}">
+                                        TheilSen Regressor (tr)
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input"
+                                           name="{{ form2.mlreg_huber.html_name }}"
+                                           type="checkbox"
+                                           role="switch"
+                                           id="{{ form2.mlreg_huber.id_for_label }}">
+                                    <label class="form-check-label" for="{{ form2.mlreg_huber.id_for_label }}">
+                                        Huber Regressor (huber)
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input"
+                                           name="{{ form2.mlreg_kr.html_name }}"
+                                           type="checkbox"
+                                           role="switch"
+                                           id="{{ form2.mlreg_kr.id_for_label }}">
+                                    <label class="form-check-label" for="{{ form2.mlreg_kr.id_for_label }}">
+                                        Kernel Ridge (kr)
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input"
+                                           name="{{ form2.mlreg_svm.html_name }}"
+                                           type="checkbox"
+                                           role="switch"
+                                           id="{{ form2.mlreg_svm.id_for_label }}">
+                                    <label class="form-check-label" for="{{ form2.mlreg_svm.id_for_label }}">
+                                        Support Vector Regression (svm)
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input"
+                                           name="{{ form2.mlreg_knn.html_name }}"
+                                           type="checkbox"
+                                           role="switch"
+                                           id="{{ form2.mlreg_knn.id_for_label }}">
+                                    <label class="form-check-label" for="{{ form2.mlreg_knn.id_for_label }}">
+                                        K Neighbors Regressor (knn)
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input"
+                                           name="{{ form2.mlreg_dt.html_name }}"
+                                           type="checkbox"
+                                           role="switch"
+                                           id="{{ form2.mlreg_dt.id_for_label }}">
+                                    <label class="form-check-label" for="{{ form2.mlreg_dt.id_for_label }}">
+                                        Decision Tree Regressor (dt)
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input"
+                                           name="{{ form2.mlreg_rf.html_name }}"
+                                           type="checkbox"
+                                           role="switch"
+                                           id="{{ form2.mlreg_rf.id_for_label }}">
+                                    <label class="form-check-label" for="{{ form2.mlreg_rf.id_for_label }}">
+                                        Random Forest Regressor (rf)
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input"
+                                           name="{{ form2.mlreg_et.html_name }}"
+                                           type="checkbox"
+                                           role="switch"
+                                           id="{{ form2.mlreg_et.id_for_label }}">
+                                    <label class="form-check-label" for="{{ form2.mlreg_et.id_for_label }}">
+                                        Extra Trees Regressor (et)
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input"
+                                           name="{{ form2.mlreg_ada.html_name }}"
+                                           type="checkbox"
+                                           role="switch"
+                                           id="{{ form2.mlreg_ada.id_for_label }}">
+                                    <label class="form-check-label" for="{{ form2.mlreg_ada.id_for_label }}">
+                                        AdaBoost Regressor (ada)
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input"
+                                           name="{{ form2.mlreg_gbr.html_name }}"
+                                           type="checkbox"
+                                           role="switch"
+                                           id="{{ form2.mlreg_gbr.id_for_label }}">
+                                    <label class="form-check-label" for="{{ form2.mlreg_gbr.id_for_label }}">
+                                        Gradient Boosting Regressor (gbr)
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input"
+                                           name="{{ form2.mlreg_mlp.html_name }}"
+                                           type="checkbox"
+                                           role="switch"
+                                           id="{{ form2.mlreg_mlp.id_for_label }}">
+                                    <label class="form-check-label" for="{{ form2.mlreg_mlp.id_for_label }}">
+                                        MLP Regressor (mlp)
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input"
+                                           name="{{ form2.mlreg_xgboost.html_name }}"
+                                           type="checkbox"
+                                           role="switch"
+                                           id="{{ form2.mlreg_xgboost.id_for_label }}">
+                                    <label class="form-check-label" for="{{ form2.mlreg_xgboost.id_for_label }}">
+                                        Extreme Gradient Boosting (xgboost)
+                                    </label>
+                                </div>
+                            </div>
               <div class="col-md-4 col-sm-6">
                 <div class="form-check form-switch">
                   <input class="form-check-input" name="{{ form2.mlreg_lightgbm.html_name }}" type="checkbox" role="switch" id="{{ form2.mlreg_lightgbm.id_for_label }}">
