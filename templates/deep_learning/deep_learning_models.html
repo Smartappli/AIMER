@@ -1,14 +1,13 @@
 {% extends 'base.html' %}
-
 {% load static %}
-
 {% block title %}Deep Learning -  Models{% endblock %}
-
 {% block content %}
-      <h3><span class="text-info-emphasis">75</span> Classification Models</h3>
-      <div class="row g-3">
+    <h3>
+          <span class="text-info-emphasis">75</span> Classification Models
+    </h3>
+    <div class="row g-3">
         <div class="col-md-6">
-          <ul>
+            <ul>
             <li>
                 Xception (Keras - <i>Xception</i>)
                 <a href="{% static 'pdf/1610.02357.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
@@ -523,13 +522,13 @@
                     <svg class="bi" width="16" height="16" role="img" aria-label="Rethinking Atrous Convolution for Semantic Image Segmentation"><use href="#pdf"></use></svg>
                 </a>
             </li>
-            <li>
-                DeepLab V3+ (PyTorch - <i>DeepLabV3+</i>)
-                <a href="{% static 'pdf/1802.02611.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="Encoder-Decoder with Atrous Separable Convolution for Semantic Image Segmentation"><use href="#pdf"></use></svg>
-                </a>
-            </li>
-          </ul>
+                <li>
+                    DeepLab V3+ (PyTorch - <i>DeepLabV3+</i>)
+                    <a href="{% static 'pdf/1802.02611.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi" width="16" height="16" role="img" aria-label="Encoder-Decoder with Atrous Separable Convolution for Semantic Image Segmentation"><use href="#pdf"></use></svg>
+                    </a>
+                </li>
+            </ul>
         </div>
-      </div>
+    </div>
 {% endblock %}
