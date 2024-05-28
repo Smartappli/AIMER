@@ -1,10 +1,10 @@
 django==5.0.6
-huggingface-hub==0.23.1
+huggingface-hub==0.23.2
 #pycaret[full]==3.3.2 # 3.2.1
 #git+https://github.com/pycaret/pycaret.git
 #scikit-learn-intelex
 #tensorflow==2.15 # 2.14.1
-tf-nightly==2.17.0.dev20240526
+tf-nightly==2.17.0.dev20240527
 keras==3.3.3 # 2.14
 keras-tuner==1.4.7
 seaborn==0.13.2 # 0.12.2
@@ -18,12 +18,12 @@ torch==2.2.2
 torchvision==0.17.2
 timm==1.0.3
 prophet==1.1.5
-lightgbm
+lightgbm==4.3.0
 captum==0.7.0
 # psycopg2==2.9.9
 tqdm==4.66.2
 syft==0.8.7b8
-wheel>=0.40.0 # not directly required, pinned by Snyk to avoid a vulnerability
+wheel>=0.43.0 # not directly required, pinned by Snyk to avoid a vulnerability
 gevent>=23.9.0 # not directly required, pinned by Snyk to avoid a vulnerability
 setuptools==65.5.1 # not directly required, pinned by Snyk to avoid a vulnerability
 pillow>=10.3.0 # not directly required, pinned by Snyk to avoid a vulnerability
