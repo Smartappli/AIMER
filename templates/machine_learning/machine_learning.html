@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block title %}Machine learning{% endblock %}
 {% block content %}
-    {% if request.user.is_authenticated %}    
+    {% if request.user.is_authenticated %}
         <div class="accordion accordion-flush" id="MLAssistant">
             <div class="accordion-item">
                 <h2 class="accordion-header">
@@ -61,7 +61,8 @@
                                            type="checkbox"
                                            role="switch"
                                            id="{{ form5.mlad_iforest.id_for_label }}">
-                                    <label class="form-check-label" for="{{ form5.mlad_iforest.id_for_label }}">
+                                    <label class="form-check-label"
+                                           for="{{ form5.mlad_iforest.id_for_label }}">
                                         Isolation Forest (<i>iforest</i>)
                                     </label>
                                 </div>
@@ -73,7 +74,8 @@
                                            type="checkbox"
                                            role="switch"
                                            id="{{ form5.mlad_histogram.id_for_label }}">
-                                    <label class="form-check-label" for="{{ form5.mlad_histogram.id_for_label }}">
+                                    <label class="form-check-label"
+                                           for="{{ form5.mlad_histogram.id_for_label }}">
                                         Histogram-based Outlier Detection (<i>histogram</i>)
                                     </label>
                                 </div>
@@ -85,7 +87,8 @@
                                            type="checkbox"
                                            role="switch"
                                            id="{{ form5.mlad_knn.id_for_label }}">
-                                    <label class="form-check-label" for="{{ form5.mlad_knn.id_for_label }}">
+                                    <label class="form-check-label"
+                                           for="{{ form5.mlad_knn.id_for_label }}">
                                         K-Nearest Neighbors Detector (knn)
                                     </label>
                                 </div>
@@ -97,7 +100,8 @@
                                            type="checkbox"
                                            role="switch"
                                            id="{{ form5.mlad_lof.id_for_label }}">
-                                    <label class="form-check-label" for="{{ form5.mlad_lof.id_for_label }}">
+                                    <label class="form-check-label"
+                                           for="{{ form5.mlad_lof.id_for_label }}">
                                         Local Outlier Factor (lof)
                                     </label>
                                 </div>
@@ -109,7 +113,8 @@
                                            type="checkbox"
                                            role="switch"
                                            id="{{ form5.mlad_svm.id_for_label }}">
-                                    <label class="form-check-label" for="{{ form5.mlad_svm.id_for_label }}">
+                                    <label class="form-check-label"
+                                           for="{{ form5.mlad_svm.id_for_label }}">
                                         One-class SVM detector (svm)
                                     </label>
                                 </div>
@@ -121,7 +126,8 @@
                                            type="checkbox"
                                            role="switch"
                                            id="{{ form5.mlad_pca.id_for_label }}">
-                                    <label class="form-check-label" for="{{ form5.mlad_pca.id_for_label }}">
+                                    <label class="form-check-label"
+                                           for="{{ form5.mlad_pca.id_for_label }}">
                                         Principal Component Analysis (pca)
                                     </label>
                                 </div>
@@ -133,7 +139,8 @@
                                            type="checkbox"
                                            role="switch"
                                            id="{{ form5.mlad_mcd.id_for_label }}">
-                                    <label class="form-check-label" for="{{ form5.mlad_mcd.id_for_label }}">
+                                    <label class="form-check-label"
+                                           for="{{ form5.mlad_mcd.id_for_label }}">
                                         Minimum Covariance Determinant (mcd)
                                     </label>
                                 </div>
@@ -145,7 +152,8 @@
                                            type="checkbox"
                                            role="switch"
                                            id="{{ form5.mlad_sod.id_for_label }}">
-                                    <label class="form-check-label" for="{{ form5.mlad_sod.id_for_label }}">
+                                    <label class="form-check-label"
+                                           for="{{ form5.mlad_sod.id_for_label }}">
                                         Subspace Outlier Detection (sod)
                                     </label>
                                 </div>
@@ -157,16 +165,21 @@
                                            type="checkbox"
                                            role="switch"
                                            id="{{ form5.mlad_sos.id_for_label }}">
-                                    <label class="form-check-label" for="{{ form5.mlad_sos.id_for_label }}">
+                                    <label class="form-check-label"
+                                           for="{{ form5.mlad_sos.id_for_label }}">
                                         Stochastic Outlier Selection (sos)
                                     </label>
                                 </div>
                             </div>
                             <div class="d-grid gap-2 d-md-flex justify-content-md-end col-md-12">
-                                <button type="button" class="btn btn-success mb-3" onclick="adSelectModel();">
+                                <button type="button"
+                                        class="btn btn-success mb-3"
+                                        onclick="adSelectModel();">
                                     Select All
                                 </button>
-                                <button type="button" class="btn btn-danger mb-3" onclick="adUnselectModel();">
+                                <button type="button"
+                                        class="btn btn-danger mb-3"
+                                        onclick="adUnselectModel();">
                                     Unselect All
                                 </button>
                             </div>
@@ -193,9 +206,11 @@
                                 <div class="form-check form-switch">
                                     <input class="form-check-input"
                                            name="{{ form2.mlreg_lr.html_name }}"
-                                           type="checkbox" role="switch"
+                                           type="checkbox"
+                                           role="switch"
                                            id="{{ form2.mlreg_lr.id_for_label }}">
-                                    <label class="form-check-label" for="{{ form2.mlreg_lr.id_for_label }}">
+                                    <label class="form-check-label"
+                                           for="{{ form2.mlreg_lr.id_for_label }}">
                                         Linear Regression (lr)
                                     </label>
                                 </div>
@@ -204,9 +219,11 @@
                                 <div class="form-check form-switch">
                                     <input class="form-check-input"
                                            name="{{ form2.mlreg_lasso.html_name }}"
-                                           type="checkbox" role="switch"
+                                           type="checkbox"
+                                           role="switch"
                                            id="{{ form2.mlreg_lasso.id_for_label }}">
-                                    <label class="form-check-label" for="{{ form2.mlreg_lasso.id_for_label }}">
+                                    <label class="form-check-label"
+                                           for="{{ form2.mlreg_lasso.id_for_label }}">
                                         Lasso Regression (lasso)
                                     </label>
                                 </div>
@@ -218,7 +235,8 @@
                                            type="checkbox"
                                            role="switch"
                                            id="{{ form2.mlreg_ridge.id_for_label }}">
-                                    <label class="form-check-label" for="{{ form2.mlreg_ridge.id_for_label }}">
+                                    <label class="form-check-label"
+                                           for="{{ form2.mlreg_ridge.id_for_label }}">
                                         Ridge Regression (ridge)
                                     </label>
                                 </div>
@@ -230,7 +248,8 @@
                                            type="checkbox"
                                            role="switch"
                                            id="{{ form2.mlreg_en.id_for_label }}">
-                                    <label class="form-check-label" for="{{ form2.mlreg_en.id_for_label }}">
+                                    <label class="form-check-label"
+                                           for="{{ form2.mlreg_en.id_for_label }}">
                                         Elastic Net (en)
                                     </label>
                                 </div>
@@ -242,7 +261,8 @@
                                            type="checkbox"
                                            role="switch"
                                            id="{{ form2.mlreg_lar.id_for_label }}">
-                                    <label class="form-check-label" for="{{ form2.mlreg_lar.id_for_label }}">
+                                    <label class="form-check-label"
+                                           for="{{ form2.mlreg_lar.id_for_label }}">
                                         Least Angle Regression (lar)
                                     </label>
                                 </div>
@@ -254,7 +274,8 @@
                                            type="checkbox"
                                            role="switch"
                                            id="{{ form2.mlreg_llar.id_for_label }}">
-                                    <label class="form-check-label" for="{{ form2.mlreg_llar.id_for_label }}">
+                                    <label class="form-check-label"
+                                           for="{{ form2.mlreg_llar.id_for_label }}">
                                         Lasso Least Angle Regression (llar)
                                     </label>
                                 </div>
@@ -266,7 +287,8 @@
                                            type="checkbox"
                                            role="switch"
                                            id="{{ form2.mlreg_omp.id_for_label }}">
-                                    <label class="form-check-label" for="{{ form2.mlreg_omp.id_for_label }}">
+                                    <label class="form-check-label"
+                                           for="{{ form2.mlreg_omp.id_for_label }}">
                                         Orthogonal Matching Pursuit (omp)
                                     </label>
                                 </div>
@@ -278,7 +300,8 @@
                                            type="checkbox"
                                            role="switch"
                                            id="{{ form2.mlreg_br.id_for_label }}">
-                                    <label class="form-check-label" for="{{ form2.mlreg_br.id_for_label }}">
+                                    <label class="form-check-label"
+                                           for="{{ form2.mlreg_br.id_for_label }}">
                                         Bayesian Ridge (br)
                                     </label>
                                 </div>
@@ -290,7 +313,8 @@
                                            type="checkbox"
                                            role="switch"
                                            id="{{ form2.mlreg_ard.id_for_label }}">
-                                    <label class="form-check-label" for="{{ form2.mlreg_ard.id_for_label }}">
+                                    <label class="form-check-label"
+                                           for="{{ form2.mlreg_ard.id_for_label }}">
                                         Automatic Relevance Determination (ard)
                                     </label>
                                 </div>
@@ -302,7 +326,8 @@
                                            type="checkbox"
                                            role="switch"
                                            id="{{ form2.mlreg_par.id_for_label }}">
-                                    <label class="form-check-label" for="{{ form2.mlreg_par.id_for_label }}">
+                                    <label class="form-check-label"
+                                           for="{{ form2.mlreg_par.id_for_label }}">
                                         Passive Aggressive Regressor (par)
                                     </label>
                                 </div>
@@ -314,7 +339,8 @@
                                            type="checkbox"
                                            role="switch"
                                            id="{{ form2.mlreg_ransac.id_for_label }}">
-                                    <label class="form-check-label" for="{{ form2.mlreg_ransac.id_for_label }}">
+                                    <label class="form-check-label"
+                                           for="{{ form2.mlreg_ransac.id_for_label }}">
                                         Random Sample Consensus (ransac)
                                     </label>
                                 </div>
@@ -326,7 +352,8 @@
                                            type="checkbox"
                                            role="switch"
                                            id="{{ form2.mlreg_tr.id_for_label }}">
-                                    <label class="form-check-label" for="{{ form2.mlreg_tr.id_for_label }}">
+                                    <label class="form-check-label"
+                                           for="{{ form2.mlreg_tr.id_for_label }}">
                                         TheilSen Regressor (tr)
                                     </label>
                                 </div>
@@ -338,7 +365,8 @@
                                            type="checkbox"
                                            role="switch"
                                            id="{{ form2.mlreg_huber.id_for_label }}">
-                                    <label class="form-check-label" for="{{ form2.mlreg_huber.id_for_label }}">
+                                    <label class="form-check-label"
+                                           for="{{ form2.mlreg_huber.id_for_label }}">
                                         Huber Regressor (huber)
                                     </label>
                                 </div>
@@ -350,7 +378,8 @@
                                            type="checkbox"
                                            role="switch"
                                            id="{{ form2.mlreg_kr.id_for_label }}">
-                                    <label class="form-check-label" for="{{ form2.mlreg_kr.id_for_label }}">
+                                    <label class="form-check-label"
+                                           for="{{ form2.mlreg_kr.id_for_label }}">
                                         Kernel Ridge (kr)
                                     </label>
                                 </div>
@@ -362,7 +391,8 @@
                                            type="checkbox"
                                            role="switch"
                                            id="{{ form2.mlreg_svm.id_for_label }}">
-                                    <label class="form-check-label" for="{{ form2.mlreg_svm.id_for_label }}">
+                                    <label class="form-check-label"
+                                           for="{{ form2.mlreg_svm.id_for_label }}">
                                         Support Vector Regression (svm)
                                     </label>
                                 </div>
@@ -374,7 +404,8 @@
                                            type="checkbox"
                                            role="switch"
                                            id="{{ form2.mlreg_knn.id_for_label }}">
-                                    <label class="form-check-label" for="{{ form2.mlreg_knn.id_for_label }}">
+                                    <label class="form-check-label"
+                                           for="{{ form2.mlreg_knn.id_for_label }}">
                                         K Neighbors Regressor (knn)
                                     </label>
                                 </div>
@@ -386,7 +417,8 @@
                                            type="checkbox"
                                            role="switch"
                                            id="{{ form2.mlreg_dt.id_for_label }}">
-                                    <label class="form-check-label" for="{{ form2.mlreg_dt.id_for_label }}">
+                                    <label class="form-check-label"
+                                           for="{{ form2.mlreg_dt.id_for_label }}">
                                         Decision Tree Regressor (dt)
                                     </label>
                                 </div>
@@ -398,7 +430,8 @@
                                            type="checkbox"
                                            role="switch"
                                            id="{{ form2.mlreg_rf.id_for_label }}">
-                                    <label class="form-check-label" for="{{ form2.mlreg_rf.id_for_label }}">
+                                    <label class="form-check-label"
+                                           for="{{ form2.mlreg_rf.id_for_label }}">
                                         Random Forest Regressor (rf)
                                     </label>
                                 </div>
@@ -410,7 +443,8 @@
                                            type="checkbox"
                                            role="switch"
                                            id="{{ form2.mlreg_et.id_for_label }}">
-                                    <label class="form-check-label" for="{{ form2.mlreg_et.id_for_label }}">
+                                    <label class="form-check-label"
+                                           for="{{ form2.mlreg_et.id_for_label }}">
                                         Extra Trees Regressor (et)
                                     </label>
                                 </div>
@@ -422,7 +456,8 @@
                                            type="checkbox"
                                            role="switch"
                                            id="{{ form2.mlreg_ada.id_for_label }}">
-                                    <label class="form-check-label" for="{{ form2.mlreg_ada.id_for_label }}">
+                                    <label class="form-check-label"
+                                           for="{{ form2.mlreg_ada.id_for_label }}">
                                         AdaBoost Regressor (ada)
                                     </label>
                                 </div>
@@ -434,7 +469,8 @@
                                            type="checkbox"
                                            role="switch"
                                            id="{{ form2.mlreg_gbr.id_for_label }}">
-                                    <label class="form-check-label" for="{{ form2.mlreg_gbr.id_for_label }}">
+                                    <label class="form-check-label"
+                                           for="{{ form2.mlreg_gbr.id_for_label }}">
                                         Gradient Boosting Regressor (gbr)
                                     </label>
                                 </div>
@@ -446,7 +482,8 @@
                                            type="checkbox"
                                            role="switch"
                                            id="{{ form2.mlreg_mlp.id_for_label }}">
-                                    <label class="form-check-label" for="{{ form2.mlreg_mlp.id_for_label }}">
+                                    <label class="form-check-label"
+                                           for="{{ form2.mlreg_mlp.id_for_label }}">
                                         MLP Regressor (mlp)
                                     </label>
                                 </div>
@@ -458,7 +495,8 @@
                                            type="checkbox"
                                            role="switch"
                                            id="{{ form2.mlreg_xgboost.id_for_label }}">
-                                    <label class="form-check-label" for="{{ form2.mlreg_xgboost.id_for_label }}">
+                                    <label class="form-check-label"
+                                           for="{{ form2.mlreg_xgboost.id_for_label }}">
                                         Extreme Gradient Boosting (xgboost)
                                     </label>
                                 </div>
@@ -470,7 +508,8 @@
                                            type="checkbox"
                                            role="switch"
                                            id="{{ form2.mlreg_lightgbm.id_for_label }}">
-                                    <label class="form-check-label" for="{{ form2.mlreg_lightgbm.id_for_label }}">
+                                    <label class="form-check-label"
+                                           for="{{ form2.mlreg_lightgbm.id_for_label }}">
                                         Light Gradient Boosting Machine (lightgbm)
                                     </label>
                                 </div>
@@ -496,7 +535,7 @@
                                            role="switch"
                                            id="{{ form2.mlreg_dummy.id_for_label }}">
                                     <label class="form-check-label"
-                                        for="{{ form2.mlreg_dummy.id_for_label }}">
+                                           for="{{ form2.mlreg_dummy.id_for_label }}">
                                         Dummy Regressor (dummy)
                                     </label>
                                 </div>
@@ -509,7 +548,7 @@
                                            role="switch"
                                            id="{{ form2.mlreg_bagging.id_for_label }}">
                                     <label class="form-check-label"
-                                        for="{{ form2.mlreg_bagging.id_for_label }}">
+                                           for="{{ form2.mlreg_bagging.id_for_label }}">
                                         Bagging Regressor (bagging)
                                     </label>
                                 </div>
