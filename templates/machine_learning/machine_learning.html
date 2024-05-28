@@ -106,10 +106,7 @@
                                            type="checkbox"
                                            role="switch"
                                            id="{{ form5.mlad_svm.id_for_label }}">
-                                    <label class="form-check-label"
-                                           for="{{ form5.mlad_svm.id_for_label }}">
-                                        One-class SVM detector (svm)
-                                    </label>
+                                    <label class="form-check-label" for="{{ form5.mlad_svm.id_for_label }}">One-class SVM detector (svm)</label>
                                 </div>
                             </div>
                             <div class="col-md-4 col-sm-6">
@@ -154,7 +151,8 @@
                             </div>
                             <div class="d-grid gap-2 d-md-flex justify-content-md-end col-md-12">
                                 <button type="button" class="btn btn-success mb-3" onclick="adSelectModel();">Select All</button>
-                                <button type="button" class="btn btn-danger mb-3"
+                                <button type="button"
+                                        class="btn btn-danger mb-3"
                                         onclick="adUnselectModel();">Unselect All</button>
                             </div>
                         </form>
@@ -441,8 +439,7 @@
                                            type="checkbox"
                                            role="switch"
                                            id="{{ form2.mlreg_dummy.id_for_label }}">
-                                    <label class="form-check-label" for="{{ form2.mlreg_dummy.id_for_label }}">Dummy Regressor (dummy)
-                                    </label>
+                                    <label class="form-check-label" for="{{ form2.mlreg_dummy.id_for_label }}">Dummy Regressor (dummy)</label>
                                 </div>
                             </div>
                             <div class="col-md-4 col-sm-6">
@@ -472,7 +469,8 @@
                                 <div class="form-check form-switch">
                                     <input class="form-check-input"
                                            name="{{ form2.mlreg_voting.html_name }}"
-                                           type="checkbox" role="switch"
+                                           type="checkbox"
+                                           role="switch"
                                            id="{{ form2.mlreg_voting.id_for_label }}">
                                     <label class="form-check-label" for="{{ form2.mlreg_voting.id_for_label }}">Voting Regressor (voting)</label>
                                 </div>
@@ -498,7 +496,9 @@
                             aria-expanded="false"
                             aria-controls="flush-collapseThree">Classification</button>
                 </h2>
-                <div id="MLAssistant-collapseThree" class="accordion-collapse collapse" data-bs-parent="#MLAssistant">
+                <div id="MLAssistant-collapseThree"
+                     class="accordion-collapse collapse"
+                     data-bs-parent="#MLAssistant">
                     <div class="accordion-body">
                         <form class="row g-3" action="/ml_mlcla_processing/" method="post">
                             {% csrf_token %}
@@ -509,10 +509,7 @@
                                            type="checkbox"
                                            role="switch"
                                            id="{{ form1.mlcla_lr.id_for_label }}">
-                                    <label class="form-check-label"
-                                           for="{{ form1.mlcla_lr.id_for_label }}">
-                                        Logistic Regression (lr)
-                                    </label>
+                                    <label class="form-check-label" for="{{ form1.mlcla_lr.id_for_label }}">Logistic Regression (lr)</label>
                                 </div>
                             </div>
                             <div class="col-md-4 col-sm-6">
@@ -522,10 +519,7 @@
                                            type="checkbox"
                                            role="switch"
                                            id="{{ form1.mlcla_knn.id_for_label }}">
-                                    <label class="form-check-label"
-                                           for="{{ form1.mlcla_knn.id_for_label }}">
-                                        K Neightbors Classifier (knn)
-                                    </label>
+                                    <label class="form-check-label" for="{{ form1.mlcla_knn.id_for_label }}">K Neightbors Classifier (knn)</label>
                                 </div>
                             </div>
                             <div class="col-md-4 col-sm-6">
@@ -535,10 +529,7 @@
                                            type="checkbox"
                                            role="switch"
                                            id="{{ form1.mlcla_nb.id_for_label }}">
-                                    <label class="form-check-label"
-                                           for="{{ form1.mlcla_nb.id_for_label }}">
-                                        Gaussian Naive Bayes (nb)
-                                    </label>
+                                    <label class="form-check-label" for="{{ form1.mlcla_nb.id_for_label }}">Gaussian Naive Bayes (nb)</label>
                                 </div>
                             </div>
                             <div class="col-md-4 col-sm-6">
@@ -548,10 +539,7 @@
                                            type="checkbox"
                                            role="switch"
                                            id="{{ form1.mlcla_dt.id_for_label }}">
-                                    <label class="form-check-label"
-                                           for="{{ form1.mlcla_dt.id_for_label }}">
-                                        Decision Tree Classifier (dt)
-                                    </label>
+                                    <label class="form-check-label" for="{{ form1.mlcla_dt.id_for_label }}">Decision Tree Classifier (dt)</label>
                                 </div>
                             </div>
                             <div class="col-md-4 col-sm-6">
@@ -561,10 +549,7 @@
                                            type="checkbox"
                                            role="switch"
                                            id="{{ form1.mlcla_svm.id_for_label }}">
-                                    <label class="form-check-label"
-                                           for="{{ form1.mlcla_svm.id_for_label }}">
-                                        SVM - Linear Kernel (svm)
-                                    </label>
+                                    <label class="form-check-label" for="{{ form1.mlcla_svm.id_for_label }}">SVM - Linear Kernel (svm)</label>
                                 </div>
                             </div>
                             <div class="col-md-4 col-sm-6">
@@ -574,10 +559,7 @@
                                            type="checkbox"
                                            role="switch"
                                            id="{{ form1.mlcla_rbfsvm.id_for_label }}">
-                                    <label class="form-check-label"
-                                           for="{{ form1.mlcla_rbfsvm.id_for_label }}">
-                                        SVM - Radial Kernel (rbfsvm)
-                                    </label>
+                                    <label class="form-check-label" for="{{ form1.mlcla_rbfsvm.id_for_label }}">SVM - Radial Kernel (rbfsvm)</label>
                                 </div>
                             </div>
                             <div class="col-md-4 col-sm-6">
@@ -585,11 +567,9 @@
                                     <input class="form-check-input"
                                            name="{{ form1.mlcla_gpc.html_name }}"
                                            type="checkbox"
-                                           role="switch" id="{{ form1.mlcla_gpc.id_for_label }}">
-                                    <label class="form-check-label"
-                                           for="{{ form1.mlcla_gpc.id_for_label }}">
-                                        Gaussian Process Classifier (gpc)
-                                    </label>
+                                           role="switch"
+                                           id="{{ form1.mlcla_gpc.id_for_label }}">
+                                    <label class="form-check-label" for="{{ form1.mlcla_gpc.id_for_label }}">Gaussian Process Classifier (gpc)</label>
                                 </div>
                             </div>
                             <div class="col-md-4 col-sm-6">
@@ -599,10 +579,7 @@
                                            type="checkbox"
                                            role="switch"
                                            id="{{ form1.mlcla_mlp.id_for_label }}">
-                                    <label class="form-check-label"
-                                           for="{{ form1.mlcla_mlp.id_for_label }}">
-                                        MLP Classifier (mlp)
-                                    </label>
+                                    <label class="form-check-label" for="{{ form1.mlcla_mlp.id_for_label }}">MLP Classifier (mlp)</label>
                                 </div>
                             </div>
                             <div class="col-md-4 col-sm-6">
@@ -612,10 +589,7 @@
                                            type="checkbox"
                                            role="switch"
                                            id="{{ form1.mlcla_ridge.id_for_label }}">
-                                    <label class="form-check-label"
-                                           for="{{ form1.mlcla_ridge.id_for_label }}">
-                                        Ridge Classifier (ridge)
-                                    </label>
+                                    <label class="form-check-label" for="{{ form1.mlcla_ridge.id_for_label }}">Ridge Classifier (ridge)</label>
                                 </div>
                             </div>
                             <div class="col-md-4 col-sm-6">
@@ -625,10 +599,7 @@
                                            type="checkbox"
                                            role="switch"
                                            id="{{ form1.mlcla_rf.id_for_label }}">
-                                    <label class="form-check-label"
-                                           for="{{ form1.mlcla_rf.id_for_label }}">
-                                        Random Forest Classifier (rf)
-                                    </label>
+                                    <label class="form-check-label" for="{{ form1.mlcla_rf.id_for_label }}">Random Forest Classifier (rf)</label>
                                 </div>
                             </div>
                             <div class="col-md-4 col-sm-6">
@@ -638,10 +609,7 @@
                                            type="checkbox"
                                            role="switch"
                                            id="{{ form1.mlcla_qda.id_for_label }}">
-                                    <label class="form-check-label"
-                                           for="{{ form1.mlcla_qda.id_for_label }}">
-                                        Quadratic Discriminant Analysis (qda)
-                                    </label>
+                                    <label class="form-check-label" for="{{ form1.mlcla_qda.id_for_label }}">Quadratic Discriminant Analysis (qda)</label>
                                 </div>
                             </div>
                             <div class="col-md-4 col-sm-6">
@@ -651,10 +619,7 @@
                                            type="checkbox"
                                            role="switch"
                                            id="{{ form1.mlcla_ada.id_for_label }}">
-                                    <label class="form-check-label"
-                                           for="{{ form1.mlcla_ada.id_for_label }}">
-                                        Ada Boost Classifier (ada)
-                                    </label>
+                                    <label class="form-check-label" for="{{ form1.mlcla_ada.id_for_label }}">Ada Boost Classifier (ada)</label>
                                 </div>
                             </div>
                             <div class="col-md-4 col-sm-6">
@@ -664,10 +629,7 @@
                                            type="checkbox"
                                            role="switch"
                                            id="{{ form1.mlcla_gbc.id_for_label }}">
-                                    <label class="form-check-label"
-                                           for="{{ form1.mlcla_gbc.id_for_label }}">
-                                        Gradient Boost Classifier (gbc)
-                                    </label>
+                                    <label class="form-check-label" for="{{ form1.mlcla_gbc.id_for_label }}">Gradient Boost Classifier (gbc)</label>
                                 </div>
                             </div>
                             <div class="col-md-4 col-sm-6">
@@ -677,10 +639,7 @@
                                            type="checkbox"
                                            role="switch"
                                            id="{{ form1.mlcla_lda.id_for_label }}">
-                                    <label class="form-check-label"
-                                           for="{{ form1.mlcla_lda.id_for_label }}">
-                                        Linear Discriminant Analysis (lda)
-                                    </label>
+                                    <label class="form-check-label" for="{{ form1.mlcla_lda.id_for_label }}">Linear Discriminant Analysis (lda)</label>
                                 </div>
                             </div>
                             <div class="col-md-4 col-sm-6">
@@ -690,10 +649,7 @@
                                            type="checkbox"
                                            role="switch"
                                            id="{{ form1.mlcla_et.id_for_label }}">
-                                    <label class="form-check-label"
-                                           for="{{ form1.mlcla_et.id_for_label }}">
-                                        Extra Trees Classifier (et)
-                                    </label>
+                                    <label class="form-check-label" for="{{ form1.mlcla_et.id_for_label }}">Extra Trees Classifier (et)</label>
                                 </div>
                             </div>
                             <div class="col-md-4 col-sm-6">
@@ -703,8 +659,7 @@
                                            type="checkbox"
                                            role="switch"
                                            id="{{ form1.mlcla_xgboost.id_for_label }}">
-                                    <label class="form-check-label"
-                                           for="{{ form1.mlcla_xgboost.id_for_label }}">
+                                    <label class="form-check-label" for="{{ form1.mlcla_xgboost.id_for_label }}">
                                         Extreme Gradient Boosting (xgboost)
                                     </label>
                                 </div>
@@ -725,12 +680,12 @@
                             <div class="col-md-4 col-sm-6">
                                 <div class="form-check form-switch">
                                     <input class="form-check-input"
-                                        name="{{ form1.mlcla_catboost.html_name }}"
-                                        type="checkbox"
-                                        role="switch"
-                                        id="{{ form1.mlcla_catboost.id_for_label }}">
+                                           name="{{ form1.mlcla_catboost.html_name }}"
+                                           type="checkbox"
+                                           role="switch"
+                                           id="{{ form1.mlcla_catboost.id_for_label }}">
                                     <label class="form-check-label"
-                                        for="{{ form1.mlcla_catboost.id_for_label }}">
+                                           for="{{ form1.mlcla_catboost.id_for_label }}">
                                         CatBoost Classifier (catboost)
                                     </label>
                                 </div>
@@ -739,18 +694,19 @@
                                 <div class="form-check form-switch">
                                     <input class="form-check-input"
                                            name="{{ form1.mlcla_dummy.html_name }}"
-                                           type="checkbox" 
-                                           role="switch" 
+                                           type="checkbox"
+                                           role="switch"
                                            id="{{ form1.mlcla_dummy.id_for_label }}">
-                                    <label class="form-check-label" 
-                                           for="{{ form1.mlcla_dummy.id_for_label }}">
-                                        Dummy Classifier (dummy)
-                                    </label>
+                                    <label class="form-check-label" for="{{ form1.mlcla_dummy.id_for_label }}">Dummy Classifier (dummy)</label>
                                 </div>
                             </div>
                             <div class="d-grid gap-2 d-md-flex justify-content-md-end col-md-12">
-                                <button type="button" class="btn btn-success mb-3" onclick="claSelectModel();">Select All</button>
-                                <button type="button" class="btn btn-danger mb-3" onclick="claUnselectModel();">Unselect All</button>
+                                <button type="button"
+                                        class="btn btn-success mb-3"
+                                        onclick="claSelectModel();">Select All</button>
+                                <button type="button"
+                                        class="btn btn-danger mb-3"
+                                        onclick="claUnselectModel();">Unselect All</button>
                             </div>
                         </form>
                     </div>
@@ -763,11 +719,9 @@
                             data-bs-toggle="collapse"
                             data-bs-target="#MLAssistant-collapseFour"
                             aria-expanded="false"
-                            aria-controls="flush-collapseFour">
-                        Time Series
-                    </button>
+                            aria-controls="flush-collapseFour">Time Series</button>
                 </h2>
-                <div id="MLAssistant-collapseFour" 
+                <div id="MLAssistant-collapseFour"
                      class="accordion-collapse collapse"
                      data-bs-parent="#MLAssistant">
                     <div class="accordion-body">
@@ -780,10 +734,7 @@
                                            type="checkbox"
                                            role="switch"
                                            id="{{ form3.mlts_naive.id_for_label }}">
-                                    <label class="form-check-label"
-                                           for="{{ form3.mlts_naive.id_for_label }}">
-                                        Naive Forecaster (naive)
-                                    </label>
+                                    <label class="form-check-label" for="{{ form3.mlts_naive.id_for_label }}">Naive Forecaster (naive)</label>
                                 </div>
                             </div>
                             <div class="col-md-4 col-sm-6">
@@ -793,8 +744,7 @@
                                            type="checkbox"
                                            role="switch"
                                            id="{{ form3.mlts_grand_means.id_for_label }}">
-                                    <label class="form-check-label"
-                                           for="{{ form3.mlts_grand_means.id_for_label }}">
+                                    <label class="form-check-label" for="{{ form3.mlts_grand_means.id_for_label }}">
                                         Grand Means Forecaster (grand_means)
                                     </label>
                                 </div>
@@ -806,10 +756,7 @@
                                            type="checkbox"
                                            role="switch"
                                            id="{{ form3.mlts_snaive.id_for_label }}">
-                                    <label class="form-check-label"
-                                           for="{{ form3.mlts_snaive.id_for_label }}">
-                                        Seasonal Naive Forecaster (snaive)
-                                    </label>
+                                    <label class="form-check-label" for="{{ form3.mlts_snaive.id_for_label }}">Seasonal Naive Forecaster (snaive)</label>
                                 </div>
                             </div>
                             <div class="col-md-4 col-sm-6">
@@ -1117,7 +1064,10 @@
                                          type="checkbox"
                                          role="switch"
                                          id="{{ form3.mlts_rf_cds_dt.id_for_label }}">
-                                  <label class="form-check-label" for="{{ form3.mlts_rf_cds_dt.id_for_label }}">Random Forest w/ Cond. Deseasonalize & Detrending (rf_cds_dt)</label>
+                                  <label class="form-check-label" 
+                                         for="{{ form3.mlts_rf_cds_dt.id_for_label }}">
+                                      Random Forest w/ Cond. Deseasonalize & Detrending (rf_cds_dt)
+                                  </label>
                               </div>
                           </div>
                           <div class="col-md-4 col-sm-6">
@@ -1127,122 +1077,200 @@
                                          type="checkbox"
                                          role="switch"
                                          id="{{ form3.mlts_et_cds_dt.id_for_label }}">
-                                  <label class="form-check-label" for="{{ form3.mlts_et_cds_dt.id_for_label }}">Extra Trees w/ Cond. Deseasonalize & Detrending (et_cds_dt)</label>
+                                  <label class="form-check-label"
+                                         for="{{ form3.mlts_et_cds_dt.id_for_label }}">
+                                      Extra Trees w/ Cond. Deseasonalize & Detrending (et_cds_dt)
+                                  </label>
                               </div>
                           </div>
                           <div class="col-md-4 col-sm-6">
-                            <div class="form-check form-switch">
-                              <input class="form-check-input" name="{{ form3.mlts_gbr_cds_dt.html_name }}" type="checkbox" role="switch" id="{{ form3.mlts_gbr_cds_dt.id_for_label }}">
-                              <label class="form-check-label" for="{{ form3.mlts_gbr_cds_dt.id_for_label }}">Gradient Boosting w/ Cond. Deseasonalize & Detrending (gbr_cds_dt)</label>
-                            </div>
+                              <div class="form-check form-switch">
+                                  <input class="form-check-input"
+                                         name="{{ form3.mlts_gbr_cds_dt.html_name }}"
+                                         type="checkbox"
+                                         role="switch"
+                                         id="{{ form3.mlts_gbr_cds_dt.id_for_label }}">
+                                  <label class="form-check-label"
+                                         for="{{ form3.mlts_gbr_cds_dt.id_for_label }}">
+                                      Gradient Boosting w/ Cond. Deseasonalize & Detrending (gbr_cds_dt)
+                                  </label>
+                              </div>
                           </div>
                           <div class="col-md-4 col-sm-6">
-                            <div class="form-check form-switch">
-                              <input class="form-check-input" name="{{ form3.mlts_ada_cds_dt.html_name }}" type="checkbox" role="switch" id="{{ form3.mlts_ada_cds_dt.id_for_label }}">
-                              <label class="form-check-label" for="{{ form3.mlts_ada_cds_dt.id_for_label }}">AdaBoost w/ Cond. Deseasonalize & Detrending (ada_cds_dt)</label>
-                            </div>
+                              <div class="form-check form-switch">
+                                  <input class="form-check-input"
+                                         name="{{ form3.mlts_ada_cds_dt.html_name }}"
+                                         type="checkbox"
+                                         role="switch"
+                                         id="{{ form3.mlts_ada_cds_dt.id_for_label }}">
+                                  <label class="form-check-label"
+                                         for="{{ form3.mlts_ada_cds_dt.id_for_label }}">
+                                      AdaBoost w/ Cond. Deseasonalize & Detrending (ada_cds_dt)
+                                  </label>
+                              </div>
                           </div>
                           <div class="col-md-4 col-sm-6">
-                            <div class="form-check form-switch">
-                              <input class="form-check-input" name="{{ form3.mlts_xgboost_cds_dt.html_name }}" type="checkbox" role="switch" id="{{ form3.mlts_xgboost_cds_dt.id_for_label }}">
-                              <label class="form-check-label" for="{{ form3.mlts_xgboost_cds_dt.id_for_label }}">Extreme Gradient Boosting w/ Cond. Deseasonalize & Detrending (xgboost_cds_dt)</label>
-                            </div>
+                              <div class="form-check form-switch">
+                                  <input class="form-check-input"
+                                         name="{{ form3.mlts_xgboost_cds_dt.html_name }}"
+                                         type="checkbox"
+                                         role="switch"
+                                         id="{{ form3.mlts_xgboost_cds_dt.id_for_label }}">
+                                  <label class="form-check-label"
+                                         for="{{ form3.mlts_xgboost_cds_dt.id_for_label }}">
+                                      Extreme Gradient Boosting w/ Cond. Deseasonalize & Detrending (xgboost_cds_dt)
+                                  </label>
+                              </div>
                           </div>
                           <div class="col-md-4 col-sm-6">
-                            <div class="form-check form-switch">
-                              <input class="form-check-input" name="{{ form3.mlts_lightgbm_cds_dt.html_name }}" type="checkbox" role="switch" id="{{ form3.mlts_lightgbm_cds_dt.id_for_label }}">
-                              <label class="form-check-label" for="{{ form3.mlts_lightgbm_cds_dt.id_for_label }}">Light Gradient Boosting w/ Cond. Deseasonalize & Detrending (lightgbm_cds_dt)</label>
-                            </div>
+                              <div class="form-check form-switch">
+                                  <input class="form-check-input"
+                                         name="{{ form3.mlts_lightgbm_cds_dt.html_name }}"
+                                         type="checkbox"
+                                         role="switch"
+                                         id="{{ form3.mlts_lightgbm_cds_dt.id_for_label }}">
+                                  <label class="form-check-label"
+                                         for="{{ form3.mlts_lightgbm_cds_dt.id_for_label }}">
+                                      Light Gradient Boosting w/ Cond. Deseasonalize & Detrending (lightgbm_cds_dt)
+                                  </label>
+                              </div>
                           </div>
                           <div class="col-md-4 col-sm-6">
-                            <div class="form-check form-switch">
-                              <input class="form-check-input" name="{{ form3.mlts_catboost_cds_dt.html_name }}" type="checkbox" role="switch" id="{{ form3.mlts_catboost_cds_dt.id_for_label }}">
-                              <label class="form-check-label" for="{{ form3.mlts_catboost_cds_dt.id_for_label }}">CatBoost Regressor w/ Cond. Deseasonalize & Detrending (catboost_cds_dt)</label>
-                            </div>
+                              <div class="form-check form-switch">
+                                  <input class="form-check-input"
+                                         name="{{ form3.mlts_catboost_cds_dt.html_name }}" 
+                                         type="checkbox" 
+                                         role="switch" 
+                                         id="{{ form3.mlts_catboost_cds_dt.id_for_label }}">
+                                  <label class="form-check-label" 
+                                         for="{{ form3.mlts_catboost_cds_dt.id_for_label }}">
+                                      CatBoost Regressor w/ Cond. Deseasonalize & Detrending (catboost_cds_dt)
+                                  </label>
+                              </div>
                           </div>
                           <div class="d-grid gap-2 d-md-flex justify-content-md-end col-md-12">
-                            <button type="button" class="btn btn-success mb-3" onclick="tsSelectModel();">Select All</button>
-                            <button type="button" class="btn btn-danger mb-3" onclick="tsUnselectModel();">Unselect All</button>
+                              <button type="button" class="btn btn-success mb-3" onclick="tsSelectModel();">Select All</button>
+                              <button type="button" class="btn btn-danger mb-3" onclick="tsUnselectModel();">Unselect All</button>
                           </div>
-            </form>
+                      </form>
+                  </div>
+              </div>
           </div>
-        </div>
-      </div>
-      <div class="accordion-item">
-        <h2 class="accordion-header">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#MLAssistant-collapseFive" aria-expanded="false" aria-controls="MLAssistant-collapseFive">
-            Clustering
-          </button>
-        </h2>
-        <div id="MLAssistant-collapseFive" class="accordion-collapse collapse" data-bs-parent="#MLAssistant">
-          <div class="accordion-body">
-    
-            <form class="row g-3" action="/ml_mlclu_processing/" method="post">
-              {% csrf_token %}
-              <div class="col-md-4 col-sm-6">
-                <div class="form-check form-switch">
-                  <input class="form-check-input" name="{{ form4.mlclu_kmeans.html_name }}" type="checkbox" role="switch" id="{{ form4.mlclu_kmeans.id_for_label }}">
-                  <label class="form-check-label" for="{{ form4.mlclu_kmeans.id_for_label }}">K-Means Clustering (kmeans)</label>
-                </div>
+          <div class="accordion-item">
+              <h2 class="accordion-header">
+                  <button class="accordion-button collapsed"
+                          type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#MLAssistant-collapseFive"
+                          aria-expanded="false"
+                          aria-controls="MLAssistant-collapseFive">Clustering</button>
+              </h2>
+              <div id="MLAssistant-collapseFive" class="accordion-collapse collapse" data-bs-parent="#MLAssistant">
+                  <div class="accordion-body">
+                      <form class="row g-3" action="/ml_mlclu_processing/" method="post">
+                          {% csrf_token %}
+                          <div class="col-md-4 col-sm-6">
+                              <div class="form-check form-switch">
+                                  <input class="form-check-input" 
+                                         name="{{ form4.mlclu_kmeans.html_name }}" 
+                                         type="checkbox" 
+                                         role="switch" 
+                                         id="{{ form4.mlclu_kmeans.id_for_label }}">
+                                  <label class="form-check-label" 
+                                         for="{{ form4.mlclu_kmeans.id_for_label }}">K-Means Clustering (kmeans)</label>
+                              </div>
+                          </div>
+                          <div class="col-md-4 col-sm-6">
+                              <div class="form-check form-switch">
+                                  <input class="form-check-input" 
+                                         name="{{ form4.mlclu_ap.html_name }}" 
+                                         type="checkbox" 
+                                         role="switch" 
+                                         id="{{ form4.mlclu_ap.id_for_label }}">
+                                  <label class="form-check-label" 
+                                         for="{{ form4.mlclu_ap.id_for_label }}">Affinity Propagation (ap)</label>
+                              </div>
+                          </div>
+                          <div class="col-md-4 col-sm-6">
+                              <div class="form-check form-switch">
+                                  <input class="form-check-input"
+                                         name="{{ form4.mlclu_meanshift.html_name }}"
+                                         type="checkbox"
+                                         role="switch"
+                                         id="{{ form4.mlclu_meanshift.id_for_label }}">
+                                  <label class="form-check-label" for="{{ form4.mlclu_meanshift.id_for_label }}">
+                                      Mean Shift Clustering (meanshift)
+                                  </label>
+                              </div>
+                          </div>
+                          <div class="col-md-4 col-sm-6">
+                              <div class="form-check form-switch">
+                                  <input class="form-check-input"
+                                         name="{{ form4.mlclu_sc.html_name }}"
+                                         type="checkbox"
+                                         role="switch"
+                                         id="{{ form4.mlclu_sc.id_for_label }}">
+                                  <label class="form-check-label" for="{{ form4.mlclu_sc.id_for_label }}">Spectral Clustering (sc)</label>
+                              </div>
+                          </div>
+                          <div class="col-md-4 col-sm-6">
+                              <div class="form-check form-switch">
+                                  <input class="form-check-input"
+                                         name="{{ form4.mlclu_hclust.html_name }}"
+                                         type="checkbox"
+                                         role="switch"
+                                         id="{{ form4.mlclu_hclust.id_for_label }}">
+                                  <label class="form-check-label" for="{{ form4.mlclu_hclust.id_for_label }}">Agglomerative Clustering (hclust)</label>
+                              </div>
+                          </div>
+                          <div class="col-md-4 col-sm-6">
+                              <div class="form-check form-switch">
+                                  <input class="form-check-input"
+                                         name="{{ form4.mlclu_dbscan.html_name }}"
+                                         type="checkbox" role="switch"
+                                         id="{{ form4.mlclu_dbscan.id_for_label }}">
+                                  <label class="form-check-label" for="{{ form4.mlclu_dbscan.id_for_label }}">Density-Based Spatial Clustering (dbscan)</label>
+                              </div>
+                          </div>
+                          <div class="col-md-4 col-sm-6">
+                              <div class="form-check form-switch">
+                                  <input class="form-check-input"
+                                         name="{{ form4.mlclu_optics.html_name }}"
+                                         type="checkbox"
+                                         role="switch"
+                                         id="{{ form4.mlclu_optics.id_for_label }}">
+                                  <label class="form-check-label" for="{{ form4.mlclu_optics.id_for_label }}">OPTICS Clustering (optics)</label>
+                              </div>
+                          </div>
+                          <div class="col-md-4 col-sm-6">
+                              <div class="form-check form-switch">
+                                  <input class="form-check-input"
+                                         name="{{ form4.mlclu_birch.html_name }}"
+                                         type="checkbox"
+                                         role="switch"
+                                         id="{{ form4.mlclu_birch.id_for_label }}">
+                                  <label class="form-check-label" for="{{ form4.mlclu_birch.id_for_label }}">Birch Clustering (birch)</label>
+                              </div>
+                          </div>
+                          <div class="col-md-4 col-sm-6">
+                              <div class="form-check form-switch">
+                                  <input class="form-check-input"
+                                         name="{{ form4.mlclu_kmodes.html_name }}"
+                                         type="checkbox"
+                                         role="switch"
+                                         id="{{ form4.mlclu_kmodes.id_for_label }}">
+                                  <label class="form-check-label" for="{{ form4.mlclu_kmodes.id_for_label }}">K-Modes Clustering (kmodes)</label>
+                              </div>
+                          </div>
+                          <div class="d-grid gap-2 d-md-flex justify-content-md-end col-md-12">
+                              <button type="button" class="btn btn-success mb-3" onclick="cluSelectModel();">Select All</button>
+                              <button type="button" class="btn btn-danger mb-3" onclick="cluUnselectModel();">Unselect All</button>
+                          </div>
+                      </form>
+                  </div>
               </div>
-              <div class="col-md-4 col-sm-6">
-                <div class="form-check form-switch">
-                  <input class="form-check-input" name="{{ form4.mlclu_ap.html_name }}" type="checkbox" role="switch" id="{{ form4.mlclu_ap.id_for_label }}">
-                  <label class="form-check-label" for="{{ form4.mlclu_ap.id_for_label }}">Affinity Propagation (ap)</label>
-                </div>
-              </div>
-              <div class="col-md-4 col-sm-6">
-                <div class="form-check form-switch">
-                  <input class="form-check-input" name="{{ form4.mlclu_meanshift.html_name }}" type="checkbox" role="switch" id="{{ form4.mlclu_meanshift.id_for_label }}">
-                  <label class="form-check-label" for="{{ form4.mlclu_meanshift.id_for_label }}">Mean Shift Clustering (meanshift)</label>
-                </div>
-              </div>
-              <div class="col-md-4 col-sm-6">
-                <div class="form-check form-switch">
-                  <input class="form-check-input" name="{{ form4.mlclu_sc.html_name }}" type="checkbox" role="switch" id="{{ form4.mlclu_sc.id_for_label }}">
-                  <label class="form-check-label" for="{{ form4.mlclu_sc.id_for_label }}">Spectral Clustering (sc)</label>
-                </div>
-              </div>
-              <div class="col-md-4 col-sm-6">
-                <div class="form-check form-switch">
-                  <input class="form-check-input" name="{{ form4.mlclu_hclust.html_name }}" type="checkbox" role="switch" id="{{ form4.mlclu_hclust.id_for_label }}">
-                  <label class="form-check-label" for="{{ form4.mlclu_hclust.id_for_label }}">Agglomerative Clustering (hclust)</label>
-                </div>
-              </div>
-              <div class="col-md-4 col-sm-6">
-                <div class="form-check form-switch">
-                  <input class="form-check-input" name="{{ form4.mlclu_dbscan.html_name }}" type="checkbox" role="switch" id="{{ form4.mlclu_dbscan.id_for_label }}">
-                  <label class="form-check-label" for="{{ form4.mlclu_dbscan.id_for_label }}">Density-Based Spatial Clustering (dbscan)</label>
-                </div>
-              </div>
-              <div class="col-md-4 col-sm-6">
-                <div class="form-check form-switch">
-                  <input class="form-check-input" name="{{ form4.mlclu_optics.html_name }}" type="checkbox" role="switch" id="{{ form4.mlclu_optics.id_for_label }}">
-                  <label class="form-check-label" for="{{ form4.mlclu_optics.id_for_label }}">OPTICS Clustering (optics)</label>
-                </div>
-              </div>
-              <div class="col-md-4 col-sm-6">
-                <div class="form-check form-switch">
-                  <input class="form-check-input" name="{{ form4.mlclu_birch.html_name }}" type="checkbox" role="switch" id="{{ form4.mlclu_birch.id_for_label }}">
-                  <label class="form-check-label" for="{{ form4.mlclu_birch.id_for_label }}">Birch Clustering (birch)</label>
-                </div>
-              </div>
-              <div class="col-md-4 col-sm-6">
-                <div class="form-check form-switch">
-                  <input class="form-check-input" name="{{ form4.mlclu_kmodes.html_name }}" type="checkbox" role="switch" id="{{ form4.mlclu_kmodes.id_for_label }}">
-                  <label class="form-check-label" for="{{ form4.mlclu_kmodes.id_for_label }}">K-Modes Clustering (kmodes)</label>
-                </div>
-              </div>
-              <div class="d-grid gap-2 d-md-flex justify-content-md-end col-md-12">
-                <button type="button" class="btn btn-success mb-3" onclick="cluSelectModel();">Select All</button>
-                <button type="button" class="btn btn-danger mb-3" onclick="cluUnselectModel();">Unselect All</button>
-              </div>
-            </form>
-    
           </div>
-        </div>
       </div>
-    </div>
 {%  else %}
   <h3><span class="text-danger-emphasis">12</span> Anomaly Detection Models</h3>
   <div class="row g-3">
