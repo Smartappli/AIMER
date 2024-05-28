@@ -1910,8 +1910,7 @@
                                            type="checkbox"
                                            role="switch"
                                            id="{{ form1.dpcla_gradcam.id_for_label }}">
-                                    <label class="form-check-label"
-                                           for="{{ form1.dpcla_gradcam.id_for_label }}">Grad CAM</label>
+                                    <label class="form-check-label" for="{{ form1.dpcla_gradcam.id_for_label }}">Grad CAM</label>
                                 </div>
                             </div>
                             <div class="col-md-3 col-sm-6">
@@ -1954,7 +1953,8 @@
                                            type="checkbox"
                                            role="switch"
                                            id="{{ form1.dpcla_layercam.id_for_label }}">
-                                    <label class="form-check-label" for="{{ form1.dpcla_layercam.id_for_label }}">Layer CAM</label>
+                                    <label class="form-check-label"
+                                           for="{{ form1.dpcla_layercam.id_for_label }}">Layer CAM</label>
                                 </div>
                             </div>
                             <div class="col-md-3 col-sm-6">
@@ -1964,7 +1964,10 @@
                                            type="checkbox"
                                            role="switch"
                                            id="{{ form1.dpcla_vanillasaliency.id_for_label }}">
-                                    <label class="form-check-label" for="{{ form1.dpcla_vanillasaliency.id_for_label }}">Vanilla Saliency</label>
+                                    <label class="form-check-label"
+                                           for="{{ form1.dpcla_vanillasaliency.id_for_label }}">
+                                        Vanilla Saliency
+                                    </label>
                                 </div>
                             </div>
                             <div class="col-md-3 col-sm-6">
@@ -1974,11 +1977,14 @@
                                            type="checkbox"
                                            role="switch"
                                            id="{{ form1.dpcla_smoothgrad.id_for_label }}">
-                                    <label class="form-check-label" for="{{ form1.dpcla_smoothgrad.id_for_label }}">Smooth Grad</label>
+                                    <label class="form-check-label"
+                                           for="{{ form1.dpcla_smoothgrad.id_for_label }}">Smooth Grad</label>
                                 </div>
                             </div>
                             <div class="d-grid gap-2 d-md-flex justify-content-md-end col-md-12">
-                                <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                                <div class="btn-group"
+                                     role="group"
+                                     aria-label="Basic mixed styles example">
                                     <button type="button" class="btn btn-success" onclick="selectXAI();">Select All</button>
                                     <button type="button" class="btn btn-danger" onclick="unselectXAI();">Unselect All</button>
                                 </div>
@@ -1993,7 +1999,8 @@
                                            type="checkbox"
                                            role="switch"
                                            id="{{ form1.dpcla_savemodel.id_for_label }}">
-                                    <label class="form-check-label" for="{{ form1.dpcla_savemodel.id_for_label }}">Save Model</label>
+                                    <label class="form-check-label"
+                                           for="{{ form1.dpcla_savemodel.id_for_label }}">Save Model</label>
                                 </div>
                             </div>
                             <div class="col-md-3 col-sm-6">
@@ -2003,7 +2010,10 @@
                                            type="checkbox"
                                            role="switch"
                                            id="{{ form1.dpcla_traingraph.id_for_label }}">
-                                    <label class="form-check-label" for="{{ form1.dpcla_traingraph.id_for_label }}">Training / Validation Graphs</label>
+                                    <label class="form-check-label"
+                                           for="{{ form1.dpcla_traingraph.id_for_label }}">
+                                        Training / Validation Graphs
+                                    </label>
                                 </div>
                             </div>
                             <div class="col-md-3 col-sm-6">
@@ -2013,7 +2023,8 @@
                                            type="checkbox"
                                            role="switch"
                                            id="{{ form1.dpcla_confmatrix.id_for_label }}">
-                                    <label class="form-check-label" for="{{ form1.dpcla_confmatrix.id_for_label }}">Confusion Matrix</label>
+                                    <label class="form-check-label"
+                                           for="{{ form1.dpcla_confmatrix.id_for_label }}">Confusion Matrix</label>
                                 </div>
                             </div>
                             <div class="col-md-3 col-sm-6">
@@ -2023,7 +2034,10 @@
                                            type="checkbox"
                                            role="switch"
                                            id="{{ form1.dpcla_classreport.id_for_label }}">
-                                    <label class="form-check-label" for="{{ form1.dpcla_classreport.id_for_label }}">Classification Report</label>
+                                    <label class="form-check-label"
+                                           for="{{ form1.dpcla_classreport.id_for_label }}">
+                                        Classification Report
+                                    </label>
                                 </div>
                             </div>
                             <div class="col-md-3 col-sm-6">
@@ -2048,11 +2062,16 @@
             </div>
             <div class="accordion-item">
                 <h2 class="accordion-header">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#DeepAssistant-collapseThree" aria-expanded="false" aria-controls="DeepAssistant-collapseThree">
-                        Image Segmentation
-                    </button>
+                    <button class="accordion-button collapsed"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#DeepAssistant-collapseThree"
+                            aria-expanded="false"
+                            aria-controls="DeepAssistant-collapseThree">Image Segmentation</button>
                 </h2>
-                <div id="DeepAssistant-collapseThree" class="accordion-collapse collapse" data-bs-parent="#DeepAssistant">
+                <div id="DeepAssistant-collapseThree"
+                     class="accordion-collapse collapse"
+                    data-bs-parent="#DeepAssistant">
                     <div class="accordion-body">
                         <form class="row g-3" action="/dl_classifier_processing/" method="post">
                             {% csrf_token %}
@@ -2074,7 +2093,8 @@
                                            type="checkbox"
                                            role="switch"
                                            id="{{ form2.dpseg_unetplusplus.id_for_label }}">
-                                    <label class="form-check-label" for="{{ form2.dpseg_unetplusplus.id_for_label }}">U-Net++</label>
+                                    <label class="form-check-label"
+                                           for="{{ form2.dpseg_unetplusplus.id_for_label }}">U-Net++</label>
                                 </div>
                             </div>
                             <div class="col-md-3 col-sm-6">
@@ -2099,32 +2119,54 @@
                             </div>
                             <div class="col-md-3 col-sm-6">
                                 <div class="form-check form-switch">
-                                    <input class="form-check-input" name="{{ form2.dpseg_fpn.html_name }}" type="checkbox" role="switch" id="{{ form2.dpseg_fpn.id_for_label }}">
+                                    <input class="form-check-input"
+                                           name="{{ form2.dpseg_fpn.html_name }}"
+                                           type="checkbox"
+                                           role="switch"
+                                           id="{{ form2.dpseg_fpn.id_for_label }}">
                                     <label class="form-check-label" for="{{ form2.dpseg_fpn.id_for_label }}">FPN</label>
                                 </div>
                             </div>
                             <div class="col-md-3 col-sm-6">
                                 <div class="form-check form-switch">
-                                    <input class="form-check-input" name="{{ form2.dpseg_pspnet.html_name }}" type="checkbox" role="switch" id="{{ form2.dpseg_pspnet.id_for_label }}">
+                                    <input class="form-check-input"
+                                           name="{{ form2.dpseg_pspnet.html_name }}"
+                                           type="checkbox"
+                                           role="switch"
+                                           id="{{ form2.dpseg_pspnet.id_for_label }}">
                                     <label class="form-check-label" for="{{ form2.dpseg_pspnet.id_for_label }}">PSP Net</label>
                                 </div>
                             </div>
                             <div class="col-md-3 col-sm-6">
                                 <div class="form-check form-switch">
-                                    <input class="form-check-input" name="{{ form2.dpseg_pan.html_name }}" type="checkbox" role="switch" id="{{ form2.dpseg_pan.id_for_label }}">
+                                    <input class="form-check-input"
+                                           name="{{ form2.dpseg_pan.html_name }}"
+                                           type="checkbox"
+                                           role="switch"
+                                           id="{{ form2.dpseg_pan.id_for_label }}">
                                     <label class="form-check-label" for="{{ form2.dpseg_pan.id_for_label }}">PAN</label>
                                 </div>
                             </div>
                             <div class="col-md-3 col-sm-6">
                                 <div class="form-check form-switch">
-                                    <input class="form-check-input" name="{{ form2.dpseg_deeplabv3.html_name }}" type="checkbox" role="switch" id="{{ form2.dpseg_deeplabv3.id_for_label }}">
-                                    <label class="form-check-label" for="{{ form2.dpseg_deeplabv3.id_for_label }}">DeepLab v3</label>
+                                    <input class="form-check-input"
+                                           name="{{ form2.dpseg_deeplabv3.html_name }}"
+                                           type="checkbox"
+                                           role="switch"
+                                           id="{{ form2.dpseg_deeplabv3.id_for_label }}">
+                                    <label class="form-check-label"
+                                           for="{{ form2.dpseg_deeplabv3.id_for_label }}">DeepLab v3</label>
                                 </div>
                             </div>
                             <div class="col-md-3 col-sm-6">
                                 <div class="form-check form-switch">
-                                    <input class="form-check-input" name="{{ form2.dpseg_deeplabv3plus.html_name }}" type="checkbox" role="switch" id="{{ form2.dpseg_deeplabv3plus.id_for_label }}">
-                                    <label class="form-check-label" for="{{ form2.dpseg_deeplabv3plus.id_for_label }}">DeepLab v3+</label>
+                                    <input class="form-check-input"
+                                           name="{{ form2.dpseg_deeplabv3plus.html_name }}"
+                                           type="checkbox"
+                                           role="switch"
+                                           id="{{ form2.dpseg_deeplabv3plus.id_for_label }}">
+                                    <label class="form-check-label"
+                                           for="{{ form2.dpseg_deeplabv3plus.id_for_label }}">DeepLab v3+</label>
                                 </div>
                             </div>
                         </form>
@@ -2156,59 +2198,115 @@
                     <li>
                         VGG 11 (PyTorch - <i>VGG11</i>)
                         {% if pdf == "True" %}
-                            <a href="{% static 'pdf/1409.1556.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                                <svg class="bi" width="16" height="16" role="img" aria-label="VERY DEEP CONVOLUTIONAL NETWORKS FOR LARGE-SCALE IMAGE RECOGNITION"><use href="#pdf"></use></svg>
+                            <a href="{% static 'pdf/1409.1556.pdf' %}"
+                               target="_blank"
+                               class="d-inline-flex link-body-emphasis text-decoration-none">
+                                <svg class="bi"
+                                     width="16"
+                                     height="16"
+                                     role="img"
+                                     aria-label="VERY DEEP CONVOLUTIONAL NETWORKS FOR LARGE-SCALE IMAGE RECOGNITION">
+                                    <use href="#pdf"></use>
+                                </svg>
                             </a>
                         {% endif %}
                     </li>
                     <li>
                         VGG 13 (PyTorch - <i>VGG13</i>)
                         {% if pdf == "True" %}
-                            <a href="{% static 'pdf/1409.1556.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                                <svg class="bi" width="16" height="16" role="img" aria-label="VERY DEEP CONVOLUTIONAL NETWORKS FOR LARGE-SCALE IMAGE RECOGNITION"><use href="#pdf"></use></svg>
+                            <a href="{% static 'pdf/1409.1556.pdf' %}"
+                               target="_blank"
+                               class="d-inline-flex link-body-emphasis text-decoration-none">
+                                <svg class="bi"
+                                     width="16"
+                                     height="16"
+                                     role="img"
+                                     aria-label="VERY DEEP CONVOLUTIONAL NETWORKS FOR LARGE-SCALE IMAGE RECOGNITION">
+                                    <use href="#pdf"></use>
+                                </svg>
                             </a>
                         {% endif %}
                     </li>
                     <li>
                         VGG 16 (Keras - <i>VGG16</i>)
                         {% if pdf == "True" %}
-                            <a href="{% static 'pdf/1409.1556.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                                <svg class="bi" width="16" height="16" role="img" aria-label="VERY DEEP CONVOLUTIONAL NETWORKS FOR LARGE-SCALE IMAGE RECOGNITION"><use href="#pdf"></use></svg>
+                            <a href="{% static 'pdf/1409.1556.pdf' %}"
+                               target="_blank"
+                               class="d-inline-flex link-body-emphasis text-decoration-none">
+                                <svg class="bi"
+                                     width="16"
+                                     height="16"
+                                     role="img"
+                                     aria-label="VERY DEEP CONVOLUTIONAL NETWORKS FOR LARGE-SCALE IMAGE RECOGNITION">
+                                    <use href="#pdf"></use>
+                                </svg>
                             </a>
                         {% endif %}
                     </li>
                     <li>
                         VGG 19 (Keras - <i>VGG19</i>)
                         {% if pdf == "True" %}
-                            <a href="{% static 'pdf/1409.1556.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                                <svg class="bi" width="16" height="16" role="img" aria-label="VERY DEEP CONVOLUTIONAL NETWORKS FOR LARGE-SCALE IMAGE RECOGNITION"><use href="#pdf"></use></svg>
+                            <a href="{% static 'pdf/1409.1556.pdf' %}"
+                               target="_blank"
+                               class="d-inline-flex link-body-emphasis text-decoration-none">
+                                <svg class="bi"
+                                     width="16"
+                                     height="16"
+                                     role="img"
+                                     aria-label="VERY DEEP CONVOLUTIONAL NETWORKS FOR LARGE-SCALE IMAGE RECOGNITION">
+                                    <use href="#pdf"></use>
+                                </svg>
                             </a>
                         {% endif %}
                     </li>
                     <li>
                         ResNet 18 (PyTorch - <i>ResNet18</i>)
                         {% if pdf == "True" %}
-                            <a href="{% static 'pdf/1512.03385.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                                <svg class="bi" width="16" height="16" role="img" aria-label="Deep Residual Learning for Image Recognition"><use href="#pdf"></use></svg>
+                            <a href="{% static 'pdf/1512.03385.pdf' %}"
+                               target="_blank"
+                               class="d-inline-flex link-body-emphasis text-decoration-none">
+                                <svg class="bi"
+                                     width="16"
+                                     height="16"
+                                     role="img"
+                                     aria-label="Deep Residual Learning for Image Recognition">
+                                    <use href="#pdf"></use>
+                                </svg>
                             </a>
                         {% endif %}
                     </li>
                     <li>
                         ResNet 34 (PyTorch - <i>ResNet34</i>)
                         {% if pdf == "True" %}
-                            <a href="{% static 'pdf/1512.03385.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                                <svg class="bi" width="16" height="16" role="img" aria-label="Deep Residual Learning for Image Recognition"><use href="#pdf"></use></svg>
+                            <a href="{% static 'pdf/1512.03385.pdf' %}"
+                               target="_blank"
+                               class="d-inline-flex link-body-emphasis text-decoration-none">
+                                <svg class="bi"
+                                     width="16"
+                                     height="16"
+                                     role="img"
+                                     aria-label="Deep Residual Learning for Image Recognition">
+                                    <use href="#pdf"></use>
+                                </svg>
                             </a>
                         {% endif %}
                     </li>
                     <li>
-                ResNet 50 (Keras - <i>ResNet50</i>)
-                {% if pdf == "True" %}
-                <a href="{% static 'pdf/1512.03385.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="Deep Residual Learning for Image Recognition"><use href="#pdf"></use></svg>
-                </a>
-                {% endif %}
-            </li>
+                        ResNet 50 (Keras - <i>ResNet50</i>)
+                        {% if pdf == "True" %}
+                            <a href="{% static 'pdf/1512.03385.pdf' %}"
+                               target="_blank"
+                               class="d-inline-flex link-body-emphasis text-decoration-none">
+                                <svg class="bi"
+                                     width="16"
+                                     height="16"
+                                     role="img"
+                                     aria-label="Deep Residual Learning for Image Recognition">
+                                    <use href="#pdf"></use>
+                                </svg>
+                            </a>
+                        {% endif %}
+                    </li>
             <li>
                 ResNet 50 V2 (Keras - <i>ResNet50V2</i>)
                 {% if pdf == "True" %}
