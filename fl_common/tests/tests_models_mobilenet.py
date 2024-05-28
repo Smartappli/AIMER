@@ -48,10 +48,12 @@ class ProcessingMobilenetTestCase(TestCase):
             "mobilenetv4_conv_small",
             "mobilenetv4_conv_medium",
             "mobilenetv4_conv_large",
-            "mobilenetv4_hybrid_medium_075",
             "mobilenetv4_hybrid_medium",
-            "mobilenetv4_hybrid_medium_150",
             "mobilenetv4_hybrid_large",
+            "mobilenetv4_conv_aa_medium",
+            "mobilenetv4_conv_blur_medium",
+            "mobilenetv4_hybrid_medium_075",
+            "mobilenetv4_hybrid_large_075",
         ]
         num_classes = 10  # You can adjust the number of classes as needed
 
