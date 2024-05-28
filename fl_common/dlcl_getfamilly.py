@@ -479,6 +479,7 @@ def get_family_model_e(model_type, num_classes):
         "efficientnet_b0_g16_evos": get_efficientnet_model,
         "efficientnet_b3_gn": get_efficientnet_model,
         "efficientnet_b3_g8_gn": get_efficientnet_model,
+        "efficientnet_blur_b0": get_efficientnet_model,
         "efficientnet_es": get_efficientnet_model,
         "efficientnet_es_pruned": get_efficientnet_model,
         "efficientnet_em": get_efficientnet_model,
