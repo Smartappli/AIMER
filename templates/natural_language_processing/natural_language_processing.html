@@ -4,101 +4,124 @@
 {%  block content %}
 {%  if request.user.is_authenticated %}
     <div class="accordion accordion-flush" id="NLPAssistant">
-      <div class="accordion-item">
-        <h2 class="accordion-header">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#NLPAssistant-collapseOne" aria-expanded="false" aria-controls="NLPAssistant-collapseOne">
-            Text Generation
-          </button>
-        </h2>
-        <div id="NLPAssistant-collapseOne" class="accordion-collapse collapse" data-bs-parent="#NLPAssistant">
-          <div class="accordion-body">
-              <form class="row g-3" action="/natural_language_processing_chat/" method="post">
-                {% csrf_token %}
-                  <h5>Model Choice</h5>
-                  <div class="col-md-3 col-sm-6">
-                    <div class="form-check form-switch">
-                      <input class="form-check-input" name="{{ form1.nlptg_model_alfred_40b.html_name }}" type="radio" id="{{ form1.nlptg_model_alfred_40b.id_for_label }}">
-                      <label class="form-check-label" for="{{ form1.nlptg_model_alfred_40b.id_for_label }}">Alfred 40B 
-                          <a href="{% static 'pdf/2306.15595.pdf' %}" target="_blank"><svg class="bi" width="16" height="16" role="img" aria-label="Alfred 40B"><use href="#pdf"></use></svg></a>
-                          <a href="{% static 'pdf/2309.00071.pdf' %}" target="_blank"><svg class="bi" width="16" height="16" role="img" aria-label="Alfred 40B"><use href="#pdf"></use></svg></a>
-                          <a href="{% static 'pdf/2307.03172.pdf' %}" target="_blank"><svg class="bi" width="16" height="16" role="img" aria-label="Alfred 40B"><use href="#pdf"></use></svg></a>
-                      </label>
-                    </div>
-                  </div>
-                  <div class="col-md-3 col-sm-6">
-                    <div class="form-check form-switch">
-                      <input class="form-check-input" name="{{ form1.nlptg_model_codellama_7b.html_name }}" type="radio" id="{{ form1.nlptg_model_codellama_7b.id_for_label }}">
-                      <label class="form-check-label" for="{{ form1.nlptg_model_codellama_7b.id_for_label }}">CodeLLaMa 7B
-                          <a href="{% static 'pdf/2308.12950.pdf' %}" target="_blank"><svg class="bi" width="16" height="16" role="img" aria-label="Alfred 40B"><use href="#pdf"></use></svg></a>
-                      </label>
-                    </div>
-                  </div>
-                  <div class="col-md-3 col-sm-6">
-                    <div class="form-check form-switch">
-                      <input class="form-check-input" name="{{ form1.nlptg_model_codellama_13b.html_name }}" type="radio" id="{{ form1.nlptg_model_codellama_13b.id_for_label }}">
-                      <label class="form-check-label" for="{{ form1.nlptg_model_codellama_13b.id_for_label }}">CodeLLaMa 13B</label>
-                    </div>
-                  </div>
-                  <div class="col-md-3 col-sm-6">
-                    <div class="form-check form-switch">
-                      <input class="form-check-input" name="{{ form1.nlptg_model_falcon_7b.html_name }}" type="radio" id="{{ form1.nlptg_model_falcon_7b.id_for_label }}">
-                      <label class="form-check-label" for="{{ form1.nlptg_model_falcon_7b.id_for_label }}">Falcon 7B</label>
-                    </div>
-                  </div>
-                  <div class="col-md-3 col-sm-6">
-                    <div class="form-check form-switch">
-                      <input class="form-check-input" name="{{ form1.nlptg_model_falcon_7b_instruct.html_name }}" type="radio" id="{{ form1.nlptg_model_falcon_7b_instruct.id_for_label }}">
-                      <label class="form-check-label" for="{{ form1.nlptg_model_falcon_7b_instruct.id_for_label }}">Falcon 7B Instruct</label>
-                    </div>
-                  </div>
-                  <div class="col-md-3 col-sm-6">
-                    <div class="form-check form-switch">
-                      <input class="form-check-input" name="{{ form1.nlptg_model_falcon_40b.html_name }}" type="radio" id="{{ form1.nlptg_model_falcon_40b.id_for_label }}" checked>
-                      <label class="form-check-label" for="{{ form1.nlptg_model_falcon_40b.id_for_label }}">Falcon 40B</label>
-                    </div>
-                  </div>
-                  <div class="col-md-3 col-sm-6">
-                    <div class="form-check form-switch">
-                      <input class="form-check-input" name="{{ form1.nlptg_model_falcon_40b_instruct.html_name }}" type="radio" id="{{ form1.nlptg_model_falcon_40b_instruct.id_for_label }}">
-                      <label class="form-check-label" for="{{ form1.nlptg_model_falcon_40b_instruct.id_for_label }}">Falcon 40B Instruct</label>
-                    </div>
-                  </div>
-                  <div class="col-md-3 col-sm-6">
-                    <div class="form-check form-switch">
-                      <input class="form-check-input" name="{{ form1.nlptg_model_falcon_180b.html_name }}" type="radio" id="{{ form1.nlptg_model_falcon_180b.id_for_label }}">
-                      <label class="form-check-label" for="{{ form1.nlptg_model_falcon_180b.id_for_label }}">Falcon 180B</label>
-                    </div>
-                  </div>
-                  <div class="col-md-3 col-sm-6">
-                    <div class="form-check form-switch">
-                      <input class="form-check-input" name="{{ form1.nlptg_model_falcon_180b_chat.html_name }}" type="radio" id="{{ form1.nlptg_model_falcon_180b_chat.id_for_label }}">
-                      <label class="form-check-label" for="{{ form1.nlptg_model_falcon_180b_chat.id_for_label }}">Falcon 180B Chat</label>
-                    </div>
-                  </div>
-                  <div class="col-md-3 col-sm-6">
-                    <div class="form-check form-switch">
-                      <input class="form-check-input" name="{{ form1.nlptg_model_llama2_7b.html_name }}" type="radio" id="{{ form1.nlptg_model_llama2_7b.id_for_label }}">
-                      <label class="form-check-label" for="{{ form1.nlptg_model_llama2_7b.id_for_label }}">LLaMA 2 7B</label>
-                    </div>
-                  </div>
-                  <div class="col-md-3 col-sm-6">
-                    <div class="form-check form-switch">
-                      <input class="form-check-input" name="{{ form1.nlptg_model_llama2_13b.html_name }}" type="radio" id="{{ form1.nlptg_model_llama2_13b.id_for_label }}">
-                      <label class="form-check-label" for="{{ form1.nlptg_model_llama2_13b.id_for_label }}">LLaMA 2 13B</label>
-                    </div>
-                  </div>
-                  <div class="col-md-3 col-sm-6">
-                    <div class="form-check form-switch">
-                      <input class="form-check-input" name="{{ form1.nlptg_model_llama2_70b.html_name }}" type="radio" id="{{ form1.nlptg_model_llama2_70b.id_for_label }}">
-                      <label class="form-check-label" for="{{ form1.nlptg_model_llama2_70b.id_for_label }}">LLaMA 2 70B</label>
-                    </div>
-                  </div>
-                   <div class="col-md-3 col-sm-6">
-                    <div class="form-check form-switch">
-                      <input class="form-check-input" name="{{ form1.nlptg_model_med42_70b.html_name }}" type="radio" id="{{ form1.nlptg_model_med42_70b.id_for_label }}">
-                      <label class="form-check-label" for="{{ form1.nlptg_model_med42_70b.id_for_label }}">Med42 70B</label>
-                    </div>
-                  </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#NLPAssistant-collapseOne" aria-expanded="false" aria-controls="NLPAssistant-collapseOne">
+                    Text Generation
+                </button>
+            </h2>
+            <div id="NLPAssistant-collapseOne" class="accordion-collapse collapse" data-bs-parent="#NLPAssistant">
+                <div class="accordion-body">
+                    <form class="row g-3" action="/natural_language_processing_chat/" method="post">
+                        {% csrf_token %}
+                        <h5>Model Choice</h5>
+                        <div class="col-md-3 col-sm-6">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input"
+                                       name="{{ form1.nlptg_model_alfred_40b.html_name }}"
+                                       type="radio"
+                                       id="{{ form1.nlptg_model_alfred_40b.id_for_label }}">
+                                <label class="form-check-label"
+                                       for="{{ form1.nlptg_model_alfred_40b.id_for_label }}">Alfred 40B 
+                                    <a href="{% static 'pdf/2306.15595.pdf' %}" target="_blank">
+                                        <svg class="bi" width="16" height="16" role="img" aria-label="Alfred 40B">
+                                            <use href="#pdf"></use>
+                                        </svg>
+                                    </a>
+                                    <a href="{% static 'pdf/2309.00071.pdf' %}" target="_blank">
+                                        <svg class="bi" width="16" height="16" role="img" aria-label="Alfred 40B">
+                                            <use href="#pdf"></use>
+                                        </svg>
+                                    </a>
+                                    <a href="{% static 'pdf/2307.03172.pdf' %}" target="_blank">
+                                        <svg class="bi" width="16" height="16" role="img" aria-label="Alfred 40B">
+                                            <use href="#pdf"></use>
+                                        </svg>
+                                    </a>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-6">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input"
+                                       name="{{ form1.nlptg_model_codellama_7b.html_name }}"
+                                       type="radio" id="{{ form1.nlptg_model_codellama_7b.id_for_label }}">
+                                <label class="form-check-label"
+                                       for="{{ form1.nlptg_model_codellama_7b.id_for_label }}">CodeLLaMa 7B
+                                    <a href="{% static 'pdf/2308.12950.pdf' %}" target="_blank">
+                                        <svg class="bi" width="16" height="16" role="img" aria-label="Alfred 40B">
+                                            <use href="#pdf"></use>
+                                        </svg>
+                                    </a>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-6">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" name="{{ form1.nlptg_model_codellama_13b.html_name }}" type="radio" id="{{ form1.nlptg_model_codellama_13b.id_for_label }}">
+                                <label class="form-check-label" for="{{ form1.nlptg_model_codellama_13b.id_for_label }}">CodeLLaMa 13B</label>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-6">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" name="{{ form1.nlptg_model_falcon_7b.html_name }}" type="radio" id="{{ form1.nlptg_model_falcon_7b.id_for_label }}">
+                                <label class="form-check-label" for="{{ form1.nlptg_model_falcon_7b.id_for_label }}">Falcon 7B</label>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-6">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" name="{{ form1.nlptg_model_falcon_7b_instruct.html_name }}" type="radio" id="{{ form1.nlptg_model_falcon_7b_instruct.id_for_label }}">
+                                <label class="form-check-label" for="{{ form1.nlptg_model_falcon_7b_instruct.id_for_label }}">Falcon 7B Instruct</label>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-6">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" name="{{ form1.nlptg_model_falcon_40b.html_name }}" type="radio" id="{{ form1.nlptg_model_falcon_40b.id_for_label }}" checked>
+                                <label class="form-check-label" for="{{ form1.nlptg_model_falcon_40b.id_for_label }}">Falcon 40B</label>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-6">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" name="{{ form1.nlptg_model_falcon_40b_instruct.html_name }}" type="radio" id="{{ form1.nlptg_model_falcon_40b_instruct.id_for_label }}">
+                                <label class="form-check-label" for="{{ form1.nlptg_model_falcon_40b_instruct.id_for_label }}">Falcon 40B Instruct</label>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-6">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" name="{{ form1.nlptg_model_falcon_180b.html_name }}" type="radio" id="{{ form1.nlptg_model_falcon_180b.id_for_label }}">
+                                <label class="form-check-label" for="{{ form1.nlptg_model_falcon_180b.id_for_label }}">Falcon 180B</label>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-6">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" name="{{ form1.nlptg_model_falcon_180b_chat.html_name }}" type="radio" id="{{ form1.nlptg_model_falcon_180b_chat.id_for_label }}">
+                                <label class="form-check-label" for="{{ form1.nlptg_model_falcon_180b_chat.id_for_label }}">Falcon 180B Chat</label>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-6">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" name="{{ form1.nlptg_model_llama2_7b.html_name }}" type="radio" id="{{ form1.nlptg_model_llama2_7b.id_for_label }}">
+                                <label class="form-check-label" for="{{ form1.nlptg_model_llama2_7b.id_for_label }}">LLaMA 2 7B</label>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-6">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" name="{{ form1.nlptg_model_llama2_13b.html_name }}" type="radio" id="{{ form1.nlptg_model_llama2_13b.id_for_label }}">
+                                <label class="form-check-label" for="{{ form1.nlptg_model_llama2_13b.id_for_label }}">LLaMA 2 13B</label>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-6">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" name="{{ form1.nlptg_model_llama2_70b.html_name }}" type="radio" id="{{ form1.nlptg_model_llama2_70b.id_for_label }}">
+                                <label class="form-check-label" for="{{ form1.nlptg_model_llama2_70b.id_for_label }}">LLaMA 2 70B</label>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-6">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" name="{{ form1.nlptg_model_med42_70b.html_name }}" type="radio" id="{{ form1.nlptg_model_med42_70b.id_for_label }}">
+                                <label class="form-check-label" for="{{ form1.nlptg_model_med42_70b.id_for_label }}">Med42 70B</label>
+                            </div>
+                        </div>
                   <div class="col-md-3 col-sm-6">
                     <div class="form-check form-switch">
                       <input class="form-check-input" name="{{ form1.nlptg_model_meditron_7b.html_name }}" type="radio" id="{{ form1.nlptg_model_meditron_7b.id_for_label }}">
