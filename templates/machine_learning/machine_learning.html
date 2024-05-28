@@ -474,64 +474,93 @@
                                     </label>
                                 </div>
                             </div>
-              <div class="col-md-4 col-sm-6">
-                <div class="form-check form-switch">
-                  <input class="form-check-input" name="{{ form2.mlreg_catboost.html_name }}" type="checkbox" role="switch" id="{{ form2.mlreg_catboost.id_for_label }}">
-                  <label class="form-check-label" for="{{ form2.mlreg_catboost.id_for_label }}">CatBoost (catboost)</label>
+                            <div class="col-md-4 col-sm-6">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input"
+                                           name="{{ form2.mlreg_catboost.html_name }}"
+                                           type="checkbox"
+                                           role="switch"
+                                           id="{{ form2.mlreg_catboost.id_for_label }}">
+                                    <label class="form-check-label"
+                                           for="{{ form2.mlreg_catboost.id_for_label }}">CatBoost (catboost)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input"
+                                           name="{{ form2.mlreg_dummy.html_name }}"
+                                           type="checkbox"
+                                           role="switch"
+                                           id="{{ form2.mlreg_dummy.id_for_label }}">
+                                    <label class="form-check-label"
+                                           for="{{ form2.mlreg_dummy.id_for_label }}">Dummy Regressor (dummy)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input"
+                                           name="{{ form2.mlreg_bagging.html_name }}"
+                                           type="checkbox" role="switch"
+                                           id="{{ form2.mlreg_bagging.id_for_label }}">
+                                    <label class="form-check-label"
+                                           for="{{ form2.mlreg_bagging.id_for_label }}">Bagging Regressor (bagging)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input"
+                                           name="{{ form2.mlreg_stacking.html_name }}"
+                                           type="checkbox" role="switch"
+                                           id="{{ form2.mlreg_stacking.id_for_label }}">
+                                    <label class="form-check-label"
+                                           for="{{ form2.mlreg_stacking.id_for_label }}">Stacking Regressor (stacking)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input"
+                                           name="{{ form2.mlreg_voting.html_name }}"
+                                           type="checkbox" role="switch"
+                                           id="{{ form2.mlreg_voting.id_for_label }}">
+                                    <label class="form-check-label"
+                                           for="{{ form2.mlreg_voting.id_for_label }}">Voting Regressor (voting)</label>
+                                </div>
+                            </div>
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-end col-md-12">
+                                <button type="button" class="btn btn-success mb-3" onclick="regSelectModel();">Select All</button>
+                                <button type="button" class="btn btn-danger mb-3" onclick="regUnselectModel();">Unselect All</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-              </div>
-              <div class="col-md-4 col-sm-6">
-                <div class="form-check form-switch">
-                  <input class="form-check-input" name="{{ form2.mlreg_dummy.html_name }}" type="checkbox" role="switch" id="{{ form2.mlreg_dummy.id_for_label }}">
-                  <label class="form-check-label" for="{{ form2.mlreg_dummy.id_for_label }}">Dummy Regressor (dummy)</label>
-                </div>
-              </div>
-              <div class="col-md-4 col-sm-6">
-                <div class="form-check form-switch">
-                  <input class="form-check-input" name="{{ form2.mlreg_bagging.html_name }}" type="checkbox" role="switch" id="{{ form2.mlreg_bagging.id_for_label }}">
-                  <label class="form-check-label" for="{{ form2.mlreg_bagging.id_for_label }}">Bagging Regressor (bagging)</label>
-                </div>
-              </div>
-              <div class="col-md-4 col-sm-6">
-                <div class="form-check form-switch">
-                  <input class="form-check-input" name="{{ form2.mlreg_stacking.html_name }}" type="checkbox" role="switch" id="{{ form2.mlreg_stacking.id_for_label }}">
-                  <label class="form-check-label" for="{{ form2.mlreg_stacking.id_for_label }}">Stacking Regressor (stacking)</label>
-                </div>
-              </div>
-              <div class="col-md-4 col-sm-6">
-                <div class="form-check form-switch">
-                  <input class="form-check-input" name="{{ form2.mlreg_voting.html_name }}" type="checkbox" role="switch" id="{{ form2.mlreg_voting.id_for_label }}">
-                  <label class="form-check-label" for="{{ form2.mlreg_voting.id_for_label }}">Voting Regressor (voting)</label>
-                </div>
-              </div>
-              <div class="d-grid gap-2 d-md-flex justify-content-md-end col-md-12">
-                <button type="button" class="btn btn-success mb-3" onclick="regSelectModel();">Select All</button>
-                <button type="button" class="btn btn-danger mb-3" onclick="regUnselectModel();">Unselect All</button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-      <div class="accordion-item">
-        <h2 class="accordion-header">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#MLAssistant-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
-            Classification
-          </button>
-        </h2>
-        <div id="MLAssistant-collapseThree" class="accordion-collapse collapse" data-bs-parent="#MLAssistant">
-          <div class="accordion-body">
-    
-            <form class="row g-3" action="/ml_mlcla_processing/" method="post">
-              {% csrf_token %}
-              <div class="col-md-4 col-sm-6">
-                <div class="form-check form-switch">
-                  <input class="form-check-input" name="{{ form1.mlcla_lr.html_name }}" type="checkbox" role="switch" id="{{ form1.mlcla_lr.id_for_label }}">
-                  <label class="form-check-label" for="{{ form1.mlcla_lr.id_for_label }}">Logistic Regression (lr)</label>
-                </div>
-              </div>
-              <div class="col-md-4 col-sm-6">
-                <div class="form-check form-switch">
-                  <input class="form-check-input" name="{{ form1.mlcla_knn.html_name }}" type="checkbox" role="switch" id="{{ form1.mlcla_knn.id_for_label }}">
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#MLAssistant-collapseThree"
+                            aria-expanded="false"
+                            aria-controls="flush-collapseThree">
+                        Classification
+                  </button>
+              </h2>
+              <div id="MLAssistant-collapseThree" class="accordion-collapse collapse" data-bs-parent="#MLAssistant">
+                  <div class="accordion-body">
+                      <form class="row g-3" action="/ml_mlcla_processing/" method="post">
+                          {% csrf_token %}
+                          <div class="col-md-4 col-sm-6">
+                              <div class="form-check form-switch">
+                                  <input class="form-check-input"
+                                         name="{{ form1.mlcla_lr.html_name }}"
+                                         type="checkbox" role="switch"
+                                         id="{{ form1.mlcla_lr.id_for_label }}">
+                                  <label class="form-check-label" for="{{ form1.mlcla_lr.id_for_label }}">Logistic Regression (lr)</label>
+                              </div>
+                          </div>
+                          <div class="col-md-4 col-sm-6">
+                              <div class="form-check form-switch">
+                                  <input class="form-check-input" name="{{ form1.mlcla_knn.html_name }}" type="checkbox" role="switch" id="{{ form1.mlcla_knn.id_for_label }}">
                   <label class="form-check-label" for="{{ form1.mlcla_knn.id_for_label }}">K Neightbors Classifier (knn)</label>
                 </div>
               </div>
