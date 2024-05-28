@@ -1988,31 +1988,51 @@
                             <h5>Training Output</h5>
                             <div class="col-md-3 col-sm-6">
                                 <div class="form-check form-switch">
-                                    <input class="form-check-input" name="{{ form1.dpcla_savemodel.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_savemodel.id_for_label }}">
+                                    <input class="form-check-input"
+                                           name="{{ form1.dpcla_savemodel.html_name }}"
+                                           type="checkbox"
+                                           role="switch"
+                                           id="{{ form1.dpcla_savemodel.id_for_label }}">
                                     <label class="form-check-label" for="{{ form1.dpcla_savemodel.id_for_label }}">Save Model</label>
                                 </div>
                             </div>
                             <div class="col-md-3 col-sm-6">
                                 <div class="form-check form-switch">
-                                    <input class="form-check-input" name="{{ form1.dpcla_traingraph.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_traingraph.id_for_label }}">
+                                    <input class="form-check-input"
+                                           name="{{ form1.dpcla_traingraph.html_name }}"
+                                           type="checkbox"
+                                           role="switch"
+                                           id="{{ form1.dpcla_traingraph.id_for_label }}">
                                     <label class="form-check-label" for="{{ form1.dpcla_traingraph.id_for_label }}">Training / Validation Graphs</label>
                                 </div>
                             </div>
                             <div class="col-md-3 col-sm-6">
                                 <div class="form-check form-switch">
-                                    <input class="form-check-input" name="{{ form1.dpcla_confmatrix.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_confmatrix.id_for_label }}">
+                                    <input class="form-check-input"
+                                           name="{{ form1.dpcla_confmatrix.html_name }}"
+                                           type="checkbox"
+                                           role="switch"
+                                           id="{{ form1.dpcla_confmatrix.id_for_label }}">
                                     <label class="form-check-label" for="{{ form1.dpcla_confmatrix.id_for_label }}">Confusion Matrix</label>
                                 </div>
                             </div>
                             <div class="col-md-3 col-sm-6">
                                 <div class="form-check form-switch">
-                                    <input class="form-check-input" name="{{ form1.dpcla_classreport.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_classreport.id_for_label }}">
+                                    <input class="form-check-input"
+                                           name="{{ form1.dpcla_classreport.html_name }}"
+                                           type="checkbox"
+                                           role="switch"
+                                           id="{{ form1.dpcla_classreport.id_for_label }}">
                                     <label class="form-check-label" for="{{ form1.dpcla_classreport.id_for_label }}">Classification Report</label>
                                 </div>
                             </div>
                             <div class="col-md-3 col-sm-6">
                                 <div class="form-check form-switch">
-                                    <input class="form-check-input" name="{{ form1.dpcla_tflite.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_tflite.id_for_label }}">
+                                    <input class="form-check-input"
+                                           name="{{ form1.dpcla_tflite.html_name }}"
+                                           type="checkbox"
+                                           role="switch"
+                                           id="{{ form1.dpcla_tflite.id_for_label }}">
                                     <label class="form-check-label" for="{{ form1.dpcla_tflite.id_for_label }}">TFLite Conversion</label>
                                 </div>
                             </div>
@@ -2026,89 +2046,105 @@
                     </div>
                 </div>
             </div>
-      <div class="accordion-item">
-        <h2 class="accordion-header">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#DeepAssistant-collapseThree" aria-expanded="false" aria-controls="DeepAssistant-collapseThree">
-            Image Segmentation
-          </button>
-        </h2>
-        <div id="DeepAssistant-collapseThree" class="accordion-collapse collapse" data-bs-parent="#DeepAssistant">
-          <div class="accordion-body">
-              <form class="row g-3" action="/dl_classifier_processing/" method="post">
-                {% csrf_token %}
-                  <h5>Model Choice</h5>
-                  <div class="col-md-3 col-sm-6">
-                    <div class="form-check form-switch">
-                      <input class="form-check-input" name="{{ form2.dpseg_unet.html_name }}" type="checkbox" role="switch" id="{{ form2.dpseg_unet.id_for_label }}">
-                      <label class="form-check-label" for="{{ form2.dpseg_unet.id_for_label }}">U-Net</label>
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#DeepAssistant-collapseThree" aria-expanded="false" aria-controls="DeepAssistant-collapseThree">
+                        Image Segmentation
+                    </button>
+                </h2>
+                <div id="DeepAssistant-collapseThree" class="accordion-collapse collapse" data-bs-parent="#DeepAssistant">
+                    <div class="accordion-body">
+                        <form class="row g-3" action="/dl_classifier_processing/" method="post">
+                            {% csrf_token %}
+                            <h5>Model Choice</h5>
+                            <div class="col-md-3 col-sm-6">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input"
+                                           name="{{ form2.dpseg_unet.html_name }}"
+                                           type="checkbox"
+                                           role="switch"
+                                           id="{{ form2.dpseg_unet.id_for_label }}">
+                                    <label class="form-check-label" for="{{ form2.dpseg_unet.id_for_label }}">U-Net</label>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-6">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input"
+                                           name="{{ form2.dpseg_unetplusplus.html_name }}"
+                                           type="checkbox"
+                                           role="switch"
+                                           id="{{ form2.dpseg_unetplusplus.id_for_label }}">
+                                    <label class="form-check-label" for="{{ form2.dpseg_unetplusplus.id_for_label }}">U-Net++</label>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-6">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input"
+                                           name="{{ form2.dpseg_manet.html_name }}"
+                                           type="checkbox"
+                                           role="switch"
+                                           id="{{ form2.dpseg_manet.id_for_label }}">
+                                    <label class="form-check-label" for="{{ form2.dpseg_manet.id_for_label }}">MAnet</label>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-6">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input"
+                                           name="{{ form2.dpseg_linknet.html_name }}"
+                                           type="checkbox"
+                                           role="switch"
+                                           id="{{ form2.dpseg_linknet.id_for_label }}">
+                                    <label class="form-check-label" for="{{ form2.dpseg_linknet.id_for_label }}">Linknet</label>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-6">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" name="{{ form2.dpseg_fpn.html_name }}" type="checkbox" role="switch" id="{{ form2.dpseg_fpn.id_for_label }}">
+                                    <label class="form-check-label" for="{{ form2.dpseg_fpn.id_for_label }}">FPN</label>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-6">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" name="{{ form2.dpseg_pspnet.html_name }}" type="checkbox" role="switch" id="{{ form2.dpseg_pspnet.id_for_label }}">
+                                    <label class="form-check-label" for="{{ form2.dpseg_pspnet.id_for_label }}">PSP Net</label>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-6">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" name="{{ form2.dpseg_pan.html_name }}" type="checkbox" role="switch" id="{{ form2.dpseg_pan.id_for_label }}">
+                                    <label class="form-check-label" for="{{ form2.dpseg_pan.id_for_label }}">PAN</label>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-6">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" name="{{ form2.dpseg_deeplabv3.html_name }}" type="checkbox" role="switch" id="{{ form2.dpseg_deeplabv3.id_for_label }}">
+                                    <label class="form-check-label" for="{{ form2.dpseg_deeplabv3.id_for_label }}">DeepLab v3</label>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-6">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" name="{{ form2.dpseg_deeplabv3plus.html_name }}" type="checkbox" role="switch" id="{{ form2.dpseg_deeplabv3plus.id_for_label }}">
+                                    <label class="form-check-label" for="{{ form2.dpseg_deeplabv3plus.id_for_label }}">DeepLab v3+</label>
+                                </div>
+                            </div>
+                        </form>
                     </div>
-                  </div>
-                  <div class="col-md-3 col-sm-6">
-                    <div class="form-check form-switch">
-                      <input class="form-check-input" name="{{ form2.dpseg_unetplusplus.html_name }}" type="checkbox" role="switch" id="{{ form2.dpseg_unetplusplus.id_for_label }}">
-                      <label class="form-check-label" for="{{ form2.dpseg_unetplusplus.id_for_label }}">U-Net++</label>
-                    </div>
-                  </div>
-                  <div class="col-md-3 col-sm-6">
-                    <div class="form-check form-switch">
-                      <input class="form-check-input" name="{{ form2.dpseg_manet.html_name }}" type="checkbox" role="switch" id="{{ form2.dpseg_manet.id_for_label }}">
-                      <label class="form-check-label" for="{{ form2.dpseg_manet.id_for_label }}">MAnet</label>
-                    </div>
-                  </div>
-                  <div class="col-md-3 col-sm-6">
-                    <div class="form-check form-switch">
-                      <input class="form-check-input" name="{{ form2.dpseg_linknet.html_name }}" type="checkbox" role="switch" id="{{ form2.dpseg_linknet.id_for_label }}">
-                      <label class="form-check-label" for="{{ form2.dpseg_linknet.id_for_label }}">Linknet</label>
-                    </div>
-                  </div>
-                  <div class="col-md-3 col-sm-6">
-                    <div class="form-check form-switch">
-                      <input class="form-check-input" name="{{ form2.dpseg_fpn.html_name }}" type="checkbox" role="switch" id="{{ form2.dpseg_fpn.id_for_label }}">
-                      <label class="form-check-label" for="{{ form2.dpseg_fpn.id_for_label }}">FPN</label>
-                    </div>
-                  </div>
-                  <div class="col-md-3 col-sm-6">
-                    <div class="form-check form-switch">
-                      <input class="form-check-input" name="{{ form2.dpseg_pspnet.html_name }}" type="checkbox" role="switch" id="{{ form2.dpseg_pspnet.id_for_label }}">
-                      <label class="form-check-label" for="{{ form2.dpseg_pspnet.id_for_label }}">PSP Net</label>
-                    </div>
-                  </div>
-                  <div class="col-md-3 col-sm-6">
-                    <div class="form-check form-switch">
-                      <input class="form-check-input" name="{{ form2.dpseg_pan.html_name }}" type="checkbox" role="switch" id="{{ form2.dpseg_pan.id_for_label }}">
-                      <label class="form-check-label" for="{{ form2.dpseg_pan.id_for_label }}">PAN</label>
-                    </div>
-                  </div>
-                  <div class="col-md-3 col-sm-6">
-                    <div class="form-check form-switch">
-                      <input class="form-check-input" name="{{ form2.dpseg_deeplabv3.html_name }}" type="checkbox" role="switch" id="{{ form2.dpseg_deeplabv3.id_for_label }}">
-                      <label class="form-check-label" for="{{ form2.dpseg_deeplabv3.id_for_label }}">DeepLab v3</label>
-                    </div>
-                  </div>
-                  <div class="col-md-3 col-sm-6">
-                    <div class="form-check form-switch">
-                      <input class="form-check-input" name="{{ form2.dpseg_deeplabv3plus.html_name }}" type="checkbox" role="switch" id="{{ form2.dpseg_deeplabv3plus.id_for_label }}">
-                      <label class="form-check-label" for="{{ form2.dpseg_deeplabv3plus.id_for_label }}">DeepLab v3+</label>
-                    </div>
-                  </div>
-              </form>
-          </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-{% else %}
-      <h3><span class="text-info-emphasis">75</span> Classification Models</h3>
-      <div class="row g-3">
-        <div class="col-md-6">
-          <ul>
-            <li>
-                Xception (Keras - <i>Xception</i>)
-                {% if pdf == "True" %}
-                <a href="{% static 'pdf/1610.02357.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="Xception: Deep Learning with Depthwise Separable Convolutions"><use href="#pdf"></use></svg>
-                </a>
-                {% endif %}
-            </li>
+    {% else %}
+        <h3><span class="text-info-emphasis">75</span> Classification Models</h3>
+        <div class="row g-3">
+            <div class="col-md-6">
+                <ul>
+                    <li>
+                        Xception (Keras - <i>Xception</i>)
+                        {% if pdf == "True" %}
+                            <a href="{% static 'pdf/1610.02357.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
+                                <svg class="bi" width="16" height="16" role="img" aria-label="Xception: Deep Learning with Depthwise Separable Convolutions"><use href="#pdf"></use></svg>
+                            </a>
+                        {% endif %}
+                    </li>
             <li>
                 VGG 11 (PyTorch - <i>VGG11</i>)
                 {% if pdf == "True" %}
