@@ -2695,7 +2695,7 @@
                     </li>
                     <li>
                         EfficientNet B0 V2 (Keras - <i>EfficientNetB0V2</i>)
-                        {% if pdf == "True" %}                
+                        {% if pdf == "True" %}
                             <a href="{% static 'pdf/2104.00298.pdf' %}"
                                target="_blank"
                                class="d-inline-flex link-body-emphasis text-decoration-none">
@@ -2823,7 +2823,7 @@
                                     <use href="#pdf"></use>
                                 </svg>
                             </a>
-                        {%  endif %}
+                        {% endif %}
                     </li>
                     <li>
                         EfficientNet B5 (Keras - <i>EfficientNetB5</i>)
@@ -2907,7 +2907,7 @@
                     </li>
                     <li>
                         EfficientNet V2 Large (Keras - <i>EfficientNetV2Large</i>)
-                        {% if pdf == "True" %}                
+                        {% if pdf == "True" %}
                             <a href="{% static 'pdf/2104.00298.pdf' %}"
                                target="_blank"
                                class="d-inline-flex link-body-emphasis text-decoration-none">
@@ -2963,7 +2963,8 @@
                                      width="16"
                                      height="16"
                                      role="img"
-                                     aria-label="A ConvNet for the 2020s"><use href="#pdf"></use>
+                                     aria-label="A ConvNet for the 2020s">
+                                    <use href="#pdf"></use>
                                 </svg>
                             </a>
                         {% endif %}
@@ -2978,7 +2979,8 @@
                                      width="16"
                                      height="16"
                                      role="img"
-                                     aria-label="A ConvNet for the 2020s"><use href="#pdf"></use>
+                                     aria-label="A ConvNet for the 2020s">
+                                    <use href="#pdf"></use>
                                 </svg>
                             </a>
                         {% endif %}
@@ -2993,7 +2995,8 @@
                                      width="16"
                                      height="16"
                                      role="img"
-                                     aria-label="A ConvNet for the 2020s"><use href="#pdf"></use>
+                                     aria-label="A ConvNet for the 2020s">
+                                    <use href="#pdf"></use>
                                 </svg>
                             </a>
                         {% endif %}
@@ -3008,7 +3011,8 @@
                                      width="16"
                                      height="16"
                                      role="img"
-                                     aria-label="Designing Network Design Spaces"><use href="#pdf"></use>
+                                     aria-label="Designing Network Design Spaces">
+                                    <use href="#pdf"></use>
                                 </svg>
                             </a>
                         {% endif %}
@@ -3023,7 +3027,8 @@
                                      width="16"
                                      height="16"
                                      role="img"
-                                     aria-label="Designing Network Design Spaces"><use href="#pdf"></use>
+                                     aria-label="Designing Network Design Spaces">
+                                    <use href="#pdf"></use>
                                 </svg>
                             </a>
                         {% endif %}
@@ -3038,7 +3043,8 @@
                                      width="16"
                                      height="16"
                                      role="img"
-                                     aria-label="Designing Network Design Spaces"><use href="#pdf"></use>
+                                     aria-label="Designing Network Design Spaces">
+                                    <use href="#pdf"></use>
                                 </svg>
                             </a>
                         {% endif %}
@@ -3077,7 +3083,7 @@
                     </li>
                     <li>
                         RegNetY 006 (Keras - <i>RegNetY006</i>)
-                        {% if pdf == "True" %}                
+                        {% if pdf == "True" %}
                             <a href="{% static 'pdf/2003.13678.pdf' %}"
                                target="_blank"
                                class="d-inline-flex link-body-emphasis text-decoration-none">
@@ -3189,7 +3195,7 @@
                     </li>
                     <li>
                         RegNetX 040 (Keras - <i>RegNetX040</i>)
-                        {% if pdf == "True" %}                
+                        {% if pdf == "True" %}
                             <a href="{% static 'pdf/2003.13678.pdf' %}"
                                target="_blank"
                                class="d-inline-flex link-body-emphasis text-decoration-none">
@@ -3220,11 +3226,11 @@
                         {% endif %}
                     </li>
                     <li>
-                         RegNetX 064 (Keras - <i>RegNetX064</i>)
-                         {% if pdf == "True" %}
-                             <a href="{% static 'pdf/2003.13678.pdf' %}"
-                                target="_blank"
-                                class="d-inline-flex link-body-emphasis text-decoration-none">
+                        RegNetX 064 (Keras - <i>RegNetX064</i>)
+                        {% if pdf == "True" %}
+                            <a href="{% static 'pdf/2003.13678.pdf' %}"
+                               target="_blank"
+                               class="d-inline-flex link-body-emphasis text-decoration-none">
                                 <svg class="bi"
                                      width="16"
                                      height="16"
@@ -3232,14 +3238,15 @@
                                      aria-label="Designing Network Design Spaces">
                                     <use href="#pdf"></use>
                                 </svg>
-                             </a>
-                         {% endif %}
+                            </a>
+                        {% endif %}
                     </li>
                     <li>
                         RegNetY 064 (Keras - <i>RegNetY064</i>)
                         {% if pdf == "True" %}
                             <a href="{% static 'pdf/2003.13678.pdf' %}"
-                               target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
+                               target="_blank"
+                               class="d-inline-flex link-body-emphasis text-decoration-none">
                                 <svg class="bi"
                                      width="16"
                                      height="16"
@@ -3381,577 +3388,579 @@
                 </ul>
             </div>
         </div>
-        <h3><span class="text-info-emphasis">9</span> Segmentation Architectures</h3>
+        <h3>
+            <span class="text-info-emphasis">9</span> Segmentation Architectures
+        </h3>
         <div class="row g-3">
             <div class="col-md-6">
-              <ul>
-                <li>
-                    U-Net (PyTorch - <i>UNet</i>)
-                    {% if pdf == "True" %}
-                        <a href="{% static 'pdf/1505.04597.pdf' %}"
-                           target="_blank"
-                           class="d-inline-flex link-body-emphasis text-decoration-none">
-                            <svg class="bi"
-                                 width="16"
-                                 height="16"
-                                 role="img"
-                                 aria-label="U-Net: Convolutional Networks for Biomedical Image Segmentation">
-                                <use href="#pdf"></use>
-                            </svg>
-                        </a>
-                    {% endif %}
-                </li>
-                <li>
-                    U-Net++ (PyTorch - <i>UNet++</i>)
-                    {% if pdf == "True" %}
-                        <a href="{% static 'pdf/1807.10165.pdf' %}"
-                            target="_blank"
-                            class="d-inline-flex link-body-emphasis text-decoration-none">
-                            <svg class="bi"
-                                 width="16"
-                                 height="16"
-                                 role="img"
-                                 aria-label="UNet++: A Nested U-Net Architecture for Medical Image Segmentation">
-                                <use href="#pdf"></use>
-                            </svg>
-                        </a>
-                    {% endif %}
-                </li>
-                <li>
-                    MAnet (PyTorch - <i>MAnet</i>)
-                    {% if pdf == "True" %}                
-                        <a href="{% static 'pdf/MA-Net_A_Multi-Scale_Attention_Network_for_Liver_and_Tumor_Segmentation.pdf' %}"
-                           target="_blank"
-                           class="d-inline-flex link-body-emphasis text-decoration-none">
-                            <svg class="bi"
-                                 width="16"
-                                 height="16"
-                                 role="img"
-                                 aria-label="MA-Net: A Multi-Scale Attention Network for Liver and Tumor Segmentation">
-                                <use href="#pdf"></use>
-                            </svg>
-                        </a>
-                    {% endif %}
-                </li>
-                <li>
-                    Linknet (PyTorch - <i>Linknet</i>)
-                    {% if pdf == "True" %}
-                        <a href="{% static 'pdf/1707.03718.pdf' %}"
-                           target="_blank"
-                           class="d-inline-flex link-body-emphasis text-decoration-none">
-                            <svg class="bi"
-                                 width="16"
-                                 height="16"
-                                 role="img"
-                                 aria-label="LinkNet: Exploiting Encoder Representations for Efficient Semantic Segmentation">
-                                <use href="#pdf"></use>
-                            </svg>
-                        </a>
-                    {% endif %}
-                </li>
-                <li>
-                    FPN (PyTorch - <i>FPN</i>)
-                    {% if pdf == "True" %}
-                        <a href="{% static 'pdf/COCO17-Stuff-FAIR.pdf' %}"
-                           target="_blank"
-                           class="d-inline-flex link-body-emphasis text-decoration-none">
-                            <svg class="bi"
-                                 width="16"
-                                 height="16"
-                                 role="img"
-                                 aria-label="A Unified Architecture for Instance and Semantic Segmentation">
-                                <use href="#pdf"></use>
-                            </svg>
-                        </a>
-                    {% endif %}
-                </li>
-            </ul>
+                <ul>
+                    <li>
+                        U-Net (PyTorch - <i>UNet</i>)
+                        {% if pdf == "True" %}
+                            <a href="{% static 'pdf/1505.04597.pdf' %}"
+                               target="_blank"
+                               class="d-inline-flex link-body-emphasis text-decoration-none">
+                                <svg class="bi"
+                                     width="16"
+                                     height="16"
+                                     role="img"
+                                     aria-label="U-Net: Convolutional Networks for Biomedical Image Segmentation">
+                                    <use href="#pdf"></use>
+                                </svg>
+                            </a>
+                        {% endif %}
+                    </li>
+                    <li>
+                        U-Net++ (PyTorch - <i>UNet++</i>)
+                        {% if pdf == "True" %}
+                            <a href="{% static 'pdf/1807.10165.pdf' %}"
+                                target="_blank"
+                                class="d-inline-flex link-body-emphasis text-decoration-none">
+                                <svg class="bi"
+                                     width="16"
+                                     height="16"
+                                     role="img"
+                                     aria-label="UNet++: A Nested U-Net Architecture for Medical Image Segmentation">
+                                    <use href="#pdf"></use>
+                                </svg>
+                            </a>
+                        {% endif %}
+                    </li>
+                    <li>
+                        MAnet (PyTorch - <i>MAnet</i>)
+                        {% if pdf == "True" %}                
+                            <a href="{% static 'pdf/MA-Net_A_Multi-Scale_Attention_Network_for_Liver_and_Tumor_Segmentation.pdf' %}"
+                               target="_blank"
+                               class="d-inline-flex link-body-emphasis text-decoration-none">
+                                <svg class="bi"
+                                     width="16"
+                                     height="16"
+                                     role="img"
+                                     aria-label="MA-Net: A Multi-Scale Attention Network for Liver and Tumor Segmentation">
+                                    <use href="#pdf"></use>
+                                </svg>
+                            </a>
+                        {% endif %}
+                    </li>
+                    <li>
+                        Linknet (PyTorch - <i>Linknet</i>)
+                        {% if pdf == "True" %}
+                            <a href="{% static 'pdf/1707.03718.pdf' %}"
+                               target="_blank"
+                               class="d-inline-flex link-body-emphasis text-decoration-none">
+                                <svg class="bi"
+                                     width="16"
+                                     height="16"
+                                     role="img"
+                                     aria-label="LinkNet: Exploiting Encoder Representations for Efficient Semantic Segmentation">
+                                    <use href="#pdf"></use>
+                                </svg>
+                            </a>
+                        {% endif %}
+                    </li>
+                    <li>
+                        FPN (PyTorch - <i>FPN</i>)
+                        {% if pdf == "True" %}
+                            <a href="{% static 'pdf/COCO17-Stuff-FAIR.pdf' %}"
+                               target="_blank"
+                               class="d-inline-flex link-body-emphasis text-decoration-none">
+                                <svg class="bi"
+                                     width="16"
+                                     height="16"
+                                     role="img"
+                                     aria-label="A Unified Architecture for Instance and Semantic Segmentation">
+                                    <use href="#pdf"></use>
+                                </svg>
+                            </a>
+                        {% endif %}
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-6">
+                <ul>
+                    <li>
+                        PSPNet (PyTorch - <i>PSPNet</i>)
+                        {% if pdf == "True" %}
+                            <a href="{% static 'pdf/1612.01105.pdf' %}"
+                                target="_blank"
+                                class="d-inline-flex link-body-emphasis text-decoration-none">
+                                <svg class="bi"
+                                     width="16"
+                                     height="16"
+                                     role="img"
+                                     aria-label="Pyramid Scene Parsing Network"><use href="#pdf"></use>
+                                </svg>
+                            </a>
+                        {% endif %}
+                    </li>
+                    <li>
+                        PAN (PyTorch - <i>PAN</i>)
+                        {% if pdf == "True" %}
+                            <a href="{% static 'pdf/1805.10180.pdf' %}"
+                               target="_blank"
+                               class="d-inline-flex link-body-emphasis text-decoration-none">
+                                <svg class="bi"
+                                     width="16"
+                                     height="16"
+                                     role="img"
+                                     aria-label="Pyramid Attention Network for Semantic Segmentation"><use href="#pdf"></use>
+                                </svg>
+                            </a>
+                        {% endif %}
+                    </li>
+                    <li>
+                        DeepLab V3 (PyTorch - <i>DeepLabV3</i>)
+                        {% if pdf == "True" %}
+                            <a href="{% static 'pdf/1706.05587.pdf' %}"
+                               target="_blank"
+                               class="d-inline-flex link-body-emphasis text-decoration-none">
+                                <svg class="bi"
+                                     width="16"
+                                     height="16"
+                                     role="img"
+                                     aria-label="Rethinking Atrous Convolution for Semantic Image Segmentation"><use href="#pdf"></use>
+                                </svg>
+                            </a>
+                        {% endif %}
+                    </li>
+                    <li>
+                        DeepLab V3+ (PyTorch - <i>DeepLabV3+</i>)
+                        {% if pdf == "True" %}
+                            <a href="{% static 'pdf/1802.02611.pdf' %}"
+                               target="_blank"
+                               class="d-inline-flex link-body-emphasis text-decoration-none">
+                                <svg class="bi"
+                                     width="16"
+                                     height="16"
+                                     role="img"
+                                     aria-label="Encoder-Decoder with Atrous Separable Convolution for Semantic Image Segmentation"><use href="#pdf"></use>
+                                </svg>
+                            </a>
+                        {% endif %}
+                    </li>
+                </ul>
+            </div>
         </div>
-        <div class="col-md-6">
-            <ul>
-                <li>
-                    PSPNet (PyTorch - <i>PSPNet</i>)
-                    {% if pdf == "True" %}
-                        <a href="{% static 'pdf/1612.01105.pdf' %}"
-                            target="_blank"
-                            class="d-inline-flex link-body-emphasis text-decoration-none">
-                            <svg class="bi"
-                                 width="16"
-                                 height="16"
-                                 role="img"
-                                 aria-label="Pyramid Scene Parsing Network"><use href="#pdf"></use>
-                            </svg>
-                        </a>
-                    {% endif %}
-                </li>
-                <li>
-                    PAN (PyTorch - <i>PAN</i>)
-                    {% if pdf == "True" %}
-                        <a href="{% static 'pdf/1805.10180.pdf' %}"
-                           target="_blank"
-                           class="d-inline-flex link-body-emphasis text-decoration-none">
-                            <svg class="bi"
-                                 width="16"
-                                 height="16"
-                                 role="img"
-                                 aria-label="Pyramid Attention Network for Semantic Segmentation"><use href="#pdf"></use>
-                            </svg>
-                        </a>
-                    {% endif %}
-                </li>
-                <li>
-                    DeepLab V3 (PyTorch - <i>DeepLabV3</i>)
-                    {% if pdf == "True" %}
-                        <a href="{% static 'pdf/1706.05587.pdf' %}"
-                           target="_blank"
-                           class="d-inline-flex link-body-emphasis text-decoration-none">
-                            <svg class="bi"
-                                 width="16"
-                                 height="16"
-                                 role="img"
-                                 aria-label="Rethinking Atrous Convolution for Semantic Image Segmentation"><use href="#pdf"></use>
-                            </svg>
-                        </a>
-                    {% endif %}
-                </li>
-                <li>
-                    DeepLab V3+ (PyTorch - <i>DeepLabV3+</i>)
-                    {% if pdf == "True" %}
-                        <a href="{% static 'pdf/1802.02611.pdf' %}"
-                           target="_blank"
-                           class="d-inline-flex link-body-emphasis text-decoration-none">
-                            <svg class="bi"
-                                 width="16"
-                                 height="16"
-                                 role="img"
-                                 aria-label="Encoder-Decoder with Atrous Separable Convolution for Semantic Image Segmentation"><use href="#pdf"></use>
-                            </svg>
-                        </a>
-                    {% endif %}
-                </li>
-            </ul>
-        </div>
-    </div>
     {% endif %}
 {% endblock %}
 {% block script %}
-{%  if request.user.is_authenticated %}
-<script>
-    function selectDataAug() {
-        document.getElementById("{{ form1.dpcla_data_augmentation_cropping.id_for_label }}").checked = true;
-        document.getElementById("{{ form1.dpcla_data_augmentation_horizontal_flip.id_for_label }}").checked = true;
-        document.getElementById("{{ form1.dpcla_data_augmentation_vertical_flip.id_for_label }}").checked = true;
-        document.getElementById("{{ form1.dpcla_data_augmentation_translation.id_for_label }}").checked = true;
-        document.getElementById("{{ form1.dpcla_data_augmentation_rotation.id_for_label }}").checked = true;
-        document.getElementById("{{ form1.dpcla_data_augmentation_zoom.id_for_label }}").checked = true;
-        document.getElementById("{{ form1.dpcla_data_augmentation_contrast.id_for_label }}").checked = true;
-        document.getElementById("{{ form1.dpcla_data_augmentation_brightness.id_for_label }}").checked = true;
-    }
+    {%  if request.user.is_authenticated %}
+        <script>
+            function selectDataAug() {
+                document.getElementById("{{ form1.dpcla_data_augmentation_cropping.id_for_label }}").checked = true;
+                document.getElementById("{{ form1.dpcla_data_augmentation_horizontal_flip.id_for_label }}").checked = true;
+                document.getElementById("{{ form1.dpcla_data_augmentation_vertical_flip.id_for_label }}").checked = true;
+                document.getElementById("{{ form1.dpcla_data_augmentation_translation.id_for_label }}").checked = true;
+                document.getElementById("{{ form1.dpcla_data_augmentation_rotation.id_for_label }}").checked = true;
+                document.getElementById("{{ form1.dpcla_data_augmentation_zoom.id_for_label }}").checked = true;
+                document.getElementById("{{ form1.dpcla_data_augmentation_contrast.id_for_label }}").checked = true;
+                document.getElementById("{{ form1.dpcla_data_augmentation_brightness.id_for_label }}").checked = true;
+            }
 
-    function unselectDataAug() {
-        document.getElementById("{{ form1.dpcla_data_augmentation_cropping.id_for_label }}").checked = false;
-        document.getElementById("{{ form1.dpcla_data_augmentation_horizontal_flip.id_for_label }}").checked = false;
-        document.getElementById("{{ form1.dpcla_data_augmentation_vertical_flip.id_for_label }}").checked = false;
-        document.getElementById("{{ form1.dpcla_data_augmentation_translation.id_for_label }}").checked = false;
-        document.getElementById("{{ form1.dpcla_data_augmentation_rotation.id_for_label }}").checked = false;
-        document.getElementById("{{ form1.dpcla_data_augmentation_zoom.id_for_label }}").checked = false;
-        document.getElementById("{{ form1.dpcla_data_augmentation_contrast.id_for_label }}").checked = false;
-        document.getElementById("{{ form1.dpcla_data_augmentation_brightness.id_for_label }}").checked = false;
-    }
+            function unselectDataAug() {
+                document.getElementById("{{ form1.dpcla_data_augmentation_cropping.id_for_label }}").checked = false;
+                document.getElementById("{{ form1.dpcla_data_augmentation_horizontal_flip.id_for_label }}").checked = false;
+                document.getElementById("{{ form1.dpcla_data_augmentation_vertical_flip.id_for_label }}").checked = false;
+                document.getElementById("{{ form1.dpcla_data_augmentation_translation.id_for_label }}").checked = false;
+                document.getElementById("{{ form1.dpcla_data_augmentation_rotation.id_for_label }}").checked = false;
+                document.getElementById("{{ form1.dpcla_data_augmentation_zoom.id_for_label }}").checked = false;
+                document.getElementById("{{ form1.dpcla_data_augmentation_contrast.id_for_label }}").checked = false;
+                document.getElementById("{{ form1.dpcla_data_augmentation_brightness.id_for_label }}").checked = false;
+            }
 
-    function selectModel() {
-        document.getElementById("{{ form1.dpcla_cception.id_for_label }}").checked = true;
-        document.getElementById("{{ form1.dpcla_vgg_11.id_for_label }}").checked = true;
-        document.getElementById("{{ form1.dpcla_vgg_13.id_for_label }}").checked = true;
-        document.getElementById("{{ form1.dpcla_vgg_16.id_for_label }}").checked = true;
-        document.getElementById("{{ form1.dpcla_vgg_19.id_for_label }}").checked = true;
-        document.getElementById("{{ form1.dpcla_resnet_18.id_for_label }}").checked = true;
-        document.getElementById("{{ form1.dpcla_resnet_34.id_for_label }}").checked = true;
-        document.getElementById("{{ form1.dpcla_resnet_50.id_for_label }}").checked = true;
-        document.getElementById("{{ form1.dpcla_resnet_50_v2.id_for_label }}").checked = true;
-        document.getElementById("{{ form1.dpcla_resnet_rs_50.id_for_label }}").checked = true;
-        document.getElementById("{{ form1.dpcla_resnet_101.id_for_label }}").checked = true;
-        document.getElementById("{{ form1.dpcla_resnet_101_v2.id_for_label }}").checked = true;
-        document.getElementById("{{ form1.dpcla_resnet_rs_101.id_for_label }}").checked = true;
-        document.getElementById("{{ form1.dpcla_resnet_152.id_for_label }}").checked = true;
-        document.getElementById("{{ form1.dpcla_resnet_152_v2.id_for_label }}").checked = true;
-        document.getElementById("{{ form1.dpcla_resnet_rs_152.id_for_label }}").checked = true;
-        document.getElementById("{{ form1.dpcla_resnet_rs_200.id_for_label }}").checked = true;
-        document.getElementById("{{ form1.dpcla_resnet_rs_270.id_for_label }}").checked = true;
-        document.getElementById("{{ form1.dpcla_resnet_rs_350.id_for_label }}").checked = true;
-        document.getElementById("{{ form1.dpcla_resnet_rs_420.id_for_label }}").checked = true;
-        document.getElementById("{{ form1.dpcla_inception_v3.id_for_label }}").checked = true;
-        document.getElementById("{{ form1.dpcla_inception_resnet_v2.id_for_label }}").checked = true;
-        document.getElementById("{{ form1.dpcla_mobilenet.id_for_label }}").checked = true;
-        document.getElementById("{{ form1.dpcla_mobilenet_v2.id_for_label }}").checked = true;
-        document.getElementById("{{ form1.dpcla_mobilenet_v3_small.id_for_label }}").checked = true;
-        document.getElementById("{{ form1.dpcla_mobilenet_v3_large.id_for_label }}").checked = true;
-        document.getElementById("{{ form1.dpcla_densenet_121.id_for_label }}").checked = true;
-        document.getElementById("{{ form1.dpcla_densenet_169.id_for_label }}").checked = true;
-        document.getElementById("{{ form1.dpcla_densenet_201.id_for_label }}").checked = true;
-        document.getElementById("{{ form1.dpcla_nasnet_mobile.id_for_label }}").checked = true;
-        document.getElementById("{{ form1.dpcla_nasnet_large.id_for_label }}").checked = true;
-        document.getElementById("{{ form1.dpcla_efficientnet_b0.id_for_label }}").checked = true;
-        document.getElementById("{{ form1.dpcla_efficientnet_b0_v2.id_for_label }}").checked = true;
-        document.getElementById("{{ form1.dpcla_efficientnet_b1.id_for_label }}").checked = true;
-        document.getElementById("{{ form1.dpcla_efficientnet_b1_v2.id_for_label }}").checked = true;
-        document.getElementById("{{ form1.dpcla_efficientnet_b2.id_for_label }}").checked = true;
-        document.getElementById("{{ form1.dpcla_efficientnet_b2_v2.id_for_label }}").checked = true;
-        document.getElementById("{{ form1.dpcla_efficientnet_b3.id_for_label }}").checked = true;
-        document.getElementById("{{ form1.dpcla_efficientnet_b3_v2.id_for_label }}").checked = true;
-        document.getElementById("{{ form1.dpcla_efficientnet_b4.id_for_label }}").checked = true;
-        document.getElementById("{{ form1.dpcla_efficientnet_b5.id_for_label }}").checked = true;
-        document.getElementById("{{ form1.dpcla_efficientnet_b6.id_for_label }}").checked = true;
-        document.getElementById("{{ form1.dpcla_efficientnet_b7.id_for_label }}").checked = true;
-        document.getElementById("{{ form1.dpcla_efficientnet_v2_small.id_for_label }}").checked = true;
-        document.getElementById("{{ form1.dpcla_efficientnet_v2_medium.id_for_label }}").checked = true;
-        document.getElementById("{{ form1.dpcla_efficientnet_v2_large.id_for_label }}").checked = true;
-        document.getElementById("{{ form1.dpcla_convnext_tiny.id_for_label }}").checked = true;
-        document.getElementById("{{ form1.dpcla_Convnext_small.id_for_label }}").checked = true;
-        document.getElementById("{{ form1.dpcla_convnext_base.id_for_label }}").checked = true;
-        document.getElementById("{{ form1.dpcla_convnext_large.id_for_label }}").checked = true;
-        document.getElementById("{{ form1.dpcla_convnext_xlarge.id_for_label }}").checked = true;
-        document.getElementById("{{ form1.dpcla_regnet_x_002.id_for_label }}").checked = true;
-        document.getElementById("{{ form1.dpcla_regnet_y_002.id_for_label }}").checked = true;
-        document.getElementById("{{ form1.dpcla_regnet_x_004.id_for_label }}").checked = true;
-        document.getElementById("{{ form1.dpcla_regnet_Y_004.id_for_label }}").checked = true;
-        document.getElementById("{{ form1.dpcla_regnet_x_006.id_for_label }}").checked = true;
-        document.getElementById("{{ form1.dpcla_regnet_y_006.id_for_label }}").checked = true;
-        document.getElementById("{{ form1.dpcla_regnet_x_008.id_for_label }}").checked = true;
-        document.getElementById("{{ form1.dpcla_regnet_y_008.id_for_label }}").checked = true;
-        document.getElementById("{{ form1.dpcla_regnet_x_016.id_for_label }}").checked = true;
-        document.getElementById("{{ form1.dpcla_regnet_y_016.id_for_label }}").checked = true;
-        document.getElementById("{{ form1.dpcla_regnet_x_032.id_for_label }}").checked = true;
-        document.getElementById("{{ form1.dpcla_regnet_y_032.id_for_label }}").checked = true;
-        document.getElementById("{{ form1.dpcla_regnet_x_040.id_for_label }}").checked = true;
-        document.getElementById("{{ form1.dpcla_regnet_y_040.id_for_label }}").checked = true;
-        document.getElementById("{{ form1.dpcla_regnet_x_064.id_for_label }}").checked = true;
-        document.getElementById("{{ form1.dpcla_regnet_y_064.id_for_label }}").checked = true;
-        document.getElementById("{{ form1.dpcla_regnet_x_080.id_for_label }}").checked = true;
-        document.getElementById("{{ form1.dpcla_regnet_y_080.id_for_label }}").checked = true;
-        document.getElementById("{{ form1.dpcla_regnet_x_120.id_for_label }}").checked = true;
-        document.getElementById("{{ form1.dpcla_regnet_y_120.id_for_label }}").checked = true;
-        document.getElementById("{{ form1.dpcla_regnet_X_160.id_for_label }}").checked = true;
-        document.getElementById("{{ form1.dpcla_regnet_y_160.id_for_label }}").checked = true;
-        document.getElementById("{{ form1.dpcla_regnet_x_320.id_for_label }}").checked = true;
-        document.getElementById("{{ form1.dpcla_regnet_y_320.id_for_label }}").checked = true;
-      }
-
-      function unselectModel() {
-        document.getElementById("{{ form1.dpcla_xception.id_for_label }}").checked = false;
-        document.getElementById("{{ form1.dpcla_vgg_11.id_for_label }}").checked = false;
-        document.getElementById("{{ form1.dpcla_vgg_13.id_for_label }}").checked = false;
-        document.getElementById("{{ form1.dpcla_vgg_16.id_for_label }}").checked = false;
-        document.getElementById("{{ form1.dpcla_vgg_19.id_for_label }}").checked = false;
-        document.getElementById("{{ form1.dpcla_resnet_18.id_for_label }}").checked = false;
-        document.getElementById("{{ form1.dpcla_resnet_34.id_for_label }}").checked = false;
-        document.getElementById("{{ form1.dpcla_resnet_50.id_for_label }}").checked = false;
-        document.getElementById("{{ form1.dpcla_resnet_50_v2.id_for_label }}").checked = false;
-        document.getElementById("{{ form1.dpcla_resnet_rs_50.id_for_label }}").checked = false;
-        document.getElementById("{{ form1.dpcla_resnet_101.id_for_label }}").checked = false;
-        document.getElementById("{{ form1.dpcla_resnet_101_v2.id_for_label }}").checked = false;
-        document.getElementById("{{ form1.dpcla_resnet_rs_101.id_for_label }}").checked = false;
-        document.getElementById("{{ form1.dpcla_resnet_152.id_for_label }}").checked = false;
-        document.getElementById("{{ form1.dpcla_resnet_152_v2.id_for_label }}").checked = false;
-        document.getElementById("{{ form1.dpcla_resnet_rs_152.id_for_label }}").checked = false;
-        document.getElementById("{{ form1.dpcla_resnet_rs_200.id_for_label }}").checked = false;
-        document.getElementById("{{ form1.dpcla_resnet_rs_270.id_for_label }}").checked = false;
-        document.getElementById("{{ form1.dpcla_resnet_rs_350.id_for_label }}").checked = false;
-        document.getElementById("{{ form1.dpcla_resnet_rs_420.id_for_label }}").checked = false;
-        document.getElementById("{{ form1.dpcla_inception_v3.id_for_label }}").checked = false;
-        document.getElementById("{{ form1.dpcla_inception_resnet_v2.id_for_label }}").checked = false;
-        document.getElementById("{{ form1.dpcla_mobilenet.id_for_label }}").checked = false;
-        document.getElementById("{{ form1.dpcla_mobilenet_v2.id_for_label }}").checked = false;
-        document.getElementById("{{ form1.dpcla_mobilenet_v3_small.id_for_label }}").checked = false;
-        document.getElementById("{{ form1.dpcla_mobilenet_v3_large.id_for_label }}").checked = false;
-        document.getElementById("{{ form1.dpcla_densenet_121.id_for_label }}").checked = false;
-        document.getElementById("{{ form1.dpcla_densenet_169.id_for_label }}").checked = false;
-        document.getElementById("{{ form1.dpcla_densenet_201.id_for_label }}").checked = false;
-        document.getElementById("{{ form1.dpcla_nasnet_mobile.id_for_label }}").checked = false;
-        document.getElementById("{{ form1.dpcla_nasnet_large.id_for_label }}").checked = false;
-        document.getElementById("{{ form1.dpcla_efficientnet_b0.id_for_label }}").checked = false;
-        document.getElementById("{{ form1.dpcla_efficientnet_b0_v2.id_for_label }}").checked = false;
-        document.getElementById("{{ form1.dpcla_efficientnet_b1.id_for_label }}").checked = false;
-        document.getElementById("{{ form1.dpcla_efficientnet_b1_v2.id_for_label }}").checked = false;
-        document.getElementById("{{ form1.dpcla_efficientnet_b2.id_for_label }}").checked = false;
-        document.getElementById("{{ form1.dpcla_efficientnet_b2_v2.id_for_label }}").checked = false;
-        document.getElementById("{{ form1.dpcla_efficientnet_b3.id_for_label }}").checked = false;
-        document.getElementById("{{ form1.dpcla_efficientnet_b3_v2.id_for_label }}").checked = false;
-        document.getElementById("{{ form1.dpcla_efficientnet_b4.id_for_label }}").checked = false;
-        document.getElementById("{{ form1.dpcla_efficientnet_b5.id_for_label }}").checked = false;
-        document.getElementById("{{ form1.dpcla_efficientnet_b6.id_for_label }}").checked = false;
-        document.getElementById("{{ form1.dpcla_efficientnet_b7.id_for_label }}").checked = false;
-        document.getElementById("{{ form1.dpcla_efficientnet_v2_small.id_for_label }}").checked = false;
-        document.getElementById("{{ form1.dpcla_efficientnet_v2_medium.id_for_label }}").checked = false;
-        document.getElementById("{{ form1.dpcla_efficientnet_v2_large.id_for_label }}").checked = false;
-        document.getElementById("{{ form1.dpcla_convnext_tiny.id_for_label }}").checked = false;
-        document.getElementById("{{ form1.dpcla_convnext_small.id_for_label }}").checked = false;
-        document.getElementById("{{ form1.dpcla_convnext_base.id_for_label }}").checked = false;
-        document.getElementById("{{ form1.dpcla_convnext_large.id_for_label }}").checked = false;
-        document.getElementById("{{ form1.dpcla_convnext_xlarge.id_for_label }}").checked = false;
-        document.getElementById("{{ form1.dpcla_regnet_x_002.id_for_label }}").checked = false;
-        document.getElementById("{{ form1.dpcla_regnet_y_002.id_for_label }}").checked = false;
-        document.getElementById("{{ form1.dpcla_regnet_x_004.id_for_label }}").checked = false;
-        document.getElementById("{{ form1.dpcla_regnet_y_004.id_for_label }}").checked = false;
-        document.getElementById("{{ form1.dpcla_regnet_x_006.id_for_label }}").checked = false;
-        document.getElementById("{{ form1.dpcla_regnet_y_006.id_for_label }}").checked = false;
-        document.getElementById("{{ form1.dpcla_regnet_x_008.id_for_label }}").checked = false;
-        document.getElementById("{{ form1.dpcla_regnet_y_008.id_for_label }}").checked = false;
-        document.getElementById("{{ form1.dpcla_regnet_x_016.id_for_label }}").checked = false;
-        document.getElementById("{{ form1.dpcla_regnet_y_016.id_for_label }}").checked = false;
-        document.getElementById("{{ form1.dpcla_regnet_x_032.id_for_label }}").checked = false;
-        document.getElementById("{{ form1.dpcla_regnet_y_032.id_for_label }}").checked = false;
-        document.getElementById("{{ form1.dpcla_regnet_x_040.id_for_label }}").checked = false;
-        document.getElementById("{{ form1.dpcla_regnet_y_040.id_for_label }}").checked = false;
-        document.getElementById("{{ form1.dpcla_regnet_x_064.id_for_label }}").checked = false;
-        document.getElementById("{{ form1.dpcla_regnet_y_064.id_for_label }}").checked = false;
-        document.getElementById("{{ form1.dpcla_regnet_x_080.id_for_label }}").checked = false;
-        document.getElementById("{{ form1.dpcla_regnet_y_080.id_for_label }}").checked = false;
-        document.getElementById("{{ form1.dpcla_regnet_x_120.id_for_label }}").checked = false;
-        document.getElementById("{{ form1.dpcla_regnet_y_120.id_for_label }}").checked = false;
-        document.getElementById("{{ form1.dpcla_regnet_x_160.id_for_label }}").checked = false;
-        document.getElementById("{{ form1.dpcla_regnet_y_160.id_for_label }}").checked = false;
-        document.getElementById("{{ form1.dpcla_regnet_x_320.id_for_label }}").checked = false;
-        document.getElementById("{{ form1.dpcla_regnet_y_320.id_for_label }}").checked = false;
-      }
-
-    function selectXAI() {
-         document.getElementById("{{ form1.dpcla_activationmaximization.id_for_label }}").checked = true;
-         document.getElementById("{{ form1.dpcla_gradcam.id_for_label }}").checked = true;
-         document.getElementById("{{ form1.dpcla_gradcamplusplus.id_for_label }}").checked = true;
-         document.getElementById("{{ form1.dpcla_scorecam.id_for_label }}").checked = true;
-         document.getElementById("{{ form1.dpcla_fasterscorecam.id_for_label }}").checked = true;
-         document.getElementById("{{ form1.dpcla_layercam.id_for_label }}").checked = true;
-         document.getElementById("{{ form1.dpcla_vanillasaliency.id_for_label }}").checked = true;
-         document.getElementById("{{ form1.dpcla_smoothgrad.id_for_label }}").checked = true;
-    }
-
-    function unselectXAI() {
-         document.getElementById("{{ form1.dpcla_activationmaximization.id_for_label }}").checked = false;
-         document.getElementById("{{ form1.dpcla_gradcam.id_for_label }}").checked = false;
-         document.getElementById("{{ form1.dpcla_gradcamplusplus.id_for_label }}").checked = false;
-         document.getElementById("{{ form1.dpcla_scorecam.id_for_label }}").checked = false;
-         document.getElementById("{{ form1.dpcla_fasterscorecam.id_for_label }}").checked = false;
-         document.getElementById("{{ form1.dpcla_layercam.id_for_label }}").checked = false;
-         document.getElementById("{{ form1.dpcla_vanillasaliency.id_for_label }}").checked = false;
-         document.getElementById("{{ form1.dpcla_smoothgrad.id_for_label }}").checked = false;
-    }
-
-    function selectXception(element) {
-        if (element.checked) {
-            document.getElementById("{{ form1.dpcla_xception.id_for_label }}").checked = true;
-        } else {
-            document.getElementById("{{ form1.dpcla_xception.id_for_label }}").checked = false;
-        }
-    }
-
-    function selectVGG(element) {
-        if (element.checked) {
-            document.getElementById("{{ form1.dpcla_vgg11.id_for_label }}").checked = true;
-            document.getElementById("{{ form1.dpcla_vgg13.id_for_label }}").checked = true;
-            document.getElementById("{{ form1.dpcla_vgg16.id_for_label }}").checked = true;
-            document.getElementById("{{ form1.dpcla_vgg19.id_for_label }}").checked = true;
-        } else {
-            document.getElementById("{{ form1.dpcla_vgg11.id_for_label }}").checked = true;
-            document.getElementById("{{ form1.dpcla_vgg13.id_for_label }}").checked = true;
-            document.getElementById("{{ form1.dpcla_vgg16.id_for_label }}").checked = false;
-            document.getElementById("{{ form1.dpcla_vgg19.id_for_label }}").checked = false;
-        }
-    }
-
-    function selectResNet(element) {
-        if (element.checked) {
-            document.getElementById("{{ form1.dpcla_resnet_18.id_for_label }}").checked = true;
-            document.getElementById("{{ form1.dpcla_resNet_34.id_for_label }}").checked = true;
-            document.getElementById("{{ form1.dpcla_resnet_50.id_for_label }}").checked = true;
-            document.getElementById("{{ form1.dpcla_resnet_50_v2.id_for_label }}").checked = true;
-            document.getElementById("{{ form1.dpcla_resnet_rs_50.id_for_label }}").checked = true;
-            document.getElementById("{{ form1.dpcla_resnet_101.id_for_label }}").checked = true;
-            document.getElementById("{{ form1.dpcla_resnet_101_v2.id_for_label }}").checked = true;
-            document.getElementById("{{ form1.dpcla_resnet_rs_101.id_for_label }}").checked = true;
-            document.getElementById("{{ form1.dpcla_resnet_152.id_for_label }}").checked = true;
-            document.getElementById("{{ form1.dpcla_resnet_152_v2.id_for_label }}").checked = true;
-            document.getElementById("{{ form1.dpcla_resnet_rs_152.id_for_label }}").checked = true;
-            document.getElementById("{{ form1.dpcla_resnet_rs_200.id_for_label }}").checked = true;
-            document.getElementById("{{ form1.dpcla_resnet_rs_270.id_for_label }}").checked = true;
-            document.getElementById("{{ form1.dpcla_resnet_rs_350.id_for_label }}").checked = true;
-            document.getElementById("{{ form1.dpcla_resnet_rs_420.id_for_label }}").checked = true;
-        } else {
-            document.getElementById("{{ form1.dpcla_resnet_18.id_for_label }}").checked = false;
-            document.getElementById("{{ form1.dpcla_resnet_34.id_for_label }}").checked = false;
-            document.getElementById("{{ form1.dpcla_resnet_50.id_for_label }}").checked = false;
-            document.getElementById("{{ form1.dpcla_resnet_50_v2.id_for_label }}").checked = false;
-            document.getElementById("{{ form1.dpcla_resnet_rs_50.id_for_label }}").checked = false;
-            document.getElementById("{{ form1.dpcla_resnet_101.id_for_label }}").checked = false;
-            document.getElementById("{{ form1.dpcla_resnet_101_v2.id_for_label }}").checked = false;
-            document.getElementById("{{ form1.dpcla_resnet_rs_101.id_for_label }}").checked = false;
-            document.getElementById("{{ form1.dpcla_resnet_152.id_for_label }}").checked = false;
-            document.getElementById("{{ form1.dpcla_resNet_152_v2.id_for_label }}").checked = false;
-            document.getElementById("{{ form1.dpcla_resnet_rs_152.id_for_label }}").checked = false;
-            document.getElementById("{{ form1.dpcla_resnet_rs_200.id_for_label }}").checked = false;
-            document.getElementById("{{ form1.dpcla_resnet_rs_270.id_for_label }}").checked = false;
-            document.getElementById("{{ form1.dpcla_resnet_rs_350.id_for_label }}").checked = false;
-            document.getElementById("{{ form1.dpcla_resnet_rs_420.id_for_label }}").checked = false;
-        }
-    }
-
-    function selectInception(element) {
-        if (element.checked) {
-            document.getElementById("{{ form1.dpcla_inception_v3.id_for_label }}").checked = true;
-            document.getElementById("{{ form1.dpcla_inception_resnet_v2.id_for_label }}").checked = true;
-        } else {
-            document.getElementById("{{ form1.dpcla_inception_v3.id_for_label }}").checked = false;
-            document.getElementById("{{ form1.dpcla_inception_resnet_v2.id_for_label }}").checked = false;
-        }
-    }
-
-    function selectMobileNet(element) {
-        if (element.checked) {
-            document.getElementById("{{ form1.dpcla_mobilenet.id_for_label }}").checked = true;
-            document.getElementById("{{ form1.dpcla_mobilenet_v2.id_for_label }}").checked = true;
-            document.getElementById("{{ form1.dpcla_mobilenet_v3_small.id_for_label }}").checked = true;
-            document.getElementById("{{ form1.dpcla_mobilenet_v3_large.id_for_label }}").checked = true;
-        } else {
-            document.getElementById("{{ form1.dpcla_mobilenet.id_for_label }}").checked = false;
-            document.getElementById("{{ form1.dpcla_mobilenet_v2.id_for_label }}").checked = false;
-            document.getElementById("{{ form1.dpcla_mobilenet_v3_small.id_for_label }}").checked = false;
-            document.getElementById("{{ form1.dpcla_mobilenet_v3_large.id_for_label }}").checked = false;
-        }
-    }
-
-    function selectDenseNet(element) {
-        if (element.checked) {
-            document.getElementById("{{ form1.dpcla_densenet_121.id_for_label }}").checked = true;
-            document.getElementById("{{ form1.dpcla_densenet_169.id_for_label }}").checked = true;
-            document.getElementById("{{ form1.dpcla_densenet_201.id_for_label }}").checked = true;
-        } else {
-            document.getElementById("{{ form1.dpcla_densenet_121.id_for_label }}").checked = false;
-            document.getElementById("{{ form1.dpcla_densenet_169.id_for_label }}").checked = false;
-            document.getElementById("{{ form1.dpcla_densenet_201.id_for_label }}").checked = false;
-        }
-    }
-
-    function selectNASNet(element) {
-        if (element.checked) {
-            document.getElementById("{{ form1.dpcla_nasnet_mobile.id_for_label }}").checked = true;
-            document.getElementById("{{ form1.dpcla_nasnet_large.id_for_label }}").checked = true;
-        } else {
-            document.getElementById("{{ form1.dpcla_nasnet_mobile.id_for_label }}").checked = false;
-            document.getElementById("{{ form1.dpcla_nasnet_large.id_for_label }}").checked = false;
-        }
-    }
-
-    function selectEfficientNet(element) {
-        if (element.checked) {
-            document.getElementById("{{ form1.dpcla_efficientnet_b0.id_for_label }}").checked = true;
-            document.getElementById("{{ form1.dpcla_efficientnet_b0_v2.id_for_label }}").checked = true;
-            document.getElementById("{{ form1.dpcla_efficientnet_b1.id_for_label }}").checked = true;
-            document.getElementById("{{ form1.dpcla_efficientnet_b1_v2.id_for_label }}").checked = true;
-            document.getElementById("{{ form1.dpcla_efficientnet_b2.id_for_label }}").checked = true;
-            document.getElementById("{{ form1.dpcla_efficientnet_b2_v2.id_for_label }}").checked = true;
-            document.getElementById("{{ form1.dpcla_efficientnet_b3.id_for_label }}").checked = true;
-            document.getElementById("{{ form1.dpcla_efficientnet_b3_v2.id_for_label }}").checked = true;
-            document.getElementById("{{ form1.dpcla_efficientnet_b4.id_for_label }}").checked = true;
-            document.getElementById("{{ form1.dpcla_efficientnet_b5.id_for_label }}").checked = true;
-            document.getElementById("{{ form1.dpcla_efficientnet_b6.id_for_label }}").checked = true;
-            document.getElementById("{{ form1.dpcla_efficientnet_b7.id_for_label }}").checked = true;
-            document.getElementById("{{ form1.dpcla_efficientnet_v2_small.id_for_label }}").checked = true;
-            document.getElementById("{{ form1.dpcla_efficientnet_v2_medium.id_for_label }}").checked = true;
-            document.getElementById("{{ form1.dpcla_efficientnet_v2_large.id_for_label }}").checked = true;
-        } else {
-            document.getElementById("{{ form1.dpcla_efficientnet_b0.id_for_label }}").checked = false;
-            document.getElementById("{{ form1.dpcla_efficientnet_b0_v2.id_for_label }}").checked = false;
-            document.getElementById("{{ form1.dpcla_efficientnet_b1.id_for_label }}").checked = false;
-            document.getElementById("{{ form1.dpcla_efficientnet_b1_v2.id_for_label }}").checked = false;
-            document.getElementById("{{ form1.dpcla_efficientnet_b2.id_for_label }}").checked = false;
-            document.getElementById("{{ form1.dpcla_efficientnet_b2_V2.id_for_label }}").checked = false;
-            document.getElementById("{{ form1.dpcla_efficientnet_b3.id_for_label }}").checked = false;
-            document.getElementById("{{ form1.dpcla_efficientnet_b3_v2.id_for_label }}").checked = false;
-            document.getElementById("{{ form1.dpcla_efficientnet_b4.id_for_label }}").checked = false;
-            document.getElementById("{{ form1.dpcla_efficientnet_b5.id_for_label }}").checked = false;
-            document.getElementById("{{ form1.dpcla_efficientnet_b6.id_for_label }}").checked = false;
-            document.getElementById("{{ form1.dpcla_efficientnet_b7.id_for_label }}").checked = false;
-            document.getElementById("{{ form1.dpcla_efficientnet_v2_small.id_for_label }}").checked = false;
-            document.getElementById("{{ form1.dpcla_efficientnet_v2_medium.id_for_label }}").checked = false;
-            document.getElementById("{{ form1.dpcla_efficientnet_v2_large.id_for_label }}").checked = false;
-        }
-    }
-
-    function selectConvNeXt(element) {
-        if (element.checked) {
-            document.getElementById("{{ form1.dpcla_convnext_tiny.id_for_label }}").checked = true;
-            document.getElementById("{{ form1.dpcla_convnext_small.id_for_label }}").checked = true;
-            document.getElementById("{{ form1.dpcla_convnext_base.id_for_label }}").checked = true;
-            document.getElementById("{{ form1.dpcla_convnext_large.id_for_label }}").checked = true;
-            document.getElementById("{{ form1.dpcla_convnext_xlarge.id_for_label }}").checked = true;
-        } else {
-            document.getElementById("{{ form1.dpcla_convnext_tiny.id_for_label }}").checked = false;
-            document.getElementById("{{ form1.dpcla_convnext_small.id_for_label }}").checked = false;
-            document.getElementById("{{ form1.dpcla_convnext_base.id_for_label }}").checked = false;
-            document.getElementById("{{ form1.dpcla_convnext_large.id_for_label }}").checked = false;
-            document.getElementById("{{ form1.dpcla_convnext_xlarge.id_for_label }}").checked = false;
-        }
-    }
-
-    function selectRegNetX(element) {
-        if (element.checked) {
-            document.getElementById("{{ form1.dpcla_regnet_x_002.id_for_label }}").checked = true;
-            document.getElementById("{{ form1.dpcla_regnet_x_004.id_for_label }}").checked = true;
-            document.getElementById("{{ form1.dpcla_regnet_x_006.id_for_label }}").checked = true;
-            document.getElementById("{{ form1.dpcla_regnet_x_008.id_for_label }}").checked = true;
-            document.getElementById("{{ form1.dpcla_regnet_x_016.id_for_label }}").checked = true;
-            document.getElementById("{{ form1.dpcla_regnet_x_032.id_for_label }}").checked = true;
-            document.getElementById("{{ form1.dpcla_regnet_x_040.id_for_label }}").checked = true;
-            document.getElementById("{{ form1.dpcla_regnet_x_064.id_for_label }}").checked = true;
-            document.getElementById("{{ form1.dpcla_regnet_x_080.id_for_label }}").checked = true;
-            document.getElementById("{{ form1.dpcla_regnet_x_120.id_for_label }}").checked = true;
-            document.getElementById("{{ form1.dpcla_regnet_x_160.id_for_label }}").checked = true;
-            document.getElementById("{{ form1.dpcla_regnet_x_320.id_for_label }}").checked = true;
-        } else {
-            document.getElementById("{{ form1.dpcla_regnet_x_002.id_for_label }}").checked = false;
-            document.getElementById("{{ form1.dpcla_regnet_x_004.id_for_label }}").checked = false;
-            document.getElementById("{{ form1.dpcla_regnet_x_006.id_for_label }}").checked = false;
-            document.getElementById("{{ form1.dpcla_regnet_x_008.id_for_label }}").checked = false;
-            document.getElementById("{{ form1.dpcla_regnet_x_016.id_for_label }}").checked = false;
-            document.getElementById("{{ form1.dpcla_regnet_x_032.id_for_label }}").checked = false;
-            document.getElementById("{{ form1.dpcla_regnet_x_040.id_for_label }}").checked = false;
-            document.getElementById("{{ form1.dpcla_regnet_x_064.id_for_label }}").checked = false;
-            document.getElementById("{{ form1.dpcla_regnet_x_080.id_for_label }}").checked = false;
-            document.getElementById("{{ form1.dpcla_regnet_x_120.id_for_label }}").checked = false;
-            document.getElementById("{{ form1.dpcla_regnet_x_160.id_for_label }}").checked = false;
-            document.getElementById("{{ form1.dpcla_regnet_x_320.id_for_label }}").checked = false;
-        }
-    }
-
-    function selectRegNetY(element) {
-        if (element.checked) {
-            document.getElementById("{{ form1.dpcla_regnet_y_002.id_for_label }}").checked = true;
-            document.getElementById("{{ form1.dpcla_regnet_y_004.id_for_label }}").checked = true;
-            document.getElementById("{{ form1.dpcla_regnet_y_006.id_for_label }}").checked = true;
-            document.getElementById("{{ form1.dpcla_regnet_y_008.id_for_label }}").checked = true;
-            document.getElementById("{{ form1.dpcla_regnet_y_016.id_for_label }}").checked = true;
-            document.getElementById("{{ form1.dpcla_regnet_y_032.id_for_label }}").checked = true;
-            document.getElementById("{{ form1.dpcla_regnet_y_040.id_for_label }}").checked = true;
-            document.getElementById("{{ form1.dpcla_regnet_y_064.id_for_label }}").checked = true;
-            document.getElementById("{{ form1.dpcla_regnet_y_080.id_for_label }}").checked = true;
-            document.getElementById("{{ form1.dpcla_regnet_y_120.id_for_label }}").checked = true;
-            document.getElementById("{{ form1.dpcla_regnet_y_160.id_for_label }}").checked = true;
-            document.getElementById("{{ form1.dpcla_regnet_y_320.id_for_label }}").checked = true;
-        } else {
-            document.getElementById("{{ form1.dpcla_regnet_y_002.id_for_label }}").checked = false;
-            document.getElementById("{{ form1.dpcla_regnet_y_004.id_for_label }}").checked = false;
-            document.getElementById("{{ form1.dpcla_regnet_y_006.id_for_label }}").checked = false;
-            document.getElementById("{{ form1.dpcla_regnet_y_008.id_for_label }}").checked = false;
-            document.getElementById("{{ form1.dpcla_regnet_y_016.id_for_label }}").checked = false;
-            document.getElementById("{{ form1.dpcla_regnet_y_032.id_for_label }}").checked = false;
-            document.getElementById("{{ form1.dpcla_regnet_y_040.id_for_label }}").checked = false;
-            document.getElementById("{{ form1.dpcla_regnet_y_064.id_for_label }}").checked = false;
-            document.getElementById("{{ form1.dpcla_regnet_y_080.id_for_label }}").checked = false;
-            document.getElementById("{{ form1.dpcla_regnet_y_120.id_for_label }}").checked = false;
-            document.getElementById("{{ form1.dpcla_regnet_y_160.id_for_label }}").checked = false;
-            document.getElementById("{{ form1.dpcla_regnet_y_320.id_for_label }}").checked = false;
-        }
-    }
-</script>
-{% endif %}
+            function selectModel() {
+                document.getElementById("{{ form1.dpcla_cception.id_for_label }}").checked = true;
+                document.getElementById("{{ form1.dpcla_vgg_11.id_for_label }}").checked = true;
+                document.getElementById("{{ form1.dpcla_vgg_13.id_for_label }}").checked = true;
+                document.getElementById("{{ form1.dpcla_vgg_16.id_for_label }}").checked = true;
+                document.getElementById("{{ form1.dpcla_vgg_19.id_for_label }}").checked = true;
+                document.getElementById("{{ form1.dpcla_resnet_18.id_for_label }}").checked = true;
+                document.getElementById("{{ form1.dpcla_resnet_34.id_for_label }}").checked = true;
+                document.getElementById("{{ form1.dpcla_resnet_50.id_for_label }}").checked = true;
+                document.getElementById("{{ form1.dpcla_resnet_50_v2.id_for_label }}").checked = true;
+                document.getElementById("{{ form1.dpcla_resnet_rs_50.id_for_label }}").checked = true;
+                document.getElementById("{{ form1.dpcla_resnet_101.id_for_label }}").checked = true;
+                document.getElementById("{{ form1.dpcla_resnet_101_v2.id_for_label }}").checked = true;
+                document.getElementById("{{ form1.dpcla_resnet_rs_101.id_for_label }}").checked = true;
+                document.getElementById("{{ form1.dpcla_resnet_152.id_for_label }}").checked = true;
+                document.getElementById("{{ form1.dpcla_resnet_152_v2.id_for_label }}").checked = true;
+                document.getElementById("{{ form1.dpcla_resnet_rs_152.id_for_label }}").checked = true;
+                document.getElementById("{{ form1.dpcla_resnet_rs_200.id_for_label }}").checked = true;
+                document.getElementById("{{ form1.dpcla_resnet_rs_270.id_for_label }}").checked = true;
+                document.getElementById("{{ form1.dpcla_resnet_rs_350.id_for_label }}").checked = true;
+                document.getElementById("{{ form1.dpcla_resnet_rs_420.id_for_label }}").checked = true;
+                document.getElementById("{{ form1.dpcla_inception_v3.id_for_label }}").checked = true;
+                document.getElementById("{{ form1.dpcla_inception_resnet_v2.id_for_label }}").checked = true;
+                document.getElementById("{{ form1.dpcla_mobilenet.id_for_label }}").checked = true;
+                document.getElementById("{{ form1.dpcla_mobilenet_v2.id_for_label }}").checked = true;
+                document.getElementById("{{ form1.dpcla_mobilenet_v3_small.id_for_label }}").checked = true;
+                document.getElementById("{{ form1.dpcla_mobilenet_v3_large.id_for_label }}").checked = true;
+                document.getElementById("{{ form1.dpcla_densenet_121.id_for_label }}").checked = true;
+                document.getElementById("{{ form1.dpcla_densenet_169.id_for_label }}").checked = true;
+                document.getElementById("{{ form1.dpcla_densenet_201.id_for_label }}").checked = true;
+                document.getElementById("{{ form1.dpcla_nasnet_mobile.id_for_label }}").checked = true;
+                document.getElementById("{{ form1.dpcla_nasnet_large.id_for_label }}").checked = true;
+                document.getElementById("{{ form1.dpcla_efficientnet_b0.id_for_label }}").checked = true;
+                document.getElementById("{{ form1.dpcla_efficientnet_b0_v2.id_for_label }}").checked = true;
+                document.getElementById("{{ form1.dpcla_efficientnet_b1.id_for_label }}").checked = true;
+                document.getElementById("{{ form1.dpcla_efficientnet_b1_v2.id_for_label }}").checked = true;
+                document.getElementById("{{ form1.dpcla_efficientnet_b2.id_for_label }}").checked = true;
+                document.getElementById("{{ form1.dpcla_efficientnet_b2_v2.id_for_label }}").checked = true;
+                document.getElementById("{{ form1.dpcla_efficientnet_b3.id_for_label }}").checked = true;
+                document.getElementById("{{ form1.dpcla_efficientnet_b3_v2.id_for_label }}").checked = true;
+                document.getElementById("{{ form1.dpcla_efficientnet_b4.id_for_label }}").checked = true;
+                document.getElementById("{{ form1.dpcla_efficientnet_b5.id_for_label }}").checked = true;
+                document.getElementById("{{ form1.dpcla_efficientnet_b6.id_for_label }}").checked = true;
+                document.getElementById("{{ form1.dpcla_efficientnet_b7.id_for_label }}").checked = true;
+                document.getElementById("{{ form1.dpcla_efficientnet_v2_small.id_for_label }}").checked = true;
+                document.getElementById("{{ form1.dpcla_efficientnet_v2_medium.id_for_label }}").checked = true;
+                document.getElementById("{{ form1.dpcla_efficientnet_v2_large.id_for_label }}").checked = true;
+                document.getElementById("{{ form1.dpcla_convnext_tiny.id_for_label }}").checked = true;
+                document.getElementById("{{ form1.dpcla_Convnext_small.id_for_label }}").checked = true;
+                document.getElementById("{{ form1.dpcla_convnext_base.id_for_label }}").checked = true;
+                document.getElementById("{{ form1.dpcla_convnext_large.id_for_label }}").checked = true;
+                document.getElementById("{{ form1.dpcla_convnext_xlarge.id_for_label }}").checked = true;
+                document.getElementById("{{ form1.dpcla_regnet_x_002.id_for_label }}").checked = true;
+                document.getElementById("{{ form1.dpcla_regnet_y_002.id_for_label }}").checked = true;
+                document.getElementById("{{ form1.dpcla_regnet_x_004.id_for_label }}").checked = true;
+                document.getElementById("{{ form1.dpcla_regnet_Y_004.id_for_label }}").checked = true;
+                document.getElementById("{{ form1.dpcla_regnet_x_006.id_for_label }}").checked = true;
+                document.getElementById("{{ form1.dpcla_regnet_y_006.id_for_label }}").checked = true;
+                document.getElementById("{{ form1.dpcla_regnet_x_008.id_for_label }}").checked = true;
+                document.getElementById("{{ form1.dpcla_regnet_y_008.id_for_label }}").checked = true;
+                document.getElementById("{{ form1.dpcla_regnet_x_016.id_for_label }}").checked = true;
+                document.getElementById("{{ form1.dpcla_regnet_y_016.id_for_label }}").checked = true;
+                document.getElementById("{{ form1.dpcla_regnet_x_032.id_for_label }}").checked = true;
+                document.getElementById("{{ form1.dpcla_regnet_y_032.id_for_label }}").checked = true;
+                document.getElementById("{{ form1.dpcla_regnet_x_040.id_for_label }}").checked = true;
+                document.getElementById("{{ form1.dpcla_regnet_y_040.id_for_label }}").checked = true;
+                document.getElementById("{{ form1.dpcla_regnet_x_064.id_for_label }}").checked = true;
+                document.getElementById("{{ form1.dpcla_regnet_y_064.id_for_label }}").checked = true;
+                document.getElementById("{{ form1.dpcla_regnet_x_080.id_for_label }}").checked = true;
+                document.getElementById("{{ form1.dpcla_regnet_y_080.id_for_label }}").checked = true;
+                document.getElementById("{{ form1.dpcla_regnet_x_120.id_for_label }}").checked = true;
+                document.getElementById("{{ form1.dpcla_regnet_y_120.id_for_label }}").checked = true;
+                document.getElementById("{{ form1.dpcla_regnet_X_160.id_for_label }}").checked = true;
+                document.getElementById("{{ form1.dpcla_regnet_y_160.id_for_label }}").checked = true;
+                document.getElementById("{{ form1.dpcla_regnet_x_320.id_for_label }}").checked = true;
+                document.getElementById("{{ form1.dpcla_regnet_y_320.id_for_label }}").checked = true;
+              }
+        
+              function unselectModel() {
+                document.getElementById("{{ form1.dpcla_xception.id_for_label }}").checked = false;
+                document.getElementById("{{ form1.dpcla_vgg_11.id_for_label }}").checked = false;
+                document.getElementById("{{ form1.dpcla_vgg_13.id_for_label }}").checked = false;
+                document.getElementById("{{ form1.dpcla_vgg_16.id_for_label }}").checked = false;
+                document.getElementById("{{ form1.dpcla_vgg_19.id_for_label }}").checked = false;
+                document.getElementById("{{ form1.dpcla_resnet_18.id_for_label }}").checked = false;
+                document.getElementById("{{ form1.dpcla_resnet_34.id_for_label }}").checked = false;
+                document.getElementById("{{ form1.dpcla_resnet_50.id_for_label }}").checked = false;
+                document.getElementById("{{ form1.dpcla_resnet_50_v2.id_for_label }}").checked = false;
+                document.getElementById("{{ form1.dpcla_resnet_rs_50.id_for_label }}").checked = false;
+                document.getElementById("{{ form1.dpcla_resnet_101.id_for_label }}").checked = false;
+                document.getElementById("{{ form1.dpcla_resnet_101_v2.id_for_label }}").checked = false;
+                document.getElementById("{{ form1.dpcla_resnet_rs_101.id_for_label }}").checked = false;
+                document.getElementById("{{ form1.dpcla_resnet_152.id_for_label }}").checked = false;
+                document.getElementById("{{ form1.dpcla_resnet_152_v2.id_for_label }}").checked = false;
+                document.getElementById("{{ form1.dpcla_resnet_rs_152.id_for_label }}").checked = false;
+                document.getElementById("{{ form1.dpcla_resnet_rs_200.id_for_label }}").checked = false;
+                document.getElementById("{{ form1.dpcla_resnet_rs_270.id_for_label }}").checked = false;
+                document.getElementById("{{ form1.dpcla_resnet_rs_350.id_for_label }}").checked = false;
+                document.getElementById("{{ form1.dpcla_resnet_rs_420.id_for_label }}").checked = false;
+                document.getElementById("{{ form1.dpcla_inception_v3.id_for_label }}").checked = false;
+                document.getElementById("{{ form1.dpcla_inception_resnet_v2.id_for_label }}").checked = false;
+                document.getElementById("{{ form1.dpcla_mobilenet.id_for_label }}").checked = false;
+                document.getElementById("{{ form1.dpcla_mobilenet_v2.id_for_label }}").checked = false;
+                document.getElementById("{{ form1.dpcla_mobilenet_v3_small.id_for_label }}").checked = false;
+                document.getElementById("{{ form1.dpcla_mobilenet_v3_large.id_for_label }}").checked = false;
+                document.getElementById("{{ form1.dpcla_densenet_121.id_for_label }}").checked = false;
+                document.getElementById("{{ form1.dpcla_densenet_169.id_for_label }}").checked = false;
+                document.getElementById("{{ form1.dpcla_densenet_201.id_for_label }}").checked = false;
+                document.getElementById("{{ form1.dpcla_nasnet_mobile.id_for_label }}").checked = false;
+                document.getElementById("{{ form1.dpcla_nasnet_large.id_for_label }}").checked = false;
+                document.getElementById("{{ form1.dpcla_efficientnet_b0.id_for_label }}").checked = false;
+                document.getElementById("{{ form1.dpcla_efficientnet_b0_v2.id_for_label }}").checked = false;
+                document.getElementById("{{ form1.dpcla_efficientnet_b1.id_for_label }}").checked = false;
+                document.getElementById("{{ form1.dpcla_efficientnet_b1_v2.id_for_label }}").checked = false;
+                document.getElementById("{{ form1.dpcla_efficientnet_b2.id_for_label }}").checked = false;
+                document.getElementById("{{ form1.dpcla_efficientnet_b2_v2.id_for_label }}").checked = false;
+                document.getElementById("{{ form1.dpcla_efficientnet_b3.id_for_label }}").checked = false;
+                document.getElementById("{{ form1.dpcla_efficientnet_b3_v2.id_for_label }}").checked = false;
+                document.getElementById("{{ form1.dpcla_efficientnet_b4.id_for_label }}").checked = false;
+                document.getElementById("{{ form1.dpcla_efficientnet_b5.id_for_label }}").checked = false;
+                document.getElementById("{{ form1.dpcla_efficientnet_b6.id_for_label }}").checked = false;
+                document.getElementById("{{ form1.dpcla_efficientnet_b7.id_for_label }}").checked = false;
+                document.getElementById("{{ form1.dpcla_efficientnet_v2_small.id_for_label }}").checked = false;
+                document.getElementById("{{ form1.dpcla_efficientnet_v2_medium.id_for_label }}").checked = false;
+                document.getElementById("{{ form1.dpcla_efficientnet_v2_large.id_for_label }}").checked = false;
+                document.getElementById("{{ form1.dpcla_convnext_tiny.id_for_label }}").checked = false;
+                document.getElementById("{{ form1.dpcla_convnext_small.id_for_label }}").checked = false;
+                document.getElementById("{{ form1.dpcla_convnext_base.id_for_label }}").checked = false;
+                document.getElementById("{{ form1.dpcla_convnext_large.id_for_label }}").checked = false;
+                document.getElementById("{{ form1.dpcla_convnext_xlarge.id_for_label }}").checked = false;
+                document.getElementById("{{ form1.dpcla_regnet_x_002.id_for_label }}").checked = false;
+                document.getElementById("{{ form1.dpcla_regnet_y_002.id_for_label }}").checked = false;
+                document.getElementById("{{ form1.dpcla_regnet_x_004.id_for_label }}").checked = false;
+                document.getElementById("{{ form1.dpcla_regnet_y_004.id_for_label }}").checked = false;
+                document.getElementById("{{ form1.dpcla_regnet_x_006.id_for_label }}").checked = false;
+                document.getElementById("{{ form1.dpcla_regnet_y_006.id_for_label }}").checked = false;
+                document.getElementById("{{ form1.dpcla_regnet_x_008.id_for_label }}").checked = false;
+                document.getElementById("{{ form1.dpcla_regnet_y_008.id_for_label }}").checked = false;
+                document.getElementById("{{ form1.dpcla_regnet_x_016.id_for_label }}").checked = false;
+                document.getElementById("{{ form1.dpcla_regnet_y_016.id_for_label }}").checked = false;
+                document.getElementById("{{ form1.dpcla_regnet_x_032.id_for_label }}").checked = false;
+                document.getElementById("{{ form1.dpcla_regnet_y_032.id_for_label }}").checked = false;
+                document.getElementById("{{ form1.dpcla_regnet_x_040.id_for_label }}").checked = false;
+                document.getElementById("{{ form1.dpcla_regnet_y_040.id_for_label }}").checked = false;
+                document.getElementById("{{ form1.dpcla_regnet_x_064.id_for_label }}").checked = false;
+                document.getElementById("{{ form1.dpcla_regnet_y_064.id_for_label }}").checked = false;
+                document.getElementById("{{ form1.dpcla_regnet_x_080.id_for_label }}").checked = false;
+                document.getElementById("{{ form1.dpcla_regnet_y_080.id_for_label }}").checked = false;
+                document.getElementById("{{ form1.dpcla_regnet_x_120.id_for_label }}").checked = false;
+                document.getElementById("{{ form1.dpcla_regnet_y_120.id_for_label }}").checked = false;
+                document.getElementById("{{ form1.dpcla_regnet_x_160.id_for_label }}").checked = false;
+                document.getElementById("{{ form1.dpcla_regnet_y_160.id_for_label }}").checked = false;
+                document.getElementById("{{ form1.dpcla_regnet_x_320.id_for_label }}").checked = false;
+                document.getElementById("{{ form1.dpcla_regnet_y_320.id_for_label }}").checked = false;
+              }
+        
+            function selectXAI() {
+                 document.getElementById("{{ form1.dpcla_activationmaximization.id_for_label }}").checked = true;
+                 document.getElementById("{{ form1.dpcla_gradcam.id_for_label }}").checked = true;
+                 document.getElementById("{{ form1.dpcla_gradcamplusplus.id_for_label }}").checked = true;
+                 document.getElementById("{{ form1.dpcla_scorecam.id_for_label }}").checked = true;
+                 document.getElementById("{{ form1.dpcla_fasterscorecam.id_for_label }}").checked = true;
+                 document.getElementById("{{ form1.dpcla_layercam.id_for_label }}").checked = true;
+                 document.getElementById("{{ form1.dpcla_vanillasaliency.id_for_label }}").checked = true;
+                 document.getElementById("{{ form1.dpcla_smoothgrad.id_for_label }}").checked = true;
+            }
+        
+            function unselectXAI() {
+                 document.getElementById("{{ form1.dpcla_activationmaximization.id_for_label }}").checked = false;
+                 document.getElementById("{{ form1.dpcla_gradcam.id_for_label }}").checked = false;
+                 document.getElementById("{{ form1.dpcla_gradcamplusplus.id_for_label }}").checked = false;
+                 document.getElementById("{{ form1.dpcla_scorecam.id_for_label }}").checked = false;
+                 document.getElementById("{{ form1.dpcla_fasterscorecam.id_for_label }}").checked = false;
+                 document.getElementById("{{ form1.dpcla_layercam.id_for_label }}").checked = false;
+                 document.getElementById("{{ form1.dpcla_vanillasaliency.id_for_label }}").checked = false;
+                 document.getElementById("{{ form1.dpcla_smoothgrad.id_for_label }}").checked = false;
+            }
+        
+            function selectXception(element) {
+                if (element.checked) {
+                    document.getElementById("{{ form1.dpcla_xception.id_for_label }}").checked = true;
+                } else {
+                    document.getElementById("{{ form1.dpcla_xception.id_for_label }}").checked = false;
+                }
+            }
+        
+            function selectVGG(element) {
+                if (element.checked) {
+                    document.getElementById("{{ form1.dpcla_vgg11.id_for_label }}").checked = true;
+                    document.getElementById("{{ form1.dpcla_vgg13.id_for_label }}").checked = true;
+                    document.getElementById("{{ form1.dpcla_vgg16.id_for_label }}").checked = true;
+                    document.getElementById("{{ form1.dpcla_vgg19.id_for_label }}").checked = true;
+                } else {
+                    document.getElementById("{{ form1.dpcla_vgg11.id_for_label }}").checked = true;
+                    document.getElementById("{{ form1.dpcla_vgg13.id_for_label }}").checked = true;
+                    document.getElementById("{{ form1.dpcla_vgg16.id_for_label }}").checked = false;
+                    document.getElementById("{{ form1.dpcla_vgg19.id_for_label }}").checked = false;
+                }
+            }
+        
+            function selectResNet(element) {
+                if (element.checked) {
+                    document.getElementById("{{ form1.dpcla_resnet_18.id_for_label }}").checked = true;
+                    document.getElementById("{{ form1.dpcla_resNet_34.id_for_label }}").checked = true;
+                    document.getElementById("{{ form1.dpcla_resnet_50.id_for_label }}").checked = true;
+                    document.getElementById("{{ form1.dpcla_resnet_50_v2.id_for_label }}").checked = true;
+                    document.getElementById("{{ form1.dpcla_resnet_rs_50.id_for_label }}").checked = true;
+                    document.getElementById("{{ form1.dpcla_resnet_101.id_for_label }}").checked = true;
+                    document.getElementById("{{ form1.dpcla_resnet_101_v2.id_for_label }}").checked = true;
+                    document.getElementById("{{ form1.dpcla_resnet_rs_101.id_for_label }}").checked = true;
+                    document.getElementById("{{ form1.dpcla_resnet_152.id_for_label }}").checked = true;
+                    document.getElementById("{{ form1.dpcla_resnet_152_v2.id_for_label }}").checked = true;
+                    document.getElementById("{{ form1.dpcla_resnet_rs_152.id_for_label }}").checked = true;
+                    document.getElementById("{{ form1.dpcla_resnet_rs_200.id_for_label }}").checked = true;
+                    document.getElementById("{{ form1.dpcla_resnet_rs_270.id_for_label }}").checked = true;
+                    document.getElementById("{{ form1.dpcla_resnet_rs_350.id_for_label }}").checked = true;
+                    document.getElementById("{{ form1.dpcla_resnet_rs_420.id_for_label }}").checked = true;
+                } else {
+                    document.getElementById("{{ form1.dpcla_resnet_18.id_for_label }}").checked = false;
+                    document.getElementById("{{ form1.dpcla_resnet_34.id_for_label }}").checked = false;
+                    document.getElementById("{{ form1.dpcla_resnet_50.id_for_label }}").checked = false;
+                    document.getElementById("{{ form1.dpcla_resnet_50_v2.id_for_label }}").checked = false;
+                    document.getElementById("{{ form1.dpcla_resnet_rs_50.id_for_label }}").checked = false;
+                    document.getElementById("{{ form1.dpcla_resnet_101.id_for_label }}").checked = false;
+                    document.getElementById("{{ form1.dpcla_resnet_101_v2.id_for_label }}").checked = false;
+                    document.getElementById("{{ form1.dpcla_resnet_rs_101.id_for_label }}").checked = false;
+                    document.getElementById("{{ form1.dpcla_resnet_152.id_for_label }}").checked = false;
+                    document.getElementById("{{ form1.dpcla_resNet_152_v2.id_for_label }}").checked = false;
+                    document.getElementById("{{ form1.dpcla_resnet_rs_152.id_for_label }}").checked = false;
+                    document.getElementById("{{ form1.dpcla_resnet_rs_200.id_for_label }}").checked = false;
+                    document.getElementById("{{ form1.dpcla_resnet_rs_270.id_for_label }}").checked = false;
+                    document.getElementById("{{ form1.dpcla_resnet_rs_350.id_for_label }}").checked = false;
+                    document.getElementById("{{ form1.dpcla_resnet_rs_420.id_for_label }}").checked = false;
+                }
+            }
+        
+            function selectInception(element) {
+                if (element.checked) {
+                    document.getElementById("{{ form1.dpcla_inception_v3.id_for_label }}").checked = true;
+                    document.getElementById("{{ form1.dpcla_inception_resnet_v2.id_for_label }}").checked = true;
+                } else {
+                    document.getElementById("{{ form1.dpcla_inception_v3.id_for_label }}").checked = false;
+                    document.getElementById("{{ form1.dpcla_inception_resnet_v2.id_for_label }}").checked = false;
+                }
+            }
+        
+            function selectMobileNet(element) {
+                if (element.checked) {
+                    document.getElementById("{{ form1.dpcla_mobilenet.id_for_label }}").checked = true;
+                    document.getElementById("{{ form1.dpcla_mobilenet_v2.id_for_label }}").checked = true;
+                    document.getElementById("{{ form1.dpcla_mobilenet_v3_small.id_for_label }}").checked = true;
+                    document.getElementById("{{ form1.dpcla_mobilenet_v3_large.id_for_label }}").checked = true;
+                } else {
+                    document.getElementById("{{ form1.dpcla_mobilenet.id_for_label }}").checked = false;
+                    document.getElementById("{{ form1.dpcla_mobilenet_v2.id_for_label }}").checked = false;
+                    document.getElementById("{{ form1.dpcla_mobilenet_v3_small.id_for_label }}").checked = false;
+                    document.getElementById("{{ form1.dpcla_mobilenet_v3_large.id_for_label }}").checked = false;
+                }
+            }
+        
+            function selectDenseNet(element) {
+                if (element.checked) {
+                    document.getElementById("{{ form1.dpcla_densenet_121.id_for_label }}").checked = true;
+                    document.getElementById("{{ form1.dpcla_densenet_169.id_for_label }}").checked = true;
+                    document.getElementById("{{ form1.dpcla_densenet_201.id_for_label }}").checked = true;
+                } else {
+                    document.getElementById("{{ form1.dpcla_densenet_121.id_for_label }}").checked = false;
+                    document.getElementById("{{ form1.dpcla_densenet_169.id_for_label }}").checked = false;
+                    document.getElementById("{{ form1.dpcla_densenet_201.id_for_label }}").checked = false;
+                }
+            }
+        
+            function selectNASNet(element) {
+                if (element.checked) {
+                    document.getElementById("{{ form1.dpcla_nasnet_mobile.id_for_label }}").checked = true;
+                    document.getElementById("{{ form1.dpcla_nasnet_large.id_for_label }}").checked = true;
+                } else {
+                    document.getElementById("{{ form1.dpcla_nasnet_mobile.id_for_label }}").checked = false;
+                    document.getElementById("{{ form1.dpcla_nasnet_large.id_for_label }}").checked = false;
+                }
+            }
+        
+            function selectEfficientNet(element) {
+                if (element.checked) {
+                    document.getElementById("{{ form1.dpcla_efficientnet_b0.id_for_label }}").checked = true;
+                    document.getElementById("{{ form1.dpcla_efficientnet_b0_v2.id_for_label }}").checked = true;
+                    document.getElementById("{{ form1.dpcla_efficientnet_b1.id_for_label }}").checked = true;
+                    document.getElementById("{{ form1.dpcla_efficientnet_b1_v2.id_for_label }}").checked = true;
+                    document.getElementById("{{ form1.dpcla_efficientnet_b2.id_for_label }}").checked = true;
+                    document.getElementById("{{ form1.dpcla_efficientnet_b2_v2.id_for_label }}").checked = true;
+                    document.getElementById("{{ form1.dpcla_efficientnet_b3.id_for_label }}").checked = true;
+                    document.getElementById("{{ form1.dpcla_efficientnet_b3_v2.id_for_label }}").checked = true;
+                    document.getElementById("{{ form1.dpcla_efficientnet_b4.id_for_label }}").checked = true;
+                    document.getElementById("{{ form1.dpcla_efficientnet_b5.id_for_label }}").checked = true;
+                    document.getElementById("{{ form1.dpcla_efficientnet_b6.id_for_label }}").checked = true;
+                    document.getElementById("{{ form1.dpcla_efficientnet_b7.id_for_label }}").checked = true;
+                    document.getElementById("{{ form1.dpcla_efficientnet_v2_small.id_for_label }}").checked = true;
+                    document.getElementById("{{ form1.dpcla_efficientnet_v2_medium.id_for_label }}").checked = true;
+                    document.getElementById("{{ form1.dpcla_efficientnet_v2_large.id_for_label }}").checked = true;
+                } else {
+                    document.getElementById("{{ form1.dpcla_efficientnet_b0.id_for_label }}").checked = false;
+                    document.getElementById("{{ form1.dpcla_efficientnet_b0_v2.id_for_label }}").checked = false;
+                    document.getElementById("{{ form1.dpcla_efficientnet_b1.id_for_label }}").checked = false;
+                    document.getElementById("{{ form1.dpcla_efficientnet_b1_v2.id_for_label }}").checked = false;
+                    document.getElementById("{{ form1.dpcla_efficientnet_b2.id_for_label }}").checked = false;
+                    document.getElementById("{{ form1.dpcla_efficientnet_b2_V2.id_for_label }}").checked = false;
+                    document.getElementById("{{ form1.dpcla_efficientnet_b3.id_for_label }}").checked = false;
+                    document.getElementById("{{ form1.dpcla_efficientnet_b3_v2.id_for_label }}").checked = false;
+                    document.getElementById("{{ form1.dpcla_efficientnet_b4.id_for_label }}").checked = false;
+                    document.getElementById("{{ form1.dpcla_efficientnet_b5.id_for_label }}").checked = false;
+                    document.getElementById("{{ form1.dpcla_efficientnet_b6.id_for_label }}").checked = false;
+                    document.getElementById("{{ form1.dpcla_efficientnet_b7.id_for_label }}").checked = false;
+                    document.getElementById("{{ form1.dpcla_efficientnet_v2_small.id_for_label }}").checked = false;
+                    document.getElementById("{{ form1.dpcla_efficientnet_v2_medium.id_for_label }}").checked = false;
+                    document.getElementById("{{ form1.dpcla_efficientnet_v2_large.id_for_label }}").checked = false;
+                }
+            }
+        
+            function selectConvNeXt(element) {
+                if (element.checked) {
+                    document.getElementById("{{ form1.dpcla_convnext_tiny.id_for_label }}").checked = true;
+                    document.getElementById("{{ form1.dpcla_convnext_small.id_for_label }}").checked = true;
+                    document.getElementById("{{ form1.dpcla_convnext_base.id_for_label }}").checked = true;
+                    document.getElementById("{{ form1.dpcla_convnext_large.id_for_label }}").checked = true;
+                    document.getElementById("{{ form1.dpcla_convnext_xlarge.id_for_label }}").checked = true;
+                } else {
+                    document.getElementById("{{ form1.dpcla_convnext_tiny.id_for_label }}").checked = false;
+                    document.getElementById("{{ form1.dpcla_convnext_small.id_for_label }}").checked = false;
+                    document.getElementById("{{ form1.dpcla_convnext_base.id_for_label }}").checked = false;
+                    document.getElementById("{{ form1.dpcla_convnext_large.id_for_label }}").checked = false;
+                    document.getElementById("{{ form1.dpcla_convnext_xlarge.id_for_label }}").checked = false;
+                }
+            }
+        
+            function selectRegNetX(element) {
+                if (element.checked) {
+                    document.getElementById("{{ form1.dpcla_regnet_x_002.id_for_label }}").checked = true;
+                    document.getElementById("{{ form1.dpcla_regnet_x_004.id_for_label }}").checked = true;
+                    document.getElementById("{{ form1.dpcla_regnet_x_006.id_for_label }}").checked = true;
+                    document.getElementById("{{ form1.dpcla_regnet_x_008.id_for_label }}").checked = true;
+                    document.getElementById("{{ form1.dpcla_regnet_x_016.id_for_label }}").checked = true;
+                    document.getElementById("{{ form1.dpcla_regnet_x_032.id_for_label }}").checked = true;
+                    document.getElementById("{{ form1.dpcla_regnet_x_040.id_for_label }}").checked = true;
+                    document.getElementById("{{ form1.dpcla_regnet_x_064.id_for_label }}").checked = true;
+                    document.getElementById("{{ form1.dpcla_regnet_x_080.id_for_label }}").checked = true;
+                    document.getElementById("{{ form1.dpcla_regnet_x_120.id_for_label }}").checked = true;
+                    document.getElementById("{{ form1.dpcla_regnet_x_160.id_for_label }}").checked = true;
+                    document.getElementById("{{ form1.dpcla_regnet_x_320.id_for_label }}").checked = true;
+                } else {
+                    document.getElementById("{{ form1.dpcla_regnet_x_002.id_for_label }}").checked = false;
+                    document.getElementById("{{ form1.dpcla_regnet_x_004.id_for_label }}").checked = false;
+                    document.getElementById("{{ form1.dpcla_regnet_x_006.id_for_label }}").checked = false;
+                    document.getElementById("{{ form1.dpcla_regnet_x_008.id_for_label }}").checked = false;
+                    document.getElementById("{{ form1.dpcla_regnet_x_016.id_for_label }}").checked = false;
+                    document.getElementById("{{ form1.dpcla_regnet_x_032.id_for_label }}").checked = false;
+                    document.getElementById("{{ form1.dpcla_regnet_x_040.id_for_label }}").checked = false;
+                    document.getElementById("{{ form1.dpcla_regnet_x_064.id_for_label }}").checked = false;
+                    document.getElementById("{{ form1.dpcla_regnet_x_080.id_for_label }}").checked = false;
+                    document.getElementById("{{ form1.dpcla_regnet_x_120.id_for_label }}").checked = false;
+                    document.getElementById("{{ form1.dpcla_regnet_x_160.id_for_label }}").checked = false;
+                    document.getElementById("{{ form1.dpcla_regnet_x_320.id_for_label }}").checked = false;
+                }
+            }
+        
+            function selectRegNetY(element) {
+                if (element.checked) {
+                    document.getElementById("{{ form1.dpcla_regnet_y_002.id_for_label }}").checked = true;
+                    document.getElementById("{{ form1.dpcla_regnet_y_004.id_for_label }}").checked = true;
+                    document.getElementById("{{ form1.dpcla_regnet_y_006.id_for_label }}").checked = true;
+                    document.getElementById("{{ form1.dpcla_regnet_y_008.id_for_label }}").checked = true;
+                    document.getElementById("{{ form1.dpcla_regnet_y_016.id_for_label }}").checked = true;
+                    document.getElementById("{{ form1.dpcla_regnet_y_032.id_for_label }}").checked = true;
+                    document.getElementById("{{ form1.dpcla_regnet_y_040.id_for_label }}").checked = true;
+                    document.getElementById("{{ form1.dpcla_regnet_y_064.id_for_label }}").checked = true;
+                    document.getElementById("{{ form1.dpcla_regnet_y_080.id_for_label }}").checked = true;
+                    document.getElementById("{{ form1.dpcla_regnet_y_120.id_for_label }}").checked = true;
+                    document.getElementById("{{ form1.dpcla_regnet_y_160.id_for_label }}").checked = true;
+                    document.getElementById("{{ form1.dpcla_regnet_y_320.id_for_label }}").checked = true;
+                } else {
+                    document.getElementById("{{ form1.dpcla_regnet_y_002.id_for_label }}").checked = false;
+                    document.getElementById("{{ form1.dpcla_regnet_y_004.id_for_label }}").checked = false;
+                    document.getElementById("{{ form1.dpcla_regnet_y_006.id_for_label }}").checked = false;
+                    document.getElementById("{{ form1.dpcla_regnet_y_008.id_for_label }}").checked = false;
+                    document.getElementById("{{ form1.dpcla_regnet_y_016.id_for_label }}").checked = false;
+                    document.getElementById("{{ form1.dpcla_regnet_y_032.id_for_label }}").checked = false;
+                    document.getElementById("{{ form1.dpcla_regnet_y_040.id_for_label }}").checked = false;
+                    document.getElementById("{{ form1.dpcla_regnet_y_064.id_for_label }}").checked = false;
+                    document.getElementById("{{ form1.dpcla_regnet_y_080.id_for_label }}").checked = false;
+                    document.getElementById("{{ form1.dpcla_regnet_y_120.id_for_label }}").checked = false;
+                    document.getElementById("{{ form1.dpcla_regnet_y_160.id_for_label }}").checked = false;
+                    document.getElementById("{{ form1.dpcla_regnet_y_320.id_for_label }}").checked = false;
+                }
+            }
+        </script>
+    {% endif %}
 {% endblock %}
