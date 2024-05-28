@@ -1000,9 +1000,10 @@
                                 <div class="form-check form-switch">
                                     <input class="form-check-input"
                                            name="{{ form3.mlts_omp_cds_dt.html_name }}"
-                                           type="checkbox" role="switch"
+                                           type="checkbox"
+                                           role="switch"
                                            id="{{ form3.mlts_omp_cds_dt.id_for_label }}">
-                                    <label class="form-check-label" 
+                                    <label class="form-check-label"
                                            for="{{ form3.mlts_omp_cds_dt.id_for_label }}">
                                         Orthogonal Matching Pursuit w/ Cond. Deseasonalize & Detrending (omp_cds_dt)
                                     </label>
@@ -1041,7 +1042,7 @@
                                            type="checkbox"
                                            role="switch"
                                            id="{{ form3.mlts_rf_cds_dt.id_for_label }}">
-                                    <label class="form-check-label" 
+                                    <label class="form-check-label"
                                            for="{{ form3.mlts_rf_cds_dt.id_for_label }}">
                                         Random Forest w/ Cond. Deseasonalize & Detrending (rf_cds_dt)
                                     </label>
@@ -1115,11 +1116,11 @@
                             <div class="col-md-4 col-sm-6">
                                 <div class="form-check form-switch">
                                     <input class="form-check-input"
-                                           name="{{ form3.mlts_catboost_cds_dt.html_name }}" 
-                                           type="checkbox" 
-                                           role="switch" 
+                                           name="{{ form3.mlts_catboost_cds_dt.html_name }}"
+                                           type="checkbox"
+                                           role="switch"
                                            id="{{ form3.mlts_catboost_cds_dt.id_for_label }}">
-                                    <label class="form-check-label" 
+                                    <label class="form-check-label"
                                            for="{{ form3.mlts_catboost_cds_dt.id_for_label }}">
                                         CatBoost Regressor w/ Cond. Deseasonalize & Detrending (catboost_cds_dt)
                                     </label>
@@ -1127,7 +1128,9 @@
                             </div>
                             <div class="d-grid gap-2 d-md-flex justify-content-md-end col-md-12">
                                 <button type="button" class="btn btn-success mb-3" onclick="tsSelectModel();">Select All</button>
-                                <button type="button" class="btn btn-danger mb-3" onclick="tsUnselectModel();">Unselect All</button>
+                                <button type="button"
+                                        class="btn btn-danger mb-3"
+                                        onclick="tsUnselectModel();">Unselect All</button>
                             </div>
                         </form>
                     </div>
@@ -1149,23 +1152,21 @@
                             <div class="col-md-4 col-sm-6">
                                 <div class="form-check form-switch">
                                     <input class="form-check-input" 
-                                           name="{{ form4.mlclu_kmeans.html_name }}" 
-                                           type="checkbox" 
-                                           role="switch" 
+                                           name="{{ form4.mlclu_kmeans.html_name }}"
+                                           type="checkbox"
+                                           role="switch"
                                            id="{{ form4.mlclu_kmeans.id_for_label }}">
-                                    <label class="form-check-label" 
-                                           for="{{ form4.mlclu_kmeans.id_for_label }}">K-Means Clustering (kmeans)</label>
+                                    <label class="form-check-label" for="{{ form4.mlclu_kmeans.id_for_label }}">K-Means Clustering (kmeans)</label>
                                 </div>
                             </div>
                             <div class="col-md-4 col-sm-6">
                                 <div class="form-check form-switch">
-                                    <input class="form-check-input" 
-                                           name="{{ form4.mlclu_ap.html_name }}" 
-                                           type="checkbox" 
-                                           role="switch" 
+                                    <input class="form-check-input"
+                                           name="{{ form4.mlclu_ap.html_name }}"
+                                           type="checkbox"
+                                           role="switch"
                                            id="{{ form4.mlclu_ap.id_for_label }}">
-                                    <label class="form-check-label" 
-                                           for="{{ form4.mlclu_ap.id_for_label }}">Affinity Propagation (ap)</label>
+                                    <label class="form-check-label" for="{{ form4.mlclu_ap.id_for_label }}">Affinity Propagation (ap)</label>
                                 </div>
                             </div>
                             <div class="col-md-4 col-sm-6">
@@ -1175,7 +1176,8 @@
                                            type="checkbox"
                                            role="switch"
                                            id="{{ form4.mlclu_meanshift.id_for_label }}">
-                                    <label class="form-check-label" for="{{ form4.mlclu_meanshift.id_for_label }}">
+                                    <label class="form-check-label"
+                                           for="{{ form4.mlclu_meanshift.id_for_label }}">
                                         Mean Shift Clustering (meanshift)
                                     </label>
                                 </div>
@@ -1204,9 +1206,12 @@
                                 <div class="form-check form-switch">
                                     <input class="form-check-input"
                                            name="{{ form4.mlclu_dbscan.html_name }}"
-                                           type="checkbox" role="switch"
+                                           type="checkbox"
+                                           role="switch"
                                            id="{{ form4.mlclu_dbscan.id_for_label }}">
-                                    <label class="form-check-label" for="{{ form4.mlclu_dbscan.id_for_label }}">Density-Based Spatial Clustering (dbscan)</label>
+                                    <label class="form-check-label" for="{{ form4.mlclu_dbscan.id_for_label }}">
+                                        Density-Based Spatial Clustering (dbscan)
+                                    </label>
                                 </div>
                             </div>
                             <div class="col-md-4 col-sm-6">
@@ -1240,75 +1245,165 @@
                                 </div>
                             </div>
                             <div class="d-grid gap-2 d-md-flex justify-content-md-end col-md-12">
-                                <button type="button" class="btn btn-success mb-3" onclick="cluSelectModel();">Select All</button>
-                                <button type="button" class="btn btn-danger mb-3" onclick="cluUnselectModel();">Unselect All</button>
+                                <button type="button"
+                                        class="btn btn-success mb-3"
+                                        onclick="cluSelectModel();">Select All</button>
+                                <button type="button"
+                                        class="btn btn-danger mb-3"
+                                        onclick="cluUnselectModel();">Unselect All</button>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
-    {%  else %}
-        <h3><span class="text-danger-emphasis">12</span> Anomaly Detection Models</h3>
+    {% else %}
+        <h3>
+            <span class="text-danger-emphasis">12</span> Anomaly Detection Models
+        </h3>
         <div class="row g-3">
             <div class="col-md-6">
                 <ul>
-                <li>Angle-base Outlier Detection (PyCaret - <i>abod</i>)</li>
-                <li>Clustering-Based Local Outlier (PyCaret - <i>cluster</i>)</li>
-                <li>Connectivity-Based Local Outlier (PyCaret - <i>cof</i>)</li>
-                <li>Isolation Forest (PyCaret - <i>iforest</i>)</li>
-                <li>Histogram-based Outlier Detection (PyCaret - <i>histogram</i>)</li>
-                <li>K-Nearest Neighbors Detector (PyCaret - <i>knn</i>)</li>
+                    <li>
+                        Angle-base Outlier Detection (PyCaret - <i>abod</i>)
+                    </li>
+                    <li>
+                        Clustering-Based Local Outlier (PyCaret - <i>cluster</i>)
+                    </li>
+                    <li>
+                        Connectivity-Based Local Outlier (PyCaret - <i>cof</i>)
+                    </li>
+                    <li>
+                        Isolation Forest (PyCaret - <i>iforest</i>)
+                    </li>
+                    <li>
+                        Histogram-based Outlier Detection (PyCaret - <i>histogram</i>)
+                    </li>
+                    <li>
+                        K-Nearest Neighbors Detector (PyCaret - <i>knn</i>)
+                    </li>
             </ul>
         </div>
         <div class="col-md-6">
             <ul>
-                <li>Local Outlier Factor (PyCaret - <i>lof</i>)</li>
-                <li>One-class SVM detector (PyCaret - <i>svm</i>)</li>
-                <li>Principal Component Analysis (PyCaret - <i>pca</i>)</li>
-                <li>Minimum Covariance Determinant (PyCaret - <i>mcd</i>)</li>
-                <li>Subspace Outlier Detection (PyCaret - <i>sod</i>)</li>
-                <li>Stochastic Outlier Selection (PyCaret - <i>sos</i>)</li>
+                <li>
+                    Local Outlier Factor (PyCaret - <i>lof</i>)
+                </li>
+                <li>
+                    One-class SVM detector (PyCaret - <i>svm</i>)
+                </li>
+                <li>
+                    Principal Component Analysis (PyCaret - <i>pca</i>)
+                </li>
+                <li>
+                    Minimum Covariance Determinant (PyCaret - <i>mcd</i>)
+                </li>
+                <li>
+                    Subspace Outlier Detection (PyCaret - <i>sod</i>)
+                </li>
+                <li>
+                    Stochastic Outlier Selection (PyCaret - <i>sos</i>)
+                </li>
             </ul>
         </div>
     </div>
-    <h3><span class="text-danger-emphasis">29</span> Regression Models</h3>
+    <h3>
+        <span class="text-danger-emphasis">29</span> Regression Models
+    </h3>
     <div class="row g-3">
         <div class="col-md-6">
             <ul>
-                <li>Linear Regression (PyCaret - <i>lr</i>)</li>
-                <li>Lasso Regression (PyCaret - <i>lasso</i>)</li>
-                <li>Ridge Regression (PyCaret - <i>ridge</i>)</li>
-                <li>Elastic Net (PyCaret - <i>en</i>)</li>
-                <li>Least Angle Regression (PyCaret - <i>lar</i>)</li>
-                <li>Lasso Least Angle Regression (PyCaret - <i>llar</i>)</li>
-                <li>Orthogonal Matching Pursuit (PyCaret - <i>omp</i>)</li>
-                <li>Bayesian Ridge (PyCaret - <i>br</i>)</li>
-                <li>Automatic Relevance Determination (PyCaret - <i>ard</i>)</li>
-                <li>Passive Aggressive Regressor (PyCaret - <i>par</i>)</li>
-                <li>Random Sample Consensus (PyCaret - <i>ransac</i>)</li>
-                <li>TheilSen Regressor (PyCaret - <i>tr</i>)</li>
-                <li>Huber Regressor (PyCaret - <i>huber</i>)</li>
-                <li>Kernel Ridge (PyCaret - <i>kr</i>)</li>
-                <li>Support Vector Regression (PyCaret - <i>svm</i>)</li>
+                <li>
+                    Linear Regression (PyCaret - <i>lr</i>)
+                </li>
+                <li>
+                    Lasso Regression (PyCaret - <i>lasso</i>)
+                </li>
+                <li>
+                    Ridge Regression (PyCaret - <i>ridge</i>)
+                </li>
+                <li>
+                    Elastic Net (PyCaret - <i>en</i>)
+                </li>
+                <li>
+                    Least Angle Regression (PyCaret - <i>lar</i>)
+                </li>
+                <li>
+                    Lasso Least Angle Regression (PyCaret - <i>llar</i>)
+                </li>
+                <li>
+                    Orthogonal Matching Pursuit (PyCaret - <i>omp</i>)
+                </li>
+                <li>
+                    Bayesian Ridge (PyCaret - <i>br</i>)
+                </li>
+                <li>
+                    Automatic Relevance Determination (PyCaret - <i>ard</i>)
+                </li>
+                <li>
+                    Passive Aggressive Regressor (PyCaret - <i>par</i>)
+                </li>
+                <li>
+                    Random Sample Consensus (PyCaret - <i>ransac</i>)
+                </li>
+                <li>
+                    TheilSen Regressor (PyCaret - <i>tr</i>)
+                </li>
+                <li>
+                    Huber Regressor (PyCaret - <i>huber</i>)
+                </li>
+                <li>
+                    Kernel Ridge (PyCaret - <i>kr</i>)
+                </li>
+                <li>
+                    Support Vector Regression (PyCaret - <i>svm</i>)
+                </li>
             </ul>
         </div>
         <div class="col-md-6">
             <ul>
-                <li>K Neighbors Regressor (PyCaret - <i>knn</i>)</li>
-                <li>Decision Tree Regressor (PyCaret - <i>dt</i>)</li>
-                <li>Random Forest Regressor (PyCaret - <i>rf</i>)</li>
-                <li>Extra Trees Regressor (PyCaret - <i>et</i>)</li>
-                <li>AdaBoost Regressor (PyCaret - <i>ada</i>)</li>
-                <li>Gradient Boosting Regressor (PyCaret - <i>gbr</i>)</li>
-                <li>MLP Regressor (PyCaret - <i>mlp</i>)</li>
-                <li>Extreme Gradient Boosting (PyCaret - <i>xgboost</i>)</li>
-                <li>Light Gradient Boosting Machine (PyCaret - <i>lightgbm</i>)</li>
-                <li>CatBoost (PyCaret - <i>catboost</i>)</li>
-                <li>Dummy Regressor (PyCaret - <i>dummy</i>)</li>
-                <li>Bagging Regressor (PyCaret - <i>bagging</i>)</li>
-                <li>Stacking Regressor (PyCaret - <i>stacking</i>)</li>
-                <li>Voting Regressor (PyCaret - <i>voting</i>)</li>
+                <li>
+                    K Neighbors Regressor (PyCaret - <i>knn</i>)
+                </li>
+                <li>
+                    Decision Tree Regressor (PyCaret - <i>dt</i>)
+                </li>
+                <li>
+                    Random Forest Regressor (PyCaret - <i>rf</i>)
+                </li>
+                <li>
+                    Extra Trees Regressor (PyCaret - <i>et</i>)
+                </li>
+                <li>
+                    AdaBoost Regressor (PyCaret - <i>ada</i>)
+                </li>
+                <li>
+                    Gradient Boosting Regressor (PyCaret - <i>gbr</i>)
+                </li>
+                <li>
+                    MLP Regressor (PyCaret - <i>mlp</i>)
+                </li>
+                <li>
+                    Extreme Gradient Boosting (PyCaret - <i>xgboost</i>)
+                </li>
+                <li>
+                    Light Gradient Boosting Machine (PyCaret - <i>lightgbm</i>)
+                </li>
+                <li>
+                    CatBoost (PyCaret - <i>catboost</i>)
+                </li>
+                <li>
+                    Dummy Regressor (PyCaret - <i>dummy</i>)
+                </li>
+                <li>
+                    Bagging Regressor (PyCaret - <i>bagging</i>)
+                </li>
+                <li>
+                    Stacking Regressor (PyCaret - <i>stacking</i>)
+                </li>
+                <li>
+                    Voting Regressor (PyCaret - <i>voting</i>)
+                </li>
             </ul>
         </div>
     </div>
@@ -1316,29 +1411,67 @@
     <div class="row g-3">
         <div class="col-md-6">
             <ul>
-                <li>Logistic Regression (PyCaret - <i>lr</i>)</li>
-                <li>K Neightbors Classifier (PyCaret - <i>knn</i>)</li>
-                <li>Gaussian Naive Bayes (PyCaret - <i>nb</i>)</li>
-                <li>Decision Tree Classifier (PyCaret - <i>dt</i>)</li>
-                <li>SVM - Linear Kernel (PyCaret - <i>svm</i>)</li>
-                <li>SVM - Radial Kernel (PyCaret - <i>rbfsvm</i>)</li>
-                <li>Gaussian Process Classifier (PyCaret - <i>gpc</i>)</li>
-                <li>MLP Classifier (PyCaret - <i>mlp</i>)</li>
-                <li>Ridge Classifier (PyCaret - <i>ridge</i>)</li>
-                <li>Random Forest Classifier (PyCaret - <i>rf</i>)</li>
+                <li>
+                    Logistic Regression (PyCaret - <i>lr</i>)
+                </li>
+                <li>
+                    K Neightbors Classifier (PyCaret - <i>knn</i>)
+                </li>
+                <li>
+                    Gaussian Naive Bayes (PyCaret - <i>nb</i>)
+                </li>
+                <li>
+                    Decision Tree Classifier (PyCaret - <i>dt</i>)
+                </li>
+                <li>
+                    SVM - Linear Kernel (PyCaret - <i>svm</i>)
+                </li>
+                <li>
+                    SVM - Radial Kernel (PyCaret - <i>rbfsvm</i>)
+                </li>
+                <li>
+                    Gaussian Process Classifier (PyCaret - <i>gpc</i>)
+                </li>
+                <li>
+                    MLP Classifier (PyCaret - <i>mlp</i>)
+                </li>
+                <li>
+                    Ridge Classifier (PyCaret - <i>ridge</i>)
+                </li>
+                <li>
+                    Random Forest Classifier (PyCaret - <i>rf</i>)
+                </li>
             </ul>
         </div>
         <div class="col-md-6">
             <ul>
-                <li>Quadratic Discriminant Analysis (PyCaret - <i>qda</i>)</li>
-                <li>Ada Boost Classifier (PyCaret - <i>ada</i>)</li>
-                <li>Gradient Boost Classifier (PyCaret - <i>gbc</i>)</li>
-                <li>Linear Discriminant Analysis (PyCaret - <i>lda</i>)</li>
-                <li>Extra Trees Classifier (PyCaret - <i>et</i>)</li>
-                <li>Extreme Gradient Boosting (PyCaret - <i>xgboost</i>)</li>
-                <li>light Gradient Boosting Machine (PyCaret - <i>lightgbm</i>)</li>
-                <li>CatBoost Classifier (PyCaret - <i>catboost</i>)</li>
-                <li>Dummy Classifier (PyCaret - <i>dummy</i>)</li>
+                <li>
+                    Quadratic Discriminant Analysis (PyCaret - <i>qda</i>)
+                </li>
+                <li>
+                    Ada Boost Classifier (PyCaret - <i>ada</i>)
+                </li>
+                <li>
+                    Gradient Boost Classifier (PyCaret - <i>gbc</i>)
+                </li>
+                <li>
+                    Linear Discriminant Analysis (PyCaret - <i>lda</i>)
+                </li>
+                <li>
+                    Extra Trees Classifier (PyCaret - <i>et</i>)
+                </li>
+                <li>
+                    Extreme Gradient Boosting (PyCaret - <i>xgboost</i>)
+                </li>
+                <li>
+                    light Gradient Boosting Machine (PyCaret - <i>lightgbm</i>)
+                </li>
+                <li>
+                    CatBoost Classifier (PyCaret - <i>catboost</i>)
+                </li>
+                <li>
+                    Dummy Classifier (PyCaret - <i>dummy</i>)
+                </li>
             </ul>
         </div>
     </div>
@@ -1346,19 +1479,37 @@
     <div class="row g-3">
         <div class="col-md-6">
             <ul>
-                <li>K-Means Clustering (PyCaret - <i>kmeans</i>)</li>
-                <li>Affinity Propagation (PyCaret - <i>ap</i>)</li>
-                <li>Mean Shift Clustering (PyCaret - <i>meanshift</i>)</li>
-                <li>Spectral Clustering (PyCaret - <i>sc</i>)</li>
-                <li>Agglomerative Clustering (PyCaret - <i>hclust</i>)</li>
+                <li>
+                    K-Means Clustering (PyCaret - <i>kmeans</i>)
+                </li>
+                <li>
+                    Affinity Propagation (PyCaret - <i>ap</i>)
+                </li>
+                <li>
+                    Mean Shift Clustering (PyCaret - <i>meanshift</i>)
+                </li>
+                <li>
+                    Spectral Clustering (PyCaret - <i>sc</i>)
+                </li>
+                <li>
+                    Agglomerative Clustering (PyCaret - <i>hclust</i>)
+                </li>
             </ul>
         </div>
         <div class="col-md-6">
             <ul>
-                <li>Density-Based Spatial Clustering (PyCaret - <i>dbscan</i>)</li>
-                <li>OPTICS Clustering (PyCaret - <i>optics</i>)</li>
-                <li>Birch Clustering (PyCaret - <i>birch</i>)</li>
-                <li>K-Modes Clustering (PyCaret - <i>kmodes</i>)</li>
+                <li>
+                    Density-Based Spatial Clustering (PyCaret - <i>dbscan</i>)
+                </li>
+                <li>
+                    OPTICS Clustering (PyCaret - <i>optics</i>)
+                </li>
+                <li>
+                    Birch Clustering (PyCaret - <i>birch</i>)
+                </li>
+                <li>
+                    K-Modes Clustering (PyCaret - <i>kmodes</i>)
+                </li>
             </ul>
         </div>
     </div>    
