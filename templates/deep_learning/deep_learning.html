@@ -1802,8 +1802,8 @@
                                            autocomplete="off">
                                     <label class="btn btn-outline-danger" for="strategy3">3 Steps</label>
                                 </div>
-                            </div>              
-                            <div class="col-md-3 col-sm-6">Step 1</div>              
+                            </div>
+                            <div class="col-md-3 col-sm-6">Step 1</div>
                             <div class="col-md-3 col-sm-6">
                                 <select class="form-select"
                                         name="{{ form1.dpcla_optimizer1.html_name }}"
@@ -1821,7 +1821,7 @@
                                     <option selected>--- Loss Function ---</option>
                                     {% for loss in losses %}<option value="{{ loss }}">{{ loss }}</option>{% endfor %}
                                 </select>
-                            </div>     
+                            </div>
                             <div class="col-md-3 col-sm-6">
                                 <select class="form-select"
                                         name="{{ form1.dpcla_lr1.html_name }}"
@@ -1830,8 +1830,8 @@
                                     <option selected>--- Learning Rate ---</option>
                                     {% for lr in lrs %}<option value="{{ lr }}">{{ lr }}</option>{% endfor %}
                                 </select>
-                            </div>  
-                            <div class="col-md-3 col-sm-6">Step 2</div>              
+                            </div>
+                            <div class="col-md-3 col-sm-6">Step 2</div>
                             <div class="col-md-3 col-sm-6">
                                 <select class="form-select"
                                         name="{{ form1.dpcla_optimizer2.html_name }}"
@@ -1849,7 +1849,7 @@
                                     <option selected>--- Loss Function ---</option>
                                     {% for loss in losses %}<option value="{{ loss }}">{{ loss }}</option>{% endfor %}
                                 </select>
-                            </div>     
+                            </div>
                             <div class="col-md-3 col-sm-6">
                                 <select class="form-select"
                                         name="{{ form1.dpcla_lr2.html_name }}"
@@ -1859,7 +1859,7 @@
                                     {% for lr in lrs %}<option value="{{ lr }}">{{ lr }}</option>{% endfor %}
                                 </select>
                             </div>
-                            <div class="col-md-3 col-sm-6">Step 3</div>              
+                            <div class="col-md-3 col-sm-6">Step 3</div>
                             <div class="col-md-3 col-sm-6">
                                 <select class="form-select"
                                         name="{{ form1.dpcla_optimizer3.html_name }}"
@@ -1877,7 +1877,7 @@
                                     <option selected>--- Loss Function ---</option>
                                     {% for loss in losses %}<option value="{{ loss }}">{{ loss }}</option>{% endfor %}
                                 </select>
-                            </div>     
+                            </div>
                             <div class="col-md-3 col-sm-6">
                                 <select class="form-select"
                                         name="{{ form1.dpcla_lr3.html_name }}"
@@ -1903,97 +1903,129 @@
                                     </label>
                                 </div>
                             </div>
-                  <div class="col-md-3 col-sm-6">
-                    <div class="form-check form-switch">
-                      <input class="form-check-input" name="{{ form1.dpcla_gradcam.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_gradcam.id_for_label }}">
-                      <label class="form-check-label" for="{{ form1.dpcla_gradcam.id_for_label }}">Grad CAM</label>
+                            <div class="col-md-3 col-sm-6">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input"
+                                           name="{{ form1.dpcla_gradcam.html_name }}"
+                                           type="checkbox"
+                                           role="switch"
+                                           id="{{ form1.dpcla_gradcam.id_for_label }}">
+                                    <label class="form-check-label"
+                                           for="{{ form1.dpcla_gradcam.id_for_label }}">Grad CAM</label>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-6">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input"
+                                           name="{{ form1.dpcla_gradcamplusplus.html_name }}"
+                                           type="checkbox"
+                                           role="switch"
+                                           id="{{ form1.dpcla_gradcamplusplus.id_for_label }}">
+                                    <label class="form-check-label"
+                                           for="{{ form1.dpcla_gradcamplusplus.id_for_label }}">Grad CAM ++</label>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-6">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input"
+                                           name="{{ form1.dpcla_scorecam.html_name }}"
+                                           type="checkbox"
+                                           role="switch"
+                                           id="{{ form1.dpcla_scorecam.id_for_label }}">
+                                    <label class="form-check-label"
+                                           for="{{ form1.dpcla_scorecam.id_for_label }}">Score CAM</label>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-6">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input"
+                                           name="{{ form1.dpcla_fasterscorecam.html_name }}"
+                                           type="checkbox"
+                                           role="switch"
+                                           id="{{ form1.dpcla_fasterscorecam.id_for_label }}">
+                                    <label class="form-check-label"
+                                           for="{{ form1.dpcla_fasterscorecam.id_for_label }}">Faster-CAM</label>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-6">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input"
+                                           name="{{ form1.dpcla_layercam.html_name }}"
+                                           type="checkbox"
+                                           role="switch"
+                                           id="{{ form1.dpcla_layercam.id_for_label }}">
+                                    <label class="form-check-label" for="{{ form1.dpcla_layercam.id_for_label }}">Layer CAM</label>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-6">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input"
+                                           name="{{ form1.dpcla_vanillasaliency.html_name }}"
+                                           type="checkbox"
+                                           role="switch"
+                                           id="{{ form1.dpcla_vanillasaliency.id_for_label }}">
+                                    <label class="form-check-label" for="{{ form1.dpcla_vanillasaliency.id_for_label }}">Vanilla Saliency</label>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-6">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input"
+                                           name="{{ form1.dpcla_smoothgrad.html_name }}"
+                                           type="checkbox"
+                                           role="switch"
+                                           id="{{ form1.dpcla_smoothgrad.id_for_label }}">
+                                    <label class="form-check-label" for="{{ form1.dpcla_smoothgrad.id_for_label }}">Smooth Grad</label>
+                                </div>
+                            </div>
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-end col-md-12">
+                                <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                                    <button type="button" class="btn btn-success" onclick="selectXAI();">Select All</button>
+                                    <button type="button" class="btn btn-danger" onclick="unselectXAI();">Unselect All</button>
+                                </div>
+                            </div>
+                            <br>
+                            <br>
+                            <h5>Training Output</h5>
+                            <div class="col-md-3 col-sm-6">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" name="{{ form1.dpcla_savemodel.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_savemodel.id_for_label }}">
+                                    <label class="form-check-label" for="{{ form1.dpcla_savemodel.id_for_label }}">Save Model</label>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-6">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" name="{{ form1.dpcla_traingraph.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_traingraph.id_for_label }}">
+                                    <label class="form-check-label" for="{{ form1.dpcla_traingraph.id_for_label }}">Training / Validation Graphs</label>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-6">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" name="{{ form1.dpcla_confmatrix.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_confmatrix.id_for_label }}">
+                                    <label class="form-check-label" for="{{ form1.dpcla_confmatrix.id_for_label }}">Confusion Matrix</label>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-6">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" name="{{ form1.dpcla_classreport.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_classreport.id_for_label }}">
+                                    <label class="form-check-label" for="{{ form1.dpcla_classreport.id_for_label }}">Classification Report</label>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-6">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" name="{{ form1.dpcla_tflite.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_tflite.id_for_label }}">
+                                    <label class="form-check-label" for="{{ form1.dpcla_tflite.id_for_label }}">TFLite Conversion</label>
+                                </div>
+                            </div>
+                            <br>
+                            <br>
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-end col-md-12">
+                                <button type="reset" class="btn btn-secondary mb-3">Reset</button>
+                                <button type="submit" class="btn btn-primary mb-3">Run</button>
+                            </div>
+                        </form>
                     </div>
-                  </div>
-                  <div class="col-md-3 col-sm-6">
-                    <div class="form-check form-switch">
-                      <input class="form-check-input" name="{{ form1.dpcla_gradcamplusplus.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_gradcamplusplus.id_for_label }}">
-                      <label class="form-check-label" for="{{ form1.dpcla_gradcamplusplus.id_for_label }}">Grad CAM ++</label>
-                    </div>
-                  </div>
-                  <div class="col-md-3 col-sm-6">
-                    <div class="form-check form-switch">
-                      <input class="form-check-input" name="{{ form1.dpcla_scorecam.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_scorecam.id_for_label }}">
-                      <label class="form-check-label" for="{{ form1.dpcla_scorecam.id_for_label }}">Score CAM</label>
-                    </div>
-                  </div>
-                  <div class="col-md-3 col-sm-6">
-                    <div class="form-check form-switch">
-                      <input class="form-check-input" name="{{ form1.dpcla_fasterscorecam.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_fasterscorecam.id_for_label }}">
-                      <label class="form-check-label" for="{{ form1.dpcla_fasterscorecam.id_for_label }}">Faster-CAM</label>
-                    </div>
-                  </div>
-                  <div class="col-md-3 col-sm-6">
-                    <div class="form-check form-switch">
-                      <input class="form-check-input" name="{{ form1.dpcla_layercam.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_layercam.id_for_label }}">
-                      <label class="form-check-label" for="{{ form1.dpcla_layercam.id_for_label }}">Layer CAM</label>
-                    </div>
-                  </div>
-                  <div class="col-md-3 col-sm-6">
-                    <div class="form-check form-switch">
-                      <input class="form-check-input" name="{{ form1.dpcla_vanillasaliency.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_vanillasaliency.id_for_label }}">
-                      <label class="form-check-label" for="{{ form1.dpcla_vanillasaliency.id_for_label }}">Vanilla Saliency</label>
-                    </div>
-                  </div>
-                  <div class="col-md-3 col-sm-6">
-                    <div class="form-check form-switch">
-                      <input class="form-check-input" name="{{ form1.dpcla_smoothgrad.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_smoothgrad.id_for_label }}">
-                      <label class="form-check-label" for="{{ form1.dpcla_smoothgrad.id_for_label }}">Smooth Grad</label>
-                    </div>
-                  </div>
-                  <div class="d-grid gap-2 d-md-flex justify-content-md-end col-md-12">
-                    <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                      <button type="button" class="btn btn-success" onclick="selectXAI();">Select All</button>
-                      <button type="button" class="btn btn-danger" onclick="unselectXAI();">Unselect All</button>
-                    </div>
-                  </div>
-                  <br>
-                  <br>
-                  <h5>Training Output</h5>
-                  <div class="col-md-3 col-sm-6">
-                    <div class="form-check form-switch">
-                      <input class="form-check-input" name="{{ form1.dpcla_savemodel.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_savemodel.id_for_label }}">
-                      <label class="form-check-label" for="{{ form1.dpcla_savemodel.id_for_label }}">Save Model</label>
-                    </div>
-                  </div>
-                  <div class="col-md-3 col-sm-6">
-                    <div class="form-check form-switch">
-                      <input class="form-check-input" name="{{ form1.dpcla_traingraph.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_traingraph.id_for_label }}">
-                      <label class="form-check-label" for="{{ form1.dpcla_traingraph.id_for_label }}">Training / Validation Graphs</label>
-                    </div>
-                  </div>
-                  <div class="col-md-3 col-sm-6">
-                    <div class="form-check form-switch">
-                      <input class="form-check-input" name="{{ form1.dpcla_confmatrix.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_confmatrix.id_for_label }}">
-                      <label class="form-check-label" for="{{ form1.dpcla_confmatrix.id_for_label }}">Confusion Matrix</label>
-                    </div>
-                  </div>
-                  <div class="col-md-3 col-sm-6">
-                    <div class="form-check form-switch">
-                      <input class="form-check-input" name="{{ form1.dpcla_classreport.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_classreport.id_for_label }}">
-                      <label class="form-check-label" for="{{ form1.dpcla_classreport.id_for_label }}">Classification Report</label>
-                    </div>
-                  </div>
-                  <div class="col-md-3 col-sm-6">
-                    <div class="form-check form-switch">
-                      <input class="form-check-input" name="{{ form1.dpcla_tflite.html_name }}" type="checkbox" role="switch" id="{{ form1.dpcla_tflite.id_for_label }}">
-                      <label class="form-check-label" for="{{ form1.dpcla_tflite.id_for_label }}">TFLite Conversion</label>
-                    </div>
-                  </div>
-                  <br>
-                  <br>
-                  <div class="d-grid gap-2 d-md-flex justify-content-md-end col-md-12">
-                    <button type="reset" class="btn btn-secondary mb-3">Reset</button>
-                    <button type="submit" class="btn btn-primary mb-3">Run</button>
-                  </div>
-              </form>
-          </div>
-        </div>
-      </div>
+                </div>
+            </div>
       <div class="accordion-item">
         <h2 class="accordion-header">
           <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#DeepAssistant-collapseThree" aria-expanded="false" aria-controls="DeepAssistant-collapseThree">
