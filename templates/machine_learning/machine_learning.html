@@ -560,64 +560,122 @@
                           </div>
                           <div class="col-md-4 col-sm-6">
                               <div class="form-check form-switch">
-                                  <input class="form-check-input" name="{{ form1.mlcla_knn.html_name }}" type="checkbox" role="switch" id="{{ form1.mlcla_knn.id_for_label }}">
-                  <label class="form-check-label" for="{{ form1.mlcla_knn.id_for_label }}">K Neightbors Classifier (knn)</label>
-                </div>
-              </div>
-              <div class="col-md-4 col-sm-6">
-                <div class="form-check form-switch">
-                  <input class="form-check-input" name="{{ form1.mlcla_nb.html_name }}" type="checkbox" role="switch" id="{{ form1.mlcla_nb.id_for_label }}">
-                  <label class="form-check-label" for="{{ form1.mlcla_nb.id_for_label }}">Gaussian Naive Bayes (nb)</label>
-                </div>
-              </div>
-              <div class="col-md-4 col-sm-6">
-                <div class="form-check form-switch">
-                  <input class="form-check-input" name="{{ form1.mlcla_dt.html_name }}" type="checkbox" role="switch" id="{{ form1.mlcla_dt.id_for_label }}">
-                  <label class="form-check-label" for="{{ form1.mlcla_dt.id_for_label }}">Decision Tree Classifier (dt)</label>
-                </div>
-              </div>
-              <div class="col-md-4 col-sm-6">
-                <div class="form-check form-switch">
-                  <input class="form-check-input" name="{{ form1.mlcla_svm.html_name }}" type="checkbox" role="switch" id="{{ form1.mlcla_svm.id_for_label }}">
-                  <label class="form-check-label" for="{{ form1.mlcla_svm.id_for_label }}">SVM - Linear Kernel (svm)</label>
-                </div>
-              </div>
-              <div class="col-md-4 col-sm-6">
-                <div class="form-check form-switch">
-                  <input class="form-check-input" name="{{ form1.mlcla_rbfsvm.html_name }}" type="checkbox" role="switch" id="{{ form1.mlcla_rbfsvm.id_for_label }}">
-                  <label class="form-check-label" for="{{ form1.mlcla_rbfsvm.id_for_label }}">SVM - Radial Kernel (rbfsvm)</label>
-                </div>
-              </div>
-              <div class="col-md-4 col-sm-6">
-                <div class="form-check form-switch">
-                  <input class="form-check-input" name="{{ form1.mlcla_gpc.html_name }}" type="checkbox" role="switch" id="{{ form1.mlcla_gpc.id_for_label }}">
-                  <label class="form-check-label" for="{{ form1.mlcla_gpc.id_for_label }}">Gaussian Process Classifier (gpc)</label>
-                </div>
-              </div>
-              <div class="col-md-4 col-sm-6">
-                <div class="form-check form-switch">
-                  <input class="form-check-input" name="{{ form1.mlcla_mlp.html_name }}" type="checkbox" role="switch" id="{{ form1.mlcla_mlp.id_for_label }}">
-                  <label class="form-check-label" for="{{ form1.mlcla_mlp.id_for_label }}">MLP Classifier (mlp)</label>
-                </div>
-              </div>
-              <div class="col-md-4 col-sm-6">
-                <div class="form-check form-switch">
-                  <input class="form-check-input" name="{{ form1.mlcla_ridge.html_name }}" type="checkbox" role="switch" id="{{ form1.mlcla_ridge.id_for_label }}">
-                  <label class="form-check-label" for="{{ form1.mlcla_ridge.id_for_label }}">Ridge Classifier (ridge)</label>
-                </div>
-              </div>
-              <div class="col-md-4 col-sm-6">
-                <div class="form-check form-switch">
-                  <input class="form-check-input" name="{{ form1.mlcla_rf.html_name }}" type="checkbox" role="switch" id="{{ form1.mlcla_rf.id_for_label }}">
-                  <label class="form-check-label" for="{{ form1.mlcla_rf.id_for_label }}">Random Forest Classifier (rf)</label>
-                </div>
-              </div>
-              <div class="col-md-4 col-sm-6">
-                <div class="form-check form-switch">
-                  <input class="form-check-input" name="{{ form1.mlcla_qda.html_name }}" type="checkbox" role="switch" id="{{ form1.mlcla_qda.id_for_label }}">
-                  <label class="form-check-label" for="{{ form1.mlcla_qda.id_for_label }}">Quadratic Discriminant Analysis (qda)</label>
-                </div>
-              </div>
+                                  <input class="form-check-input"
+                                         name="{{ form1.mlcla_knn.html_name }}"
+                                         type="checkbox"
+                                         role="switch"
+                                         id="{{ form1.mlcla_knn.id_for_label }}">
+                                  <label class="form-check-label"
+                                         for="{{ form1.mlcla_knn.id_for_label }}">K Neightbors Classifier (knn)</label>
+                              </div>
+                          </div>
+                          <div class="col-md-4 col-sm-6">
+                              <div class="form-check form-switch">
+                                  <input class="form-check-input"
+                                         name="{{ form1.mlcla_nb.html_name }}"
+                                         type="checkbox" role="switch"
+                                         id="{{ form1.mlcla_nb.id_for_label }}">
+                                  <label class="form-check-label"
+                                         for="{{ form1.mlcla_nb.id_for_label }}">Gaussian Naive Bayes (nb)</label>
+                              </div>
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input"
+                                       name="{{ form1.mlcla_dt.html_name }}"
+                                       type="checkbox" role="switch"
+                                       id="{{ form1.mlcla_dt.id_for_label }}">
+                                <label class="form-check-label"
+                                       for="{{ form1.mlcla_dt.id_for_label }}">Decision Tree Classifier (dt)</label>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input"
+                                       name="{{ form1.mlcla_svm.html_name }}"
+                                       type="checkbox" role="switch"
+                                       id="{{ form1.mlcla_svm.id_for_label }}">
+                                <label class="form-check-label"
+                                       for="{{ form1.mlcla_svm.id_for_label }}">SVM - Linear Kernel (svm)</label>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input"
+                                       name="{{ form1.mlcla_rbfsvm.html_name }}"
+                                       type="checkbox"
+                                       role="switch"
+                                       id="{{ form1.mlcla_rbfsvm.id_for_label }}">
+                                <label class="form-check-label"
+                                       for="{{ form1.mlcla_rbfsvm.id_for_label }}">
+                                    SVM - Radial Kernel (rbfsvm)
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input"
+                                       name="{{ form1.mlcla_gpc.html_name }}"
+                                       type="checkbox"
+                                       role="switch" id="{{ form1.mlcla_gpc.id_for_label }}">
+                                <label class="form-check-label"
+                                       for="{{ form1.mlcla_gpc.id_for_label }}">
+                                    Gaussian Process Classifier (gpc)
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input"
+                                       name="{{ form1.mlcla_mlp.html_name }}"
+                                       type="checkbox"
+                                       role="switch"
+                                       id="{{ form1.mlcla_mlp.id_for_label }}">
+                                <label class="form-check-label"
+                                       for="{{ form1.mlcla_mlp.id_for_label }}">
+                                    MLP Classifier (mlp)
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input"
+                                       name="{{ form1.mlcla_ridge.html_name }}"
+                                       type="checkbox"
+                                       role="switch"
+                                       id="{{ form1.mlcla_ridge.id_for_label }}">
+                                <label class="form-check-label"
+                                       for="{{ form1.mlcla_ridge.id_for_label }}">
+                                    Ridge Classifier (ridge)
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input"
+                                       name="{{ form1.mlcla_rf.html_name }}"
+                                       type="checkbox"
+                                       role="switch"
+                                       id="{{ form1.mlcla_rf.id_for_label }}">
+                                <label class="form-check-label"
+                                       for="{{ form1.mlcla_rf.id_for_label }}">
+                                    Random Forest Classifier (rf)
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input"
+                                       name="{{ form1.mlcla_qda.html_name }}"
+                                       type="checkbox"
+                                       role="switch"
+                                       id="{{ form1.mlcla_qda.id_for_label }}">
+                                <label class="form-check-label"
+                                       for="{{ form1.mlcla_qda.id_for_label }}">
+                                    Quadratic Discriminant Analysis (qda)
+                                </label>
+                            </div>
+                        </div>
               <div class="col-md-4 col-sm-6">
                 <div class="form-check form-switch">
                   <input class="form-check-input" name="{{ form1.mlcla_ada.html_name }}" type="checkbox" role="switch" id="{{ form1.mlcla_ada.id_for_label }}">
