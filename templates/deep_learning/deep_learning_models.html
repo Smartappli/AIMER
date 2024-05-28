@@ -1,535 +1,1207 @@
 {% extends 'base.html' %}
-
 {% load static %}
-
 {% block title %}Deep Learning -  Models{% endblock %}
-
 {% block content %}
-      <h3><span class="text-info-emphasis">75</span> Classification Models</h3>
-      <div class="row g-3">
+    <h3>
+        <span class="text-info-emphasis">75</span> Classification Models
+    </h3>
+    <div class="row g-3">
         <div class="col-md-6">
-          <ul>
-            <li>
-                Xception (Keras - <i>Xception</i>)
-                <a href="{% static 'pdf/1610.02357.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="Xception: Deep Learning with Depthwise Separable Convolutions"><use href="#pdf"></use></svg>
-                </a>
-            </li>
-            <li>
-                VGG 11 (PyTorch - <i>VGG11</i>)
-                <a href="{% static 'pdf/1409.1556.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="VERY DEEP CONVOLUTIONAL NETWORKS FOR LARGE-SCALE IMAGE RECOGNITION"><use href="#pdf"></use></svg>
-                </a>
-            </li>
-            <li>
-                VGG 13 (PyTorch - <i>VGG13</i>)
-                <a href="{% static 'pdf/1409.1556.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="VERY DEEP CONVOLUTIONAL NETWORKS FOR LARGE-SCALE IMAGE RECOGNITION"><use href="#pdf"></use></svg>
-                </a>
-            </li>
-            <li>
-                VGG 16 (Keras - <i>VGG16</i>)
-                <a href="{% static 'pdf/1409.1556.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="VERY DEEP CONVOLUTIONAL NETWORKS FOR LARGE-SCALE IMAGE RECOGNITION"><use href="#pdf"></use></svg>
-                </a>
-            </li>
-            <li>
-                VGG 19 (Keras - <i>VGG19</i>)
-                <a href="{% static 'pdf/1409.1556.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="VERY DEEP CONVOLUTIONAL NETWORKS FOR LARGE-SCALE IMAGE RECOGNITION"><use href="#pdf"></use></svg>
-                </a>
-            </li>
-            <li>
-                 ResNet 18 (PyTorch - <i>ResNet18</i>)
-                 <a href="{% static 'pdf/1512.03385.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="Deep Residual Learning for Image Recognition"><use href="#pdf"></use></svg>
-                </a>
-            </li>
-            <li>
-                 ResNet 34 (PyTorch - <i>ResNet34</i>)
-                 <a href="{% static 'pdf/1512.03385.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="Deep Residual Learning for Image Recognition"><use href="#pdf"></use></svg>
-                </a>
-            </li>
-            <li>
-                ResNet 50 (Keras - <i>ResNet50</i>)
-                <a href="{% static 'pdf/1512.03385.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="Deep Residual Learning for Image Recognition"><use href="#pdf"></use></svg>
-                </a>
-            </li>
-            <li>
-                ResNet 50 V2 (Keras - <i>ResNet50V2</i>)
-                <a href="{% static 'pdf/1603.05027.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="Identity Mappings in Deep Residual Networks"><use href="#pdf"></use></svg>
-                </a>
-            </li>
-            <li>
-                ResNet RS 50 (Keras - <i>ResNetRS50</i>)
-                <a href="{% static 'pdf/2103.07579.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="Revisiting ResNets: Improved Training and Scaling Strategies"><use href="#pdf"></use></svg>
-                </a>
-            </li>
-            <li>
-                ResNet 101 (Keras - <i>ResNet101</i>)
-                <a href="{% static 'pdf/1512.03385.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="Deep Residual Learning for Image Recognition"><use href="#pdf"></use></svg>
-                </a>
-            </li>
-            <li>
-                ResNet 101 V2 (Keras - <i>ResNet101V2</i>)
-                <a href="{% static 'pdf/1603.05027.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="Identity Mappings in Deep Residual Networks"><use href="#pdf"></use></svg>
-                </a>
-            </li>
-            <li>
-                ResNet RS 101 (Keras - <i>ResNetRS101</i>)
-                <a href="{% static 'pdf/2103.07579.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="Revisiting ResNets: Improved Training and Scaling Strategies"><use href="#pdf"></use></svg>
-                </a>
-            </li>
-            <li>
-                ResNet 152 (Keras - <i>ResNet152</i>)
-                <a href="{% static 'pdf/1512.03385.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="Deep Residual Learning for Image Recognition"><use href="#pdf"></use></svg>
-                </a>
-            </li>
-            <li>
-                ResNet 152 V2 (Keras - <i>ResNet152V2</i>)
-                <a href="{% static 'pdf/1603.05027.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="Identity Mappings in Deep Residual Networks"><use href="#pdf"></use></svg>
-                </a>
-            </li>
-            <li>
-                ResNet RS 152 (Keras - <i>ResNetRS152</i>)
-                <a href="{% static 'pdf/2103.07579.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="Revisiting ResNets: Improved Training and Scaling Strategies"><use href="#pdf"></use></svg>
-                </a>
-            </li>
-            <li>
-                ResNet RS 200 (Keras - <i>ResNetRS200</i>)
-                <a href="{% static 'pdf/2103.07579.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="Revisiting ResNets: Improved Training and Scaling Strategies"><use href="#pdf"></use></svg>
-                </a>
-            </li>
-            <li>
-                ResNet RS 270 (Keras - <i>ResNetRS270</i>)
-                <a href="{% static 'pdf/2103.07579.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="Revisiting ResNets: Improved Training and Scaling Strategies"><use href="#pdf"></use></svg>
-                </a>
-            </li>
-            <li>
-                ResNet RS 350 (Keras - <i>ResNetRS350</i>)
-                 <a href="{% static 'pdf/2103.07579.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="Revisiting ResNets: Improved Training and Scaling Strategies"><use href="#pdf"></use></svg>
-                </a>
-            </li>
-            <li>
-                ResNet RS 420 (Keras - <i>ResNetRS420</i>)
-                <a href="{% static 'pdf/2103.07579.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="Revisiting ResNets: Improved Training and Scaling Strategies"><use href="#pdf"></use></svg>
-                </a>
-            </li>
-            <li>
-                Inception V3 (Keras - <i>InceptionV3</i>)
-                <a href="{% static 'pdf/1512.00567.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="Rethinking the Inception Architecture for Computer Vision"><use href="#pdf"></use></svg>
-                </a>
-            </li>
-            <li>
-                InceptionResNet V2 (Keras - <i>InceptionResNetV2</i>)
-                <a href="{% static 'pdf/1602.07261.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="Inception-v4, Inception-ResNet and the Impact of Residual Connections on Learning"><use href="#pdf"></use></svg>
-                </a>
-            </li>
-            <li>
-                MobileNet (Keras - <i>MobileNet</i>)
-                <a href="{% static 'pdf/1704.04861.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="MobileNets: Efficient Convolutional Neural Networks for Mobile Vision Applications"><use href="#pdf"></use></svg>
-                </a>
-            </li>
-            <li>
-                MobileNet V2 (Keras - <i>MobileNetV2</i>)
-                <a href="{% static 'pdf/1801.04381.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="MobileNetV2: Inverted Residuals and Linear Bottlenecks"><use href="#pdf"></use></svg>
-                </a>
-            </li>
-            <li>
-                MobileNet V3 Small (Keras - <i>MobileNetV3Small</i>)
-                <a href="{% static 'pdf/1905.02244.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="Searching for MobileNetV3"><use href="#pdf"></use></svg>
-                </a>
-            </li>
-            <li>
-                MobileNet V3 Large (Keras - <i>MobileNetV3Large</i>)
-                <a href="{% static 'pdf/1905.02244.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="Searching for MobileNetV3"><use href="#pdf"></use></svg>
-                </a>
-            </li>
-            <li>
-                DenseNet 121 (Keras - <i>DenseNet121</i>)
-                <a href="{% static 'pdf/1608.06993.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="Densely Connected Convolutional Networks"><use href="#pdf"></use></svg>
-                </a>
-            </li>
-            <li>
-                DenseNet 169 (Keras - <i>DenseNet169</i>)
-                <a href="{% static 'pdf/1608.06993.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="Densely Connected Convolutional Networks"><use href="#pdf"></use></svg>
-                </a>
-            </li>
-            <li>
-                DenseNet 201 (Keras - <i>DenseNet201</i>)
-                <a href="{% static 'pdf/1608.06993.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="Densely Connected Convolutional Networks"><use href="#pdf"></use></svg>
-                </a>
-            </li>
-            <li>
-                NASNet Mobile (Keras - <i>NASNetMobile</i>)
-                <a href="{% static 'pdf/1707.07012.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="Learning Transferable Architectures for Scalable Image Recognition"><use href="#pdf"></use></svg>
-                </a>
-            </li>
-            <li>
-                NASNet Large (Keras - <i>NASNetLarge</i>)
-                <a href="{% static 'pdf/1707.07012.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="Learning Transferable Architectures for Scalable Image Recognition"><use href="#pdf"></use></svg>
-                </a>
-            </li>
-            <li>
-                EfficientNet B0 (Keras - <i>EfficientNetB0</i>)
-                <a href="{% static 'pdf/1905.11946.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks"><use href="#pdf"></use></svg>
-                </a>
-            </li>
-            <li>
-                EfficientNet B0 V2 (Keras - <i>EfficientNetB0V2</i>)
-                <a href="{% static 'pdf/2104.00298.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="EfficientNetV2: Smaller Models and Faster Training"><use href="#pdf"></use></svg>
-                </a>
-            </li>
-            <li>
-                EfficientNet B1 (Keras - <i>EfficientNetB1</i>)
-                <a href="{% static 'pdf/1905.11946.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks"><use href="#pdf"></use></svg>
-                </a>
-            </li>
-            <li>
-                EfficientNet B1 V2 (Keras - <i>EfficientNetB1V2</i>)
-                <a href="{% static 'pdf/2104.00298.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="EfficientNetV2: Smaller Models and Faster Training"><use href="#pdf"></use></svg>
-                </a>
-            </li>
-            <li>
-                EfficientNet B2 (Keras - <i>EfficientNetB2</i>)
-                <a href="{% static 'pdf/1905.11946.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks"><use href="#pdf"></use></svg>
-                </a>
-            </li>
-            <li>
-                EfficientNet B2 V2 (Keras - <i>EfficientNetB2V2</i>)
-                <a href="{% static 'pdf/2104.00298.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="EfficientNetV2: Smaller Models and Faster Training"><use href="#pdf"></use></svg>
-                </a>
-            </li>
-            <li>
-                EfficientNet B3 (Keras - <i>EfficientNetB3</i>)
-                <a href="{% static 'pdf/1905.11946.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks"><use href="#pdf"></use></svg>
-                </a>
-            </li>
-          </ul>
+            <ul>
+                <li>
+                    Xception (Keras - <i>Xception</i>)
+                    <a href="{% static 'pdf/1610.02357.pdf' %}"
+                       target="_blank"
+                       class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi"
+                             width="16"
+                             height="16"
+                             role="img"
+                             aria-label="Xception: Deep Learning with Depthwise Separable Convolutions">
+                            <use href="#pdf"></use>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    VGG 11 (PyTorch - <i>VGG11</i>)
+                    <a href="{% static 'pdf/1409.1556.pdf' %}"
+                       target="_blank"
+                       class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi"
+                             width="16"
+                             height="16"
+                             role="img"
+                             aria-label="VERY DEEP CONVOLUTIONAL NETWORKS FOR LARGE-SCALE IMAGE RECOGNITION">
+                            <use href="#pdf"></use>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    VGG 13 (PyTorch - <i>VGG13</i>)
+                    <a href="{% static 'pdf/1409.1556.pdf' %}"
+                       target="_blank"
+                       class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi"
+                             width="16"
+                             height="16"
+                             role="img"
+                             aria-label="VERY DEEP CONVOLUTIONAL NETWORKS FOR LARGE-SCALE IMAGE RECOGNITION">
+                            <use href="#pdf"></use>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    VGG 16 (Keras - <i>VGG16</i>)
+                    <a href="{% static 'pdf/1409.1556.pdf' %}"
+                       target="_blank"
+                       class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi"
+                             width="16"
+                             height="16"
+                             role="img"
+                             aria-label="VERY DEEP CONVOLUTIONAL NETWORKS FOR LARGE-SCALE IMAGE RECOGNITION">
+                            <use href="#pdf"></use>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    VGG 19 (Keras - <i>VGG19</i>)
+                    <a href="{% static 'pdf/1409.1556.pdf' %}"
+                       target="_blank"
+                       class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi"
+                             width="16"
+                             height="16"
+                             role="img"
+                             aria-label="VERY DEEP CONVOLUTIONAL NETWORKS FOR LARGE-SCALE IMAGE RECOGNITION">
+                            <use href="#pdf"></use>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    ResNet 18 (PyTorch - <i>ResNet18</i>)
+                    <a href="{% static 'pdf/1512.03385.pdf' %}"
+                       target="_blank"
+                       class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi"
+                             width="16"
+                             height="16"
+                             role="img"
+                             aria-label="Deep Residual Learning for Image Recognition">
+                            <use href="#pdf"></use>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    ResNet 34 (PyTorch - <i>ResNet34</i>)
+                    <a href="{% static 'pdf/1512.03385.pdf' %}"
+                       target="_blank"
+                       class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi"
+                             width="16"
+                             height="16"
+                             role="img"
+                             aria-label="Deep Residual Learning for Image Recognition">
+                            <use href="#pdf"></use>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    ResNet 50 (Keras - <i>ResNet50</i>)
+                    <a href="{% static 'pdf/1512.03385.pdf' %}"
+                       target="_blank"
+                       class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi"
+                             width="16"
+                             height="16"
+                             role="img"
+                             aria-label="Deep Residual Learning for Image Recognition">
+                            <use href="#pdf"></use>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    ResNet 50 V2 (Keras - <i>ResNet50V2</i>)
+                    <a href="{% static 'pdf/1603.05027.pdf' %}"
+                       target="_blank"
+                       class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi"
+                             width="16"
+                             height="16"
+                             role="img"
+                             aria-label="Identity Mappings in Deep Residual Networks">
+                            <use href="#pdf"></use>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    ResNet RS 50 (Keras - <i>ResNetRS50</i>)
+                    <a href="{% static 'pdf/2103.07579.pdf' %}"
+                       target="_blank"
+                       class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi"
+                             width="16"
+                             height="16"
+                             role="img"
+                             aria-label="Revisiting ResNets: Improved Training and Scaling Strategies">
+                            <use href="#pdf"></use>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    ResNet 101 (Keras - <i>ResNet101</i>)
+                    <a href="{% static 'pdf/1512.03385.pdf' %}"
+                       target="_blank"
+                       class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi"
+                             width="16"
+                             height="16"
+                             role="img"
+                             aria-label="Deep Residual Learning for Image Recognition">
+                            <use href="#pdf"></use>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    ResNet 101 V2 (Keras - <i>ResNet101V2</i>)
+                    <a href="{% static 'pdf/1603.05027.pdf' %}"
+                       target="_blank"
+                       class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi"
+                             width="16"
+                             height="16"
+                             role="img"
+                             aria-label="Identity Mappings in Deep Residual Networks">
+                            <use href="#pdf"></use>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    ResNet RS 101 (Keras - <i>ResNetRS101</i>)
+                    <a href="{% static 'pdf/2103.07579.pdf' %}"
+                       target="_blank"
+                       class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi"
+                             width="16"
+                             height="16"
+                             role="img"
+                             aria-label="Revisiting ResNets: Improved Training and Scaling Strategies">
+                            <use href="#pdf"></use>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    ResNet 152 (Keras - <i>ResNet152</i>)
+                    <a href="{% static 'pdf/1512.03385.pdf' %}"
+                       target="_blank"
+                       class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi"
+                             width="16"
+                             height="16"
+                             role="img"
+                             aria-label="Deep Residual Learning for Image Recognition">
+                            <use href="#pdf"></use>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    ResNet 152 V2 (Keras - <i>ResNet152V2</i>)
+                    <a href="{% static 'pdf/1603.05027.pdf' %}"
+                       target="_blank"
+                       class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi"
+                             width="16"
+                             height="16"
+                             role="img"
+                             aria-label="Identity Mappings in Deep Residual Networks">
+                            <use href="#pdf"></use>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    ResNet RS 152 (Keras - <i>ResNetRS152</i>)
+                    <a href="{% static 'pdf/2103.07579.pdf' %}"
+                       target="_blank"
+                       class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi"
+                             width="16"
+                             height="16"
+                             role="img"
+                             aria-label="Revisiting ResNets: Improved Training and Scaling Strategies">
+                            <use href="#pdf"></use>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    ResNet RS 200 (Keras - <i>ResNetRS200</i>)
+                    <a href="{% static 'pdf/2103.07579.pdf' %}"
+                       target="_blank"
+                       class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi"
+                             width="16"
+                             height="16"
+                             role="img"
+                             aria-label="Revisiting ResNets: Improved Training and Scaling Strategies">
+                            <use href="#pdf"></use>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    ResNet RS 270 (Keras - <i>ResNetRS270</i>)
+                    <a href="{% static 'pdf/2103.07579.pdf' %}"
+                       target="_blank"
+                       class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi"
+                             width="16"
+                             height="16"
+                             role="img"
+                             aria-label="Revisiting ResNets: Improved Training and Scaling Strategies">
+                            <use href="#pdf"></use>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    ResNet RS 350 (Keras - <i>ResNetRS350</i>)
+                    <a href="{% static 'pdf/2103.07579.pdf' %}"
+                       target="_blank"
+                       class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi"
+                             width="16"
+                             height="16"
+                             role="img"
+                             aria-label="Revisiting ResNets: Improved Training and Scaling Strategies">
+                            <use href="#pdf"></use>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    ResNet RS 420 (Keras - <i>ResNetRS420</i>)
+                    <a href="{% static 'pdf/2103.07579.pdf' %}"
+                       target="_blank"
+                       class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi"
+                             width="16"
+                             height="16"
+                             role="img"
+                             aria-label="Revisiting ResNets: Improved Training and Scaling Strategies">
+                            <use href="#pdf"></use>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    Inception V3 (Keras - <i>InceptionV3</i>)
+                    <a href="{% static 'pdf/1512.00567.pdf' %}"
+                       target="_blank"
+                       class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi"
+                             width="16"
+                             height="16"
+                             role="img"
+                             aria-label="Rethinking the Inception Architecture for Computer Vision">
+                            <use href="#pdf"></use>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    InceptionResNet V2 (Keras - <i>InceptionResNetV2</i>)
+                    <a href="{% static 'pdf/1602.07261.pdf' %}"
+                       target="_blank"
+                       class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi"
+                             width="16"
+                             height="16"
+                             role="img"
+                             aria-label="Inception-v4, Inception-ResNet and the Impact of Residual Connections on Learning">
+                            <use href="#pdf"></use>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    MobileNet (Keras - <i>MobileNet</i>)
+                    <a href="{% static 'pdf/1704.04861.pdf' %}"
+                       target="_blank"
+                       class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi"
+                             width="16"
+                             height="16"
+                             role="img"
+                             aria-label="MobileNets: Efficient Convolutional Neural Networks for Mobile Vision Applications">
+                            <use href="#pdf"></use>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    MobileNet V2 (Keras - <i>MobileNetV2</i>)
+                    <a href="{% static 'pdf/1801.04381.pdf' %}"
+                       target="_blank"
+                       class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi"
+                             width="16"
+                             height="16"
+                             role="img"
+                             aria-label="MobileNetV2: Inverted Residuals and Linear Bottlenecks">
+                            <use href="#pdf"></use>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    MobileNet V3 Small (Keras - <i>MobileNetV3Small</i>)
+                    <a href="{% static 'pdf/1905.02244.pdf' %}"
+                       target="_blank"
+                       class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi"
+                             width="16"
+                             height="16"
+                             role="img"
+                             aria-label="Searching for MobileNetV3">
+                            <use href="#pdf"></use>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    MobileNet V3 Large (Keras - <i>MobileNetV3Large</i>)
+                    <a href="{% static 'pdf/1905.02244.pdf' %}"
+                       target="_blank"
+                       class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi"
+                             width="16"
+                             height="16"
+                             role="img"
+                             aria-label="Searching for MobileNetV3">
+                            <use href="#pdf"></use>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    DenseNet 121 (Keras - <i>DenseNet121</i>)
+                    <a href="{% static 'pdf/1608.06993.pdf' %}"
+                       target="_blank"
+                       class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi"
+                             width="16"
+                             height="16"
+                             role="img"
+                             aria-label="Densely Connected Convolutional Networks">
+                            <use href="#pdf"></use>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    DenseNet 169 (Keras - <i>DenseNet169</i>)
+                    <a href="{% static 'pdf/1608.06993.pdf' %}"
+                       target="_blank"
+                       class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi"
+                             width="16"
+                             height="16"
+                             role="img"
+                             aria-label="Densely Connected Convolutional Networks">
+                            <use href="#pdf"></use>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    DenseNet 201 (Keras - <i>DenseNet201</i>)
+                    <a href="{% static 'pdf/1608.06993.pdf' %}"
+                       target="_blank"
+                       class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi"
+                             width="16"
+                             height="16"
+                             role="img"
+                             aria-label="Densely Connected Convolutional Networks">
+                            <use href="#pdf"></use>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    NASNet Mobile (Keras - <i>NASNetMobile</i>)
+                    <a href="{% static 'pdf/1707.07012.pdf' %}"
+                       target="_blank"
+                       class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi"
+                             width="16"
+                             height="16"
+                             role="img"
+                             aria-label="Learning Transferable Architectures for Scalable Image Recognition">
+                            <use href="#pdf"></use>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    NASNet Large (Keras - <i>NASNetLarge</i>)
+                    <a href="{% static 'pdf/1707.07012.pdf' %}"
+                       target="_blank"
+                       class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi"
+                             width="16"
+                             height="16"
+                             role="img"
+                             aria-label="Learning Transferable Architectures for Scalable Image Recognition">
+                            <use href="#pdf"></use>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    EfficientNet B0 (Keras - <i>EfficientNetB0</i>)
+                    <a href="{% static 'pdf/1905.11946.pdf' %}"
+                       target="_blank"
+                       class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi"
+                             width="16"
+                             height="16"
+                             role="img"
+                             aria-label="EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks">
+                            <use href="#pdf"></use>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    EfficientNet B0 V2 (Keras - <i>EfficientNetB0V2</i>)
+                    <a href="{% static 'pdf/2104.00298.pdf' %}"
+                       target="_blank"
+                       class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi"
+                             width="16"
+                             height="16"
+                             role="img"
+                             aria-label="EfficientNetV2: Smaller Models and Faster Training">
+                            <use href="#pdf"></use>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    EfficientNet B1 (Keras - <i>EfficientNetB1</i>)
+                    <a href="{% static 'pdf/1905.11946.pdf' %}"
+                       target="_blank"
+                       class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi"
+                             width="16"
+                             height="16"
+                             role="img"
+                             aria-label="EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks">
+                            <use href="#pdf"></use>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    EfficientNet B1 V2 (Keras - <i>EfficientNetB1V2</i>)
+                    <a href="{% static 'pdf/2104.00298.pdf' %}"
+                       target="_blank"
+                       class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi"
+                             width="16"
+                             height="16"
+                             role="img"
+                             aria-label="EfficientNetV2: Smaller Models and Faster Training">
+                            <use href="#pdf"></use>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    EfficientNet B2 (Keras - <i>EfficientNetB2</i>)
+                    <a href="{% static 'pdf/1905.11946.pdf' %}"
+                       target="_blank"
+                       class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi"
+                             width="16"
+                             height="16"
+                             role="img"
+                             aria-label="EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks">
+                            <use href="#pdf"></use>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    EfficientNet B2 V2 (Keras - <i>EfficientNetB2V2</i>)
+                    <a href="{% static 'pdf/2104.00298.pdf' %}"
+                       target="_blank"
+                       class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi"
+                             width="16"
+                             height="16"
+                             role="img"
+                             aria-label="EfficientNetV2: Smaller Models and Faster Training">
+                            <use href="#pdf"></use>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    EfficientNet B3 (Keras - <i>EfficientNetB3</i>)
+                    <a href="{% static 'pdf/1905.11946.pdf' %}"
+                       target="_blank"
+                       class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi"
+                             width="16"
+                             height="16"
+                             role="img"
+                             aria-label="EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks">
+                            <use href="#pdf"></use>
+                        </svg>
+                    </a>
+                </li>
+            </ul>
         </div>
         <div class="col-md-6">
-          <ul>
-            <li>
-                EfficientNet B3 V2 (Keras - <i>EfficientNetB3V2</i>)
-                <a href="{% static 'pdf/2104.00298.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="EfficientNetV2: Smaller Models and Faster Training"><use href="#pdf"></use></svg>
-                </a>
-            </li>
-            <li>
-                EfficientNet B4 (Keras - <i>EfficientNetB4</i>)
-                <a href="{% static 'pdf/1905.11946.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks"><use href="#pdf"></use></svg>
-                </a>
-            </li>
-            <li>
-                EfficientNet B5 (Keras - <i>EfficientNetB5</i>)
-                <a href="{% static 'pdf/1905.11946.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks"><use href="#pdf"></use></svg>
-                </a>
-            </li>
-            <li>
-                EfficientNet B6 (Keras - <i>EfficientNetB6</i>)
-                <a href="{% static 'pdf/1905.11946.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks"><use href="#pdf"></use></svg>
-                </a>
-            </li>
-            <li>
-                EfficientNet B7 (Keras - <i>EfficientNetB7</i>)
-                <a href="{% static 'pdf/1905.11946.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks"><use href="#pdf"></use></svg>
-                </a>
-            </li>
-            <li>
-                EfficientNet V2 Small (Keras - <i>EfficientNetV2Small</i>)
-                <a href="{% static 'pdf/2104.00298.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="EfficientNetV2: Smaller Models and Faster Training"><use href="#pdf"></use></svg>
-                </a>
-            </li>
-            <li>
-                EfficientNet V2 Medium (Keras - <i>EfficientNetV2Medium</i>)
-                <a href="{% static 'pdf/2104.00298.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="EfficientNetV2: Smaller Models and Faster Training"><use href="#pdf"></use></svg>
-                </a>
-            </li>
-            <li>
-                EfficientNet V2 Large (Keras - <i>EfficientNetV2Large</i>)
-                <a href="{% static 'pdf/2104.00298.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="EfficientNetV2: Smaller Models and Faster Training"><use href="#pdf"></use></svg>
-                </a>
-            </li>
-            <li>
-                ConvNeXtTiny (Keras - <i>ConvNeXt Tiny</i>)
-                <a href="{% static 'pdf/2201.03545.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="A ConvNet for the 2020s"><use href="#pdf"></use></svg>
-                </a>
-            </li>
-            <li>
-                ConvNeXtSmall (Keras - <i>ConvNeXt Small</i>)
-                <a href="{% static 'pdf/2201.03545.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="A ConvNet for the 2020s"><use href="#pdf"></use></svg>
-                </a>
-            </li>
-            <li>
-                 ConvNeXtBase (Keras - <i>ConvNeXt Base</i>)
-                <a href="{% static 'pdf/2201.03545.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="A ConvNet for the 2020s"><use href="#pdf"></use></svg>
-                </a>
-            </li>
-            <li>
-                ConvNeXtLarge (Keras - <i>ConvNeXt Large</i>)
-                <a href="{% static 'pdf/2201.03545.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="A ConvNet for the 2020s"><use href="#pdf"></use></svg>
-                </a>
-            </li>
-            <li>
-                ConvNeXtXLarge (Keras - <i>ConvNeXt XLarge</i>)
-                <a href="{% static 'pdf/2201.03545.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="A ConvNet for the 2020s"><use href="#pdf"></use></svg>
-                </a>
-            </li>
-            <li>
-                RegNetX 002 (Keras - <i>RegNetX002</i>)
-                <a href="{% static 'pdf/2003.13678.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="Designing Network Design Spaces"><use href="#pdf"></use></svg>
-                </a>
-            </li>
-            <li>
-                RegNetY 002 (Keras - <i>RegNetY002</i>)
-                <a href="{% static 'pdf/2003.13678.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="Designing Network Design Spaces"><use href="#pdf"></use></svg>
-                </a>
-            </li>
-            <li>
-                RegNetX 004 (Keras - <i>RegNetX004</i>)
-                <a href="{% static 'pdf/2003.13678.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="Designing Network Design Spaces"><use href="#pdf"></use></svg>
-                </a>
-            </li>
-            <li>
-                RegNetY 004 (Keras - <i>RegNetY004</i>)
-                <a href="{% static 'pdf/2003.13678.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="Designing Network Design Spaces"><use href="#pdf"></use></svg>
-                </a>
-            </li>
-            <li>
-                RegNetX 006 (Keras - <i>RegNetX006</i>)
-                <a href="{% static 'pdf/2003.13678.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="Designing Network Design Spaces"><use href="#pdf"></use></svg>
-                </a>
-            </li>
-            <li>
-                RegNetY 006 (Keras - <i>RegNetY006</i>)
-                <a href="{% static 'pdf/2003.13678.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="Designing Network Design Spaces"><use href="#pdf"></use></svg>
-                </a>
-            </li>
-            <li>
-                RegNetX 008 (Keras - <i>RegNetX008</i>)
-                <a href="{% static 'pdf/2003.13678.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="Designing Network Design Spaces"><use href="#pdf"></use></svg>
-                </a>
-            </li>
-            <li>
-                RegNetY 008 (Keras - <i>RegNetY008</i>)
-                <a href="{% static 'pdf/2003.13678.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="Designing Network Design Spaces"><use href="#pdf"></use></svg>
-                </a>
-            </li>
-            <li>
-                RegNetX 016 (Keras - <i>RegNetX016</i>)
-                <a href="{% static 'pdf/2003.13678.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="Designing Network Design Spaces"><use href="#pdf"></use></svg>
-                </a>
-            </li>
-            <li>
-                RegNetY 016 (Keras - <i>RegNetY016</i>)
-                <a href="{% static 'pdf/2003.13678.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="Designing Network Design Spaces"><use href="#pdf"></use></svg>
-                </a>
-            </li>
-            <li>
-               RegNetX 032 (Keras - <i>RegNetX032</i>)
-                <a href="{% static 'pdf/2003.13678.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="Designing Network Design Spaces"><use href="#pdf"></use></svg>
-                </a>
-            </li>
-            <li>
-                RegNetY 032 (Keras - <i>RegNetY032</i>)
-                <a href="{% static 'pdf/2003.13678.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="Designing Network Design Spaces"><use href="#pdf"></use></svg>
-                </a>
-            </li>
-            <li>
-                RegNetX 040 (Keras - <i>RegNetX040</i>)
-                <a href="{% static 'pdf/2003.13678.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="Designing Network Design Spaces"><use href="#pdf"></use></svg>
-                </a>
-            </li>
-            <li>
-                RegNetY 040 (Keras - <i>RegNetY040</i>)
-                <a href="{% static 'pdf/2003.13678.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="Designing Network Design Spaces"><use href="#pdf"></use></svg>
-                </a>
-            </li>
-            <li>
-                 RegNetX 064 (Keras - <i>RegNetX064</i>)
-                 <a href="{% static 'pdf/2003.13678.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="Designing Network Design Spaces"><use href="#pdf"></use></svg>
-                 </a>
-            </li>
-            <li>
-                RegNetY 064 (Keras - <i>RegNetY064</i>)
-                <a href="{% static 'pdf/2003.13678.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="Designing Network Design Spaces"><use href="#pdf"></use></svg>
-                </a>
-            </li>
-            <li>
-                RegNetX 080 (Keras - <i>RegNetX080</i>)
-                <a href="{% static 'pdf/2003.13678.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="Designing Network Design Spaces"><use href="#pdf"></use></svg>
-                </a>
-            </li>
-            <li>
-                RegNetY 080 (Keras - <i>RegNetY080</i>)
-                <a href="{% static 'pdf/2003.13678.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="Designing Network Design Spaces"><use href="#pdf"></use></svg>
-                </a>
-            </li>
-            <li>
-                RegNetX 120 (Keras - <i>RegNetX120</i>)
-                <a href="{% static 'pdf/2003.13678.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="Designing Network Design Spaces"><use href="#pdf"></use></svg>
-                </a>
-            </li>
-            <li>
-                RegNetY 120 (Keras - <i>RegNetY120</i>)
-                <a href="{% static 'pdf/2003.13678.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="Designing Network Design Spaces"><use href="#pdf"></use></svg>
-                </a>
-            </li>
-            <li>
-                RegNetX 160 (Keras - <i>RegNetX160</i>)
-                <a href="{% static 'pdf/2003.13678.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="Designing Network Design Spaces"><use href="#pdf"></use></svg>
-                </a>
-            </li>
-            <li>
-                RegNetY 160 (Keras - <i>RegNetY160</i>)
-                <a href="{% static 'pdf/2003.13678.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="Designing Network Design Spaces"><use href="#pdf"></use></svg>
-                </a>
-            </li>
-            <li>
-                RegNetX 320 (Keras - <i>RegNetX320</i>)
-                <a href="{% static 'pdf/2003.13678.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="Designing Network Design Spaces"><use href="#pdf"></use></svg>
-                </a>
-            </li>
-            <li>
-                RegNetY 320 (Keras - <i>RegNetY320</i>)
-                <a href="{% static 'pdf/2003.13678.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="Designing Network Design Spaces"><use href="#pdf"></use></svg>
-                </a>
-            </li>
-          </ul>
+            <ul>
+                <li>
+                    EfficientNet B3 V2 (Keras - <i>EfficientNetB3V2</i>)
+                    <a href="{% static 'pdf/2104.00298.pdf' %}"
+                       target="_blank"
+                       class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi"
+                             width="16"
+                             height="16"
+                             role="img"
+                             aria-label="EfficientNetV2: Smaller Models and Faster Training">
+                            <use href="#pdf"></use>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    EfficientNet B4 (Keras - <i>EfficientNetB4</i>)
+                    <a href="{% static 'pdf/1905.11946.pdf' %}"
+                       target="_blank"
+                       class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi"
+                             width="16"
+                             height="16"
+                             role="img"
+                             aria-label="EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks">
+                            <use href="#pdf"></use>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    EfficientNet B5 (Keras - <i>EfficientNetB5</i>)
+                    <a href="{% static 'pdf/1905.11946.pdf' %}"
+                       target="_blank"
+                       class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi"
+                             width="16"
+                             height="16"
+                             role="img"
+                             aria-label="EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks">
+                            <use href="#pdf"></use>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    EfficientNet B6 (Keras - <i>EfficientNetB6</i>)
+                    <a href="{% static 'pdf/1905.11946.pdf' %}"
+                       target="_blank"
+                       class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi"
+                             width="16"
+                             height="16"
+                             role="img"
+                             aria-label="EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks">
+                            <use href="#pdf"></use>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    EfficientNet B7 (Keras - <i>EfficientNetB7</i>)
+                    <a href="{% static 'pdf/1905.11946.pdf' %}"
+                       target="_blank"
+                       class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi"
+                             width="16"
+                             height="16"
+                             role="img"
+                             aria-label="EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks">
+                            <use href="#pdf"></use>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    EfficientNet V2 Small (Keras - <i>EfficientNetV2Small</i>)
+                    <a href="{% static 'pdf/2104.00298.pdf' %}"
+                       target="_blank"
+                       class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi"
+                             width="16"
+                             height="16"
+                             role="img"
+                             aria-label="EfficientNetV2: Smaller Models and Faster Training">
+                            <use href="#pdf"></use>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    EfficientNet V2 Medium (Keras - <i>EfficientNetV2Medium</i>)
+                    <a href="{% static 'pdf/2104.00298.pdf' %}"
+                       target="_blank"
+                       class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi"
+                             width="16"
+                             height="16"
+                             role="img"
+                             aria-label="EfficientNetV2: Smaller Models and Faster Training">
+                            <use href="#pdf"></use>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    EfficientNet V2 Large (Keras - <i>EfficientNetV2Large</i>)
+                    <a href="{% static 'pdf/2104.00298.pdf' %}"
+                       target="_blank"
+                       class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi"
+                             width="16"
+                             height="16"
+                             role="img"
+                             aria-label="EfficientNetV2: Smaller Models and Faster Training">
+                            <use href="#pdf"></use>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    ConvNeXtTiny (Keras - <i>ConvNeXt Tiny</i>)
+                    <a href="{% static 'pdf/2201.03545.pdf' %}"
+                       target="_blank"
+                       class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi"
+                             width="16"
+                             height="16"
+                             role="img"
+                             aria-label="A ConvNet for the 2020s">
+                            <use href="#pdf"></use>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    ConvNeXtSmall (Keras - <i>ConvNeXt Small</i>)
+                    <a href="{% static 'pdf/2201.03545.pdf' %}"
+                       target="_blank"
+                       class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi"
+                             width="16"
+                             height="16"
+                             role="img"
+                             aria-label="A ConvNet for the 2020s">
+                            <use href="#pdf"></use>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    ConvNeXtBase (Keras - <i>ConvNeXt Base</i>)
+                    <a href="{% static 'pdf/2201.03545.pdf' %}"
+                       target="_blank"
+                       class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi"
+                             width="16"
+                             height="16"
+                             role="img"
+                             aria-label="A ConvNet for the 2020s">
+                            <use href="#pdf"></use>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    ConvNeXtLarge (Keras - <i>ConvNeXt Large</i>)
+                    <a href="{% static 'pdf/2201.03545.pdf' %}"
+                       target="_blank"
+                       class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi"
+                             width="16"
+                             height="16"
+                             role="img"
+                             aria-label="A ConvNet for the 2020s">
+                            <use href="#pdf"></use>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    ConvNeXtXLarge (Keras - <i>ConvNeXt XLarge</i>)
+                    <a href="{% static 'pdf/2201.03545.pdf' %}"
+                       target="_blank"
+                       class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi"
+                             width="16"
+                             height="16"
+                             role="img"
+                             aria-label="A ConvNet for the 2020s">
+                            <use href="#pdf"></use>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    RegNetX 002 (Keras - <i>RegNetX002</i>)
+                    <a href="{% static 'pdf/2003.13678.pdf' %}"
+                       target="_blank"
+                       class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi"
+                             width="16"
+                             height="16"
+                             role="img"
+                             aria-label="Designing Network Design Spaces">
+                            <use href="#pdf"></use>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    RegNetY 002 (Keras - <i>RegNetY002</i>)
+                    <a href="{% static 'pdf/2003.13678.pdf' %}"
+                       target="_blank"
+                       class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi"
+                             width="16"
+                             height="16"
+                             role="img"
+                             aria-label="Designing Network Design Spaces">
+                            <use href="#pdf"></use>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    RegNetX 004 (Keras - <i>RegNetX004</i>)
+                    <a href="{% static 'pdf/2003.13678.pdf' %}"
+                       target="_blank"
+                       class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi"
+                             width="16"
+                             height="16"
+                             role="img"
+                             aria-label="Designing Network Design Spaces">
+                            <use href="#pdf"></use>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    RegNetY 004 (Keras - <i>RegNetY004</i>)
+                    <a href="{% static 'pdf/2003.13678.pdf' %}"
+                       target="_blank"
+                       class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi"
+                             width="16"
+                             height="16"
+                             role="img"
+                             aria-label="Designing Network Design Spaces">
+                            <use href="#pdf"></use>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    RegNetX 006 (Keras - <i>RegNetX006</i>)
+                    <a href="{% static 'pdf/2003.13678.pdf' %}"
+                       target="_blank"
+                       class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi"
+                             width="16"
+                             height="16"
+                             role="img"
+                             aria-label="Designing Network Design Spaces">
+                            <use href="#pdf"></use>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    RegNetY 006 (Keras - <i>RegNetY006</i>)
+                    <a href="{% static 'pdf/2003.13678.pdf' %}"
+                       target="_blank"
+                       class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi"
+                             width="16"
+                             height="16"
+                             role="img"
+                             aria-label="Designing Network Design Spaces">
+                            <use href="#pdf"></use>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    RegNetX 008 (Keras - <i>RegNetX008</i>)
+                    <a href="{% static 'pdf/2003.13678.pdf' %}"
+                       target="_blank"
+                       class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi"
+                             width="16"
+                             height="16"
+                             role="img"
+                             aria-label="Designing Network Design Spaces">
+                            <use href="#pdf"></use>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    RegNetY 008 (Keras - <i>RegNetY008</i>)
+                    <a href="{% static 'pdf/2003.13678.pdf' %}"
+                       target="_blank"
+                       class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi"
+                             width="16"
+                             height="16"
+                             role="img"
+                             aria-label="Designing Network Design Spaces">
+                            <use href="#pdf"></use>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    RegNetX 016 (Keras - <i>RegNetX016</i>)
+                    <a href="{% static 'pdf/2003.13678.pdf' %}"
+                       target="_blank"
+                       class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi"
+                             width="16"
+                             height="16"
+                             role="img"
+                             aria-label="Designing Network Design Spaces">
+                            <use href="#pdf"></use>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    RegNetY 016 (Keras - <i>RegNetY016</i>)
+                    <a href="{% static 'pdf/2003.13678.pdf' %}"
+                       target="_blank"
+                       class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi"
+                             width="16"
+                             height="16"
+                             role="img"
+                             aria-label="Designing Network Design Spaces">
+                            <use href="#pdf"></use>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    RegNetX 032 (Keras - <i>RegNetX032</i>)
+                    <a href="{% static 'pdf/2003.13678.pdf' %}"
+                       target="_blank"
+                       class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi"
+                             width="16"
+                             height="16"
+                             role="img"
+                             aria-label="Designing Network Design Spaces">
+                            <use href="#pdf"></use>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    RegNetY 032 (Keras - <i>RegNetY032</i>)
+                    <a href="{% static 'pdf/2003.13678.pdf' %}"
+                       target="_blank"
+                       class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi"
+                             width="16"
+                             height="16"
+                             role="img"
+                             aria-label="Designing Network Design Spaces">
+                            <use href="#pdf"></use>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    RegNetX 040 (Keras - <i>RegNetX040</i>)
+                    <a href="{% static 'pdf/2003.13678.pdf' %}"
+                       target="_blank"
+                       class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi"
+                             width="16"
+                             height="16"
+                             role="img"
+                             aria-label="Designing Network Design Spaces">
+                            <use href="#pdf"></use>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    RegNetY 040 (Keras - <i>RegNetY040</i>)
+                    <a href="{% static 'pdf/2003.13678.pdf' %}"
+                       target="_blank"
+                       class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi"
+                             width="16"
+                             height="16"
+                             role="img"
+                             aria-label="Designing Network Design Spaces">
+                            <use href="#pdf"></use>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    RegNetX 064 (Keras - <i>RegNetX064</i>)
+                    <a href="{% static 'pdf/2003.13678.pdf' %}"
+                       target="_blank"
+                       class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi"
+                             width="16"
+                             height="16"
+                             role="img"
+                             aria-label="Designing Network Design Spaces">
+                            <use href="#pdf"></use>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    RegNetY 064 (Keras - <i>RegNetY064</i>)
+                    <a href="{% static 'pdf/2003.13678.pdf' %}"
+                       target="_blank"
+                       class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi"
+                             width="16"
+                             height="16"
+                             role="img"
+                             aria-label="Designing Network Design Spaces">
+                            <use href="#pdf"></use>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    RegNetX 080 (Keras - <i>RegNetX080</i>)
+                    <a href="{% static 'pdf/2003.13678.pdf' %}"
+                       target="_blank"
+                       class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi"
+                             width="16"
+                             height="16"
+                             role="img"
+                             aria-label="Designing Network Design Spaces">
+                            <use href="#pdf"></use>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    RegNetY 080 (Keras - <i>RegNetY080</i>)
+                    <a href="{% static 'pdf/2003.13678.pdf' %}"
+                       target="_blank"
+                       class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi"
+                             width="16"
+                             height="16"
+                             role="img"
+                             aria-label="Designing Network Design Spaces">
+                            <use href="#pdf"></use>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    RegNetX 120 (Keras - <i>RegNetX120</i>)
+                    <a href="{% static 'pdf/2003.13678.pdf' %}"
+                       target="_blank"
+                       class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi"
+                             width="16"
+                             height="16"
+                             role="img"
+                             aria-label="Designing Network Design Spaces">
+                            <use href="#pdf"></use>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    RegNetY 120 (Keras - <i>RegNetY120</i>)
+                    <a href="{% static 'pdf/2003.13678.pdf' %}"
+                       target="_blank"
+                       class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi"
+                             width="16"
+                             height="16"
+                             role="img"
+                             aria-label="Designing Network Design Spaces">
+                            <use href="#pdf"></use>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    RegNetX 160 (Keras - <i>RegNetX160</i>)
+                    <a href="{% static 'pdf/2003.13678.pdf' %}"
+                       target="_blank"
+                       class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi"
+                             width="16"
+                             height="16"
+                             role="img"
+                             aria-label="Designing Network Design Spaces">
+                            <use href="#pdf"></use>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    RegNetY 160 (Keras - <i>RegNetY160</i>)
+                    <a href="{% static 'pdf/2003.13678.pdf' %}"
+                       target="_blank"
+                       class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi"
+                             width="16"
+                             height="16"
+                             role="img"
+                             aria-label="Designing Network Design Spaces">
+                            <use href="#pdf"></use>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    RegNetX 320 (Keras - <i>RegNetX320</i>)
+                    <a href="{% static 'pdf/2003.13678.pdf' %}"
+                       target="_blank"
+                       class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi"
+                             width="16"
+                             height="16"
+                             role="img"
+                             aria-label="Designing Network Design Spaces">
+                            <use href="#pdf"></use>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    RegNetY 320 (Keras - <i>RegNetY320</i>)
+                    <a href="{% static 'pdf/2003.13678.pdf' %}"
+                       target="_blank"
+                       class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi"
+                             width="16"
+                             height="16"
+                             role="img"
+                             aria-label="Designing Network Design Spaces">
+                            <use href="#pdf"></use>
+                        </svg>
+                    </a>
+                </li>
+            </ul>
         </div>
-      </div>
-
-      <h3><span class="text-info-emphasis">9</span> Segmentation Architectures</h3>
-      <div class="row g-3">
+    </div>
+    <h3>
+        <span class="text-info-emphasis">9</span> Segmentation Architectures
+    </h3>
+    <div class="row g-3">
         <div class="col-md-6">
-          <ul>
-            <li>
-                U-Net (PyTorch - <i>UNet</i>)
-                <a href="{% static 'pdf/1505.04597.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="U-Net: Convolutional Networks for Biomedical Image Segmentation"><use href="#pdf"></use></svg>
-                </a>
-            </li>
-            <li>
-                U-Net++ (PyTorch - <i>UNet++</i>)
-                <a href="{% static 'pdf/1807.10165.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="UNet++: A Nested U-Net Architecture for Medical Image Segmentation"><use href="#pdf"></use></svg>
-                </a>
-            </li>
-            <li>
-                MAnet (PyTorch - <i>MAnet</i>)
-                <a href="{% static 'pdf/MA-Net_A_Multi-Scale_Attention_Network_for_Liver_and_Tumor_Segmentation.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="MA-Net: A Multi-Scale Attention Network for Liver and Tumor Segmentation"><use href="#pdf"></use></svg>
-                </a>
-            </li>
-            <li>
-                Linknet (PyTorch - <i>Linknet</i>)
-                <a href="{% static 'pdf/1707.03718.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="LinkNet: Exploiting Encoder Representations for Efficient Semantic Segmentation"><use href="#pdf"></use></svg>
-                </a>
-            </li>
-            <li>
-                FPN (PyTorch - <i>FPN</i>)
-                <a href="{% static 'pdf/COCO17-Stuff-FAIR.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="A Unified Architecture for Instance and Semantic Segmentation"><use href="#pdf"></use></svg>
-                </a>
-            </li>
-          </ul>
+            <ul>
+                <li>
+                    U-Net (PyTorch - <i>UNet</i>)
+                    <a href="{% static 'pdf/1505.04597.pdf' %}"
+                       target="_blank"
+                       class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi"
+                             width="16"
+                             height="16"
+                             role="img"
+                             aria-label="U-Net: Convolutional Networks for Biomedical Image Segmentation">
+                            <use href="#pdf"></use>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    U-Net++ (PyTorch - <i>UNet++</i>)
+                    <a href="{% static 'pdf/1807.10165.pdf' %}"
+                       target="_blank"
+                       class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi"
+                             width="16"
+                             height="16"
+                             role="img"
+                             aria-label="UNet++: A Nested U-Net Architecture for Medical Image Segmentation">
+                            <use href="#pdf"></use>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    MAnet (PyTorch - <i>MAnet</i>)
+                    <a href="{% static 'pdf/MA-Net_A_Multi-Scale_Attention_Network_for_Liver_and_Tumor_Segmentation.pdf' %}"
+                       target="_blank"
+                       class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi"
+                             width="16"
+                             height="16"
+                             role="img"
+                             aria-label="MA-Net: A Multi-Scale Attention Network for Liver and Tumor Segmentation">
+                            <use href="#pdf"></use>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    Linknet (PyTorch - <i>Linknet</i>)
+                    <a href="{% static 'pdf/1707.03718.pdf' %}"
+                       target="_blank"
+                       class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi"
+                             width="16"
+                             height="16"
+                             role="img"
+                             aria-label="LinkNet: Exploiting Encoder Representations for Efficient Semantic Segmentation">
+                            <use href="#pdf"></use>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    FPN (PyTorch - <i>FPN</i>)
+                    <a href="{% static 'pdf/COCO17-Stuff-FAIR.pdf' %}"
+                       target="_blank"
+                       class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi"
+                             width="16"
+                             height="16"
+                             role="img"
+                             aria-label="A Unified Architecture for Instance and Semantic Segmentation">
+                            <use href="#pdf"></use>
+                        </svg>
+                    </a>
+                </li>
+            </ul>
         </div>
         <div class="col-md-6">
-          <ul>
-            <li>
-                PSPNet (PyTorch - <i>PSPNet</i>)
-                <a href="{% static 'pdf/1612.01105.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="Pyramid Scene Parsing Network"><use href="#pdf"></use></svg>
-                </a>
-            </li>
-            <li>
-                PAN (PyTorch - <i>PAN</i>)
-                <a href="{% static 'pdf/1805.10180.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="Pyramid Attention Network for Semantic Segmentation"><use href="#pdf"></use></svg>
-                </a>
-            </li>
-            <li>
-                DeepLab V3 (PyTorch - <i>DeepLabV3</i>)
-                <a href="{% static 'pdf/1706.05587.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="Rethinking Atrous Convolution for Semantic Image Segmentation"><use href="#pdf"></use></svg>
-                </a>
-            </li>
-            <li>
-                DeepLab V3+ (PyTorch - <i>DeepLabV3+</i>)
-                <a href="{% static 'pdf/1802.02611.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="Encoder-Decoder with Atrous Separable Convolution for Semantic Image Segmentation"><use href="#pdf"></use></svg>
-                </a>
-            </li>
-          </ul>
+            <ul>
+                <li>
+                    PSPNet (PyTorch - <i>PSPNet</i>)
+                    <a href="{% static 'pdf/1612.01105.pdf' %}"
+                       target="_blank"
+                       class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi"
+                             width="16"
+                             height="16"
+                             role="img"
+                             aria-label="Pyramid Scene Parsing Network">
+                            <use href="#pdf"></use>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    PAN (PyTorch - <i>PAN</i>)
+                    <a href="{% static 'pdf/1805.10180.pdf' %}"
+                       target="_blank"
+                       class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi"
+                             width="16"
+                             height="16"
+                             role="img"
+                             aria-label="Pyramid Attention Network for Semantic Segmentation">
+                            <use href="#pdf"></use>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    DeepLab V3 (PyTorch - <i>DeepLabV3</i>)
+                    <a href="{% static 'pdf/1706.05587.pdf' %}"
+                       target="_blank"
+                       class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi"
+                             width="16"
+                             height="16"
+                             role="img"
+                             aria-label="Rethinking Atrous Convolution for Semantic Image Segmentation">
+                            <use href="#pdf"></use>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    DeepLab V3+ (PyTorch - <i>DeepLabV3+</i>)
+                    <a href="{% static 'pdf/1802.02611.pdf' %}"
+                       target="_blank"
+                       class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi"
+                             width="16"
+                             height="16"
+                             role="img"
+                             aria-label="Encoder-Decoder with Atrous Separable Convolution for Semantic Image Segmentation">
+                            <use href="#pdf"></use>
+                        </svg>
+                    </a>
+                </li>
+            </ul>
         </div>
-      </div>
+    </div>
 {% endblock %}

@@ -9,12 +9,6 @@ def get_mobilenet_model(mobilenet_type, num_classes):
 
     Args:
     - mobilenet_type (str): Type of MobileNet architecture to be loaded.
-      Options: 'MobileNet_V2', 'MobileNet_V3_Small', 'MobileNet_V3_Large', 'mobilenetv3_large_075',
-               'mobilenetv3_large_100', 'mobilenetv3_small_050', 'mobilenetv3_small_075', 'mobilenetv3_small_100',
-               'mobilenetv3_rw', 'tf_mobilenetv3_large_075', 'tf_mobilenetv3_large_100',
-               'tf_mobilenetv3_large_minimal_100', 'tf_mobilenetv3_small_075', 'tf_mobilenetv3_small_100',
-               'tf_mobilenetv3_small_minimal_100', 'fbnetv3_b', 'fbnetv3_d', 'fbnetv3_g', 'lcnet_035', 'lcnet_050',
-               'lcnet_075', 'lcnet_100', 'lcnet_150'.
     - num_classes (int): Number of output classes for the modified model. Default is 1000.
 
     Returns:
@@ -73,10 +67,12 @@ def get_mobilenet_model(mobilenet_type, num_classes):
         "mobilenetv4_conv_small",
         "mobilenetv4_conv_medium",
         "mobilenetv4_conv_large",
-        "mobilenetv4_hybrid_medium_075",
         "mobilenetv4_hybrid_medium",
-        "mobilenetv4_hybrid_medium_150",
         "mobilenetv4_hybrid_large",
+        "mobilenetv4_conv_aa_medium",
+        "mobilenetv4_conv_blur_medium",
+        "mobilenetv4_hybrid_medium_075",
+        "mobilenetv4_hybrid_large_075",
     ]
 
     # Check if the vision type is from torchvision
