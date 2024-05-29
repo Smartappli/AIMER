@@ -71,6 +71,20 @@ def import_data(request):
                 insertion = 1
 
             expected_values = {
+                "BF16": "BF16",
+                "F16": "F16",
+                "IQ1_M": "IQ1M",
+                "IQ1_S": "IQ1S".
+                "IQ2_M": "IQ2M",
+                "IQ2_S": "IQ2S",
+                "IQ2_XS": "IQ2XS",
+                "IQ2_XXS": "IQ2XSS",
+                "IQ3_M": "IQ3M",
+                "IQ3_S": "IQ3S",
+                "IQ3_XS": "IQ3XS",
+                "IQ3_XXS": "IQ3_XXS",
+                "IQ4_NL": "IQ4NL",
+                "IQ4_XS": "IQ4XS",
                 "Q2_K": "Q2K",
                 "Q3_K_L": "Q3KL",
                 "Q3_K_M": "Q3KM",
