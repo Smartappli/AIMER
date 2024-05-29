@@ -84,15 +84,15 @@ def import_data(request):
                 "Q5_K_M": "Q5KM",
                 "Q5_K_S": "Q5KS",
                 "Q6_K": "Q6K",
-                "Q8_0": "Q80",                
+                "Q8_0": "Q80",
             }
-            
+
             try:
                 model_type = expected_values[q]
             except KeyError:
                 msg = f"Unexpected value for q: {q}"
                 raise ValueError(msg)
-            
+
             if insertion == 1:
                 ModelFile.objects.get_or_create(
                     model_file_model_id=the_model,
