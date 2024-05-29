@@ -13,6 +13,8 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="model",
             name="model_uuid",
-            field=models.UUIDField(default=uuid.uuid4, editable=False, unique=True),
+            field=models.UUIDField(
+                default=uuid.uuid4, editable=False, unique=True
+            ),
         ),
     ]

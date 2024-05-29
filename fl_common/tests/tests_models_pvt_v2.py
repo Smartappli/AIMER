@@ -1,11 +1,13 @@
 import os
+
 from django.test import TestCase
+
 from fl_common.models.pvt_v2 import get_pvt_v2_model
 
 os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
 
 
-class ProcessingPvt_v2TestCase(TestCase):
+class ProcessingPvtV2TestCase(TestCase):
     """
     Test case class for processing Pvt v2 models.
     """
@@ -31,7 +33,9 @@ class ProcessingPvt_v2TestCase(TestCase):
                     model = get_pvt_v2_model(pvt_v2_type, num_classes)
                     self.assertIsNotNone(model)
                 except ValueError:
-                    self.fail(f"{pvt_v2_type} should be a known PVTv2 architecture.")
+                    self.fail(
+                        f"{pvt_v2_type} should be a known PVTv2 architecture.",
+                    )
 
     def test_unknown_pvt_v2_type(self):
         """

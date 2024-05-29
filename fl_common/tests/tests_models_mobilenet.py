@@ -1,5 +1,7 @@
 import os
+
 from django.test import TestCase
+
 from fl_common.models.mobilenet import get_mobilenet_model
 
 os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
@@ -24,6 +26,7 @@ class ProcessingMobilenetTestCase(TestCase):
             "MobileNet_V3_Large",
             "mobilenetv3_large_075",
             "mobilenetv3_large_100",
+            "mobilenetv3_large_150",
             "mobilenetv3_small_050",
             "mobilenetv3_small_075",
             "mobilenetv3_small_100",
@@ -42,6 +45,15 @@ class ProcessingMobilenetTestCase(TestCase):
             "lcnet_075",
             "lcnet_100",
             "lcnet_150",
+            "mobilenetv4_conv_small",
+            "mobilenetv4_conv_medium",
+            "mobilenetv4_conv_large",
+            "mobilenetv4_hybrid_medium",
+            "mobilenetv4_hybrid_large",
+            "mobilenetv4_conv_aa_medium",
+            "mobilenetv4_conv_blur_medium",
+            "mobilenetv4_hybrid_medium_075",
+            "mobilenetv4_hybrid_large_075",
         ]
         num_classes = 10  # You can adjust the number of classes as needed
 
@@ -53,7 +65,7 @@ class ProcessingMobilenetTestCase(TestCase):
                     self.assertIsNotNone(model)
                 except ValueError:
                     self.fail(
-                        f"{mobilenet_type} should be a known MobileNet architecture."
+                        f"{mobilenet_type} should be a known MobileNet architecture.",
                     )
 
     def test_mobilenet_unknown_architecture(self):
@@ -72,5 +84,6 @@ class ProcessingMobilenetTestCase(TestCase):
             get_mobilenet_model(mobilenet_type, num_classes)
 
         self.assertEqual(
-            str(context.exception), f"Unknown MobileNet Architecture : {mobilenet_type}"
+            str(context.exception),
+            f"Unknown MobileNet Architecture : {mobilenet_type}",
         )

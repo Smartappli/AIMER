@@ -32,10 +32,19 @@ def get_mobilevit_model(mobilevit_type, num_classes):
     ]
 
     if mobilevit_type not in mobilevit_options:
-        raise ValueError(f"Unknown MobileViT Architecture: {mobilevit_type}")
+        msg = f"Unknown MobileViT Architecture: {mobilevit_type}"
+        raise ValueError(msg)
 
     try:
-        return create_model(mobilevit_type, pretrained=True, num_classes=num_classes)
+        return create_model(
+            mobilevit_type,
+            pretrained=True,
+            num_classes=num_classes,
+        )
     except RuntimeError as e:
         print(f"{mobilevit_type} - Error loading pretrained model: {e}")
-        return create_model(mobilevit_type, pretrained=False, num_classes=num_classes)
+        return create_model(
+            mobilevit_type,
+            pretrained=False,
+            num_classes=num_classes,
+        )

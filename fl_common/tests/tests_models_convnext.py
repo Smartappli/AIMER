@@ -1,5 +1,7 @@
 import os
+
 from django.test import TestCase
+
 from fl_common.models.convnext import get_convnext_model
 
 os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
@@ -61,7 +63,7 @@ class ProcessingConvNextTestCase(TestCase):
                     self.assertIsNotNone(model)
                 except ValueError:
                     self.fail(
-                        f"{convnext_type} should be a known Convnext architecture."
+                        f"{convnext_type} should be a known Convnext architecture.",
                     )
 
     def test_convnext_unknown_architecture(self):
@@ -79,5 +81,6 @@ class ProcessingConvNextTestCase(TestCase):
             get_convnext_model(convnext_type, num_classes)
 
         self.assertEqual(
-            str(context.exception), f"Unknown ConvNeXt Architecture : {convnext_type}"
+            str(context.exception),
+            f"Unknown ConvNeXt Architecture : {convnext_type}",
         )

@@ -1,5 +1,7 @@
 import os
+
 from django.test import TestCase
+
 from fl_common.models.twins import get_twins_model
 
 os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
@@ -31,7 +33,9 @@ class ProcessingTwinsTestCase(TestCase):
                     model = get_twins_model(twins_type, num_classes)
                     self.assertIsNotNone(model)
                 except ValueError:
-                    self.fail(f"{twins_type} should be a known Twins architecture.")
+                    self.fail(
+                        f"{twins_type} should be a known Twins architecture.",
+                    )
 
     def test_unknown_twins_type(self):
         """

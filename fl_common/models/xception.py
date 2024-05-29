@@ -27,10 +27,19 @@ def get_xception_model(xception_type, num_classes):
     }
 
     if xception_type not in valid_types:
-        raise ValueError(f"Unknown Xception Architecture: {xception_type}")
+        msg = f"Unknown Xception Architecture: {xception_type}"
+        raise ValueError(msg)
 
     try:
-        return create_model(xception_type, pretrained=True, num_classes=num_classes)
+        return create_model(
+            xception_type,
+            pretrained=True,
+            num_classes=num_classes,
+        )
     except RuntimeError as e:
         print(f"{xception_type} - Error loading pretrained model: {e}")
-        return create_model(xception_type, pretrained=False, num_classes=num_classes)
+        return create_model(
+            xception_type,
+            pretrained=False,
+            num_classes=num_classes,
+        )

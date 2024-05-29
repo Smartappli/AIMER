@@ -1,5 +1,7 @@
 import os
+
 from django.test import TestCase
+
 from fl_common.models.resnet import get_resnet_model
 
 os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
@@ -115,7 +117,9 @@ class ProcessingResnetTestCase(TestCase):
                     model = get_resnet_model(resnet_type, num_classes)
                     self.assertIsNotNone(model)
                 except ValueError:
-                    self.fail(f"{resnet_type} should be a known Resnet architecture.")
+                    self.fail(
+                        f"{resnet_type} should be a known Resnet architecture.",
+                    )
 
     def test_resnet_unknown_architecture(self):
         """
@@ -133,5 +137,6 @@ class ProcessingResnetTestCase(TestCase):
             get_resnet_model(resnet_type, num_classes)
 
         self.assertEqual(
-            str(context.exception), f"Unknown ResNet Architecture: {resnet_type}"
+            str(context.exception),
+            f"Unknown ResNet Architecture: {resnet_type}",
         )

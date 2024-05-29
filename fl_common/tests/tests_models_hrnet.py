@@ -1,5 +1,7 @@
 import os
+
 from django.test import TestCase
+
 from fl_common.models.hrnet import get_hrnet_model
 
 os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
@@ -37,7 +39,9 @@ class ProcessingHrnetTestCase(TestCase):
                     model = get_hrnet_model(hrnet_type, num_classes)
                     self.assertIsNotNone(model)
                 except ValueError:
-                    self.fail(f"{hrnet_type} should be a known HRNet architecture.")
+                    self.fail(
+                        f"{hrnet_type} should be a known HRNet architecture.",
+                    )
 
     def test_hrnet_model_unknown_type(self):
         """

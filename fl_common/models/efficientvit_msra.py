@@ -24,16 +24,21 @@ def get_efficientvit_msra_model(efficientvit_msra_type, num_classes):
     }
 
     if efficientvit_msra_type not in supported_types:
-        raise ValueError(
+        msg = (
             f"Unknown EfficientViT-MSRA Architecture: {efficientvit_msra_type}"
         )
+        raise ValueError(msg)
 
     try:
         return create_model(
-            efficientvit_msra_type, pretrained=True, num_classes=num_classes
+            efficientvit_msra_type,
+            pretrained=True,
+            num_classes=num_classes,
         )
     except RuntimeError as e:
         print(f"{efficientvit_msra_type} - Error loading pretrained model: {e}")
         return create_model(
-            efficientvit_msra_type, pretrained=False, num_classes=num_classes
+            efficientvit_msra_type,
+            pretrained=False,
+            num_classes=num_classes,
         )

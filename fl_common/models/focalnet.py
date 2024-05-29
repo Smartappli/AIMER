@@ -35,10 +35,19 @@ def get_focalnet_model(focalnet_type, num_classes):
     }
 
     if focalnet_type not in supported_types:
-        raise ValueError(f"Unknown Focalnet Architecture: {focalnet_type}")
+        msg = f"Unknown Focalnet Architecture: {focalnet_type}"
+        raise ValueError(msg)
 
     try:
-        return create_model(focalnet_type, pretrained=True, num_classes=num_classes)
+        return create_model(
+            focalnet_type,
+            pretrained=True,
+            num_classes=num_classes,
+        )
     except RuntimeError as e:
         print(f"{focalnet_type} - Error loading pretrained model: {e}")
-        return create_model(focalnet_type, pretrained=False, num_classes=num_classes)
+        return create_model(
+            focalnet_type,
+            pretrained=False,
+            num_classes=num_classes,
+        )

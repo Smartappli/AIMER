@@ -1,6 +1,10 @@
 import os
+
 from django.test import TestCase
-from fl_common.models.vision_transformer_sam import get_vision_transformer_sam_model
+
+from fl_common.models.vision_transformer_sam import (
+    get_vision_transformer_sam_model,
+)
 
 os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
 
@@ -23,7 +27,10 @@ class ProcessingVisionTransformerSamTestCase(TestCase):
         ]
         for model_type in model_types:
             with self.subTest(model_type=model_type):
-                model = get_vision_transformer_sam_model(model_type, num_classes)
+                model = get_vision_transformer_sam_model(
+                    model_type,
+                    num_classes,
+                )
                 self.assertIsNotNone(model)
                 # Add more specific tests if needed
 

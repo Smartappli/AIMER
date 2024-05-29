@@ -12,25 +12,41 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU Affero General Public License for more details.
 
 You should have received a copy of the GNU Affero General Public License
-along with this program.  If not, see <https://www.gnu.org/licenses/>.
+along with this program.  If not, see <https://www.gnu.org/licenses />.
 -->
-
-      <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
-        <div class="col-md-3 mb-2 mb-md-0">
-          <a href="/server/dashboard/" class="d-inline-flex link-body-emphasis text-decoration-none">
-            <svg class="bi" width="45" height="32" role="img" aria-label="Medical FL Server"><use href="#{{ logo|random }}"></use></svg>
+<header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+    <div class="col-md-3 mb-2 mb-md-0">
+        <a href="/server/dashboard/"
+           class="d-inline-flex link-body-emphasis text-decoration-none">
+            <svg class="bi"
+                 width="45"
+                 height="32"
+                 role="img"
+                 aria-label="Medical FL Server">
+                <use href="#{{ logo|random }}"></use>
+            </svg>
             <span class="fs-4">Medical FL Server</span>
-          </a>
-        </div>
-
-        <ul class="nav nav-underline col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-          <li><a href="../server_projects/" class="link-success nav-link px-2 {% if section == "projects" %}active{%  endif %}">Projects</a></li>
-          <li><a href="../server_stakeholders/" class="link-danger nav-link px-2 {% if section == "stakeholders" %}active{%  endif %}">Stakeholders</a></li>
-          <li><a href="../server_monitoring/" class="link-info nav-link px-2 {% if section == "monitoring" %}active{%  endif %}">Monitoring</a></li>
-          <li><a href="../server_management/" class="link-warning nav-link px-2 {% if section == "management" %}active{%  endif %}">Management</a></li>
-        </ul>
-
-        <div class="col-md-3 text-end">
-          <a class="btn btn-primary" href="/admin" role="button">Administration</a>
-        </div>
-      </header>
+        </a>
+    </div>
+    <ul class="nav nav-underline col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+        <li>
+            <a href="../server_projects/"
+               class="link-success nav-link px-2 {% if section == "projects" %}active{% endif %}">Projects</a>
+        </li>
+        <li>
+            <a href="../server_stakeholders/"
+               class="link-danger nav-link px-2 {% if section == "stakeholders" %}active{% endif %}">Stakeholders</a>
+        </li>
+        <li>
+            <a href="../server_monitoring/"
+               class="link-info nav-link px-2 {% if section == "monitoring" %}active{% endif %}">Monitoring</a>
+        </li>
+        <li>
+            <a href="../server_management/"
+               class="link-warning nav-link px-2 {% if section == "management" %}active{% endif %}">Management</a>
+        </li>
+    </ul>
+    <div class="col-md-3 text-end">
+        <a class="btn btn-primary" href="/admin" role="button">Administration</a>
+    </div>
+</header>

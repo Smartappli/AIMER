@@ -1,5 +1,7 @@
 import os
+
 from django.test import TestCase
+
 from fl_common.models.visformer import get_visformer_model
 
 os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
@@ -24,7 +26,7 @@ class ProcessingVisformerTestCase(TestCase):
                     self.assertIsNotNone(model)
                 except ValueError:
                     self.fail(
-                        f"{visformer_type} should be a known Visformer architecture."
+                        f"{visformer_type} should be a known Visformer architecture.",
                     )
 
     def test_unknown_visformer_type(self):

@@ -1,6 +1,6 @@
-import torch.nn as nn
-from torchvision import models
 from timm import create_model
+from torch import nn
+from torchvision import models
 
 
 def get_vgg_model(vgg_type, num_classes):
@@ -58,13 +58,20 @@ def get_vgg_model(vgg_type, num_classes):
     # Check if the vision type is from the 'timm' library
     elif vgg_type in timm_models:
         try:
-            vgg_model = create_model(vgg_type, pretrained=True, num_classes=num_classes)
+            vgg_model = create_model(
+                vgg_type,
+                pretrained=True,
+                num_classes=num_classes,
+            )
         except RuntimeError as e:
             print(f"{vgg_type} - Error loading pretrained model: {e}")
             vgg_model = create_model(
-                vgg_type, pretrained=False, num_classes=num_classes
+                vgg_type,
+                pretrained=False,
+                num_classes=num_classes,
             )
     else:
-        raise ValueError(f"Unknown VGG Architecture : {vgg_type}")
+        msg = f"Unknown VGG Architecture : {vgg_type}"
+        raise ValueError(msg)
 
     return vgg_model

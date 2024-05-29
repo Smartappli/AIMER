@@ -1,6 +1,10 @@
 import os
+
 from django.test import TestCase
-from fl_common.models.swin_transformer_v2_cr import get_swin_transformer_v2_cr_model
+
+from fl_common.models.swin_transformer_v2_cr import (
+    get_swin_transformer_v2_cr_model,
+)
 
 os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
 

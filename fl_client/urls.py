@@ -1,4 +1,5 @@
-from django.urls import path, include
+from django.urls import include, path
+
 from fl_client import views
 
 app_name = "fl_client"
@@ -8,7 +9,9 @@ urlpatterns = [
     path("", include("django.contrib.auth.urls")),
     path("data_processing/", views.data_processing, name="data_processing"),
     path(
-        "data_processing_faqs/", views.data_processing_faqs, name="data_processing_faqs"
+        "data_processing_faqs/",
+        views.data_processing_faqs,
+        name="data_processing_faqs",
     ),
     path(
         "data_processing_models/",
@@ -21,9 +24,15 @@ urlpatterns = [
         name="data_processing_tutorials",
     ),
     path("deep_learning/", views.deep_learning, name="deep_learning"),
-    path("deep_learning_faqs/", views.deep_learning_faqs, name="deepl_learning_faqs"),
     path(
-        "deep_learning_models/", views.deep_learning_models, name="deep_learning_models"
+        "deep_learning_faqs/",
+        views.deep_learning_faqs,
+        name="deepl_learning_faqs",
+    ),
+    path(
+        "deep_learning_models/",
+        views.deep_learning_models,
+        name="deep_learning_models",
     ),
     path(
         "deep_learning_tutorials/",

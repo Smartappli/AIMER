@@ -1,5 +1,7 @@
 import os
+
 from django.test import TestCase
+
 from fl_common.models.regnet import get_regnet_model
 
 os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
@@ -71,7 +73,9 @@ class ProcessingRegnetTestCase(TestCase):
                     model = get_regnet_model(regnet_type, num_classes)
                     self.assertIsNotNone(model)
                 except ValueError:
-                    self.fail(f"{regnet_type} should be a known Regnet architecture.")
+                    self.fail(
+                        f"{regnet_type} should be a known Regnet architecture.",
+                    )
 
     def test_regnet_unknown_architecture(self):
         """
@@ -89,5 +93,6 @@ class ProcessingRegnetTestCase(TestCase):
             get_regnet_model(regnet_type, num_classes)
 
         self.assertEqual(
-            str(context.exception), f"Unknown RegNet Architecture: {regnet_type}"
+            str(context.exception),
+            f"Unknown RegNet Architecture: {regnet_type}",
         )

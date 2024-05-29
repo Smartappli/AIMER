@@ -1,5 +1,7 @@
 import os
+
 from django.test import TestCase
+
 from fl_common.models.hiera import get_hiera_model
 
 os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
@@ -37,7 +39,9 @@ class ProcessingHieraTestCase(TestCase):
                     model = get_hiera_model(hiera_type, num_classes)
                     self.assertIsNotNone(model)
                 except ValueError:
-                    self.fail(f"{hiera_type} should be a known hiera architecture.")
+                    self.fail(
+                        f"{hiera_type} should be a known hiera architecture.",
+                    )
 
     def test_unknown_hiera_type(self):
         """

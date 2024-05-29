@@ -1,5 +1,7 @@
 import os
+
 from django.test import TestCase
+
 from fl_common.models.nest import get_nest_model
 
 os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
@@ -30,7 +32,9 @@ class ProcessingNestTestCase(TestCase):
                     model = get_nest_model(nest_type, num_classes)
                     self.assertIsNotNone(model)
                 except ValueError:
-                    self.fail(f"{nest_type} should be a known Nest architecture.")
+                    self.fail(
+                        f"{nest_type} should be a known Nest architecture.",
+                    )
 
     def test_unknown_nest_type(self):
         """

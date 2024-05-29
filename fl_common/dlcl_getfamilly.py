@@ -11,6 +11,7 @@ from fl_common.models.convmixer import get_convmixer_model
 from fl_common.models.convnext import get_convnext_model
 from fl_common.models.crossvit import get_crossvit_model
 from fl_common.models.cspnet import get_cspnet_model
+from fl_common.models.cvt import get_cvt_model
 from fl_common.models.davit import get_davit_model
 from fl_common.models.deit import get_deit_model
 from fl_common.models.densenet import get_densenet_model
@@ -19,9 +20,9 @@ from fl_common.models.dpn import get_dpn_model
 from fl_common.models.edgenet import get_edgenet_model
 from fl_common.models.efficientformer import get_efficientformer_model
 from fl_common.models.efficientformer_v2 import get_efficientformer_v2_model
+from fl_common.models.efficientnet import get_efficientnet_model
 from fl_common.models.efficientvit_mit import get_efficientvit_mit_model
 from fl_common.models.efficientvit_msra import get_efficientvit_msra_model
-from fl_common.models.efficientnet import get_efficientnet_model
 from fl_common.models.eva import get_eva_model
 from fl_common.models.fastvit import get_fastvit_model
 from fl_common.models.focalnet import get_focalnet_model
@@ -32,8 +33,8 @@ from fl_common.models.hardcorenas import get_hardcorenas_model
 from fl_common.models.hgnet import get_hgnet_model
 from fl_common.models.hiera import get_hiera_model
 from fl_common.models.hrnet import get_hrnet_model
-from fl_common.models.inception_next import get_inception_next_model
 from fl_common.models.inception import get_inception_model
+from fl_common.models.inception_next import get_inception_next_model
 from fl_common.models.levit import get_levit_model
 from fl_common.models.maxvit import get_maxvit_model
 from fl_common.models.metaformer import get_metaformer_model
@@ -54,8 +55,8 @@ from fl_common.models.repghost import get_repghost_model
 from fl_common.models.repvit import get_repvit_model
 from fl_common.models.res2net import get_res2net_model
 from fl_common.models.resnest import get_resnest_model
-from fl_common.models.resnetv2 import get_resnetv2_model
 from fl_common.models.resnet import get_resnet_model
+from fl_common.models.resnetv2 import get_resnetv2_model
 from fl_common.models.resnext import get_resnext_model
 from fl_common.models.rexnet import get_rexnet_model
 from fl_common.models.selecsls import get_selecsls_model
@@ -66,11 +67,13 @@ from fl_common.models.sknet import get_sknet_model
 from fl_common.models.squeezenet import get_squeezenet_model
 from fl_common.models.swin_transformer import get_swin_transformer_model
 from fl_common.models.swin_transformer_v2 import get_swin_transformer_v2_model
-from fl_common.models.swin_transformer_v2_cr import get_swin_transformer_v2_cr_model
+from fl_common.models.swin_transformer_v2_cr import (
+    get_swin_transformer_v2_cr_model,
+)
 from fl_common.models.tiny_vit import get_tiny_vit_model
 from fl_common.models.tnt import get_tnt_model
-from fl_common.models.twins import get_twins_model
 from fl_common.models.tresnet import get_tresnet_model
+from fl_common.models.twins import get_twins_model
 from fl_common.models.vgg import get_vgg_model
 from fl_common.models.visformer import get_visformer_model
 from fl_common.models.vision_transformer import get_vision_transformer_model
@@ -80,7 +83,9 @@ from fl_common.models.vision_transformer_hybrid import (
 from fl_common.models.vision_transformer_relpos import (
     get_vision_transformer_relpos_model,
 )
-from fl_common.models.vision_transformer_sam import get_vision_transformer_sam_model
+from fl_common.models.vision_transformer_sam import (
+    get_vision_transformer_sam_model,
+)
 from fl_common.models.vitamin import get_vitamin_model
 from fl_common.models.volo import get_volo_model
 from fl_common.models.vovnet import get_vovnet_model
@@ -106,7 +111,8 @@ def get_family_model_a(model_type, num_classes):
     model_retrieval_functions = {"AlexNet": get_alexnet_model}
 
     if model_type not in model_retrieval_functions:
-        raise ValueError(f"Unknown model_type provided: {model_type}")
+        msg = f"Unknown model_type provided: {model_type}"
+        raise ValueError(msg)
 
     return model_retrieval_functions[model_type](model_type, num_classes)
 
@@ -193,7 +199,8 @@ def get_family_model_b(model_type, num_classes):
     }
 
     if model_type not in model_retrieval_functions:
-        raise ValueError(f"Unknown model_type provided: {model_type}")
+        msg = f"Unknown model_type provided: {model_type}"
+        raise ValueError(msg)
 
     return model_retrieval_functions[model_type](model_type, num_classes)
 
@@ -300,10 +307,14 @@ def get_family_model_c(model_type, num_classes):
         "cs3sedarknet_xdw": get_cspnet_model,
         "cs3edgenet_x": get_cspnet_model,
         "cs3se_edgenet_x": get_cspnet_model,
+        "cvt_13": get_cvt_model,
+        "cvt_21": get_cvt_model,
+        "cvt_w24": get_cvt_model,
     }
 
     if model_type not in model_retrieval_functions:
-        raise ValueError(f"Unknown model_type provided: {model_type}")
+        msg = f"Unknown model_type provided: {model_type}"
+        raise ValueError(msg)
 
     return model_retrieval_functions[model_type](model_type, num_classes)
 
@@ -377,7 +388,8 @@ def get_family_model_d(model_type, num_classes):
     }
 
     if model_type not in model_retrieval_functions:
-        raise ValueError(f"Unknown model_type provided: {model_type}")
+        msg = f"Unknown model_type provided: {model_type}"
+        raise ValueError(msg)
 
     return model_retrieval_functions[model_type](model_type, num_classes)
 
@@ -467,6 +479,7 @@ def get_family_model_e(model_type, num_classes):
         "efficientnet_b0_g16_evos": get_efficientnet_model,
         "efficientnet_b3_gn": get_efficientnet_model,
         "efficientnet_b3_g8_gn": get_efficientnet_model,
+        "efficientnet_blur_b0": get_efficientnet_model,
         "efficientnet_es": get_efficientnet_model,
         "efficientnet_es_pruned": get_efficientnet_model,
         "efficientnet_em": get_efficientnet_model,
@@ -520,6 +533,9 @@ def get_family_model_e(model_type, num_classes):
         "tf_efficientnetv2_b1": get_efficientnet_model,
         "tf_efficientnetv2_b2": get_efficientnet_model,
         "tf_efficientnetv2_b3": get_efficientnet_model,
+        "efficientnet_x_b3": get_efficientnet_model,
+        "efficientnet_x_b5": get_efficientnet_model,
+        "efficientnet_h_b5": get_efficientnet_model,
         "mixnet_s": get_efficientnet_model,
         "mixnet_m": get_efficientnet_model,
         "mixnet_l": get_efficientnet_model,
@@ -556,7 +572,8 @@ def get_family_model_e(model_type, num_classes):
     }
 
     if model_type not in model_retrieval_functions:
-        raise ValueError(f"Unknown model_type provided: {model_type}")
+        msg = f"Unknown model_type provided: {model_type}"
+        raise ValueError(msg)
 
     return model_retrieval_functions[model_type](model_type, num_classes)
 
@@ -598,7 +615,8 @@ def get_family_model_f(model_type, num_classes):
     }
 
     if model_type not in model_retrieval_functions:
-        raise ValueError(f"Unknown model_type provided: {model_type}")
+        msg = f"Unknown model_type provided: {model_type}"
+        raise ValueError(msg)
 
     return model_retrieval_functions[model_type](model_type, num_classes)
 
@@ -633,7 +651,8 @@ def get_family_model_g(model_type, num_classes):
     }
 
     if model_type not in model_retrieval_functions:
-        raise ValueError(f"Unknown model_type provided: {model_type}")
+        msg = f"Unknown model_type provided: {model_type}"
+        raise ValueError(msg)
 
     return model_retrieval_functions[model_type](model_type, num_classes)
 
@@ -689,7 +708,8 @@ def get_family_model_h(model_type, num_classes):
     }
 
     if model_type not in model_retrieval_functions:
-        raise ValueError(f"Unknown model_type provided: {model_type}")
+        msg = f"Unknown model_type provided: {model_type}"
+        raise ValueError(msg)
 
     return model_retrieval_functions[model_type](model_type, num_classes)
 
@@ -718,7 +738,8 @@ def get_family_model_i(model_type, num_classes):
     }
 
     if model_type not in model_retrieval_functions:
-        raise ValueError(f"Unknown model_type provided: {model_type}")
+        msg = f"Unknown model_type provided: {model_type}"
+        raise ValueError(msg)
 
     return model_retrieval_functions[model_type](model_type, num_classes)
 
@@ -761,7 +782,8 @@ def get_family_model_l(model_type, num_classes):
     }
 
     if model_type not in model_retrieval_functions:
-        raise ValueError(f"Unknown model_type provided: {model_type}")
+        msg = f"Unknown model_type provided: {model_type}"
+        raise ValueError(msg)
 
     return model_retrieval_functions[model_type](model_type, num_classes)
 
@@ -880,6 +902,7 @@ def get_family_model_m(model_type, num_classes):
         "MobileNet_V3_Large": get_mobilenet_model,
         "mobilenetv3_large_075": get_mobilenet_model,
         "mobilenetv3_large_100": get_mobilenet_model,
+        "mobilenetv3_large_150": get_mobilenet_model,
         "mobilenetv3_small_050": get_mobilenet_model,
         "mobilenetv3_small_075": get_mobilenet_model,
         "mobilenetv3_small_100": get_mobilenet_model,
@@ -898,6 +921,15 @@ def get_family_model_m(model_type, num_classes):
         "lcnet_075": get_mobilenet_model,
         "lcnet_100": get_mobilenet_model,
         "lcnet_150": get_mobilenet_model,
+        "mobilenetv4_conv_small": get_mobilenet_model,
+        "mobilenetv4_conv_medium": get_mobilenet_model,
+        "mobilenetv4_conv_large": get_mobilenet_model,
+        "mobilenetv4_hybrid_medium": get_mobilenet_model,
+        "mobilenetv4_hybrid_large": get_mobilenet_model,
+        "mobilenetv4_conv_aa_medium": get_mobilenet_model,
+        "mobilenetv4_conv_blur_medium": get_mobilenet_model,
+        "mobilenetv4_hybrid_medium_075": get_mobilenet_model,
+        "mobilenetv4_hybrid_large_075": get_mobilenet_model,
         "mobilevit_xxs": get_mobilevit_model,
         "mobilevit_xs": get_mobilevit_model,
         "mobilevit_s": get_mobilevit_model,
@@ -919,7 +951,8 @@ def get_family_model_m(model_type, num_classes):
     }
 
     if model_type not in model_retrieval_functions:
-        raise ValueError(f"Unknown model_type provided: {model_type}")
+        msg = f"Unknown model_type provided: {model_type}"
+        raise ValueError(msg)
 
     return model_retrieval_functions[model_type](model_type, num_classes)
 
@@ -987,7 +1020,8 @@ def get_family_model_n(model_type, num_classes):
     }
 
     if model_type not in model_retrieval_functions:
-        raise ValueError(f"Unknown model_type provided: {model_type}")
+        msg = f"Unknown model_type provided: {model_type}"
+        raise ValueError(msg)
 
     return model_retrieval_functions[model_type](model_type, num_classes)
 
@@ -1026,7 +1060,8 @@ def get_family_model_p(model_type, num_classes):
     }
 
     if model_type not in model_retrieval_functions:
-        raise ValueError(f"Unknown model_type provided: {model_type}")
+        msg = f"Unknown model_type provided: {model_type}"
+        raise ValueError(msg)
 
     return model_retrieval_functions[model_type](model_type, num_classes)
 
@@ -1241,7 +1276,8 @@ def get_family_model_r(model_type, num_classes):
     }
 
     if model_type not in model_retrieval_functions:
-        raise ValueError(f"Unknown model_type provided: {model_type}")
+        msg = f"Unknown model_type provided: {model_type}"
+        raise ValueError(msg)
 
     return model_retrieval_functions[model_type](model_type, num_classes)
 
@@ -1336,7 +1372,8 @@ def get_family_model_s(model_type, num_classes):
     }
 
     if model_type not in model_retrieval_functions:
-        raise ValueError(f"Unknown model_type provided: {model_type}")
+        msg = f"Unknown model_type provided: {model_type}"
+        raise ValueError(msg)
 
     return model_retrieval_functions[model_type](model_type, num_classes)
 
@@ -1376,7 +1413,8 @@ def get_family_model_t(model_type, num_classes):
         "twins_svt_large": get_twins_model,
     }
     if model_type not in model_retrieval_functions:
-        raise ValueError(f"Unknown model_type provided: {model_type}")
+        msg = f"Unknown model_type provided: {model_type}"
+        raise ValueError(msg)
 
     return model_retrieval_functions[model_type](model_type, num_classes)
 
@@ -1584,7 +1622,8 @@ def get_family_model_v(model_type, num_classes):
     }
 
     if model_type not in model_retrieval_functions:
-        raise ValueError(f"Unknown model_type provided: {model_type}")
+        msg = f"Unknown model_type provided: {model_type}"
+        raise ValueError(msg)
 
     return model_retrieval_functions[model_type](model_type, num_classes)
 
@@ -1609,7 +1648,8 @@ def get_family_model_w(model_type, num_classes):
     }
 
     if model_type not in model_retrieval_functions:
-        raise ValueError(f"Unknown model_type provided: {model_type}")
+        msg = f"Unknown model_type provided: {model_type}"
+        raise ValueError(msg)
 
     return model_retrieval_functions[model_type](model_type, num_classes)
 
@@ -1666,7 +1706,8 @@ def get_family_model_x(model_type, num_classes):
     }
 
     if model_type not in model_retrieval_functions:
-        raise ValueError(f"Unknown model_type provided: {model_type}")
+        msg = f"Unknown model_type provided: {model_type}"
+        raise ValueError(msg)
 
     return model_retrieval_functions[model_type](model_type, num_classes)
 
@@ -1707,11 +1748,8 @@ def get_family_model(model_type, num_classes):
     # Convert the first letter of the model_type to lowercase
     first_letter = model_type[0].lower()
 
-    # Default value if no matching case is found
-    model = "Error"
-
     # Retrieve the corresponding function and call it
     if first_letter in model_functions:
-        model = model_functions[first_letter](model_type, num_classes)
+        return model_functions[first_letter](model_type, num_classes)
 
-    return model
+    return "Error"

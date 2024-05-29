@@ -42,10 +42,19 @@ def get_cspnet_model(cspnet_type, num_classes):
     ]
 
     if cspnet_type not in cspnet_architectures:
-        raise ValueError(f"Unknown CSPNet Architecture: {cspnet_type}")
+        msg = f"Unknown CSPNet Architecture: {cspnet_type}"
+        raise ValueError(msg)
 
     try:
-        return create_model(cspnet_type, pretrained=True, num_classes=num_classes)
+        return create_model(
+            cspnet_type,
+            pretrained=True,
+            num_classes=num_classes,
+        )
     except RuntimeError as e:
         print(f"{cspnet_type} - Error loading pretrained model: {e}")
-        return create_model(cspnet_type, pretrained=False, num_classes=num_classes)
+        return create_model(
+            cspnet_type,
+            pretrained=False,
+            num_classes=num_classes,
+        )

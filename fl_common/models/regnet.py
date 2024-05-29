@@ -1,6 +1,6 @@
-import torch.nn as nn
-from torchvision import models
 from timm import create_model
+from torch import nn
+from torchvision import models
 
 
 def get_regnet_model(regnet_type, num_classes):
@@ -23,15 +23,39 @@ def get_regnet_model(regnet_type, num_classes):
     # Mapping of vision types to their corresponding torchvision models and
     # weights
     torchvision_models = {
-        "RegNet_X_400MF": (models.regnet_x_400mf, models.RegNet_X_400MF_Weights),
-        "RegNet_X_800MF": (models.regnet_x_800mf, models.RegNet_X_800MF_Weights),
-        "RegNet_X_1_6GF": (models.regnet_x_1_6gf, models.RegNet_X_1_6GF_Weights),
-        "RegNet_X_3_2GF": (models.regnet_x_3_2gf, models.RegNet_X_3_2GF_Weights),
+        "RegNet_X_400MF": (
+            models.regnet_x_400mf,
+            models.RegNet_X_400MF_Weights,
+        ),
+        "RegNet_X_800MF": (
+            models.regnet_x_800mf,
+            models.RegNet_X_800MF_Weights,
+        ),
+        "RegNet_X_1_6GF": (
+            models.regnet_x_1_6gf,
+            models.RegNet_X_1_6GF_Weights,
+        ),
+        "RegNet_X_3_2GF": (
+            models.regnet_x_3_2gf,
+            models.RegNet_X_3_2GF_Weights,
+        ),
         "RegNet_X_16GF": (models.regnet_x_16gf, models.RegNet_X_16GF_Weights),
-        "RegNet_Y_400MF": (models.regnet_y_400mf, models.RegNet_Y_400MF_Weights),
-        "RegNet_Y_800MF": (models.regnet_y_800mf, models.RegNet_Y_800MF_Weights),
-        "RegNet_Y_1_6GF": (models.regnet_y_1_6gf, models.RegNet_Y_1_6GF_Weights),
-        "RegNet_Y_3_2GF": (models.regnet_y_3_2gf, models.RegNet_Y_3_2GF_Weights),
+        "RegNet_Y_400MF": (
+            models.regnet_y_400mf,
+            models.RegNet_Y_400MF_Weights,
+        ),
+        "RegNet_Y_800MF": (
+            models.regnet_y_800mf,
+            models.RegNet_Y_800MF_Weights,
+        ),
+        "RegNet_Y_1_6GF": (
+            models.regnet_y_1_6gf,
+            models.RegNet_Y_1_6GF_Weights,
+        ),
+        "RegNet_Y_3_2GF": (
+            models.regnet_y_3_2gf,
+            models.RegNet_Y_3_2GF_Weights,
+        ),
         "RegNet_Y_16GF": (models.regnet_y_16gf, models.RegNet_Y_16GF_Weights),
     }
 
@@ -92,14 +116,19 @@ def get_regnet_model(regnet_type, num_classes):
     elif regnet_type in timm_models:
         try:
             regnet_model = create_model(
-                regnet_type, pretrained=True, num_classes=num_classes
+                regnet_type,
+                pretrained=True,
+                num_classes=num_classes,
             )
         except RuntimeError as e:
             print(f"{regnet_type} - Error loading pretrained model: {e}")
             regnet_model = create_model(
-                regnet_type, pretrained=False, num_classes=num_classes
+                regnet_type,
+                pretrained=False,
+                num_classes=num_classes,
             )
     else:
-        raise ValueError(f"Unknown RegNet Architecture: {regnet_type}")
+        msg = f"Unknown RegNet Architecture: {regnet_type}"
+        raise ValueError(msg)
 
     return regnet_model

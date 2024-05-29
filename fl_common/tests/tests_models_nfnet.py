@@ -1,5 +1,7 @@
 import os
+
 from django.test import TestCase
+
 from fl_common.models.nfnet import get_nfnet_model
 
 os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
@@ -57,7 +59,9 @@ class ProcessingNfnetTestCase(TestCase):
                     model = get_nfnet_model(nfnet_type, num_classes)
                     self.assertIsNotNone(model)
                 except ValueError:
-                    self.fail(f"{nfnet_type} should be a known NFNet architecture.")
+                    self.fail(
+                        f"{nfnet_type} should be a known NFNet architecture.",
+                    )
 
     def test_unknown_nfnet_type(self):
         """

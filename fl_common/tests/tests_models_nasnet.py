@@ -1,5 +1,7 @@
 import os
+
 from django.test import TestCase
+
 from fl_common.models.nasnet import get_nasnet_model
 
 os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
@@ -23,7 +25,9 @@ class ProcessingNasnetTestCase(TestCase):
                     model = get_nasnet_model(nasnet_type, num_classes)
                     self.assertIsNotNone(model)
                 except ValueError:
-                    self.fail(f"{nasnet_type} should be a known NASNet architecture.")
+                    self.fail(
+                        f"{nasnet_type} should be a known NASNet architecture.",
+                    )
 
     def test_unknown_nasnet_type(self):
         """

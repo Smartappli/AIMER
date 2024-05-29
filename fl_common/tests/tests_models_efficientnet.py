@@ -1,6 +1,8 @@
 import os
-import torch.nn as nn
+
 from django.test import TestCase
+from torch import nn
+
 from fl_common.models.efficientnet import get_efficientnet_model
 
 os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
@@ -63,6 +65,7 @@ class ProcessingEfficientNetTestCase(TestCase):
             "efficientnet_b0_g16_evos",
             "efficientnet_b3_gn",
             "efficientnet_b3_g8_gn",
+            "efficientnet_blur_b0",
             "efficientnet_es",
             "efficientnet_es_pruned",
             "efficientnet_em",
@@ -116,6 +119,9 @@ class ProcessingEfficientNetTestCase(TestCase):
             "tf_efficientnetv2_b1",
             "tf_efficientnetv2_b2",
             "tf_efficientnetv2_b3",
+            "efficientnet_x_b3",
+            "efficientnet_x_b5",
+            "efficientnet_h_b5",
             "mixnet_s",
             "mixnet_m",
             "mixnet_l",

@@ -1,5 +1,7 @@
 import os
+
 from django.test import TestCase
+
 from fl_common.models.mlp_mixer import get_mlp_mixer_model
 
 os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
@@ -40,7 +42,7 @@ class ProcessingMlpMixerTestCase(TestCase):
                     self.assertIsNotNone(model)
                 except ValueError:
                     self.fail(
-                        f"{mlp_mixer_type} should be a known Mlp Mixer architecture."
+                        f"{mlp_mixer_type} should be a known Mlp Mixer architecture.",
                     )
 
     def test_unknown_mlp_mixer_type(self):

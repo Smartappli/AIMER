@@ -24,10 +24,19 @@ def get_selecsls_model(selecsls_type, num_classes):
     }
 
     if selecsls_type not in valid_types:
-        raise ValueError(f"Unknown SelecSLS Architecture: {selecsls_type}")
+        msg = f"Unknown SelecSLS Architecture: {selecsls_type}"
+        raise ValueError(msg)
 
     try:
-        return create_model(selecsls_type, pretrained=True, num_classes=num_classes)
+        return create_model(
+            selecsls_type,
+            pretrained=True,
+            num_classes=num_classes,
+        )
     except RuntimeError as e:
         print(f"{selecsls_type} - Error loading pretrained model: {e}")
-        return create_model(selecsls_type, pretrained=False, num_classes=num_classes)
+        return create_model(
+            selecsls_type,
+            pretrained=False,
+            num_classes=num_classes,
+        )

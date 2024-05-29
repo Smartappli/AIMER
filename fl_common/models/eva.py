@@ -60,7 +60,8 @@ def get_eva_model(eva_type, num_classes):
     }
 
     if eva_type not in supported_types:
-        raise ValueError(f"Unknown EVA Architecture: {eva_type}")
+        msg = f"Unknown EVA Architecture: {eva_type}"
+        raise ValueError(msg)
 
     try:
         return create_model(eva_type, pretrained=True, num_classes=num_classes)

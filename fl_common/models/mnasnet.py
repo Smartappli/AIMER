@@ -1,4 +1,4 @@
-import torch.nn as nn
+from torch import nn
 from torchvision import models
 
 
@@ -17,15 +17,20 @@ def get_mnasnet_model(mnasnet_type: str, num_classes: int) -> nn.Module:
 
     # Check if the specified type is valid
     if mnasnet_type not in weight_classes:
-        raise ValueError(f"Unknown MNASNet Architecture: {mnasnet_type}")
+        msg = f"Unknown MNASNet Architecture: {mnasnet_type}"
+        raise ValueError(msg)
 
     # Load the pre-trained model
     try:
         weights = weight_classes[mnasnet_type].DEFAULT
-        mnasnet_model = getattr(models.mnasnet, mnasnet_type.lower())(weights=weights)
+        mnasnet_model = getattr(models.mnasnet, mnasnet_type.lower())(
+            weights=weights,
+        )
     except RuntimeError as e:
         print(f"{mnasnet_type} - Error loading pretrained model: {e}")
-        mnasnet_model = getattr(models.mnasnet, mnasnet_type.lower())(weights=None)
+        mnasnet_model = getattr(models.mnasnet, mnasnet_type.lower())(
+            weights=None,
+        )
 
     # Modify the last layer
     num_features = mnasnet_model.classifier[1].in_features

@@ -1,4 +1,4 @@
-import torch.nn as nn
+from torch import nn
 from torchvision import models
 
 
@@ -20,8 +20,14 @@ def get_wide_resnet_model(wide_resnet_type, num_classes):
     # Dictionary mapping model types to their corresponding functions and
     # default weights
     wide_resnet_models = {
-        "Wide_ResNet50_2": (models.wide_resnet50_2, models.Wide_ResNet50_2_Weights),
-        "Wide_ResNet101_2": (models.wide_resnet101_2, models.Wide_ResNet101_2_Weights),
+        "Wide_ResNet50_2": (
+            models.wide_resnet50_2,
+            models.Wide_ResNet50_2_Weights,
+        ),
+        "Wide_ResNet101_2": (
+            models.wide_resnet101_2,
+            models.Wide_ResNet101_2_Weights,
+        ),
     }
 
     # Get the model function and default weights based on the specified type
@@ -34,7 +40,8 @@ def get_wide_resnet_model(wide_resnet_type, num_classes):
             print(f"{wide_resnet_type} - Error loading pretrained model: {e}")
             wide_resnet_model = model_func(weights=None)
     else:
-        raise ValueError(f"Unknown Wide ResNet Architecture: {wide_resnet_type}")
+        msg = f"Unknown Wide ResNet Architecture: {wide_resnet_type}"
+        raise ValueError(msg)
 
     # Modify the last layer to suit the given number of classes
     num_features = wide_resnet_model.fc.in_features

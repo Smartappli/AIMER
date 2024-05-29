@@ -1,4 +1,4 @@
-import torch.nn as nn
+from torch import nn
 from torchvision import models
 
 
@@ -21,14 +21,17 @@ def get_googlenet_model(googlenet_type, num_classes):
     """
     # Validate the googlenet_type before proceeding
     if googlenet_type != "GoogLeNet":
-        raise ValueError(f"Unknown GoogLeNet Architecture: {googlenet_type}")
+        msg = f"Unknown GoogLeNet Architecture: {googlenet_type}"
+        raise ValueError(msg)
 
     # Load the pre-trained version of GoogLeNet
     try:
         weights = models.GoogLeNet_Weights.DEFAULT
         googlenet_model = models.googlenet(weights=weights)
     except RuntimeError as e:
-        print(f"{googlenet_type} - Error loading pretrained GoogLeNet model: {e}")
+        print(
+            f"{googlenet_type} - Error loading pretrained GoogLeNet model: {e}",
+        )
         googlenet_model = models.googlenet(weights=None)
 
     # Modify the fully connected layer to suit the given number of classes

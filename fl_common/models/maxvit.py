@@ -1,6 +1,6 @@
-import torch.nn as nn
-from torchvision import models
 from timm import create_model
+from torch import nn
+from torchvision import models
 
 
 def get_maxvit_model(maxvit_type, num_classes):
@@ -20,7 +20,9 @@ def get_maxvit_model(maxvit_type, num_classes):
     """
     # Mapping of vision types to their corresponding torchvision models and
     # weights
-    torchvision_models = {"MaxVit_T": (models.maxvit_t, models.MaxVit_T_Weights)}
+    torchvision_models = {
+        "MaxVit_T": (models.maxvit_t, models.MaxVit_T_Weights),
+    }
 
     timm_models = [
         "coatnet_pico_rw_224",
@@ -99,14 +101,19 @@ def get_maxvit_model(maxvit_type, num_classes):
     elif maxvit_type in timm_models:
         try:
             maxvit_model = create_model(
-                maxvit_type, pretrained=True, num_classes=num_classes
+                maxvit_type,
+                pretrained=True,
+                num_classes=num_classes,
             )
         except RuntimeError as e:
             print(f"{maxvit_type} - Error loading pretrained model: {e}")
             maxvit_model = create_model(
-                maxvit_type, pretrained=False, num_classes=num_classes
+                maxvit_type,
+                pretrained=False,
+                num_classes=num_classes,
             )
     else:
-        raise ValueError(f"Unknown MaxVit Architecture: {maxvit_type}")
+        msg = f"Unknown MaxVit Architecture: {maxvit_type}"
+        raise ValueError(msg)
 
     return maxvit_model

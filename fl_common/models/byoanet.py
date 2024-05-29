@@ -34,10 +34,19 @@ def get_byoanet_model(byoanet_type, num_classes):
     ]
 
     if byoanet_type not in byoanet_types:
-        raise ValueError(f"Unknown Byoanet Architecture: {byoanet_type}")
+        msg = f"Unknown Byoanet Architecture: {byoanet_type}"
+        raise ValueError(msg)
 
     try:
-        return create_model(byoanet_type, pretrained=True, num_classes=num_classes)
+        return create_model(
+            byoanet_type,
+            pretrained=True,
+            num_classes=num_classes,
+        )
     except RuntimeError as e:
         print(f"{byoanet_type} - Error loading pretrained model: {e}")
-        return create_model(byoanet_type, pretrained=False, num_classes=num_classes)
+        return create_model(
+            byoanet_type,
+            pretrained=False,
+            num_classes=num_classes,
+        )
