@@ -10,7 +10,8 @@ RUN apt-get update \
     python3 python3-pip gcc wget \
     ocl-icd-opencl-dev opencl-headers clinfo \
     libclblast-dev libopenblas-dev \
-    && apt-get clean
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
 RUN mkdir -p /etc/OpenCL/vendors && echo "libnvidia-opencl.so.1" > /etc/OpenCL/vendors/nvidia.icd
 
