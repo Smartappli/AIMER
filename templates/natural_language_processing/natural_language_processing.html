@@ -409,464 +409,464 @@
                         Emotional Analysis
                     </button>
                 </h2>
-        <div id="NLPAssistant-collapseThree" class="accordion-collapse collapse" data-bs-parent="#NLPAssistant">
-          <div class="accordion-body">
-              <form class="row g-3" action="/npl_emotialanalysis_processing/" method="post">
-                {% csrf_token %}
-                  <h5>Model Choice</h5>
-                  <div class="col-md-3 col-sm-6">
-                    <div class="form-check form-switch">
-                      <input class="form-check-input" name="{{ form3.dpcla_data_augmentation_cropping.html_name }}" type="checkbox" role="switch" id="{{ form3.dpcla_data_augmentation_cropping.id_for_label }}">
-                        <label class="form-check-label" for="{{ form3.dpcla_data_augmentation_cropping.id_for_label }}">Image Cropping</label>
+                <div id="NLPAssistant-collapseThree" class="accordion-collapse collapse" data-bs-parent="#NLPAssistant">
+                    <div class="accordion-body">
+                        <form class="row g-3" action="/npl_emotialanalysis_processing/" method="post">
+                            {% csrf_token %}
+                            <h5>Model Choice</h5>
+                            <div class="col-md-3 col-sm-6">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" name="{{ form3.dpcla_data_augmentation_cropping.html_name }}" type="checkbox" role="switch" id="{{ form3.dpcla_data_augmentation_cropping.id_for_label }}">
+                                    <label class="form-check-label" for="{{ form3.dpcla_data_augmentation_cropping.id_for_label }}">Image Cropping</label>
+                                </div>
+                            </div>
+                        </form>
                     </div>
-                  </div>
-              </form>
-          </div>
+                </div>
+            </div>
         </div>
-      </div>
+    {% else %}
+        <h3><span class="text-warning-emphasis">32</span> Text Generation</h3>
+        <div class="row g-3">
+            <div class="col-md-6">
+                <ul>
+                    <li>
+                        Alfred 40B
+                        {% if pdf == "True" %}
+                        <a href="{% static 'pdf/2306.15595.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
+                            <svg class="bi" width="16" height="16" role="img" aria-label="ALost in the Middle: How Language Models Use Long Contexts"><use href="#pdf"></use></svg>
+                        </a>
+                        <a href="{% static 'pdf/2309.00071.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
+                            <svg class="bi" width="16" height="16" role="img" aria-label="YaRN: Efficient Context Window Extension of Large Language Models"><use href="#pdf"></use></svg>
+                        </a>
+                        <a href="{% static 'pdf/2307.03172.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
+                            <svg class="bi" width="16" height="16" role="img" aria-label="EXTENDING CONTEXT WINDOW OF LARGE LANGUAGE MODELS VIA POSITION INTERPOLATION"><use href="#pdf"></use></svg>
+                        </a>
+                        {% endif %}
+                    </li>
+                    <li>
+                        Code 13B
+                    </li>
+                    <li>
+                        Code 33B
+                    </li>
+                    <li>
+                        CodeLLaMa 7B
+                        {% if pdf == "True" %}
+                        <a href="{% static 'pdf/2308.12950.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
+                            <svg class="bi" width="16" height="16" role="img" aria-label="Code Llama: Open Foundation Models for Code"><use href="#pdf"></use></svg>
+                        </a>
+                        {% endif %}
+                    </li>
+                    <li>
+                        CodeLLaMa 7B-Instruct
+                    </li>   
+                     <li>
+                        CodeLLaMa 7B-Python
+                    </li>             
+                    <li>
+                        CodeLLaMa 13B
+                        {% if pdf == "True" %}
+                        <a href="{% static 'pdf/2308.12950.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
+                            <svg class="bi" width="16" height="16" role="img" aria-label="Code Llama: Open Foundation Models for Code"><use href="#pdf"></use></svg>
+                        </a>
+                        {% endif %}
+                    </li>
+                    <li>
+                        CodeLLaMa 13B-Instruct
+                    </li>
+                    <li>
+                        CodeLLaMa 13B-Python
+                    </li>
+                    <li>
+                        CodeLLaMa 34B
+                    </li>              
+                    <li>
+                        CodeLLaMa 34B-Instruct
+                    </li>
+                    <li>
+                        CodeLLaMa 34B-Python
+                    </li>               
+                    <li>
+                        Falcon 7B
+                        {% if pdf == "True" %}                
+                        <a href="{% static 'pdf/2205.14135.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
+                            <svg class="bi" width="16" height="16" role="img" aria-label="FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness"><use href="#pdf"></use></svg>
+                        </a>
+                        <a href="{% static 'pdf/1911.02150.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
+                            <svg class="bi" width="16" height="16" role="img" aria-label="Fast Transformer Decoding: One Write-Head is All You Need"><use href="#pdf"></use></svg>
+                        </a>
+                        <a href="{% static 'pdf/2101.00027.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
+                            <svg class="bi" width="16" height="16" role="img" aria-label="The Pile: An 800GB Dataset of Diverse Text for Language Modeling"><use href="#pdf"></use></svg>
+                        </a>
+                        <a href="{% static 'pdf/2005.14165.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
+                            <svg class="bi" width="16" height="16" role="img" aria-label="Language Models are Few-Shot Learners"><use href="#pdf"></use></svg>
+                        </a>
+                        <a href="{% static 'pdf/2104.09864.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
+                            <svg class="bi" width="16" height="16" role="img" aria-label="ROFORMER: ENHANCED TRANSFORMER WITH ROTARY POSITION EMBEDDING"><use href="#pdf"></use></svg>
+                        </a>
+                        <a href="{% static 'pdf/2306.01116.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
+                            <svg class="bi" width="16" height="16" role="img" aria-label="The RefinedWeb Dataset for Falcon LLM: Outperforming Curated Corpora with Web Data, and Web Data Only"><use href="#pdf"></use></svg>
+                        </a>
+                        {% endif %}
+                     </li>
+                     <li>
+                        Falcon 7B-Instruct
+                        {% if pdf == "True" %}                 
+                        <a href="{% static 'pdf/2205.14135.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
+                            <svg class="bi" width="16" height="16" role="img" aria-label="FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness"><use href="#pdf"></use></svg>
+                        </a>
+                        <a href="{% static 'pdf/1911.02150.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
+                            <svg class="bi" width="16" height="16" role="img" aria-label="Fast Transformer Decoding: One Write-Head is All You Need"><use href="#pdf"></use></svg>
+                        </a>
+                        <a href="{% static 'pdf/2101.00027.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
+                            <svg class="bi" width="16" height="16" role="img" aria-label="The Pile: An 800GB Dataset of Diverse Text for Language Modeling"><use href="#pdf"></use></svg>
+                        </a>
+                        <a href="{% static 'pdf/2005.14165.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
+                            <svg class="bi" width="16" height="16" role="img" aria-label="Language Models are Few-Shot Learners"><use href="#pdf"></use></svg>
+                        </a>
+                        <a href="{% static 'pdf/2104.09864.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
+                            <svg class="bi" width="16" height="16" role="img" aria-label="ROFORMER: ENHANCED TRANSFORMER WITH ROTARY POSITION EMBEDDING"><use href="#pdf"></use></svg>
+                        </a>
+                        <a href="{% static 'pdf/2306.01116.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
+                            <svg class="bi" width="16" height="16" role="img" aria-label="The RefinedWeb Dataset for Falcon LLM: Outperforming Curated Corpora with Web Data, and Web Data Only"><use href="#pdf"></use></svg>
+                        </a>
+                        {% endif %}
+                    </li>
+                    <li>
+                        Falcon 40B
+                        {% if pdf == "True" %}
+                        <a href="{% static 'pdf/2205.14135.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
+                            <svg class="bi" width="16" height="16" role="img" aria-label="FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness"><use href="#pdf"></use></svg>
+                        </a>
+                        <a href="{% static 'pdf/1911.02150.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
+                            <svg class="bi" width="16" height="16" role="img" aria-label="Fast Transformer Decoding: One Write-Head is All You Need"><use href="#pdf"></use></svg>
+                        </a>
+                        <a href="{% static 'pdf/2101.00027.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
+                            <svg class="bi" width="16" height="16" role="img" aria-label="The Pile: An 800GB Dataset of Diverse Text for Language Modeling"><use href="#pdf"></use></svg>
+                        </a>
+                        <a href="{% static 'pdf/2005.14165.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
+                            <svg class="bi" width="16" height="16" role="img" aria-label="Language Models are Few-Shot Learners"><use href="#pdf"></use></svg>
+                        </a>
+                        <a href="{% static 'pdf/2104.09864.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
+                            <svg class="bi" width="16" height="16" role="img" aria-label="ROFORMER: ENHANCED TRANSFORMER WITH ROTARY POSITION EMBEDDING"><use href="#pdf"></use></svg>
+                        </a>
+                        <a href="{% static 'pdf/2306.01116.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
+                            <svg class="bi" width="16" height="16" role="img" aria-label="The RefinedWeb Dataset for Falcon LLM: Outperforming Curated Corpora with Web Data, and Web Data Only"><use href="#pdf"></use></svg>
+                        </a>
+                        {% endif %}
+                    </li>
+                    <li>
+                        Falcon 40B-Instruct
+                        {% if pdf == "True" %}
+                        <a href="{% static 'pdf/2205.14135.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
+                            <svg class="bi" width="16" height="16" role="img" aria-label="FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness"><use href="#pdf"></use></svg>
+                        </a>
+                        <a href="{% static 'pdf/1911.02150.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
+                            <svg class="bi" width="16" height="16" role="img" aria-label="Fast Transformer Decoding: One Write-Head is All You Need"><use href="#pdf"></use></svg>
+                        </a>
+                        <a href="{% static 'pdf/2101.00027.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
+                            <svg class="bi" width="16" height="16" role="img" aria-label="The Pile: An 800GB Dataset of Diverse Text for Language Modeling"><use href="#pdf"></use></svg>
+                        </a>
+                        <a href="{% static 'pdf/2005.14165.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
+                            <svg class="bi" width="16" height="16" role="img" aria-label="Language Models are Few-Shot Learners"><use href="#pdf"></use></svg>
+                        </a>
+                        <a href="{% static 'pdf/2104.09864.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
+                            <svg class="bi" width="16" height="16" role="img" aria-label="ROFORMER: ENHANCED TRANSFORMER WITH ROTARY POSITION EMBEDDING"><use href="#pdf"></use></svg>
+                        </a>
+                        <a href="{% static 'pdf/2306.01116.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
+                            <svg class="bi" width="16" height="16" role="img" aria-label="The RefinedWeb Dataset for Falcon LLM: Outperforming Curated Corpora with Web Data, and Web Data Only"><use href="#pdf"></use></svg>
+                        </a>
+                        {% endif %}
+                    </li>
+                    <li>
+                        Falcon 180B
+                        {% if pdf == "True" %}
+                        <a href="{% static 'pdf/2205.14135.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
+                            <svg class="bi" width="16" height="16" role="img" aria-label="FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness"><use href="#pdf"></use></svg>
+                        </a>
+                        <a href="{% static 'pdf/1911.02150.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
+                            <svg class="bi" width="16" height="16" role="img" aria-label="Fast Transformer Decoding: One Write-Head is All You Need"><use href="#pdf"></use></svg>
+                        </a>
+                        <a href="{% static 'pdf/2005.14165.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
+                            <svg class="bi" width="16" height="16" role="img" aria-label="Language Models are Few-Shot Learners"><use href="#pdf"></use></svg>
+                        </a>
+                        <a href="{% static 'pdf/2104.09864.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
+                            <svg class="bi" width="16" height="16" role="img" aria-label="ROFORMER: ENHANCED TRANSFORMER WITH ROTARY POSITION EMBEDDING"><use href="#pdf"></use></svg>
+                        </a>
+                        <a href="{% static 'pdf/2306.01116.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
+                            <svg class="bi" width="16" height="16" role="img" aria-label="The RefinedWeb Dataset for Falcon LLM: Outperforming Curated Corpora with Web Data, and Web Data Only"><use href="#pdf"></use></svg>
+                        </a>
+                        {% endif %}
+                    </li>
+                    <li>
+                        Falcon 180B-Chat
+                        {% if pdf == "True" %}
+                        <a href="{% static 'pdf/2205.14135.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
+                            <svg class="bi" width="16" height="16" role="img" aria-label="FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness"><use href="#pdf"></use></svg>
+                        </a>
+                        <a href="{% static 'pdf/1911.02150.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
+                            <svg class="bi" width="16" height="16" role="img" aria-label="Fast Transformer Decoding: One Write-Head is All You Need"><use href="#pdf"></use></svg>
+                        </a>
+                        <a href="{% static 'pdf/2005.14165.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
+                            <svg class="bi" width="16" height="16" role="img" aria-label="Language Models are Few-Shot Learners"><use href="#pdf"></use></svg>
+                        </a>
+                        <a href="{% static 'pdf/2104.09864.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
+                            <svg class="bi" width="16" height="16" role="img" aria-label="ROFORMER: ENHANCED TRANSFORMER WITH ROTARY POSITION EMBEDDING"><use href="#pdf"></use></svg>
+                        </a>
+                        <a href="{% static 'pdf/2306.01116.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
+                            <svg class="bi" width="16" height="16" role="img" aria-label="The RefinedWeb Dataset for Falcon LLM: Outperforming Curated Corpora with Web Data, and Web Data Only"><use href="#pdf"></use></svg>
+                        </a>
+                        {% endif %}
+                    </li>
+                    <li>
+                        LLaMA 2 7B
+                        {% if pdf == "True" %}                
+                        <a href="{% static 'pdf/2307.09288.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
+                            <svg class="bi" width="16" height="16" role="img" aria-label="Llama 2: Open Foundation and Fine-Tuned Chat Models"><use href="#pdf"></use></svg>
+                        </a>
+                        {% endif %}
+                    </li>
+                    <li>
+                        LLaMA 2 7B-Chat
+                    </li>  
+                     <li>
+                        LLaMA 2 7B-Coder
+                    </li>              
+                    <li>
+                        LLaMa 2 13B
+                        {% if pdf == "True" %}                
+                        <a href="{% static 'pdf/2307.09288.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
+                            <svg class="bi" width="16" height="16" role="img" aria-label="Llama 2: Open Foundation and Fine-Tuned Chat Models"><use href="#pdf"></use></svg>
+                        </a>
+                        {% endif %}
+                    </li>
+                    <li>
+                        LLaMA 2 13B-Chat
+                    </li>
+                    <li>
+                        LLaMa 2 70B
+                        {% if pdf == "True" %}
+                        <a href="{% static 'pdf/2307.09288.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
+                            <svg class="bi" width="16" height="16" role="img" aria-label="Llama 2: Open Foundation and Fine-Tuned Chat Models"><use href="#pdf"></use></svg>
+                        </a>
+                        {% endif %}
+                    </li>
+                     <li>
+                        LLaMA 2 70B-Chat
+                    </li>             
+                    <li>
+                        Med42 70B
+                    </li>
+                    <li>
+                        MedAlpaca 13B
+                    </li>              
+                    <li>
+                        Meditron 7B
+                        {% if pdf == "True" %}
+                        <a href="{% static 'pdf/2311.16079.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
+                            <svg class="bi" width="16" height="16" role="img" aria-label="MEDITRON-70B: Scaling Medical Pretraining for Large Language Models"><use href="#pdf"></use></svg>
+                        </a>
+                        {% endif %}
+                    </li>
+                    <li>
+                        Meditron 7B-Chat
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-6">
+              <ul>
+                <li>
+                    Meditron 70B
+                    {% if pdf == "True" %}                
+                    <a href="{% static 'pdf/2311.16079.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi" width="16" height="16" role="img" aria-label="MEDITRON-70B: Scaling Medical Pretraining for Large Language Models"><use href="#pdf"></use></svg>
+                    </a>
+                     {% endif %}   
+                </li>
+                <li>
+                    Mistral 7B
+                    {% if pdf == "True" %}
+                    <a href="{% static 'pdf/2310.06825.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi" width="16" height="16" role="img" aria-label="Mistral 7B"><use href="#pdf"></use></svg>
+                    </a>
+                    {% endif %}
+                </li>              
+                <li>
+                    Mistral 7B-Instruct
+                    {% if pdf == "True" %}                
+                    <a href="{% static 'pdf/2310.06825.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi" width="16" height="16" role="img" aria-label="Mistral 7B"><use href="#pdf"></use></svg>
+                    </a>
+                    {% endif %}
+                </li>
+                <li>
+                    Mistral 7B OpenOrca
+                    {% if pdf == "True" %}
+                    <a href="{% static 'pdf/2306.15595.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi" width="16" height="16" role="img" aria-label="Orca: Progressive Learning from Complex Explanation Traces of GPT-4"><use href="#pdf"></use></svg>
+                    </a>
+                    <a href="{% static 'pdf/2301.13688.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi" width="16" height="16" role="img" aria-label="The Flan Collection: Designing Data and Methods for Effective Instruction Tuning"><use href="#pdf"></use></svg>
+                    </a>
+                    {% endif %}
+                </li>
+                <li>
+                    Mixtral 8x7B
+                </li>
+                <li>
+                    Mixtral 8x7B-Instruct
+                </li>
+                <li>
+                    Neural-Chat 7B v3.3
+                </li>
+                <li>
+                    Notus v1
+                </li>
+                <li>
+                    OpenChat 7B v3.5-1012
+                    {% if pdf == "True" %}
+                    <a href="{% static 'pdf/2309.11235.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi" width="16" height="16" role="img" aria-label="OPENCHAT: ADVANCING OPEN-SOURCE LANGUAGE MODELS WITH MIXED-QUALITY DATA"><use href="#pdf"></use></svg>
+                    </a>
+                    <a href="{% static 'pdf/2303.08774.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi" width="16" height="16" role="img" aria-label="GPT-4 Technical Report"><use href="#pdf"></use></svg>
+                    </a>
+                     <a href="{% static 'pdf/2212.10560.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi" width="16" height="16" role="img" aria-label="Self-Instruct: Aligning Language Model with Self Generated Instructions"><use href="#pdf"></use></svg>
+                    </a>
+                    {% endif %}
+                </li>
+                <li>
+                    Open LLaMA 3B v2
+                </li>
+                <li>
+                    Open LLaMa 7B v2
+                </li>
+                <li>
+                    Open LLaMa 13B v2
+                </li>
+                <li>
+                    Orca 2 7B
+                    {% if pdf == "True" %}
+                    <a href="{% static 'pdf/2311.11045.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi" width="16" height="16" role="img" aria-label="Orca 2: Teaching Small Language Models How to Reason"><use href="#pdf"></use></svg>
+                    </a>
+                    {% endif %}
+                </li>
+                <li>
+                    Orca 2 13B
+                    {% if pdf == "True" %}                
+                    <a href="{% static 'pdf/2311.11045.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi" width="16" height="16" role="img" aria-label="Orca 2: Teaching Small Language Models How to Reason"><use href="#pdf"></use></svg>
+                    </a>
+                    {% endif %}
+                </li>
+                <li>
+                    Python Code 13B
+                </li>
+                <li>
+                    Python Code 33B
+                </li>              
+                <li>
+                    PsyMedRP 13B v1
+                </li>
+                <li>
+                    PsyMedRP 20B v1
+                </li>
+                <li>
+                    Starling LM 7B Alpha
+                    {% if pdf == "True" %}
+                    <a href="{% static 'pdf/2306.02231.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi" width="16" height="16" role="img" aria-label="Fine-Tuning Language Models with Advantage-Induced Policy Alignment"><use href="#pdf"></use></svg>
+                    </a>
+                    {% endif %}
+                </li>
+                <li>
+                    Vicuna 7B v1.5
+                    {% if pdf == "True" %}
+                    <a href="{% static 'pdf/2307.09288.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi" width="16" height="16" role="img" aria-label="Llama 2: Open Foundation and Fine-Tuned Chat Models"><use href="#pdf"></use></svg>
+                    </a>
+                    <a href="{% static 'pdf/2306.05685.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi" width="16" height="16" role="img" aria-label="Llama 2: Open Foundation and Fine-Tuned Chat Models"><use href="#pdf"></use></svg>
+                    </a>
+                    {% endif %}
+                </li>
+                <li>
+                    Vicuna 13B v1.5
+                    {% if pdf == "True" %}
+                    <a href="{% static 'pdf/2307.09288.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi" width="16" height="16" role="img" aria-label="Llama 2: Open Foundation and Fine-Tuned Chat Models"><use href="#pdf"></use></svg>
+                    </a>
+                    <a href="{% static 'pdf/2306.05685.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi" width="16" height="16" role="img" aria-label="Llama 2: Open Foundation and Fine-Tuned Chat Models"><use href="#pdf"></use></svg>
+                    </a>
+                    {% endif %}
+                </li>
+                <li>
+                    Vicuna 33B v1.3
+                </li>
+                 <li>
+                    Vicuna 33B-Coder
+                </li>
+                <li>
+                    WizardLM 7B v1.0
+                    {% if pdf == "True" %}                
+                    <a href="{% static 'pdf/2304.12244.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi" width="16" height="16" role="img" aria-label="Direct Preference Optimization: Your Language Model is Secretly a Reward Model"><use href="#pdf"></use></svg>
+                    </a>  
+                    <a href="{% static 'pdf/2306.08568.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi" width="16" height="16" role="img" aria-label="Direct Preference Optimization: Your Language Model is Secretly a Reward Model"><use href="#pdf"></use></svg>
+                    </a>
+                    {% endif %}
+                </li> 
+                <li>
+                    WizardLM 13B v1.2
+                    {% if pdf == "True" %}
+                    <a href="{% static 'pdf/2304.12244.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi" width="16" height="16" role="img" aria-label="Direct Preference Optimization: Your Language Model is Secretly a Reward Model"><use href="#pdf"></use></svg>
+                    </a>  
+                    <a href="{% static 'pdf/2306.08568.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi" width="16" height="16" role="img" aria-label="Direct Preference Optimization: Your Language Model is Secretly a Reward Model"><use href="#pdf"></use></svg>
+                    </a>
+                    {% endif %}
+                </li>              
+                <li>
+                    WizardLM 70B v1.0
+                    {% if pdf == "True" %}
+                    <a href="{% static 'pdf/2304.12244.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi" width="16" height="16" role="img" aria-label="Direct Preference Optimization: Your Language Model is Secretly a Reward Model"><use href="#pdf"></use></svg>
+                    </a>  
+                    <a href="{% static 'pdf/2306.08568.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi" width="16" height="16" role="img" aria-label="Direct Preference Optimization: Your Language Model is Secretly a Reward Model"><use href="#pdf"></use></svg>
+                    </a>
+                    {% endif %}
+                </li>   
+                <li>
+                    Zephyr 3B
+                </li>              
+                <li>
+                    Zephyr 7B Alpha
+                    {% if pdf == "True" %}
+                    <a href="{% static 'pdf/2305.18290.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi" width="16" height="16" role="img" aria-label="Direct Preference Optimization: Your Language Model is Secretly a Reward Model"><use href="#pdf"></use></svg>
+                    </a>
+                    {% endif %}
+                </li>
+                <li>
+                    Zephyr 7B Beta
+                    {% if pdf == "True" %}                
+                    <a href="{% static 'pdf/2305.18290.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi" width="16" height="16" role="img" aria-label="Direct Preference Optimization: Your Language Model is Secretly a Reward Model"><use href="#pdf"></use></svg>
+                    </a>
+                    <a href="{% static 'pdf/2310.16944.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <svg class="bi" width="16" height="16" role="img" aria-label="Zephyr: Direct Distillation of LM Alignment"><use href="#pdf"></use></svg>
+                    </a>
+                    {% endif %}
+                </li>
+            </ul>
+        </div>
     </div>
-{% else %}
-      <h3><span class="text-warning-emphasis">32</span> Text Generation</h3>
-      <div class="row g-3">
-        <div class="col-md-6">
-          <ul>
-            <li>
-                Alfred 40B
-                {% if pdf == "True" %}
-                <a href="{% static 'pdf/2306.15595.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="ALost in the Middle: How Language Models Use Long Contexts"><use href="#pdf"></use></svg>
-                </a>
-                <a href="{% static 'pdf/2309.00071.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="YaRN: Efficient Context Window Extension of Large Language Models"><use href="#pdf"></use></svg>
-                </a>
-                <a href="{% static 'pdf/2307.03172.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="EXTENDING CONTEXT WINDOW OF LARGE LANGUAGE MODELS VIA POSITION INTERPOLATION"><use href="#pdf"></use></svg>
-                </a>
-                {% endif %}
-            </li>
-            <li>
-                Code 13B
-            </li>
-            <li>
-                Code 33B
-            </li>
-            <li>
-                CodeLLaMa 7B
-                {% if pdf == "True" %}
-                <a href="{% static 'pdf/2308.12950.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="Code Llama: Open Foundation Models for Code"><use href="#pdf"></use></svg>
-                </a>
-                {% endif %}
-            </li>
-            <li>
-                CodeLLaMa 7B-Instruct
-            </li>   
-             <li>
-                CodeLLaMa 7B-Python
-            </li>             
-            <li>
-                CodeLLaMa 13B
-                {% if pdf == "True" %}
-                <a href="{% static 'pdf/2308.12950.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="Code Llama: Open Foundation Models for Code"><use href="#pdf"></use></svg>
-                </a>
-                {% endif %}
-            </li>
-            <li>
-                CodeLLaMa 13B-Instruct
-            </li>
-            <li>
-                CodeLLaMa 13B-Python
-            </li>
-            <li>
-                CodeLLaMa 34B
-            </li>              
-            <li>
-                CodeLLaMa 34B-Instruct
-            </li>
-            <li>
-                CodeLLaMa 34B-Python
-            </li>               
-            <li>
-                Falcon 7B
-                {% if pdf == "True" %}                
-                <a href="{% static 'pdf/2205.14135.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness"><use href="#pdf"></use></svg>
-                </a>
-                <a href="{% static 'pdf/1911.02150.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="Fast Transformer Decoding: One Write-Head is All You Need"><use href="#pdf"></use></svg>
-                </a>
-                <a href="{% static 'pdf/2101.00027.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="The Pile: An 800GB Dataset of Diverse Text for Language Modeling"><use href="#pdf"></use></svg>
-                </a>
-                <a href="{% static 'pdf/2005.14165.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="Language Models are Few-Shot Learners"><use href="#pdf"></use></svg>
-                </a>
-                <a href="{% static 'pdf/2104.09864.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="ROFORMER: ENHANCED TRANSFORMER WITH ROTARY POSITION EMBEDDING"><use href="#pdf"></use></svg>
-                </a>
-                <a href="{% static 'pdf/2306.01116.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="The RefinedWeb Dataset for Falcon LLM: Outperforming Curated Corpora with Web Data, and Web Data Only"><use href="#pdf"></use></svg>
-                </a>
-                {% endif %}
-             </li>
-             <li>
-                Falcon 7B-Instruct
-                {% if pdf == "True" %}                 
-                <a href="{% static 'pdf/2205.14135.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness"><use href="#pdf"></use></svg>
-                </a>
-                <a href="{% static 'pdf/1911.02150.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="Fast Transformer Decoding: One Write-Head is All You Need"><use href="#pdf"></use></svg>
-                </a>
-                <a href="{% static 'pdf/2101.00027.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="The Pile: An 800GB Dataset of Diverse Text for Language Modeling"><use href="#pdf"></use></svg>
-                </a>
-                <a href="{% static 'pdf/2005.14165.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="Language Models are Few-Shot Learners"><use href="#pdf"></use></svg>
-                </a>
-                <a href="{% static 'pdf/2104.09864.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="ROFORMER: ENHANCED TRANSFORMER WITH ROTARY POSITION EMBEDDING"><use href="#pdf"></use></svg>
-                </a>
-                <a href="{% static 'pdf/2306.01116.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="The RefinedWeb Dataset for Falcon LLM: Outperforming Curated Corpora with Web Data, and Web Data Only"><use href="#pdf"></use></svg>
-                </a>
-                {% endif %}
-            </li>
-            <li>
-                Falcon 40B
-                {% if pdf == "True" %}
-                <a href="{% static 'pdf/2205.14135.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness"><use href="#pdf"></use></svg>
-                </a>
-                <a href="{% static 'pdf/1911.02150.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="Fast Transformer Decoding: One Write-Head is All You Need"><use href="#pdf"></use></svg>
-                </a>
-                <a href="{% static 'pdf/2101.00027.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="The Pile: An 800GB Dataset of Diverse Text for Language Modeling"><use href="#pdf"></use></svg>
-                </a>
-                <a href="{% static 'pdf/2005.14165.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="Language Models are Few-Shot Learners"><use href="#pdf"></use></svg>
-                </a>
-                <a href="{% static 'pdf/2104.09864.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="ROFORMER: ENHANCED TRANSFORMER WITH ROTARY POSITION EMBEDDING"><use href="#pdf"></use></svg>
-                </a>
-                <a href="{% static 'pdf/2306.01116.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="The RefinedWeb Dataset for Falcon LLM: Outperforming Curated Corpora with Web Data, and Web Data Only"><use href="#pdf"></use></svg>
-                </a>
-                {% endif %}
-            </li>
-            <li>
-                Falcon 40B-Instruct
-                {% if pdf == "True" %}
-                <a href="{% static 'pdf/2205.14135.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness"><use href="#pdf"></use></svg>
-                </a>
-                <a href="{% static 'pdf/1911.02150.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="Fast Transformer Decoding: One Write-Head is All You Need"><use href="#pdf"></use></svg>
-                </a>
-                <a href="{% static 'pdf/2101.00027.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="The Pile: An 800GB Dataset of Diverse Text for Language Modeling"><use href="#pdf"></use></svg>
-                </a>
-                <a href="{% static 'pdf/2005.14165.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="Language Models are Few-Shot Learners"><use href="#pdf"></use></svg>
-                </a>
-                <a href="{% static 'pdf/2104.09864.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="ROFORMER: ENHANCED TRANSFORMER WITH ROTARY POSITION EMBEDDING"><use href="#pdf"></use></svg>
-                </a>
-                <a href="{% static 'pdf/2306.01116.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="The RefinedWeb Dataset for Falcon LLM: Outperforming Curated Corpora with Web Data, and Web Data Only"><use href="#pdf"></use></svg>
-                </a>
-                {% endif %}
-            </li>
-            <li>
-                Falcon 180B
-                {% if pdf == "True" %}
-                <a href="{% static 'pdf/2205.14135.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness"><use href="#pdf"></use></svg>
-                </a>
-                <a href="{% static 'pdf/1911.02150.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="Fast Transformer Decoding: One Write-Head is All You Need"><use href="#pdf"></use></svg>
-                </a>
-                <a href="{% static 'pdf/2005.14165.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="Language Models are Few-Shot Learners"><use href="#pdf"></use></svg>
-                </a>
-                <a href="{% static 'pdf/2104.09864.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="ROFORMER: ENHANCED TRANSFORMER WITH ROTARY POSITION EMBEDDING"><use href="#pdf"></use></svg>
-                </a>
-                <a href="{% static 'pdf/2306.01116.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="The RefinedWeb Dataset for Falcon LLM: Outperforming Curated Corpora with Web Data, and Web Data Only"><use href="#pdf"></use></svg>
-                </a>
-                {% endif %}
-            </li>
-            <li>
-                Falcon 180B-Chat
-                {% if pdf == "True" %}
-                <a href="{% static 'pdf/2205.14135.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness"><use href="#pdf"></use></svg>
-                </a>
-                <a href="{% static 'pdf/1911.02150.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="Fast Transformer Decoding: One Write-Head is All You Need"><use href="#pdf"></use></svg>
-                </a>
-                <a href="{% static 'pdf/2005.14165.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="Language Models are Few-Shot Learners"><use href="#pdf"></use></svg>
-                </a>
-                <a href="{% static 'pdf/2104.09864.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="ROFORMER: ENHANCED TRANSFORMER WITH ROTARY POSITION EMBEDDING"><use href="#pdf"></use></svg>
-                </a>
-                <a href="{% static 'pdf/2306.01116.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="The RefinedWeb Dataset for Falcon LLM: Outperforming Curated Corpora with Web Data, and Web Data Only"><use href="#pdf"></use></svg>
-                </a>
-                {% endif %}
-            </li>
-            <li>
-                LLaMA 2 7B
-                {% if pdf == "True" %}                
-                <a href="{% static 'pdf/2307.09288.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="Llama 2: Open Foundation and Fine-Tuned Chat Models"><use href="#pdf"></use></svg>
-                </a>
-                {% endif %}
-            </li>
-            <li>
-                LLaMA 2 7B-Chat
-            </li>  
-             <li>
-                LLaMA 2 7B-Coder
-            </li>              
-            <li>
-                LLaMa 2 13B
-                {% if pdf == "True" %}                
-                <a href="{% static 'pdf/2307.09288.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="Llama 2: Open Foundation and Fine-Tuned Chat Models"><use href="#pdf"></use></svg>
-                </a>
-                {% endif %}
-            </li>
-            <li>
-                LLaMA 2 13B-Chat
-            </li>
-            <li>
-                LLaMa 2 70B
-                {% if pdf == "True" %}
-                <a href="{% static 'pdf/2307.09288.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="Llama 2: Open Foundation and Fine-Tuned Chat Models"><use href="#pdf"></use></svg>
-                </a>
-                {% endif %}
-            </li>
-             <li>
-                LLaMA 2 70B-Chat
-            </li>             
-            <li>
-                Med42 70B
-            </li>
-            <li>
-                MedAlpaca 13B
-            </li>              
-            <li>
-                Meditron 7B
-                {% if pdf == "True" %}
-                <a href="{% static 'pdf/2311.16079.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="MEDITRON-70B: Scaling Medical Pretraining for Large Language Models"><use href="#pdf"></use></svg>
-                </a>
-                {% endif %}
-            </li>
-            <li>
-                Meditron 7B-Chat
-            </li>
-          </ul>
-        </div>
-        <div class="col-md-6">
-          <ul>
-            <li>
-                Meditron 70B
-                {% if pdf == "True" %}                
-                <a href="{% static 'pdf/2311.16079.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="MEDITRON-70B: Scaling Medical Pretraining for Large Language Models"><use href="#pdf"></use></svg>
-                </a>
-                 {% endif %}   
-            </li>
-            <li>
-                Mistral 7B
-                {% if pdf == "True" %}
-                <a href="{% static 'pdf/2310.06825.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="Mistral 7B"><use href="#pdf"></use></svg>
-                </a>
-                {% endif %}
-            </li>              
-            <li>
-                Mistral 7B-Instruct
-                {% if pdf == "True" %}                
-                <a href="{% static 'pdf/2310.06825.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="Mistral 7B"><use href="#pdf"></use></svg>
-                </a>
-                {% endif %}
-            </li>
-            <li>
-                Mistral 7B OpenOrca
-                {% if pdf == "True" %}
-                <a href="{% static 'pdf/2306.15595.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="Orca: Progressive Learning from Complex Explanation Traces of GPT-4"><use href="#pdf"></use></svg>
-                </a>
-                <a href="{% static 'pdf/2301.13688.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="The Flan Collection: Designing Data and Methods for Effective Instruction Tuning"><use href="#pdf"></use></svg>
-                </a>
-                {% endif %}
-            </li>
-            <li>
-                Mixtral 8x7B
-            </li>
-            <li>
-                Mixtral 8x7B-Instruct
-            </li>
-            <li>
-                Neural-Chat 7B v3.3
-            </li>
-            <li>
-                Notus v1
-            </li>
-            <li>
-                OpenChat 7B v3.5-1012
-                {% if pdf == "True" %}
-                <a href="{% static 'pdf/2309.11235.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="OPENCHAT: ADVANCING OPEN-SOURCE LANGUAGE MODELS WITH MIXED-QUALITY DATA"><use href="#pdf"></use></svg>
-                </a>
-                <a href="{% static 'pdf/2303.08774.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="GPT-4 Technical Report"><use href="#pdf"></use></svg>
-                </a>
-                 <a href="{% static 'pdf/2212.10560.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="Self-Instruct: Aligning Language Model with Self Generated Instructions"><use href="#pdf"></use></svg>
-                </a>
-                {% endif %}
-            </li>
-            <li>
-                Open LLaMA 3B v2
-            </li>
-            <li>
-                Open LLaMa 7B v2
-            </li>
-            <li>
-                Open LLaMa 13B v2
-            </li>
-            <li>
-                Orca 2 7B
-                {% if pdf == "True" %}
-                <a href="{% static 'pdf/2311.11045.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="Orca 2: Teaching Small Language Models How to Reason"><use href="#pdf"></use></svg>
-                </a>
-                {% endif %}
-            </li>
-            <li>
-                Orca 2 13B
-                {% if pdf == "True" %}                
-                <a href="{% static 'pdf/2311.11045.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="Orca 2: Teaching Small Language Models How to Reason"><use href="#pdf"></use></svg>
-                </a>
-                {% endif %}
-            </li>
-            <li>
-                Python Code 13B
-            </li>
-            <li>
-                Python Code 33B
-            </li>              
-            <li>
-                PsyMedRP 13B v1
-            </li>
-            <li>
-                PsyMedRP 20B v1
-            </li>
-            <li>
-                Starling LM 7B Alpha
-                {% if pdf == "True" %}
-                <a href="{% static 'pdf/2306.02231.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="Fine-Tuning Language Models with Advantage-Induced Policy Alignment"><use href="#pdf"></use></svg>
-                </a>
-                {% endif %}
-            </li>
-            <li>
-                Vicuna 7B v1.5
-                {% if pdf == "True" %}
-                <a href="{% static 'pdf/2307.09288.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="Llama 2: Open Foundation and Fine-Tuned Chat Models"><use href="#pdf"></use></svg>
-                </a>
-                <a href="{% static 'pdf/2306.05685.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="Llama 2: Open Foundation and Fine-Tuned Chat Models"><use href="#pdf"></use></svg>
-                </a>
-                {% endif %}
-            </li>
-            <li>
-                Vicuna 13B v1.5
-                {% if pdf == "True" %}
-                <a href="{% static 'pdf/2307.09288.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="Llama 2: Open Foundation and Fine-Tuned Chat Models"><use href="#pdf"></use></svg>
-                </a>
-                <a href="{% static 'pdf/2306.05685.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="Llama 2: Open Foundation and Fine-Tuned Chat Models"><use href="#pdf"></use></svg>
-                </a>
-                {% endif %}
-            </li>
-            <li>
-                Vicuna 33B v1.3
-            </li>
-             <li>
-                Vicuna 33B-Coder
-            </li>
-            <li>
-                WizardLM 7B v1.0
-                {% if pdf == "True" %}                
-                <a href="{% static 'pdf/2304.12244.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="Direct Preference Optimization: Your Language Model is Secretly a Reward Model"><use href="#pdf"></use></svg>
-                </a>  
-                <a href="{% static 'pdf/2306.08568.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="Direct Preference Optimization: Your Language Model is Secretly a Reward Model"><use href="#pdf"></use></svg>
-                </a>
-                {% endif %}
-            </li> 
-            <li>
-                WizardLM 13B v1.2
-                {% if pdf == "True" %}
-                <a href="{% static 'pdf/2304.12244.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="Direct Preference Optimization: Your Language Model is Secretly a Reward Model"><use href="#pdf"></use></svg>
-                </a>  
-                <a href="{% static 'pdf/2306.08568.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="Direct Preference Optimization: Your Language Model is Secretly a Reward Model"><use href="#pdf"></use></svg>
-                </a>
-                {% endif %}
-            </li>              
-            <li>
-                WizardLM 70B v1.0
-                {% if pdf == "True" %}
-                <a href="{% static 'pdf/2304.12244.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="Direct Preference Optimization: Your Language Model is Secretly a Reward Model"><use href="#pdf"></use></svg>
-                </a>  
-                <a href="{% static 'pdf/2306.08568.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="Direct Preference Optimization: Your Language Model is Secretly a Reward Model"><use href="#pdf"></use></svg>
-                </a>
-                {% endif %}
-            </li>   
-            <li>
-                Zephyr 3B
-            </li>              
-            <li>
-                Zephyr 7B Alpha
-                {% if pdf == "True" %}
-                <a href="{% static 'pdf/2305.18290.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="Direct Preference Optimization: Your Language Model is Secretly a Reward Model"><use href="#pdf"></use></svg>
-                </a>
-                {% endif %}
-            </li>
-            <li>
-                Zephyr 7B Beta
-                {% if pdf == "True" %}                
-                <a href="{% static 'pdf/2305.18290.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="Direct Preference Optimization: Your Language Model is Secretly a Reward Model"><use href="#pdf"></use></svg>
-                </a>
-                <a href="{% static 'pdf/2310.16944.pdf' %}" target="_blank" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="16" height="16" role="img" aria-label="Zephyr: Direct Distillation of LM Alignment"><use href="#pdf"></use></svg>
-                </a>
-                {% endif %}
-            </li>
-          </ul>
-        </div>
-      </div>
 {% endif %}
 {% endblock %}
