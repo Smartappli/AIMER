@@ -70,52 +70,29 @@ def import_data(request):
                 sha256 = fichier.lfs["sha256"]
                 insertion = 1
 
-            match q:
-                case "Q2_K":
-                    model_type = "Q2K"
-
-                case "Q3_K_L":
-                    model_type = "Q3KL"
-
-                case "Q3_K_L":
-                    model_type = "Q3KL"
-
-                case "Q3_K_M":
-                    model_type = "Q3KM"
-
-                case "Q3_K_S":
-                    model_type = "Q3KS"
-
-                case "Q4_0":
-                    model_type = "Q40"
-
-                case "Q4_1":
-                    model_type = "Q41"
-
-                case "Q4_K_M":
-                    model_type = "Q4KM"
-
-                case "Q4_K_S":
-                    model_type = "Q4KS"
-
-                case "Q5_0":
-                    model_type = "Q50"
-
-                case "Q5_1":
-                    model_type = "Q51"
-
-                case "Q5_K_M":
-                    model_type = "Q5KM"
-
-                case "Q5_K_S":
-                    model_type = "Q5KS"
-
-                case "Q6_K":
-                    model_type = "Q6K"
-
-                case "Q8_0":
-                    model_type = "Q80"
-
+            expected_values = {
+                "Q2_K": "Q2K",
+                "Q3_K_L": "Q3KL",
+                "Q3_K_M": "Q3KM",
+                "Q3_K_S": "Q3KS",
+                "Q4_0": "Q40",
+                "Q4_1": "Q41",
+                "Q4_K_M": "Q4KM",
+                "Q4_K_S": "Q4KS",
+                "Q5_0": "Q50",
+                "Q5_1": "Q51",
+                "Q5_K_M": "Q5KM",
+                "Q5_K_S": "Q5KS",
+                "Q6_K": "Q6K",
+                "Q8_0": "Q80",                
+            }
+            
+            try:
+                model_type = expected_values[q]
+            except KeyError:
+                msg = f"Unexpected value for q: {q}"
+                raise ValueError(msg)
+            
             if insertion == 1:
                 ModelFile.objects.get_or_create(
                     model_file_model_id=the_model,
