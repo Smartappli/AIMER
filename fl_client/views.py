@@ -118,7 +118,6 @@ def import_data(request):
 
 def download_data(request):
     """Method to download the data from Hugging Face"""
-    import os
     import shutil
 
     from huggingface_hub import (
