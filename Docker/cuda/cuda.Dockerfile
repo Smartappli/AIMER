@@ -6,7 +6,7 @@ ENV HOST 0.0.0.0
 ENV PORT 8008
 
 RUN apt-get update \
-    && apt-get install -y git build-essential \
+    && apt-get install -y --no-install-recommends git build-essential \
     python3 python3-pip gcc wget \
     ocl-icd-opencl-dev opencl-headers clinfo \
     libclblast-dev libopenblas-dev \
