@@ -74,7 +74,7 @@ def import_data(request):
                 "BF16": "BF16",
                 "F16": "F16",
                 "IQ1_M": "IQ1M",
-                "IQ1_S": "IQ1S".
+                "IQ1_S": "IQ1S",
                 "IQ2_M": "IQ2M",
                 "IQ2_S": "IQ2S",
                 "IQ2_XS": "IQ2XS",
