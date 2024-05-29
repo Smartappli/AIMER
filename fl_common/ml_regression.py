@@ -1,4 +1,4 @@
-import random
+import secrets
 
 # import pycaret
 # from pycaret.datasets import get_data
@@ -9,7 +9,7 @@ from fl_client.models import Queue
 # from fl_client.models import Dataset, Dataset_File
 # from fl_client.models import Dataset_Central_Data, Dataset_Local_Data, Dataset_Remote_Data
 
-session_seed = random.randrange(1, 1000)
+session_seed = secrets.randbelow(1000) + 1
 
 tasks = Queue.objects.get(queue_state="CR", queue_model_type="DLCL")
 for task in tasks:
