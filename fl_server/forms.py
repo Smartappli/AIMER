@@ -1,5 +1,8 @@
+from typing import ClassVar
+
 from django import forms
 from django.contrib.auth.models import User
+
 from .models import AgentConfiguration
 
 
@@ -8,7 +11,7 @@ class AgentEditForm(forms.ModelForm):
 
     class Meta:
         model = AgentConfiguration
-        fields = [
+        fields: ClassVar[list[str]] = [
             "agent_name",
             "agent_description",
             "agent_ip",

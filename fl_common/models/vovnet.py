@@ -29,10 +29,19 @@ def get_vovnet_model(vovnet_type, num_classes):
     }
 
     if vovnet_type not in valid_types:
-        raise ValueError(f"Unknown Vovnet Architecture: {vovnet_type}")
+        msg = f"Unknown Vovnet Architecture: {vovnet_type}"
+        raise ValueError(msg)
 
     try:
-        return create_model(vovnet_type, pretrained=True, num_classes=num_classes)
+        return create_model(
+            vovnet_type,
+            pretrained=True,
+            num_classes=num_classes,
+        )
     except RuntimeError as e:
         print(f"{vovnet_type} - Error loading pretrained model: {e}")
-        return create_model(vovnet_type, pretrained=False, num_classes=num_classes)
+        return create_model(
+            vovnet_type,
+            pretrained=False,
+            num_classes=num_classes,
+        )

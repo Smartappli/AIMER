@@ -28,10 +28,19 @@ def get_vitamin_model(vitamin_type, num_classes):
     }
 
     if vitamin_type not in valid_types:
-        raise ValueError(f"Unknown vitamin Architecture: {vitamin_type}")
+        msg = f"Unknown vitamin Architecture: {vitamin_type}"
+        raise ValueError(msg)
 
     try:
-        return create_model(vitamin_type, pretrained=True, num_classes=num_classes)
+        return create_model(
+            vitamin_type,
+            pretrained=True,
+            num_classes=num_classes,
+        )
     except RuntimeError as e:
         print(f"{vitamin_type} - Error loading pretrained model: {e}")
-        return create_model(vitamin_type, pretrained=False, num_classes=num_classes)
+        return create_model(
+            vitamin_type,
+            pretrained=False,
+            num_classes=num_classes,
+        )

@@ -1,5 +1,7 @@
 import os
+
 from django.test import TestCase
+
 from fl_common.models.densenet import get_densenet_model
 
 os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
@@ -43,7 +45,7 @@ class ProcessingDenseNetTestCase(TestCase):
                     self.assertIsNotNone(model)
                 except ValueError:
                     self.fail(
-                        f"{densenet_type} should be a known Densenet architecture."
+                        f"{densenet_type} should be a known Densenet architecture.",
                     )
 
     def test_densenet_unknown_architecture(self):
@@ -61,5 +63,6 @@ class ProcessingDenseNetTestCase(TestCase):
             get_densenet_model(densenet_type, num_classes)
 
         self.assertEqual(
-            str(context.exception), f"Unknown DenseNet Architecture : {densenet_type}"
+            str(context.exception),
+            f"Unknown DenseNet Architecture : {densenet_type}",
         )

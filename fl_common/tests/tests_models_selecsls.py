@@ -1,5 +1,7 @@
 import os
+
 from django.test import TestCase
+
 from fl_common.models.selecsls import get_selecsls_model
 
 os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
@@ -30,7 +32,7 @@ class ProcessingSelecslsTestCase(TestCase):
                     self.assertIsNotNone(model)
                 except ValueError:
                     self.fail(
-                        f"{selecsls_type} should be a known SelecSLS architecture."
+                        f"{selecsls_type} should be a known SelecSLS architecture.",
                     )
 
     def test_unknown_selecsls_type(self):

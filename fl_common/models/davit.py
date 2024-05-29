@@ -25,10 +25,19 @@ def get_davit_model(davit_type, num_classes):
 
     # Check if the davit_type is valid
     if davit_type not in valid_davit_types:
-        raise ValueError(f"Unknown Davit Architecture: {davit_type}")
+        msg = f"Unknown Davit Architecture: {davit_type}"
+        raise ValueError(msg)
 
     try:
-        return create_model(davit_type, pretrained=True, num_classes=num_classes)
+        return create_model(
+            davit_type,
+            pretrained=True,
+            num_classes=num_classes,
+        )
     except RuntimeError as e:
         print(f"{davit_type} - Error loading pretrained model: {e}")
-        return create_model(davit_type, pretrained=False, num_classes=num_classes)
+        return create_model(
+            davit_type,
+            pretrained=False,
+            num_classes=num_classes,
+        )

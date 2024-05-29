@@ -1,6 +1,7 @@
 import os
 
 from django.test import TestCase
+
 from fl_common.models.focalnet import get_focalnet_model
 
 os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
@@ -44,7 +45,7 @@ class ProcessingFastVitTestCase(TestCase):
                     self.assertIsNotNone(model)
                 except ValueError:
                     self.fail(
-                        f"{focalnet_type} should be a known Focalnet architecture."
+                        f"{focalnet_type} should be a known Focalnet architecture.",
                     )
 
     def test_unknown_focalnet_type(self):

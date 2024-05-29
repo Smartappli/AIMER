@@ -1,5 +1,8 @@
+from typing import ClassVar
+
 from django import forms
 from django.contrib.auth.models import User
+
 from .models import Profile
 
 
@@ -20,109 +23,109 @@ class DLClassificationForm(forms.Form):
     # --- MODELS ---
 
     # Xception #
-    dpcla_Xception = forms.BooleanField(required=False)
+    dpcla_xception = forms.BooleanField(required=False)
 
     # VGG
-    dpcla_VGG11 = forms.BooleanField(required=False)
-    dpcla_VGG13 = forms.BooleanField(required=False)
-    dpcla_VGG16 = forms.BooleanField(required=False)
-    dpcla_VGG19 = forms.BooleanField(required=False)
+    dpcla_vgg_11 = forms.BooleanField(required=False)
+    dpcla_vgg_13 = forms.BooleanField(required=False)
+    dpcla_vgg_16 = forms.BooleanField(required=False)
+    dpcla_vgg_19 = forms.BooleanField(required=False)
 
     # ResNet, ResNet V2, ResNetRS
-    dpcla_ResNet18 = forms.BooleanField(required=False)
-    dpcla_ResNet34 = forms.BooleanField(required=False)
-    dpcla_ResNet50 = forms.BooleanField(required=False)
-    dpcla_ResNet50V2 = forms.BooleanField(required=False)
-    dpcla_ResNetRS50 = forms.BooleanField(required=False)
-    dpcla_ResNet101 = forms.BooleanField(required=False)
-    dpcla_ResNet101V2 = forms.BooleanField(required=False)
-    dpcla_ResNetRS101 = forms.BooleanField(required=False)
-    dpcla_ResNet152 = forms.BooleanField(required=False)
-    dpcla_ResNet152V2 = forms.BooleanField(required=False)
-    dpcla_ResNetRS152 = forms.BooleanField(required=False)
-    dpcla_ResNetRS200 = forms.BooleanField(required=False)
-    dpcla_ResNetRS270 = forms.BooleanField(required=False)
-    dpcla_ResNetRS350 = forms.BooleanField(required=False)
-    dpcla_ResNetRS420 = forms.BooleanField(required=False)
+    dpcla_resnet_18 = forms.BooleanField(required=False)
+    dpcla_resnet_34 = forms.BooleanField(required=False)
+    dpcla_resnet_50 = forms.BooleanField(required=False)
+    dpcla_resnet_50_v2 = forms.BooleanField(required=False)
+    dpcla_resnet_rs_50 = forms.BooleanField(required=False)
+    dpcla_resnet_101 = forms.BooleanField(required=False)
+    dpcla_resnet_101_v2 = forms.BooleanField(required=False)
+    dpcla_resnet_rs_101 = forms.BooleanField(required=False)
+    dpcla_resnet_152 = forms.BooleanField(required=False)
+    dpcla_resnet_152_v2 = forms.BooleanField(required=False)
+    dpcla_resnet_rs_152 = forms.BooleanField(required=False)
+    dpcla_resnet_rs_200 = forms.BooleanField(required=False)
+    dpcla_resnet_rs_270 = forms.BooleanField(required=False)
+    dpcla_resnet_rs_350 = forms.BooleanField(required=False)
+    dpcla_resnet_rs_420 = forms.BooleanField(required=False)
 
     # Inception
-    dpcla_InceptionV3 = forms.BooleanField(required=False)
-    dpcla_InceptionResNetV2 = forms.BooleanField(required=False)
+    dpcla_inception_v3 = forms.BooleanField(required=False)
+    dpcla_inception_resnet_v2 = forms.BooleanField(required=False)
 
     # MobileNet
-    dpcla_MobileNet = forms.BooleanField(required=False)
-    dpcla_MobileNetV2 = forms.BooleanField(required=False)
-    dpcla_MobileNetV3Small = forms.BooleanField(required=False)
-    dpcla_MobileNetV3Large = forms.BooleanField(required=False)
+    dpcla_mobilenet = forms.BooleanField(required=False)
+    dpcla_mobilenet_v2 = forms.BooleanField(required=False)
+    dpcla_mobilenet_v3_small = forms.BooleanField(required=False)
+    dpcla_mobilenet_v3_large = forms.BooleanField(required=False)
 
     # DenseNet
-    dpcla_DenseNet121 = forms.BooleanField(required=False)
-    dpcla_DenseNet169 = forms.BooleanField(required=False)
-    dpcla_DenseNet201 = forms.BooleanField(required=False)
+    dpcla_densenet_121 = forms.BooleanField(required=False)
+    dpcla_densenet_169 = forms.BooleanField(required=False)
+    dpcla_densenet_201 = forms.BooleanField(required=False)
 
     # NasNet
-    dpcla_NASNetMobile = forms.BooleanField(required=False)
-    dpcla_NASNetLarge = forms.BooleanField(required=False)
+    dpcla_nasnet_mobile = forms.BooleanField(required=False)
+    dpcla_nasnet_large = forms.BooleanField(required=False)
 
     # EfficientNet, EfficientNet V2
-    dpcla_EfficientNetB0 = forms.BooleanField(required=False)
-    dpcla_EfficientNetB0V2 = forms.BooleanField(required=False)
-    dpcla_EfficientNetB1 = forms.BooleanField(required=False)
-    dpcla_EfficientNetB1V2 = forms.BooleanField(required=False)
-    dpcla_EfficientNetB2 = forms.BooleanField(required=False)
-    dpcla_EfficientNetB2V2 = forms.BooleanField(required=False)
-    dpcla_EfficientNetB3 = forms.BooleanField(required=False)
-    dpcla_EfficientNetB3V2 = forms.BooleanField(required=False)
-    dpcla_EfficientNetB4 = forms.BooleanField(required=False)
-    dpcla_EfficientNetB5 = forms.BooleanField(required=False)
-    dpcla_EfficientNetB6 = forms.BooleanField(required=False)
-    dpcla_EfficientNetB7 = forms.BooleanField(required=False)
-    dpcla_EfficientNetV2Small = forms.BooleanField(required=False)
-    dpcla_EfficientNetV2Medium = forms.BooleanField(required=False)
-    dpcla_EfficientNetV2Large = forms.BooleanField(required=False)
+    dpcla_efficientnet_b0 = forms.BooleanField(required=False)
+    dpcla_efficientnet_b0_v2 = forms.BooleanField(required=False)
+    dpcla_efficientnet_b1 = forms.BooleanField(required=False)
+    dpcla_efficientnet_b1_v2 = forms.BooleanField(required=False)
+    dpcla_efficientnet_b2 = forms.BooleanField(required=False)
+    dpcla_efficientnet_b2_v2 = forms.BooleanField(required=False)
+    dpcla_efficientnet_b3 = forms.BooleanField(required=False)
+    dpcla_efficientnet_b3_v2 = forms.BooleanField(required=False)
+    dpcla_efficientnet_b4 = forms.BooleanField(required=False)
+    dpcla_efficientnet_b5 = forms.BooleanField(required=False)
+    dpcla_efficientnet_b6 = forms.BooleanField(required=False)
+    dpcla_efficientnet_b7 = forms.BooleanField(required=False)
+    dpcla_efficientnet_v2_small = forms.BooleanField(required=False)
+    dpcla_efficientnet_v2_medium = forms.BooleanField(required=False)
+    dpcla_efficientnet_v2_large = forms.BooleanField(required=False)
 
     # ConvNeXT
-    dpcla_ConvNeXtTiny = forms.BooleanField(required=False)
-    dpcla_ConvNeXtSmall = forms.BooleanField(required=False)
-    dpcla_ConvNeXtBase = forms.BooleanField(required=False)
-    dpcla_ConvNeXtLarge = forms.BooleanField(required=False)
-    dpcla_ConvNeXtXLarge = forms.BooleanField(required=False)
+    dpcla_convnext_tiny = forms.BooleanField(required=False)
+    dpcla_convnext_small = forms.BooleanField(required=False)
+    dpcla_convnext_base = forms.BooleanField(required=False)
+    dpcla_convnext_large = forms.BooleanField(required=False)
+    dpcla_convnext_xlarge = forms.BooleanField(required=False)
 
     # RegNetX, RegNetY
-    dpcla_RegNetX002 = forms.BooleanField(required=False)
-    dpcla_RegNetY002 = forms.BooleanField(required=False)
-    dpcla_RegNetX004 = forms.BooleanField(required=False)
-    dpcla_RegNetY004 = forms.BooleanField(required=False)
-    dpcla_RegNetX006 = forms.BooleanField(required=False)
-    dpcla_RegNetY006 = forms.BooleanField(required=False)
-    dpcla_RegNetX008 = forms.BooleanField(required=False)
-    dpcla_RegNetY008 = forms.BooleanField(required=False)
-    dpcla_RegNetX016 = forms.BooleanField(required=False)
-    dpcla_RegNetY016 = forms.BooleanField(required=False)
-    dpcla_RegNetX032 = forms.BooleanField(required=False)
-    dpcla_RegNetY032 = forms.BooleanField(required=False)
-    dpcla_RegNetX040 = forms.BooleanField(required=False)
-    dpcla_RegNetY040 = forms.BooleanField(required=False)
-    dpcla_RegNetX064 = forms.BooleanField(required=False)
-    dpcla_RegNetY064 = forms.BooleanField(required=False)
-    dpcla_RegNetX080 = forms.BooleanField(required=False)
-    dpcla_RegNetY080 = forms.BooleanField(required=False)
-    dpcla_RegNetX120 = forms.BooleanField(required=False)
-    dpcla_RegNetY120 = forms.BooleanField(required=False)
-    dpcla_RegNetX160 = forms.BooleanField(required=False)
-    dpcla_RegNetY160 = forms.BooleanField(required=False)
-    dpcla_RegNetX320 = forms.BooleanField(required=False)
-    dpcla_RegNetY320 = forms.BooleanField(required=False)
+    dpcla_regnet_x_002 = forms.BooleanField(required=False)
+    dpcla_regnet_y_002 = forms.BooleanField(required=False)
+    dpcla_regnet_x_004 = forms.BooleanField(required=False)
+    dpcla_regnet_y_004 = forms.BooleanField(required=False)
+    dpcla_regnet_x_006 = forms.BooleanField(required=False)
+    dpcla_regnet_y_006 = forms.BooleanField(required=False)
+    dpcla_regnet_x_008 = forms.BooleanField(required=False)
+    dpcla_regnet_y_008 = forms.BooleanField(required=False)
+    dpcla_regnet_x_016 = forms.BooleanField(required=False)
+    dpcla_regnet_y_016 = forms.BooleanField(required=False)
+    dpcla_regnet_x_032 = forms.BooleanField(required=False)
+    dpcla_regnet_y_032 = forms.BooleanField(required=False)
+    dpcla_regnet_x_040 = forms.BooleanField(required=False)
+    dpcla_regnet_y_040 = forms.BooleanField(required=False)
+    dpcla_regnet_x_064 = forms.BooleanField(required=False)
+    dpcla_regnet_y_064 = forms.BooleanField(required=False)
+    dpcla_regnet_x_080 = forms.BooleanField(required=False)
+    dpcla_regbet_y_080 = forms.BooleanField(required=False)
+    dpcla_regnet_x_120 = forms.BooleanField(required=False)
+    dpcla_regnet_y_120 = forms.BooleanField(required=False)
+    dpcla_regnet_x_160 = forms.BooleanField(required=False)
+    dpcla_regnet_y_160 = forms.BooleanField(required=False)
+    dpcla_regnet_x_320 = forms.BooleanField(required=False)
+    dpcla_regnet_y_320 = forms.BooleanField(required=False)
 
     # --- TRAINING STRATEGY ---
 
-    dpcla_Optimizer1 = forms.CharField(max_length=100, required=True)
-    dpcla_Optimizer2 = forms.CharField(max_length=100, required=False)
-    dpcla_Optimizer3 = forms.CharField(max_length=100, required=False)
+    dpcla_optimizer1 = forms.CharField(max_length=100, required=True)
+    dpcla_optimizer2 = forms.CharField(max_length=100, required=False)
+    dpcla_optimizer3 = forms.CharField(max_length=100, required=False)
 
-    dpcla_Loss1 = forms.CharField(max_length=100, required=True)
-    dpcla_Loss2 = forms.CharField(max_length=100, required=False)
-    dpcla_Loss3 = forms.CharField(max_length=100, required=False)
+    dpcla_loss1 = forms.CharField(max_length=100, required=True)
+    dpcla_loss2 = forms.CharField(max_length=100, required=False)
+    dpcla_loss3 = forms.CharField(max_length=100, required=False)
 
     dpcla_lr1 = forms.FloatField(required=True)
     dpcla_lr2 = forms.FloatField(required=False)
@@ -401,24 +404,34 @@ class UserRegistrationForm(forms.ModelForm):
     """Class for creating user registration form."""
 
     password = forms.CharField(label="Password", widget=forms.PasswordInput)
-    password2 = forms.CharField(label="Repeat Password", widget=forms.PasswordInput)
+    password2 = forms.CharField(
+        label="Repeat Password",
+        widget=forms.PasswordInput,
+    )
 
     class Meta:
         model = User
-        fields = ["username", "first_name", "last_name", "email"]
+        fields: ClassVar[list[str]] = [
+            "username",
+            "first_name",
+            "last_name",
+            "email",
+        ]
 
     def clean_password2(self):
         """Validate password"""
         cd = self.cleaned_data
         if cd["password"] != cd["password2"]:
-            raise forms.ValidationError("Passwords do not match.")
+            msg = "Passwords do not match."
+            raise forms.ValidationError(msg)
         return cd["password2"]
 
     def clean_email(self):
         """Validate email"""
         data = self.cleaned_data["email"]
         if User.objects.filter(email=data).exists():
-            raise forms.ValidationError("Email already registered.")
+            msg = "Email already registered."
+            raise forms.ValidationError(msg)
         return data
 
 
@@ -427,14 +440,15 @@ class UserEditForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ["first_name", "last_name", "email"]
+        fields: ClassVar[list[str]] = ["first_name", "last_name", "email"]
 
     def clean_email(self):
         """Validate email"""
         data = self.cleaned_data["email"]
         qs = User.objects.exclude(id=self.instance.id).filter(email=data)
         if qs.exists():
-            raise forms.ValidationError("Emaii already registered")
+            msg = "Emaii already registered."
+            raise forms.ValidationError(msg)
         return data
 
 
@@ -443,4 +457,4 @@ class ProfileEditForm(forms.ModelForm):
 
     class Meta:
         model = Profile
-        fields = ["date_of_birth", "photo"]
+        fields: ClassVar[list[str]] = ["date_of_birth", "photo"]

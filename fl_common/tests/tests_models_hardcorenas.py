@@ -1,5 +1,7 @@
 import os
+
 from django.test import TestCase
+
 from fl_common.models.hardcorenas import get_hardcorenas_model
 
 os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
@@ -32,7 +34,7 @@ class ProcessingHardcorenasTestCase(TestCase):
                     self.assertIsNotNone(model)
                 except ValueError:
                     self.fail(
-                        f"{hardcorenas_type} should be a known HardcoreNAS architecture."
+                        f"{hardcorenas_type} should be a known HardcoreNAS architecture.",
                     )
 
     def test_unknown_hardcorenas_type(self):

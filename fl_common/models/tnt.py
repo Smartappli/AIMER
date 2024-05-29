@@ -17,7 +17,8 @@ def get_tnt_model(tnt_type, num_classes):
     """
     valid_types = {"tnt_s_patch16_224", "tnt_b_patch16_224"}
     if tnt_type not in valid_types:
-        raise ValueError(f"Unknown TnT Architecture: {tnt_type}")
+        msg = f"Unknown TnT Architecture: {tnt_type}"
+        raise ValueError(msg)
 
     try:
         return create_model(tnt_type, pretrained=True, num_classes=num_classes)

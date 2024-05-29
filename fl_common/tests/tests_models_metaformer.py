@@ -1,5 +1,7 @@
 import os
+
 from django.test import TestCase
+
 from fl_common.models.metaformer import get_metaformer_model
 
 os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
@@ -43,7 +45,7 @@ class ProcessingMetaformerTestCase(TestCase):
                     self.assertIsNotNone(model)
                 except ValueError:
                     self.fail(
-                        f"{metaformer_type} should be a known Metaformer architecture."
+                        f"{metaformer_type} should be a known Metaformer architecture.",
                     )
 
     def test_unknown_metaformer_type(self):

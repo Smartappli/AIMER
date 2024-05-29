@@ -1,6 +1,8 @@
 import os
-import torch.nn as nn
+
 from django.test import TestCase
+from torch import nn
+
 from fl_common.models.maxvit import get_maxvit_model
 
 os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
@@ -105,5 +107,6 @@ class ProcessingMaxvitTestCase(TestCase):
             get_maxvit_model(maxvit_type, num_classes)
 
         self.assertEqual(
-            str(context.exception), f"Unknown MaxVit Architecture: {maxvit_type}"
+            str(context.exception),
+            f"Unknown MaxVit Architecture: {maxvit_type}",
         )

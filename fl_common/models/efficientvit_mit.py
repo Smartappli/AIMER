@@ -28,16 +28,19 @@ def get_efficientvit_mit_model(efficientvit_mit_type, num_classes):
     }
 
     if efficientvit_mit_type not in supported_types:
-        raise ValueError(
-            f"Unknown EfficientViT-MIT Architecture: {efficientvit_mit_type}"
-        )
+        msg = f"Unknown EfficientViT-MIT Architecture: {efficientvit_mit_type}"
+        raise ValueError(msg)
 
     try:
         return create_model(
-            efficientvit_mit_type, pretrained=True, num_classes=num_classes
+            efficientvit_mit_type,
+            pretrained=True,
+            num_classes=num_classes,
         )
     except RuntimeError as e:
         print(f"{efficientvit_mit_type} - Error loading pretrained model: {e}")
         return create_model(
-            efficientvit_mit_type, pretrained=False, num_classes=num_classes
+            efficientvit_mit_type,
+            pretrained=False,
+            num_classes=num_classes,
         )

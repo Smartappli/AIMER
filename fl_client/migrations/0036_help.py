@@ -24,11 +24,15 @@ class Migration(migrations.Migration):
                 ),
                 (
                     "help_uuid",
-                    models.UUIDField(default=uuid.uuid4, editable=False, unique=True),
+                    models.UUIDField(
+                        default=uuid.uuid4, editable=False, unique=True
+                    ),
                 ),
                 (
                     "help_key",
-                    models.CharField(editable=False, max_length=15, unique=True),
+                    models.CharField(
+                        editable=False, max_length=15, unique=True
+                    ),
                 ),
                 ("help_value", models.CharField(max_length=250)),
             ],

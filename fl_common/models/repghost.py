@@ -27,10 +27,19 @@ def get_repghost_model(repghost_type, num_classes):
     ]
 
     if repghost_type not in valid_types:
-        raise ValueError(f"Unknown Repghost Architecture: {repghost_type}")
+        msg = f"Unknown Repghost Architecture: {repghost_type}"
+        raise ValueError(msg)
 
     try:
-        return create_model(repghost_type, pretrained=True, num_classes=num_classes)
+        return create_model(
+            repghost_type,
+            pretrained=True,
+            num_classes=num_classes,
+        )
     except RuntimeError as e:
         print(f"{repghost_type} - Error loading pretrained model: {e}")
-        return create_model(repghost_type, pretrained=False, num_classes=num_classes)
+        return create_model(
+            repghost_type,
+            pretrained=False,
+            num_classes=num_classes,
+        )

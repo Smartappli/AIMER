@@ -16,13 +16,19 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name="NLP_Model_Family",
             fields=[
-                ("model_family_creation_date", models.DateTimeField(auto_created=True)),
+                (
+                    "model_family_creation_date",
+                    models.DateTimeField(auto_created=True),
+                ),
                 (
                     "model_family_id",
                     models.BigAutoField(primary_key=True, serialize=False),
                 ),
                 ("model_family_name", models.CharField(max_length=100)),
-                ("model_family_updated_date", models.DateTimeField(auto_now_add=True)),
+                (
+                    "model_family_updated_date",
+                    models.DateTimeField(auto_now_add=True),
+                ),
                 (
                     "model_family_owner",
                     models.ForeignKey(
@@ -48,12 +54,17 @@ class Migration(migrations.Migration):
                 ("model_name", models.CharField(max_length=100)),
                 ("model_version", models.CharField(max_length=15)),
                 ("model_repo", models.CharField(max_length=250)),
-                ("model_creation_date", models.DateTimeField(auto_now_add=True)),
+                (
+                    "model_creation_date",
+                    models.DateTimeField(auto_now_add=True),
+                ),
                 ("model_updated_date", models.DateTimeField(auto_now=True)),
                 (
                     "model_provider",
                     models.CharField(
-                        choices=[("HF", "Hugging Face")], default="HF", max_length=2
+                        choices=[("HF", "Hugging Face")],
+                        default="HF",
+                        max_length=2,
                     ),
                 ),
                 (
@@ -92,9 +103,18 @@ class Migration(migrations.Migration):
                     "model_file_extension",
                     models.CharField(blank=True, max_length=6, null=True),
                 ),
-                ("model_filesize", models.BigIntegerField(blank=True, null=True)),
-                ("model_file_creation_date", models.DateTimeField(auto_now_add=True)),
-                ("model_file_updated_date", models.DateTimeField(auto_now=True)),
+                (
+                    "model_filesize",
+                    models.BigIntegerField(blank=True, null=True),
+                ),
+                (
+                    "model_file_creation_date",
+                    models.DateTimeField(auto_now_add=True),
+                ),
+                (
+                    "model_file_updated_date",
+                    models.DateTimeField(auto_now=True),
+                ),
                 (
                     "NLP_model_id",
                     models.ForeignKey(

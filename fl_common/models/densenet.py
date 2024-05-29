@@ -1,6 +1,6 @@
-import torch.nn as nn
-from torchvision import models
 from timm import create_model
+from torch import nn
+from torchvision import models
 
 
 def get_densenet_model(densenet_type, num_classes):
@@ -56,14 +56,19 @@ def get_densenet_model(densenet_type, num_classes):
     elif densenet_type in timm_models:
         try:
             densenet_model = create_model(
-                densenet_type, pretrained=True, num_classes=num_classes
+                densenet_type,
+                pretrained=True,
+                num_classes=num_classes,
             )
         except RuntimeError as e:
             print(f"{densenet_type} - Error loading pretrained model: {e}")
             densenet_model = create_model(
-                densenet_type, pretrained=False, num_classes=num_classes
+                densenet_type,
+                pretrained=False,
+                num_classes=num_classes,
             )
     else:
-        raise ValueError(f"Unknown DenseNet Architecture : {densenet_type}")
+        msg = f"Unknown DenseNet Architecture : {densenet_type}"
+        raise ValueError(msg)
 
     return densenet_model

@@ -27,7 +27,8 @@ def get_pit_model(pit_type, num_classes):
     ]
 
     if pit_type not in pit_types:
-        raise ValueError(f"Unknown PIT Architecture: {pit_type}")
+        msg = f"Unknown PIT Architecture: {pit_type}"
+        raise ValueError(msg)
 
     try:
         return create_model(pit_type, pretrained=True, num_classes=num_classes)

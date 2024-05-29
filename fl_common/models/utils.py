@@ -1,30 +1,43 @@
 import os
+
+import matplotlib.pyplot as plt
 import torch
-import torch.nn as nn
-import torch.optim as optim
-import torch.optim.lr_scheduler as lr_scheduler
-from torch.utils.data import DataLoader
-from torchvision import datasets, transforms
 
 # from tqdm import tqdm
 from captum.attr import (
-    Saliency,
-    IntegratedGradients,
-    GuidedBackprop,
     DeepLift,
+    GuidedBackprop,
+    IntegratedGradients,
     # LayerConductance,
     # NeuronConductance,
     Occlusion,
+    Saliency,
     ShapleyValueSampling,
 )
+from sklearn.model_selection import train_test_split
+from torch import nn, optim
+from torch.optim import lr_scheduler
+from torch.utils.data import DataLoader
 
 # from sklearn.metrics import confusion_matrix, classification_report
 from torch.utils.data.sampler import SubsetRandomSampler
-from sklearn.model_selection import train_test_split
-import matplotlib.pyplot as plt
+from torchvision import datasets, transforms
 
 # import seaborn as sns
 # import time
+
+
+def maybe_add_transform(transform_list, condition, transform, *args, **kwargs):
+    """Helper function to add a transform to the list if the condition is met."""
+    if condition:
+        # Convert single integers to tuples for resize, crop operations
+        if isinstance(condition, int) and transform in {
+            transforms.Resize,
+            transforms.CenterCrop,
+            transforms.RandomCrop,
+        }:
+            condition = (condition, condition)
+        transform_list.append(transform(*args, **kwargs))
 
 
 def create_transform(
@@ -68,50 +81,72 @@ def create_transform(
     transform_list = []
 
     if data_augmentation:
-        if resize is not None:
-            if isinstance(resize, int):
-                resize = (resize, resize)
-            transform_list.append(transforms.Resize(resize))
-
-        if center_crop is not None:
-            if isinstance(center_crop, int):
-                center_crop = (center_crop, center_crop)
-            transform_list.append(transforms.CenterCrop(center_crop))
-
-        if random_crop is not None:
-            if isinstance(random_crop, int):
-                random_crop = (random_crop, random_crop)
-            transform_list.append(transforms.RandomCrop(random_crop))
-
-        if random_horizontal_flip:
-            transform_list.append(
-                transforms.RandomHorizontalFlip(p=horizontal_flip_prob)
-            )
-
-        if random_vertical_flip:
-            transform_list.append(transforms.RandomVerticalFlip(p=vertical_flip_prob))
-
-        if random_rotation is not None:
-            transform_list.append(transforms.RandomRotation(degrees=rotation_range))
-
-        if color_jitter is not None:
-            transform_list.append(transforms.ColorJitter(*color_jitter))
-
-        if gaussian_blur is not None:
-            transform_list.append(transforms.GaussianBlur(gaussian_blur))
-
-        if to_tensor:
-            transform_list.append(transforms.ToTensor())
-
-        if normalize is not None:
-            transform_list.append(
-                transforms.Normalize(mean=normalize[0], std=normalize[1])
-            )
+        maybe_add_transform(
+            transform_list,
+            resize,
+            transforms.Resize,
+            size=resize,
+        )
+        maybe_add_transform(
+            transform_list,
+            center_crop,
+            transforms.CenterCrop,
+            size=center_crop,
+        )
+        maybe_add_transform(
+            transform_list,
+            random_crop,
+            transforms.RandomCrop,
+            size=random_crop,
+        )
+        maybe_add_transform(
+            transform_list,
+            random_horizontal_flip,
+            transforms.RandomHorizontalFlip,
+            p=horizontal_flip_prob,
+        )
+        maybe_add_transform(
+            transform_list,
+            random_vertical_flip,
+            transforms.RandomVerticalFlip,
+            p=vertical_flip_prob,
+        )
+        maybe_add_transform(
+            transform_list,
+            random_rotation,
+            transforms.RandomRotation,
+            degrees=rotation_range,
+        )
+        maybe_add_transform(
+            transform_list,
+            color_jitter,
+            transforms.ColorJitter,
+            *color_jitter,
+        )
+        maybe_add_transform(
+            transform_list,
+            gaussian_blur,
+            transforms.GaussianBlur,
+            kernel_size=gaussian_blur,
+        )
+        maybe_add_transform(transform_list, to_tensor, transforms.ToTensor)
+        maybe_add_transform(
+            transform_list,
+            normalize,
+            transforms.Normalize,
+            mean=normalize[0],
+            std=normalize[1],
+        )
 
     return transforms.Compose(transform_list)
 
 
-def get_dataset(dataset_path, batch_size, augmentation_params, normalize_params):
+def get_dataset(
+    dataset_path,
+    batch_size,
+    augmentation_params,
+    normalize_params,
+):
     """
     Create and configure data loaders for a custom dataset.
 
@@ -151,17 +186,24 @@ def get_dataset(dataset_path, batch_size, augmentation_params, normalize_params)
     # Load your custom dataset
     dataset = datasets.ImageFolder(
         root=dataset_path,
-        transform=create_transform(**augmentation_params, normalize=normalize_params),
+        transform=create_transform(
+            **augmentation_params,
+            normalize=normalize_params,
+        ),
     )
 
     # Split the dataset into training and testing sets
     train_indices, test_indices = train_test_split(
-        list(range(len(dataset))), test_size=0.1, random_state=42
+        list(range(len(dataset))),
+        test_size=0.1,
+        random_state=42,
     )
 
     # Further split the training set into training and validation sets
     train_indices, val_indices = train_test_split(
-        train_indices, test_size=0.222222, random_state=42
+        train_indices,
+        test_size=0.222222,
+        random_state=42,
     )
 
     # Create SubsetRandomSampler for each set
@@ -182,9 +224,17 @@ def get_dataset(dataset_path, batch_size, augmentation_params, normalize_params)
     print(f"Nombre d'images dans l'ensemble de test: {num_test_images}")
 
     # Define data loaders
-    train_loader = DataLoader(dataset, batch_size=batch_size, sampler=train_sampler)
+    train_loader = DataLoader(
+        dataset,
+        batch_size=batch_size,
+        sampler=train_sampler,
+    )
     val_loader = DataLoader(dataset, batch_size=batch_size, sampler=val_sampler)
-    test_loader = DataLoader(dataset, batch_size=batch_size, sampler=test_sampler)
+    test_loader = DataLoader(
+        dataset,
+        batch_size=batch_size,
+        sampler=test_sampler,
+    )
 
     num_classes = len(dataset.classes)
     class_names = dataset.classes
@@ -261,7 +311,8 @@ def get_criterion(criterion_name):
     try:
         return criterion_dict[criterion_name]()
     except KeyError as exc:
-        raise ValueError(f"Unknown Criterion: {criterion_name}") from exc
+        msg = f"Unknown Criterion: {criterion_name}"
+        raise ValueError(msg) from exc
 
 
 def get_optimizer(optimizer_name, model_parameters, learning_rate):
@@ -319,9 +370,13 @@ def get_optimizer(optimizer_name, model_parameters, learning_rate):
     }
 
     try:
-        return optimizer_dict[optimizer_name](model_parameters, lr=learning_rate)
+        return optimizer_dict[optimizer_name](
+            model_parameters,
+            lr=learning_rate,
+        )
     except KeyError as exc:
-        raise ValueError(f"Unknown Optimizer: {optimizer_name}") from exc
+        msg = f"Unknown Optimizer: {optimizer_name}"
+        raise ValueError(msg) from exc
 
 
 def get_scheduler(optimizer, scheduler_type="step", **kwargs):
@@ -348,7 +403,8 @@ def get_scheduler(optimizer, scheduler_type="step", **kwargs):
     try:
         return scheduler_dict[scheduler_type](optimizer, **kwargs)
     except KeyError as exc:
-        raise ValueError(f"Invalid scheduler_type: {scheduler_type}") from exc
+        msg = f"Invalid scheduler_type: {scheduler_type}"
+        raise ValueError(msg) from exc
 
 
 def generate_xai_heatmaps(model, image_tensor, label, save_dir, methods=None):
@@ -431,7 +487,7 @@ def generate_xai_heatmaps(model, image_tensor, label, save_dir, methods=None):
         plt.imshow(attributions_np, cmap="viridis")
         plt.title(f"XAI Heatmap for {method_name} (Label: {label})")
         plt.colorbar()
-        save_path = os.path.join(save_dir, f"xai_heatmap_{method_name}_{label}.png")
+        save_path = save_dir + "/" + f"xai_heatmap_{method_name}_{label}.png"
         plt.savefig(save_path)
         plt.show()
 
@@ -502,7 +558,9 @@ class EarlyStopping:
         elif val_loss > self.best_loss:
             self.counter += 1
             if self.verbose:
-                print(f"EarlyStopping counter: {self.counter} out of {self.patience}")
+                print(
+                    f"EarlyStopping counter: {self.counter} out of {self.patience}",
+                )
             if self.counter >= self.patience:
                 self.early_stop = True
         else:

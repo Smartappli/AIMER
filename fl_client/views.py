@@ -1,14 +1,29 @@
-from django.contrib.auth.decorators import login_required
+from pathlib import Path
+
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 
-from .forms import DLClassificationForm, DLSegmentation
-from .forms import MLClassificationForm, MLRegressionForm
-from .forms import MLTimeSeriesForm
-from .forms import MLClusteringForm, MLAnomalyDetectionForm
-from .forms import NLPTextGenerationForm, NLPEmotionalAnalysisForm
-from .forms import UserRegistrationForm, UserEditForm, ProfileEditForm
-from .models import Profile, Model, ModelFile, Queue  # ModelFamily, ModelDocument,
+from .forms import (
+    DLClassificationForm,
+    DLSegmentation,
+    MLAnomalyDetectionForm,
+    MLClassificationForm,
+    MLClusteringForm,
+    MLRegressionForm,
+    MLTimeSeriesForm,
+    NLPEmotionalAnalysisForm,
+    NLPTextGenerationForm,
+    ProfileEditForm,
+    UserEditForm,
+    UserRegistrationForm,
+)
+from .models import (
+    Model,
+    ModelFile,
+    Profile,
+    Queue,
+)
 
 # from fl_common.models.xception import xception
 # from fl_common.models.alexnet import alexnet
@@ -25,7 +40,9 @@ def import_data(request):
     from huggingface_hub import list_repo_tree
 
     my_model = Model.objects.filter(
-        model_category="NL", model_type="TG", model_provider="HF"
+        model_category="NL",
+        model_type="TG",
+        model_provider="HF",
     )
     grandtotal = 0
     for p in my_model:
@@ -53,51 +70,28 @@ def import_data(request):
                 sha256 = fichier.lfs["sha256"]
                 insertion = 1
 
-            match q:
-                case "Q2_K":
-                    model_type = "Q2K"
+            expected_values = {
+                "Q2_K": "Q2K",
+                "Q3_K_L": "Q3KL",
+                "Q3_K_M": "Q3KM",
+                "Q3_K_S": "Q3KS",
+                "Q4_0": "Q40",
+                "Q4_1": "Q41",
+                "Q4_K_M": "Q4KM",
+                "Q4_K_S": "Q4KS",
+                "Q5_0": "Q50",
+                "Q5_1": "Q51",
+                "Q5_K_M": "Q5KM",
+                "Q5_K_S": "Q5KS",
+                "Q6_K": "Q6K",
+                "Q8_0": "Q80",
+            }
 
-                case "Q3_K_L":
-                    model_type = "Q3KL"
-
-                case "Q3_K_L":
-                    model_type = "Q3KL"
-
-                case "Q3_K_M":
-                    model_type = "Q3KM"
-
-                case "Q3_K_S":
-                    model_type = "Q3KS"
-
-                case "Q4_0":
-                    model_type = "Q40"
-
-                case "Q4_1":
-                    model_type = "Q41"
-
-                case "Q4_K_M":
-                    model_type = "Q4KM"
-
-                case "Q4_K_S":
-                    model_type = "Q4KS"
-
-                case "Q5_0":
-                    model_type = "Q50"
-
-                case "Q5_1":
-                    model_type = "Q51"
-
-                case "Q5_K_M":
-                    model_type = "Q5KM"
-
-                case "Q5_K_S":
-                    model_type = "Q5KS"
-
-                case "Q6_K":
-                    model_type = "Q6K"
-
-                case "Q8_0":
-                    model_type = "Q80"
+            try:
+                model_type = expected_values[q]
+            except KeyError:
+                msg = f"Unexpected value for q: {q}"
+                raise ValueError(msg)
 
             if insertion == 1:
                 ModelFile.objects.get_or_create(
@@ -114,7 +108,9 @@ def import_data(request):
 
         print(p.model_repo + ": " + str(total))
 
-    print("TOTAL: " + str(format(grandtotal / 1024 / 1024 / 1024, ".2f")) + " GB")
+    print(
+        "TOTAL: " + str(format(grandtotal / 1024 / 1024 / 1024, ".2f")) + " GB",
+    )
 
     logo = ["share", "hospital", "data", "cpu", "gpu"]
     return render(request, "core/index.html", {"logo": logo})
@@ -124,27 +120,33 @@ def download_data(request):
     """Method to download the data from Hugging Face"""
     import os
     import shutil
+
     from huggingface_hub import (
+        _CACHED_NO_EXIST,
         hf_hub_download,
         try_to_load_from_cache,
-        _CACHED_NO_EXIST,
     )
 
     my_models = Model.objects.filter(
-        model_category="NL", model_type="TG", model_provider="HF"
+        model_category="NL",
+        model_type="TG",
+        model_provider="HF",
     )
 
     for p in my_models:
         print(p.model_repo)
 
         my_files = ModelFile.objects.filter(
-            model_file_model_id=p.model_id, model_file_type="Q4KM"
+            model_file_model_id=p.model_id,
+            model_file_type="Q4KM",
         ).order_by("model_file_filename")
 
         model_listing = []
         for q in my_files:
             filepath = try_to_load_from_cache(
-                repo_id=p.model_repo, filename=q.model_file_filename, repo_type="model"
+                repo_id=p.model_repo,
+                filename=q.model_file_filename,
+                repo_type="model",
             )
             if isinstance(filepath, str):
                 # file exists and is cached
@@ -154,13 +156,19 @@ def download_data(request):
             elif filepath is _CACHED_NO_EXIST:
                 # non-existence of file is cached
                 print("File in download")
-                hf_hub_download(repo_id=p.model_repo, filename=q.model_file_filename)
+                hf_hub_download(
+                    repo_id=p.model_repo,
+                    filename=q.model_file_filename,
+                )
                 print("File downloaded")
 
             else:
                 print("File in download")
 
-                hf_hub_download(repo_id=p.model_repo, filename=q.model_file_filename)
+                hf_hub_download(
+                    repo_id=p.model_repo,
+                    filename=q.model_file_filename,
+                )
 
                 print("File downloaded")
 
@@ -169,7 +177,7 @@ def download_data(request):
                     repo_id=p.model_repo,
                     filename=q.model_file_filename,
                     repo_type="model",
-                )
+                ),
             )
 
             if len(model_listing) > 1:
@@ -178,23 +186,32 @@ def download_data(request):
                 target = new_name.replace("-split-a", "")
 
                 for file in model_listing[1:]:
-                    with open(new_name, "ab") as out_file, open(file, "rb") as in_file:
+                    with Path(new_name).open("ab") as out_file, Path(file).open(
+                        "rb",
+                    ) as in_file:
                         shutil.copyfileobj(in_file, out_file)
-                        os.remove(file)
+                        file_path = Path(file)
+                        file_path.unlink()
 
-                    os.rename(new_name, target)
+                    new_name_path = Path(new_name)
+                    new_name_path.rename(Path(target))
 
                 i = 0
                 for q2 in my_files:
                     if i == 0:
-                        ModelFile.objects.filter(pk=q2.model_file_model_id).update(
+                        ModelFile.objects.filter(
+                            pk=q2.model_file_model_id,
+                        ).update(
                             model_file_filename=q2.model_file_filename.replace(
-                                "-split-a", ""
-                            )
+                                "-split-a",
+                                "",
+                            ),
                         )
                         i = 1
                     else:
-                        ModelFile.objects.get(pk=q2.model_file_model_id).delete()
+                        ModelFile.objects.get(
+                            pk=q2.model_file_model_id,
+                        ).delete()
 
     logo = ["share", "hospital", "data", "cpu", "gpu"]
     return render(request, "core/index.html", {"logo": logo})
@@ -334,8 +351,12 @@ def deep_learning_classification_run(request):
                         "horizontal_flip": cd[
                             "dpcla_data_augmentation_horizontal_flip"
                         ],
-                        "vertical_flip": cd["dpcla_data_augmentation_vertical_flip"],
-                        "translation": cd["dpcla_data_augmentation_translation"],
+                        "vertical_flip": cd[
+                            "dpcla_data_augmentation_vertical_flip"
+                        ],
+                        "translation": cd[
+                            "dpcla_data_augmentation_translation"
+                        ],
                         "rotation": cd["dpcla_data_augmentation_rotation"],
                         "zoom": cd["dpcla_data_augmentation_zoom"],
                         "contrast": cd["dpcla_data_augmentation_contrast"],
@@ -345,7 +366,9 @@ def deep_learning_classification_run(request):
                     params["augmentation"] = augmentation
 
                     xai = {
-                        "activation_maximization": cd["dpcla_activationmaximization"],
+                        "activation_maximization": cd[
+                            "dpcla_activationmaximization"
+                        ],
                         "gradcam": cd["dpcla_gradcam"],
                         "gradcamplusplus": cd["dpcla_gradcamplusplus"],
                         "scorecam": cd["dpcla_scorecam"],
@@ -382,33 +405,27 @@ def deep_learning_segmentation_run(request):
         if form.is_valid():
             cd = form.cleaned_data
 
+            # Default model_id
             model_id = 1
-            if cd["dpseg_unet"]:
-                model_id = Model.objects.get(pk=67)
 
-            if cd["dpseg_unetplusplus"]:
-                model_id = Model.objects.get(pk=67)
+            # Mapping of form fields to model primary keys
+            model_mapping = {
+                "dpseg_unet": 67,
+                "dpseg_unetplusplus": 67,
+                "dpseg_manet": 67,
+                "dpseg_linknet": 67,
+                "dpseg_fpn": 67,
+                "dpseg_pspnet": 67,
+                "dpseg_pan": 67,
+                "dpseg_deeplabv3": 67,
+                "dpseg_deeplabv3plus": 67,
+            }
 
-            if cd["dpseg_manet"]:
-                model_id = Model.objects.get(pk=67)
-
-            if cd["dpseg_linknet"]:
-                model_id = Model.objects.get(pk=67)
-
-            if cd["dpseg_fpn"]:
-                model_id = Model.objects.get(pk=67)
-
-            if cd["dpseg_pspnet"]:
-                model_id = Model.objects.get(pk=67)
-
-            if cd["dpseg_pan"]:
-                model_id = Model.objects.get(pk=67)
-
-            if cd["dpseg_deeplabv3"]:
-                model_id = Model.objects.get(pk=67)
-
-            if cd["dpseg_deeplabv3plus"]:
-                model_id = Model.objects.get(pk=67)
+            # Update model_id based on form input
+            for field, pk in model_mapping.items():
+                if cd.get(field):
+                    model_id = Model.objects.get(pk=pk)
+                    break  # Assuming only one model can be selected
 
             print(model_id)
 
@@ -529,7 +546,13 @@ def natural_language_processing(request):
     return render(
         request,
         "natural_language_processing/natural_language_processing.html",
-        {"logo": logo, "form1": form1, "form2": form2, "section": "nlp", "pdf": True},
+        {
+            "logo": logo,
+            "form1": form1,
+            "form2": form2,
+            "section": "nlp",
+            "pdf": True,
+        },
     )
 
 
@@ -600,7 +623,11 @@ def register(request):
             new_user.save()
             # Create the user profile
             Profile.objects.create(user=new_user)
-            return render(request, "account/register_done.html", {"new_user": new_user})
+            return render(
+                request,
+                "account/register_done.html",
+                {"new_user": new_user},
+            )
 
     else:
         user_form = UserRegistrationForm()
@@ -613,7 +640,9 @@ def edit(request):
     if request.method == "POST":
         user_form = UserEditForm(instance=request.user, data=request.POST)
         profile_form = ProfileEditForm(
-            instance=request.user.profile, date=request.POST, files=request.FILES
+            instance=request.user.profile,
+            date=request.POST,
+            files=request.FILES,
         )
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()

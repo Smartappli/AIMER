@@ -1,6 +1,6 @@
-import torch.nn as nn
-from torchvision import models
 from timm import create_model
+from torch import nn
+from torchvision import models
 
 
 def get_resnet_model(resnet_type, num_classes):
@@ -144,14 +144,19 @@ def get_resnet_model(resnet_type, num_classes):
     elif resnet_type in timm_models:
         try:
             resnet_model = create_model(
-                resnet_type, pretrained=True, num_classes=num_classes
+                resnet_type,
+                pretrained=True,
+                num_classes=num_classes,
             )
         except RuntimeError as e:
             print(f"{resnet_type} - Error loading pretrained model: {e}")
             resnet_model = create_model(
-                resnet_type, pretrained=False, num_classes=num_classes
+                resnet_type,
+                pretrained=False,
+                num_classes=num_classes,
             )
     else:
-        raise ValueError(f"Unknown ResNet Architecture: {resnet_type}")
+        msg = f"Unknown ResNet Architecture: {resnet_type}"
+        raise ValueError(msg)
 
     return resnet_model

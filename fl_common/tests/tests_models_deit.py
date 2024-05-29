@@ -1,5 +1,7 @@
 import os
+
 from django.test import TestCase
+
 from fl_common.models.deit import get_deit_model
 
 os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
@@ -47,7 +49,9 @@ class ProcessingDeitTestCase(TestCase):
                     model = get_deit_model(deit_type, num_classes)
                     self.assertIsNotNone(model)
                 except ValueError:
-                    self.fail(f"{deit_type} should be a known Deit architecture.")
+                    self.fail(
+                        f"{deit_type} should be a known Deit architecture.",
+                    )
 
     def test_unknown_deit_type(self):
         """

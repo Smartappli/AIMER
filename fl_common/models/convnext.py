@@ -1,6 +1,6 @@
-import torch.nn as nn
-from torchvision import models
 from timm import create_model
+from torch import nn
+from torchvision import models
 
 
 def get_convnext_model(convnext_type, num_classes):
@@ -22,9 +22,15 @@ def get_convnext_model(convnext_type, num_classes):
     # weights
     torchvision_models = {
         "ConvNeXt_Tiny": (models.convnext_tiny, models.ConvNeXt_Tiny_Weights),
-        "ConvNeXt_Small": (models.convnext_small, models.ConvNeXt_Small_Weights),
+        "ConvNeXt_Small": (
+            models.convnext_small,
+            models.ConvNeXt_Small_Weights,
+        ),
         "ConvNeXt_Base": (models.convnext_base, models.ConvNeXt_Base_Weights),
-        "ConvNeXt_Large": (models.convnext_large, models.ConvNeXt_Large_Weights),
+        "ConvNeXt_Large": (
+            models.convnext_large,
+            models.ConvNeXt_Large_Weights,
+        ),
     }
 
     timm_models = [
@@ -76,14 +82,19 @@ def get_convnext_model(convnext_type, num_classes):
     elif convnext_type in timm_models:
         try:
             convnext_model = create_model(
-                convnext_type, pretrained=True, num_classes=num_classes
+                convnext_type,
+                pretrained=True,
+                num_classes=num_classes,
             )
         except RuntimeError as e:
             print(f"{convnext_type} - Error loading pretrained model: {e}")
             convnext_model = create_model(
-                convnext_type, pretrained=False, num_classes=num_classes
+                convnext_type,
+                pretrained=False,
+                num_classes=num_classes,
             )
     else:
-        raise ValueError(f"Unknown ConvNeXt Architecture : {convnext_type}")
+        msg = f"Unknown ConvNeXt Architecture : {convnext_type}"
+        raise ValueError(msg)
 
     return convnext_model

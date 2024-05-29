@@ -1,5 +1,7 @@
 import os
+
 from django.test import TestCase
+
 from fl_common.models.sequencer import get_sequencer_model
 
 os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
@@ -24,7 +26,7 @@ class ProcessingSequencerTestCase(TestCase):
                     self.assertIsNotNone(model)
                 except ValueError:
                     self.fail(
-                        f"{sequencer_type} should be a known sequencer architecture."
+                        f"{sequencer_type} should be a known sequencer architecture.",
                     )
 
     def test_unknown_type(self):

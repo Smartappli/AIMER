@@ -1,5 +1,7 @@
 import os
+
 from django.test import TestCase
+
 from fl_common.models.vitamin import get_vitamin_model
 
 os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
@@ -10,7 +12,7 @@ class ProcessingViTaminTestCase(TestCase):
     Test case class for processing ViTamin models.
     """
 
-    def test_known_ViTamin_types(self):
+    def test_known_vitamin_types(self):
         """
         Test the get_ViTamin_model function with known ViTamin types.
 

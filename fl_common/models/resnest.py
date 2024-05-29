@@ -27,10 +27,19 @@ def get_resnest_model(resnest_type, num_classes):
     ]
 
     if resnest_type not in valid_types:
-        raise ValueError(f"Unknown Resnest Architecture: {resnest_type}")
+        msg = f"Unknown Resnest Architecture: {resnest_type}"
+        raise ValueError(msg)
 
     try:
-        return create_model(resnest_type, pretrained=True, num_classes=num_classes)
+        return create_model(
+            resnest_type,
+            pretrained=True,
+            num_classes=num_classes,
+        )
     except RuntimeError as e:
         print(f"{resnest_type} - Error loading pretrained model: {e}")
-        return create_model(resnest_type, pretrained=False, num_classes=num_classes)
+        return create_model(
+            resnest_type,
+            pretrained=False,
+            num_classes=num_classes,
+        )

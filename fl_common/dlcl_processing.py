@@ -1,24 +1,27 @@
 import os
 import time
-import torch
-import torch.nn as nn
-from tqdm import tqdm
-from captum.attr import (
-    IntegratedGradients,
-    GuidedBackprop,
-)
-from sklearn.metrics import confusion_matrix, classification_report
+from pathlib import Path
+
 import matplotlib.pyplot as plt
 import seaborn as sns
-from fl_common.models.utils import (
-    get_optimizer,
-    get_criterion,
-    get_scheduler,
-    generate_xai_heatmaps,
-    get_dataset,
-    EarlyStopping,
+import torch
+from captum.attr import (
+    GuidedBackprop,
+    IntegratedGradients,
 )
+from sklearn.metrics import classification_report, confusion_matrix
+from torch import nn
+from tqdm import tqdm
+
 from fl_common.dlcl_getfamilly import get_family_model
+from fl_common.models.utils import (
+    EarlyStopping,
+    generate_xai_heatmaps,
+    get_criterion,
+    get_dataset,
+    get_optimizer,
+    get_scheduler,
+)
 
 os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
 
@@ -142,12 +145,21 @@ xai = False
 
 for model_type in model_list:
     # Replace with the actual path where to save results
-    save_dir = "c:/TFE/Models/" + model_type + "/"
-    os.makedirs(save_dir, exist_ok=True)
+    save_dir = "c:/TFE/Models/" + model_type
+    Path(save_dir).mkdir(parents=True, exist_ok=True)
 
     # Load your custom dataset
-    train_loader, val_loader, test_loader, num_classes, class_names = get_dataset(
-        dataset_path, batch_size, augmentation_params, normalize_params
+    (
+        train_loader,
+        val_loader,
+        test_loader,
+        num_classes,
+        class_names,
+    ) = get_dataset(
+        dataset_path,
+        batch_size,
+        augmentation_params,
+        normalize_params,
     )
 
     print(f"Model: {model_type}")
@@ -166,24 +178,34 @@ for model_type in model_list:
     model_parameters = model.parameters()
     criterion = get_criterion(criterion_name_phase1)
     optimizer = get_optimizer(
-        optimizer_name_phase1, model_parameters, learning_rate_phase1
+        optimizer_name_phase1,
+        model_parameters,
+        learning_rate_phase1,
     )
 
     # scheduler = get_scheduler(optimizer, scheduler_type='step', step_size=10, gamma=0.5)
     # scheduler = get_scheduler(optimizer, scheduler_type='multi_step', milestones=[30, 60, 90], gamma=0.5)
     # scheduler = get_scheduler(optimizer, scheduler_type='exponential', gamma=0.95)
 
-    scheduler = get_scheduler(optimizer, scheduler_type="step", step_size=10, gamma=0.5)
+    scheduler = get_scheduler(
+        optimizer,
+        scheduler_type="step",
+        step_size=10,
+        gamma=0.5,
+    )
 
     # Training loop
     early_stopping_phase1 = EarlyStopping(
-        patience=early_stopping_patience_phase1, verbose=verbose
+        patience=early_stopping_patience_phase1,
+        verbose=verbose,
     )
     early_stopping_phase2 = EarlyStopping(
-        patience=early_stopping_patience_phase2, verbose=verbose
+        patience=early_stopping_patience_phase2,
+        verbose=verbose,
     )
     early_stopping_phase3 = EarlyStopping(
-        patience=early_stopping_patience_phase3, verbose=verbose
+        patience=early_stopping_patience_phase3,
+        verbose=verbose,
     )
 
     train_losses = []
@@ -203,7 +225,7 @@ for model_type in model_list:
         total_train = 0
 
         print(
-            f"\nEpoch {epoch + 1}/{num_epochs_phase1}, Learning Rate: {optimizer.param_groups[0]['lr']}"
+            f"\nEpoch {epoch + 1}/{num_epochs_phase1}, Learning Rate: {optimizer.param_groups[0]['lr']}",
         )
 
         # Use tqdm for a progress bar over the training batches
@@ -228,7 +250,9 @@ for model_type in model_list:
                 correct_train += (predicted == labels).sum().item()
 
                 # Print progress within the epoch
-                if (batch_idx + 1) % 10 == 0 or (batch_idx + 1) == len(train_loader):
+                if (batch_idx + 1) % 10 == 0 or (batch_idx + 1) == len(
+                    train_loader,
+                ):
                     avg_batch_loss = running_loss / (batch_idx + 1)
                     batch_accuracy = correct_train / total_train
                     progress_bar.set_postfix(
@@ -277,7 +301,7 @@ for model_type in model_list:
         # Save the model if the current validation loss is the best
         if avg_val_loss < best_val_loss:
             best_val_loss = avg_val_loss
-            torch.save(model.state_dict(), save_dir + "best_model.pth")
+            torch.save(model.state_dict(), save_dir + "/best_model.pth")
 
         epoch_end_time = time.time()
         elapsed_time = epoch_end_time - epoch_start_time
@@ -297,7 +321,7 @@ for model_type in model_list:
             f"Epoch {epoch + 1}/{num_epochs_phase1} => "
             f"Train Loss: {avg_train_loss:.4f}, Train Accuracy: {train_accuracy:.4f}, "
             f"Validation Loss: {avg_val_loss:.4f}, Validation Accuracy: {val_accuracy:.4f}, "
-            f"{elapsed_time_msg}"
+            f"{elapsed_time_msg}",
         )
 
     # Proceed only if the first phase didn't early stop
@@ -309,7 +333,9 @@ for model_type in model_list:
         model_parameters = model.parameters()
         criterion = get_criterion(criterion_name_phase2)
         optimizer = get_optimizer(
-            optimizer_name_phase2, model_parameters, learning_rate_phase2
+            optimizer_name_phase2,
+            model_parameters,
+            learning_rate_phase2,
         )
 
         # scheduler = get_scheduler(optimizer, scheduler_type='step', step_size=10, gamma=0.5)
@@ -317,7 +343,10 @@ for model_type in model_list:
         # scheduler = get_scheduler(optimizer, scheduler_type='exponential', gamma=0.95)
 
         scheduler = get_scheduler(
-            optimizer, scheduler_type="step", step_size=10, gamma=0.5
+            optimizer,
+            scheduler_type="step",
+            step_size=10,
+            gamma=0.5,
         )
 
         for epoch in range(num_epochs_phase2):
@@ -329,7 +358,7 @@ for model_type in model_list:
             total_train = 0
 
             print(
-                f"\nEpoch {epoch + 1}/{num_epochs_phase2}, Learning Rate: {optimizer.param_groups[0]['lr']}"
+                f"\nEpoch {epoch + 1}/{num_epochs_phase2}, Learning Rate: {optimizer.param_groups[0]['lr']}",
             )
 
             # Use tqdm for a progress bar over the training batches
@@ -355,7 +384,7 @@ for model_type in model_list:
 
                     # Print progress within the epoch
                     if (batch_idx + 1) % 10 == 0 or (batch_idx + 1) == len(
-                        train_loader
+                        train_loader,
                     ):
                         avg_batch_loss = running_loss / (batch_idx + 1)
                         batch_accuracy = correct_train / total_train
@@ -425,7 +454,7 @@ for model_type in model_list:
                 f"\nEpoch {epoch + 1}/{num_epochs_phase2} (Phase 2) => "
                 f"Train Loss: {avg_train_loss:.4f}, Train Accuracy: {train_accuracy:.4f}, "
                 f"Validation Loss: {avg_val_loss:.4f}, Validation Accuracy: {val_accuracy:.4f}, "
-                f"{elapsed_time_msg}"
+                f"{elapsed_time_msg}",
             )
 
     # Third Training Phase (Optional)
@@ -438,7 +467,9 @@ for model_type in model_list:
         model_parameters = model.parameters()
         criterion = get_criterion(criterion_name_phase3)
         optimizer = get_optimizer(
-            optimizer_name_phase3, model_parameters, learning_rate_phase3
+            optimizer_name_phase3,
+            model_parameters,
+            learning_rate_phase3,
         )
 
         # scheduler = get_scheduler(optimizer, scheduler_type='step', step_size=10, gamma=0.5)
@@ -446,7 +477,10 @@ for model_type in model_list:
         # scheduler = get_scheduler(optimizer, scheduler_type='exponential', gamma=0.95)
 
         scheduler = get_scheduler(
-            optimizer, scheduler_type="step", step_size=10, gamma=0.5
+            optimizer,
+            scheduler_type="step",
+            step_size=10,
+            gamma=0.5,
         )
 
         for epoch in range(num_epochs_phase3):
@@ -458,7 +492,7 @@ for model_type in model_list:
             total_train = 0
 
             print(
-                f"\nEpoch {epoch + 1}/{num_epochs_phase3}, Learning Rate: {optimizer.param_groups[0]['lr']}"
+                f"\nEpoch {epoch + 1}/{num_epochs_phase3}, Learning Rate: {optimizer.param_groups[0]['lr']}",
             )
 
             # Use tqdm for a progress bar over the training batches
@@ -484,7 +518,7 @@ for model_type in model_list:
 
                     # Print progress within the epoch
                     if (batch_idx + 1) % 10 == 0 or (batch_idx + 1) == len(
-                        train_loader
+                        train_loader,
                     ):
                         avg_batch_loss = running_loss / (batch_idx + 1)
                         batch_accuracy = correct_train / total_train
@@ -554,7 +588,7 @@ for model_type in model_list:
                 f"\nEpoch {epoch + 1}/{num_epochs_phase3} (Phase 3) => "
                 f"Train Loss: {avg_train_loss:.4f}, Train Accuracy: {train_accuracy:.4f}, "
                 f"Validation Loss: {avg_val_loss:.4f}, Validation Accuracy: {val_accuracy:.4f}, "
-                f"{elapsed_time_msg}"
+                f"{elapsed_time_msg}",
             )
 
     # Calculate total training time
@@ -590,8 +624,9 @@ for model_type in model_list:
     fig.tight_layout()
 
     # Saving the graph
-    save_path = os.path.join(save_dir, "training_curves.png")
-    fig.savefig(save_path)
+    # save_path = os.path.join(save_dir, "training_curves.png")
+    save_dir_path = Path(save_dir + "/training_curves.png")
+    fig.savefig(save_dir_path)
 
     plt.show()
 
@@ -635,24 +670,28 @@ for model_type in model_list:
     plt.xlabel("Predicted Label")
     plt.ylabel("True Label")
     # Saving the confusion matrix
-    plt.savefig(save_dir + "confusion_matrix.png")
+    plt.savefig(save_dir + "/confusion_matrix.png")
     plt.show()  # Confusion matrix display
 
     # Print classification report
     class_report = classification_report(
-        all_labels, all_preds, target_names=class_names
+        all_labels,
+        all_preds,
+        target_names=class_names,
     )
     print("\nClassification Report:\n", class_report)
 
     # Save classification report to a text file
-    with open(
-        save_dir + "classification_report.txt", "w", encoding="UTF-8"
+    save_classification = Path(save_dir + "/classification_report.txt")
+    with save_classification.open(
+        "w",
+        encoding="UTF-8",
     ) as report_file:
         report_file.write(save_dir + "Classification Report:\n" + class_report)
 
     # Loop through test dataset and generate XAI heatmaps for specific methods
     if xai:
-        save_dir += "xai_heatmaps/"
+        save_dir += "/xai_heatmaps/"
         # Loop through test dataset and generate XAI heatmaps for specific
         # methods
         for i, (inputs, labels) in enumerate(test_loader):
@@ -666,11 +705,11 @@ for model_type in model_list:
             labels_scalars = labels.tolist()  # Convert to list
 
             for j, (predicted_scalar, label_scalar) in enumerate(
-                zip(predicted_scalars, labels_scalars)
+                zip(predicted_scalars, labels_scalars),
             ):
                 if predicted_scalar != label_scalar:
                     print(
-                        f"Example {i * test_loader.batch_size + j + 1}: Prediction: {predicted_scalar}, Actual: {label_scalar}"
+                        f"Example {i * test_loader.batch_size + j + 1}: Prediction: {predicted_scalar}, Actual: {label_scalar}",
                     )
 
                     # Specify the methods you want to use (e.g.,
@@ -682,10 +721,8 @@ for model_type in model_list:
 
                     # Create a directory for XAI heatmaps based on the specific
                     # example
-                    example_dir = (
-                        f"{save_dir}/example_{i * test_loader.batch_size + j + 1}/"
-                    )
-                    os.makedirs(example_dir, exist_ok=True)
+                    example_dir = f"{save_dir}/example_{i * test_loader.batch_size + j + 1}/"
+                    Path(example_dir).mkdir(parents=True, exist_ok=True)
 
                     generate_xai_heatmaps(
                         model,

@@ -39,10 +39,19 @@ def get_levit_model(levit_type, num_classes):
     ]
 
     if levit_type not in levit_options:
-        raise ValueError(f"Unknown Levit Architecture: {levit_type}")
+        msg = f"Unknown Levit Architecture: {levit_type}"
+        raise ValueError(msg)
 
     try:
-        return create_model(levit_type, pretrained=True, num_classes=num_classes)
+        return create_model(
+            levit_type,
+            pretrained=True,
+            num_classes=num_classes,
+        )
     except RuntimeError as e:
         print(f"{levit_type} - Error loading pretrained model: {e}")
-        return create_model(levit_type, pretrained=False, num_classes=num_classes)
+        return create_model(
+            levit_type,
+            pretrained=False,
+            num_classes=num_classes,
+        )

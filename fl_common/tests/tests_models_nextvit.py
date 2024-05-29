@@ -1,5 +1,7 @@
 import os
+
 from django.test import TestCase
+
 from fl_common.models.nextvit import get_nextvit_model
 
 os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
@@ -23,7 +25,9 @@ class ProcessingNestTestCase(TestCase):
                     model = get_nextvit_model(nextvit_type, num_classes)
                     self.assertIsNotNone(model)
                 except ValueError:
-                    self.fail(f"{nextvit_type} should be a known NEXTVIT architecture.")
+                    self.fail(
+                        f"{nextvit_type} should be a known NEXTVIT architecture.",
+                    )
 
     def test_get_nextvit_model_unknown_type(self):
         """

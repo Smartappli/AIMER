@@ -64,7 +64,9 @@ class Migration(migrations.Migration):
                 ),
                 (
                     "dataset_central_data_uuid",
-                    models.UUIDField(default=uuid.uuid4, editable=False, unique=True),
+                    models.UUIDField(
+                        default=uuid.uuid4, editable=False, unique=True
+                    ),
                 ),
                 (
                     "dataset_central_data_link",
@@ -74,7 +76,10 @@ class Migration(migrations.Migration):
                     "dataset_central_creation_date",
                     models.DateTimeField(auto_now_add=True),
                 ),
-                ("dataset_central_updated_date", models.DateTimeField(auto_now=True)),
+                (
+                    "dataset_central_updated_date",
+                    models.DateTimeField(auto_now=True),
+                ),
                 (
                     "dataset_central_data_dataset_id",
                     models.ForeignKey(
@@ -103,8 +108,14 @@ class Migration(migrations.Migration):
                     models.UUIDField(default=uuid.uuid4, editable=False),
                 ),
                 ("dataset_file_filename", models.CharField(max_length=255)),
-                ("dataset_file_creation_date", models.DateTimeField(auto_now_add=True)),
-                ("dataset_file_updated_date", models.DateTimeField(auto_now=True)),
+                (
+                    "dataset_file_creation_date",
+                    models.DateTimeField(auto_now_add=True),
+                ),
+                (
+                    "dataset_file_updated_date",
+                    models.DateTimeField(auto_now=True),
+                ),
                 (
                     "dataset_file_dataset_id",
                     models.ForeignKey(
@@ -127,7 +138,9 @@ class Migration(migrations.Migration):
                 ),
                 (
                     "dataset_local_data_uuid",
-                    models.UUIDField(default=uuid.uuid4, editable=False, unique=True),
+                    models.UUIDField(
+                        default=uuid.uuid4, editable=False, unique=True
+                    ),
                 ),
                 ("dataset_local_data_link", models.URLField(max_length=255)),
                 (
@@ -171,7 +184,9 @@ class Migration(migrations.Migration):
                 ),
                 (
                     "dataset_remote_data_uuid",
-                    models.UUIDField(default=uuid.uuid4, editable=False, unique=True),
+                    models.UUIDField(
+                        default=uuid.uuid4, editable=False, unique=True
+                    ),
                 ),
                 (
                     "dataset_remote_data_protocol",
@@ -208,7 +223,10 @@ class Migration(migrations.Migration):
                     "dataset_remote_creation_date",
                     models.DateTimeField(auto_now_add=True),
                 ),
-                ("dataset_remote_updated_date", models.DateTimeField(auto_now=True)),
+                (
+                    "dataset_remote_updated_date",
+                    models.DateTimeField(auto_now=True),
+                ),
                 (
                     "dataset_remote_data_dataset_id",
                     models.ForeignKey(

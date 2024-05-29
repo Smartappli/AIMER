@@ -1,6 +1,8 @@
 import os
-import torch.nn as nn
+
 from django.test import TestCase
+from torch import nn
+
 from fl_common.models.shufflenet import get_shufflenet_model
 
 os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"

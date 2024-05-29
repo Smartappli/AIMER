@@ -1,5 +1,7 @@
 import os
+
 from django.test import TestCase
+
 from fl_common.models.hgnet import get_hgnet_model
 
 os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
@@ -35,7 +37,9 @@ class ProcessingHgnetTestCase(TestCase):
                     model = get_hgnet_model(hgnet_type, num_classes)
                     self.assertIsNotNone(model)
                 except ValueError:
-                    self.fail(f"{hgnet_type} should be a known Hgnet architecture.")
+                    self.fail(
+                        f"{hgnet_type} should be a known Hgnet architecture.",
+                    )
 
     def test_unknown_hgnet_type(self):
         """

@@ -1,5 +1,7 @@
 import os
+
 from django.test import TestCase
+
 from fl_common.models.eva import get_eva_model
 
 os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"

@@ -13,7 +13,10 @@ def create_uuid(apps, schema_editor):
 
 class Migration(migrations.Migration):
     dependencies = [
-        ("fl_client", "0023_alter_document_document_uuid_alter_queue_queue_uuid"),
+        (
+            "fl_client",
+            "0023_alter_document_document_uuid_alter_queue_queue_uuid",
+        ),
     ]
 
     operations = [
