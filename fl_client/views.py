@@ -89,9 +89,9 @@ def import_data(request):
 
             try:
                 model_type = expected_values[q]
-            except KeyError:
+            except KeyError as exc:
                 msg = f"Unexpected value for q: {q}"
-                raise ValueError(msg)
+                raise ValueError(msg) from exc
 
             if insertion == 1:
                 ModelFile.objects.get_or_create(
