@@ -5,7 +5,7 @@ FROM nvidia/cuda:${CUDA_IMAGE}
 ENV HOST 0.0.0.0
 ENV PORT 8008
 
-RUN apt-get update && apt-get upgrade -y \
+RUN apt-get update \
     && apt-get install -y git build-essential \
     python3 python3-pip gcc wget \
     ocl-icd-opencl-dev opencl-headers clinfo \
