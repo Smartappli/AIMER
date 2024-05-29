@@ -19,7 +19,12 @@ USER myuser
 COPY --chown=myuser:myuser . .
 
 # Install Python dependencies
-RUN python -m pip install --upgrade pip pytest cmake scikit-build setuptools fastapi uvicorn sse-starlette pydantic-settings starlette-context
+RUN python -m pip install --upgrade pip \
+    && pip install pytest==8.2.1 cmake==3.29.3 \ 
+    scikit-build==0.17.6 setuptools==70.0.0 \
+    fastapi==0.111.0 uvicorn==0.30.0 \
+    sse-starlette==2.1.0 pydantic-settings==2.2.1 \
+    starlette-context==0.3.6
 
 # Install llama-cpp-python (build with OpenBLAS)
 RUN CMAKE_ARGS="-DLLAMA_BLAS=ON -DLLAMA_BLAS_VENDOR=OpenBLAS" pip install 'llama-cpp-python[server]==0.2.76' --verbose
