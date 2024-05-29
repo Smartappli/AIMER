@@ -5,6 +5,7 @@ FROM nvidia/cuda:${CUDA_IMAGE}
 ENV HOST 0.0.0.0
 ENV PORT 8008
 
+# Install necessary packages
 RUN apt-get update \
     && apt-get install -y --no-install-recommends git build-essential \
     python3 python3-pip gcc wget \
@@ -15,18 +16,26 @@ RUN apt-get update \
 
 RUN mkdir -p /etc/OpenCL/vendors && echo "libnvidia-opencl.so.1" > /etc/OpenCL/vendors/nvidia.icd
 
-COPY ../.. .
+# Create a non-root user
+RUN useradd -m myuser
 
-# setting build related env vars
+# Change to the non-root user
+USER myuser
+
+# Copy the application code
+COPY --chown=myuser:myuser ../.. .
+
+# Set build-related environment variables
 ENV CUDA_DOCKER_ARCH=all
 ENV LLAMA_CUBLAS=1
 
-# Install depencencies
+# Install dependencies
 RUN python3 -m pip install --upgrade pip pytest cmake scikit-build setuptools fastapi uvicorn sse-starlette pydantic-settings starlette-context
 
-# Install llama-cpp-python (build with cuda)
+# Install llama-cpp-python (build with CUDA)
 RUN CMAKE_ARGS="-DLLAMA_CUBLAS=on" FORCE_CMAKE=1 pip install 'llama-cpp-python[server]==0.2.76' --verbose
 
+# Expose the port
 EXPOSE 8008
 
 # Run the server
