@@ -6,14 +6,14 @@
 [![Ruff](https://github.com/Smartappli/AIMER/actions/workflows/ruff.yml/badge.svg)](https://github.com/Smartappli/AIMER/actions/workflows/ruff.yml)
 [![DjLint](https://github.com/Smartappli/AIMER/actions/workflows/djlint.yml/badge.svg)](https://github.com/Smartappli/AIMER/actions/workflows/djlint.yml)
 
-# Tests
+### Tests
 [![Nightlies Models - PART A](https://github.com/Smartappli/AIMER/actions/workflows/nightlies_models_A.yml/badge.svg)](https://github.com/Smartappli/AIMER/actions/workflows/nightlies_models_A.yml)
 [![Nightlies Models - PART B](https://github.com/Smartappli/AIMER/actions/workflows/nightlies_models_B.yml/badge.svg)](https://github.com/Smartappli/AIMER/actions/workflows/nightlies_models_B.yml)
 [![Nightlies Models - PART C](https://github.com/Smartappli/AIMER/actions/workflows/nightlies_models_C.yml/badge.svg)](https://github.com/Smartappli/AIMER/actions/workflows/nightlies_models_C.yml)
 
-# Formatters
+### Formatters
 [![Black Formatter](https://github.com/Smartappli/AIMER/actions/workflows/black.yml/badge.svg)](https://github.com/Smartappli/AIMER/actions/workflows/black.yml)
 [![Django Formatter](https://github.com/Smartappli/AIMER/actions/workflows/djformatter.yml/badge.svg)](https://github.com/Smartappli/AIMER/actions/workflows/djformatter.yml)
 
-# License Analyiss
+### License Analyiss
 [![Dependencies license compliance checker](https://github.com/Smartappli/AIMER/actions/workflows/liccheck.yml/badge.svg)](https://github.com/Smartappli/AIMER/actions/workflows/liccheck.yml)
