@@ -22,7 +22,7 @@ timm>=1.0.3
 prophet>=1.1.5
 lightgbm>=4.3.0
 captum==0.7.0
-# psycopg2==2.9.9
+psycopg==3.1.19
 tqdm==4.66.2
 syft>=0.8.7b9
 wheel>=0.43.0 # not directly required, pinned by Snyk to avoid a vulnerability
