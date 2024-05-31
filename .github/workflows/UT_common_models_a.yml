@@ -61,7 +61,7 @@ jobs:
         pip install -r requirements.txt
     - name: Fl_common Models AlexNet
       run: |
-        coverage -m run manage.py test fl_common.tests.tests_models_alexnet
+        coverage run manage.py test fl_common.tests.tests_models_alexnet
         coverage xml
     - name: SonarCloud Scan
       uses: SonarSource/sonarcloud-github-action@master
