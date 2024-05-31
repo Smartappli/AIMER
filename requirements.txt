@@ -1,8 +1,8 @@
 django>=5.0.6
 huggingface-hub>=0.23.2
-# pycaret[full]==3.3.2 # 3.2.1
-# cgit+https://github.com/pycaret/pycaret.git
-scikit-learn-intelex==2024.4.0
+# pycaret[full]>=3.3.2 # 3.2.1
+# git+https://github.com/pycaret/pycaret.git
+scikit-learn-intelex>=2023.2.1
 # tensorflow==2.15 # 2.14.1
 tf-nightly>=2.17.0.dev20240527
 keras>=3.3.3 # 2.14
@@ -18,8 +18,8 @@ torch==2.2.2; sys_platform == 'darwin'
 torch==2.3.0; sys_platform != 'darwin'
 torchvision==0.17.2; sys_platform == 'darwin'
 torchvision==0.18.0; sys_platform != 'darwin'
-# timm>=1.0.3
-git+https://github.com/huggingface/pytorch-image-models.git
+timm>=1.0.3
+# git+https://github.com/huggingface/pytorch-image-models.git #noqa
 prophet>=1.1.5
 lightgbm>=4.3.0
 captum==0.7.0
