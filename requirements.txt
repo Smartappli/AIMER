@@ -20,7 +20,7 @@ torch==2.3.0; sys_platform != 'darwin'
 torchvision==0.17.2; sys_platform == 'darwin'
 torchvision==0.18.0; sys_platform != 'darwin'
 # timm>=1.0.3
-git+https://github.com/huggingface/pytorch-image-models.git
+git+https://github.com/huggingface/pytorch-image-models.git #noqa
 prophet>=1.1.5
 lightgbm>=4.3.0
 captum==0.7.0
