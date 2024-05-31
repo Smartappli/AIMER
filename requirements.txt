@@ -1,6 +1,6 @@
 django>=5.0.6
 huggingface-hub>=0.23.2
-# pycaret[full]==3.3.2 # 3.2.1
+pycaret[full]>=3.3.2 # 3.2.1
 # git+https://github.com/pycaret/pycaret.git
 scikit-learn-intelex>=2023.2.1
 # tensorflow==2.15 # 2.14.1
