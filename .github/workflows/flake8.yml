@@ -19,7 +19,7 @@ jobs:
           python-version: "3.11"
           cache: 'pip'
       - name: flake8 Lint
-        uses: py-actions/flake8@v2
+        uses: py-actions/flake8@v2.3.0
         with:
           update-pip: "true"
           exclude: "manage.py,fl_client/migrations,fl_server/migrations,settings.py"
