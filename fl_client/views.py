@@ -71,6 +71,20 @@ def import_data(request):
                 insertion = 1
 
             expected_values = {
+                "BF16": "BF16",
+                "F16": "F16",
+                "IQ1_M": "IQ1M",
+                "IQ1_S": "IQ1S",
+                "IQ2_M": "IQ2M",
+                "IQ2_S": "IQ2S",
+                "IQ2_XS": "IQ2XS",
+                "IQ2_XXS": "IQ2XSS",
+                "IQ3_M": "IQ3M",
+                "IQ3_S": "IQ3S",
+                "IQ3_XS": "IQ3XS",
+                "IQ3_XXS": "IQ3_XXS",
+                "IQ4_NL": "IQ4NL",
+                "IQ4_XS": "IQ4XS",
                 "Q2_K": "Q2K",
                 "Q3_K_L": "Q3KL",
                 "Q3_K_M": "Q3KM",
@@ -89,9 +103,9 @@ def import_data(request):
 
             try:
                 model_type = expected_values[q]
-            except KeyError:
+            except KeyError as exc:
                 msg = f"Unexpected value for q: {q}"
-                raise ValueError(msg)
+                raise ValueError(msg) from exc
 
             if insertion == 1:
                 ModelFile.objects.get_or_create(
@@ -118,7 +132,6 @@ def import_data(request):
 
 def download_data(request):
     """Method to download the data from Hugging Face"""
-    import os
     import shutil
 
     from huggingface_hub import (
