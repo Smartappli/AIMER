@@ -62,6 +62,11 @@ jobs:
       run: |
         coverage run -m manage.py test fl_common.tests.tests_models_beit
         coverage xml
+    - name: SonarCloud Scan
+      uses: SonarSource/sonarcloud-github-action@master
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}        
 
   test-byoanet-models:
     runs-on: ubuntu-latest
