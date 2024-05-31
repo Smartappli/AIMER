@@ -23,6 +23,9 @@ def get_fastvit_model(fastvit_type, num_classes):
         "fastvit_sa24",
         "fastvit_sa36",
         "fastvit_ma36",
+        "fastvit_mci0",
+        "fastvit_mci1",
+        "fastvit_mci2",
     }
 
     if fastvit_type not in supported_types:
