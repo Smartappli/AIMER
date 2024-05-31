@@ -60,7 +60,7 @@ jobs:
         pip install -r requirements.txt
     - name: Fl_common Models Beit
       run: |
-        coverage run -m manage.py test fl_common.tests.tests_models_beit
+        coverage run manage.py test fl_common.tests.tests_models_beit
         coverage xml
     - name: SonarCloud Scan
       uses: SonarSource/sonarcloud-github-action@master
