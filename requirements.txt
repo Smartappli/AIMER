@@ -2,7 +2,8 @@ django>=5.0.6
 huggingface-hub>=0.23.2
 # pycaret[full]==3.3.2 # 3.2.1
 # cgit+https://github.com/pycaret/pycaret.git
-scikit-learn-intelex==2024.4.0
+scikit-learn-intelex==2024.4.0; sys_platform != 'darwin'
+scikit-learn-intelex==2023.2.1; sys_platform == 'darwin'
 # tensorflow==2.15 # 2.14.1
 tf-nightly>=2.17.0.dev20240527
 keras>=3.3.3 # 2.14
