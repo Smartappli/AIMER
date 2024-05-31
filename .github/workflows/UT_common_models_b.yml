@@ -56,10 +56,12 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        python -m pip install coverage
         pip install -r requirements.txt
     - name: Fl_common Models Beit
       run: |
-        python manage.py test fl_common.tests.tests_models_beit
+        coverage run -m manage.py test fl_common.tests.tests_models_beit
+        coverage xml
 
   test-byoanet-models:
     runs-on: ubuntu-latest
