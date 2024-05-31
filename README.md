@@ -6,7 +6,7 @@
 [![flake8](https://github.com/Smartappli/AIMER/actions/workflows/flake8.yml/badge.svg)](https://github.com/Smartappli/AIMER/actions/workflows/flake8.yml)
 [![Ruff](https://github.com/Smartappli/AIMER/actions/workflows/ruff.yml/badge.svg)](https://github.com/Smartappli/AIMER/actions/workflows/ruff.yml)
 [![DjLint](https://github.com/Smartappli/AIMER/actions/workflows/djlint.yml/badge.svg)](https://github.com/Smartappli/AIMER/actions/workflows/djlint.yml)
-[![Sonarqube](https://github.com/Smartappli/AIMER/actions/workflows/sonarqube.yml/badge.svg)](https://github.com/Smartappli/AIMER/actions/workflows/sonarqube.yml)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=Smartappli_AIMER&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=Smartappli_AIMER)
 
 ### Tests
 
