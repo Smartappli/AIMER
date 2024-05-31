@@ -62,7 +62,7 @@ jobs:
     - name: Fl_common Models AlexNet
       run: |
         coverage run manage.py test fl_common.tests.tests_models_alexnet
-        coverage xml
+        coverage xml -o coverage-alexenet.xml
     - name: SonarCloud Scan
       uses: SonarSource/sonarcloud-github-action@master
       env:
