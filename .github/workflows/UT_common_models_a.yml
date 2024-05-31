@@ -61,4 +61,5 @@ jobs:
         pip install -r requirements.txt
     - name: Fl_common Models AlexNet
       run: |
-        coverage run manage.py test fl_common.tests.tests_models_alexnet
+        coverage -m run manage.py test fl_common.tests.tests_models_alexnet
+        coverage xml
