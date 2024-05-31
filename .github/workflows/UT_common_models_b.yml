@@ -46,7 +46,7 @@ jobs:
         dotnet: true
         haskell: true
         large-packages: true
-        docker-images: true
+        docker-images: false
         swap-storage: true    
     - uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
@@ -61,7 +61,7 @@ jobs:
     - name: Fl_common Models Beit
       run: |
         coverage run manage.py test fl_common.tests.tests_models_beit
-        coverage xml
+        coverage xml -o coverage-beit.xml
     - name: SonarCloud Scan
       uses: SonarSource/sonarcloud-github-action@master
       env:
