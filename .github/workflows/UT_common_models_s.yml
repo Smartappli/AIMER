@@ -61,7 +61,9 @@ jobs:
           pip install -r requirements.txt
       - name: Fl_common Models Selecsls
         run: |
-          python manage.py test fl_common.tests.tests_models_selecsls
+          coverage run manage.py test fl_common.tests.tests_models_selecsls
+          coverage xml -o coverage-selecsls.xml
+          coverage report
 
   tests-senet-models:
     runs-on: ubuntu-latest
@@ -118,6 +120,8 @@ jobs:
       - name: Fl_common Models Senet
         run: |
           coverave run manage.py test fl_common.tests.tests_models_senet
+          coverage xml -o coverage-senet.xml
+          coverage report
 
   tests-sequencer-models:
     runs-on: ubuntu-latest
@@ -173,7 +177,9 @@ jobs:
           pip install -r requirements.txt
       - name: Fl_common Models Sequencer
         run: |
-          coverave run manage.py test fl_common.tests.tests_models_sequencer        
+          coverave run manage.py test fl_common.tests.tests_models_sequencer
+          coverage xml -o coverage-sequencer.xml
+          coverage report        
 
   tests-shufflenet-models:
     runs-on: ubuntu-latest
@@ -230,6 +236,8 @@ jobs:
     - name: Fl_common Models Shufflenet
       run: |
         coverave run manage.py test fl_common.tests.tests_models_shufflenet
+        coverage xml -o coverage-shufflenet.xml
+        coverage report
 
   tests-sknet-models:
     runs-on: ubuntu-latest
@@ -286,6 +294,8 @@ jobs:
     - name: Fl_common Models Sknet
       run: |
         coverave run manage.py test fl_common.tests.tests_models_sknet
+        coverage xml -o coverage-sknet.xml
+        coverage report
 
   tests-squeezenet-models:
     runs-on: ubuntu-latest
@@ -342,6 +352,8 @@ jobs:
     - name: Fl_common Models Squeezenet
       run: |
         coverave run manage.py test fl_common.tests.tests_models_squeezenet
+        coverage xml -o coverage-squeezenet.xml
+        coverage report
 
   tests-swin_transformer-models:
     runs-on: ubuntu-latest
@@ -398,6 +410,8 @@ jobs:
     - name: Fl_common Models Swin Transformer
       run: |
         coverave run manage.py test fl_common.tests.tests_models_swin_transformer
+        coverage xml -o coverage-swin_transformer.xml
+        coverage report
 
   tests-swin_transformer-v2-models:
     runs-on: ubuntu-latest
@@ -454,6 +468,8 @@ jobs:
     - name: Fl_common Models Swin Transformer v2
       run: |
         coverave run manage.py test fl_common.tests.tests_models_swin_transformer_v2
+        coverage xml -o coverage-swin_tramsformer_v2.xml
+        coverage report
 
   tests-swin_transformer-v2-cr-001-models:
     runs-on: ubuntu-latest
