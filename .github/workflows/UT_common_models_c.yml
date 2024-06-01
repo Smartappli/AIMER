@@ -46,7 +46,7 @@ jobs:
         dotnet: true
         haskell: true
         large-packages: true
-        docker-images: true
+        docker-images: false
         swap-storage: true    
     - uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
@@ -57,10 +57,12 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        python -m pip install coverage
         pip install -r requirements.txt
     - name: Fl_common Models Cait
       run: |
-        python manage.py test fl_common.tests.tests_models_cait
+        coverage run manage.py test fl_common.tests.tests_models_cait
+        coverage xml -o coverage-cait.xml
 
   test-coat-models:
     runs-on: ubuntu-latest
@@ -101,7 +103,7 @@ jobs:
         dotnet: true
         haskell: true
         large-packages: true
-        docker-images: true
+        docker-images: false
         swap-storage: true
     - uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
@@ -112,10 +114,12 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        python -m pip install coverage
         pip install -r requirements.txt
     - name: Fl_common Models Coat
       run: |
-        python manage.py test fl_common.tests.tests_models_coat
+        coverage run manage.py test fl_common.tests.tests_models_coat
+        coverage xml -o coverage-coat.xml
 
   test-convit-models:
     runs-on: ubuntu-latest
@@ -156,7 +160,7 @@ jobs:
         dotnet: true
         haskell: true
         large-packages: true
-        docker-images: true
+        docker-images: false
         swap-storage: true
     - uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
@@ -167,10 +171,12 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        python -m pip install coverage
         pip install -r requirements.txt
     - name: Fl_common Models Convit
       run: |
-        python manage.py test fl_common.tests.tests_models_convit
+        coverage run manage.py test fl_common.tests.tests_models_convit
+        coverage xml -o coverage-convit.xml
 
   test-convmixer-models:
     runs-on: ubuntu-latest
@@ -211,7 +217,7 @@ jobs:
         dotnet: true
         haskell: true
         large-packages: true
-        docker-images: true
+        docker-images: false
         swap-storage: true
     - uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
@@ -225,7 +231,8 @@ jobs:
         pip install -r requirements.txt
     - name: Fl_common Models Convmixer
       run: |
-        python manage.py test fl_common.tests.tests_models_convmixer
+        coverage run manage.py test fl_common.tests.tests_models_convmixer
+        coverage xml -o coverage-convmixer.xml
 
   test-convnext-models:
     runs-on: ubuntu-latest
@@ -266,7 +273,7 @@ jobs:
         dotnet: true
         haskell: true
         large-packages: true
-        docker-images: true
+        docker-images: false
         swap-storage: true
     - uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
@@ -277,10 +284,12 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        python -m pip install coverage
         pip install -r requirements.txt
     - name: Fl_common Models Convnext
       run: |
-        python manage.py test fl_common.tests.tests_models_convnext
+        coverage run manage.py test fl_common.tests.tests_models_convnext
+        coverage xml -o coverage-convnext.xml
 
   test-crossvit-models:
     runs-on: ubuntu-latest
@@ -321,7 +330,7 @@ jobs:
         dotnet: true
         haskell: true
         large-packages: true
-        docker-images: true
+        docker-images: false
         swap-storage: true
     - uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
@@ -332,10 +341,12 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        python -m pip install coverage
         pip install -r requirements.txt
     - name: Fl_common Models Crossvit
       run: |
-        python manage.py test fl_common.tests.tests_models_crossvit
+        coverage run manage.py test fl_common.tests.tests_models_crossvit
+        coverage xml -o coverage-crossvit.xml
 
   test-cspnet-models:
     runs-on: ubuntu-latest
@@ -376,7 +387,7 @@ jobs:
         dotnet: true
         haskell: true
         large-packages: true
-        docker-images: true
+        docker-images: false
         swap-storage: true
     - uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
@@ -387,10 +398,12 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        python -m pip install coverage
         pip install -r requirements.txt
     - name: Fl_common Models Cspnet
       run: |
-        python manage.py test fl_common.tests.tests_models_cspnet
+        coverage run manage.py test fl_common.tests.tests_models_cspnet
+        coverage xml -o coverage-cspnet.xml
 
   test-cvt-models:
     runs-on: ubuntu-latest
@@ -431,7 +444,7 @@ jobs:
         dotnet: true
         haskell: true
         large-packages: true
-        docker-images: true
+        docker-images: false
         swap-storage: true
     - uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
@@ -442,7 +455,9 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        python -m pip install coverage
         pip install -r requirements.txt
     - name: Fl_common Models CVT
       run: |
-        python manage.py test fl_common.tests.tests_models_cvt
+        coverage run manage.py test fl_common.tests.tests_models_cvt
+        coverage xml -o coverage-cvt.xml
