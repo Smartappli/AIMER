@@ -52,7 +52,16 @@ jobs:
       uses: SonarSource/sonarcloud-github-action@master
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}        
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      with:
+        projectBaseDir: .
+        args: >
+          -Dsonar.projectKey=Smartappli_AIMER
+          -Dsonar.organization=smartappli-github
+          -Dsonar.python.coverage.reportPaths=coverage-beit.xml
+          -Dsonar.verbose=true
+
+
 
   test-byoanet-models:
     runs-on: ubuntu-latest
