@@ -73,4 +73,6 @@ jobs:
       with:
         projectBaseDir: .
         args: >
+          -Dsonar.projectKey=Smartappli_AIMER
+          -Dsonar.organization=smartappli-github
           -Dsonar.python.coverage.reportPaths=coverage-alexenet.xml
