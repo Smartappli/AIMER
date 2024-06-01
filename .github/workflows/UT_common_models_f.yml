@@ -46,7 +46,7 @@ jobs:
         dotnet: true
         haskell: true
         large-packages: true
-        docker-images: true
+        docker-images: false
         swap-storage: true
     - uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
@@ -57,10 +57,13 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        python -m pip install coverage
         pip install -r requirements.txt
     - name: Fl_common Models Fastvit
       run: |
-        python manage.py test fl_common.tests.tests_models_fastvit
+        coverage run manage.py test fl_common.tests.tests_models_fastvit
+        coverage xml -o coverage-fastvit.xml
+        coverage report
 
   test-focalnet-models:
     runs-on: ubuntu-latest
@@ -101,7 +104,7 @@ jobs:
         dotnet: true
         haskell: true
         large-packages: true
-        docker-images: true
+        docker-images: false
         swap-storage: true
     - uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
@@ -112,7 +115,10 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        python -m pip install coverage
         pip install -r requirements.txt
     - name: Fl_common Models Focalnet
       run: |
-        python manage.py test fl_common.tests.tests_models_focalnet
+        coverage run manage.py test fl_common.tests.tests_models_focalnet
+        coverage xml -o coverage-focalnet.xml
+        coverage report
