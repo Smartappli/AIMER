@@ -46,7 +46,7 @@ jobs:
         dotnet: true
         haskell: true
         large-packages: true
-        docker-images: true
+        docker-images: false
         swap-storage: true
     - uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
@@ -57,10 +57,12 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        python -m pip install coverage
         pip install -r requirements.txt
     - name: Fl_common Models Davit
       run: |
-        python manage.py test fl_common.tests.tests_models_davit
+        coverage run manage.py test fl_common.tests.tests_models_davit
+        coverage xml -o coverage-davit.xml
 
   test-deit-models:
     runs-on: ubuntu-latest
@@ -101,7 +103,7 @@ jobs:
         dotnet: true
         haskell: true
         large-packages: true
-        docker-images: true
+        docker-images: false
         swap-storage: true
     - uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
@@ -112,10 +114,12 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        python -m pip install coverage
         pip install -r requirements.txt
     - name: Fl_common Models Deit
       run: |
-        python manage.py test fl_common.tests.tests_models_deit
+        coverage run manage.py test fl_common.tests.tests_models_deit
+        coverage xml -o coverage-deit.xml
 
   test-densenet-models:
     runs-on: ubuntu-latest
@@ -156,7 +160,7 @@ jobs:
         dotnet: true
         haskell: true
         large-packages: true
-        docker-images: true
+        docker-images: false
         swap-storage: true
     - uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
@@ -167,10 +171,12 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        python -m pip install coverage
         pip install -r requirements.txt
     - name: Fl_common Models Densenet
       run: |
-        python manage.py test fl_common.tests.tests_models_densenet
+        coverage run manage.py test fl_common.tests.tests_models_densenet
+        coverage xml -o coverage-densenet.xml
 
   test-dla-models:
     runs-on: ubuntu-latest
@@ -211,7 +217,7 @@ jobs:
         dotnet: true
         haskell: true
         large-packages: true
-        docker-images: true
+        docker-images: false
         swap-storage: true
     - uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
@@ -222,10 +228,12 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        python -m pip install coverage
         pip install -r requirements.txt
     - name: Fl_common Models Dla
       run: |
-        python manage.py test fl_common.tests.tests_models_dla
+        coverage run manage.py test fl_common.tests.tests_models_dla
+        coverage xml -o coverage-dla.xml
 
   test-dpn-models:
     runs-on: ubuntu-latest
@@ -266,7 +274,7 @@ jobs:
         dotnet: true
         haskell: true
         large-packages: true
-        docker-images: true
+        docker-images: false
         swap-storage: true
     - uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
@@ -277,7 +285,9 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        python -m pip install coverage
         pip install -r requirements.txt
     - name: Fl_common Models Dpn
       run: |
-        python manage.py test fl_common.tests.tests_models_dpn
+        coverage run manage.py test fl_common.tests.tests_models_dpn
+        coverage xml -o coverage-dpn.xml
