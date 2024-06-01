@@ -62,3 +62,5 @@ jobs:
     - name: Fl_common Models Wide Resnet
       run: |
         coverage run manage.py test fl_common.tests.tests_models_wide_resnet
+        coverage xml -o coverage-wide_resnet.xml
+        coverage report
