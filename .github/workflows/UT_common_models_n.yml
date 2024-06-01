@@ -46,7 +46,7 @@ jobs:
         dotnet: true
         haskell: true
         large-packages: true
-        docker-images: true
+        docker-images: false
         swap-storage: true
     - uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
@@ -57,10 +57,13 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        python -m pip install coverage        
         pip install -r requirements.txt
     - name: Fl_common Models Nasnet
       run: |
-        python manage.py test fl_common.tests.tests_models_nasnet
+        coverage run manage.py test fl_common.tests.tests_models_nasnet
+        coverage xml -o coverage-nasnet.xml
+        coverage report        
 
   test-nest-models:
     runs-on: ubuntu-latest
@@ -101,7 +104,7 @@ jobs:
         dotnet: true
         haskell: true
         large-packages: true
-        docker-images: true
+        docker-images: false
         swap-storage: true
     - uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
@@ -112,10 +115,13 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        python -m pip install coverage        
         pip install -r requirements.txt
     - name: Fl_common Models Nest
       run: |
-        python manage.py test fl_common.tests.tests_models_nest
+        coverage run manage.py test fl_common.tests.tests_models_nest
+        coverage xml -o coverage-nest.xml
+        coverage report
 
   test-nextvit-models:
     runs-on: ubuntu-latest
@@ -156,7 +162,7 @@ jobs:
         dotnet: true
         haskell: true
         large-packages: true
-        docker-images: true
+        docker-images: false
         swap-storage: true
     - uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
@@ -167,10 +173,13 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        python -m pip install coverage        
         pip install -r requirements.txt
     - name: Fl_common Models Nextvit
       run: |
-        python manage.py test fl_common.tests.tests_models_nextvit
+        coverage run manage.py test fl_common.tests.tests_models_nextvit
+        coverage xml -o coverage-nextvit.xml
+        coverage report        
 
   test-nfnet-models:
     runs-on: ubuntu-latest
@@ -211,7 +220,7 @@ jobs:
         dotnet: true
         haskell: true
         large-packages: true
-        docker-images: true
+        docker-images: false
         swap-storage: true
     - uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
@@ -222,7 +231,10 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        python -m pip install coverage        
         pip install -r requirements.txt
     - name: Fl_common Models Nfnet
       run: |
-        python manage.py test fl_common.tests.tests_models_nfnet
+        coverage run manage.py test fl_common.tests.tests_models_nfnet
+        coverage xml -o coverage-nfnet.xml
+        coverage report        
