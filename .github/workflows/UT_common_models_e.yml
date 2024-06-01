@@ -46,7 +46,7 @@ jobs:
         dotnet: true
         haskell: true
         large-packages: true
-        docker-images: true
+        docker-images: false
         swap-storage: true
     - uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
@@ -57,10 +57,12 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        python -m pip install coverage
         pip install -r requirements.txt
     - name: Fl_common Models Edgenet
       run: |
-        python manage.py test fl_common.tests.tests_models_edgenet  
+        coverage run manage.py test fl_common.tests.tests_models_edgenet
+        coverage xml -o coverage-edgenet.xml
 
   test-efficientformer-models:
     runs-on: ubuntu-latest
@@ -101,7 +103,7 @@ jobs:
         dotnet: true
         haskell: true
         large-packages: true
-        docker-images: true
+        docker-images: false
         swap-storage: true
     - uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
@@ -112,10 +114,12 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        python -m pip install coverage
         pip install -r requirements.txt
     - name: Fl_common Models Efficientformer
       run: |
-        python manage.py test fl_common.tests.tests_models_efficientformer
+        coverage manage.py test fl_common.tests.tests_models_efficientformer
+        coverage xml -o coverage-efficientformer.xml
 
   test-efficientformer-v2-models:
     runs-on: ubuntu-latest
@@ -156,7 +160,7 @@ jobs:
         dotnet: true
         haskell: true
         large-packages: true
-        docker-images: true
+        docker-images: false
         swap-storage: true
     - uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
@@ -167,10 +171,12 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        python -m pip install coverage
         pip install -r requirements.txt
     - name: Fl_common Models Efficientformer v2
       run: |
-        python manage.py test fl_common.tests.tests_models_efficientformer_v2
+        coverage run manage.py test fl_common.tests.tests_models_efficientformer_v2
+        coverage xml -o coverage-efficientformer_v2.xml
 
   test-efficienet-mit-models:
     runs-on: ubuntu-latest
@@ -211,7 +217,7 @@ jobs:
         dotnet: true
         haskell: true
         large-packages: true
-        docker-images: true
+        docker-images: false
         swap-storage: true
     - uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
@@ -222,10 +228,12 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        python -m pip install coverage
         pip install -r requirements.txt
     - name: Fl_common Models Efficientvit_mit
       run: |
-        python manage.py test fl_common.tests.tests_models_efficientvit_mit
+        coverage run manage.py test fl_common.tests.tests_models_efficientvit_mit
+        coverage xml -o coverage-efficientvit_mit.xml
 
   test-efficienet-msra-models:
     runs-on: ubuntu-latest
@@ -266,7 +274,7 @@ jobs:
         dotnet: true
         haskell: true
         large-packages: true
-        docker-images: true
+        docker-images: false
         swap-storage: true
     - uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
@@ -277,10 +285,12 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        python -m pip install coverage
         pip install -r requirements.txt
     - name: Fl_common Models Efficientvit_msra
       run: |
-        python manage.py test fl_common.tests.tests_models_efficientvit_msra
+        coverage run manage.py test fl_common.tests.tests_models_efficientvit_msra
+        coverage xml -o coverage-efficientvit_msra.xml
 
   test-efficienet-models:
     runs-on: ubuntu-latest
@@ -321,7 +331,7 @@ jobs:
         dotnet: true
         haskell: true
         large-packages: true
-        docker-images: true
+        docker-images: false
         swap-storage: true
     - uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
@@ -332,11 +342,13 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        python -m pip install coverage
         pip install -r requirements.txt
     - name: Fl_common Models Efficientnet
       run: |
-        python manage.py test fl_common.tests.tests_models_efficientnet
-
+        coverage run manage.py test fl_common.tests.tests_models_efficientnet
+        coverage xml -o coverage-efficientnet.xml
+        
   test-eva1-models:
     runs-on: ubuntu-latest
     strategy:
@@ -376,7 +388,7 @@ jobs:
         dotnet: true
         haskell: true
         large-packages: true
-        docker-images: true
+        docker-images: false
         swap-storage: true
     - uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
@@ -387,10 +399,12 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        python -m pip install coverage
         pip install -r requirements.txt
     - name: Fl_common Models Eva Part 1
       run: |
-        python manage.py test fl_common.tests.tests_models_eva_001
+        coverage run manage.py test fl_common.tests.tests_models_eva_001
+        coverage xml -o coverage-eva_001.xml
 
   test-eva2-models:
     runs-on: ubuntu-latest
@@ -431,7 +445,7 @@ jobs:
         dotnet: true
         haskell: true
         large-packages: true
-        docker-images: true
+        docker-images: false
         swap-storage: true
     - uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
@@ -442,10 +456,12 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        python -m pip install coverage
         pip install -r requirements.txt
     - name: Fl_common Models Eva Part 2
       run: |
-        python manage.py test fl_common.tests.tests_models_eva_002
+        coverage run manage.py test fl_common.tests.tests_models_eva_002
+        coverage xml -o coverage-eva_002.xml
 
   test-eva3-models:
     runs-on: ubuntu-latest
@@ -486,7 +502,7 @@ jobs:
         dotnet: true
         haskell: true
         large-packages: true
-        docker-images: true
+        docker-images: false
         swap-storage: true
     - uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
@@ -497,7 +513,9 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        python -m pip install coverage
         pip install -r requirements.txt
     - name: Fl_common Models Eva Part 2
       run: |
-        python manage.py test fl_common.tests.tests_models_eva_003
+        coverage run manage.py test fl_common.tests.tests_models_eva_003
+        coverage xml -o coverage-eva_003.xml
