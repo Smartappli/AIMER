@@ -63,6 +63,7 @@ jobs:
       run: |
         coverage run manage.py test fl_common.tests.tests_models_davit
         coverage xml -o coverage-davit.xml
+        coverage report
 
   test-deit-models:
     runs-on: ubuntu-latest
@@ -120,6 +121,7 @@ jobs:
       run: |
         coverage run manage.py test fl_common.tests.tests_models_deit
         coverage xml -o coverage-deit.xml
+        coverage report
 
   test-densenet-models:
     runs-on: ubuntu-latest
@@ -177,6 +179,7 @@ jobs:
       run: |
         coverage run manage.py test fl_common.tests.tests_models_densenet
         coverage xml -o coverage-densenet.xml
+        coverage report
 
   test-dla-models:
     runs-on: ubuntu-latest
@@ -234,6 +237,7 @@ jobs:
       run: |
         coverage run manage.py test fl_common.tests.tests_models_dla
         coverage xml -o coverage-dla.xml
+        coverage report
 
   test-dpn-models:
     runs-on: ubuntu-latest
@@ -291,3 +295,4 @@ jobs:
       run: |
         coverage run manage.py test fl_common.tests.tests_models_dpn
         coverage xml -o coverage-dpn.xml
+        coverage report
