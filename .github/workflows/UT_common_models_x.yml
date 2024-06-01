@@ -62,6 +62,8 @@ jobs:
     - name: Fl_common Models Xception
       run: |
         coverage run manage.py test fl_common.tests.tests_models_xception
+        coverage xml -o coverage-xception.xml
+        coverage report
 
   test-xcit-models:
     runs-on: ubuntu-latest
@@ -118,3 +120,5 @@ jobs:
     - name: Fl_common Models Xcit
       run: |
         coverage run manage.py test fl_common.tests.tests_models_xcit
+        coverage xml -o coverage-xcit.xml
+        coverage report
