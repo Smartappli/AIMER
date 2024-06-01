@@ -63,6 +63,7 @@ jobs:
       run: |
         coverage run manage.py test fl_common.tests.tests_models_edgenet
         coverage xml -o coverage-edgenet.xml
+        coverage report
 
   test-efficientformer-models:
     runs-on: ubuntu-latest
@@ -120,6 +121,7 @@ jobs:
       run: |
         coverage run manage.py test fl_common.tests.tests_models_efficientformer
         coverage xml -o coverage-efficientformer.xml
+        coverage report
 
   test-efficientformer-v2-models:
     runs-on: ubuntu-latest
@@ -177,6 +179,7 @@ jobs:
       run: |
         coverage run manage.py test fl_common.tests.tests_models_efficientformer_v2
         coverage xml -o coverage-efficientformer_v2.xml
+        coverage report
 
   test-efficienet-mit-models:
     runs-on: ubuntu-latest
@@ -234,6 +237,7 @@ jobs:
       run: |
         coverage run manage.py test fl_common.tests.tests_models_efficientvit_mit
         coverage xml -o coverage-efficientvit_mit.xml
+        coverage report
 
   test-efficienet-msra-models:
     runs-on: ubuntu-latest
@@ -291,6 +295,7 @@ jobs:
       run: |
         coverage run manage.py test fl_common.tests.tests_models_efficientvit_msra
         coverage xml -o coverage-efficientvit_msra.xml
+        coverage report
 
   test-efficienet-models:
     runs-on: ubuntu-latest
@@ -348,6 +353,7 @@ jobs:
       run: |
         coverage run manage.py test fl_common.tests.tests_models_efficientnet
         coverage xml -o coverage-efficientnet.xml
+        coverage report
         
   test-eva1-models:
     runs-on: ubuntu-latest
@@ -405,6 +411,7 @@ jobs:
       run: |
         coverage run manage.py test fl_common.tests.tests_models_eva_001
         coverage xml -o coverage-eva_001.xml
+        coverage report
 
   test-eva2-models:
     runs-on: ubuntu-latest
@@ -462,6 +469,7 @@ jobs:
       run: |
         coverage run manage.py test fl_common.tests.tests_models_eva_002
         coverage xml -o coverage-eva_002.xml
+        coverage report
 
   test-eva3-models:
     runs-on: ubuntu-latest
@@ -519,3 +527,4 @@ jobs:
       run: |
         coverage run manage.py test fl_common.tests.tests_models_eva_003
         coverage xml -o coverage-eva_003.xml
+        coverage report
