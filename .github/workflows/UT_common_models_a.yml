@@ -69,3 +69,4 @@ jobs:
           -Dsonar.projectKey=Smartappli_AIMER
           -Dsonar.organization=smartappli-github
           -Dsonar.python.coverage.reportPaths=coverage-alexenet.xml
+          -Dsonar.verbose=true
