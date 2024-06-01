@@ -62,7 +62,9 @@ jobs:
     - name: Fl_common Models Tinyvit
       run: |
         coverave run manage.py test fl_common.tests.tests_models_tinyvit
-
+        coverage xml -o coverage-tinyvit.xml
+        coverage report
+          
   test-tnt-models:
     runs-on: ubuntu-latest
     strategy:
@@ -118,7 +120,9 @@ jobs:
     - name: Fl_common Models Tnt
       run: |
         coverave run manage.py test fl_common.tests.tests_models_tnt
-
+        coverage xml -o coverage-tnt.xml
+        coverage report
+        
   test-tresnet-models:
     runs-on: ubuntu-latest
     strategy:
@@ -174,7 +178,9 @@ jobs:
     - name: Fl_common Models Tresnet
       run: |
         coverage run manage.py test fl_common.tests.tests_models_tresnet
-
+        coverage xml -o coverage-tresnet.xml
+        coverage report
+        
   test-twins-models:
     runs-on: ubuntu-latest
     strategy:
@@ -230,3 +236,5 @@ jobs:
     - name: Fl_common Models Twins
       run: |
         coverage run manage.py test fl_common.tests.tests_models_twins
+        coverage xml -o coverage-twins.xml
+        coverage report
