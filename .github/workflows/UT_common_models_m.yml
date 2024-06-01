@@ -46,7 +46,7 @@ jobs:
         dotnet: true
         haskell: true
         large-packages: true
-        docker-images: true
+        docker-images: false
         swap-storage: true
     - uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
@@ -57,11 +57,14 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        python -m pip install coverage        
         pip install -r requirements.txt
     - name: Fl_common Models Maxvit
       run: |
-        python manage.py test fl_common.tests.tests_models_maxvit
-
+        coverage run manage.py test fl_common.tests.tests_models_maxvit
+        coverage xml -o coverage-maxvit.xml
+        coverage report
+        
   test-metaformer-models:
     runs-on: ubuntu-latest
     strategy:
@@ -101,7 +104,7 @@ jobs:
         dotnet: true
         haskell: true
         large-packages: true
-        docker-images: true
+        docker-images: false
         swap-storage: true
     - uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
@@ -112,10 +115,13 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        python -m pip install coverage        
         pip install -r requirements.txt
     - name: Fl_common Models Metaformer
       run: |
-        python manage.py test fl_common.tests.tests_models_metaformer
+        coverage run manage.py test fl_common.tests.tests_models_metaformer
+        coverage xml -o coverage-metaformer.xml
+        coverage report
 
   test-mlp_mixer-models:
     runs-on: ubuntu-latest
@@ -156,7 +162,7 @@ jobs:
         dotnet: true
         haskell: true
         large-packages: true
-        docker-images: true
+        docker-images: false
         swap-storage: true
     - uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
@@ -167,11 +173,14 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        python -m pip install coverage        
         pip install -r requirements.txt
     - name: Fl_common Models Mlpmixer
       run: |
-        python manage.py test fl_common.tests.tests_models_mlp_mixer
-
+        coverage run manage.py test fl_common.tests.tests_models_mlp_mixer
+        coverage xml -o coverage-mlp_mixer.xml
+        coverage report
+        
   test-mnasnet-models:
     runs-on: ubuntu-latest
     strategy:
@@ -211,7 +220,7 @@ jobs:
         dotnet: true
         haskell: true
         large-packages: true
-        docker-images: true
+        docker-images: false
         swap-storage: true
     - uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
@@ -222,11 +231,14 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        python -m pip install coverage        
         pip install -r requirements.txt
     - name: Fl_common Models Mnasnet
       run: |
-        python manage.py test fl_common.tests.tests_models_mnasnet
-
+        coverage run manage.py test fl_common.tests.tests_models_mnasnet
+        coverage xml -o coverage-mnasnet.xml
+        coverage report
+        
   test-mobilenet-models:
     runs-on: ubuntu-latest
     strategy:
@@ -266,7 +278,7 @@ jobs:
         dotnet: true
         haskell: true
         large-packages: true
-        docker-images: true
+        docker-images: false
         swap-storage: true
     - uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
@@ -277,11 +289,14 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        python -m pip install coverage        
         pip install -r requirements.txt
     - name: Fl_common Models Mobilenet
       run: |
-        python manage.py test fl_common.tests.tests_models_mobilenet
-
+        coverage run manage.py test fl_common.tests.tests_models_mobilenet
+        coverage xml -o coverage-mobilenet.xml
+        coverage report
+        
   test-mobilevit-models:
     runs-on: ubuntu-latest
     strategy:
@@ -321,7 +336,7 @@ jobs:
         dotnet: true
         haskell: true
         large-packages: true
-        docker-images: true
+        docker-images: false
         swap-storage: true
     - uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
@@ -332,11 +347,14 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        python -m pip install coverage
         pip install -r requirements.txt
     - name: Fl_common Models Mobilevit
       run: |
-        python manage.py test fl_common.tests.tests_models_mobilevit
-
+        coverage run manage.py test fl_common.tests.tests_models_mobilevit
+        coverage xml -o coverage-mobilevit.xml
+        coverage report
+        
   test-mvitv2-models:
     runs-on: ubuntu-latest
     strategy:
@@ -376,7 +394,7 @@ jobs:
           dotnet: true
           haskell: true
           large-packages: true
-          docker-images: true
+          docker-images: false
           swap-storage: true
       - uses: actions/checkout@v4
       - name: Set up Python ${{ matrix.python-version }}
@@ -387,7 +405,10 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
+          python -m pip install coverage
           pip install -r requirements.txt
       - name: Fl_common Models Mvitv2
         run: |
-          python manage.py test fl_common.tests.tests_models_mvitv2
+          coverage run manage.py test fl_common.tests.tests_models_mvitv2
+          coverage xml -o coverage-mvitv2.xml
+          coverage report
