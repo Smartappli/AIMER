@@ -61,7 +61,9 @@ jobs:
         pip install -r requirements.txt
     - name: Fl_common Models Pit
       run: |
-        python manage.py test fl_common.tests.tests_models_pit
+        coverage run manage.py test fl_common.tests.tests_models_pit
+        coverage xml -o coverage-pit.xml
+        coverage report
 
   test-pnasnet-models:
     runs-on: ubuntu-latest
@@ -117,7 +119,9 @@ jobs:
           pip install -r requirements.txt
       - name: Fl_common Models Pnasnet
         run: |
-          python manage.py test fl_common.tests.tests_models_pnasnet
+          coverage run manage.py test fl_common.tests.tests_models_pnasnet
+          coverage xml -o coverage-pmasnet.xml
+          coverage report
 
   test-pvt_v2-models:
     runs-on: ubuntu-latest
@@ -173,4 +177,6 @@ jobs:
           pip install -r requirements.txt
       - name: Fl_common Models Pvt v2
         run: |
-          python manage.py test fl_common.tests.tests_models_pvt_v2
+          coverage run manage.py test fl_common.tests.tests_models_pvt_v2
+          coverage xml -o coverage-pvt_v2.xml
+          coverage report
