@@ -50,6 +50,11 @@ jobs:
       run: |
         coverage run manage.py test fl_common.tests.tests_models_alexnet
         coverage xml -o coverage-alexenet.xml
+    - name: Run codacy-coverage-reporter
+      uses: codacy/codacy-coverage-reporter-action@v1.3.0
+        with:
+          project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
+          coverage-reports: coverage-alexenet.xml
     - name: SonarCloud Scan
       uses: SonarSource/sonarcloud-github-action@master
       env:
