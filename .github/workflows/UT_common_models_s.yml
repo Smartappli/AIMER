@@ -46,7 +46,7 @@ jobs:
           dotnet: true
           haskell: true
           large-packages: true
-          docker-images: true
+          docker-images: false
           swap-storage: true
       - uses: actions/checkout@v4
       - name: Set up Python ${{ matrix.python-version }}
@@ -57,6 +57,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
+          python -m pip install coverage
           pip install -r requirements.txt
       - name: Fl_common Models Selecsls
         run: |
@@ -101,7 +102,7 @@ jobs:
           dotnet: true
           haskell: true
           large-packages: true
-          docker-images: true
+          docker-images: false
           swap-storage: true
       - uses: actions/checkout@v4
       - name: Set up Python ${{ matrix.python-version }}
@@ -112,10 +113,11 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
+          python -m pip install coverage
           pip install -r requirements.txt
       - name: Fl_common Models Senet
         run: |
-          python manage.py test fl_common.tests.tests_models_senet
+          coverave run manage.py test fl_common.tests.tests_models_senet
 
   tests-sequencer-models:
     runs-on: ubuntu-latest
@@ -156,7 +158,7 @@ jobs:
           dotnet: true
           haskell: true
           large-packages: true
-          docker-images: true
+          docker-images: false
           swap-storage: true
       - uses: actions/checkout@v4
       - name: Set up Python ${{ matrix.python-version }}
@@ -167,10 +169,11 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
+          python -m pip install coverage
           pip install -r requirements.txt
       - name: Fl_common Models Sequencer
         run: |
-          python manage.py test fl_common.tests.tests_models_sequencer        
+          coverave run manage.py test fl_common.tests.tests_models_sequencer        
 
   tests-shufflenet-models:
     runs-on: ubuntu-latest
@@ -211,7 +214,7 @@ jobs:
         dotnet: true
         haskell: true
         large-packages: true
-        docker-images: true
+        docker-images: false
         swap-storage: true
     - uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
@@ -222,10 +225,11 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        python -m pip install coverage
         pip install -r requirements.txt
     - name: Fl_common Models Shufflenet
       run: |
-        python manage.py test fl_common.tests.tests_models_shufflenet
+        coverave run manage.py test fl_common.tests.tests_models_shufflenet
 
   tests-sknet-models:
     runs-on: ubuntu-latest
@@ -266,7 +270,7 @@ jobs:
         dotnet: true
         haskell: true
         large-packages: true
-        docker-images: true
+        docker-images: false
         swap-storage: true
     - uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
@@ -277,10 +281,11 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        python -m pip install coverage
         pip install -r requirements.txt
     - name: Fl_common Models Sknet
       run: |
-        python manage.py test fl_common.tests.tests_models_sknet
+        coverave run manage.py test fl_common.tests.tests_models_sknet
 
   tests-squeezenet-models:
     runs-on: ubuntu-latest
@@ -321,7 +326,7 @@ jobs:
         dotnet: true
         haskell: true
         large-packages: true
-        docker-images: true
+        docker-images: false
         swap-storage: true
     - uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
@@ -332,10 +337,11 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        python -m pip install coverage
         pip install -r requirements.txt
     - name: Fl_common Models Squeezenet
       run: |
-        python manage.py test fl_common.tests.tests_models_squeezenet
+        coverave run manage.py test fl_common.tests.tests_models_squeezenet
 
   tests-swin_transformer-models:
     runs-on: ubuntu-latest
@@ -376,7 +382,7 @@ jobs:
         dotnet: true
         haskell: true
         large-packages: true
-        docker-images: true
+        docker-images: false
         swap-storage: true
     - uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
@@ -387,10 +393,11 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        python -m pip install coverage
         pip install -r requirements.txt
     - name: Fl_common Models Swin Transformer
       run: |
-        python manage.py test fl_common.tests.tests_models_swin_transformer
+        coverave run manage.py test fl_common.tests.tests_models_swin_transformer
 
   tests-swin_transformer-v2-models:
     runs-on: ubuntu-latest
@@ -431,7 +438,7 @@ jobs:
         dotnet: true
         haskell: true
         large-packages: true
-        docker-images: true
+        docker-images: false
         swap-storage: true
     - uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
@@ -442,10 +449,11 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        python -m pip install coverage
         pip install -r requirements.txt
     - name: Fl_common Models Swin Transformer v2
       run: |
-        python manage.py test fl_common.tests.tests_models_swin_transformer_v2
+        coverave run manage.py test fl_common.tests.tests_models_swin_transformer_v2
 
   tests-swin_transformer-v2-cr-001-models:
     runs-on: ubuntu-latest
@@ -486,7 +494,7 @@ jobs:
         dotnet: true
         haskell: true
         large-packages: true
-        docker-images: true
+        docker-images: false
         swap-storage: true
     - uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
@@ -497,10 +505,11 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        python -m pip install coverage
         pip install -r requirements.txt
     - name: Fl_common Models Swin Transformer v2 cr 001
       run: |
-        python manage.py test fl_common.tests.tests_models_swin_transformer_v2_cr_001
+        coverave run manage.py test fl_common.tests.tests_models_swin_transformer_v2_cr_001
         
   tests-swin_transformer-v2-cr-002-models:
     runs-on: ubuntu-latest
@@ -541,7 +550,7 @@ jobs:
         dotnet: true
         haskell: true
         large-packages: true
-        docker-images: true
+        docker-images: false
         swap-storage: true
     - uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
@@ -552,10 +561,11 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        python -m pip install coverage
         pip install -r requirements.txt
     - name: Fl_common Models Swin Transformer v2 cr 002
       run: |
-        python manage.py test fl_common.tests.tests_models_swin_transformer_v2_cr_002
+        coverave run manage.py test fl_common.tests.tests_models_swin_transformer_v2_cr_002
         
   tests-swin_transformer-v2-cr-003-models:
     runs-on: ubuntu-latest
@@ -596,7 +606,7 @@ jobs:
         dotnet: true
         haskell: true
         large-packages: true
-        docker-images: true
+        docker-images: false
         swap-storage: true
     - uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
@@ -607,7 +617,8 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        python -m pip install coverage
         pip install -r requirements.txt
     - name: Fl_common Models Swin Transformer v2 cr 003
       run: |
-        python manage.py test fl_common.tests.tests_models_swin_transformer_v2_cr_003
+        coverave run manage.py test fl_common.tests.tests_models_swin_transformer_v2_cr_003
