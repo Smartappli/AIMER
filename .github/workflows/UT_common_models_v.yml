@@ -46,7 +46,7 @@ jobs:
         dotnet: true
         haskell: true
         large-packages: true
-        docker-images: true
+        docker-images: false
         swap-storage: true
     - uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
@@ -57,10 +57,11 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        python -m pip install coverage
         pip install -r requirements.txt
     - name: Fl_common Models VGG
       run: |
-        python manage.py test fl_common.tests.tests_models_vgg
+        coverage run manage.py test fl_common.tests.tests_models_vgg
 
   test-visformer-models:
     runs-on: ubuntu-latest
@@ -101,7 +102,7 @@ jobs:
         dotnet: true
         haskell: true
         large-packages: true
-        docker-images: true
+        docker-images: false
         swap-storage: true
     - uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
@@ -112,10 +113,11 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        python -m pip install coverage
         pip install -r requirements.txt
     - name: Fl_common Models Visformer
       run: |
-        python manage.py test fl_common.tests.tests_models_visformer
+        coverage run manage.py test fl_common.tests.tests_models_visformer
 
   test-vision_transformer-models-1:
     runs-on: ubuntu-latest
@@ -156,7 +158,7 @@ jobs:
         dotnet: true
         haskell: true
         large-packages: true
-        docker-images: true
+        docker-images: false
         swap-storage: true
     - uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
@@ -167,10 +169,11 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        python -m pip install coverage
         pip install -r requirements.txt
     - name: Fl_common Models Vision Transformer
       run: |
-        python manage.py test fl_common.tests.tests_models_vision_transformer_001
+        coverage run manage.py test fl_common.tests.tests_models_vision_transformer_001
 
   test-vision_transformer-models-2:
     runs-on: ubuntu-latest
@@ -211,7 +214,7 @@ jobs:
         dotnet: true
         haskell: true
         large-packages: true
-        docker-images: true
+        docker-images: false
         swap-storage: true
     - uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
@@ -222,10 +225,11 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        python -m pip install coverage
         pip install -r requirements.txt
     - name: Fl_common Models Vision Transformer
       run: |
-        python manage.py test fl_common.tests.tests_models_vision_transformer_002
+        coverage run manage.py test fl_common.tests.tests_models_vision_transformer_002
 
   test-vision_transformer-models-3:
     runs-on: ubuntu-latest
@@ -266,7 +270,7 @@ jobs:
         dotnet: true
         haskell: true
         large-packages: true
-        docker-images: true
+        docker-images: false
         swap-storage: true
     - uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
@@ -277,10 +281,11 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        python -m pip install coverage
         pip install -r requirements.txt
     - name: Fl_common Models Vision Transformer
       run: |
-        python manage.py test fl_common.tests.tests_models_vision_transformer_003
+        coverage run manage.py test fl_common.tests.tests_models_vision_transformer_003
 
   test-vision_transformer-models-4:
     runs-on: ubuntu-latest
@@ -321,7 +326,7 @@ jobs:
         dotnet: true
         haskell: true
         large-packages: true
-        docker-images: true
+        docker-images: false
         swap-storage: true
     - uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
@@ -332,10 +337,11 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        python -m pip install coverage
         pip install -r requirements.txt
     - name: Fl_common Models Vision Transformer
       run: |
-        python manage.py test fl_common.tests.tests_models_vision_transformer_004
+        coverage run manage.py test fl_common.tests.tests_models_vision_transformer_004
 
   test-vision_transformer-models-5:
     runs-on: ubuntu-latest
@@ -376,7 +382,7 @@ jobs:
         dotnet: true
         haskell: true
         large-packages: true
-        docker-images: true
+        docker-images: false
         swap-storage: true
     - uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
@@ -387,10 +393,11 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        python -m pip install coverage
         pip install -r requirements.txt
     - name: Fl_common Models Vision Transformer
       run: |
-        python manage.py test fl_common.tests.tests_models_vision_transformer_005
+        coverage run manage.py test fl_common.tests.tests_models_vision_transformer_005
 
   test-vision_transformer-models-6:
     runs-on: ubuntu-latest
@@ -431,7 +438,7 @@ jobs:
         dotnet: true
         haskell: true
         large-packages: true
-        docker-images: true
+        docker-images: false
         swap-storage: true
     - uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
@@ -442,10 +449,11 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        python -m pip install coverage
         pip install -r requirements.txt
     - name: Fl_common Models Vision Transformer
       run: |
-        python manage.py test fl_common.tests.tests_models_vision_transformer_006
+        coverage run manage.py test fl_common.tests.tests_models_vision_transformer_006
 
   test-vision_transformer-models-7:
     runs-on: ubuntu-latest
@@ -486,7 +494,7 @@ jobs:
         dotnet: true
         haskell: true
         large-packages: true
-        docker-images: true
+        docker-images: false
         swap-storage: true
     - uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
@@ -497,10 +505,11 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        python -m pip install coverage
         pip install -r requirements.txt
     - name: Fl_common Models Vision Transformer
       run: |
-        python manage.py test fl_common.tests.tests_models_vision_transformer_007
+        coverage run manage.py test fl_common.tests.tests_models_vision_transformer_007
 
   test-vision_transformer-models-8:
     runs-on: ubuntu-latest
@@ -541,7 +550,7 @@ jobs:
         dotnet: true
         haskell: true
         large-packages: true
-        docker-images: true
+        docker-images: false
         swap-storage: true
     - uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
@@ -552,10 +561,11 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        python -m pip install coverage
         pip install -r requirements.txt
     - name: Fl_common Models Vision Transformer
       run: |
-        python manage.py test fl_common.tests.tests_models_vision_transformer_008
+        coverage run manage.py test fl_common.tests.tests_models_vision_transformer_008
 
   test-vision_transformer-models-9:
     runs-on: ubuntu-latest
@@ -596,7 +606,7 @@ jobs:
         dotnet: true
         haskell: true
         large-packages: true
-        docker-images: true
+        docker-images: false
         swap-storage: true
     - uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
@@ -607,10 +617,11 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        python -m pip install coverage
         pip install -r requirements.txt
     - name: Fl_common Models Vision Transformer
       run: |
-        python manage.py test fl_common.tests.tests_models_vision_transformer_009
+        coverage run manage.py test fl_common.tests.tests_models_vision_transformer_009
 
   test-vision_transformer-models-10:
     runs-on: ubuntu-latest
@@ -651,7 +662,7 @@ jobs:
         dotnet: true
         haskell: true
         large-packages: true
-        docker-images: true
+        docker-images: false
         swap-storage: true
     - uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
@@ -662,10 +673,11 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        python -m pip install coverage
         pip install -r requirements.txt
     - name: Fl_common Models Vision Transformer
       run: |
-        python manage.py test fl_common.tests.tests_models_vision_transformer_010
+        coverage run manage.py test fl_common.tests.tests_models_vision_transformer_010
 
   test-vision_transformer-models-11:
     runs-on: ubuntu-latest
@@ -706,7 +718,7 @@ jobs:
         dotnet: true
         haskell: true
         large-packages: true
-        docker-images: true
+        docker-images: false
         swap-storage: true
     - uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
@@ -717,10 +729,11 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        python -m pip install coverage
         pip install -r requirements.txt
     - name: Fl_common Models Vision Transformer
       run: |
-        python manage.py test fl_common.tests.tests_models_vision_transformer_011
+        coverage run manage.py test fl_common.tests.tests_models_vision_transformer_011
 
   test-vision_transformer-models-12:
     runs-on: ubuntu-latest
@@ -761,7 +774,7 @@ jobs:
         dotnet: true
         haskell: true
         large-packages: true
-        docker-images: true
+        docker-images: false
         swap-storage: true
     - uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
@@ -772,10 +785,11 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        python -m pip install coverage
         pip install -r requirements.txt
     - name: Fl_common Models Vision Transformer
       run: |
-        python manage.py test fl_common.tests.tests_models_vision_transformer_012
+        coverage run manage.py test fl_common.tests.tests_models_vision_transformer_012
 
   test-vision_transformer-models-13:
     runs-on: ubuntu-latest
@@ -816,7 +830,7 @@ jobs:
         dotnet: true
         haskell: true
         large-packages: true
-        docker-images: true
+        docker-images: false
         swap-storage: true
     - uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
@@ -827,10 +841,11 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        python -m pip install coverage
         pip install -r requirements.txt
     - name: Fl_common Models Vision Transformer
       run: |
-        python manage.py test fl_common.tests.tests_models_vision_transformer_013
+        coverage run manage.py test fl_common.tests.tests_models_vision_transformer_013
 
   test-vision_transformer-models-14:
     runs-on: ubuntu-latest
@@ -871,7 +886,7 @@ jobs:
         dotnet: true
         haskell: true
         large-packages: true
-        docker-images: true
+        docker-images: false
         swap-storage: true
     - uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
@@ -882,10 +897,11 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        python -m pip install coverage
         pip install -r requirements.txt
     - name: Fl_common Models Vision Transformer
       run: |
-        python manage.py test fl_common.tests.tests_models_vision_transformer_014
+        coverage run manage.py test fl_common.tests.tests_models_vision_transformer_014
 
   test-vision_transformer-models-15:
     runs-on: ubuntu-latest
@@ -926,7 +942,7 @@ jobs:
         dotnet: true
         haskell: true
         large-packages: true
-        docker-images: true
+        docker-images: false
         swap-storage: true
     - uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
@@ -937,10 +953,11 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        python -m pip install coverage
         pip install -r requirements.txt
     - name: Fl_common Models Vision Transformer
       run: |
-        python manage.py test fl_common.tests.tests_models_vision_transformer_015
+        coverage run manage.py test fl_common.tests.tests_models_vision_transformer_015
 
   test-vision_transformer-models-16:
     runs-on: ubuntu-latest
@@ -981,7 +998,7 @@ jobs:
         dotnet: true
         haskell: true
         large-packages: true
-        docker-images: true
+        docker-images: false
         swap-storage: true
     - uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
@@ -992,10 +1009,11 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        python -m pip install coverage
         pip install -r requirements.txt
     - name: Fl_common Models Vision Transformer
       run: |
-        python manage.py test fl_common.tests.tests_models_vision_transformer_016
+        coverage run manage.py test fl_common.tests.tests_models_vision_transformer_016
 
   test-vision_transformer-models-17:
     runs-on: ubuntu-latest
@@ -1036,7 +1054,7 @@ jobs:
         dotnet: true
         haskell: true
         large-packages: true
-        docker-images: true
+        docker-images: false
         swap-storage: true
     - uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
@@ -1047,10 +1065,11 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        python -m pip install coverage
         pip install -r requirements.txt
     - name: Fl_common Models Vision Transformer
       run: |
-        python manage.py test fl_common.tests.tests_models_vision_transformer_017
+        coverage run manage.py test fl_common.tests.tests_models_vision_transformer_017
 
   test-vision_transformer-models-18:
     runs-on: ubuntu-latest
@@ -1091,7 +1110,7 @@ jobs:
         dotnet: true
         haskell: true
         large-packages: true
-        docker-images: true
+        docker-images: false
         swap-storage: true
     - uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
@@ -1102,10 +1121,11 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        python -m pip install coverage
         pip install -r requirements.txt
     - name: Fl_common Models Vision Transformer
       run: |
-        python manage.py test fl_common.tests.tests_models_vision_transformer_018
+        coverage run manage.py test fl_common.tests.tests_models_vision_transformer_018
 
   test-vision_transformer-models-19:
     runs-on: ubuntu-latest
@@ -1146,7 +1166,7 @@ jobs:
         dotnet: true
         haskell: true
         large-packages: true
-        docker-images: true
+        docker-images: false
         swap-storage: true
     - uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
@@ -1157,10 +1177,11 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        python -m pip install coverage
         pip install -r requirements.txt
     - name: Fl_common Models Vision Transformer
       run: |
-        python manage.py test fl_common.tests.tests_models_vision_transformer_019
+        coverage run manage.py test fl_common.tests.tests_models_vision_transformer_019
 
   test-vision_transformer-models-20:
     runs-on: ubuntu-latest
@@ -1201,7 +1222,7 @@ jobs:
         dotnet: true
         haskell: true
         large-packages: true
-        docker-images: true
+        docker-images: false
         swap-storage: true
     - uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
@@ -1212,10 +1233,11 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        python -m pip install coverage
         pip install -r requirements.txt
     - name: Fl_common Models Vision Transformer
       run: |
-        python manage.py test fl_common.tests.tests_models_vision_transformer_020
+        coverage run manage.py test fl_common.tests.tests_models_vision_transformer_020
 
   test-vision_transformer_hybrid-models:
     runs-on: ubuntu-latest
@@ -1265,7 +1287,7 @@ jobs:
         dotnet: true
         haskell: true
         large-packages: true
-        docker-images: true
+        docker-images: false
         swap-storage: true
     - uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
@@ -1276,10 +1298,11 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        python -m pip install coverage
         pip install -r requirements.txt
     - name: Fl_common Models Vision Transformer Hybrid
       run: |
-        python manage.py test fl_common.tests.tests_models_vision_transformer_hybrid
+        coverage run manage.py test fl_common.tests.tests_models_vision_transformer_hybrid
 
   test-vision_transformer_relpos-models:
     runs-on: ubuntu-latest
@@ -1320,7 +1343,7 @@ jobs:
         dotnet: true
         haskell: true
         large-packages: true
-        docker-images: true
+        docker-images: false
         swap-storage: true
     - uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
@@ -1331,10 +1354,11 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        python -m pip install coverage
         pip install -r requirements.txt
     - name: Fl_common Models Vision Transformer Relpos
       run: |
-        python manage.py test fl_common.tests.tests_models_vision_transformer_relpos
+        coverage run manage.py test fl_common.tests.tests_models_vision_transformer_relpos
 
   test-vision_transformer_sam-models:
     runs-on: ubuntu-latest
@@ -1375,7 +1399,7 @@ jobs:
         dotnet: true
         haskell: true
         large-packages: true
-        docker-images: true
+        docker-images: false
         swap-storage: true
     - uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
@@ -1386,10 +1410,11 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        python -m pip install coverage
         pip install -r requirements.txt
     - name: Fl_common Models Vision Transformer Sam
       run: |
-        python manage.py test fl_common.tests.tests_models_vision_transformer_sam
+        coverage run manage.py test fl_common.tests.tests_models_vision_transformer_sam
 
   test-vitamin-models:
     runs-on: ubuntu-latest
@@ -1430,7 +1455,7 @@ jobs:
         dotnet: true
         haskell: true
         large-packages: true
-        docker-images: true
+        docker-images: false
         swap-storage: true
     - uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
@@ -1441,10 +1466,11 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        python -m pip install coverage
         pip install -r requirements.txt
     - name: Fl_common Models ViTamin
       run: |
-        python manage.py test fl_common.tests.tests_models_vitamin
+        coverage run manage.py test fl_common.tests.tests_models_vitamin
 
   test-volo-models:
     runs-on: ubuntu-latest
@@ -1485,7 +1511,7 @@ jobs:
         dotnet: true
         haskell: true
         large-packages: true
-        docker-images: true
+        docker-images: false
         swap-storage: true
     - uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
@@ -1496,10 +1522,11 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        python -m pip install coverage
         pip install -r requirements.txt
     - name: Fl_common Models Volo
       run: |
-        python manage.py test fl_common.tests.tests_models_volo
+        coverage run manage.py test fl_common.tests.tests_models_volo
 
   test-vovnet-models:
     runs-on: ubuntu-latest
@@ -1540,7 +1567,7 @@ jobs:
         dotnet: true
         haskell: true
         large-packages: true
-        docker-images: true
+        docker-images: false
         swap-storage: true
     - uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
@@ -1551,7 +1578,8 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        python -m pip install coverage
         pip install -r requirements.txt
     - name: Fl_common Models Vovnet
       run: |
-        python manage.py test fl_common.tests.tests_models_vovnet
+        coverage run manage.py test fl_common.tests.tests_models_vovnet
