@@ -63,6 +63,7 @@ jobs:
       run: |
         coverage run manage.py test fl_common.tests.tests_models_cait
         coverage xml -o coverage-cait.xml
+        coverage report
 
   test-coat-models:
     runs-on: ubuntu-latest
@@ -120,6 +121,7 @@ jobs:
       run: |
         coverage run manage.py test fl_common.tests.tests_models_coat
         coverage xml -o coverage-coat.xml
+        coverage report
 
   test-convit-models:
     runs-on: ubuntu-latest
@@ -177,6 +179,7 @@ jobs:
       run: |
         coverage run manage.py test fl_common.tests.tests_models_convit
         coverage xml -o coverage-convit.xml
+        coverage report
 
   test-convmixer-models:
     runs-on: ubuntu-latest
@@ -233,6 +236,7 @@ jobs:
       run: |
         coverage run manage.py test fl_common.tests.tests_models_convmixer
         coverage xml -o coverage-convmixer.xml
+        coverage report
 
   test-convnext-models:
     runs-on: ubuntu-latest
@@ -290,6 +294,7 @@ jobs:
       run: |
         coverage run manage.py test fl_common.tests.tests_models_convnext
         coverage xml -o coverage-convnext.xml
+        coverage report
 
   test-crossvit-models:
     runs-on: ubuntu-latest
@@ -347,6 +352,7 @@ jobs:
       run: |
         coverage run manage.py test fl_common.tests.tests_models_crossvit
         coverage xml -o coverage-crossvit.xml
+        coverage report
 
   test-cspnet-models:
     runs-on: ubuntu-latest
@@ -404,6 +410,7 @@ jobs:
       run: |
         coverage run manage.py test fl_common.tests.tests_models_cspnet
         coverage xml -o coverage-cspnet.xml
+        coverage report
 
   test-cvt-models:
     runs-on: ubuntu-latest
@@ -461,3 +468,4 @@ jobs:
       run: |
         coverage run manage.py test fl_common.tests.tests_models_cvt
         coverage xml -o coverage-cvt.xml
+        coverage report
