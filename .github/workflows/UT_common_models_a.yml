@@ -55,6 +55,7 @@ jobs:
       env:
         project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
       with:
+        api-token: ${{ secrets.CODACY_API_TOKEN }}
         coverage-reports: 'coverage-alexenet.xml'
     - name: SonarCloud Scan
       uses: SonarSource/sonarcloud-github-action@master
