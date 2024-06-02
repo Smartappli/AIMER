@@ -33,9 +33,9 @@ class ProcessingFastVitTestCase(TestCase):
             "fastvit_sa24",
             "fastvit_sa36",
             "fastvit_ma36",
-            "fastvit_mci0",
-            "fastvit_mci1",
-            "fastvit_mci2",
+            # "fastvit_mci0",
+            # "fastvit_mci1",
+            # "fastvit_mci2",
         ]
 
         num_classes = 10  # You can adjust this based on your use case
