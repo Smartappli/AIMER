@@ -62,7 +62,6 @@ jobs:
           -Dsonar.verbose=true
 
 
-
   test-byoanet-models:
     runs-on: ubuntu-latest
     strategy:
