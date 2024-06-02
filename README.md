@@ -21,7 +21,7 @@
 
 ### Security
 
-[![Codacy Security Scan](https://github.com/Smartappli/AIMER/actions/workflows/codacy.yml/badge.svg?event=status)](https://github.com/Smartappli/AIMER/actions/workflows/codacy.yml)
+[![Codacy Security Scan](https://github.com/Smartappli/AIMER/actions/workflows/codacy.yml/badge.svg)](https://github.com/Smartappli/AIMER/actions/workflows/codacy.yml)
 [![Safety](https://github.com/Smartappli/AIMER/actions/workflows/safety.yml/badge.svg)](https://github.com/Smartappli/AIMER/actions/workflows/safety.yml)
 
 ### License Analysis
