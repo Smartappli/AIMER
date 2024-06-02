@@ -177,7 +177,7 @@ jobs:
           pip install -r requirements.txt
       - name: Fl_common Models Sequencer
         run: |
-          coverave run manage.py test fl_common.tests.tests_models_sequencer
+          coverage run manage.py test fl_common.tests.tests_models_sequencer
           coverage xml -o coverage-sequencer.xml
           coverage report        
 
@@ -235,7 +235,7 @@ jobs:
         pip install -r requirements.txt
     - name: Fl_common Models Shufflenet
       run: |
-        coverave run manage.py test fl_common.tests.tests_models_shufflenet
+        coverage run manage.py test fl_common.tests.tests_models_shufflenet
         coverage xml -o coverage-shufflenet.xml
         coverage report
 
@@ -293,7 +293,7 @@ jobs:
         pip install -r requirements.txt
     - name: Fl_common Models Sknet
       run: |
-        coverave run manage.py test fl_common.tests.tests_models_sknet
+        coverage run manage.py test fl_common.tests.tests_models_sknet
         coverage xml -o coverage-sknet.xml
         coverage report
 
@@ -351,7 +351,7 @@ jobs:
         pip install -r requirements.txt
     - name: Fl_common Models Squeezenet
       run: |
-        coverave run manage.py test fl_common.tests.tests_models_squeezenet
+        coverage run manage.py test fl_common.tests.tests_models_squeezenet
         coverage xml -o coverage-squeezenet.xml
         coverage report
 
@@ -409,7 +409,7 @@ jobs:
         pip install -r requirements.txt
     - name: Fl_common Models Swin Transformer
       run: |
-        coverave run manage.py test fl_common.tests.tests_models_swin_transformer
+        coverage run manage.py test fl_common.tests.tests_models_swin_transformer
         coverage xml -o coverage-swin_transformer.xml
         coverage report
 
@@ -467,7 +467,7 @@ jobs:
         pip install -r requirements.txt
     - name: Fl_common Models Swin Transformer v2
       run: |
-        coverave run manage.py test fl_common.tests.tests_models_swin_transformer_v2
+        coverage run manage.py test fl_common.tests.tests_models_swin_transformer_v2
         coverage xml -o coverage-swin_tramsformer_v2.xml
         coverage report
 
@@ -525,7 +525,9 @@ jobs:
         pip install -r requirements.txt
     - name: Fl_common Models Swin Transformer v2 cr 001
       run: |
-        coverave run manage.py test fl_common.tests.tests_models_swin_transformer_v2_cr_001
+        coverage run manage.py test fl_common.tests.tests_models_swin_transformer_v2_cr_001
+        coverage xml -o coverage-swin_transformer_v2_cr_001.xml
+        coverage report
         
   tests-swin_transformer-v2-cr-002-models:
     runs-on: ubuntu-latest
@@ -581,8 +583,9 @@ jobs:
         pip install -r requirements.txt
     - name: Fl_common Models Swin Transformer v2 cr 002
       run: |
-        coverave run manage.py test fl_common.tests.tests_models_swin_transformer_v2_cr_002
-        
+        coverage run manage.py test fl_common.tests.tests_models_swin_transformer_v2_cr_002
+        coverage xml -o coverage-swin_transformer_v2_cr_002.xml
+        coverage report
   tests-swin_transformer-v2-cr-003-models:
     runs-on: ubuntu-latest
     strategy:
@@ -637,4 +640,6 @@ jobs:
         pip install -r requirements.txt
     - name: Fl_common Models Swin Transformer v2 cr 003
       run: |
-        coverave run manage.py test fl_common.tests.tests_models_swin_transformer_v2_cr_003
+        coverage run manage.py test fl_common.tests.tests_models_swin_transformer_v2_cr_003
+        coverage xml -o coverage-swin_transformer_v2_cr_003.xml
+        coverage report
