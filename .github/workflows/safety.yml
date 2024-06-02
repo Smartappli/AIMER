@@ -20,5 +20,6 @@ jobs:
       - name: Check out master
         uses: actions/checkout@master
 
-      - name: Security vulnerabilities scan
-        uses: aufdenpunkt/python-safety-check@master
+      - uses: pyupio/safety-action@v1
+        with:
+          api-key: ${{ secrets.SAFETY_API_KEY }}
