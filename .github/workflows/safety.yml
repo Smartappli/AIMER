@@ -17,8 +17,8 @@ jobs:
   security:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
-      - name: Run Safety CLI to check for vulnerabilities
-        uses: pyupio/safety-3-beta/safety-3@main
-        with:
-          api-key: ${{ secrets.SAFETY_API_KEY }}
+      - name: Check out master
+        uses: actions/checkout@master
+
+      - name: Security vulnerabilities scan
+        uses: aufdenpunkt/python-safety-check@master
