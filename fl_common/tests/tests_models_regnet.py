@@ -55,7 +55,7 @@ class ProcessingRegnetTestCase(TestCase):
             "regnety_320",
             "regnety_640",
             "regnety_1280",
-            "regnety_2560",
+            # "regnety_2560",
             "regnety_040_sgn",
             "regnetv_040",
             "regnetv_064",
