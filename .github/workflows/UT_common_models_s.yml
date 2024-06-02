@@ -119,7 +119,7 @@ jobs:
           pip install -r requirements.txt
       - name: Fl_common Models Senet
         run: |
-          coverave run manage.py test fl_common.tests.tests_models_senet
+          coverage run manage.py test fl_common.tests.tests_models_senet
           coverage xml -o coverage-senet.xml
           coverage report
 
