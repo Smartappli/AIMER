@@ -14,9 +14,11 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  safety:
+  security:
     runs-on: ubuntu-latest
     steps:
-      - uses: pyupio/safety-action@v1
+      - uses: actions/checkout@master
+      - name: Run Safety CLI to check for vulnerabilities
+        uses: pyupio/safety-3-beta/safety-3@main
         with:
           api-key: ${{ secrets.SAFETY_API_KEY }}
