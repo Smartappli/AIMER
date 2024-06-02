@@ -19,6 +19,10 @@
 [![Black Formatter](https://github.com/Smartappli/AIMER/actions/workflows/black.yml/badge.svg)](https://github.com/Smartappli/AIMER/actions/workflows/black.yml)
 [![Django Formatter](https://github.com/Smartappli/AIMER/actions/workflows/djformatter.yml/badge.svg)](https://github.com/Smartappli/AIMER/actions/workflows/djformatter.yml)
 
+### Security
+
+[![Codacy Security Scan](https://github.com/Smartappli/AIMER/actions/workflows/codacy.yml/badge.svg?event=status)](https://github.com/Smartappli/AIMER/actions/workflows/codacy.yml)
+
 ### License Analysis
 
 [![Dependencies license compliance checker](https://github.com/Smartappli/AIMER/actions/workflows/liccheck.yml/badge.svg)](https://github.com/Smartappli/AIMER/actions/workflows/liccheck.yml)
