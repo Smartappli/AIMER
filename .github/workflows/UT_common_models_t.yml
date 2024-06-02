@@ -61,7 +61,7 @@ jobs:
         pip install -r requirements.txt
     - name: Fl_common Models Tinyvit
       run: |
-        coverave run manage.py test fl_common.tests.tests_models_tinyvit
+        coverage run manage.py test fl_common.tests.tests_models_tinyvit
         coverage xml -o coverage-tinyvit.xml
         coverage report
           
