@@ -119,7 +119,7 @@ jobs:
         pip install -r requirements.txt
     - name: Fl_common Models Tnt
       run: |
-        coverave run manage.py test fl_common.tests.tests_models_tnt
+        coverage run manage.py test fl_common.tests.tests_models_tnt
         coverage xml -o coverage-tnt.xml
         coverage report
         
