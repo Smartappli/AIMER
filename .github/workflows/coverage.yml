@@ -133,7 +133,15 @@ jobs:
           rm -rf /home/runner/.cache/torch/* 
           coverage run -a manage.py test fl_common.tests.tests_models_eva_003
           rm -rf /home/runner/.cache/huggingface/*
-          rm -rf /home/runner/.cache/torch/*                    
+          rm -rf /home/runner/.cache/torch/* 
+      - name: Coverage F
+        run: |
+          coverage run -a manage.py test fl_common.tests.tests_models_fastvit
+          rm -rf /home/runner/.cache/huggingface/*
+          rm -rf /home/runner/.cache/torch/*
+          coverage run -a manage.py test fl_common.tests.tests_models_focalnet
+          rm -rf /home/runner/.cache/huggingface/*
+          rm -rf /home/runner/.cache/torch/*                 
       - name: Coverage Report
         run: |          
           coverage xml -o coverage.xml
