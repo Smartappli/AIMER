@@ -38,29 +38,29 @@ jobs:
       - name: Coverage B
         run: |           
           coverage run -a manage.py test fl_common.tests.tests_models_beit
-          rm -fv /home/runner/.cache/torch/hub/checkpoints/*
+          rm -rfv /home/runner/.cache/huggingface/*
           coverage run -a manage.py test fl_common.tests.tests_models_byoanet
-          rm -fv /home/runner/.cache/torch/hub/checkpoints/*
+          rm -rfv /home/runner/.cache/huggingface/*
           coverage run -a manage.py test fl_common.tests.tests_models_byobnet
-          rm -fv /home/runner/.cache/torch/hub/checkpoints/*
+          rm -rfv /home/runner/.cache/huggingface/*
       - name: Coverage C
         run: |               
           coverage run -a manage.py test fl_common.tests.tests_models_cait
-          rm -fv /home/runner/.cache/torch/hub/checkpoints/*
+          rm -rfv /home/runner/.cache/huggingface/*
           coverage run -a manage.py test fl_common.tests.tests_models_coat
-          rm -fv /home/runner/.cache/torch/hub/checkpoints/*
+          rm -rfv /home/runner/.cache/huggingface/*
           coverage run -a manage.py test fl_common.tests.tests_models_convit
-          rm -fv /home/runner/.cache/torch/hub/checkpoints/*
+          rm -rfv /home/runner/.cache/huggingface/*
           coverage run -a manage.py test fl_common.tests.tests_models_convmixer
-          rm -fv /home/runner/.cache/torch/hub/checkpoints/*
+          rm -rfv /home/runner/.cache/huggingface/*
           coverage run -a manage.py test fl_common.tests.tests_models_convnext
-          rm -fv /home/runner/.cache/torch/hub/checkpoints/*
+          rm -rfv /home/runner/.cache/huggingface/*
           coverage run -a manage.py test fl_common.tests.tests_models_crossvit
-          rm -fv /home/runner/.cache/torch/hub/checkpoints/*
+          rm -rfv /home/runner/.cache/huggingface/*
           coverage run -a manage.py test fl_common.tests.tests_models_cspnet
-          rm -fv /home/runner/.cache/torch/hub/checkpoints/*
+          rm -rfv /home/runner/.cache/huggingface/*
           coverage run -a manage.py test fl_common.tests.tests_models_cvt
-          rm -fv /home/runner/.cache/torch/hub/checkpoints/*          
+          rm -rfv /home/runner/.cache/huggingface/*       
       - name: Coverage Report
         run: |          
           coverage xml -o coverage.xml
