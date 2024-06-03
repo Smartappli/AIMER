@@ -46,13 +46,19 @@ jobs:
         python -m pip install --upgrade pip
         python -m pip install coverage
         pip install -r requirements.txt
-    - name: Fl_common Models AlexNet
+    - name: Coverage Erase
+      run: |
+        coverage erase         
+    - name: Coverage AlexNet
       run: |
         coverage run manage.py test fl_common.tests.tests_models_alexnet
-        coverage xml -o coverage-alexenet.xml
+        rm -fv /home/runner/.cache/torch/hub/checkpoints/*
+    - name: Coverage Report
+      run: |           
+        coverage xml -o coverage.xml
         coverage report
     - name: SonarCloud Scan
       uses: SonarSource/sonarcloud-github-action@master
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}        
