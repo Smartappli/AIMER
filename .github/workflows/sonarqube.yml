@@ -27,7 +27,13 @@ jobs:
         run: |
           coverage erase
           coverage run manage.py test fl_common.tests.tests_models_alexnet
+          rm -f /home/runner/.cache/torch/hub/checkpoints/*
           coverage run -a manage.py test fl_common.tests.tests_models_beit
+          rm -f /home/runner/.cache/torch/hub/checkpoints/*
+          coverage run -a manage.py test fl_common.tests.tests_models_byoanet
+          rm -f /home/runner/.cache/torch/hub/checkpoints/*
+          coverage run -a manage.py test fl_common.tests.tests_models_byobnet
+          rm -f /home/runner/.cache/torch/hub/checkpoints/*
           coverage xml -o coverage.xml
           coverage report          
       - name: SonarCloud Scan
