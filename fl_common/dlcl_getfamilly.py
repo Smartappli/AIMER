@@ -905,7 +905,6 @@ def get_family_model_m(model_type, num_classes):
         "MobileNet_V3_Large": get_mobilenet_model,
         "mobilenetv3_large_075": get_mobilenet_model,
         "mobilenetv3_large_100": get_mobilenet_model,
-        "mobilenetv3_large_150": get_mobilenet_model,
         "mobilenetv3_small_050": get_mobilenet_model,
         "mobilenetv3_small_075": get_mobilenet_model,
         "mobilenetv3_small_100": get_mobilenet_model,
