@@ -1,4 +1,4 @@
-name: Sonarqube
+name: Coverage
 on:
   push:
     branches:
@@ -12,7 +12,7 @@ concurrency:
   
 jobs:
   sonarcloud:
-    name: SonarCloud
+    name: Coverage
     runs-on: ubuntu-latest
     steps:
       - name: Free Disk Space (Ubuntu)
@@ -49,7 +49,8 @@ jobs:
       - name: Coverage A
         run: |       
           coverage run manage.py test fl_common.tests.tests_models_alexnet
-          rm -rf /home/runner/.cache/*
+          rm -rf /home/runner/.cache/huggingface/*
+          rm -rf /home/runner/.cache/torch/*  
       - name: Coverage B
         run: |           
           coverage run -a manage.py test fl_common.tests.tests_models_beit
@@ -86,7 +87,24 @@ jobs:
           rm -rf /home/runner/.cache/torch/*    
           coverage run -a manage.py test fl_common.tests.tests_models_cvt
           rm -rf /home/runner/.cache/huggingface/*
-          rm -rf /home/runner/.cache/torch/* 
+          rm -rf /home/runner/.cache/torch/*
+      - name: Coverage D
+        run: |
+          coverage run -a manage.py test fl_common.tests.tests_models_davit
+          rm -rf /home/runner/.cache/huggingface/*
+          rm -rf /home/runner/.cache/torch/*
+          coverage run -a manage.py test fl_common.tests.tests_models_deit
+          rm -rf /home/runner/.cache/huggingface/*
+          rm -rf /home/runner/.cache/torch/*
+          coverage run -a manage.py test fl_common.tests.tests_models_densenet
+          rm -rf /home/runner/.cache/huggingface/*
+          rm -rf /home/runner/.cache/torch/*   
+          coverage run -a manage.py test fl_common.tests.tests_models_dla
+          rm -rf /home/runner/.cache/huggingface/*
+          rm -rf /home/runner/.cache/torch/*
+          coverage run -a manage.py test fl_common.tests.tests_models_dpn
+          rm -rf /home/runner/.cache/huggingface/*
+          rm -rf /home/runner/.cache/torch/*          
       - name: Coverage Report
         run: |          
           coverage xml -o coverage.xml
@@ -96,3 +114,11 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      - name: Run codacy-coverage-reporter
+        uses: codacy/codacy-coverage-reporter-action@v1.3.0
+        with:
+          project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
+          coverage-reports: 'coverage.xml'
+        env:
+          CODACY_PROJECT_TOKEN: ${{ secrets.CODACY_PROJECT_TOKEN }}
+          
