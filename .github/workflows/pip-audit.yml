@@ -1,4 +1,4 @@
-name: Safety
+name: Pip-audit
 
 on:
   schedule:
