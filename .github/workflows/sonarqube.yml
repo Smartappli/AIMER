@@ -27,9 +27,8 @@ jobs:
         run: |
           coverage erase
           coverage run manage.py test fl_common.tests.tests_models_alexnet
+          coverage run -a manage.py test fl_common.tests.tests_models_beit
           coverage xml -o coverage.xml
-          coverage run manage.py test fl_common.tests.tests_models_beit
-          coverage xml -a -o coverage.xml
           coverage report          
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
