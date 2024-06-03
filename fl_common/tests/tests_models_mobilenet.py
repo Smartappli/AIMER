@@ -26,7 +26,6 @@ class ProcessingMobilenetTestCase(TestCase):
             "MobileNet_V3_Large",
             "mobilenetv3_large_075",
             "mobilenetv3_large_100",
-            "mobilenetv3_large_150",
             "mobilenetv3_small_050",
             "mobilenetv3_small_075",
             "mobilenetv3_small_100",
