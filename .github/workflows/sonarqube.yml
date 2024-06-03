@@ -52,9 +52,9 @@ jobs:
           rm -f /home/runner/.cache/torch/hub/checkpoints/*
           coverage run -a manage.py test fl_common.tests.tests_models_crossvit
           rm -f /home/runner/.cache/torch/hub/checkpoints/*
-          coverage run manage.py test fl_common.tests.tests_models_cspnet
+          coverage run -a manage.py test fl_common.tests.tests_models_cspnet
           rm -f /home/runner/.cache/torch/hub/checkpoints/*
-          coverage run manage.py test fl_common.tests.tests_models_cvt
+          coverage run -a manage.py test fl_common.tests.tests_models_cvt
           rm -f /home/runner/.cache/torch/hub/checkpoints/*          
       - name: Coverage Report
         run: |          
