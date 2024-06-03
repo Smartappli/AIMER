@@ -29,33 +29,33 @@ jobs:
       - name: Coverage A
         run: |       
           coverage run manage.py test fl_common.tests.tests_models_alexnet
-          rm -f /home/runner/.cache/torch/hub/checkpoints/*
+          rm -fv /home/runner/.cache/torch/hub/checkpoints/*
       - name: Coverage B
         run: |           
           coverage run -a manage.py test fl_common.tests.tests_models_beit
-          rm -f /home/runner/.cache/torch/hub/checkpoints/*
+          rm -fv /home/runner/.cache/torch/hub/checkpoints/*
           coverage run -a manage.py test fl_common.tests.tests_models_byoanet
-          rm -f /home/runner/.cache/torch/hub/checkpoints/*
+          rm -fv /home/runner/.cache/torch/hub/checkpoints/*
           coverage run -a manage.py test fl_common.tests.tests_models_byobnet
-          rm -f /home/runner/.cache/torch/hub/checkpoints/*
+          rm -fv /home/runner/.cache/torch/hub/checkpoints/*
       - name: Coverage C
         run: |               
           coverage run -a manage.py test fl_common.tests.tests_models_cait
-          rm -f /home/runner/.cache/torch/hub/checkpoints/*
+          rm -fv /home/runner/.cache/torch/hub/checkpoints/*
           coverage run -a manage.py test fl_common.tests.tests_models_coat
-          rm -f /home/runner/.cache/torch/hub/checkpoints/*
+          rm -fv /home/runner/.cache/torch/hub/checkpoints/*
           coverage run -a manage.py test fl_common.tests.tests_models_convit
-          rm -f /home/runner/.cache/torch/hub/checkpoints/*
+          rm -fv /home/runner/.cache/torch/hub/checkpoints/*
           coverage run -a manage.py test fl_common.tests.tests_models_convmixer
-          rm -f /home/runner/.cache/torch/hub/checkpoints/*
+          rm -fv /home/runner/.cache/torch/hub/checkpoints/*
           coverage run -a manage.py test fl_common.tests.tests_models_convnext
-          rm -f /home/runner/.cache/torch/hub/checkpoints/*
+          rm -fv /home/runner/.cache/torch/hub/checkpoints/*
           coverage run -a manage.py test fl_common.tests.tests_models_crossvit
-          rm -f /home/runner/.cache/torch/hub/checkpoints/*
+          rm -fv /home/runner/.cache/torch/hub/checkpoints/*
           coverage run -a manage.py test fl_common.tests.tests_models_cspnet
-          rm -f /home/runner/.cache/torch/hub/checkpoints/*
+          rm -fv /home/runner/.cache/torch/hub/checkpoints/*
           coverage run -a manage.py test fl_common.tests.tests_models_cvt
-          rm -f /home/runner/.cache/torch/hub/checkpoints/*          
+          rm -fv /home/runner/.cache/torch/hub/checkpoints/*          
       - name: Coverage Report
         run: |          
           coverage xml -o coverage.xml
