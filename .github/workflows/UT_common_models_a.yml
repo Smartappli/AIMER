@@ -52,7 +52,7 @@ jobs:
     - name: Coverage AlexNet
       run: |
         coverage run manage.py test fl_common.tests.tests_models_alexnet
-        rm -fv /home/runner/.cache/torch/hub/checkpoints/*
+        rm -rfv /home/runner/.cache/huggingface/*
     - name: Coverage Report
       run: |           
         coverage xml -o coverage.xml
