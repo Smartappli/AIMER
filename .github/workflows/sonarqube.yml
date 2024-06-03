@@ -23,17 +23,22 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install coverage
           pip install -r requirements.txt
-      - name: Coverage
+      - name: Coverage Erase
         run: |
           coverage erase
+      - name: Coverage A
+        run: |       
           coverage run manage.py test fl_common.tests.tests_models_alexnet
           rm -f /home/runner/.cache/torch/hub/checkpoints/*
+      - name: Coverage B
+        run: |           
           coverage run -a manage.py test fl_common.tests.tests_models_beit
           rm -f /home/runner/.cache/torch/hub/checkpoints/*
           coverage run -a manage.py test fl_common.tests.tests_models_byoanet
           rm -f /home/runner/.cache/torch/hub/checkpoints/*
           coverage run -a manage.py test fl_common.tests.tests_models_byobnet
           rm -f /home/runner/.cache/torch/hub/checkpoints/*
+      - name: Coverage Report      
           coverage xml -o coverage.xml
           coverage report          
       - name: SonarCloud Scan
