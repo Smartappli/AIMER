@@ -44,9 +44,7 @@ def get_mobilenet_model(mobilenet_type, num_classes):
     timm_models = [
         "mobilenetv3_large_075",
         "mobilenetv3_large_100",
-        "mobilenetv3_large_150",
         "mobilenetv3_small_050",
-        "mobilenetv3_small_075",
         "mobilenetv3_small_075",
         "mobilenetv3_small_100",
         "mobilenetv3_rw",
