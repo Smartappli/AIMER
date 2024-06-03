@@ -23,6 +23,7 @@
 
 [![Codacy Security Scan](https://github.com/Smartappli/AIMER/actions/workflows/codacy.yml/badge.svg)](https://github.com/Smartappli/AIMER/actions/workflows/codacy.yml)
 [![Safety](https://github.com/Smartappli/AIMER/actions/workflows/safety.yml/badge.svg)](https://github.com/Smartappli/AIMER/actions/workflows/safety.yml)
+[![Pip-audit](https://github.com/Smartappli/AIMER/actions/workflows/pip-audit.yml/badge.svg)](https://github.com/Smartappli/AIMER/actions/workflows/pip-audit.yml)
 
 ### License Analysis
 
