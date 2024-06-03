@@ -38,7 +38,8 @@ jobs:
           rm -f /home/runner/.cache/torch/hub/checkpoints/*
           coverage run -a manage.py test fl_common.tests.tests_models_byobnet
           rm -f /home/runner/.cache/torch/hub/checkpoints/*
-      - name: Coverage Report      
+      - name: Coverage Report
+        run: |          
           coverage xml -o coverage.xml
           coverage report          
       - name: SonarCloud Scan
