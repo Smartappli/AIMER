@@ -34,46 +34,33 @@ jobs:
       - name: Coverage A
         run: |       
           coverage run manage.py test fl_common.tests.tests_models_alexnet
-          rm -rf /home/runner/.cache/torch/*
-          rm -rf /home/runner/.cache/huggingface/*
+          rm -rf /home/runner/.cache/*
       - name: Coverage B
         run: |           
           coverage run -a manage.py test fl_common.tests.tests_models_beit
-          rm -rf /home/runner/.cache/torch/*
-          rm -rf /home/runner/.cache/huggingface/*
+          rm -rf /home/runner/.cache/*
           coverage run -a manage.py test fl_common.tests.tests_models_byoanet
-          rm -rf /home/runner/.cache/torch/*
-          rm -rf /home/runner/.cache/huggingface/*
+          rm -rf /home/runner/.cache/*
           coverage run -a manage.py test fl_common.tests.tests_models_byobnet
-          rm -rf /home/runner/.cache/torch/*
-          rm -rf /home/runner/.cache/huggingface/*
+          rm -rf /home/runner/.cache/*
       - name: Coverage C
         run: |               
           coverage run -a manage.py test fl_common.tests.tests_models_cait
-          rm -rf /home/runner/.cache/torch/*
-          rm -rf /home/runner/.cache/huggingface/*
+          rm -rf /home/runner/.cache/*
           coverage run -a manage.py test fl_common.tests.tests_models_coat
-          rm -rf /home/runner/.cache/torch/*
-          rm -rf /home/runner/.cache/huggingface/*
+          rm -rf /home/runner/.cache/*
           coverage run -a manage.py test fl_common.tests.tests_models_convit
-          rm -rf /home/runner/.cache/torch/*
-          rm -rf /home/runner/.cache/huggingface/*
+          rm -rf /home/runner/.cache/*
           coverage run -a manage.py test fl_common.tests.tests_models_convmixer
-          rm -rf /home/runner/.cache/torch/*
-          rm -rf /home/runner/.cache/huggingface/*
+          rm -rf /home/runner/.cache/*
           coverage run -a manage.py test fl_common.tests.tests_models_convnext
-          rm -rf /home/runner/.cache/torch/*
-          rm -rf /home/runner/.cache/huggingface/*
+          rm -rf /home/runner/.cache/*
           coverage run -a manage.py test fl_common.tests.tests_models_crossvit
-          rm -rf /home/runner/.cache/torch/*
-          rm -rf /home/runner/.cache/torch/*
-          rm -rf /home/runner/.cache/huggingface/*
+          rm -rf /home/runner/.cache/*
           coverage run -a manage.py test fl_common.tests.tests_models_cspnet
-          rm -rf /home/runner/.cache/torch/*
-          rm -rf /home/runner/.cache/huggingface/*
+          rm -rf /home/runner/.cache/*
           coverage run -a manage.py test fl_common.tests.tests_models_cvt
-          rm -rf /home/runner/.cache/torch/*
-          rm -rf /home/runner/.cache/huggingface/*      
+          rm -rf /home/runner/.cache/*  
       - name: Coverage Report
         run: |          
           coverage xml -o coverage.xml
