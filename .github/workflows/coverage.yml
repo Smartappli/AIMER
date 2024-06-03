@@ -104,7 +104,36 @@ jobs:
           rm -rf /home/runner/.cache/torch/*
           coverage run -a manage.py test fl_common.tests.tests_models_dpn
           rm -rf /home/runner/.cache/huggingface/*
-          rm -rf /home/runner/.cache/torch/*          
+          rm -rf /home/runner/.cache/torch/*
+      - name: Coverage E
+        run: |     
+          coverage run -a manage.py test fl_common.tests.tests_models_edgenet
+          rm -rf /home/runner/.cache/huggingface/*
+          rm -rf /home/runner/.cache/torch/*
+          coverage run -a manage.py test fl_common.tests.tests_models_efficientformer
+          rm -rf /home/runner/.cache/huggingface/*
+          rm -rf /home/runner/.cache/torch/* 
+          coverage run -a manage.py test fl_common.tests.tests_models_efficientformer_v2
+          rm -rf /home/runner/.cache/huggingface/*
+          rm -rf /home/runner/.cache/torch/* 
+          coverage run -a manage.py test fl_common.tests.tests_models_efficientvit_mit
+          rm -rf /home/runner/.cache/huggingface/*
+          rm -rf /home/runner/.cache/torch/*
+          coverage run -a manage.py test fl_common.tests.tests_models_efficientvit_msra
+          rm -rf /home/runner/.cache/huggingface/*
+          rm -rf /home/runner/.cache/torch/*
+          coverage run -a manage.py test fl_common.tests.tests_models_efficientnet
+          rm -rf /home/runner/.cache/huggingface/*
+          rm -rf /home/runner/.cache/torch/*
+          coverage run -a manage.py test fl_common.tests.tests_models_eva_001
+          rm -rf /home/runner/.cache/huggingface/*
+          rm -rf /home/runner/.cache/torch/* 
+          coverage run -a manage.py test fl_common.tests.tests_models_eva_002
+          rm -rf /home/runner/.cache/huggingface/*
+          rm -rf /home/runner/.cache/torch/* 
+          coverage run -a manage.py test fl_common.tests.tests_models_eva_003
+          rm -rf /home/runner/.cache/huggingface/*
+          rm -rf /home/runner/.cache/torch/*                    
       - name: Coverage Report
         run: |          
           coverage xml -o coverage.xml
