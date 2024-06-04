@@ -1,93 +1,56 @@
+import os
+from dotenv import load_dotenv
 import pandas as pd
 import syft as sy
 
-# from syft import autocache
-
-SYFT_VERSION = ">=0.8.2.b0,<0.9"
-package_string = f'"syft{SYFT_VERSION}"'
-verbose = True
+SYFT_VERSION = ">=0.8.6,<0.9"
 
 
-def launch_node():
+def load_secrets():
     """
-    Launches three nodes: Humani, Epicura, and Vivalia, registers a user,
-    uploads a dataset, calculates the mean age, and then destroys the nodes.
+    Loads secrets from .env file.
+    """
+    load_dotenv()
+    return os.getenv("EMAIL"), os.getenv("PASSWORD")
+
+
+def launch_node(name, port, email, password):
+    """
+    Launches a node, registers a user, uploads a dataset, calculates the mean age,
+    and then destroys the node.
+
+    Args:
+        name (str): Name of the node.
+        port (int): Port number for the node.
+        email (str): User email.
+        password (str): User password.
     """
 
-    sy.requires(SYFT_VERSION)
-
-    print(f"Version of PySyft : {sy.__version__}")
-
-    print("\n--- Démarrage du noeud Humani ---")
-    node_humani = sy.Orchestra.launch(
-        name="do-humani",
-        port=9000,
+    print(f"\n--- Démarrage du noeud {name} ---")
+    node = sy.orchestra.launch(
+        name=f"do-{name}",
+        port=port,
         local_db=True,
         dev_mode=True,
         reset=True,
     )
-    root_domain_humani_client = node_humani.login(
-        email="info@openmined.org",
-        password="changethis",
+    client = node.login(
+        email=email,
+        password=password,
     )
-    root_domain_humani_client.register(
+    client.register(
         name="Jane Doe",
-        email="janedoe@caltech.edu",
-        password="abc123",
-        password_verify="abc123",
+        email=email,
+        password=password,
+        password_verify=password,
         institution="Caltech",
         website="https://www.caltech.edu/",
     )
 
-    print("\n--- Démarrage du noeud Epicura ---")
-    node_epicura = sy.Orchestra.launch(
-        name="do-epicura",
-        port=9001,
-        local_db=True,
-        dev_mode=True,
-        reset=True,
+    ds_client = node.login(
+        email=email,
+        password=password,
     )
-    root_domain_epicura_client = node_epicura.login(
-        email="info@openmined.org",
-        password="changethis",
-    )
-    root_domain_epicura_client.register(
-        name="Jane Doe",
-        email="janedoe@caltech.edu",
-        password="abc123",
-        password_verify="abc123",
-        institution="Caltech",
-        website="https://www.caltech.edu/",
-    )
-
-    print("\n--- Démarrage du noeud Vivalia ---")
-    node_vivalia = sy.Orchestra.launch(
-        name="do-vivalia",
-        port=9003,
-        local_db=True,
-        dev_mode=True,
-        reset=True,
-    )
-    root_domain_vivalia_client = node_vivalia.login(
-        email="info@openmined.org",
-        password="changethis",
-    )
-    root_domain_vivalia_client.register(
-        name="Jane Doe",
-        email="janedoe@caltech.edu",
-        password="abc123",
-        password_verify="abc123",
-        institution="Caltech",
-        website="https://www.caltech.edu/",
-    )
-
-    ds_client = node_humani.login(
-        email="janedoe@caltech.edu",
-        password="abc123",
-    )
-
-    data_subjects = root_domain_humani_client.data_subject_registry.get_all()
-    print(data_subjects)
 
     dataset = sy.Dataset(
         name="usa-mock-data",
@@ -111,7 +74,7 @@ def launch_node():
             ),
         ],
     )
-    root_domain_humani_client.upload_dataset(dataset)
+    client.upload_dataset(dataset)
 
     asset = ds_client.datasets[-1].assets["ages"]
     mock = asset.mock
@@ -119,11 +82,25 @@ def launch_node():
     age_sum = mock["Age"].mean()
     print(age_sum)
 
-    print("--- Destruction des Domain Servers ---")
-    node_humani.land()
-    node_epicura.land()
-    node_vivalia.land()
+    print(f"--- Destruction du Domain Server {name} ---")
+    node.land()
+
+
+def launch_nodes():
+    """
+    Launches three nodes: Humani, Epicura, and Vivalia.
+    """
+    email, password = load_secrets()
+    nodes = [
+        {"name": "Humani", "port": 9000},
+        {"name": "Epicura", "port": 9001},
+        {"name": "Vivalia", "port": 9003},
+    ]
+    for node in nodes:
+        launch_node(node["name"], node["port"], email, password)
 
 
 if __name__ == "__main__":
-    launch_node()
+    sy.requires(SYFT_VERSION)
+    print(f"Version of PySyft : {sy.__version__}")
+    launch_nodes()

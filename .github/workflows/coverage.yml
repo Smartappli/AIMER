@@ -49,8 +49,11 @@ jobs:
       - name: Coverage FL_Client
         run: | 
           coverage run manage.py test fl_client.tests.tests_urls
-          coverage run manage.py test fl_client.tests.tests_views
-      - name: Coverage A
+          coverage run -a manage.py test fl_client.tests.tests_views
+      - name: Coverage FL_Server
+        run: |
+          coverage run
+      - name: Coverage -a manage.py test fl_server.tests.tests_server
         run: |       
           coverage run -a manage.py test fl_common.tests.tests_models_alexnet
           rm -rf /home/runner/.cache/huggingface/*
