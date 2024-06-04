@@ -141,7 +141,114 @@ jobs:
           rm -rf /home/runner/.cache/torch/*
           coverage run -a manage.py test fl_common.tests.tests_models_focalnet
           rm -rf /home/runner/.cache/huggingface/*
-          rm -rf /home/runner/.cache/torch/*                 
+          rm -rf /home/runner/.cache/torch/*
+      - name: Coverage F
+        run: |
+          coverage run -a manage.py test fl_common.tests.tests_models_gcvit
+          rm -rf /home/runner/.cache/huggingface/*
+          rm -rf /home/runner/.cache/torch/*
+          coverage run -a manage.py test fl_common.tests.tests_models_gcvit
+          rm -rf /home/runner/.cache/huggingface/*
+          rm -rf /home/runner/.cache/torch/*          
+      - name: Coverage H
+        run: |
+          coverage run -a manage.py test fl_common.tests.tests_models_hardcorenas
+          rm -rf /home/runner/.cache/huggingface/*
+          rm -rf /home/runner/.cache/torch/*
+          coverage run -a manage.py test fl_common.tests.tests_models_hgnet
+          rm -rf /home/runner/.cache/huggingface/*
+          rm -rf /home/runner/.cache/torch/*
+          coverage run -a manage.py test fl_common.tests.tests_models_hiera
+          rm -rf /home/runner/.cache/huggingface/*
+          rm -rf /home/runner/.cache/torch/*
+          coverage run -a manage.py test fl_common.tests.tests_models_hrnet
+          rm -rf /home/runner/.cache/huggingface/*
+          rm -rf /home/runner/.cache/torch/*
+      - name: Coverage I
+        run: | 
+          coverage run -a manage.py test fl_common.tests.tests_models_inception
+          rm -rf /home/runner/.cache/huggingface/*
+          rm -rf /home/runner/.cache/torch/*
+          coverage run -a manage.py test fl_common.tests.tests_models_inceptionnext
+          rm -rf /home/runner/.cache/huggingface/*
+          rm -rf /home/runner/.cache/torch/*
+      - name: Coverage M
+        run: |
+          coverage run -a manage.py test fl_common.tests.tests_models_maxvit
+          rm -rf /home/runner/.cache/huggingface/*
+          rm -rf /home/runner/.cache/torch/*
+          coverage run -a manage.py test fl_common.tests.tests_models_metaformer
+          rm -rf /home/runner/.cache/huggingface/*
+          rm -rf /home/runner/.cache/torch/*
+          coverage run -a manage.py test fl_common.tests.tests_models_mlp_mixer
+          rm -rf /home/runner/.cache/huggingface/*
+          rm -rf /home/runner/.cache/torch/*
+          coverage run -a manage.py test fl_common.tests.tests_models_mnasnet
+          rm -rf /home/runner/.cache/huggingface/*
+          rm -rf /home/runner/.cache/torch/*
+          coverage run -a manage.py test fl_common.tests.tests_models_mobilenet
+          rm -rf /home/runner/.cache/huggingface/*
+          rm -rf /home/runner/.cache/torch/*
+          coverage run -a manage.py test fl_common.tests.tests_models_mobilevit
+          rm -rf /home/runner/.cache/huggingface/*
+          rm -rf /home/runner/.cache/torch/*
+          coverage run -a manage.py test fl_common.tests.tests_models_mvitv2
+          rm -rf /home/runner/.cache/huggingface/*
+          rm -rf /home/runner/.cache/torch/*
+      - name: Coverage N
+        run: |
+          coverage run -a manage.py test fl_common.tests.tests_models_nasnet
+          rm -rf /home/runner/.cache/huggingface/*
+          rm -rf /home/runner/.cache/torch/*
+          coverage run -a manage.py test fl_common.tests.tests_models_nest
+          rm -rf /home/runner/.cache/huggingface/*
+          rm -rf /home/runner/.cache/torch/*
+          coverage run -a manage.py test fl_common.tests.tests_models_nextvit
+          rm -rf /home/runner/.cache/huggingface/*
+          rm -rf /home/runner/.cache/torch/*
+          coverage run -a manage.py test fl_common.tests.tests_models_nfnet
+          rm -rf /home/runner/.cache/huggingface/*
+          rm -rf /home/runner/.cache/torch/*
+      - name: Coverage P
+        run: |
+          coverage run -a manage.py test fl_common.tests.tests_models_pit
+          rm -rf /home/runner/.cache/huggingface/*
+          rm -rf /home/runner/.cache/torch/*
+          coverage run -a manage.py test fl_common.tests.tests_models_pnasnet
+          rm -rf /home/runner/.cache/huggingface/*
+          rm -rf /home/runner/.cache/torch/* 
+          coverage run -a manage.py test fl_common.tests.tests_models_pvt_v2
+          rm -rf /home/runner/.cache/huggingface/*
+          rm -rf /home/runner/.cache/torch/*
+      - name: Coverage R
+        run: | 
+          coverage run -a manage.py test fl_common.tests.tests_models_regnet
+          rm -rf /home/runner/.cache/huggingface/*
+          rm -rf /home/runner/.cache/torch/*
+          coverage run -a manage.py test fl_common.tests.tests_models_repghost
+          rm -rf /home/runner/.cache/huggingface/*
+          rm -rf /home/runner/.cache/torch/*
+          coverage run -a manage.py test fl_common.tests.tests_models_repvit
+          rm -rf /home/runner/.cache/huggingface/*
+          rm -rf /home/runner/.cache/torch/*
+          coverage run -a manage.py test fl_common.tests.tests_models_res2net
+          rm -rf /home/runner/.cache/huggingface/*
+          rm -rf /home/runner/.cache/torch/*
+          coverage run -a manage.py test fl_common.tests.tests_models_resnest
+          rm -rf /home/runner/.cache/huggingface/*
+          rm -rf /home/runner/.cache/torch/*
+          coverage run -a manage.py test fl_common.tests.tests_models_resnet
+          rm -rf /home/runner/.cache/huggingface/*
+          rm -rf /home/runner/.cache/torch/*
+          coverage run -a manage.py test fl_common.tests.tests_models_resnetv2
+          rm -rf /home/runner/.cache/huggingface/*
+          rm -rf /home/runner/.cache/torch/*
+          coverage run -a manage.py test fl_common.tests.tests_models_resnext
+          rm -rf /home/runner/.cache/huggingface/*
+          rm -rf /home/runner/.cache/torch/*
+          coverage run -a manage.py test fl_common.tests.tests_models_rexnet
+          rm -rf /home/runner/.cache/huggingface/*
+          rm -rf /home/runner/.cache/torch/*          
       - name: Coverage Report
         run: |          
           coverage xml -o coverage.xml
