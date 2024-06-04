@@ -19,7 +19,7 @@ USER myuser
 ENV PATH="/home/myuser/.local/bin:${PATH}"
 
 # Copy the application code
-COPY --chown=myuser:myuser . .
+COPY --chown=myuser:myuser --chmod=755 . .
 
 # Install Python dependencies
 RUN python -m pip install --upgrade pip \
