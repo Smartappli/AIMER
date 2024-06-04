@@ -1,6 +1,6 @@
 from django.test import TestCase, RequestFactory
 from django.urls import reverse
-from fl_client.views import data_processing, data_processing_faqs, data_processing_models, data_processing_tutorials, deep_learning_faqs, deep_learning_models, deep_learning_tutorials
+from fl_client.forms import NLPTextGenerationForm, NLPEmotionalAnalysisForm
 
 
 class IndexViewTests(TestCase):
@@ -154,3 +154,142 @@ class IndexViewTests(TestCase):
         self.assertEqual(response.context['logo'], ["share", "hospital", "data", "cpu", "gpu"])
         self.assertIn('section', response.context)
         self.assertEqual(response.context['section'], "dl")
+
+    def test_machine_learning_faqs_renders_correct_template(self):
+        """
+        Tests if the machine learning FAQs view uses the correct template.
+        """
+        response = self.client.get(reverse('fl_client:machine_learning_faqs'))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'machine_learning/machine_learning_faqs.html')
+
+    def test_machine_learning_faqs_context(self):
+        """
+        Tests if the context of the machine learning FAQs view contains the expected elements.
+        """
+        response = self.client.get(reverse('fl_client:machine_learning_faqs'))
+        self.assertEqual(response.status_code, 200)
+        self.assertIn('logo', response.context)
+        self.assertEqual(response.context['logo'], ["share", "hospital", "data", "cpu", "gpu"])
+        self.assertIn('section', response.context)
+        self.assertEqual(response.context['section'], "ml")
+
+    def test_machine_learning_models_renders_correct_template(self):
+        """
+        Tests if the machine learning models view uses the correct template.
+        """
+        response = self.client.get(reverse('fl_client:machine_learning_models'))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'machine_learning/machine_learning_models.html')
+
+    def test_machine_learning_models_context(self):
+        """
+        Tests if the context of the machine learning models view contains the expected elements.
+        """
+        response = self.client.get(reverse('fl_client:machine_learning_models'))
+        self.assertEqual(response.status_code, 200)
+        self.assertIn('logo', response.context)
+        self.assertEqual(response.context['logo'], ["share", "hospital", "data", "cpu", "gpu"])
+        self.assertIn('section', response.context)
+        self.assertEqual(response.context['section'], "ml")
+
+    def test_machine_learning_tutorials_renders_correct_template(self):
+        """
+        Tests if the machine learning tutorials view uses the correct template.
+        """
+        response = self.client.get(reverse('fl_client:machine_learning_tutorials'))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'machine_learning/machine_learning_tutorials.html')
+
+    def test_machine_learning_tutorials_context(self):
+        """
+        Tests if the context of the machine learning tutorials view contains the expected elements.
+        """
+        response = self.client.get(reverse('fl_client:machine_learning_tutorials'))
+        self.assertEqual(response.status_code, 200)
+        self.assertIn('logo', response.context)
+        self.assertEqual(response.context['logo'], ["share", "hospital", "data", "cpu", "gpu"])
+        self.assertIn('section', response.context)
+        self.assertEqual(response.context['section'], "ml")
+
+    def test_natural_language_processing_renders_correct_template(self):
+        """
+        Tests if the natural language processing view uses the correct template.
+        """
+        response = self.client.get(reverse('fl_client:natural_language_processing'))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'natural_language_processing/natural_language_processing.html')
+
+    def test_natural_language_processing_context(self):
+        """
+        Tests if the context of the natural language processing view contains the expected elements.
+        """
+        response = self.client.get(reverse('fl_client:natural_language_processing'))
+        self.assertEqual(response.status_code, 200)
+        self.assertIn('logo', response.context)
+        self.assertEqual(response.context['logo'], ["share", "hospital", "data", "cpu", "gpu"])
+        self.assertIn('section', response.context)
+        self.assertEqual(response.context['section'], "nlp")
+        self.assertIn('form1', response.context)
+        self.assertIsInstance(response.context['form1'], NLPTextGenerationForm)
+        self.assertIn('form2', response.context)
+        self.assertIsInstance(response.context['form2'], NLPEmotionalAnalysisForm)
+        self.assertIn('pdf', response.context)
+        self.assertTrue(response.context['pdf'])
+
+    def test_natural_language_processing_faqs_renders_correct_template(self):
+        """
+        Tests if the natural language processing FAQs view uses the correct template.
+        """
+        response = self.client.get(reverse('fl_client:natural_language_processing_faqs'))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'natural_language_processing/natural_language_processing_faqs.html')
+
+    def test_natural_language_processing_faqs_context(self):
+        """
+        Tests if the context of the natural language processing FAQs view contains the expected elements.
+        """
+        response = self.client.get(reverse('fl_client:natural_language_processing_faqs'))
+        self.assertEqual(response.status_code, 200)
+        self.assertIn('logo', response.context)
+        self.assertEqual(response.context['logo'], ["share", "hospital", "data", "cpu", "gpu"])
+        self.assertIn('section', response.context)
+        self.assertEqual(response.context['section'], "nlp")
+
+    def test_natural_language_processing_models_renders_correct_template(self):
+        """
+        Tests if the natural language processing models view uses the correct template.
+        """
+        response = self.client.get(reverse('fl_client:natural_language_processing_models'))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'natural_language_processing/natural_language_processing_models.html')
+
+    def test_natural_language_processing_models_context(self):
+        """
+        Tests if the context of the natural language processing models view contains the expected elements.
+        """
+        response = self.client.get(reverse('fl_client:natural_language_processing_models'))
+        self.assertEqual(response.status_code, 200)
+        self.assertIn('logo', response.context)
+        self.assertEqual(response.context['logo'], ["share", "hospital", "data", "cpu", "gpu"])
+        self.assertIn('section', response.context)
+        self.assertEqual(response.context['section'], "nlp")
+
+    def test_natural_language_processing_tutorials_renders_correct_template(self):
+        """
+        Tests if the natural language processing tutorials view uses the correct template.
+        """
+        response = self.client.get(reverse('fl_client:natural_language_processing_tutorials'))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'natural_language_processing/natural_language_processing_tutorials.html')
+
+    def test_natural_language_processing_tutorials_context(self):
+        """
+        Tests if the context of the natural language processing tutorials view contains the expected elements.
+        """
+        response = self.client.get(reverse('fl_client:natural_language_processing_tutorials'))
+        self.assertEqual(response.status_code, 200)
+        self.assertIn('logo', response.context)
+        self.assertEqual(response.context['logo'], ["share", "hospital", "data", "cpu", "gpu"])
+        self.assertIn('section', response.context)
+        self.assertEqual(response.context['section'], "nlp")

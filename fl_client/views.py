@@ -488,6 +488,7 @@ def machine_learning(request):
     )
 
 
+@require_POST
 def machine_learning_anomaly_detection_run(request):
     """Method to run machine learning anomaly detection"""
     if request.method == "POST":
@@ -497,6 +498,7 @@ def machine_learning_anomaly_detection_run(request):
             print(cd)
 
 
+@require_POST
 def machine_learning_classification_run(request):
     """Method to run machine learning classification"""
     if request.method == "POST":
@@ -506,6 +508,7 @@ def machine_learning_classification_run(request):
             print(cd)
 
 
+@require_POST
 def machine_learning_clustering_run(request):
     """Method to run machine learning clustering"""
     if request.method == "POST":
@@ -515,6 +518,7 @@ def machine_learning_clustering_run(request):
             print(cd)
 
 
+@require_GET
 def machine_learning_faqs(request):
     """Method to generate machine learning faqs"""
     logo = ["share", "hospital", "data", "cpu", "gpu"]
@@ -525,6 +529,7 @@ def machine_learning_faqs(request):
     )
 
 
+@require_GET
 def machine_learning_models(request):
     """Method to generate machine learning models list"""
     logo = ["share", "hospital", "data", "cpu", "gpu"]
@@ -535,6 +540,7 @@ def machine_learning_models(request):
     )
 
 
+@require_POST
 def machine_learning_regression_run(request):
     """Method for executing machine learning"""
     if request.method == "POST":
@@ -544,6 +550,7 @@ def machine_learning_regression_run(request):
             print(cd)
 
 
+@require_POST
 def machine_learning_timeseries_run(request):
     """Method for executing time series analysis"""
     if request.method == "POST":
@@ -553,6 +560,7 @@ def machine_learning_timeseries_run(request):
             print(cd)
 
 
+@require_GET
 def machine_learning_tutorials(request):
     """Method for create machine learning tutorials page"""
     logo = ["share", "hospital", "data", "cpu", "gpu"]
@@ -563,6 +571,7 @@ def machine_learning_tutorials(request):
     )
 
 
+@require_GET
 def natural_language_processing(request):
     """Method for creating natural language"""
     logo = ["share", "hospital", "data", "cpu", "gpu"]
@@ -581,6 +590,7 @@ def natural_language_processing(request):
     )
 
 
+@require_POST
 def natural_language_processing_emotional_analysis_run(request):
     """Method for execute natural language processing emotional analysis"""
     if request.method == "POST":
@@ -590,6 +600,7 @@ def natural_language_processing_emotional_analysis_run(request):
             print(cd)
 
 
+@require_GET
 def natural_language_processing_faqs(request):
     """Method to display natural language processing faqs"""
     logo = ["share", "hospital", "data", "cpu", "gpu"]
@@ -600,6 +611,7 @@ def natural_language_processing_faqs(request):
     )
 
 
+@require_GET
 def natural_language_processing_models(request):
     """Method to display all models available"""
     logo = ["share", "hospital", "data", "cpu", "gpu"]
@@ -610,6 +622,7 @@ def natural_language_processing_models(request):
     )
 
 
+@require_POST
 def natural_language_processing_text_generation_run(request):
     """Method to use text generation natural language processing models"""
     if request.method == "POST":
@@ -619,6 +632,7 @@ def natural_language_processing_text_generation_run(request):
             print(cd)
 
 
+@require_GET
 def natural_language_processing_tutorials(request):
     """Method to generate natural language processing tutorials"""
     logo = ["share", "hospital", "data", "cpu", "gpu"]
@@ -629,12 +643,14 @@ def natural_language_processing_tutorials(request):
     )
 
 
+@require_GET
 def model_list(request):
     """Method to list all models"""
     models = Model.objects.all()
     return render(request, "base.html", {"models": models})
 
 
+@require_POST
 def register(request):
     """Method to register a new model"""
     if request.method == "POST":
