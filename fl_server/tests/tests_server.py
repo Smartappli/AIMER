@@ -4,6 +4,7 @@ from unittest.mock import patch, MagicMock
 # Import your functions here
 from fl_server.server import load_secrets, launch_node, launch_nodes
 
+
 class TestServer(TestCase):
     """
     Test case for the server of the 'fl_server' Django app.
