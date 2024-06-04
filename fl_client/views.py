@@ -5,7 +5,6 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.views.decorators.http import require_POST, require_GET
 
-
 from .forms import (
     DLClassificationForm,
     DLSegmentation,
@@ -27,8 +26,6 @@ from .models import (
     Queue,
 )
 
-# from fl_common.models.xception import xception
-# from fl_common.models.alexnet import alexnet
 
 @require_GET
 def index(request):
