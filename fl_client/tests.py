@@ -2,6 +2,7 @@ from django.test import RequestFactory, TestCase
 from django.urls import reverse
 from .views import index, data_processing, data_processing_faqs, data_processing_models, data_processing_tutorials
 
+
 class TestIndexView(TestCase):
     def setUp(self):
         self.factory = RequestFactory()
