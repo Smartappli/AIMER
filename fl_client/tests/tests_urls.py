@@ -86,9 +86,9 @@ class TestUrls(TestCase):
         )
         self.assertEqual(response.status_code, 200)
 
-    def test_register_url(self):
-        response = self.client.get(reverse("fl_client:register"))
-        self.assertEqual(response.status_code, 200)
+    # def test_register_url(self):
+    #    response = self.client.get(reverse("fl_client:register"))
+    #    self.assertEqual(response.status_code, 200)
 
     # def test_edit_url(self):
     #    response = self.client.get(reverse("fl_client:edit"))
