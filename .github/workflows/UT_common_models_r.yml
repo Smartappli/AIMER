@@ -294,6 +294,8 @@ jobs:
     - name: Fl_common Models Resnest
       run: |
         coverage run manage.py test fl_common.tests.tests_models_resnest
+        coverage xml -o coverage-resnest.xml
+        coverage report
 
   test-resnet-models:
     runs-on: ubuntu-latest
