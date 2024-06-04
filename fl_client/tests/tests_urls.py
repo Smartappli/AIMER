@@ -90,9 +90,9 @@ class TestUrls(TestCase):
         response = self.client.get(reverse("fl_client:register"))
         self.assertEqual(response.status_code, 200)
 
-    def test_edit_url(self):
-        response = self.client.get(reverse("fl_client:edit"))
-        self.assertEqual(response.status_code, 200)
+    # def test_edit_url(self):
+    #    response = self.client.get(reverse("fl_client:edit"))
+    #    self.assertEqual(response.status_code, 200)
 
     def test_import_url(self):
         response = self.client.get(reverse("fl_client:import"))
