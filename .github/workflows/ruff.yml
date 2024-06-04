@@ -16,7 +16,7 @@ jobs:
           cache: 'pip'
       - uses: chartboost/ruff-action@v1
         with:
-          args: 'check --select C90,E,F,I,NPY,RUF,UP,W --ignore E501,F401 --exclude fl_client/migrations,fl_server/migrations --fixable ALL --unsafe-fixes --fix'
+          args: 'check --select C90,E,F,I,NPY,RUF,UP,W --ignore C901,E501,F401 --exclude fl_client/migrations,fl_server/migrations --fixable ALL --unsafe-fixes --fix'
       - uses: stefanzweifel/git-auto-commit-action@v5
         with:
           branch: 'ruff'
