@@ -453,6 +453,7 @@ def deep_learning_segmentation_run(request):
             print(model_id)
 
 
+@require_GET
 def deep_learning_tutorials(request):
     """Method to generate deep learning tutorials"""
     logo = ["share", "hospital", "data", "cpu", "gpu"]
@@ -463,6 +464,7 @@ def deep_learning_tutorials(request):
     )
 
 
+@require_GET
 def machine_learning(request):
     """Method to create a machine learning form"""
     form1 = MLClassificationForm

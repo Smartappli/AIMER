@@ -1,5 +1,4 @@
 from django.urls import include, path
-
 from fl_client import views
 
 app_name = "fl_client"
@@ -27,7 +26,7 @@ urlpatterns = [
     path(
         "deep_learning_faqs/",
         views.deep_learning_faqs,
-        name="deepl_learning_faqs",
+        name="deep_learning_faqs",
     ),
     path(
         "deep_learning_models/",
