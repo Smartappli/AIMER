@@ -47,7 +47,7 @@ class TestIndexView(TestCase):
         response = data_processing(request)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(
-            response, "data_processing/data_processing.html"
+            response, "data_processing/data_processing.html",
         )
 
     def test_data_processing_faqs_view(self):
@@ -55,7 +55,7 @@ class TestIndexView(TestCase):
         response = data_processing_faqs(request)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(
-            response, "data_processing/data_processing_faqs.html"
+            response, "data_processing/data_processing_faqs.html",
         )
 
     def test_data_processing_models_view(self):
@@ -63,7 +63,7 @@ class TestIndexView(TestCase):
         response = data_processing_models(request)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(
-            response, "data_processing/data_processing_models.html"
+            response, "data_processing/data_processing_models.html",
         )
 
     def test_data_processing_tutorials_view(self):
@@ -71,5 +71,5 @@ class TestIndexView(TestCase):
         response = data_processing_tutorials(request)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(
-            response, "data_processing/data_processing_tutorials.html"
+            response, "data_processing/data_processing_tutorials.html",
         )
