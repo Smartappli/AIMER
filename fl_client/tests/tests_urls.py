@@ -33,7 +33,7 @@ class TestUrls(TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_deep_learning_faqs_url(self):
-        response = self.client.get(reverse("fl_client:deepl_learning_faqs"))
+        response = self.client.get(reverse("fl_client:deep_learning_faqs"))
         self.assertEqual(response.status_code, 200)
 
     def test_deep_learning_models_url(self):
