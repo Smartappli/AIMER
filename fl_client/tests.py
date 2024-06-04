@@ -24,7 +24,7 @@ class TestUrls(TestCase):
 
     def test_data_processing_tutorials_url(self):
         response = self.client.get(
-            reverse("fl_client:data_processing_tutorials")
+            reverse("fl_client:data_processing_tutorials"),
         )
         self.assertEqual(response.status_code, 200)
 
@@ -58,31 +58,31 @@ class TestUrls(TestCase):
 
     def test_machine_learning_tutorials_url(self):
         response = self.client.get(
-            reverse("fl_client:machine_learning_tutorials")
+            reverse("fl_client:machine_learning_tutorials"),
         )
         self.assertEqual(response.status_code, 200)
 
     def test_natural_language_processing_url(self):
         response = self.client.get(
-            reverse("fl_client:natural_language_processing")
+            reverse("fl_client:natural_language_processing"),
         )
         self.assertEqual(response.status_code, 200)
 
     def test_natural_language_processing_faqs_url(self):
         response = self.client.get(
-            reverse("fl_client:natural_language_processing_faqs")
+            reverse("fl_client:natural_language_processing_faqs"),
         )
         self.assertEqual(response.status_code, 200)
 
     def test_natural_language_processing_models_url(self):
         response = self.client.get(
-            reverse("fl_client:natural_language_processing_models")
+            reverse("fl_client:natural_language_processing_models"),
         )
         self.assertEqual(response.status_code, 200)
 
     def test_natural_language_processing_tutorials_url(self):
         response = self.client.get(
-            reverse("fl_client:natural_language_processing_tutorials")
+            reverse("fl_client:natural_language_processing_tutorials"),
         )
         self.assertEqual(response.status_code, 200)
 
