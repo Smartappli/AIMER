@@ -1,10 +1,12 @@
 from django.test import TestCase, Client
 from django.urls import reverse
 
+
 class TestUrls(TestCase):
     """
     Test case for the URLs of the 'fl_client' Django app.
     """
+
     def setUp(self):
         """
         Set up the test case with a Django test client.
@@ -43,7 +45,9 @@ class TestUrls(TestCase):
         """
         Test the data processing tutorials URL.
         """
-        response = self.client.get(reverse("fl_client:data_processing_tutorials"))
+        response = self.client.get(
+            reverse("fl_client:data_processing_tutorials")
+        )
         self.assertEqual(response.status_code, 200)
 
     def test_deep_learning_url(self):
@@ -99,35 +103,45 @@ class TestUrls(TestCase):
         """
         Test the machine learning tutorials URL.
         """
-        response = self.client.get(reverse("fl_client:machine_learning_tutorials"))
+        response = self.client.get(
+            reverse("fl_client:machine_learning_tutorials")
+        )
         self.assertEqual(response.status_code, 200)
 
     def test_natural_language_processing_url(self):
         """
         Test the natural language processing URL.
         """
-        response = self.client.get(reverse("fl_client:natural_language_processing"))
+        response = self.client.get(
+            reverse("fl_client:natural_language_processing")
+        )
         self.assertEqual(response.status_code, 200)
 
     def test_natural_language_processing_faqs_url(self):
         """
         Test the natural language processing FAQs URL.
         """
-        response = self.client.get(reverse("fl_client:natural_language_processing_faqs"))
+        response = self.client.get(
+            reverse("fl_client:natural_language_processing_faqs")
+        )
         self.assertEqual(response.status_code, 200)
 
     def test_natural_language_processing_models_url(self):
         """
         Test the natural language processing models URL.
         """
-        response = self.client.get(reverse("fl_client:natural_language_processing_models"))
+        response = self.client.get(
+            reverse("fl_client:natural_language_processing_models")
+        )
         self.assertEqual(response.status_code, 200)
 
     def test_natural_language_processing_tutorials_url(self):
         """
         Test the natural language processing tutorials URL.
         """
-        response = self.client.get(reverse("fl_client:natural_language_processing_tutorials"))
+        response = self.client.get(
+            reverse("fl_client:natural_language_processing_tutorials")
+        )
         self.assertEqual(response.status_code, 200)
 
     def test_import_url(self):
