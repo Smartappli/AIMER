@@ -26,7 +26,7 @@ USER myuser
 ENV PATH="/home/myuser/.local/bin:${PATH}"
 
 # Copy the application code
-COPY --chown=myuser:myuser ../.. .
+COPY --chown=myuser:myuser --chmod=755 ../.. .
 
 # Set build-related environment variables
 ENV CUDA_DOCKER_ARCH=all
