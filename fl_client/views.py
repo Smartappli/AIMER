@@ -28,14 +28,14 @@ from .models import (
 # from fl_common.models.xception import xception
 # from fl_common.models.alexnet import alexnet
 
-@require_http_methods(["GET"])
+@require_GET
 def index(request):
     """Method to render the index page."""
     logo = ["share", "hospital", "data", "cpu", "gpu"]
     return render(request, "core/index.html", {"logo": logo})
 
 
-@require_http_methods(["POST"])
+@require_GET
 def import_data(request):
     """Method for importing data"""
     from huggingface_hub import list_repo_tree
@@ -131,6 +131,7 @@ def import_data(request):
     return render(request, "core/index.html", {"logo": logo})
 
 
+@require_GET
 def download_data(request):
     """Method to download the data from Hugging Face"""
     import shutil
@@ -231,7 +232,7 @@ def download_data(request):
     return render(request, "core/index.html", {"logo": logo})
 
 
-@require_http_methods(["GET"])
+@require_GET
 def data_processing(request):
     """Method to generate data processing form"""
     logo = ["share", "hospital", "data", "cpu", "gpu"]
@@ -242,7 +243,7 @@ def data_processing(request):
     )
 
 
-@require_http_methods(["GET"])
+@require_GET
 def data_processing_faqs(request):
     """Method to display data faqs"""
     logo = ["share", "hospital", "data", "cpu", "gpu"]
@@ -253,7 +254,7 @@ def data_processing_faqs(request):
     )
 
 
-@require_http_methods(["GET"])
+@require_GET
 def data_processing_models(request):
     """Method to display data processing models"""
     logo = ["share", "hospital", "data", "cpu", "gpu"]
@@ -264,7 +265,7 @@ def data_processing_models(request):
     )
 
 
-@require_http_methods(["GET"])
+@require_GET
 def data_processing_tutorials(request):
     """Method to display data processing tutorials"""
     logo = ["share", "hospital", "data", "cpu", "gpu"]
@@ -275,7 +276,7 @@ def data_processing_tutorials(request):
     )
 
 
-@require_http_methods(["GET"])
+@require_GET
 def deep_learning(request):
     """Method to render deep learning form"""
     logo = ["share", "hospital", "data", "cpu", "gpu"]
@@ -326,7 +327,8 @@ def deep_learning(request):
         },
     )
 
-@require_http_methods(["GET"])
+
+@require_GET
 def deep_learning_faqs(request):
     """Method to display deep learning faqs"""
     logo = ["share", "hospital", "data", "cpu", "gpu"]
@@ -337,7 +339,7 @@ def deep_learning_faqs(request):
     )
 
 
-@require_http_methods(["GET"])
+@require_GET
 def deep_learning_models(request):
     """Method to display all deep learning models."""
     logo = ["share", "hospital", "data", "cpu", "gpu"]
@@ -348,6 +350,7 @@ def deep_learning_models(request):
     )
 
 
+@require_POST
 def deep_learning_classification_run(request):
     """Method to run the deep learning classification"""
     if request.method == "POST":
@@ -418,6 +421,7 @@ def deep_learning_classification_run(request):
                     )
 
 
+@require_POST
 def deep_learning_segmentation_run(request):
     """Method to run a deep learning segmentation"""
     if request.method == "POST":
