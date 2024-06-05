@@ -3,7 +3,7 @@ from dotenv import load_dotenv
 from unittest.mock import MagicMock, patch
 
 import pandas as pd
-from syft.Orchestra import launch
+from syft import orchestra.launch
 from django.test import TestCase
 
 from fl_server.server import launch_node, launch_nodes, load_secrets
