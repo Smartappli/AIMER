@@ -1,45 +1,51 @@
+import os
 from unittest.mock import MagicMock, patch
 
+import pandas as pd
 import syft as sy
 from django.test import TestCase
 
 from fl_server.server import launch_node, launch_nodes, load_secrets
 
 
-class TestServer(TestCase):
+class TestYourModule(TestCase):
     """
-    Test case for the server of the 'fl_server' Django app.
+    Test case for the module.
     """
 
     @patch("os.getenv")
-    def test_load_secrets(self, mock_getenv):
+    @patch("dotenv.load_dotenv")
+    def test_load_secrets(self, mock_load_dotenv, mock_getenv):
         """
-        Test the load_secrets function.
+        Test case for the load_secrets function.
         """
         mock_getenv.side_effect = ["test_email", "test_password"]
         email, password = load_secrets()
+        mock_load_dotenv.assert_called_once()
         self.assertEqual(email, "test_email")
         self.assertEqual(password, "test_password")
 
     @patch("sy.orchestra.launch")
-    @patch("fl_server.server.load_secrets")
-    def test_launch_node(self, mock_load_secrets, mock_launch):
+    def test_launch_node(self, mock_launch):
         """
-        Test the launch_node function.
+        Test case for the launch_node function.
         """
-        mock_load_secrets.return_value = ("test_email", "test_password")
         mock_node = MagicMock()
         mock_launch.return_value = mock_node
-        mock_client = MagicMock()
-        mock_node.login.return_value = mock_client
-        launch_node("test_node", 9000)
-        self.assertEqual(mock_node.login.call_count, 2)
+        launch_node("test", 9000, "test_email", "test_password")
+        mock_launch.assert_called_once_with(
+            name="do-test",
+            port=9000,
+            local_db=True,
+            dev_mode=True,
+            reset=True,
+        )
 
-    @patch("fl_server.server.launch_node")
     @patch("fl_server.server.load_secrets")
-    def test_launch_nodes(self, mock_load_secrets, mock_launch_node):
+    @patch("fl_server.server.launch_node")
+    def test_launch_nodes(self, mock_launch_node, mock_load_secrets):
         """
-        Test the launch_nodes function.
+        Test case for the launch_nodes function.
         """
         mock_load_secrets.return_value = ("test_email", "test_password")
         launch_nodes()
