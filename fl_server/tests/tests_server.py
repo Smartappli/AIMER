@@ -3,13 +3,13 @@ from dotenv import load_dotenv
 from unittest.mock import MagicMock, patch
 
 import pandas as pd
-from syft import orchestra.launch
+from syft as sy
 from django.test import TestCase
 
 from fl_server.server import launch_node, launch_nodes, load_secrets
 
 SYFT_VERSION = ">=0.8.6,<0.9"
-
+sy.requires(SYFT_VERSION)
 
 class TestYourModule(TestCase):
     """
@@ -28,7 +28,7 @@ class TestYourModule(TestCase):
         self.assertEqual(email, "test_email")
         self.assertEqual(password, "test_password")
 
-    @patch("syft.orchestra.launch")
+    @patch("sy.orchestra.launch")
     def test_launch_node(self, mock_launch):
         """
         Test case for the launch_node function.
