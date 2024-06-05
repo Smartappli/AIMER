@@ -1,7 +1,8 @@
 import os
-from dotenv import load_dotenv
+
 import pandas as pd
 import syft as sy
+from dotenv import load_dotenv
 
 SYFT_VERSION = ">=0.8.6,<0.9"
 
