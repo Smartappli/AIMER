@@ -1,8 +1,9 @@
 import os
+from dotenv import load_dotenv
 from unittest.mock import MagicMock, patch
 
 import pandas as pd
-import syft as sy
+import syft
 from django.test import TestCase
 
 from fl_server.server import launch_node, launch_nodes, load_secrets
@@ -25,7 +26,7 @@ class TestYourModule(TestCase):
         self.assertEqual(email, "test_email")
         self.assertEqual(password, "test_password")
 
-    @patch("sy.orchestra.launch")
+    @patch("syft.orchestra.launch")
     def test_launch_node(self, mock_launch):
         """
         Test case for the launch_node function.
