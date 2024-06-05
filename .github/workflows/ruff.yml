@@ -15,5 +15,5 @@ jobs:
           args: 'check --select C90,E,F,I,NPY,RUF,UP,W --ignore E501,F401 --exclude fl_client/migrations,fl_server/migrations --fixable ALL --unsafe-fixes --fix'
       - uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          create_branch: true
+          branch: 'ruff'
           commit_message: 'style fixes by ruff'
