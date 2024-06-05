@@ -3,7 +3,7 @@ from dotenv import load_dotenv
 from unittest.mock import MagicMock, patch
 
 import pandas as pd
-import syft
+from syft.orchestra import launch
 from django.test import TestCase
 
 from fl_server.server import launch_node, launch_nodes, load_secrets
@@ -21,7 +21,7 @@ class TestYourModule(TestCase):
         Test case for the load_secrets function.
         """
         mock_getenv.side_effect = ["test_email", "test_password"]
-        email, password = load_secrets()
+        email, password = fl_server.server.load_secrets()
         mock_load_dotenv.assert_called_once()
         self.assertEqual(email, "test_email")
         self.assertEqual(password, "test_password")
