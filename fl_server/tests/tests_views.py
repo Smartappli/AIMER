@@ -30,7 +30,7 @@ class ServerViewsTestCase(TestCase):
         """
         Test that the server projects view renders the correct template with the correct context.
         """
-        response = self.client.get(reverse("fl_server:server_projects"))
+        response = self.client.get(reverse("fl_server:sprojects"))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "server/server_projects.html")
         self.assertEqual(response.context["section"], "projects")
@@ -43,7 +43,7 @@ class ServerViewsTestCase(TestCase):
         """
         Test that the server stakeholders view renders the correct template with the correct context.
         """
-        response = self.client.get(reverse("fl_server:server_stakeholders"))
+        response = self.client.get(reverse("fl_server:stakeholders"))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "server/server_stakeholders.html")
         self.assertEqual(response.context["section"], "stakeholders")
@@ -56,7 +56,7 @@ class ServerViewsTestCase(TestCase):
         """
         Test that the server monitoring view renders the correct template with the correct context.
         """
-        response = self.client.get(reverse("fl_server:server_monitoring"))
+        response = self.client.get(reverse("fl_server:monitoring"))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "server/server_monitoring.html")
         self.assertEqual(response.context["section"], "monitoring")
@@ -69,7 +69,7 @@ class ServerViewsTestCase(TestCase):
         """
         Test that the server management view renders the correct template with the correct context.
         """
-        response = self.client.get(reverse("fl_server:server_management"))
+        response = self.client.get(reverse("fl_server:management"))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "server/server_management.html")
         self.assertEqual(response.context["section"], "management")
