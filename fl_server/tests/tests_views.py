@@ -30,7 +30,7 @@ class ServerViewsTestCase(TestCase):
         """
         Test that the server projects view renders the correct template with the correct context.
         """
-        response = self.client.get(reverse("fl_server:sprojects"))
+        response = self.client.get(reverse("fl_server:projects"))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "server/server_projects.html")
         self.assertEqual(response.context["section"], "projects")
