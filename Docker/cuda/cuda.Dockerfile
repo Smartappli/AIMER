@@ -16,6 +16,9 @@ RUN apt-get update \
 
 RUN mkdir -p /etc/OpenCL/vendors && echo "libnvidia-opencl.so.1" > /etc/OpenCL/vendors/nvidia.icd
 
+# Copy the application code
+COPY --chown=root:root --chmod=755 ../.. .
+
 # Create a non-root user
 RUN useradd -m myuser
 
@@ -24,9 +27,6 @@ USER myuser
 
 # Add .local/bin to PATH
 ENV PATH="/home/myuser/.local/bin:${PATH}"
-
-# Copy the application code
-COPY --chown=myuser:myuser --chmod=755 ../.. .
 
 # Set build-related environment variables
 ENV CUDA_DOCKER_ARCH=all
