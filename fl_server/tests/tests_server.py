@@ -2,7 +2,6 @@ import os
 from dotenv import load_dotenv
 from unittest.mock import MagicMock, patch
 
-import pandas as pd
 import syft as sy
 from django.test import TestCase
 
@@ -36,7 +35,7 @@ class TestYourModule(TestCase):
         self.assertEqual(email, "test_email")
         self.assertEqual(password, "test_password")
 
-    @patch("sy.orchestra.launch")
+    @patch("syft.orchestra.launch")
     def test_launch_node(self, mock_launch):
         """
         Test case for the launch_node function.
@@ -71,4 +70,3 @@ class TestYourModule(TestCase):
         
         # Assert that the launch_node function was called three times
         self.assertEqual(mock_launch_node.call_count, 3)
-
