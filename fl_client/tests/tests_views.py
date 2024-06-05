@@ -1,6 +1,6 @@
-from django.test import TestCase, RequestFactory
+from django.test import RequestFactory, TestCase
 from django.urls import reverse
-from fl_client.forms import NLPTextGenerationForm, NLPEmotionalAnalysisForm
+from fl_client.forms import NLPEmotionalAnalysisForm, NLPTextGenerationForm
 
 
 class IndexViewTests(TestCase):
