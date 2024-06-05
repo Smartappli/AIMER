@@ -9,6 +9,9 @@ RUN apt update && apt install -y --no-install-recommends git libopenblas-dev nin
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* 
 
+# Copy the application code
+COPY --chown=root:root --chmod=755 . .
+
 # Create a non-root user
 RUN useradd -m myuser
 
@@ -17,9 +20,6 @@ USER myuser
 
 # Add .local/bin to PATH
 ENV PATH="/home/myuser/.local/bin:${PATH}"
-
-# Copy the application code
-COPY --chown=myuser:myuser --chmod=755 . .
 
 # Install Python dependencies
 RUN python -m pip install --upgrade pip \
