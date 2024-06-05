@@ -11,6 +11,7 @@ from fl_server.server import launch_node, launch_nodes, load_secrets
 SYFT_VERSION = ">=0.8.6,<0.9"
 sy.requires(SYFT_VERSION)
 
+
 class TestYourModule(TestCase):
     """
     Test case for the module.
