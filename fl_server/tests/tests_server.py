@@ -24,13 +24,13 @@ class TestYourModule(TestCase):
         """
         # Mock the return values of environment variables
         mock_getenv.side_effect = ["test_email", "test_password"]
-        
+
         # Call the load_secrets function
         email, password = load_secrets()
-        
+
         # Assert that load_dotenv was called once
         mock_load_dotenv.assert_called_once()
-        
+
         # Assert that the returned email and password match the mocked values
         self.assertEqual(email, "test_email")
         self.assertEqual(password, "test_password")
@@ -43,10 +43,10 @@ class TestYourModule(TestCase):
         # Create a mock node
         mock_node = MagicMock()
         mock_launch.return_value = mock_node
-        
+
         # Call the launch_node function with test parameters
         launch_node("test", 9000, "test_email", "test_password")
-        
+
         # Assert that the launch function was called once with the specified parameters
         mock_launch.assert_called_once_with(
             name="do-test",
@@ -64,9 +64,9 @@ class TestYourModule(TestCase):
         """
         # Mock the return values of load_secrets
         mock_load_secrets.return_value = ("test_email", "test_password")
-        
+
         # Call the launch_nodes function
         launch_nodes()
-        
+
         # Assert that the launch_node function was called three times
         self.assertEqual(mock_launch_node.call_count, 3)
