@@ -46,7 +46,7 @@ class TestUrls(TestCase):
         Test the data processing tutorials URL.
         """
         response = self.client.get(
-            reverse("fl_client:data_processing_tutorials")
+            reverse("fl_client:data_processing_tutorials"),
         )
         self.assertEqual(response.status_code, 200)
 
@@ -104,7 +104,7 @@ class TestUrls(TestCase):
         Test the machine learning tutorials URL.
         """
         response = self.client.get(
-            reverse("fl_client:machine_learning_tutorials")
+            reverse("fl_client:machine_learning_tutorials"),
         )
         self.assertEqual(response.status_code, 200)
 
@@ -113,7 +113,7 @@ class TestUrls(TestCase):
         Test the natural language processing URL.
         """
         response = self.client.get(
-            reverse("fl_client:natural_language_processing")
+            reverse("fl_client:natural_language_processing"),
         )
         self.assertEqual(response.status_code, 200)
 
@@ -122,7 +122,7 @@ class TestUrls(TestCase):
         Test the natural language processing FAQs URL.
         """
         response = self.client.get(
-            reverse("fl_client:natural_language_processing_faqs")
+            reverse("fl_client:natural_language_processing_faqs"),
         )
         self.assertEqual(response.status_code, 200)
 
@@ -131,7 +131,7 @@ class TestUrls(TestCase):
         Test the natural language processing models URL.
         """
         response = self.client.get(
-            reverse("fl_client:natural_language_processing_models")
+            reverse("fl_client:natural_language_processing_models"),
         )
         self.assertEqual(response.status_code, 200)
 
@@ -140,7 +140,7 @@ class TestUrls(TestCase):
         Test the natural language processing tutorials URL.
         """
         response = self.client.get(
-            reverse("fl_client:natural_language_processing_tutorials")
+            reverse("fl_client:natural_language_processing_tutorials"),
         )
         self.assertEqual(response.status_code, 200)
 
