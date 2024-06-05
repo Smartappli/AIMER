@@ -676,6 +676,7 @@ def register(request):
 
 
 @login_required
+@require_POST
 def edit(request):
     """Method to edit an existing user profile"""
     if request.method == "POST":
