@@ -1,7 +1,9 @@
-from django.test import TestCase
-from unittest.mock import patch, MagicMock
-from fl_server.server import load_secrets, launch_node, launch_nodes
+from unittest.mock import MagicMock, patch
+
 import syft as sy
+from django.test import TestCase
+
+from fl_server.server import load_secrets, launch_node, launch_nodes
 
 
 class TestServer(TestCase):
