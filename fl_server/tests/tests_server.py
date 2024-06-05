@@ -1,8 +1,7 @@
 from django.test import TestCase
 from unittest.mock import patch, MagicMock
-
-# Import your functions here
 from fl_server.server import load_secrets, launch_node, launch_nodes
+import syft as sy
 
 
 class TestServer(TestCase):
@@ -20,7 +19,7 @@ class TestServer(TestCase):
         self.assertEqual(email, "test_email")
         self.assertEqual(password, "test_password")
 
-    @patch("syft.orchestra.launch")
+    @patch("sy.orchestra.launch")
     @patch("fl_server.server.load_secrets")
     def test_launch_node(self, mock_load_secrets, mock_launch):
         """
