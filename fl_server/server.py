@@ -3,7 +3,6 @@ import syft as sy
 
 SYFT_VERSION = ">=0.8.6,<0.9"
 
-
 def load_secrets():
     """
     Loads secrets from .env file.
@@ -15,6 +14,8 @@ def load_secrets():
 
     email = os.getenv("EMAIL")
     password = os.getenv("PASSWORD")
+    
+    return email, password
 
 
 def launch_node(name, port, email, password):
