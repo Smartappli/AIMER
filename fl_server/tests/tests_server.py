@@ -1,9 +1,10 @@
 import os
+from unittest.mock import MagicMock, patch
+
 import pandas as pd
 import syft as sy
-
 from django.test import TestCase
-from unittest.mock import patch, MagicMock
+
 from fl_server.server import launch_node, launch_nodes, load_secrets
 
 
