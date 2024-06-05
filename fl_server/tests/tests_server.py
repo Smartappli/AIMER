@@ -34,7 +34,11 @@ class TestYourModule(TestCase):
         mock_launch.return_value = mock_node
         launch_node("test", 9000, "test_email", "test_password")
         mock_launch.assert_called_once_with(
-            name="do-test", port=9000, local_db=True, dev_mode=True, reset=True,
+            name="do-test",
+            port=9000,
+            local_db=True,
+            dev_mode=True,
+            reset=True,
         )
 
     @patch("fl_server.server.load_secrets")
