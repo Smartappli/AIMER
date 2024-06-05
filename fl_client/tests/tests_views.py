@@ -1,5 +1,6 @@
 from django.test import RequestFactory, TestCase
 from django.urls import reverse
+
 from fl_client.forms import NLPEmotionalAnalysisForm, NLPTextGenerationForm
 
 
