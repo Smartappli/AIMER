@@ -3,7 +3,7 @@ from unittest.mock import MagicMock, patch
 import syft as sy
 from django.test import TestCase
 
-from fl_server.server import load_secrets, launch_node, launch_nodes
+from fl_server.server import launch_node, launch_nodes, load_secrets
 
 
 class TestServer(TestCase):
