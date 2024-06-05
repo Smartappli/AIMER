@@ -10,11 +10,11 @@ def load_secrets():
     """
     from dotenv import load_dotenv
     import os
-    
+
     load_dotenv()
-    
-    email = os.getenv('EMAIL')
-    password = os.getenv('PASSWORD')
+
+    email = os.getenv("EMAIL")
+    password = os.getenv("PASSWORD")
 
 
 def launch_node(name, port, email, password):
