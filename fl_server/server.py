@@ -1,8 +1,5 @@
-import os
-
 import pandas as pd
 import syft as sy
-from dotenv import load_dotenv
 
 SYFT_VERSION = ">=0.8.6,<0.9"
 
@@ -11,8 +8,13 @@ def load_secrets():
     """
     Loads secrets from .env file.
     """
+    from dotenv import load_dotenv
+    import os
+    
     load_dotenv()
-    return os.getenv("EMAIL"), os.getenv("PASSWORD")
+    
+    email = os.getenv('EMAIL')
+    password = os.getenv('PASSWORD')
 
 
 def launch_node(name, port, email, password):
