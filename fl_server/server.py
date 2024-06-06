@@ -57,7 +57,13 @@ def register_user(node, email, password, name, institution, website):
 
 
 def launch_and_register(
-    name, port, email, password, user_name, institution, website,
+    name,
+    port,
+    email,
+    password,
+    user_name,
+    institution,
+    website,
 ):
     """
     Launch a new node and register a new user for it.
@@ -77,7 +83,12 @@ def launch_and_register(
     """
     node = launch_node(name, port)
     client = register_user(
-        node, email, password, user_name, institution, website,
+        node,
+        email,
+        password,
+        user_name,
+        institution,
+        website,
     )
     return node, client
 

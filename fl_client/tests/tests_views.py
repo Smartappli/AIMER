@@ -8,7 +8,7 @@ class IndexViewTests(TestCase):
     """
     Test case for the views of the 'fl_client' Django app.
     """
-    
+
     def setUp(self):
         """
         Set up the test case with a Django test client.
