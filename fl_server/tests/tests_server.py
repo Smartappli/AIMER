@@ -4,7 +4,7 @@ from unittest.mock import patch, MagicMock
 class TestNodeLaunch(unittest.TestCase):
     @patch('syft.Orchestra.launch')
     def test_launch_node(self, mock_launch):
-        from my_module import launch_node  # Assuming the refactored code is in my_module.py
+        from fl_server.server import launch_node  # Assuming the refactored code is in fl_server.server.py
 
         mock_node = MagicMock()
         mock_launch.return_value = mock_node
@@ -22,7 +22,7 @@ class TestNodeLaunch(unittest.TestCase):
 
     @patch('syft.Orchestra.login')
     def test_register_user(self, mock_login):
-        from my_module import register_user  # Assuming the refactored code is in my_module.py
+        from fl_server.server import register_user  # Assuming the refactored code is in fl_server.server.py
 
         mock_client = MagicMock()
         mock_login.return_value = mock_client
