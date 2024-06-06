@@ -3,7 +3,7 @@ from unittest.mock import patch, MagicMock
 
 
 class TestNodeLaunch(unittest.TestCase):
-    @patch("syft.Orchestra.launch")
+    @patch("syft.orchestra.launch")
     def test_launch_node(self, mock_launch):
         from fl_server.server import (
             launch_node,
@@ -23,7 +23,7 @@ class TestNodeLaunch(unittest.TestCase):
         )
         self.assertEqual(node, mock_node)
 
-    @patch("syft.Orchestra.login")
+    @patch("syft.orchestra.login")
     def test_register_user(self, mock_login):
         from fl_server.server import (
             register_user,
