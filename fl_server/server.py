@@ -77,6 +77,12 @@ def launch_and_register(name, port, email, password, user_name, institution, web
     )
     return node, client
 
+def login(node, login_email, login_password):
+     return node.login(
+            email=login_email,
+            password=login_password,
+        )
+
 def land_node(node):
     """
     Destroy the given node.
