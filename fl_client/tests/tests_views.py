@@ -5,7 +5,14 @@ from fl_client.forms import NLPEmotionalAnalysisForm, NLPTextGenerationForm
 
 
 class IndexViewTests(TestCase):
+    """
+    Test case for the views of the 'fl_client' Django app.
+    """
+    
     def setUp(self):
+        """
+        Set up the test case with a Django test client.
+        """
         self.client = Client()
 
     def test_index_view_uses_correct_template(self):
