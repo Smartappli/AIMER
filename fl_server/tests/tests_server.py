@@ -10,7 +10,7 @@ sy.requires(SYFT_VERSION)
 print(f"Version of PySyft : {sy.__version__}")
 
 class ServerTestCase(TestCase):
-    def launch_node_main():
+    def test_launch_node_main(self):
         node_humani, client_humani = launch_and_register(
             "do-humani",
             9000,
