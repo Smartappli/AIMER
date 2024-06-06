@@ -1,9 +1,11 @@
-from django.test import TestCase
+from django.test import Client, TestCase
 from django.urls import reverse
 
 
 class ServerViewsTestCase(TestCase):
     """Test suite for the server views."""
+    def setUp(self):
+        self.client = Client()
 
     def test_index_redirects_to_dashboard(self):
         """
