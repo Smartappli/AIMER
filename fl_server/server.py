@@ -3,6 +3,7 @@ import syft as sy
 
 SYFT_VERSION = ">=0.8.2.b0,<0.9"
 
+
 def launch_node(name, port):
     print(f"\n--- Démarrage du noeud {name} ---")
     node = sy.Orchestra.launch(
@@ -13,6 +14,7 @@ def launch_node(name, port):
         reset=True,
     )
     return node
+
 
 def register_user(node, email, password, name, institution, website):
     client = node.login(email=email, password=password)
@@ -26,19 +28,49 @@ def register_user(node, email, password, name, institution, website):
     )
     return client
 
-def launch_and_register(name, port, email, password, user_name, institution, website):
+
+def launch_and_register(
+    name, port, email, password, user_name, institution, website
+):
     node = launch_node(name, port)
-    client = register_user(node, email, password, user_name, institution, website)
+    client = register_user(
+        node, email, password, user_name, institution, website
+    )
     return node, client
+
 
 def launch_node_main():
     sy.requires(SYFT_VERSION)
 
     print(f"Version of PySyft : {sy.__version__}")
 
-    node_humani, client_humani = launch_and_register("do-humani", 9000, "info@openmined.org", "changethis", "Jane Doe", "Caltech", "https://www.caltech.edu/")
-    node_epicura, client_epicura = launch_and_register("do-epicura", 9001, "info@openmined.org", "changethis", "Jane Doe", "Caltech", "https://www.caltech.edu/")
-    node_vivalia, client_vivalia = launch_and_register("do-vivalia", 9003, "info@openmined.org", "changethis", "Jane Doe", "Caltech", "https://www.caltech.edu/")
+    node_humani, client_humani = launch_and_register(
+        "do-humani",
+        9000,
+        "info@openmined.org",
+        "changethis",
+        "Jane Doe",
+        "Caltech",
+        "https://www.caltech.edu/",
+    )
+    node_epicura, client_epicura = launch_and_register(
+        "do-epicura",
+        9001,
+        "info@openmined.org",
+        "changethis",
+        "Jane Doe",
+        "Caltech",
+        "https://www.caltech.edu/",
+    )
+    node_vivalia, client_vivalia = launch_and_register(
+        "do-vivalia",
+        9003,
+        "info@openmined.org",
+        "changethis",
+        "Jane Doe",
+        "Caltech",
+        "https://www.caltech.edu/",
+    )
 
     ds_client = node_humani.login(
         email="janedoe@caltech.edu",
@@ -82,6 +114,7 @@ def launch_node_main():
     node_humani.land()
     node_epicura.land()
     node_vivalia.land()
+
 
 if __name__ == "__main__":
     launch_node_main()
