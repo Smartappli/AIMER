@@ -4,6 +4,7 @@ from django.urls import reverse
 
 class ServerViewsTestCase(TestCase):
     """Test suite for the server views."""
+
     def setUp(self):
         self.client = Client()
 
