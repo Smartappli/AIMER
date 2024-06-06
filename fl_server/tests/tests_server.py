@@ -5,6 +5,7 @@ from fl_server.server import launch_and_register, land_node, login
 
 SYFT_VERSION = ">=0.8.2.b0,<0.9"
 
+
 class ServerTestCase(TestCase):
     """
     A Django TestCase for testing the server functionality.
@@ -52,10 +53,10 @@ class ServerTestCase(TestCase):
             "janedoe@caltech.edu",
             "abc123",
         )
-    
+
         data_subjects = self.client_humani.data_subject_registry.get_all()
         self.assertIsNotNone(data_subjects)
-    
+
         dataset = sy.Dataset(
             name="usa-mock-data",
             description="Dataset of ages",
@@ -79,10 +80,10 @@ class ServerTestCase(TestCase):
             ],
         )
         self.client_humani.upload_dataset(dataset)
-    
+
         asset = ds_client.datasets[-1].assets["ages"]
         mock = asset.mock
-    
+
         age_sum = mock["Age"].mean()
         self.assertIsNotNone(age_sum)
 

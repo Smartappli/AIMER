@@ -7,6 +7,7 @@ SYFT_VERSION = ">=0.8.2.b0,<0.9"
 sy.requires(SYFT_VERSION)
 print(f"Version of PySyft : {sy.__version__}")
 
+
 def launch_node(name, port):
     """
     Launch a new node with the given name and port.
@@ -27,6 +28,7 @@ def launch_node(name, port):
         reset=True,
     )
     return node
+
 
 def register_user(node, email, password, name, institution, website):
     """
@@ -54,7 +56,10 @@ def register_user(node, email, password, name, institution, website):
     )
     return client
 
-def launch_and_register(name, port, email, password, user_name, institution, website):
+
+def launch_and_register(
+    name, port, email, password, user_name, institution, website
+):
     """
     Launch a new node and register a new user for it.
 
@@ -77,6 +82,7 @@ def launch_and_register(name, port, email, password, user_name, institution, web
     )
     return node, client
 
+
 def login(node, login_email, login_password):
     """
     Log in to the given node with the provided email and password.
@@ -93,6 +99,7 @@ def login(node, login_email, login_password):
         email=login_email,
         password=login_password,
     )
+
 
 def land_node(node):
     """
