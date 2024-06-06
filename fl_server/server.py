@@ -20,7 +20,7 @@ def launch_node(name, port):
         node: The launched node.
     """
     print(f"\n--- Démarrage du noeud {name} ---")
-    node = sy.orchestra.Orchestra.launch(
+    node = sy.launch(
         name=name,
         port=port,
         local_db=True,
