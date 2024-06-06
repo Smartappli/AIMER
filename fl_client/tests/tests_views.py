@@ -6,7 +6,7 @@ from fl_client.forms import NLPEmotionalAnalysisForm, NLPTextGenerationForm
 
 class IndexViewTests(TestCase):
     def setUp(self):
-        self.factory = RequestFactory()
+        self.client = Client()
 
     def test_index_view_uses_correct_template(self):
         """
