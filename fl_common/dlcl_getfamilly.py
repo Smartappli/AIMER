@@ -1574,6 +1574,7 @@ def get_family_model_v(model_type, num_classes):
         "vit_small_resnet50d_s16_224": get_vision_transformer_hybrid_model,
         "vit_base_resnet26d_224": get_vision_transformer_hybrid_model,
         "vit_base_resnet50d_224": get_vision_transformer_hybrid_model,
+        "vit_base_mci_224": get_vision_transformer_hybrid_model,
         "vit_relpos_base_patch32_plus_rpn_256": get_vision_transformer_relpos_model,
         "vit_relpos_base_patch16_plus_240": get_vision_transformer_relpos_model,
         "vit_relpos_small_patch16_224": get_vision_transformer_relpos_model,
