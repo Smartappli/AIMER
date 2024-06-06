@@ -31,6 +31,7 @@ class ProcessingVisionTransformerHybridTestCase(TestCase):
             "vit_small_resnet50d_s16_224",
             "vit_base_resnet26d_224",
             "vit_base_resnet50d_224",
+            "vit_base_mci_224",
         ]
         for model_type in model_types:
             with self.subTest(model_type=model_type):
