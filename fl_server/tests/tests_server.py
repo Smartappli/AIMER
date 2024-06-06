@@ -1,17 +1,21 @@
 from django.test import TestCase
 import pandas as pd
 import syft as sy
-from fl_server.server import launch_and_register, land_node
+from fl_server.server import launch_and_register, land_node, login
 
 SYFT_VERSION = ">=0.8.2.b0,<0.9"
 
-# Ensure the correct version of PySyft is installed
-sy.requires(SYFT_VERSION)
-print(f"Version of PySyft : {sy.__version__}")
-
 class ServerTestCase(TestCase):
-    def test_launch_node_main(self):
-        node_humani, client_humani = launch_and_register(
+    """
+    A Django TestCase for testing the server functionality.
+    """
+
+    def setUp(self):
+        """
+        Set up the test case by launching and registering nodes.
+        """
+        sy.requires(SYFT_VERSION)
+        self.node_humani, self.client_humani = launch_and_register(
             "do-humani",
             9000,
             "info@openmined.org",
@@ -20,7 +24,7 @@ class ServerTestCase(TestCase):
             "Caltech",
             "https://www.caltech.edu/",
         )
-        node_epicura, client_epicura = launch_and_register(
+        self.node_epicura, self.client_epicura = launch_and_register(
             "do-epicura",
             9001,
             "info@openmined.org",
@@ -29,7 +33,7 @@ class ServerTestCase(TestCase):
             "Caltech",
             "https://www.caltech.edu/",
         )
-        node_vivalia, client_vivalia = launch_and_register(
+        self.node_vivalia, self.client_vivalia = launch_and_register(
             "do-vivalia",
             9003,
             "info@openmined.org",
@@ -38,14 +42,19 @@ class ServerTestCase(TestCase):
             "Caltech",
             "https://www.caltech.edu/",
         )
-    
-        ds_client = node_humani.login(
-            email="janedoe@caltech.edu",
-            password="abc123",
+
+    def test_launch_node_main(self):
+        """
+        Test the main node launch functionality.
+        """
+        ds_client = self.login(
+            "node_humani",
+            "janedoe@caltech.edu",
+            "abc123",
         )
     
-        data_subjects = client_humani.data_subject_registry.get_all()
-        print(data_subjects)
+        data_subjects = self.client_humani.data_subject_registry.get_all()
+        self.assertIsNotNone(data_subjects)
     
         dataset = sy.Dataset(
             name="usa-mock-data",
@@ -69,14 +78,18 @@ class ServerTestCase(TestCase):
                 ),
             ],
         )
-        client_humani.upload_dataset(dataset)
+        self.client_humani.upload_dataset(dataset)
     
         asset = ds_client.datasets[-1].assets["ages"]
         mock = asset.mock
     
         age_sum = mock["Age"].mean()
-        print(age_sum)
-    
-        land_node(node_humani)
-        land_node(node_epicura)
-        land_node(node_vivalia)
+        self.assertIsNotNone(age_sum)
+
+    def tearDown(self):
+        """
+        Clean up the test case by landing the nodes.
+        """
+        land_node(self.node_humani)
+        land_node(self.node_epicura)
+        land_node(self.node_vivalia)
