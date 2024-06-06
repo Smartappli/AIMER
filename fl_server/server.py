@@ -32,7 +32,7 @@ def launch_node(name, port, email, password):
     """
 
     import syft as sy
-    
+
     print(f"\n--- Démarrage du noeud {name} ---")
     node = sy.orchestra.launch(
         name=f"do-{name}",
