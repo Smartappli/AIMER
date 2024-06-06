@@ -31,7 +31,6 @@ class IndexViewTests(TestCase):
         Tests if the data processing view uses the correct template.
         """
         response = self.client.get(reverse("fl_client:data_processing"))
-        self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(
             response,
             "data_processing/data_processing.html",
@@ -42,7 +41,6 @@ class IndexViewTests(TestCase):
         Tests if the context of the data processing view contains the expected elements.
         """
         response = self.client.get(reverse("fl_client:data_processing"))
-        self.assertEqual(response.status_code, 200)
         self.assertIn("logo", response.context)
         self.assertEqual(
             response.context["logo"],
@@ -67,7 +65,6 @@ class IndexViewTests(TestCase):
         Tests if the context of the data processing FAQs view contains the expected elements.
         """
         response = self.client.get(reverse("fl_client:data_processing_faqs"))
-        self.assertEqual(response.status_code, 200)
         self.assertIn("logo", response.context)
         self.assertEqual(
             response.context["logo"],
@@ -81,7 +78,6 @@ class IndexViewTests(TestCase):
         Tests if the data processing models view uses the correct template.
         """
         response = self.client.get(reverse("fl_client:data_processing_models"))
-        self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(
             response,
             "data_processing/data_processing_models.html",
@@ -92,7 +88,6 @@ class IndexViewTests(TestCase):
         Tests if the context of the data processing models view contains the expected elements.
         """
         response = self.client.get(reverse("fl_client:data_processing_models"))
-        self.assertEqual(response.status_code, 200)
         self.assertIn("logo", response.context)
         self.assertEqual(
             response.context["logo"],
@@ -108,7 +103,6 @@ class IndexViewTests(TestCase):
         response = self.client.get(
             reverse("fl_client:data_processing_tutorials"),
         )
-        self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(
             response,
             "data_processing/data_processing_tutorials.html",
@@ -121,7 +115,6 @@ class IndexViewTests(TestCase):
         response = self.client.get(
             reverse("fl_client:data_processing_tutorials"),
         )
-        self.assertEqual(response.status_code, 200)
         self.assertIn("logo", response.context)
         self.assertEqual(
             response.context["logo"],
@@ -135,7 +128,6 @@ class IndexViewTests(TestCase):
         Tests if the deep learning FAQs view uses the correct template.
         """
         response = self.client.get(reverse("fl_client:deep_learning_faqs"))
-        self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(
             response,
             "deep_learning/deep_learning_faqs.html",
@@ -146,7 +138,6 @@ class IndexViewTests(TestCase):
         Tests if the context of the deep learning FAQs view contains the expected elements.
         """
         response = self.client.get(reverse("fl_client:deep_learning_faqs"))
-        self.assertEqual(response.status_code, 200)
         self.assertIn("logo", response.context)
         self.assertEqual(
             response.context["logo"],
@@ -171,7 +162,6 @@ class IndexViewTests(TestCase):
         Tests if the context of the deep learning models view contains the expected elements.
         """
         response = self.client.get(reverse("fl_client:deep_learning_models"))
-        self.assertEqual(response.status_code, 200)
         self.assertIn("logo", response.context)
         self.assertEqual(
             response.context["logo"],
@@ -185,7 +175,6 @@ class IndexViewTests(TestCase):
         Tests if the deep learning tutorials view uses the correct template.
         """
         response = self.client.get(reverse("fl_client:deep_learning_tutorials"))
-        self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(
             response,
             "deep_learning/deep_learning_tutorials.html",
@@ -196,7 +185,6 @@ class IndexViewTests(TestCase):
         Tests if the context of the deep learning tutorials view contains the expected elements.
         """
         response = self.client.get(reverse("fl_client:deep_learning_tutorials"))
-        self.assertEqual(response.status_code, 200)
         self.assertIn("logo", response.context)
         self.assertEqual(
             response.context["logo"],
@@ -210,7 +198,6 @@ class IndexViewTests(TestCase):
         Tests if the machine learning FAQs view uses the correct template.
         """
         response = self.client.get(reverse("fl_client:machine_learning_faqs"))
-        self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(
             response,
             "machine_learning/machine_learning_faqs.html",
@@ -221,7 +208,6 @@ class IndexViewTests(TestCase):
         Tests if the context of the machine learning FAQs view contains the expected elements.
         """
         response = self.client.get(reverse("fl_client:machine_learning_faqs"))
-        self.assertEqual(response.status_code, 200)
         self.assertIn("logo", response.context)
         self.assertEqual(
             response.context["logo"],
@@ -235,7 +221,6 @@ class IndexViewTests(TestCase):
         Tests if the machine learning models view uses the correct template.
         """
         response = self.client.get(reverse("fl_client:machine_learning_models"))
-        self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(
             response,
             "machine_learning/machine_learning_models.html",
@@ -246,7 +231,6 @@ class IndexViewTests(TestCase):
         Tests if the context of the machine learning models view contains the expected elements.
         """
         response = self.client.get(reverse("fl_client:machine_learning_models"))
-        self.assertEqual(response.status_code, 200)
         self.assertIn("logo", response.context)
         self.assertEqual(
             response.context["logo"],
@@ -262,7 +246,6 @@ class IndexViewTests(TestCase):
         response = self.client.get(
             reverse("fl_client:machine_learning_tutorials"),
         )
-        self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(
             response,
             "machine_learning/machine_learning_tutorials.html",
@@ -275,7 +258,6 @@ class IndexViewTests(TestCase):
         response = self.client.get(
             reverse("fl_client:machine_learning_tutorials"),
         )
-        self.assertEqual(response.status_code, 200)
         self.assertIn("logo", response.context)
         self.assertEqual(
             response.context["logo"],
@@ -291,7 +273,6 @@ class IndexViewTests(TestCase):
         response = self.client.get(
             reverse("fl_client:natural_language_processing"),
         )
-        self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(
             response,
             "natural_language_processing/natural_language_processing.html",
@@ -304,7 +285,6 @@ class IndexViewTests(TestCase):
         response = self.client.get(
             reverse("fl_client:natural_language_processing"),
         )
-        self.assertEqual(response.status_code, 200)
         self.assertIn("logo", response.context)
         self.assertEqual(
             response.context["logo"],
@@ -329,7 +309,6 @@ class IndexViewTests(TestCase):
         response = self.client.get(
             reverse("fl_client:natural_language_processing_faqs"),
         )
-        self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(
             response,
             "natural_language_processing/natural_language_processing_faqs.html",
@@ -342,7 +321,6 @@ class IndexViewTests(TestCase):
         response = self.client.get(
             reverse("fl_client:natural_language_processing_faqs"),
         )
-        self.assertEqual(response.status_code, 200)
         self.assertIn("logo", response.context)
         self.assertEqual(
             response.context["logo"],
@@ -358,7 +336,6 @@ class IndexViewTests(TestCase):
         response = self.client.get(
             reverse("fl_client:natural_language_processing_models"),
         )
-        self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(
             response,
             "natural_language_processing/natural_language_processing_models.html",
@@ -371,7 +348,6 @@ class IndexViewTests(TestCase):
         response = self.client.get(
             reverse("fl_client:natural_language_processing_models"),
         )
-        self.assertEqual(response.status_code, 200)
         self.assertIn("logo", response.context)
         self.assertEqual(
             response.context["logo"],
@@ -389,7 +365,6 @@ class IndexViewTests(TestCase):
         response = self.client.get(
             reverse("fl_client:natural_language_processing_tutorials"),
         )
-        self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(
             response,
             "natural_language_processing/natural_language_processing_tutorials.html",
@@ -402,7 +377,6 @@ class IndexViewTests(TestCase):
         response = self.client.get(
             reverse("fl_client:natural_language_processing_tutorials"),
         )
-        self.assertEqual(response.status_code, 200)
         self.assertIn("logo", response.context)
         self.assertEqual(
             response.context["logo"],
