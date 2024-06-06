@@ -1,6 +1,7 @@
-from django.test import TestCase
 import pandas as pd
 import syft as sy
+from django.test import TestCase
+
 from fl_server.server import launch_and_register, land_node, login
 
 SYFT_VERSION = ">=0.8.2.b0,<0.9"
