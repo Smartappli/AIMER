@@ -53,7 +53,7 @@ jobs:
       - name: Coverage FL_Server
         run: | 
           coverage run -a manage.py test fl_server.tests.tests_views          
-          coverage run -m unittest fl_server.tests.tests_server.py
+          coverage run -m unittest fl_server.tests.tests_server
       - name: Coverage A
         run: |       
           coverage run -a manage.py test fl_common.tests.tests_models_alexnet
