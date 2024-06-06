@@ -1,63 +1,52 @@
 import pandas as pd
 import syft as sy
 
-SYFT_VERSION = ">=0.8.6,<0.9"
+SYFT_VERSION = ">=0.8.2.b0,<0.9"
 
-
-def load_secrets():
-    """
-    Loads secrets from .env file.
-    """
-    from dotenv import load_dotenv
-    import os
-
-    load_dotenv()
-
-    email = os.getenv("EMAIL")
-    password = os.getenv("PASSWORD")
-
-    return email, password
-
-
-def launch_node(name, port, email, password):
-    """
-    Launches a node, registers a user, uploads a dataset, calculates the mean age,
-    and then destroys the node.
-
-    Args:
-        name (str): Name of the node.
-        port (int): Port number for the node.
-        email (str): User email.
-        password (str): User password.
-    """
-
-    import syft as sy
-
+def launch_node(name, port):
     print(f"\n--- Démarrage du noeud {name} ---")
-    node = sy.orchestra.launch(
-        name=f"do-{name}",
+    node = sy.Orchestra.launch(
+        name=name,
         port=port,
         local_db=True,
         dev_mode=True,
         reset=True,
     )
-    client = node.login(
-        email=email,
-        password=password,
-    )
+    return node
+
+def register_user(node, email, password, name, institution, website):
+    client = node.login(email=email, password=password)
     client.register(
-        name="Jane Doe",
+        name=name,
         email=email,
         password=password,
         password_verify=password,
-        institution="Caltech",
-        website="https://www.caltech.edu/",
+        institution=institution,
+        website=website,
+    )
+    return client
+
+def launch_and_register(name, port, email, password, user_name, institution, website):
+    node = launch_node(name, port)
+    client = register_user(node, email, password, user_name, institution, website)
+    return node, client
+
+def launch_node_main():
+    sy.requires(SYFT_VERSION)
+
+    print(f"Version of PySyft : {sy.__version__}")
+
+    node_humani, client_humani = launch_and_register("do-humani", 9000, "info@openmined.org", "changethis", "Jane Doe", "Caltech", "https://www.caltech.edu/")
+    node_epicura, client_epicura = launch_and_register("do-epicura", 9001, "info@openmined.org", "changethis", "Jane Doe", "Caltech", "https://www.caltech.edu/")
+    node_vivalia, client_vivalia = launch_and_register("do-vivalia", 9003, "info@openmined.org", "changethis", "Jane Doe", "Caltech", "https://www.caltech.edu/")
+
+    ds_client = node_humani.login(
+        email="janedoe@caltech.edu",
+        password="abc123",
     )
 
-    ds_client = node.login(
-        email=email,
-        password=password,
-    )
+    data_subjects = client_humani.data_subject_registry.get_all()
+    print(data_subjects)
 
     dataset = sy.Dataset(
         name="usa-mock-data",
@@ -81,7 +70,7 @@ def launch_node(name, port, email, password):
             ),
         ],
     )
-    client.upload_dataset(dataset)
+    client_humani.upload_dataset(dataset)
 
     asset = ds_client.datasets[-1].assets["ages"]
     mock = asset.mock
@@ -89,25 +78,10 @@ def launch_node(name, port, email, password):
     age_sum = mock["Age"].mean()
     print(age_sum)
 
-    print(f"--- Destruction du Domain Server {name} ---")
-    node.land()
-
-
-def launch_nodes():
-    """
-    Launches three nodes: Humani, Epicura, and Vivalia.
-    """
-    email, password = load_secrets()
-    nodes = [
-        {"name": "Humani", "port": 9000},
-        {"name": "Epicura", "port": 9001},
-        {"name": "Vivalia", "port": 9003},
-    ]
-    for node in nodes:
-        launch_node(node["name"], node["port"], email, password)
-
+    print("--- Destruction des Domain Servers ---")
+    node_humani.land()
+    node_epicura.land()
+    node_vivalia.land()
 
 if __name__ == "__main__":
-    sy.requires(SYFT_VERSION)
-    print(f"Version of PySyft : {sy.__version__}")
-    launch_nodes()
+    launch_node_main()
