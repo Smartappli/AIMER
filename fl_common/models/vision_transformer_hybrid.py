@@ -32,6 +32,7 @@ def get_vision_transformer_hybrid_model(
         "vit_small_resnet50d_s16_224",
         "vit_base_resnet26d_224",
         "vit_base_resnet50d_224",
+        "vit_base_mci_224",
     }
 
     if vision_transformer_hybrid_type not in valid_types:
