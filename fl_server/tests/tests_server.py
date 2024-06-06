@@ -1,60 +1,84 @@
-import unittest
-from unittest.mock import patch, MagicMock
+import pandas as pd
+import syft as sy
 
+SYFT_VERSION = ">=0.8.2.b0,<0.9"
 
-class TestNodeLaunch(unittest.TestCase):
-    @patch("syft.orchestra.launch")
-    def test_launch_node(self, mock_launch):
-        from fl_server.server import (
-            launch_node,
-        )  # Assuming the refactored code is in fl_server.server.py
+# Ensure the correct version of PySyft is installed
+sy.requires(SYFT_VERSION)
+print(f"Version of PySyft : {sy.__version__}")
 
-        mock_node = MagicMock()
-        mock_launch.return_value = mock_node
+def launch_node_main():
+    node_humani, client_humani = launch_and_register(
+        "do-humani",
+        9000,
+        "info@openmined.org",
+        "changethis",
+        "Jane Doe",
+        "Caltech",
+        "https://www.caltech.edu/",
+    )
+    node_epicura, client_epicura = launch_and_register(
+        "do-epicura",
+        9001,
+        "info@openmined.org",
+        "changethis",
+        "Jane Doe",
+        "Caltech",
+        "https://www.caltech.edu/",
+    )
+    node_vivalia, client_vivalia = launch_and_register(
+        "do-vivalia",
+        9003,
+        "info@openmined.org",
+        "changethis",
+        "Jane Doe",
+        "Caltech",
+        "https://www.caltech.edu/",
+    )
 
-        node = launch_node("do-humani", 9000)
+    ds_client = node_humani.login(
+        email="janedoe@caltech.edu",
+        password="abc123",
+    )
 
-        mock_launch.assert_called_once_with(
-            name="do-humani",
-            port=9000,
-            local_db=True,
-            dev_mode=True,
-            reset=True,
-        )
-        self.assertEqual(node, mock_node)
+    data_subjects = client_humani.data_subject_registry.get_all()
+    print(data_subjects)
 
-    @patch("syft.orchestra.login")
-    def test_register_user(self, mock_login):
-        from fl_server.server import (
-            register_user,
-        )  # Assuming the refactored code is in fl_server.server.py
+    dataset = sy.Dataset(
+        name="usa-mock-data",
+        description="Dataset of ages",
+        asset_list=[
+            sy.Asset(
+                name="ages",
+                data=pd.DataFrame(
+                    {
+                        "Patient_ID": ["011", "015", "022", "034", "044"],
+                        "Age": [40, 39, 35, 60, 25],
+                    },
+                ),
+                mock=pd.DataFrame(
+                    {
+                        "Patient_ID": ["1", "2", "3", "4", "5"],
+                        "Age": [50, 49, 45, 70, 35],
+                    },
+                ),
+                mock_is_real=False,
+            ),
+        ],
+    )
+    client_humani.upload_dataset(dataset)
 
-        mock_client = MagicMock()
-        mock_login.return_value = mock_client
+    asset = ds_client.datasets[-1].assets["ages"]
+    mock = asset.mock
 
-        node = MagicMock()
-        client = register_user(
-            node,
-            "info@openmined.org",
-            "changethis",
-            "Jane Doe",
-            "Caltech",
-            "https://www.caltech.edu/",
-        )
+    age_sum = mock["Age"].mean()
+    print(age_sum)
 
-        mock_login.assert_called_once_with(
-            email="info@openmined.org", password="changethis"
-        )
-        mock_client.register.assert_called_once_with(
-            name="Jane Doe",
-            email="info@openmined.org",
-            password="changethis",
-            password_verify="changethis",
-            institution="Caltech",
-            website="https://www.caltech.edu/",
-        )
-        self.assertEqual(client, mock_client)
+    print("--- Destruction des Domain Servers ---")
+    node_humani.land()
+    node_epicura.land()
+    node_vivalia.land()
 
 
 if __name__ == "__main__":
-    unittest.main()
+    launch_node_main()
