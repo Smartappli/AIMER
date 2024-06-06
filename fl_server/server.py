@@ -78,10 +78,21 @@ def launch_and_register(name, port, email, password, user_name, institution, web
     return node, client
 
 def login(node, login_email, login_password):
-     return node.login(
-            email=login_email,
-            password=login_password,
-        )
+    """
+    Log in to the given node with the provided email and password.
+
+    Args:
+        node: The node to log in to.
+        login_email (str): The email to use for logging in.
+        login_password (str): The password to use for logging in.
+
+    Returns:
+        client: The client returned after successful login.
+    """
+    return node.login(
+        email=login_email,
+        password=login_password,
+    )
 
 def land_node(node):
     """
