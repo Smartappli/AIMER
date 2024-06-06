@@ -4,7 +4,11 @@ from django.urls import reverse
 
 class ServerViewsTestCase(TestCase):
     """Test suite for the server views."""
+    
     def setUp(self):
+        """
+        Set up the test case with a Django test client.
+        """
         self.client = Client()
 
     def test_index_redirects_to_dashboard(self):
