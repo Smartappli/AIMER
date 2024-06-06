@@ -16,12 +16,16 @@ def get_vitamin_model(vitamin_type, num_classes):
     - ValueError: If the specified `vitamin_type` is not one of the supported architectures.
     """
     valid_types = {
-        "vitamin_small",
-        "vitamin_base",
-        "vitamin_large",
+        "vitamin_small_224",
+        "vitamin_base_224",
+        "vitamin_large_224",
         "vitamin_large_256",
         "vitamin_large_336",
         "vitamin_large_384",
+        "vitamin_large2_224",
+        "vitamin_large2_256",
+        "vitamin_large2_336",
+        "vitamin_large2_384",
         "vitamin_xlarge_256",
         "vitamin_xlarge_336",
         "vitamin_xlarge_384",
