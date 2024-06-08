@@ -23,7 +23,7 @@ lightgbm>=4.3.0
 captum==0.7.0
 psycopg==3.1.19
 git+https://github.com/huggingface/pytorch-image-models.git
-syft>=0.8.6b10
+syft>=0.8.7b10
 # git+https://github.com/pycaret/pycaret.git
 wheel>=0.43.0 # not directly required, pinned by Snyk to avoid a vulnerability
 gevent>=23.9.0 # not directly required, pinned by Snyk to avoid a vulnerability
