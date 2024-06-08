@@ -58,7 +58,7 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           python -m pip install coverage
-          pip install -r requirements.txt
+          pip install -r tests.txt
       - name: Fl_common Models Selecsls
         run: |
           coverage run manage.py test fl_common.tests.tests_models_selecsls
@@ -116,7 +116,7 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           python -m pip install coverage
-          pip install -r requirements.txt
+          pip install -r tests.txt
       - name: Fl_common Models Senet
         run: |
           coverage run manage.py test fl_common.tests.tests_models_senet
@@ -174,7 +174,7 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           python -m pip install coverage
-          pip install -r requirements.txt
+          pip install -r tests.txt
       - name: Fl_common Models Sequencer
         run: |
           coverage run manage.py test fl_common.tests.tests_models_sequencer
@@ -232,7 +232,7 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         python -m pip install coverage
-        pip install -r requirements.txt
+        pip install -r tests.txt
     - name: Fl_common Models Shufflenet
       run: |
         coverage run manage.py test fl_common.tests.tests_models_shufflenet
@@ -290,7 +290,7 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         python -m pip install coverage
-        pip install -r requirements.txt
+        pip install -r tests.txt
     - name: Fl_common Models Sknet
       run: |
         coverage run manage.py test fl_common.tests.tests_models_sknet
@@ -348,7 +348,7 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         python -m pip install coverage
-        pip install -r requirements.txt
+        pip install -r tests.txt
     - name: Fl_common Models Squeezenet
       run: |
         coverage run manage.py test fl_common.tests.tests_models_squeezenet
@@ -406,7 +406,7 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         python -m pip install coverage
-        pip install -r requirements.txt
+        pip install -r tests.txt
     - name: Fl_common Models Swin Transformer
       run: |
         coverage run manage.py test fl_common.tests.tests_models_swin_transformer
@@ -464,7 +464,7 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         python -m pip install coverage
-        pip install -r requirements.txt
+        pip install -r tests.txt
     - name: Fl_common Models Swin Transformer v2
       run: |
         coverage run manage.py test fl_common.tests.tests_models_swin_transformer_v2
@@ -522,7 +522,7 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         python -m pip install coverage
-        pip install -r requirements.txt
+        pip install -r tests.txt
     - name: Fl_common Models Swin Transformer v2 cr 001
       run: |
         coverage run manage.py test fl_common.tests.tests_models_swin_transformer_v2_cr_001
@@ -580,7 +580,7 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         python -m pip install coverage
-        pip install -r requirements.txt
+        pip install -r tests.txt
     - name: Fl_common Models Swin Transformer v2 cr 002
       run: |
         coverage run manage.py test fl_common.tests.tests_models_swin_transformer_v2_cr_002
@@ -637,7 +637,7 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         python -m pip install coverage
-        pip install -r requirements.txt
+        pip install -r tests.txt
     - name: Fl_common Models Swin Transformer v2 cr 003
       run: |
         coverage run manage.py test fl_common.tests.tests_models_swin_transformer_v2_cr_003
