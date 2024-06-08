@@ -58,7 +58,7 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         python -m pip install coverage
-        pip install -r requirements.txt
+        pip install -r tests.txt
     - name: Fl_common Models Regnet
       run: |
         coverage run manage.py test fl_common.tests.tests_models_regnet
@@ -116,7 +116,7 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         python -m pip install coverage
-        pip install -r requirements.txt
+        pip install -r tests.txt
     - name: Fl_common Models Repghost
       run: |
         coverage run manage.py test fl_common.tests.tests_models_repghost
@@ -174,7 +174,7 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         python -m pip install coverage
-        pip install -r requirements.txt
+        pip install -r tests.txt
     - name: Fl_common Models Repvit
       run: |
         coverage run manage.py test fl_common.tests.tests_models_repvit
@@ -232,7 +232,7 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         python -m pip install coverage
-        pip install -r requirements.txt
+        pip install -r tests.txt
     - name: Fl_common Models Res2net
       run: |
         coverage run manage.py test fl_common.tests.tests_models_res2net
@@ -290,7 +290,7 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         python -m pip install coverage
-        pip install -r requirements.txt
+        pip install -r tests.txt
     - name: Fl_common Models Resnest
       run: |
         coverage run manage.py test fl_common.tests.tests_models_resnest
@@ -348,7 +348,7 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         python -m pip install coverage
-        pip install -r requirements.txt
+        pip install -r tests.txt
     - name: Fl_common Models Resnet
       run: |
         coverage run manage.py test fl_common.tests.tests_models_resnet
@@ -406,7 +406,7 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         python -m pip install coverage
-        pip install -r requirements.txt
+        pip install -r tests.txt
     - name: Fl_common Models Resnet v2
       run: |
         coverage run manage.py test fl_common.tests.tests_models_resnetv2
@@ -464,7 +464,7 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         python -m pip install coverage
-        pip install -r requirements.txt
+        pip install -r tests.txt
     - name: Fl_common Models Resnext
       run: |
         coverage run manage.py test fl_common.tests.tests_models_resnext
@@ -522,7 +522,7 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         python -m pip install coverage
-        pip install -r requirements.txt
+        pip install -r tests.txt
     - name: Fl_common Models Rexnet
       run: |
         coverage run manage.py test fl_common.tests.tests_models_rexnet
