@@ -29,19 +29,19 @@ class ProcessingViTaminTestCase(TestCase):
         - AssertionError: If the function returns None for any known ViTamin type.
         """
         known_types = [
-            # "vitamin_small_224",
-            # "vitamin_base_224",
-            # "vitamin_large_224",
-            # "vitamin_large_256",
-            # "vitamin_large_336",
-            # "vitamin_large_384",
-            # "vitamin_large2_224",
-            # "vitamin_large2_256",
-            # "vitamin_large2_336",
-            # "vitamin_large2_384",
-            # "vitamin_xlarge_256",
-            # "vitamin_xlarge_336",
-            # "vitamin_xlarge_384",
+            "vitamin_small_224",
+            "vitamin_base_224",
+            "vitamin_large_224",
+            "vitamin_large_256",
+            "vitamin_large_336",
+            "vitamin_large_384",
+            "vitamin_large2_224",
+            "vitamin_large2_256",
+            "vitamin_large2_336",
+            "vitamin_large2_384",
+            "vitamin_xlarge_256",
+            "vitamin_xlarge_336",
+            "vitamin_xlarge_384",
         ]
 
         for vitamin_type in known_types:
