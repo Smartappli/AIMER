@@ -58,7 +58,7 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         python -m pip install coverage        
-        pip install -r requirements.txt
+        pip install -r tests.txt
     - name: Fl_common Models Maxvit
       run: |
         coverage run manage.py test fl_common.tests.tests_models_maxvit
@@ -116,7 +116,7 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         python -m pip install coverage        
-        pip install -r requirements.txt
+        pip install -r tests.txt
     - name: Fl_common Models Metaformer
       run: |
         coverage run manage.py test fl_common.tests.tests_models_metaformer
@@ -174,7 +174,7 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         python -m pip install coverage        
-        pip install -r requirements.txt
+        pip install -r tests.txt
     - name: Fl_common Models Mlpmixer
       run: |
         coverage run manage.py test fl_common.tests.tests_models_mlp_mixer
@@ -232,7 +232,7 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         python -m pip install coverage        
-        pip install -r requirements.txt
+        pip install -r tests.txt
     - name: Fl_common Models Mnasnet
       run: |
         coverage run manage.py test fl_common.tests.tests_models_mnasnet
@@ -290,7 +290,7 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         python -m pip install coverage        
-        pip install -r requirements.txt
+        pip install -r tests.txt
     - name: Fl_common Models Mobilenet
       run: |
         coverage run manage.py test fl_common.tests.tests_models_mobilenet
@@ -348,7 +348,7 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         python -m pip install coverage
-        pip install -r requirements.txt
+        pip install -r tests.txt
     - name: Fl_common Models Mobilevit
       run: |
         coverage run manage.py test fl_common.tests.tests_models_mobilevit
@@ -406,7 +406,7 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           python -m pip install coverage
-          pip install -r requirements.txt
+          pip install -r tests.txt
       - name: Fl_common Models Mvitv2
         run: |
           coverage run manage.py test fl_common.tests.tests_models_mvitv2
