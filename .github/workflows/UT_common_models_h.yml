@@ -58,7 +58,7 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         python -m pip install coverage
-        pip install -r requirements.txt
+        pip install -r tests.txt
     - name: Fl_common Models Hardcorenas
       run: |
         coverage run manage.py test fl_common.tests.tests_models_hardcorenas
@@ -116,7 +116,7 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         python -m pip install coverage
-        pip install -r requirements.txt
+        pip install -r tests.txt
     - name: Fl_common Models Hgnet
       run: |
         coverage run manage.py test fl_common.tests.tests_models_hgnet
@@ -174,7 +174,7 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         python -m pip install coverage
-        pip install -r requirements.txt
+        pip install -r tests.txt
     - name: Fl_common Models Hgnet
       run: |
         coverage run manage.py test fl_common.tests.tests_models_hiera
@@ -232,7 +232,7 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         python -m pip install coverage
-        pip install -r requirements.txt
+        pip install -r tests.txt
     - name: Fl_common Models Hrnet
       run: |
         coverage run manage.py test fl_common.tests.tests_models_hrnet
