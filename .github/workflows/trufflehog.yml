@@ -6,7 +6,8 @@ on:
       - master
   
  jobs: 
-   trufflehog: 
+   trufflehog:
+     name: Secret Leaks
      runs-on: ubuntu-latest 
      steps: 
        - name: Checkout code 
