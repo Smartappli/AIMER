@@ -4,7 +4,7 @@ from django.test import TestCase
 
 from fl_server.server import land_node, launch_and_register, login
 
-SYFT_VERSION = ">=0.8.2.b0,<0.9"
+SYFT_VERSION = ">=0.8.6.b10,<0.9"
 
 
 class ServerTestCase(TestCase):

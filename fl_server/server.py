@@ -1,7 +1,7 @@
 import pandas as pd
 import syft as sy
 
-SYFT_VERSION = ">=0.8.2.b0,<0.9"
+SYFT_VERSION = ">=0.8.6.b10,<0.9"
 
 # Ensure the correct version of PySyft is installed
 sy.requires(SYFT_VERSION)
@@ -20,7 +20,7 @@ def launch_node(name, port):
         node: The launched node.
     """
     print(f"\n--- Démarrage du noeud {name} ---")
-    return sy.Orchestrator.launch(
+    return sy.orchestra.launch(
         name=name,
         port=port,
         local_db=True,
