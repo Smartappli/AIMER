@@ -1,7 +1,7 @@
 import pandas as pd
 import syft as sy
 
-SYFT_VERSION = ">=0.8.6.b10,<0.9"
+SYFT_VERSION = ">=0.8.7.b10,<0.9"
 
 # Ensure the correct version of PySyft is installed
 sy.requires(SYFT_VERSION)

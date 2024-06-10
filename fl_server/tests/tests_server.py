@@ -4,7 +4,7 @@ from django.test import TestCase
 
 from fl_server.server import land_node, launch_and_register, login
 
-SYFT_VERSION = ">=0.8.6.b10,<0.9"
+SYFT_VERSION = ">=0.8.7.b10,<0.9"
 
 
 class ServerTestCase(TestCase):
@@ -49,7 +49,7 @@ class ServerTestCase(TestCase):
         """
         Test the main node launch functionality.
         """
-        ds_client = self.login(
+        ds_client = login(
             "node_humani",
             "janedoe@caltech.edu",
             "abc123",
