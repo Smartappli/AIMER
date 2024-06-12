@@ -41,11 +41,12 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          python -m pip install coverage
-          pip install -r tests.txt
+          python -m pip install uv
+          python -m uv pip install coverage
+          python -m uv pip install -r tests.txt
       - name: Coverage Erase
         run: |
-          coverage erase
+          python -m uv coverage erase
       - name: Coverage FL_Client
         run: | 
           coverage run manage.py test fl_client.tests.tests_urls
