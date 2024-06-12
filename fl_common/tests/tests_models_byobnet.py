@@ -58,6 +58,17 @@ class ProcessingByobnetTestCase(TestCase):
             "mobileone_s2",
             "mobileone_s3",
             "mobileone_s4",
+            "resnet50_clip",
+            "resnet101_clip",
+            "resnet50x4_clip",
+            "resnet50x16_clip",
+            "resnet50x64_clip",
+            "resnet50_clip_gap",
+            "resnet101_clip_gap",
+            "resnet50x4_clip_gap",
+            "resnet50x16_clip_gap",
+            "resnet50x64_clip_gap",
+            "resnet50_mlp",
         ]
         num_classes = 1000
         for byobnet_type in known_types:
