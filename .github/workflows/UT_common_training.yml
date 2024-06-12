@@ -57,11 +57,9 @@ jobs:
     - name: Install dependencies
       run: |
         pip install uv
-        uv venv
-        source .venv/bin/activate
-        uv pip install --upgrade pip
-        uv pip install coverage
-        uv pip install -r tests.txt
+        python -m uv pip install --upgrade pip
+        python -m uv pip install coverage
+        python -m uv pip install -r tests.txt
     - name: Fl_common unit tests
       run: |
-        uv coverage run manage.py test fl_common.tests.tests
+        python -m coverage run manage.py test fl_common.tests.tests
