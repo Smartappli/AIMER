@@ -62,4 +62,6 @@ jobs:
         uv pip install --upgrade pip
         uv pip install coverage
         uv pip install -r tests.txt
+    - name: Fl_common unit tests
+      run: |
         uv coverage run manage.py test fl_common.tests.tests
