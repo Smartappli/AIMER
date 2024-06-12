@@ -196,6 +196,17 @@ def get_family_model_b(model_type, num_classes):
         "mobileone_s2": get_byobnet_model,
         "mobileone_s3": get_byobnet_model,
         "mobileone_s4": get_byobnet_model,
+        "resnet50_clip": get_byobnet_model,
+        "resnet101_clip": get_byobnet_model,
+        "resnet50x4_clip": get_byobnet_model,
+        "resnet50x16_clip": get_byobnet_model,
+        "resnet50x64_clip": get_byobnet_model,
+        "resnet50_clip_gap": get_byobnet_model,
+        "resnet101_clip_gap": get_byobnet_model,
+        "resnet50x4_clip_gap": get_byobnet_model,
+        "resnet50x16_clip_gap": get_byobnet_model,
+        "resnet50x64_clip_gap": get_byobnet_model,
+        "resnet50_mlp": get_byobnet_model,
     }
 
     if model_type not in model_retrieval_functions:
