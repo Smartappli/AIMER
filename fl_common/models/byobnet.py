@@ -57,6 +57,17 @@ def get_byobnet_model(byobnet_type, num_classes):
         "mobileone_s2",
         "mobileone_s3",
         "mobileone_s4",
+        "resnet50_clip",
+        "resnet101_clip",
+        "resnet50x4_clip",
+        "resnet50x16_clip",
+        "resnet50x64_clip",
+        "resnet50_clip_gap",
+        "resnet101_clip_gap",
+        "resnet50x4_clip_gap",
+        "resnet50x16_clip_gap",
+        "resnet50x64_clip_gap",
+        "resnet50_mlp",
     ]
 
     if byobnet_type not in model_types:
