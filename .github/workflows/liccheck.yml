@@ -30,8 +30,10 @@ jobs:
         cache: 'pip'
     - name: Get explicit and transitive dependencies
       run: |
-        pip install -r requirements.txt
-        pip freeze > requirements-all.txt
+        python -m pip install --upgrade pip
+        python -m pip install uv
+        python -m uv pip install -r requirements.txt
+        python -m uv pip freeze > requirements-all.txt
     - name: Check python
       id: license_check_report
       uses: pilosus/action-pip-license-checker@v2
