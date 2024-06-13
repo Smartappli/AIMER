@@ -16,23 +16,6 @@ jobs:
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
-    - name: ⌛ rate 1
-      shell: pwsh
-      run: |
-        # add random sleep since we run on fixed schedule
-        sleep (get-random -max 1200)
-        
-        # get currently authenticated user rate limit info
-        $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
-    
-        # if we don't have at least 350 requests left, wait until reset
-        if ($rate.remaining -lt 350) {
-            $wait = ($rate.reset - (Get-Date (Get-Date).ToUniversalTime() -UFormat %s))
-            echo "Rate limit remaining is $($rate.remaining), waiting for $($wait) seconds to reset"
-            sleep $wait
-            $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
-            echo "Rate limit has reset to $($rate.remaining) requests"
-        }
     - name: Free Disk Space (Ubuntu)
       uses: jlumbroso/free-disk-space@main
       with:
@@ -75,23 +58,6 @@ jobs:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     needs: test-vgg-models
     steps:
-    - name: ⌛ rate 1
-      shell: pwsh
-      run: |
-        # add random sleep since we run on fixed schedule
-        sleep (get-random -max 1200)
-        
-        # get currently authenticated user rate limit info
-        $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
-    
-        # if we don't have at least 350 requests left, wait until reset
-        if ($rate.remaining -lt 350) {
-            $wait = ($rate.reset - (Get-Date (Get-Date).ToUniversalTime() -UFormat %s))
-            echo "Rate limit remaining is $($rate.remaining), waiting for $($wait) seconds to reset"
-            sleep $wait
-            $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
-            echo "Rate limit has reset to $($rate.remaining) requests"
-        }
     - name: Free Disk Space (Ubuntu)
       uses: jlumbroso/free-disk-space@main
       with:
@@ -134,23 +100,6 @@ jobs:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     needs: test-visformer-models
     steps:
-    - name: ⌛ rate 1
-      shell: pwsh
-      run: |
-        # add random sleep since we run on fixed schedule
-        sleep (get-random -max 1200)
-        
-        # get currently authenticated user rate limit info
-        $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
-    
-        # if we don't have at least 350 requests left, wait until reset
-        if ($rate.remaining -lt 350) {
-            $wait = ($rate.reset - (Get-Date (Get-Date).ToUniversalTime() -UFormat %s))
-            echo "Rate limit remaining is $($rate.remaining), waiting for $($wait) seconds to reset"
-            sleep $wait
-            $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
-            echo "Rate limit has reset to $($rate.remaining) requests"
-        }
     - name: Free Disk Space (Ubuntu)
       uses: jlumbroso/free-disk-space@main
       with:
@@ -193,23 +142,6 @@ jobs:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     needs: test-visformer-models
     steps:
-    - name: ⌛ rate 1
-      shell: pwsh
-      run: |
-        # add random sleep since we run on fixed schedule
-        sleep (get-random -max 1200)
-        
-        # get currently authenticated user rate limit info
-        $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
-    
-        # if we don't have at least 350 requests left, wait until reset
-        if ($rate.remaining -lt 350) {
-            $wait = ($rate.reset - (Get-Date (Get-Date).ToUniversalTime() -UFormat %s))
-            echo "Rate limit remaining is $($rate.remaining), waiting for $($wait) seconds to reset"
-            sleep $wait
-            $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
-            echo "Rate limit has reset to $($rate.remaining) requests"
-        }
     - name: Free Disk Space (Ubuntu)
       uses: jlumbroso/free-disk-space@main
       with:
@@ -252,23 +184,6 @@ jobs:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     needs: test-visformer-models
     steps:
-    - name: ⌛ rate 1
-      shell: pwsh
-      run: |
-        # add random sleep since we run on fixed schedule
-        sleep (get-random -max 1200)
-        
-        # get currently authenticated user rate limit info
-        $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
-    
-        # if we don't have at least 350 requests left, wait until reset
-        if ($rate.remaining -lt 350) {
-            $wait = ($rate.reset - (Get-Date (Get-Date).ToUniversalTime() -UFormat %s))
-            echo "Rate limit remaining is $($rate.remaining), waiting for $($wait) seconds to reset"
-            sleep $wait
-            $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
-            echo "Rate limit has reset to $($rate.remaining) requests"
-        }
     - name: Free Disk Space (Ubuntu)
       uses: jlumbroso/free-disk-space@main
       with:
@@ -311,23 +226,6 @@ jobs:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     needs: test-visformer-models
     steps:
-    - name: ⌛ rate 1
-      shell: pwsh
-      run: |
-        # add random sleep since we run on fixed schedule
-        sleep (get-random -max 1200)
-        
-        # get currently authenticated user rate limit info
-        $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
-    
-        # if we don't have at least 350 requests left, wait until reset
-        if ($rate.remaining -lt 350) {
-            $wait = ($rate.reset - (Get-Date (Get-Date).ToUniversalTime() -UFormat %s))
-            echo "Rate limit remaining is $($rate.remaining), waiting for $($wait) seconds to reset"
-            sleep $wait
-            $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
-            echo "Rate limit has reset to $($rate.remaining) requests"
-        }
     - name: Free Disk Space (Ubuntu)
       uses: jlumbroso/free-disk-space@main
       with:
@@ -370,23 +268,6 @@ jobs:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     needs: test-visformer-models
     steps:
-    - name: ⌛ rate 1
-      shell: pwsh
-      run: |
-        # add random sleep since we run on fixed schedule
-        sleep (get-random -max 1200)
-        
-        # get currently authenticated user rate limit info
-        $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
-    
-        # if we don't have at least 350 requests left, wait until reset
-        if ($rate.remaining -lt 350) {
-            $wait = ($rate.reset - (Get-Date (Get-Date).ToUniversalTime() -UFormat %s))
-            echo "Rate limit remaining is $($rate.remaining), waiting for $($wait) seconds to reset"
-            sleep $wait
-            $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
-            echo "Rate limit has reset to $($rate.remaining) requests"
-        }
     - name: Free Disk Space (Ubuntu)
       uses: jlumbroso/free-disk-space@main
       with:
@@ -429,23 +310,6 @@ jobs:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     needs: test-visformer-models
     steps:
-    - name: ⌛ rate 1
-      shell: pwsh
-      run: |
-        # add random sleep since we run on fixed schedule
-        sleep (get-random -max 1200)
-        
-        # get currently authenticated user rate limit info
-        $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
-    
-        # if we don't have at least 350 requests left, wait until reset
-        if ($rate.remaining -lt 350) {
-            $wait = ($rate.reset - (Get-Date (Get-Date).ToUniversalTime() -UFormat %s))
-            echo "Rate limit remaining is $($rate.remaining), waiting for $($wait) seconds to reset"
-            sleep $wait
-            $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
-            echo "Rate limit has reset to $($rate.remaining) requests"
-        }
     - name: Free Disk Space (Ubuntu)
       uses: jlumbroso/free-disk-space@main
       with:
@@ -488,23 +352,6 @@ jobs:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     needs: test-visformer-models
     steps:
-    - name: ⌛ rate 1
-      shell: pwsh
-      run: |
-        # add random sleep since we run on fixed schedule
-        sleep (get-random -max 1200)
-        
-        # get currently authenticated user rate limit info
-        $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
-    
-        # if we don't have at least 350 requests left, wait until reset
-        if ($rate.remaining -lt 350) {
-            $wait = ($rate.reset - (Get-Date (Get-Date).ToUniversalTime() -UFormat %s))
-            echo "Rate limit remaining is $($rate.remaining), waiting for $($wait) seconds to reset"
-            sleep $wait
-            $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
-            echo "Rate limit has reset to $($rate.remaining) requests"
-        }
     - name: Free Disk Space (Ubuntu)
       uses: jlumbroso/free-disk-space@main
       with:
@@ -547,23 +394,6 @@ jobs:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     needs: test-visformer-models
     steps:
-    - name: ⌛ rate 1
-      shell: pwsh
-      run: |
-        # add random sleep since we run on fixed schedule
-        sleep (get-random -max 1200)
-        
-        # get currently authenticated user rate limit info
-        $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
-    
-        # if we don't have at least 350 requests left, wait until reset
-        if ($rate.remaining -lt 350) {
-            $wait = ($rate.reset - (Get-Date (Get-Date).ToUniversalTime() -UFormat %s))
-            echo "Rate limit remaining is $($rate.remaining), waiting for $($wait) seconds to reset"
-            sleep $wait
-            $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
-            echo "Rate limit has reset to $($rate.remaining) requests"
-        }
     - name: Free Disk Space (Ubuntu)
       uses: jlumbroso/free-disk-space@main
       with:
@@ -606,23 +436,6 @@ jobs:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     needs: test-visformer-models
     steps:
-    - name: ⌛ rate 1
-      shell: pwsh
-      run: |
-        # add random sleep since we run on fixed schedule
-        sleep (get-random -max 1200)
-        
-        # get currently authenticated user rate limit info
-        $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
-    
-        # if we don't have at least 350 requests left, wait until reset
-        if ($rate.remaining -lt 350) {
-            $wait = ($rate.reset - (Get-Date (Get-Date).ToUniversalTime() -UFormat %s))
-            echo "Rate limit remaining is $($rate.remaining), waiting for $($wait) seconds to reset"
-            sleep $wait
-            $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
-            echo "Rate limit has reset to $($rate.remaining) requests"
-        }
     - name: Free Disk Space (Ubuntu)
       uses: jlumbroso/free-disk-space@main
       with:
@@ -665,23 +478,6 @@ jobs:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     needs: test-visformer-models
     steps:
-    - name: ⌛ rate 1
-      shell: pwsh
-      run: |
-        # add random sleep since we run on fixed schedule
-        sleep (get-random -max 1200)
-        
-        # get currently authenticated user rate limit info
-        $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
-    
-        # if we don't have at least 350 requests left, wait until reset
-        if ($rate.remaining -lt 350) {
-            $wait = ($rate.reset - (Get-Date (Get-Date).ToUniversalTime() -UFormat %s))
-            echo "Rate limit remaining is $($rate.remaining), waiting for $($wait) seconds to reset"
-            sleep $wait
-            $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
-            echo "Rate limit has reset to $($rate.remaining) requests"
-        }
     - name: Free Disk Space (Ubuntu)
       uses: jlumbroso/free-disk-space@main
       with:
@@ -724,23 +520,6 @@ jobs:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     needs: test-visformer-models
     steps:
-    - name: ⌛ rate 1
-      shell: pwsh
-      run: |
-        # add random sleep since we run on fixed schedule
-        sleep (get-random -max 1200)
-        
-        # get currently authenticated user rate limit info
-        $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
-    
-        # if we don't have at least 350 requests left, wait until reset
-        if ($rate.remaining -lt 350) {
-            $wait = ($rate.reset - (Get-Date (Get-Date).ToUniversalTime() -UFormat %s))
-            echo "Rate limit remaining is $($rate.remaining), waiting for $($wait) seconds to reset"
-            sleep $wait
-            $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
-            echo "Rate limit has reset to $($rate.remaining) requests"
-        }
     - name: Free Disk Space (Ubuntu)
       uses: jlumbroso/free-disk-space@main
       with:
@@ -783,23 +562,6 @@ jobs:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     needs: test-visformer-models
     steps:
-    - name: ⌛ rate 1
-      shell: pwsh
-      run: |
-        # add random sleep since we run on fixed schedule
-        sleep (get-random -max 1200)
-        
-        # get currently authenticated user rate limit info
-        $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
-    
-        # if we don't have at least 350 requests left, wait until reset
-        if ($rate.remaining -lt 350) {
-            $wait = ($rate.reset - (Get-Date (Get-Date).ToUniversalTime() -UFormat %s))
-            echo "Rate limit remaining is $($rate.remaining), waiting for $($wait) seconds to reset"
-            sleep $wait
-            $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
-            echo "Rate limit has reset to $($rate.remaining) requests"
-        }
     - name: Free Disk Space (Ubuntu)
       uses: jlumbroso/free-disk-space@main
       with:
@@ -842,23 +604,6 @@ jobs:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     needs: test-visformer-models
     steps:
-    - name: ⌛ rate 1
-      shell: pwsh
-      run: |
-        # add random sleep since we run on fixed schedule
-        sleep (get-random -max 1200)
-        
-        # get currently authenticated user rate limit info
-        $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
-    
-        # if we don't have at least 350 requests left, wait until reset
-        if ($rate.remaining -lt 350) {
-            $wait = ($rate.reset - (Get-Date (Get-Date).ToUniversalTime() -UFormat %s))
-            echo "Rate limit remaining is $($rate.remaining), waiting for $($wait) seconds to reset"
-            sleep $wait
-            $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
-            echo "Rate limit has reset to $($rate.remaining) requests"
-        }
     - name: Free Disk Space (Ubuntu)
       uses: jlumbroso/free-disk-space@main
       with:
@@ -901,23 +646,6 @@ jobs:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     needs: test-visformer-models
     steps:
-    - name: ⌛ rate 1
-      shell: pwsh
-      run: |
-        # add random sleep since we run on fixed schedule
-        sleep (get-random -max 1200)
-        
-        # get currently authenticated user rate limit info
-        $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
-    
-        # if we don't have at least 350 requests left, wait until reset
-        if ($rate.remaining -lt 350) {
-            $wait = ($rate.reset - (Get-Date (Get-Date).ToUniversalTime() -UFormat %s))
-            echo "Rate limit remaining is $($rate.remaining), waiting for $($wait) seconds to reset"
-            sleep $wait
-            $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
-            echo "Rate limit has reset to $($rate.remaining) requests"
-        }
     - name: Free Disk Space (Ubuntu)
       uses: jlumbroso/free-disk-space@main
       with:
@@ -960,23 +688,6 @@ jobs:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     needs: test-visformer-models
     steps:
-    - name: ⌛ rate 1
-      shell: pwsh
-      run: |
-        # add random sleep since we run on fixed schedule
-        sleep (get-random -max 1200)
-        
-        # get currently authenticated user rate limit info
-        $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
-    
-        # if we don't have at least 350 requests left, wait until reset
-        if ($rate.remaining -lt 350) {
-            $wait = ($rate.reset - (Get-Date (Get-Date).ToUniversalTime() -UFormat %s))
-            echo "Rate limit remaining is $($rate.remaining), waiting for $($wait) seconds to reset"
-            sleep $wait
-            $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
-            echo "Rate limit has reset to $($rate.remaining) requests"
-        }
     - name: Free Disk Space (Ubuntu)
       uses: jlumbroso/free-disk-space@main
       with:
@@ -1019,23 +730,6 @@ jobs:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     needs: test-visformer-models
     steps:
-    - name: ⌛ rate 1
-      shell: pwsh
-      run: |
-        # add random sleep since we run on fixed schedule
-        sleep (get-random -max 1200)
-        
-        # get currently authenticated user rate limit info
-        $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
-    
-        # if we don't have at least 350 requests left, wait until reset
-        if ($rate.remaining -lt 350) {
-            $wait = ($rate.reset - (Get-Date (Get-Date).ToUniversalTime() -UFormat %s))
-            echo "Rate limit remaining is $($rate.remaining), waiting for $($wait) seconds to reset"
-            sleep $wait
-            $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
-            echo "Rate limit has reset to $($rate.remaining) requests"
-        }
     - name: Free Disk Space (Ubuntu)
       uses: jlumbroso/free-disk-space@main
       with:
@@ -1078,23 +772,6 @@ jobs:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     needs: test-visformer-models
     steps:
-    - name: ⌛ rate 1
-      shell: pwsh
-      run: |
-        # add random sleep since we run on fixed schedule
-        sleep (get-random -max 1200)
-        
-        # get currently authenticated user rate limit info
-        $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
-    
-        # if we don't have at least 350 requests left, wait until reset
-        if ($rate.remaining -lt 350) {
-            $wait = ($rate.reset - (Get-Date (Get-Date).ToUniversalTime() -UFormat %s))
-            echo "Rate limit remaining is $($rate.remaining), waiting for $($wait) seconds to reset"
-            sleep $wait
-            $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
-            echo "Rate limit has reset to $($rate.remaining) requests"
-        }
     - name: Free Disk Space (Ubuntu)
       uses: jlumbroso/free-disk-space@main
       with:
@@ -1137,23 +814,6 @@ jobs:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     needs: test-visformer-models
     steps:
-    - name: ⌛ rate 1
-      shell: pwsh
-      run: |
-        # add random sleep since we run on fixed schedule
-        sleep (get-random -max 1200)
-        
-        # get currently authenticated user rate limit info
-        $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
-    
-        # if we don't have at least 350 requests left, wait until reset
-        if ($rate.remaining -lt 350) {
-            $wait = ($rate.reset - (Get-Date (Get-Date).ToUniversalTime() -UFormat %s))
-            echo "Rate limit remaining is $($rate.remaining), waiting for $($wait) seconds to reset"
-            sleep $wait
-            $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
-            echo "Rate limit has reset to $($rate.remaining) requests"
-        }
     - name: Free Disk Space (Ubuntu)
       uses: jlumbroso/free-disk-space@main
       with:
@@ -1196,23 +856,6 @@ jobs:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     needs: test-visformer-models
     steps:
-    - name: ⌛ rate 1
-      shell: pwsh
-      run: |
-        # add random sleep since we run on fixed schedule
-        sleep (get-random -max 1200)
-        
-        # get currently authenticated user rate limit info
-        $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
-    
-        # if we don't have at least 350 requests left, wait until reset
-        if ($rate.remaining -lt 350) {
-            $wait = ($rate.reset - (Get-Date (Get-Date).ToUniversalTime() -UFormat %s))
-            echo "Rate limit remaining is $($rate.remaining), waiting for $($wait) seconds to reset"
-            sleep $wait
-            $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
-            echo "Rate limit has reset to $($rate.remaining) requests"
-        }
     - name: Free Disk Space (Ubuntu)
       uses: jlumbroso/free-disk-space@main
       with:
@@ -1255,23 +898,6 @@ jobs:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     needs: test-visformer-models
     steps:
-    - name: ⌛ rate 1
-      shell: pwsh
-      run: |
-        # add random sleep since we run on fixed schedule
-        sleep (get-random -max 1200)
-        
-        # get currently authenticated user rate limit info
-        $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
-    
-        # if we don't have at least 350 requests left, wait until reset
-        if ($rate.remaining -lt 350) {
-            $wait = ($rate.reset - (Get-Date (Get-Date).ToUniversalTime() -UFormat %s))
-            echo "Rate limit remaining is $($rate.remaining), waiting for $($wait) seconds to reset"
-            sleep $wait
-            $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
-            echo "Rate limit has reset to $($rate.remaining) requests"
-        }
     - name: Free Disk Space (Ubuntu)
       uses: jlumbroso/free-disk-space@main
       with:
@@ -1323,23 +949,6 @@ jobs:
             'test-vision_transformer-models-17', 'test-vision_transformer-models-18',
             'test-vision_transformer-models-19', 'test-vision_transformer-models-20']
     steps:
-    - name: ⌛ rate 1
-      shell: pwsh
-      run: |
-        # add random sleep since we run on fixed schedule
-        sleep (get-random -max 1200)
-        
-        # get currently authenticated user rate limit info
-        $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
-    
-        # if we don't have at least 350 requests left, wait until reset
-        if ($rate.remaining -lt 350) {
-            $wait = ($rate.reset - (Get-Date (Get-Date).ToUniversalTime() -UFormat %s))
-            echo "Rate limit remaining is $($rate.remaining), waiting for $($wait) seconds to reset"
-            sleep $wait
-            $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
-            echo "Rate limit has reset to $($rate.remaining) requests"
-        }
     - name: Free Disk Space (Ubuntu)
       uses: jlumbroso/free-disk-space@main
       with:
@@ -1382,23 +991,6 @@ jobs:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     needs: test-vision_transformer_hybrid-models
     steps:
-    - name: ⌛ rate 1
-      shell: pwsh
-      run: |
-        # add random sleep since we run on fixed schedule
-        sleep (get-random -max 1200)
-        
-        # get currently authenticated user rate limit info
-        $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
-    
-        # if we don't have at least 350 requests left, wait until reset
-        if ($rate.remaining -lt 350) {
-            $wait = ($rate.reset - (Get-Date (Get-Date).ToUniversalTime() -UFormat %s))
-            echo "Rate limit remaining is $($rate.remaining), waiting for $($wait) seconds to reset"
-            sleep $wait
-            $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
-            echo "Rate limit has reset to $($rate.remaining) requests"
-        }
     - name: Free Disk Space (Ubuntu)
       uses: jlumbroso/free-disk-space@main
       with:
@@ -1441,23 +1033,6 @@ jobs:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     needs: test-vision_transformer_relpos-models
     steps:
-    - name: ⌛ rate 1
-      shell: pwsh
-      run: |
-        # add random sleep since we run on fixed schedule
-        sleep (get-random -max 1200)
-        
-        # get currently authenticated user rate limit info
-        $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
-    
-        # if we don't have at least 350 requests left, wait until reset
-        if ($rate.remaining -lt 350) {
-            $wait = ($rate.reset - (Get-Date (Get-Date).ToUniversalTime() -UFormat %s))
-            echo "Rate limit remaining is $($rate.remaining), waiting for $($wait) seconds to reset"
-            sleep $wait
-            $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
-            echo "Rate limit has reset to $($rate.remaining) requests"
-        }
     - name: Free Disk Space (Ubuntu)
       uses: jlumbroso/free-disk-space@main
       with:
@@ -1500,23 +1075,6 @@ jobs:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     needs: test-vision_transformer_sam-models
     steps:
-    - name: ⌛ rate 1
-      shell: pwsh
-      run: |
-        # add random sleep since we run on fixed schedule
-        sleep (get-random -max 1200)
-        
-        # get currently authenticated user rate limit info
-        $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
-    
-        # if we don't have at least 350 requests left, wait until reset
-        if ($rate.remaining -lt 350) {
-            $wait = ($rate.reset - (Get-Date (Get-Date).ToUniversalTime() -UFormat %s))
-            echo "Rate limit remaining is $($rate.remaining), waiting for $($wait) seconds to reset"
-            sleep $wait
-            $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
-            echo "Rate limit has reset to $($rate.remaining) requests"
-        }
     - name: Free Disk Space (Ubuntu)
       uses: jlumbroso/free-disk-space@main
       with:
@@ -1559,23 +1117,6 @@ jobs:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     needs: test-vitamin-models
     steps:
-    - name: ⌛ rate 1
-      shell: pwsh
-      run: |
-        # add random sleep since we run on fixed schedule
-        sleep (get-random -max 1200)
-        
-        # get currently authenticated user rate limit info
-        $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
-    
-        # if we don't have at least 350 requests left, wait until reset
-        if ($rate.remaining -lt 350) {
-            $wait = ($rate.reset - (Get-Date (Get-Date).ToUniversalTime() -UFormat %s))
-            echo "Rate limit remaining is $($rate.remaining), waiting for $($wait) seconds to reset"
-            sleep $wait
-            $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
-            echo "Rate limit has reset to $($rate.remaining) requests"
-        }
     - name: Free Disk Space (Ubuntu)
       uses: jlumbroso/free-disk-space@main
       with:
@@ -1618,23 +1159,6 @@ jobs:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     needs: test-volo-models
     steps:
-    - name: ⌛ rate 1
-      shell: pwsh
-      run: |
-        # add random sleep since we run on fixed schedule
-        sleep (get-random -max 1200)
-        
-        # get currently authenticated user rate limit info
-        $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
-    
-        # if we don't have at least 350 requests left, wait until reset
-        if ($rate.remaining -lt 350) {
-            $wait = ($rate.reset - (Get-Date (Get-Date).ToUniversalTime() -UFormat %s))
-            echo "Rate limit remaining is $($rate.remaining), waiting for $($wait) seconds to reset"
-            sleep $wait
-            $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
-            echo "Rate limit has reset to $($rate.remaining) requests"
-        }
     - name: Free Disk Space (Ubuntu)
       uses: jlumbroso/free-disk-space@main
       with:
