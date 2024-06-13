@@ -125,6 +125,7 @@ def get_efficientnet_model(efficientnet_type, num_classes):
         "efficientnet_b0_g16_evos",
         "efficientnet_b3_gn",
         "efficientnet_b3_g8_gn",
+        "efficientnet_blur_b0",
         "efficientnet_es",
         "efficientnet_es_pruned",
         "efficientnet_em",
