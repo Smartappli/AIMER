@@ -47,6 +47,7 @@ jobs:
         with:
           file: ./Docker/cpu/cpu.Dockerfile
           push: true
+          platforms: linux/amd64,linux/arm64
           tags: smartappli/llm-server-cpu:latest
 
   docker-cuda:
@@ -77,6 +78,7 @@ jobs:
         with:
           file: ./Docker/cuda/cuda.Dockerfile
           push: true
+          platforms: linux/amd64,linux/arm64
           tags: smartappli/llm-server-cuda:latest
 
   docker-pycaret:
@@ -107,4 +109,5 @@ jobs:
         with:
           file: ./Docker/pycaret/pycaret.Dockerfile
           push: true
+          platforms: linux/amd64,linux/arm64
           tags: smartappli/pycaret:latest
