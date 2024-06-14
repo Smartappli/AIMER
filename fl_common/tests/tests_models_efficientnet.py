@@ -41,6 +41,8 @@ class ProcessingEfficientNetTestCase(TestCase):
             "semnasnet_100",
             "semnasnet_140",
             "mnasnet_small",
+            # "mobilenet_100",
+            # "mobilenet_125",
             "mobilenetv2_035",
             "mobilenetv2_050",
             "mobilenetv2_075",
@@ -135,6 +137,11 @@ class ProcessingEfficientNetTestCase(TestCase):
             "tinynet_c",
             "tinynet_d",
             "tinynet_e",
+            # "mobilenet_edgetpu_100",
+            # "mobilenet_edgetpu_v2_xs",
+            # "mobilenet_edgetpu_v2_s",
+            # "mobilenet_edgetpu_v2_m",
+            # "mobilenet_edgetpu_v2_l",
         ]
         num_classes = 10  # You can adjust the number of classes as needed
 
