@@ -48,7 +48,7 @@ jobs:
           file: ./Docker/cpu/cpu.Dockerfile
           push: true
           platforms: linux/amd64,linux/arm64
-          tags: smartappli/llm-server-cpu:latest
+          tags: smartappli/aimer-llm-server-cpu:latest
 
   docker-cuda:
     runs-on: ubuntu-latest
@@ -79,7 +79,7 @@ jobs:
           file: ./Docker/cuda/cuda.Dockerfile
           push: true
           platforms: linux/amd64,linux/arm64
-          tags: smartappli/llm-server-cuda:latest
+          tags: smartappli/aimer-llm-server-cuda:latest
 
   docker-pycaret:
     runs-on: ubuntu-latest
@@ -110,4 +110,4 @@ jobs:
           file: ./Docker/pycaret/pycaret.Dockerfile
           push: true
           platforms: linux/amd64,linux/arm64
-          tags: smartappli/pycaret:latest
+          tags: smartappli/aimer-pycaret:latest
