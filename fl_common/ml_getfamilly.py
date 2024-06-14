@@ -1,3 +1,3 @@
-def get_classification_model:
+def get_classification_model():
 
   return False
