@@ -1779,7 +1779,9 @@ def get_family_model(model_type, num_classes):
     first_letter = model_type[0].lower()
 
     # Retrieve the corresponding function and call it
-    if first_letter in model_functions:
-        return model_functions[first_letter](model_type, num_classes)
+    model_function = model_functions.get(first_letter)
+    if model_function is not None:
+        return model_function(model_type, num_classes)
 
-    return "Error"
+    msg = f"Error: Unknown model type: {model_type}"
+    raise ValueError(msg)
