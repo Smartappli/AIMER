@@ -6,7 +6,12 @@
 [![flake8](https://github.com/Smartappli/AIMER/actions/workflows/flake8.yml/badge.svg)](https://github.com/Smartappli/AIMER/actions/workflows/flake8.yml)
 [![Ruff](https://github.com/Smartappli/AIMER/actions/workflows/ruff.yml/badge.svg)](https://github.com/Smartappli/AIMER/actions/workflows/ruff.yml)
 [![DjLint](https://github.com/Smartappli/AIMER/actions/workflows/djlint.yml/badge.svg)](https://github.com/Smartappli/AIMER/actions/workflows/djlint.yml)
+
+### Code Quality
+
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=Smartappli_AIMER&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=Smartappli_AIMER)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/4c61dec09d8e42a390a1b9595f214ca7)](https://app.codacy.com/gh/Smartappli/AIMER/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
+[![Codacy Badge](https://app.codacy.com/project/badge/Coverage/4c61dec09d8e42a390a1b9595f214ca7)](https://app.codacy.com/gh/Smartappli/AIMER/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_coverage)
 
 ### Tests
 
