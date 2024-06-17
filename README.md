@@ -27,6 +27,7 @@
 
 ### Security
 
+[![Bandit Security Scan](https://github.com/Smartappli/AIMER/actions/workflows/bandit.yml/badge.svg)](https://github.com/Smartappli/AIMER/actions/workflows/bandit.yml)
 [![Codacy Security Scan](https://github.com/Smartappli/AIMER/actions/workflows/codacy.yml/badge.svg)](https://github.com/Smartappli/AIMER/actions/workflows/codacy.yml)
 [![Safety](https://github.com/Smartappli/AIMER/actions/workflows/safety.yml/badge.svg)](https://github.com/Smartappli/AIMER/actions/workflows/safety.yml)
 [![Pip-audit](https://github.com/Smartappli/AIMER/actions/workflows/pip-audit.yml/badge.svg)](https://github.com/Smartappli/AIMER/actions/workflows/pip-audit.yml)
