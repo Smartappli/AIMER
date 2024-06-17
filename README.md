@@ -14,7 +14,7 @@
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/4c61dec09d8e42a390a1b9595f214ca7)](https://app.codacy.com/gh/Smartappli/AIMER/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
 [![Codacy Badge](https://app.codacy.com/project/badge/Coverage/4c61dec09d8e42a390a1b9595f214ca7)](https://app.codacy.com/gh/Smartappli/AIMER/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_coverage)
 
-### Tests
+### Unit Tests
 
 [![Nightlies Models - PART A](https://github.com/Smartappli/AIMER/actions/workflows/nightlies_models_A.yml/badge.svg)](https://github.com/Smartappli/AIMER/actions/workflows/nightlies_models_A.yml)
 [![Nightlies Models - PART B](https://github.com/Smartappli/AIMER/actions/workflows/nightlies_models_B.yml/badge.svg)](https://github.com/Smartappli/AIMER/actions/workflows/nightlies_models_B.yml)
