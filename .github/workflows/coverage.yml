@@ -157,7 +157,7 @@ jobs:
           coverage run -a manage.py test fl_common.tests.tests_models_gcvit
           rm -rf /home/runner/.cache/huggingface/*
           rm -rf /home/runner/.cache/torch/*
-          coverage run -a manage.py test fl_common.tests.tests_models_gcvit
+          coverage run -a manage.py test fl_common.tests.tests_models_ghostnet
           rm -rf /home/runner/.cache/huggingface/*
           rm -rf /home/runner/.cache/torch/*          
       - name: Coverage H
