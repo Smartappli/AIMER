@@ -1,9 +1,9 @@
-name: DjLint
+name: Linter
 
 on: [push, pull_request]
 
 concurrency:
-  group: djlint-${{ github.event_name == 'pull_request' && format('{0}-{1}', github.workflow, github.event.pull_request.number) || github.workflow_ref }}
+  group: linter-${{ github.event_name == 'pull_request' && format('{0}-{1}', github.workflow, github.event.pull_request.number) || github.workflow_ref }}
   cancel-in-progress: true
 
 jobs:
