@@ -441,8 +441,8 @@ jobs:
           rm -rf /home/runner/.cache/huggingface/*
           rm -rf /home/runner/.cache/torch/*
           coverage run manage.py test --parallel auto fl_common.tests.tests_models_vision_transformer_012
-          coverage cobmine -a
-          rm -rf /home/runner/.cache/huggingface/*
+          coverage combine -a
+          rm -rf /home/runner/.cach/huggingface/*
           rm -rf /home/runner/.cache/torch/*
           coverage run manage.py test --parallel auto fl_common.tests.tests_models_vision_transformer_013
           coverage combine -a
