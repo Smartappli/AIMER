@@ -23,6 +23,7 @@ permissions:
 
 jobs:
   safety:
+    name: Safety Security Scan
     runs-on: ubuntu-latest
     steps:
       - name: Check out master
@@ -69,6 +70,7 @@ jobs:
           sarif_file: results.sarif
 
   security:
+    name: Pip-audit Scan
     runs-on: ubuntu-latest
     steps:
       - name: Check out master
