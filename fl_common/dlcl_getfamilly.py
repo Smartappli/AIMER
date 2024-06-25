@@ -351,6 +351,8 @@ def get_family_model_d(model_type, num_classes):
         "davit_large": get_davit_model,
         "davit_huge": get_davit_model,
         "davit_giant": get_davit_model,
+        # "davit_base_fl": get_davit_model,
+        # "davit_huge_fl": get_davit_model,
         "deit_tiny_patch16_224": get_deit_model,
         "deit_small_patch16_224": get_deit_model,
         "deit_base_patch16_224": get_deit_model,
