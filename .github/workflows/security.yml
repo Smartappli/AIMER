@@ -7,7 +7,7 @@ on:
     # The branches below must be a subset of the branches above
     branches: [ "master" ]
   schedule:
-    - cron: "0 03 * * *" # 12am UTC, 5:30pm Indian, 9pm Brazil, 11am AEDT
+    - cron: "30 03 * * *" # 12am UTC, 5:30pm Indian, 9pm Brazil, 11am AEDT
   workflow_dispatch:
     inputs:
       none:
@@ -48,7 +48,8 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: 3.12
-
+          cache: 'pip' # caching pip dependencies
+          
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
@@ -66,3 +67,16 @@ jobs:
         uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: results.sarif
+
+  trufflehog:
+    name: Secret Leaks
+    runs-on: ubuntu-latest 
+    steps: 
+      - name: Checkout code 
+        uses: actions/checkout@v4 
+        with: 
+          fetch-depth: 0
+          
+      - name: Secret Scanning 
+        uses: trufflesecurity/trufflehog@main
+
