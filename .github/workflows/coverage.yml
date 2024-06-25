@@ -43,7 +43,7 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install uv
           python -m uv pip install coverage
-          python -m uv pip install -r test --parallels.txt
+          python -m uv pip install -r tests.txt
       - name: Coverage Erase
         run: |
           coverage erase
