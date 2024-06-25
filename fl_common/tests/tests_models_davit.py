@@ -23,6 +23,8 @@ class ProcessingDavitTestCase(TestCase):
             "davit_large",
             "davit_huge",
             "davit_giant",
+            # "davit_base_fl",
+            # "davit_huge_fl",
         ]
         num_classes = 10
 
