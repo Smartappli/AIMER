@@ -7,7 +7,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  ruff:
+  ruff-lint:
     name: Ruff
     runs-on: ubuntu-latest
     steps:
@@ -24,7 +24,7 @@ jobs:
 
   flake8-lint:
     runs-on: ubuntu-latest
-    name: Flake8 Lint
+    name: Flake8
     steps:
       - name: Check out source repository
         uses: actions/checkout@v4
@@ -44,8 +44,28 @@ jobs:
           max-line-length: "80"
           plugins: "flake8-builtins flake8-commas flake8-errmsg flake8-fixme  pep8-naming flake8-pie flake8-use-pathlib flake8-return flake8-type-checking flake8-todo flake8-tidy-imports flake8-bugbear flake8-django flake8-bandit TorchFix pandas-vet flake8-logging-format flake8-requirements"
 
+  dj-lint:
+    runs-on: ubuntu-latest
+    name: Django Lint
+    steps:
+      - name: Check out source repository
+        uses: actions/checkout@v4
+      
+      - name: Set up Python environment
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: 'pip'
+      
+      - name: DjLint Linter
+        run: |
+          python -m pip install --upgrade pip
+          pip install djlint
+          djlint ./templates --extension=html --lint
+
   pylint:
     name: PyLint
+    needs: [dj-lint,flake8-lint,ruff-lint]
     strategy:
       max-parallel: 15
       matrix:
@@ -91,22 +111,3 @@ jobs:
         python -m uv pip install -r requirements.txt
     - name: Analysing the code with pylint
       run: pylint --load-plugins pylint_django --django-settings-module=lab.settings "**/*.py"
-          
-  dj-lint:
-    runs-on: ubuntu-latest
-    name: Django Lint
-    steps:
-      - name: Check out source repository
-        uses: actions/checkout@v4
-      
-      - name: Set up Python environment
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
-          cache: 'pip'
-      
-      - name: DjLint Linter
-        run: |
-          python -m pip install --upgrade pip
-          pip install djlint
-          djlint ./templates --extension=html --lint
