@@ -21,6 +21,8 @@ def get_davit_model(davit_type, num_classes):
         "davit_large",
         "davit_huge",
         "davit_giant",
+        "davit_base_fl",
+        "davit_huge_fl",
     ]
 
     # Check if the davit_type is valid
