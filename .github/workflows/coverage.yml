@@ -116,86 +116,110 @@ jobs:
           rm -rf /home/runner/.cache/torch/*
       - name: Coverage D
         run: |
-          coverage run -a manage.py test --parallel auto fl_common.tests.tests_models_davit
+          coverage run manage.py test --parallel auto fl_common.tests.tests_models_davit
+          coverage combine -a
           rm -rf /home/runner/.cache/huggingface/*
           rm -rf /home/runner/.cache/torch/*
-          coverage run -a manage.py test --parallel auto fl_common.tests.tests_models_deit
+          coverage run manage.py test --parallel auto fl_common.tests.tests_models_deit
+          coverage combine -a
           rm -rf /home/runner/.cache/huggingface/*
           rm -rf /home/runner/.cache/torch/*
-          coverage run -a manage.py test --parallel auto fl_common.tests.tests_models_densenet
+          coverage run manage.py test --parallel auto fl_common.tests.tests_models_densenet
+          coverage combine -a
           rm -rf /home/runner/.cache/huggingface/*
           rm -rf /home/runner/.cache/torch/*   
-          coverage run -a manage.py test --parallel auto fl_common.tests.tests_models_dla
+          coverage run manage.py test --parallel auto fl_common.tests.tests_models_dla
+          coverage combine -a
           rm -rf /home/runner/.cache/huggingface/*
           rm -rf /home/runner/.cache/torch/*
-          coverage run -a manage.py test --parallel auto fl_common.tests.tests_models_dpn
+          coverage run manage.py test --parallel auto fl_common.tests.tests_models_dpn
+          coverage combine -a
           rm -rf /home/runner/.cache/huggingface/*
           rm -rf /home/runner/.cache/torch/*
       - name: Coverage E
         run: |     
-          coverage run -a manage.py test --parallel auto fl_common.tests.tests_models_edgenet
+          coverage run manage.py test --parallel auto fl_common.tests.tests_models_edgenet
+          coverage combine -a
           rm -rf /home/runner/.cache/huggingface/*
           rm -rf /home/runner/.cache/torch/*
-          coverage run -a manage.py test --parallel auto fl_common.tests.tests_models_efficientformer
+          coverage run manage.py test --parallel auto fl_common.tests.tests_models_efficientformer
+          coverage combine -a
           rm -rf /home/runner/.cache/huggingface/*
           rm -rf /home/runner/.cache/torch/* 
-          coverage run -a manage.py test --parallel auto fl_common.tests.tests_models_efficientformer_v2
+          coverage run manage.py test --parallel auto fl_common.tests.tests_models_efficientformer_v2
+          coverage combine -a
           rm -rf /home/runner/.cache/huggingface/*
           rm -rf /home/runner/.cache/torch/* 
-          coverage run -a manage.py test --parallel auto fl_common.tests.tests_models_efficientvit_mit
+          coverage run manage.py test --parallel auto fl_common.tests.tests_models_efficientvit_mit
+          coverage combine -a
           rm -rf /home/runner/.cache/huggingface/*
           rm -rf /home/runner/.cache/torch/*
-          coverage run -a manage.py test --parallel auto fl_common.tests.tests_models_efficientvit_msra
+          coverage run manage.py test --parallel auto fl_common.tests.tests_models_efficientvit_msra
+          coverage combine -a
           rm -rf /home/runner/.cache/huggingface/*
           rm -rf /home/runner/.cache/torch/*
-          coverage run -a manage.py test --parallel auto fl_common.tests.tests_models_efficientnet
+          coverage run manage.py test --parallel auto fl_common.tests.tests_models_efficientnet
+          coverage combine -a
           rm -rf /home/runner/.cache/huggingface/*
           rm -rf /home/runner/.cache/torch/*
-          coverage run -a manage.py test --parallel auto fl_common.tests.tests_models_eva_001
+          coverage run manage.py test --parallel auto fl_common.tests.tests_models_eva_001
+          coverage combine -a
           rm -rf /home/runner/.cache/huggingface/*
           rm -rf /home/runner/.cache/torch/* 
-          coverage run -a manage.py test --parallel auto fl_common.tests.tests_models_eva_002
+          coverage run manage.py test --parallel auto fl_common.tests.tests_models_eva_002
+          coverage combine -a
           rm -rf /home/runner/.cache/huggingface/*
           rm -rf /home/runner/.cache/torch/* 
-          coverage run -a manage.py test --parallel auto fl_common.tests.tests_models_eva_003
+          coverage run manage.py test --parallel auto fl_common.tests.tests_models_eva_003
+          coverage combine -a
           rm -rf /home/runner/.cache/huggingface/*
           rm -rf /home/runner/.cache/torch/* 
       - name: Coverage F
         run: |
-          coverage run -a manage.py test --parallel auto fl_common.tests.tests_models_fastvit
+          coverage run manage.py test --parallel auto fl_common.tests.tests_models_fastvit
+          coverage combine -a
           rm -rf /home/runner/.cache/huggingface/*
           rm -rf /home/runner/.cache/torch/*
-          coverage run -a manage.py test --parallel auto fl_common.tests.tests_models_focalnet
+          coverage run manage.py test --parallel auto fl_common.tests.tests_models_focalnet
+          coverage combine -a
           rm -rf /home/runner/.cache/huggingface/*
           rm -rf /home/runner/.cache/torch/*
       - name: Coverage F
         run: |
-          coverage run -a manage.py test --parallel auto fl_common.tests.tests_models_gcvit
+          coverage run manage.py test --parallel auto fl_common.tests.tests_models_gcvit
+          coverage combine -a
           rm -rf /home/runner/.cache/huggingface/*
           rm -rf /home/runner/.cache/torch/*
-          coverage run -a manage.py test --parallel auto fl_common.tests.tests_models_ghostnet
+          coverage run manage.py test --parallel auto fl_common.tests.tests_models_ghostnet
+          coverage combine -a
           rm -rf /home/runner/.cache/huggingface/*
           rm -rf /home/runner/.cache/torch/*          
       - name: Coverage H
         run: |
-          coverage run -a manage.py test --parallel auto fl_common.tests.tests_models_hardcorenas
+          coverage run manage.py test --parallel auto fl_common.tests.tests_models_hardcorenas
+          coverage combine -a
           rm -rf /home/runner/.cache/huggingface/*
           rm -rf /home/runner/.cache/torch/*
-          coverage run -a manage.py test --parallel auto fl_common.tests.tests_models_hgnet
+          coverage run manage.py test --parallel auto fl_common.tests.tests_models_hgnet
+          coverage combine -a
           rm -rf /home/runner/.cache/huggingface/*
           rm -rf /home/runner/.cache/torch/*
-          coverage run -a manage.py test --parallel auto fl_common.tests.tests_models_hiera
+          coverage run manage.py test --parallel auto fl_common.tests.tests_models_hiera
+          coverage combine -a
           rm -rf /home/runner/.cache/huggingface/*
           rm -rf /home/runner/.cache/torch/*
-          coverage run -a manage.py test --parallel auto fl_common.tests.tests_models_hrnet
+          coverage run manage.py test --parallel auto fl_common.tests.tests_models_hrnet
+          coverage combine -a
           rm -rf /home/runner/.cache/huggingface/*
           rm -rf /home/runner/.cache/torch/*
       - name: Coverage I
         run: | 
-          coverage run -a manage.py test --parallel auto fl_common.tests.tests_models_inception
+          coverage run manage.py test --parallel auto fl_common.tests.tests_models_inception
+          coverage combine -a
           rm -rf /home/runner/.cache/huggingface/*
           rm -rf /home/runner/.cache/torch/*
-          coverage run -a manage.py test --parallel auto fl_common.tests.tests_models_inceptionnext
+          coverage run manage.py test --parallel auto fl_common.tests.tests_models_inceptionnext
+          coverage combine -a
           rm -rf /home/runner/.cache/huggingface/*
           rm -rf /home/runner/.cache/torch/*
       - name: Coverage M
