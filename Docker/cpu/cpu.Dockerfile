@@ -22,11 +22,11 @@ USER myuser
 ENV PATH="/home/myuser/.local/bin:${PATH}"
 
 # Install Python dependencies
-RUN python -m pip install --upgrade pip \
-    && pip install pytest==8.2.1 cmake==3.29.3 \ 
-    scikit-build==0.17.6 setuptools==70.0.0 \
-    fastapi==0.111.0 uvicorn==0.30.0 \
-    sse-starlette==2.1.0 pydantic-settings==2.2.1 \
+RUN python -m pip install --upgrade pip==24.4.1 \
+    && pip install pytest==8.2.2 cmake==3.29.6 \ 
+    scikit-build==0.18.0 setuptools==70.1.1 \
+    fastapi==0.111.0 uvicorn==0.30.1 \
+    sse-starlette==2.1.2 pydantic-settings==2.3.4 \
     starlette-context==0.3.6
 
 # Install llama-cpp-python (build with OpenBLAS)
