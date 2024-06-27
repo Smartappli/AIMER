@@ -41,7 +41,7 @@ RUN python3 -m pip install --upgrade pip \
     starlette-context==0.3.6
 
 # Install llama-cpp-python (build with CUDA)
-RUN CMAKE_ARGS="-DLLAMA_CUDA=on" FORCE_CMAKE=1 pip install 'llama-cpp-python[server]==0.2.78' --verbose
+RUN CMAKE_ARGS="-DLLAMA_CUDA=on" FORCE_CMAKE=1 pip install 'llama-cpp-python[server]==0.2.79' --verbose
 
 # Expose the port
 EXPOSE 8008
