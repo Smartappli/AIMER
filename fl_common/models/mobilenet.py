@@ -47,7 +47,6 @@ def get_mobilenet_model(mobilenet_type, num_classes):
         "mobilenetv3_small_050",
         "mobilenetv3_small_075",
         "mobilenetv3_small_100",
-        "mobilenetv3_small_100h',
         "mobilenetv3_rw",
         "tf_mobilenetv3_large_075",
         "tf_mobilenetv3_large_100",
