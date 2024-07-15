@@ -77,6 +77,7 @@ def get_efficientnet_model(efficientnet_type, num_classes):
         "semnasnet_140",
         "mnasnet_small",
         "mobilenet_100",
+        # "mobilenet_100h",
         "mobilenet_125",
         "mobilenetv2_035",
         "mobilenetv2_050",
