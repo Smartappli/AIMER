@@ -42,6 +42,7 @@ class ProcessingEfficientNetTestCase(TestCase):
             "semnasnet_140",
             "mnasnet_small",
             "mobilenet_100",
+            # "mobilenet_100h",
             "mobilenet_125",
             "mobilenetv2_035",
             "mobilenetv2_050",

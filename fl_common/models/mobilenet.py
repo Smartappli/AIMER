@@ -69,6 +69,8 @@ def get_mobilenet_model(mobilenet_type, num_classes):
         "mobilenetv4_hybrid_large",
         "mobilenetv4_conv_aa_medium",
         "mobilenetv4_conv_blur_medium",
+        "mobilenetv4_conv_aa_large",
+        "mobilenetv4_conv_blur_large",
         "mobilenetv4_hybrid_medium_075",
         "mobilenetv4_hybrid_large_075",
         "repghostnetv2_conv_small",
