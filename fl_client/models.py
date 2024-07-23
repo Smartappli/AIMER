@@ -216,6 +216,7 @@ class ModelFile(models.Model):
         Q3KL = "Q3KL", "Q3_K_L"
         Q3KM = "Q3KM", "Q3_K_M"
         Q3KS = "Q3KS", "Q3_K_S"
+        Q3KXL = "Q3KXL", "Q3_K_XL"
         Q40 = "Q40", "Q4_0"
         Q41 = "Q41", "Q4_1"
         Q4KM = "Q4KM", "Q4_K_M"
