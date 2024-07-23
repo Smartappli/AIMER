@@ -225,6 +225,7 @@ class ModelFile(models.Model):
         Q5KS = "Q5KS", "Q5_K_S"
         Q6K = "Q6K", "Q6_K"
         Q80 = "Q80", "Q8_0"
+        Q80L = "Q80L", "Q8_O_L"
 
     class Extension(models.TextChoices):
         """Class representing a file extension."""
