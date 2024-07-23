@@ -211,6 +211,7 @@ class ModelFile(models.Model):
         """Class representing file types."""
 
         NONE = "NA", "N/A"
+        IQ2S = "IQ2S", "IQ2_S"
         Q2K = "Q2K", "Q2_K"
         Q2KL = "Q2KL", "Q2_K_L"
         Q3KL = "Q3KL", "Q3_K_L"
@@ -224,7 +225,7 @@ class ModelFile(models.Model):
         Q50 = "Q50", "Q5_0"
         Q51 = "Q51", "Q5_1"
         Q5KM = "Q5KM", "Q5_K_M"
-        Q5KS = "Q5KS", "Q5_K_S"
+        Q5KS = "Q5KS", "Q5_K_S"I
         Q6K = "Q6K", "Q6_K"
         Q80 = "Q80", "Q8_0"
         Q80L = "Q80L", "Q8_O_L"
