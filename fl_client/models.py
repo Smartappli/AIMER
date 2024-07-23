@@ -1,4 +1,4 @@
-import uuid
+deimport uuid
 from typing import ClassVar, List
 
 from django.conf import settings
@@ -212,6 +212,7 @@ class ModelFile(models.Model):
 
         NONE = "NA", "N/A"
         Q2K = "Q2K", "Q2_K"
+        Q2KL = "Q2KL", "Q2_K_L"
         Q3KL = "Q3KL", "Q3_K_L"
         Q3KM = "Q3KM", "Q3_K_M"
         Q3KS = "Q3KS", "Q3_K_S"
