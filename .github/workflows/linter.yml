@@ -45,6 +45,7 @@ jobs:
       - uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: 'style fixes by ruff'
+          commit_options: '--no-verify --signoff'
           branch: 'black'
 
   flake8-lint:
