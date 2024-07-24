@@ -225,7 +225,7 @@ class ModelFile(models.Model):
         Q50 = "Q50", "Q5_0"
         Q51 = "Q51", "Q5_1"
         Q5KM = "Q5KM", "Q5_K_M"
-        Q5KS = "Q5KS", "Q5_K_S"I
+        Q5KS = "Q5KS", "Q5_K_S"
         Q6K = "Q6K", "Q6_K"
         Q80 = "Q80", "Q8_0"
         Q80L = "Q80L", "Q8_O_L"
