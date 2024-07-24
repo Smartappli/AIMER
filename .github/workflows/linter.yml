@@ -8,7 +8,7 @@ concurrency:
 
 jobs:
   ruff-lint:
-    name: Ruff
+    name: Ruff Linter
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -23,7 +23,7 @@ jobs:
           args: 'check --select ASYNC,C90,DJ,DTZ,E,F,I,NPY,PD,PERF,PT,RUF,SIM,UP,W --ignore E501,F401 --output-format github --diff --exclude fl_client/migrations,fl_server/migrations'
 
   ruff-fix:
-    name: Ruff
+    name: Ruff Fixer
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
