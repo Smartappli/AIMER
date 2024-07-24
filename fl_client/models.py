@@ -1,4 +1,4 @@
-deimport uuid
+import uuid
 from typing import ClassVar, List
 
 from django.conf import settings
