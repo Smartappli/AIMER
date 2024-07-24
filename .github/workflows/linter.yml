@@ -37,9 +37,10 @@ jobs:
         with:
           args: 'check --fix'
 
-      - uses: stefanzweifel/git-auto-commit-action@v4
+      - uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: 'style fixes by ruff'
+          branch: ruff
 
   flake8-lint:
     runs-on: ubuntu-latest
