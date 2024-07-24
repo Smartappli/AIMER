@@ -47,6 +47,7 @@ jobs:
           commit_message: 'style fixes by ruff'
           commit_options: '--no-verify --signoff'
           skip_checkout: true
+          push_options: '--force'
           branch: 'black'
 
   flake8-lint:
