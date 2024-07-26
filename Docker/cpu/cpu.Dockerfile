@@ -1,4 +1,4 @@
-FROM python:3-slim-bullseye
+FROM python:3-slim-bookworm
 
 # We need to set the host to 0.0.0.0 to allow outside access
 ENV HOST=0.0.0.0
@@ -22,15 +22,10 @@ USER myuser
 ENV PATH="/home/myuser/.local/bin:${PATH}"
 
 # Install Python dependencies
-RUN python -m pip install --upgrade pip \
-    && pip install pytest==8.2.1 cmake==3.23.3 \
-    scikit-build==0.17.6 setuptools==71.1.0 \
-    fastapi==0.111.1 uvicorn==0.30.3 \
-    sse-starlette==2.1.0 pydantic-settings==2.2.1 \
-    starlette-context==0.3.6
+RUN python -m pip install --upgrade pip pytest cmake scikit-build setuptools fastapi uvicorn sse-starlette pydantic-settings starlette-context
 
 # Install llama-cpp-python (build with OpenBLAS)
-RUN CMAKE_ARGS="-DLLAMA_BLAS=ON -DLLAMA_BLAS_VENDOR=OpenBLAS" pip install 'llama-cpp-python[server]==0.2.83' --verbose
+RUN CMAKE_ARGS="-DLLAMA_BLAS=ON -DLLAMA_BLAS_VENDOR=OpenBLAS" pip install llama_cpp_python --verbose
 
 # Expose the port
 EXPOSE 8008
