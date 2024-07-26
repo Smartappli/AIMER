@@ -24,14 +24,14 @@ ENV PATH="/home/myuser/.local/bin:${PATH}"
 # Install Python dependencies
 RUN python -m pip install --upgrade pip
 RUN python -m pip install uv
-RUN python -m uv pip install pytest==8.3.2 cmake==3.30.1 \ 
-    scikit-build==0.18.0 setuptools==71.1.0 \
-    fastapi==0.111.1 uvicorn==0.30.3 \
-    sse-starlette==2.1.2 pydantic-settings==2.3.4 \
+RUN python -m uv pip install pip install pytest==8.2.1 cmake==3.23.3 \
+    scikit-build==0.17.6 setuptools==70.0.0 \
+    fastapi==0.111.0 uvicorn==0.30.0 \
+    sse-starlette==2.1.0 pydantic-settings==2.2.1 \
     starlette-context==0.3.6
 
 # Install llama-cpp-python (build with OpenBLAS)
-RUN CMAKE_ARGS="-DLLAMA_BLAS=ON -DLLAMA_BLAS_VENDOR=OpenBLAS" pip install 'llama-cpp-python==0.2.83' --verbose
+RUN CMAKE_ARGS="-DLLAMA_BLAS=ON -DLLAMA_BLAS_VENDOR=OpenBLAS" pip install 'llama-cpp-python[server]==0.2.83' --verbose
 
 # Expose the port
 EXPOSE 8008
