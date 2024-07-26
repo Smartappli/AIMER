@@ -1,4 +1,4 @@
-django>=5.0.6
+django==5.0.7
 python-dotenv==1.0.1
 huggingface-hub>=0.23.2
 # pycaret[full]>=3.3.2 # 3.2.1
