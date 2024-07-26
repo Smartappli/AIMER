@@ -2,8 +2,8 @@ ARG CUDA_IMAGE="12.5.0-devel-ubuntu22.04"
 FROM nvidia/cuda:${CUDA_IMAGE}
 
 # We need to set the host to 0.0.0.0 to allow outside access
-ENV HOST 0.0.0.0
-ENV PORT 8008
+ENV HOST=0.0.0.0
+ENV PORT=8008
 
 # Install necessary packages
 RUN apt-get update \
