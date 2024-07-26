@@ -8,7 +8,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  test-fastvit-models:
+  test-f-models:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -41,52 +41,14 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         python -m pip install uv
-        python -m uv pip install coverage
         python -m uv pip install -r tests.txt
-    - name: Fl_common Models Fastvit
+    - name: Fastvit
       run: |
-        coverage run manage.py test fl_common.tests.tests_models_fastvit
-        coverage xml -o coverage-fastvit.xml
-        coverage report
-
-  test-focalnet-models:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: ["3.12"]
-    env:
-      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    needs: test-fastvit-models
-    steps:
-    - name: Free Disk Space (Ubuntu)
-      uses: jlumbroso/free-disk-space@main
-      with:
-        # this might remove tools that are actually needed,
-        # if set to "true" but frees about 6 GB
-        tool-cache: false
-
-        # all of these default to true, but feel free to set to
-        # "false" if necessary for your workflow
-        android: true
-        dotnet: true
-        haskell: true
-        large-packages: true
-        docker-images: false
-        swap-storage: true
-    - uses: actions/checkout@v4
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v5
-      with:
-        python-version: ${{ matrix.python-version }}
-        cache: 'pip'
-    - name: Install dependencies
+        python manage.py test fl_common.tests.tests_models_fastvit
+        rm -rf /home/runner/.cache/huggingface/*
+        rm -rf /home/runner/.cache/torch/*
+    - name: Focalnet
       run: |
-        python -m pip install --upgrade pip
-        python -m pip install uv
-        python -m uv pip install coverage
-        python -m uv pip install -r tests.txt
-    - name: Fl_common Models Focalnet
-      run: |
-        coverage run manage.py test fl_common.tests.tests_models_focalnet
-        coverage xml -o coverage-focalnet.xml
-        coverage report
+        python manage.py test fl_common.tests.tests_models_focalnet
+        rm -rf /home/runner/.cache/huggingface/*
+        rm -rf /home/runner/.cache/torch/* 

@@ -41,13 +41,12 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           python -m pip install uv
-          python -m uv pip install coverage
           python -m uv pip install -r tests.txt
       - name: Fl_common Models Selecsls
         run: |
-          coverage run manage.py test fl_common.tests.tests_models_selecsls
-          coverage xml -o coverage-selecsls.xml
-          coverage report
+          manage.py test fl_common.tests.tests_models_selecsls
+          rm -rf /home/runner/.cache/huggingface/*
+          rm -rf /home/runner/.cache/torch/*
 
   tests-senet-models:
     runs-on: ubuntu-latest
@@ -58,90 +57,6 @@ jobs:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     needs: tests-selecsls-models
     steps:
-      - name: Free Disk Space (Ubuntu)
-        uses: jlumbroso/free-disk-space@main
-        with:
-          # this might remove tools that are actually needed,
-          # if set to "true" but frees about 6 GB
-          tool-cache: false
-
-          # all of these default to true, but feel free to set to
-          # "false" if necessary for your workflow
-          android: true
-          dotnet: true
-          haskell: true
-          large-packages: true
-          docker-images: false
-          swap-storage: true
-      - uses: actions/checkout@v4
-      - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v5
-        with:
-          python-version: ${{ matrix.python-version }}
-          cache: 'pip'
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          python -m pip install uv
-          python -m uv pip install coverage
-          python -m uv pip install -r tests.txt
-      - name: Fl_common Models Senet
-        run: |
-          coverage run manage.py test fl_common.tests.tests_models_senet
-          coverage xml -o coverage-senet.xml
-          coverage report
-
-  tests-sequencer-models:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: ["3.12"]
-    env:
-      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    needs: tests-senet-models
-    steps:
-      - name: Free Disk Space (Ubuntu)
-        uses: jlumbroso/free-disk-space@main
-        with:
-          # this might remove tools that are actually needed,
-          # if set to "true" but frees about 6 GB
-          tool-cache: false
-
-          # all of these default to true, but feel free to set to
-          # "false" if necessary for your workflow
-          android: true
-          dotnet: true
-          haskell: true
-          large-packages: true
-          docker-images: false
-          swap-storage: true
-      - uses: actions/checkout@v4
-      - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v5
-        with:
-          python-version: ${{ matrix.python-version }}
-          cache: 'pip'
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          python -m pip install uv
-          python -m uv pip install coverage
-          python -m uv pip install -r tests.txt
-      - name: Fl_common Models Sequencer
-        run: |
-          coverage run manage.py test fl_common.tests.tests_models_sequencer
-          coverage xml -o coverage-sequencer.xml
-          coverage report        
-
-  tests-shufflenet-models:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: ["3.12"]
-    env:
-      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    needs: tests-sequencer-models
-    steps:
     - name: Free Disk Space (Ubuntu)
       uses: jlumbroso/free-disk-space@main
       with:
@@ -169,301 +84,53 @@ jobs:
         python -m pip install uv
         python -m uv pip install coverage
         python -m uv pip install -r tests.txt
+    - name: Fl_common Models Senet
+      run: |
+        python manage.py test fl_common.tests.tests_models_senet
+        rm -rf /home/runner/.cache/huggingface/*
+        rm -rf /home/runner/.cache/torch/*
+    - name: Fl_common Models Sequencer
+      run: |
+        python manage.py test fl_common.tests.tests_models_sequencer
+        rm -rf /home/runner/.cache/huggingface/*
+        rm -rf /home/runner/.cache/torch/*
     - name: Fl_common Models Shufflenet
       run: |
-        coverage run manage.py test fl_common.tests.tests_models_shufflenet
-        coverage xml -o coverage-shufflenet.xml
-        coverage report
-
-  tests-sknet-models:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: ["3.12"]
-    env:
-      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    needs: tests-shufflenet-models
-    steps:
-    - name: Free Disk Space (Ubuntu)
-      uses: jlumbroso/free-disk-space@main
-      with:
-        # this might remove tools that are actually needed,
-        # if set to "true" but frees about 6 GB
-        tool-cache: false
-
-        # all of these default to true, but feel free to set to
-        # "false" if necessary for your workflow
-        android: true
-        dotnet: true
-        haskell: true
-        large-packages: true
-        docker-images: false
-        swap-storage: true
-    - uses: actions/checkout@v4
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v5
-      with:
-        python-version: ${{ matrix.python-version }}
-        cache: 'pip'
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        python -m pip install uv
-        python -m uv pip install coverage
-        python -m uv pip install -r tests.txt
+        python manage.py test fl_common.tests.tests_models_shufflenet
+        rm -rf /home/runner/.cache/huggingface/*
+        rm -rf /home/runner/.cache/torch/*
     - name: Fl_common Models Sknet
       run: |
-        coverage run manage.py test fl_common.tests.tests_models_sknet
-        coverage xml -o coverage-sknet.xml
-        coverage report
-
-  tests-squeezenet-models:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: ["3.12"]
-    env:
-      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    needs: tests-sknet-models
-    steps:
-    - name: Free Disk Space (Ubuntu)
-      uses: jlumbroso/free-disk-space@main
-      with:
-        # this might remove tools that are actually needed,
-        # if set to "true" but frees about 6 GB
-        tool-cache: false
-
-        # all of these default to true, but feel free to set to
-        # "false" if necessary for your workflow
-        android: true
-        dotnet: true
-        haskell: true
-        large-packages: true
-        docker-images: false
-        swap-storage: true
-    - uses: actions/checkout@v4
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v5
-      with:
-        python-version: ${{ matrix.python-version }}
-        cache: 'pip'
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        python -m pip install uv
-        python -m uv pip install coverage
-        python -m uv pip install -r tests.txt
+        python manage.py test fl_common.tests.tests_models_sknet
+        rm -rf /home/runner/.cache/huggingface/*
+        rm -rf /home/runner/.cache/torch/*
     - name: Fl_common Models Squeezenet
       run: |
-        coverage run manage.py test fl_common.tests.tests_models_squeezenet
-        coverage xml -o coverage-squeezenet.xml
-        coverage report
-
-  tests-swin_transformer-models:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: ["3.12"]
-    env:
-      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    needs: tests-squeezenet-models
-    steps:
-    - name: Free Disk Space (Ubuntu)
-      uses: jlumbroso/free-disk-space@main
-      with:
-        # this might remove tools that are actually needed,
-        # if set to "true" but frees about 6 GB
-        tool-cache: false
-
-        # all of these default to true, but feel free to set to
-        # "false" if necessary for your workflow
-        android: true
-        dotnet: true
-        haskell: true
-        large-packages: true
-        docker-images: false
-        swap-storage: true
-    - uses: actions/checkout@v4
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v5
-      with:
-        python-version: ${{ matrix.python-version }}
-        cache: 'pip'
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        python -m pip install uv
-        python -m uv pip install coverage
-        python -m uv pip install -r tests.txt
+        python manage.py test fl_common.tests.tests_models_squeezenet
+        rm -rf /home/runner/.cache/huggingface/*
+        rm -rf /home/runner/.cache/torch/*
     - name: Fl_common Models Swin Transformer
       run: |
-        coverage run manage.py test fl_common.tests.tests_models_swin_transformer
-        coverage xml -o coverage-swin_transformer.xml
-        coverage report
-
-  tests-swin_transformer-v2-models:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: ["3.12"]
-    env:
-      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    needs: tests-swin_transformer-models
-    steps:
-    - name: Free Disk Space (Ubuntu)
-      uses: jlumbroso/free-disk-space@main
-      with:
-        # this might remove tools that are actually needed,
-        # if set to "true" but frees about 6 GB
-        tool-cache: false
-
-        # all of these default to true, but feel free to set to
-        # "false" if necessary for your workflow
-        android: true
-        dotnet: true
-        haskell: true
-        large-packages: true
-        docker-images: false
-        swap-storage: true
-    - uses: actions/checkout@v4
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v5
-      with:
-        python-version: ${{ matrix.python-version }}
-        cache: 'pip'
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        python -m pip install uv
-        python -m uv pip install coverage
-        python -m uv pip install -r tests.txt
+        python manage.py test fl_common.tests.tests_models_swin_transformer
+        rm -rf /home/runner/.cache/huggingface/*
+        rm -rf /home/runner/.cache/torch/*
     - name: Fl_common Models Swin Transformer v2
       run: |
-        coverage run manage.py test fl_common.tests.tests_models_swin_transformer_v2
-        coverage xml -o coverage-swin_tramsformer_v2.xml
-        coverage report
-
-  tests-swin_transformer-v2-cr-001-models:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: ["3.12"]
-    env:
-      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    needs: tests-swin_transformer-v2-models
-    steps:
-    - name: Free Disk Space (Ubuntu)
-      uses: jlumbroso/free-disk-space@main
-      with:
-        # this might remove tools that are actually needed,
-        # if set to "true" but frees about 6 GB
-        tool-cache: false
-
-        # all of these default to true, but feel free to set to
-        # "false" if necessary for your workflow
-        android: true
-        dotnet: true
-        haskell: true
-        large-packages: true
-        docker-images: false
-        swap-storage: true
-    - uses: actions/checkout@v4
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v5
-      with:
-        python-version: ${{ matrix.python-version }}
-        cache: 'pip'
-    - name: Install dependencies
+        python manage.py test fl_common.tests.tests_models_swin_transformer_v2
+        rm -rf /home/runner/.cache/huggingface/*
+        rm -rf /home/runner/.cache/torch/*
+    - name: Swin Transformer v2 cr - PART 1/3
       run: |
-        python -m pip install --upgrade pip
-        python -m pip install uv
-        python -m uv pip install coverage
-        python -m uv pip install -r tests.txt
-    - name: Fl_common Models Swin Transformer v2 cr 001
+        python manage.py test fl_common.tests.tests_models_swin_transformer_v2_cr_001
+        rm -rf /home/runner/.cache/huggingface/*
+        rm -rf /home/runner/.cache/torch/*
+    - name: Swin Transformer v2 - PART 2/3
       run: |
-        coverage run manage.py test fl_common.tests.tests_models_swin_transformer_v2_cr_001
-        coverage xml -o coverage-swin_transformer_v2_cr_001.xml
-        coverage report
-        
-  tests-swin_transformer-v2-cr-002-models:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: ["3.12"]
-    env:
-      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    needs: tests-swin_transformer-v2-models
-    steps:
-    - name: Free Disk Space (Ubuntu)
-      uses: jlumbroso/free-disk-space@main
-      with:
-        # this might remove tools that are actually needed,
-        # if set to "true" but frees about 6 GB
-        tool-cache: false
-
-        # all of these default to true, but feel free to set to
-        # "false" if necessary for your workflow
-        android: true
-        dotnet: true
-        haskell: true
-        large-packages: true
-        docker-images: false
-        swap-storage: true
-    - uses: actions/checkout@v4
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v5
-      with:
-        python-version: ${{ matrix.python-version }}
-        cache: 'pip'
-    - name: Install dependencies
+        python manage.py test fl_common.tests.tests_models_swin_transformer_v2_cr_002
+        rm -rf /home/runner/.cache/huggingface/*
+        rm -rf /home/runner/.cache/torch/*
+    - name: Swin Transformer v2 cr - PART 3/3
       run: |
-        python -m pip install --upgrade pip
-        python -m pip install uv
-        python -m uv pip install coverage
-        python -m uv pip install -r tests.txt
-    - name: Fl_common Models Swin Transformer v2 cr 002
-      run: |
-        coverage run manage.py test fl_common.tests.tests_models_swin_transformer_v2_cr_002
-        coverage xml -o coverage-swin_transformer_v2_cr_002.xml
-        coverage report
-  tests-swin_transformer-v2-cr-003-models:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: ["3.12"]
-    env:
-      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    needs: tests-swin_transformer-v2-models
-    steps:
-    - name: Free Disk Space (Ubuntu)
-      uses: jlumbroso/free-disk-space@main
-      with:
-        # this might remove tools that are actually needed,
-        # if set to "true" but frees about 6 GB
-        tool-cache: false
-
-        # all of these default to true, but feel free to set to
-        # "false" if necessary for your workflow
-        android: true
-        dotnet: true
-        haskell: true
-        large-packages: true
-        docker-images: false
-        swap-storage: true
-    - uses: actions/checkout@v4
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v5
-      with:
-        python-version: ${{ matrix.python-version }}
-        cache: 'pip'
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        python -m pip install uv
-        python -m uv pip install coverage
-        python -m uv pip install -r tests.txt
-    - name: Fl_common Models Swin Transformer v2 cr 003
-      run: |
-        coverage run manage.py test fl_common.tests.tests_models_swin_transformer_v2_cr_003
-        coverage xml -o coverage-swin_transformer_v2_cr_003.xml
-        coverage report
+        python manage.py test fl_common.tests.tests_models_swin_transformer_v2_cr_003
+        rm -rf /home/runner/.cache/huggingface/*
+        rm -rf /home/runner/.cache/torch/* 

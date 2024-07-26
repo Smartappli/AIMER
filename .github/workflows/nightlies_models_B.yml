@@ -1,13 +1,11 @@
 name: Nightlies Models - PART B
 
 on:
-  schedule:
-    - cron: "0 08 * * */7" # 12am UTC, 5:30pm Indian, 9pm Brazil, 11am AEDT
-  workflow_dispatch:
-    inputs:
-      none:
-        description: "Run Nightlies Tests Manually"
-        required: false
+  push:
+    branches:
+      - master
+  pull_request:
+    types: [opened, synchronize, reopened]
 
 concurrency:
   group: nightlies_modesl_B-${{ github.event_name == 'pull_request' && format('{0}-{1}', github.workflow, github.event.pull_request.number) || github.workflow_ref }}
