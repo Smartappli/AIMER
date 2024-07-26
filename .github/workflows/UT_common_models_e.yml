@@ -42,47 +42,47 @@ jobs:
         python -m pip install --upgrade pip
         python -m pip install uv
         python -m uv pip install -r tests.txt
-    - name: Fl_common Models Edgenet
+    - name: Edgenet
       run: |
         python manage.py test fl_common.tests.tests_models_edgenet
         rm -rf /home/runner/.cache/huggingface/*
         rm -rf /home/runner/.cache/torch/*
-    - name: Fl_common Models Efficientformer
+    - name: Efficientformer
       run: |
         python manage.py test fl_common.tests.tests_models_efficientformer
         rm -rf /home/runner/.cache/huggingface/*
         rm -rf /home/runner/.cache/torch/*
-    - name: Fl_common Models Efficientformer v2
+    - name: Efficientformer v2
       run: |
         python manage.py test fl_common.tests.tests_models_efficientformer_v2
         rm -rf /home/runner/.cache/huggingface/*
         rm -rf /home/runner/.cache/torch/*
-    - name: Fl_common Models Efficientvit_mit
+    - name: Efficientvit_mit
       run: |
         python run manage.py test fl_common.tests.tests_models_efficientvit_mit
         rm -rf /home/runner/.cache/huggingface/*
         rm -rf /home/runner/.cache/torch/*
-    - name: Fl_common Models Efficientvit_msra
+    - name: Efficientvit_msra
       run: |
         python run manage.py test fl_common.tests.tests_models_efficientvit_msra
         rm -rf /home/runner/.cache/huggingface/*
         rm -rf /home/runner/.cache/torch/*
-    - name: Fl_common Models Efficientnet
+    - name: Efficientnet
       run: |
         python manage.py test fl_common.tests.tests_models_efficientnet
         rm -rf /home/runner/.cache/huggingface/*
         rm -rf /home/runner/.cache/torch/*
-    - name: Fl_common Models Eva Part 1
+    - name: Eva - Part 1/3
       run: |
         python manage.py test fl_common.tests.tests_models_eva_001
         rm -rf /home/runner/.cache/huggingface/*
         rm -rf /home/runner/.cache/torch/*
-    - name: Fl_common Models Eva Part 2
+    - name: Eva - Part 2/3
       run: |
         python manage.py test fl_common.tests.tests_models_eva_002
         rm -rf /home/runner/.cache/huggingface/*
         rm -rf /home/runner/.cache/torch/*
-    - name: Fl_common Models Eva Part 3
+    - name: Eva - Part 3/3
       run: |
         python manage.py test fl_common.tests.tests_models_eva_003
         rm -rf /home/runner/.cache/huggingface/*

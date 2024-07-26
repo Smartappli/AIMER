@@ -42,27 +42,27 @@ jobs:
         python -m pip install --upgrade pip
         python -m pip install uv
         python -m uv pip install -r tests.txt
-    - name: Fl_common Models Davit
+    - name: Davit
       run: |
         python manage.py test fl_common.tests.tests_models_davit
         rm -rf /home/runner/.cache/huggingface/*
         rm -rf /home/runner/.cache/torch/*
-    - name: Fl_common Models Deit
+    - name: Deit
       run: |
         python manage.py test fl_common.tests.tests_models_deit
         rm -rf /home/runner/.cache/huggingface/*
         rm -rf /home/runner/.cache/torch/*
-    - name: Fl_common Models Densenet
+    - name: Densenet
       run: |
         python manage.py test fl_common.tests.tests_models_densenet
         rm -rf /home/runner/.cache/huggingface/*
         rm -rf /home/runner/.cache/torch/*
-    - name: Fl_common Models Dla
+    - name: Dla
       run: |
         python manage.py test fl_common.tests.tests_models_dla
         rm -rf /home/runner/.cache/huggingface/*
         rm -rf /home/runner/.cache/torch/*
-    - name: Fl_common Models Dpn
+    - name: Dpn
       run: |
         python manage.py test fl_common.tests.tests_models_dpn
         rm -rf /home/runner/.cache/huggingface/*

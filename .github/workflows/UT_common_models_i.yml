@@ -42,12 +42,12 @@ jobs:
         python -m pip install --upgrade pip
         python -m pip install uv
         python -m uv pip install -r tests.txt
-    - name: Fl_common Models Inception
+    - name: Inception
       run: |
         python manage.py test fl_common.tests.tests_models_inception
         rm -rf /home/runner/.cache/huggingface/*
         rm -rf /home/runner/.cache/torch/*
-    - name: Fl_common Models Inception Next
+    - name: Inception Next
       run: |
         python manage.py test fl_common.tests.tests_models_inceptionnext
         rm -rf /home/runner/.cache/huggingface/*

@@ -41,17 +41,17 @@ jobs:
         python -m pip install --upgrade pip
         python -m pip install uv
         python -m uv pip install -r tests.txt
-    - name: Fl_common Models Beit
+    - name: Beit
       run: |
         python manage.py test fl_common.tests.tests_models_beit      
         rm -rf /home/runner/.cache/huggingface/*
         rm -rf /home/runner/.cache/torch/*
-    - name: Fl_common Models Byoanet
+    - name: Byoanet
       run: |
         python manage.py test fl_common.tests.tests_models_byoanet      
         rm -rf /home/runner/.cache/huggingface/*
         rm -rf /home/runner/.cache/torch/*
-    - name: Fl_common Models Byobnet
+    - name: Byobnet
       run: |
         python manage.py test fl_common.tests.tests_models_byobnet
         rm -rf /home/runner/.cache/huggingface/*

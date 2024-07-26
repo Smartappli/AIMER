@@ -42,42 +42,42 @@ jobs:
         python -m pip install --upgrade pip
         python -m pip install uv
         python -m uv pip install -r tests.txt
-    - name: Fl_common Models Cait
+    - name: Cait
       run: |
         python manage.py test fl_common.tests.tests_models_cait
         rm -rf /home/runner/.cache/huggingface/*
         rm -rf /home/runner/.cache/torch/*
-    - name: Fl_common Models Coat
+    - name: Coat
       run: |
         python manage.py test fl_common.tests.tests_models_coat
         rm -rf /home/runner/.cache/huggingface/*
         rm -rf /home/runner/.cache/torch/*
-    - name: Fl_common Models Convit
+    - name: Convit
       run: |
         python manage.py test fl_common.tests.tests_models_convit
         rm -rf /home/runner/.cache/huggingface/*
         rm -rf /home/runner/.cache/torch/*
-    - name: Fl_common Models Convmixer
+    - name: Convmixer
       run: |
         python manage.py test fl_common.tests.tests_models_convmixer
         rm -rf /home/runner/.cache/huggingface/*
         rm -rf /home/runner/.cache/torch/*
-    - name: Fl_common Models Convnext
+    - name: Convnext
       run: |
         python manage.py test fl_common.tests.tests_models_convnext
         rm -rf /home/runner/.cache/huggingface/*
         rm -rf /home/runner/.cache/torch/*
-    - name: Fl_common Models Crossvit
+    - name: Crossvit
       run: |
         python manage.py test fl_common.tests.tests_models_crossvit
         rm -rf /home/runner/.cache/huggingface/*
         rm -rf /home/runner/.cache/torch/*
-    - name: Fl_common Models Cspnet
+    - name: Cspnet
       run: |
         python manage.py test fl_common.tests.tests_models_cspnet
         rm -rf /home/runner/.cache/huggingface/*
         rm -rf /home/runner/.cache/torch/*
-    - name: Fl_common Models CVT
+    - name: CVT
       run: |
         python manage.py test fl_common.tests.tests_models_cvt
         rm -rf /home/runner/.cache/huggingface/*
