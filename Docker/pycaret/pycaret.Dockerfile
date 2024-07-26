@@ -20,7 +20,7 @@ RUN "${CONDA_DIR}/envs/${conda_env}/bin/python" -m ipykernel install --user --na
 RUN "${CONDA_DIR}/envs/${conda_env}/bin/pip" install pycaret[full]==3.3.2
 
 # prepend conda environment to path
-ENV PATH "${CONDA_DIR}/envs/${conda_env}/bin:${PATH}"
+ENV PATH="${CONDA_DIR}/envs/${conda_env}/bin:${PATH}"
 
 # make the env default
-ENV CONDA_DEFAULT_ENV ${conda_env}
+ENV CONDA_DEFAULT_ENV=${conda_env}
