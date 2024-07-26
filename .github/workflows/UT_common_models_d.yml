@@ -41,178 +41,29 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         python -m pip install uv
-        python -m uv pip install coverage
         python -m uv pip install -r tests.txt
     - name: Fl_common Models Davit
       run: |
-        coverage run manage.py test fl_common.tests.tests_models_davit
-        coverage xml -o coverage-davit.xml
-        coverage report
-
-  test-deit-models:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: ["3.12"]
-    env:
-      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    needs: test-davit-models
-    steps:
-    - name: Free Disk Space (Ubuntu)
-      uses: jlumbroso/free-disk-space@main
-      with:
-        # this might remove tools that are actually needed,
-        # if set to "true" but frees about 6 GB
-        tool-cache: false
-
-        # all of these default to true, but feel free to set to
-        # "false" if necessary for your workflow
-        android: true
-        dotnet: true
-        haskell: true
-        large-packages: true
-        docker-images: false
-        swap-storage: true
-    - uses: actions/checkout@v4
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v5
-      with:
-        python-version: ${{ matrix.python-version }}
-        cache: 'pip'
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        python -m pip install uv
-        python -m uv pip install coverage
-        python -m uv pip install -r tests.txt
+        python manage.py test fl_common.tests.tests_models_davit
+        rm -rf /home/runner/.cache/huggingface/*
+        rm -rf /home/runner/.cache/torch/*
     - name: Fl_common Models Deit
       run: |
-        coverage run manage.py test fl_common.tests.tests_models_deit
-        coverage xml -o coverage-deit.xml
-        coverage report
-
-  test-densenet-models:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: ["3.12"]
-    env:
-      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    needs: test-deit-models
-    steps:
-    - name: Free Disk Space (Ubuntu)
-      uses: jlumbroso/free-disk-space@main
-      with:
-        # this might remove tools that are actually needed,
-        # if set to "true" but frees about 6 GB
-        tool-cache: false
-
-        # all of these default to true, but feel free to set to
-        # "false" if necessary for your workflow
-        android: true
-        dotnet: true
-        haskell: true
-        large-packages: true
-        docker-images: false
-        swap-storage: true
-    - uses: actions/checkout@v4
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v5
-      with:
-        python-version: ${{ matrix.python-version }}
-        cache: 'pip'
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        python -m pip install uv
-        python -m uv pip install coverage
-        python -m uv pip install -r tests.txt
+        python manage.py test fl_common.tests.tests_models_deit
+        rm -rf /home/runner/.cache/huggingface/*
+        rm -rf /home/runner/.cache/torch/*
     - name: Fl_common Models Densenet
       run: |
-        coverage run manage.py test fl_common.tests.tests_models_densenet
-        coverage xml -o coverage-densenet.xml
-        coverage report
-
-  test-dla-models:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: ["3.12"]
-    env:
-      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    needs: test-densenet-models
-    steps:
-    - name: Free Disk Space (Ubuntu)
-      uses: jlumbroso/free-disk-space@main
-      with:
-        # this might remove tools that are actually needed,
-        # if set to "true" but frees about 6 GB
-        tool-cache: false
-
-        # all of these default to true, but feel free to set to
-        # "false" if necessary for your workflow
-        android: true
-        dotnet: true
-        haskell: true
-        large-packages: true
-        docker-images: false
-        swap-storage: true
-    - uses: actions/checkout@v4
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v5
-      with:
-        python-version: ${{ matrix.python-version }}
-        cache: 'pip'
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        python -m pip install uv
-        python -m uv pip install coverage
-        python -m uv pip install -r tests.txt
+        python manage.py test fl_common.tests.tests_models_densenet
+        rm -rf /home/runner/.cache/huggingface/*
+        rm -rf /home/runner/.cache/torch/*
     - name: Fl_common Models Dla
       run: |
-        coverage run manage.py test fl_common.tests.tests_models_dla
-        coverage xml -o coverage-dla.xml
-        coverage report
-
-  test-dpn-models:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: ["3.12"]
-    env:
-      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    needs: test-dla-models
-    steps:
-    - name: Free Disk Space (Ubuntu)
-      uses: jlumbroso/free-disk-space@main
-      with:
-        # this might remove tools that are actually needed,
-        # if set to "true" but frees about 6 GB
-        tool-cache: false
-
-        # all of these default to true, but feel free to set to
-        # "false" if necessary for your workflow
-        android: true
-        dotnet: true
-        haskell: true
-        large-packages: true
-        docker-images: false
-        swap-storage: true
-    - uses: actions/checkout@v4
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v5
-      with:
-        python-version: ${{ matrix.python-version }}
-        cache: 'pip'
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        python -m pip install uv
-        python -m uv pip install coverage
-        python -m uv pip install -r tests.txt
+        python manage.py test fl_common.tests.tests_models_dla
+        rm -rf /home/runner/.cache/huggingface/*
+        rm -rf /home/runner/.cache/torch/*
     - name: Fl_common Models Dpn
       run: |
-        coverage run manage.py test fl_common.tests.tests_models_dpn
-        coverage xml -o coverage-dpn.xml
-        coverage report
+        python manage.py test fl_common.tests.tests_models_dpn
+        rm -rf /home/runner/.cache/huggingface/*
+        rm -rf /home/runner/.cache/torch/* 

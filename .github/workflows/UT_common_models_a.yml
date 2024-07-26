@@ -8,7 +8,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  test-alexnet-model:
+  test-a-model:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -45,3 +45,5 @@ jobs:
     - name: Fl_common Models AlexNet
       run: |
         python manage.py test fl_common.tests.tests_models_alexnet
+        rm -rf /home/runner/.cache/huggingface/*
+        rm -rf /home/runner/.cache/torch/* 

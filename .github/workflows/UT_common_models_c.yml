@@ -8,7 +8,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  test-cait-models:
+  test-c-models:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -41,304 +41,44 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         python -m pip install uv
-        python -m uv pip install coverage
         python -m uv pip install -r tests.txt
     - name: Fl_common Models Cait
       run: |
-        coverage run manage.py test fl_common.tests.tests_models_cait
-        coverage xml -o coverage-cait.xml
-        coverage report
-
-  test-coat-models:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: ["3.12"]
-    env:
-      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    needs: test-cait-models
-    steps:
-    - name: Free Disk Space (Ubuntu)
-      uses: jlumbroso/free-disk-space@main
-      with:
-        # this might remove tools that are actually needed,
-        # if set to "true" but frees about 6 GB
-        tool-cache: false
-
-        # all of these default to true, but feel free to set to
-        # "false" if necessary for your workflow
-        android: true
-        dotnet: true
-        haskell: true
-        large-packages: true
-        docker-images: false
-        swap-storage: true
-    - uses: actions/checkout@v4
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v5
-      with:
-        python-version: ${{ matrix.python-version }}
-        cache: 'pip'
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        python -m pip install uv
-        python -m uv pip install coverage
-        python -m uv pip install -r tests.txt
+        python manage.py test fl_common.tests.tests_models_cait
+        rm -rf /home/runner/.cache/huggingface/*
+        rm -rf /home/runner/.cache/torch/*
     - name: Fl_common Models Coat
       run: |
-        coverage run manage.py test fl_common.tests.tests_models_coat
-        coverage xml -o coverage-coat.xml
-        coverage report
-
-  test-convit-models:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: ["3.12"]
-    env:
-      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    needs: test-coat-models
-    steps:
-    - name: Free Disk Space (Ubuntu)
-      uses: jlumbroso/free-disk-space@main
-      with:
-        # this might remove tools that are actually needed,
-        # if set to "true" but frees about 6 GB
-        tool-cache: false
-
-        # all of these default to true, but feel free to set to
-        # "false" if necessary for your workflow
-        android: true
-        dotnet: true
-        haskell: true
-        large-packages: true
-        docker-images: false
-        swap-storage: true
-    - uses: actions/checkout@v4
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v5
-      with:
-        python-version: ${{ matrix.python-version }}
-        cache: 'pip'
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        python -m pip install uv
-        python -m uv pip install coverage
-        python -m uv pip install -r tests.txt
+        python manage.py test fl_common.tests.tests_models_coat
+        rm -rf /home/runner/.cache/huggingface/*
+        rm -rf /home/runner/.cache/torch/*
     - name: Fl_common Models Convit
       run: |
-        coverage run manage.py test fl_common.tests.tests_models_convit
-        coverage xml -o coverage-convit.xml
-        coverage report
-
-  test-convmixer-models:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: ["3.12"]
-    env:
-      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    needs: test-convit-models
-    steps:
-    - name: Free Disk Space (Ubuntu)
-      uses: jlumbroso/free-disk-space@main
-      with:
-        # this might remove tools that are actually needed,
-        # if set to "true" but frees about 6 GB
-        tool-cache: false
-
-        # all of these default to true, but feel free to set to
-        # "false" if necessary for your workflow
-        android: true
-        dotnet: true
-        haskell: true
-        large-packages: true
-        docker-images: false
-        swap-storage: true
-    - uses: actions/checkout@v4
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v5
-      with:
-        python-version: ${{ matrix.python-version }}
-        cache: 'pip'
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        python -m pip install uv
-        python -m uv pip install coverage
-        python -m uv pip install -r tests.txt
+        python manage.py test fl_common.tests.tests_models_convit
+        rm -rf /home/runner/.cache/huggingface/*
+        rm -rf /home/runner/.cache/torch/*
     - name: Fl_common Models Convmixer
       run: |
-        coverage run manage.py test fl_common.tests.tests_models_convmixer
-        coverage xml -o coverage-convmixer.xml
-        coverage report
-
-  test-convnext-models:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: ["3.12"]
-    env:
-      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    needs: test-convmixer-models
-    steps:
-    - name: Free Disk Space (Ubuntu)
-      uses: jlumbroso/free-disk-space@main
-      with:
-        # this might remove tools that are actually needed,
-        # if set to "true" but frees about 6 GB
-        tool-cache: false
-
-        # all of these default to true, but feel free to set to
-        # "false" if necessary for your workflow
-        android: true
-        dotnet: true
-        haskell: true
-        large-packages: true
-        docker-images: false
-        swap-storage: true
-    - uses: actions/checkout@v4
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v5
-      with:
-        python-version: ${{ matrix.python-version }}
-        cache: 'pip'
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        python -m pip install uv
-        python -m uv pip install coverage
-        python -m uv pip install -r tests.txt
+        python manage.py test fl_common.tests.tests_models_convmixer
+        rm -rf /home/runner/.cache/huggingface/*
+        rm -rf /home/runner/.cache/torch/*
     - name: Fl_common Models Convnext
       run: |
-        coverage run manage.py test fl_common.tests.tests_models_convnext
-        coverage xml -o coverage-convnext.xml
-        coverage report
-
-  test-crossvit-models:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: ["3.12"]
-    env:
-      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    needs: test-convnext-models
-    steps:
-    - name: Free Disk Space (Ubuntu)
-      uses: jlumbroso/free-disk-space@main
-      with:
-        # this might remove tools that are actually needed,
-        # if set to "true" but frees about 6 GB
-        tool-cache: false
-
-        # all of these default to true, but feel free to set to
-        # "false" if necessary for your workflow
-        android: true
-        dotnet: true
-        haskell: true
-        large-packages: true
-        docker-images: false
-        swap-storage: true
-    - uses: actions/checkout@v4
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v5
-      with:
-        python-version: ${{ matrix.python-version }}
-        cache: 'pip'
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        python -m pip install uv
-        python -m uv pip install coverage
-        python -m uv pip install -r tests.txt
+        python manage.py test fl_common.tests.tests_models_convnext
+        rm -rf /home/runner/.cache/huggingface/*
+        rm -rf /home/runner/.cache/torch/*
     - name: Fl_common Models Crossvit
       run: |
-        coverage run manage.py test fl_common.tests.tests_models_crossvit
-        coverage xml -o coverage-crossvit.xml
-        coverage report
-
-  test-cspnet-models:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: ["3.12"]
-    env:
-      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    needs: test-crossvit-models
-    steps:
-    - name: Free Disk Space (Ubuntu)
-      uses: jlumbroso/free-disk-space@main
-      with:
-        # this might remove tools that are actually needed,
-        # if set to "true" but frees about 6 GB
-        tool-cache: false
-
-        # all of these default to true, but feel free to set to
-        # "false" if necessary for your workflow
-        android: true
-        dotnet: true
-        haskell: true
-        large-packages: true
-        docker-images: false
-        swap-storage: true
-    - uses: actions/checkout@v4
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v5
-      with:
-        python-version: ${{ matrix.python-version }}
-        cache: 'pip'
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        python -m pip install uv
-        python -m uv pip install coverage
-        python -m uv pip install -r tests.txt
+        python manage.py test fl_common.tests.tests_models_crossvit
+        rm -rf /home/runner/.cache/huggingface/*
+        rm -rf /home/runner/.cache/torch/*
     - name: Fl_common Models Cspnet
       run: |
-        coverage run manage.py test fl_common.tests.tests_models_cspnet
-        coverage xml -o coverage-cspnet.xml
-        coverage report
-
-  test-cvt-models:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: ["3.12"]
-    env:
-      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    needs: test-cspnet-models
-    steps:
-    - name: Free Disk Space (Ubuntu)
-      uses: jlumbroso/free-disk-space@main
-      with:
-        # this might remove tools that are actually needed,
-        # if set to "true" but frees about 6 GB
-        tool-cache: false
-
-        # all of these default to true, but feel free to set to
-        # "false" if necessary for your workflow
-        android: true
-        dotnet: true
-        haskell: true
-        large-packages: true
-        docker-images: false
-        swap-storage: true
-    - uses: actions/checkout@v4
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v5
-      with:
-        python-version: ${{ matrix.python-version }}
-        cache: 'pip'
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        python -m pip install uv
-        python -m uv pip install coverage
-        python -m uv pip install -r tests.txt
+        python manage.py test fl_common.tests.tests_models_cspnet
+        rm -rf /home/runner/.cache/huggingface/*
+        rm -rf /home/runner/.cache/torch/*
     - name: Fl_common Models CVT
       run: |
-        coverage run manage.py test fl_common.tests.tests_models_cvt
-        coverage xml -o coverage-cvt.xml
-        coverage report
+        python manage.py test fl_common.tests.tests_models_cvt
+        rm -rf /home/runner/.cache/huggingface/*
+        rm -rf /home/runner/.cache/torch/* 
