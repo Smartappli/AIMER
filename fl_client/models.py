@@ -249,7 +249,7 @@ class ModelFile(models.Model):
         related_name="model_file_model_id",
     )
     model_file_type = models.CharField(
-        max_length=4,
+        max_length=8,
         choices=Type.choices,
         default=Type.NONE,
     )
