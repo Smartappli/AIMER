@@ -59,12 +59,12 @@ jobs:
         rm -rf /home/runner/.cache/torch/*
     - name: Efficientvit_mit
       run: |
-        python run manage.py test fl_common.tests.tests_models_efficientvit_mit
+        python manage.py test fl_common.tests.tests_models_efficientvit_mit
         rm -rf /home/runner/.cache/huggingface/*
         rm -rf /home/runner/.cache/torch/*
     - name: Efficientvit_msra
       run: |
-        python run manage.py test fl_common.tests.tests_models_efficientvit_msra
+        python manage.py test fl_common.tests.tests_models_efficientvit_msra
         rm -rf /home/runner/.cache/huggingface/*
         rm -rf /home/runner/.cache/torch/*
     - name: Efficientnet
