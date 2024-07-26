@@ -8,7 +8,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  test-harcorenas-models:
+  test-h-models:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -41,136 +41,24 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         python -m pip install uv
-        python -m uv pip install coverage
         python -m uv pip install -r tests.txt
     - name: Fl_common Models Hardcorenas
       run: |
-        coverage run manage.py test fl_common.tests.tests_models_hardcorenas
-        coverage xml -o coverage-hardcorenas.xml
-        coverage report
-        
-  test-hgnet-models:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: ["3.12"]
-    env:
-      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    needs: test-harcorenas-models
-    steps:
-    - name: Free Disk Space (Ubuntu)
-      uses: jlumbroso/free-disk-space@main
-      with:
-        # this might remove tools that are actually needed,
-        # if set to "true" but frees about 6 GB
-        tool-cache: false
-
-        # all of these default to true, but feel free to set to
-        # "false" if necessary for your workflow
-        android: true
-        dotnet: true
-        haskell: true
-        large-packages: true
-        docker-images: false
-        swap-storage: true
-    - uses: actions/checkout@v4
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v5
-      with:
-        python-version: ${{ matrix.python-version }}
-        cache: 'pip'
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        python -m pip install uv
-        python -m uv pip install coverage
-        python -m uv pip install -r tests.txt
+        python manage.py test fl_common.tests.tests_models_hardcorenas
+        rm -rf /home/runner/.cache/huggingface/*
+        rm -rf /home/runner/.cache/torch/* 
     - name: Fl_common Models Hgnet
       run: |
-        coverage run manage.py test fl_common.tests.tests_models_hgnet
-        coverage xml -o coverage-hgnet.xml
-        coverage report
-
-  test-hiera-models:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: ["3.12"]
-    env:
-      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    needs: test-hgnet-models
-    steps:
-    - name: Free Disk Space (Ubuntu)
-      uses: jlumbroso/free-disk-space@main
-      with:
-        # this might remove tools that are actually needed,
-        # if set to "true" but frees about 6 GB
-        tool-cache: false
-
-        # all of these default to true, but feel free to set to
-        # "false" if necessary for your workflow
-        android: true
-        dotnet: true
-        haskell: true
-        large-packages: true
-        docker-images: false
-        swap-storage: true
-    - uses: actions/checkout@v4
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v5
-      with:
-        python-version: ${{ matrix.python-version }}
-        cache: 'pip'
-    - name: Install dependencies
+        python manage.py test fl_common.tests.tests_models_hgnet
+        rm -rf /home/runner/.cache/huggingface/*
+        rm -rf /home/runner/.cache/torch/*
+    - name: Fl_common Models Hiera
       run: |
-        python -m pip install --upgrade pip
-        python -m pip install uv
-        python -m uv pip install coverage
-        python -m uv pip install -r tests.txt
-    - name: Fl_common Models Hgnet
-      run: |
-        coverage run manage.py test fl_common.tests.tests_models_hiera
-        coverage xml -o coverage-hiera.xml
-        coverage report
-
-  test-hrnet-models:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: ["3.12"]
-    env:
-      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    needs: test-hiera-models
-    steps:
-    - name: Free Disk Space (Ubuntu)
-      uses: jlumbroso/free-disk-space@main
-      with:
-        # this might remove tools that are actually needed,
-        # if set to "true" but frees about 6 GB
-        tool-cache: false
-
-        # all of these default to true, but feel free to set to
-        # "false" if necessary for your workflow
-        android: true
-        dotnet: true
-        haskell: true
-        large-packages: true
-        docker-images: false
-        swap-storage: true
-    - uses: actions/checkout@v4
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v5
-      with:
-        python-version: ${{ matrix.python-version }}
-        cache: 'pip'
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        python -m pip install uv
-        python -m uv pip install coverage
-        python -m uv pip install -r tests.txt
+        python manage.py test fl_common.tests.tests_models_hiera
+        rm -rf /home/runner/.cache/huggingface/*
+        rm -rf /home/runner/.cache/torch/*
     - name: Fl_common Models Hrnet
       run: |
-        coverage run manage.py test fl_common.tests.tests_models_hrnet
-        coverage xml -o coverage-hrnet.xml
-        coverage report
+        python manage.py test fl_common.tests.tests_models_hrnet
+        rm -rf /home/runner/.cache/huggingface/*
+        rm -rf /home/runner/.cache/torch/* 

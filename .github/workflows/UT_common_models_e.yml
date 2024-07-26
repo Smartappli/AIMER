@@ -8,7 +8,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  test-edgenet-models:
+  test-e-models:
     runs-on: ubuntu-latest
     strategy:
       matrix:

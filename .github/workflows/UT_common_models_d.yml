@@ -8,7 +8,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  test-davit-models:
+  test-d-models:
     runs-on: ubuntu-latest
     strategy:
       matrix:
