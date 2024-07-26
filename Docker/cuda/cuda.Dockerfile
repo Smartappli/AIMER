@@ -32,12 +32,7 @@ ENV CUDA_DOCKER_ARCH=all
 ENV LLAMA_CUBLAS=1
 
 # Install dependencies
-RUN python3 -m pip install --upgrade pip \
-    && pip install pytest==8.3.2 cmake==3.30.1 \
-    scikit-build==0.18.0 setuptools==71.1.0 \
-    fastapi==0.111.1 uvicorn==0.30.3 \
-    sse-starlette==2.1.2 pydantic-settings==2.3.4 \
-    starlette-context==0.3.6
+RUN python3 -m pip install --upgrade pip pytest cmake scikit-build setuptools fastapi uvicorn sse-starlette pydantic-settings starlette-context
 
 # Install llama-cpp-python (build with CUDA)
 RUN CMAKE_ARGS="-DLLAMA_CUBLAS=on FORCE_CMAKE=1" pip install llama-cpp-python
@@ -46,4 +41,4 @@ RUN CMAKE_ARGS="-DLLAMA_CUBLAS=on FORCE_CMAKE=1" pip install llama-cpp-python
 EXPOSE 8008
 
 # Run the server
-CMD ["python", "-m", "llama_cpp.server", "--config_file", "config-cuda.json"]
+CMD ["python3", "-m", "llama_cpp.server", "--config_file", "config-cuda.json"]
