@@ -76,10 +76,11 @@ class ServerTestCase(TestCase):
         )
         self.client_humani.upload_dataset(dataset)
 
-        ds_client = login('node_humani',
-                          "janedoe@caltech.edu",
-                          "abc123",
-                          )
+        ds_client = login(
+            "node_humani",
+            "janedoe@caltech.edu",
+            "abc123",
+        )
 
         asset = ds_client.datasets[-1].assets["ages"]
         mock = asset.mock

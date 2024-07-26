@@ -577,10 +577,16 @@ def test_model_combinations(encoders, architectures):
                         in_channels=3,
                         classes=2,
                     )
-                    preprocess_input = get_preprocessing_fn(encoder["model"], pretrained='imagenet')
-                    print(f'Success: Created {arch["model"]} with {encoder["model"]}')
+                    preprocess_input = get_preprocessing_fn(
+                        encoder["model"], pretrained="imagenet"
+                    )
+                    print(
+                        f'Success: Created {arch["model"]} with {encoder["model"]}'
+                    )
                 except Exception as e:
-                    print(f'Failed: {arch["model"]} with {encoder["model"]} - {e}')
+                    print(
+                        f'Failed: {arch["model"]} with {encoder["model"]} - {e}'
+                    )
 
 
 test_model_combinations(encoders, architectures)
