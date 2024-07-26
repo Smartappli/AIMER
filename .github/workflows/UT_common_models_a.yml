@@ -44,4 +44,4 @@ jobs:
         python -m uv pip install -r tests.txt
     - name: Fl_common Models AlexNet
       run: |
-        python -m manage.py test fl_common.tests.tests_models_alexnet
+        python manage.py test fl_common.tests.tests_models_alexnet
