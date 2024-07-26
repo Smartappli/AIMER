@@ -1,8 +1,8 @@
 FROM python:3-slim-bullseye
 
 # We need to set the host to 0.0.0.0 to allow outside access
-ENV HOST 0.0.0.0
-ENV PORT 8008
+ENV HOST=0.0.0.0
+ENV PORT=8008
 
 # Install necessary packages
 RUN apt update && apt install -y --no-install-recommends git libopenblas-dev ninja-build build-essential pkg-config \
