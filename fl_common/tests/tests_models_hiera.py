@@ -29,6 +29,8 @@ class ProcessingHieraTestCase(TestCase):
             "hiera_base_plus_224",
             "hiera_large_224",
             "hiera_huge_224",
+            "hiera_small_abswin_256",
+            "hiera_base_abswin_256",
         ]
 
         num_classes = 1000  # Assuming 1000 classes for the test

@@ -49,12 +49,6 @@ class ServerTestCase(TestCase):
         """
         Test the main node launch functionality.
         """
-        ds_client = login(
-            "node_humani",
-            "janedoe@caltech.edu",
-            "abc123",
-        )
-
         data_subjects = self.client_humani.data_subject_registry.get_all()
         self.assertIsNotNone(data_subjects)
 
@@ -81,6 +75,11 @@ class ServerTestCase(TestCase):
             ],
         )
         self.client_humani.upload_dataset(dataset)
+
+        ds_client = login('node_humani',
+                          "janedoe@caltech.edu",
+                          "abc123",
+                          )
 
         asset = ds_client.datasets[-1].assets["ages"]
         mock = asset.mock
