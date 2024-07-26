@@ -34,14 +34,14 @@ ENV LLAMA_CUBLAS=1
 
 # Install dependencies
 RUN python3 -m pip install --upgrade pip \
-    && pip install pytest==8.2.2 cmake==3.29.6 \
-    scikit-build==0.18.0 setuptools==70.1.1 \
-    fastapi==0.111.0 uvicorn==0.30.1 \
+    && pip install pytest==8.3.2 cmake==3.30.1 \
+    scikit-build==0.18.0 setuptools==71.1.0 \
+    fastapi==0.111.1 uvicorn==0.30.3 \
     sse-starlette==2.1.2 pydantic-settings==2.3.4 \
     starlette-context==0.3.6
 
 # Install llama-cpp-python (build with CUDA)
-RUN CMAKE_ARGS="-DLLAMA_CUDA=on" FORCE_CMAKE=1 pip install 'llama-cpp-python[server]==0.2.79' --verbose
+RUN CMAKE_ARGS="-DLLAMA_CUDA=on" FORCE_CMAKE=1 pip install 'llama-cpp-python[server]==0.2.83' --verbose
 
 # Expose the port
 EXPOSE 8008
