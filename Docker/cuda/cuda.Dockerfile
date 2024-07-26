@@ -6,15 +6,14 @@ ENV HOST=0.0.0.0
 ENV PORT=8008
 
 # Install necessary packages
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends build-essential \
-    python3 python3-pip gcc wget git \
+RUN apt-get update && apt-get upgrade -y \
+    && apt-get install -y git build-essential \
+    python3 python3-pip gcc wget \
     ocl-icd-opencl-dev opencl-headers clinfo \
     libclblast-dev libopenblas-dev \
+    && mkdir -p /etc/OpenCL/vendors && echo "libnvidia-opencl.so.1" > /etc/OpenCL/vendors/nvidia.icd
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
-
-RUN mkdir -p /etc/OpenCL/vendors && echo "libnvidia-opencl.so.1" > /etc/OpenCL/vendors/nvidia.icd
 
 # Copy the application code
 COPY --chown=root:root --chmod=755 ../.. .
@@ -41,7 +40,7 @@ RUN python3 -m pip install --upgrade pip \
     starlette-context==0.3.6
 
 # Install llama-cpp-python (build with CUDA)
-RUN CMAKE_ARGS="-DLLAMA_CUDA=on" FORCE_CMAKE=1 pip install 'llama-cpp-python==0.2.83' --verbose
+RUN CMAKE_ARGS="-DLLAMA_CUBLAS=on FORCE_CMAKE=1" pip install llama-cpp-python
 
 # Expose the port
 EXPOSE 8008
