@@ -22,8 +22,8 @@ def get_hiera_model(hiera_type, num_classes):
         "hiera_base_plus_224",
         "hiera_large_224",
         "hiera_huge_224",
-        'hiera_small_abswin_256',
-        'hiera_base_abswin_256',
+        "hiera_small_abswin_256",
+        "hiera_base_abswin_256",
     }
 
     if hiera_type not in valid_hiera_types:
