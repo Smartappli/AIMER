@@ -36,4 +36,4 @@ RUN CMAKE_ARGS="-DLLAMA_BLAS=ON -DLLAMA_BLAS_VENDOR=OpenBLAS" pip install 'llama
 EXPOSE 8008
 
 # Run the server
-CMD python3 -m llama_cpp.server --config_file config-cpu.json
+CMD python -m llama_cpp.server --config_file config-cpu.json
