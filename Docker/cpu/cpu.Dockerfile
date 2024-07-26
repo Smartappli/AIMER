@@ -22,11 +22,10 @@ USER myuser
 ENV PATH="/home/myuser/.local/bin:${PATH}"
 
 # Install Python dependencies
-RUN python -m pip install --upgrade pip
-RUN python -m pip install uv
-RUN python -m uv pip install pip install pytest==8.2.1 cmake==3.23.3 \
-    scikit-build==0.17.6 setuptools==70.0.0 \
-    fastapi==0.111.0 uvicorn==0.30.0 \
+RUN python -m pip install --upgrade pip \
+    && pip install pytest==8.2.1 cmake==3.23.3 \
+    scikit-build==0.17.6 setuptools==71.1.0 \
+    fastapi==0.111.1 uvicorn==0.30.3 \
     sse-starlette==2.1.0 pydantic-settings==2.2.1 \
     starlette-context==0.3.6
 
