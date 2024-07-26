@@ -45,12 +45,10 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install uv
           python -m uv pip install coverage
-          python -m uv pip install -r tests.txt
-      - name: Coverage Erase
-        run: |
-          coverage erase
+          python -m uv pip install -r tests.txt         
       - name: Coverage FL_Client
         run: | 
+          coverage erase
           coverage run manage.py test --parallel auto fl_client.tests.tests_urls
           coverage combine -a 
           coverage run manage.py test --parallel auto fl_client.tests.tests_views
