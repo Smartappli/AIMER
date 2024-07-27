@@ -33,12 +33,7 @@ ENV CUDA_DOCKER_ARCH=all
 ENV LLAMA_CUBLAS=1
 
 # Install Python dependencies
-RUN python3 -m pip install --upgrade pip \
-    && pip install pytest==8.2.1 cmake==3.29.3 \
-    scikit-build==0.17.6 setuptools==70.0.0 \
-    fastapi==0.111.0 uvicorn==0.30.0 \
-    sse-starlette==2.1.0 pydantic-settings==2.2.1 \
-    starlette-context==0.3.6
+RUN python3 -m pip install --upgrade pip pytest cmake scikit-build setuptools fastapi uvicorn sse-starlette pydantic-settings starlette-context
 
 # Install llama-cpp-python (build with CUDA)
 RUN CMAKE_ARGS="-DLLAMA_CUBLAS=on" pip install llama-cpp-python
