@@ -27,7 +27,7 @@ RUN python3 -m venv venv
 # RUN python3 -m pip install --upgrade pip pytest cmake scikit-build setuptools fastapi uvicorn sse-starlette pydantic-settings starlette-context
 
 # Install llama-cpp-python (build with cuda)
-RUN CMAKE_ARGS="-DGGML_CUDA=on" venv/bin/pip install .[server]
+RUN CMAKE_ARGS="-DGGML_CUDA=on" venv/bin/pip install llama-cpp-python[server]
 
 # RUN make clean
 FROM nvidia/cuda:${CUDA_RUNTIME_IMAGE} as runtime
