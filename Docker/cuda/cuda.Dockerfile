@@ -14,7 +14,7 @@ RUN apt-get update && apt-get upgrade -y \
     && mkdir -p /etc/OpenCL/vendors && echo "libnvidia-opencl.so.1" > /etc/OpenCL/vendors/nvidia.icd
 
 # Copy the application code
-COPY --chown=root:root --chmod=755 ../.. .
+COPY --chown=root:root --chmod=755 . .
 
 # Create a non-root user
 RUN useradd -m myuser
