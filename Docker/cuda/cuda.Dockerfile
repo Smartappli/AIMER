@@ -2,8 +2,8 @@ ARG CUDA_IMAGE="12.4.1-devel-ubuntu22.04"
 FROM nvidia/cuda:${CUDA_IMAGE}
 
 # We need to set the host to 0.0.0.0 to allow outside access
-ENV HOST 0.0.0.0
-ENV PORT 8008
+ENV HOST=0.0.0.0
+ENV PORT=8008
 
 # Install necessary packages
 RUN apt-get update \
@@ -26,7 +26,7 @@ USER myuser
 ENV PATH="/home/myuser/.local/bin:${PATH}"
 
 # Copy the application code
-COPY --chown=myuser:myuser ../.. .
+COPY --chown=myuser:myuser . .
 
 # Setting build-related environment variables
 ENV CUDA_DOCKER_ARCH=all
@@ -41,7 +41,7 @@ RUN python3 -m pip install --upgrade pip \
     starlette-context==0.3.6
 
 # Install llama-cpp-python (build with CUDA)
-RUN CMAKE_ARGS="-DLLAMA_CUDA=on" FORCE_CMAKE=1 pip install llama-cpp-python
+RUN CMAKE_ARGS="-DLLAMA_CUBLAS=on" pip install llama-cpp-python
 
 # Expose the port
 EXPOSE 8008
