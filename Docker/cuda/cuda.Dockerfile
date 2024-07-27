@@ -47,4 +47,4 @@ RUN CMAKE_ARGS="-DLLAMA_CUDA=on" FORCE_CMAKE=1 pip install llama-cpp-python
 EXPOSE 8008
 
 # Run the server
-CMD python3 -m llama_cpp.server --config_file config-cuda.json
+CMD ["python", "-m", "llama_cpp.server", "--config_file", "config-cpu.json"]
