@@ -44,4 +44,4 @@ WORKDIR /llama_cpp_python
 COPY --from=builder /llama_cpp_python/venv venv
 
 # Run the server
-CMD ["venv/bin/python3", "-m", "llama_cpp.server", "--config_file", "config-cuda.json"]
+CMD ["python3", "-m", "llama_cpp.server", "--config_file", "config-cuda.json"]
