@@ -1,4 +1,4 @@
-ARG CUDA_IMAGE="12.4.1-devel-ubuntu22.04"
+ARG CUDA_IMAGE="12.5.0-devel-ubuntu22.04"
 FROM nvidia/cuda:${CUDA_IMAGE}
 
 # We need to set the host to 0.0.0.0 to allow outside access
@@ -36,7 +36,7 @@ ENV GGML_CUDA=1
 RUN python3 -m pip install --upgrade pip pytest cmake scikit-build setuptools fastapi uvicorn sse-starlette pydantic-settings starlette-context
 
 # Install llama-cpp-python (build with CUDA)
-RUN CMAKE_ARGS="-DGGML_CUDA=on" pip install llama-cpp-python
+RUN CMAKE_ARGS="-DGGML_CUDA=on" pip install llama-cpp-python[server]
 
 # Expose the port
 EXPOSE 8008
