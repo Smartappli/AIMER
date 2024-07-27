@@ -24,7 +24,7 @@ ENV GGML_CUDA=1
 # Install depencencies
 RUN python3 -m pip install --upgrade pip
 RUN python3 -m venv venv
-# RUN python3 -m pip install --upgrade pip pytest cmake scikit-build setuptools fastapi uvicorn sse-starlette pydantic-settings starlette-context
+venv/bin/pip install pytest cmake scikit-build setuptools fastapi uvicorn sse-starlette pydantic-settings starlette-context
 
 # Install llama-cpp-python (build with cuda)
 RUN CMAKE_ARGS="-DGGML_CUDA=on" venv/bin/pip install llama-cpp-python[server]
@@ -43,6 +43,5 @@ WORKDIR /llama_cpp_python
 
 COPY --from=builder /llama_cpp_python/venv venv
 
-
 # Run the server
-CMD ["venv/bin/python3", "-m", "llama_cpp.server", "--config_file", "config-cpu.json"]
+CMD ["venv/bin/python3", "-m", "llama_cpp.server", "--config_file", "config-cuda.json"]
