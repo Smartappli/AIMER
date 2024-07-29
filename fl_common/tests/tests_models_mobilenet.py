@@ -54,11 +54,6 @@ class ProcessingMobilenetTestCase(TestCase):
             "mobilenetv4_conv_aa_large",
             "mobilenetv4_hybrid_medium_075",
             "mobilenetv4_hybrid_large_075",
-            # "repghostnetv2_conv_small",
-            # "repghostnetv2_conv_medium",
-            # "repghostnetv2_conv_large",
-            # cc"repghostnetv2_conv_aa_medium",
-            # "repghostnetv2_conv_blur_medium",
         ]
         num_classes = 10  # You can adjust the number of classes as needed
 
