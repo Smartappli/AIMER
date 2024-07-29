@@ -72,11 +72,6 @@ def get_mobilenet_model(mobilenet_type, num_classes):
         "mobilenetv4_conv_aa_large",
         "mobilenetv4_hybrid_medium_075",
         "mobilenetv4_hybrid_large_075",
-        "repghostnetv2_conv_small",
-        "repghostnetv2_conv_medium",
-        "repghostnetv2_conv_large",
-        "repghostnetv2_conv_aa_medium",
-        "repghostnetv2_conv_blur_medium",
     ]
 
     # Check if the vision type is from torchvision
