@@ -1,4 +1,4 @@
-django==5.0.8
+django>=5.0.7
 python-dotenv==1.0.1
 huggingface-hub>=0.23.4
 scikit-learn-intelex>=2023.2.1
