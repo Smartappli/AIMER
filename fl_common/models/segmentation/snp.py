@@ -578,7 +578,8 @@ def test_model_combinations(encoders, architectures):
                         classes=2,
                     )
                     preprocess_input = get_preprocessing_fn(
-                        encoder["model"], pretrained="imagenet",
+                        encoder["model"],
+                        pretrained="imagenet",
                     )
                     print(
                         f'Success: Created {arch["model"]} with {encoder["model"]}',
