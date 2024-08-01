@@ -4,7 +4,7 @@ import torch
 from django.test import TestCase
 from torch import nn, optim
 from torch.optim import lr_scheduler
-from torchvision import transforms, utils
+from torchvision import transforms
 
 from fl_common.models.utils import (
     create_transform,
