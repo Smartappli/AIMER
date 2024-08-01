@@ -583,17 +583,25 @@ def test_model_combinations(encoders, architectures):
                     print(
                         f'Success: Created {arch["model"]} with {encoder["model"]}',
                     )
+                except smp.encoders.encoders.EncoderNotFoundError as e:
+                    print(
+                        f'Failed: Encoder not found for {arch["model"]} with {encoder["model"]} - {e}',
+                    )
+                except smp.base.ModelNotFoundError as e:
+                    print(
+                        f'Failed: Model not found for {arch["model"]} with {encoder["model"]} - {e}',
+                    )
                 except ValueError as e:
                     print(
                         f'Failed: Value error for {arch["model"]} with {encoder["model"]} - {e}',
                     )
-                except ImportError as e:
-                    print(
-                        f'Failed: Import error for {arch["model"]} with {encoder["model"]} - {e}',
-                    )
                 except KeyError as e:
                     print(
                         f'Failed: Key error for {arch["model"]} with {encoder["model"]} - {e}',
+                    )
+                except ImportError as e:
+                    print(
+                        f'Failed: Import error for {arch["model"]} with {encoder["model"]} - {e}',
                     )
                 except Exception as e:
                     print(
