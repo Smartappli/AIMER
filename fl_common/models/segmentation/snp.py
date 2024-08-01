@@ -1,5 +1,6 @@
 import segmentation_models_pytorch as smp
 from segmentation_models_pytorch.encoders import get_preprocessing_fn
+from segmentation_models_pytorch.encoders._preprocessing import PreprocessingNotFound
 
 encoders = [
     {"model": "tu-SelecSls42", "dilation": "False"},
@@ -583,13 +584,17 @@ def test_model_combinations(encoders, architectures):
                     print(
                         f'Success: Created {arch["model"]} with {encoder["model"]}',
                     )
-                except smp.encoders.encoders.EncoderNotFoundError as e:
+                except smp.encoders._base.EncoderNotFoundError as e:
                     print(
                         f'Failed: Encoder not found for {arch["model"]} with {encoder["model"]} - {e}',
                     )
-                except smp.base.ModelNotFoundError as e:
+                except smp.encoders._base.ModelNotFoundError as e:
                     print(
                         f'Failed: Model not found for {arch["model"]} with {encoder["model"]} - {e}',
+                    )
+                except PreprocessingNotFound as e:
+                    print(
+                        f'Failed: Preprocessing function not found for {arch["model"]} with {encoder["model"]} - {e}',
                     )
                 except ValueError as e:
                     print(
@@ -603,9 +608,13 @@ def test_model_combinations(encoders, architectures):
                     print(
                         f'Failed: Import error for {arch["model"]} with {encoder["model"]} - {e}',
                     )
-                except Exception as e:
+                except TypeError as e:
                     print(
-                        f'Failed: {arch["model"]} with {encoder["model"]} - {e}',
+                        f'Failed: Type error for {arch["model"]} with {encoder["model"]} - {e}',
+                    )
+                except AttributeError as e:
+                    print(
+                        f'Failed: Attribute error for {arch["model"]} with {encoder["model"]} - {e}',
                     )
 
 
