@@ -583,14 +583,6 @@ def test_model_combinations(encoders, architectures):
                     print(
                         f'Success: Created {arch["model"]} with {encoder["model"]}',
                     )
-                except EncoderNotFoundError as e:
-                    print(
-                        f'Failed: Encoder not found for {arch["model"]} with {encoder["model"]} - {e}',
-                    )
-                except ModelNotFoundError as e:
-                    print(
-                        f'Failed: Model not found for {arch["model"]} with {encoder["model"]} - {e}',
-                    )
                 except ValueError as e:
                     print(
                         f'Failed: Value error for {arch["model"]} with {encoder["model"]} - {e}',
@@ -607,5 +599,6 @@ def test_model_combinations(encoders, architectures):
                     print(
                         f'Failed: {arch["model"]} with {encoder["model"]} - {e}',
                     )
+
 
 test_model_combinations(encoders, architectures)
