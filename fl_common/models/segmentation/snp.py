@@ -592,5 +592,6 @@ def test_model_combinations(encoders, architectures):
                         f'Failed: {arch["model"]} with {encoder["model"]} - {e}',
                     )
 
+
 # Call the function with encoders and architectures
 test_model_combinations(encoders, architectures)
