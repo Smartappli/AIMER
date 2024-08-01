@@ -582,6 +582,7 @@ def test_model_combinations(encoders, architectures):
                     )
                     print(
                         f'Success: Created {arch["model"]} with {encoder["model"]}',
+                    )
                 except (ValueError, KeyError, ImportError, TypeError, AttributeError) as e:
                     print(
                         f'Failed: {arch["model"]} with {encoder["model"]} - {e}',
