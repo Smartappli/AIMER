@@ -3,9 +3,10 @@ from timm import create_model
 
 def get_rdnet_model(rdnet_type, num_classes):
     valid_rdnet_types = [
-        "dla60_res2net",
-        "dla60_res2next",
-        "dla34",
+        "rdnet_tiny",
+        "rdnet_small",
+        "rdnet_base",
+        "rdnet_large",
     ]
 
     if rdnet_type not in valid_rdnet_types:
