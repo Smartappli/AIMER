@@ -2,8 +2,8 @@ Django==5.1
 python-dotenv==1.0.1
 huggingface-hub==0.24.5
 scikit-learn-intelex>=2023.2.1
-tf-nightly==2.18.0.dev20240808
-keras-nightly==3.4.1.dev2024080903
+tf-nightly
+keras-nightly
 keras-tuner==1.4.7
 seaborn==0.13.2 # 0.12.2
 numpy>=1.23.5,<=1.26.4; python_version<"3.12"
