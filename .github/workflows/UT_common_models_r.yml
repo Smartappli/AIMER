@@ -42,6 +42,11 @@ jobs:
         python -m pip install --upgrade pip
         python -m pip install uv
         python -m uv pip install -r tests.txt
+    - name: Rdnet
+      run: |
+        python manage.py test fl_common.tests.tests_models_rdnet
+        rm -rf /home/runner/.cache/huggingface/*
+        rm -rf /home/runner/.cache/torch/*
     - name: Regnet
       run: |
         python manage.py test fl_common.tests.tests_models_regnet
