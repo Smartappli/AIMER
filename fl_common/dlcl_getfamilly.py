@@ -50,6 +50,7 @@ from fl_common.models.nfnet import get_nfnet_model
 from fl_common.models.pit import get_pit_model
 from fl_common.models.pnasnet import get_pnasnet_model
 from fl_common.models.pvt_v2 import get_pvt_v2_model
+from fl_common.models.rdnet import get_rdnet_model
 from fl_common.models.regnet import get_regnet_model
 from fl_common.models.repghost import get_repghost_model
 from fl_common.models.repvit import get_repvit_model
@@ -1107,6 +1108,10 @@ def get_family_model_r(model_type, num_classes):
         ValueError: If an unknown model_type is provided.
     """
     model_retrieval_functions = {
+        "rdnet_tiny": get_rdnet_model,
+        "rdnet_small": get_rdnet_model,
+        "rdnet_base": get_rdnet_model,
+        "rdnet_large": get_rdnet_model,
         "RegNet_X_400MF": get_regnet_model,
         "RegNet_X_800MF": get_regnet_model,
         "RegNet_X_1_6GF": get_regnet_model,
