@@ -4,15 +4,15 @@ from timm import create_model
 def get_rdnet_model(rdnet_type, num_classes):
     """
     Create an RDNet model using the timm library.
-    
+
     Parameters:
     - rdnet_type (str): The type of RDNet architecture. Must be one of 
       ["rdnet_tiny", "rdnet_small", "rdnet_base", "rdnet_large"].
     - num_classes (int): The number of output classes for the model.
-    
+
     Returns:
     - model: A PyTorch model instance based on the RDNet architecture.
-    
+
     Raises:
     - ValueError: If an invalid rdnet_type is provided.
     - RuntimeError: If there is an error loading the pretrained model.
