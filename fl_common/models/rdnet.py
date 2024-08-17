@@ -17,7 +17,7 @@ def get_rdnet_model(rdnet_type, num_classes):
     - ValueError: If an invalid rdnet_type is provided.
     - RuntimeError: If there is an error loading the pretrained model.
     """
-    
+
     valid_rdnet_types = [
         "rdnet_tiny",
         "rdnet_small",
