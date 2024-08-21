@@ -1,6 +1,6 @@
 Django==5.1
 python-dotenv==1.0.1
-huggingface-hub==0.24.5
+huggingface-hub==0.24.6
 scikit-learn-intelex>=2023.2.1
 tf-nightly
 keras-nightly
