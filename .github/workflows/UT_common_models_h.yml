@@ -57,6 +57,11 @@ jobs:
         python manage.py test fl_common.tests.tests_models_hiera
         rm -rf /home/runner/.cache/huggingface/*
         rm -rf /home/runner/.cache/torch/*
+    - name: Hieradet SAM2
+      run: |
+        python manage.py test fl_common.tests.tests_models_hieradet_sam2
+        rm -rf /home/runner/.cache/huggingface/*
+        rm -rf /home/runner/.cache/torch/*
     - name: Hrnet
       run: |
         python manage.py test fl_common.tests.tests_models_hrnet
