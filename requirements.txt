@@ -7,7 +7,7 @@ keras-nightly
 keras-tuner==1.4.7
 seaborn==0.13.2 # 0.12.2
 numpy>=1.23.5,<=1.26.4; python_version<"3.12"
-numpy>=1.26.4,<2.1; python_version>="3.12"
+numpy>=1.26.4,<2.2; python_version>="3.12"
 scikit-learn==1.5.1
 # pandas>=2.2.2 # 2.0.3
 # --extra-index-url https://download.pytorch.org/whl/cpu
