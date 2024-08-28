@@ -32,6 +32,7 @@ from fl_common.models.googlenet import get_googlenet_model
 from fl_common.models.hardcorenas import get_hardcorenas_model
 from fl_common.models.hgnet import get_hgnet_model
 from fl_common.models.hiera import get_hiera_model
+from fl_common.models.hieradet_sam2 import get_hieradet_sam2_model
 from fl_common.models.hrnet import get_hrnet_model
 from fl_common.models.inception import get_inception_model
 from fl_common.models.inception_next import get_inception_next_model
