@@ -22,7 +22,7 @@ class ProcessingHieradetSAM2TestCase(TestCase):
         Raises:
             AssertionError: If any known hiera architecture fails to be created or if any architecture is unknown.
         """
-        known_hiera_types = [
+        known_hieradet_sam2_types = [
             "sam2_hiera_tiny",
             "sam2_hiera_small",
             "sam2_hiera_base_plus",
