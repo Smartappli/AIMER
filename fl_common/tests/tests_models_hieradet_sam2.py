@@ -53,7 +53,7 @@ class ProcessingHieradetSAM2TestCase(TestCase):
         Raises:
             AssertionError: If creating a HIERADET SAM2 model with an unknown architecture type does not raise a ValueError.
         """
-        unknown_hiera_type = "unknown_hieradet_sam2_type"
+        unknown_hieradet_sam2_type = "unknown_hieradet_sam2_type"
         num_classes = 1000
 
         with self.assertRaises(ValueError):
