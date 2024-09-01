@@ -209,7 +209,7 @@ jobs:
           rm -rf /home/runner/.cache/huggingface/*
           rm -rf /home/runner/.cache/torch/*
           coverage run manage.py test --parallel auto fl_common.tests.tests_models_hieradet_sam2
-          coverage combiné -a
+          coverage combinE -a
           rm -rf /home/runner/.cache/huggingface/*
           rm -rf /home/runner/.cache/torch/*
           coverage run manage.py test --parallel auto fl_common.tests.tests_models_hrnet
