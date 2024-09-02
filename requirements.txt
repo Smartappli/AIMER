@@ -18,7 +18,7 @@ prophet==1.1.5
 lightgbm==4.5.0
 captum==0.7.0
 psycopg==3.2.1
-syft==0.9.1b6
+syft==0.9.1b7
 wheel==0.44.0
 gevent==24.2.1
 setuptools==74.0.0
