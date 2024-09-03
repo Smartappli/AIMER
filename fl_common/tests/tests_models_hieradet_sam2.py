@@ -57,4 +57,4 @@ class ProcessingHieradetSAM2TestCase(TestCase):
         num_classes = 1000
 
         with self.assertRaises(ValueError):
-            get_hieradet_sam2_model(unknown_hieradet_sam2_type, num_classes)
+            get_hieradet_sam2_model(unknown_hieradet_sam2_type, num_classes,)
