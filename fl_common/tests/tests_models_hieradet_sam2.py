@@ -36,7 +36,8 @@ class ProcessingHieradetSAM2TestCase(TestCase):
             with self.subTest(hieradet_sam2_type=hieradet_sam2_type):
                 try:
                     model = get_hieradet_sam2_model(
-                        hieradet_sam2_type, num_classes,
+                        hieradet_sam2_type,
+                        num_classes,
                     )
                     self.assertIsNotNone(model)
                 except ValueError:
