@@ -238,6 +238,10 @@ for model_type in model_list:
         # Save the model if the current validation loss is the best
         if avg_val_loss < best_val_loss:
             best_val_loss = avg_val_loss
+            
+            if not os.path.exists(save_dir):
+                os.makedirs(save_dir, exist_ok=True)
+                
             torch.save(model.state_dict(), os.path.join(save_dir, "best_model.pth"))
 
         epoch_end_time = time.time()
@@ -371,6 +375,10 @@ for model_type in model_list:
             # Save the model if the current validation loss is the best
             if avg_val_loss < best_val_loss:
                 best_val_loss = avg_val_loss
+
+                if not os.path.exists(save_dir):
+                    os.makedirs(save_dir, exist_ok=True)
+                
                 torch.save(model.state_dict(), os.path.join(save_dir, "best_model.pth"))
 
             epoch_end_time = time.time()
@@ -505,6 +513,10 @@ for model_type in model_list:
             # Save the model if the current validation loss is the best
             if avg_val_loss < best_val_loss:
                 best_val_loss = avg_val_loss
+
+                if not os.path.exists(save_dir):
+                    os.makedirs(save_dir, exist_ok=True)
+                    
                 torch.save(model.state_dict(), os.path.join(save_dir, "best_model.pth"))
 
             epoch_end_time = time.time()
