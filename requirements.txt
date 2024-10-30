@@ -17,7 +17,7 @@ timm==1.0.11
 prophet==1.1.6
 lightgbm==4.5.0
 captum==0.7.0
-syft==0.9.2b7
+syft==0.9.2
 wheel==0.44.0
 gevent==24.10.3
 setuptools==75.3.0
