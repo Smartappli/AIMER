@@ -20,7 +20,7 @@ captum==0.7.0
 syft==0.9.3b2
 wheel==0.45.0
 gevent==24.11.1
-setuptools==75.5.0
+setuptools==75.6.0
 pillow==11.0.0
 zipp==3.21.0
 werkzeug>=3.0.6 # not directly required, pinned by Snyk to avoid a vulnerability
