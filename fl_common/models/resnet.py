@@ -76,7 +76,6 @@ def get_resnet_model(resnet_type, num_classes):
         "resnext101_32x8d",
         "resnext101_32x16d",
         "resnext101_32x32d",
-        "resnext101_32x32d",
         "resnext101_64x4d",
         "ecaresnet26t",
         "ecaresnet50d",
@@ -124,6 +123,7 @@ def get_resnet_model(resnet_type, num_classes):
         "resnetrs270",
         "resnetrs350",
         "resnetrs420",
+        "test_resnet",
     ]
 
     # Check if the vision type is from torchvision
