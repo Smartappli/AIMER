@@ -42,6 +42,11 @@ jobs:
         python -m pip install --upgrade pip
         python -m pip install uv
         python -m uv pip install -r tests.txt
+    - name: Mambaout
+      run: |
+        python manage.py test fl_common.tests.tests_models_mambaout
+        rm -rf /home/runner/.cache/huggingface/*
+        rm -rf /home/runner/.cache/torch/*
     - name: Maxvit
       run: |
         python manage.py test fl_common.tests.tests_models_maxvit
