@@ -249,7 +249,7 @@ for model_type in model_list:
                     best_model_path,
                 )
                 print(
-                    f"Model state dictionary saved safely to {best_model_path}"
+                    f"Model state dictionary saved safely to {best_model_path}",
                 )
             except Exception as e:
                 print(f"Error saving the model: {e}")
