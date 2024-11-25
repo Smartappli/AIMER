@@ -9,6 +9,7 @@ from your_module import get_mambaout_model
 # Désactivation de l'avertissement pour les liens symboliques
 os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
 
+
 class MambaoutModelTestCase(TestCase):
     """
     Test case class for processing Mambaout models.
@@ -70,12 +71,16 @@ class MambaoutModelTestCase(TestCase):
         """Test that if loading the pretrained model fails, the model is created without pretrained weights."""
         mambaout_type = "mambaout_base"
         num_classes = 5
-        
+
         # Simule un RuntimeError lors du chargement du modèle pré-entraîné
-        mock_create_model.side_effect = RuntimeError("Pretrained model not found")
-        
+        mock_create_model.side_effect = RuntimeError(
+            "Pretrained model not found"
+        )
+
         model = get_mambaout_model(mambaout_type, num_classes)
-        
+
         # Vérifie que la création du modèle a bien été appelée avec pretrained=False
-        mock_create_model.assert_called_once_with(mambaout_type, pretrained=False, num_classes=num_classes)
+        mock_create_model.assert_called_once_with(
+            mambaout_type, pretrained=False, num_classes=num_classes
+        )
         self.assertEqual(model, mock_create_model.return_value)

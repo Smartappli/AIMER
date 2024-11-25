@@ -38,7 +38,7 @@ def get_convnext_model(convnext_type, num_classes):
         "convnext_zepto_rms_ols",
         "convnext_atto",
         "convnext_atto_ols",
-        "convnext_atto_rms" ,
+        "convnext_atto_rms",
         "convnext_femto",
         "convnext_femto_ols",
         "convnext_pico",
