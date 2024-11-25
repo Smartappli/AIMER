@@ -178,6 +178,10 @@ def get_efficientnet_model(efficientnet_type, num_classes):
         "mobilenet_edgetpu_v2_s",
         "mobilenet_edgetpu_v2_m",
         "mobilenet_edgetpu_v2_l",
+        "test_efficientnet",
+        "test_efficientnet_gn",
+        "test_efficientnet_ln",
+        "test_efficientnet_evos",
     ]
 
     # Check if the vision type is from torchvision
