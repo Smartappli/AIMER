@@ -21,11 +21,6 @@ class ProcessingResnetTestCase(TestCase):
         """
         # List of ResNet model types to test
         resnet_types = [
-            "ResNet18",
-            "ResNet34",
-            "ResNet50",
-            "ResNet101",
-            "ResNet152",
             "resnet10t",
             "resnet14t",
             "resnet18",
@@ -83,6 +78,7 @@ class ProcessingResnetTestCase(TestCase):
             "seresnext26d_32x4d",
             "seresnext26t_32x4d",
             "seresnext50_32x4d",
+            "seresnext101_32x4d",
             "seresnext101_32x8d",
             "seresnext101d_32x8d",
             "seresnext101_64x4d",
@@ -105,6 +101,7 @@ class ProcessingResnetTestCase(TestCase):
             "resnetrs270",
             "resnetrs350",
             "resnetrs420",
+            "test_resnet",
         ]
         num_classes = 10  # You can adjust the number of classes as needed
 
