@@ -244,7 +244,7 @@ for model_type in model_list:
 
             best_model_path = save_dir_path / "best_model.pth"
             torch.save(
-                model.state_dict(), best_model_path)
+                model.state_dict(), best_model_path
             )
 
         epoch_end_time = time.time()
@@ -384,7 +384,7 @@ for model_type in model_list:
 
                 best_model_path = save_dir_path / "best_model.pth"
                 torch.save(
-                    model.state_dict(), best_model_path)
+                    model.state_dict(), best_model_path
                 )
 
             epoch_end_time = time.time()
@@ -525,7 +525,7 @@ for model_type in model_list:
 
                 best_model_path = save_dir_path / "best_model.pth"
                 torch.save(
-                    model.state_dict(), best_model_path)
+                    model.state_dict(), best_model_path
                 )
 
             epoch_end_time = time.time()
