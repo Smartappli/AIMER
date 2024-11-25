@@ -68,6 +68,7 @@ def get_byobnet_model(byobnet_type, num_classes):
         "resnet50x16_clip_gap",
         "resnet50x64_clip_gap",
         "resnet50_mlp",
+        "test_byobnet",
     ]
 
     if byobnet_type not in model_types:
