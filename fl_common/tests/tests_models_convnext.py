@@ -52,6 +52,9 @@ class ProcessingConvNextTestCase(TestCase):
             "convnextv2_base",
             "convnextv2_large",
             "convnextv2_huge",
+            "test_convnext",
+            "test_convnext2",
+            "test_convnext3",
         ]
         num_classes = 10  # You can adjust the number of classes as needed
 
