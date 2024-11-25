@@ -244,7 +244,7 @@ for model_type in model_list:
 
             best_model_path = save_dir / "best_model.pth"
             try:
-                torch.save(model.state_dict(), best_model_path)
+                torch.save(model.state_dict(), best_model_path) # noqa: S614
                 print(f"Model state dictionary saved safely to {best_model_path}")
             except Exception as e:
                 print(f"Error saving the model: {e}")
@@ -386,7 +386,7 @@ for model_type in model_list:
 
                 best_model_path = save_dir / "best_model.pth"
                 try:
-                    torch.save(model.state_dict(), best_model_path)
+                    torch.save(model.state_dict(), best_model_path) # noqa: S614
                     print(f"Model state dictionary saved safely to {best_model_path}")
                 except Exception as e:
                     print(f"Error saving the model: {e}")
@@ -529,7 +529,7 @@ for model_type in model_list:
 
                 best_model_path = save_dir / "best_model.pth"
                 try:
-                    torch.save(model.state_dict(), best_model_path)
+                    torch.save(model.state_dict(), best_model_path) # noqa: S614
                     print(f"Model state dictionary saved safely to {best_model_path}")
                 except Exception as e:
                     print(f"Error saving the model: {e}")
