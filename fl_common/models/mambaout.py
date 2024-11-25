@@ -53,7 +53,7 @@ def get_mambaout_model(mambaout_type, num_classes):
 
     try:
         return create_model(
-            mambaout_type, pretrained=True, num_classes=num_classes
+            mambaout_type, pretrained=True, num_classes=num_classes,
         )
     except RuntimeError as e:
         print(f"{mambaout_type} - Error loading pretrained model: {e}")
