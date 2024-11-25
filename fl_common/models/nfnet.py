@@ -51,6 +51,7 @@ def get_nfnet_model(nfnet_type, num_classes):
         "nf_ecaresnet26",
         "nf_ecaresnet50",
         "nf_ecaresnet101",
+        "test_nfnet",
     ]
 
     if nfnet_type not in valid_nfnet_types:
