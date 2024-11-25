@@ -16,7 +16,7 @@ def get_mambaout_model(mambaout_type, num_classes):
         "test_mambaout",
     }
 
-    if beit_type not in valid_types:
+    if mambaout_type not in valid_types:
         msg = f"Unknown Mambaout Architecture: {mambaout_type}"
         raise ValueError(msg)
 
