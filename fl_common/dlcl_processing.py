@@ -242,9 +242,11 @@ for model_type in model_list:
             if not Path(save_dir).exists():
                 Path(save_dir).mkdir(parents=True, exist_ok=True)
 
-            best_model_path = save_dir / "best_model.pth"
+            best_model_path = save_dir / "best_model.pt"
             try:
-                torch.save(model.state_dict(), best_model_path) 
+                torch.jit.save(
+                    torch.jit.script(model), best_model_path,
+                )
                 print(
                     f"Model state dictionary saved safely to {best_model_path}"
                 )
@@ -386,10 +388,10 @@ for model_type in model_list:
                 if not Path(save_dir).exists():
                     Path(save_dir).mkdir(parents=True, exist_ok=True)
 
-                best_model_path = save_dir / "best_model.pth"
+                best_model_path = save_dir / "best_model.pt"
                 try:
-                    torch.save(
-                        model.state_dict(), best_model_path,
+                    torch.jit.save(
+                        torch.jit.script(model), best_model_path,
                     )
                     print(
                         f"Model state dictionary saved safely to {best_model_path}",
@@ -533,13 +535,13 @@ for model_type in model_list:
                 if not Path(save_dir).exists():
                     Path(save_dir).mkdir(parents=True, exist_ok=True)
 
-                best_model_path = save_dir / "best_model.pth"
+                best_model_path = save_dir / "best_model.pt"
                 try:
-                    torch.save(
-                        model.state_dict(), best_model_path,
+                    torch.jit.save(
+                        torch.jit.script(model), best_model_path,
                     )
                     print(
-                        f"Model state dictionary saved safely to {best_model_path}"
+                        f"Model state dictionary saved safely to {best_model_path}",
                     )
                 except Exception as e:
                     print(f"Error saving the model: {e}")
