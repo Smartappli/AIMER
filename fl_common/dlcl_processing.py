@@ -389,10 +389,8 @@ for model_type in model_list:
 
                 best_model_path = save_dir / "best_model.pt"
                 try:
-                    torch.jit.save(
-                        torch.jit.script(model),
-                        best_model_path,
-                    )
+                    model_scripted = torch.jit.script(model)
+                    model_scripted.save(best_model_path)
                     print(
                         f"Model state dictionary saved safely to {best_model_path}",
                     )
@@ -537,10 +535,8 @@ for model_type in model_list:
 
                 best_model_path = save_dir / "best_model.pt"
                 try:
-                    torch.jit.save(
-                        torch.jit.script(model),
-                        best_model_path,
-                    )
+                    model_scripted = torch.jit.script(model)
+                    model_scripted.save(best_model_path)
                     print(
                         f"Model state dictionary saved safely to {best_model_path}",
                     )
