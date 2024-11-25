@@ -1305,6 +1305,7 @@ def get_family_model_r(model_type, num_classes):
         "resnetrs270": get_resnet_model,
         "resnetrs350": get_resnet_model,
         "resnetrs420": get_resnet_model,
+        "test_resnet": get_resnet_model,
         "resnetv2_50x1_bit": get_resnetv2_model,
         "resnetv2_50x3_bit": get_resnetv2_model,
         "resnetv2_101x1_bit": get_resnetv2_model,
