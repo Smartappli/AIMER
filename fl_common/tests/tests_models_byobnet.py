@@ -69,6 +69,7 @@ class ProcessingByobnetTestCase(TestCase):
             "resnet50x16_clip_gap",
             "resnet50x64_clip_gap",
             "resnet50_mlp",
+            "test_byobnet",
         ]
         num_classes = 1000
         for byobnet_type in known_types:
