@@ -243,7 +243,11 @@ for model_type in model_list:
                 Path(save_dir).mkdir(parents=True, exist_ok=True)
 
             best_model_path = save_dir / "best_model.pth"
-            torch.save(model.state_dict(), best_model_path)
+            try:
+                torch.save(model.state_dict(), best_model_path)
+                print(f"Model state dictionary saved safely to {best_model_path}")
+            except Exception as e:
+                print(f"Error saving the model: {e}")
 
         epoch_end_time = time.time()
         elapsed_time = epoch_end_time - epoch_start_time
@@ -381,7 +385,11 @@ for model_type in model_list:
                     Path(save_dir).mkdir(parents=True, exist_ok=True)
 
                 best_model_path = save_dir / "best_model.pth"
-                torch.save(model.state_dict(), best_model_path)
+                try:
+                    torch.save(model.state_dict(), best_model_path)
+                    print(f"Model state dictionary saved safely to {best_model_path}")
+                except Exception as e:
+                    print(f"Error saving the model: {e}")
 
             epoch_end_time = time.time()
             elapsed_time = epoch_end_time - epoch_start_time
@@ -520,7 +528,11 @@ for model_type in model_list:
                     Path(save_dir).mkdir(parents=True, exist_ok=True)
 
                 best_model_path = save_dir / "best_model.pth"
-                torch.save(model.state_dict(), best_model_path)
+                try:
+                    torch.save(model.state_dict(), best_model_path)
+                    print(f"Model state dictionary saved safely to {best_model_path}")
+                except Exception as e:
+                    print(f"Error saving the model: {e}")
 
             epoch_end_time = time.time()
             elapsed_time = epoch_end_time - epoch_start_time
