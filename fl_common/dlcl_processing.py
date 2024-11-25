@@ -240,7 +240,7 @@ for model_type in model_list:
             best_val_loss = avg_val_loss
 
             if not os.path.exists(save_dir):
-                os.makedirs(save_dir, exist_ok=True)
+                Path(save_dir).mkdir(parents=True, exist_ok=True)
 
             torch.save(
                 model.state_dict(), os.path.join(save_dir, "best_model.pth")
@@ -519,7 +519,7 @@ for model_type in model_list:
                 best_val_loss = avg_val_loss
 
                 if not os.path.exists(save_dir):
-                    os.makedirs(save_dir, exist_ok=True)
+                    Path(save_dir).mkdir(parents=True, exist_ok=True)
 
                 torch.save(
                     model.state_dict(), os.path.join(save_dir, "best_model.pth")
