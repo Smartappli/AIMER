@@ -143,6 +143,10 @@ class ProcessingEfficientNetTestCase(TestCase):
             "mobilenet_edgetpu_v2_s",
             "mobilenet_edgetpu_v2_m",
             "mobilenet_edgetpu_v2_l",
+            "test_efficientnet",
+            "test_efficientnet_gn",
+            "test_efficientnet_ln",
+            "test_efficientnet_evos",
         ]
         num_classes = 10  # You can adjust the number of classes as needed
 
