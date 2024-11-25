@@ -50,6 +50,7 @@ class ProcessingNfnetTestCase(TestCase):
             "nf_ecaresnet26",
             "nf_ecaresnet50",
             "nf_ecaresnet101",
+            "test_nfnet",
         ]
         num_classes = 1000  # Assuming 1000 classes for the test
 
