@@ -242,7 +242,7 @@ for model_type in model_list:
             if not Path(save_dir).exists():
                 Path(save_dir).mkdir(parents=True, exist_ok=True)
 
-            best_model_path = save_dir_path / "best_model.pth"
+            best_model_path = save_dir / "best_model.pth"
             torch.save(model.state_dict(), best_model_path)
 
         epoch_end_time = time.time()
@@ -380,7 +380,7 @@ for model_type in model_list:
                 if not Path(save_dir).exists():
                     Path(save_dir).mkdir(parents=True, exist_ok=True)
 
-                best_model_path = save_dir_path / "best_model.pth"
+                best_model_path = save_dir / "best_model.pth"
                 torch.save(model.state_dict(), best_model_path)
 
             epoch_end_time = time.time()
@@ -519,7 +519,7 @@ for model_type in model_list:
                 if not Path(save_dir).exists():
                     Path(save_dir).mkdir(parents=True, exist_ok=True)
 
-                best_model_path = save_dir_path / "best_model.pth"
+                best_model_path = save_dir / "best_model.pth"
                 torch.save(model.state_dict(), best_model_path)
 
             epoch_end_time = time.time()
