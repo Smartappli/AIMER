@@ -37,6 +37,7 @@ from fl_common.models.hrnet import get_hrnet_model
 from fl_common.models.inception import get_inception_model
 from fl_common.models.inception_next import get_inception_next_model
 from fl_common.models.levit import get_levit_model
+from fl_common.models.mambaout import get_mambaout_model
 from fl_common.models.maxvit import get_maxvit_model
 from fl_common.models.metaformer import get_metaformer_model
 from fl_common.models.mlp_mixer import get_mlp_mixer_model
@@ -844,6 +845,17 @@ def get_family_model_m(model_type, num_classes):
         ValueError: If an unknown model_type is provided.
     """
     model_retrieval_functions = {
+        "mambaout_femto": get_mambaout_model,
+        "mambaout_kobe": get_mambaout_model,
+        "mambaout_tiny": get_mambaout_model,
+        "mambaout_small": get_mambaout_model,
+        "mambaout_base": get_mambaout_model,
+        "mambaout_small_rw": get_mambaout_model,
+        "mambaout_base_short_rw": get_mambaout_model,
+        "mambaout_base_tall_rw": get_mambaout_model,
+        "mambaout_base_wide_rw": get_mambaout_model,
+        "mambaout_base_plus_rw": get_mambaout_model,
+        "test_mambaout": get_mambaout_model,
         "MaxVit_T": get_maxvit_model,
         "coatnet_pico_rw_224": get_maxvit_model,
         "coatnet_nano_rw_224": get_maxvit_model,
