@@ -209,6 +209,7 @@ def get_family_model_b(model_type, num_classes):
         "resnet50x16_clip_gap": get_byobnet_model,
         "resnet50x64_clip_gap": get_byobnet_model,
         "resnet50_mlp": get_byobnet_model,
+        "test_byobnet": get_byobnet_model,
     }
 
     if model_type not in model_retrieval_functions:
