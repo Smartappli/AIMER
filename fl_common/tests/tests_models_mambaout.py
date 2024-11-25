@@ -4,7 +4,7 @@ from torch import nn
 from unittest.mock import patch
 
 # Assurez-vous d'importer la fonction get_mambaout_model depuis le bon module
-from your_module import get_mambaout_model
+from fl_common.models.mambaout import get_mambaout_model
 
 # Désactivation de l'avertissement pour les liens symboliques
 os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
