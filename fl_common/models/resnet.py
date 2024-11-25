@@ -23,7 +23,8 @@ def get_resnet_model(resnet_type, num_classes):
             'seresnext101_32x8d', 'seresnext101d_32x8d', 'seresnext101_64x4d', 'senet154', 'resnetblur18',
             'resnetblur50', 'resnetblur50d', 'resnetblur101d', 'resnetaa34d', 'resnetaa50', 'resnetaa50d',
             'resnetaa101d', 'seresnetaa50d', 'seresnextaa101d_32x8d', 'seresnextaa201d_32x8d', 'resnetrs50',
-            'resnetrs101', 'resnetrs152', 'resnetrs200', 'resnetrs270', 'resnetrs350', 'resnetrs420'
+            'resnetrs101', 'resnetrs152', 'resnetrs200', 'resnetrs270', 'resnetrs350', 'resnetrs420',
+            'test_resnet'
         num_classes (int): The number of output classes for the model.
 
     Returns:
