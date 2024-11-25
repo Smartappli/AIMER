@@ -1073,6 +1073,7 @@ def get_family_model_n(model_type, num_classes):
         "nf_ecaresnet26": get_nfnet_model,
         "nf_ecaresnet50": get_nfnet_model,
         "nf_ecaresnet101": get_nfnet_model,
+        "test_nfnet": get_nfnet_model,
     }
 
     if model_type not in model_retrieval_functions:
