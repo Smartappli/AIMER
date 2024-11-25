@@ -34,8 +34,11 @@ def get_convnext_model(convnext_type, num_classes):
     }
 
     timm_models = [
+        "convnext_zepto_rms",
+        "convnext_zepto_rms_ols",
         "convnext_atto",
         "convnext_atto_ols",
+        "convnext_atto_rms" ,
         "convnext_femto",
         "convnext_femto_ols",
         "convnext_pico",
@@ -54,11 +57,14 @@ def get_convnext_model(convnext_type, num_classes):
         "convnextv2_femto",
         "convnextv2_pico",
         "convnextv2_nano",
-        "convnextv2_small",
         "convnextv2_tiny",
+        "convnextv2_small",
         "convnextv2_base",
         "convnextv2_large",
         "convnextv2_huge",
+        "test_convnext",
+        "test_convnext2",
+        "test_convnext3",
     ]
 
     # Check if the vision type is from torchvision
