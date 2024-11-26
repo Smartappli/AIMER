@@ -132,6 +132,10 @@ def get_vision_transformer_model(vision_type, num_classes):
         "vit_base_patch16_reg4_gap_256",
         "vit_so150m_patch16_reg4_map_256",
         "vit_so150m_patch16_reg4_gap_256",
+        "vit_intern300m_patch14_448",
+        "test_vit",
+        "test_vit2",
+        "test_vit3",
     ]
 
     # Check if the vision type is from torchvision
