@@ -18,7 +18,7 @@ prophet==1.1.6
 lightgbm==4.5.0
 captum==0.7.0
 syft==0.9.3b2
-wheel==0.45.0
+wheel==0.45.1
 gevent==24.11.1
 setuptools==75.6.0
 pillow==11.0.0
