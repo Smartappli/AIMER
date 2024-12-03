@@ -24,4 +24,5 @@ setuptools==75.6.0
 pillow==11.0.0
 zipp==3.21.0
 werkzeug>=3.0.6 # not directly required, pinned by Snyk to avoid a vulnerability
+fastapi==0.115.5
 starlette==0.40.0
