@@ -38,7 +38,7 @@ jobs:
           python-version: '3.12'
           cache: 'pip'
          
-      - uses: chartboost/ruff-action@v1
+      - uses: astral-sh/ruff-action@v2
         with:
           args: 'check --fix --ignore F841'
 
