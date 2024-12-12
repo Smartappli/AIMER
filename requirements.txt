@@ -3,7 +3,7 @@ python-dotenv==1.0.1
 huggingface-hub==0.26.5
 scikit-learn-intelex>=2023.2.1; sys_platform != 'darwin'
 tensorflow-cpu==2.18.0; sys_platform != 'darwin'
-tendorflow==2.18.0; sys_platform == 'darwin'
+tensorflow==2.18.0; sys_platform == 'darwin'
 keras
 keras-tuner
 seaborn==0.13.2 # 0.12.2
