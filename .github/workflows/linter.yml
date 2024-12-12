@@ -120,7 +120,7 @@ jobs:
         python -m pip install uv
         python -m uv pip install pylint
         python -m uv pip install git+https://github.com/pylint-dev/pylint-django.git
-        python -m uv pip install -r requirements.txt
+        python -m uv pip install --prerelease=allow -r requirements.txt
     - name: Install dependencies on Windows
       if: ${{ matrix.os == 'windows-2019' || matrix.os == 'windows-2022' }}
       run: |
