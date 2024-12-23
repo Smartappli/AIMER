@@ -18,7 +18,7 @@ jobs:
           python-version: '3.12'
           cache: 'pip'
       
-      - uses: astral-sh/ruff-action@v2
+      - uses: astral-sh/ruff-action@v3
         with:
           args: 'check --select ASYNC,C90,DJ,DTZ,E,F,I,NPY,PD,PERF,PT,RUF,SIM,UP,W --ignore E501,F401,F841 --output-format github --diff --exclude fl_client/migrations,fl_server/migrations'
 
@@ -38,7 +38,7 @@ jobs:
           python-version: '3.12'
           cache: 'pip'
          
-      - uses: astral-sh/ruff-action@v2
+      - uses: astral-sh/ruff-action@v3
         with:
           args: 'check --fix --ignore F841'
 
