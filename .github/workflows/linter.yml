@@ -29,13 +29,9 @@ jobs:
         with:
           ref: ${{ github.head_ref }}
   
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
-          cache: 'pip'
-         
       - uses: astral-sh/ruff-action@v3
         with:
+          python-version: '3.12
           args: 'check --fix --ignore F841'
 
       - uses: stefanzweifel/git-auto-commit-action@v5
