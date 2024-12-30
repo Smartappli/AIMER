@@ -12,10 +12,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      
+
+      - uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+
+      - name: Print the installed version
+        run: echo "Installed uv version is ${{ steps.setup-uv.outputs.uv-version }}"
+
+      - name: Install Python 3.12
+        run: uv python install 3.12
+
       - uses: astral-sh/ruff-action@v3
         with:
-          python-version: '3.12
           args: 'check --select ASYNC,C90,DJ,DTZ,E,F,I,NPY,PD,PERF,PT,RUF,SIM,UP,W --ignore E501,F401,F841 --output-format github --diff --exclude fl_client/migrations,fl_server/migrations'
 
   ruff-fix:
@@ -28,10 +37,19 @@ jobs:
       - uses: actions/checkout@v4
         with:
           ref: ${{ github.head_ref }}
+
+      - uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+
+      - name: Print the installed version
+        run: echo "Installed uv version is ${{ steps.setup-uv.outputs.uv-version }}"
+
+      - name: Install Python 3.12
+        run: uv python install 3.12
   
       - uses: astral-sh/ruff-action@v3
         with:
-          python-version: '3.12
           args: 'check --fix --ignore F841'
 
       - uses: stefanzweifel/git-auto-commit-action@v5
