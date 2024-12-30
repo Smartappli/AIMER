@@ -1,4 +1,4 @@
-ARG CUDA_VERSION="12.6.0"
+ARG CUDA_VERSION="12.6.3"
 ARG OS="ubuntu24.04"
 
 ARG CUDA_BUILDER_IMAGE="${CUDA_VERSION}-devel-${OS}"
@@ -37,7 +37,7 @@ ENV HOST 0.0.0.0
 ENV CUDA_DOCKER_ARCH=all
 
 RUN apt-get update && apt-get upgrade -y \
-    && apt-get install -y python3 python3-pip python3-venv
+    && apt-get install -y --no-install-recommends python3 python3-pip python3-venv
 
 WORKDIR /llama_cpp_python
 
