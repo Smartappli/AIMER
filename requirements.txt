@@ -14,11 +14,11 @@ scikit-learn>=1.6.1
 # --extra-index-url https://download.pytorch.org/whl/cpu
 torch>=2.6.0,<2.7.0
 torchvision
-timm>=1.0.13
+timm>=1.0.15
 prophet==1.1.6
 lightgbm==4.6.0
 captum==0.7.0
-# syft==0.9.3b2
+# syft>=0.9.3b2
 wheel==0.45.1
 gevent==24.11.1
 setuptools>=75.6.0
