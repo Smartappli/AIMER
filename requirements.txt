@@ -1,6 +1,6 @@
 Django[argon2]==5.1.8
 python-dotenv==1.1.0
-huggingface-hub==0.30.0
+huggingface-hub==0.30.1
 scikit-learn-intelex>=2023.2.1; sys_platform != 'darwin'
 tensorflow-cpu; sys_platform != 'darwin'
 tensorflow; sys_platform == 'darwin'
