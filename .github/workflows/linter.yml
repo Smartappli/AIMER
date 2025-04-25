@@ -13,7 +13,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: astral-sh/setup-uv@v5
+      - uses: astral-sh/setup-uv@v6
         with:
           enable-cache: true
 
@@ -38,7 +38,7 @@ jobs:
         with:
           ref: ${{ github.head_ref }}
 
-      - uses: astral-sh/setup-uv@v5
+      - uses: astral-sh/setup-uv@v6
         with:
           enable-cache: true
 
@@ -67,7 +67,7 @@ jobs:
       - name: Check out source repository
         uses: actions/checkout@v4
         
-      - uses: astral-sh/setup-uv@v5
+      - uses: astral-sh/setup-uv@v6
         with:
           enable-cache: true
 
@@ -93,7 +93,7 @@ jobs:
       - name: Check out source repository
         uses: actions/checkout@v4
       
-      - uses: astral-sh/setup-uv@v5
+      - uses: astral-sh/setup-uv@v6
         with:
           enable-cache: true
 
