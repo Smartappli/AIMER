@@ -15,7 +15,7 @@ scikit-learn>=1.6.1
 torch>=2.6.0,<2.8.0
 torchvision
 timm>=1.0.15
-prophet==1.1.6
+prophet==1.1.7
 lightgbm==4.6.0
 captum==0.8.0
 # syft>=0.9.3b2
