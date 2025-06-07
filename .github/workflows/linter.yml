@@ -20,8 +20,8 @@ jobs:
       - name: Print the installed version
         run: echo "Installed uv version is ${{ steps.setup-uv.outputs.uv-version }}"
 
-      - name: Install Python 3.12
-        run: uv python install 3.12
+      - name: Install Python 3.13
+        run: uv python install 3.13
 
       - uses: astral-sh/ruff-action@v3
         with:
@@ -100,12 +100,12 @@ jobs:
       - name: Print the installed version
         run: echo "Installed uv version is ${{ steps.setup-uv.outputs.uv-version }}"
 
-      - name: Install Python 3.12
-        run: uv python install 3.12
+      - name: Install Python 3.13
+        run: uv python install 3.13
       
       - name: DjLint Linter
         run: |
-          uv pip install djlint
+          uv pip install djlint --system
           djlint ./templates --extension=html --lint
           djlint ./templates --extension=html --reformat
 
