@@ -45,8 +45,8 @@ jobs:
       - name: Print the installed version
         run: echo "Installed uv version is ${{ steps.setup-uv.outputs.uv-version }}"
 
-      - name: Install Python 3.12
-        run: uv python install 3.12
+      - name: Install Python 3.13
+        run: uv python install 3.13
   
       - uses: astral-sh/ruff-action@v3
         with:
@@ -74,8 +74,8 @@ jobs:
       - name: Print the installed version
         run: echo "Installed uv version is ${{ steps.setup-uv.outputs.uv-version }}"
 
-      - name: Install Python 3.12
-        run: uv python install 3.12
+      - name: Install Python 3.13
+        run: uv python install 3.13
           
       - name: flake8 Lint
         uses: py-actions/flake8@v2.3.0
@@ -100,12 +100,17 @@ jobs:
       - name: Print the installed version
         run: echo "Installed uv version is ${{ steps.setup-uv.outputs.uv-version }}"
 
-      - name: Install Python 3.13
-        run: uv python install 3.13
-      
-      - name: DjLint Linter
+      - name: Create virtualenv and install djlint
         run: |
-          uv pip install djlint --system
+          uv venv
+          source .venv/bin/activate
+          uv python install 3.13
+          uv pip install djlint
+
+      - name: Run djlint
+        run: |
+          source .venv/bin/activate
+          djlint . --check
           djlint ./templates --extension=html --lint
           djlint ./templates --extension=html --reformat
 
