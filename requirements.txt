@@ -23,5 +23,5 @@ wheel==0.46.1
 gevent==25.5.1
 setuptools>=78.1.1
 pillow==11.2.1
-zipp==3.22.0
+zipp==3.23.0
 werkzeug>=3.0.6
