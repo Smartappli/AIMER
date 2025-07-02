@@ -1,4 +1,4 @@
-Django[argon2]==5.2.3
+Django[argon2]==5.2.4
 python-dotenv==1.1.1
 huggingface-hub==0.32.6
 scikit-learn-intelex>=2023.2.1; sys_platform != 'darwin'
