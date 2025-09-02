@@ -20,7 +20,7 @@ lightgbm==4.6.0
 captum==0.8.0
 # syft>=0.9.3b2
 wheel==0.46.1
-gevent==25.5.1
+gevent==25.8.2
 setuptools>=78.1.1
 pillow==11.3.0
 zipp==3.23.0
