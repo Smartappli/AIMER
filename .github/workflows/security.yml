@@ -48,7 +48,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: 3.13
+          python-version: 3.14
           cache: 'pip' # caching pip dependencies
           
       - name: Install dependencies
@@ -78,7 +78,7 @@ jobs:
         
       - uses: actions/setup-python@v5
         with:
-          python-version: 3.13
+          python-version: 3.14
 
       - name: install
         run: |
