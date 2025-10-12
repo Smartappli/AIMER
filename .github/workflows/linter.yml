@@ -52,7 +52,7 @@ jobs:
         with:
           args: 'check --fix --ignore F841'
 
-      - uses: stefanzweifel/git-auto-commit-action@v6
+      - uses: stefanzweifel/git-auto-commit-action@v7
         with:
           commit_message: 'style fixes by ruff'
           commit_options: '--no-verify --signoff'
