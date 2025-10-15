@@ -7,7 +7,7 @@ tensorflow; sys_platform == 'darwin'
 keras
 keras-tuner
 seaborn==0.13.2 # 0.12.2
-numpy>=2.3.2,<=2.3.2; python_version<"3.12"
+numpy>=2.3.4,<=2.3.4; python_version<"3.12"
 numpy>=2.3,<3; python_version>="3.12"
 scikit-learn>=1.6.1
 # pandas>=2.2.2 # 2.0.3
