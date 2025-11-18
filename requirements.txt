@@ -12,9 +12,9 @@ numpy>=2.3,<3; python_version>="3.12"
 scikit-learn>=1.6.1
 # pandas>=2.2.2 # 2.0.3
 # --extra-index-url https://download.pytorch.org/whl/cpu
-torch>=2.8.0
+torch
 torchvision
-timm>=1.0.15
+timm
 prophet==1.2.1
 lightgbm==4.6.0
 captum==0.8.0
