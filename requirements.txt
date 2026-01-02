@@ -17,7 +17,7 @@ torchvision
 timm
 prophet==1.2.1
 lightgbm==4.6.0
-captum==0.8.0
+captum
 # syft>=0.9.3b2
 wheel==0.46.1
 gevent==25.9.1
