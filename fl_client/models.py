@@ -561,7 +561,7 @@ class DatasetCentralData(models.Model):
     dataset_central_updated_date = models.DateTimeField(auto_now=True)
 
     class Meta:
-         ordering: ClassVar[list[str]] = ["dataset_central_data_link"]
+        ordering: ClassVar[list[str]] = ["dataset_central_data_link"]
 
     def __str__(self):
         return (
