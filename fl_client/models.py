@@ -426,7 +426,7 @@ class Dataset(models.Model):
     dataset_updated_date = models.DateTimeField(auto_now=True)
 
     class Meta:
-        ordering: ClassVar[List[str]] = ["dataset_name"]
+        ordering: ClassVar[list[str]] = ["dataset_name"]
 
     def __str__(self):
         return self.dataset_name
@@ -463,7 +463,7 @@ class DatasetLocalData(models.Model):
     dataset_local_data_updated_date = models.DateTimeField(auto_now=True)
 
     class Meta:
-        ordering: ClassVar[List[str]] = ["dataset_local_data_link"]
+        ordering: ClassVar[list[str]] = ["dataset_local_data_link"]
 
     def __str__(self):
         return (
@@ -526,7 +526,7 @@ class DatasetRemoteData(models.Model):
     dataset_remote_updated_date = models.DateTimeField(auto_now=True)
 
     class Meta:
-        ordering: ClassVar[List[str]] = ["dataset_remote_data_path"]
+         ordering: ClassVar[list[str]] = ["dataset_remote_data_path"]
 
     def __str__(self):
         return (
@@ -561,7 +561,7 @@ class DatasetCentralData(models.Model):
     dataset_central_updated_date = models.DateTimeField(auto_now=True)
 
     class Meta:
-        ordering: ClassVar[List[str]] = ["dataset_central_data_link"]
+         ordering: ClassVar[list[str]] = ["dataset_central_data_link"]
 
     def __str__(self):
         return (
@@ -640,7 +640,7 @@ class Queue(models.Model):
     queue_updated_date = models.DateTimeField(auto_now=True)
 
     class Meta:
-        ordering: ClassVar[List[str]] = ["queue_model_type", "queue_state"]
+         ordering: ClassVar[list[str]] = ["queue_model_type", "queue_state"]
 
     def __str__(self):
         return str(self.queue_uuid)
