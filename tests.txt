@@ -20,10 +20,10 @@ torch
 torchvision
 prophet>=1.1.5
 lightgbm>=4.3.0
-captum==0.7.0
-psycopg>=3.1.19
+captum
+psycopg
 git+https://github.com/huggingface/pytorch-image-models.git
-syft>=0.9.0b1
+# syft>=0.9.3
 # git+https://github.com/pycaret/pycaret.git
 wheel>=0.43.0 # not directly required, pinned by Snyk to avoid a vulnerability
 gevent>=23.9.0 # not directly required, pinned by Snyk to avoid a vulnerability
