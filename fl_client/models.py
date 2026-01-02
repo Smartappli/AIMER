@@ -79,7 +79,7 @@ class License(models.Model):
     license_updated_date = models.DateTimeField(auto_now=True)
 
     class Meta:
-        ordering: ClassVar[list[str]] = ["license_short_name"
+        ordering: ClassVar[list[str]] = ["license_short_name"]
 
     def __str__(self):
         return self.license_short_name + " - " + self.license_name
