@@ -17,7 +17,7 @@ jobs:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
     - name: Free Disk Space (Ubuntu)
-      uses: jlumbroso/free-disk-space@main
+      uses: jlumbroso/free-disk-space@v1.3.1
       with:
         # this might remove tools that are actually needed,
         # if set to "true" but frees about 6 GB
@@ -29,8 +29,9 @@ jobs:
         dotnet: true
         haskell: true
         large-packages: true
-        docker-images: false
+        docker-images: true
         swap-storage: true
+
     - uses: actions/checkout@v6
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v6
