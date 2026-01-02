@@ -85,6 +85,12 @@ jobs:
       - name: Bandit by PyCQA
         uses: PyCQA/bandit-action@v1.0.1
 
+      - name: Upload SARIF results
+        uses: github/codeql-action/upload-sarif@v4
+        with:
+          sarif_file: results.sarif
+          category: bandit
+
   security:
     name: Pip-audit Scan
     runs-on: ubuntu-latest
