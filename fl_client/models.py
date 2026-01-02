@@ -106,7 +106,7 @@ class ModelFamily(models.Model):
     model_family_updated_date = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-         ordering: ClassVar[list[str]] = ["model_family_name"]
+        ordering: ClassVar[list[str]] = ["model_family_name"]
 
     def __str__(self):
         return self.model_family_name
@@ -189,7 +189,7 @@ class Model(models.Model):
     model_updated_date = models.DateTimeField(auto_now=True)
 
     class Meta:
-         ordering: ClassVar[list[str]] = ["model_name"]
+        ordering: ClassVar[list[str]] = ["model_name"]
 
     def __str__(self):
         if str(self.model_version) != "None":
@@ -314,7 +314,7 @@ class Document(models.Model):
     document_updated_date = models.DateTimeField(auto_now=True)
 
     class Meta:
-         ordering: ClassVar[list[str]] = ["document_filename"]
+        ordering: ClassVar[list[str]] = ["document_filename"]
 
     def __str__(self):
         return self.document_filename + " ----- " + self.document_title
@@ -526,7 +526,7 @@ class DatasetRemoteData(models.Model):
     dataset_remote_updated_date = models.DateTimeField(auto_now=True)
 
     class Meta:
-         ordering: ClassVar[list[str]] = ["dataset_remote_data_path"]
+        ordering: ClassVar[list[str]] = ["dataset_remote_data_path"]
 
     def __str__(self):
         return (
@@ -640,7 +640,7 @@ class Queue(models.Model):
     queue_updated_date = models.DateTimeField(auto_now=True)
 
     class Meta:
-         ordering: ClassVar[list[str]] = ["queue_model_type", "queue_state"]
+        ordering: ClassVar[list[str]] = ["queue_model_type", "queue_state"]
 
     def __str__(self):
         return str(self.queue_uuid)
@@ -668,7 +668,7 @@ class Help(models.Model):
     )
 
     class Meta:
-         ordering: ClassVar[list[str]] = ["help_key"]
+        ordering: ClassVar[list[str]] = ["help_key"]
 
     def __str__(self):
         return self.help_key + " : " + self.help_value
