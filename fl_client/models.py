@@ -79,7 +79,7 @@ class License(models.Model):
     license_updated_date = models.DateTimeField(auto_now=True)
 
     class Meta:
-        ordering: ClassVar[List[str]] = ["license_short_name"]
+        ordering: ClassVar[list[str]] = ["license_short_name"
 
     def __str__(self):
         return self.license_short_name + " - " + self.license_name
@@ -106,7 +106,7 @@ class ModelFamily(models.Model):
     model_family_updated_date = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        ordering: ClassVar[List[str]] = ["model_family_name"]
+         ordering: ClassVar[list[str]] = ["model_family_name"]
 
     def __str__(self):
         return self.model_family_name
@@ -189,7 +189,7 @@ class Model(models.Model):
     model_updated_date = models.DateTimeField(auto_now=True)
 
     class Meta:
-        ordering: ClassVar[List[str]] = ["model_name"]
+         ordering: ClassVar[list[str]] = ["model_name"]
 
     def __str__(self):
         if str(self.model_version) != "None":
@@ -278,7 +278,7 @@ class ModelFile(models.Model):
     model_file_updated_date = models.DateTimeField(auto_now=True)
 
     class Meta:
-        ordering: ClassVar[List[str]] = ["model_file_filename"]
+        ordering: ClassVar[list[str]] = ["model_file_filename"]
 
     def __str__(self):
         return (
@@ -314,7 +314,7 @@ class Document(models.Model):
     document_updated_date = models.DateTimeField(auto_now=True)
 
     class Meta:
-        ordering: ClassVar[List[str]] = ["document_filename"]
+         ordering: ClassVar[list[str]] = ["document_filename"]
 
     def __str__(self):
         return self.document_filename + " ----- " + self.document_title
@@ -359,7 +359,7 @@ class ModelDocument(models.Model):
     )
 
     class Meta:
-        ordering: ClassVar[List[str]] = ["modeldoc_model_id"]
+        ordering: ClassVar[list[str]] = ["modeldoc_model_id"]
 
     def __str__(self):
         return (
