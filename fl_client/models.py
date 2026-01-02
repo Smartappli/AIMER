@@ -668,7 +668,7 @@ class Help(models.Model):
     )
 
     class Meta:
-        ordering: ClassVar[List[str]] = ["help_key"]
+         ordering: ClassVar[list[str]] = ["help_key"]
 
     def __str__(self):
         return self.help_key + " : " + self.help_value
