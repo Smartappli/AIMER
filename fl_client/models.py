@@ -1,5 +1,5 @@
 import uuid
-from typing import ClassVar, List
+from typing import ClassVar
 
 from django.conf import settings
 from django.contrib.auth.models import User
