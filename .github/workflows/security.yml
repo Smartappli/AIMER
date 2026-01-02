@@ -38,6 +38,7 @@ jobs:
       contents: read # for actions/checkout to fetch code
       security-events: write # for github/codeql-action/upload-sarif to upload SARIF results
       actions: read # only required for a private repository by github/codeql-action/upload-sarif to get the Action run status
+      
     name: Bandit Security Scan
     runs-on: ubuntu-latest
     steps:
@@ -59,16 +60,26 @@ jobs:
           python -m uv pip install -r requirements.txt     
 
       # Execute Bandit
-      - name: Run Bandit CLI
+      - name: Run Bandit (SARIF)
+        id: bandit
         run: |
+          set +e
           bandit -r . -v --format sarif -o results.sarif
-
-      # Upload the SARIF file generated in the previous step
+          ec=$?
+          set -e
+          echo "exit_code=$ec" >> "$GITHUB_OUTPUT"
+          exit 0
+      
       - name: Upload SARIF results
+        if: always()
         uses: github/codeql-action/upload-sarif@v4
         with:
           sarif_file: results.sarif
           category: bandit
+      
+      - name: Fail if Bandit found issues
+        if: ${{ steps.bandit.outputs.exit_code != '0' }}
+        run: exit 1
 
   security:
     name: Pip-audit Scan
