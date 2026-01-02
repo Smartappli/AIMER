@@ -27,5 +27,5 @@ zipp==3.23.0
 werkzeug>=3.1.4
 protobuf>=4.25.8 # not directly required, pinned by Snyk to avoid a vulnerability
 urllib3>=2.5.0 # not directly required, pinned by Snyk to avoid a vulnerability
-django>=4.2.27 # not directly required, pinned by Snyk to avoid a vulnerability
+django>=6.0 # not directly required, pinned by Snyk to avoid a vulnerability
 sqlparse>=0.5.4 # not directly required, pinned by Snyk to avoid a vulnerability
