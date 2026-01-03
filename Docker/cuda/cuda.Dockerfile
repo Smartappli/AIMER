@@ -1,45 +1,54 @@
-ARG CUDA_VERSION="12.6.3"
-ARG OS="ubuntu24.04"
+ARG CUDA_IMAGE="13.1.0-devel-ubuntu24.04"
+FROM nvidia/cuda:${CUDA_IMAGE}
 
-ARG CUDA_BUILDER_IMAGE="${CUDA_VERSION}-devel-${OS}"
-ARG CUDA_RUNTIME_IMAGE="${CUDA_VERSION}-runtime-${OS}"
-FROM nvidia/cuda:${CUDA_BUILDER_IMAGE} as builder
+# Pour que le serveur écoute hors du container
+ENV HOST=0.0.0.0
 
-RUN apt-get update && apt-get upgrade -y \
-    && apt-get install -y --no-install-recommends git build-essential \
-    python3 python3-pip python3-venv gcc wget \
-    ocl-icd-opencl-dev opencl-headers clinfo \
-    libclblast-dev libopenblas-dev \
-    && mkdir -p /etc/OpenCL/vendors && echo "libnvidia-opencl.so.1" > /etc/OpenCL/vendors/nvidia.icd \
-    &
+# 1) Packages système
+RUN apt-get update && \
+    DEBIAN_FRONTEND=noninteractive apt-get upgrade -y && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y \
+        python3 python3-venv python3-dev \
+        git build-essential \
+        cmake ninja-build \
+        gcc g++ wget \
+        ocl-icd-opencl-dev opencl-headers clinfo \
+        libclblast-dev libopenblas-dev \
+        # utile pour certains linkers CUDA/OpenMP
+        libgomp1 \
+    && mkdir -p /etc/OpenCL/vendors && \
+    echo "libnvidia-opencl.so.1" > /etc/OpenCL/vendors/nvidia.icd && \
+    rm -rf /var/lib/apt/lists/*
 
+# 2) ⚙️ Fix build : fournir une libcuda.so.1 “stub” au linker
+#   Dans les images CUDA 13, il y a un stub dans /usr/local/cuda/compat ou lib64/stubs
+RUN set -eux; \
+    if [ -f /usr/local/cuda/compat/libcuda.so.1 ]; then \
+        ln -sf /usr/local/cuda/compat/libcuda.so.1 /usr/lib/x86_64-linux-gnu/libcuda.so.1; \
+    elif [ -f /usr/local/cuda/lib64/stubs/libcuda.so ]; then \
+        ln -sf /usr/local/cuda/lib64/stubs/libcuda.so /usr/lib/x86_64-linux-gnu/libcuda.so.1; \
+    fi
+
+# 3) Copier le code
+WORKDIR /app
 COPY . .
 
-# setting build related env vars
-ENV CUDA_DOCKER_ARCH=all
+# 4) Créer un venv Python (évite PEP 668 / --break-system-packages)
+RUN python3 -m venv /opt/venv
+ENV PATH="/opt/venv/bin:${PATH}"
+
+# 5) Installer les deps Python dans le venv
+RUN pip install --upgrade --no-cache-dir pip wheel && \
+    pip install --no-cache-dir \
+        pytest scikit-build setuptools \
+        fastapi uvicorn sse-starlette \
+        pydantic-settings starlette-context
+
+# 6) Installer llama-cpp-python avec CUDA
+#    Tu peux ajuster CMAKE_CUDA_ARCHITECTURES à ton GPU (80 = A100, 86 = RTX 30xx, 89 = RTX 40xx, etc.)
 ENV GGML_CUDA=1
+ENV CMAKE_ARGS="-DGGML_CUDA=ON -DCMAKE_CUDA_ARCHITECTURES=90"
+RUN pip install --no-cache-dir --verbose llama-cpp-python
 
-# Install depencencies
-RUN python3 -m pip install --upgrade pip
-RUN python3 -m venv venv
-RUN venv/bin/pip install pytest cmake scikit-build setuptools fastapi uvicorn sse-starlette pydantic-settings starlette-context
-
-# Install llama-cpp-python (build with cuda)
-RUN CMAKE_ARGS="-DGGML_CUDA=on" venv/bin/pip install llama-cpp-python
-
-# RUN make clean
-FROM nvidia/cuda:${CUDA_RUNTIME_IMAGE} as runtime
-
-# We need to set the host to 0.0.0.0 to allow outside access
-ENV HOST 0.0.0.0
-ENV CUDA_DOCKER_ARCH=all
-
-RUN apt-get update && apt-get upgrade -y \
-    && apt-get install -y --no-install-recommends python3 python3-pip python3-venv
-
-WORKDIR /llama_cpp_python
-
-COPY --from=builder /llama_cpp_python/venv venv
-
-# Run the server
+# 7) Commande de lancement
 CMD ["python3", "-m", "llama_cpp.server", "--config_file", "config-cuda.json"]
