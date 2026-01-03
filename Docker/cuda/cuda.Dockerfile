@@ -1,4 +1,4 @@
-ARG CUDA_IMAGE="13.1.0-devel-ubuntu24.04"
+ARG CUDA_IMAGE="13.0.2-devel-ubuntu24.04"
 FROM nvidia/cuda:${CUDA_IMAGE}
 
 # Pour que le serveur écoute hors du container
