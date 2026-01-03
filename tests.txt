@@ -24,7 +24,7 @@ psycopg
 git+https://github.com/huggingface/pytorch-image-models.git
 flower[simulation]
 # git+https://github.com/pycaret/pycaret.git
-wheel>=0.78.0 # not directly required, pinned by Snyk to avoid a vulnerability
+wheel
 gevent>=23.9.0 # not directly required, pinned by Snyk to avoid a vulnerability
 setuptools>=70.0.0 # not directly required, pinned by Snyk to avoid a vulnerability
 pillow>=10.3.0 # not directly required, pinned by Snyk to avoid a vulnerability
