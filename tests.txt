@@ -30,4 +30,4 @@ wheel
 gevent>=23.9.0 # not directly required, pinned by Snyk to avoid a vulnerability
 setuptools>=70.0.0 # not directly required, pinned by Snyk to avoid a vulnerability
 pillow>=10.3.0 # not directly required, pinned by Snyk to avoid a vulnerability
-ray==2.52.0
+ray>=2.52.0
