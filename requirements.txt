@@ -1,8 +1,8 @@
 Django[argon2]>=6.0, <6.1
 huggingface-hub
 flwr[simulation]
-syft-flwr
-syftbox
+# syft-flwr
+# syftbox
 scikit-learn-intelex>=2023.2.1; sys_platform != 'darwin'
 python-dotenv==1.2.1
 tensorflow-cpu; sys_platform != 'darwin'
@@ -17,7 +17,7 @@ scikit-learn>=1.6.1
 # --extra-index-url https://download.pytorch.org/whl/cpu
 torch
 torchvision
-git+https://github.com/huggingface/pytorch-image-models.git
+timm>=1.0.22
 prophet==1.2.1
 lightgbm==4.6.0
 captum
