@@ -1,7 +1,8 @@
-Django[argon2]
-python-dotenv==1.2.1
+Django[argon2]>=6.0, <6.1
 huggingface-hub
+flower
 scikit-learn-intelex>=2023.2.1; sys_platform != 'darwin'
+python-dotenv==1.2.1
 tensorflow-cpu; sys_platform != 'darwin'
 tensorflow; sys_platform == 'darwin'
 keras
@@ -18,7 +19,6 @@ timm
 prophet==1.2.1
 lightgbm==4.6.0
 captum
-# syft>=0.9.3b2
 wheel==0.46.1
 gevent==25.9.1
 setuptools>=78.1.1
@@ -27,5 +27,4 @@ zipp==3.23.0
 werkzeug>=3.1.4
 protobuf>=4.25.8 # not directly required, pinned by Snyk to avoid a vulnerability
 urllib3>=2.5.0 # not directly required, pinned by Snyk to avoid a vulnerability
-django>=6.0 # not directly required, pinned by Snyk to avoid a vulnerability
 sqlparse>=0.5.4 # not directly required, pinned by Snyk to avoid a vulnerability
