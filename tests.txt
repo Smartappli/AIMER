@@ -1,5 +1,5 @@
-django>=6.0
-python-dotenv>=1.0.1
+django[argon2]>=6.0, <6.1
+python-dotenv==1.2.1
 huggingface-hub>=0.23.2
 # pycaret[full]>=3.3.2 # 3.2.1
 scikit-learn-intelex>=2023.2.1
@@ -12,8 +12,7 @@ seaborn==0.13.2 # 0.12.2
 # numpy==1.24.4 # 1.24.3
 # numpy==1.24.4; python_version<"3.12"
 # numpy>=1.26.4,<1.27; python_version>="3.12"
-# timm>=1.0.3
-# syft>=0.8.6
+timm>=1.0.22
 scikit-learn>=1.5.0 # 1.3.2
 pandas==2.2.2 # 2.0.3
 torch
@@ -23,9 +22,9 @@ lightgbm>=4.3.0
 captum
 psycopg
 git+https://github.com/huggingface/pytorch-image-models.git
-# syft>=0.9.3
+flower[simulation]
 # git+https://github.com/pycaret/pycaret.git
-wheel>=0.43.0 # not directly required, pinned by Snyk to avoid a vulnerability
+wheel>=0.78.0 # not directly required, pinned by Snyk to avoid a vulnerability
 gevent>=23.9.0 # not directly required, pinned by Snyk to avoid a vulnerability
 setuptools>=70.0.0 # not directly required, pinned by Snyk to avoid a vulnerability
 pillow>=10.3.0 # not directly required, pinned by Snyk to avoid a vulnerability
