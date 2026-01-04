@@ -30,18 +30,16 @@ COPY . .
 RUN python3 -m venv /opt/venv
 ENV PATH="/opt/venv/bin:${PATH}"
 
-# 5) Installer les deps Python dans le venv
 RUN pip install --upgrade --no-cache-dir pip wheel && \
     pip install --no-cache-dir \
-        pytest scikit-build setuptools \
-        fastapi uvicorn sse-starlette \
+        pytest scikit-build setuptools==80.9.0 \
+        fastapi==0.128.0 uvicorn[standard]==0.4.0 sse-starlette \
         pydantic-settings starlette-context
 
-# 6) Installer llama-cpp-python avec CUDA
-#    Tu peux ajuster CMAKE_CUDA_ARCHITECTURES à ton GPU (80 = A100, 86 = RTX 30xx, 89 = RTX 40xx, etc.)
+# Installer llama-cpp-python avec CUDA
+# On peut ajuster CMAKE_CUDA_ARCHITECTURES à ton GPU (80 = A100, 86 = RTX 30xx, 89 = RTX 40xx, etc.)
 ENV GGML_CUDA=1
 ENV CMAKE_ARGS="-DGGML_CUDA=ON -DCMAKE_CUDA_ARCHITECTURES=90"
 RUN pip install --no-cache-dir --verbose llama-cpp-python
 
-# 7) Commande de lancement
 CMD ["python3", "-m", "llama_cpp.server", "--config_file", "config-cuda.json"]
