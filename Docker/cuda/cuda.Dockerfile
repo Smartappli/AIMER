@@ -1,10 +1,8 @@
 ARG CUDA_IMAGE="13.1.0-devel-ubuntu24.04"
 FROM nvidia/cuda:${CUDA_IMAGE}
 
-# Pour que le serveur écoute hors du container
 ENV HOST=0.0.0.0
 
-# 1) Packages système
 RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get upgrade -y && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y \
@@ -14,14 +12,11 @@ RUN apt-get update && \
         gcc g++ wget \
         ocl-icd-opencl-dev opencl-headers clinfo \
         libclblast-dev libopenblas-dev \
-        # utile pour certains linkers CUDA/OpenMP
         libgomp1 \
     && mkdir -p /etc/OpenCL/vendors && \
     echo "libnvidia-opencl.so.1" > /etc/OpenCL/vendors/nvidia.icd && \
     rm -rf /var/lib/apt/lists/*
 
-# 2) ⚙️ Fix build : fournir une libcuda.so.1 “stub” au linker
-#   Dans les images CUDA 13, il y a un stub dans /usr/local/cuda/compat ou lib64/stubs
 RUN set -eux; \
     if [ -f /usr/local/cuda/compat/libcuda.so.1 ]; then \
         ln -sf /usr/local/cuda/compat/libcuda.so.1 /usr/lib/x86_64-linux-gnu/libcuda.so.1; \
@@ -29,11 +24,9 @@ RUN set -eux; \
         ln -sf /usr/local/cuda/lib64/stubs/libcuda.so /usr/lib/x86_64-linux-gnu/libcuda.so.1; \
     fi
 
-# 3) Copier le code
 WORKDIR /app
 COPY . .
 
-# 4) Créer un venv Python (évite PEP 668 / --break-system-packages)
 RUN python3 -m venv /opt/venv
 ENV PATH="/opt/venv/bin:${PATH}"
 
