@@ -22,8 +22,8 @@ captum
 psycopg
 git+https://github.com/huggingface/pytorch-image-models.git
 flwr-nightly[simulation]
-syft-flwr
-syftbox
+# syft-flwr
+# syftbox
 # git+https://github.com/pycaret/pycaret.git
 wheel
 gevent>=23.9.0 # not directly required, pinned by Snyk to avoid a vulnerability
