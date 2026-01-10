@@ -1,0 +1,26 @@
+{% extends layout_path %}
+
+{% load static %}
+{% load i18n %}
+
+{% block title %}{% trans "Under Maintenance" %}{% endblock %}
+
+{% block page_css %}
+{{ block.super }}
+<link rel="stylesheet" href="{% static 'vendor/css/pages/page-misc.css' %}" />
+{% endblock page_css %}
+
+{% block content %}
+<!--Under Maintenance -->
+<div class="container-xxl py-4">
+  <div class="misc-wrapper">
+    <h3 class="mb-2 mx-2">{% trans "Under Maintenance! 🚧" %}</h3>
+    <p class="mb-6 mx-2">{% trans "Sorry for the inconvenience but we're performing some maintenance at the moment" %} </p>
+    <a href="{% url 'index' %}" class="btn btn-primary">{% trans "Back to home" %}</a>
+    <div class="mt-6">
+      <img src="{% static 'img/illustrations/girl-doing-yoga-' %}{{ COOKIES.theme|default:theme }}.png" alt="girl-doing-yoga-light" width="500" class="img-fluid" data-app-light-img="illustrations/girl-doing-yoga-light.png" data-app-dark-img="illustrations/girl-doing-yoga-dark.png" />
+    </div>
+  </div>
+</div>
+<!-- /Under Maintenance -->
+{% endblock %}

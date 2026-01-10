@@ -1,0 +1,27 @@
+{% extends layout_path %}
+
+{% load static %}
+{% load i18n %}
+
+{% block title %}{% trans "Not Authorized" %}{% endblock %}
+
+{% block page_css %}
+{{ block.super }}
+<link rel="stylesheet" href="{% static 'vendor/css/pages/page-misc.css' %}" />
+{% endblock page_css %}
+
+{% block content %}
+<!-- Not Authorized -->
+<div class="container-xxl">
+  <div class="misc-wrapper">
+    <h1 class="mb-2 mx-2" style="line-height: 6rem;font-size: 6rem;">401</h1>
+    <h4 class="mb-2 mx-2">{% trans "You are not authorized! 🔐" %}</h4>
+    <p class="mb-6 mx-2">{% trans "You don’t have permission to access this page. Go Home!" %}</p>
+    <a href="{% url 'index' %}" class="btn btn-primary">{% trans "Back to home" %}</a>
+    <div class="mt-6">
+      <img src="{% static 'img/illustrations/girl-with-laptop-' %}{{ COOKIES.theme|default:theme }}.png" alt="page-misc-not-authorized-light" width="500" class="img-fluid" data-app-light-img="illustrations/girl-with-laptop-light.png" data-app-dark-img="illustrations/girl-with-laptop-dark.png" />
+    </div>
+  </div>
+</div>
+<!-- /Not Authorized -->
+{% endblock %}

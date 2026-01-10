@@ -1,0 +1,10 @@
+<aside id="layout-menu" class="layout-menu-horizontal menu-horizontal  menu bg-menu-theme flex-grow-0">
+  <div class="{{container_class}} d-flex h-100">
+    <ul class="menu-inner">
+      {% for item in menu_data.menu %}
+        {% comment %} Menu Item {% endcomment %}
+        {% include './partials/menu_item_template.html' with item=item %}
+      {% endfor %}
+    </ul>
+  </div>
+</aside>

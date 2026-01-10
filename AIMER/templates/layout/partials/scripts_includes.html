@@ -1,0 +1,30 @@
+{% load static %}
+{% load i18n %}
+<!-- Helpers -->
+<!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
+<script src="{% static 'vendor/js/helpers.js' %}"></script>
+<!--? Template customizer: To hide customizer set display_customizer value false in config.js.  -->
+{% if has_customizer %}
+<script src="{% static 'vendor/js/template-customizer.js' %}"></script>
+{% endif %}
+<!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
+<script src="{% static 'js/config.js' %}"></script>
+<!-- beautify ignore:start -->
+{% if has_customizer %}
+<script>
+  if (typeof TemplateCustomizer !== 'undefined') {
+    window.templateCustomizer = new TemplateCustomizer({
+      defaultTheme: "{{theme}}", // Required as system style can't decided without JS
+     {% if primary_color %}
+      defaultPrimaryColor: "{{ primary_color }}",
+    {% endif %}
+    defaultTextDir: '{% if rtl_mode %}rtl{% else %}ltr{% endif %}',
+    defaultSemiDark: {{ semi_dark_value }},
+    defaultShowDropdownOnHover: {{ show_dropdown_onhover_value }},
+    lang: '{{LANGUAGE_CODE}}',
+    controls: {{ customizer_controls | safe }}
+  });
+  }
+</script>
+{% endif %}
+<!-- beautify ignore:end -->

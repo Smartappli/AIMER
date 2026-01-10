@@ -10,7 +10,14 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
+import os
 from pathlib import Path
+
+from django.utils.translation import gettext_lazy as _
+from dotenv import load_dotenv
+from .template import TEMPLATE_CONFIG, THEME_LAYOUT_DIR, THEME_VARIABLES
+
+load_dotenv()  # take environment variables from .env.
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,10 +27,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-ao*a)e3+osh44v2^g2w74t=sakx=nu%o&$b0-fb#$7+g1=8ozx'
+SECRET_KEY = os.environ["SECRET_KEY"]
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+
+ENVIRONMENT="local"
 
 ALLOWED_HOSTS = []
 
@@ -38,12 +47,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'auth.apps.AuthConfig',
     'website.apps.WebsiteConfig',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    "django.middleware.locale.LocaleMiddleware",
+    "AIMER.language_middleware.DefaultLanguageMiddleware",
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -56,13 +68,25 @@ ROOT_URLCONF = 'AIMER.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / "templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
+                'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                "AIMER.context_processors.language_code",
+                "AIMER.context_processors.my_setting",
+                "AIMER.context_processors.get_cookie",
+                "AIMER.context_processors.environment",
+            ],
+            "libraries": {
+                "theme": "AIMER.template_tags.theme",
+            },
+            "builtins": [
+                "django.templatetags.static",
+                "AIMER.template_tags.theme",
             ],
         },
     },
@@ -99,6 +123,13 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+PASSWORD_HASHERS = [
+    "django.contrib.auth.hashers.Argon2PasswordHasher",
+    "django.contrib.auth.hashers.PBKDF2PasswordHasher",
+    "django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher",
+    "django.contrib.auth.hashers.BCryptSHA256PasswordHasher",
+    "django.contrib.auth.hashers.ScryptPasswordHasher",
+]
 
 # Internationalization
 # https://docs.djangoproject.com/en/6.0/topics/i18n/
@@ -111,8 +142,22 @@ USE_I18N = True
 
 USE_TZ = True
 
+# Default URL on which Django application runs for specific environment
+BASE_URL = os.environ.get("BASE_URL", default="http://127.0.0.1:8000")
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = "static/"
+STATIC_ROOT = BASE_DIR / "staticfiles"
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
+
+# Template Settings
+# ------------------------------------------------------------------------------
+
+THEME_LAYOUT_DIR = THEME_LAYOUT_DIR
+TEMPLATE_CONFIG = TEMPLATE_CONFIG
+THEME_VARIABLES = THEME_VARIABLES
+

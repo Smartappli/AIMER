@@ -1,0 +1,33 @@
+{% extends layout_path %}
+
+{% load static %}
+{% load i18n %}
+
+{% block title %}{% trans "Coming Soon" %}{% endblock %}
+
+{% block page_css %}
+{{ block.super }}
+<link rel="stylesheet" href="{% static 'vendor/css/pages/page-misc.css' %}" />
+{% endblock page_css %}
+
+{% block content %}
+<!-- Coming Soon -->
+<div class="container-xxl py-4">
+  <div class="misc-wrapper">
+    <h3 class="mb-2 mx-2">{% trans "We are launching soon 🚀" %}</h3>
+    <p class="mb-6 mx-2">{% trans "Our website is opening soon. Please register to get notified when it's ready!" %}</p>
+    <form onsubmit="return false">
+      <div>
+        <div class="mb-1 d-flex gap-4">
+          <input type="email" class="form-control" placeholder="{% trans "Enter your email" %}" autofocus>
+          <button type="submit" class="btn btn-primary">{% trans "Notify" %}</button>
+        </div>
+      </div>
+    </form>
+    <div class="mt-12">
+      <img src="{% static 'img/illustrations/boy-with-rocket-' %}{{ COOKIES.theme|default:theme }}.png" alt="boy-with-rocket-light" width="500" class="img-fluid" data-app-dark-img="illustrations/boy-with-rocket-dark.png" data-app-light-img="illustrations/boy-with-rocket-light.png" />
+    </div>
+  </div>
+</div>
+<!-- /Coming Soon -->
+{% endblock %}

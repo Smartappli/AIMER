@@ -1,0 +1,530 @@
+services:
+  # =========================
+  # Postgresql
+  # =========================
+  postgres:
+    image: postgres:18-alpine
+    container_name: postgres
+    env_file: .env
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+      TZ: ${TZ}
+    ports:
+      - "${POSTGRES_HOST_PORT:-5433}:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "${POSTGRES_USER}", "-d", "${POSTGRES_DB}", "-h", "localhost", "-p", "5432"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: always
+
+  postgres-init-dbs:
+    image: postgres:18-alpine
+    container_name: postgres-init-dbs
+    env_file: .env
+    depends_on:
+      - postgres
+    environment:
+      # Pour psql sans prompt
+      PGPASSWORD: ${POSTGRES_PASSWORD}
+      # Liste des DB à créer (séparées par des espaces)
+      DB_NAMES: ${POSTGRES_EXTRA_DBS:-appdb mlflow airflow langfuse}
+    entrypoint: [ "/bin/sh", "-lc" ]
+    command: >
+      set -e;
+      echo "Waiting for Postgres...";
+      until pg_isready -h postgres -p 5432 -U "${POSTGRES_USER}" >/dev/null 2>&1; do sleep 1; done;
+      echo "Postgres is ready. Ensuring DBs: ${DB_NAMES}";
+      for db in ${DB_NAMES}; do
+        echo " - $db";
+        psql -h postgres -U "${POSTGRES_USER}" -d postgres -tAc "SELECT 1 FROM pg_database WHERE datname='${db}'" | grep -q 1
+          || psql -h postgres -U "${POSTGRES_USER}" -d postgres -c "CREATE DATABASE \"${db}\";";
+      done;
+      echo "Done."
+    restart: "no"
+
+  # =========================
+  # PGVector
+  # =========================
+  pgvector:
+    image: pgvector/pgvector:pg18-trixie
+    container_name: pgvector2
+    env_file: .env
+    environment:
+      POSTGRES_USER: ${PGVECTOR_USER}
+      POSTGRES_PASSWORD: ${PGVECTOR_PASSWORD}
+      POSTGRES_DB: ${PGVECTOR_DB}
+      TZ: ${TZ}
+    ports:
+      - "${PGVECTOR_HOST_PORT:-5432}:5432"
+    volumes:
+      - pgvector-data:/var/lib/postgresql
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-U", "${PGVECTOR_USER}", "-d", "${PGVECTOR_DB}", "-h", "localhost", "-p", "5432" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: always
+
+  # =========================
+  # PGAdmin
+  # =========================
+  pgadmin:
+    image: dpage/pgadmin4:9
+    container_name: pgadmin
+    env_file: .env
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_PASSWORD}
+      PGADMIN_LISTEN_PORT: ${PGADMIN_PORT}
+      TZ: ${TZ}
+    ports:
+      - "${PGADMIN_PORT}:${PGADMIN_PORT}"
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+    depends_on:
+      - postgres
+      - pgvector
+    restart: always
+
+  # =========================
+  # Ollama
+  # =========================
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ohllama
+    env_file: .env
+    ports:
+      - "${OLLAMA_PORT:-11434}:11434"
+    volumes:
+      - ollama-data:/root/.ollama
+    command: ["serve"]
+    healthcheck:
+      test: ["CMD", "ollama", "list"]
+      interval: 30s
+      timeout: 10s
+      retries: 10
+    restart: always
+
+  ollama-preload:
+    image: curlimages/curl:8.10.1
+    container_name: ollama-preload
+    depends_on:
+      - ollama
+    command: >
+      sh -lc '
+        set -e;
+        # attendre que l’API réponde
+        until curl -sf http://ollama:11434/api/tags >/dev/null; do sleep 1; done;
+
+        for m in \
+          llama3.2-vision \
+          mistral-small3.2
+        do
+          echo "Pull $m";
+          curl -sf http://ollama:11434/api/pull \
+            -H "Content-Type: application/json" \
+            -d "{\"model\":\"$m\",\"stream\":false}" >/dev/null;
+        done;
+
+        echo "All models pulled.";
+      '
+    restart: "no"
+
+  # =========================
+  # Qdrant
+  # =========================
+  qdrant:
+    build:
+      context: ./qdrant
+      dockerfile: Dockerfile
+    image: qdrant-local:with-curl
+    env_file: .env
+    environment:
+      QDRANT__SERVICE__API_KEY: ${QDRANT_API_KEY:-}
+      QDRANT__LOG_LEVEL: ${QDRANT_LOG_LEVEL:-INFO}
+      TZ: ${TZ}
+    ports:
+      - "${QDRANT_HOST_PORT:-6333}:6333"
+    volumes:
+      - qdrant-data:/qdrant/storage
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://localhost:6333/readyz >/dev/null || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 20s
+    restart: always
+
+  # =========================
+  # Neo4j
+  # =========================
+  neo4j:
+    image: neo4j:5
+    container_name: neo4j
+    env_file: .env
+    environment:
+      TZ: ${TZ}
+      # Format: "neo4j/password" (ou "none" pour désactiver l'auth en dev)
+      NEO4J_AUTH: ${NEO4J_AUTH:-neo4j/neo4j}
+      # Plugins utiles (APOC)
+      NEO4J_PLUGINS: '["apoc"]'
+      NEO4J_dbms_security_procedures_unrestricted: "apoc.*"
+      NEO4J_dbms_security_procedures_allowlist: "apoc.*"
+    ports:
+      - "${GRAPHDB_HTTP_PORT:-7474}:7474"
+      - "${GRAPHDB_BOLT_PORT:-7687}:7687"
+    volumes:
+      - neo4j-data:/data
+      - neo4j-logs:/logs
+      - neo4j-import:/var/lib/neo4j/import
+      - neo4j-plugins:/plugins
+    restart: always
+
+  # =========================
+  # Airflow (LocalExecutor + Postgres existant)
+  # =========================
+  airflow-init:
+    build:
+      context: ./airflow
+      dockerfile: Dockerfile
+    container_name: airflow-init
+    env_file: .env
+    depends_on:
+      postgres-init-dbs:
+        condition: service_completed_successfully
+    environment:
+      AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
+      AIRFLOW__API__SECRET_KEY: ${AIRFLOW_API_SECRET_KEY}
+      AIRFLOW__CORE__SIMPLE_AUTH_MANAGER_USERS: ${AIRFLOW_SIMPLE_USERS}
+    command: ["bash", "-lc", "airflow db migrate"]
+    restart: "no"
+
+  airflow-api:
+    build:
+      context: ./airflow
+      dockerfile: Dockerfile
+    container_name: airflow-api
+    env_file: .env
+    depends_on:
+      - postgres-init-dbs
+      - airflow-init
+    environment:
+      TZ: ${TZ}
+      AIRFLOW__CORE__EXECUTOR: LocalExecutor
+      AIRFLOW__CORE__LOAD_EXAMPLES: "false"
+      AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
+      AIRFLOW__API__SECRET_KEY: ${AIRFLOW_API_SECRET_KEY}
+      AIRFLOW__API__HOST: 0.0.0.0
+      AIRFLOW__API__PORT: "8080"
+    ports:
+      - "${AIRFLOW_PORT:-8080}:8080"
+    volumes:
+      - ./airflow/dags:/opt/airflow/dags
+      - ./airflow/logs:/opt/airflow/logs
+      - ./airflow/plugins:/opt/airflow/plugins
+    command: ["api-server"]
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "http://localhost:8080/api/v2/monitor/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    restart: always
+
+  airflow-scheduler:
+    build:
+      context: ./airflow
+      dockerfile: Dockerfile
+    container_name: airflow-scheduler
+    env_file: .env
+    depends_on:
+      - postgres-init-dbs
+      - airflow-init
+    environment:
+      TZ: ${TZ}
+      AIRFLOW__CORE__EXECUTOR: LocalExecutor
+      AIRFLOW__CORE__LOAD_EXAMPLES: "false"
+      AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
+      AIRFLOW__API__SECRET_KEY: ${AIRFLOW_API_SECRET_KEY}
+    volumes:
+      - ./airflow/dags:/opt/airflow/dags
+      - ./airflow/logs:/opt/airflow/logs
+      - ./airflow/plugins:/opt/airflow/plugins
+    command: ["scheduler"]
+    restart: always
+
+  airflow-dag-processor:
+    build:
+      context: ./airflow
+      dockerfile: Dockerfile
+    container_name: airflow-dag-processor
+    env_file: .env
+    depends_on:
+      - postgres-init-dbs
+      - airflow-init
+    environment:
+      TZ: ${TZ}
+      AIRFLOW__CORE__EXECUTOR: LocalExecutor
+      AIRFLOW__CORE__LOAD_EXAMPLES: "false"
+      AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
+      AIRFLOW__API__SECRET_KEY: ${AIRFLOW_API_SECRET_KEY}
+    volumes:
+      - ./airflow/dags:/opt/airflow/dags
+      - ./airflow/logs:/opt/airflow/logs
+      - ./airflow/plugins:/opt/airflow/plugins
+    command: ["dag-processor"]
+    restart: always
+
+  # =========================
+  # Langfuse v3 (web + worker + clickhouse + redis + minio)
+  # =========================
+  langfuse-clickhouse:
+    image: clickhouse/clickhouse-server:latest
+    container_name: langfuse-clickhouse
+    environment:
+      TZ: ${TZ}
+      CLICKHOUSE_DB: ${LANGFUSE_CLICKHOUSE_DB:-default}
+      CLICKHOUSE_USER: ${LANGFUSE_CLICKHOUSE_USER:-clickhouse}
+      CLICKHOUSE_PASSWORD: ${LANGFUSE_CLICKHOUSE_PASSWORD:-clickhouse}
+    volumes:
+      - langfuse-clickhouse-data:/var/lib/clickhouse
+    ulimits:
+      nofile:
+        soft: 262144
+        hard: 262144
+    restart: always
+
+  langfuse-redis:
+    image: redis:8-alpine
+    container_name: langfuse-redis
+    command: >
+      sh -c "redis-server --appendonly yes --requirepass ${LANGFUSE_REDIS_AUTH:-redis}"
+    environment:
+      TZ: ${TZ}
+    volumes:
+      - langfuse-redis-data:/data
+    restart: always
+
+  langfuse-minio:
+    image: minio/minio:latest
+    container_name: langfuse-minio
+    environment:
+      TZ: ${TZ}
+      MINIO_ROOT_USER: ${LANGFUSE_S3_ACCESS_KEY_ID:-minioadmin}
+      MINIO_ROOT_PASSWORD: ${LANGFUSE_S3_SECRET_ACCESS_KEY:-minioadmin}
+    command: server /data --console-address ":9001"
+    ports:
+      - "${LANGFUSE_MINIO_PORT:-9000}:9000"
+      - "${LANGFUSE_MINIO_CONSOLE_PORT:-9001}:9001"
+    volumes:
+      - langfuse-minio-data:/data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/ready"]
+      interval: 5s
+      timeout: 3s
+      retries: 30
+    restart: always
+
+  langfuse-minio-init:
+    image: minio/mc:latest
+    container_name: langfuse-minio-init
+    depends_on:
+      - langfuse-minio
+    entrypoint: >
+      /bin/sh -lc '
+        set -e;
+  
+        echo "Waiting for MinIO (mc alias set)...";
+        i=0;
+        until mc alias set lf "http://langfuse-minio:9000" \
+          "${LANGFUSE_S3_ACCESS_KEY_ID:-minioadmin}" \
+          "${LANGFUSE_S3_SECRET_ACCESS_KEY:-minioadmin}"
+        do
+          i=$((i+1));
+          if [ "$i" -ge 120 ]; then
+            echo "MinIO not reachable after 120s. Dumping DNS & retry info:";
+            (getent hosts langfuse-minio || true);
+            exit 1;
+          fi
+          sleep 1;
+        done
+  
+        echo "MinIO is reachable. Ensuring buckets...";
+        mc mb -p "lf/${LANGFUSE_S3_EVENT_UPLOAD_BUCKET:-langfuse-events}" || true;
+        mc mb -p "lf/${LANGFUSE_S3_MEDIA_UPLOAD_BUCKET:-langfuse-media}" || true;
+  
+        echo "Buckets ensured.";
+      '
+    restart: "no"
+
+  langfuse-web:
+    image: langfuse/langfuse:3
+    container_name: langfuse-web
+    env_file: .env
+    depends_on:
+      - postgres-init-dbs
+      - langfuse-clickhouse
+      - langfuse-redis
+      - langfuse-minio
+      - langfuse-minio-init
+    environment:
+      TZ: ${TZ}
+      DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
+      CLICKHOUSE_CLUSTER_ENABLED: "false"
+      CLICKHOUSE_MIGRATION_URL: clickhouse://langfuse-clickhouse:9000
+      CLICKHOUSE_URL: http://langfuse-clickhouse:8123
+      CLICKHOUSE_USER: ${LANGFUSE_CLICKHOUSE_USER:-clickhouse}
+      CLICKHOUSE_PASSWORD: ${LANGFUSE_CLICKHOUSE_PASSWORD:-clickhouse}
+      CLICKHOUSE_DB: ${LANGFUSE_CLICKHOUSE_DB:-default}
+      REDIS_HOST: langfuse-redis
+      REDIS_PORT: 6379
+      REDIS_AUTH: ${LANGFUSE_REDIS_AUTH:-redis}
+      NEXTAUTH_URL: ${LANGFUSE_NEXTAUTH_URL:-http://localhost:3000}
+      NEXTAUTH_SECRET: ${LANGFUSE_NEXTAUTH_SECRET:-change_me_use_openssl_rand_base64_32}
+      SALT: ${LANGFUSE_SALT:-change_me_use_openssl_rand_base64_32}
+      ENCRYPTION_KEY: ${LANGFUSE_ENCRYPTION_KEY:-0000000000000000000000000000000000000000000000000000000000000000}
+
+      # S3 / MinIO (événements)
+      LANGFUSE_S3_EVENT_UPLOAD_BUCKET: ${LANGFUSE_S3_EVENT_UPLOAD_BUCKET:-langfuse-events}
+      LANGFUSE_S3_EVENT_UPLOAD_REGION: ${LANGFUSE_S3_EVENT_UPLOAD_REGION:-us-east-1}
+      LANGFUSE_S3_EVENT_UPLOAD_ENDPOINT: ${LANGFUSE_S3_EVENT_UPLOAD_ENDPOINT:-http://langfuse-minio:9000}
+      LANGFUSE_S3_EVENT_UPLOAD_ACCESS_KEY_ID: ${LANGFUSE_S3_ACCESS_KEY_ID:-minioadmin}
+      LANGFUSE_S3_EVENT_UPLOAD_SECRET_ACCESS_KEY: ${LANGFUSE_S3_SECRET_ACCESS_KEY:-minioadmin}
+      LANGFUSE_S3_EVENT_UPLOAD_FORCE_PATH_STYLE: "true"
+
+      # S3 / MinIO (media)
+      LANGFUSE_S3_MEDIA_UPLOAD_BUCKET: ${LANGFUSE_S3_MEDIA_UPLOAD_BUCKET:-langfuse-media}
+      LANGFUSE_S3_MEDIA_UPLOAD_REGION: ${LANGFUSE_S3_MEDIA_UPLOAD_REGION:-us-east-1}
+      LANGFUSE_S3_MEDIA_UPLOAD_ENDPOINT: ${LANGFUSE_S3_MEDIA_UPLOAD_ENDPOINT:-http://langfuse-minio:9000}
+      LANGFUSE_S3_MEDIA_UPLOAD_ACCESS_KEY_ID: ${LANGFUSE_S3_ACCESS_KEY_ID:-minioadmin}
+      LANGFUSE_S3_MEDIA_UPLOAD_SECRET_ACCESS_KEY: ${LANGFUSE_S3_SECRET_ACCESS_KEY:-minioadmin}
+      LANGFUSE_S3_MEDIA_UPLOAD_FORCE_PATH_STYLE: "true"
+    ports:
+      - "${LANGFUSE_PORT:-3000}:3000"
+    restart: always
+
+  langfuse-worker:
+    image: langfuse/langfuse-worker:3
+    container_name: langfuse-worker
+    env_file: .env
+    depends_on:
+      - postgres-init-dbs
+      - langfuse-clickhouse
+      - langfuse-redis
+      - langfuse-minio
+      - langfuse-minio-init
+    environment:
+      TZ: ${TZ}
+      DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
+      CLICKHOUSE_CLUSTER_ENABLED: "false"
+      CLICKHOUSE_MIGRATION_URL: clickhouse://langfuse-clickhouse:9000
+      CLICKHOUSE_URL: http://langfuse-clickhouse:8123
+      CLICKHOUSE_USER: ${LANGFUSE_CLICKHOUSE_USER:-clickhouse}
+      CLICKHOUSE_PASSWORD: ${LANGFUSE_CLICKHOUSE_PASSWORD:-clickhouse}
+      CLICKHOUSE_DB: ${LANGFUSE_CLICKHOUSE_DB:-default}
+      REDIS_HOST: langfuse-redis
+      REDIS_PORT: 6379
+      REDIS_AUTH: ${LANGFUSE_REDIS_AUTH:-redis}
+      NEXTAUTH_URL: ${LANGFUSE_NEXTAUTH_URL:-http://localhost:3000}
+      SALT: ${LANGFUSE_SALT:-change_me_use_openssl_rand_base64_32}
+      ENCRYPTION_KEY: ${LANGFUSE_ENCRYPTION_KEY:-0000000000000000000000000000000000000000000000000000000000000000}
+
+      LANGFUSE_S3_EVENT_UPLOAD_BUCKET: ${LANGFUSE_S3_EVENT_UPLOAD_BUCKET:-langfuse-events}
+      LANGFUSE_S3_EVENT_UPLOAD_REGION: ${LANGFUSE_S3_EVENT_UPLOAD_REGION:-us-east-1}
+      LANGFUSE_S3_EVENT_UPLOAD_ENDPOINT: ${LANGFUSE_S3_EVENT_UPLOAD_ENDPOINT:-http://langfuse-minio:9000}
+      LANGFUSE_S3_EVENT_UPLOAD_ACCESS_KEY_ID: ${LANGFUSE_S3_ACCESS_KEY_ID:-minioadmin}
+      LANGFUSE_S3_EVENT_UPLOAD_SECRET_ACCESS_KEY: ${LANGFUSE_S3_SECRET_ACCESS_KEY:-minioadmin}
+      LANGFUSE_S3_EVENT_UPLOAD_FORCE_PATH_STYLE: "true"
+
+      LANGFUSE_S3_MEDIA_UPLOAD_BUCKET: ${LANGFUSE_S3_MEDIA_UPLOAD_BUCKET:-langfuse-media}
+      LANGFUSE_S3_MEDIA_UPLOAD_REGION: ${LANGFUSE_S3_MEDIA_UPLOAD_REGION:-us-east-1}
+      LANGFUSE_S3_MEDIA_UPLOAD_ENDPOINT: ${LANGFUSE_S3_MEDIA_UPLOAD_ENDPOINT:-http://langfuse-minio:9000}
+      LANGFUSE_S3_MEDIA_UPLOAD_ACCESS_KEY_ID: ${LANGFUSE_S3_ACCESS_KEY_ID:-minioadmin}
+      LANGFUSE_S3_MEDIA_UPLOAD_SECRET_ACCESS_KEY: ${LANGFUSE_S3_SECRET_ACCESS_KEY:-minioadmin}
+      LANGFUSE_S3_MEDIA_UPLOAD_FORCE_PATH_STYLE: "true"
+    ports:
+      - "${LANGFUSE_WORKER_PORT:-3030}:3030"
+    restart: always
+
+  # =========================
+  # MLflow (Postgres backend + artifacts volume)
+  # =========================
+  mlflow:
+    build:
+      context: ./mlflow
+      dockerfile: Dockerfile
+    image: mlflow-local:with-psycopg2
+    env_file: .env
+    depends_on:
+      postgres-init-dbs:
+        condition: service_completed_successfully
+    environment:
+      TZ: ${TZ}
+    ports:
+      - "${MLFLOW_PORT:-5000}:5000"
+    volumes:
+      - mlflow-artifacts:/mlflow/artifacts
+    command:
+      - sh
+      - -c
+      - |
+        exec mlflow server --host 0.0.0.0 --port 5000 \
+          --backend-store-uri "${MLFLOW_BACKEND_STORE_URI}" \
+          --default-artifact-root /mlflow/artifacts \
+          --allowed-hosts "${MLFLOW_ALLOWED_HOSTS:-*}" \
+          --cors-allowed-origins "${MLFLOW_CORS_ALLOWED_ORIGINS:-*}"
+    restart: always
+
+  # =========================
+  # Apache Jena Fuseki (SPARQL / RDF triplestore)
+  # =========================
+  fuseki:
+    image: stain/jena-fuseki:latest
+    container_name: fuseki
+    env_file: .env
+    environment:
+      TZ: ${TZ}
+      # Optionnel: si non défini, un mot de passe admin est généré au 1er run
+      ADMIN_PASSWORD: ${FUSEKI_ADMIN_PASSWORD:-}
+      # Optionnel: mémoire JVM
+      JVM_ARGS: ${FUSEKI_JVM_ARGS:--Xmx2g}
+      # Crée un dataset vide au démarrage (ex: /ds)
+      FUSEKI_DATASET_1: ${FUSEKI_DATASET_1:-ds}
+      # Recommandé: TDB2
+      TDB: ${FUSEKI_TDB:-2}
+    ports:
+      # Localhost only + port par défaut 3031 (3030 est déjà pris chez toi)
+      - "127.0.0.1:${FUSEKI_PORT:-3031}:3030"
+    volumes:
+      - fuseki-data:/fuseki
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://localhost:3030/$/ping >/dev/null || exit 1"]
+      interval: 15s
+      timeout: 5s
+      retries: 10
+      start_period: 20s
+    restart: always
+
+volumes:
+  postgres-data:
+  pgvector-data:
+  pgadmin-data:
+  ollama-data:
+  qdrant-data:
+
+  neo4j-data:
+  neo4j-logs:
+  neo4j-import:
+  neo4j-plugins:
+
+  langfuse-clickhouse-data:
+  langfuse-redis-data:
+  langfuse-minio-data:
+
+  mlflow-artifacts:
+
+  fuseki-data:

@@ -1,0 +1,23 @@
+{% extends 'layout/master.html' %}
+
+
+{% block layout %}
+
+{% if is_navbar %}
+<!-- Navbar: Start -->
+{% include "../layout/partials/navbar/navbar_front.html" %}
+<!-- Navbar: End -->
+{% endif %}
+
+<!-- Content:Start -->
+{% block content %}
+{% endblock content %}
+<!-- Content: End -->
+
+{% if is_footer %}
+<!-- Footer: Start -->
+{% include "../layout/partials/footer/footer_front.html" %}
+<!-- Footer: End -->
+{% endif %}
+
+{% endblock layout %}

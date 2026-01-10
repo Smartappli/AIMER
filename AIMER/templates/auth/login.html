@@ -1,0 +1,102 @@
+{% extends layout_path %}
+
+{% load static %}
+{% load i18n %}
+
+{% block title %}{% trans "AIMER - Login" %}{% endblock %}
+
+{% block vendor_css %}
+{{ block.super }}
+<link rel="stylesheet" href="{% static 'vendor/libs/@form-validation/form-validation.css' %}" />
+{% endblock vendor_css %}
+
+{% block vendor_js %}
+{{ block.super }}
+<script src="{% static 'vendor/libs/@form-validation/popular.js' %}"></script>
+<script src="{% static 'vendor/libs/@form-validation/bootstrap5.js' %}"></script>
+<script src="{% static 'vendor/libs/@form-validation/auto-focus.js' %}"></script>
+{% endblock vendor_js %}
+
+{% block page_css %}
+{{ block.super }}
+<link rel="stylesheet" href="{% static 'vendor/css/pages/page-auth.css' %}" />
+{% endblock page_css %}
+
+{% block page_js %}
+{{ block.super }}
+<script src="{% static 'js/authentication.js' %}"></script>
+<script src="{% static 'js/ui-popover.js' %}"></script>
+{% endblock page_js %}
+
+{% block content %}
+<div class="authentication-wrapper authentication-cover">
+  <!-- Logo -->
+  <a href="{% url 'login' %}" class="app-brand auth-cover-brand gap-2">
+    <span class="app-brand-logo demo">{% include 'partials/logo.html' %}</span>
+    <span class="app-brand-text demo text-heading fw-bold">{% get_theme_variables 'template_name' %}</span>
+  </a>
+  <!-- /Logo -->
+  <div class="authentication-inner row m-0">
+    <!-- /Left Text -->
+    <div class="d-none d-lg-flex col-lg-7 col-xl-8 align-items-center p-5">
+      <div class="w-100 d-flex justify-content-center">
+        <img src="{% static 'img/illustrations/boy-with-rocket-' %}{{ COOKIES.theme|default:theme }}.png" class="img-fluid" alt="Login image" width="700" data-app-dark-img="illustrations/boy-with-rocket-dark.png" data-app-light-img="illustrations/boy-with-rocket-light.png" />
+      </div>
+    </div>
+    <!-- /Left Text -->
+
+    <!-- Login -->
+    <div class="d-flex col-12 col-lg-5 col-xl-4 align-items-center authentication-bg p-sm-12 p-6">
+      <div class="w-px-400 mx-auto mt-sm-12 mt-8">
+        <h4 class="mb-1">{% trans "Welcome to" %} {% get_theme_variables 'template_name' %}!</h4>
+        <p class="mb-6">{% trans "Please sign-in to your account and start the adventure" %}</p>
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert {% if message.tags == 'success' %}alert-success{% elif message.tags == 'error' %}alert-danger{% else %}alert-warning{% endif %}" role="alert">
+          {{ message }}
+        </div>
+        {% endfor %}
+        {% endif %}
+        <form id="formAuthentication" class="mb-6" action="{% url 'login' %}" method="post">
+          {% csrf_token %}
+          <div class="mb-6 form-control-validation">
+            <label for="email" class="form-label">{% trans "Email or Username" %}</label>
+            <input type="email" class="form-control" id="email" name="email-username" aria-describedby="{% trans "Email/Username" %}" autofocus />
+          </div>
+          <div class="form-password-toggle form-control-validation">
+            <label class="form-label" for="password">{% trans "Password" %}</label>
+            <div class="input-group input-group-merge">
+              <input type="password" id="password" class="form-control" name="password" aria-describedby="{% trans "password" %}" />
+              <span class="input-group-text cursor-pointer"><i class="icon-base bx bx-hide"></i></span>
+            </div>
+          </div>
+          <div class="my-7">
+            <div class="d-flex justify-content-between">
+              <div class="form-check mb-0">
+                <input class="form-check-input" type="checkbox" id="remember-me" />
+                <label class="form-check-label" for="remember-me">{% trans "Remember Me" %}</label>
+              </div>
+              <a href="{% url 'forgot-password' %}">
+                <small>{% trans "Forgot Password?" %}</small>
+              </a>
+            </div>
+          </div>
+          {% if request.GET.next %}
+          <input type="hidden" name="next" value="{{request.GET.next}}">
+          {% endif %}
+          <button class="btn btn-primary d-grid w-100" type="submit">{% trans "Sign in" %}</button>
+        </form>
+
+        <p class="text-center">
+          <span>{% trans "New on our platform?" %}</span>
+          <a href="{% url 'register' %}">
+            <span>{% trans "Create an account" %}</span>
+          </a>
+        </p>
+
+      </div>
+    </div>
+    <!-- /Login -->
+  </div>
+</div>
+{% endblock %}

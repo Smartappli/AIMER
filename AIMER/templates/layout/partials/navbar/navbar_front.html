@@ -1,0 +1,160 @@
+{% load static %}
+{% load i18n %}
+
+<nav class="layout-navbar shadow-none py-0">
+  <div class="container">
+    <div class="navbar navbar-expand-lg landing-navbar px-3 px-md-8">
+      <!-- Menu logo wrapper: Start -->
+      <div class="navbar-brand app-brand demo d-flex py-0 me-4 me-xl-8">
+        <!-- Mobile menu toggle: Start-->
+        <button class="navbar-toggler border-0 px-0 me-4" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <i class="icon-base bx bx-menu icon-lg align-middle text-heading fw-medium"></i>
+        </button>
+        <!-- Mobile menu toggle: End-->
+        <a href="{% url 'index' %}" class="app-brand-link">
+          <span class="app-brand-logo demo">{% include 'partials/logo.html'  %}</span>
+          <span class="app-brand-text demo menu-text fw-bold ms-2 ps-1">{% get_theme_variables 'template_name' %}</span>
+        </a>
+      </div>
+      <!-- Menu logo wrapper: End -->
+      <!-- Menu wrapper: Start -->
+      <div class="collapse navbar-collapse landing-nav-menu" id="navbarSupportedContent">
+        <button class="navbar-toggler border-0 text-heading position-absolute end-0 top-0 scaleX-n1-rtl p-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <i class="icon-base bx bx-x icon-lg"></i>
+        </button>
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link fw-medium" aria-current="page" href="{% url 'index' %}#landingHero">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link fw-medium" href="{% url 'index' %}#landingFeatures">Features</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link fw-medium" href="{% url 'index' %}#landingTeam">Team</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link fw-medium" href="{% url 'index' %}#landingFAQ">FAQ</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link fw-medium" href="{% url 'index' %}#landingContact">Contact us</a>
+          </li>
+          <li class="nav-item mega-dropdown {% if '/front/pricing/' in active_url or '/front/payment/' in active_url or '/front/checkout/' in active_url or '/front/help_center/' in active_url %}active{% endif %}">
+            <a href="javascript:void(0);" class="nav-link dropdown-toggle navbar-ex-14-mega-dropdown mega-dropdown fw-medium" aria-expanded="false" data-bs-toggle="mega-dropdown" data-trigger="hover">
+              <span data-i18n="Pages">Pages</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link fw-medium" href="{% url 'index' %}" target="_blank">Admin</a>
+          </li>
+        </ul>
+      </div>
+      <div class="landing-menu-overlay d-lg-none"></div>
+      <!-- Menu wrapper: End -->
+      <!-- Toolbar: Start -->
+      <ul class="navbar-nav flex-row align-items-center ms-auto">
+        {% if has_customizer %}
+        <!-- Style Switcher -->
+        <li class="nav-item dropdown-style-switcher dropdown me-2 me-xl-0">
+          <a class="nav-link dropdown-toggle hide-arrow" id="nav-theme" href="javascript:void(0);" data-bs-toggle="dropdown">
+            <i class="icon-base bx bx-sun icon-lg theme-icon-active"></i>
+            <span class="d-none ms-2" id="nav-theme-text">Toggle theme</span>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-theme-text">
+            <li>
+              <button type="button" class="dropdown-item align-items-center active" data-bs-theme-value="light" aria-pressed="false">
+                <span><i class="icon-base bx bx-sun icon-md me-3" data-icon="sun"></i>Light</span>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="dropdown-item align-items-center" data-bs-theme-value="dark" aria-pressed="true">
+                <span><i class="icon-base bx bx-moon icon-md me-3" data-icon="moon"></i>Dark</span>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="dropdown-item align-items-center" data-bs-theme-value="system" aria-pressed="false">
+                <span><i class="icon-base bx bx-desktop icon-md me-3" data-icon="desktop"></i>System</span>
+              </button>
+            </li>
+          </ul>
+        </li>
+        <!-- / Style Switcher-->
+        {% endif %}
+
+        <!-- navbar button: Start -->
+        {% if request.user.is_authenticated %}
+
+        <li class="nav-item navbar-dropdown dropdown-user dropdown">
+          <a class="nav-link dropdown-toggle hide-arrow p-0" href="javascript:void(0);" data-bs-toggle="dropdown">
+            <div class="avatar avatar-online">
+              <!-- Moke condition for displaying user avatar -->
+              {% if request.user|has_group:"admin" %}
+              <img src="{% static 'img/avatars/1.png' %}" alt class="rounded-circle">
+              {% else %}
+              <img src="{% static 'img/avatars/3.png' %}" alt class="rounded-circle">
+              {% endif %}
+            </div>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li>
+              <a class="dropdown-item" href="javascript:void(0);">
+                <div class="d-flex">
+                  <div class="flex-shrink-0 me-3">
+                    <div class="avatar avatar-online">
+                      <!-- Moke condition for displaying user avatar -->
+                      {% if request.user|has_group:"admin" %}
+                      <img src="{% static 'img/avatars/1.png' %}" alt class="w-px-40 h-auto rounded-circle">
+                      {% else %}
+                      <img src="{% static 'img/avatars/3.png' %}" alt class="w-px-40 h-auto rounded-circle">
+                      {% endif %}
+                    </div>
+                  </div>
+                  <div class="flex-grow-1">
+                    <h6 class="mb-0">{{ request.user.username| capfirst }}</h6>
+                    {% for group in request.user.groups.all %}
+                    <small class="text-body-secondary">{{group.name| capfirst }}</small>
+                    {% endfor %}
+                  </div>
+                </div>
+              </a>
+            </li>
+            <li>
+              {% if request.user.is_authenticated and request.user.profile.is_verified %}
+              <span class="dropdown-item d-flex justify-content-between align-content-center">
+                <span>
+                  <i class='icon-base icon-md me-3 bx bxs-user-circle'></i>
+                  <span class="align-middle">Verified</span>
+                </span>
+                <span class="text-success"><i class='icon-base icon-md bx bxs-circle'></i></span>
+              </span>
+              {% else %}
+              <a class="dropdown-item d-flex justify-content-between align-content-center" href="{% url 'verify-email-page' %}">
+                <span>
+                  <i class='icon-base icon-md me-3 bx bxs-user-circle'></i>
+                  <span class="align-middle">Not Verified</span>
+                </span>
+                <span class="text-danger"><i class='icon-base icon-md bx bxs-circle'></i></span>
+              </a>
+              {% endif %}
+            </li>
+            <li>
+              <form action="{% url 'logout' %}" method="post">
+                {% csrf_token %}
+                <button type="submit" class="dropdown-item">
+                  <i class="icon-base bx bx-power-off icon-md me-3"></i>
+                  <span class="align-middle">{% trans "Log Out" %}</span>
+                </button>
+              </form>
+            </li>
+          </ul>
+        </li>
+        {% else %}
+        <li>
+          <a href="{% url 'login' %}" class="btn btn-primary" target="_blank"><span class="icon-base bx bx-log-in-circle scaleX-n1-rtl me-md-1"></span><span class="d-none d-md-block">{% trans "Login" %}/{% trans "Register" %}</span></a>
+        </li>
+        {% endif %}
+        <!-- navbar button: End -->
+      </ul>
+      <!-- Toolbar: End -->
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,95 @@
+{% load static %}
+
+<!-- Payment provider modal -->
+<div class="modal fade" id="paymentProvider" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-simple modal-enable-otp modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="text-center mb-6">
+          <h4 class="mb-2">Select payment providers</h4>
+          <p>Third-party payment providers</p>
+        </div>
+
+        <div class="d-flex flex-column flex-sm-row align-items-sm-center justify-content-between border-bottom py-4 mb-4">
+          <h6 class="m-0 mb-2 mb-md-0 me-12">Adyen</h6>
+          <div class="d-flex flex-wrap gap-4">
+            <img src="{% static 'img/icons/payments/visa-cc.png' %}" class="img-fluid w-px-50 h-px-30 rounded" alt="visa-card" />
+            <img src="{% static 'img/icons/payments/mastercard-cc.png' %}" class="img-fluid w-px-50 h-px-30 rounded" alt="master-card" />
+            <img src="{% static 'img/icons/payments/ae-' %}{{ COOKIES.theme|default:theme }}.png" class="img-fluid w-px-50 h-px-30" alt="american-express-card" data-app-light-img="icons/payments/ae-light.png" data-app-dark-img="icons/payments/ae-dark.png" />
+            <img src="{% static 'img/icons/payments/jcb-' %}{{ COOKIES.theme|default:theme }}.png" class="img-fluid w-px-50 h-px-30" alt="jcb-card" data-app-light-img="icons/payments/jcb-light.png" data-app-dark-img="icons/payments/jcb-dark.png" />
+            <img src="{% static 'img/icons/payments/dc-' %}{{ COOKIES.theme|default:theme }}.png" class="img-fluid w-px-50 h-px-30" alt="diners-club-card" data-app-light-img="icons/payments/dc-light.png" data-app-dark-img="icons/payments/dc-dark.png" />
+          </div>
+        </div>
+        <div class="d-flex flex-column flex-sm-row align-items-sm-center justify-content-between border-bottom pb-4 mb-4">
+          <h6 class="m-0 mb-2 mb-md-0">2Checkout</h6>
+          <div class="d-flex flex-wrap gap-4">
+            <img src="{% static 'img/icons/payments/visa-cc.png' %}" class="img-fluid w-px-50 h-px-30 rounded" alt="visa-card" />
+            <img src="{% static 'img/icons/payments/ae-' %}{{ COOKIES.theme|default:theme }}.png" class="img-fluid w-px-50 h-px-30" alt="american-express-card" data-app-light-img="icons/payments/ae-light.png" data-app-dark-img="icons/payments/ae-dark.png" />
+            <img src="{% static 'img/icons/payments/jcb-' %}{{ COOKIES.theme|default:theme }}.png" class="img-fluid w-px-50 h-px-30" alt="jcb-card" data-app-light-img="icons/payments/jcb-light.png" data-app-dark-img="icons/payments/jcb-dark.png" />
+            <img src="{% static 'img/icons/payments/dc-' %}{{ COOKIES.theme|default:theme }}.png" class="img-fluid w-px-50 h-px-30" alt="diners-club-card" data-app-light-img="icons/payments/dc-light.png" data-app-dark-img="icons/payments/dc-dark.png" />
+          </div>
+        </div>
+        <div class="d-flex flex-column flex-sm-row align-items-sm-center justify-content-between border-bottom pb-4 mb-4">
+          <h6 class="m-0 mb-2 mb-md-0">Airpay</h6>
+          <div class="d-flex flex-wrap gap-4">
+            <img src="{% static 'img/icons/payments/visa-cc.png' %}" class="img-fluid w-px-50 h-px-30 rounded" alt="visa-card" />
+            <img src="{% static 'img/icons/payments/ae-' %}{{ COOKIES.theme|default:theme }}.png" class="img-fluid w-px-50 h-px-30" alt="american-express-card" data-app-light-img="icons/payments/ae-light.png" data-app-dark-img="icons/payments/ae-dark.png" />
+            <img src="{% static 'img/icons/payments/mastercard-cc.png' %}" class="img-fluid w-px-50 h-px-30 rounded" alt="master-card" />
+            <img src="{% static 'img/icons/payments/jcb-' %}{{ COOKIES.theme|default:theme }}.png" class="img-fluid w-px-50 h-px-30" alt="jcb-card" data-app-light-img="icons/payments/jcb-light.png" data-app-dark-img="icons/payments/jcb-dark.png" />
+
+          </div>
+        </div>
+        <div class="d-flex flex-column flex-sm-row align-items-sm-center justify-content-between border-bottom pb-4 mb-4">
+          <h6 class="m-0 mb-2 mb-md-0">Authorize.net</h6>
+
+          <div class="d-flex flex-wrap gap-4">
+            <img src="{% static 'img/icons/payments/ae-' %}{{ COOKIES.theme|default:theme }}.png" class="img-fluid w-px-50 h-px-30" alt="american-express-card" data-app-light-img="icons/payments/ae-light.png" data-app-dark-img="icons/payments/ae-dark.png" />
+            <img src="{% static 'img/icons/payments/jcb-' %}{{ COOKIES.theme|default:theme }}.png" class="img-fluid w-px-50 h-px-30" alt="jcb-card" data-app-light-img="icons/payments/jcb-light.png" data-app-dark-img="icons/payments/jcb-dark.png" />
+            <img src="{% static 'img/icons/payments/dc-' %}{{ COOKIES.theme|default:theme }}.png" class="img-fluid w-px-50 h-px-30" alt="diners-club-card" data-app-light-img="icons/payments/dc-light.png" data-app-dark-img="icons/payments/dc-dark.png" />
+          </div>
+        </div>
+        <div class="d-flex flex-column flex-sm-row align-items-sm-center justify-content-between border-bottom pb-4 mb-4">
+          <h6 class="m-0 mb-2 mb-md-0">Bambora</h6>
+
+          <div class="d-flex flex-wrap gap-4">
+
+            <img src="{% static 'img/icons/payments/mastercard-cc.png' %}" class="img-fluid w-px-50 h-px-30 rounded" alt="master-card" />
+            <img src="{% static 'img/icons/payments/ae-' %}{{ COOKIES.theme|default:theme }}.png" class="img-fluid w-px-50 h-px-30" alt="american-express-card" data-app-light-img="icons/payments/ae-light.png" data-app-dark-img="icons/payments/ae-dark.png" />
+            <img src="{% static 'img/icons/payments/jcb-' %}{{ COOKIES.theme|default:theme }}.png" class="img-fluid w-px-50 h-px-30" alt="jcb-card" data-app-light-img="icons/payments/jcb-light.png" data-app-dark-img="icons/payments/jcb-dark.png" />
+
+          </div>
+        </div>
+        <div class="d-flex flex-column flex-sm-row align-items-sm-center justify-content-between border-bottom pb-4 mb-4">
+          <h6 class="m-0 mb-2 mb-md-0">Cayan</h6>
+
+          <div class="d-flex flex-wrap gap-4">
+            <img src="{% static 'img/icons/payments/visa-cc.png' %}" class="img-fluid w-px-50 h-px-30 rounded" alt="visa-card" />
+            <img src="{% static 'img/icons/payments/mastercard-cc.png' %}" class="img-fluid w-px-50 h-px-30 rounded" alt="master-card" />
+            <img src="{% static 'img/icons/payments/ae-' %}{{ COOKIES.theme|default:theme }}.png" class="img-fluid w-px-50 h-px-30" alt="american-express-card" data-app-light-img="icons/payments/ae-light.png" data-app-dark-img="icons/payments/ae-dark.png" />
+            <img src="{% static 'img/icons/payments/jcb-' %}{{ COOKIES.theme|default:theme }}.png" class="img-fluid w-px-50 h-px-30" alt="jcb-card" data-app-light-img="icons/payments/jcb-light.png" data-app-dark-img="icons/payments/jcb-dark.png" />
+            <img src="{% static 'img/icons/payments/dc-' %}{{ COOKIES.theme|default:theme }}.png" class="img-fluid w-px-50 h-px-30" alt="diners-club-card" data-app-light-img="icons/payments/dc-light.png" data-app-dark-img="icons/payments/dc-dark.png" />
+          </div>
+        </div>
+        <div class="d-flex flex-column flex-sm-row align-items-sm-center justify-content-between border-bottom pb-4 mb-4">
+          <h6 class="m-0 mb-2 mb-md-0">Chase Paymentech (Orbital)</h6>
+
+          <div class="d-flex flex-wrap gap-4">
+            <img src="{% static 'img/icons/payments/visa-cc.png' %}" class="img-fluid w-px-50 h-px-30 rounded" alt="visa-card" />
+            <img src="{% static 'img/icons/payments/ae-' %}{{ COOKIES.theme|default:theme }}.png" class="img-fluid w-px-50 h-px-30" alt="american-express-card" data-app-light-img="icons/payments/ae-light.png" data-app-dark-img="icons/payments/ae-dark.png" />
+            <img src="{% static 'img/icons/payments/jcb-' %}{{ COOKIES.theme|default:theme }}.png" class="img-fluid w-px-50 h-px-30" alt="jcb-card" data-app-light-img="icons/payments/jcb-light.png" data-app-dark-img="icons/payments/jcb-dark.png" />
+            <img src="{% static 'img/icons/payments/dc-' %}{{ COOKIES.theme|default:theme }}.png" class="img-fluid w-px-50 h-px-30" alt="diners-club-card" data-app-light-img="icons/payments/dc-light.png" data-app-dark-img="icons/payments/dc-dark.png" />
+          </div>
+        </div>
+        <div class="d-flex flex-column flex-sm-row align-items-sm-center justify-content-between pb-4">
+          <h6 class="m-0 mb-2 mb-md-0">Checkout.com</h6>
+          <div class="d-flex flex-wrap gap-4">
+            <img src="{% static 'img/icons/payments/visa-cc.png' %}" class="img-fluid w-px-50 h-px-30 rounded" alt="visa-card" />
+            <img src="{% static 'img/icons/payments/mastercard-cc.png' %}" class="img-fluid w-px-50 h-px-30 rounded" alt="master-card" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- / Payment provider modal -->
