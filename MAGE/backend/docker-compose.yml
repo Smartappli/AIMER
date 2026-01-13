@@ -82,10 +82,15 @@ services:
       PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_PASSWORD}
       PGADMIN_LISTEN_PORT: ${PGADMIN_PORT}
       TZ: ${TZ}
+      PGADMIN_SERVER_JSON_FILE: /pgadmin4/servers.json
+      PGADMIN_REPLACE_SERVERS_ON_STARTUP: "True"
+      PGPASS_FILE: /pgpass
     ports:
       - "${PGADMIN_PORT}:${PGADMIN_PORT}"
     volumes:
       - pgadmin-data:/var/lib/pgadmin
+      - ./pgadmin/servers.json:/pgadmin4/servers.json:ro
+      - ./pgadmin/pgpass:/pgpass:ro
     depends_on:
       - postgres
       - pgvector

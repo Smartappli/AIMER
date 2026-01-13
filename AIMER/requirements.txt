@@ -1,3 +1,14 @@
 django[argon2]>=6.0.1
 daphne==4.2.1
 python-dotenv>=1.2.1
+
+pydantic==2.12.5
+tqdm==4.67.1
+langchain_core==1.2.7
+langchain_community==1.0.0a1
+langchain_qdrant==1.1.0
+langchain-docling==2.0.0
+langchain-ollama==1.0.1
+numpy==2.4.1
+# docling==2.67.0
+qdrant-client==1.16.2
