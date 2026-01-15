@@ -1,7 +1,7 @@
 django[argon2]>=6.0, <6.1
 # syftbox>=0.4.0
 huggingface-hub[mcp,torch]==1.2.3
-flwr[simulation]==1.23.0
+flwr[simulation]==1.25.0
 # syft-flwr>=0.4.3
 # scikit-learn-intelex>=2023.2.1; sys_platform != 'darwin'
 python-dotenv==1.2.1
