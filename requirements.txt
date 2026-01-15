@@ -7,7 +7,7 @@ flwr[simulation]==1.25.0
 python-dotenv==1.2.1
 tensorflow-cpu>=2.20.0; sys_platform != 'darwin'
 tensorflow>=2.20.0; sys_platform == 'darwin'
-keras==3.13.0
+keras==3.13.1
 keras-tuner==1.4.8
 # seaborn==0.13.2 # 0.12.2
 numpy>=2.3,<3
