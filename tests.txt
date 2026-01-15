@@ -1,4 +1,4 @@
-django[argon2]>=6.0, <6.1
+django[argon2]>=6.0.1, <6.1
 python-dotenv==1.2.1
 huggingface-hub[mcp,torch]
 # pycaret[full]>=3.3.2 # 3.2.1
@@ -25,7 +25,3 @@ flwr-nightly[simulation]
 # syft-flwr
 # syftbox
 # git+https://github.com/pycaret/pycaret.git
-wheel
-gevent>=23.9.0 # not directly required, pinned by Snyk to avoid a vulnerability
-setuptools>=70.0.0 # not directly required, pinned by Snyk to avoid a vulnerability
-pillow>=10.3.0 # not directly required, pinned by Snyk to avoid a vulnerability
