@@ -24,7 +24,7 @@ def filter_by_url(submenu, url):
     if submenu:
         for subitem in submenu:
             subitem_url = subitem.get("url")
-            if subitem_url == url.path or subitem_url == url.resolver_match.url_name:
+            if subitem_url in (url.path, url.resolver_match.url_name):
                 return True
 
             # Recursively check for submenus
