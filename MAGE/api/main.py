@@ -52,7 +52,7 @@ async def is_pretrained(model_id: str):
 
 @api.get('/model/is_pretrained')
 async def are_pretrained():
-    from timm import list_models, list_modules, is_model_pretrained
+    from timm import list_models, is_model_pretrained
     models = list(list_models())
     return {"model_is_pretrained" : {model : is_model_pretrained(model)
             for model in models}}
@@ -66,7 +66,7 @@ async def module_list():
 
 @api.get("/module/{module_id}/details")
 async def module_details(module_id: str):
-    from timm import list_models, list_modules
+    from timm import list_models
     return {module_id: list(list_models(module=module_id))}
 
 
