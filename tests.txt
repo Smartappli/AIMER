@@ -21,7 +21,7 @@ lightgbm>=4.3.0
 captum
 psycopg
 git+https://github.com/huggingface/pytorch-image-models.git
-flwr-nightly[simulation]
+# flwr-nightly[simulation]
 # syft-flwr
 # syftbox
 # git+https://github.com/pycaret/pycaret.git
