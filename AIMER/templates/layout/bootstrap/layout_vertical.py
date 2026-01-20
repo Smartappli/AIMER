@@ -4,7 +4,16 @@ import json
 
 from AIMER.template_helpers.theme import TemplateHelper
 
-menu_file_path =  settings.BASE_DIR / "templates" / "layout" / "partials" / "menu" / "vertical" / "json" / "vertical_menu.json"
+menu_file_path = (
+    settings.BASE_DIR
+    / "templates"
+    / "layout"
+    / "partials"
+    / "menu"
+    / "vertical"
+    / "json"
+    / "vertical_menu.json"
+)
 
 """
 This is an entry and Bootstrap class for the theme level.
@@ -34,7 +43,9 @@ class TemplateBootstrapLayoutVertical:
 
     def init_menu_data(context):
         # Load the menu data from the JSON file
-        menu_data = json.load(menu_file_path.open()) if menu_file_path.exists() else []
+        menu_data = (
+            json.load(menu_file_path.open()) if menu_file_path.exists() else []
+        )
 
         # Updated context with menu_data
-        context.update({ "menu_data": menu_data })
+        context.update({"menu_data": menu_data})

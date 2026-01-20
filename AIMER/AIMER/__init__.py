@@ -19,7 +19,7 @@ class TemplateLayout:
                 ),
                 # Set default rtl True if the language Arabic else use rtl_mode value from TEMPLATE_CONFIG
                 "rtl_mode": True
-                if self.request.COOKIES.get('django_text_direction') == "rtl"
+                if self.request.COOKIES.get("django_text_direction") == "rtl"
                 else settings.TEMPLATE_CONFIG.get("rtl_mode"),
             }
         )

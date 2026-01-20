@@ -72,7 +72,9 @@ def _safe_get_model(model_name: str, *, weights, num_classes: int):
     # --- Fallback très ancien torchvision: appel direct au builder ---
     builder = getattr(tvm, model_name, None)
     if builder is None:
-        raise RuntimeError(f"Model builder not found for {model_name!r} (old torchvision fallback)")
+        raise RuntimeError(
+            f"Model builder not found for {model_name!r} (old torchvision fallback)"
+        )
 
     # Ancienne API: pretrained=True/False
     try:
@@ -90,17 +92,27 @@ class TorchvisionModelsTest(TestCase):
         modules: dict[str, ModuleType] = {"classification": tvm}
 
         # Sous-modules “classiques” (selon version torchvision)
-        for sub in ("detection", "segmentation", "video", "optical_flow", "quantization"):
+        for sub in (
+            "detection",
+            "segmentation",
+            "video",
+            "optical_flow",
+            "quantization",
+        ):
             mod = getattr(tvm, sub, None)
             if isinstance(mod, ModuleType):
                 modules[sub] = mod
 
         cls.modules = modules
-        cls.models = {name: _safe_list_models(mod) for name, mod in modules.items()}
+        cls.models = {
+            name: _safe_list_models(mod) for name, mod in modules.items()
+        }
         cls.num_classes = 10
 
     def test_model_creation(self) -> None:
-        total_models = sum(len(model_list) for model_list in self.models.values())
+        total_models = sum(
+            len(model_list) for model_list in self.models.values()
+        )
         is_tty = sys.stdout.isatty() or sys.stderr.isatty()
 
         bar_fmt = (
@@ -116,7 +128,11 @@ class TorchvisionModelsTest(TestCase):
             weights = _safe_get_model_weights_default(model_name)
             if weights is not None:
                 try:
-                    model = _safe_get_model(model_name, weights=weights, num_classes=self.num_classes)
+                    model = _safe_get_model(
+                        model_name,
+                        weights=weights,
+                        num_classes=self.num_classes,
+                    )
                     pretrained_used = True
                     return model, "weights", time.time() - start_time
                 except (URLError, OSError, RuntimeError, ValueError):
@@ -125,7 +141,9 @@ class TorchvisionModelsTest(TestCase):
 
             # 2) fallback sans weights (random)
             start_time = time.time()
-            model = _safe_get_model(model_name, weights=None, num_classes=self.num_classes)
+            model = _safe_get_model(
+                model_name, weights=None, num_classes=self.num_classes
+            )
             return model, "no-weights", time.time() - start_time
 
         if is_tty:
@@ -159,14 +177,22 @@ class TorchvisionModelsTest(TestCase):
                     ) as p_mod:
                         for model_name in model_list:
                             p_mod.set_postfix_str(model_name)
-                            p_global.set_postfix_str(f"{module_name} • {model_name}")
+                            p_global.set_postfix_str(
+                                f"{module_name} • {model_name}"
+                            )
 
-                            with self.subTest(module=module_name, model=model_name):
-                                model, status, elapsed = create_one(module_name, model_name)
+                            with self.subTest(
+                                module=module_name, model=model_name
+                            ):
+                                model, status, elapsed = create_one(
+                                    module_name, model_name
+                                )
                                 # éviter de garder plein de modèles en mémoire
                                 del model
 
-                                p_mod.set_postfix_str(f"{model_name} • {status} • {elapsed:.2f}s")
+                                p_mod.set_postfix_str(
+                                    f"{model_name} • {status} • {elapsed:.2f}s"
+                                )
                                 p_global.set_postfix_str(
                                     f"{module_name} • {model_name} • {status} • {elapsed:.2f}s"
                                 )
