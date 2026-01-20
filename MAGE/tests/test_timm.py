@@ -17,7 +17,9 @@ class TimmModelsTest(TestCase):
         cls.num_classes = 10
 
     def test_model_creation(self) -> None:
-        total_models = sum(len(model_list) for model_list in self.models.values())
+        total_models = sum(
+            len(model_list) for model_list in self.models.values()
+        )
         is_tty = sys.stdout.isatty() or sys.stderr.isatty()
 
         bar_fmt = (
@@ -57,22 +59,42 @@ class TimmModelsTest(TestCase):
                     ) as p_mod:
                         for model_name in model_list:
                             p_mod.set_postfix_str(model_name)
-                            p_global.set_postfix_str(f"{module_name} • {model_name}")
+                            p_global.set_postfix_str(
+                                f"{module_name} • {model_name}"
+                            )
 
-                            with self.subTest(module=module_name, model=model_name):
+                            with self.subTest(
+                                module=module_name, model=model_name
+                            ):
                                 pretrained_used = True
                                 start_time = time.time()
                                 try:
-                                    create_model(model_name, pretrained=True, num_classes=self.num_classes)
+                                    create_model(
+                                        model_name,
+                                        pretrained=True,
+                                        num_classes=self.num_classes,
+                                    )
                                 except RuntimeError:
                                     pretrained_used = False
                                     start_time = time.time()
-                                    create_model(model_name, pretrained=False, num_classes=self.num_classes)
+                                    create_model(
+                                        model_name,
+                                        pretrained=False,
+                                        num_classes=self.num_classes,
+                                    )
 
                                 elapsed = time.time() - start_time
-                                status = "pretrained" if pretrained_used else "no-pretrained"
-                                p_mod.set_postfix_str(f"{model_name} • {status} • {elapsed:.2f}s")
-                                p_global.set_postfix_str(f"{module_name} • {model_name} • {status} • {elapsed:.2f}s")
+                                status = (
+                                    "pretrained"
+                                    if pretrained_used
+                                    else "no-pretrained"
+                                )
+                                p_mod.set_postfix_str(
+                                    f"{model_name} • {status} • {elapsed:.2f}s"
+                                )
+                                p_global.set_postfix_str(
+                                    f"{module_name} • {model_name} • {status} • {elapsed:.2f}s"
+                                )
 
                             p_mod.update(1)
                             p_global.update(1)
@@ -96,7 +118,15 @@ class TimmModelsTest(TestCase):
                         pbar.set_postfix_str(f"{module_name} • {model_name}")
                         with self.subTest(module=module_name, model=model_name):
                             try:
-                                create_model(model_name, pretrained=True, num_classes=self.num_classes)
+                                create_model(
+                                    model_name,
+                                    pretrained=True,
+                                    num_classes=self.num_classes,
+                                )
                             except RuntimeError:
-                                create_model(model_name, pretrained=False, num_classes=self.num_classes)
+                                create_model(
+                                    model_name,
+                                    pretrained=False,
+                                    num_classes=self.num_classes,
+                                )
                         pbar.update(1)

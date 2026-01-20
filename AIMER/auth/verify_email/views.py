@@ -18,13 +18,18 @@ class VerifyEmailTokenView(AuthView):
             if not request.user.is_authenticated:
                 # User is not already authenticated
                 # Perform the email verification and any other necessary actions
-                await sync_to_async(messages.success)(request, "Email verified successfully")
+                await sync_to_async(messages.success)(
+                    request, "Email verified successfully"
+                )
             return redirect("login")
             # Now, redirect to the login page
 
         except Profile.DoesNotExist:
-            await sync_to_async(messages.error)(request, "Invalid token, please try again")
+            await sync_to_async(messages.error)(
+                request, "Invalid token, please try again"
+            )
             return redirect("verify-email-page")
+
 
 class VerifyEmailView(AuthView):
     async def get(self, request):
@@ -44,7 +49,9 @@ class SendVerificationView(AuthView):
             await send_verification_email(email, token)
             await sync_to_async(messages.success)(request, message)
         else:
-            await sync_to_async(messages.error)(request, "Email not found in session")
+            await sync_to_async(messages.error)(
+                request, "Email not found in session"
+            )
 
         return redirect("verify-email-page")
 
@@ -53,14 +60,24 @@ class SendVerificationView(AuthView):
             email = await sync_to_async(lambda: request.user.profile.email)()
 
             if settings.EMAIL_HOST_USER and settings.EMAIL_HOST_PASSWORD:
-                message = await sync_to_async(messages.success)(request, "Verification email sent successfully")
+                message = await sync_to_async(messages.success)(
+                    request, "Verification email sent successfully"
+                )
             else:
-                message = await sync_to_async(messages.error)(request, "Email settings are not configured. Unable to send verification email.")
+                message = await sync_to_async(messages.error)(
+                    request,
+                    "Email settings are not configured. Unable to send verification email.",
+                )
         else:
-            email = request.session.get('email')
+            email = request.session.get("email")
             if settings.EMAIL_HOST_USER and settings.EMAIL_HOST_PASSWORD:
-                message = "Resend verification email successfully" if email else None
+                message = (
+                    "Resend verification email successfully" if email else None
+                )
             else:
-                 message = await sync_to_async(messages.error)(request, "Email settings are not configured. Unable to send verification email.")
+                message = await sync_to_async(messages.error)(
+                    request,
+                    "Email settings are not configured. Unable to send verification email.",
+                )
 
         return email, message

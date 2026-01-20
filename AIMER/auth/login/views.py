@@ -11,7 +11,9 @@ class LoginView(AuthView):
         is_auth = await sync_to_async(lambda: request.user.is_authenticated)()
         if is_auth:
             # If the user is already logged in, redirect them to the home page or another appropriate page.
-            return redirect("index")  # Replace 'index' with the actual URL name for the home page
+            return redirect(
+                "index"
+            )  # Replace 'index' with the actual URL name for the home page
 
         # Render the login page for users who are not logged in.
         return await sync_to_async(super().get)(request)
@@ -22,22 +24,30 @@ class LoginView(AuthView):
             password = request.POST.get("password")
 
             if not (username and password):
-                await sync_to_async(messages.error)(request, "Please enter your username and password.")
+                await sync_to_async(messages.error)(
+                    request, "Please enter your username and password."
+                )
                 return redirect("login")
 
             if "@" in username:
                 user_email = await User.objects.filter(email=username).afirst()
                 if user_email is None:
-                    await sync_to_async(messages.error)(request, "Please enter a valid email.")
+                    await sync_to_async(messages.error)(
+                        request, "Please enter a valid email."
+                    )
                     return redirect("login")
                 username = user_email.username
 
             user_email = await User.objects.filter(username=username).afirst()
             if user_email is None:
-                await sync_to_async(messages.error)(request, "Please enter a valid username.")
+                await sync_to_async(messages.error)(
+                    request, "Please enter a valid username."
+                )
                 return redirect("login")
 
-            authenticated_user = await aauthenticate(request, username=username, password=password)
+            authenticated_user = await aauthenticate(
+                request, username=username, password=password
+            )
             if authenticated_user is not None:
                 # Login the user if authentication is successful
                 await alogin(request, authenticated_user)
@@ -45,8 +55,10 @@ class LoginView(AuthView):
                 # Redirect to the page the user was trying to access before logging in
                 if "next" in request.POST:
                     return redirect(request.POST["next"])
-                else: # Redirect to the home page or another appropriate page
+                else:  # Redirect to the home page or another appropriate page
                     return redirect("index")
             else:
-                await sync_to_async(messages.error)(request, "Please enter a valid username.")
+                await sync_to_async(messages.error)(
+                    request, "Please enter a valid username."
+                )
                 return redirect("login")
