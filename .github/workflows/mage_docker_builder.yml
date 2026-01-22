@@ -1,4 +1,4 @@
-name: Docker Builder
+name: Mage Docker Builder
 
 on:
   push:

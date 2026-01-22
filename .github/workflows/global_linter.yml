@@ -1,9 +1,9 @@
-name: Linter
+name: Global Linter
 
 on: [push, pull_request]
 
 concurrency:
-  group: linter-${{ github.event_name == 'pull_request' && format('{0}-{1}', github.workflow, github.event.pull_request.number) || github.workflow_ref }}
+  group: global-linter-${{ github.event_name == 'pull_request' && format('{0}-{1}', github.workflow, github.event.pull_request.number) || github.workflow_ref }}
   cancel-in-progress: true
 
 jobs:
@@ -58,31 +58,3 @@ jobs:
           skip_checkout: true
           push_options: '--force'
           branch: 'black'
-
-  dj-lint:
-    runs-on: ubuntu-latest
-    name: Django Lint
-    steps:
-      - name: Check out source repository
-        uses: actions/checkout@v6
-      
-      - uses: astral-sh/setup-uv@v7.2.0
-        with:
-          enable-cache: true
-
-      - name: Print the installed version
-        run: echo "Installed uv version is ${{ steps.setup-uv.outputs.uv-version }}"
-
-      - name: Create virtualenv and install djlint
-        run: |
-          uv venv
-          source .venv/bin/activate
-          uv python install 3.13
-          uv pip install djlint
-
-      - name: Run djlint
-        run: |
-          source .venv/bin/activate
-          djlint . --check
-          djlint ./templates --extension=html --lint
-          djlint ./templates --extension=html --reformat
