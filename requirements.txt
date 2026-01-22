@@ -21,7 +21,7 @@ protobuf>=4.0
 # prophet==1.2.1
 # lightgbm==4.6.0
 # captum
-wheel==0.46.2
+wheel==0.46.3
 # gevent==25.9.1
 setuptools==80.10.1
 # pillow==12.1.0
