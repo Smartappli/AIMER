@@ -48,11 +48,12 @@ jobs:
     name: Django Formatter (djLint)
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - name: Check out source repository
+        uses: actions/checkout@v6
         with:
           ref: ${{ github.head_ref || github.ref_name }}
 
-      - name: Set up Python
+      - name: Set up Python environment
         uses: actions/setup-python@v6
         with:
           python-version: "3.13"
@@ -63,10 +64,18 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install djlint
 
-      # IMPORTANT: ne mets pas --check avant --reformat, sinon ça peut échouer et stopper le job
-      - name: djLint reformat
+      - name: djLint reformat (allow exit 1)
         run: |
+          set +e
           djlint ./AIMER/templates --reformat
+          code=$?
+          set -e
+  
+          # djlint peut renvoyer 1 quand il a modifié des fichiers -> on accepte
+          if [ "$code" -gt 1 ]; then
+            echo "djlint failed with exit code $code"
+            exit "$code"
+          fi
 
       - name: Detect changes
         id: djlint_changes
@@ -85,9 +94,8 @@ jobs:
           title: "Format templates with djLint"
           commit-message: ":art: Format templates with djLint"
           body: |
-            This pull request formats Django templates under `./templates` using [djLint](https://github.com/djlint/djLint).
+            This pull request formats Django templates under `./templates` using djLint.
           base: ${{ github.head_ref || github.ref_name }}
           branch: formatter/djlint-${{ github.event_name == 'pull_request' && github.event.pull_request.number || github.ref_name }}
           add-paths: |
             templates/**
-
