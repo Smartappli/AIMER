@@ -6,6 +6,8 @@
 
 ## MAGE Unit Tests
 
+[![Mage Coverage](https://github.com/Smartappli/AIMER/actions/workflows/mage_coverage.yml/badge.svg)](https://github.com/Smartappli/AIMER/actions/workflows/mage_coverage.yml)
+
 ## FARM Unit Tests
 
 ## CI / CD
