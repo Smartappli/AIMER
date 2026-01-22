@@ -3,7 +3,7 @@ name: Docker Builder
 on:
   push:
     branches:
-      - 'master'
+      - '2026'
 
 permissions:
   contents: write
