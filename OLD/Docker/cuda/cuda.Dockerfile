@@ -32,7 +32,7 @@ ENV PATH="/opt/venv/bin:${PATH}"
 
 RUN pip install --upgrade --no-cache-dir pip wheel && \
     pip install --no-cache-dir \
-        pytest scikit-build setuptools==80.9.0 \
+        pytest scikit-build setuptools==80.10.1 \
         fastapi==0.128.0 uvicorn[standard]==0.4.0 sse-starlette \
         pydantic-settings starlette-context
 
