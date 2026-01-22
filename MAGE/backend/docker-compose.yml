@@ -116,7 +116,7 @@ services:
     restart: always
 
   ollama-preload:
-    image: curlimages/curl:8.10.1
+    image: curlimages/curl:8.18.0
     container_name: ollama-preload
     depends_on:
       - ollama
