@@ -66,7 +66,7 @@ jobs:
       # IMPORTANT: ne mets pas --check avant --reformat, sinon ça peut échouer et stopper le job
       - name: djLint reformat
         run: |
-          djlint ./templates --reformat
+          djlint ./AIMER/templates --reformat
 
       - name: Detect changes
         id: djlint_changes
