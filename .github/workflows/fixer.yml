@@ -22,7 +22,7 @@ jobs:
       
       - uses: astral-sh/ruff-action@v3
         with:
-          python-version: '3.12'
+          python-version: '3.13'
           args: 'check --fix-only'
 
       - uses: stefanzweifel/git-auto-commit-action@v7
