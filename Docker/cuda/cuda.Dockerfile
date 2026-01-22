@@ -1,4 +1,4 @@
-ARG CUDA_IMAGE="13.1.0-devel-ubuntu24.04"
+ARG CUDA_IMAGE="13.1.1-devel-ubuntu24.04"
 FROM nvidia/cuda:${CUDA_IMAGE}
 
 ENV HOST=0.0.0.0
