@@ -5,7 +5,6 @@ from langchain_ollama import OllamaEmbeddings, ChatOllama
 from langchain_qdrant import QdrantVectorStore, RetrievalMode, FastEmbedSparse
 
 # re-ranking for better result
-from langchain_community.cross_encoders import HuggingFaceCrossEncoder
 
 # metadata filtering
 from qdrant_client.models import Filter, FieldCondition, MatchValue

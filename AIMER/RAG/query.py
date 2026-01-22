@@ -1,7 +1,4 @@
-from click import prompt
 from dotenv import load_dotenv
-from langchain_community.embeddings import HuggingFaceEmbeddings
-from sqlalchemy.ext.hybrid import hybrid_method
 
 load_dotenv()
 

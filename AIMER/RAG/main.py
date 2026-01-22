@@ -10,7 +10,6 @@ from docling_core.types.doc import PictureItem
 from docling.datamodel.base_models import InputFormat
 from docling.datamodel.pipeline_options import PdfPipelineOptions
 from docling.document_converter import DocumentConverter, PdfFormatOption
-from langchain_community.cross_encoders import HuggingFaceCrossEncoder
 from langchain_core.documents import Document
 from langchain_core.messages import HumanMessage, SystemMessage
 from langchain_ollama import OllamaEmbeddings, ChatOllama
@@ -18,8 +17,6 @@ from langchain_qdrant import QdrantVectorStore, RetrievalMode, FastEmbedSparse
 from PIL import Image
 from pypdf import PdfReader
 from qdrant_client import QdrantClient
-from qdrant_client.models import Filter, FieldCondition, MatchValue
-from scripts.schema import ChunkMetadata
 
 
 # Directory paths
