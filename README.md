@@ -14,5 +14,5 @@
 
 [![Global Code Quality](https://github.com/Smartappli/AIMER/actions/workflows/global_code_quality.yml/badge.svg)](https://github.com/Smartappli/AIMER/actions/workflows/global_code_quality.yml)
 [![Global Linter](https://github.com/Smartappli/AIMER/actions/workflows/global_linter.yml/badge.svg)](https://github.com/Smartappli/AIMER/actions/workflows/global_linter.yml)
-[![Security](https://github.com/Smartappli/AIMER/actions/workflows/security.yml/badge.svg)](https://github.com/Smartappli/AIMER/actions/workflows/security.yml)
+[![Global Security](https://github.com/Smartappli/AIMER/actions/workflows/global_security.yml/badge.svg)](https://github.com/Smartappli/AIMER/actions/workflows/global_security.yml)
 [![Global License Checker](https://github.com/Smartappli/AIMER/actions/workflows/global_license_check.yml/badge.svg)](https://github.com/Smartappli/AIMER/actions/workflows/global_license_check.yml)
