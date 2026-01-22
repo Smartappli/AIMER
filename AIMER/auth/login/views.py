@@ -3,6 +3,8 @@ from django.shortcuts import redirect
 from django.contrib.auth import aauthenticate, alogin
 from django.contrib.auth.models import User
 from django.contrib import messages
+from django.conf import settings
+from django.utils.http import url_has_allowed_host_and_scheme
 from ..views import AuthView
 
 
@@ -53,8 +55,12 @@ class LoginView(AuthView):
                 await alogin(request, authenticated_user)
 
                 # Redirect to the page the user was trying to access before logging in
-                if "next" in request.POST:
-                    return redirect(request.POST["next"])
+                next_url = request.POST.get("next", "")
+                if next_url and url_has_allowed_host_and_scheme(
+                    url=next_url,
+                    allowed_hosts=getattr(settings, "ALLOWED_HOSTS", []),
+                ):
+                    return redirect(next_url)
                 else:  # Redirect to the home page or another appropriate page
                     return redirect("index")
             else:
