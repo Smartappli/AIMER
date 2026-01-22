@@ -10,7 +10,7 @@
 
 ## CI
 
-[![Code Quality](https://github.com/Smartappli/AIMER/actions/workflows/quality.yml/badge.svg)](https://github.com/Smartappli/AIMER/actions/workflows/quality.yml)
+[![Code Quality](https://github.com/Smartappli/AIMER/actions/workflows/code_quality.yml/badge.svg)](https://github.com/Smartappli/AIMER/actions/workflows/code_quality.yml)
 [![Linter](https://github.com/Smartappli/AIMER/actions/workflows/linter.yml/badge.svg)](https://github.com/Smartappli/AIMER/actions/workflows/linter.yml)
 [![Formatter](https://github.com/Smartappli/AIMER/actions/workflows/formatter.yml/badge.svg)](https://github.com/Smartappli/AIMER/actions/workflows/formatter.yml)
 [![Security](https://github.com/Smartappli/AIMER/actions/workflows/security.yml/badge.svg)](https://github.com/Smartappli/AIMER/actions/workflows/security.yml)
