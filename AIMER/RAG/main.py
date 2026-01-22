@@ -10,7 +10,6 @@ from docling_core.types.doc import PictureItem
 from docling.datamodel.base_models import InputFormat
 from docling.datamodel.pipeline_options import PdfPipelineOptions
 from docling.document_converter import DocumentConverter, PdfFormatOption
-from langchain_community.cross_encoders import HuggingFaceCrossEncoder
 from langchain_core.documents import Document
 from langchain_core.messages import HumanMessage, SystemMessage
 from langchain_ollama import OllamaEmbeddings, ChatOllama
@@ -18,8 +17,6 @@ from langchain_qdrant import QdrantVectorStore, RetrievalMode, FastEmbedSparse
 from PIL import Image
 from pypdf import PdfReader
 from qdrant_client import QdrantClient
-from qdrant_client.models import Filter, FieldCondition, MatchValue
-from scripts.schema import ChunkMetadata
 
 
 # Directory paths
@@ -59,6 +56,7 @@ For text:
 
 Be direct and factual. Focus on numbers, trends, and insights that would be useful for retrieval."""
 
+
 def pdf_has_text(pdf_file: Path, max_pages: int = 3) -> bool:
     r = PdfReader(str(pdf_file))
     for i, page in enumerate(r.pages[:max_pages]):
@@ -66,6 +64,7 @@ def pdf_has_text(pdf_file: Path, max_pages: int = 3) -> bool:
         if len(txt) > 50:
             return True
     return False
+
 
 def convert_pdf_to_docling(pdf_file: Path):
     do_ocr = not pdf_has_text(pdf_file)
@@ -87,6 +86,7 @@ def convert_pdf_to_docling(pdf_file: Path):
     result = doc_converter.convert(pdf_file)
     return result
 
+
 def save_page_images(doc_converter, figures_dir: Path):
     pages_to_save = set()
 
@@ -105,7 +105,10 @@ def save_page_images(doc_converter, figures_dir: Path):
         for page_no in pages_to_save:
             page = doc_converter.document.pages[page_no]
 
-            page.image.pil_image.save(figures_dir / f"page_{page_no}.png", "PNG")
+            page.image.pil_image.save(
+                figures_dir / f"page_{page_no}.png", "PNG"
+            )
+
 
 def extract_context_and_table(lines: List[str], table_index: int):
     table_lines = []
@@ -116,11 +119,12 @@ def extract_context_and_table(lines: List[str], table_index: int):
         i += 1
 
     start = max(0, table_index - 2)
-    context_lines = lines[start: table_index]
+    context_lines = lines[start:table_index]
 
     content = "\n".join(context_lines) + "\n\n" + "\n".join(table_lines)
 
     return content, i
+
 
 def extract_tables_with_content(markdown_text: str):
     lines = markdown_text.split("\n")
@@ -130,13 +134,13 @@ def extract_tables_with_content(markdown_text: str):
     table_num = 1
     i = 0
 
-    while(i < len(lines)):
-        if '<!-- page break -->' in lines[i]:
+    while i < len(lines):
+        if "<!-- page break -->" in lines[i]:
             current_page = current_page + 1
             i = i + 1
             continue
 
-        if lines[i].startswith("|") and lines[i].count("|")>1:
+        if lines[i].startswith("|") and lines[i].count("|") > 1:
             content, next_i = extract_context_and_table(lines, i)
             tables.append((content, f"table_{table_num}", current_page))
             table_num = table_num + 1
@@ -146,14 +150,17 @@ def extract_tables_with_content(markdown_text: str):
 
     return tables
 
-def save_tables(markdown_text, tables_dir):
 
+def save_tables(markdown_text, tables_dir):
     tables = extract_tables_with_content(markdown_text)
 
     for table_context, table_name, page_num in tables:
         context_with_page = f"**Page:** {page_num}\n\n{table_context}"
 
-        (tables_dir / f"{table_name}_page_{page_num}.md").write_text(context_with_page, encoding="utf-8")
+        (tables_dir / f"{table_name}_page_{page_num}.md").write_text(
+            context_with_page, encoding="utf-8"
+        )
+
 
 def extract_pdf_content(pdf_file: Path):
     md_dir = Path(OUTPUT_MD_DIR) / pdf_file.stem
@@ -165,13 +172,16 @@ def extract_pdf_content(pdf_file: Path):
 
     doc_converter = convert_pdf_to_docling(pdf_file)
 
-    markdown_text = doc_converter.document.export_to_markdown(page_break_placeholder="<!-- page_break -->")
+    markdown_text = doc_converter.document.export_to_markdown(
+        page_break_placeholder="<!-- page_break -->"
+    )
 
     (md_dir / f"{pdf_file.stem}.md").write_text(markdown_text, encoding="utf-8")
 
     save_page_images(doc_converter, figures_dir)
 
     save_tables(markdown_text, tables_dir)
+
 
 def compute_file_hash(file_path: Path):
     sha256_hash = hashlib.sha256()
@@ -182,6 +192,7 @@ def compute_file_hash(file_path: Path):
 
     return sha256_hash.hexdigest()
 
+
 def get_processed_hashes():
     processed_hashes = set()
     offset = None
@@ -191,23 +202,27 @@ def get_processed_hashes():
             collection_name=COLLECTION_NAME,
             limit=10_000,
             with_payload=True,
-            offset=offset
+            offset=offset,
         )
 
         if not points:
             break
 
-        processed_hashes.update(point.payload['metadata']['file_hash'] for point in points)
+        processed_hashes.update(
+            point.payload["metadata"]["file_hash"] for point in points
+        )
 
         if offset is None:
             break
 
     return processed_hashes
 
+
 def extract_page_number(file_path: Path):
-    pattern = r'page_(\d+)'
+    pattern = r"page_(\d+)"
     match = re.search(pattern=pattern, string=file_path.stem)
     return int(match.group(1)) if match else None
+
 
 def generate_image_description(image_path: Path):
     image = Image.open(image_path)
@@ -218,20 +233,24 @@ def generate_image_description(image_path: Path):
 
     message = HumanMessage(
         content=[
-            {'type': 'text', 'text': describe_image_prompt},
-            {'type': 'image_url', 'image_url': f"data:image/png;base64,{image_base64}"}
+            {"type": "text", "text": describe_image_prompt},
+            {
+                "type": "image_url",
+                "image_url": f"data:image/png;base64,{image_base64}",
+            },
         ]
     )
-    system_prompt = SystemMessage('You are an AI Assistant')
+    system_prompt = SystemMessage("You are an AI Assistant")
 
     response = model.invoke([system_prompt, message])
 
     return response.text
 
+
 def generate_and_save_description(image_path: Path):
     doc_name = image_path.parent.name
 
-    output_dir = Path(OUTPUT_DESCRIPTIONS_DIR)/doc_name
+    output_dir = Path(OUTPUT_DESCRIPTIONS_DIR) / doc_name
     output_dir.mkdir(parents=True, exist_ok=True)
 
     desc_file = output_dir / f"{image_path.stem}.md"
@@ -244,25 +263,26 @@ def generate_and_save_description(image_path: Path):
 
     return True
 
-def extract_metadata_from_filename(filename: str):
 
-    filename = filename.replace(".pdf", "").replace('.md', '')
+def extract_metadata_from_filename(filename: str):
+    filename = filename.replace(".pdf", "").replace(".md", "")
 
     parts = filename.split("-")
 
     return {
-        'doc_month': parts[0],
-        'doc_year': parts[1],
-        'eod_type': parts[2],
+        "doc_month": parts[0],
+        "doc_year": parts[1],
+        "eod_type": parts[2],
     }
 
+
 model = ChatOllama(
-    model = MODEL_NAME,
+    model=MODEL_NAME,
     base_url="http://localhost:11434",
 )
 
 llm = ChatOllama(
-    model = LLM_MODEL,
+    model=LLM_MODEL,
     base_url="http://localhost:11434",
 )
 
@@ -284,55 +304,60 @@ vector_store = QdrantVectorStore.from_documents(
     sparse_embedding=sparse_embeddings,
     url="http://localhost:6333",
     api_key="azertyuiop",
-    collection_name = COLLECTION_NAME,
+    collection_name=COLLECTION_NAME,
     retrieval_mode=RetrievalMode.HYBRID,
-    force_recreate=False
+    force_recreate=False,
 )
 
 processed_hashes = get_processed_hashes()
-def ingest_file_in_db(file_path, processed_hashes):
 
+
+def ingest_file_in_db(file_path, processed_hashes):
     file_hash = compute_file_hash(file_path)
     if file_hash in processed_hashes:
         print(f"Following file has been already uploaded: {file_path}")
 
     path_str = str(file_path)
-    if 'markdown' in path_str:
-        content_type = 'text'
+    if "markdown" in path_str:
+        content_type = "text"
         doc_name = file_path.name
-    elif 'tables' in path_str:
-        content_type = 'tables'
+    elif "tables" in path_str:
+        content_type = "tables"
         doc_name = file_path.parent.name
-    elif 'image_desc' in path_str:
-        content_type = 'image_desc'
+    elif "image_desc" in path_str:
+        content_type = "image_desc"
         doc_name = file_path.parent_name
     else:
-        content_type = 'unknown'
+        content_type = "unknown"
         doc_name = file_path.name
 
     content = file_path.read_text(encoding="utf-8")
 
     base_metadata = extract_metadata_from_filename(doc_name)
 
-    base_metadata.update({
-        'content_type': content_type,
-        'file_hash': file_hash,
-        'source_file': doc_name
-    })
+    base_metadata.update(
+        {
+            "content_type": content_type,
+            "file_hash": file_hash,
+            "source_file": doc_name,
+        }
+    )
 
-    if content_type == 'text':
+    if content_type == "text":
         pages = content.split("<!-- page break -->")
         documents = []
         for idx, page in enumerate(pages, start=1):
             metadata = base_metadata.copy()
-            metadata.update({'page': idx})
-            documents.append(Document(page_content=page, metadata=base_metadata))
+            metadata.update({"page": idx})
+            documents.append(
+                Document(page_content=page, metadata=base_metadata)
+            )
 
         vector_store.add_documents(documents)
     else:
         page_num = extract_page_number(file_path)
         metadata = base_metadata.copy()
-        metadata.update({'page': page_num})
+        metadata.update({"page": page_num})
         documents = [Document(page_content=content, metadata=base_metadata)]
 
         vector_store.add_documents(documents)

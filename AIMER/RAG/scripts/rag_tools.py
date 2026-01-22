@@ -1,11 +1,11 @@
 from dotenv import load_dotenv
+
 load_dotenv()
 
 from langchain_ollama import OllamaEmbeddings, ChatOllama
 from langchain_qdrant import QdrantVectorStore, RetrievalMode, FastEmbedSparse
 
 # re-ranking for better result
-from langchain_community.cross_encoders import HuggingFaceCrossEncoder
 
 # metadata filtering
 from qdrant_client.models import Filter, FieldCondition, MatchValue
@@ -25,8 +25,8 @@ RERANKER_MODEL = ""
 
 # Initialize LLM
 llm = ChatOllama(
-    model = LLM_MODEL,
-    base_url = "http://localhost:11434",
+    model=LLM_MODEL,
+    base_url="http://localhost:11434",
 )
 
 # Embeddings
@@ -46,10 +46,11 @@ vector_store = QdrantVectorStore.from_existing_collection(
     sparse_embeddings=sparse_embeddings,
     collection_name=COLLECTION_NAME,
     url="http://localhost:6333",
-    retrieval_mode=RetrievalMode.HYBRID
+    retrieval_mode=RetrievalMode.HYBRID,
 )
 
 # Filter Extraction with LLM
+
 
 def extract_filters(user_query: str):
     prompt = f"""
@@ -73,6 +74,7 @@ def extract_filters(user_query: str):
 
     return filters
 
+
 @tool
 def hybrid_search(query: str, k: int = 5):
     """
@@ -92,11 +94,15 @@ def hybrid_search(query: str, k: int = 5):
     qdrant_filter = None
 
     if filters:
-        condition = [FieldCondition(key=f"metadata.{key}", match=MatchValue(value=value))
-                     for key, value in filters.items()]
+        condition = [
+            FieldCondition(key=f"metadata.{key}", match=MatchValue(value=value))
+            for key, value in filters.items()
+        ]
 
         qdrant_filter = Filter(must=condition)
 
-    results = vector_store.similarity_search(query=query, k=k, filters=qdrant_filter)
+    results = vector_store.similarity_search(
+        query=query, k=k, filters=qdrant_filter
+    )
 
     return results

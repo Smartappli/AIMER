@@ -1,7 +1,4 @@
-from click import prompt
 from dotenv import load_dotenv
-from langchain_community.embeddings import HuggingFaceEmbeddings
-from sqlalchemy.ext.hybrid import hybrid_method
 
 load_dotenv()
 
@@ -26,7 +23,7 @@ RERANKER_MODEL = "Krakekai/qwen3-reranker-8b"
 
 # Initialize LLM
 llm = ChatOllama(
-    model = LLM_MODEL,
+    model=LLM_MODEL,
     base_url="http://localhost:11434",
 )
 
@@ -47,8 +44,9 @@ vector_store = QdrantVectorStore.from_existing_collection(
     sparse_embedding=spare_embeddings,
     collection_name=COLLECTION_NAME,
     url="http://localhost:6333",
-    retrieval_mode=RetrievalMode.HYBRID
+    retrieval_mode=RetrievalMode.HYBRID,
 )
+
 
 def extract_filters(user_query: str):
     prompt = """
@@ -60,7 +58,6 @@ def extract_filters(user_query: str):
             
             Extract metadata based on the user query only:           
         """
-
 
     structured_llm = llm.with_structured_output(ChunkMetadata)
 
@@ -75,34 +72,44 @@ def extract_filters(user_query: str):
 
     return filters
 
+
 def hybrid_search(query: str, k: int = 10, filters: dict = None):
     qdrant_filter = None
 
     if filters:
-        condition = [FieldCondition(key=f"metadata.{key}", match=MatchValue(value=value))
-                     for key, value in filters.items()]
+        condition = [
+            FieldCondition(key=f"metadata.{key}", match=MatchValue(value=value))
+            for key, value in filters.items()
+        ]
 
         qdrant_filter = Filter(must=condition)
 
-    results = vector_store.similarity_search(query=query, k=k, filter=qdrant_filter)
+    results = vector_store.similarity_search(
+        query=query, k=k, filter=qdrant_filter
+    )
 
     return results
 
-def rerank_results(query: str, documents= list, top_k: int = 5):
-    reranker = HuggingFaceCrossEncoder(model_name=RERANKER_MODEL, model_kwargs={'device': 'xpu'})
+
+def rerank_results(query: str, documents=list, top_k: int = 5):
+    reranker = HuggingFaceCrossEncoder(
+        model_name=RERANKER_MODEL, model_kwargs={"device": "xpu"}
+    )
 
     query_doc_pairs = [(query, doc.page_content) for doc in documents]
 
     scores = reranker.score(query_doc_pairs)
 
-    reranked = sorted(zip(scores, documents), key=lambda x: x[0], reverse=True)[:top_k]
+    reranked = sorted(zip(scores, documents), key=lambda x: x[0], reverse=True)[
+        :top_k
+    ]
 
     return [rank[1] for rank in reranked]
 
 
 query = ""
 filters = extract_filters(query)
-print (filters)
+print(filters)
 results = hybrid_search(query, k=10, filters=filters)
 
 response = rerank_results(query, results)
