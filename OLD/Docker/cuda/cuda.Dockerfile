@@ -30,7 +30,7 @@ COPY . .
 RUN python3 -m venv /opt/venv
 ENV PATH="/opt/venv/bin:${PATH}"
 
-RUN pip install --upgrade --no-cache-dir pip wheel && \
+RUN pip install --upgrade --no-cache-dir pip wheel==0.46.3 && \
     pip install --no-cache-dir \
         pytest scikit-build setuptools==80.10.1 \
         fastapi==0.128.0 uvicorn[standard]==0.4.0 sse-starlette \
