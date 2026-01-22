@@ -14,4 +14,4 @@
 [![Linter](https://github.com/Smartappli/AIMER/actions/workflows/linter.yml/badge.svg)](https://github.com/Smartappli/AIMER/actions/workflows/linter.yml)
 [![Formatter](https://github.com/Smartappli/AIMER/actions/workflows/formatter.yml/badge.svg)](https://github.com/Smartappli/AIMER/actions/workflows/formatter.yml)
 [![Security](https://github.com/Smartappli/AIMER/actions/workflows/security.yml/badge.svg)](https://github.com/Smartappli/AIMER/actions/workflows/security.yml)
-[![Dependencies license compliance checker](https://github.com/Smartappli/AIMER/actions/workflows/liccheck.yml/badge.svg)](https://github.com/Smartappli/AIMER/actions/workflows/liccheck.yml)
+[![Dependencies License Checker](https://github.com/Smartappli/AIMER/actions/workflows/license_check.yml/badge.svg)](https://github.com/Smartappli/AIMER/actions/workflows/license_check.yml)
