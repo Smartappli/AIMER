@@ -1,29 +1,27 @@
-name: Nighlies Common
+name: Mage Coverage
 on:
-  schedule:
-    - cron: "0 00 * * *" # 12am UTC, 5:30pm Indian, 9pm Brazil, 11am AEDT
-  workflow_dispatch:
-    inputs:
-      none:
-        description: "Nighlies Common"
-        required: false
+  push:
+    branches:
+      - 'master'
+  pull_request:
+    types: [opened, synchronize, reopened]
 
 concurrency:
-  group: nightlies-common-${{ github.event_name == 'pull_request' && format('{0}-{1}', github.workflow, github.event.pull_request.number) || github.workflow_ref }}
+  group: mage-coverage-${{ github.event_name == 'pull_request' && format('{0}-{1}', github.workflow, github.event.pull_request.number) || github.workflow_ref }}
   cancel-in-progress: true
-
+  
 jobs:
   sonarcloud:
     name: Coverage
     runs-on: ubuntu-latest
     steps:
       - name: Free Disk Space (Ubuntu)
-        uses: jlumbroso/free-disk-space@main
+        uses: jlumbroso/free-disk-space@v1.3.1
         with:
           # this might remove tools that are actually needed,
           # if set to "true" but frees about 6 GB
           tool-cache: false
-
+  
           # all of these default to true, but feel free to set to
           # "false" if necessary for your workflow
           android: true
@@ -31,41 +29,33 @@ jobs:
           haskell: true
           large-packages: true
           docker-images: false
-          swap-storage: true
+          swap-storage: true          
       - uses: actions/checkout@v6
         with:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
-      - name: Set up Python ${{ matrix.python-version }}
+      - name: Set up Python
         uses: actions/setup-python@v6
         with:
-          python-version: 3.12
+          python-version: 3.13
           cache: 'pip'
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           python -m pip install uv
           python -m uv pip install coverage
-          python -m uv pip install -r tests.txt
+          python -m uv pip install pytest
       - name: Coverage Erase
         run: |
           coverage erase
-      - name: Coverage FL_Client
+      - name: Coverage Models
         run: | 
-          coverage run manage.py test --parallel auto fl_client.tests.tests_urls
+          coverage run manage.py test --parallel auto MAGE.tests.test_timm
           coverage combine -a 
-          coverage run manage.py test --parallel auto fl_client.tests.tests_views
-          coverage combine -a
-      - name: Coverage FL_Server
-        run: | 
-          coverage run manage.py test --parallel auto fl_server.tests.tests_urls
-          coverage combine -a
-          coverage run manage.py test --parallel auto fl_server.tests.tests_views
-          coverage combine -a
-          # coverage run -a manage.py test --parallel auto fl_server.tests.tests_server
+          coverage run manage.py test --parallel auto MAGE.tests.test_torchvision
       - name: Coverage Report
         run: |          
           coverage xml -o coverage.xml
-          coverage report
+          coverage report          
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@v7.0.0
         env:
@@ -77,4 +67,4 @@ jobs:
           coverage-reports: 'coverage.xml'
         env:
           CODACY_PROJECT_TOKEN: ${{ secrets.CODACY_PROJECT_TOKEN }}
-
+          
