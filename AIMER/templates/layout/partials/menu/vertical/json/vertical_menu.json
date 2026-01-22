@@ -1,0 +1,20 @@
+{
+  "menu": [
+    {
+      "name": "Dashboards",
+      "icon": "menu-icon icon-base bx bx-home-smile",
+      "slug": "dashboard",
+      "badge": [
+        "danger",
+        "5"
+      ],
+      "submenu": [
+        {
+          "url": "index",
+          "name": "Analytics",
+          "slug": "dashboard-analytics"
+        }
+      ]
+    }
+  ]
+}

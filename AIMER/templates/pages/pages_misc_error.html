@@ -1,0 +1,28 @@
+{% extends layout_path %}
+
+{% load static %}
+{% load i18n %}
+
+{% block title %}{% trans "Error" %}{% endblock %}
+
+{% block page_css %}
+{{ block.super }}
+<link rel="stylesheet" href="{% static 'vendor/css/pages/page-misc.css' %}" />
+{% endblock page_css %}
+
+
+{% block content %}
+<!-- Error -->
+<div class="container-xxl">
+  <div class="misc-wrapper">
+    <h1 class="mb-2 mx-2" style="line-height: 6rem;font-size: 6rem;">404</h1>
+    <h4 class="mb-2 mx-2">{% trans "Page Not Found️ ⚠️" %}</h4>
+    <p class="mb-6 mx-2">{% trans "we couldn't find the page you are looking for" %}</p>
+    <a href="{% url 'index' %}" class="btn btn-primary">{% trans "Back to home" %}</a>
+    <div class="mt-6">
+      <img src="{% static 'img/illustrations/page-misc-error-' %}{{ COOKIES.theme|default:theme }}.png" alt="page-misc-error-light" width="500" class="img-fluid" data-app-light-img="illustrations/page-misc-error-light.png" data-app-dark-img="illustrations/page-misc-error-dark.png" />
+    </div>
+  </div>
+</div>
+<!-- /Error -->
+{% endblock %}

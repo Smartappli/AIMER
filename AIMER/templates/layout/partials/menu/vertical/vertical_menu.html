@@ -1,0 +1,36 @@
+<aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+  <!-- ! Hide app brand if navbar-full -->
+  {% if not navbar_full %}
+  <div class="app-brand demo">
+    <a href="{% url 'index' %}" class="app-brand-link">
+      <span class="app-brand-logo demo">
+        {% include 'partials/logo.html'  %}
+      </span>
+      <span class="app-brand-text demo menu-text fw-bold ms-2">{% get_theme_variables 'template_name' %}</span>
+    </a>
+
+    <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
+      <i class="bx bx-chevron-left bx-sm d-flex align-items-center justify-content-center"></i>
+    </a>
+  </div>
+  {% endif %}
+
+
+  <div class="menu-inner-shadow"></div>
+
+  <ul class="menu-inner py-1">
+    {% for item in menu_data.menu %}
+
+    {% comment %} Menu Header {% endcomment %}
+    {% if "menu_header" in item %}
+    {% include './partials/menu_header_template.html' with header_text=item.menu_header %}
+    {% else %}
+
+    {% comment %} Menu Item {% endcomment %}
+    {% include './partials/menu_item_template.html' with item=item %}
+    {% endif %}
+    {% endfor %}
+  </ul>
+
+
+</aside>

@@ -1,0 +1,12 @@
+{% load i18n %}
+
+{% if item %}
+  {% if not item.permission or request.user|has_permission:item.permission %}
+  <li class="menu-item {% if item.url == request.resolver_match.url_name or item.url == request.path %}active{% endif %}">
+    <a href="{% if item.external == True %}{{ item.url }}{% else %}{% url item.url %}{% endif %}" class="menu-link" {% if item.target == "_blank" %}target="_blank" {% endif %}>
+      <i class="{{ item.icon }}"></i>
+      <div>{% trans item.name %}</div>
+    </a>
+  </li>
+  {% endif %}
+{% endif %}

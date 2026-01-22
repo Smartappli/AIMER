@@ -1,0 +1,80 @@
+{% extends layout_path %}
+
+{% load static %}
+{% load i18n %}
+
+{% block title %}{% trans "AIMER - Verify Email" %}{% endblock %}
+
+{% block page_css %}
+{{ block.super }}
+<link rel="stylesheet" href="{% static 'vendor/css/pages/page-auth.css' %}" />
+{% endblock page_css %}
+
+{% block page_js %}
+{{ block.super }}
+<script src="{% static 'js/auth-click-loader.js' %}"></script>
+{% endblock page_js %}
+
+
+{% block content %}
+<div class="authentication-wrapper authentication-cover">
+  <!-- Logo -->
+  <a href="{% url 'index' %}" class="app-brand auth-cover-brand gap-2">
+    <span class="app-brand-logo demo">{% include 'partials/logo.html'  %}</span>
+    <span class="app-brand-text demo text-heading fw-bold">{% get_theme_variables 'template_name' %}</span>
+  </a>
+  <!-- /Logo -->
+  <div class="authentication-inner row m-0">
+    <!-- /Left Text -->
+    <div class="d-none d-lg-flex col-lg-7 col-xl-8 align-items-center p-5">
+      <div class="w-100 d-flex justify-content-center">
+        <img src="{% static 'img/illustrations/boy-verify-email-' %}{{ COOKIES.theme|default:theme }}.png" class="img-fluid" alt="Login image" width="700" data-app-dark-img="illustrations/boy-verify-email-dark.png" data-app-light-img="illustrations/boy-verify-email-light.png" />
+      </div>
+    </div>
+    <!-- /Left Text -->
+
+    <!--  Verify email -->
+    <div class="d-flex col-12 col-lg-5 col-xl-4 align-items-center authentication-bg p-sm-12 p-6">
+      <div class="w-px-400 mx-auto mt-sm-12 mt-8">
+        <h4 class="mb-1">{% trans "Verify your email" %} ✉️</h4>
+        {% if request.user.is_authenticated %}
+        <p class="text-start mb-1">
+          {% trans "Verification link will be send to this email:" %} {{request.user.email}}.
+        </p>
+        {% else %}
+        <p class="text-start mb-1">
+          {% trans "Verification link send to your email address." %}
+        </p>
+        {% endif %}
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert {% if message.tags == 'success' %}alert-success{% elif message.tags == 'error' %}alert-danger{% else %}alert-warning{% endif %} mb-0 mt-1" role="alert">
+          {{ message }}
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% if request.user.is_authenticated %}
+        <a id="btnSubmit" class="btn btn-primary w-100 my-5" href="{% url 'send-verification' %}">
+          <span id="btnText" class="me-1">{% trans "Verify Email" %}</span>
+          <span id="btnLoader" class="spinner-border spinner-border-sm visually-hidden ms-2" role="status" aria-hidden="true"></span>
+        </a>
+        <a class="btn btn-primary w-100" href="{% url 'index' %}">
+          {% trans "Back" %}
+        </a>
+        {% else %}
+        <a class="btn btn-primary w-100 my-4" href="{% url 'login' %}">
+          {% trans "Skip for now & Login" %}
+        </a>
+        <p class="text-center">Didn't get the mail?
+          <a id="btnSubmit" class="text-center" href="{% url 'send-verification' %}">
+            <span id="btnText" class="me-1">{% trans "Resend" %}</span>
+            <span id="btnLoader" class="spinner-border spinner-border-sm visually-hidden" role="status" aria-hidden="true"></span>
+          </a>
+        </p>
+        {% endif %}
+      </div>
+    </div>
+    <!-- / Verify email -->
+  </div>
+</div>
+{% endblock %}

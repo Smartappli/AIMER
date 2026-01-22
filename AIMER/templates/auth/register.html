@@ -1,0 +1,105 @@
+{% extends layout_path %}
+
+{% load static %}
+{% load i18n %}
+
+{% block title %}{% trans "AIMER - Register" %}{% endblock %}
+
+{% block vendor_css %}
+{{ block.super }}
+<link rel="stylesheet" href="{% static 'vendor/libs/@form-validation/form-validation.css' %}" />
+{% endblock vendor_css %}
+
+{% block vendor_js %}
+{{ block.super }}
+<script src="{% static 'vendor/libs/@form-validation/popular.js' %}"></script>
+<script src="{% static 'vendor/libs/@form-validation/bootstrap5.js' %}"></script>
+<script src="{% static 'vendor/libs/@form-validation/auto-focus.js' %}"></script>
+{% endblock vendor_js %}
+
+{% block page_css %}
+{{ block.super }}
+<link rel="stylesheet" href="{% static 'vendor/css/pages/page-auth.css' %}" />
+{% endblock page_css %}
+
+{% block page_js %}
+{{ block.super }}
+<script src="{% static 'js/authentication.js' %}"></script>
+{% endblock page_js %}
+
+{% block content %}
+<div class="authentication-wrapper authentication-cover">
+  <!-- Logo -->
+  <a href="{% url 'index' %}" class="app-brand auth-cover-brand gap-2">
+    <span class="app-brand-logo demo">{% include 'partials/logo.html'  %}</span>
+    <span class="app-brand-text demo text-heading fw-bold">{% get_theme_variables 'template_name' %}</span>
+  </a>
+  <!-- /Logo -->
+  <div class="authentication-inner row m-0">
+
+    <!-- /Left Text -->
+    <div class="d-none d-lg-flex col-lg-7 col-xl-8 align-items-center p-5">
+      <div class="w-100 d-flex justify-content-center">
+        <img src="{% static 'img/illustrations/girl-with-laptop-' %}{{ COOKIES.theme|default:theme }}.png" class="img-fluid scaleX-n1-rtl" alt="Login image" width="700" data-app-dark-img="illustrations/girl-with-laptop-dark.png" data-app-light-img="illustrations/girl-with-laptop-light.png" />
+      </div>
+    </div>
+    <!-- /Left Text -->
+
+    <!-- Register -->
+    <div class="d-flex col-12 col-lg-5 col-xl-4 align-items-center authentication-bg p-sm-12 p-6">
+      <div class="w-px-400 mx-auto mt-sm-12 mt-8">
+        <h4 class="mb-1">{% trans "Adventure starts here" %}</h4>
+        <p class="mb-6">{% trans "Make your app management easy and fun!" %}</p>
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert {% if message.tags == 'success' %}alert-success{% elif message.tags == 'error' %}alert-danger{% else %}alert-warning{% endif %}" role="alert">
+          {{ message }}
+        </div>
+        {% endfor %}
+        {% endif %}
+        <form id="formAuthentication" class="mb-6" action="{% url 'register' %}" method="post">
+          {% csrf_token %}
+          <div class="mb-6 form-control-validation">
+            <label for="username" class="form-label">{% trans "Username" %}</label>
+            <input type="text" class="form-control" id="username" name="username" autofocus>
+          </div>
+          <div class="mb-6 form-control-validation">
+            <label for="email" class="form-label">{% trans "Email" %}</label>
+            <input type="text" class="form-control" id="email" name="email">
+          </div>
+          <div class="form-password-toggle form-control-validation">
+            <label class="form-label" for="password">{% trans "Password" %}</label>
+            <div class="input-group input-group-merge">
+              <input type="password" id="password" class="form-control" name="password" aria-describedby="{% trans "password" %}" />
+              <span class="input-group-text cursor-pointer"><i class="icon-base bx bx-hide"></i></span>
+            </div>
+          </div>
+          <div class="my-7 form-control-validation">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="terms-conditions" name="terms" />
+              <label class="form-check-label" for="terms-conditions">
+                {% trans "I agree to" %}
+                <a href="javascript:void(0);">{% trans "privacy policy & terms" %}</a>
+              </label>
+            </div>
+          </div>
+          <button id="btnSubmit" class="btn btn-primary w-100" type="submit">
+            <span id="btnText" class="me-1">{% trans "Sign up" %}</span>
+            <span id="btnLoader" class="spinner-border spinner-border-sm visually-hidden ms-2" role="status" aria-hidden="true"></span>
+          </button>
+
+        </form>
+
+        <p class="text-center">
+          <span>{% trans "Already have an account?" %}</span>
+          <a href="{% url 'login' %}">
+            <span>{% trans "Sign in instead" %}</span>
+          </a>
+        </p>
+
+      </div>
+    </div>
+    <!-- /Register -->
+  </div>
+</div>
+{% endblock %}
