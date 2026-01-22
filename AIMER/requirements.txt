@@ -18,7 +18,7 @@ langchain-docling==2.0.0
 langchain-ollama==1.0.1
 langgraph==1.0.7
 langgraph-checkpoint-sqlite==3.0.3
-numpy==2.4.1
+numpy
 pydantic==2.12.5
 pypdf==6.6.0
 qdrant-client==1.16.2
