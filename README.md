@@ -8,7 +8,7 @@
 
 ## FARM Unit Tests
 
-## CI
+## CI / CD
 
 [![Code Quality](https://github.com/Smartappli/AIMER/actions/workflows/code_quality.yml/badge.svg)](https://github.com/Smartappli/AIMER/actions/workflows/code_quality.yml)
 [![Linter](https://github.com/Smartappli/AIMER/actions/workflows/linter.yml/badge.svg)](https://github.com/Smartappli/AIMER/actions/workflows/linter.yml)
