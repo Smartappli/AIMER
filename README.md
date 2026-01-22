@@ -7,12 +7,14 @@
 ## MAGE Unit Tests
 
 [![Mage Coverage](https://github.com/Smartappli/AIMER/actions/workflows/mage_coverage.yml/badge.svg)](https://github.com/Smartappli/AIMER/actions/workflows/mage_coverage.yml)
+[![Mage Docker Builder](https://github.com/Smartappli/AIMER/actions/workflows/mage_docker_builder.yml/badge.svg)](https://github.com/Smartappli/AIMER/actions/workflows/mage_docker_builder.yml)
 
 ## FARM Unit Tests
 
 ## CI / CD
 
 [![Global Code Quality](https://github.com/Smartappli/AIMER/actions/workflows/global_code_quality.yml/badge.svg)](https://github.com/Smartappli/AIMER/actions/workflows/global_code_quality.yml)
+[![CodeQL](https://github.com/Smartappli/AIMER/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/Smartappli/AIMER/actions/workflows/github-code-scanning/codeql)
 [![Global Linter](https://github.com/Smartappli/AIMER/actions/workflows/global_linter.yml/badge.svg)](https://github.com/Smartappli/AIMER/actions/workflows/global_linter.yml)
 [![Global Security](https://github.com/Smartappli/AIMER/actions/workflows/global_security.yml/badge.svg)](https://github.com/Smartappli/AIMER/actions/workflows/global_security.yml)
 [![Global License Checker](https://github.com/Smartappli/AIMER/actions/workflows/global_license_check.yml/badge.svg)](https://github.com/Smartappli/AIMER/actions/workflows/global_license_check.yml)
