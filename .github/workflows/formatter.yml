@@ -1,49 +1,93 @@
 name: Formatter
-on: [push, pull_request]
+on:
+  push:
+    # évite les boucles quand create-pull-request pousse une branche "formatter/..."
+    branches-ignore:
+      - "formatter/**"
+  pull_request:
+
+permissions:
+  contents: write
+  pull-requests: write
 
 concurrency:
-  group: formatter-${{ github.event_name == 'pull_request' && format('{0}-{1}', github.workflow, github.event.pull_request.number) || github.workflow_ref }}
+  group: formatter-${{ github.event_name == 'pull_request' && format('{0}-pr-{1}', github.workflow, github.event.pull_request.number) || format('{0}-{1}', github.workflow, github.ref_name) }}
   cancel-in-progress: true
 
 jobs:
-  linter_name:
+  black:
     name: Black
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
+        with:
+          # en PR: on checkout la branche source (head_ref), en push: la branche du push
+          ref: ${{ github.head_ref || github.ref_name }}
+
       - name: Check files using the black formatter
         uses: rickstaa/action-black@v1
         id: action_black
         with:
           black_args: ". --line-length 80 -t py312 -t py313 -t py314"
+
       - name: Create Pull Request
-        if: steps.action_black.outputs.is_formatted == 'true'
+        if: steps.action_black.outputs.is_formatted == 'true' && (github.event_name == 'push' || github.event.pull_request.head.repo.full_name == github.repository)
         uses: peter-evans/create-pull-request@v8
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          title: "Format Python code with psf/black push"
+          title: "Format Python code with psf/black"
           commit-message: ":art: Format Python code with psf/black"
           body: |
-            There appear to be some python formatting errors in ${{ github.sha }}. This pull request
-            uses the [psf/black](https://github.com/psf/black) formatter to fix these issues.
-          base: ${{ github.head_ref }} # Creates pull request onto pull request or commit branch
-          branch: black
+            This pull request applies automatic formatting with [psf/black](https://github.com/psf/black).
+          base: ${{ github.head_ref || github.ref_name }}
+          branch: formatter/black-${{ github.event_name == 'pull_request' && github.event.pull_request.number || github.ref_name }}
+          add-paths: |
+            **/*.py
 
   dj-lint:
+    name: Django Formatter (djLint)
     runs-on: ubuntu-latest
-    name: Django Formatter
     steps:
-      - name: Check out source repository
-        uses: actions/checkout@v6
-      - name: Set up Python environment
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.head_ref || github.ref_name }}
+
+      - name: Set up Python
         uses: actions/setup-python@v6
         with:
           python-version: "3.13"
-          cache: 'pip'
-      - name: DjLint Formatter
+          cache: "pip"
+
+      - name: Install djLint
         run: |
           python -m pip install --upgrade pip
-          python -m pip install uv
-          python -m uv pip install djlint         
-          djlint ./templates --check
+          python -m pip install djlint
+
+      # IMPORTANT: ne mets pas --check avant --reformat, sinon ça peut échouer et stopper le job
+      - name: djLint reformat
+        run: |
           djlint ./templates --reformat
+
+      - name: Detect changes
+        id: djlint_changes
+        run: |
+          if git diff --quiet; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Create Pull Request
+        if: steps.djlint_changes.outputs.changed == 'true' && (github.event_name == 'push' || github.event.pull_request.head.repo.full_name == github.repository)
+        uses: peter-evans/create-pull-request@v8
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          title: "Format templates with djLint"
+          commit-message: ":art: Format templates with djLint"
+          body: |
+            This pull request formats Django templates under `./templates` using [djLint](https://github.com/djlint/djLint).
+          base: ${{ github.head_ref || github.ref_name }}
+          branch: formatter/djlint-${{ github.event_name == 'pull_request' && github.event.pull_request.number || github.ref_name }}
+          add-paths: |
+            templates/**
+
