@@ -9,7 +9,7 @@ docling[vlm]==2.69.1
 fastembed==0.7.4
 # fastembed-gpu==0.7.4
 transformers==4.57.6
-huggingface-hub
+huggingface-hub==0.36.0
 hf_xet
 langchain-core==1.2.7
 langchain_community==0.4.1
