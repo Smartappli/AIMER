@@ -70,7 +70,9 @@ def _safe_get_model(model_name: str, *, weights, num_classes: int):
     # --- Fallback très ancien torchvision: appel direct au builder ---
     builder = getattr(tvm, model_name, None)
     if builder is None:
-        raise RuntimeError(f"Model builder not found for {model_name!r} (old torchvision fallback)")
+        raise RuntimeError(
+            f"Model builder not found for {model_name!r} (old torchvision fallback)"
+        )
 
     # Ancienne API: pretrained=True/False
     try:
@@ -84,7 +86,13 @@ def tv_modules() -> dict[str, ModuleType]:
     modules: dict[str, ModuleType] = {"classification": tvm}
 
     # Sous-modules “classiques” (selon version torchvision)
-    for sub in ("detection", "segmentation", "video", "optical_flow", "quantization"):
+    for sub in (
+        "detection",
+        "segmentation",
+        "video",
+        "optical_flow",
+        "quantization",
+    ):
         mod = getattr(tvm, sub, None)
         if isinstance(mod, ModuleType):
             modules[sub] = mod
@@ -119,7 +127,9 @@ def num_classes() -> int:
 
 
 @pytest.mark.slow
-def test_torchvision_model_creation(tv_models: dict[str, list[str]], num_classes: int) -> None:
+def test_torchvision_model_creation(
+    tv_models: dict[str, list[str]], num_classes: int
+) -> None:
     total_models = sum(len(model_list) for model_list in tv_models.values())
     is_tty = sys.stdout.isatty() or sys.stderr.isatty()
 
@@ -136,7 +146,9 @@ def test_torchvision_model_creation(tv_models: dict[str, list[str]], num_classes
         weights = _safe_get_model_weights_default(model_name)
         if weights is not None:
             try:
-                model = _safe_get_model(model_name, weights=weights, num_classes=num_classes)
+                model = _safe_get_model(
+                    model_name, weights=weights, num_classes=num_classes
+                )
                 return model, "weights", time.time() - start_time
             except (URLError, OSError, RuntimeError, ValueError):
                 # download impossible / mismatch / autre -> fallback random
@@ -144,7 +156,9 @@ def test_torchvision_model_creation(tv_models: dict[str, list[str]], num_classes
 
         # 2) fallback sans weights (random)
         start_time = time.time()
-        model = _safe_get_model(model_name, weights=None, num_classes=num_classes)
+        model = _safe_get_model(
+            model_name, weights=None, num_classes=num_classes
+        )
         return model, "no-weights", time.time() - start_time
 
     if is_tty:
@@ -179,12 +193,18 @@ def test_torchvision_model_creation(tv_models: dict[str, list[str]], num_classes
                 ) as p_mod:
                     for model_name in model_list:
                         p_mod.set_postfix_str(model_name)
-                        p_global.set_postfix_str(f"{module_name} • {model_name}")
+                        p_global.set_postfix_str(
+                            f"{module_name} • {model_name}"
+                        )
 
                         try:
-                            model, status, elapsed = create_one(module_name, model_name)
+                            model, status, elapsed = create_one(
+                                module_name, model_name
+                            )
                             del model  # éviter d'accumuler en mémoire
-                            p_mod.set_postfix_str(f"{model_name} • {status} • {elapsed:.2f}s")
+                            p_mod.set_postfix_str(
+                                f"{model_name} • {status} • {elapsed:.2f}s"
+                            )
                             p_global.set_postfix_str(
                                 f"{module_name} • {model_name} • {status} • {elapsed:.2f}s"
                             )
@@ -218,7 +238,8 @@ def test_torchvision_model_creation(tv_models: dict[str, list[str]], num_classes
                         failures.append((module_name, model_name, repr(e)))
                     pbar.update(1)
 
-    assert not failures, (
-        "Certaines créations de modèles TorchVision ont échoué:\n"
-        + "\n".join(f"- {m} / {n}: {err}" for m, n, err in failures)
+    assert (
+        not failures
+    ), "Certaines créations de modèles TorchVision ont échoué:\n" + "\n".join(
+        f"- {m} / {n}: {err}" for m, n, err in failures
     )
