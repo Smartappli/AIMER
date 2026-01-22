@@ -2,9 +2,7 @@
 
 ## AIMER Unit Tests
 
-[![Nightlies Models - PART A](https://github.com/Smartappli/AIMER/actions/workflows/nightlies_models_A.yml/badge.svg)](https://github.com/Smartappli/AIMER/actions/workflows/nightlies_models_A.yml)
-[![Nightlies Models - PART B](https://github.com/Smartappli/AIMER/actions/workflows/nightlies_models_B.yml/badge.svg)](https://github.com/Smartappli/AIMER/actions/workflows/nightlies_models_B.yml)
-[![Nightlies Models - PART C](https://github.com/Smartappli/AIMER/actions/workflows/nightlies_models_C.yml/badge.svg)](https://github.com/Smartappli/AIMER/actions/workflows/nightlies_models_C.yml)
+[![Aimer DJLint](https://github.com/Smartappli/AIMER/actions/workflows/aimer_djlint.yml/badge.svg)](https://github.com/Smartappli/AIMER/actions/workflows/aimer_djlint.yml)
 
 ## MAGE Unit Tests
 
