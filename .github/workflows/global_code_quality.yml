@@ -10,7 +10,7 @@ on:
     - cron: '30 3 * * *'
 
 concurrency:
-  group: code_quality-${{ github.event_name == 'pull_request' && format('{0}-{1}', github.workflow, github.event.pull_request.number) || github.workflow_ref }}
+  group: global-code-quality-${{ github.event_name == 'pull_request' && format('{0}-{1}', github.workflow, github.event.pull_request.number) || github.workflow_ref }}
   cancel-in-progress: true
 
 permissions:
