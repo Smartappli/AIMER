@@ -1,5 +1,5 @@
 fastapi[standard-no-fastapi-cloud-cli]==0.128.0
-fastmcp==2.14.3
+fastmcp==2.14.4
 uvicorn[standard]==0.40.0
 # tensorflow-cpu>=2.20.0; sys_platform != 'darwin'
 # tensorflow>=2.20.0; sys_platform == 'darwin'
