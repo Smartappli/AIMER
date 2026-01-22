@@ -1,12 +1,12 @@
+import os
 import sys
 import time
 from types import ModuleType
 from urllib.error import URLError
 
-from django.test import TestCase
-from tqdm.auto import tqdm
-
+import pytest
 import torchvision.models as tvm
+from tqdm.auto import tqdm
 
 
 def _safe_list_models(module: ModuleType) -> list[str]:
@@ -39,9 +39,7 @@ def _safe_list_models(module: ModuleType) -> list[str]:
 
 
 def _safe_get_model_weights_default(model_name: str):
-    """
-    Retourne weights_enum.DEFAULT si disponible, sinon None.
-    """
+    """Retourne weights_enum.DEFAULT si disponible, sinon None."""
     if not hasattr(tvm, "get_model_weights"):
         return None
     try:
@@ -72,151 +70,155 @@ def _safe_get_model(model_name: str, *, weights, num_classes: int):
     # --- Fallback très ancien torchvision: appel direct au builder ---
     builder = getattr(tvm, model_name, None)
     if builder is None:
-        raise RuntimeError(
-            f"Model builder not found for {model_name!r} (old torchvision fallback)"
-        )
+        raise RuntimeError(f"Model builder not found for {model_name!r} (old torchvision fallback)")
 
     # Ancienne API: pretrained=True/False
     try:
         return builder(pretrained=True)
     except Exception:
-        # num_classes pas standard partout en ancien API, on reste minimaliste
         return builder(pretrained=False)
 
 
-class TorchvisionModelsTest(TestCase):
-    @classmethod
-    def setUpClass(cls) -> None:
-        super().setUpClass()
+@pytest.fixture(scope="session")
+def tv_modules() -> dict[str, ModuleType]:
+    modules: dict[str, ModuleType] = {"classification": tvm}
 
-        modules: dict[str, ModuleType] = {"classification": tvm}
+    # Sous-modules “classiques” (selon version torchvision)
+    for sub in ("detection", "segmentation", "video", "optical_flow", "quantization"):
+        mod = getattr(tvm, sub, None)
+        if isinstance(mod, ModuleType):
+            modules[sub] = mod
 
-        # Sous-modules “classiques” (selon version torchvision)
-        for sub in (
-            "detection",
-            "segmentation",
-            "video",
-            "optical_flow",
-            "quantization",
-        ):
-            mod = getattr(tvm, sub, None)
-            if isinstance(mod, ModuleType):
-                modules[sub] = mod
+    # Optionnel: filtrer modules en CI
+    # export TV_TEST_MODULES="classification,detection"
+    wanted = os.getenv("TV_TEST_MODULES")
+    if wanted:
+        keep = {m.strip() for m in wanted.split(",") if m.strip()}
+        modules = {k: v for k, v in modules.items() if k in keep}
 
-        cls.modules = modules
-        cls.models = {
-            name: _safe_list_models(mod) for name, mod in modules.items()
-        }
-        cls.num_classes = 10
+    return modules
 
-    def test_model_creation(self) -> None:
-        total_models = sum(
-            len(model_list) for model_list in self.models.values()
-        )
-        is_tty = sys.stdout.isatty() or sys.stderr.isatty()
 
-        bar_fmt = (
-            "{l_bar}{bar} | {n_fmt}/{total_fmt} "
-            "[{elapsed}<{remaining}, {rate_fmt}] {postfix}"
-        )
+@pytest.fixture(scope="session")
+def tv_models(tv_modules: dict[str, ModuleType]) -> dict[str, list[str]]:
+    models = {name: _safe_list_models(mod) for name, mod in tv_modules.items()}
 
-        def create_one(module_name: str, model_name: str):
-            pretrained_used = False
-            start_time = time.time()
+    # Optionnel: limiter par module en CI
+    # export TV_TEST_LIMIT_PER_MODULE="20"
+    lim = os.getenv("TV_TEST_LIMIT_PER_MODULE")
+    limit = int(lim) if (lim and lim.isdigit()) else None
+    if limit is not None:
+        models = {k: v[:limit] for k, v in models.items()}
 
-            # 1) tenter weights DEFAULT (si dispo)
-            weights = _safe_get_model_weights_default(model_name)
-            if weights is not None:
-                try:
-                    model = _safe_get_model(
-                        model_name,
-                        weights=weights,
-                        num_classes=self.num_classes,
-                    )
-                    pretrained_used = True
-                    return model, "weights", time.time() - start_time
-                except (URLError, OSError, RuntimeError, ValueError):
-                    # download impossible / mismatch / autre -> fallback random
-                    pass
+    return models
 
-            # 2) fallback sans weights (random)
-            start_time = time.time()
-            model = _safe_get_model(
-                model_name, weights=None, num_classes=self.num_classes
-            )
-            return model, "no-weights", time.time() - start_time
 
-        if is_tty:
-            with tqdm(
-                total=total_models,
-                desc="All models",
-                unit="model",
-                position=0,
-                dynamic_ncols=True,
-                bar_format=bar_fmt,
-                mininterval=0.2,
-                smoothing=0.1,
-                leave=True,
-                disable=False,
-                file=sys.stdout,
-                ascii=False,
-            ) as p_global:
-                for module_name, model_list in self.models.items():
-                    with tqdm(
-                        total=len(model_list),
-                        desc=f"Module: {module_name}",
-                        unit="model",
-                        position=1,
-                        dynamic_ncols=True,
-                        bar_format=bar_fmt,
-                        mininterval=0.2,
-                        smoothing=0.1,
-                        leave=False,
-                        disable=False,
-                        file=sys.stdout,
-                    ) as p_mod:
-                        for model_name in model_list:
-                            p_mod.set_postfix_str(model_name)
-                            p_global.set_postfix_str(
-                                f"{module_name} • {model_name}"
-                            )
+@pytest.fixture(scope="session")
+def num_classes() -> int:
+    return 10
 
-                            with self.subTest(
-                                module=module_name, model=model_name
-                            ):
-                                model, status, elapsed = create_one(
-                                    module_name, model_name
-                                )
-                                # éviter de garder plein de modèles en mémoire
-                                del model
 
-                                p_mod.set_postfix_str(
-                                    f"{model_name} • {status} • {elapsed:.2f}s"
-                                )
-                                p_global.set_postfix_str(
-                                    f"{module_name} • {model_name} • {status} • {elapsed:.2f}s"
-                                )
+@pytest.mark.slow
+def test_torchvision_model_creation(tv_models: dict[str, list[str]], num_classes: int) -> None:
+    total_models = sum(len(model_list) for model_list in tv_models.values())
+    is_tty = sys.stdout.isatty() or sys.stderr.isatty()
 
-                            p_mod.update(1)
-                            p_global.update(1)
-        else:
-            with tqdm(
-                total=total_models,
-                desc="torchvision get_model",
-                unit="model",
-                dynamic_ncols=False,
-                bar_format=bar_fmt,
-                mininterval=0.2,
-                smoothing=0.1,
-                leave=True,
-                disable=False,
-                file=sys.stdout,
-                ascii=False,
-            ) as pbar:
-                for module_name, model_list in self.models.items():
+    bar_fmt = (
+        "{l_bar}{bar} | {n_fmt}/{total_fmt} "
+        "[{elapsed}<{remaining}, {rate_fmt}] {postfix}"
+    )
+
+    failures: list[tuple[str, str, str]] = []
+
+    def create_one(module_name: str, model_name: str):
+        # 1) tenter weights DEFAULT (si dispo)
+        start_time = time.time()
+        weights = _safe_get_model_weights_default(model_name)
+        if weights is not None:
+            try:
+                model = _safe_get_model(model_name, weights=weights, num_classes=num_classes)
+                return model, "weights", time.time() - start_time
+            except (URLError, OSError, RuntimeError, ValueError):
+                # download impossible / mismatch / autre -> fallback random
+                pass
+
+        # 2) fallback sans weights (random)
+        start_time = time.time()
+        model = _safe_get_model(model_name, weights=None, num_classes=num_classes)
+        return model, "no-weights", time.time() - start_time
+
+    if is_tty:
+        # ✅ 2 barres (global + module) proprement
+        with tqdm(
+            total=total_models,
+            desc="All models",
+            unit="model",
+            position=0,
+            dynamic_ncols=True,
+            bar_format=bar_fmt,
+            mininterval=0.2,
+            smoothing=0.1,
+            leave=True,
+            disable=False,
+            file=sys.stdout,
+            ascii=False,
+        ) as p_global:
+            for module_name, model_list in tv_models.items():
+                with tqdm(
+                    total=len(model_list),
+                    desc=f"Module: {module_name}",
+                    unit="model",
+                    position=1,
+                    dynamic_ncols=True,
+                    bar_format=bar_fmt,
+                    mininterval=0.2,
+                    smoothing=0.1,
+                    leave=False,
+                    disable=False,
+                    file=sys.stdout,
+                ) as p_mod:
                     for model_name in model_list:
-                        pbar.set_postfix_str(f"{module_name} • {model_name}")
-                        with self.subTest(module=module_name, model=model_name):
-                            model, _, _ = create_one(module_name, model_name)
-                            del model
-                        pbar.update(1)
+                        p_mod.set_postfix_str(model_name)
+                        p_global.set_postfix_str(f"{module_name} • {model_name}")
+
+                        try:
+                            model, status, elapsed = create_one(module_name, model_name)
+                            del model  # éviter d'accumuler en mémoire
+                            p_mod.set_postfix_str(f"{model_name} • {status} • {elapsed:.2f}s")
+                            p_global.set_postfix_str(
+                                f"{module_name} • {model_name} • {status} • {elapsed:.2f}s"
+                            )
+                        except Exception as e:
+                            failures.append((module_name, model_name, repr(e)))
+
+                        p_mod.update(1)
+                        p_global.update(1)
+    else:
+        # ✅ Pas de TTY => 1 seule barre (visible même dans des logs)
+        with tqdm(
+            total=total_models,
+            desc="torchvision get_model",
+            unit="model",
+            dynamic_ncols=False,
+            bar_format=bar_fmt,
+            mininterval=0.2,
+            smoothing=0.1,
+            leave=True,
+            disable=False,
+            file=sys.stdout,
+            ascii=False,
+        ) as pbar:
+            for module_name, model_list in tv_models.items():
+                for model_name in model_list:
+                    pbar.set_postfix_str(f"{module_name} • {model_name}")
+                    try:
+                        model, _, _ = create_one(module_name, model_name)
+                        del model
+                    except Exception as e:
+                        failures.append((module_name, model_name, repr(e)))
+                    pbar.update(1)
+
+    assert not failures, (
+        "Certaines créations de modèles TorchVision ont échoué:\n"
+        + "\n".join(f"- {m} / {n}: {err}" for m, n, err in failures)
+    )
