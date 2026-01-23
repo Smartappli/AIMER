@@ -43,7 +43,7 @@ def extract_filters(user_query: str):
                 <USER QUERY STARTS>
                 {user_query}
                 <USER QUERY ENDS>
-                
+
                 Extract metadata base on the user query only:        
             """
 

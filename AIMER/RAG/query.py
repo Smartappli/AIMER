@@ -34,6 +34,19 @@ vector_store = QdrantVectorStore.from_existing_collection(
 
 
 def extract_filters(user_query: str):
+    """Extract structured metadata filters from a natural-language user query.
+
+    This function asks the LLM to produce a `ChunkMetadata` object from the
+    query, then converts it to a dict suitable for building a Qdrant filter.
+
+    Args:
+        user_query: The raw user query.
+
+    Returns:
+        A dictionary of metadata filters (e.g. {"source": "...", "year": 2024}).
+        If no filters are detected, returns an empty dict.
+
+    """
     prompt = """
             Extract metadata filters from the query. Return None for fields mentioned.
 
@@ -59,6 +72,20 @@ def extract_filters(user_query: str):
 
 
 def hybrid_search(query: str, k: int = 10, filters: dict = None):
+    """Perform a hybrid (dense + sparse) similarity search in Qdrant.
+
+    If `filters` are provided, they are translated into a Qdrant `Filter` that
+    matches `metadata.<key> == value` for each pair.
+
+    Args:
+        query: User query text.
+        k: Number of documents to retrieve.
+        filters: Optional metadata filters.
+
+    Returns:
+        A list of retrieved documents (LangChain Document objects).
+
+    """
     qdrant_filter = None
 
     if filters:
@@ -69,12 +96,24 @@ def hybrid_search(query: str, k: int = 10, filters: dict = None):
 
         qdrant_filter = Filter(must=condition)
 
-    results = vector_store.similarity_search(query=query, k=k, filter=qdrant_filter)
-
-    return results
+    return vector_store.similarity_search(query=query, k=k, filter=qdrant_filter)
 
 
 def rerank_results(query: str, documents=list, top_k: int = 5):
+    """Rerank retrieved documents using a cross-encoder reranker.
+
+    The reranker scores each (query, document_text) pair and returns the top
+    `top_k` documents sorted by descending score.
+
+    Args:
+        query: User query text.
+        documents: List of retrieved documents (must have `page_content`).
+        top_k: Number of documents to return after reranking.
+
+    Returns:
+        A list of top reranked documents.
+
+    """
     reranker = HuggingFaceCrossEncoder(
         model_name=RERANKER_MODEL, model_kwargs={"device": "xpu"},
     )
