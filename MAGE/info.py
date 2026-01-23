@@ -12,7 +12,7 @@ def _safe(label, fn, default="N/A"):
 
 
 print(
-    f"Python: {sys.version.split()[0]} ({platform.system()} {platform.release()})"
+    f"Python: {sys.version.split()[0]} ({platform.system()} {platform.release()})",
 )
 print(f"PyTorch version: {torch.__version__}")
 
@@ -34,7 +34,7 @@ if torch.cuda.is_available():
         cap = getattr(props, "major", None), getattr(props, "minor", None)
         mem_gb = getattr(props, "total_memory", 0) / (1024**3)
         print(
-            f" - [{i}] {name} | capability={cap[0]}.{cap[1]} | VRAM={mem_gb:.2f} GB"
+            f" - [{i}] {name} | capability={cap[0]}.{cap[1]} | VRAM={mem_gb:.2f} GB",
         )
 
 # --- Apple MPS (Mac)
@@ -45,7 +45,7 @@ if mps_backend is None:
 else:
     print(f"MPS built:     {_safe('mps_built', mps_backend.is_built, False)}")
     print(
-        f"MPS available: {_safe('mps_avail', mps_backend.is_available, False)}"
+        f"MPS available: {_safe('mps_avail', mps_backend.is_available, False)}",
     )
 
 # --- Intel XPU (oneAPI / Intel GPU)
@@ -63,12 +63,12 @@ else:
             n = xpu.device_count()
             for i in range(n):
                 name = _safe(
-                    "xpu_name", lambda: xpu.get_device_name(i), "Unknown"
+                    "xpu_name", lambda: xpu.get_device_name(i), "Unknown",
                 )
                 print(f" - [{i}] {name}")
         except Exception as e:
             print(
-                f" - Unable to enumerate XPU devices ({type(e).__name__}: {e})"
+                f" - Unable to enumerate XPU devices ({type(e).__name__}: {e})",
             )
 
 # --- CPU basics

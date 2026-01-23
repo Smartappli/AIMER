@@ -9,8 +9,7 @@ from tqdm.auto import tqdm
 
 @pytest.fixture(scope="session")
 def timm_models() -> dict[str, list[str]]:
-    """
-    Liste tous les modèles timm, groupés par module.
+    """Liste tous les modèles timm, groupés par module.
     Optionnel: limiter via variables d'env pour éviter un test interminable en CI.
       - TIMM_TEST_MODULES="resnet,vit,convnext"
       - TIMM_TEST_LIMIT_PER_MODULE="20"
@@ -43,7 +42,7 @@ def num_classes() -> int:
 
 @pytest.mark.slow
 def test_timm_model_creation(
-    timm_models: dict[str, list[str]], num_classes: int
+    timm_models: dict[str, list[str]], num_classes: int,
 ) -> None:
     total_models = sum(len(model_list) for model_list in timm_models.values())
     is_tty = sys.stdout.isatty() or sys.stderr.isatty()
@@ -100,7 +99,7 @@ def test_timm_model_creation(
                     for model_name in model_list:
                         p_mod.set_postfix_str(model_name)
                         p_global.set_postfix_str(
-                            f"{module_name} • {model_name}"
+                            f"{module_name} • {model_name}",
                         )
 
                         try:
@@ -111,10 +110,10 @@ def test_timm_model_creation(
                                 else "no-pretrained"
                             )
                             p_mod.set_postfix_str(
-                                f"{model_name} • {status} • {elapsed:.2f}s"
+                                f"{model_name} • {status} • {elapsed:.2f}s",
                             )
                             p_global.set_postfix_str(
-                                f"{module_name} • {model_name} • {status} • {elapsed:.2f}s"
+                                f"{module_name} • {model_name} • {status} • {elapsed:.2f}s",
                             )
                         except Exception as e:
                             failures.append((module_name, model_name, repr(e)))

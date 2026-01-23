@@ -10,8 +10,7 @@ from tqdm.auto import tqdm
 
 
 def _safe_list_models(module: ModuleType) -> list[str]:
-    """
-    TorchVision >= 0.14: tvm.list_models(module=...)
+    """TorchVision >= 0.14: tvm.list_models(module=...)
     Fallback: introspection (moins fiable, mais évite de casser si ancienne version)
     """
     if hasattr(tvm, "list_models"):
@@ -50,8 +49,7 @@ def _safe_get_model_weights_default(model_name: str):
 
 
 def _safe_get_model(model_name: str, *, weights, num_classes: int):
-    """
-    1) Si weights != None => essaie get_model(name, weights=weights) (sans num_classes)
+    """1) Si weights != None => essaie get_model(name, weights=weights) (sans num_classes)
     2) Sinon => essaie get_model(name, weights=None, num_classes=...) puis fallback sans num_classes
     """
     if hasattr(tvm, "get_model"):
@@ -71,7 +69,7 @@ def _safe_get_model(model_name: str, *, weights, num_classes: int):
     builder = getattr(tvm, model_name, None)
     if builder is None:
         raise RuntimeError(
-            f"Model builder not found for {model_name!r} (old torchvision fallback)"
+            f"Model builder not found for {model_name!r} (old torchvision fallback)",
         )
 
     # Ancienne API: pretrained=True/False
@@ -128,7 +126,7 @@ def num_classes() -> int:
 
 @pytest.mark.slow
 def test_torchvision_model_creation(
-    tv_models: dict[str, list[str]], num_classes: int
+    tv_models: dict[str, list[str]], num_classes: int,
 ) -> None:
     total_models = sum(len(model_list) for model_list in tv_models.values())
     is_tty = sys.stdout.isatty() or sys.stderr.isatty()
@@ -147,7 +145,7 @@ def test_torchvision_model_creation(
         if weights is not None:
             try:
                 model = _safe_get_model(
-                    model_name, weights=weights, num_classes=num_classes
+                    model_name, weights=weights, num_classes=num_classes,
                 )
                 return model, "weights", time.time() - start_time
             except (URLError, OSError, RuntimeError, ValueError):
@@ -157,7 +155,7 @@ def test_torchvision_model_creation(
         # 2) fallback sans weights (random)
         start_time = time.time()
         model = _safe_get_model(
-            model_name, weights=None, num_classes=num_classes
+            model_name, weights=None, num_classes=num_classes,
         )
         return model, "no-weights", time.time() - start_time
 
@@ -194,19 +192,19 @@ def test_torchvision_model_creation(
                     for model_name in model_list:
                         p_mod.set_postfix_str(model_name)
                         p_global.set_postfix_str(
-                            f"{module_name} • {model_name}"
+                            f"{module_name} • {model_name}",
                         )
 
                         try:
                             model, status, elapsed = create_one(
-                                module_name, model_name
+                                module_name, model_name,
                             )
                             del model  # éviter d'accumuler en mémoire
                             p_mod.set_postfix_str(
-                                f"{model_name} • {status} • {elapsed:.2f}s"
+                                f"{model_name} • {status} • {elapsed:.2f}s",
                             )
                             p_global.set_postfix_str(
-                                f"{module_name} • {model_name} • {status} • {elapsed:.2f}s"
+                                f"{module_name} • {model_name} • {status} • {elapsed:.2f}s",
                             )
                         except Exception as e:
                             failures.append((module_name, model_name, repr(e)))

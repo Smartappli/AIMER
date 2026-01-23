@@ -30,7 +30,7 @@ class TemplateBootstrapLayoutVertical:
                 "is_menu": True,
                 "is_footer": True,
                 "navbar_detached": True,
-            }
+            },
         )
 
         # map_context according to updated context values

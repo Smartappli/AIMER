@@ -1,7 +1,6 @@
 import base64
 import hashlib
 import io
-import os
 import re
 from pathlib import Path
 
@@ -32,11 +31,11 @@ LLM_MODEL = "qwen3:8b"
 EMBEDDING_MODEL = "qwen3-embedding:8b"
 RERANKER_MODEL = "Krakekai/qwen3-reranker-8b"
 
-os.makedirs(DATA_DIR, exist_ok=True)
-os.makedirs(OUTPUT_MD_DIR, exist_ok=True)
-os.makedirs(OUTPUT_FIGURES_DIR, exist_ok=True)
-os.makedirs(OUTPUT_DESCRIPTIONS_DIR, exist_ok=True)
-os.makedirs(OUTPUT_TABLES_DIR, exist_ok=True)
+Path(DATA_DIR).mkdir(exist_ok=True, parents=True)
+Path(OUTPUT_MD_DIR).mkdir(exist_ok=True, parents=True)
+Path(OUTPUT_FIGURES_DIR).mkdir(exist_ok=True, parents=True)
+Path(OUTPUT_DESCRIPTIONS_DIR).mkdir(exist_ok=True, parents=True)
+Path(OUTPUT_TABLES_DIR).mkdir(exist_ok=True, parents=True)
 
 describe_image_prompt = """Analyze this financial document page and extract meaningful data in a concise format.
 
@@ -78,8 +77,8 @@ def convert_pdf_to_docling(pdf_file: Path):
 
     doc_converter = DocumentConverter(
         format_options={
-            InputFormat.PDF: PdfFormatOption(pipeline_options=pipeline_options)
-        }
+            InputFormat.PDF: PdfFormatOption(pipeline_options=pipeline_options),
+        },
     )
 
     result = doc_converter.convert(pdf_file)
@@ -105,7 +104,7 @@ def save_page_images(doc_converter, figures_dir: Path):
             page = doc_converter.document.pages[page_no]
 
             page.image.pil_image.save(
-                figures_dir / f"page_{page_no}.png", "PNG"
+                figures_dir / f"page_{page_no}.png", "PNG",
             )
 
 
@@ -157,7 +156,7 @@ def save_tables(markdown_text, tables_dir):
         context_with_page = f"**Page:** {page_num}\n\n{table_context}"
 
         (tables_dir / f"{table_name}_page_{page_num}.md").write_text(
-            context_with_page, encoding="utf-8"
+            context_with_page, encoding="utf-8",
         )
 
 
@@ -172,7 +171,7 @@ def extract_pdf_content(pdf_file: Path):
     doc_converter = convert_pdf_to_docling(pdf_file)
 
     markdown_text = doc_converter.document.export_to_markdown(
-        page_break_placeholder="<!-- page_break -->"
+        page_break_placeholder="<!-- page_break -->",
     )
 
     (md_dir / f"{pdf_file.stem}.md").write_text(markdown_text, encoding="utf-8")
@@ -185,7 +184,7 @@ def extract_pdf_content(pdf_file: Path):
 def compute_file_hash(file_path: Path):
     sha256_hash = hashlib.sha256()
 
-    with open(file_path, "rb") as file:
+    with Path(file_path).open("rb") as file:
         for byte_block in iter(lambda: file.read(4096), b""):
             sha256_hash.update(byte_block)
 
@@ -237,7 +236,7 @@ def generate_image_description(image_path: Path):
                 "type": "image_url",
                 "image_url": f"data:image/png;base64,{image_base64}",
             },
-        ]
+        ],
     )
     system_prompt = SystemMessage("You are an AI Assistant")
 
@@ -339,7 +338,7 @@ def ingest_file_in_db(file_path, processed_hashes):
             "content_type": content_type,
             "file_hash": file_hash,
             "source_file": doc_name,
-        }
+        },
     )
 
     if content_type == "text":
@@ -349,7 +348,7 @@ def ingest_file_in_db(file_path, processed_hashes):
             metadata = base_metadata.copy()
             metadata.update({"page": idx})
             documents.append(
-                Document(page_content=page, metadata=base_metadata)
+                Document(page_content=page, metadata=base_metadata),
             )
 
         vector_store.add_documents(documents)

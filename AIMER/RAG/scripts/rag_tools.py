@@ -74,8 +74,7 @@ def extract_filters(user_query: str):
 
 @tool
 def hybrid_search(query: str, k: int = 5):
-    """
-    Perform hybrid search (dense + sparse vector).
+    """Perform hybrid search (dense + sparse vector).
 
     Args:
         query: Search query
@@ -84,8 +83,8 @@ def hybrid_search(query: str, k: int = 5):
 
     Returns:
         List of Document objects
-    """
 
+    """
     filters = extract_filters(query)
 
     qdrant_filter = None
@@ -99,7 +98,7 @@ def hybrid_search(query: str, k: int = 5):
         qdrant_filter = Filter(must=condition)
 
     results = vector_store.similarity_search(
-        query=query, k=k, filters=qdrant_filter
+        query=query, k=k, filters=qdrant_filter,
     )
 
     return results

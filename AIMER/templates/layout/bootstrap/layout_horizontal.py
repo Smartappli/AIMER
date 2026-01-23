@@ -32,7 +32,7 @@ class TemplateBootstrapLayoutHorizontal:
                 "menu_horizontal": True,
                 "is_footer": True,
                 "navbar_detached": False,
-            }
+            },
         )
         # map_context according to updated context values
         TemplateHelper.map_context(context)

@@ -15,7 +15,7 @@ class LoginView(AuthView):
         if is_auth:
             # If the user is already logged in, redirect them to the home page or another appropriate page.
             return redirect(
-                "index"
+                "index",
             )  # Replace 'index' with the actual URL name for the home page
 
         # Render the login page for users who are not logged in.
@@ -28,7 +28,7 @@ class LoginView(AuthView):
 
             if not (username and password):
                 await sync_to_async(messages.error)(
-                    request, "Please enter your username and password."
+                    request, "Please enter your username and password.",
                 )
                 return redirect("login")
 
@@ -36,7 +36,7 @@ class LoginView(AuthView):
                 user_email = await User.objects.filter(email=username).afirst()
                 if user_email is None:
                     await sync_to_async(messages.error)(
-                        request, "Please enter a valid email."
+                        request, "Please enter a valid email.",
                     )
                     return redirect("login")
                 username = user_email.username
@@ -44,12 +44,12 @@ class LoginView(AuthView):
             user_email = await User.objects.filter(username=username).afirst()
             if user_email is None:
                 await sync_to_async(messages.error)(
-                    request, "Please enter a valid username."
+                    request, "Please enter a valid username.",
                 )
                 return redirect("login")
 
             authenticated_user = await aauthenticate(
-                request, username=username, password=password
+                request, username=username, password=password,
             )
             if authenticated_user is not None:
                 # Login the user if authentication is successful
@@ -62,10 +62,9 @@ class LoginView(AuthView):
                     allowed_hosts=getattr(settings, "ALLOWED_HOSTS", []),
                 ):
                     return redirect(next_url)
-                else:  # Redirect to the home page or another appropriate page
-                    return redirect("index")
-            else:
-                await sync_to_async(messages.error)(
-                    request, "Please enter a valid username."
-                )
-                return redirect("login")
+                # Redirect to the home page or another appropriate page
+                return redirect("index")
+            await sync_to_async(messages.error)(
+                request, "Please enter a valid username.",
+            )
+            return redirect("login")

@@ -13,7 +13,7 @@ class TemplateBootstrapLayoutBlank:
                 "layout": "blank",
                 "content_layout": "wide",
                 "display_customizer": False,
-            }
+            },
         )
         # map_context according to updated context values
         TemplateHelper.map_context(context)

@@ -16,7 +16,7 @@ class RegisterView(AuthView):
         if request.user.is_authenticated:
             # If the user is already logged in, redirect them to the home page or another appropriate page.
             return redirect(
-                "index"
+                "index",
             )  # Replace 'index' with the actual URL name for the home page
 
         # Render the login page for users who are not logged in.
@@ -30,23 +30,23 @@ class RegisterView(AuthView):
         # Check if a user with the same username or email already exists
         if await User.objects.filter(username=username, email=email).aexists():
             await sync_to_async(messages.error)(
-                request, "User already exists, Try logging in."
+                request, "User already exists, Try logging in.",
             )
             return redirect("register")
-        elif await User.objects.filter(email=email).aexists():
+        if await User.objects.filter(email=email).aexists():
             await sync_to_async(messages.error)(
-                request, "Email already exists."
+                request, "Email already exists.",
             )
             return redirect("register")
-        elif await User.objects.filter(username=username).aexists():
+        if await User.objects.filter(username=username).aexists():
             await sync_to_async(messages.error)(
-                request, "Username already exists."
+                request, "Username already exists.",
             )
             return redirect("register")
 
         # Create the user and set their password
         created_user = await User.objects.acreate_user(
-            username=username, email=email, password=password
+            username=username, email=email, password=password,
         )
         created_user.set_password(password)
         await created_user.asave()
@@ -60,7 +60,7 @@ class RegisterView(AuthView):
 
         # Set the token in the user's profile
         user_profile, created = await Profile.objects.aget_or_create(
-            user=created_user
+            user=created_user,
         )
         user_profile.email_token = token
         user_profile.email = email
@@ -70,7 +70,7 @@ class RegisterView(AuthView):
 
         if settings.EMAIL_HOST_USER and settings.EMAIL_HOST_PASSWORD:
             await sync_to_async(messages.success)(
-                request, "Verification email sent successfully"
+                request, "Verification email sent successfully",
             )
         else:
             await sync_to_async(messages.error)(

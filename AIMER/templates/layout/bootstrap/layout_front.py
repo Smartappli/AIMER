@@ -15,7 +15,7 @@ class TemplateBootstrapLayoutFront:
                 "display_customizer": False,
                 "content_layout": "wide",
                 "navbar_type": "fixed",
-            }
+            },
         )
         # map_context according to updated context values
         TemplateHelper.map_context(context)
