@@ -3,8 +3,8 @@ from dotenv import load_dotenv
 load_dotenv()
 
 from langchain_core.tools import tool
-from langchain_ollama import OllamaEmbeddings, ChatOllama
-from langchain_qdrant import QdrantVectorStore, RetrievalMode, FastEmbedSparse
+from langchain_ollama import ChatOllama, OllamaEmbeddings
+from langchain_qdrant import FastEmbedSparse, QdrantVectorStore, RetrievalMode
 
 # metadata filtering
 from qdrant_client.models import FieldCondition, Filter, MatchValue
