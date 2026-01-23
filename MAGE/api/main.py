@@ -11,7 +11,7 @@ async def read_root():
 
 @api.get("/libraries")
 async def libraries():
-    from importlib.metadata import version, PackageNotFoundError
+    from importlib.metadata import PackageNotFoundError, version
 
     def safe_version(pkg_name: str, module_name: str | None = None):
         try:
@@ -56,7 +56,7 @@ async def is_pretrained(model_id: str):
 
 @api.get("/model/is_pretrained")
 async def are_pretrained():
-    from timm import list_models, is_model_pretrained
+    from timm import is_model_pretrained, list_models
 
     models = list(list_models())
     return {

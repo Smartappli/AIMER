@@ -1,6 +1,5 @@
 from langchain_ollama import ChatOllama
 
-
 LLM_MODEL = ""
 
 model = ChatOllama(

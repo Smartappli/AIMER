@@ -1,9 +1,10 @@
 from asgiref.sync import sync_to_async
-from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.contrib.auth import aauthenticate, alogin
+from django.shortcuts import redirect, render
+
 from ..models import Profile
 from ..views import AuthView
-from django.contrib.auth import aauthenticate, alogin
 
 
 class ResetPasswordView(AuthView):

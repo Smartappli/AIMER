@@ -1,11 +1,13 @@
-from asgiref.sync import sync_to_async
-from django.shortcuts import redirect
-from django.contrib import messages
-from django.conf import settings
-from ..views import AuthView
-from ..models import Profile
-from ..helpers import send_verification_email
 import uuid
+
+from asgiref.sync import sync_to_async
+from django.conf import settings
+from django.contrib import messages
+from django.shortcuts import redirect
+
+from ..helpers import send_verification_email
+from ..models import Profile
+from ..views import AuthView
 
 
 class VerifyEmailTokenView(AuthView):

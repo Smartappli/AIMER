@@ -1,12 +1,14 @@
+import uuid
+
 from asgiref.sync import sync_to_async
-from django.shortcuts import redirect
-from django.contrib.auth.models import User, Group
-from django.contrib import messages
 from django.conf import settings
-from ..views import AuthView
+from django.contrib import messages
+from django.contrib.auth.models import Group, User
+from django.shortcuts import redirect
+
 from ..helpers import send_verification_email
 from ..models import Profile
-import uuid
+from ..views import AuthView
 
 
 class RegisterView(AuthView):

@@ -1,7 +1,7 @@
 from asgiref.sync import sync_to_async
+from django.conf import settings
 from django.core.mail import EmailMessage
 from django.urls import reverse
-from django.conf import settings
 
 
 async def send_email(subject, email, message):

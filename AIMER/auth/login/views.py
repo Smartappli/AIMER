@@ -1,10 +1,11 @@
 from asgiref.sync import sync_to_async
 from django.shortcuts import redirect
+from django.conf import settings
+from django.contrib import messages
 from django.contrib.auth import aauthenticate, alogin
 from django.contrib.auth.models import User
-from django.contrib import messages
-from django.conf import settings
 from django.utils.http import url_has_allowed_host_and_scheme
+
 from ..views import AuthView
 
 

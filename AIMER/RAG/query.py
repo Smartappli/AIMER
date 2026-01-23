@@ -2,14 +2,13 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-from langchain_ollama import OllamaEmbeddings, ChatOllama
-from langchain_qdrant import QdrantVectorStore, RetrievalMode, FastEmbedSparse
-
 # re-ranking for better result
 from langchain_community.cross_encoders import HuggingFaceCrossEncoder
+from langchain_ollama import ChatOllama, OllamaEmbeddings
+from langchain_qdrant import FastEmbedSparse, QdrantVectorStore, RetrievalMode
 
 # metadata filtering
-from qdrant_client.models import Filter, FieldCondition, MatchValue
+from qdrant_client.models import FieldCondition, Filter, MatchValue
 
 # metadata extraction from LLM
 from scripts.schema import ChunkMetadata

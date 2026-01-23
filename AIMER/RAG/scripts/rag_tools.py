@@ -2,18 +2,15 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+from langchain_core.tools import tool
 from langchain_ollama import OllamaEmbeddings, ChatOllama
 from langchain_qdrant import QdrantVectorStore, RetrievalMode, FastEmbedSparse
 
-# re-ranking for better result
-
 # metadata filtering
-from qdrant_client.models import Filter, FieldCondition, MatchValue
+from qdrant_client.models import FieldCondition, Filter, MatchValue
 
 # metadata extraction from LLM
 from schema import ChunkMetadata
-
-from langchain_core.tools import tool
 
 # Configuration
 COLLECTION_NAME = ""

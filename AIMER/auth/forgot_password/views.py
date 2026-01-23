@@ -1,13 +1,15 @@
+import uuid
+from datetime import timedelta, datetime
+
 from asgiref.sync import sync_to_async
-from django.shortcuts import redirect
-from django.contrib.auth.models import User
-from django.contrib import messages
 from django.conf import settings
+from django.contrib import messages
+from django.contrib.auth.models import User
+from django.shortcuts import redirect
+
 from ..helpers import send_password_reset_email
 from ..models import Profile
 from ..views import AuthView
-from datetime import timedelta, datetime
-import uuid
 
 
 class ForgetPasswordView(AuthView):

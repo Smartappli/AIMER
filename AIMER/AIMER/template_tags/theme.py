@@ -1,7 +1,8 @@
-from django.utils.safestring import mark_safe
 from django import template
-from AIMER.template_helpers.theme import TemplateHelper
 from django.contrib.auth.decorators import user_passes_test
+from django.utils.safestring import mark_safe
+
+from AIMER.template_helpers.theme import TemplateHelper
 
 register = template.Library()
 

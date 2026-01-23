@@ -1,15 +1,15 @@
-from django.urls import path
 from django.contrib.auth.views import LogoutView
-from .register.views import RegisterView
-from .login.views import LoginView
+from django.urls import path
+
 from .forgot_password.views import ForgetPasswordView
+from .login.views import LoginView
+from .register.views import RegisterView
 from .reset_password.views import ResetPasswordView
 from .verify_email.views import (
+    SendVerificationView,
     VerifyEmailTokenView,
     VerifyEmailView,
-    SendVerificationView,
 )
-
 
 urlpatterns = [
     path(

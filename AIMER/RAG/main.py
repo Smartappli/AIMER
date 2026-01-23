@@ -1,23 +1,24 @@
 import base64
-import os
 import hashlib
 import io
+import os
 import re
 from pathlib import Path
-from tqdm import tqdm
 from typing import List
-from docling_core.types.doc import PictureItem
+
 from docling.datamodel.base_models import InputFormat
 from docling.datamodel.pipeline_options import PdfPipelineOptions
 from docling.document_converter import DocumentConverter, PdfFormatOption
+from docling_core.types.doc import PictureItem
 from langchain_core.documents import Document
 from langchain_core.messages import HumanMessage, SystemMessage
-from langchain_ollama import OllamaEmbeddings, ChatOllama
-from langchain_qdrant import QdrantVectorStore, RetrievalMode, FastEmbedSparse
+from langchain_ollama import ChatOllama, OllamaEmbeddings
+from langchain_qdrant import FastEmbedSparse, QdrantVectorStore, RetrievalMode
 from PIL import Image
 from pypdf import PdfReader
 from qdrant_client import QdrantClient
 
+from tqdm import tqdm
 
 # Directory paths
 DATA_DIR = "data/pdfs"
@@ -110,7 +111,7 @@ def save_page_images(doc_converter, figures_dir: Path):
             )
 
 
-def extract_context_and_table(lines: List[str], table_index: int):
+def extract_context_and_table(lines: list[str], table_index: int):
     table_lines = []
     i = table_index
 

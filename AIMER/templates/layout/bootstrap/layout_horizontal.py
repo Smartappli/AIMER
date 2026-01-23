@@ -1,8 +1,7 @@
-from django.conf import settings
 import json
 
-
 from AIMER.template_helpers.theme import TemplateHelper
+from django.conf import settings
 
 menu_file_path = (
     settings.BASE_DIR
