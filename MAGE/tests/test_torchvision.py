@@ -22,6 +22,7 @@ from tqdm.auto import tqdm
 
 if TYPE_CHECKING:
     from collections.abc import Iterator
+
     from torch import nn
 
 logger = logging.getLogger(__name__)
