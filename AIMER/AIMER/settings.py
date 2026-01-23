@@ -81,13 +81,8 @@ TEMPLATES = [
                 "AIMER.context_processors.get_cookie",
                 "AIMER.context_processors.environment",
             ],
-            "libraries": {
-                "theme": "AIMER.template_tags.theme",
-            },
-            "builtins": [
-                "django.templatetags.static",
-                "AIMER.template_tags.theme",
-            ],
+            "libraries": {"theme": "AIMER.template_tags.theme"},
+            "builtins": ["django.templatetags.static", "AIMER.template_tags.theme"],
         },
     },
 ]
@@ -98,10 +93,7 @@ ASGI_APPLICATION = "AIMER.asgi.application"
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    },
+    "default": {"ENGINE": "django.db.backends.sqlite3", "NAME": BASE_DIR / "db.sqlite3"},
 }
 
 
@@ -112,15 +104,9 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
     },
-    {
-        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
-    },
-    {
-        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
-    },
-    {
-        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
-    },
+    {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator"},
+    {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator"},
+    {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
 ]
 
 PASSWORD_HASHERS = [
@@ -149,9 +135,7 @@ TEST_RUNNER = "django_rich.test.RichRunner"
 
 STATIC_URL = "static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
-STATICFILES_DIRS = [
-    BASE_DIR / "static",
-]
+STATICFILES_DIRS = [BASE_DIR / "static"]
 
 # Template Settings
 # ------------------------------------------------------------------------------

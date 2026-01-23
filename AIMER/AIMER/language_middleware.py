@@ -3,6 +3,22 @@ from django.utils.translation import activate
 
 
 class DefaultLanguageMiddleware:
+    """Django middleware that ensures a default language is activated and persisted.
+
+    If the ``django_language`` cookie is missing, this middleware:
+    - activates ``settings.LANGUAGE_CODE`` for the current request
+    - sets the ``django_language`` cookie on the response
+
+    If the cookie is already present, the request/response cycle is passed through
+    unchanged.
+
+    Notes:
+        - This middleware relies on Django's i18n machinery (``activate``) and the
+          ``settings.LANGUAGE_CODE`` value.
+        - Cookie name follows Django's default language cookie convention.
+
+    """
+
     def __init__(self, get_response):
         self.get_response = get_response
 

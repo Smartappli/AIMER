@@ -1,4 +1,3 @@
-# from AIMER.bootstrap import TemplateBootstrap
 from django.conf import settings
 
 from .template_helpers.theme import TemplateHelper

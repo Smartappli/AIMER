@@ -58,8 +58,7 @@ class LoginView(AuthView):
                 # Redirect to the page the user was trying to access before logging in
                 next_url = request.POST.get("next", "")
                 if next_url and url_has_allowed_host_and_scheme(
-                    url=next_url,
-                    allowed_hosts=getattr(settings, "ALLOWED_HOSTS", []),
+                    url=next_url, allowed_hosts=getattr(settings, "ALLOWED_HOSTS", []),
                 ):
                     return redirect(next_url)
                 # Redirect to the home page or another appropriate page

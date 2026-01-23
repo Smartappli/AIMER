@@ -103,9 +103,7 @@ def save_page_images(doc_converter, figures_dir: Path):
         for page_no in pages_to_save:
             page = doc_converter.document.pages[page_no]
 
-            page.image.pil_image.save(
-                figures_dir / f"page_{page_no}.png", "PNG",
-            )
+            page.image.pil_image.save(figures_dir / f"page_{page_no}.png", "PNG")
 
 
 def extract_context_and_table(lines: list[str], table_index: int):
@@ -232,10 +230,7 @@ def generate_image_description(image_path: Path):
     message = HumanMessage(
         content=[
             {"type": "text", "text": describe_image_prompt},
-            {
-                "type": "image_url",
-                "image_url": f"data:image/png;base64,{image_base64}",
-            },
+            {"type": "image_url", "image_url": f"data:image/png;base64,{image_base64}"},
         ],
     )
     system_prompt = SystemMessage("You are an AI Assistant")
@@ -267,34 +262,18 @@ def extract_metadata_from_filename(filename: str):
 
     parts = filename.split("-")
 
-    return {
-        "doc_month": parts[0],
-        "doc_year": parts[1],
-        "eod_type": parts[2],
-    }
+    return {"doc_month": parts[0], "doc_year": parts[1], "eod_type": parts[2]}
 
 
-model = ChatOllama(
-    model=MODEL_NAME,
-    base_url="http://localhost:11434",
-)
+model = ChatOllama(model=MODEL_NAME, base_url="http://localhost:11434")
 
-llm = ChatOllama(
-    model=LLM_MODEL,
-    base_url="http://localhost:11434",
-)
+llm = ChatOllama(model=LLM_MODEL, base_url="http://localhost:11434")
 
-embeddings = OllamaEmbeddings(
-    model=EMBEDDING_MODEL,
-    base_url="http://localhost:11434",
-)
+embeddings = OllamaEmbeddings(model=EMBEDDING_MODEL, base_url="http://localhost:11434")
 
 sparse_embeddings = FastEmbedSparse(model_name="Qdrant/bm25")
 
-qdrant_client = QdrantClient(
-    url="http://localhost:6333",
-    api_key="azertyuiop",
-)
+qdrant_client = QdrantClient(url="http://localhost:6333", api_key="azertyuiop")
 
 vector_store = QdrantVectorStore.from_documents(
     documents=[],
@@ -334,11 +313,7 @@ def ingest_file_in_db(file_path, processed_hashes):
     base_metadata = extract_metadata_from_filename(doc_name)
 
     base_metadata.update(
-        {
-            "content_type": content_type,
-            "file_hash": file_hash,
-            "source_file": doc_name,
-        },
+        {"content_type": content_type, "file_hash": file_hash, "source_file": doc_name},
     )
 
     if content_type == "text":
@@ -347,9 +322,7 @@ def ingest_file_in_db(file_path, processed_hashes):
         for idx, page in enumerate(pages, start=1):
             metadata = base_metadata.copy()
             metadata.update({"page": idx})
-            documents.append(
-                Document(page_content=page, metadata=base_metadata),
-            )
+            documents.append(Document(page_content=page, metadata=base_metadata))
 
         vector_store.add_documents(documents)
     else:

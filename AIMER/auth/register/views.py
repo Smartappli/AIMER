@@ -34,14 +34,10 @@ class RegisterView(AuthView):
             )
             return redirect("register")
         if await User.objects.filter(email=email).aexists():
-            await sync_to_async(messages.error)(
-                request, "Email already exists.",
-            )
+            await sync_to_async(messages.error)(request, "Email already exists.")
             return redirect("register")
         if await User.objects.filter(username=username).aexists():
-            await sync_to_async(messages.error)(
-                request, "Username already exists.",
-            )
+            await sync_to_async(messages.error)(request, "Username already exists.")
             return redirect("register")
 
         # Create the user and set their password
@@ -59,9 +55,7 @@ class RegisterView(AuthView):
         token = str(uuid.uuid4())
 
         # Set the token in the user's profile
-        user_profile, created = await Profile.objects.aget_or_create(
-            user=created_user,
-        )
+        user_profile, created = await Profile.objects.aget_or_create(user=created_user)
         user_profile.email_token = token
         user_profile.email = email
         await user_profile.asave()

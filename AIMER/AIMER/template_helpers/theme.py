@@ -17,21 +17,15 @@ class TemplateHelper:
                 "skins": settings.TEMPLATE_CONFIG.get("my_skins"),
                 "semiDark": settings.TEMPLATE_CONFIG.get("has_semi_dark"),
                 "rtl_mode": settings.TEMPLATE_CONFIG.get("rtl_mode"),
-                "has_customizer": settings.TEMPLATE_CONFIG.get(
-                    "has_customizer",
-                ),
+                "has_customizer": settings.TEMPLATE_CONFIG.get("has_customizer"),
                 "display_customizer": settings.TEMPLATE_CONFIG.get(
                     "display_customizer",
                 ),
-                "content_layout": settings.TEMPLATE_CONFIG.get(
-                    "content_layout",
-                ),
+                "content_layout": settings.TEMPLATE_CONFIG.get("content_layout"),
                 "navbar_type": settings.TEMPLATE_CONFIG.get("navbar_type"),
                 "header_type": settings.TEMPLATE_CONFIG.get("header_type"),
                 "menu_fixed": settings.TEMPLATE_CONFIG.get("menu_fixed"),
-                "menu_collapsed": settings.TEMPLATE_CONFIG.get(
-                    "menu_collapsed",
-                ),
+                "menu_collapsed": settings.TEMPLATE_CONFIG.get("menu_collapsed"),
                 "footer_fixed": settings.TEMPLATE_CONFIG.get("footer_fixed"),
                 "show_dropdown_onhover": settings.TEMPLATE_CONFIG.get(
                     "show_dropdown_onhover",
@@ -94,9 +88,7 @@ class TemplateHelper:
             "true" if context.get("show_dropdown_onhover") else "false"
         )
 
-        context["semi_dark_value"] = (
-            "true" if context.get("semiDark") else "false"
-        )
+        context["semi_dark_value"] = "true" if context.get("semiDark") else "false"
 
         # Display Customizer
         context["display_customizer_class"] = (

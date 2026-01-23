@@ -12,16 +12,8 @@ from .verify_email.views import (
 )
 
 urlpatterns = [
-    path(
-        "login/",
-        LoginView.as_view(template_name="auth/login.html"),
-        name="login",
-    ),
-    path(
-        "logout/",
-        LogoutView.as_view(),
-        name="logout",
-    ),
+    path("login/", LoginView.as_view(template_name="auth/login.html"), name="login"),
+    path("logout/", LogoutView.as_view(), name="logout"),
     path(
         "register/",
         RegisterView.as_view(template_name="auth/register.html"),
@@ -33,14 +25,10 @@ urlpatterns = [
         name="verify-email-page",
     ),
     path(
-        "verify/email/<str:token>/",
-        VerifyEmailTokenView.as_view(),
-        name="verify-email",
+        "verify/email/<str:token>/", VerifyEmailTokenView.as_view(), name="verify-email",
     ),
     path(
-        "send_verification/",
-        SendVerificationView.as_view(),
-        name="send-verification",
+        "send_verification/", SendVerificationView.as_view(), name="send-verification",
     ),
     path(
         "forgot_password/",

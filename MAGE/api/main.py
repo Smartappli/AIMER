@@ -30,8 +30,7 @@ async def libraries():
         "AI": {
             "keras": safe_version("keras", "keras"),
             "segmentation-models-pytorch": safe_version(
-                "segmentation-models-pytorch",
-                "segmentation_models_pytorch",
+                "segmentation-models-pytorch", "segmentation_models_pytorch",
             ),
             "tensorflow": safe_version("tensorflow", "tensorflow"),
             "timm": safe_version("timm", "timm"),
@@ -60,9 +59,7 @@ async def are_pretrained():
 
     models = list(list_models())
     return {
-        "model_is_pretrained": {
-            model: is_model_pretrained(model) for model in models
-        },
+        "model_is_pretrained": {model: is_model_pretrained(model) for model in models},
     }
 
 
@@ -84,9 +81,7 @@ async def module_details(module_id: str):
 async def module_all_details():
     from timm import list_models, list_modules
 
-    return {
-        module: list(list_models(module=module)) for module in list_modules()
-    }
+    return {module: list(list_models(module=module)) for module in list_modules()}
 
 
 mcp = FastMCP.from_fastapi(

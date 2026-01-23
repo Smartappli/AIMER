@@ -40,9 +40,7 @@ class ForgetPasswordView(AuthView):
             # Set the token in the user's profile and add an expiration time (e.g., 24 hours from now)
             expiration_time = datetime.now() + timedelta(hours=24)
 
-            user_profile, created = await Profile.objects.aget_or_create(
-                user=user,
-            )
+            user_profile, created = await Profile.objects.aget_or_create(user=user)
             user_profile.forget_password_token = token
             user_profile.forget_password_token_expiration = expiration_time
             await user_profile.asave()

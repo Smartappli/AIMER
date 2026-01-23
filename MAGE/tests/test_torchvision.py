@@ -1,23 +1,41 @@
+"""TorchVision model registry smoke tests.
+
+The goal is to validate that TorchVision models can be constructed across
+multiple submodules (classification, detection, segmentation, etc.) without
+crashing, while remaining compatible with older TorchVision APIs.
+"""
+
+from __future__ import annotations
+
+import inspect
+import logging
 import os
 import sys
 import time
 from types import ModuleType
+from typing import TYPE_CHECKING
 from urllib.error import URLError
 
 import pytest
 import torchvision.models as tvm
 from tqdm.auto import tqdm
 
+if TYPE_CHECKING:
+    from collections.abc import Iterator
+    from torch import nn
+
+logger = logging.getLogger(__name__)
+
 
 def _safe_list_models(module: ModuleType) -> list[str]:
-    """TorchVision >= 0.14: tvm.list_models(module=...)
-    Fallback: introspection (moins fiable, mais évite de casser si ancienne version)
+    """Return available model builder names for a TorchVision module.
+
+    Prefers the official registry (TorchVision >= 0.14 via ``tvm.list_models``).
+    Falls back to introspection for older versions (less reliable, but avoids
+    breaking on legacy installs).
     """
     if hasattr(tvm, "list_models"):
         return list(tvm.list_models(module=module))
-
-    # --- Fallback ancien torchvision (pas de registry) ---
-    import inspect
 
     names: list[str] = []
     for name in dir(module):
@@ -26,108 +44,106 @@ def _safe_list_models(module: ModuleType) -> list[str]:
         fn = getattr(module, name, None)
         if not callable(fn):
             continue
-        # Heuristique: builders torchvision sont souvent en lowercase
         if name.lower() != name:
             continue
+
         try:
             inspect.signature(fn)
-        except Exception:
+        except (TypeError, ValueError) as exc:
+            logger.debug(
+                "Skipping %s.%s: %s", module.__name__, name, exc, exc_info=True,
+            )
             continue
+
         names.append(name)
+
     return sorted(set(names))
 
 
-def _safe_get_model_weights_default(model_name: str):
-    """Retourne weights_enum.DEFAULT si disponible, sinon None."""
+def _safe_get_model_weights_default(model_name: str) -> object | None:
+    """Return ``weights_enum.DEFAULT`` for a model if available, else ``None``."""
     if not hasattr(tvm, "get_model_weights"):
         return None
+
     try:
         weights_enum = tvm.get_model_weights(model_name)
         return getattr(weights_enum, "DEFAULT", None)
-    except Exception:
+    except (AttributeError, KeyError, TypeError, ValueError, RuntimeError) as exc:
+        logger.debug("No DEFAULT weights for %s: %s", model_name, exc, exc_info=True)
         return None
 
 
-def _safe_get_model(model_name: str, *, weights, num_classes: int):
-    """1) Si weights != None => essaie get_model(name, weights=weights) (sans num_classes)
-    2) Sinon => essaie get_model(name, weights=None, num_classes=...) puis fallback sans num_classes
+def _safe_get_model(
+    model_name: str, *, weights: object | None, num_classes: int,
+) -> nn.Module:
+    """Create a model using the best available TorchVision API.
+
+    - If ``tvm.get_model`` exists:
+      - When ``weights`` is not None, call ``get_model(name, weights=...)``.
+      - Otherwise, try ``get_model(name, weights=None, num_classes=...)``,
+        then fall back to without ``num_classes`` if unsupported.
+    - Otherwise, fall back to calling the builder function directly on
+      ``torchvision.models`` (very old TorchVision).
     """
     if hasattr(tvm, "get_model"):
         get_model = tvm.get_model
 
         if weights is not None:
-            # Important: éviter num_classes avec weights (souvent incompatible)
             return get_model(model_name, weights=weights)
 
-        # weights=None => on tente num_classes si supporté
         try:
             return get_model(model_name, weights=None, num_classes=num_classes)
         except TypeError:
             return get_model(model_name, weights=None)
 
-    # --- Fallback très ancien torchvision: appel direct au builder ---
     builder = getattr(tvm, model_name, None)
     if builder is None:
-        raise RuntimeError(
-            f"Model builder not found for {model_name!r} (old torchvision fallback)",
-        )
+        msg = f"Model builder not found for old torchvision fallback: {model_name!r}"
+        raise RuntimeError(msg)
 
-    # Ancienne API: pretrained=True/False
     try:
         return builder(pretrained=True)
-    except Exception:
+    except (TypeError, OSError, RuntimeError, ValueError) as exc:
+        logger.debug(
+            "pretrained=True failed for %s, retrying pretrained=False: %s",
+            model_name,
+            exc,
+            exc_info=True,
+        )
         return builder(pretrained=False)
 
 
-@pytest.fixture(scope="session")
-def tv_modules() -> dict[str, ModuleType]:
-    modules: dict[str, ModuleType] = {"classification": tvm}
+def _create_one(model_name: str, num_classes: int) -> tuple[nn.Module, str, float]:
+    """Create one model, trying DEFAULT weights first, then random init."""
+    start_time = time.time()
+    weights = _safe_get_model_weights_default(model_name)
 
-    # Sous-modules “classiques” (selon version torchvision)
-    for sub in (
-        "detection",
-        "segmentation",
-        "video",
-        "optical_flow",
-        "quantization",
-    ):
-        mod = getattr(tvm, sub, None)
-        if isinstance(mod, ModuleType):
-            modules[sub] = mod
+    if weights is not None:
+        try:
+            model = _safe_get_model(
+                model_name, weights=weights, num_classes=num_classes,
+            )
+            return model, "weights", time.time() - start_time
+        except (URLError, OSError, RuntimeError, ValueError, TypeError):
+            # Download/mismatch/old API quirks -> fall back to random.
+            pass
 
-    # Optionnel: filtrer modules en CI
-    # export TV_TEST_MODULES="classification,detection"
-    wanted = os.getenv("TV_TEST_MODULES")
-    if wanted:
-        keep = {m.strip() for m in wanted.split(",") if m.strip()}
-        modules = {k: v for k, v in modules.items() if k in keep}
-
-    return modules
+    start_time = time.time()
+    model = _safe_get_model(model_name, weights=None, num_classes=num_classes)
+    return model, "no-weights", time.time() - start_time
 
 
-@pytest.fixture(scope="session")
-def tv_models(tv_modules: dict[str, ModuleType]) -> dict[str, list[str]]:
-    models = {name: _safe_list_models(mod) for name, mod in tv_modules.items()}
-
-    # Optionnel: limiter par module en CI
-    # export TV_TEST_LIMIT_PER_MODULE="20"
-    lim = os.getenv("TV_TEST_LIMIT_PER_MODULE")
-    limit = int(lim) if (lim and lim.isdigit()) else None
-    if limit is not None:
-        models = {k: v[:limit] for k, v in models.items()}
-
-    return models
+def _iter_models(tv_models: dict[str, list[str]]) -> Iterator[tuple[str, str]]:
+    """Yield (module_name, model_name) pairs."""
+    for module_name, model_list in tv_models.items():
+        for model_name in model_list:
+            yield module_name, model_name
 
 
-@pytest.fixture(scope="session")
-def num_classes() -> int:
-    return 10
-
-
-@pytest.mark.slow
-def test_torchvision_model_creation(
-    tv_models: dict[str, list[str]], num_classes: int,
-) -> None:
+def _run_creation_with_progress(
+    tv_models: dict[str, list[str]], *, num_classes: int,
+) -> list[tuple[str, str, str]]:
+    """Run model creation checks and return a list of failures."""
     total_models = sum(len(model_list) for model_list in tv_models.values())
     is_tty = sys.stdout.isatty() or sys.stderr.isatty()
 
@@ -138,29 +154,7 @@ def test_torchvision_model_creation(
 
     failures: list[tuple[str, str, str]] = []
 
-    def create_one(module_name: str, model_name: str):
-        # 1) tenter weights DEFAULT (si dispo)
-        start_time = time.time()
-        weights = _safe_get_model_weights_default(model_name)
-        if weights is not None:
-            try:
-                model = _safe_get_model(
-                    model_name, weights=weights, num_classes=num_classes,
-                )
-                return model, "weights", time.time() - start_time
-            except (URLError, OSError, RuntimeError, ValueError):
-                # download impossible / mismatch / autre -> fallback random
-                pass
-
-        # 2) fallback sans weights (random)
-        start_time = time.time()
-        model = _safe_get_model(
-            model_name, weights=None, num_classes=num_classes,
-        )
-        return model, "no-weights", time.time() - start_time
-
     if is_tty:
-        # ✅ 2 barres (global + module) proprement
         with tqdm(
             total=total_models,
             desc="All models",
@@ -173,7 +167,6 @@ def test_torchvision_model_creation(
             leave=True,
             disable=False,
             file=sys.stdout,
-            ascii=False,
         ) as p_global:
             for module_name, model_list in tv_models.items():
                 with tqdm(
@@ -191,53 +184,99 @@ def test_torchvision_model_creation(
                 ) as p_mod:
                     for model_name in model_list:
                         p_mod.set_postfix_str(model_name)
-                        p_global.set_postfix_str(
-                            f"{module_name} • {model_name}",
-                        )
+                        p_global.set_postfix_str(f"{module_name} • {model_name}")
 
                         try:
-                            model, status, elapsed = create_one(
-                                module_name, model_name,
+                            model, status, elapsed = _create_one(
+                                model_name, num_classes,
                             )
-                            del model  # éviter d'accumuler en mémoire
+                            del model
+
                             p_mod.set_postfix_str(
                                 f"{model_name} • {status} • {elapsed:.2f}s",
                             )
-                            p_global.set_postfix_str(
-                                f"{module_name} • {model_name} • {status} • {elapsed:.2f}s",
+                            postfix = (
+                                f"{module_name} • {model_name} • "
+                                f"{status} • {elapsed:.2f}s"
                             )
-                        except Exception as e:
-                            failures.append((module_name, model_name, repr(e)))
+                            p_global.set_postfix_str(postfix)
+                        except Exception as exc:  # noqa: BLE001
+                            failures.append((module_name, model_name, repr(exc)))
 
                         p_mod.update(1)
                         p_global.update(1)
-    else:
-        # ✅ Pas de TTY => 1 seule barre (visible même dans des logs)
-        with tqdm(
-            total=total_models,
-            desc="torchvision get_model",
-            unit="model",
-            dynamic_ncols=False,
-            bar_format=bar_fmt,
-            mininterval=0.2,
-            smoothing=0.1,
-            leave=True,
-            disable=False,
-            file=sys.stdout,
-            ascii=False,
-        ) as pbar:
-            for module_name, model_list in tv_models.items():
-                for model_name in model_list:
-                    pbar.set_postfix_str(f"{module_name} • {model_name}")
-                    try:
-                        model, _, _ = create_one(module_name, model_name)
-                        del model
-                    except Exception as e:
-                        failures.append((module_name, model_name, repr(e)))
-                    pbar.update(1)
 
-    assert (
-        not failures
-    ), "Certaines créations de modèles TorchVision ont échoué:\n" + "\n".join(
-        f"- {m} / {n}: {err}" for m, n, err in failures
-    )
+        return failures
+
+    with tqdm(
+        total=total_models,
+        desc="torchvision get_model",
+        unit="model",
+        dynamic_ncols=False,
+        bar_format=bar_fmt,
+        mininterval=0.2,
+        smoothing=0.1,
+        leave=True,
+        disable=False,
+        file=sys.stdout,
+    ) as pbar:
+        for module_name, model_name in _iter_models(tv_models):
+            pbar.set_postfix_str(f"{module_name} • {model_name}")
+            try:
+                model, _, _ = _create_one(model_name, num_classes)
+                del model
+            except Exception as exc:  # noqa: BLE001
+                failures.append((module_name, model_name, repr(exc)))
+            pbar.update(1)
+
+    return failures
+
+
+@pytest.fixture(scope="session")
+def tv_modules() -> dict[str, ModuleType]:
+    """Return TorchVision submodules to probe for model builders."""
+    modules: dict[str, ModuleType] = {"classification": tvm}
+
+    for sub in ("detection", "segmentation", "video", "optical_flow", "quantization"):
+        mod = getattr(tvm, sub, None)
+        if isinstance(mod, ModuleType):
+            modules[sub] = mod
+
+    wanted = os.getenv("TV_TEST_MODULES")
+    if wanted:
+        keep = {m.strip() for m in wanted.split(",") if m.strip()}
+        modules = {k: v for k, v in modules.items() if k in keep}
+
+    return modules
+
+
+@pytest.fixture(scope="session")
+def tv_models(tv_modules: dict[str, ModuleType]) -> dict[str, list[str]]:
+    """Return model name lists per TorchVision submodule."""
+    models = {name: _safe_list_models(mod) for name, mod in tv_modules.items()}
+
+    lim = os.getenv("TV_TEST_LIMIT_PER_MODULE")
+    limit = int(lim) if (lim and lim.isdigit()) else None
+    if limit is not None:
+        models = {k: v[:limit] for k, v in models.items()}
+
+    return models
+
+
+@pytest.fixture(scope="session")
+def num_classes() -> int:
+    """Return a small class count for classifier heads."""
+    return 10
+
+
+@pytest.mark.slow
+def test_torchvision_model_creation(
+    tv_models: dict[str, list[str]], num_classes: int,
+) -> None:
+    """Smoke-test that TorchVision models can be instantiated without crashing."""
+    failures = _run_creation_with_progress(tv_models, num_classes=num_classes)
+    if failures:
+        msg = "Certaines créations de modèles TorchVision ont échoué:\n" + "\n".join(
+            f"- {m} / {n}: {err}" for m, n, err in failures
+        )
+        pytest.fail(msg)

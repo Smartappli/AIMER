@@ -15,21 +15,13 @@ SPARCE_EMBEDDING_MODEL = "Qdrant/bm25"
 RERANKER_MODEL = "Krakekai/qwen3-reranker-8b"
 
 # Initialize LLM
-llm = ChatOllama(
-    model=LLM_MODEL,
-    base_url="http://localhost:11434",
-)
+llm = ChatOllama(model=LLM_MODEL, base_url="http://localhost:11434")
 
 # Embeddings
-embeddings = OllamaEmbeddings(
-    model=EMBEDDING_MODEL,
-    base_url="http://localhost:11434",
-)
+embeddings = OllamaEmbeddings(model=EMBEDDING_MODEL, base_url="http://localhost:11434")
 
 # Sparse embeddings
-spare_embeddings = FastEmbedSparse(
-    model=SPARCE_EMBEDDING_MODEL,
-)
+spare_embeddings = FastEmbedSparse(model=SPARCE_EMBEDDING_MODEL)
 
 # Connection to existing collection
 vector_store = QdrantVectorStore.from_existing_collection(
@@ -77,9 +69,7 @@ def hybrid_search(query: str, k: int = 10, filters: dict = None):
 
         qdrant_filter = Filter(must=condition)
 
-    results = vector_store.similarity_search(
-        query=query, k=k, filter=qdrant_filter,
-    )
+    results = vector_store.similarity_search(query=query, k=k, filter=qdrant_filter)
 
     return results
 
@@ -93,9 +83,7 @@ def rerank_results(query: str, documents=list, top_k: int = 5):
 
     scores = reranker.score(query_doc_pairs)
 
-    reranked = sorted(zip(scores, documents), key=lambda x: x[0], reverse=True)[
-        :top_k
-    ]
+    reranked = sorted(zip(scores, documents), key=lambda x: x[0], reverse=True)[:top_k]
 
     return [rank[1] for rank in reranked]
 

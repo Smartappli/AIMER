@@ -1,16 +1,11 @@
 from dotenv import load_dotenv
-
-load_dotenv()
-
 from langchain_core.tools import tool
 from langchain_ollama import ChatOllama, OllamaEmbeddings
 from langchain_qdrant import FastEmbedSparse, QdrantVectorStore, RetrievalMode
-
-# metadata filtering
 from qdrant_client.models import FieldCondition, Filter, MatchValue
-
-# metadata extraction from LLM
 from schema import ChunkMetadata
+
+load_dotenv()
 
 # Configuration
 COLLECTION_NAME = ""
@@ -21,21 +16,13 @@ LLM_MODEL = ""
 RERANKER_MODEL = ""
 
 # Initialize LLM
-llm = ChatOllama(
-    model=LLM_MODEL,
-    base_url="http://localhost:11434",
-)
+llm = ChatOllama(model=LLM_MODEL, base_url="http://localhost:11434")
 
 # Embeddings
-embeddings = OllamaEmbeddings(
-    model=EMBEDDING_MODEL,
-    base_url="http://localhost:11434",
-)
+embeddings = OllamaEmbeddings(model=EMBEDDING_MODEL, base_url="http://localhost:11434")
 
 # Sparse embeddings
-sparse_embeddings = FastEmbedSparse(
-    model=SPARSE_EMBEDDING_MODEL,
-)
+sparse_embeddings = FastEmbedSparse(model=SPARSE_EMBEDDING_MODEL)
 
 # Connect to existing collection
 vector_store = QdrantVectorStore.from_existing_collection(
@@ -97,8 +84,6 @@ def hybrid_search(query: str, k: int = 5):
 
         qdrant_filter = Filter(must=condition)
 
-    results = vector_store.similarity_search(
-        query=query, k=k, filters=qdrant_filter,
-    )
+    results = vector_store.similarity_search(query=query, k=k, filters=qdrant_filter)
 
     return results
