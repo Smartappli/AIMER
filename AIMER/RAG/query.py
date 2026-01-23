@@ -1,11 +1,8 @@
 from dotenv import load_dotenv
-
 from langchain_community.cross_encoders import HuggingFaceCrossEncoder
 from langchain_ollama import ChatOllama, OllamaEmbeddings
 from langchain_qdrant import FastEmbedSparse, QdrantVectorStore, RetrievalMode
-
 from qdrant_client.models import FieldCondition, Filter, MatchValue
-
 from scripts.schema import ChunkMetadata
 
 load_dotenv()
