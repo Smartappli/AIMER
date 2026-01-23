@@ -20,9 +20,9 @@ class AuthView(TemplateView):
         context.update(
             {
                 "layout_path": TemplateHelper.set_layout(
-                    "layout_blank.html", context
+                    "layout_blank.html", context,
                 ),
-            }
+            },
         )
 
         return context

@@ -84,7 +84,7 @@ def hybrid_search(query: str, k: int = 10, filters: dict = None):
         qdrant_filter = Filter(must=condition)
 
     results = vector_store.similarity_search(
-        query=query, k=k, filter=qdrant_filter
+        query=query, k=k, filter=qdrant_filter,
     )
 
     return results
@@ -92,7 +92,7 @@ def hybrid_search(query: str, k: int = 10, filters: dict = None):
 
 def rerank_results(query: str, documents=list, top_k: int = 5):
     reranker = HuggingFaceCrossEncoder(
-        model_name=RERANKER_MODEL, model_kwargs={"device": "xpu"}
+        model_name=RERANKER_MODEL, model_kwargs={"device": "xpu"},
     )
 
     query_doc_pairs = [(query, doc.page_content) for doc in documents]

@@ -29,7 +29,7 @@ def filter_by_url(submenu, url):
                 return True
 
             # Recursively check for submenus
-            elif subitem.get("submenu"):
+            if subitem.get("submenu"):
                 if filter_by_url(subitem["submenu"], url):
                     return True
 

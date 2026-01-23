@@ -6,14 +6,14 @@ from django.dispatch import receiver
 
 class Profile(models.Model):
     user = models.OneToOneField(
-        User, on_delete=models.CASCADE, related_name="profile"
+        User, on_delete=models.CASCADE, related_name="profile",
     )
     email = models.EmailField(
-        max_length=100, unique=True
+        max_length=100, unique=True,
     )  # Use unique=True for unique email addresses
     email_token = models.CharField(max_length=100, blank=True, null=True)
     forget_password_token = models.CharField(
-        max_length=100, blank=True, null=True
+        max_length=100, blank=True, null=True,
     )
     is_verified = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)

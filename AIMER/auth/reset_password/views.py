@@ -12,7 +12,7 @@ class ResetPasswordView(AuthView):
         if request.user.is_authenticated:
             # If the user is already logged in, redirect them to the home page or another appropriate page.
             return redirect(
-                "index"
+                "index",
             )  # Replace 'index' with the actual URL name for the home page
 
         # Render the login page for users who are not logged in.
@@ -23,7 +23,7 @@ class ResetPasswordView(AuthView):
             profile = await Profile.objects.aget(forget_password_token=token)
         except Profile.DoesNotExist:
             await sync_to_async(messages.error)(
-                request, "Invalid or expired token."
+                request, "Invalid or expired token.",
             )
             return redirect("forgot-password")
 
@@ -33,18 +33,18 @@ class ResetPasswordView(AuthView):
 
             if not (new_password and confirm_password):
                 await sync_to_async(messages.error)(
-                    request, "Please fill all fields."
+                    request, "Please fill all fields.",
                 )
                 return await sync_to_async(render)(
-                    request, "reset-password.html"
+                    request, "reset-password.html",
                 )
 
             if new_password != confirm_password:
                 await sync_to_async(messages.error)(
-                    request, "Passwords do not match."
+                    request, "Passwords do not match.",
                 )
                 return await sync_to_async(render)(
-                    request, "reset-password.html"
+                    request, "reset-password.html",
                 )
 
             user = profile.user
@@ -57,13 +57,12 @@ class ResetPasswordView(AuthView):
 
             # Log the user in after a successful password reset
             authenticated_user = await aauthenticate(
-                request, username=user.username, password=new_password
+                request, username=user.username, password=new_password,
             )
             if authenticated_user:
                 await alogin(request, authenticated_user)
                 return redirect("index")
-            else:
-                await sync_to_async(messages.success)(
-                    request, "Password reset successful. Please log in."
-                )
-                return redirect("login")
+            await sync_to_async(messages.success)(
+                request, "Password reset successful. Please log in.",
+            )
+            return redirect("login")
