@@ -66,7 +66,6 @@ def test_timm_model_creation(
             return False, time.time() - start
 
     if is_tty:
-        # ✅ 2 barres (global + module) proprement
         with tqdm(
             total=total_models,
             desc="All models",
