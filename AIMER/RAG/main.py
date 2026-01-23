@@ -17,7 +17,6 @@ from langchain_qdrant import FastEmbedSparse, QdrantVectorStore, RetrievalMode
 from PIL import Image
 from pypdf import PdfReader
 from qdrant_client import QdrantClient
-
 from tqdm import tqdm
 
 # Directory paths
