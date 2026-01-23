@@ -98,7 +98,9 @@ def hybrid_search(query: str, k: int = 5):
         qdrant_filter = Filter(must=condition)
 
     results = vector_store.similarity_search(
-        query=query, k=k, filters=qdrant_filter,
+        query=query,
+        k=k,
+        filters=qdrant_filter,
     )
 
     return results
