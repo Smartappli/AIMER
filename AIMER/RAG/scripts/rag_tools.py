@@ -44,7 +44,8 @@ def extract_filters(user_query: str):
                 {user_query}
                 <USER QUERY ENDS>
 
-                Extract metadata base on the user query only:        
+                Extract metadata base on the user query only: 
+       
             """
 
     structured_llm = llm.with_structured_output(ChunkMetadata)
@@ -84,6 +85,4 @@ def hybrid_search(query: str, k: int = 5):
 
         qdrant_filter = Filter(must=condition)
 
-    results = vector_store.similarity_search(query=query, k=k, filters=qdrant_filter)
-
-    return results
+    return vector_store.similarity_search(query=query, k=k, filters=qdrant_filter)

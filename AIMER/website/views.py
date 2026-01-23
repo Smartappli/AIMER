@@ -11,9 +11,30 @@ Refer to front_pages/urls.py file for more pages.
 
 
 class FrontPagesView(TemplateView):
-    # Predefined function
+    """Base view for AIMER "front" pages.
+
+    Overrides `get_context_data()` to:
+    1) Initialize the global layout context via `TemplateLayout.init()`.
+    2) Add layout-related variables expected by the front templates.
+    3) Map/normalize context values via `TemplateHelper.map_context()`.
+
+    Typical usage is to set `template_name` in URL patterns or subclasses.
+    """
+
     def get_context_data(self, **kwargs):
-        # A function to init the global layout. It is defined in AIMER/__init__.py file
+        """Build template context for front pages.
+
+        Args:
+            **kwargs: Context parameters passed by Django (e.g. URL kwargs).
+
+        Returns:
+            A context dictionary enriched with:
+                - layout: "front"
+                - layout_path: resolved layout template path
+                - active_url: current request path
+            and any global layout context initialized by `TemplateLayout.init()`.
+
+        """
         context = TemplateLayout.init(self, super().get_context_data(**kwargs))
 
         # Update the context
