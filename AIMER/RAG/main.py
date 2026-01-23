@@ -4,7 +4,6 @@ import io
 import os
 import re
 from pathlib import Path
-from typing import List
 
 from docling.datamodel.base_models import InputFormat
 from docling.datamodel.pipeline_options import PdfPipelineOptions
