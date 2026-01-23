@@ -126,7 +126,8 @@ def num_classes() -> int:
 
 @pytest.mark.slow
 def test_torchvision_model_creation(
-    tv_models: dict[str, list[str]], num_classes: int,
+    tv_models: dict[str, list[str]],
+    num_classes: int,
 ) -> None:
     total_models = sum(len(model_list) for model_list in tv_models.values())
     is_tty = sys.stdout.isatty() or sys.stderr.isatty()
@@ -145,7 +146,9 @@ def test_torchvision_model_creation(
         if weights is not None:
             try:
                 model = _safe_get_model(
-                    model_name, weights=weights, num_classes=num_classes,
+                    model_name,
+                    weights=weights,
+                    num_classes=num_classes,
                 )
                 return model, "weights", time.time() - start_time
             except (URLError, OSError, RuntimeError, ValueError):
@@ -155,7 +158,9 @@ def test_torchvision_model_creation(
         # 2) fallback sans weights (random)
         start_time = time.time()
         model = _safe_get_model(
-            model_name, weights=None, num_classes=num_classes,
+            model_name,
+            weights=None,
+            num_classes=num_classes,
         )
         return model, "no-weights", time.time() - start_time
 
@@ -197,7 +202,8 @@ def test_torchvision_model_creation(
 
                         try:
                             model, status, elapsed = create_one(
-                                module_name, model_name,
+                                module_name,
+                                model_name,
                             )
                             del model  # éviter d'accumuler en mémoire
                             p_mod.set_postfix_str(

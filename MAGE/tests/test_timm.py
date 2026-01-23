@@ -42,7 +42,8 @@ def num_classes() -> int:
 
 @pytest.mark.slow
 def test_timm_model_creation(
-    timm_models: dict[str, list[str]], num_classes: int,
+    timm_models: dict[str, list[str]],
+    num_classes: int,
 ) -> None:
     total_models = sum(len(model_list) for model_list in timm_models.values())
     is_tty = sys.stdout.isatty() or sys.stderr.isatty()

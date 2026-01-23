@@ -30,7 +30,8 @@ class ForgetPasswordView(AuthView):
             user = await User.objects.filter(email=email).afirst()
             if not user:
                 await sync_to_async(messages.error)(
-                    request, "No user with this email exists.",
+                    request,
+                    "No user with this email exists.",
                 )
                 return redirect("forgot-password")
 

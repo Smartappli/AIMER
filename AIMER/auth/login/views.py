@@ -28,7 +28,8 @@ class LoginView(AuthView):
 
             if not (username and password):
                 await sync_to_async(messages.error)(
-                    request, "Please enter your username and password.",
+                    request,
+                    "Please enter your username and password.",
                 )
                 return redirect("login")
 
@@ -36,7 +37,8 @@ class LoginView(AuthView):
                 user_email = await User.objects.filter(email=username).afirst()
                 if user_email is None:
                     await sync_to_async(messages.error)(
-                        request, "Please enter a valid email.",
+                        request,
+                        "Please enter a valid email.",
                     )
                     return redirect("login")
                 username = user_email.username
@@ -44,12 +46,15 @@ class LoginView(AuthView):
             user_email = await User.objects.filter(username=username).afirst()
             if user_email is None:
                 await sync_to_async(messages.error)(
-                    request, "Please enter a valid username.",
+                    request,
+                    "Please enter a valid username.",
                 )
                 return redirect("login")
 
             authenticated_user = await aauthenticate(
-                request, username=username, password=password,
+                request,
+                username=username,
+                password=password,
             )
             if authenticated_user is not None:
                 # Login the user if authentication is successful
@@ -65,6 +70,7 @@ class LoginView(AuthView):
                 # Redirect to the home page or another appropriate page
                 return redirect("index")
             await sync_to_async(messages.error)(
-                request, "Please enter a valid username.",
+                request,
+                "Please enter a valid username.",
             )
             return redirect("login")
