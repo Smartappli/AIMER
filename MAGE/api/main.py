@@ -30,12 +30,12 @@ async def libraries():
         "AI": {
             "keras": safe_version("keras", "keras"),
             "segmentation-models-pytorch": safe_version(
-                "segmentation-models-pytorch", "segmentation_models_pytorch"
+                "segmentation-models-pytorch", "segmentation_models_pytorch",
             ),
             "tensorflow": safe_version("tensorflow", "tensorflow"),
             "timm": safe_version("timm", "timm"),
             "torch": safe_version("torch", "torch"),
-        }
+        },
     }
 
 
@@ -59,7 +59,7 @@ async def are_pretrained():
 
     models = list(list_models())
     return {
-        "model_is_pretrained": {model: is_model_pretrained(model) for model in models}
+        "model_is_pretrained": {model: is_model_pretrained(model) for model in models},
     }
 
 
@@ -85,10 +85,10 @@ async def module_all_details():
 
 
 mcp = FastMCP.from_fastapi(
-    app=api, name="Timm API MCP"
+    app=api, name="Timm API MCP",
 )  # auto-tooling :contentReference[oaicite:1]{index=1}
 mcp_app = mcp.http_app(
-    path="/mcp"
+    path="/mcp",
 )  # endpoint MCP :contentReference[oaicite:2]{index=2}
 
 app = FastAPI(

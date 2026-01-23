@@ -25,10 +25,10 @@ urlpatterns = [
         name="verify-email-page",
     ),
     path(
-        "verify/email/<str:token>/", VerifyEmailTokenView.as_view(), name="verify-email"
+        "verify/email/<str:token>/", VerifyEmailTokenView.as_view(), name="verify-email",
     ),
     path(
-        "send_verification/", SendVerificationView.as_view(), name="send-verification"
+        "send_verification/", SendVerificationView.as_view(), name="send-verification",
     ),
     path(
         "forgot_password/",

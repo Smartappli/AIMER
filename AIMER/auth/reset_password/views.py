@@ -12,7 +12,7 @@ class ResetPasswordView(AuthView):
         if request.user.is_authenticated:
             # If the user is already logged in, redirect them to the home page or another appropriate page.
             return redirect(
-                "index"
+                "index",
             )  # Replace 'index' with the actual URL name for the home page
 
         # Render the login page for users who are not logged in.
@@ -47,12 +47,12 @@ class ResetPasswordView(AuthView):
 
             # Log the user in after a successful password reset
             authenticated_user = await aauthenticate(
-                request, username=user.username, password=new_password
+                request, username=user.username, password=new_password,
             )
             if authenticated_user:
                 await alogin(request, authenticated_user)
                 return redirect("index")
             await sync_to_async(messages.success)(
-                request, "Password reset successful. Please log in."
+                request, "Password reset successful. Please log in.",
             )
             return redirect("login")

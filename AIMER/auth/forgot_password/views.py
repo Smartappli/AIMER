@@ -17,7 +17,7 @@ class ForgetPasswordView(AuthView):
         if request.user.is_authenticated:
             # If the user is already logged in, redirect them to the home page or another appropriate page.
             return redirect(
-                "index"
+                "index",
             )  # Replace 'index' with the actual URL name for the home page
 
         # Render the login page for users who are not logged in.
@@ -30,7 +30,7 @@ class ForgetPasswordView(AuthView):
             user = await User.objects.filter(email=email).afirst()
             if not user:
                 await sync_to_async(messages.error)(
-                    request, "No user with this email exists."
+                    request, "No user with this email exists.",
                 )
                 return redirect("forgot-password")
 

@@ -48,7 +48,7 @@ def build_info_report() -> str:
     lines: list[str] = []
 
     lines.append(
-        f"Python: {sys.version.split()[0]} ({platform.system()} {platform.release()})"
+        f"Python: {sys.version.split()[0]} ({platform.system()} {platform.release()})",
     )
     lines.append(f"PyTorch version: {torch.__version__}")
     lines.append("")
@@ -91,7 +91,7 @@ def build_info_report() -> str:
             mem_bytes = getattr(props, "total_memory", 0)
             mem_gb = float(mem_bytes) / (1024**3) if mem_bytes else 0.0
             lines.append(
-                f" - [{i}] {name} | capability={cap_major}.{cap_minor} | VRAM={mem_gb:.2f} GB"
+                f" - [{i}] {name} | capability={cap_major}.{cap_minor} | VRAM={mem_gb:.2f} GB",
             )
 
     # --- Apple MPS (Mac)
@@ -102,10 +102,10 @@ def build_info_report() -> str:
         lines.append("MPS backend: not present in this build")
     else:
         lines.append(
-            f"MPS built:     {_safe('mps_built', mps_backend.is_built, default=False)}"
+            f"MPS built:     {_safe('mps_built', mps_backend.is_built, default=False)}",
         )
         lines.append(
-            f"MPS available: {_safe('mps_avail', mps_backend.is_available, default=False)}"
+            f"MPS available: {_safe('mps_avail', mps_backend.is_available, default=False)}",
         )
 
     # --- Intel XPU (oneAPI / Intel GPU)
@@ -127,7 +127,7 @@ def build_info_report() -> str:
 
             for i in range(xpu_count):
                 name = _safe(
-                    "xpu_name", lambda i=i: xpu.get_device_name(i), default="Unknown"
+                    "xpu_name", lambda i=i: xpu.get_device_name(i), default="Unknown",
                 )
                 lines.append(f" - [{i}] {name}")
 
@@ -135,7 +135,7 @@ def build_info_report() -> str:
     lines.append("")
     lines.append("=== CPU ===")
     lines.append(
-        f"Num threads: {_safe('threads', torch.get_num_threads, default='N/A')}"
+        f"Num threads: {_safe('threads', torch.get_num_threads, default='N/A')}",
     )
     lines.append(f"Default dtype: {torch.get_default_dtype()}")
 

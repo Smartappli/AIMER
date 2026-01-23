@@ -22,7 +22,7 @@ class FrontPagesView(TemplateView):
                 "layout": "front",
                 "layout_path": TemplateHelper.set_layout("layout_front.html", context),
                 "active_url": self.request.path,  # Get the current url path (active URL) from request
-            }
+            },
         )
 
         # map_context according to updated context values
