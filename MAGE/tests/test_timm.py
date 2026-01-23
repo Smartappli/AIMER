@@ -14,7 +14,6 @@ def timm_models() -> dict[str, list[str]]:
       - TIMM_TEST_MODULES="resnet,vit,convnext"
       - TIMM_TEST_LIMIT_PER_MODULE="20"
     """
-
     modules = list(list_modules())
 
     mods_env = os.getenv("TIMM_TEST_MODULES")
