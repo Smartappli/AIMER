@@ -63,7 +63,9 @@ else:
             n = xpu.device_count()
             for i in range(n):
                 name = _safe(
-                    "xpu_name", lambda: xpu.get_device_name(i), "Unknown",
+                    "xpu_name",
+                    lambda: xpu.get_device_name(i),
+                    "Unknown",
                 )
                 print(f" - [{i}] {name}")
         except Exception as e:

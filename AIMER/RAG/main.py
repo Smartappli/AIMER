@@ -104,7 +104,8 @@ def save_page_images(doc_converter, figures_dir: Path):
             page = doc_converter.document.pages[page_no]
 
             page.image.pil_image.save(
-                figures_dir / f"page_{page_no}.png", "PNG",
+                figures_dir / f"page_{page_no}.png",
+                "PNG",
             )
 
 
@@ -156,7 +157,8 @@ def save_tables(markdown_text, tables_dir):
         context_with_page = f"**Page:** {page_num}\n\n{table_context}"
 
         (tables_dir / f"{table_name}_page_{page_num}.md").write_text(
-            context_with_page, encoding="utf-8",
+            context_with_page,
+            encoding="utf-8",
         )
 
 

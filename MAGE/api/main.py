@@ -90,7 +90,8 @@ async def module_all_details():
 
 
 mcp = FastMCP.from_fastapi(
-    app=api, name="Timm API MCP",
+    app=api,
+    name="Timm API MCP",
 )  # auto-tooling :contentReference[oaicite:1]{index=1}
 mcp_app = mcp.http_app(
     path="/mcp",
