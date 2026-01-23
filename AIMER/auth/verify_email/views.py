@@ -11,7 +11,30 @@ from ..views import AuthView
 
 
 class VerifyEmailTokenView(AuthView):
+    """Verify a user's email address using a token.
+
+    GET /verify-email/<token>:
+    - Finds the Profile with `email_token == token`.
+    - Sets `is_verified = True` and clears `email_token`.
+    - Shows a success message (mainly for non-authenticated users).
+    - Redirects to the login page.
+
+    Error handling:
+    - If the token is invalid, shows an error message and redirects to the
+      verify email page.
+    """
+
     async def get(self, request, token):
+        """Handle token verification.
+
+        Args:
+            request: Django HttpRequest.
+            token: Verification token extracted from the URL.
+
+        Returns:
+            An HTTP redirect response.
+
+        """
         try:
             profile = await Profile.objects.filter(email_token=token).afirst()
             profile.is_verified = True
@@ -34,13 +57,46 @@ class VerifyEmailTokenView(AuthView):
 
 
 class VerifyEmailView(AuthView):
+    """Display the verify email page.
+
+    This is typically a page where users are informed that they must verify their
+    email address and where they can trigger a resend of the verification email.
+    """
+
     async def get(self, request):
-        # Render the login page for users who are not logged in.
+        """Render the verify email page.
+
+        Args:
+            request: Django HttpRequest.
+
+        Returns:
+            The response returned by the parent AuthView's GET handler.
+
+        """
         return await sync_to_async(super().get)(request)
 
 
 class SendVerificationView(AuthView):
+    """Generate and send a verification email.
+
+    GET /send-verification:
+    - Determines the target email (authenticated user profile or session).
+    - Generates a new UUID token, saves it into Profile.email_token.
+    - Sends the verification email.
+    - Displays a success or error message.
+    - Redirects back to the verify email page.
+    """
+
     async def get(self, request):
+        """Send a (re)verification email to the user.
+
+        Args:
+            request: Django HttpRequest.
+
+        Returns:
+            An HTTP redirect response to the verify email page.
+
+        """
         email, message = await self.get_email_and_message(request)
 
         if email:
@@ -56,6 +112,22 @@ class SendVerificationView(AuthView):
         return redirect("verify-email-page")
 
     async def get_email_and_message(self, request):
+        """Resolve the recipient email and the user-facing message to display.
+
+        Rules:
+        - If authenticated, use `request.user.profile.email`.
+        - If not authenticated, use `request.session["email"]` if present.
+        - If EMAIL settings are missing, prepare an error message.
+
+        Args:
+            request: Django HttpRequest.
+
+        Returns:
+            A tuple (email, message) where:
+            - email is a string or None
+            - message is either a string or a messages.* result depending on path
+
+        """
         if request.user.is_authenticated:
             email = await sync_to_async(lambda: request.user.profile.email)()
 
