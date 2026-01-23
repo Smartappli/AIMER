@@ -76,7 +76,7 @@ def hybrid_search(query: str, k: int = 10, filters: dict = None):
 
 def rerank_results(query: str, documents=list, top_k: int = 5):
     reranker = HuggingFaceCrossEncoder(
-        model_name=RERANKER_MODEL, model_kwargs={"device": "xpu"},
+        model_name=RERANKER_MODEL, model_kwargs={"device": "xpu"}
     )
 
     query_doc_pairs = [(query, doc.page_content) for doc in documents]

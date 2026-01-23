@@ -52,7 +52,7 @@ def _safe_list_models(module: ModuleType) -> list[str]:
             inspect.signature(fn)
         except (TypeError, ValueError) as exc:
             logger.debug(
-                "Skipping %s.%s: %s", module.__name__, name, exc, exc_info=True,
+                "Skipping %s.%s: %s", module.__name__, name, exc, exc_info=True
             )
             continue
 
@@ -75,7 +75,7 @@ def _safe_get_model_weights_default(model_name: str) -> object | None:
 
 
 def _safe_get_model(
-    model_name: str, *, weights: object | None, num_classes: int,
+    model_name: str, *, weights: object | None, num_classes: int
 ) -> nn.Module:
     """Create a model using the best available TorchVision API.
 
@@ -122,7 +122,7 @@ def _create_one(model_name: str, num_classes: int) -> tuple[nn.Module, str, floa
     if weights is not None:
         try:
             model = _safe_get_model(
-                model_name, weights=weights, num_classes=num_classes,
+                model_name, weights=weights, num_classes=num_classes
             )
             return model, "weights", time.time() - start_time
         except (URLError, OSError, RuntimeError, ValueError, TypeError):
@@ -142,7 +142,7 @@ def _iter_models(tv_models: dict[str, list[str]]) -> Iterator[tuple[str, str]]:
 
 
 def _run_creation_with_progress(
-    tv_models: dict[str, list[str]], *, num_classes: int,
+    tv_models: dict[str, list[str]], *, num_classes: int
 ) -> list[tuple[str, str, str]]:
     """Run model creation checks and return a list of failures."""
     total_models = sum(len(model_list) for model_list in tv_models.values())
@@ -189,12 +189,12 @@ def _run_creation_with_progress(
 
                         try:
                             model, status, elapsed = _create_one(
-                                model_name, num_classes,
+                                model_name, num_classes
                             )
                             del model
 
                             p_mod.set_postfix_str(
-                                f"{model_name} • {status} • {elapsed:.2f}s",
+                                f"{model_name} • {status} • {elapsed:.2f}s"
                             )
                             postfix = (
                                 f"{module_name} • {model_name} • "
@@ -272,7 +272,7 @@ def num_classes() -> int:
 
 @pytest.mark.slow
 def test_torchvision_model_creation(
-    tv_models: dict[str, list[str]], num_classes: int,
+    tv_models: dict[str, list[str]], num_classes: int
 ) -> None:
     """Smoke-test that TorchVision models can be instantiated without crashing."""
     failures = _run_creation_with_progress(tv_models, num_classes=num_classes)

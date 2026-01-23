@@ -77,8 +77,8 @@ def convert_pdf_to_docling(pdf_file: Path):
 
     doc_converter = DocumentConverter(
         format_options={
-            InputFormat.PDF: PdfFormatOption(pipeline_options=pipeline_options),
-        },
+            InputFormat.PDF: PdfFormatOption(pipeline_options=pipeline_options)
+        }
     )
 
     result = doc_converter.convert(pdf_file)
@@ -154,7 +154,7 @@ def save_tables(markdown_text, tables_dir):
         context_with_page = f"**Page:** {page_num}\n\n{table_context}"
 
         (tables_dir / f"{table_name}_page_{page_num}.md").write_text(
-            context_with_page, encoding="utf-8",
+            context_with_page, encoding="utf-8"
         )
 
 
@@ -169,7 +169,7 @@ def extract_pdf_content(pdf_file: Path):
     doc_converter = convert_pdf_to_docling(pdf_file)
 
     markdown_text = doc_converter.document.export_to_markdown(
-        page_break_placeholder="<!-- page_break -->",
+        page_break_placeholder="<!-- page_break -->"
     )
 
     (md_dir / f"{pdf_file.stem}.md").write_text(markdown_text, encoding="utf-8")
@@ -231,7 +231,7 @@ def generate_image_description(image_path: Path):
         content=[
             {"type": "text", "text": describe_image_prompt},
             {"type": "image_url", "image_url": f"data:image/png;base64,{image_base64}"},
-        ],
+        ]
     )
     system_prompt = SystemMessage("You are an AI Assistant")
 
@@ -313,7 +313,7 @@ def ingest_file_in_db(file_path, processed_hashes):
     base_metadata = extract_metadata_from_filename(doc_name)
 
     base_metadata.update(
-        {"content_type": content_type, "file_hash": file_hash, "source_file": doc_name},
+        {"content_type": content_type, "file_hash": file_hash, "source_file": doc_name}
     )
 
     if content_type == "text":
