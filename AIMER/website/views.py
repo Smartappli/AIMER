@@ -1,6 +1,7 @@
+from AIMER.template_helpers.theme import TemplateHelper
+
 from django.views.generic import TemplateView
 from AIMER import TemplateLayout
-from AIMER.template_helpers.theme import TemplateHelper
 
 
 """

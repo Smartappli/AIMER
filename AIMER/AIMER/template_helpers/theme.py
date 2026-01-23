@@ -4,6 +4,7 @@ from pprint import pprint
 
 from django.conf import settings
 
+
 # Core TemplateHelper class
 class TemplateHelper:
     # Init the Template Context using TEMPLATE_CONFIG
