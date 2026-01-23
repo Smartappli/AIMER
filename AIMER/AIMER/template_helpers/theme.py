@@ -112,7 +112,7 @@ class TemplateHelper:
             context["content_layout_class"] = "layout-compact"
 
         # Detached Navbar
-        if context.get("navbar_detached") == True:
+        if context.get("navbar_detached"):
             context["navbar_detached_class"] = "navbar-detached"
         else:
             context["navbar_detached_class"] = ""

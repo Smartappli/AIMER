@@ -1,17 +1,14 @@
 from dotenv import load_dotenv
 
-load_dotenv()
-
-# re-ranking for better result
 from langchain_community.cross_encoders import HuggingFaceCrossEncoder
 from langchain_ollama import ChatOllama, OllamaEmbeddings
 from langchain_qdrant import FastEmbedSparse, QdrantVectorStore, RetrievalMode
 
-# metadata filtering
 from qdrant_client.models import FieldCondition, Filter, MatchValue
 
-# metadata extraction from LLM
 from scripts.schema import ChunkMetadata
+
+load_dotenv()
 
 COLLECTION_NAME = "rag_docs"
 
