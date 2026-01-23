@@ -55,7 +55,9 @@ def build_info_report() -> str:
     lines.append("--- Build info (CUDA / HIP (ROCm) / etc.)")
     lines.append(f"torch.version.cuda: {torch.version.cuda}")
     lines.append(f"torch.version.hip:  {getattr(torch.version, 'hip', None)}")
-    lines.append(f"torch.version.git:  {getattr(torch.version, 'git_version', None)}")
+    lines.append(
+        f"torch.version.git:  {getattr(torch.version, 'git_version', None)}"
+    )
 
     # --- CUDA / ROCm (AMD uses torch.cuda API too)
     lines.append("")
@@ -66,7 +68,11 @@ def build_info_report() -> str:
     cuda_count = _safe("cuda_count", torch.cuda.device_count, default=0)
     lines.append(f"CUDA device count: {cuda_count}")
 
-    if cuda_available is True and isinstance(cuda_count, int) and cuda_count > 0:
+    if (
+        cuda_available is True
+        and isinstance(cuda_count, int)
+        and cuda_count > 0
+    ):
         cur = _safe("cuda_current", torch.cuda.current_device, default="N/A")
         lines.append(f"CUDA current device: {cur}")
 
@@ -121,13 +127,19 @@ def build_info_report() -> str:
         xpu_count = _safe("xpu_count", xpu.device_count, default=0)
         lines.append(f"XPU device count: {xpu_count}")
 
-        if xpu_available is True and isinstance(xpu_count, int) and xpu_count > 0:
+        if (
+            xpu_available is True
+            and isinstance(xpu_count, int)
+            and xpu_count > 0
+        ):
             cur = _safe("xpu_current", xpu.current_device, default="N/A")
             lines.append(f"XPU current device: {cur}")
 
             for i in range(xpu_count):
                 name = _safe(
-                    "xpu_name", lambda i=i: xpu.get_device_name(i), default="Unknown",
+                    "xpu_name",
+                    lambda i=i: xpu.get_device_name(i),
+                    default="Unknown",
                 )
                 lines.append(f" - [{i}] {name}")
 

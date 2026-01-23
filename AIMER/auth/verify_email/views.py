@@ -44,14 +44,16 @@ class VerifyEmailTokenView(AuthView):
                 # User is not already authenticated
                 # Perform the email verification and any other necessary actions
                 await sync_to_async(messages.success)(
-                    request, "Email verified successfully",
+                    request,
+                    "Email verified successfully",
                 )
             return redirect("login")
             # Now, redirect to the login page
 
         except Profile.DoesNotExist:
             await sync_to_async(messages.error)(
-                request, "Invalid token, please try again",
+                request,
+                "Invalid token, please try again",
             )
             return redirect("verify-email-page")
 
@@ -107,7 +109,9 @@ class SendVerificationView(AuthView):
             await send_verification_email(email, token)
             await sync_to_async(messages.success)(request, message)
         else:
-            await sync_to_async(messages.error)(request, "Email not found in session")
+            await sync_to_async(messages.error)(
+                request, "Email not found in session"
+            )
 
         return redirect("verify-email-page")
 
@@ -133,7 +137,8 @@ class SendVerificationView(AuthView):
 
             if settings.EMAIL_HOST_USER and settings.EMAIL_HOST_PASSWORD:
                 message = await sync_to_async(messages.success)(
-                    request, "Verification email sent successfully",
+                    request,
+                    "Verification email sent successfully",
                 )
             else:
                 message = await sync_to_async(messages.error)(
@@ -143,7 +148,9 @@ class SendVerificationView(AuthView):
         else:
             email = request.session.get("email")
             if settings.EMAIL_HOST_USER and settings.EMAIL_HOST_PASSWORD:
-                message = "Resend verification email successfully" if email else None
+                message = (
+                    "Resend verification email successfully" if email else None
+                )
             else:
                 message = await sync_to_async(messages.error)(
                     request,

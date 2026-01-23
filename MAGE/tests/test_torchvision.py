@@ -52,7 +52,11 @@ def _safe_list_models(module: ModuleType) -> list[str]:
             inspect.signature(fn)
         except (TypeError, ValueError) as exc:
             logger.debug(
-                "Skipping %s.%s: %s", module.__name__, name, exc, exc_info=True,
+                "Skipping %s.%s: %s",
+                module.__name__,
+                name,
+                exc,
+                exc_info=True,
             )
             continue
 
@@ -69,13 +73,24 @@ def _safe_get_model_weights_default(model_name: str) -> object | None:
     try:
         weights_enum = tvm.get_model_weights(model_name)
         return getattr(weights_enum, "DEFAULT", None)
-    except (AttributeError, KeyError, TypeError, ValueError, RuntimeError) as exc:
-        logger.debug("No DEFAULT weights for %s: %s", model_name, exc, exc_info=True)
+    except (
+        AttributeError,
+        KeyError,
+        TypeError,
+        ValueError,
+        RuntimeError,
+    ) as exc:
+        logger.debug(
+            "No DEFAULT weights for %s: %s", model_name, exc, exc_info=True
+        )
         return None
 
 
 def _safe_get_model(
-    model_name: str, *, weights: object | None, num_classes: int,
+    model_name: str,
+    *,
+    weights: object | None,
+    num_classes: int,
 ) -> nn.Module:
     """Create a model using the best available TorchVision API.
 
@@ -114,7 +129,9 @@ def _safe_get_model(
         return builder(pretrained=False)
 
 
-def _create_one(model_name: str, num_classes: int) -> tuple[nn.Module, str, float]:
+def _create_one(
+    model_name: str, num_classes: int
+) -> tuple[nn.Module, str, float]:
     """Create one model, trying DEFAULT weights first, then random init."""
     start_time = time.time()
     weights = _safe_get_model_weights_default(model_name)
@@ -122,7 +139,9 @@ def _create_one(model_name: str, num_classes: int) -> tuple[nn.Module, str, floa
     if weights is not None:
         try:
             model = _safe_get_model(
-                model_name, weights=weights, num_classes=num_classes,
+                model_name,
+                weights=weights,
+                num_classes=num_classes,
             )
             return model, "weights", time.time() - start_time
         except (URLError, OSError, RuntimeError, ValueError, TypeError):
@@ -142,7 +161,9 @@ def _iter_models(tv_models: dict[str, list[str]]) -> Iterator[tuple[str, str]]:
 
 
 def _run_creation_with_progress(
-    tv_models: dict[str, list[str]], *, num_classes: int,
+    tv_models: dict[str, list[str]],
+    *,
+    num_classes: int,
 ) -> list[tuple[str, str, str]]:
     """Run model creation checks and return a list of failures."""
     total_models = sum(len(model_list) for model_list in tv_models.values())
@@ -185,11 +206,14 @@ def _run_creation_with_progress(
                 ) as p_mod:
                     for model_name in model_list:
                         p_mod.set_postfix_str(model_name)
-                        p_global.set_postfix_str(f"{module_name} • {model_name}")
+                        p_global.set_postfix_str(
+                            f"{module_name} • {model_name}"
+                        )
 
                         try:
                             model, status, elapsed = _create_one(
-                                model_name, num_classes,
+                                model_name,
+                                num_classes,
                             )
                             del model
 
@@ -202,7 +226,9 @@ def _run_creation_with_progress(
                             )
                             p_global.set_postfix_str(postfix)
                         except Exception as exc:  # noqa: BLE001
-                            failures.append((module_name, model_name, repr(exc)))
+                            failures.append(
+                                (module_name, model_name, repr(exc))
+                            )
 
                         p_mod.update(1)
                         p_global.update(1)
@@ -238,7 +264,13 @@ def tv_modules() -> dict[str, ModuleType]:
     """Return TorchVision submodules to probe for model builders."""
     modules: dict[str, ModuleType] = {"classification": tvm}
 
-    for sub in ("detection", "segmentation", "video", "optical_flow", "quantization"):
+    for sub in (
+        "detection",
+        "segmentation",
+        "video",
+        "optical_flow",
+        "quantization",
+    ):
         mod = getattr(tvm, sub, None)
         if isinstance(mod, ModuleType):
             modules[sub] = mod
@@ -272,12 +304,14 @@ def num_classes() -> int:
 
 @pytest.mark.slow
 def test_torchvision_model_creation(
-    tv_models: dict[str, list[str]], num_classes: int,
+    tv_models: dict[str, list[str]],
+    num_classes: int,
 ) -> None:
     """Smoke-test that TorchVision models can be instantiated without crashing."""
     failures = _run_creation_with_progress(tv_models, num_classes=num_classes)
     if failures:
-        msg = "Certaines créations de modèles TorchVision ont échoué:\n" + "\n".join(
-            f"- {m} / {n}: {err}" for m, n, err in failures
+        msg = (
+            "Certaines créations de modèles TorchVision ont échoué:\n"
+            + "\n".join(f"- {m} / {n}: {err}" for m, n, err in failures)
         )
         pytest.fail(msg)
