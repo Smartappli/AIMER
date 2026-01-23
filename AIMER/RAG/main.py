@@ -339,7 +339,7 @@ def ingest_file_in_db(file_path, processed_hashes):
 data_path = Path(DATA_DIR)
 pdf_files = data_path.glob("*.pdf")
 
-for idx, pdf_file in enumerate(pdf_files):
+for _idx, pdf_file in enumerate(pdf_files):
     print(pdf_file)
     extract_pdf_content(pdf_file)
 

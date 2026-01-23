@@ -14,6 +14,7 @@ def timm_models() -> dict[str, list[str]]:
       - TIMM_TEST_MODULES="resnet,vit,convnext"
       - TIMM_TEST_LIMIT_PER_MODULE="20"
     """
+
     modules = list(list_modules())
 
     mods_env = os.getenv("TIMM_TEST_MODULES")
@@ -115,7 +116,6 @@ def test_timm_model_creation(
                         p_mod.update(1)
                         p_global.update(1)
     else:
-        # ✅ Pas de TTY => 1 seule barre (visible même dans des logs)
         with tqdm(
             total=total_models,
             desc="timm create_model",
