@@ -3,7 +3,6 @@ from django.views.generic import TemplateView
 
 from AIMER import TemplateLayout
 
-
 """
 This file is a view controller for multiple pages as a module.
 Here you can override the page view layout.
