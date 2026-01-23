@@ -2,10 +2,10 @@
 django[argon2]==6.0.1
 django-rich==2.2.0
 daphne==4.2.1
-python-dotenv>=1.2.1
+python-dotenv==1.2.1
 
 # --- RAG ----
-docling[vlm]==2.69.1
+docling[vlm]==2.70.0
 fastembed==0.7.4
 # fastembed-gpu==0.7.4
 transformers==4.57.6
