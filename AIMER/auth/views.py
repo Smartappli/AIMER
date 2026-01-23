@@ -33,8 +33,8 @@ class AuthView(TemplateView):
             A context dictionary enriched with:
                 - layout_path: resolved blank layout template path
             and any global layout context initialized by `TemplateLayout.init()`.
-        """
 
+        """
         context = TemplateLayout.init(self, super().get_context_data(**kwargs))
 
         # Update the context

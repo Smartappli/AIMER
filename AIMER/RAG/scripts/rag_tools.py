@@ -39,13 +39,13 @@ vector_store = QdrantVectorStore.from_existing_collection(
 def extract_filters(user_query: str):
     prompt = f"""
             Extract metada filers from the query. Return None for fields not mentionned.
-            
+
                 <USER QUERY STARTS>
                 {user_query}
                 <USER QUERY ENDS>
 
                 Extract metadata base on the user query only: 
-       
+
             """
 
     structured_llm = llm.with_structured_output(ChunkMetadata)
