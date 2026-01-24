@@ -1,1 +1,2 @@
-# flwr-nightly==1.26.0.dev20260120
+flwr==1.25.0
+syft-flwr==0.5.0
