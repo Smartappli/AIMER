@@ -10,7 +10,7 @@ ENV PYTHONUNBUFFERED=1
 COPY requirements.txt ${APP_HOME}
 
 # install python dependencies
-RUN pip install --upgrade pip && pip install --no-cache-dir -r ${APP_HOME}/requirements.txt
+RUN pip install --upgrade pip && pip install --no-cache-dir -r /app/requirements.txt
 
 COPY . ${APP_HOME}
 
