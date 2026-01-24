@@ -23,7 +23,8 @@ class ResetPasswordView(AuthView):
             profile = await Profile.objects.aget(forget_password_token=token)
         except Profile.DoesNotExist:
             await sync_to_async(messages.error)(
-                request, "Invalid or expired token.",
+                request,
+                "Invalid or expired token.",
             )
             return redirect("forgot-password")
 
@@ -33,18 +34,22 @@ class ResetPasswordView(AuthView):
 
             if not (new_password and confirm_password):
                 await sync_to_async(messages.error)(
-                    request, "Please fill all fields.",
+                    request,
+                    "Please fill all fields.",
                 )
                 return await sync_to_async(render)(
-                    request, "reset-password.html",
+                    request,
+                    "reset-password.html",
                 )
 
             if new_password != confirm_password:
                 await sync_to_async(messages.error)(
-                    request, "Passwords do not match.",
+                    request,
+                    "Passwords do not match.",
                 )
                 return await sync_to_async(render)(
-                    request, "reset-password.html",
+                    request,
+                    "reset-password.html",
                 )
 
             user = profile.user
