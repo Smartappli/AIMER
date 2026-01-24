@@ -12,7 +12,7 @@ RUN apt-get update \
 
 # Déps Python
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir -r /app/requirements.txt
 
 # Code
 COPY . .
