@@ -110,7 +110,8 @@ class SendVerificationView(AuthView):
             await sync_to_async(messages.success)(request, message)
         else:
             await sync_to_async(messages.error)(
-                request, "Email not found in session",
+                request,
+                "Email not found in session",
             )
 
         return redirect("verify-email-page")

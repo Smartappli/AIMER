@@ -81,7 +81,10 @@ def _safe_get_model_weights_default(model_name: str) -> object | None:
         RuntimeError,
     ) as exc:
         logger.debug(
-            "No DEFAULT weights for %s: %s", model_name, exc, exc_info=True,
+            "No DEFAULT weights for %s: %s",
+            model_name,
+            exc,
+            exc_info=True,
         )
         return None
 
@@ -130,7 +133,8 @@ def _safe_get_model(
 
 
 def _create_one(
-    model_name: str, num_classes: int,
+    model_name: str,
+    num_classes: int,
 ) -> tuple[nn.Module, str, float]:
     """Create one model, trying DEFAULT weights first, then random init."""
     start_time = time.time()
