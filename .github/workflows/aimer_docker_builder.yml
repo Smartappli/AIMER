@@ -1,4 +1,4 @@
-name: MAGE Docker Builder
+name: AIMER Docker Builder
 
 on:
   push:
@@ -10,7 +10,7 @@ permissions:
   packages: write
 
 concurrency:
-  group: mage-docker-builder-${{ github.event_name == 'pull_request' && format('{0}-{1}', github.workflow, github.event.pull_request.number) || github.workflow_ref }}
+  group: aimer-docker-builder-${{ github.event_name == 'pull_request' && format('{0}-{1}', github.workflow, github.event.pull_request.number) || github.workflow_ref }}
   cancel-in-progress: true
 
 jobs:
@@ -23,7 +23,7 @@ jobs:
           # this might remove tools that are actually needed,
           # if set to "true" but frees about 6 GB
           tool-cache: false
-          
+
           # all of these default to true, but feel free to set to
           # "false" if necessary for your workflow
           android: true
@@ -31,8 +31,8 @@ jobs:
           haskell: true
           large-packages: true
           docker-images: false
-          swap-storage: true  
-    
+          swap-storage: true
+
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
 
@@ -57,7 +57,7 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v6
         with:
-          file: ./MAGE/Dockerfile
+          file: ./AIMER/Dockerfile
           push: true
           platforms: linux/amd64,linux/arm64
-          tags: smartappli/mage-api:latest
+          tags: smartappli/aimer:latest
