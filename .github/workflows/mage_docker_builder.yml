@@ -57,7 +57,7 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v6
         with:
-          file: ./MAGE/Dockerfile-mage-api
+          file: ./MAGE/Dockerfile
           push: true
           platforms: linux/amd64,linux/arm64
           tags: smartappli/mage-api:latest
