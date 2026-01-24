@@ -7,6 +7,5 @@ torch==2.10.0
 torchvision==0.25.0
 keras==3.13.1
 timm==1.0.24
-# segmentation-models-pytorch
-git+https://github.com/qubvel/segmentation_models.pytorch
+segmentation-models-pytorch==0.5.0
 tqdm==4.67.1
