@@ -7,10 +7,10 @@ WORKDIR ${APP_HOME}
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
-COPY requirements.txt ${APP_HOME}
+COPY requirements.txt .
 
 # install python dependencies
-RUN pip install --upgrade pip && pip install --no-cache-dir -r ./app/requirements.txt
+RUN pip install --upgrade pip && pip install --no-cache-dir -r requirements.txt
 
 COPY . ${APP_HOME}
 
