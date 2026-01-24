@@ -4,12 +4,13 @@ ARG APP_HOME=/app
 WORKDIR ${APP_HOME}
 
 # set environment variables
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
 
 COPY requirements.txt ${APP_HOME}
+
 # install python dependencies
-RUN pip install --upgrade pip && pip install --no-cache-dir -r requirements.txt
+RUN pip install --upgrade pip && pip install --no-cache-dir -r ${APP_HOME}/requirements.txt
 
 COPY . ${APP_HOME}
 
