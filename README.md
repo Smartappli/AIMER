@@ -2,12 +2,13 @@
 
 ## AIMER Unit Tests
 
-[![Aimer DJLint](https://github.com/Smartappli/AIMER/actions/workflows/aimer_djlint.yml/badge.svg)](https://github.com/Smartappli/AIMER/actions/workflows/aimer_djlint.yml)
+[![AIMER DJLint](https://github.com/Smartappli/AIMER/actions/workflows/aimer_djlint.yml/badge.svg)](https://github.com/Smartappli/AIMER/actions/workflows/aimer_djlint.yml)
+[![AIMER Docker Builder](https://github.com/Smartappli/AIMER/actions/workflows/aimer_docker_builder.yml/badge.svg)](https://github.com/Smartappli/AIMER/actions/workflows/aimer_docker_builder.yml)
 
 ## MAGE Unit Tests
 
-[![Mage Coverage](https://github.com/Smartappli/AIMER/actions/workflows/mage_coverage.yml/badge.svg)](https://github.com/Smartappli/AIMER/actions/workflows/mage_coverage.yml)
-[![Mage Docker Builder](https://github.com/Smartappli/AIMER/actions/workflows/mage_docker_builder.yml/badge.svg)](https://github.com/Smartappli/AIMER/actions/workflows/mage_docker_builder.yml)
+[![MAGE Coverage](https://github.com/Smartappli/AIMER/actions/workflows/mage_coverage.yml/badge.svg)](https://github.com/Smartappli/AIMER/actions/workflows/mage_coverage.yml)
+[![MAGE Docker Builder](https://github.com/Smartappli/AIMER/actions/workflows/mage_docker_builder.yml/badge.svg)](https://github.com/Smartappli/AIMER/actions/workflows/mage_docker_builder.yml)
 
 ## FARM Unit Tests
 
