@@ -15,7 +15,8 @@ class TemplateLayout:
         context.update(
             {
                 "layout_path": TemplateHelper.set_layout(
-                    "layout_" + layout + ".html", context,
+                    "layout_" + layout + ".html",
+                    context,
                 ),
                 # Set default rtl True if the language Arabic else use rtl_mode value from TEMPLATE_CONFIG
                 "rtl_mode": True

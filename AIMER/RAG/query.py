@@ -18,7 +18,10 @@ RERANKER_MODEL = "Krakekai/qwen3-reranker-8b"
 llm = ChatOllama(model=LLM_MODEL, base_url="http://localhost:11434")
 
 # Embeddings
-embeddings = OllamaEmbeddings(model=EMBEDDING_MODEL, base_url="http://localhost:11434")
+embeddings = OllamaEmbeddings(
+    model=EMBEDDING_MODEL,
+    base_url="http://localhost:11434",
+)
 
 # Sparse embeddings
 spare_embeddings = FastEmbedSparse(model=SPARCE_EMBEDDING_MODEL)
@@ -96,7 +99,11 @@ def hybrid_search(query: str, k: int = 10, filters: dict = None):
 
         qdrant_filter = Filter(must=condition)
 
-    return vector_store.similarity_search(query=query, k=k, filter=qdrant_filter)
+    return vector_store.similarity_search(
+        query=query,
+        k=k,
+        filter=qdrant_filter,
+    )
 
 
 def rerank_results(query: str, documents=list, top_k: int = 5):
@@ -115,14 +122,17 @@ def rerank_results(query: str, documents=list, top_k: int = 5):
 
     """
     reranker = HuggingFaceCrossEncoder(
-        model_name=RERANKER_MODEL, model_kwargs={"device": "xpu"},
+        model_name=RERANKER_MODEL,
+        model_kwargs={"device": "xpu"},
     )
 
     query_doc_pairs = [(query, doc.page_content) for doc in documents]
 
     scores = reranker.score(query_doc_pairs)
 
-    reranked = sorted(zip(scores, documents), key=lambda x: x[0], reverse=True)[:top_k]
+    reranked = sorted(zip(scores, documents), key=lambda x: x[0], reverse=True)[
+        :top_k
+    ]
 
     return [rank[1] for rank in reranked]
 
