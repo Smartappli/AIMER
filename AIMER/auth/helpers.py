@@ -77,7 +77,7 @@ async def send_password_reset_email(email, token):
     """
     subject = "Reset your password"
     reset_url = get_absolute_url(
-        reverse("reset-password", kwargs={"token": token})
+        reverse("reset-password", kwargs={"token": token}),
     )
     message = f"Hi,\n\nPlease reset your password using this link: {reset_url}"
     await send_email(subject, email, message)

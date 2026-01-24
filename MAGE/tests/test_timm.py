@@ -99,7 +99,7 @@ def test_timm_model_creation(
                     for model_name in model_list:
                         p_mod.set_postfix_str(model_name)
                         p_global.set_postfix_str(
-                            f"{module_name} • {model_name}"
+                            f"{module_name} • {model_name}",
                         )
 
                         try:

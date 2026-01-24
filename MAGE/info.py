@@ -56,7 +56,7 @@ def build_info_report() -> str:
     lines.append(f"torch.version.cuda: {torch.version.cuda}")
     lines.append(f"torch.version.hip:  {getattr(torch.version, 'hip', None)}")
     lines.append(
-        f"torch.version.git:  {getattr(torch.version, 'git_version', None)}"
+        f"torch.version.git:  {getattr(torch.version, 'git_version', None)}",
     )
 
     # --- CUDA / ROCm (AMD uses torch.cuda API too)

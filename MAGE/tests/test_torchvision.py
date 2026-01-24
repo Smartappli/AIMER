@@ -81,7 +81,7 @@ def _safe_get_model_weights_default(model_name: str) -> object | None:
         RuntimeError,
     ) as exc:
         logger.debug(
-            "No DEFAULT weights for %s: %s", model_name, exc, exc_info=True
+            "No DEFAULT weights for %s: %s", model_name, exc, exc_info=True,
         )
         return None
 
@@ -130,7 +130,7 @@ def _safe_get_model(
 
 
 def _create_one(
-    model_name: str, num_classes: int
+    model_name: str, num_classes: int,
 ) -> tuple[nn.Module, str, float]:
     """Create one model, trying DEFAULT weights first, then random init."""
     start_time = time.time()
@@ -207,7 +207,7 @@ def _run_creation_with_progress(
                     for model_name in model_list:
                         p_mod.set_postfix_str(model_name)
                         p_global.set_postfix_str(
-                            f"{module_name} • {model_name}"
+                            f"{module_name} • {model_name}",
                         )
 
                         try:
@@ -227,7 +227,7 @@ def _run_creation_with_progress(
                             p_global.set_postfix_str(postfix)
                         except Exception as exc:  # noqa: BLE001
                             failures.append(
-                                (module_name, model_name, repr(exc))
+                                (module_name, model_name, repr(exc)),
                             )
 
                         p_mod.update(1)

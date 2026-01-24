@@ -19,7 +19,7 @@ llm = ChatOllama(model=LLM_MODEL, base_url="http://localhost:11434")
 
 # Embeddings
 embeddings = OllamaEmbeddings(
-    model=EMBEDDING_MODEL, base_url="http://localhost:11434"
+    model=EMBEDDING_MODEL, base_url="http://localhost:11434",
 )
 
 # Sparse embeddings
@@ -99,7 +99,7 @@ def hybrid_search(query: str, k: int = 10, filters: dict = None):
         qdrant_filter = Filter(must=condition)
 
     return vector_store.similarity_search(
-        query=query, k=k, filter=qdrant_filter
+        query=query, k=k, filter=qdrant_filter,
     )
 
 

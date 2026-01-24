@@ -104,7 +104,7 @@ def save_page_images(doc_converter, figures_dir: Path):
             page = doc_converter.document.pages[page_no]
 
             page.image.pil_image.save(
-                figures_dir / f"page_{page_no}.png", "PNG"
+                figures_dir / f"page_{page_no}.png", "PNG",
             )
 
 
@@ -276,7 +276,7 @@ model = ChatOllama(model=MODEL_NAME, base_url="http://localhost:11434")
 llm = ChatOllama(model=LLM_MODEL, base_url="http://localhost:11434")
 
 embeddings = OllamaEmbeddings(
-    model=EMBEDDING_MODEL, base_url="http://localhost:11434"
+    model=EMBEDDING_MODEL, base_url="http://localhost:11434",
 )
 
 sparse_embeddings = FastEmbedSparse(model_name="Qdrant/bm25")
@@ -335,7 +335,7 @@ def ingest_file_in_db(file_path, processed_hashes):
             metadata = base_metadata.copy()
             metadata.update({"page": idx})
             documents.append(
-                Document(page_content=page, metadata=base_metadata)
+                Document(page_content=page, metadata=base_metadata),
             )
 
         vector_store.add_documents(documents)
