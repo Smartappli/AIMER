@@ -1,4 +1,4 @@
-name: Aimer DJLint
+name: AIMER DJLint
 
 on: [push, pull_request]
 

@@ -1,4 +1,5 @@
-name: Mage Coverage
+name: MAGE Coverage
+
 on:
   push:
     branches:
