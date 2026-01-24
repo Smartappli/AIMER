@@ -3,8 +3,6 @@ FROM python:3.13-slim
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1
 
-WORKDIR /app
-
 # Dépendances système (souvent utiles pour wheels)
 RUN apt-get update \
     && apt-get install git -y --no-install-recommends build-essential \
@@ -14,6 +12,8 @@ RUN apt-get update \
 COPY requirements.txt .
 
 RUN pip install --no-cache-dir -r requirements.txt
+
+WORKDIR /app
 
 # Code
 COPY . .
