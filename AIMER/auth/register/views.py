@@ -30,19 +30,26 @@ class RegisterView(AuthView):
         # Check if a user with the same username or email already exists
         if await User.objects.filter(username=username, email=email).aexists():
             await sync_to_async(messages.error)(
-                request, "User already exists, Try logging in.",
+                request,
+                "User already exists, Try logging in.",
             )
             return redirect("register")
         if await User.objects.filter(email=email).aexists():
-            await sync_to_async(messages.error)(request, "Email already exists.")
+            await sync_to_async(messages.error)(
+                request, "Email already exists."
+            )
             return redirect("register")
         if await User.objects.filter(username=username).aexists():
-            await sync_to_async(messages.error)(request, "Username already exists.")
+            await sync_to_async(messages.error)(
+                request, "Username already exists."
+            )
             return redirect("register")
 
         # Create the user and set their password
         created_user = await User.objects.acreate_user(
-            username=username, email=email, password=password,
+            username=username,
+            email=email,
+            password=password,
         )
         created_user.set_password(password)
         await created_user.asave()
@@ -55,7 +62,9 @@ class RegisterView(AuthView):
         token = str(uuid.uuid4())
 
         # Set the token in the user's profile
-        user_profile, created = await Profile.objects.aget_or_create(user=created_user)
+        user_profile, created = await Profile.objects.aget_or_create(
+            user=created_user
+        )
         user_profile.email_token = token
         user_profile.email = email
         await user_profile.asave()
@@ -64,7 +73,8 @@ class RegisterView(AuthView):
 
         if settings.EMAIL_HOST_USER and settings.EMAIL_HOST_PASSWORD:
             await sync_to_async(messages.success)(
-                request, "Verification email sent successfully",
+                request,
+                "Verification email sent successfully",
             )
         else:
             await sync_to_async(messages.error)(

@@ -9,7 +9,11 @@ The init() function will be called in web_project/__init__.py
 class TemplateBootstrapLayoutBlank:
     def init(context):
         context.update(
-            {"layout": "blank", "content_layout": "wide", "display_customizer": False},
+            {
+                "layout": "blank",
+                "content_layout": "wide",
+                "display_customizer": False,
+            },
         )
         # map_context according to updated context values
         TemplateHelper.map_context(context)

@@ -19,7 +19,9 @@ RERANKER_MODEL = ""
 llm = ChatOllama(model=LLM_MODEL, base_url="http://localhost:11434")
 
 # Embeddings
-embeddings = OllamaEmbeddings(model=EMBEDDING_MODEL, base_url="http://localhost:11434")
+embeddings = OllamaEmbeddings(
+    model=EMBEDDING_MODEL, base_url="http://localhost:11434"
+)
 
 # Sparse embeddings
 sparse_embeddings = FastEmbedSparse(model=SPARSE_EMBEDDING_MODEL)
@@ -85,4 +87,6 @@ def hybrid_search(query: str, k: int = 5):
 
         qdrant_filter = Filter(must=condition)
 
-    return vector_store.similarity_search(query=query, k=k, filters=qdrant_filter)
+    return vector_store.similarity_search(
+        query=query, k=k, filters=qdrant_filter
+    )
