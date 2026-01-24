@@ -1,8 +1,10 @@
 # --- Core ----
 django[argon2]==6.0.1
 django-rich==2.2.0
-daphne==4.2.1
 python-dotenv==1.2.1
+
+# --- Server ---
+uvicorn==0.40.0
 
 # --- RAG ----
 docling[vlm]==2.70.0
@@ -24,5 +26,6 @@ pypdf==6.6.0
 qdrant-client==1.16.2
 tqdm==4.67.1
 
+# --- Test ---
 pytest==9.0.2
 coverage==7.13.1

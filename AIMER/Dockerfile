@@ -17,4 +17,4 @@ COPY . ${APP_HOME}
 RUN python manage.py migrate
 
 # gunicorn
-CMD ["gunicorn", "--config", "gunicorn-cfg.py", "config.wsgi"]
+CMD ["uvicorn", "AIMER.asgi.application", "--host", "0.0.0.0", "--port", "9000", "--workers", "4"]
