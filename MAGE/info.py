@@ -34,7 +34,7 @@ def _safe(label: str, fn: Callable[[], T], default: T | str = "N/A") -> T | str:
     """
     try:
         return fn()
-    except Exception as exc:  # noqa: BLE001
+    except Exception as exc:
         return f"{default} ({label}: {type(exc).__name__}: {exc})"
 
 
