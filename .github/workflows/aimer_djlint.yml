@@ -14,9 +14,8 @@ jobs:
       - name: Check out source repository
         uses: actions/checkout@v6
 
-      - uses: astral-sh/setup-uv@v7.2.0
+      - uses: astral-sh/setup-uv@v7
         with:
-          python-version: 3.13
           enable-cache: true
 
       - name: Print the installed version
@@ -26,6 +25,7 @@ jobs:
         run: |
           uv venv
           source .venv/bin/activate
+          uv python install 3.12
           uv add djlint
 
       - name: Run djlint
