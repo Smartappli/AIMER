@@ -12,7 +12,7 @@ def timm_models() -> dict[str, list[str]]:
     """Liste tous les modèles timm, groupés par module.
     Optionnel: limiter via variables d'env pour éviter un test interminable en CI.
       - TIMM_TEST_MODULES="resnet,vit,convnext"
-      - TIMM_TEST_LIMIT_PER_MODULE="20"
+      - TIMM_TEST_LIMIT_PER_MODULE="20".
     """
     modules = list(list_modules())
 

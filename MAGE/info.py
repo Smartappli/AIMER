@@ -11,10 +11,12 @@ from __future__ import annotations
 
 import platform
 import sys
-from collections.abc import Callable
-from typing import TypeVar
+from typing import TYPE_CHECKING, TypeVar
 
 import torch
+
+if TYPE_CHECKING:
+    from collections.abc import Callable
 
 T = TypeVar("T")
 
