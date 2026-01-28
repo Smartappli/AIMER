@@ -22,7 +22,7 @@ langgraph==1.0.7
 langgraph-checkpoint-sqlite==3.0.3
 numpy
 pydantic==2.12.5
-pypdf==6.6.0
+pypdf==6.6.2
 qdrant-client==1.16.2
 tqdm==4.67.1
 
