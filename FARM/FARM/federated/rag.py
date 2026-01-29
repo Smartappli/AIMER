@@ -1,8 +1,9 @@
 from __future__ import annotations
 
 import json
+from collections.abc import Mapping, Sequence
 from dataclasses import dataclass, field
-from typing import Any, Mapping, Sequence
+from typing import Any
 
 import flwr as fl
 import numpy as np
@@ -68,8 +69,8 @@ class RagIndex:
                             text=text,
                             embedding=embedding.tolist(),
                             metadata=metadata,
-                        )
-                    ]
+                        ),
+                    ],
                 )
 
     def to_state(self) -> RagState:

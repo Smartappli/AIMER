@@ -9,7 +9,13 @@ from .runner import (
     start_task_server,
 )
 from .strategies import RagFedAvgStrategy, TaskFedAvgStrategy
-from .tasks import EvaluationResult, TaskDefinition, TaskHandlers, TaskType, TrainingResult
+from .tasks import (
+    EvaluationResult,
+    TaskDefinition,
+    TaskHandlers,
+    TaskType,
+    TrainingResult,
+)
 
 __all__ = [
     "ClientContext",
@@ -23,8 +29,8 @@ __all__ = [
     "RagIndex",
     "RagState",
     "TaskDefinition",
-    "TaskHandlers",
     "TaskFedAvgStrategy",
+    "TaskHandlers",
     "TaskType",
     "TrainingResult",
     "build_rag_client",
