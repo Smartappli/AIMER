@@ -49,7 +49,8 @@ class RagIndex:
             self._texts.append(doc.text)
             self._metadata.append(doc.metadata)
             embedding = np.asarray(doc.embedding, dtype=np.float32).reshape(
-                1, -1,
+                1,
+                -1,
             )
             if embedding.shape[1] != self._embedding_dim:
                 raise ValueError("Embedding dimension mismatch for RAG index")
