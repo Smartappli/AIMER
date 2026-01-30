@@ -47,7 +47,9 @@ class RagFedAvgStrategy(fl.server.strategy.FedAvg):
     def aggregate_fit(
         self,
         server_round: int,
-        results: Sequence[tuple[fl.server.client_proxy.ClientProxy, fl.common.FitRes]],
+        results: Sequence[
+            tuple[fl.server.client_proxy.ClientProxy, fl.common.FitRes]
+        ],
         failures: Sequence[BaseException] | None,
     ) -> tuple[fl.common.Parameters | None, Mapping[str, Any]]:
         for _, fit_res in results:

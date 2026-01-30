@@ -20,11 +20,15 @@ class ClientContext:
 class FederatedTaskClient(fl.client.NumPyClient):
     """Flower NumPyClient backed by a TaskDefinition."""
 
-    def __init__(self, task: TaskDefinition, context: ClientContext | None = None) -> None:
+    def __init__(
+        self, task: TaskDefinition, context: ClientContext | None = None
+    ) -> None:
         self._task = task
         self._context = context or ClientContext(metadata={})
 
-    def get_parameters(self, config: Mapping[str, Any] | None = None) -> list[Any]:
+    def get_parameters(
+        self, config: Mapping[str, Any] | None = None
+    ) -> list[Any]:
         return self._task.handlers.get_parameters(self._task.model)
 
     def fit(
@@ -65,7 +69,9 @@ class RagClient(fl.client.Client):
         self._index = index
         self._document_provider = document_provider
 
-    def get_parameters(self, ins: fl.common.GetParametersIns) -> fl.common.GetParametersRes:
+    def get_parameters(
+        self, ins: fl.common.GetParametersIns
+    ) -> fl.common.GetParametersRes:
         parameters = state_to_parameters(self._index.to_state())
         return fl.common.GetParametersRes(
             status=fl.common.Status(code=fl.common.Code.OK, message="ok"),
