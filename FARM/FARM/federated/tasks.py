@@ -37,7 +37,7 @@ class TaskHandlers(Protocol):
         ...
 
     def set_parameters(
-        self, model: Any, parameters: Sequence[np.ndarray]
+        self, model: Any, parameters: Sequence[np.ndarray],
     ) -> None:
         ...
 
