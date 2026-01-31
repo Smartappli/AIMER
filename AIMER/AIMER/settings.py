@@ -10,8 +10,8 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
 import os
+from collections.abc import Iterable
 from pathlib import Path
-from typing import Iterable
 from urllib.parse import urlsplit
 
 from dotenv import load_dotenv
