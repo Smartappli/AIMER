@@ -24,7 +24,7 @@ numpy
 pydantic==2.12.5
 pypdf==6.6.2
 qdrant-client==1.16.2
-tqdm==4.67.1
+tqdm==4.67.2
 
 # --- Test ---
 pytest==9.0.2
