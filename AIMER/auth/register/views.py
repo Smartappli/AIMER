@@ -27,6 +27,13 @@ class RegisterView(AuthView):
         email = request.POST.get("email")
         password = request.POST.get("password")
 
+        if not (username and email and password):
+            await sync_to_async(messages.error)(
+                request,
+                "Please fill in all required fields.",
+            )
+            return redirect("register")
+
         # Check if a user with the same username or email already exists
         if await User.objects.filter(username=username, email=email).aexists():
             await sync_to_async(messages.error)(
@@ -53,8 +60,6 @@ class RegisterView(AuthView):
             email=email,
             password=password,
         )
-        created_user.set_password(password)
-        await created_user.asave()
 
         # Add the user to the 'client' group (or any other group you want to use as default for new users)
         user_group, created = await Group.objects.aget_or_create(name="client")

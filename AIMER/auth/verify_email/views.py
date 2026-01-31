@@ -35,27 +35,26 @@ class VerifyEmailTokenView(AuthView):
             An HTTP redirect response.
 
         """
-        try:
-            profile = await Profile.objects.filter(email_token=token).afirst()
-            profile.is_verified = True
-            profile.email_token = ""
-            await profile.asave()
-            if not request.user.is_authenticated:
-                # User is not already authenticated
-                # Perform the email verification and any other necessary actions
-                await sync_to_async(messages.success)(
-                    request,
-                    "Email verified successfully",
-                )
-            return redirect("login")
-            # Now, redirect to the login page
-
-        except Profile.DoesNotExist:
+        profile = await Profile.objects.filter(email_token=token).afirst()
+        if not profile:
             await sync_to_async(messages.error)(
                 request,
                 "Invalid token, please try again",
             )
             return redirect("verify-email-page")
+
+        profile.is_verified = True
+        profile.email_token = ""
+        await profile.asave()
+        if not request.user.is_authenticated:
+            # User is not already authenticated
+            # Perform the email verification and any other necessary actions
+            await sync_to_async(messages.success)(
+                request,
+                "Email verified successfully",
+            )
+        return redirect("login")
+        # Now, redirect to the login page
 
 
 class VerifyEmailView(AuthView):
@@ -104,6 +103,12 @@ class SendVerificationView(AuthView):
         if email:
             token = str(uuid.uuid4())
             user_profile = await Profile.objects.filter(email=email).afirst()
+            if not user_profile:
+                await sync_to_async(messages.error)(
+                    request,
+                    "Unable to find a profile for that email.",
+                )
+                return redirect("verify-email-page")
             user_profile.email_token = token
             await user_profile.asave()
             await send_verification_email(email, token)
@@ -134,7 +139,8 @@ class SendVerificationView(AuthView):
 
         """
         if request.user.is_authenticated:
-            email = await sync_to_async(lambda: request.user.profile.email)()
+            profile = await Profile.objects.filter(user=request.user).afirst()
+            email = profile.email if profile else None
 
             if settings.EMAIL_HOST_USER and settings.EMAIL_HOST_PASSWORD:
                 message = await sync_to_async(messages.success)(

@@ -1,7 +1,12 @@
+import logging
+from urllib.parse import urljoin
+
 from asgiref.sync import sync_to_async
 from django.conf import settings
 from django.core.mail import EmailMessage
 from django.urls import reverse
+
+logger = logging.getLogger(__name__)
 
 
 async def send_email(subject, email, message):
@@ -16,17 +21,27 @@ async def send_email(subject, email, message):
         message: Plain-text email body.
 
     Notes:
-        - Errors are caught and printed to stdout. Consider replacing `print`
-          with structured logging in production.
+        - Errors are logged with the module logger to aid diagnostics.
 
     """
+    email_from = getattr(settings, "DEFAULT_FROM_EMAIL", None) or getattr(
+        settings,
+        "EMAIL_HOST_USER",
+        None,
+    )
+    if not email_from:
+        logger.warning("Email sender is not configured; skipping send.")
+        return
+    if not email:
+        logger.warning("No recipient email provided; skipping send.")
+        return
+
+    recipient_list = [email]
+    email_message = EmailMessage(subject, message, email_from, recipient_list)
     try:
-        email_from = settings.EMAIL_HOST_USER
-        recipient_list = [email]
-        email = EmailMessage(subject, message, email_from, recipient_list)
-        await sync_to_async(email.send)()
-    except Exception as e:
-        print(f"Failed to send email: {e}")
+        await sync_to_async(email_message.send)()
+    except Exception:
+        logger.exception("Failed to send email to %s.", email)
 
 
 def get_absolute_url(path):
@@ -40,7 +55,7 @@ def get_absolute_url(path):
         An absolute URL combining `settings.BASE_URL` and the provided path.
 
     """
-    return settings.BASE_URL + path
+    return urljoin(settings.BASE_URL, path)
 
 
 async def send_verification_email(email, token):

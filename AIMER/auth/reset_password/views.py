@@ -2,6 +2,7 @@ from asgiref.sync import sync_to_async
 from django.contrib import messages
 from django.contrib.auth import aauthenticate, alogin
 from django.shortcuts import redirect, render
+from django.utils import timezone
 
 from ..models import Profile
 from ..views import AuthView
@@ -19,9 +20,20 @@ class ResetPasswordView(AuthView):
         return await sync_to_async(super().get)(request)
 
     async def post(self, request, token):
-        try:
-            profile = await Profile.objects.aget(forget_password_token=token)
-        except Profile.DoesNotExist:
+        profile = await Profile.objects.filter(forget_password_token=token).afirst()
+        if not profile:
+            await sync_to_async(messages.error)(
+                request,
+                "Invalid or expired token.",
+            )
+            return redirect("forgot-password")
+
+        if profile.forget_password_token_expires_at and timezone.now() > (
+            profile.forget_password_token_expires_at
+        ):
+            profile.forget_password_token = ""
+            profile.forget_password_token_expires_at = None
+            await profile.asave()
             await sync_to_async(messages.error)(
                 request,
                 "Invalid or expired token.",
@@ -39,7 +51,7 @@ class ResetPasswordView(AuthView):
                 )
                 return await sync_to_async(render)(
                     request,
-                    "reset-password.html",
+                    self.template_name,
                 )
 
             if new_password != confirm_password:
@@ -49,7 +61,7 @@ class ResetPasswordView(AuthView):
                 )
                 return await sync_to_async(render)(
                     request,
-                    "reset-password.html",
+                    self.template_name,
                 )
 
             user = profile.user
@@ -58,6 +70,7 @@ class ResetPasswordView(AuthView):
 
             # Clear the forget_password_token
             profile.forget_password_token = ""
+            profile.forget_password_token_expires_at = None
             await profile.asave()
 
             # Log the user in after a successful password reset

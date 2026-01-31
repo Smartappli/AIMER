@@ -10,7 +10,9 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
 import os
+from collections.abc import Iterable
 from pathlib import Path
+from urllib.parse import urlsplit
 
 from dotenv import load_dotenv
 
@@ -25,15 +27,49 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
+def env_bool(name: str, default: bool = False) -> bool:
+    """Return a boolean from an environment variable."""
+    return os.environ.get(name, str(default)).lower() in {"1", "true", "yes", "on"}
+
+
+def env_list(name: str, default: Iterable[str] | None = None) -> list[str]:
+    """Return a list from a comma-separated environment variable."""
+    if default is None:
+        default = []
+    raw_value = os.environ.get(name)
+    if raw_value is None:
+        return list(default)
+    return [item.strip() for item in raw_value.split(",") if item.strip()]
+
+
+def normalize_csrf_origins(origins: Iterable[str]) -> list[str]:
+    """Normalize CSRF trusted origins to include scheme + host."""
+    normalized: list[str] = []
+    for origin in origins:
+        parsed = urlsplit(origin)
+        if parsed.scheme and parsed.netloc:
+            normalized.append(f"{parsed.scheme}://{parsed.netloc}")
+    return normalized
+
+
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ["SECRET_KEY"]
+SECRET_KEY = os.environ.get("SECRET_KEY")
+if not SECRET_KEY:
+    raise RuntimeError("SECRET_KEY must be set in the environment.")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env_bool("DEBUG", default=False)
 
-ENVIRONMENT = "local"
+ENVIRONMENT = os.environ.get("ENVIRONMENT", "local")
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = env_list(
+    "ALLOWED_HOSTS",
+    default=["localhost", "127.0.0.1", "[::1]"] if DEBUG else [],
+)
+
+CSRF_TRUSTED_ORIGINS = normalize_csrf_origins(
+    env_list("CSRF_TRUSTED_ORIGINS"),
+)
 
 
 # Application definition
@@ -143,6 +179,17 @@ TEST_RUNNER = "django_rich.test.RichRunner"
 STATIC_URL = "static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
 STATICFILES_DIRS = [BASE_DIR / "static"]
+
+# Security settings
+SECURE_HSTS_SECONDS = 3600 if not DEBUG else 0
+SECURE_HSTS_INCLUDE_SUBDOMAINS = not DEBUG
+SECURE_HSTS_PRELOAD = not DEBUG
+SECURE_SSL_REDIRECT = env_bool("SECURE_SSL_REDIRECT", default=not DEBUG)
+SESSION_COOKIE_SECURE = env_bool("SESSION_COOKIE_SECURE", default=not DEBUG)
+CSRF_COOKIE_SECURE = env_bool("CSRF_COOKIE_SECURE", default=not DEBUG)
+SESSION_COOKIE_HTTPONLY = True
+SECURE_CONTENT_TYPE_NOSNIFF = True
+REFERRER_POLICY = "same-origin"
 
 # Template Settings
 # ------------------------------------------------------------------------------
