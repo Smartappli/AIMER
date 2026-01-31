@@ -20,7 +20,9 @@ class ResetPasswordView(AuthView):
         return await sync_to_async(super().get)(request)
 
     async def post(self, request, token):
-        profile = await Profile.objects.filter(forget_password_token=token).afirst()
+        profile = await Profile.objects.filter(
+            forget_password_token=token
+        ).afirst()
         if not profile:
             await sync_to_async(messages.error)(
                 request,
