@@ -3,15 +3,19 @@ from __future__ import annotations
 from types import SimpleNamespace
 from unittest.mock import patch
 
+from django.contrib.auth import get_user_model
+from django.contrib.auth.models import Group, Permission
+from django.contrib.contenttypes.models import ContentType
+from django.http import HttpRequest, HttpResponse
+from django.test import RequestFactory, TestCase
+from django.utils.safestring import SafeString
+
+from AIMER import TemplateLayout
 from AIMER.context_processors import environment, get_cookie, language_code, my_setting
 from AIMER.language_middleware import DefaultLanguageMiddleware
 from AIMER.template_helpers.theme import TemplateHelper
 from AIMER.template_tags import theme as theme_tags
-from django.contrib.auth import get_user_model
-from django.contrib.auth.models import Group, Permission
-from django.http import HttpRequest, HttpResponse
-from django.test import RequestFactory, TestCase
-from django.utils.safestring import SafeString
+
 from templates.layout.bootstrap.layout_blank import TemplateBootstrapLayoutBlank
 from templates.layout.bootstrap.layout_front import TemplateBootstrapLayoutFront
 from templates.layout.bootstrap.layout_horizontal import (
@@ -19,7 +23,6 @@ from templates.layout.bootstrap.layout_horizontal import (
 )
 from templates.layout.bootstrap.layout_vertical import TemplateBootstrapLayoutVertical
 
-from AIMER import TemplateLayout
 from website.views import FrontPagesView
 
 
@@ -120,6 +123,7 @@ class TemplateLayoutTests(TestCase):
     def test_template_layout_respects_rtl_cookie(self) -> None:
         request = RequestFactory().get("/dashboard/")
         request.COOKIES["django_text_direction"] = "rtl"
+
         layout = TemplateLayout()
         layout.request = request
 
@@ -132,8 +136,11 @@ class TemplateLayoutTests(TestCase):
 class FrontPagesViewTests(TestCase):
     def test_front_pages_view_context(self) -> None:
         request = RequestFactory().get("/landing/")
+
         view = FrontPagesView()
         view.request = request
+        view.args = ()
+        view.kwargs = {}
 
         context = view.get_context_data()
 
@@ -158,7 +165,7 @@ class LanguageMiddlewareTests(TestCase):
     def test_middleware_sets_cookie_when_missing(self) -> None:
         request = RequestFactory().get("/")
 
-        def get_response(request: HttpRequest) -> HttpResponse:
+        def get_response(req: HttpRequest) -> HttpResponse:
             return HttpResponse("ok")
 
         middleware = DefaultLanguageMiddleware(get_response)
@@ -173,7 +180,7 @@ class LanguageMiddlewareTests(TestCase):
         request = RequestFactory().get("/")
         request.COOKIES["django_language"] = "en"
 
-        def get_response(request: HttpRequest) -> HttpResponse:
+        def get_response(req: HttpRequest) -> HttpResponse:
             return HttpResponse("ok")
 
         middleware = DefaultLanguageMiddleware(get_response)
@@ -189,6 +196,19 @@ class TemplateTagTests(TestCase):
     def setUp(self) -> None:
         self.factory = RequestFactory()
         self.user_model = get_user_model()
+
+    def _mkuser(self, username: str, **extra_fields):
+        """
+        Crée un user avec un email unique.
+        IMPORTANT: dans ton projet, un signal post_save crée un Profile(email=instance.email)
+        et Profile.email est UNIQUE -> il faut donc un email non vide et unique.
+        """
+        return self.user_model.objects.create_user(
+            username=username,
+            email=f"{username}@example.com",
+            password="x",
+            **extra_fields,
+        )
 
     def test_theme_tags_return_safe_values(self) -> None:
         theme_name = theme_tags.get_theme_variables("template_name")
@@ -213,19 +233,26 @@ class TemplateTagTests(TestCase):
         self.assertIs(theme_tags.filter_by_url(submenu, url), True)
 
     def test_group_and_permission_filters(self) -> None:
-        user = self.user_model.objects.create_user(username="alice")
+        user = self._mkuser("alice")
+
         admin_group = Group.objects.create(name="admin")
         client_group = Group.objects.create(name="client")
         user.groups.add(admin_group)
 
-        permission = Permission.objects.get(codename="add_user")
+        # Permission "add_<user_model>" via ContentType -> robuste si User custom
+        ct = ContentType.objects.get_for_model(self.user_model)
+        add_codename = f"add_{self.user_model._meta.model_name}"
+        permission = Permission.objects.get(content_type=ct, codename=add_codename)
+
         user.user_permissions.add(permission)
-        user = self.user_model.objects.get(pk=user.pk)
+        user.refresh_from_db()
 
         self.assertIs(theme_tags.has_group(user, "admin"), True)
         self.assertIs(theme_tags.is_admin(user), True)
         self.assertIs(theme_tags.is_client(user), False)
-        self.assertIs(theme_tags.has_permission(user, "auth.add_user"), True)
+
+        perm_label = f"{ct.app_label}.{permission.codename}"
+        self.assertIs(theme_tags.has_permission(user, perm_label), True)
 
         user.groups.add(client_group)
         self.assertIs(theme_tags.is_client(user), True)
@@ -234,57 +261,39 @@ class TemplateTagTests(TestCase):
         def view(request: HttpRequest) -> HttpResponse:
             return HttpResponse("ok")
 
-        admin_user = self.user_model.objects.create_user(username="admin")
+        admin_user = self._mkuser("admin")
         admin_user.groups.add(Group.objects.create(name="admin"))
         admin_request = self.factory.get("/")
         admin_request.user = admin_user
 
-        client_user = self.user_model.objects.create_user(username="client")
+        client_user = self._mkuser("client")
         client_user.groups.add(Group.objects.create(name="client"))
         client_request = self.factory.get("/")
         client_request.user = client_user
 
-        staff_user = self.user_model.objects.create_user(
-            username="staff",
-            is_staff=True,
-        )
+        staff_user = self._mkuser("staff", is_staff=True)
         staff_request = self.factory.get("/")
         staff_request.user = staff_user
 
-        super_user = self.user_model.objects.create_user(
-            username="super",
-            is_superuser=True,
-        )
+        super_user = self._mkuser("super", is_superuser=True)
         super_request = self.factory.get("/")
         super_request.user = super_user
 
+        self.assertEqual(theme_tags.admin_required(view)(admin_request).status_code, 200)
         self.assertEqual(
-            theme_tags.admin_required(view)(admin_request).status_code,
-            200,
+            theme_tags.client_required(view)(client_request).status_code, 200
         )
+        self.assertEqual(theme_tags.staff_required(view)(staff_request).status_code, 200)
         self.assertEqual(
-            theme_tags.client_required(view)(client_request).status_code,
-            200,
-        )
-        self.assertEqual(
-            theme_tags.staff_required(view)(staff_request).status_code,
-            200,
-        )
-        self.assertEqual(
-            theme_tags.superuser_required(view)(super_request).status_code,
-            200,
+            theme_tags.superuser_required(view)(super_request).status_code, 200
         )
 
     def test_user_flags_filters(self) -> None:
-        user = self.user_model.objects.create_user(
-            username="flags",
-            is_superuser=True,
-            is_staff=True,
-        )
+        user = self._mkuser("flags", is_superuser=True, is_staff=True)
 
         self.assertIs(theme_tags.is_superuser(user), True)
         self.assertIs(theme_tags.is_staff(user), True)
 
     def test_current_url_tag(self) -> None:
         request = self.factory.get("/test/")
-        self.assertEqual(theme_tags.current_url(request), "http://testserver/test/")
+        self.assertEqual(theme_tags.current_url(request), request.build_absolute_uri())

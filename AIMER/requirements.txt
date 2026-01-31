@@ -2,6 +2,7 @@
 django[argon2]==6.0.1
 django-rich==2.2.0
 python-dotenv==1.2.1
+argon2-cffi==25.1.0
 
 # --- Server ---
 uvicorn==0.40.0
