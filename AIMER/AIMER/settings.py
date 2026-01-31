@@ -27,9 +27,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
+
 def env_bool(name: str, default: bool = False) -> bool:
     """Return a boolean from an environment variable."""
-    return os.environ.get(name, str(default)).lower() in {"1", "true", "yes", "on"}
+    return os.environ.get(name, str(default)).lower() in {
+        "1",
+        "true",
+        "yes",
+        "on",
+    }
 
 
 def env_list(name: str, default: Iterable[str] | None = None) -> list[str]:
