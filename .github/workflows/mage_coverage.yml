@@ -45,18 +45,20 @@ jobs:
           python -m pip install uv
           python -m uv pip install coverage
           python -m uv pip install pytest
+          python -m uv pip install httpx
       - name: Coverage Erase
         run: |
           coverage erase
       - name: Coverage Models
         run: | 
-          coverage run manage.py test --parallel auto MAGE.tests.test_timm
-          coverage combine -a 
-          coverage run manage.py test --parallel auto MAGE.tests.test_torchvision
+          coverage run -m pytest -q MAGE/tests/test_main.py
+          coverage run -m pytest -q MAGE/tests/test_timm.py
+          coverage run -m pytest -q MAGE/tests/test_torchvision.py
+          coverage combine
       - name: Coverage Report
         run: |          
           coverage xml -o coverage.xml
-          coverage report          
+          coverage report -m
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@v7.0.0
         env:
