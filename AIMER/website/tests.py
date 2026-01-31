@@ -3,19 +3,16 @@ from __future__ import annotations
 from types import SimpleNamespace
 from unittest.mock import patch
 
+from AIMER.context_processors import environment, get_cookie, language_code, my_setting
+from AIMER.language_middleware import DefaultLanguageMiddleware
+from AIMER.template_helpers.theme import TemplateHelper
+from AIMER.template_tags import theme as theme_tags
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Group, Permission
 from django.contrib.contenttypes.models import ContentType
 from django.http import HttpRequest, HttpResponse
 from django.test import RequestFactory, TestCase
 from django.utils.safestring import SafeString
-
-from AIMER import TemplateLayout
-from AIMER.context_processors import environment, get_cookie, language_code, my_setting
-from AIMER.language_middleware import DefaultLanguageMiddleware
-from AIMER.template_helpers.theme import TemplateHelper
-from AIMER.template_tags import theme as theme_tags
-
 from templates.layout.bootstrap.layout_blank import TemplateBootstrapLayoutBlank
 from templates.layout.bootstrap.layout_front import TemplateBootstrapLayoutFront
 from templates.layout.bootstrap.layout_horizontal import (
@@ -23,6 +20,7 @@ from templates.layout.bootstrap.layout_horizontal import (
 )
 from templates.layout.bootstrap.layout_vertical import TemplateBootstrapLayoutVertical
 
+from AIMER import TemplateLayout
 from website.views import FrontPagesView
 
 
@@ -198,8 +196,7 @@ class TemplateTagTests(TestCase):
         self.user_model = get_user_model()
 
     def _mkuser(self, username: str, **extra_fields):
-        """
-        Crée un user avec un email unique.
+        """Crée un user avec un email unique.
         IMPORTANT: dans ton projet, un signal post_save crée un Profile(email=instance.email)
         et Profile.email est UNIQUE -> il faut donc un email non vide et unique.
         """
@@ -281,11 +278,11 @@ class TemplateTagTests(TestCase):
 
         self.assertEqual(theme_tags.admin_required(view)(admin_request).status_code, 200)
         self.assertEqual(
-            theme_tags.client_required(view)(client_request).status_code, 200
+            theme_tags.client_required(view)(client_request).status_code, 200,
         )
         self.assertEqual(theme_tags.staff_required(view)(staff_request).status_code, 200)
         self.assertEqual(
-            theme_tags.superuser_required(view)(super_request).status_code, 200
+            theme_tags.superuser_required(view)(super_request).status_code, 200,
         )
 
     def test_user_flags_filters(self) -> None:
