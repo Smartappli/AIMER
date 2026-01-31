@@ -6,7 +6,6 @@ from types import ModuleType
 import pytest
 from fastapi.testclient import TestClient
 
-
 # ---------- Fakes injected BEFORE importing main.py ----------
 
 class FakeTimm(ModuleType):
@@ -72,10 +71,9 @@ def import_module_from_path(module_name: str, file_path: Path):
     return mod
 
 
-@pytest.fixture()
+@pytest.fixture
 def app_module(monkeypatch):
-    """
-    Import MAGE/api/main.py with timm and fastmcp mocked.
+    """Import MAGE/api/main.py with timm and fastmcp mocked.
     """
     # Fake timm
     monkeypatch.setitem(sys.modules, "timm", FakeTimm())
@@ -96,7 +94,7 @@ def app_module(monkeypatch):
     return import_module_from_path("mage_api_main_under_test", main_py)
 
 
-@pytest.fixture()
+@pytest.fixture
 def client(app_module):
     return TestClient(app_module.app)
 
