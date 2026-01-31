@@ -8,6 +8,7 @@ from fastapi.testclient import TestClient
 
 # ---------- Fakes injected BEFORE importing main.py ----------
 
+
 class FakeTimm(ModuleType):
     def __init__(self):
         super().__init__("timm")
@@ -73,8 +74,7 @@ def import_module_from_path(module_name: str, file_path: Path):
 
 @pytest.fixture
 def app_module(monkeypatch):
-    """Import MAGE/api/main.py with timm and fastmcp mocked.
-    """
+    """Import MAGE/api/main.py with timm and fastmcp mocked."""
     # Fake timm
     monkeypatch.setitem(sys.modules, "timm", FakeTimm())
 
@@ -100,6 +100,7 @@ def client(app_module):
 
 
 # ---------- Tests ----------
+
 
 def test_root_healthcheck(client):
     r = client.get("/")
@@ -181,7 +182,12 @@ def test_libraries_missing_packages_return_none(client, monkeypatch):
     real_import = __import__
 
     def fake_import(name, *args, **kwargs):
-        if name in {"keras", "tensorflow", "segmentation_models_pytorch", "torch"}:
+        if name in {
+            "keras",
+            "tensorflow",
+            "segmentation_models_pytorch",
+            "torch",
+        }:
             raise ImportError("not installed")
         return real_import(name, *args, **kwargs)
 
