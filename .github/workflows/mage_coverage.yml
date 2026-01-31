@@ -56,9 +56,9 @@ jobs:
           coverage run -m pytest -q MAGE/tests/test_torchvision.py
           coverage combine
       - name: Coverage Report
-        run: |          
-          coverage xml -o coverage.xml
+        run: |    
           coverage report -m
+          coverage xml -o coverage.xml
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@v7.0.0
         env:
