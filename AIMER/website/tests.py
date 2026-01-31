@@ -3,7 +3,12 @@ from __future__ import annotations
 from types import SimpleNamespace
 from unittest.mock import patch
 
-from AIMER.context_processors import environment, get_cookie, language_code, my_setting
+from AIMER.context_processors import (
+    environment,
+    get_cookie,
+    language_code,
+    my_setting,
+)
 from AIMER.language_middleware import DefaultLanguageMiddleware
 from AIMER.template_helpers.theme import TemplateHelper
 from AIMER.template_tags import theme as theme_tags
@@ -17,7 +22,9 @@ from templates.layout.bootstrap.layout_front import TemplateBootstrapLayoutFront
 from templates.layout.bootstrap.layout_horizontal import (
     TemplateBootstrapLayoutHorizontal,
 )
-from templates.layout.bootstrap.layout_vertical import TemplateBootstrapLayoutVertical
+from templates.layout.bootstrap.layout_vertical import (
+    TemplateBootstrapLayoutVertical,
+)
 
 from AIMER import TemplateLayout
 from website.views import FrontPagesView
@@ -76,7 +83,9 @@ class TemplateHelperTests(TestCase):
 
         self.assertEqual(context["header_type_class"], "")
         self.assertEqual(context["navbar_type_class"], "layout-navbar-hidden")
-        self.assertEqual(context["menu_collapsed_class"], "layout-menu-collapsed")
+        self.assertEqual(
+            context["menu_collapsed_class"], "layout-menu-collapsed"
+        )
         self.assertEqual(context["menu_fixed_class"], "layout-menu-fixed")
         self.assertEqual(context["rtl_mode_value"], "rtl")
         self.assertEqual(context["display_customizer_class"], "")
@@ -287,4 +296,6 @@ class TemplateTagTests(TestCase):
 
     def test_current_url_tag(self) -> None:
         request = self.factory.get("/test/")
-        self.assertEqual(theme_tags.current_url(request), "http://testserver/test/")
+        self.assertEqual(
+            theme_tags.current_url(request), "http://testserver/test/"
+        )
