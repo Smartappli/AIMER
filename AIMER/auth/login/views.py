@@ -64,7 +64,11 @@ class LoginView(AuthView):
                 next_url = request.POST.get("next", "")
                 if next_url and url_has_allowed_host_and_scheme(
                     url=next_url,
-                    allowed_hosts=getattr(settings, "ALLOWED_HOSTS", []),
+                    allowed_hosts={
+                        request.get_host(),
+                        *getattr(settings, "ALLOWED_HOSTS", []),
+                    },
+                    require_https=not settings.DEBUG,
                 ):
                     return redirect(next_url)
                 # Redirect to the home page or another appropriate page
