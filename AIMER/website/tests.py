@@ -218,9 +218,9 @@ class TemplateTagTests(TestCase):
         client_group = Group.objects.create(name="client")
         user.groups.add(admin_group)
 
-        permission = Permission.objects.filter(codename="add_user").first()
-        if permission is not None:
-            user.user_permissions.add(permission)
+        permission = Permission.objects.get(codename="add_user")
+        user.user_permissions.add(permission)
+        user = self.user_model.objects.get(pk=user.pk)
 
         self.assertIs(theme_tags.has_group(user, "admin"), True)
         self.assertIs(theme_tags.is_admin(user), True)
