@@ -52,6 +52,11 @@ def normalize_csrf_origins(origins: Iterable[str]) -> list[str]:
     return normalized
 
 
+def csp_sources(defaults: Iterable[str], env_name: str) -> list[str]:
+    """Return CSP sources with optional additions from environment."""
+    return [*defaults, *env_list(env_name)]
+
+
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get("SECRET_KEY")
 if not SECRET_KEY:
@@ -190,6 +195,24 @@ CSRF_COOKIE_SECURE = env_bool("CSRF_COOKIE_SECURE", default=not DEBUG)
 SESSION_COOKIE_HTTPONLY = True
 SECURE_CONTENT_TYPE_NOSNIFF = True
 REFERRER_POLICY = "same-origin"
+CONTENT_SECURITY_POLICY = {
+    "default-src": csp_sources(["'self'"], "CSP_DEFAULT_SRC"),
+    "script-src": csp_sources(["'self'"], "CSP_SCRIPT_SRC"),
+    "style-src": csp_sources(
+        ["'self'", "'unsafe-inline'"] if DEBUG else ["'self'"],
+        "CSP_STYLE_SRC",
+    ),
+    "img-src": csp_sources(["'self'", "data:"], "CSP_IMG_SRC"),
+    "font-src": csp_sources(["'self'", "data:"], "CSP_FONT_SRC"),
+    "connect-src": csp_sources(["'self'"], "CSP_CONNECT_SRC"),
+    "frame-ancestors": csp_sources(["'none'"], "CSP_FRAME_ANCESTORS"),
+    "base-uri": csp_sources(["'self'"], "CSP_BASE_URI"),
+    "form-action": csp_sources(["'self'"], "CSP_FORM_ACTION"),
+}
+CSP_REPORT_ONLY = env_bool("CSP_REPORT_ONLY", default=DEBUG)
+CONTENT_SECURITY_POLICY_REPORT_ONLY = (
+    CONTENT_SECURITY_POLICY if CSP_REPORT_ONLY else None
+)
 
 # Template Settings
 # ------------------------------------------------------------------------------
