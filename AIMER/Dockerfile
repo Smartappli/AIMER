@@ -1,17 +1,19 @@
 FROM python:3.13-slim
 
 ARG APP_HOME=/app
-WORKDIR ${APP_HOME}
 
 # set environment variables
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
+# Copy requirement files
 COPY requirements.txt .
 
 # install python dependencies
 RUN pip install --upgrade pip && pip install --no-cache-dir -r requirements.txt
 
+# Files copy
+WORKDIR ${APP_HOME}
 COPY . ${APP_HOME}
 
 # running migrations
