@@ -14,7 +14,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  docker-mage:
+  build-docker-aimer:
     runs-on: ubuntu-latest
     steps:
       - name: Free Disk Space (Ubuntu)
