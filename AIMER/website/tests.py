@@ -85,7 +85,8 @@ class TemplateHelperTests(TestCase):
         self.assertEqual(context["header_type_class"], "")
         self.assertEqual(context["navbar_type_class"], "layout-navbar-hidden")
         self.assertEqual(
-            context["menu_collapsed_class"], "layout-menu-collapsed",
+            context["menu_collapsed_class"],
+            "layout-menu-collapsed",
         )
         self.assertEqual(context["menu_fixed_class"], "layout-menu-fixed")
         self.assertEqual(context["rtl_mode_value"], "rtl")
@@ -249,7 +250,8 @@ class TemplateTagTests(TestCase):
         ct = ContentType.objects.get_for_model(self.user_model)
         add_codename = f"add_{self.user_model._meta.model_name}"
         permission = Permission.objects.get(
-            content_type=ct, codename=add_codename,
+            content_type=ct,
+            codename=add_codename,
         )
 
         user.user_permissions.add(permission)
@@ -288,14 +290,16 @@ class TemplateTagTests(TestCase):
         super_request.user = super_user
 
         self.assertEqual(
-            theme_tags.admin_required(view)(admin_request).status_code, 200,
+            theme_tags.admin_required(view)(admin_request).status_code,
+            200,
         )
         self.assertEqual(
             theme_tags.client_required(view)(client_request).status_code,
             200,
         )
         self.assertEqual(
-            theme_tags.staff_required(view)(staff_request).status_code, 200,
+            theme_tags.staff_required(view)(staff_request).status_code,
+            200,
         )
         self.assertEqual(
             theme_tags.superuser_required(view)(super_request).status_code,
@@ -311,5 +315,6 @@ class TemplateTagTests(TestCase):
     def test_current_url_tag(self) -> None:
         request = self.factory.get("/test/")
         self.assertEqual(
-            theme_tags.current_url(request), request.build_absolute_uri(),
+            theme_tags.current_url(request),
+            request.build_absolute_uri(),
         )
