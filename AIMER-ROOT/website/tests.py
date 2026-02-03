@@ -3,6 +3,7 @@ from __future__ import annotations
 from types import SimpleNamespace
 from unittest.mock import patch
 
+from AIMER import TemplateLayout
 from AIMER.context_processors import (
     environment,
     get_cookie,
@@ -27,7 +28,6 @@ from templates.layout.bootstrap.layout_vertical import (
     TemplateBootstrapLayoutVertical,
 )
 
-from AIMER import TemplateLayout
 from website.views import FrontPagesView
 
 
