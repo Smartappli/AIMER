@@ -3,7 +3,7 @@ name = "aimer"
 version = "0.1.0"
 requires-python = ">=3.13"
 dependencies = [
-    "django[argon2]==6.0.1",
+    "django[argon2]==6.0.2",
     "django-rich==2.2.0",
     "python-dotenv==1.2.1",
     "argon2-cffi==25.1.0",
@@ -13,7 +13,7 @@ dependencies = [
     "transformers==4.57.6",
     "huggingface-hub",
     "hf-xet",
-    "langchain-core==1.2.7",
+    "langchain-core==1.2.8",
     "langchain-community==0.4.1",
     "langchain-qdrant==1.1.0",
     "langchain-docling==2.0.0",
@@ -26,5 +26,5 @@ dependencies = [
     "qdrant-client==1.16.2",
     "tqdm==4.67.2",
     "pytest==9.0.2",
-    "coverage==7.13.2",
+    "coverage==7.13.3",
 ]
