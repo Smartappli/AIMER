@@ -24,7 +24,7 @@ dependencies = [
     "pydantic==2.12.5",
     "pypdf==6.6.2",
     "qdrant-client==1.16.2",
-    "tqdm==4.67.2",
+    "tqdm==4.67.3",
     "pytest==9.0.2",
     "coverage==7.13.2",
 ]
