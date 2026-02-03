@@ -30,9 +30,10 @@ jobs:
         cache: 'pip'
     - name: Get explicit and transitive dependencies
       run: |
+        cd AIMER
         python -m pip install --upgrade pip
         python -m pip install uv
-        python -m uv pip install -r AIMER/requirements.txt
+        python -m uv sync --active
         python -m uv pip freeze > requirements-all.txt
     - name: Check python
       id: license_check_report

@@ -120,8 +120,9 @@ jobs:
 
       - name: install
         run: |
-          python -m pip install --upgrade pip
-          python -m pip install -r AIMER/requirements.txt
+          cd AIMER
+          pythm -m pip install uv
+          uv sync --active
 
       - uses: pypa/gh-action-pip-audit@v1.1.0
         with:

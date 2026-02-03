@@ -43,7 +43,7 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           python -m pip install uv
-          python -m uv pip install -r MAGE/requirements.txt
+          python -m uv sync --active
           python -m uv pip install -r MAGE/requirements-test.txt
       - name: Coverage Erase
         run: |
