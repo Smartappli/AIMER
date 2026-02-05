@@ -13,7 +13,7 @@ dependencies = [
     "transformers==4.57.6",
     "huggingface-hub",
     "hf-xet",
-    "langchain-core==1.2.8",
+    "langchain-core==1.2.9",
     "langchain-community==0.4.1",
     "langchain-qdrant==1.1.0",
     "langchain-docling==2.0.0",
