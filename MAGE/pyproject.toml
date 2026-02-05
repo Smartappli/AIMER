@@ -3,8 +3,8 @@ name = "mage"
 version = "0.1.0"
 requires-python = ">=3.13"
 dependencies = [
-    "fastapi[standard-no-fastapi-cloud-cli]==0.128.0",
-    "fastmcp==2.14.4",
+    "fastapi[standard-no-fastapi-cloud-cli]==0.128.1",
+    "fastmcp==2.14.5",
     "keras==3.13.2",
     "segmentation-models-pytorch==0.5.0",
     "tensorflow>=2.20.0 ; sys_platform == 'darwin'",
@@ -12,6 +12,6 @@ dependencies = [
     "timm==1.0.24",
     "torch==2.10.0",
     "torchvision==0.25.0",
-    "tqdm==4.67.2",
+    "tqdm==4.67.3",
     "uvicorn[standard]==0.40.0",
 ]
