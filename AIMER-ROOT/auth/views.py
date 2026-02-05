@@ -10,10 +10,9 @@ layout by setting:
 See `auth/urls.py` for the routes that use this view or its subclasses.
 """
 
+from AIMER import TemplateLayout
 from AIMER.template_helpers.theme import TemplateHelper
 from django.views.generic import TemplateView
-
-from AIMER import TemplateLayout
 
 
 class AuthView(TemplateView):
