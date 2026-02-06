@@ -51,7 +51,7 @@ jobs:
           coverage erase
       - name: Coverage Models
         run: | 
-          coverage run -m pytest -q MAGE/tests/test_main.py
+          coverage run -m pytest -q tests/test_main.py
           coverage run -m pytest -q MAGE/tests/test_timm.py
           coverage run -m pytest -q MAGE/tests/test_torchvision.py
           coverage combine
