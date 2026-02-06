@@ -45,7 +45,7 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install uv
           python -m uv sync --active
-          python -m uv pip install -r MAGE/requirements-test.txt
+          python -m uv pip install -r requirements-test.txt
       - name: Coverage Erase
         run: |
           coverage erase
