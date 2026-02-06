@@ -44,14 +44,14 @@ jobs:
           cd MAGE
           python -m pip install --upgrade pip
           python -m pip install uv
-          python -m uv sync --active
+          python -m uv sync
           python -m uv pip install -r requirements-test.txt
       - name: Coverage Erase
         run: |
           coverage erase
       - name: Coverage Models
         run: | 
-          coverage run -m pytest -q tests/test_main.py
+          coverage run -m pytest -q MAGE/tests/test_main.py
           coverage run -m pytest -q MAGE/tests/test_timm.py
           coverage run -m pytest -q MAGE/tests/test_torchvision.py
           coverage combine
