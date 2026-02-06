@@ -9,7 +9,8 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
 
 # Déps Python
-COPY  uv.lock .
+COPY uv.lock .
+COPY pyproject.toml .
 
 RUN pip install --no-cache-dir uv \
     && uv sync --active
