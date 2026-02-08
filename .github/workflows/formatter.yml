@@ -28,7 +28,7 @@ jobs:
         uses: rickstaa/action-black@v1
         id: action_black
         with:
-          black_args: ". --line-length 80 -t py312"
+          black_args: ". --line-length 80 -t py313"
 
       - name: Create Pull Request
         if: steps.action_black.outputs.is_formatted == 'true' && (github.event_name == 'push' || github.event.pull_request.head.repo.full_name == github.repository)
