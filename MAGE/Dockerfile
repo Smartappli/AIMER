@@ -24,4 +24,4 @@ COPY . .
 EXPOSE 8000
 
 # module:variable ASGI
-CMD ["uvicorn", "api.main:app", "--host", "0.0.0.0", "--port", "8000", "--workers", "4"]
+CMD ["uvicorn", "api.main:app", "--host", "0.0.0.0", "--port", "10000", "--workers", "4"]

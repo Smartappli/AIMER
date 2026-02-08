@@ -20,4 +20,4 @@ COPY . ${APP_HOME}
 RUN python manage.py migrate
 
 # gunicorn
-CMD ["uvicorn", "AIMER.asgi.application", "--host", "0.0.0.0", "--port", "8000", "--workers", "4"]
+CMD ["uvicorn", "FARM.asgi.application", "--host", "0.0.0.0", "--port", "9000", "--workers", "4"]
