@@ -3,7 +3,7 @@ name = "mage"
 version = "0.1.0"
 requires-python = ">=3.13"
 dependencies = [
-    "fastapi[standard-no-fastapi-cloud-cli]==0.128.5",
+    "fastapi[standard-no-fastapi-cloud-cli]==0.128.6",
     "fastmcp==2.14.5",
     "keras==3.13.2",
     "segmentation-models-pytorch==0.5.0",
