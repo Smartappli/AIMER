@@ -66,7 +66,7 @@ requires-dist = [
     { name = "hf-xet" },
     { name = "huggingface-hub" },
     { name = "langchain-community", specifier = "==0.4.1" },
-    { name = "langchain-core", specifier = "==1.2.9" },
+    { name = "langchain-core", specifier = "==1.2.10" },
     { name = "langchain-docling", specifier = "==2.0.0" },
     { name = "langchain-ollama", specifier = "==1.0.1" },
     { name = "langchain-qdrant", specifier = "==1.1.0" },
@@ -1279,7 +1279,7 @@ wheels = [
 
 [[package]]
 name = "langchain-core"
-version = "1.2.9"
+version = "1.2.10"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "jsonpatch" },
@@ -1291,9 +1291,9 @@ dependencies = [
     { name = "typing-extensions" },
     { name = "uuid-utils" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/a6/85/f501592b5d76b27a198f1102bafe365151a0a6f69444122fad6d10e6f4bf/langchain_core-1.2.9.tar.gz", hash = "sha256:a3768febc762307241d153b0f8bc58fd4b70c0ff077fda3274606741fca3f5a7", size = 815900, upload-time = "2026-02-05T14:21:43.942Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/ae/60/5dfd49eb4143a3ba72fb93607a71109e56bc92c7144f97eeae103a118e80/langchain_core-1.2.10.tar.gz", hash = "sha256:8c1fa1515b4bf59bf61ff0ff5813dd2b91d4ca1b8bf2ee31c5536364fa4699ae", size = 826391, upload-time = "2026-02-10T14:48:31.679Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/94/46/77846a98913e444d0d564070a9056bd999daada52bd099dc1e8812272810/langchain_core-1.2.9-py3-none-any.whl", hash = "sha256:7e5ecba5ed7a65852e8d5288e9ceeba05340fa9baf32baf672818b497bbaea8f", size = 496296, upload-time = "2026-02-05T14:21:42.816Z" },
+    { url = "https://files.pythonhosted.org/packages/ed/1b/e27c9d03ae431d7b47d2b3289285473d3e724f17c13c0e2409ec158b91e4/langchain_core-1.2.10-py3-none-any.whl", hash = "sha256:fa327dd6a8a596e73a402ec3fa48ea5c4a5f5ac898e983063d1b70b4fddcdf8e", size = 496673, upload-time = "2026-02-10T14:48:29.388Z" },
 ]
 
 [[package]]
