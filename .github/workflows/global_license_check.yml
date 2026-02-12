@@ -30,7 +30,7 @@ jobs:
         cache: 'pip'
     - name: Get explicit and transitive dependencies
       run: |
-        cd AIMER
+        cd AIMER-ROOT
         python -m pip install --upgrade pip
         python -m pip install uv
         python -m uv sync --active
