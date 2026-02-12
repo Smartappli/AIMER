@@ -120,7 +120,7 @@ jobs:
 
       - name: install
         run: |
-          cd AIMER
+          cd AIMER-ROOT
           pythm -m pip install uv
           uv sync --active
 
