@@ -121,7 +121,7 @@ jobs:
       - name: install
         run: |
           cd AIMER-ROOT
-          pythm -m pip install uv
+          python -m pip install uv
           uv sync --active
 
       - uses: pypa/gh-action-pip-audit@v1.1.0
