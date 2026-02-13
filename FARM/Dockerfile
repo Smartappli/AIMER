@@ -7,14 +7,14 @@ ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
 # Copy requirement files
-COPY ./pyproject.toml ./uv.lock ./
+COPY ./FARM/pyproject.toml ./FARM/uv.lock ./
 
 # install python dependencies
-RUN pip install --upgrade pip && pip install --no-cache-dir -r requirements.txt
+RUN pip install --upgrade pip && pip install uv && uv sync --active
 
 # Files copy
 WORKDIR ${APP_HOME}
-COPY . ${APP_HOME}
+COPY ./FARM/ ${APP_HOME}
 
 # running migrations
 RUN python manage.py migrate

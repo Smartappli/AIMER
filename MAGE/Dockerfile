@@ -9,16 +9,14 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
 
 # Déps Python
-COPY uv.lock .
-COPY pyproject.toml .
+COPY ./MAGE/pyproject.toml ./MAGE/uv.lock ./
 
-RUN pip install --no-cache-dir uv \
-    && uv sync --active
+RUN pip install --upgrade pip && pip install uv && uv sync --active
 
 WORKDIR /app
 
 # Code
-COPY . .
+COPY ./MAGE/ .
 
 # Port FastAPI
 EXPOSE 8000

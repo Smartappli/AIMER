@@ -14,7 +14,7 @@ RUN pip install --upgrade pip && pip install uv && uv sync --active
 
 # Files copy
 WORKDIR ${APP_HOME}
-COPY . ${APP_HOME}
+COPY ./AIMER-ROOT/ ${APP_HOME}
 
 # running migrations
 RUN python manage.py migrate
