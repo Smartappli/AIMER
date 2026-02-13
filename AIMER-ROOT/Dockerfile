@@ -18,8 +18,11 @@ RUN uv sync --frozen
 
 COPY ./AIMER-ROOT/ ${APP_HOME}
 
-# running migrations
-RUN SECRET_KEY=${SECRET_KEY_BUILD} uv run python manage.py migrate
+# entrypoint
+COPY ./AIMER-ROOT/entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+ENTRYPOINT ["/entrypoint.sh"]
 
 # gunicorn
 CMD ["uv", "run", "uvicorn", "AIMER.asgi.application", "--host", "0.0.0.0", "--port", "8000", "--workers", "4"]
