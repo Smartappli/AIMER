@@ -7,7 +7,7 @@ ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
 # Copy requirement files
-COPY ./pyproject.toml ./uv.lock ./
+COPY ./AIMER-ROOT/pyproject.toml ./AIMER-ROOT/uv.lock ./
 
 # install python dependencies
 RUN pip install --upgrade pip && pip install uv && uv sync --active
