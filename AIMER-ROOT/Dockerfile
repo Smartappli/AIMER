@@ -7,10 +7,10 @@ ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
 # Copy requirement files
-COPY requirements.txt .
+COPY ./pyproject.toml ./uv.lock ./
 
 # install python dependencies
-RUN pip install --upgrade pip && pip install --no-cache-dir -r requirements.txt
+RUN pip install --upgrade pip && pip install uv && uv sync --active
 
 # Files copy
 WORKDIR ${APP_HOME}
