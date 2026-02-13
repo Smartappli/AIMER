@@ -7,7 +7,7 @@ ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
 # Copy requirement files
-COPY requirements.txt .
+COPY ./pyproject.toml ./uv.lock ./
 
 # install python dependencies
 RUN pip install --upgrade pip && pip install --no-cache-dir -r requirements.txt
