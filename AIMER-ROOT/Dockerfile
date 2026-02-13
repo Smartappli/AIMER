@@ -1,23 +1,24 @@
 FROM python:3.13-slim
 
 ARG APP_HOME=/app
+WORKDIR ${APP_HOME}
 
 # set environment variables
-ENV PYTHONDONTWRITEBYTECODE=1
-ENV PYTHONUNBUFFERED=1
-
-# Copy requirement files
-COPY ./AIMER-ROOT/pyproject.toml ./AIMER-ROOT/uv.lock ./
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1
 
 # install python dependencies
-RUN pip install --upgrade pip && pip install uv && uv sync --active
+RUN pip install --upgrade pip && pip install uv
 
 # Files copy
-WORKDIR ${APP_HOME}
+COPY ./AIMER-ROOT/pyproject.toml ./AIMER-ROOT/uv.lock ./
+
+RUN uv sync --frozen
+
 COPY ./AIMER-ROOT/ ${APP_HOME}
 
 # running migrations
-RUN python manage.py migrate
+RUN uv run python manage.py migrate
 
 # gunicorn
-CMD ["uvicorn", "AIMER.asgi.application", "--host", "0.0.0.0", "--port", "8000", "--workers", "4"]
+CMD ["uv", "run", "uvicorn", "AIMER.asgi.application", "--host", "0.0.0.0", "--port", "8000", "--workers", "4"]
