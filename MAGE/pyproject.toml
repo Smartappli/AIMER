@@ -3,15 +3,23 @@ name = "mage"
 version = "0.1.0"
 requires-python = ">=3.13"
 dependencies = [
-    "fastapi[standard-no-fastapi-cloud-cli]==0.129.0",
-    "fastmcp==2.14.5",
-    "keras==3.13.2",
-    "segmentation-models-pytorch==0.5.0",
-    "tensorflow>=2.20.0 ; sys_platform == 'darwin' or sys_platform == 'linux'",
-    "tensorflow-cpu>=2.20.0 ; sys_platform != 'darwin' and sys_platform == 'linux'",
-    "timm==1.0.24",
-    "torch==2.10.0",
-    "torchvision==0.25.0",
-    "tqdm==4.67.3",
-    "uvicorn[standard]==0.40.0",
+  "fastapi[standard-no-fastapi-cloud-cli]==0.129.0",
+  "fastmcp==2.14.5",
+  "keras==3.13.2",
+  "segmentation-models-pytorch==0.5.0",
+
+  # macOS (Intel + Apple Silicon)
+  "tensorflow>=2.20.0 ; sys_platform == 'darwin'",
+
+  # Linux ARM64 (aarch64)
+  "tensorflow>=2.20.0 ; sys_platform == 'linux' and platform_machine == 'aarch64'",
+
+  # Linux x86_64
+  "tensorflow-cpu>=2.20.0 ; sys_platform == 'linux' and platform_machine == 'x86_64'",
+
+  "timm==1.0.24",
+  "torch==2.10.0",
+  "torchvision==0.25.0",
+  "tqdm==4.67.3",
+  "uvicorn[standard]==0.40.0",
 ]
