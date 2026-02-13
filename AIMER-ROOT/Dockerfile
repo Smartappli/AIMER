@@ -1,7 +1,6 @@
 FROM python:3.13-slim
 
 ARG APP_HOME=/app
-ARG SECRET_KEY_BUILD=build-only-not-for-prod
 WORKDIR ${APP_HOME}
 
 # set environment variables
