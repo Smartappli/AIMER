@@ -22,7 +22,7 @@ dependencies = [
     "langgraph-checkpoint-sqlite==3.0.3",
     "numpy",
     "pydantic==2.12.5",
-    "pypdf==6.7.0",
+    "pypdf==6.7.1",
     "qdrant-client==1.16.2",
     "tqdm==4.67.3",
     "pytest==9.0.2",
