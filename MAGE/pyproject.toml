@@ -17,7 +17,7 @@ dependencies = [
   # Linux x86_64
   "tensorflow-cpu>=2.20.0 ; sys_platform == 'linux' and platform_machine == 'x86_64'",
 
-  "timm==1.0.24",
+  "timm==1.0.25",
   "torch==2.10.0",
   "torchvision==0.25.0",
   "tqdm==4.67.3",
