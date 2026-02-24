@@ -8,7 +8,7 @@ dependencies = [
     "python-dotenv==1.2.1",
     "argon2-cffi==25.1.0",
     "uvicorn==0.41.0",
-    "docling[vlm]==2.74.0",
+    "docling[vlm]==2.75.0",
     "fastembed==0.7.4",
     "transformers==4.57.6",
     "huggingface-hub",
