@@ -18,7 +18,7 @@ dependencies = [
     "langchain-qdrant==1.1.0",
     "langchain-docling==2.0.0",
     "langchain-ollama==1.0.1",
-    "langgraph==1.0.9",
+    "langgraph==1.0.10",
     "langgraph-checkpoint-sqlite==3.0.3",
     "numpy",
     "pydantic==2.12.5",
