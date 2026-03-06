@@ -61,7 +61,7 @@ requires-dist = [
     { name = "coverage", specifier = "==7.13.4" },
     { name = "django", extras = ["argon2"], specifier = "==6.0.3" },
     { name = "django-rich", specifier = "==2.2.0" },
-    { name = "docling", extras = ["vlm"], specifier = "==2.76.0" },
+    { name = "docling", extras = ["vlm"], specifier = "==2.77.0" },
     { name = "fastembed", specifier = "==0.7.4" },
     { name = "hf-xet" },
     { name = "huggingface-hub" },
@@ -648,7 +648,7 @@ wheels = [
 
 [[package]]
 name = "docling"
-version = "2.76.0"
+version = "2.77.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "accelerate" },
@@ -681,9 +681,9 @@ dependencies = [
     { name = "tqdm" },
     { name = "typer" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/25/d0/c63c9e39ff832cc51636cc085e6c069a07b1cd0c8d3621d4591d38e1c0d9/docling-2.76.0.tar.gz", hash = "sha256:c942ecbf3254c63d6853edc6cc439ce3ca4f71e469983272b579cf9a197e9356", size = 368671, upload-time = "2026-03-02T14:44:25.656Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/5e/2c/5fd1ff2666c3e7a75f9bfa058056be10c3495d57c16a9a4fd60b91b47ba8/docling-2.77.0.tar.gz", hash = "sha256:d410e9a4f457951f9da43a2ed2e6103747d60494f5e75ac64c54038d57ef903d", size = 372156, upload-time = "2026-03-06T13:46:44.234Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/e0/b5/ca589bcfc8c1bff2efb19144bc9a1693531ad3267a079187142393965597/docling-2.76.0-py3-none-any.whl", hash = "sha256:b3c4f15ce80b43744c214fa9d6415c728b060a99077803c00567fda7f84f3f20", size = 397384, upload-time = "2026-03-02T14:44:24.028Z" },
+    { url = "https://files.pythonhosted.org/packages/6b/08/0330d839d618b79188f8087551662dfbb8efd6fbfd5d33a2511138d98df0/docling-2.77.0-py3-none-any.whl", hash = "sha256:e6f7df5fbd878a47e9c6ce4d1746aada8c4d674c5342345c8992bd19bd07a9ac", size = 400712, upload-time = "2026-03-06T13:46:42.377Z" },
 ]
 
 [package.optional-dependencies]
