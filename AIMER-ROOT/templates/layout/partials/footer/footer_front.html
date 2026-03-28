@@ -4,7 +4,9 @@
     <div class="footer-top position-relative overflow-hidden z-1">
         <img src="{% static 'img/front-pages/backgrounds/footer-bg.png' %}"
              alt="footer bg"
-             class="footer-bg banner-bg-img z-n1" />
+             class="footer-bg banner-bg-img z-n1"
+             width="1920"
+             height="240" />
         <div class="container">
             <div class="row gx-0 gy-6 g-lg-10">
                 <div class="col-lg-5">
@@ -71,13 +73,23 @@
                 </div>
                 <div class="col-lg-3 col-md-4">
                     <h6 class="footer-title mb-6">Download our app</h6>
-                    <a href="javascript:void(0);" class="d-block mb-4">
+                    <a href="{% get_theme_variables 'apple_store_url' %}"
+                       class="d-block mb-4"
+                       target="_blank"
+                       rel="noopener">
                         <img src="{% static 'img/front-pages/landing-page/apple-icon.png' %}"
-                             alt="apple icon" />
+                             alt="apple icon"
+                             width="135"
+                             height="40" />
                     </a>
-                    <a href="javascript:void(0);" class="d-block">
+                    <a href="{% get_theme_variables 'google_play_url' %}"
+                       class="d-block"
+                       target="_blank"
+                       rel="noopener">
                         <img src="{% static 'img/front-pages/landing-page/google-play-icon.png' %}"
-                             alt="google play icon" />
+                             alt="google play icon"
+                             width="135"
+                             height="40" />
                     </a>
                 </div>
             </div>

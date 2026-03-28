@@ -53,7 +53,7 @@
                         <a class="nav-link fw-medium" href="{% url 'index' %}#landingContact">Contact us</a>
                     </li>
                     <li class="nav-item mega-dropdown {% if '/front/pricing/' in active_url or '/front/payment/' in active_url or '/front/checkout/' in active_url or '/front/help_center/' in active_url %}active{% endif %}">
-                        <a href="javascript:void(0);"
+                        <a href="#"
                            class="nav-link dropdown-toggle navbar-ex-14-mega-dropdown mega-dropdown fw-medium"
                            aria-expanded="false"
                            data-bs-toggle="mega-dropdown"
@@ -75,7 +75,7 @@
                     <li class="nav-item dropdown-style-switcher dropdown me-2 me-xl-0">
                         <a class="nav-link dropdown-toggle hide-arrow"
                            id="nav-theme"
-                           href="javascript:void(0);"
+                           href="#"
                            data-bs-toggle="dropdown">
                             <i class="icon-base bx bx-sun icon-lg theme-icon-active"></i>
                             <span class="d-none ms-2" id="nav-theme-text">Toggle theme</span>
@@ -114,32 +114,44 @@
                 {% if request.user.is_authenticated %}
                     <li class="nav-item navbar-dropdown dropdown-user dropdown">
                         <a class="nav-link dropdown-toggle hide-arrow p-0"
-                           href="javascript:void(0);"
+                           href="#"
                            data-bs-toggle="dropdown">
                             <div class="avatar avatar-online">
                                 <!-- Moke condition for displaying user avatar -->
                                 {% if request.user|has_group:"admin" %}
-                                    <img src="{% static 'img/avatars/1.png' %}" alt class="rounded-circle">
+                                    <img src="{% static 'img/avatars/1.png' %}"
+                                         alt="Admin avatar"
+                                         class="rounded-circle"
+                                         width="40"
+                                         height="40">
                                 {% else %}
-                                    <img src="{% static 'img/avatars/3.png' %}" alt class="rounded-circle">
+                                    <img src="{% static 'img/avatars/3.png' %}"
+                                         alt="User avatar"
+                                         class="rounded-circle"
+                                         width="40"
+                                         height="40">
                                 {% endif %}
                             </div>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
                             <li>
-                                <a class="dropdown-item" href="javascript:void(0);">
+                                <a class="dropdown-item" href="{% url 'index' %}">
                                     <div class="d-flex">
                                         <div class="flex-shrink-0 me-3">
                                             <div class="avatar avatar-online">
                                                 <!-- Moke condition for displaying user avatar -->
                                                 {% if request.user|has_group:"admin" %}
                                                     <img src="{% static 'img/avatars/1.png' %}"
-                                                         alt
-                                                         class="w-px-40 h-auto rounded-circle">
+                                                         alt="Admin avatar"
+                                                         class="w-px-40 h-auto rounded-circle"
+                                                         width="40"
+                                                         height="40">
                                                 {% else %}
                                                     <img src="{% static 'img/avatars/3.png' %}"
-                                                         alt
-                                                         class="w-px-40 h-auto rounded-circle">
+                                                         alt="User avatar"
+                                                         class="w-px-40 h-auto rounded-circle"
+                                                         width="40"
+                                                         height="40">
                                                 {% endif %}
                                             </div>
                                         </div>
@@ -156,19 +168,19 @@
                                 {% if request.user.is_authenticated and request.user.profile.is_verified %}
                                     <span class="dropdown-item d-flex justify-content-between align-content-center">
                                         <span>
-                                            <i class='icon-base icon-md me-3 bx bxs-user-circle'></i>
+                                            <i class="icon-base icon-md me-3 bx bxs-user-circle"></i>
                                             <span class="align-middle">Verified</span>
                                         </span>
-                                        <span class="text-success"><i class='icon-base icon-md bx bxs-circle'></i></span>
+                                        <span class="text-success"><i class="icon-base icon-md bx bxs-circle"></i></span>
                                     </span>
                                 {% else %}
                                     <a class="dropdown-item d-flex justify-content-between align-content-center"
                                        href="{% url 'verify-email-page' %}">
                                         <span>
-                                            <i class='icon-base icon-md me-3 bx bxs-user-circle'></i>
+                                            <i class="icon-base icon-md me-3 bx bxs-user-circle"></i>
                                             <span class="align-middle">Not Verified</span>
                                         </span>
-                                        <span class="text-danger"><i class='icon-base icon-md bx bxs-circle'></i></span>
+                                        <span class="text-danger"><i class="icon-base icon-md bx bxs-circle"></i></span>
                                     </a>
                                 {% endif %}
                             </li>
