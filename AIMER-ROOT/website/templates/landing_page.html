@@ -27,13 +27,12 @@
 <script src="{% static 'js/front-page-landing.js' %}"></script>
 {% endblock page_js %}
 
-
 {% block content %}
 <div data-bs-spy="scroll" class="scrollspy-example">
   <!-- Hero: Start -->
   <section id="hero-animation">
     <div id="landingHero" class="section-py landing-hero position-relative">
-      <img src="{% static 'img/front-pages/backgrounds/hero-bg.png' %}" alt="hero background" class="position-absolute top-0 start-50 translate-middle-x object-fit-cover w-100 h-100" data-speed="1" />
+      <img src="{% static 'img/front-pages/backgrounds/hero-bg.png' %}" alt="hero background" class="position-absolute top-0 start-50 translate-middle-x object-fit-cover w-100 h-100" data-speed="1" width="1720" height="1270" />
       <div class="container">
         <div class="hero-text-box text-center position-relative">
           <h1 class="text-primary hero-title display-6 fw-extrabold">One dashboard to manage all your businesses</h1>
@@ -42,15 +41,15 @@
             for Reliability and Customizability.
           </h2>
           <div class="landing-hero-btn d-inline-block position-relative">
-            <span class="hero-btn-item position-absolute d-none d-md-flex fw-medium">Join community <img src="{% static 'img/front-pages/icons/Join-community-arrow.png' %}" alt="Join community arrow" class="scaleX-n1-rtl" /></span>
+            <span class="hero-btn-item position-absolute d-none d-md-flex fw-medium">Join community <img src="{% static 'img/front-pages/icons/Join-community-arrow.png' %}" alt="Join community arrow" class="scaleX-n1-rtl" width="60" height="42" /></span>
             <a href="{% url 'index' %}#landingPricing" class="btn btn-primary btn-lg">Get early access</a>
           </div>
         </div>
         <div id="heroDashboardAnimation" class="hero-animation-img">
           <a href="" target="_blank">
             <div id="heroAnimationImg" class="position-relative hero-dashboard-img">
-              <img src="{% static 'img/front-pages/landing-page/hero-dashboard-' %}{{ COOKIES.theme|default:theme }}.png" alt="hero dashboard" class="animation-img" data-app-light-img="front-pages/landing-page/hero-dashboard-light.png" data-app-dark-img="front-pages/landing-page/hero-dashboard-dark.png" />
-              <img src="{% static 'img/front-pages/landing-page/hero-elements-' %}{{ COOKIES.theme|default:theme }}.png" alt="hero elements" class="position-absolute hero-elements-img animation-img top-0 start-0" data-app-light-img="front-pages/landing-page/hero-elements-light.png" data-app-dark-img="front-pages/landing-page/hero-elements-dark.png" />
+              <img src="{% static 'img/front-pages/landing-page/hero-dashboard-' %}{{ COOKIES.theme|default:theme }}.png" alt="hero dashboard" class="animation-img" data-app-light-img="front-pages/landing-page/hero-dashboard-light.png" data-app-dark-img="front-pages/landing-page/hero-dashboard-dark.png" width="1140" height="695" />
+              <img src="{% static 'img/front-pages/landing-page/hero-elements-' %}{{ COOKIES.theme|default:theme }}.png" alt="hero elements" class="position-absolute hero-elements-img animation-img top-0 start-0" data-app-light-img="front-pages/landing-page/hero-elements-light.png" data-app-dark-img="front-pages/landing-page/hero-elements-dark.png" width="1140" height="717" />
             </div>
           </a>
         </div>
@@ -68,7 +67,7 @@
       </div>
       <h4 class="text-center mb-1">
         <span class="position-relative fw-extrabold z-1">Everything you need
-          <img src="{% static 'img/front-pages/icons/section-title-icon.png' %}" alt="laptop charging" class="section-title-img position-absolute object-fit-contain bottom-0 z-n1" />
+          <img src="{% static 'img/front-pages/icons/section-title-icon.png' %}" alt="laptop charging" class="section-title-img position-absolute object-fit-contain bottom-0 z-n1" width="303" height="13" />
         </span>
         to start your next project
       </h4>
@@ -150,7 +149,7 @@
           </div>
           <h4 class="mb-1">
             <span class="position-relative fw-extrabold z-1">What people say
-              <img src="{% static 'img/front-pages/icons/section-title-icon.png' %}" alt="laptop charging" class="section-title-img position-absolute object-fit-contain bottom-0 z-n1" />
+              <img src="{% static 'img/front-pages/icons/section-title-icon.png' %}" alt="laptop charging" class="section-title-img position-absolute object-fit-contain bottom-0 z-n1" width="303" height="13" />
             </span>
           </h4>
           <p class="mb-5 mb-md-12">
@@ -174,7 +173,7 @@
                   <div class="card h-100">
                     <div class="card-body text-body d-flex flex-column justify-content-between h-100">
                       <div class="mb-4">
-                        <img src="{% static 'img/front-pages/branding/logo-1.png' %}" alt="client logo" class="client-logo img-fluid" />
+                        <img src="{% static 'img/front-pages/branding/logo-1.png' %}" alt="client logo" class="client-logo img-fluid" width="180" height="56" />
                       </div>
                       <p>“Vuexy is hands down the most useful front end Bootstrap theme I've ever used. I can't wait to use it again for my next project.”</p>
                       <div class="text-warning mb-4">
@@ -186,7 +185,7 @@
                       </div>
                       <div class="d-flex align-items-center">
                         <div class="avatar me-3 avatar-sm">
-                          <img src="{% static 'img/avatars/1.png' %}" alt="Avatar" class="rounded-circle" />
+                          <img src="{% static 'img/avatars/1.png' %}" alt="Avatar" class="rounded-circle" width="200" height="200" />
                         </div>
                         <div>
                           <h6 class="mb-0">Cecilia Payne</h6>
@@ -200,7 +199,7 @@
                   <div class="card h-100">
                     <div class="card-body text-body d-flex flex-column justify-content-between h-100">
                       <div class="mb-4">
-                        <img src="{% static 'img/front-pages/branding/logo-2.png' %}" alt="client logo" class="client-logo img-fluid" />
+                        <img src="{% static 'img/front-pages/branding/logo-2.png' %}" alt="client logo" class="client-logo img-fluid" width="151" height="45" />
                       </div>
                       <p>“I've never used a theme as versatile and flexible as Vuexy. It's my go to for building dashboard sites on almost any project.”</p>
                       <div class="text-warning mb-4">
@@ -212,7 +211,7 @@
                       </div>
                       <div class="d-flex align-items-center">
                         <div class="avatar me-3 avatar-sm">
-                          <img src="{% static 'img/avatars/2.png' %}" alt="Avatar" class="rounded-circle" />
+                          <img src="{% static 'img/avatars/2.png' %}" alt="Avatar" class="rounded-circle" width="200" height="200" />
                         </div>
                         <div>
                           <h6 class="mb-0">Eugenia Moore</h6>
@@ -226,7 +225,7 @@
                   <div class="card h-100">
                     <div class="card-body text-body d-flex flex-column justify-content-between h-100">
                       <div class="mb-4">
-                        <img src="{% static 'img/front-pages/branding/logo-3.png' %}" alt="client logo" class="client-logo img-fluid" />
+                        <img src="{% static 'img/front-pages/branding/logo-3.png' %}" alt="client logo" class="client-logo img-fluid" width="182" height="44" />
                       </div>
                       <p>This template is really clean & well documented. The docs are really easy to understand and it's always easy to find a screenshot from their website.</p>
                       <div class="text-warning mb-4">
@@ -238,7 +237,7 @@
                       </div>
                       <div class="d-flex align-items-center">
                         <div class="avatar me-3 avatar-sm">
-                          <img src="{% static 'img/avatars/3.png' %}" alt="Avatar" class="rounded-circle" />
+                          <img src="{% static 'img/avatars/3.png' %}" alt="Avatar" class="rounded-circle" width="201" height="200" />
                         </div>
                         <div>
                           <h6 class="mb-0">Curtis Fletcher</h6>
@@ -252,7 +251,7 @@
                   <div class="card h-100">
                     <div class="card-body text-body d-flex flex-column justify-content-between h-100">
                       <div class="mb-4">
-                        <img src="{% static 'img/front-pages/branding/logo-4.png' %}" alt="client logo" class="client-logo img-fluid" />
+                        <img src="{% static 'img/front-pages/branding/logo-4.png' %}" alt="client logo" class="client-logo img-fluid" width="166" height="46" />
                       </div>
                       <p>All the requirements for developers have been taken into consideration, so I’m able to build any interface I want.</p>
                       <div class="text-warning mb-4">
@@ -264,7 +263,7 @@
                       </div>
                       <div class="d-flex align-items-center">
                         <div class="avatar me-3 avatar-sm">
-                          <img src="{% static 'img/avatars/4.png' %}" alt="Avatar" class="rounded-circle" />
+                          <img src="{% static 'img/avatars/4.png' %}" alt="Avatar" class="rounded-circle" width="200" height="200" />
                         </div>
                         <div>
                           <h6 class="mb-0">Sara Smith</h6>
@@ -278,7 +277,7 @@
                   <div class="card h-100">
                     <div class="card-body text-body d-flex flex-column justify-content-between h-100">
                       <div class="mb-4">
-                        <img src="{% static 'img/front-pages/branding/logo-5.png' %}" alt="client logo" class="client-logo img-fluid" />
+                        <img src="{% static 'img/front-pages/branding/logo-5.png' %}" alt="client logo" class="client-logo img-fluid" width="187" height="42" />
                       </div>
                       <p>“I've never used a theme as versatile and flexible as Vuexy. It's my go to for building dashboard sites on almost any project.”</p>
                       <div class="text-warning mb-4">
@@ -290,7 +289,7 @@
                       </div>
                       <div class="d-flex align-items-center">
                         <div class="avatar me-3 avatar-sm">
-                          <img src="{% static 'img/avatars/5.png' %}" alt="Avatar" class="rounded-circle" />
+                          <img src="{% static 'img/avatars/5.png' %}" alt="Avatar" class="rounded-circle" width="200" height="200" />
                         </div>
                         <div>
                           <h6 class="mb-0">Eugenia Moore</h6>
@@ -304,7 +303,7 @@
                   <div class="card h-100">
                     <div class="card-body text-body d-flex flex-column justify-content-between h-100">
                       <div class="mb-4">
-                        <img src="{% static 'img/front-pages/branding/logo-6.png' %}" alt="client logo" class="client-logo img-fluid" />
+                        <img src="{% static 'img/front-pages/branding/logo-6.png' %}" alt="client logo" class="client-logo img-fluid" width="193" height="50" />
                       </div>
                       <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam nemo mollitia, ad eum officia numquam nostrum repellendus consequuntur!</p>
                       <div class="text-warning mb-4">
@@ -316,7 +315,7 @@
                       </div>
                       <div class="d-flex align-items-center">
                         <div class="avatar me-3 avatar-sm">
-                          <img src="{% static 'img/avatars/1.png' %}" alt="Avatar" class="rounded-circle" />
+                          <img src="{% static 'img/avatars/1.png' %}" alt="Avatar" class="rounded-circle" width="200" height="200" />
                         </div>
                         <div>
                           <h6 class="mb-0">Sara Smith</h6>
@@ -342,19 +341,19 @@
         <div class="swiper" id="swiper-clients-logos">
           <div class="swiper-wrapper">
             <div class="swiper-slide">
-              <img src="{% static 'img/front-pages/branding/logo_1-' %}{{ COOKIES.theme|default:theme }}.png" alt="client logo" class="client-logo" data-app-light-img="front-pages/branding/logo_1-light.png" data-app-dark-img="front-pages/branding/logo_1-dark.png" />
+              <img src="{% static 'img/front-pages/branding/logo_1-' %}{{ COOKIES.theme|default:theme }}.png" alt="client logo" class="client-logo" data-app-light-img="front-pages/branding/logo_1-light.png" data-app-dark-img="front-pages/branding/logo_1-dark.png" width="107" height="39" />
             </div>
             <div class="swiper-slide">
-              <img src="{% static 'img/front-pages/branding/logo_2-' %}{{ COOKIES.theme|default:theme }}.png" alt="client logo" class="client-logo" data-app-light-img="front-pages/branding/logo_2-light.png" data-app-dark-img="front-pages/branding/logo_2-dark.png" />
+              <img src="{% static 'img/front-pages/branding/logo_2-' %}{{ COOKIES.theme|default:theme }}.png" alt="client logo" class="client-logo" data-app-light-img="front-pages/branding/logo_2-light.png" data-app-dark-img="front-pages/branding/logo_2-dark.png" width="107" height="39" />
             </div>
             <div class="swiper-slide">
-              <img src="{% static 'img/front-pages/branding/logo_3-' %}{{ COOKIES.theme|default:theme }}.png" alt="client logo" class="client-logo" data-app-light-img="front-pages/branding/logo_3-light.png" data-app-dark-img="front-pages/branding/logo_3-dark.png" />
+              <img src="{% static 'img/front-pages/branding/logo_3-' %}{{ COOKIES.theme|default:theme }}.png" alt="client logo" class="client-logo" data-app-light-img="front-pages/branding/logo_3-light.png" data-app-dark-img="front-pages/branding/logo_3-dark.png" width="106" height="39" />
             </div>
             <div class="swiper-slide">
-              <img src="{% static 'img/front-pages/branding/logo_4-' %}{{ COOKIES.theme|default:theme }}.png" alt="client logo" class="client-logo" data-app-light-img="front-pages/branding/logo_4-light.png" data-app-dark-img="front-pages/branding/logo_4-dark.png" />
+              <img src="{% static 'img/front-pages/branding/logo_4-' %}{{ COOKIES.theme|default:theme }}.png" alt="client logo" class="client-logo" data-app-light-img="front-pages/branding/logo_4-light.png" data-app-dark-img="front-pages/branding/logo_4-dark.png" width="107" height="39" />
             </div>
             <div class="swiper-slide">
-              <img src="{% static 'img/front-pages/branding/logo_5-' %}{{ COOKIES.theme|default:theme }}.png" alt="client logo" class="client-logo" data-app-light-img="front-pages/branding/logo_5-light.png" data-app-dark-img="front-pages/branding/logo_5-dark.png" />
+              <img src="{% static 'img/front-pages/branding/logo_5-' %}{{ COOKIES.theme|default:theme }}.png" alt="client logo" class="client-logo" data-app-light-img="front-pages/branding/logo_5-light.png" data-app-dark-img="front-pages/branding/logo_5-dark.png" width="107" height="39" />
             </div>
           </div>
         </div>
@@ -372,7 +371,7 @@
       </div>
       <h4 class="text-center mb-1">
         <span class="position-relative fw-extrabold z-1">Supported
-          <img src="{% static 'img/front-pages/icons/section-title-icon.png' %}" alt="laptop charging" class="section-title-img position-absolute object-fit-contain bottom-0 z-n1" />
+          <img src="{% static 'img/front-pages/icons/section-title-icon.png' %}" alt="laptop charging" class="section-title-img position-absolute object-fit-contain bottom-0 z-n1" width="303" height="13" />
         </span>
         by Real People
       </h4>
@@ -381,7 +380,7 @@
         <div class="col-lg-3 col-sm-6">
           <div class="card mt-3 mt-lg-0 shadow-none">
             <div class="bg-label-primary border border-bottom-0 border-primary-subtle position-relative team-image-box">
-              <img src="{% static 'img/front-pages/landing-page/team-member-1.png' %}" class="position-absolute card-img-position bottom-0 start-50" alt="human image" />
+              <img src="{% static 'img/front-pages/landing-page/team-member-1.png' %}" class="position-absolute card-img-position bottom-0 start-50" alt="human image" width="220" height="240" />
             </div>
             <div class="card-body border border-top-0 border-primary-subtle text-center py-5">
               <h5 class="card-title mb-0">Sophie Gilbert</h5>
@@ -392,7 +391,7 @@
         <div class="col-lg-3 col-sm-6">
           <div class="card mt-3 mt-lg-0 shadow-none">
             <div class="bg-label-info border border-bottom-0 border-info-subtle position-relative team-image-box">
-              <img src="{% static 'img/front-pages/landing-page/team-member-2.png' %}" class="position-absolute card-img-position bottom-0 start-50" alt="human image" />
+              <img src="{% static 'img/front-pages/landing-page/team-member-2.png' %}" class="position-absolute card-img-position bottom-0 start-50" alt="human image" width="188" height="240" />
             </div>
             <div class="card-body border border-top-0 border-info-subtle text-center py-5">
               <h5 class="card-title mb-0">Paul Miles</h5>
@@ -403,7 +402,7 @@
         <div class="col-lg-3 col-sm-6">
           <div class="card mt-3 mt-lg-0 shadow-none">
             <div class="bg-label-danger border border-bottom-0 border-danger-subtle position-relative team-image-box">
-              <img src="{% static 'img/front-pages/landing-page/team-member-3.png' %}" class="position-absolute card-img-position bottom-0 start-50" alt="human image" />
+              <img src="{% static 'img/front-pages/landing-page/team-member-3.png' %}" class="position-absolute card-img-position bottom-0 start-50" alt="human image" width="189" height="240" />
             </div>
             <div class="card-body border border-top-0 border-danger-subtle text-center py-5">
               <h5 class="card-title mb-0">Nannie Ford</h5>
@@ -414,7 +413,7 @@
         <div class="col-lg-3 col-sm-6">
           <div class="card mt-3 mt-lg-0 shadow-none">
             <div class="bg-label-success border border-bottom-0 border-success-subtle position-relative team-image-box">
-              <img src="{% static 'img/front-pages/landing-page/team-member-4.png' %}" class="position-absolute card-img-position bottom-0 start-50" alt="human image" />
+              <img src="{% static 'img/front-pages/landing-page/team-member-4.png' %}" class="position-absolute card-img-position bottom-0 start-50" alt="human image" width="174" height="240" />
             </div>
             <div class="card-body border border-top-0 border-success-subtle text-center py-5">
               <h5 class="card-title mb-0">Chris Watkins</h5>
@@ -435,7 +434,7 @@
       </div>
       <h4 class="text-center mb-1">
         <span class="position-relative fw-extrabold z-1">Tailored pricing plans
-          <img src="{% static 'img/front-pages/icons/section-title-icon.png' %}" alt="laptop charging" class="section-title-img position-absolute object-fit-contain bottom-0 z-n1" />
+          <img src="{% static 'img/front-pages/icons/section-title-icon.png' %}" alt="laptop charging" class="section-title-img position-absolute object-fit-contain bottom-0 z-n1" width="303" height="13" />
         </span>
         designed for you
       </h4>
@@ -452,7 +451,7 @@
             <span class="switch-label fs-6 text-body ms-3">Pay Annual</span>
           </label>
           <div class="pricing-plans-item position-absolute d-flex">
-            <img src="{% static 'img/front-pages/icons/pricing-plans-arrow.png' %}" alt="pricing plans arrow" class="scaleX-n1-rtl" />
+            <img src="{% static 'img/front-pages/icons/pricing-plans-arrow.png' %}" alt="pricing plans arrow" class="scaleX-n1-rtl" width="51" height="53" />
             <span class="fw-medium mt-2 ms-1"> Save 25%</span>
           </div>
         </div>
@@ -463,7 +462,7 @@
           <div class="card">
             <div class="card-header">
               <div class="text-center">
-                <img src="{% static 'img/front-pages/icons/paper-airplane.png' %}" alt="paper airplane icon" class="mb-8 pb-2" />
+                <img src="{% static 'img/front-pages/icons/paper-airplane.png' %}" alt="paper airplane icon" class="mb-8 pb-2" width="88" height="89" />
                 <h4 class="mb-0">Basic</h4>
                 <div class="d-flex align-items-center justify-content-center">
                   <span class="price-monthly h2 text-primary fw-extrabold mb-0">$19</span>
@@ -533,7 +532,7 @@
           <div class="card border border-primary shadow-xl">
             <div class="card-header">
               <div class="text-center">
-                <img src="{% static 'img/front-pages/icons/plane.png' %}" alt="plane icon" class="mb-8 pb-2" />
+                <img src="{% static 'img/front-pages/icons/plane.png' %}" alt="plane icon" class="mb-8 pb-2" width="92" height="89" />
                 <h4 class="mb-0">Team</h4>
                 <div class="d-flex align-items-center justify-content-center">
                   <span class="price-monthly h2 text-primary fw-extrabold mb-0">$29</span>
@@ -603,7 +602,7 @@
           <div class="card">
             <div class="card-header">
               <div class="text-center">
-                <img src="{% static 'img/front-pages/icons/shuttle-rocket.png' %}" alt="shuttle rocket icon" class="mb-8 pb-2" />
+                <img src="{% static 'img/front-pages/icons/shuttle-rocket.png' %}" alt="shuttle rocket icon" class="mb-8 pb-2" width="90" height="89" />
                 <h4 class="mb-0">Enterprise</h4>
                 <div class="d-flex align-items-center justify-content-center">
                   <span class="price-monthly h2 text-primary fw-extrabold mb-0">$49</span>
@@ -761,14 +760,14 @@
       <h4 class="text-center mb-1">
         Frequently asked
         <span class="position-relative fw-extrabold z-1">questions
-          <img src="{% static 'img/front-pages/icons/section-title-icon.png' %}" alt="laptop charging" class="section-title-img position-absolute object-fit-contain bottom-0 z-n1" />
+          <img src="{% static 'img/front-pages/icons/section-title-icon.png' %}" alt="laptop charging" class="section-title-img position-absolute object-fit-contain bottom-0 z-n1" width="303" height="13" />
         </span>
       </h4>
       <p class="text-center mb-12 pb-md-4">Browse through these FAQs to find answers to commonly asked questions.</p>
       <div class="row gy-12 align-items-center">
         <div class="col-lg-5">
           <div class="text-center">
-            <img src="{% static 'img/front-pages/landing-page/faq-boy-with-logos.png' %}" alt="faq boy with logos" class="faq-image" />
+            <img src="{% static 'img/front-pages/landing-page/faq-boy-with-logos.png' %}" alt="faq boy with logos" class="faq-image" width="660" height="601" />
           </div>
         </div>
         <div class="col-lg-7">
@@ -823,7 +822,7 @@
 
   <!-- CTA: Start -->
   <section id="landingCTA" class="section-py landing-cta position-relative p-lg-0 pb-0">
-    <img src="{% static 'img/front-pages/backgrounds/cta-bg-' %}{{ COOKIES.theme|default:theme }}.png" class="position-absolute bottom-0 end-0 scaleX-n1-rtl h-100 w-100 z-n1" alt="cta image" data-app-light-img="front-pages/backgrounds/cta-bg-light.png" data-app-dark-img="front-pages/backgrounds/cta-bg-dark.png" />
+    <img src="{% static 'img/front-pages/backgrounds/cta-bg-' %}{{ COOKIES.theme|default:theme }}.png" class="position-absolute bottom-0 end-0 scaleX-n1-rtl h-100 w-100 z-n1" alt="cta image" data-app-light-img="front-pages/backgrounds/cta-bg-light.png" data-app-dark-img="front-pages/backgrounds/cta-bg-dark.png" width="2880" height="603" />
     <div class="container">
       <div class="row align-items-center gy-12">
         <div class="col-lg-6 text-start text-sm-center text-lg-start">
@@ -832,7 +831,7 @@
           <a href="" class="btn btn-lg btn-primary">Get Started</a>
         </div>
         <div class="col-lg-6 pt-lg-12 text-center text-lg-end">
-          <img src="{% static 'img/front-pages/landing-page/cta-dashboard.png' %}" alt="cta dashboard" class="img-fluid mt-lg-4" />
+          <img src="{% static 'img/front-pages/landing-page/cta-dashboard.png' %}" alt="cta dashboard" class="img-fluid mt-lg-4" width="455" height="239" />
         </div>
       </div>
     </div>
@@ -847,7 +846,7 @@
       </div>
       <h4 class="text-center mb-1">
         <span class="position-relative fw-extrabold z-1">Let's work
-          <img src="{% static 'img/front-pages/icons/section-title-icon.png' %}" alt="laptop charging" class="section-title-img position-absolute object-fit-contain bottom-0 z-n1" />
+          <img src="{% static 'img/front-pages/icons/section-title-icon.png' %}" alt="laptop charging" class="section-title-img position-absolute object-fit-contain bottom-0 z-n1" width="303" height="13" />
         </span>
         together
       </h4>
@@ -855,8 +854,8 @@
       <div class="row g-6">
         <div class="col-lg-5">
           <div class="contact-img-box position-relative border p-2 h-100">
-            <img src="{% static 'img/front-pages/icons/contact-border.png' %}" alt="contact border" class="contact-border-img position-absolute d-none d-lg-block scaleX-n1-rtl" />
-            <img src="{% static 'img/front-pages/landing-page/contact-customer-service.png' %}" alt="contact customer service" class="contact-img w-100 scaleX-n1-rtl" />
+            <img src="{% static 'img/front-pages/icons/contact-border.png' %}" alt="contact border" class="contact-border-img position-absolute d-none d-lg-block scaleX-n1-rtl" width="191" height="159" />
+            <img src="{% static 'img/front-pages/landing-page/contact-customer-service.png' %}" alt="contact customer service" class="contact-img w-100 scaleX-n1-rtl" width="869" height="751" />
             <div class="p-4 pb-2">
               <div class="row g-4">
                 <div class="col-md-6 col-lg-12 col-xl-6">
