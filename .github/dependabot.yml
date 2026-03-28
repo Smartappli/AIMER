@@ -6,14 +6,65 @@ updates:
       interval: "daily"
     labels:
       - "🤖 Dependencies"
+
   - package-ecosystem: "pip"
     directory: "/"
     schedule:
       interval: "daily"
     labels:
       - "🤖 Dependencies"
+
+  - package-ecosystem: "pip"
+    directory: "/AIMER-ROOT"
+    schedule:
+      interval: "daily"
+    labels:
+      - "🤖 Dependencies"
+
+  - package-ecosystem: "pip"
+    directory: "/MAGE"
+    schedule:
+      interval: "daily"
+    labels:
+      - "🤖 Dependencies"
+
+  - package-ecosystem: "pip"
+    directory: "/FARM"
+    schedule:
+      interval: "daily"
+    labels:
+      - "🤖 Dependencies"
+
   - package-ecosystem: "docker"
     directory: "/"
+    schedule:
+      interval: "daily"
+    labels:
+      - "🤖 Dependencies"
+
+  - package-ecosystem: "docker"
+    directory: "/AIMER-ROOT"
+    schedule:
+      interval: "daily"
+    labels:
+      - "🤖 Dependencies"
+
+  - package-ecosystem: "docker"
+    directory: "/MAGE"
+    schedule:
+      interval: "daily"
+    labels:
+      - "🤖 Dependencies"
+
+  - package-ecosystem: "docker"
+    directory: "/MAGE/backend"
+    schedule:
+      interval: "daily"
+    labels:
+      - "🤖 Dependencies"
+
+  - package-ecosystem: "docker"
+    directory: "/FARM"
     schedule:
       interval: "daily"
     labels:
