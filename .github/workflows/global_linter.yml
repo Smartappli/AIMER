@@ -1,60 +1,130 @@
-name: Global Linter
+name: Global Linter & Detailed Analysis
 
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - master
+      - work
+  pull_request:
+  workflow_dispatch:
+  schedule:
+    - cron: '15 2 * * 1'
 
 concurrency:
   group: global-linter-${{ github.event_name == 'pull_request' && format('{0}-{1}', github.workflow, github.event.pull_request.number) || github.workflow_ref }}
   cancel-in-progress: true
 
+permissions:
+  contents: read
+
 jobs:
-  ruff-lint:
-    name: Ruff Linter
+  ruff-gate:
+    name: Ruff Gate (blocking)
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - name: Checkout code
+        uses: actions/checkout@v6
 
-      - uses: astral-sh/setup-uv@v7.6.0
+      - name: Setup uv
+        uses: astral-sh/setup-uv@v7
         with:
           enable-cache: true
-
-      - name: Print the installed version
-        run: echo "Installed uv version is ${{ steps.setup-uv.outputs.uv-version }}"
 
       - name: Install Python 3.13
         run: uv python install 3.13
 
-      - uses: astral-sh/ruff-action@v3
-        with:
-          args: 'check --select ASYNC,C90,DJ,DTZ,E,F,I,NPY,PD,PERF,PT,RUF,SIM,UP,W --ignore E501,F401,F841 --output-format github --diff --exclude fl_client/migrations,fl_server/migrations'
+      - name: Blocking lint checks (syntax + correctness)
+        run: |
+          uvx --python 3.13 ruff check \
+            --select E9,F63,F7,F82,F401,F821,F823,F841,B,PLE,PLR0402,RUF100 \
+            --exclude .venv,.git,__pycache__,build,dist
 
-  ruff-fix:
-    name: Ruff Fixer
+  ruff-detailed-analysis:
+    name: Ruff Detailed Analysis (non-blocking)
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
+    continue-on-error: true
     steps:
-      - uses: actions/checkout@v6
-        with:
-          ref: ${{ github.head_ref }}
+      - name: Checkout code
+        uses: actions/checkout@v6
 
-      - uses: astral-sh/setup-uv@v7
+      - name: Setup uv
+        uses: astral-sh/setup-uv@v7
         with:
           enable-cache: true
 
-      - name: Print the installed version
-        run: echo "Installed uv version is ${{ steps.setup-uv.outputs.uv-version }}"
+      - name: Install Python 3.13
+        run: uv python install 3.13
+
+      - name: Run detailed Ruff analysis (all relevant rule families)
+        run: |
+          mkdir -p artifacts
+          uvx --python 3.13 ruff check \
+            --select ASYNC,ANN,ARG,B,BLE,C4,C90,COM,D,DJ,DTZ,E,EM,ERA,EXE,F,FA,FAST,FIX,FLY,FURB,G,I,ICN,INP,INT,ISC,LOG,N,NPY,PD,PERF,PGH,PIE,PL,PT,PTH,PYI,Q,RET,RSE,RUF,S,SIM,SLOT,T10,T20,TC,TCH,TD,TID,TRY,UP,W,YTT \
+            --ignore D100,D101,D102,D103,D104,D105,D106,D107,D203,D213,COM812,ISC001,ANN401,S101,T201,TD002,TD003 \
+            --exclude .venv,.git,__pycache__,build,dist,migrations \
+            --output-format json \
+            . > artifacts/ruff-report.json || true
+
+      - name: Build analysis summary
+        run: |
+          python - <<'PY'
+          import json
+          from collections import Counter
+          from pathlib import Path
+
+          report_path = Path('artifacts/ruff-report.json')
+          if not report_path.exists() or not report_path.read_text().strip():
+              Path('artifacts/ruff-summary.md').write_text('No Ruff issues found or report unavailable.\n')
+              raise SystemExit(0)
+
+          issues = json.loads(report_path.read_text())
+          total = len(issues)
+          by_rule = Counter(item['code'] for item in issues if item.get('code'))
+          by_file = Counter(item['filename'] for item in issues if item.get('filename'))
+
+          lines = [
+              '## Ruff Detailed Analysis Summary',
+              '',
+              f'- Total findings: **{total}**',
+              f'- Unique rules triggered: **{len(by_rule)}**',
+              f'- Files affected: **{len(by_file)}**',
+              '',
+              '### Top 20 rules',
+          ]
+
+          for code, count in by_rule.most_common(20):
+              lines.append(f'- `{code}`: {count}')
+
+          lines.extend(['', '### Top 20 files'])
+          for filename, count in by_file.most_common(20):
+              lines.append(f'- `{filename}`: {count}')
+
+          Path('artifacts/ruff-summary.md').write_text('\n'.join(lines) + '\n')
+          PY
+
+      - name: Publish analysis to job summary
+        run: cat artifacts/ruff-summary.md >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload Ruff artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: ruff-detailed-analysis
+          path: artifacts/
+
+  ruff-format:
+    name: Ruff Format Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Setup uv
+        uses: astral-sh/setup-uv@v7
+        with:
+          enable-cache: true
 
       - name: Install Python 3.13
         run: uv python install 3.13
-  
-      - uses: astral-sh/ruff-action@v3
-        with:
-          args: 'check --fix --ignore F841'
 
-      - uses: stefanzweifel/git-auto-commit-action@v7
-        with:
-          commit_message: 'style fixes by ruff'
-          commit_options: '--no-verify --signoff'
-          skip_checkout: true
-          push_options: '--force'
-          branch: 'black'
+      - name: Check formatting
+        run: uvx --python 3.13 ruff format --check .

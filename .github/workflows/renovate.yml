@@ -5,6 +5,10 @@ on:
   schedule:
     - cron: '0 2 * * *'
 
+concurrency:
+  group: renovate-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   renovate:
     runs-on: ubuntu-latest
@@ -16,10 +20,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
 
+      - name: Validate renovate.json syntax
+        run: python -m json.tool renovate.json > /dev/null
+
       - name: Run Renovate
         uses: renovatebot/github-action@v46.1.6
         with:
           configurationFile: renovate.json
-          token: ${{ secrets.RENOVATE_TOKEN }}
+          token: ${{ secrets.RENOVATE_TOKEN || secrets.GITHUB_TOKEN }}
         env:
           LOG_LEVEL: info

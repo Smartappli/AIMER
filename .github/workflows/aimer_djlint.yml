@@ -31,6 +31,5 @@ jobs:
       - name: Run djlint
         run: |
           source .venv/bin/activate
-          djlint . --check
-          djlint ./AIMER-ROOT/templates --extension=html --lint
-          djlint ./AIMER-ROOT/templates --extension=html --reformat
+          djlint ./AIMER-ROOT/templates --extension=html --check --lint
+          djlint ./AIMER-ROOT/website/templates --extension=html --check --lint

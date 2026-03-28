@@ -1,0 +1,37 @@
+name: Dependency Bots Health
+
+on:
+  push:
+    paths:
+      - '.github/dependabot.yml'
+      - '.github/workflows/renovate.yml'
+      - 'renovate.json'
+  pull_request:
+    paths:
+      - '.github/dependabot.yml'
+      - '.github/workflows/renovate.yml'
+      - 'renovate.json'
+  workflow_dispatch:
+
+concurrency:
+  group: dependency-bots-health-${{ github.event_name == 'pull_request' && github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  validate-config:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Validate renovate.json
+        run: python -m json.tool renovate.json > /dev/null
+
+      - name: Validate Dependabot YAML
+        run: ruby -e "require 'yaml'; YAML.load_file('.github/dependabot.yml')"
+
+      - name: Validate Renovate workflow YAML
+        run: ruby -e "require 'yaml'; YAML.load_file('.github/workflows/renovate.yml')"
