@@ -119,9 +119,17 @@
                             <div class="avatar avatar-online">
                                 <!-- Moke condition for displaying user avatar -->
                                 {% if request.user|has_group:"admin" %}
-                                    <img src="{% static 'img/avatars/1.png' %}" alt="Admin avatar" class="rounded-circle" width="40" height="40">
+                                    <img src="{% static 'img/avatars/1.png' %}"
+                                         alt="Admin avatar"
+                                         class="rounded-circle"
+                                         width="40"
+                                         height="40">
                                 {% else %}
-                                    <img src="{% static 'img/avatars/3.png' %}" alt="User avatar" class="rounded-circle" width="40" height="40">
+                                    <img src="{% static 'img/avatars/3.png' %}"
+                                         alt="User avatar"
+                                         class="rounded-circle"
+                                         width="40"
+                                         height="40">
                                 {% endif %}
                             </div>
                         </a>
