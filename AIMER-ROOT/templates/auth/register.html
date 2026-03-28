@@ -39,6 +39,7 @@
                          class="img-fluid scaleX-n1-rtl"
                          alt="Login image"
                          width="700"
+                         height="700"
                          data-app-dark-img="illustrations/girl-with-laptop-dark.png"
                          data-app-light-img="illustrations/girl-with-laptop-light.png" />
                 </div>
@@ -91,7 +92,7 @@
                                        name="terms" />
                                 <label class="form-check-label" for="terms-conditions">
                                     {% trans "I agree to" %}
-                                    <a href="javascript:void(0);">{% trans "privacy policy & terms" %}</a>
+                                    <a href="{% url 'index' %}">{% trans "privacy policy & terms" %}</a>
                                 </label>
                             </div>
                         </div>
