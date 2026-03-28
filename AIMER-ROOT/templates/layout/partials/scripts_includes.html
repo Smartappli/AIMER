@@ -1,30 +1,70 @@
 {% load static %}
-{% load i18n %}
+
 <!-- Helpers -->
-<!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
 <script src="{% static 'vendor/js/helpers.js' %}"></script>
 <!--? Template customizer: To hide customizer set display_customizer value false in config.js.  -->
 {% if has_customizer %}
-<script src="{% static 'vendor/js/template-customizer.js' %}"></script>
+    <script src="{% static 'vendor/js/template-customizer.js' %}"></script>
 {% endif %}
 <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
 <script src="{% static 'js/config.js' %}"></script>
 <!-- beautify ignore:start -->
 {% if has_customizer %}
-<script>
+    <script>
   if (typeof TemplateCustomizer !== 'undefined') {
     window.templateCustomizer = new TemplateCustomizer({
       defaultTheme: "{{theme}}", // Required as system style can't decided without JS
-     {% if primary_color %}
-      defaultPrimaryColor: "{{ primary_color }}",
-    {% endif %}
-    defaultTextDir: '{% if rtl_mode %}rtl{% else %}ltr{% endif %}',
-    defaultSemiDark: {{ semi_dark_value }},
-    defaultShowDropdownOnHover: {{ show_dropdown_onhover_value }},
-    lang: '{{LANGUAGE_CODE}}',
-    controls: {{ customizer_controls | safe }}
-  });
+      displayCustomizer: "{{display_customizer}}" === "True", // Required as the settings style is decided by the presence of TemplateCustomizer in the DOM
+      lang: '{{LANGUAGE_CODE}}',
+      pathResolver: function(path) {
+        var resolvedPaths = {
+          // Core stylesheets
+          'core.css': '{% static 'vendor/css' %}/core.css',
+          'core-dark.css': '{% static 'vendor/css' %}/core-dark.css',
+
+          // Themes
+          'theme-default.css': '{% static 'vendor/css' %}/theme-default.css',
+          'theme-default-dark.css': '{% static 'vendor/css' %}/theme-default-dark.css',
+          'theme-bordered.css': '{% static 'vendor/css' %}/theme-bordered.css',
+          'theme-bordered-dark.css': '{% static 'vendor/css' %}/theme-bordered-dark.css',
+          'theme-semi-dark.css': '{% static 'vendor/css' %}/theme-semi-dark.css',
+          'theme-semi-dark-dark.css': '{% static 'vendor/css' %}/theme-semi-dark-dark.css',
+
+          // Other stylesheets
+          'perfect-scrollbar.css': '{% static 'vendor/libs/perfect-scrollbar' %}/perfect-scrollbar.css',
+          'typeahead.css': '{% static 'vendor/libs/typeahead-js' %}/typeahead.css',
+          'bs-stepper.css': '{% static 'vendor/libs/bs-stepper' %}/bs-stepper.css',
+          'select2.css': '{% static 'vendor/libs/select2' %}/select2.css',
+          'tagify.css': '{% static 'vendor/libs/tagify' %}/tagify.css',
+          'bootstrap-select.css': '{% static 'vendor/libs/bootstrap-select' %}/bootstrap-select.css',
+          'flatpickr.css': '{% static 'vendor/libs/flatpickr' %}/flatpickr.css',
+          'formvalidation.css': '{% static 'vendor/libs/formvalidation/dist/css' %}/formValidation.min.css',
+          'quill/katex.css': '{% static 'vendor/libs/quill' %}/katex.css',
+          'quill/editor.css': '{% static 'vendor/libs/quill' %}/editor.css',
+          'dropzone.css': '{% static 'vendor/libs/dropzone' %}/dropzone.css',
+          'pickr-themes.css': '{% static 'vendor/libs/pickr' %}/pickr-themes.css',
+          'spinkit.css': '{% static 'vendor/libs/spinkit' %}/spinkit.css',
+          'toastr.css': '{% static 'vendor/libs/toastr' %}/toastr.css',
+          'datatables-bs5.css': '{% static 'vendor/libs/datatables-bs5' %}/datatables.bootstrap5.css',
+          'apex-charts.css': '{% static 'vendor/libs/apex-charts' %}/apex-charts.css',
+          'swiper.css': '{% static 'vendor/libs/swiper' %}/swiper.css',
+          'nouislider.css': '{% static 'vendor/libs/nouislider' %}/nouislider.css',
+          'plyr.css': '{% static 'vendor/libs/plyr' %}/plyr.css',
+          'leaflet.css': '{% static 'vendor/libs/leaflet' %}/leaflet.css',
+          'jkanban.css': '{% static 'vendor/libs/jkanban' %}/jkanban.css',
+          'animate.css': '{% static 'vendor/libs/animate-css' %}/animate.css',
+          'sweetalert2.css': '{% static 'vendor/libs/sweetalert2' %}/sweetalert2.css',
+          'rateyo.css': '{% static 'vendor/libs/rateyo' %}/rateyo.css',
+          'jquery-timepicker.css': '{% static 'vendor/libs/jquery-timepicker' %}/jquery-timepicker.css',
+          'apex-charts.css': '{% static 'vendor/libs/apex-charts' %}/apex-charts.css',
+          'flag-icons.css': '{% static 'vendor/libs/flag-icons' %}/flag-icons.css',
+        }
+
+        return resolvedPaths[path] || path;
+      },
+      controls: {{ customizer_controls | safe }}
+    });
   }
-</script>
+    </script>
 {% endif %}
 <!-- beautify ignore:end -->
