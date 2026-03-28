@@ -8,9 +8,7 @@ dependencies = []
 [tool.uv]
 # Limit dependency resolution to Linux/Python 3.13 so workspace locking doesn't
 # fail on unsupported split environments (e.g. macOS + Python 3.14).
-environments = [
-  "sys_platform == 'linux' and python_full_version >= '3.12' and python_full_version < '3.14'",
-]
+environments = []
 
 [tool.uv.workspace]
 members = [
