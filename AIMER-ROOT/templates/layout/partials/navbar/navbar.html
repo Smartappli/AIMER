@@ -1,16 +1,15 @@
 {% load i18n %}
 {% load static %}
-
 {% if navbar_detached %}
-<nav class="layout-navbar {{container_class}} navbar navbar-expand-xl {{navbar_detached_class}} align-items-center bg-navbar-theme" id="layout-navbar">
-  {% endif %}
-
-  {# Horizontal layout (navbar not detached) #}
-
-  {% if not navbar_detached %}
-  <nav class="layout-navbar navbar navbar-expand-xl align-items-center bg-navbar-theme" id="layout-navbar">
-    <div class="{{container_class}}">
-      {% endif %}
+    <nav class="layout-navbar {{ container_class }} navbar navbar-expand-xl {{ navbar_detached_class }} align-items-center bg-navbar-theme"
+         id="layout-navbar">
+{% endif %}
+{# Horizontal layout (navbar not detached) #}
+{% if not navbar_detached %}
+    <nav class="layout-navbar navbar navbar-expand-xl align-items-center bg-navbar-theme"
+         id="layout-navbar">
+        <div class="{{ container_class }}">
+{% endif %}
       <!--  Brand demo (display only for navbar-full and hide on below xl) -->
       {% if navbar_full %}
       <div class="navbar-brand app-brand demo d-none d-xl-flex py-0 me-4">
@@ -494,10 +493,8 @@
         </ul>
       </div>
 
-      {% if not navbar_detached %}
-    </div>
-  </nav>
-  {% endif %}
-  {% if navbar_detached %}
-</nav>
+{% if not navbar_detached %}
+        </div>
+    </nav>
 {% endif %}
+{% if navbar_detached %}</nav>{% endif %}
