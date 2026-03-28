@@ -23,24 +23,24 @@
                         {% block content %}
                         {% endblock content %}
                     </div>
-                        <!-- / Content: End -->
-                        {% if is_footer %}
-                            <!-- Footer: Start -->
-                            {% include "../layout/partials/footer/footer.html" %}
-                            <!-- Footer: End -->
-                        {% endif %}
-                        <div class="content-backdrop fade"></div>
-                    </div>
-                    <!--/ Content wrapper: End -->
+                    <!-- / Content: End -->
+                    {% if is_footer %}
+                        <!-- Footer: Start -->
+                        {% include "../layout/partials/footer/footer.html" %}
+                        <!-- Footer: End -->
+                    {% endif %}
+                    <div class="content-backdrop fade"></div>
                 </div>
-                <!-- / Layout page: End -->
+                <!--/ Content wrapper: End -->
             </div>
-            {% if is_menu %}
-                <!-- Overlay -->
-                <div class="layout-overlay layout-menu-toggle"></div>
-            {% endif %}
-            <!-- Drag Target Area To SlideIn Menu On Small Screens -->
-            <div class="drag-target"></div>
+            <!-- / Layout page: End -->
         </div>
-        <!-- Layout wrapper: End -->
-    {% endblock layout %}
+        {% if is_menu %}
+            <!-- Overlay -->
+            <div class="layout-overlay layout-menu-toggle"></div>
+        {% endif %}
+        <!-- Drag Target Area To SlideIn Menu On Small Screens -->
+        <div class="drag-target"></div>
+    </div>
+    <!-- Layout wrapper: End -->
+{% endblock layout %}
