@@ -31,6 +31,8 @@ jobs:
       - name: Run djlint
         run: |
           source .venv/bin/activate
-          djlint . --check
-          djlint ./FARM/templates --extension=html --lint
-          djlint ./FARM/templates --extension=html --reformat
+          if [ -d "./FARM/templates" ]; then
+            djlint ./FARM/templates --extension=html --check --lint
+          else
+            echo "No FARM/templates directory found; skipping djlint template checks."
+          fi

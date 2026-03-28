@@ -57,7 +57,7 @@ Be direct and factual. Focus on numbers, trends, and insights that would be usef
 
 def pdf_has_text(pdf_file: Path, max_pages: int = 3) -> bool:
     r = PdfReader(str(pdf_file))
-    for i, page in enumerate(r.pages[:max_pages]):
+    for page in r.pages[:max_pages]:
         txt = (page.extract_text() or "").strip()
         if len(txt) > 50:
             return True

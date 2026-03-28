@@ -126,7 +126,9 @@ class TemplateHelper:
         return settings.TEMPLATE_CONFIG[scope]
 
     # Set the current page layout and init the layout bootstrap file
-    def set_layout(view, context={}):
+    def set_layout(view, context=None):
+        if context is None:
+            context = {}
         # Extract layout from the view path
         layout = os.path.splitext(view)[0].split("/")[0]
 

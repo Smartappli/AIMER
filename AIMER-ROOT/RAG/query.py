@@ -130,7 +130,11 @@ def rerank_results(query: str, documents=list, top_k: int = 5):
 
     scores = reranker.score(query_doc_pairs)
 
-    reranked = sorted(zip(scores, documents), key=lambda x: x[0], reverse=True)[
+    reranked = sorted(
+        zip(scores, documents, strict=False),
+        key=lambda x: x[0],
+        reverse=True,
+    )[
         :top_k
     ]
 

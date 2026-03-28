@@ -3,18 +3,18 @@
 {% if navbar_detached %}
     <nav class="layout-navbar {{ container_class }} navbar navbar-expand-xl {{ navbar_detached_class }} align-items-center bg-navbar-theme"
          id="layout-navbar">
-{% endif %}
-{# Horizontal layout (navbar not detached) #}
-{% if not navbar_detached %}
-    <nav class="layout-navbar navbar navbar-expand-xl align-items-center bg-navbar-theme"
-         id="layout-navbar">
-        <div class="{{ container_class }}">
-{% endif %}
+    {% endif %}
+    {# Horizontal layout (navbar not detached) #}
+    {% if not navbar_detached %}
+        <nav class="layout-navbar navbar navbar-expand-xl align-items-center bg-navbar-theme"
+             id="layout-navbar">
+            <div class="{{ container_class }}">
+    {% endif %}
       <!--  Brand demo (display only for navbar-full and hide on below xl) -->
       {% if navbar_full %}
       <div class="navbar-brand app-brand demo d-none d-xl-flex py-0 me-4">
         <a href="{% url 'index' %}" class="app-brand-link gap-2">
-          <span class="app-brand-logo demo">{% include 'partials/logo.html'  %}</span>
+          <span class="app-brand-logo demo">{% include 'partials/logo.html' %}</span>
           <span class="app-brand-text demo menu-text fw-bold text-heading">{% get_theme_variables 'template_name' %}</span>
         </a>
 
@@ -69,22 +69,22 @@
             <ul class="dropdown-menu dropdown-menu-end">
               <li>
                 <a class="dropdown-item {% if LANGUAGE_CODE == 'en' %}active{% endif %}" href="{% current_url request %}" data-language="en" data-text-direction="ltr">
-                  <span class="align-middle">{% trans "English"%}</span>
+                  <span class="align-middle">{% trans "English" %}</span>
                 </a>
               </li>
               <li>
                 <a class="dropdown-item {% if LANGUAGE_CODE == 'fr' %}active{% endif %}" href="{% current_url request %}" data-language="fr" data-text-direction="ltr">
-                  <span class="align-middle">{% trans "French"%}</span>
+                  <span class="align-middle">{% trans "French" %}</span>
                 </a>
               </li>
               <li>
                 <a class="dropdown-item {% if LANGUAGE_CODE == 'ar' %}active{% endif %}" href="{% current_url request %}" data-language="ar" data-text-direction="rtl">
-                  <span class="align-middle">{% trans "Dutch"%}</span>
+                  <span class="align-middle">{% trans "Dutch" %}</span>
                 </a>
               </li>
               <li>
                 <a class="dropdown-item {% if LANGUAGE_CODE == 'de' %}active{% endif %}" href="{% current_url request %}" data-language="de" data-text-direction="ltr">
-                  <span class="align-middle">{% trans "German"%}</span>
+                  <span class="align-middle">{% trans "German" %}</span>
                 </a>
               </li>
             </ul>
@@ -424,7 +424,7 @@
                     <div class="flex-grow-1">
                       <h6 class="mb-0">{{ request.user.username| capfirst }}</h6>
                       {% for group in request.user.groups.all %}
-                      <small class="text-body-secondary">{{group.name| capfirst }}</small>
+                      <small class="text-body-secondary">{{ group.name| capfirst }}</small>
                       {% endfor %}
                     </div>
                   </div>
@@ -493,8 +493,8 @@
         </ul>
       </div>
 
-{% if not navbar_detached %}
-        </div>
-    </nav>
-{% endif %}
-{% if navbar_detached %}</nav>{% endif %}
+            {% if not navbar_detached %}
+            </div>
+        </nav>
+    {% endif %}
+    {% if navbar_detached %}</nav>{% endif %}
