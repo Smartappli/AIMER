@@ -1,6 +1,20 @@
 [project]
-name = "aimer-root"
+name = "aimer-workspace"
 version = "0.1.0"
-requires-python = ">=3.12"
+requires-python = ">=3.13"
 
 dependencies = []
+
+[tool.uv]
+# Limit dependency resolution to Linux/Python 3.13 so workspace locking doesn't
+# fail on unsupported split environments (e.g. macOS + Python 3.14).
+environments = [
+  "sys_platform == 'linux' and python_full_version >= '3.13' and python_full_version < '3.14'",
+]
+
+[tool.uv.workspace]
+members = [
+  "AIMER-ROOT",
+  "MAGE",
+  "FARM",
+]
