@@ -12,12 +12,11 @@
             {% endif %}
             <!--  Brand demo (display only for navbar-full and hide on below xl) -->
             {% if navbar_full %}
-            <div class="navbar-brand app-brand demo d-none d-xl-flex py-0 me-4">
-                <a href="{% url 'index' %}" class="app-brand-link gap-2">
-                    <span class="app-brand-logo demo">{% include 'partials/logo.html' %}</span>
-                    <span class="app-brand-text demo menu-text fw-bold text-heading">{% get_theme_variables 'template_name' %}</span>
-                </a>
-
+                <div class="navbar-brand app-brand demo d-none d-xl-flex py-0 me-4">
+                    <a href="{% url 'index' %}" class="app-brand-link gap-2">
+                        <span class="app-brand-logo demo">{% include 'partials/logo.html' %}</span>
+                        <span class="app-brand-text demo menu-text fw-bold text-heading">{% get_theme_variables 'template_name' %}</span>
+                    </a>
                     <!-- ! Display menu close icon only for horizontal-menu with navbar-full -->
                     {% if menu_horizontal %}
                         <a href="#"
@@ -27,7 +26,6 @@
                     {% endif %}
                 </div>
             {% endif %}
-
             <!-- ! Not required for layout-without-menu -->
             {% if not navbar_hide_toggle %}
                 <div class="layout-menu-toggle navbar-nav align-items-xl-center me-4 me-xl-0 {{ menu_horizontal|yesno:'d-xl-none,' }} {{ content_navbar|yesno:'d-xl-none,' }}">
@@ -62,7 +60,6 @@
                         </li>
                         <!-- /Search -->
                     {% endif %}
-
                     <!-- Language -->
                     <li class="nav-item dropdown-language dropdown me-2 me-xl-0">
                         <a class="nav-link dropdown-toggle hide-arrow"
@@ -106,73 +103,64 @@
                         </ul>
                     </li>
                     <!--/ Language -->
-
                     {% if has_customizer %}
-                    <!-- Style Switcher -->
-                    <li class="nav-item dropdown me-2 me-xl-0">
-                        <a class="nav-link dropdown-toggle hide-arrow" id="nav-theme" href="#" data-bs-toggle="dropdown">
-                            <i class="icon-base bx bx-sun icon-md theme-icon-active"></i>
-                            <span class="d-none ms-2" id="nav-theme-text">Toggle theme</span>
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-theme-text">
-                            <li>
-                                <button
-                                    type="button"
-                                    class="dropdown-item align-items-center active"
-                                    data-bs-theme-value="light"
-                                    aria-pressed="false"
-                                >
-                                    <span><i class="icon-base bx bx-sun icon-md me-3" data-icon="sun"></i>Light</span>
-                                </button>
-                            </li>
-                            <li>
-                                <button
-                                    type="button"
-                                    class="dropdown-item align-items-center"
-                                    data-bs-theme-value="dark"
-                                    aria-pressed="true"
-                                >
-                                    <span><i class="icon-base bx bx-moon icon-md me-3" data-icon="moon"></i>Dark</span>
-                                </button>
-                            </li>
-                            <li>
-                                <button
-                                    type="button"
-                                    class="dropdown-item align-items-center"
-                                    data-bs-theme-value="system"
-                                    aria-pressed="false"
-                                >
-                                    <span><i class="icon-base bx bx-desktop icon-md me-3" data-icon="desktop"></i>System</span>
-                                </button>
-                            </li>
-                        </ul>
-                    </li>
-                    <!-- / Style Switcher-->
+                        <!-- Style Switcher -->
+                        <li class="nav-item dropdown me-2 me-xl-0">
+                            <a class="nav-link dropdown-toggle hide-arrow"
+                               id="nav-theme"
+                               href="#"
+                               data-bs-toggle="dropdown">
+                                <i class="icon-base bx bx-sun icon-md theme-icon-active"></i>
+                                <span class="d-none ms-2" id="nav-theme-text">Toggle theme</span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end"
+                                aria-labelledby="nav-theme-text">
+                                <li>
+                                    <button type="button"
+                                            class="dropdown-item align-items-center active"
+                                            data-bs-theme-value="light"
+                                            aria-pressed="false">
+                                        <span><i class="icon-base bx bx-sun icon-md me-3" data-icon="sun"></i>Light</span>
+                                    </button>
+                                </li>
+                                <li>
+                                    <button type="button"
+                                            class="dropdown-item align-items-center"
+                                            data-bs-theme-value="dark"
+                                            aria-pressed="true">
+                                        <span><i class="icon-base bx bx-moon icon-md me-3" data-icon="moon"></i>Dark</span>
+                                    </button>
+                                </li>
+                                <li>
+                                    <button type="button"
+                                            class="dropdown-item align-items-center"
+                                            data-bs-theme-value="system"
+                                            aria-pressed="false">
+                                        <span><i class="icon-base bx bx-desktop icon-md me-3" data-icon="desktop"></i>System</span>
+                                    </button>
+                                </li>
+                            </ul>
+                        </li>
+                        <!-- / Style Switcher-->
                     {% endif %}
-
                     <!-- Quick links  -->
                     <li class="nav-item dropdown-shortcuts navbar-dropdown dropdown me-2 me-xl-0">
-                        <a
-                            class="nav-link dropdown-toggle hide-arrow"
-                            href="#"
-                            data-bs-toggle="dropdown"
-                            data-bs-auto-close="outside"
-                            aria-expanded="false"
-                        >
+                        <a class="nav-link dropdown-toggle hide-arrow"
+                           href="#"
+                           data-bs-toggle="dropdown"
+                           data-bs-auto-close="outside"
+                           aria-expanded="false">
                             <i class="icon-base bx bx-grid-alt icon-md"></i>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end p-0">
                             <div class="dropdown-menu-header border-bottom">
                                 <div class="dropdown-header d-flex align-items-center py-3">
                                     <h6 class="mb-0 me-auto">Shortcuts</h6>
-                                    <a
-                                        href="#"
-                                        class="dropdown-shortcuts-add py-2"
-                                        data-bs-toggle="tooltip"
-                                        data-bs-placement="top"
-                                        title="Add shortcuts"
-                                        ><i class="icon-base bx bx-plus-circle text-heading"></i
-                                    ></a>
+                                    <a href="#"
+                                       class="dropdown-shortcuts-add py-2"
+                                       data-bs-toggle="tooltip"
+                                       data-bs-placement="top"
+                                       title="Add shortcuts"><i class="icon-base bx bx-plus-circle text-heading"></i></a>
                                 </div>
                             </div>
                             <div class="dropdown-shortcuts-list scrollable-container">
@@ -244,16 +232,13 @@
                         </div>
                     </li>
                     <!-- Quick links -->
-
                     <!-- Notification -->
                     <li class="nav-item dropdown-notifications navbar-dropdown dropdown me-3 me-xl-2">
-                        <a
-                            class="nav-link dropdown-toggle hide-arrow"
-                            href="#"
-                            data-bs-toggle="dropdown"
-                            data-bs-auto-close="outside"
-                            aria-expanded="false"
-                        >
+                        <a class="nav-link dropdown-toggle hide-arrow"
+                           href="#"
+                           data-bs-toggle="dropdown"
+                           data-bs-auto-close="outside"
+                           aria-expanded="false">
                             <span class="position-relative">
                                 <i class="icon-base bx bx-bell icon-md"></i>
                                 <span class="badge rounded-pill bg-danger badge-dot badge-notifications border"></span>
@@ -265,14 +250,11 @@
                                     <h6 class="mb-0 me-auto">Notification</h6>
                                     <div class="d-flex align-items-center h6 mb-0">
                                         <span class="badge bg-label-primary me-2">8 New</span>
-                                        <a
-                                            href="#"
-                                            class="dropdown-notifications-all p-2"
-                                            data-bs-toggle="tooltip"
-                                            data-bs-placement="top"
-                                            title="Mark all as read"
-                                            ><i class="icon-base bx bx-envelope-open text-heading"></i
-                                        ></a>
+                                        <a href="#"
+                                           class="dropdown-notifications-all p-2"
+                                           data-bs-toggle="tooltip"
+                                           data-bs-placement="top"
+                                           title="Mark all as read"><i class="icon-base bx bx-envelope-open text-heading"></i></a>
                                     </div>
                                 </div>
                             </li>
@@ -282,13 +264,11 @@
                                         <div class="d-flex">
                                             <div class="flex-shrink-0 me-3">
                                                 <div class="avatar">
-                                                    <img
-                                                        src="{% static 'img/avatars/1.png' %}"
-                                                        alt="User avatar"
-                                                        class="rounded-circle"
-                                                        width="40"
-                                                        height="40"
-                                                    />
+                                                    <img src="{% static 'img/avatars/1.png' %}"
+                                                         alt="User avatar"
+                                                         class="rounded-circle"
+                                                         width="40"
+                                                         height="40" />
                                                 </div>
                                             </div>
                                             <div class="flex-grow-1">
@@ -298,9 +278,7 @@
                                             </div>
                                             <div class="flex-shrink-0 dropdown-notifications-actions">
                                                 <a href="#" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
-                                                <a href="#" class="dropdown-notifications-archive"
-                                                    ><span class="icon-base bx bx-x"></span
-                                                ></a>
+                                                <a href="#" class="dropdown-notifications-archive"><span class="icon-base bx bx-x"></span></a>
                                             </div>
                                         </div>
                                     </li>
