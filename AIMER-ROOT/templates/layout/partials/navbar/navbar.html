@@ -20,7 +20,7 @@
 
         <!-- ! Display menu close icon only for horizontal-menu with navbar-full -->
         {% if menu_horizontal %}
-        <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-xl-none">
+        <a href="#" class="layout-menu-toggle menu-link text-large ms-auto d-xl-none">
           <i class="icon-base bx bx-x icon-sm"></i>
         </a>
         {% endif %}
@@ -30,7 +30,7 @@
       <!-- ! Not required for layout-without-menu -->
       {% if not navbar_hide_toggle %}
       <div class="layout-menu-toggle navbar-nav align-items-xl-center me-4 me-xl-0 {{ menu_horizontal|yesno:'d-xl-none,' }} {{ content_navbar|yesno:'d-xl-none,' }}">
-        <a class="nav-item nav-link px-0 me-xl-6" href="javascript:void(0)">
+        <a class="nav-item nav-link px-0 me-xl-6" href="#">
           <i class="icon-base bx bx-menu icon-md"></i>
         </a>
       </div>
@@ -41,7 +41,7 @@
         <!-- Search -->
         <div class="navbar-nav align-items-center">
           <div class="nav-item navbar-search-wrapper mb-0">
-            <a class="nav-item nav-link search-toggler px-0" href="javascript:void(0);">
+            <a class="nav-item nav-link search-toggler px-0" href="#">
               <span class="d-inline-block text-body-secondary fw-normal" id="autocomplete"></span>
             </a>
           </div>
@@ -54,7 +54,7 @@
           {% if menu_horizontal %}
           <!-- Search -->
           <li class="nav-item navbar-search-wrapper me-2 me-xl-0">
-            <a class="nav-item nav-link search-toggler px-0" href="javascript:void(0);">
+            <a class="nav-item nav-link search-toggler px-0" href="#">
               <span class="d-inline-block text-body-secondary fw-normal" id="autocomplete"></span>
             </a>
           </li>
@@ -63,7 +63,7 @@
 
           <!-- Language -->
           <li class="nav-item dropdown-language dropdown me-2 me-xl-0">
-            <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
+            <a class="nav-link dropdown-toggle hide-arrow" href="#" data-bs-toggle="dropdown">
               <i class="icon-base bx bx-globe icon-md"></i>
             </a>
             <ul class="dropdown-menu dropdown-menu-end">
@@ -94,7 +94,7 @@
           {% if has_customizer %}
           <!-- Style Switcher -->
           <li class="nav-item dropdown me-2 me-xl-0">
-            <a class="nav-link dropdown-toggle hide-arrow" id="nav-theme" href="javascript:void(0);" data-bs-toggle="dropdown">
+            <a class="nav-link dropdown-toggle hide-arrow" id="nav-theme" href="#" data-bs-toggle="dropdown">
               <i class="icon-base bx bx-sun icon-md theme-icon-active"></i>
               <span class="d-none ms-2" id="nav-theme-text">Toggle theme</span>
             </a>
@@ -121,14 +121,14 @@
 
           <!-- Quick links  -->
           <li class="nav-item dropdown-shortcuts navbar-dropdown dropdown me-2 me-xl-0">
-            <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+            <a class="nav-link dropdown-toggle hide-arrow" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
               <i class="icon-base bx bx-grid-alt icon-md"></i>
             </a>
             <div class="dropdown-menu dropdown-menu-end p-0">
               <div class="dropdown-menu-header border-bottom">
                 <div class="dropdown-header d-flex align-items-center py-3">
                   <h6 class="mb-0 me-auto">Shortcuts</h6>
-                  <a href="javascript:void(0)" class="dropdown-shortcuts-add py-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Add shortcuts"><i class="icon-base bx bx-plus-circle text-heading"></i></a>
+                  <a href="#" class="dropdown-shortcuts-add py-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Add shortcuts"><i class="icon-base bx bx-plus-circle text-heading"></i></a>
                 </div>
               </div>
               <div class="dropdown-shortcuts-list scrollable-container">
@@ -203,7 +203,7 @@
 
           <!-- Notification -->
           <li class="nav-item dropdown-notifications navbar-dropdown dropdown me-3 me-xl-2">
-            <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+            <a class="nav-link dropdown-toggle hide-arrow" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
               <span class="position-relative">
                 <i class="icon-base bx bx-bell icon-md"></i>
                 <span class="badge rounded-pill bg-danger badge-dot badge-notifications border"></span>
@@ -215,7 +215,7 @@
                   <h6 class="mb-0 me-auto">Notification</h6>
                   <div class="d-flex align-items-center h6 mb-0">
                     <span class="badge bg-label-primary me-2">8 New</span>
-                    <a href="javascript:void(0)" class="dropdown-notifications-all p-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Mark all as read"><i class="icon-base bx bx-envelope-open text-heading"></i></a>
+                    <a href="#" class="dropdown-notifications-all p-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Mark all as read"><i class="icon-base bx bx-envelope-open text-heading"></i></a>
                   </div>
                 </div>
               </li>
@@ -225,7 +225,7 @@
                     <div class="d-flex">
                       <div class="flex-shrink-0 me-3">
                         <div class="avatar">
-                          <img src="{% static 'img/avatars/1.png' %}" alt class="rounded-circle" />
+                          <img src="{% static 'img/avatars/1.png' %}" alt="User avatar" class="rounded-circle" width="40" height="40" />
                         </div>
                       </div>
                       <div class="flex-grow-1">
@@ -234,8 +234,8 @@
                         <small class="text-body-secondary">1h ago</small>
                       </div>
                       <div class="flex-shrink-0 dropdown-notifications-actions">
-                        <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
-                        <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="icon-base bx bx-x"></span></a>
+                        <a href="#" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
+                        <a href="#" class="dropdown-notifications-archive"><span class="icon-base bx bx-x"></span></a>
                       </div>
                     </div>
                   </li>
@@ -252,8 +252,8 @@
                         <small class="text-body-secondary">12hr ago</small>
                       </div>
                       <div class="flex-shrink-0 dropdown-notifications-actions">
-                        <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
-                        <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="icon-base bx bx-x"></span></a>
+                        <a href="#" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
+                        <a href="#" class="dropdown-notifications-archive"><span class="icon-base bx bx-x"></span></a>
                       </div>
                     </div>
                   </li>
@@ -261,7 +261,7 @@
                     <div class="d-flex">
                       <div class="flex-shrink-0 me-3">
                         <div class="avatar">
-                          <img src="{% static 'img/avatars/2.png' %}" alt class="rounded-circle" />
+                          <img src="{% static 'img/avatars/2.png' %}" alt="User avatar" class="rounded-circle" width="40" height="40" />
                         </div>
                       </div>
                       <div class="flex-grow-1">
@@ -270,8 +270,8 @@
                         <small class="text-body-secondary">1h ago</small>
                       </div>
                       <div class="flex-shrink-0 dropdown-notifications-actions">
-                        <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
-                        <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="icon-base bx bx-x"></span></a>
+                        <a href="#" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
+                        <a href="#" class="dropdown-notifications-archive"><span class="icon-base bx bx-x"></span></a>
                       </div>
                     </div>
                   </li>
@@ -288,8 +288,8 @@
                         <small class="text-body-secondary">1 day ago</small>
                       </div>
                       <div class="flex-shrink-0 dropdown-notifications-actions">
-                        <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
-                        <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="icon-base bx bx-x"></span></a>
+                        <a href="#" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
+                        <a href="#" class="dropdown-notifications-archive"><span class="icon-base bx bx-x"></span></a>
                       </div>
                     </div>
                   </li>
@@ -297,7 +297,7 @@
                     <div class="d-flex">
                       <div class="flex-shrink-0 me-3">
                         <div class="avatar">
-                          <img src="{% static 'img/avatars/9.png' %}" alt class="rounded-circle" />
+                          <img src="{% static 'img/avatars/9.png' %}" alt="User avatar" class="rounded-circle" width="40" height="40" />
                         </div>
                       </div>
                       <div class="flex-grow-1">
@@ -306,8 +306,8 @@
                         <small class="text-body-secondary">2 days ago</small>
                       </div>
                       <div class="flex-shrink-0 dropdown-notifications-actions">
-                        <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
-                        <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="icon-base bx bx-x"></span></a>
+                        <a href="#" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
+                        <a href="#" class="dropdown-notifications-archive"><span class="icon-base bx bx-x"></span></a>
                       </div>
                     </div>
                   </li>
@@ -324,8 +324,8 @@
                         <small class="text-body-secondary">3 days ago</small>
                       </div>
                       <div class="flex-shrink-0 dropdown-notifications-actions">
-                        <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
-                        <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="icon-base bx bx-x"></span></a>
+                        <a href="#" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
+                        <a href="#" class="dropdown-notifications-archive"><span class="icon-base bx bx-x"></span></a>
                       </div>
                     </div>
                   </li>
@@ -333,7 +333,7 @@
                     <div class="d-flex">
                       <div class="flex-shrink-0 me-3">
                         <div class="avatar">
-                          <img src="{% static 'img/avatars/5.png' %}" alt class="rounded-circle" />
+                          <img src="{% static 'img/avatars/5.png' %}" alt="User avatar" class="rounded-circle" width="40" height="40" />
                         </div>
                       </div>
                       <div class="flex-grow-1">
@@ -342,8 +342,8 @@
                         <small class="text-body-secondary">4 days ago</small>
                       </div>
                       <div class="flex-shrink-0 dropdown-notifications-actions">
-                        <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
-                        <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="icon-base bx bx-x"></span></a>
+                        <a href="#" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
+                        <a href="#" class="dropdown-notifications-archive"><span class="icon-base bx bx-x"></span></a>
                       </div>
                     </div>
                   </li>
@@ -351,7 +351,7 @@
                     <div class="d-flex">
                       <div class="flex-shrink-0 me-3">
                         <div class="avatar">
-                          <img src="{% static 'img/avatars/6.png' %}" alt class="rounded-circle" />
+                          <img src="{% static 'img/avatars/6.png' %}" alt="User avatar" class="rounded-circle" width="40" height="40" />
                         </div>
                       </div>
                       <div class="flex-grow-1">
@@ -360,8 +360,8 @@
                         <small class="text-body-secondary">5 days ago</small>
                       </div>
                       <div class="flex-shrink-0 dropdown-notifications-actions">
-                        <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
-                        <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="icon-base bx bx-x"></span></a>
+                        <a href="#" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
+                        <a href="#" class="dropdown-notifications-archive"><span class="icon-base bx bx-x"></span></a>
                       </div>
                     </div>
                   </li>
@@ -378,8 +378,8 @@
                         <small class="text-body-secondary">5 days ago</small>
                       </div>
                       <div class="flex-shrink-0 dropdown-notifications-actions">
-                        <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
-                        <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="icon-base bx bx-x"></span></a>
+                        <a href="#" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
+                        <a href="#" class="dropdown-notifications-archive"><span class="icon-base bx bx-x"></span></a>
                       </div>
                     </div>
                   </li>
@@ -387,7 +387,7 @@
               </li>
               <li class="border-top">
                 <div class="d-grid p-4">
-                  <a class="btn btn-primary btn-sm d-flex" href="javascript:void(0);">
+                  <a class="btn btn-primary btn-sm d-flex" href="#">
                     <small class="align-middle">View all notifications</small>
                   </a>
                 </div>
@@ -397,13 +397,13 @@
           <!--/ Notification -->
           <!-- User -->
           <li class="nav-item navbar-dropdown dropdown-user dropdown">
-            <a class="nav-link dropdown-toggle hide-arrow p-0" href="javascript:void(0);" data-bs-toggle="dropdown">
+            <a class="nav-link dropdown-toggle hide-arrow p-0" href="#" data-bs-toggle="dropdown">
               <div class="avatar avatar-online">
                 <!-- Moke condition for displaying user avatar -->
                 {% if request.user|has_group:"admin" %}
-                <img src="{% static 'img/avatars/1.png' %}" alt class="rounded-circle">
+                <img src="{% static 'img/avatars/1.png' %}" alt="Admin avatar" class="rounded-circle" width="40" height="40">
                 {% else %}
-                <img src="{% static 'img/avatars/3.png' %}" alt class="rounded-circle">
+                <img src="{% static 'img/avatars/3.png' %}" alt="User avatar" class="rounded-circle" width="40" height="40">
                 {% endif %}
               </div>
             </a>
@@ -415,9 +415,9 @@
                       <div class="avatar avatar-online">
                         <!-- Moke condition for displaying user avatar -->
                         {% if request.user|has_group:"admin" %}
-                        <img src="{% static 'img/avatars/1.png' %}" alt class="w-px-40 h-auto rounded-circle">
+                        <img src="{% static 'img/avatars/1.png' %}" alt="Admin avatar" class="w-px-40 h-auto rounded-circle" width="40" height="40">
                         {% else %}
-                        <img src="{% static 'img/avatars/3.png' %}" alt class="w-px-40 h-auto rounded-circle">
+                        <img src="{% static 'img/avatars/3.png' %}" alt="User avatar" class="w-px-40 h-auto rounded-circle" width="40" height="40">
                         {% endif %}
                       </div>
                     </div>
@@ -463,18 +463,18 @@
                 {% if request.user.is_authenticated and request.user.profile.is_verified %}
                 <span class="dropdown-item d-flex justify-content-between align-content-center">
                   <span>
-                    <i class='icon-base icon-md me-3 bx bxs-user-circle'></i>
+                    <i class="icon-base icon-md me-3 bx bxs-user-circle"></i>
                     <span class="align-middle">Verified</span>
                   </span>
-                  <span class="text-success"><i class='icon-base icon-md bx bxs-circle'></i></span>
+                  <span class="text-success"><i class="icon-base icon-md bx bxs-circle"></i></span>
                 </span>
                 {% else %}
                 <a class="dropdown-item d-flex justify-content-between align-content-center" href="{% url 'index' %}">
                   <span>
-                    <i class='icon-base icon-md me-3 bx bxs-user-circle'></i>
+                    <i class="icon-base icon-md me-3 bx bxs-user-circle"></i>
                     <span class="align-middle">Not Verified</span>
                   </span>
-                  <span class="text-danger"><i class='icon-base icon-md bx bxs-circle'></i></span>
+                  <span class="text-danger"><i class="icon-base icon-md bx bxs-circle"></i></span>
                 </a>
                 {% endif %}
               </li>
