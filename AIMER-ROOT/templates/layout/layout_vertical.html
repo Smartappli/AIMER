@@ -19,14 +19,10 @@
                 <!-- Content wrapper: Start -->
                 <div class="content-wrapper">
                     <!-- Content: Start -->
-                    {% if is_flex %}
-                        <div class="{{ container_class }} d-flex align-items-stretch flex-grow-1 p-0">
-                        {% else %}
-                            <div class="{{ container_class }} flex-grow-1 container-p-y">
-                            {% endif %}
-                            {% block content %}
-                            {% endblock content %}
-                        </div>
+                    <div class="{{ container_class }} {% if is_flex %}d-flex align-items-stretch flex-grow-1 p-0{% else %}flex-grow-1 container-p-y{% endif %}">
+                        {% block content %}
+                        {% endblock content %}
+                    </div>
                         <!-- / Content: End -->
                         {% if is_footer %}
                             <!-- Footer: Start -->
