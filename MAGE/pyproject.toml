@@ -1,7 +1,7 @@
 [project]
 name = "mage"
 version = "0.1.0"
-requires-python = ">=3.12"
+requires-python = ">=3.14.3"
 dependencies = [
   "fastapi[standard-no-fastapi-cloud-cli]==0.135.2",
   "fastmcp==3.1.1",
@@ -9,13 +9,13 @@ dependencies = [
   "segmentation-models-pytorch==0.5.0",
 
   # macOS (Intel + Apple Silicon)
-  "tensorflow>=2.20.0 ; sys_platform == 'darwin'",
+  "tensorflow>=2.21.0; sys_platform == 'darwin'",
 
   # Linux ARM64 (aarch64)
-  "tensorflow>=2.20.0 ; sys_platform == 'linux' and platform_machine == 'aarch64'",
+  "tensorflow>=2.21.0; sys_platform == 'linux' and platform_machine == 'aarch64'",
 
   # Linux x86_64
-  "tensorflow-cpu>=2.20.0 ; sys_platform == 'linux' and platform_machine == 'x86_64'",
+  "tensorflow-cpu>=2.21.0; sys_platform == 'linux' and platform_machine == 'x86_64'",
 
   "timm==1.0.26",
   "torch==2.11.0",
