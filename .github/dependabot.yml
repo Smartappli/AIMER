@@ -1,6 +1,5 @@
 version: 2
 updates:
-  # Note: no `groups` section is defined on purpose to keep one PR per dependency update.
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
