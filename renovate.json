@@ -14,19 +14,5 @@
   "timezone": "Etc/UTC",
   "schedule": [
     "before 5am on Monday"
-  ],
-  "packageRules": [
-    {
-      "matchManagers": ["github-actions"],
-      "groupName": "github-actions"
-    },
-    {
-      "matchManagers": ["dockerfile", "docker-compose"],
-      "groupName": "container-images"
-    },
-    {
-      "matchManagers": ["pip_requirements", "pep621"],
-      "groupName": "python-dependencies"
-    }
   ]
 }
