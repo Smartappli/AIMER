@@ -60,7 +60,7 @@ jobs:
           coverage report -m
           coverage xml -o coverage.xml
       - name: SonarQube Scan
-        uses: SonarSource/sonarqube-scan-action@v7.0.0
+        uses: SonarSource/sonarqube-scan-action@v7.1.0
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       - name: Run codacy-coverage-reporter
