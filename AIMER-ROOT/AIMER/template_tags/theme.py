@@ -29,9 +29,8 @@ def filter_by_url(submenu, url):
                 return True
 
             # Recursively check for submenus
-            if subitem.get("submenu"):
-                if filter_by_url(subitem["submenu"], url):
-                    return True
+            if subitem.get("submenu") and filter_by_url(subitem["submenu"], url):
+                return True
 
     return False
 

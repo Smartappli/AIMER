@@ -3,16 +3,17 @@
 import django.db.models.deletion
 from django.conf import settings
 from django.db import migrations, models
+from typing import ClassVar
 
 
 class Migration(migrations.Migration):
     initial = True
 
-    dependencies = [
+    dependencies: ClassVar[list] = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
-    operations = [
+    operations: ClassVar[list] = [
         migrations.CreateModel(
             name="Profile",
             fields=[

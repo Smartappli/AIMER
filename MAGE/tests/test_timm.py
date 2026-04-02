@@ -70,7 +70,7 @@ def test_timm_model_creation(
         try:
             create_model(model_name, pretrained=True, num_classes=num_classes)
             return True, time.time() - start
-        except Exception:
+        except (RuntimeError, OSError, ValueError, TypeError):
             # Fallback sans pretrained (utile si poids indisponibles / offline / etc.)
             start = time.time()
             create_model(model_name, pretrained=False, num_classes=num_classes)
@@ -122,7 +122,7 @@ def test_timm_model_creation(
                             p_global.set_postfix_str(
                                 f"{module_name} • {model_name} • {status} • {elapsed:.2f}s",
                             )
-                        except Exception as e:
+                        except (RuntimeError, OSError, ValueError, TypeError) as e:
                             failures.append((module_name, model_name, repr(e)))
 
                         p_mod.update(1)
@@ -146,7 +146,7 @@ def test_timm_model_creation(
                     pbar.set_postfix_str(f"{module_name} • {model_name}")
                     try:
                         _try_create(model_name)
-                    except Exception as e:
+                    except (RuntimeError, OSError, ValueError, TypeError) as e:
                         failures.append((module_name, model_name, repr(e)))
                     pbar.update(1)
 

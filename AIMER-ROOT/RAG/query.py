@@ -74,7 +74,7 @@ def extract_filters(user_query: str):
     return filters
 
 
-def hybrid_search(query: str, k: int = 10, filters: dict = None):
+def hybrid_search(query: str, k: int = 10, filters: dict | None = None):
     """Perform a hybrid (dense + sparse) similarity search in Qdrant.
 
     If `filters` are provided, they are translated into a Qdrant `Filter` that

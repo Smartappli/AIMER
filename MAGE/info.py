@@ -11,17 +11,14 @@ from __future__ import annotations
 
 import platform
 import sys
-from typing import TYPE_CHECKING, TypeVar
+from typing import TYPE_CHECKING
 
 import torch
 
 if TYPE_CHECKING:
     from collections.abc import Callable
 
-T = TypeVar("T")
-
-
-def _safe(label: str, fn: Callable[[], T], default: T | str = "N/A") -> T | str:
+def _safe[T](label: str, fn: Callable[[], T], default: T | str = "N/A") -> T | str:
     """Call a function and return its result, or a safe fallback on failure.
 
     Args:
@@ -36,7 +33,7 @@ def _safe(label: str, fn: Callable[[], T], default: T | str = "N/A") -> T | str:
     """
     try:
         return fn()
-    except Exception as exc:
+    except (RuntimeError, OSError, ValueError, TypeError, AttributeError) as exc:
         return f"{default} ({label}: {type(exc).__name__}: {exc})"
 
 
