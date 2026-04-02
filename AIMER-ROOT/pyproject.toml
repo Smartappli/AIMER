@@ -48,3 +48,8 @@ quote-style = "double"
 indent-style = "space"
 line-ending = "lf"
 docstring-code-format = true
+
+[tool.ruff.lint.per-file-ignores]
+"AIMER/__init__.py" = ["N999"]
+"AIMER/template_helpers/__init__.py" = ["N999"]
+"AIMER/template_tags/__init__.py" = ["N999"]

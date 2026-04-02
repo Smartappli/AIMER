@@ -62,14 +62,14 @@ class RegisterView(AuthView):
         )
 
         # Add the user to the 'client' group (or any other group you want to use as default for new users)
-        user_group, created = await Group.objects.aget_or_create(name="client")
+        user_group, _created = await Group.objects.aget_or_create(name="client")
         await sync_to_async(created_user.groups.add)(user_group)
 
         # Generate a token and send a verification email here
         token = str(uuid.uuid4())
 
         # Set the token in the user's profile
-        user_profile, created = await Profile.objects.aget_or_create(
+        user_profile, _created = await Profile.objects.aget_or_create(
             user=created_user,
         )
         user_profile.email_token = token

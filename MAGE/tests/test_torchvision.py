@@ -240,7 +240,7 @@ def _run_creation_with_progress(
                                 f"{status} • {elapsed:.2f}s"
                             )
                             p_global.set_postfix_str(postfix)
-                        except Exception as exc:
+                        except (RuntimeError, OSError, ValueError, TypeError, URLError) as exc:
                             failures.append(
                                 (module_name, model_name, repr(exc)),
                             )
@@ -267,7 +267,7 @@ def _run_creation_with_progress(
             try:
                 model, _, _ = _create_one(model_name, num_classes)
                 del model
-            except Exception as exc:
+            except (RuntimeError, OSError, ValueError, TypeError, URLError) as exc:
                 failures.append((module_name, model_name, repr(exc)))
             pbar.update(1)
 

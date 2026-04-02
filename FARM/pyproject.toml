@@ -7,3 +7,14 @@ dependencies = [
     "flwr>=1.27.0",
     # "syft-flwr==0.5.1",
 ]
+
+
+[tool.ruff]
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["ALL"]
+
+[tool.ruff.lint.per-file-ignores]
+"FARM/__init__.py" = ["N999"]
+"FARM/federated/__init__.py" = ["N999"]

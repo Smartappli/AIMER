@@ -50,7 +50,7 @@ async def libraries():
             return version(pkg_name)
         except PackageNotFoundError:
             return None
-        except Exception:
+        except (ImportError, AttributeError):
             return None
 
     return {
