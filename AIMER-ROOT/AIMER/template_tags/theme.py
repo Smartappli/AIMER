@@ -88,29 +88,54 @@ def client_required(view_func: Callable[..., Any]) -> Callable[..., Any]:
 
 @register.filter(name="is_superuser")
 def is_superuser(user: AbstractBaseUser) -> bool:
-    """Return whether user is superuser."""
+    """Return whether user is superuser.
+
+    Returns:
+        bool: True if the user is a superuser.
+
+    """
     return bool(user.is_superuser)
 
 
 @register.filter(name="superuser_required")
 def superuser_required(view_func: Callable[..., Any]) -> Callable[..., Any]:
-    """Require superuser to access a view."""
+    """Require superuser to access a view.
+
+    Returns:
+        Callable[..., Any]: Wrapped view enforcing the superuser check.
+
+    """
     return user_passes_test(is_superuser, login_url="login")(view_func)
 
 
 @register.filter(name="is_staff")
 def is_staff(user: AbstractBaseUser) -> bool:
-    """Return whether user is staff."""
+    """Return whether user is staff.
+
+    Returns:
+        bool: True if the user is staff.
+
+    """
     return bool(user.is_staff)
 
 
 @register.filter(name="staff_required")
 def staff_required(view_func: Callable[..., Any]) -> Callable[..., Any]:
-    """Require staff to access a view."""
+    """Require staff to access a view.
+
+    Returns:
+        Callable[..., Any]: Wrapped view enforcing the staff check.
+
+    """
     return user_passes_test(is_staff, login_url="login")(view_func)
 
 
 @register.simple_tag
 def current_url(request: HttpRequest) -> str:
-    """Return full request URL."""
+    """Return full request URL.
+
+    Returns:
+        str: Absolute URL for the current request.
+
+    """
     return request.build_absolute_uri()

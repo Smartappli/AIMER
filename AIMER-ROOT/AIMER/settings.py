@@ -30,7 +30,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 def env_bool(name: str, default: bool = False) -> bool:
-    """Return a boolean from an environment variable."""
+    """Return a boolean from an environment variable.
+
+    Returns:
+        bool: Parsed truth value.
+
+    """
     return os.environ.get(name, str(default)).lower() in {
         "1",
         "true",
@@ -40,7 +45,12 @@ def env_bool(name: str, default: bool = False) -> bool:
 
 
 def env_list(name: str, default: Iterable[str] | None = None) -> list[str]:
-    """Return a list from a comma-separated environment variable."""
+    """Return a list from a comma-separated environment variable.
+
+    Returns:
+        list[str]: Trimmed list entries.
+
+    """
     if default is None:
         default = []
     raw_value = os.environ.get(name)
@@ -50,7 +60,12 @@ def env_list(name: str, default: Iterable[str] | None = None) -> list[str]:
 
 
 def normalize_csrf_origins(origins: Iterable[str]) -> list[str]:
-    """Normalize CSRF trusted origins to include scheme + host."""
+    """Normalize CSRF trusted origins to include scheme + host.
+
+    Returns:
+        list[str]: Origins with ``scheme://netloc`` only.
+
+    """
     normalized: list[str] = []
     for origin in origins:
         parsed = urlsplit(origin)
@@ -151,7 +166,9 @@ DATABASES = {
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
+        "NAME": (
+            "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"
+        ),
     },
     {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator"},
     {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator"},

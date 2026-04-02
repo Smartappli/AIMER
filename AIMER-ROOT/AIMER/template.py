@@ -1,4 +1,5 @@
 # Copyright (c) 2026 AIMER contributors.
+"""Theme template configuration for AIMER."""
 # Template Settings
 # ------------------------------------------------------------------------------
 
@@ -7,18 +8,22 @@
 
 # Template config
 # ? Easily change the template configuration from here
-# ? Replace this object with template-config/demo-*.py file's TEMPLATE_CONFIG to change the template configuration as per our demos
+# ? Replace this object with template-config/demo-*.py file's
+# ? TEMPLATE_CONFIG to change the template configuration as per our demos
 TEMPLATE_CONFIG = {
     "layout": "vertical",  # Options[String]: vertical(default), horizontal
     # "primary_color": "#891b03",     # Set the primary color
     "theme": "light",  # Theme options: 'light' (default), 'dark', 'system'
     "my_skins": "default",  # Skin options: "default", "bordered"
     "has_semi_dark": False,  # Semi-dark mode: True/False (False by default)
-    # options[Boolean]: False(default), True # To set layout to RTL layout  (myRTLSupport must be True for rtl mode)
+    # options[Boolean]: False(default), True
+    # To set layout to RTL (myRTLSupport must be True for RTL mode)
     "rtl_mode": False,
-    # options[Boolean]: True(default), False # Display customizer or not THIS WILL REMOVE INCLUDED JS FILE. SO LOCAL STORAGE WON'T WORK
+    # options[Boolean]: True(default), False
+    # Display customizer or not. This removes included JS; local storage won't work.
     "has_customizer": False,
-    # options[Boolean]: True(default), False # Display customizer UI or not, THIS WON'T REMOVE INCLUDED JS FILE. SO LOCAL STORAGE WILL WORK
+    # options[Boolean]: True(default), False
+    # Display customizer UI or not. This keeps included JS; local storage works.
     "display_customizer": False,
     # options[String]: 'compact', 'wide' (compact=container-xxl, wide=container-fluid)
     "content_layout": "compact",
@@ -26,9 +31,11 @@ TEMPLATE_CONFIG = {
     "navbar_type": "fixed",
     # options[String]: 'static', 'fixed' (for horizontal layout only)
     "header_type": "fixed",
-    # options[Boolean]: True(default), False # Layout(menu) Fixed (Only for vertical Layout)
+    # options[Boolean]: True(default), False
+    # Layout(menu) fixed (only for vertical layout)
     "menu_fixed": True,
-    # options[Boolean]: False(default), True # Show menu collapsed, Only for vertical Layout
+    # options[Boolean]: False(default), True
+    # Show collapsed menu (only for vertical layout)
     "menu_collapsed": False,
     # options[Boolean]: False(default), True # Footer Fixed
     "footer_fixed": False,
@@ -56,8 +63,17 @@ THEME_VARIABLES = {
     "template_suffix": "Django Admin Template",
     "template_version": "3.0.0",
     "template_free": False,
-    "template_description": "Sneat is a modern, clean and fully responsive admin template built with Bootstrap 5, Django, HTML, CSS, and JavaScript. It has a huge collection of reusable UI components. It can be used for all types of web applications like custom admin panel, project management system, admin dashboard, Backend application or CRM.",
-    "template_keyword": "django, django admin, dashboard, bootstrap 5 dashboard, bootstrap 5 design, bootstrap 5",
+    "template_description": (
+        "Sneat is a modern, clean and fully responsive admin template built "
+        "with Bootstrap 5, Django, HTML, CSS, and JavaScript. It has a huge "
+        "collection of reusable UI components. It can be used for web "
+        "applications like custom admin panels, project management systems, "
+        "dashboards, backend applications, or CRMs."
+    ),
+    "template_keyword": (
+        "django, django admin, dashboard, bootstrap 5 dashboard, "
+        "bootstrap 5 design, bootstrap 5"
+    ),
     "facebook_url": "https://www.facebook.com/ThemeSelections/",
     "twitter_url": "https://twitter.com/Theme_Selection",
     "github_url": "https://github.com/themeselection",
