@@ -1,13 +1,18 @@
+# Copyright (c) 2026 AIMER contributors.
+"""Email verification views."""
+
 import uuid
+from typing import Any, override
 
 from asgiref.sync import sync_to_async
 from django.conf import settings
 from django.contrib import messages
+from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
 from django.shortcuts import redirect
 
-from ..helpers import send_verification_email
-from ..models import Profile
-from ..views import AuthView
+from auth.helpers import send_verification_email
+from auth.models import Profile
+from auth.views import AuthView
 
 
 class VerifyEmailTokenView(AuthView):
@@ -25,7 +30,8 @@ class VerifyEmailTokenView(AuthView):
       verify email page.
     """
 
-    async def get(self, request, token):
+    @override
+    async def get(self, request: HttpRequest, token: str) -> HttpResponseRedirect:
         """
         Handle token verification.
 
@@ -67,7 +73,8 @@ class VerifyEmailView(AuthView):
     email address and where they can trigger a resend of the verification email.
     """
 
-    async def get(self, request):
+    @override
+    async def get(self, request: HttpRequest) -> HttpResponse:
         """
         Render the verify email page.
 
@@ -93,7 +100,8 @@ class SendVerificationView(AuthView):
     - Redirects back to the verify email page.
     """
 
-    async def get(self, request):
+    @override
+    async def get(self, request: HttpRequest) -> HttpResponseRedirect:
         """
         Send a (re)verification email to the user.
 
@@ -127,7 +135,10 @@ class SendVerificationView(AuthView):
 
         return redirect("verify-email-page")
 
-    async def get_email_and_message(self, request):
+    @staticmethod
+    async def get_email_and_message(
+        request: HttpRequest,
+    ) -> tuple[str | None, Any]:
         """
         Resolve the recipient email and the user-facing message to display.
 
@@ -157,7 +168,10 @@ class SendVerificationView(AuthView):
             else:
                 message = await sync_to_async(messages.error)(
                     request,
-                    "Email settings are not configured. Unable to send verification email.",
+                    (
+                        "Email settings are not configured. Unable to send "
+                        "verification email."
+                    ),
                 )
         else:
             email = request.session.get("email")
@@ -166,7 +180,10 @@ class SendVerificationView(AuthView):
             else:
                 message = await sync_to_async(messages.error)(
                     request,
-                    "Email settings are not configured. Unable to send verification email.",
+                    (
+                        "Email settings are not configured. Unable to send "
+                        "verification email."
+                    ),
                 )
 
         return email, message
