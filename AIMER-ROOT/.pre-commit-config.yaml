@@ -82,6 +82,7 @@ repos:
   - repo: https://github.com/astral-sh/ruff-pre-commit
     rev: v0.15.8
     hooks:
-      # Run the linter with custom arguments.
       - id: ruff-check
-        args: [ "--preview", "--ignore=D211,D213", "--config=pyproject.toml", "--output-format=github", "--diff", "--exclude=auth/migrations,geo_api/migrations,manage.py,db_api/migrations,dashboards/migrations", "--fix" ]
+        args: [ "--fix", "--config=pyproject.toml" ]
+      - id: ruff-format
+        args: [ "--config=pyproject.toml" ]
