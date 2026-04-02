@@ -1,7 +1,5 @@
 """View controllers for website front pages."""
 
-from typing import Any
-
 from AIMER import TemplateLayout
 from AIMER.template_helpers.theme import TemplateHelper
 from django.views.generic import TemplateView
@@ -10,7 +8,7 @@ from django.views.generic import TemplateView
 class FrontPagesView(TemplateView):
     """Base view for AIMER front pages."""
 
-    def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
+    def get_context_data(self, **kwargs: object) -> dict[str, object]:
         """Build template context for front pages.
 
         Returns:
