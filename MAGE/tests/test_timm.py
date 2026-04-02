@@ -1,10 +1,21 @@
+import importlib.util
 import os
 import sys
 import time
 
 import pytest
-from timm import create_model, list_models, list_modules
-from tqdm.auto import tqdm
+
+TIMM_AVAILABLE = importlib.util.find_spec("timm") is not None
+TQDM_AVAILABLE = importlib.util.find_spec("tqdm") is not None
+
+pytestmark = pytest.mark.skipif(
+    not (TIMM_AVAILABLE and TQDM_AVAILABLE),
+    reason="Optional dependencies `timm` and `tqdm` are required for this test.",
+)
+
+if TIMM_AVAILABLE and TQDM_AVAILABLE:
+    from timm import create_model, list_models, list_modules
+    from tqdm.auto import tqdm
 
 
 @pytest.fixture(scope="session")
