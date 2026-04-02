@@ -3,6 +3,11 @@ from __future__ import annotations
 from types import SimpleNamespace
 from unittest.mock import patch
 
+from AIMER import TemplateLayout
+from AIMER.context_processors import environment, get_cookie, language_code, my_setting
+from AIMER.language_middleware import DefaultLanguageMiddleware
+from AIMER.template_helpers.theme import TemplateHelper
+from AIMER.template_tags import theme as theme_tags
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Group, Permission
 from django.contrib.contenttypes.models import ContentType
@@ -15,13 +20,8 @@ from templates.layout.bootstrap.layout_horizontal import (
     TemplateBootstrapLayoutHorizontal,
 )
 from templates.layout.bootstrap.layout_vertical import TemplateBootstrapLayoutVertical
-from website.views import FrontPagesView
 
-from AIMER import TemplateLayout
-from AIMER.context_processors import environment, get_cookie, language_code, my_setting
-from AIMER.language_middleware import DefaultLanguageMiddleware
-from AIMER.template_helpers.theme import TemplateHelper
-from AIMER.template_tags import theme as theme_tags
+from website.views import FrontPagesView
 
 
 class TemplateHelperTests(TestCase):
