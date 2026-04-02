@@ -22,7 +22,8 @@ class DefaultLanguageMiddleware:
         self.get_response = get_response
 
     def __call__(self, request: HttpRequest) -> HttpResponse:
-        """Process request and ensure default language cookie exists.
+        """
+        Process request and ensure default language cookie exists.
 
         Returns:
             HTTP response with language cookie ensured.

@@ -1,4 +1,5 @@
-"""Authentication views base controller.
+"""
+Authentication views base controller.
 
 This module defines `AuthView`, a shared base `TemplateView` for authentication
 pages (login, register, verify email, reset password, etc.).
@@ -16,14 +17,16 @@ from django.views.generic import TemplateView
 
 
 class AuthView(TemplateView):
-    """Base view for authentication-related pages.
+    """
+    Base view for authentication-related pages.
 
     Overrides `get_context_data()` to initialize the global layout context via
     `TemplateLayout.init()` and to enforce the blank layout for auth templates.
     """
 
     def get_context_data(self, **kwargs):
-        """Build template context for auth pages.
+        """
+        Build template context for auth pages.
 
         Args:
             **kwargs: Context parameters passed by Django (e.g. URL kwargs).

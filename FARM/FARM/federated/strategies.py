@@ -50,7 +50,8 @@ class RagFedAvgStrategy(fl.server.strategy.FedAvg):
         self,
         _client_manager: fl.server.client_manager.ClientManager,
     ) -> fl.common.Parameters | None:
-        """Return the initial serialized RAG state for connected clients.
+        """
+        Return the initial serialized RAG state for connected clients.
 
         Returns:
             Serialized RAG state suitable as initial model parameters.
@@ -64,7 +65,8 @@ class RagFedAvgStrategy(fl.server.strategy.FedAvg):
         results: Sequence[tuple[fl.server.client_proxy.ClientProxy, fl.common.FitRes]],
         _failures: Sequence[BaseException] | None,
     ) -> tuple[fl.common.Parameters | None, Mapping[str, object]]:
-        """Merge RAG payloads from clients and return the aggregated state.
+        """
+        Merge RAG payloads from clients and return the aggregated state.
 
         Returns:
             Tuple of serialized aggregated RAG parameters and round metrics.

@@ -41,7 +41,8 @@ class FederatedTaskClient(fl.client.NumPyClient):
         self,
         _config: Mapping[str, Any] | None = None,
     ) -> list[Any]:
-        """Return current model parameters from task handlers.
+        """
+        Return current model parameters from task handlers.
 
         Returns:
             Current model parameters formatted for Flower transport.
@@ -54,7 +55,8 @@ class FederatedTaskClient(fl.client.NumPyClient):
         parameters: Sequence[Any],
         config: Mapping[str, Any],
     ) -> tuple[list[Any], int, dict[str, Any]]:
-        """Apply incoming parameters and execute one local training step.
+        """
+        Apply incoming parameters and execute one local training step.
 
         Returns:
             Tuple ``(parameters, num_examples, metrics)`` after local training.
@@ -73,7 +75,8 @@ class FederatedTaskClient(fl.client.NumPyClient):
         parameters: Sequence[Any],
         config: Mapping[str, Any],
     ) -> tuple[float, int, dict[str, Any]]:
-        """Evaluate the model using task-provided evaluation logic.
+        """
+        Evaluate the model using task-provided evaluation logic.
 
         Returns:
             Tuple ``(loss, num_examples, metrics)`` from local evaluation.
@@ -104,7 +107,8 @@ class RagClient(fl.client.Client):
         self,
         _ins: fl.common.GetParametersIns,
     ) -> fl.common.GetParametersRes:
-        """Return the current serialized RAG index state.
+        """
+        Return the current serialized RAG index state.
 
         Returns:
             Flower response containing serialized RAG state parameters.
@@ -117,7 +121,8 @@ class RagClient(fl.client.Client):
         )
 
     def fit(self, ins: fl.common.FitIns) -> fl.common.FitRes:
-        """Merge incoming state, apply local updates, and return new state.
+        """
+        Merge incoming state, apply local updates, and return new state.
 
         Returns:
             Flower fit response with updated serialized state and metrics.
@@ -140,7 +145,8 @@ class RagClient(fl.client.Client):
         )
 
     def evaluate(self, _ins: fl.common.EvaluateIns) -> fl.common.EvaluateRes:
-        """Return a lightweight evaluation payload for compatibility.
+        """
+        Return a lightweight evaluation payload for compatibility.
 
         Returns:
             Flower evaluation response with zero loss and RAG doc metrics.

@@ -1,6 +1,7 @@
 # Copyright (C) 2026 AIMER contributors.
 
-"""TorchVision model registry smoke tests.
+"""
+TorchVision model registry smoke tests.
 
 The goal is to validate that TorchVision models can be constructed across
 multiple submodules (classification, detection, segmentation, etc.) without
@@ -42,7 +43,8 @@ logger = logging.getLogger(__name__)
 
 
 def _safe_list_models(module: ModuleType) -> list[str]:
-    """Return available model builder names for a TorchVision module.
+    """
+    Return available model builder names for a TorchVision module.
 
     Prefers the official registry (TorchVision >= 0.14 via ``tvm.list_models``).
     Falls back to introspection for older versions (less reliable, but avoids
@@ -83,7 +85,8 @@ def _safe_list_models(module: ModuleType) -> list[str]:
 
 
 def _safe_get_model_weights_default(model_name: str) -> object | None:
-    """Return ``weights_enum.DEFAULT`` for a model if available, else ``None``.
+    """
+    Return ``weights_enum.DEFAULT`` for a model if available, else ``None``.
 
     Returns:
         The default weights enum member when available, otherwise ``None``.
@@ -117,7 +120,8 @@ def _safe_get_model(
     weights: object | None,
     num_classes: int,
 ) -> nn.Module:
-    """Create a model using the best available TorchVision API.
+    """
+    Create a model using the best available TorchVision API.
 
     - If ``tvm.get_model`` exists:
       - When ``weights`` is not None, call ``get_model(name, weights=...)``.
@@ -165,7 +169,8 @@ def _create_one(
     model_name: str,
     num_classes: int,
 ) -> tuple[nn.Module, str, float]:
-    """Create one model, trying DEFAULT weights first, then random init.
+    """
+    Create one model, trying DEFAULT weights first, then random init.
 
     Returns:
         A tuple ``(model, status, elapsed_seconds)`` where ``status`` is either
@@ -193,7 +198,8 @@ def _create_one(
 
 
 def _iter_models(tv_models: dict[str, list[str]]) -> Iterator[tuple[str, str]]:
-    """Yield ``(module_name, model_name)`` pairs.
+    """
+    Yield ``(module_name, model_name)`` pairs.
 
     Yields:
         Pairs combining a submodule name and one model name from that submodule.
@@ -209,7 +215,8 @@ def _run_creation_with_progress(
     *,
     num_classes: int,
 ) -> list[tuple[str, str, str]]:
-    """Run model creation checks and return a list of failures.
+    """
+    Run model creation checks and return a list of failures.
 
     Returns:
         List of model-creation failures as ``(module, model, error_repr)``.
@@ -264,7 +271,8 @@ def _run_creation_with_tty_progress(
     bar_fmt: str,
     num_classes: int,
 ) -> list[tuple[str, str, str]]:
-    """Run model creation checks with nested TTY progress bars.
+    """
+    Run model creation checks with nested TTY progress bars.
 
     Returns:
         List of model-creation failures as ``(module, model, error_repr)``.
@@ -348,7 +356,8 @@ def _run_module_creation(
 
 @pytest.fixture(scope="session")
 def tv_modules() -> dict[str, ModuleType]:
-    """Return TorchVision submodules to probe for model builders.
+    """
+    Return TorchVision submodules to probe for model builders.
 
     Returns:
         Mapping from logical module labels to TorchVision submodule objects.
@@ -377,7 +386,8 @@ def tv_modules() -> dict[str, ModuleType]:
 
 @pytest.fixture(scope="session")
 def tv_models(tv_modules: dict[str, ModuleType]) -> dict[str, list[str]]:
-    """Return model-name lists per TorchVision submodule.
+    """
+    Return model-name lists per TorchVision submodule.
 
     Returns:
         Dictionary keyed by module label with corresponding model-builder names.
@@ -395,7 +405,8 @@ def tv_models(tv_modules: dict[str, ModuleType]) -> dict[str, list[str]]:
 
 @pytest.fixture(scope="session")
 def num_classes() -> int:
-    """Return a small class count for classifier heads.
+    """
+    Return a small class count for classifier heads.
 
     Returns:
         Number of classes used to build classifier heads during tests.

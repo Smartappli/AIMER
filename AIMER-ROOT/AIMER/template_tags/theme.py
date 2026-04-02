@@ -22,7 +22,8 @@ register = template.Library()
 
 
 def _safe(value: object) -> SafeString:
-    """Render a value as a Django safe string.
+    """
+    Render a value as a Django safe string.
 
     Returns:
         Safely escaped string representation.
@@ -33,7 +34,8 @@ def _safe(value: object) -> SafeString:
 
 @register.simple_tag
 def get_theme_variables(scope: str) -> SafeString:
-    """Return a theme variable as a safe rendered string.
+    """
+    Return a theme variable as a safe rendered string.
 
     Returns:
         Safely rendered theme variable.
@@ -44,7 +46,8 @@ def get_theme_variables(scope: str) -> SafeString:
 
 @register.simple_tag
 def get_theme_config(scope: str) -> SafeString:
-    """Return a theme config value as a safe rendered string.
+    """
+    Return a theme config value as a safe rendered string.
 
     Returns:
         Safely rendered theme configuration value.
@@ -55,7 +58,8 @@ def get_theme_config(scope: str) -> SafeString:
 
 @register.filter
 def filter_by_url(submenu: Sequence[dict[str, object]] | None, url: object) -> bool:
-    """Return whether a menu tree matches the current URL.
+    """
+    Return whether a menu tree matches the current URL.
 
     Returns:
         ``True`` if the URL exists in the menu tree, otherwise ``False``.
@@ -80,7 +84,8 @@ def filter_by_url(submenu: Sequence[dict[str, object]] | None, url: object) -> b
 
 @register.filter
 def has_group(user: AbstractBaseUser, group: str) -> bool:
-    """Return whether the user belongs to a group.
+    """
+    Return whether the user belongs to a group.
 
     Returns:
         ``True`` when the user belongs to the named group.
@@ -91,7 +96,8 @@ def has_group(user: AbstractBaseUser, group: str) -> bool:
 
 @register.filter
 def has_permission(user: AbstractBaseUser, permission: str) -> bool:
-    """Return whether the user has a permission.
+    """
+    Return whether the user has a permission.
 
     Returns:
         ``True`` when the user has the provided permission.
@@ -102,7 +108,8 @@ def has_permission(user: AbstractBaseUser, permission: str) -> bool:
 
 @register.filter(name="is_admin")
 def is_admin(user: AbstractBaseUser) -> bool:
-    """Return whether the user belongs to admin group.
+    """
+    Return whether the user belongs to admin group.
 
     Returns:
         ``True`` when user is in the admin group.
@@ -113,7 +120,8 @@ def is_admin(user: AbstractBaseUser) -> bool:
 
 @register.filter(name="admin_required")
 def admin_required(view_func: Callable[..., object]) -> Callable[..., object]:
-    """Require admin group to access a view.
+    """
+    Require admin group to access a view.
 
     Returns:
         Wrapped view enforcing the admin-group check.
@@ -124,7 +132,8 @@ def admin_required(view_func: Callable[..., object]) -> Callable[..., object]:
 
 @register.filter(name="is_client")
 def is_client(user: AbstractBaseUser) -> bool:
-    """Return whether the user belongs to client group.
+    """
+    Return whether the user belongs to client group.
 
     Returns:
         ``True`` when user is in the client group.
@@ -135,7 +144,8 @@ def is_client(user: AbstractBaseUser) -> bool:
 
 @register.filter(name="client_required")
 def client_required(view_func: Callable[..., object]) -> Callable[..., object]:
-    """Require client group to access a view.
+    """
+    Require client group to access a view.
 
     Returns:
         Wrapped view enforcing the client-group check.
@@ -146,7 +156,8 @@ def client_required(view_func: Callable[..., object]) -> Callable[..., object]:
 
 @register.filter(name="is_superuser")
 def is_superuser(user: AbstractBaseUser) -> bool:
-    """Return whether user is superuser.
+    """
+    Return whether user is superuser.
 
     Returns:
         ``True`` if the user is a superuser.
@@ -157,7 +168,8 @@ def is_superuser(user: AbstractBaseUser) -> bool:
 
 @register.filter(name="superuser_required")
 def superuser_required(view_func: Callable[..., object]) -> Callable[..., object]:
-    """Require superuser to access a view.
+    """
+    Require superuser to access a view.
 
     Returns:
         Wrapped view enforcing the superuser check.
@@ -168,7 +180,8 @@ def superuser_required(view_func: Callable[..., object]) -> Callable[..., object
 
 @register.filter(name="is_staff")
 def is_staff(user: AbstractBaseUser) -> bool:
-    """Return whether user is staff.
+    """
+    Return whether user is staff.
 
     Returns:
         ``True`` if the user is staff.
@@ -179,7 +192,8 @@ def is_staff(user: AbstractBaseUser) -> bool:
 
 @register.filter(name="staff_required")
 def staff_required(view_func: Callable[..., object]) -> Callable[..., object]:
-    """Require staff to access a view.
+    """
+    Require staff to access a view.
 
     Returns:
         Wrapped view enforcing the staff check.
@@ -190,7 +204,8 @@ def staff_required(view_func: Callable[..., object]) -> Callable[..., object]:
 
 @register.simple_tag
 def current_url(request: HttpRequest) -> str:
-    """Return full request URL.
+    """
+    Return full request URL.
 
     Returns:
         Absolute URL for the current request.

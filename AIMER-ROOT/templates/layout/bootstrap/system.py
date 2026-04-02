@@ -9,7 +9,8 @@ class TemplateBootstrapSystem:
 
     @staticmethod
     def init(context: dict[str, object]) -> dict[str, object]:
-        """Initialize the template context for system layout.
+        """
+        Initialize the template context for system layout.
 
         Returns:
             Updated context dictionary.

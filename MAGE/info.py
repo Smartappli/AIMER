@@ -1,6 +1,7 @@
 # Copyright (C) 2026 AIMER contributors.
 
-"""Runtime environment information utilities.
+"""
+Runtime environment information utilities.
 
 This module gathers Python/PyTorch and accelerator backend details (CUDA/ROCm,
 Apple MPS, Intel XPU) for debugging and reproducibility.
@@ -22,7 +23,8 @@ if TYPE_CHECKING:
 
 
 def _safe[T](label: str, fn: Callable[[], T], default: T | str = "N/A") -> T | str:
-    """Call a function and return its result, or a safe fallback on failure.
+    """
+    Call a function and return its result, or a safe fallback on failure.
 
     Args:
         label: Human-friendly label included in the fallback message.
@@ -41,7 +43,8 @@ def _safe[T](label: str, fn: Callable[[], T], default: T | str = "N/A") -> T | s
 
 
 def build_info_report() -> str:
-    """Build a multi-line report describing the current runtime environment.
+    """
+    Build a multi-line report describing the current runtime environment.
 
     Returns:
         A formatted string with Python, PyTorch and backend capability details.

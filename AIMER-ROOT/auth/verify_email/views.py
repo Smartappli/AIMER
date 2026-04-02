@@ -11,7 +11,8 @@ from ..views import AuthView
 
 
 class VerifyEmailTokenView(AuthView):
-    """Verify a user's email address using a token.
+    """
+    Verify a user's email address using a token.
 
     GET /verify-email/<token>:
     - Finds the Profile with `email_token == token`.
@@ -25,7 +26,8 @@ class VerifyEmailTokenView(AuthView):
     """
 
     async def get(self, request, token):
-        """Handle token verification.
+        """
+        Handle token verification.
 
         Args:
             request: Django HttpRequest.
@@ -58,14 +60,16 @@ class VerifyEmailTokenView(AuthView):
 
 
 class VerifyEmailView(AuthView):
-    """Display the verify email page.
+    """
+    Display the verify email page.
 
     This is typically a page where users are informed that they must verify their
     email address and where they can trigger a resend of the verification email.
     """
 
     async def get(self, request):
-        """Render the verify email page.
+        """
+        Render the verify email page.
 
         Args:
             request: Django HttpRequest.
@@ -78,7 +82,8 @@ class VerifyEmailView(AuthView):
 
 
 class SendVerificationView(AuthView):
-    """Generate and send a verification email.
+    """
+    Generate and send a verification email.
 
     GET /send-verification:
     - Determines the target email (authenticated user profile or session).
@@ -89,7 +94,8 @@ class SendVerificationView(AuthView):
     """
 
     async def get(self, request):
-        """Send a (re)verification email to the user.
+        """
+        Send a (re)verification email to the user.
 
         Args:
             request: Django HttpRequest.
@@ -122,7 +128,8 @@ class SendVerificationView(AuthView):
         return redirect("verify-email-page")
 
     async def get_email_and_message(self, request):
-        """Resolve the recipient email and the user-facing message to display.
+        """
+        Resolve the recipient email and the user-facing message to display.
 
         Rules:
         - If authenticated, use `request.user.profile.email`.

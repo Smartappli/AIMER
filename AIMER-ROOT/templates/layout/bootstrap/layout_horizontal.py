@@ -23,7 +23,8 @@ class TemplateBootstrapLayoutHorizontal:
 
     @staticmethod
     def init(context: dict[str, object]) -> dict[str, object]:
-        """Initialize the template context for horizontal layout.
+        """
+        Initialize the template context for horizontal layout.
 
         Returns:
             Updated context dictionary.

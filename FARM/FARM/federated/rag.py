@@ -52,7 +52,8 @@ class RagIndex:
         return len(self._doc_ids)
 
     def add_documents(self, documents: Sequence[RagDocument]) -> None:
-        """Insert new documents while skipping existing document IDs.
+        """
+        Insert new documents while skipping existing document IDs.
 
         Raises:
             ValueError: If a document embedding dimension is incompatible.
@@ -97,7 +98,8 @@ class RagIndex:
                 )
 
     def to_state(self) -> RagState:
-        """Export the current index as a serializable state object.
+        """
+        Export the current index as a serializable state object.
 
         Returns:
             Snapshot of the in-memory index as a ``RagState`` instance.
@@ -112,7 +114,8 @@ class RagIndex:
 
 
 def _serialize_state(state: RagState) -> bytes:
-    """Serialize a `RagState` into UTF-8 JSON bytes.
+    """
+    Serialize a `RagState` into UTF-8 JSON bytes.
 
     Returns:
         JSON payload encoded as bytes.
@@ -128,7 +131,8 @@ def _serialize_state(state: RagState) -> bytes:
 
 
 def _deserialize_state(payload: bytes) -> RagState:
-    """Deserialize a UTF-8 JSON payload into a `RagState`.
+    """
+    Deserialize a UTF-8 JSON payload into a `RagState`.
 
     Returns:
         Reconstructed RAG state object.
@@ -147,7 +151,8 @@ def _deserialize_state(payload: bytes) -> RagState:
 
 
 def state_to_parameters(state: RagState) -> fl.common.Parameters:
-    """Convert a `RagState` into Flower transport parameters.
+    """
+    Convert a `RagState` into Flower transport parameters.
 
     Returns:
         Flower parameters containing the serialized state.
@@ -158,7 +163,8 @@ def state_to_parameters(state: RagState) -> fl.common.Parameters:
 
 
 def parameters_to_state(parameters: fl.common.Parameters) -> RagState | None:
-    """Decode Flower parameters into a `RagState`, if present.
+    """
+    Decode Flower parameters into a `RagState`, if present.
 
     Returns:
         Decoded state when tensors are present, otherwise ``None``.

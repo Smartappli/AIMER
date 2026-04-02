@@ -72,7 +72,8 @@ def pdf_has_text(pdf_file: Path, max_pages: int = 3) -> bool:
 
 
 def convert_pdf_to_docling(pdf_file: Path) -> object:
-    """Convert a PDF file with Docling using OCR when needed.
+    """
+    Convert a PDF file with Docling using OCR when needed.
 
     Returns:
         Docling conversion result object.
@@ -126,7 +127,8 @@ def save_page_images(doc_converter: object, figures_dir: Path) -> None:
 
 
 def extract_context_and_table(lines: list[str], table_index: int) -> tuple[str, int]:
-    """Extract markdown table plus nearby context lines.
+    """
+    Extract markdown table plus nearby context lines.
 
     Returns:
         Tuple of extracted content and the next line index to process.
@@ -148,7 +150,8 @@ def extract_context_and_table(lines: list[str], table_index: int) -> tuple[str, 
 
 
 def extract_tables_with_content(markdown_text: str) -> list[tuple[str, str, int]]:
-    """Parse markdown and return detected tables with context.
+    """
+    Parse markdown and return detected tables with context.
 
     Returns:
         List of tuples ``(table_content, table_name, page_number)``.

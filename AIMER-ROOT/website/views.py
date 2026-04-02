@@ -11,7 +11,8 @@ class FrontPagesView(TemplateView):
     """Base view for AIMER front pages."""
 
     def get_context_data(self, **kwargs: object) -> dict[str, object]:
-        """Build template context for front pages.
+        """
+        Build template context for front pages.
 
         Returns:
             Context dictionary enriched for front templates.

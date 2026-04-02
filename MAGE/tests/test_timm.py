@@ -1,6 +1,7 @@
 # Copyright (C) 2026 AIMER contributors.
 
-"""timm model registry smoke tests.
+"""
+timm model registry smoke tests.
 
 Validate that timm models can be created across modules without crashing,
 while keeping progress output readable in both TTY and non-TTY environments.
@@ -28,7 +29,8 @@ if TIMM_AVAILABLE and TQDM_AVAILABLE:
 
 @pytest.fixture(scope="session")
 def timm_models() -> dict[str, list[str]]:
-    """List timm models grouped by module.
+    """
+    List timm models grouped by module.
 
     Optionally limit scope in CI via:
       - ``TIMM_TEST_MODULES="resnet,vit,convnext"``
@@ -59,7 +61,8 @@ def timm_models() -> dict[str, list[str]]:
 
 @pytest.fixture(scope="session")
 def num_classes() -> int:
-    """Return a small class count for classifier heads.
+    """
+    Return a small class count for classifier heads.
 
     Returns:
         Number of classes used to instantiate timm models.
@@ -85,7 +88,8 @@ def test_timm_model_creation(
     failures: list[tuple[str, str, str]] = []
 
     def _try_create(model_name: str) -> tuple[bool, float]:
-        """Create one model with pretrained fallback.
+        """
+        Create one model with pretrained fallback.
 
         Returns:
             A tuple ``(pretrained_used, elapsed_seconds)``.

@@ -31,7 +31,8 @@ class FakeTimm(ModuleType):
         }
 
     def list_models(self, module: str | None = None) -> list[str]:
-        """Return all models or those in one fake module.
+        """
+        Return all models or those in one fake module.
 
         Returns:
             list[str]: Matching fake model identifiers.
@@ -47,7 +48,8 @@ class FakeTimm(ModuleType):
         return list(mapping.get(module, []))
 
     def list_modules(self) -> list[str]:
-        """Return fake module names.
+        """
+        Return fake module names.
 
         Returns:
             list[str]: Available fake module names.
@@ -56,7 +58,8 @@ class FakeTimm(ModuleType):
         return list(self._modules)
 
     def is_model_pretrained(self, model_id: str) -> bool:
-        """Tell whether a fake model is marked as pretrained.
+        """
+        Tell whether a fake model is marked as pretrained.
 
         Returns:
             bool: ``True`` for pretrained fake models.
@@ -85,7 +88,8 @@ class FakeFastMCP:
 
     @classmethod
     def from_fastapi(cls, _app: FastAPI, _name: str) -> FakeFastMCP:
-        """Return a fake wrapper instance.
+        """
+        Return a fake wrapper instance.
 
         Returns:
             FakeFastMCP: Fake MCP wrapper.
@@ -95,7 +99,8 @@ class FakeFastMCP:
 
     @staticmethod
     def http_app(_path: str = "/mcp") -> FakeMCPApp:
-        """Return a fake MCP app.
+        """
+        Return a fake MCP app.
 
         Returns:
             FakeMCPApp: Fake MCP HTTP app.
@@ -105,7 +110,8 @@ class FakeFastMCP:
 
 
 def import_module_from_path(module_name: str, file_path: Path) -> ModuleType:
-    """Import a module from an explicit file path.
+    """
+    Import a module from an explicit file path.
 
     Returns:
         ModuleType: Imported module instance.
@@ -126,7 +132,8 @@ def import_module_from_path(module_name: str, file_path: Path) -> ModuleType:
 
 @pytest.fixture
 def app_module(monkeypatch: pytest.MonkeyPatch) -> ModuleType:
-    """Import ``MAGE/api/main.py`` with timm and fastmcp mocked.
+    """
+    Import ``MAGE/api/main.py`` with timm and fastmcp mocked.
 
     Returns:
         ModuleType: Imported API module under test.
@@ -151,7 +158,8 @@ def app_module(monkeypatch: pytest.MonkeyPatch) -> ModuleType:
 
 @pytest.fixture
 def client(app_module: ModuleType) -> TestClient:
-    """Build a test client for the imported app module.
+    """
+    Build a test client for the imported app module.
 
     Returns:
         TestClient: Client bound to the app under test.
@@ -161,7 +169,8 @@ def client(app_module: ModuleType) -> TestClient:
 
 
 def check(condition: object, message: str) -> None:
-    """Raise an error if a condition is false.
+    """
+    Raise an error if a condition is false.
 
     Raises:
         AssertionError: If ``condition`` is falsy.

@@ -77,7 +77,8 @@ def start_rag_server(
 
 
 def build_task_client(task: TaskDefinition) -> FederatedTaskClient:
-    """Build a task client from a task definition.
+    """
+    Build a task client from a task definition.
 
     Returns:
         Initialized federated task client.
@@ -90,7 +91,8 @@ def build_rag_client(
     index: RagIndex,
     document_provider: Callable[[Mapping[str, Any]], list[RagState]],
 ) -> RagClient:
-    """Build a RAG client from an index and update provider.
+    """
+    Build a RAG client from an index and update provider.
 
     Returns:
         Initialized RAG client bound to ``index`` and ``document_provider``.

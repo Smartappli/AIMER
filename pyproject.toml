@@ -28,15 +28,13 @@ line-length = 88
 preview = true
 exclude = [
     "auth/migrations",
-    "geo_api/migrations",
-    "db_api/migrations",
     "manage.py",
-    "dashboards/migrations",
+    "website/migrations",
 ]
 
 [tool.ruff.lint]
 select = ["ALL"]
-ignore = ["N999", "PLW0127", "CPY001"]
+ignore = ["D203", "D212", "PLW0127"]
 
 [tool.ruff.format]
 quote-style = "double"

@@ -12,7 +12,8 @@ if TYPE_CHECKING:
 
 
 def my_setting(_request: HttpRequest) -> dict[str, Any]:
-    """Add Django settings to template context.
+    """
+    Add Django settings to template context.
 
     Returns:
         Mapping with Django settings object.
@@ -22,7 +23,8 @@ def my_setting(_request: HttpRequest) -> dict[str, Any]:
 
 
 def language_code(request: HttpRequest) -> dict[str, str]:
-    """Add active request language code to template context.
+    """
+    Add active request language code to template context.
 
     Returns:
         Mapping with active language code.
@@ -32,7 +34,8 @@ def language_code(request: HttpRequest) -> dict[str, str]:
 
 
 def get_cookie(request: HttpRequest) -> dict[str, Any]:
-    """Expose request cookies in template context.
+    """
+    Expose request cookies in template context.
 
     Returns:
         Mapping with cookie dictionary.
@@ -42,7 +45,8 @@ def get_cookie(request: HttpRequest) -> dict[str, Any]:
 
 
 def environment(_request: HttpRequest) -> dict[str, str]:
-    """Expose runtime environment in template context.
+    """
+    Expose runtime environment in template context.
 
     Returns:
         Mapping with the configured environment name.

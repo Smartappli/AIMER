@@ -5,7 +5,8 @@ from pydantic import BaseModel, Field
 
 
 class DocType(StrEnum):
-    """Supported document types.
+    """
+    Supported document types.
 
     Values are stored/serialized as strings (subclassing `str` helps with JSON
     serialization and compatibility with vector DB metadata filters).
@@ -15,7 +16,8 @@ class DocType(StrEnum):
 
 
 class ChunkMetadata(BaseModel):
-    """Metadata attached to a document chunk.
+    """
+    Metadata attached to a document chunk.
 
     All fields are optional so the model can represent partial metadata and can
     be used as structured output from an LLM (fields not mentioned stay `None`).

@@ -1,5 +1,6 @@
 # Copyright (c) 2026 AIMER contributors.
-"""ASGI config for AIMER project.
+"""
+ASGI config for AIMER project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 

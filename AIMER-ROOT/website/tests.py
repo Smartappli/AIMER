@@ -241,7 +241,8 @@ class TemplateTagTests(BaseTestCase):
         self.user_model = get_user_model()
 
     def _mkuser(self, username: str, **extra_fields: object) -> AbstractBaseUser:
-        """Create a user with unique username/email for each test.
+        """
+        Create a user with unique username/email for each test.
 
         Returns:
             Newly created user instance.

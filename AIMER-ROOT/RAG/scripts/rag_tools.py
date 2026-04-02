@@ -61,7 +61,8 @@ def extract_filters(user_query: str):
 
 @tool
 def hybrid_search(query: str, k: int = 5):
-    """Perform hybrid search (dense + sparse vector).
+    """
+    Perform hybrid search (dense + sparse vector).
 
     Args:
         query: Search query

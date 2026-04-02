@@ -14,7 +14,8 @@ class TemplateHelper:
 
     @staticmethod
     def init_context(context: dict[str, object]) -> dict[str, object]:
-        """Populate a context dict with template settings.
+        """
+        Populate a context dict with template settings.
 
         Returns:
             Updated context dictionary.
@@ -107,7 +108,8 @@ class TemplateHelper:
 
     @staticmethod
     def get_theme_variables(scope: str) -> object:
-        """Return an entry from THEME_VARIABLES.
+        """
+        Return an entry from THEME_VARIABLES.
 
         Returns:
             Value matching the requested scope.
@@ -117,7 +119,8 @@ class TemplateHelper:
 
     @staticmethod
     def get_theme_config(scope: str) -> object:
-        """Return an entry from TEMPLATE_CONFIG.
+        """
+        Return an entry from TEMPLATE_CONFIG.
 
         Returns:
             Value matching the requested scope.
@@ -127,7 +130,8 @@ class TemplateHelper:
 
     @staticmethod
     def set_layout(view: str, context: dict[str, object] | None = None) -> str:
-        """Resolve and initialize layout bootstrap class for a page view.
+        """
+        Resolve and initialize layout bootstrap class for a page view.
 
         Returns:
             Relative path to the selected layout template.
@@ -150,7 +154,8 @@ class TemplateHelper:
 
     @staticmethod
     def import_class(from_module: str, import_class_name: str) -> object:
-        """Import and return a class by module and class names.
+        """
+        Import and return a class by module and class names.
 
         Returns:
             Imported class object.
