@@ -2,17 +2,24 @@
 
 from __future__ import annotations
 
-from collections.abc import Mapping, Sequence
+from collections.abc import Mapping
 from dataclasses import dataclass, field
-from enum import Enum
-from typing import Any, Protocol
+from enum import StrEnum
+from typing import TYPE_CHECKING, Protocol
 
-import numpy as np
+if TYPE_CHECKING:
+    from collections.abc import Sequence
 
-from .data import FederatedDataset
+    import numpy as np
+
+    from .data import FederatedDataset
 
 
-class TaskType(str, Enum):
+ModelT = object
+type MetricsT = Mapping[str, float | int | str | bool]
+
+
+class TaskType(StrEnum):
     """Supported task categories for federated training."""
 
     CLASSIFICATION = "classification"
@@ -28,7 +35,7 @@ class TrainingResult:
 
     parameters: list[np.ndarray]
     num_examples: int
-    metrics: Mapping[str, Any] = field(default_factory=dict)
+    metrics: MetricsT = field(default_factory=dict)
 
 
 @dataclass(slots=True)
@@ -37,35 +44,35 @@ class EvaluationResult:
 
     loss: float
     num_examples: int
-    metrics: Mapping[str, Any] = field(default_factory=dict)
+    metrics: MetricsT = field(default_factory=dict)
 
 
 class TaskHandlers(Protocol):
     """Protocol that task-specific adapters must implement."""
 
-    def get_parameters(self, model: Any) -> list[np.ndarray]:
+    def get_parameters(self, model: ModelT) -> list[np.ndarray]:
         """Extract model parameters as NumPy arrays."""
 
     def set_parameters(
         self,
-        model: Any,
+        model: ModelT,
         parameters: Sequence[np.ndarray],
     ) -> None:
         """Load model parameters from a sequence of NumPy arrays."""
 
     def train(
         self,
-        model: Any,
+        model: ModelT,
         dataset: FederatedDataset,
-        config: Mapping[str, Any],
+        config: MetricsT,
     ) -> TrainingResult:
         """Run one local training step and return training metadata."""
 
     def evaluate(
         self,
-        model: Any,
+        model: ModelT,
         dataset: FederatedDataset,
-        config: Mapping[str, Any],
+        config: MetricsT,
     ) -> EvaluationResult:
         """Run local evaluation and return loss/metrics."""
 
@@ -76,7 +83,7 @@ class TaskDefinition:
 
     name: str
     task_type: TaskType
-    model: Any
+    model: ModelT
     dataset: FederatedDataset
     handlers: TaskHandlers
-    metadata: Mapping[str, Any] = field(default_factory=dict)
+    metadata: MetricsT = field(default_factory=dict)
