@@ -47,21 +47,24 @@ def build_info_report() -> str:
     """
     lines: list[str] = []
 
-    lines.append(
-        f"Python: {sys.version.split()[0]} ({platform.system()} {platform.release()})",
-    )
-    lines.append(f"PyTorch version: {torch.__version__}")
-    lines.append("")
-    lines.append("--- Build info (CUDA / HIP (ROCm) / etc.)")
-    lines.append(f"torch.version.cuda: {torch.version.cuda}")
-    lines.append(f"torch.version.hip:  {getattr(torch.version, 'hip', None)}")
-    lines.append(
-        f"torch.version.git:  {getattr(torch.version, 'git_version', None)}",
+    lines.extend(
+        (
+            (
+                f"Python: {sys.version.split()[0]} "
+                f"({platform.system()} {platform.release()})"
+            ),
+            f"PyTorch version: {torch.__version__}",
+            "",
+            "--- Build info (CUDA / HIP (ROCm) / etc.)",
+            f"torch.version.cuda: {torch.version.cuda}",
+            f"torch.version.hip:  {getattr(torch.version, 'hip', None)}",
+            f"torch.version.git:  {getattr(torch.version, 'git_version', None)}",
+            "",
+            "=== CUDA / ROCm ===",
+        ),
     )
 
     # --- CUDA / ROCm (AMD uses torch.cuda API too)
-    lines.append("")
-    lines.append("=== CUDA / ROCm ===")
     cuda_available = torch.cuda.is_available()
     lines.append(f"CUDA available: {cuda_available}")
 
@@ -93,26 +96,33 @@ def build_info_report() -> str:
             mem_bytes = getattr(props, "total_memory", 0)
             mem_gb = float(mem_bytes) / (1024**3) if mem_bytes else 0.0
             lines.append(
-                f" - [{i}] {name} | capability={cap_major}.{cap_minor} | VRAM={mem_gb:.2f} GB",
+                (
+                    f" - [{i}] {name} | capability={cap_major}.{cap_minor} "
+                    f"| VRAM={mem_gb:.2f} GB"
+                ),
             )
 
     # --- Apple MPS (Mac)
-    lines.append("")
-    lines.append("=== MPS (Apple Silicon) ===")
+    lines.extend(("", "=== MPS (Apple Silicon) ==="))
     mps_backend = getattr(torch.backends, "mps", None)
     if mps_backend is None:
         lines.append("MPS backend: not present in this build")
     else:
-        lines.append(
-            f"MPS built:     {_safe('mps_built', mps_backend.is_built, default=False)}",
-        )
-        lines.append(
-            f"MPS available: {_safe('mps_avail', mps_backend.is_available, default=False)}",
+        lines.extend(
+            (
+                (
+                    "MPS built:     "
+                    f"{_safe('mps_built', mps_backend.is_built, default=False)}"
+                ),
+                (
+                    "MPS available: "
+                    f"{_safe('mps_avail', mps_backend.is_available, default=False)}"
+                ),
+            ),
         )
 
     # --- Intel XPU (oneAPI / Intel GPU)
-    lines.append("")
-    lines.append("=== XPU (Intel) ===")
+    lines.extend(("", "=== XPU (Intel) ==="))
     xpu = getattr(torch, "xpu", None)
     if xpu is None:
         lines.append("XPU backend: not present in this build (no torch.xpu)")
@@ -136,12 +146,14 @@ def build_info_report() -> str:
                 lines.append(f" - [{i}] {name}")
 
     # --- CPU basics
-    lines.append("")
-    lines.append("=== CPU ===")
-    lines.append(
-        f"Num threads: {_safe('threads', torch.get_num_threads, default='N/A')}",
+    lines.extend(
+        (
+            "",
+            "=== CPU ===",
+            f"Num threads: {_safe('threads', torch.get_num_threads, default='N/A')}",
+            f"Default dtype: {torch.get_default_dtype()}",
+        ),
     )
-    lines.append(f"Default dtype: {torch.get_default_dtype()}")
 
     return "\n".join(lines)
 
