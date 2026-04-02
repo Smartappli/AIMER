@@ -67,7 +67,7 @@ def hybrid_search(
 
 
 def rerank_results(
-    query: str, documents: list[Document], top_k: int = 5
+    query: str, documents: list[Document], top_k: int = 5,
 ) -> list[Document]:
     """Rerank retrieved documents using a cross-encoder."""
     reranker = HuggingFaceCrossEncoder(
