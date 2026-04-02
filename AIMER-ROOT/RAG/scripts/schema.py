@@ -1,4 +1,5 @@
 # Copyright (c) 2026 AIMER contributors.
+"""Schema definitions for RAG chunk metadata."""
 from enum import StrEnum
 
 from pydantic import BaseModel, Field

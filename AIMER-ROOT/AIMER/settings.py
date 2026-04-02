@@ -30,7 +30,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
 
-def env_bool(name: str, default: bool = False) -> bool:
+def env_bool(name: str, *, default: bool = False) -> bool:
     """
     Return a boolean from an environment variable.
 

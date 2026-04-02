@@ -1,25 +1,49 @@
+# Copyright (c) 2026 AIMER contributors.
+"""Password reset views."""
+
+from __future__ import annotations
+
+from typing import TYPE_CHECKING, override
+
 from asgiref.sync import sync_to_async
 from django.contrib import messages
 from django.contrib.auth import aauthenticate, alogin
 from django.shortcuts import redirect, render
 from django.utils import timezone
 
-from ..models import Profile
-from ..views import AuthView
+from auth.models import Profile
+from auth.views import AuthView
+
+if TYPE_CHECKING:
+    from django.http import HttpRequest, HttpResponse
 
 
 class ResetPasswordView(AuthView):
-    async def get(self, request, token):
-        if request.user.is_authenticated:
-            # If the user is already logged in, redirect them to the home page or another appropriate page.
-            return redirect(
-                "index",
-            )  # Replace 'index' with the actual URL name for the home page
+    """Handle password reset form rendering and submission."""
 
-        # Render the login page for users who are not logged in.
+    @override
+    async def get(self, request: HttpRequest, _token: str) -> HttpResponse:
+        """
+        Render reset-password form for anonymous users.
+
+        Returns:
+            HttpResponse: Reset-password page or redirect for authenticated users.
+
+        """
+        if request.user.is_authenticated:
+            return redirect("index")
+
         return await sync_to_async(super().get)(request)
 
-    async def post(self, request, token):
+    @override
+    async def post(self, request: HttpRequest, token: str) -> HttpResponse:
+        """
+        Validate token, set a new password, then login user if possible.
+
+        Returns:
+            HttpResponse: Redirect or rendered template based on validation result.
+
+        """
         profile = await Profile.objects.filter(
             forget_password_token=token,
         ).afirst()
@@ -42,50 +66,41 @@ class ResetPasswordView(AuthView):
             )
             return redirect("forgot-password")
 
-        if request.method == "POST":
-            new_password = request.POST.get("password")
-            confirm_password = request.POST.get("confirm-password")
+        new_password = request.POST.get("password")
+        confirm_password = request.POST.get("confirm-password")
 
-            if not (new_password and confirm_password):
-                await sync_to_async(messages.error)(
-                    request,
-                    "Please fill all fields.",
-                )
-                return await sync_to_async(render)(
-                    request,
-                    self.template_name,
-                )
-
-            if new_password != confirm_password:
-                await sync_to_async(messages.error)(
-                    request,
-                    "Passwords do not match.",
-                )
-                return await sync_to_async(render)(
-                    request,
-                    self.template_name,
-                )
-
-            user = profile.user
-            await sync_to_async(user.set_password)(new_password)
-            await user.asave()
-
-            # Clear the forget_password_token
-            profile.forget_password_token = ""
-            profile.forget_password_token_expires_at = None
-            await profile.asave()
-
-            # Log the user in after a successful password reset
-            authenticated_user = await aauthenticate(
+        if not (new_password and confirm_password):
+            await sync_to_async(messages.error)(
                 request,
-                username=user.username,
-                password=new_password,
+                "Please fill all fields.",
             )
-            if authenticated_user:
-                await alogin(request, authenticated_user)
-                return redirect("index")
-            await sync_to_async(messages.success)(
+            return await sync_to_async(render)(request, self.template_name)
+
+        if new_password != confirm_password:
+            await sync_to_async(messages.error)(
                 request,
-                "Password reset successful. Please log in.",
+                "Passwords do not match.",
             )
-            return redirect("login")
+            return await sync_to_async(render)(request, self.template_name)
+
+        user = profile.user
+        await sync_to_async(user.set_password)(new_password)
+        await user.asave()
+
+        profile.forget_password_token = ""
+        profile.forget_password_token_expires_at = None
+        await profile.asave()
+
+        authenticated_user = await aauthenticate(
+            request,
+            username=user.username,
+            password=new_password,
+        )
+        if authenticated_user:
+            await alogin(request, authenticated_user)
+            return redirect("index")
+        await sync_to_async(messages.success)(
+            request,
+            "Password reset successful. Please log in.",
+        )
+        return redirect("login")

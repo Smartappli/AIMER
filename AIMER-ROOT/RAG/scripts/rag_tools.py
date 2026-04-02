@@ -1,5 +1,10 @@
 # Copyright (c) 2026 AIMER contributors.
+"""RAG helper tools for metadata filtering and hybrid retrieval."""
+
+from collections.abc import Sequence
+
 from dotenv import load_dotenv
+from langchain_core.documents import Document
 from langchain_core.tools import tool
 from langchain_ollama import ChatOllama, OllamaEmbeddings
 from langchain_qdrant import FastEmbedSparse, QdrantVectorStore, RetrievalMode
@@ -37,10 +42,15 @@ vector_store = QdrantVectorStore.from_existing_collection(
     retrieval_mode=RetrievalMode.HYBRID,
 )
 
-# Filter Extraction with LLM
 
+def extract_filters(user_query: str) -> dict[str, str | int]:
+    """
+    Extract metadata filters from a user query using structured LLM output.
 
-def extract_filters(user_query: str):
+    Returns:
+        dict[str, str | int]: Non-null metadata fields inferred from the query.
+
+    """
     prompt = f"""
             Extract metada filers from the query. Return None for fields not mentionned.
 
@@ -60,17 +70,16 @@ def extract_filters(user_query: str):
 
 
 @tool
-def hybrid_search(query: str, k: int = 5):
+def hybrid_search(query: str, k: int = 5) -> Sequence[Document]:
     """
     Perform hybrid search (dense + sparse vector).
 
     Args:
-        query: Search query
-        k: Number of results
-        filters: Optional filters like {}
+        query: Search query.
+        k: Number of results.
 
     Returns:
-        List of Document objects
+        Sequence[Document]: Matching documents.
 
     """
     filters = extract_filters(query)
