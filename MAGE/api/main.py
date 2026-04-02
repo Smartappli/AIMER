@@ -38,13 +38,23 @@ def _safe_version(pkg_name: str, module_name: str | None = None) -> str | None:
 
 @api.get("/")
 async def read_root() -> dict[str, str]:
-    """Health-check endpoint."""
+    """Health-check endpoint.
+
+    Returns:
+        Status payload confirming the API is running.
+
+    """
     return {"API": "UP"}
 
 
 @api.get("/libraries")
 async def libraries() -> dict[str, dict[str, str | None]]:
-    """Return versions of key AI/ML libraries if installed."""
+    """Return versions of key AI/ML libraries if installed.
+
+    Returns:
+        Nested mapping of library names to detected version strings (or ``None``).
+
+    """
     return {
         "AI": {
             "keras": _safe_version("keras", "keras"),
@@ -61,19 +71,34 @@ async def libraries() -> dict[str, dict[str, str | None]]:
 
 @api.get("/model")
 async def model_list() -> list[str]:
-    """List all model names known by `timm`."""
+    """List all model names known by `timm`.
+
+    Returns:
+        List of all available timm model identifiers.
+
+    """
     return list(list_models())
 
 
 @api.get("/model/{model_id}/is_pretrained")
 async def is_pretrained(model_id: str) -> bool:
-    """Check whether a specific `timm` model has pretrained weights."""
+    """Check whether a specific `timm` model has pretrained weights.
+
+    Returns:
+        ``True`` when pretrained weights exist for ``model_id``; else ``False``.
+
+    """
     return is_model_pretrained(model_id)
 
 
 @api.get("/model/is_pretrained")
 async def are_pretrained() -> dict[str, dict[str, bool]]:
-    """Check pretrained availability for all `timm` models."""
+    """Check pretrained availability for all `timm` models.
+
+    Returns:
+        Mapping keyed by model name with pretrained availability booleans.
+
+    """
     models = list(list_models())
     return {
         "model_is_pretrained": {model: is_model_pretrained(model) for model in models},
@@ -82,19 +107,34 @@ async def are_pretrained() -> dict[str, dict[str, bool]]:
 
 @api.get("/module")
 async def module_list() -> list[str]:
-    """List all `timm` modules (families / namespaces)."""
+    """List all `timm` modules (families / namespaces).
+
+    Returns:
+        List of available timm module names.
+
+    """
     return list_modules()
 
 
 @api.get("/module/{module_id}/details")
 async def module_details(module_id: str) -> dict[str, list[str]]:
-    """List all `timm` models for a specific module."""
+    """List all `timm` models for a specific module.
+
+    Returns:
+        Single-entry mapping from ``module_id`` to its model identifiers.
+
+    """
     return {module_id: list(list_models(module=module_id))}
 
 
 @api.get("/module/details")
 async def module_all_details() -> dict[str, list[str]]:
-    """List all models for all `timm` modules."""
+    """List all models for all `timm` modules.
+
+    Returns:
+        Mapping from each module name to the list of its model identifiers.
+
+    """
     return {module: list(list_models(module=module)) for module in list_modules()}
 
 
