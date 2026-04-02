@@ -9,19 +9,16 @@ from django.contrib.contenttypes.models import ContentType
 from django.http import HttpRequest, HttpResponse
 from django.test import RequestFactory, TestCase
 from django.utils.safestring import SafeString
-from templates.layout.bootstrap.layout_blank import \
-    TemplateBootstrapLayoutBlank
-from templates.layout.bootstrap.layout_front import \
-    TemplateBootstrapLayoutFront
-from templates.layout.bootstrap.layout_horizontal import \
-    TemplateBootstrapLayoutHorizontal
-from templates.layout.bootstrap.layout_vertical import \
-    TemplateBootstrapLayoutVertical
+from templates.layout.bootstrap.layout_blank import TemplateBootstrapLayoutBlank
+from templates.layout.bootstrap.layout_front import TemplateBootstrapLayoutFront
+from templates.layout.bootstrap.layout_horizontal import (
+    TemplateBootstrapLayoutHorizontal,
+)
+from templates.layout.bootstrap.layout_vertical import TemplateBootstrapLayoutVertical
 from website.views import FrontPagesView
 
 from AIMER import TemplateLayout
-from AIMER.context_processors import (environment, get_cookie, language_code,
-                                      my_setting)
+from AIMER.context_processors import environment, get_cookie, language_code, my_setting
 from AIMER.language_middleware import DefaultLanguageMiddleware
 from AIMER.template_helpers.theme import TemplateHelper
 from AIMER.template_tags import theme as theme_tags

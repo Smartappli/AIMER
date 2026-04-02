@@ -5,8 +5,11 @@ from .forgot_password.views import ForgetPasswordView
 from .login.views import LoginView
 from .register.views import RegisterView
 from .reset_password.views import ResetPasswordView
-from .verify_email.views import (SendVerificationView, VerifyEmailTokenView,
-                                 VerifyEmailView)
+from .verify_email.views import (
+    SendVerificationView,
+    VerifyEmailTokenView,
+    VerifyEmailView,
+)
 
 urlpatterns = [
     path(
