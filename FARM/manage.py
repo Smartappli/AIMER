@@ -4,18 +4,25 @@
 import os
 import sys
 
+DJANGO_IMPORT_ERROR: ImportError | None = None
 
-def main():
-    """Run administrative tasks."""
+try:
+    from django.core.management import execute_from_command_line
+except ImportError as exc:
+    DJANGO_IMPORT_ERROR = exc
+    execute_from_command_line = None
+
+
+def main() -> None:
+    """Run administrative tasks.
+
+    Raises:
+        ImportError: If Django is not installed in the current environment.
+
+    """
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "framework.settings")
-    try:
-        from django.core.management import execute_from_command_line
-    except ImportError as exc:
-        raise ImportError(
-            "Couldn't import Django. Are you sure it's installed and "
-            "available on your PYTHONPATH environment variable? Did you "
-            "forget to activate a virtual environment?"
-        ) from exc
+    if execute_from_command_line is None:
+        raise ImportError from DJANGO_IMPORT_ERROR
     execute_from_command_line(sys.argv)
 
 
