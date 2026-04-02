@@ -3,12 +3,14 @@
 from __future__ import annotations
 
 import json
-from collections.abc import Mapping, Sequence
 from dataclasses import dataclass, field
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 import flwr as fl
 import numpy as np
+
+if TYPE_CHECKING:
+    from collections.abc import Mapping, Sequence
 
 
 @dataclass(slots=True)
@@ -48,7 +50,12 @@ class RagIndex:
         return len(self._doc_ids)
 
     def add_documents(self, documents: Sequence[RagDocument]) -> None:
-        """Insert new documents while skipping existing document IDs."""
+        """Insert new documents while skipping existing document IDs.
+
+        Raises:
+            ValueError: If a document embedding dimension is incompatible.
+
+        """
         if not documents:
             return
         for doc in documents:
@@ -62,7 +69,8 @@ class RagIndex:
                 -1,
             )
             if embedding.shape[1] != self._embedding_dim:
-                raise ValueError("Embedding dimension mismatch for RAG index")
+                msg = "Embedding dimension mismatch for RAG index"
+                raise ValueError(msg)
             self._embeddings = np.vstack([self._embeddings, embedding])
 
     def merge_state(self, state: RagState) -> None:
@@ -97,6 +105,12 @@ class RagIndex:
 
 
 def _serialize_state(state: RagState) -> bytes:
+    """Serialize a `RagState` into UTF-8 JSON bytes.
+
+    Returns:
+        JSON payload encoded as bytes.
+
+    """
     payload = {
         "doc_ids": state.doc_ids,
         "texts": state.texts,
@@ -107,6 +121,12 @@ def _serialize_state(state: RagState) -> bytes:
 
 
 def _deserialize_state(payload: bytes) -> RagState:
+    """Deserialize a UTF-8 JSON payload into a `RagState`.
+
+    Returns:
+        Reconstructed RAG state object.
+
+    """
     data = json.loads(payload.decode("utf-8"))
     embeddings = np.asarray(data.get("embeddings", []), dtype=np.float32)
     if embeddings.ndim == 1 and embeddings.size:
@@ -120,13 +140,23 @@ def _deserialize_state(payload: bytes) -> RagState:
 
 
 def state_to_parameters(state: RagState) -> fl.common.Parameters:
-    """Convert a `RagState` into Flower transport parameters."""
+    """Convert a `RagState` into Flower transport parameters.
+
+    Returns:
+        Flower parameters containing the serialized state.
+
+    """
     payload = _serialize_state(state)
     return fl.common.Parameters(tensors=[payload], tensor_type="bytes")
 
 
 def parameters_to_state(parameters: fl.common.Parameters) -> RagState | None:
-    """Decode Flower parameters into a `RagState`, if present."""
+    """Decode Flower parameters into a `RagState`, if present.
+
+    Returns:
+        Decoded state when tensors are present, otherwise ``None``.
+
+    """
     if not parameters.tensors:
         return None
     payload = parameters.tensors[0]
