@@ -155,9 +155,7 @@ class SendVerificationView(AuthView):
         else:
             email = request.session.get("email")
             if settings.EMAIL_HOST_USER and settings.EMAIL_HOST_PASSWORD:
-                message = (
-                    "Resend verification email successfully" if email else None
-                )
+                message = "Resend verification email successfully" if email else None
             else:
                 message = await sync_to_async(messages.error)(
                     request,

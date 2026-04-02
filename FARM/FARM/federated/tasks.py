@@ -33,31 +33,27 @@ class EvaluationResult:
 
 
 class TaskHandlers(Protocol):
-    def get_parameters(self, model: Any) -> list[np.ndarray]:
-        ...
+    def get_parameters(self, model: Any) -> list[np.ndarray]: ...
 
     def set_parameters(
         self,
         model: Any,
         parameters: Sequence[np.ndarray],
-    ) -> None:
-        ...
+    ) -> None: ...
 
     def train(
         self,
         model: Any,
         dataset: FederatedDataset,
         config: Mapping[str, Any],
-    ) -> TrainingResult:
-        ...
+    ) -> TrainingResult: ...
 
     def evaluate(
         self,
         model: Any,
         dataset: FederatedDataset,
         config: Mapping[str, Any],
-    ) -> EvaluationResult:
-        ...
+    ) -> EvaluationResult: ...
 
 
 @dataclass(slots=True)

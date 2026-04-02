@@ -134,9 +134,7 @@ def rerank_results(query: str, documents=list, top_k: int = 5):
         zip(scores, documents, strict=False),
         key=lambda x: x[0],
         reverse=True,
-    )[
-        :top_k
-    ]
+    )[:top_k]
 
     return [rank[1] for rank in reranked]
 

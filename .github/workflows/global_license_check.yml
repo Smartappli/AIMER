@@ -2,55 +2,62 @@ name: Global License Checker
 
 on:
   push:
-    branches:
-      - master
-
-  workflow_call:
-
+    branches: ["master"]
   pull_request:
-    branches:
-      - "**"
+    branches: ["master"]
+  workflow_call:
+  workflow_dispatch:
 
 concurrency:
-  group: global-license-check-${{ github.event_name == 'pull_request' && format('{0}-{1}', github.workflow, github.event.pull_request.number) || github.workflow_ref }}
+  group: global-license-check-${{ github.event_name == 'pull_request' && format('{0}-{1}', github.workflow, github.event.pull_request.number) || github.ref }}
   cancel-in-progress: true
+
+permissions:
+  contents: read
 
 jobs:
   license_check:
     runs-on: ubuntu-latest
-    steps:
-    - name: Checkout the code
-      uses: actions/checkout@v6
-      with:
-        fetch-depth: 0
-    - name: Setup Python
-      uses: actions/setup-python@v6
-      with:
-        python-version: '3.12'
-        cache: 'pip'
-    - name: Get explicit and transitive dependencies
-      run: |
-        cd AIMER-ROOT
-        python -m pip install --upgrade pip
-        python -m pip install uv
-        python -m uv sync --active
-        python -m uv pip freeze > requirements-all.txt
-    - name: Check python
-      id: license_check_report
-      uses: pilosus/action-pip-license-checker@v3
-      with:
-        requirements: 'requirements-all.txt'
-        fail: 'NetworkCopyleft'
-        exclude: '(?i)^(pylint|tbb|nvidia|aio[-_]*).*'
-        verbose: 1
-        github-token: ${{ secrets.OAUTH_TOKEN_GITHUB }}
-    - name: Save report
-      if: ${{ always() }}
-      run: echo "${{ steps.license_check_report.outputs.report }}" > license-report.json
-    - name: Upload artifact
-      if: ${{ always() }}
-      uses: actions/upload-artifact@v7
-      with:
-        name: license-report
-        path: license-report.json
+    timeout-minutes: 20
 
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Setup uv
+        uses: astral-sh/setup-uv@v5
+
+      - name: Resolve dependencies and export full requirements
+        working-directory: AIMER-ROOT
+        run: |
+          uv sync --all-extras
+          uv pip freeze > requirements-all.txt
+
+      - name: Check Python licenses
+        id: license_check_report
+        uses: pilosus/action-pip-license-checker@v3
+        with:
+          requirements: AIMER-ROOT/requirements-all.txt
+          fail: NetworkCopyleft
+          exclude: (?i)^(pylint|tbb|nvidia|aio[-_]*).*
+          verbose: 1
+          github-token: ${{ github.token }}
+
+      - name: Save report
+        if: ${{ always() }}
+        run: |
+          printf '%s' '${{ steps.license_check_report.outputs.report }}' > license-report.json
+
+      - name: Upload artifact
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: license-report
+          path: license-report.json
+          if-no-files-found: error

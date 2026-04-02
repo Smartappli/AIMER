@@ -94,9 +94,7 @@ class TemplateHelper:
             "true" if context.get("show_dropdown_onhover") else "false"
         )
 
-        context["semi_dark_value"] = (
-            "true" if context.get("semiDark") else "false"
-        )
+        context["semi_dark_value"] = "true" if context.get("semiDark") else "false"
 
         # Display Customizer
         context["display_customizer_class"] = (

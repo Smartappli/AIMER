@@ -108,9 +108,7 @@ async def are_pretrained():
 
     models = list(list_models())
     return {
-        "model_is_pretrained": {
-            model: is_model_pretrained(model) for model in models
-        },
+        "model_is_pretrained": {model: is_model_pretrained(model) for model in models},
     }
 
 
@@ -153,9 +151,7 @@ async def module_all_details():
     """
     from timm import list_models, list_modules
 
-    return {
-        module: list(list_models(module=module)) for module in list_modules()
-    }
+    return {module: list(list_models(module=module)) for module in list_modules()}
 
 
 mcp = FastMCP.from_fastapi(
