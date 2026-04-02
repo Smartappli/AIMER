@@ -1,3 +1,5 @@
+# Copyright (C) 2026 AIMER contributors.
+
 """Tests for the FastAPI endpoints defined in ``MAGE/api/main.py``."""
 
 from __future__ import annotations

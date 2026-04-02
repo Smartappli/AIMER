@@ -1,3 +1,5 @@
+# Copyright (C) 2026 AIMER contributors.
+
 """Runtime environment information utilities.
 
 This module gathers Python/PyTorch and accelerator backend details (CUDA/ROCm,
