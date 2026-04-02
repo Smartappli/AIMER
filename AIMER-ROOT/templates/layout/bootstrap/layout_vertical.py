@@ -1,8 +1,10 @@
+# Copyright (c) 2026 AIMER contributors.
+"""Vertical bootstrap layout context initializers."""
+
 import json
 
+from AIMER.template_helpers.theme import TemplateHelper
 from django.conf import settings
-
-from ....AIMER.template_helpers.theme import TemplateHelper
 
 menu_file_path = (
     settings.BASE_DIR
@@ -15,14 +17,18 @@ menu_file_path = (
     / "vertical_menu.json"
 )
 
-"""
-This is an entry and Bootstrap class for the theme level.
-The init() function will be called in web_project/__init__.py
-"""
-
 
 class TemplateBootstrapLayoutVertical:
-    def init(context):
+    """Provide setup helpers for the vertical bootstrap layout."""
+
+    @staticmethod
+    def init(context: dict[str, object]) -> dict[str, object]:
+        """Initialize the template context for vertical layout.
+
+        Returns:
+            Updated context dictionary.
+
+        """
         context.update(
             {
                 "layout": "vertical",
@@ -41,7 +47,9 @@ class TemplateBootstrapLayoutVertical:
 
         return context
 
-    def init_menu_data(context):
+    @staticmethod
+    def init_menu_data(context: dict[str, object]) -> None:
+        """Load vertical menu JSON data and inject it into context."""
         # Load the menu data from the JSON file
         menu_data = json.load(menu_file_path.open()) if menu_file_path.exists() else []
 

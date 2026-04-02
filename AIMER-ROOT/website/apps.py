@@ -1,3 +1,4 @@
+# Copyright (c) 2026 AIMER contributors.
 """App configuration for the website Django app."""
 
 from django.apps import AppConfig
