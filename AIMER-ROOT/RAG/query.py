@@ -4,16 +4,18 @@
 from __future__ import annotations
 
 import operator
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 from dotenv import load_dotenv
 from langchain_community.cross_encoders import HuggingFaceCrossEncoder
-from langchain_core.documents import Document
 from langchain_ollama import ChatOllama, OllamaEmbeddings
 from langchain_qdrant import FastEmbedSparse, QdrantVectorStore, RetrievalMode
 from qdrant_client.models import FieldCondition, Filter, MatchValue
 
 from RAG.scripts.schema import ChunkMetadata
+
+if TYPE_CHECKING:
+    from langchain_core.documents import Document
 
 load_dotenv()
 
@@ -36,7 +38,13 @@ vector_store = QdrantVectorStore.from_existing_collection(
 
 
 def extract_filters(user_query: str) -> dict[str, Any]:
-    """Extract metadata filters from a user query."""
+    """
+    Extract metadata filters from a user query.
+
+    Returns:
+        Mapping of metadata keys and values inferred from the query.
+
+    """
     prompt = f"""
             Extract metadata filters from the query. Return None for fields mentioned.
 
@@ -54,7 +62,13 @@ def hybrid_search(
     k: int = 10,
     filters: dict[str, Any] | None = None,
 ) -> list[Document]:
-    """Perform hybrid (dense + sparse) similarity search in Qdrant."""
+    """
+    Perform hybrid (dense + sparse) similarity search in Qdrant.
+
+    Returns:
+        List of retrieved documents matching the query and optional filters.
+
+    """
     qdrant_filter = None
     if filters:
         condition = [
@@ -71,7 +85,13 @@ def rerank_results(
     documents: list[Document],
     top_k: int = 5,
 ) -> list[Document]:
-    """Rerank retrieved documents using a cross-encoder."""
+    """
+    Rerank retrieved documents using a cross-encoder.
+
+    Returns:
+        Top-ranked documents ordered by reranker relevance score.
+
+    """
     reranker = HuggingFaceCrossEncoder(
         model_name=RERANKER_MODEL,
         model_kwargs={"device": "xpu"},
