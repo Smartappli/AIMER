@@ -3,12 +3,15 @@
 
 from __future__ import annotations
 
-from collections.abc import Callable
-from typing import Any
+from typing import TYPE_CHECKING
 
 from django.conf import settings
-from django.http import HttpRequest, HttpResponse
 from django.utils.translation import activate
+
+if TYPE_CHECKING:
+    from collections.abc import Callable
+
+    from django.http import HttpRequest, HttpResponse
 
 
 class DefaultLanguageMiddleware:
@@ -19,7 +22,12 @@ class DefaultLanguageMiddleware:
         self.get_response = get_response
 
     def __call__(self, request: HttpRequest) -> HttpResponse:
-        """Process request and ensure default language cookie exists."""
+        """Process request and ensure default language cookie exists.
+
+        Returns:
+            HTTP response with language cookie ensured.
+
+        """
         if "django_language" not in request.COOKIES:
             default_language = settings.LANGUAGE_CODE
             activate(default_language)

@@ -36,7 +36,7 @@ exclude = [
 
 [tool.ruff.lint]
 select = ["ALL"]
-ignore = ["N999", "PLW0127"]
+ignore = ["N999", "PLW0127", "CPY001"]
 
 [tool.ruff.format]
 quote-style = "double"

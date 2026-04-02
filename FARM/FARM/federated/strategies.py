@@ -2,8 +2,10 @@
 
 from __future__ import annotations
 
-from collections.abc import Callable, Mapping, Sequence
-from typing import Any
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from collections.abc import Callable, Mapping, Sequence
 
 import flwr as fl
 
@@ -16,9 +18,9 @@ class TaskFedAvgStrategy(fl.server.strategy.FedAvg):
     def __init__(
         self,
         task_name: str,
-        on_fit_config_fn: Callable[[int], Mapping[str, Any]] | None = None,
-        on_evaluate_config_fn: Callable[[int], Mapping[str, Any]] | None = None,
-        **kwargs: Any,
+        on_fit_config_fn: Callable[[int], Mapping[str, object]] | None = None,
+        on_evaluate_config_fn: Callable[[int], Mapping[str, object]] | None = None,
+        **kwargs: object,
     ) -> None:
         """Initialize a FedAvg strategy tied to a task name."""
         super().__init__(
@@ -35,8 +37,8 @@ class RagFedAvgStrategy(fl.server.strategy.FedAvg):
     def __init__(
         self,
         rag_index: RagIndex,
-        on_fit_config_fn: Callable[[int], Mapping[str, Any]] | None = None,
-        **kwargs: Any,
+        on_fit_config_fn: Callable[[int], Mapping[str, object]] | None = None,
+        **kwargs: object,
     ) -> None:
         """Initialize a strategy backed by a shared RAG index."""
         super().__init__(on_fit_config_fn=on_fit_config_fn, **kwargs)
@@ -44,18 +46,28 @@ class RagFedAvgStrategy(fl.server.strategy.FedAvg):
 
     def initialize_parameters(
         self,
-        client_manager: fl.server.client_manager.ClientManager,
+        _client_manager: fl.server.client_manager.ClientManager,
     ) -> fl.common.Parameters | None:
-        """Return the initial serialized RAG state for connected clients."""
+        """Return the initial serialized RAG state for connected clients.
+
+        Returns:
+            Serialized RAG state suitable as initial model parameters.
+
+        """
         return state_to_parameters(self._rag_index.to_state())
 
     def aggregate_fit(
         self,
         server_round: int,
         results: Sequence[tuple[fl.server.client_proxy.ClientProxy, fl.common.FitRes]],
-        failures: Sequence[BaseException] | None,
-    ) -> tuple[fl.common.Parameters | None, Mapping[str, Any]]:
-        """Merge RAG payloads from clients and return the aggregated state."""
+        _failures: Sequence[BaseException] | None,
+    ) -> tuple[fl.common.Parameters | None, Mapping[str, object]]:
+        """Merge RAG payloads from clients and return the aggregated state.
+
+        Returns:
+            Tuple of serialized aggregated RAG parameters and round metrics.
+
+        """
         for _, fit_res in results:
             state = parameters_to_state(fit_res.parameters)
             if state:
