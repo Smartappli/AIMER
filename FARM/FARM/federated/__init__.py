@@ -1,3 +1,5 @@
+"""Public exports for federated learning utilities."""
+
 from .clients import ClientContext, FederatedTaskClient, RagClient
 from .data import FederatedDataset
 from .rag import RagDocument, RagIndex, RagState

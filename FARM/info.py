@@ -1,3 +1,5 @@
+"""Display installed package versions used by FARM integrations."""
+
 import syft_client as sc
 import syft_flwr
 

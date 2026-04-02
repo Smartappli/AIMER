@@ -1,0 +1,1 @@
+"""FARM Django project package."""

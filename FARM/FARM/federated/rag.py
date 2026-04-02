@@ -1,3 +1,5 @@
+"""RAG state structures and serialization helpers for Flower."""
+
 from __future__ import annotations
 
 import json
@@ -11,6 +13,8 @@ import numpy as np
 
 @dataclass(slots=True)
 class RagDocument:
+    """Single retrievable document stored in the shared index."""
+
     doc_id: str
     embedding: Sequence[float]
     text: str
@@ -19,6 +23,8 @@ class RagDocument:
 
 @dataclass(slots=True)
 class RagState:
+    """Serializable full state of a RAG index."""
+
     doc_ids: list[str]
     embeddings: np.ndarray
     texts: list[str]
@@ -29,6 +35,7 @@ class RagIndex:
     """In-memory RAG index used to synchronize documents between clients."""
 
     def __init__(self, embedding_dim: int) -> None:
+        """Create an empty index with a fixed embedding dimension."""
         self._embedding_dim = embedding_dim
         self._doc_ids: list[str] = []
         self._texts: list[str] = []
@@ -37,9 +44,11 @@ class RagIndex:
 
     @property
     def size(self) -> int:
+        """Return the number of indexed documents."""
         return len(self._doc_ids)
 
     def add_documents(self, documents: Sequence[RagDocument]) -> None:
+        """Insert new documents while skipping existing document IDs."""
         if not documents:
             return
         for doc in documents:
@@ -57,6 +66,7 @@ class RagIndex:
             self._embeddings = np.vstack([self._embeddings, embedding])
 
     def merge_state(self, state: RagState) -> None:
+        """Merge an external state into the local index."""
         if state.doc_ids:
             for doc_id, text, metadata, embedding in zip(
                 state.doc_ids,
@@ -77,6 +87,7 @@ class RagIndex:
                 )
 
     def to_state(self) -> RagState:
+        """Export the current index as a serializable state object."""
         return RagState(
             doc_ids=list(self._doc_ids),
             embeddings=self._embeddings.copy(),
@@ -109,11 +120,13 @@ def _deserialize_state(payload: bytes) -> RagState:
 
 
 def state_to_parameters(state: RagState) -> fl.common.Parameters:
+    """Convert a `RagState` into Flower transport parameters."""
     payload = _serialize_state(state)
     return fl.common.Parameters(tensors=[payload], tensor_type="bytes")
 
 
 def parameters_to_state(parameters: fl.common.Parameters) -> RagState | None:
+    """Decode Flower parameters into a `RagState`, if present."""
     if not parameters.tensors:
         return None
     payload = parameters.tensors[0]

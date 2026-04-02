@@ -1,3 +1,5 @@
+"""Federated client implementations for task and RAG workloads."""
+
 from __future__ import annotations
 
 from collections.abc import Callable, Mapping, Sequence
@@ -25,6 +27,7 @@ class FederatedTaskClient(fl.client.NumPyClient):
         task: TaskDefinition,
         context: ClientContext | None = None,
     ) -> None:
+        """Initialize a task-oriented federated client."""
         self._task = task
         self._context = context or ClientContext(metadata={})
 
@@ -32,6 +35,7 @@ class FederatedTaskClient(fl.client.NumPyClient):
         self,
         config: Mapping[str, Any] | None = None,
     ) -> list[Any]:
+        """Return current model parameters from task handlers."""
         return self._task.handlers.get_parameters(self._task.model)
 
     def fit(
@@ -39,6 +43,7 @@ class FederatedTaskClient(fl.client.NumPyClient):
         parameters: Sequence[Any],
         config: Mapping[str, Any],
     ) -> tuple[list[Any], int, dict[str, Any]]:
+        """Apply incoming parameters and execute one local training step."""
         self._task.handlers.set_parameters(self._task.model, parameters)
         result: TrainingResult = self._task.handlers.train(
             self._task.model,
@@ -52,6 +57,7 @@ class FederatedTaskClient(fl.client.NumPyClient):
         parameters: Sequence[Any],
         config: Mapping[str, Any],
     ) -> tuple[float, int, dict[str, Any]]:
+        """Evaluate the model using task-provided evaluation logic."""
         self._task.handlers.set_parameters(self._task.model, parameters)
         result: EvaluationResult = self._task.handlers.evaluate(
             self._task.model,
@@ -69,6 +75,7 @@ class RagClient(fl.client.Client):
         index: RagIndex,
         document_provider: Callable[[Mapping[str, Any]], Sequence[RagState]],
     ) -> None:
+        """Initialize a RAG synchronization client."""
         self._index = index
         self._document_provider = document_provider
 
@@ -76,6 +83,7 @@ class RagClient(fl.client.Client):
         self,
         ins: fl.common.GetParametersIns,
     ) -> fl.common.GetParametersRes:
+        """Return the current serialized RAG index state."""
         parameters = state_to_parameters(self._index.to_state())
         return fl.common.GetParametersRes(
             status=fl.common.Status(code=fl.common.Code.OK, message="ok"),
@@ -83,6 +91,7 @@ class RagClient(fl.client.Client):
         )
 
     def fit(self, ins: fl.common.FitIns) -> fl.common.FitRes:
+        """Merge incoming state, apply local updates, and return new state."""
         incoming = parameters_to_state(ins.parameters)
         if incoming:
             self._index.merge_state(incoming)
@@ -100,6 +109,7 @@ class RagClient(fl.client.Client):
         )
 
     def evaluate(self, ins: fl.common.EvaluateIns) -> fl.common.EvaluateRes:
+        """Return a lightweight evaluation payload for compatibility."""
         return fl.common.EvaluateRes(
             status=fl.common.Status(code=fl.common.Code.OK, message="ok"),
             loss=0.0,
