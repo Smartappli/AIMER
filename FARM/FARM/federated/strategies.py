@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any
+from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from collections.abc import Callable, Mapping, Sequence
@@ -18,8 +18,8 @@ class TaskFedAvgStrategy(fl.server.strategy.FedAvg):
     def __init__(
         self,
         task_name: str,
-        on_fit_config_fn: Callable[[int], Mapping[str, Any]] | None = None,
-        on_evaluate_config_fn: Callable[[int], Mapping[str, Any]] | None = None,
+        on_fit_config_fn: Callable[[int], Mapping[str, object]] | None = None,
+        on_evaluate_config_fn: Callable[[int], Mapping[str, object]] | None = None,
         **kwargs: object,
     ) -> None:
         """Initialize a FedAvg strategy tied to a task name."""
@@ -37,7 +37,7 @@ class RagFedAvgStrategy(fl.server.strategy.FedAvg):
     def __init__(
         self,
         rag_index: RagIndex,
-        on_fit_config_fn: Callable[[int], Mapping[str, Any]] | None = None,
+        on_fit_config_fn: Callable[[int], Mapping[str, object]] | None = None,
         **kwargs: object,
     ) -> None:
         """Initialize a strategy backed by a shared RAG index."""
@@ -61,7 +61,7 @@ class RagFedAvgStrategy(fl.server.strategy.FedAvg):
         server_round: int,
         results: Sequence[tuple[fl.server.client_proxy.ClientProxy, fl.common.FitRes]],
         _failures: Sequence[BaseException] | None,
-    ) -> tuple[fl.common.Parameters | None, Mapping[str, Any]]:
+    ) -> tuple[fl.common.Parameters | None, Mapping[str, object]]:
         """Merge RAG payloads from clients and return the aggregated state.
 
         Returns:

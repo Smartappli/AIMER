@@ -13,8 +13,4 @@ target-version = "py313"
 
 [tool.ruff.lint]
 select = ["ALL"]
-ignore = ["N999", "PLW0127", "CPY001"]
-
-[tool.ruff.lint.per-file-ignores]
-"FARM/__init__.py" = ["N999"]
-"FARM/federated/__init__.py" = ["N999"]
+ignore = []
