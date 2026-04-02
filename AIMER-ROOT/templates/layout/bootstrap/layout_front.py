@@ -1,13 +1,20 @@
-from ....AIMER.template_helpers.theme import TemplateHelper
+# Copyright (c) 2026 AIMER contributors.
+"""Front bootstrap layout context initializers."""
 
-"""
-This is an entry and Bootstrap class for the theme level.
-The init() function will be called in web_project/__init__.py
-"""
+from AIMER.template_helpers.theme import TemplateHelper
 
 
 class TemplateBootstrapLayoutFront:
-    def init(context):
+    """Provide setup helpers for the front bootstrap layout."""
+
+    @staticmethod
+    def init(context: dict[str, object]) -> dict[str, object]:
+        """Initialize the template context for front layout.
+
+        Returns:
+            Updated context dictionary.
+
+        """
         context.update(
             {
                 "layout": "front",
