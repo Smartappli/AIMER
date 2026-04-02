@@ -197,3 +197,10 @@ SESSION_COOKIE_HTTPONLY = True
 SECURE_CONTENT_TYPE_NOSNIFF = True
 REFERRER_POLICY = "same-origin"
 
+# Template Settings
+# ------------------------------------------------------------------------------
+
+THEME_LAYOUT_DIR = THEME_LAYOUT_DIR
+TEMPLATE_CONFIG = TEMPLATE_CONFIG
+THEME_VARIABLES = THEME_VARIABLES
+
