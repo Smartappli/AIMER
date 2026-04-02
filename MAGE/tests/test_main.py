@@ -87,7 +87,12 @@ class FakeFastMCP:
     """Fake ``FastMCP`` facade used while importing the API module."""
 
     @classmethod
-    def from_fastapi(cls, _app: FastAPI, _name: str) -> FakeFastMCP:
+    def from_fastapi(
+        cls,
+        app: FastAPI | None = None,
+        name: str | None = None,
+        **_: object,
+    ) -> FakeFastMCP:
         """
         Return a fake wrapper instance.
 
@@ -98,7 +103,7 @@ class FakeFastMCP:
         return cls()
 
     @staticmethod
-    def http_app(_path: str = "/mcp") -> FakeMCPApp:
+    def http_app(path: str = "/mcp", **_: object) -> FakeMCPApp:
         """
         Return a fake MCP app.
 
