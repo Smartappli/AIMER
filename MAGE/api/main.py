@@ -76,9 +76,7 @@ async def are_pretrained() -> dict[str, dict[str, bool]]:
     """Check pretrained availability for all `timm` models."""
     models = list(list_models())
     return {
-        "model_is_pretrained": {
-            model: is_model_pretrained(model) for model in models
-        },
+        "model_is_pretrained": {model: is_model_pretrained(model) for model in models},
     }
 
 
