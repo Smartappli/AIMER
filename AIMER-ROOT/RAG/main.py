@@ -62,7 +62,13 @@ describe_image_prompt = (
 
 
 def pdf_has_text(pdf_file: Path, max_pages: int = 3) -> bool:
-    """Check whether the PDF contains extractable text."""
+    """
+    Check whether the PDF contains extractable text.
+
+    Returns:
+        ``True`` when extracted text exceeds the configured threshold.
+
+    """
     reader = PdfReader(str(pdf_file))
     for page in reader.pages[:max_pages]:
         txt = (page.extract_text() or "").strip()
@@ -217,7 +223,13 @@ def extract_pdf_content(pdf_file: Path) -> None:
 
 
 def compute_file_hash(file_path: Path) -> str:
-    """Compute and return SHA-256 hash for a file."""
+    """
+    Compute and return SHA-256 hash for a file.
+
+    Returns:
+        SHA-256 hex digest of the file content.
+
+    """
     sha256_hash = hashlib.sha256()
 
     with Path(file_path).open("rb") as file:
@@ -228,7 +240,13 @@ def compute_file_hash(file_path: Path) -> str:
 
 
 def get_processed_hashes() -> set[str]:
-    """Retrieve already indexed file hashes from the vector store."""
+    """
+    Retrieve already indexed file hashes from the vector store.
+
+    Returns:
+        Set of file hashes already present in the collection.
+
+    """
     processed_hashes: set[str] = set()
     offset = None
 
@@ -254,14 +272,26 @@ def get_processed_hashes() -> set[str]:
 
 
 def extract_page_number(file_path: Path) -> int | None:
-    """Extract page number from a file name stem."""
+    """
+    Extract page number from a file name stem.
+
+    Returns:
+        Extracted page number, or ``None`` when absent in the file stem.
+
+    """
     pattern = r"page_(\d+)"
     match = re.search(pattern=pattern, string=file_path.stem)
     return int(match.group(1)) if match else None
 
 
 def generate_image_description(image_path: Path) -> str:
-    """Generate a textual description for an extracted page image."""
+    """
+    Generate a textual description for an extracted page image.
+
+    Returns:
+        Generated textual description for the provided image.
+
+    """
     image = Image.open(image_path)
     buffered = io.BytesIO()
     image.save(buffered, format="PNG")
@@ -285,7 +315,13 @@ def generate_image_description(image_path: Path) -> str:
 
 
 def generate_and_save_description(image_path: Path) -> bool:
-    """Generate and store image description if it does not already exist."""
+    """
+    Generate and store image description if it does not already exist.
+
+    Returns:
+        ``True`` when a new description is generated, ``False`` when it already exists.
+
+    """
     doc_name = image_path.parent.name
 
     output_dir = Path(OUTPUT_DESCRIPTIONS_DIR) / doc_name
@@ -303,7 +339,13 @@ def generate_and_save_description(image_path: Path) -> bool:
 
 
 def extract_metadata_from_filename(filename: str) -> dict[str, str]:
-    """Extract document metadata components from filename."""
+    """
+    Extract document metadata components from filename.
+
+    Returns:
+        Metadata dictionary with month, year, and EOD type.
+
+    """
     filename = filename.replace(".pdf", "").replace(".md", "")
 
     parts = filename.split("-")
