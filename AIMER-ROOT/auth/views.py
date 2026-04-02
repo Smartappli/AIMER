@@ -1,3 +1,5 @@
+# Copyright (c) 2026 AIMER contributors.
+
 """
 Authentication views base controller.
 
@@ -24,7 +26,7 @@ class AuthView(TemplateView):
     `TemplateLayout.init()` and to enforce the blank layout for auth templates.
     """
 
-    def get_context_data(self, **kwargs):
+    def get_context_data(self, **kwargs: object) -> dict[str, object]:
         """
         Build template context for auth pages.
 
