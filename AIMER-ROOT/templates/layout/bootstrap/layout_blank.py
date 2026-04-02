@@ -9,7 +9,8 @@ class TemplateBootstrapLayoutBlank:
 
     @staticmethod
     def init(context: dict[str, object]) -> dict[str, object]:
-        """Initialize the template context for blank layout.
+        """
+        Initialize the template context for blank layout.
 
         Returns:
             Updated context dictionary.

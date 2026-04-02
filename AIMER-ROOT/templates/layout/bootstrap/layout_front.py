@@ -9,7 +9,8 @@ class TemplateBootstrapLayoutFront:
 
     @staticmethod
     def init(context: dict[str, object]) -> dict[str, object]:
-        """Initialize the template context for front layout.
+        """
+        Initialize the template context for front layout.
 
         Returns:
             Updated context dictionary.
