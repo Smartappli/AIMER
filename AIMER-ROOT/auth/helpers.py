@@ -39,7 +39,7 @@ def get_absolute_url(path: str) -> str:
 async def send_verification_email(email: str, token: str) -> None:
     """Send an email verification link."""
     verification_url = get_absolute_url(
-        reverse("verify-email", kwargs={"token": token})
+        reverse("verify-email", kwargs={"token": token}),
     )
     message = f"Hi,\n\nPlease verify your email using this link: {verification_url}"
     await send_email("Verify your email", email, message)

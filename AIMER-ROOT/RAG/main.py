@@ -301,8 +301,6 @@ processed_hashes = get_processed_hashes()
 
 def ingest_file_in_db(file_path, processed_hashes) -> None:
     file_hash = compute_file_hash(file_path)
-    if file_hash in processed_hashes:
-        pass
 
     path_str = str(file_path)
     if "markdown" in path_str:

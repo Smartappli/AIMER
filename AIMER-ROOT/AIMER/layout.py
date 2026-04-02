@@ -22,7 +22,8 @@ class TemplateLayout:
         context.update(
             {
                 "layout_path": TemplateHelper.set_layout(
-                    f"layout_{layout}.html", context
+                    f"layout_{layout}.html",
+                    context,
                 ),
                 "rtl_mode": (
                     self.request.COOKIES.get("django_text_direction") == "rtl"
