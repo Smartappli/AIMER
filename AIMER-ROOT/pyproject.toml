@@ -27,3 +27,24 @@ dependencies = [
     "pytest==9.0.2",
     "coverage==7.13.5",
 ]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 88
+preview = true
+exclude = [
+    "auth/migrations",
+    "geo_api/migrations",
+    "db_api/migrations",
+    "manage.py",
+    "dashboards/migrations",
+]
+
+[tool.ruff.lint]
+select = ["ALL"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+line-ending = "lf"
+docstring-code-format = true
