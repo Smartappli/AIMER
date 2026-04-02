@@ -5,7 +5,6 @@ from __future__ import annotations
 
 from importlib import import_module, util
 from pathlib import Path
-from typing import Any
 
 from django.conf import settings
 
@@ -14,8 +13,13 @@ class TemplateHelper:
     """Utilities for building and mapping template context."""
 
     @staticmethod
-    def init_context(context: dict[str, Any]) -> dict[str, Any]:
-        """Populate a context dict with template settings."""
+    def init_context(context: dict[str, object]) -> dict[str, object]:
+        """Populate a context dict with template settings.
+
+        Returns:
+            Updated context dictionary.
+
+        """
         context.update(
             {
                 "layout": settings.TEMPLATE_CONFIG.get("layout"),
@@ -45,7 +49,7 @@ class TemplateHelper:
         return context
 
     @staticmethod
-    def map_context(context: dict[str, Any]) -> None:
+    def map_context(context: dict[str, object]) -> None:
         """Map context values to helper CSS classes and rendered booleans."""
         is_horizontal = context.get("layout") == "horizontal"
         is_vertical = context.get("layout") == "vertical"
@@ -102,18 +106,33 @@ class TemplateHelper:
         )
 
     @staticmethod
-    def get_theme_variables(scope: str) -> Any:
-        """Return an entry from THEME_VARIABLES."""
+    def get_theme_variables(scope: str) -> object:
+        """Return an entry from THEME_VARIABLES.
+
+        Returns:
+            Value matching the requested scope.
+
+        """
         return settings.THEME_VARIABLES[scope]
 
     @staticmethod
-    def get_theme_config(scope: str) -> Any:
-        """Return an entry from TEMPLATE_CONFIG."""
+    def get_theme_config(scope: str) -> object:
+        """Return an entry from TEMPLATE_CONFIG.
+
+        Returns:
+            Value matching the requested scope.
+
+        """
         return settings.TEMPLATE_CONFIG[scope]
 
     @staticmethod
-    def set_layout(view: str, context: dict[str, Any] | None = None) -> str:
-        """Resolve and initialize layout bootstrap class for a page view."""
+    def set_layout(view: str, context: dict[str, object] | None = None) -> str:
+        """Resolve and initialize layout bootstrap class for a page view.
+
+        Returns:
+            Relative path to the selected layout template.
+
+        """
         context = {} if context is None else context
         layout = Path(view).stem.split("/")[0]
         base_module = f"templates.{settings.THEME_LAYOUT_DIR.replace('/', '.')}"
@@ -130,7 +149,12 @@ class TemplateHelper:
         return f"{settings.THEME_LAYOUT_DIR}/{view}"
 
     @staticmethod
-    def import_class(from_module: str, import_class_name: str) -> Any:
-        """Import and return a class by module and class names."""
+    def import_class(from_module: str, import_class_name: str) -> object:
+        """Import and return a class by module and class names.
+
+        Returns:
+            Imported class object.
+
+        """
         module = import_module(from_module)
         return getattr(module, import_class_name)

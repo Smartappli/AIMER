@@ -1,7 +1,11 @@
+"""Tests for template helpers, context processors, middleware, and template tags."""
+
 from __future__ import annotations
 
 from types import SimpleNamespace
+from typing import Any
 from unittest.mock import patch
+from uuid import uuid4
 
 from AIMER import TemplateLayout
 from AIMER.context_processors import environment, get_cookie, language_code, my_setting
@@ -9,7 +13,7 @@ from AIMER.language_middleware import DefaultLanguageMiddleware
 from AIMER.template_helpers.theme import TemplateHelper
 from AIMER.template_tags import theme as theme_tags
 from django.contrib.auth import get_user_model
-from django.contrib.auth.models import Group, Permission
+from django.contrib.auth.models import AbstractBaseUser, Group, Permission
 from django.contrib.contenttypes.models import ContentType
 from django.http import HttpRequest, HttpResponse
 from django.test import RequestFactory, TestCase
@@ -25,15 +29,19 @@ from website.views import FrontPagesView
 
 
 class TemplateHelperTests(TestCase):
+    """Tests for TemplateHelper context initialization and mapping."""
+
     def test_init_context_populates_expected_keys(self) -> None:
+        """Ensure init_context sets core default keys."""
         context: dict[str, object] = {}
         TemplateHelper.init_context(context)
 
-        self.assertEqual(context["layout"], "vertical")
-        self.assertEqual(context["navbar_type"], "fixed")
-        self.assertIs(context["menu_fixed"], True)
+        assert context["layout"] == "vertical"
+        assert context["navbar_type"] == "fixed"
+        assert context["menu_fixed"] is True
 
     def test_map_context_for_horizontal_layout(self) -> None:
+        """Ensure horizontal layout values are mapped correctly."""
         context = {
             "layout": "horizontal",
             "header_type": "fixed",
@@ -51,13 +59,14 @@ class TemplateHelperTests(TestCase):
 
         TemplateHelper.map_context(context)
 
-        self.assertEqual(context["header_type_class"], "layout-menu-fixed")
-        self.assertEqual(context["navbar_type_class"], "")
-        self.assertEqual(context["footer_fixed_class"], "layout-footer-fixed")
-        self.assertEqual(context["container_class"], "container-fluid")
-        self.assertEqual(context["navbar_detached_class"], "")
+        assert context["header_type_class"] == "layout-menu-fixed"
+        assert context["navbar_type_class"] == ""
+        assert context["footer_fixed_class"] == "layout-footer-fixed"
+        assert context["container_class"] == "container-fluid"
+        assert context["navbar_detached_class"] == ""
 
     def test_map_context_for_vertical_layout(self) -> None:
+        """Ensure vertical layout values are mapped correctly."""
         context = {
             "layout": "vertical",
             "header_type": "static",
@@ -75,27 +84,26 @@ class TemplateHelperTests(TestCase):
 
         TemplateHelper.map_context(context)
 
-        self.assertEqual(context["header_type_class"], "")
-        self.assertEqual(context["navbar_type_class"], "layout-navbar-hidden")
-        self.assertEqual(
-            context["menu_collapsed_class"],
-            "layout-menu-collapsed",
-        )
-        self.assertEqual(context["menu_fixed_class"], "layout-menu-fixed")
-        self.assertEqual(context["rtl_mode_value"], "rtl")
-        self.assertEqual(context["display_customizer_class"], "")
-        self.assertEqual(context["content_layout_class"], "layout-compact")
-        self.assertEqual(context["navbar_detached_class"], "navbar-detached")
+        assert context["header_type_class"] == ""
+        assert context["navbar_type_class"] == "layout-navbar-hidden"
+        assert context["menu_collapsed_class"] == "layout-menu-collapsed"
+        assert context["menu_fixed_class"] == "layout-menu-fixed"
+        assert context["rtl_mode_value"] == "rtl"
+        assert context["display_customizer_class"] == ""
+        assert context["content_layout_class"] == "layout-compact"
+        assert context["navbar_detached_class"] == "navbar-detached"
 
     def test_set_layout_uses_front_bootstrap(self) -> None:
+        """Ensure set_layout resolves front layout metadata."""
         context: dict[str, object] = {}
         layout_path = TemplateHelper.set_layout("layout_front.html", context)
 
-        self.assertEqual(layout_path, "layout/layout_front.html")
-        self.assertEqual(context["layout"], "front")
-        self.assertIs(context["is_front"], True)
+        assert layout_path == "layout/layout_front.html"
+        assert context["layout"] == "front"
+        assert context["is_front"] is True
 
     def test_template_bootstrap_variants(self) -> None:
+        """Ensure each bootstrap variant initializes a layout key."""
         for bootstrap in (
             TemplateBootstrapLayoutBlank,
             TemplateBootstrapLayoutFront,
@@ -117,11 +125,14 @@ class TemplateHelperTests(TestCase):
             }
             bootstrap.init(context)
 
-            self.assertIn("layout", context)
+            assert "layout" in context
 
 
 class TemplateLayoutTests(TestCase):
+    """Tests for TemplateLayout behavior."""
+
     def test_template_layout_respects_rtl_cookie(self) -> None:
+        """Ensure RTL cookie is reflected in resulting context."""
         request = RequestFactory().get("/dashboard/")
         request.COOKIES["django_text_direction"] = "rtl"
 
@@ -130,12 +141,15 @@ class TemplateLayoutTests(TestCase):
 
         context = layout.init({})
 
-        self.assertEqual(context["rtl_mode"], True)
-        self.assertEqual(context["layout_path"], "layout/layout_vertical.html")
+        assert context["rtl_mode"]
+        assert context["layout_path"] == "layout/layout_vertical.html"
 
 
 class FrontPagesViewTests(TestCase):
+    """Tests for front pages view context generation."""
+
     def test_front_pages_view_context(self) -> None:
+        """Ensure front page view provides expected context values."""
         request = RequestFactory().get("/landing/")
 
         view = FrontPagesView()
@@ -145,28 +159,34 @@ class FrontPagesViewTests(TestCase):
 
         context = view.get_context_data()
 
-        self.assertEqual(context["layout"], "front")
-        self.assertEqual(context["active_url"], "/landing/")
-        self.assertEqual(context["layout_path"], "layout/layout_front.html")
+        assert context["layout"] == "front"
+        assert context["active_url"] == "/landing/"
+        assert context["layout_path"] == "layout/layout_front.html"
 
 
 class ContextProcessorTests(TestCase):
+    """Tests for project context processors."""
+
     def test_context_processors_values(self) -> None:
+        """Ensure context processors return expected keys and values."""
         request = HttpRequest()
         request.LANGUAGE_CODE = "fr"
         request.COOKIES = {"session": "abc"}
 
-        self.assertIn("MY_SETTING", my_setting(request))
-        self.assertEqual(language_code(request)["LANGUAGE_CODE"], "fr")
-        self.assertEqual(get_cookie(request)["COOKIES"], {"session": "abc"})
-        self.assertIn("ENVIRONMENT", environment(request))
+        assert "MY_SETTING" in my_setting(request)
+        assert language_code(request)["LANGUAGE_CODE"] == "fr"
+        assert get_cookie(request)["COOKIES"] == {"session": "abc"}
+        assert "ENVIRONMENT" in environment(request)
 
 
 class LanguageMiddlewareTests(TestCase):
+    """Tests for default language middleware behavior."""
+
     def test_middleware_sets_cookie_when_missing(self) -> None:
+        """Ensure middleware sets language cookie when absent."""
         request = RequestFactory().get("/")
 
-        def get_response(req: HttpRequest) -> HttpResponse:
+        def get_response(_req: HttpRequest) -> HttpResponse:
             return HttpResponse("ok")
 
         middleware = DefaultLanguageMiddleware(get_response)
@@ -175,13 +195,14 @@ class LanguageMiddlewareTests(TestCase):
             response = middleware(request)
 
         activate_mock.assert_called_once()
-        self.assertIn("django_language", response.cookies)
+        assert "django_language" in response.cookies
 
     def test_middleware_skips_when_cookie_present(self) -> None:
+        """Ensure middleware does not reset language when cookie exists."""
         request = RequestFactory().get("/")
         request.COOKIES["django_language"] = "en"
 
-        def get_response(req: HttpRequest) -> HttpResponse:
+        def get_response(_req: HttpRequest) -> HttpResponse:
             return HttpResponse("ok")
 
         middleware = DefaultLanguageMiddleware(get_response)
@@ -190,35 +211,41 @@ class LanguageMiddlewareTests(TestCase):
             response = middleware(request)
 
         activate_mock.assert_not_called()
-        self.assertNotIn("django_language", response.cookies)
+        assert "django_language" not in response.cookies
 
 
 class TemplateTagTests(TestCase):
+    """Tests for custom template tags and permission helpers."""
+
     def setUp(self) -> None:
+        """Prepare commonly used factory and user model handles."""
         self.factory = RequestFactory()
         self.user_model = get_user_model()
 
-    def _mkuser(self, username: str, **extra_fields):
-        """Crée un user avec un email unique.
-        IMPORTANT: dans ton projet, un signal post_save crée un Profile(email=instance.email)
-        et Profile.email est UNIQUE -> il faut donc un email non vide et unique.
+    def _mkuser(self, username: str, **extra_fields: Any) -> AbstractBaseUser:
+        """Create a user with unique username/email for each test.
+
+        Returns:
+            Newly created user instance.
         """
         return self.user_model.objects.create_user(
             username=username,
             email=f"{username}@example.com",
-            password="x",
+            password=uuid4().hex,
             **extra_fields,
         )
 
     def test_theme_tags_return_safe_values(self) -> None:
+        """Ensure theme tag helpers return expected safe string values."""
         theme_name = theme_tags.get_theme_variables("template_name")
         layout = theme_tags.get_theme_config("layout")
 
-        self.assertIsInstance(theme_name, SafeString)
-        self.assertEqual(str(theme_name), "AIMER")
-        self.assertEqual(str(layout), "vertical")
+        assert isinstance(theme_name, SafeString)
+        assert str(theme_name) == "AIMER"
+        assert str(layout) == "vertical"
 
     def test_filter_by_url_matches_nested_submenu(self) -> None:
+        """Ensure submenu URL matcher works on nested entries."""
         submenu = [
             {
                 "url": "/dashboard/",
@@ -230,18 +257,18 @@ class TemplateTagTests(TestCase):
         resolver = SimpleNamespace(url_name="nested")
         url = SimpleNamespace(path="/nested/", resolver_match=resolver)
 
-        self.assertIs(theme_tags.filter_by_url(submenu, url), True)
+        assert theme_tags.filter_by_url(submenu, url) is True
 
     def test_group_and_permission_filters(self) -> None:
+        """Ensure group and permission helper filters evaluate properly."""
         user = self._mkuser("alice")
 
         admin_group = Group.objects.create(name="admin")
         client_group = Group.objects.create(name="client")
         user.groups.add(admin_group)
 
-        # Permission "add_<user_model>" via ContentType -> robuste si User custom
         ct = ContentType.objects.get_for_model(self.user_model)
-        add_codename = f"add_{self.user_model._meta.model_name}"
+        add_codename = f"add_{ct.model}"
         permission = Permission.objects.get(
             content_type=ct,
             codename=add_codename,
@@ -250,18 +277,20 @@ class TemplateTagTests(TestCase):
         user.user_permissions.add(permission)
         user.refresh_from_db()
 
-        self.assertIs(theme_tags.has_group(user, "admin"), True)
-        self.assertIs(theme_tags.is_admin(user), True)
-        self.assertIs(theme_tags.is_client(user), False)
+        assert theme_tags.has_group(user, "admin") is True
+        assert theme_tags.is_admin(user) is True
+        assert theme_tags.is_client(user) is False
 
         perm_label = f"{ct.app_label}.{permission.codename}"
-        self.assertIs(theme_tags.has_permission(user, perm_label), True)
+        assert theme_tags.has_permission(user, perm_label) is True
 
         user.groups.add(client_group)
-        self.assertIs(theme_tags.is_client(user), True)
+        assert theme_tags.is_client(user) is True
 
     def test_role_required_decorators_allow_access(self) -> None:
-        def view(request: HttpRequest) -> HttpResponse:
+        """Ensure role decorators allow access for matching users."""
+
+        def view(_request: HttpRequest) -> HttpResponse:
             return HttpResponse("ok")
 
         admin_user = self._mkuser("admin")
@@ -282,32 +311,19 @@ class TemplateTagTests(TestCase):
         super_request = self.factory.get("/")
         super_request.user = super_user
 
-        self.assertEqual(
-            theme_tags.admin_required(view)(admin_request).status_code,
-            200,
-        )
-        self.assertEqual(
-            theme_tags.client_required(view)(client_request).status_code,
-            200,
-        )
-        self.assertEqual(
-            theme_tags.staff_required(view)(staff_request).status_code,
-            200,
-        )
-        self.assertEqual(
-            theme_tags.superuser_required(view)(super_request).status_code,
-            200,
-        )
+        assert theme_tags.admin_required(view)(admin_request).status_code == 200
+        assert theme_tags.client_required(view)(client_request).status_code == 200
+        assert theme_tags.staff_required(view)(staff_request).status_code == 200
+        assert theme_tags.superuser_required(view)(super_request).status_code == 200
 
     def test_user_flags_filters(self) -> None:
+        """Ensure superuser and staff filters mirror user flags."""
         user = self._mkuser("flags", is_superuser=True, is_staff=True)
 
-        self.assertIs(theme_tags.is_superuser(user), True)
-        self.assertIs(theme_tags.is_staff(user), True)
+        assert theme_tags.is_superuser(user) is True
+        assert theme_tags.is_staff(user) is True
 
     def test_current_url_tag(self) -> None:
+        """Ensure current_url returns the absolute URL for request."""
         request = self.factory.get("/test/")
-        self.assertEqual(
-            theme_tags.current_url(request),
-            request.build_absolute_uri(),
-        )
+        assert theme_tags.current_url(request) == request.build_absolute_uri()

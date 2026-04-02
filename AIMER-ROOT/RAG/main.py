@@ -1,4 +1,6 @@
 # Copyright (c) 2026 AIMER contributors.
+"""Pipeline utilities to extract, enrich, and ingest RAG documents."""
+
 import base64
 import hashlib
 import io
@@ -32,40 +34,50 @@ LLM_MODEL = "qwen3:8b"
 EMBEDDING_MODEL = "qwen3-embedding:8b"
 RERANKER_MODEL = "Krakekai/qwen3-reranker-8b"
 
+TEXT_THRESHOLD = 50
+MIN_IMAGE_DIMENSION = 500
+
 Path(DATA_DIR).mkdir(exist_ok=True, parents=True)
 Path(OUTPUT_MD_DIR).mkdir(exist_ok=True, parents=True)
 Path(OUTPUT_FIGURES_DIR).mkdir(exist_ok=True, parents=True)
 Path(OUTPUT_DESCRIPTIONS_DIR).mkdir(exist_ok=True, parents=True)
 Path(OUTPUT_TABLES_DIR).mkdir(exist_ok=True, parents=True)
 
-describe_image_prompt = """Analyze this financial document page and extract meaningful data in a concise format.
-
-For charts and graphs:
-- Identify the metric being measured
-- List key data points and values
-- Note significant trends (growth, decline, stability)
-
-For tables:
-- Extract column headers and key rows
-- Note important values and totals
-
-For text:
-- Summarize key facts and numbers only
-- Skip formating, headers, and navigation elements
-
-Be direct and factual. Focus on numbers, trends, and insights that would be useful for retrieval."""
+describe_image_prompt = (
+    "Analyze this financial document page and extract meaningful data "
+    "in a concise format.\n\n"
+    "For charts and graphs:\n"
+    "- Identify the metric being measured\n"
+    "- List key data points and values\n"
+    "- Note significant trends (growth, decline, stability)\n\n"
+    "For tables:\n"
+    "- Extract column headers and key rows\n"
+    "- Note important values and totals\n\n"
+    "For text:\n"
+    "- Summarize key facts and numbers only\n"
+    "- Skip formating, headers, and navigation elements\n\n"
+    "Be direct and factual. Focus on numbers, trends, and insights "
+    "that would be useful for retrieval."
+)
 
 
 def pdf_has_text(pdf_file: Path, max_pages: int = 3) -> bool:
-    r = PdfReader(str(pdf_file))
-    for page in r.pages[:max_pages]:
+    """Check whether the PDF contains extractable text."""
+    reader = PdfReader(str(pdf_file))
+    for page in reader.pages[:max_pages]:
         txt = (page.extract_text() or "").strip()
-        if len(txt) > 50:
+        if len(txt) > TEXT_THRESHOLD:
             return True
     return False
 
 
-def convert_pdf_to_docling(pdf_file: Path):
+def convert_pdf_to_docling(pdf_file: Path) -> object:
+    """Convert a PDF file with Docling using OCR when needed.
+
+    Returns:
+        Docling conversion result object.
+
+    """
     do_ocr = not pdf_has_text(pdf_file)
 
     pipeline_options = PdfPipelineOptions(
@@ -85,8 +97,9 @@ def convert_pdf_to_docling(pdf_file: Path):
     return doc_converter.convert(pdf_file)
 
 
-def save_page_images(doc_converter, figures_dir: Path) -> None:
-    pages_to_save = set()
+def save_page_images(doc_converter: object, figures_dir: Path) -> None:
+    """Save page images when pages contain sufficiently large pictures."""
+    pages_to_save: set[int] = set()
 
     for item in doc_converter.document.iterate_items():
         element = item[0]
@@ -94,7 +107,10 @@ def save_page_images(doc_converter, figures_dir: Path) -> None:
         if isinstance(element, PictureItem):
             image = element.get_image(doc_converter.document)
 
-            if image.size[0] > 500 or image.size[1] > 500:
+            if (
+                image.size[0] > MIN_IMAGE_DIMENSION
+                or image.size[1] > MIN_IMAGE_DIMENSION
+            ):
                 page_no = element.prov[0].page_no if element.prov else None
 
                 if page_no:
@@ -109,8 +125,14 @@ def save_page_images(doc_converter, figures_dir: Path) -> None:
             )
 
 
-def extract_context_and_table(lines: list[str], table_index: int):
-    table_lines = []
+def extract_context_and_table(lines: list[str], table_index: int) -> tuple[str, int]:
+    """Extract markdown table plus nearby context lines.
+
+    Returns:
+        Tuple of extracted content and the next line index to process.
+
+    """
+    table_lines: list[str] = []
     i = table_index
 
     while (i < len(lines)) and (lines[i].startswith("|")):
@@ -125,10 +147,16 @@ def extract_context_and_table(lines: list[str], table_index: int):
     return content, i
 
 
-def extract_tables_with_content(markdown_text: str):
+def extract_tables_with_content(markdown_text: str) -> list[tuple[str, str, int]]:
+    """Parse markdown and return detected tables with context.
+
+    Returns:
+        List of tuples ``(table_content, table_name, page_number)``.
+
+    """
     lines = markdown_text.split("\n")
     lines = [line for line in lines if line.strip()]
-    tables = []
+    tables: list[tuple[str, str, int]] = []
     current_page = 1
     table_num = 1
     i = 0
@@ -150,7 +178,8 @@ def extract_tables_with_content(markdown_text: str):
     return tables
 
 
-def save_tables(markdown_text, tables_dir) -> None:
+def save_tables(markdown_text: str, tables_dir: Path) -> None:
+    """Persist extracted table markdown snippets on disk."""
     tables = extract_tables_with_content(markdown_text)
 
     for table_context, table_name, page_num in tables:
@@ -163,6 +192,7 @@ def save_tables(markdown_text, tables_dir) -> None:
 
 
 def extract_pdf_content(pdf_file: Path) -> None:
+    """Extract markdown, page images, and table snippets from a PDF."""
     md_dir = Path(OUTPUT_MD_DIR) / pdf_file.stem
     figures_dir = Path(OUTPUT_FIGURES_DIR) / pdf_file.stem
     tables_dir = Path(OUTPUT_TABLES_DIR) / pdf_file.stem
@@ -183,7 +213,8 @@ def extract_pdf_content(pdf_file: Path) -> None:
     save_tables(markdown_text, tables_dir)
 
 
-def compute_file_hash(file_path: Path):
+def compute_file_hash(file_path: Path) -> str:
+    """Compute and return SHA-256 hash for a file."""
     sha256_hash = hashlib.sha256()
 
     with Path(file_path).open("rb") as file:
@@ -193,8 +224,9 @@ def compute_file_hash(file_path: Path):
     return sha256_hash.hexdigest()
 
 
-def get_processed_hashes():
-    processed_hashes = set()
+def get_processed_hashes() -> set[str]:
+    """Retrieve already indexed file hashes from the vector store."""
+    processed_hashes: set[str] = set()
     offset = None
 
     while True:
@@ -218,13 +250,15 @@ def get_processed_hashes():
     return processed_hashes
 
 
-def extract_page_number(file_path: Path):
+def extract_page_number(file_path: Path) -> int | None:
+    """Extract page number from a file name stem."""
     pattern = r"page_(\d+)"
     match = re.search(pattern=pattern, string=file_path.stem)
     return int(match.group(1)) if match else None
 
 
-def generate_image_description(image_path: Path):
+def generate_image_description(image_path: Path) -> str:
+    """Generate a textual description for an extracted page image."""
     image = Image.open(image_path)
     buffered = io.BytesIO()
     image.save(buffered, format="PNG")
@@ -248,6 +282,7 @@ def generate_image_description(image_path: Path):
 
 
 def generate_and_save_description(image_path: Path) -> bool:
+    """Generate and store image description if it does not already exist."""
     doc_name = image_path.parent.name
 
     output_dir = Path(OUTPUT_DESCRIPTIONS_DIR) / doc_name
@@ -264,7 +299,8 @@ def generate_and_save_description(image_path: Path) -> bool:
     return True
 
 
-def extract_metadata_from_filename(filename: str):
+def extract_metadata_from_filename(filename: str) -> dict[str, str]:
+    """Extract document metadata components from filename."""
     filename = filename.replace(".pdf", "").replace(".md", "")
 
     parts = filename.split("-")
@@ -299,7 +335,8 @@ vector_store = QdrantVectorStore.from_documents(
 processed_hashes = get_processed_hashes()
 
 
-def ingest_file_in_db(file_path, processed_hashes) -> None:
+def ingest_file_in_db(file_path: Path, processed_hashes: set[str]) -> None:
+    """Ingest a markdown-derived file into the vector database."""
     file_hash = compute_file_hash(file_path)
 
     path_str = str(file_path)
@@ -330,7 +367,7 @@ def ingest_file_in_db(file_path, processed_hashes) -> None:
 
     if content_type == "text":
         pages = content.split("<!-- page break -->")
-        documents = []
+        documents: list[Document] = []
         for idx, page in enumerate(pages, start=1):
             metadata = base_metadata.copy()
             metadata.update({"page": idx})
