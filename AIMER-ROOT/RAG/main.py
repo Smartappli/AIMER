@@ -1,3 +1,4 @@
+# Copyright (c) 2026 AIMER contributors.
 import base64
 import hashlib
 import io
@@ -81,11 +82,10 @@ def convert_pdf_to_docling(pdf_file: Path):
         },
     )
 
-    result = doc_converter.convert(pdf_file)
-    return result
+    return doc_converter.convert(pdf_file)
 
 
-def save_page_images(doc_converter, figures_dir: Path):
+def save_page_images(doc_converter, figures_dir: Path) -> None:
     pages_to_save = set()
 
     for item in doc_converter.document.iterate_items():
@@ -135,22 +135,22 @@ def extract_tables_with_content(markdown_text: str):
 
     while i < len(lines):
         if "<!-- page break -->" in lines[i]:
-            current_page = current_page + 1
-            i = i + 1
+            current_page += 1
+            i += 1
             continue
 
         if lines[i].startswith("|") and lines[i].count("|") > 1:
             content, next_i = extract_context_and_table(lines, i)
             tables.append((content, f"table_{table_num}", current_page))
-            table_num = table_num + 1
+            table_num += 1
             i = next_i
         else:
-            i = i + 1
+            i += 1
 
     return tables
 
 
-def save_tables(markdown_text, tables_dir):
+def save_tables(markdown_text, tables_dir) -> None:
     tables = extract_tables_with_content(markdown_text)
 
     for table_context, table_name, page_num in tables:
@@ -162,7 +162,7 @@ def save_tables(markdown_text, tables_dir):
         )
 
 
-def extract_pdf_content(pdf_file: Path):
+def extract_pdf_content(pdf_file: Path) -> None:
     md_dir = Path(OUTPUT_MD_DIR) / pdf_file.stem
     figures_dir = Path(OUTPUT_FIGURES_DIR) / pdf_file.stem
     tables_dir = Path(OUTPUT_TABLES_DIR) / pdf_file.stem
@@ -247,7 +247,7 @@ def generate_image_description(image_path: Path):
     return response.text
 
 
-def generate_and_save_description(image_path: Path):
+def generate_and_save_description(image_path: Path) -> bool:
     doc_name = image_path.parent.name
 
     output_dir = Path(OUTPUT_DESCRIPTIONS_DIR) / doc_name
@@ -299,10 +299,10 @@ vector_store = QdrantVectorStore.from_documents(
 processed_hashes = get_processed_hashes()
 
 
-def ingest_file_in_db(file_path, processed_hashes):
+def ingest_file_in_db(file_path, processed_hashes) -> None:
     file_hash = compute_file_hash(file_path)
     if file_hash in processed_hashes:
-        print(f"Following file has been already uploaded: {file_path}")
+        pass
 
     path_str = str(file_path)
     if "markdown" in path_str:
@@ -355,8 +355,7 @@ def ingest_file_in_db(file_path, processed_hashes):
 data_path = Path(DATA_DIR)
 pdf_files = data_path.glob("*.pdf")
 
-for _idx, pdf_file in enumerate(pdf_files):
-    print(pdf_file)
+for pdf_file in pdf_files:
     extract_pdf_content(pdf_file)
 
     images_path = Path(OUTPUT_FIGURES_DIR) / pdf_file.stem
@@ -372,4 +371,3 @@ for md_file in tqdm(all_md_files):
     ingest_file_in_db(md_file, processed_hashes)
 
 collection_info = vector_store.client.get_collection_info(COLLECTION_NAME)
-print(collection_info)

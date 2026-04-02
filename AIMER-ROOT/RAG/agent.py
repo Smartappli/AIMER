@@ -1,3 +1,4 @@
+# Copyright (c) 2026 AIMER contributors.
 from langchain_ollama import ChatOllama
 
 LLM_MODEL = ""

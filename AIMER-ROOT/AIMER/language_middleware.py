@@ -1,37 +1,29 @@
+# Copyright (c) 2026 AIMER contributors.
+"""Middleware for default language cookie handling."""
+
+from __future__ import annotations
+
+from collections.abc import Callable
+from typing import Any
+
 from django.conf import settings
+from django.http import HttpRequest, HttpResponse
 from django.utils.translation import activate
 
 
 class DefaultLanguageMiddleware:
-    """Django middleware that ensures a default language is activated and persisted.
+    """Set Django language cookie when it is missing."""
 
-    If the ``django_language`` cookie is missing, this middleware:
-    - activates ``settings.LANGUAGE_CODE`` for the current request
-    - sets the ``django_language`` cookie on the response
-
-    If the cookie is already present, the request/response cycle is passed through
-    unchanged.
-
-    Notes:
-        - This middleware relies on Django's i18n machinery (``activate``) and the
-          ``settings.LANGUAGE_CODE`` value.
-        - Cookie name follows Django's default language cookie convention.
-
-    """
-
-    def __init__(self, get_response):
+    def __init__(self, get_response: Callable[[HttpRequest], HttpResponse]) -> None:
+        """Store next middleware/view callable."""
         self.get_response = get_response
 
-    def __call__(self, request):
-        # Check if the django_language cookie is not set
+    def __call__(self, request: HttpRequest) -> HttpResponse:
+        """Process request and ensure default language cookie exists."""
         if "django_language" not in request.COOKIES:
-            # Get the default language from settings.LANGUAGE_CODE
             default_language = settings.LANGUAGE_CODE
             activate(default_language)
             response = self.get_response(request)
             response.set_cookie("django_language", default_language)
-
-        else:
-            response = self.get_response(request)
-
-        return response
+            return response
+        return self.get_response(request)
