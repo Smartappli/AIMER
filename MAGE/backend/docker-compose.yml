@@ -342,7 +342,7 @@ services:
     entrypoint: >
       /bin/sh -lc '
         set -e;
-  
+
         echo "Waiting for MinIO (mc alias set)...";
         i=0;
         until mc alias set lf "http://langfuse-minio:9000" \
@@ -357,11 +357,11 @@ services:
           fi
           sleep 1;
         done
-  
+
         echo "MinIO is reachable. Ensuring buckets...";
         mc mb -p "lf/${LANGFUSE_S3_EVENT_UPLOAD_BUCKET:-langfuse-events}" || true;
         mc mb -p "lf/${LANGFUSE_S3_MEDIA_UPLOAD_BUCKET:-langfuse-media}" || true;
-  
+
         echo "Buckets ensured.";
       '
     restart: "no"

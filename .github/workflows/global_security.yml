@@ -32,7 +32,7 @@ jobs:
           # this might remove tools that are actually needed,
           # if set to "true" but frees about 6 GB
           tool-cache: false
-          
+
           # all of these default to true, but feel free to set to
           # "false" if necessary for your workflow
           android: true
@@ -54,7 +54,7 @@ jobs:
       contents: read # for actions/checkout to fetch code
       security-events: write # for github/codeql-action/upload-sarif to upload SARIF results
       actions: read # only required for a private repository by github/codeql-action/upload-sarif to get the Action run status
-      
+
     name: Bandit Security Scan
     runs-on: ubuntu-latest
     steps:
@@ -64,7 +64,7 @@ jobs:
           # this might remove tools that are actually needed,
           # if set to "true" but frees about 6 GB
           tool-cache: false
-          
+
           # all of these default to true, but feel free to set to
           # "false" if necessary for your workflow
           android: true
@@ -73,7 +73,7 @@ jobs:
           large-packages: true
           docker-images: true
           swap-storage: true
-          
+
       - name: Checkout code
         uses: actions/checkout@v6
 
@@ -81,7 +81,7 @@ jobs:
         uses: actions/setup-python@v6
         with:
           python-version: '3.13'
-          
+
       - name: Bandit by PyCQA
         uses: PyCQA/bandit-action@main
 
@@ -95,7 +95,7 @@ jobs:
           # this might remove tools that are actually needed,
           # if set to "true" but frees about 6 GB
           tool-cache: false
-          
+
           # all of these default to true, but feel free to set to
           # "false" if necessary for your workflow
           android: true
@@ -104,10 +104,10 @@ jobs:
           large-packages: true
           docker-images: true
           swap-storage: true
-          
+
       - name: Check out master
         uses: actions/checkout@v6
-        
+
       - uses: actions/setup-python@v6
         with:
           python-version: '3.13'
@@ -124,15 +124,15 @@ jobs:
 
   trufflehog:
     name: Secret Leaks
-    runs-on: ubuntu-latest 
-    steps: 
+    runs-on: ubuntu-latest
+    steps:
       - name: Free Disk Space (Ubuntu)
         uses: jlumbroso/free-disk-space@v1.3.1
         with:
           # this might remove tools that are actually needed,
           # if set to "true" but frees about 6 GB
           tool-cache: false
-          
+
           # all of these default to true, but feel free to set to
           # "false" if necessary for your workflow
           android: true
@@ -141,12 +141,11 @@ jobs:
           large-packages: true
           docker-images: true
           swap-storage: true
-          
-      - name: Checkout code 
-        uses: actions/checkout@v6 
-        with: 
-          fetch-depth: 0
-          
-      - name: Secret Scanning 
-        uses: trufflesecurity/trufflehog@main
 
+      - name: Checkout code
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Secret Scanning
+        uses: trufflesecurity/trufflehog@main

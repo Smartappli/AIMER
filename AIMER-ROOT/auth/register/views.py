@@ -89,6 +89,6 @@ class RegisterView(AuthView):
                 "Email settings are not configured. Unable to send verification email.",
             )
 
-        request.session["email"] = email  ## Save email in session
+        request.session["email"] = email  # Save email in session
         # Redirect to the verification page after successful registration
         return redirect("verify-email-page")

@@ -7,6 +7,7 @@ crashing, while remaining compatible with older TorchVision APIs.
 
 from __future__ import annotations
 
+import importlib.util
 import inspect
 import logging
 import os
@@ -15,8 +16,6 @@ import time
 from types import ModuleType
 from typing import TYPE_CHECKING
 from urllib.error import URLError
-
-import importlib.util
 
 import pytest
 

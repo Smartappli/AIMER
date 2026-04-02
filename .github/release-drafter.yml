@@ -62,7 +62,7 @@ autolabeler:
   title:
     - '/(fix|bug|missing|correct)/i'
 - label: '🧹 Updates'
-  title: 
+  title:
     - '/(improve|update|refactor|deprecated|remove|unused|test)/i'
 - label: '🤖 Dependencies'
   title:

@@ -1,147 +1,147 @@
 {
   "menu": [
     {
-      "name": "Dashboards",
       "icon": "menu-icon icon-base bx bx-home-smile",
+      "name": "Dashboards",
       "slug": "dashboard",
       "submenu": [
         {
-          "url": "index",
-          "name": "Analytics",
           "icon": "menu-icon icon-base bx bx-pie-chart-alt-2",
-          "slug": "dashboard-analytics"
+          "name": "Analytics",
+          "slug": "dashboard-analytics",
+          "url": "index"
         },
         {
-          "url": "dashboard-crm",
-          "name": "CRM",
           "icon": "menu-icon icon-base bx bx-shape-circle",
-          "slug": "dashboard-crm"
+          "name": "CRM",
+          "slug": "dashboard-crm",
+          "url": "dashboard-crm"
         },
         {
-          "url": "/app/ecommerce/dashboard",
           "external": true,
-          "name": "eCommerce",
           "icon": "menu-icon icon-base bx bx-cart-alt",
-          "slug": "app-ecommerce-dashboard"
+          "name": "eCommerce",
+          "slug": "app-ecommerce-dashboard",
+          "url": "/app/ecommerce/dashboard"
         },
         {
-          "url": "/app/logistics/dashboard",
           "external": true,
-          "name": "Logistics",
           "icon": "menu-icon icon-base bx bx-car",
-          "slug": "app-logistics-dashboard"
+          "name": "Logistics",
+          "slug": "app-logistics-dashboard",
+          "url": "/app/logistics/dashboard"
         },
         {
-          "url": "/app/academy/dashboard",
           "external": true,
-          "name": "Academy",
           "icon": "menu-icon icon-base bx bx-book-open",
-          "slug": "app-academy-dashboard"
+          "name": "Academy",
+          "slug": "app-academy-dashboard",
+          "url": "/app/academy/dashboard"
         }
       ]
     },
     {
-      "name": "Layouts",
       "icon": "menu-icon icon-base bx bx-layout",
+      "name": "Layouts",
       "slug": "layouts",
       "submenu": [
         {
-          "url": "layouts-without-menu",
-          "name": "Without menu",
           "icon": "menu-icon icon-base bx bx-menu",
-          "slug": "layouts-without-menu"
+          "name": "Without menu",
+          "slug": "layouts-without-menu",
+          "url": "layouts-without-menu"
         },
         {
-          "url": "layouts-content-navbar",
-          "name": "Vertical",
           "icon": "menu-icon icon-base bx bx-vertical-center",
+          "name": "Vertical",
           "slug": "layouts-content-navbar",
-          "target": "_blank"
+          "target": "_blank",
+          "url": "layouts-content-navbar"
         },
         {
-          "url": "layouts-horizontal",
-          "name": "Horizontal",
           "icon": "menu-icon icon-base bx bx-horizontal-center",
-          "slug": "layouts-horizontal"
+          "name": "Horizontal",
+          "slug": "layouts-horizontal",
+          "url": "layouts-horizontal"
         },
         {
-          "url": "layouts-fluid",
-          "name": "Fluid",
           "icon": "menu-icon icon-base bx bx-fullscreen",
-          "slug": "layouts-fluid"
+          "name": "Fluid",
+          "slug": "layouts-fluid",
+          "url": "layouts-fluid"
         },
         {
-          "url": "layouts-container",
-          "name": "Container",
           "icon": "menu-icon icon-base bx bx-exit-fullscreen",
-          "slug": "layouts-container"
+          "name": "Container",
+          "slug": "layouts-container",
+          "url": "layouts-container"
         },
         {
-          "url": "layouts-blank",
-          "name": "Blank",
           "icon": "menu-icon icon-base bx bx-square-rounded",
+          "name": "Blank",
           "slug": "layouts-blank",
-          "target": "_blank"
+          "target": "_blank",
+          "url": "layouts-blank"
         }
       ]
     },
     {
-      "name": "Apps",
       "icon": "menu-icon icon-base bx bx-customize",
+      "name": "Apps",
       "slug": "app",
       "submenu": [
         {
-          "url": "app-email",
-          "name": "Email",
           "icon": "menu-icon icon-base bx bx-envelope",
-          "slug": "app-email"
+          "name": "Email",
+          "slug": "app-email",
+          "url": "app-email"
         },
         {
-          "url": "app-chat",
-          "name": "Chat",
           "icon": "menu-icon icon-base bx bx-chat",
-          "slug": "app-chat"
+          "name": "Chat",
+          "slug": "app-chat",
+          "url": "app-chat"
         },
         {
-          "url": "app-calendar",
-          "name": "Calendar",
           "icon": "menu-icon icon-base bx bx-calendar",
-          "slug": "app-calendar"
+          "name": "Calendar",
+          "slug": "app-calendar",
+          "url": "app-calendar"
         },
         {
-          "url": "app-kanban",
-          "name": "Kanban",
           "icon": "menu-icon icon-base bx bx-grid",
-          "slug": "app-kanban"
+          "name": "Kanban",
+          "slug": "app-kanban",
+          "url": "app-kanban"
         },
         {
+          "icon": "menu-icon icon-base bx bx-cart-alt",
           "name": "eCommerce",
           "slug": "app-ecommerce",
-          "icon": "menu-icon icon-base bx bx-cart-alt",
           "submenu": [
             {
-              "url": "app-ecommerce-dashboard",
               "name": "Dashboard",
-              "slug": "app-ecommerce-dashboard"
+              "slug": "app-ecommerce-dashboard",
+              "url": "app-ecommerce-dashboard"
             },
             {
               "name": "Products",
               "slug": "app-ecommerce-product",
               "submenu": [
                 {
-                  "url": "app-ecommerce-product-list",
                   "name": "Product List",
-                  "slug": "app-ecommerce-product-list"
+                  "slug": "app-ecommerce-product-list",
+                  "url": "app-ecommerce-product-list"
                 },
                 {
-                  "url": "app-ecommerce-product-add",
                   "name": "Add Product",
-                  "slug": "app-ecommerce-product-add"
+                  "slug": "app-ecommerce-product-add",
+                  "url": "app-ecommerce-product-add"
                 },
                 {
-                  "url": "app-ecommerce-product-category-list",
                   "name": "Category List",
-                  "slug": "app-ecommerce-product-category-list"
+                  "slug": "app-ecommerce-product-category-list",
+                  "url": "app-ecommerce-product-category-list"
                 }
               ]
             },
@@ -150,14 +150,14 @@
               "slug": "app-ecommerce-order",
               "submenu": [
                 {
-                  "url": "app-ecommerce-order-list",
                   "name": "Order List",
-                  "slug": "app-ecommerce-order-list"
+                  "slug": "app-ecommerce-order-list",
+                  "url": "app-ecommerce-order-list"
                 },
                 {
-                  "url": "app-ecommerce-order-details",
                   "name": "Order Details",
-                  "slug": "app-ecommerce-order-details"
+                  "slug": "app-ecommerce-order-details",
+                  "url": "app-ecommerce-order-details"
                 }
               ]
             },
@@ -166,221 +166,221 @@
               "slug": "app-ecommerce-customer",
               "submenu": [
                 {
-                  "url": "app-ecommerce-customer-all",
                   "name": "All Customers",
-                  "slug": "app-ecommerce-customer-all"
+                  "slug": "app-ecommerce-customer-all",
+                  "url": "app-ecommerce-customer-all"
                 },
                 {
                   "name": "Customer Details",
                   "slug": "app-ecommerce-customer-details",
                   "submenu": [
                     {
-                      "url": "app-ecommerce-customer-details-overview",
                       "name": "Overview",
-                      "slug": "app-ecommerce-customer-details-overview"
+                      "slug": "app-ecommerce-customer-details-overview",
+                      "url": "app-ecommerce-customer-details-overview"
                     },
                     {
-                      "url": "app-ecommerce-customer-details-security",
                       "name": "Security",
-                      "slug": "app-ecommerce-customer-details-security"
+                      "slug": "app-ecommerce-customer-details-security",
+                      "url": "app-ecommerce-customer-details-security"
                     },
                     {
-                      "url": "app-ecommerce-customer-details-billing",
                       "name": "Address & Billing",
-                      "slug": "app-ecommerce-customer-details-billing"
+                      "slug": "app-ecommerce-customer-details-billing",
+                      "url": "app-ecommerce-customer-details-billing"
                     },
                     {
-                      "url": "app-ecommerce-customer-details-notifications",
                       "name": "Notifications",
-                      "slug": "app-ecommerce-customer-details-notifications"
+                      "slug": "app-ecommerce-customer-details-notifications",
+                      "url": "app-ecommerce-customer-details-notifications"
                     }
                   ]
                 }
               ]
             },
             {
-              "url": "app-ecommerce-manage-reviews",
               "name": "Manage Reviews",
-              "slug": "app-ecommerce-manage-reviews"
+              "slug": "app-ecommerce-manage-reviews",
+              "url": "app-ecommerce-manage-reviews"
             },
             {
-              "url": "app-ecommerce-referrals",
               "name": "Referrals",
-              "slug": "app-ecommerce-referrals"
+              "slug": "app-ecommerce-referrals",
+              "url": "app-ecommerce-referrals"
             },
             {
               "name": "Settings",
               "slug": "app-ecommerce-settings",
               "submenu": [
                 {
-                  "url": "app-ecommerce-settings-detail",
                   "name": "Store details",
-                  "slug": "app-ecommerce-settings-detail"
+                  "slug": "app-ecommerce-settings-detail",
+                  "url": "app-ecommerce-settings-detail"
                 },
                 {
-                  "url": "app-ecommerce-settings-payments",
                   "name": "Payments",
-                  "slug": "app-ecommerce-settings-payments"
+                  "slug": "app-ecommerce-settings-payments",
+                  "url": "app-ecommerce-settings-payments"
                 },
                 {
-                  "url": "app-ecommerce-settings-checkout",
                   "name": "Checkout",
-                  "slug": "app-ecommerce-settings-checkout"
+                  "slug": "app-ecommerce-settings-checkout",
+                  "url": "app-ecommerce-settings-checkout"
                 },
                 {
-                  "url": "app-ecommerce-settings-shipping",
                   "name": "Shipping & Delivery",
-                  "slug": "app-ecommerce-settings-shipping"
+                  "slug": "app-ecommerce-settings-shipping",
+                  "url": "app-ecommerce-settings-shipping"
                 },
                 {
-                  "url": "app-ecommerce-settings-locations",
                   "name": "Locations",
-                  "slug": "app-ecommerce-settings-locations"
+                  "slug": "app-ecommerce-settings-locations",
+                  "url": "app-ecommerce-settings-locations"
                 },
                 {
-                  "url": "app-ecommerce-settings-notifications",
                   "name": "Notifications",
-                  "slug": "app-ecommerce-settings-notifications"
+                  "slug": "app-ecommerce-settings-notifications",
+                  "url": "app-ecommerce-settings-notifications"
                 }
               ]
             }
           ]
         },
         {
-          "name": "Academy",
           "icon": "menu-icon icon-base bx bx-book-open",
+          "name": "Academy",
           "slug": "app-academy",
           "submenu": [
             {
-              "url": "app-academy-dashboard",
               "name": "Dashboard",
-              "slug": "app-academy-dashboard"
+              "slug": "app-academy-dashboard",
+              "url": "app-academy-dashboard"
             },
             {
-              "url": "app-academy-course",
               "name": "My Course",
-              "slug": "app-academy-course"
+              "slug": "app-academy-course",
+              "url": "app-academy-course"
             },
             {
-              "url": "app-academy-course-details",
               "name": "Course Details",
-              "slug": "app-academy-course-details"
+              "slug": "app-academy-course-details",
+              "url": "app-academy-course-details"
             }
           ]
         },
         {
-          "name": "Logistics",
           "icon": "menu-icon icon-base bx bx-car",
+          "name": "Logistics",
           "slug": "app-logistics",
           "submenu": [
             {
-              "url": "app-logistics-dashboard",
               "name": "Dashboard",
-              "slug": "app-logistics-dashboard"
+              "slug": "app-logistics-dashboard",
+              "url": "app-logistics-dashboard"
             },
             {
-              "url": "app-logistics-fleet",
               "name": "Fleet",
-              "slug": "app-logistics-fleet"
+              "slug": "app-logistics-fleet",
+              "url": "app-logistics-fleet"
             }
           ]
         },
         {
-          "name": "Invoice",
           "icon": "menu-icon icon-base bx bx-food-menu",
+          "name": "Invoice",
           "slug": "app-invoice",
           "submenu": [
             {
-              "url": "app-invoice-list",
               "name": "List",
-              "slug": "app-invoice-list"
+              "slug": "app-invoice-list",
+              "url": "app-invoice-list"
             },
             {
-              "url": "app-invoice-preview",
               "name": "Preview",
-              "slug": "app-invoice-preview"
+              "slug": "app-invoice-preview",
+              "url": "app-invoice-preview"
             },
             {
-              "url": "app-invoice-edit",
               "name": "Edit",
-              "slug": "app-invoice-edit"
+              "slug": "app-invoice-edit",
+              "url": "app-invoice-edit"
             },
             {
-              "url": "app-invoice-add",
               "name": "Add",
-              "slug": "app-invoice-add"
+              "slug": "app-invoice-add",
+              "url": "app-invoice-add"
             }
           ]
         },
         {
-          "name": "Users",
           "icon": "menu-icon icon-base bx bx-user",
+          "name": "Users",
           "permission": "user.view_user",
-          "slug": "app-user",
           "role": "admin",
+          "slug": "app-user",
           "submenu": [
             {
-              "url": "app-user-list",
               "name": "List",
-              "slug": "app-user-list"
+              "slug": "app-user-list",
+              "url": "app-user-list"
             },
             {
               "name": "View",
               "slug": "app-user-view",
               "submenu": [
                 {
-                  "url": "app-user-view-account",
                   "name": "Account",
-                  "slug": "app-user-view-account"
+                  "slug": "app-user-view-account",
+                  "url": "app-user-view-account"
                 },
                 {
-                  "url": "app-user-view-security",
                   "name": "Security",
-                  "slug": "app-user-view-security"
+                  "slug": "app-user-view-security",
+                  "url": "app-user-view-security"
                 },
                 {
-                  "url": "app-user-view-billing",
                   "name": "Billing & Plans",
-                  "slug": "app-user-view-billing"
+                  "slug": "app-user-view-billing",
+                  "url": "app-user-view-billing"
                 },
                 {
-                  "url": "app-user-view-notifications",
                   "name": "Notifications",
-                  "slug": "app-user-view-notifications"
+                  "slug": "app-user-view-notifications",
+                  "url": "app-user-view-notifications"
                 },
                 {
-                  "url": "app-user-view-connections",
                   "name": "Connections",
-                  "slug": "app-user-view-connections"
+                  "slug": "app-user-view-connections",
+                  "url": "app-user-view-connections"
                 }
               ]
             }
           ]
         },
         {
-          "name": "Roles & Permissions",
           "icon": "menu-icon icon-base bx bx-check-shield",
+          "name": "Roles & Permissions",
           "permission": "permission.view_permission",
-          "slug": "app-access",
           "role": "admin",
+          "slug": "app-access",
           "submenu": [
             {
-              "url": "app-access-roles",
               "name": "Roles",
-              "slug": "app-access-roles"
+              "slug": "app-access-roles",
+              "url": "app-access-roles"
             },
             {
-              "url": "app-access-permission",
               "name": "Permissions",
-              "slug": "app-access-permission"
+              "slug": "app-access-permission",
+              "url": "app-access-permission"
             }
           ]
         }
       ]
     },
     {
-      "name": "Pages",
       "icon": "menu-icon icon-base bx bx-collection",
+      "name": "Pages",
       "slug": [
         "pages",
         "auth",
@@ -389,154 +389,154 @@
       ],
       "submenu": [
         {
-          "name": "Front Pages",
           "icon": "menu-icon icon-base bx bx-store",
+          "name": "Front Pages",
           "slug": "front-pages",
           "submenu": [
             {
-              "url": "landing-page",
               "name": "Landing",
               "slug": "front-pages-landing",
-              "target": "_blank"
+              "target": "_blank",
+              "url": "landing-page"
             },
             {
-              "url": "pricing-page",
               "name": "Pricing",
               "slug": "front-pages-pricing",
-              "target": "_blank"
+              "target": "_blank",
+              "url": "pricing-page"
             },
             {
-              "url": "payment-page",
               "name": "Payments",
               "slug": "front-pages-payment",
-              "target": "_blank"
+              "target": "_blank",
+              "url": "payment-page"
             },
             {
-              "url": "checkout-page",
               "name": "Checkout",
               "slug": "front-pages-checkout",
-              "target": "_blank"
+              "target": "_blank",
+              "url": "checkout-page"
             },
             {
-              "url": "help-center-landing",
               "name": "Help Center",
               "slug": "front-pages-help-center",
-              "target": "_blank"
+              "target": "_blank",
+              "url": "help-center-landing"
             }
           ]
         },
         {
-          "url": "transactions",
+          "icon": "menu-icon icon-base bx bx-data",
           "name": "Transactions (CRUD)",
           "permission": "transactions.view_transaction",
-          "icon": "menu-icon icon-base bx bx-data",
-          "slug": "transactions"
+          "slug": "transactions",
+          "url": "transactions"
         },
         {
-          "name": "User Profile",
           "icon": "menu-icon icon-base bx bx-user-circle",
+          "name": "User Profile",
           "slug": "pages-profile",
           "submenu": [
             {
-              "url": "pages-profile-user",
               "name": "Profile",
-              "slug": "pages-profile-user"
+              "slug": "pages-profile-user",
+              "url": "pages-profile-user"
             },
             {
-              "url": "pages-profile-teams",
               "name": "Teams",
-              "slug": "pages-profile-teams"
+              "slug": "pages-profile-teams",
+              "url": "pages-profile-teams"
             },
             {
-              "url": "pages-profile-projects",
               "name": "Projects",
-              "slug": "pages-profile-projects"
+              "slug": "pages-profile-projects",
+              "url": "pages-profile-projects"
             },
             {
-              "url": "pages-profile-connections",
               "name": "Connections",
-              "slug": "pages-profile-connections"
+              "slug": "pages-profile-connections",
+              "url": "pages-profile-connections"
             }
           ]
         },
         {
-          "name": "Account Settings",
           "icon": "menu-icon icon-base bx bx-cog",
+          "name": "Account Settings",
           "slug": "pages-account-settings",
           "submenu": [
             {
-              "url": "pages-account-settings-account",
               "name": "Account",
-              "slug": "pages-account-settings-account"
+              "slug": "pages-account-settings-account",
+              "url": "pages-account-settings-account"
             },
             {
-              "url": "pages-account-settings-security",
               "name": "Security",
-              "slug": "pages-account-settings-security"
+              "slug": "pages-account-settings-security",
+              "url": "pages-account-settings-security"
             },
             {
-              "url": "pages-account-settings-billing",
               "name": "Billing & Plans",
-              "slug": "pages-account-settings-billing"
+              "slug": "pages-account-settings-billing",
+              "url": "pages-account-settings-billing"
             },
             {
-              "url": "pages-account-settings-notifications",
               "name": "Notifications",
-              "slug": "pages-account-settings-notifications"
+              "slug": "pages-account-settings-notifications",
+              "url": "pages-account-settings-notifications"
             },
             {
-              "url": "pages-account-settings-connections",
               "name": "Connections",
-              "slug": "pages-account-settings-connections"
+              "slug": "pages-account-settings-connections",
+              "url": "pages-account-settings-connections"
             }
           ]
         },
         {
-          "url": "pages-faq",
-          "name": "FAQ",
           "icon": "menu-icon icon-base bx bx-help-circle",
-          "slug": "pages-faq"
+          "name": "FAQ",
+          "slug": "pages-faq",
+          "url": "pages-faq"
         },
         {
-          "url": "pages-pricing",
-          "name": "Pricing",
           "icon": "menu-icon icon-base bx bx-diamond",
-          "slug": "pages-pricing"
+          "name": "Pricing",
+          "slug": "pages-pricing",
+          "url": "pages-pricing"
         },
         {
-          "name": "Misc",
           "icon": "menu-icon icon-base bx bx-shape-circle",
+          "name": "Misc",
           "slug": "pages-misc",
           "submenu": [
             {
-              "url": "pages-misc-error",
               "name": "Error",
               "slug": "pages-misc-error",
-              "target": "_blank"
+              "target": "_blank",
+              "url": "pages-misc-error"
             },
             {
-              "url": "pages-misc-under-maintenance",
               "name": "Under Maintenance",
               "slug": "pages-misc-under-maintenance",
-              "target": "_blank"
+              "target": "_blank",
+              "url": "pages-misc-under-maintenance"
             },
             {
-              "url": "pages-misc-comingsoon",
               "name": "Coming Soon",
               "slug": "pages-misc-comingsoon",
-              "target": "_blank"
+              "target": "_blank",
+              "url": "pages-misc-comingsoon"
             },
             {
-              "url": "pages-misc-not-authorized",
               "name": "Not Authorized",
               "slug": "pages-misc-not-authorized",
-              "target": "_blank"
+              "target": "_blank",
+              "url": "pages-misc-not-authorized"
             }
           ]
         },
         {
-          "name": "Authentications",
           "icon": "menu-icon icon-base bx bx-lock-open-alt",
+          "name": "Authentications",
           "slug": "auth",
           "submenu": [
             {
@@ -544,16 +544,16 @@
               "slug": "auth-login",
               "submenu": [
                 {
-                  "url": "auth-login-basic",
                   "name": "Basic",
                   "slug": "auth-login-basic",
-                  "target": "_blank"
+                  "target": "_blank",
+                  "url": "auth-login-basic"
                 },
                 {
-                  "url": "auth-login-cover",
                   "name": "Cover",
                   "slug": "auth-login-cover",
-                  "target": "_blank"
+                  "target": "_blank",
+                  "url": "auth-login-cover"
                 }
               ]
             },
@@ -562,22 +562,22 @@
               "slug": "auth-register",
               "submenu": [
                 {
-                  "url": "auth-register-basic",
                   "name": "Basic",
                   "slug": "auth-register-basic",
-                  "target": "_blank"
+                  "target": "_blank",
+                  "url": "auth-register-basic"
                 },
                 {
-                  "url": "auth-register-cover",
                   "name": "Cover",
                   "slug": "auth-register-cover",
-                  "target": "_blank"
+                  "target": "_blank",
+                  "url": "auth-register-cover"
                 },
                 {
-                  "url": "auth-register-multisteps",
                   "name": "Multi-steps",
                   "slug": "auth-register-multisteps",
-                  "target": "_blank"
+                  "target": "_blank",
+                  "url": "auth-register-multisteps"
                 }
               ]
             },
@@ -586,16 +586,16 @@
               "slug": "auth-verify-email",
               "submenu": [
                 {
-                  "url": "auth-verify-email-basic",
                   "name": "Basic",
                   "slug": "auth-verify-email-basic",
-                  "target": "_blank"
+                  "target": "_blank",
+                  "url": "auth-verify-email-basic"
                 },
                 {
-                  "url": "auth-verify-email-cover",
                   "name": "Cover",
                   "slug": "auth-verify-email-cover",
-                  "target": "_blank"
+                  "target": "_blank",
+                  "url": "auth-verify-email-cover"
                 }
               ]
             },
@@ -604,16 +604,16 @@
               "slug": "auth-reset-password",
               "submenu": [
                 {
-                  "url": "auth-reset-password-basic",
                   "name": "Basic",
                   "slug": "auth-reset-password-basic",
-                  "target": "_blank"
+                  "target": "_blank",
+                  "url": "auth-reset-password-basic"
                 },
                 {
-                  "url": "auth-reset-password-cover",
                   "name": "Cover",
                   "slug": "auth-reset-password-cover",
-                  "target": "_blank"
+                  "target": "_blank",
+                  "url": "auth-reset-password-cover"
                 }
               ]
             },
@@ -622,16 +622,16 @@
               "slug": "auth-forgot-password",
               "submenu": [
                 {
-                  "url": "auth-forgot-password-basic",
                   "name": "Basic",
                   "slug": "auth-forgot-password-basic",
-                  "target": "_blank"
+                  "target": "_blank",
+                  "url": "auth-forgot-password-basic"
                 },
                 {
-                  "url": "auth-forgot-password-cover",
                   "name": "Cover",
                   "slug": "auth-forgot-password-cover",
-                  "target": "_blank"
+                  "target": "_blank",
+                  "url": "auth-forgot-password-cover"
                 }
               ]
             },
@@ -640,54 +640,54 @@
               "slug": "auth-two-steps",
               "submenu": [
                 {
-                  "url": "auth-two-steps-basic",
                   "name": "Basic",
                   "slug": "auth-two-steps-basic",
-                  "target": "_blank"
+                  "target": "_blank",
+                  "url": "auth-two-steps-basic"
                 },
                 {
-                  "url": "auth-two-steps-cover",
                   "name": "Cover",
                   "slug": "auth-two-steps-cover",
-                  "target": "_blank"
+                  "target": "_blank",
+                  "url": "auth-two-steps-cover"
                 }
               ]
             }
           ]
         },
         {
-          "name": "Wizard Examples",
           "icon": "menu-icon icon-base bx bx-spreadsheet",
+          "name": "Wizard Examples",
           "slug": "wizard-ex",
           "submenu": [
             {
-              "url": "wizard-ex-checkout",
               "name": "Checkout",
-              "slug": "wizard-ex-checkout"
+              "slug": "wizard-ex-checkout",
+              "url": "wizard-ex-checkout"
             },
             {
-              "url": "wizard-ex-property-listing",
               "name": "Property Listing",
-              "slug": "wizard-ex-property-listing"
+              "slug": "wizard-ex-property-listing",
+              "url": "wizard-ex-property-listing"
             },
             {
-              "url": "wizard-ex-create-deal",
               "name": "Create Deal",
-              "slug": "wizard-ex-create-deal"
+              "slug": "wizard-ex-create-deal",
+              "url": "wizard-ex-create-deal"
             }
           ]
         },
         {
-          "url": "modal-examples",
-          "name": "Modal Examples",
           "icon": "menu-icon icon-base bx bx-window-open",
-          "slug": "modal-examples"
+          "name": "Modal Examples",
+          "slug": "modal-examples",
+          "url": "modal-examples"
         }
       ]
     },
     {
-      "name": "Components",
       "icon": "menu-icon icon-base bx bx-code-block",
+      "name": "Components",
       "slug": [
         "cards",
         "ui",
@@ -696,244 +696,244 @@
       ],
       "submenu": [
         {
-          "name": "Cards",
           "icon": "menu-icon icon-base bx bx-collection",
+          "name": "Cards",
           "slug": "cards",
           "submenu": [
             {
-              "url": "cards-basic",
               "name": "Basic",
-              "slug": "cards-basic"
+              "slug": "cards-basic",
+              "url": "cards-basic"
             },
             {
-              "url": "cards-advance",
               "name": "Advance",
-              "slug": "cards-advance"
+              "slug": "cards-advance",
+              "url": "cards-advance"
             },
             {
-              "url": "cards-statistics",
               "name": "Statistics",
-              "slug": "cards-statistics"
+              "slug": "cards-statistics",
+              "url": "cards-statistics"
             },
             {
-              "url": "cards-analytics",
               "name": "Analytics",
-              "slug": "cards-analytics"
+              "slug": "cards-analytics",
+              "url": "cards-analytics"
             },
             {
-              "url": "cards-gamifications",
               "name": "Gamifications",
-              "slug": "cards-gamifications"
+              "slug": "cards-gamifications",
+              "url": "cards-gamifications"
             },
             {
-              "url": "cards-actions",
               "name": "Actions",
-              "slug": "cards-actions"
+              "slug": "cards-actions",
+              "url": "cards-actions"
             }
           ]
         },
         {
-          "name": "User interface",
           "icon": "menu-icon icon-base bx bx-box",
+          "name": "User interface",
           "slug": "ui",
           "submenu": [
             {
-              "url": "ui-accordion",
               "name": "Accordion",
-              "slug": "ui-accordion"
+              "slug": "ui-accordion",
+              "url": "ui-accordion"
             },
             {
-              "url": "ui-alerts",
               "name": "Alerts",
-              "slug": "ui-alerts"
+              "slug": "ui-alerts",
+              "url": "ui-alerts"
             },
             {
-              "url": "ui-badges",
               "name": "Badges",
-              "slug": "ui-badges"
+              "slug": "ui-badges",
+              "url": "ui-badges"
             },
             {
-              "url": "ui-buttons",
               "name": "Buttons",
-              "slug": "ui-buttons"
+              "slug": "ui-buttons",
+              "url": "ui-buttons"
             },
             {
-              "url": "ui-carousel",
               "name": "Carousel",
-              "slug": "ui-carousel"
+              "slug": "ui-carousel",
+              "url": "ui-carousel"
             },
             {
-              "url": "ui-collapse",
               "name": "Collapse",
-              "slug": "ui-collapse"
+              "slug": "ui-collapse",
+              "url": "ui-collapse"
             },
             {
-              "url": "ui-dropdowns",
               "name": "Dropdowns",
-              "slug": "ui-dropdowns"
+              "slug": "ui-dropdowns",
+              "url": "ui-dropdowns"
             },
             {
-              "url": "ui-footer",
               "name": "Footer",
-              "slug": "ui-footer"
+              "slug": "ui-footer",
+              "url": "ui-footer"
             },
             {
-              "url": "ui-list-groups",
               "name": "List Groups",
-              "slug": "ui-list-groups"
+              "slug": "ui-list-groups",
+              "url": "ui-list-groups"
             },
             {
-              "url": "ui-modals",
               "name": "Modals",
-              "slug": "ui-modals"
+              "slug": "ui-modals",
+              "url": "ui-modals"
             },
             {
-              "url": "ui-navbar",
               "name": "Navbar",
-              "slug": "ui-navbar"
+              "slug": "ui-navbar",
+              "url": "ui-navbar"
             },
             {
-              "url": "ui-offcanvas",
               "name": "Offcanvas",
-              "slug": "ui-offcanvas"
+              "slug": "ui-offcanvas",
+              "url": "ui-offcanvas"
             },
             {
-              "url": "ui-pagination-breadcrumbs",
               "name": "Pagination & Breadcrumbs",
-              "slug": "ui-pagination-breadcrumbs"
+              "slug": "ui-pagination-breadcrumbs",
+              "url": "ui-pagination-breadcrumbs"
             },
             {
-              "url": "ui-progress",
               "name": "Progress",
-              "slug": "ui-progress"
+              "slug": "ui-progress",
+              "url": "ui-progress"
             },
             {
-              "url": "ui-spinners",
               "name": "Spinners",
-              "slug": "ui-spinners"
+              "slug": "ui-spinners",
+              "url": "ui-spinners"
             },
             {
-              "url": "ui-tabs-pills",
               "name": "Tabs & Pills",
-              "slug": "ui-tabs-pills"
+              "slug": "ui-tabs-pills",
+              "url": "ui-tabs-pills"
             },
             {
-              "url": "ui-toasts",
               "name": "Toasts",
-              "slug": "ui-toasts"
+              "slug": "ui-toasts",
+              "url": "ui-toasts"
             },
             {
-              "url": "ui-tooltips-popovers",
               "name": "Tooltips & Popovers",
-              "slug": "ui-tooltips-popovers"
+              "slug": "ui-tooltips-popovers",
+              "url": "ui-tooltips-popovers"
             },
             {
-              "url": "ui-typography",
               "name": "Typography",
-              "slug": "ui-typography"
+              "slug": "ui-typography",
+              "url": "ui-typography"
             }
           ]
         },
         {
-          "name": "Extended UI",
           "icon": "menu-icon icon-base bx bx-copy",
+          "name": "Extended UI",
           "slug": "extended",
           "submenu": [
             {
-              "url": "extended-ui-avatar",
               "name": "Avatar",
-              "slug": "extended-ui-avatar"
+              "slug": "extended-ui-avatar",
+              "url": "extended-ui-avatar"
             },
             {
-              "url": "extended-ui-blockui",
               "name": "BlockUI",
-              "slug": "extended-ui-blockui"
+              "slug": "extended-ui-blockui",
+              "url": "extended-ui-blockui"
             },
             {
-              "url": "extended-ui-drag-and-drop",
               "name": "Drag & Drop",
-              "slug": "extended-ui-drag-and-drop"
+              "slug": "extended-ui-drag-and-drop",
+              "url": "extended-ui-drag-and-drop"
             },
             {
-              "url": "extended-ui-media-player",
               "name": "Media Player",
-              "slug": "extended-ui-media-player"
+              "slug": "extended-ui-media-player",
+              "url": "extended-ui-media-player"
             },
             {
-              "url": "extended-ui-perfect-scrollbar",
               "name": "Perfect Scrollbar",
-              "slug": "extended-ui-perfect-scrollbar"
+              "slug": "extended-ui-perfect-scrollbar",
+              "url": "extended-ui-perfect-scrollbar"
             },
             {
-              "url": "extended-ui-star-ratings",
               "name": "Star Ratings",
-              "slug": "extended-ui-star-ratings"
+              "slug": "extended-ui-star-ratings",
+              "url": "extended-ui-star-ratings"
             },
             {
-              "url": "extended-ui-sweetalert2",
               "name": "SweetAlert2",
-              "slug": "extended-ui-sweetalert2"
+              "slug": "extended-ui-sweetalert2",
+              "url": "extended-ui-sweetalert2"
             },
             {
-              "url": "extended-ui-text-divider",
               "name": "Text Divider",
-              "slug": "extended-ui-text-divider"
+              "slug": "extended-ui-text-divider",
+              "url": "extended-ui-text-divider"
             },
             {
               "name": "Timeline",
               "slug": "extended-ui-timeline",
               "submenu": [
                 {
-                  "url": "extended-ui-timeline-basic",
                   "name": "Basic",
-                  "slug": "extended-ui-timeline-basic"
+                  "slug": "extended-ui-timeline-basic",
+                  "url": "extended-ui-timeline-basic"
                 },
                 {
-                  "url": "extended-ui-timeline-fullscreen",
                   "name": "Fullscreen",
-                  "slug": "extended-ui-timeline-fullscreen"
+                  "slug": "extended-ui-timeline-fullscreen",
+                  "url": "extended-ui-timeline-fullscreen"
                 }
               ]
             },
             {
-              "url": "extended-ui-tour",
               "name": "Tour",
-              "slug": "extended-ui-tour"
+              "slug": "extended-ui-tour",
+              "url": "extended-ui-tour"
             },
             {
-              "url": "extended-ui-treeview",
               "name": "Treeview",
-              "slug": "extended-ui-treeview"
+              "slug": "extended-ui-treeview",
+              "url": "extended-ui-treeview"
             },
             {
-              "url": "extended-ui-misc",
               "name": "Miscellaneous",
-              "slug": "extended-ui-misc"
+              "slug": "extended-ui-misc",
+              "url": "extended-ui-misc"
             }
           ]
         },
         {
-          "name": "Icons",
           "icon": "menu-icon icon-base bx bx-crown",
+          "name": "Icons",
           "slug": "icons",
           "submenu": [
             {
-              "url": "icons-boxicons",
               "name": "Boxicons",
-              "slug": "icons-boxicons"
+              "slug": "icons-boxicons",
+              "url": "icons-boxicons"
             },
             {
-              "url": "icons-font-awesome",
               "name": "Fontawesome",
-              "slug": "icons-font-awesome"
+              "slug": "icons-font-awesome",
+              "url": "icons-font-awesome"
             }
           ]
         }
       ]
     },
     {
-      "name": "Forms",
       "icon": "menu-icon icon-base bx bx-book-content",
+      "name": "Forms",
       "slug": [
         "forms",
         "form-layouts",
@@ -942,177 +942,177 @@
       ],
       "submenu": [
         {
-          "name": "Form Elements",
           "icon": "menu-icon icon-base bx bx-detail",
+          "name": "Form Elements",
           "slug": "forms",
           "submenu": [
             {
-              "url": "forms-basic-inputs",
               "name": "Basic Inputs",
-              "slug": "forms-basic-inputs"
+              "slug": "forms-basic-inputs",
+              "url": "forms-basic-inputs"
             },
             {
-              "url": "forms-input-groups",
               "name": "Input groups",
-              "slug": "forms-input-groups"
+              "slug": "forms-input-groups",
+              "url": "forms-input-groups"
             },
             {
-              "url": "forms-custom-options",
               "name": "Custom Options",
-              "slug": "forms-custom-options"
+              "slug": "forms-custom-options",
+              "url": "forms-custom-options"
             },
             {
-              "url": "forms-editors",
               "name": "Editors",
-              "slug": "forms-editors"
+              "slug": "forms-editors",
+              "url": "forms-editors"
             },
             {
-              "url": "forms-file-upload",
               "name": "File Upload",
-              "slug": "forms-file-upload"
+              "slug": "forms-file-upload",
+              "url": "forms-file-upload"
             },
             {
-              "url": "forms-pickers",
               "name": "Pickers",
-              "slug": "forms-pickers"
+              "slug": "forms-pickers",
+              "url": "forms-pickers"
             },
             {
-              "url": "forms-selects",
               "name": "Select & Tags",
-              "slug": "forms-selects"
+              "slug": "forms-selects",
+              "url": "forms-selects"
             },
             {
-              "url": "forms-sliders",
               "name": "Sliders",
-              "slug": "forms-sliders"
+              "slug": "forms-sliders",
+              "url": "forms-sliders"
             },
             {
-              "url": "forms-switches",
               "name": "Switches",
-              "slug": "forms-switches"
+              "slug": "forms-switches",
+              "url": "forms-switches"
             },
             {
-              "url": "forms-extras",
               "name": "Extras",
-              "slug": "forms-extras"
+              "slug": "forms-extras",
+              "url": "forms-extras"
             }
           ]
         },
         {
-          "name": "Form Layouts",
           "icon": "menu-icon icon-base bx bx-detail",
+          "name": "Form Layouts",
           "slug": "form-layouts",
           "submenu": [
             {
-              "url": "form-layouts-vertical",
               "name": "Vertical Form",
-              "slug": "form-layouts-vertical"
+              "slug": "form-layouts-vertical",
+              "url": "form-layouts-vertical"
             },
             {
-              "url": "form-layouts-horizontal",
               "name": "Horizontal Form",
-              "slug": "form-layouts-horizontal"
+              "slug": "form-layouts-horizontal",
+              "url": "form-layouts-horizontal"
             },
             {
-              "url": "form-layouts-sticky",
               "name": "Sticky Actions",
-              "slug": "form-layouts-sticky"
+              "slug": "form-layouts-sticky",
+              "url": "form-layouts-sticky"
             }
           ]
         },
         {
-          "name": "Form Wizard",
           "icon": "menu-icon icon-base bx bx-carousel",
+          "name": "Form Wizard",
           "slug": "form-wizard",
           "submenu": [
             {
-              "url": "form-wizard-numbered",
               "name": "Numbered",
-              "slug": "form-wizard-numbered"
+              "slug": "form-wizard-numbered",
+              "url": "form-wizard-numbered"
             },
             {
-              "url": "form-wizard-icons",
               "name": "Icons",
-              "slug": "form-wizard-icons"
+              "slug": "form-wizard-icons",
+              "url": "form-wizard-icons"
             }
           ]
         },
         {
-          "url": "form-validation",
-          "name": "Form Validation",
           "icon": "menu-icon icon-base bx bx-list-check",
-          "slug": "form-validation"
+          "name": "Form Validation",
+          "slug": "form-validation",
+          "url": "form-validation"
         }
       ]
     },
     {
-      "name": "Tables",
       "icon": "menu-icon icon-base bx bx-grid-alt",
+      "name": "Tables",
       "slug": [
         "tables",
         "tables-datatables"
       ],
       "submenu": [
         {
-          "url": "tables-basic",
-          "name": "Tables",
           "icon": "menu-icon icon-base bx bx-grid-alt",
-          "slug": "tables-basic"
+          "name": "Tables",
+          "slug": "tables-basic",
+          "url": "tables-basic"
         },
         {
-          "name": "Datatables",
           "icon": "menu-icon icon-base bx bx-grid",
+          "name": "Datatables",
           "slug": "tables-datatables",
           "submenu": [
             {
-              "url": "tables-datatables-basic",
               "name": "Basic",
-              "slug": "tables-datatables-basic"
+              "slug": "tables-datatables-basic",
+              "url": "tables-datatables-basic"
             },
             {
-              "url": "tables-datatables-advanced",
               "name": "Advanced",
-              "slug": "tables-datatables-advanced"
+              "slug": "tables-datatables-advanced",
+              "url": "tables-datatables-advanced"
             },
             {
-              "url": "tables-datatables-extensions",
               "name": "Extensions",
-              "slug": "tables-datatables-extensions"
+              "slug": "tables-datatables-extensions",
+              "url": "tables-datatables-extensions"
             }
           ]
         }
       ]
     },
     {
-      "name": "Charts",
       "icon": "menu-icon icon-base bx bx-bar-chart-square",
+      "name": "Charts",
       "slug": [
         "charts",
         "maps"
       ],
       "submenu": [
         {
-          "name": "Charts",
           "icon": "menu-icon icon-base bx bx-chart",
+          "name": "Charts",
           "slug": "charts",
           "submenu": [
             {
-              "url": "charts-apex",
               "name": "Apex Charts",
-              "slug": "charts-apex"
+              "slug": "charts-apex",
+              "url": "charts-apex"
             },
             {
-              "url": "charts-chartjs",
               "name": "ChartJS",
-              "slug": "charts-chartjs"
+              "slug": "charts-chartjs",
+              "url": "charts-chartjs"
             }
           ]
         },
         {
-          "url": "maps-leaflet",
-          "name": "Leaflet Maps",
           "icon": "menu-icon icon-base bx bx-map-alt",
-          "slug": "maps-leaflet"
+          "name": "Leaflet Maps",
+          "slug": "maps-leaflet",
+          "url": "maps-leaflet"
         }
       ]
     }

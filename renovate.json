@@ -11,8 +11,8 @@
     "renovate"
   ],
   "rangeStrategy": "bump",
-  "timezone": "Etc/UTC",
   "schedule": [
     "before 5am on Monday"
-  ]
+  ],
+  "timezone": "Etc/UTC"
 }

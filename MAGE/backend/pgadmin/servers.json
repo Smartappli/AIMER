@@ -1,28 +1,28 @@
 {
   "Servers": {
     "1": {
-      "Name": "postgres",
+      "ConnectionParameters": {
+        "sslmode": "prefer"
+      },
       "Group": "Servers",
       "Host": "postgres",
-      "Port": 5432,
       "MaintenanceDB": "postgres",
-      "Username": "postgres",
+      "Name": "postgres",
+      "Port": 5432,
       "SSLMode": "prefer",
-      "ConnectionParameters": {
-        "sslmode": "prefer"
-      }
+      "Username": "postgres"
     },
     "2": {
-      "Name": "pgvector",
-      "Group": "Servers",
-      "Host": "pgvector",
-      "Port": 5432,
-      "MaintenanceDB": "postgres",
-      "Username": "pgvector",
-      "SSLMode": "prefer",
       "ConnectionParameters": {
         "sslmode": "prefer"
-      }
+      },
+      "Group": "Servers",
+      "Host": "pgvector",
+      "MaintenanceDB": "postgres",
+      "Name": "pgvector",
+      "Port": 5432,
+      "SSLMode": "prefer",
+      "Username": "pgvector"
     }
   }
 }

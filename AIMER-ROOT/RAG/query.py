@@ -56,8 +56,8 @@ def extract_filters(user_query: str):
             <USER QUERY STARTS>
             {user_query}
             </USER QUERY ENDS>
-            
-            Extract metadata based on the user query only:           
+
+            Extract metadata based on the user query only:
         """
 
     structured_llm = llm.with_structured_output(ChunkMetadata)
@@ -93,7 +93,8 @@ def hybrid_search(query: str, k: int = 10, filters: dict = None):
 
     if filters:
         condition = [
-            FieldCondition(key=f"metadata.{key}", match=MatchValue(value=value))
+            FieldCondition(key=f"metadata.{key}",
+                           match=MatchValue(value=value))
             for key, value in filters.items()
         ]
 

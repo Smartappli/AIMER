@@ -165,5 +165,6 @@ mcp_app = mcp.http_app(
 app = FastAPI(
     title="REST + MCP",
     routes=[*mcp_app.routes, *api.routes],
-    lifespan=mcp_app.lifespan,  # important: session manager MCP :contentReference[oaicite:3]{index=3}
+    # important: session manager MCP :contentReference[oaicite:3]{index=3}
+    lifespan=mcp_app.lifespan,
 )

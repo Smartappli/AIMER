@@ -10,7 +10,7 @@ on:
 concurrency:
   group: mage-coverage-${{ github.event_name == 'pull_request' && format('{0}-{1}', github.workflow, github.event.pull_request.number) || github.workflow_ref }}
   cancel-in-progress: true
-  
+
 jobs:
   sonarcloud:
     name: Coverage
@@ -22,7 +22,7 @@ jobs:
           # this might remove tools that are actually needed,
           # if set to "true" but frees about 6 GB
           tool-cache: false
-  
+
           # all of these default to true, but feel free to set to
           # "false" if necessary for your workflow
           android: true
@@ -30,7 +30,7 @@ jobs:
           haskell: true
           large-packages: true
           docker-images: false
-          swap-storage: true          
+          swap-storage: true
       - uses: actions/checkout@v6
         with:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
@@ -50,13 +50,13 @@ jobs:
         run: |
           coverage erase
       - name: Coverage Models
-        run: | 
+        run: |
           coverage run -m pytest -q MAGE/tests/test_main.py
           coverage run -m pytest -q MAGE/tests/test_timm.py
           coverage run -m pytest -q MAGE/tests/test_torchvision.py
           coverage combine
       - name: Coverage Report
-        run: |    
+        run: |
           coverage report -m
           coverage xml -o coverage.xml
       - name: SonarQube Scan
@@ -70,4 +70,3 @@ jobs:
           coverage-reports: 'coverage.xml'
         env:
           CODACY_PROJECT_TOKEN: ${{ secrets.CODACY_PROJECT_TOKEN }}
-          

@@ -1,6 +1,7 @@
+from django.views.generic import TemplateView
+
 from AIMER import TemplateLayout
 from AIMER.template_helpers.theme import TemplateHelper
-from django.views.generic import TemplateView
 
 """
 This file is a view controller for multiple pages as a module.
@@ -44,7 +45,8 @@ class FrontPagesView(TemplateView):
                     "layout_front.html",
                     context,
                 ),
-                "active_url": self.request.path,  # Get the current url path (active URL) from request
+                # Get the current url path (active URL) from request
+                "active_url": self.request.path,
             },
         )
 

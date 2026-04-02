@@ -47,7 +47,7 @@ def extract_filters(user_query: str):
                 {user_query}
                 <USER QUERY ENDS>
 
-                Extract metadata base on the user query only: 
+                Extract metadata base on the user query only:
 
             """
 
@@ -82,7 +82,8 @@ def hybrid_search(query: str, k: int = 5):
 
     if filters:
         condition = [
-            FieldCondition(key=f"metadata.{key}", match=MatchValue(value=value))
+            FieldCondition(key=f"metadata.{key}",
+                           match=MatchValue(value=value))
             for key, value in filters.items()
         ]
 
