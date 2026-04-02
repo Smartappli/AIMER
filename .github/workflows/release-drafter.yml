@@ -21,11 +21,11 @@ jobs:
       - name: Update draft release (attempt 1)
         id: release_drafter_attempt_1
         continue-on-error: true
-        uses: release-drafter/release-drafter@v7
+        uses: release-drafter/release-drafter@v7.1.1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Update draft release (retry after transient API/network failure)
         if: steps.release_drafter_attempt_1.outcome == 'failure'
-        uses: release-drafter/release-drafter@v7
+        uses: release-drafter/release-drafter@v7.1.1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
