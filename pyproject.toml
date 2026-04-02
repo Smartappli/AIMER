@@ -43,12 +43,3 @@ quote-style = "double"
 indent-style = "space"
 line-ending = "lf"
 docstring-code-format = true
-
-
-[tool.ruff.lint.per-file-ignores]
-"MAGE/tests/**/*.py" = ["ANN", "ARG", "D", "DOC", "EM", "INP001", "PLC0415", "PLR1702", "PLR2004", "PLR6301", "RUF029", "S101", "TRY003", "E501"]
-"MAGE/info.py" = ["INP001", "PLR0915", "FURB113", "E501"]
-"FARM/info.py" = ["INP001"]
-"FARM/FARM/settings.py" = ["INP001"]
-"FARM/FARM/urls.py" = ["INP001"]
-"MAGE/api/main.py" = ["DOC201"]
