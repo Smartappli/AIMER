@@ -3,7 +3,7 @@
 {% load i18n %}
 {% block title %}
     {% trans "Coming Soon" %}
-{% endblock %}
+{% endblock title %}
 {% block page_css %}
     {{ block.super }}
     <link rel="stylesheet" href="{% static 'vendor/css/pages/page-misc.css' %}" />
@@ -37,4 +37,4 @@
         </div>
     </div>
     <!-- /Coming Soon -->
-{% endblock %}
+{% endblock content %}

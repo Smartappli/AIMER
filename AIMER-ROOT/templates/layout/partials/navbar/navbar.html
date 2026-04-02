@@ -14,7 +14,7 @@
             {% if navbar_full %}
                 <div class="navbar-brand app-brand demo d-none d-xl-flex py-0 me-4">
                     <a href="{% url 'index' %}" class="app-brand-link gap-2">
-                        <span class="app-brand-logo demo">{% include 'partials/logo.html' %}</span>
+                        <span class="app-brand-logo demo">{% include "partials/logo.html" %}</span>
                         <span class="app-brand-text demo menu-text fw-bold text-heading">{% get_theme_variables 'template_name' %}</span>
                     </a>
                     <!-- ! Display menu close icon only for horizontal-menu with navbar-full -->
