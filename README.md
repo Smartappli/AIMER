@@ -17,9 +17,6 @@ This repository is managed as a unified workspace to keep development, quality c
 
 ## Continuous Integration Status
 
-### AIMER
-
-[![AIMER DJLint](https://github.com/Smartappli/AIMER/actions/workflows/aimer_djlint.yml/badge.svg)](https://github.com/Smartappli/AIMER/actions/workflows/aimer_djlint.yml)
 [![AIMER Docker Builder](https://github.com/Smartappli/AIMER/actions/workflows/aimer_docker_builder.yml/badge.svg)](https://github.com/Smartappli/AIMER/actions/workflows/aimer_docker_builder.yml)
 
 ### MAGE
