@@ -33,7 +33,8 @@ class ForgetPasswordView(AuthView):
         email = request.POST.get("email")
         if not email:
             await sync_to_async(messages.error)(
-                request, "Please enter your email address.",
+                request,
+                "Please enter your email address.",
             )
             return redirect("forgot-password")
 

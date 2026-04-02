@@ -40,7 +40,8 @@ class LoginView(AuthView):
             user_by_email = await User.objects.filter(email=username).afirst()
             if user_by_email is None:
                 await sync_to_async(messages.error)(
-                    request, "Please enter a valid email.",
+                    request,
+                    "Please enter a valid email.",
                 )
                 return redirect("login")
             username = user_by_email.username
@@ -48,7 +49,8 @@ class LoginView(AuthView):
         user_by_username = await User.objects.filter(username=username).afirst()
         if user_by_username is None:
             await sync_to_async(messages.error)(
-                request, "Please enter a valid username.",
+                request,
+                "Please enter a valid username.",
             )
             return redirect("login")
 
@@ -59,7 +61,8 @@ class LoginView(AuthView):
         )
         if authenticated_user is None:
             await sync_to_async(messages.error)(
-                request, "Please enter a valid username.",
+                request,
+                "Please enter a valid username.",
             )
             return redirect("login")
 
