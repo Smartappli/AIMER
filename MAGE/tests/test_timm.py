@@ -1,3 +1,5 @@
+# Copyright (C) 2026 AIMER contributors.
+
 """timm model registry smoke tests.
 
 Validate that timm models can be created across modules without crashing,

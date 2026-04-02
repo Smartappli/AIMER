@@ -1,3 +1,5 @@
+# Copyright (C) 2026 AIMER contributors.
+
 """FastAPI app exposing timm metadata and MCP routes."""
 
 from __future__ import annotations

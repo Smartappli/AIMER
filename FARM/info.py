@@ -1,3 +1,5 @@
+# Copyright (C) 2026 AIMER contributors.
+
 """Display installed package versions used by FARM integrations."""
 
 import sys

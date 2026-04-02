@@ -1,3 +1,5 @@
+# Copyright (C) 2026 AIMER contributors.
+
 """TorchVision model registry smoke tests.
 
 The goal is to validate that TorchVision models can be constructed across
