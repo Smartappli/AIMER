@@ -2,16 +2,19 @@
 
 from __future__ import annotations
 
-from collections.abc import Callable, Mapping
 from dataclasses import dataclass, field
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 import flwr as fl
 
 from .clients import FederatedTaskClient, RagClient
-from .rag import RagIndex, RagState
 from .strategies import RagFedAvgStrategy, TaskFedAvgStrategy
-from .tasks import TaskDefinition
+
+if TYPE_CHECKING:
+    from collections.abc import Callable, Mapping
+
+    from .rag import RagIndex, RagState
+    from .tasks import TaskDefinition
 
 
 @dataclass(slots=True)
@@ -72,7 +75,12 @@ def start_rag_server(
 
 
 def build_task_client(task: TaskDefinition) -> FederatedTaskClient:
-    """Build a task client from a task definition."""
+    """Build a task client from a task definition.
+
+    Returns:
+        Initialized federated task client.
+
+    """
     return FederatedTaskClient(task=task)
 
 
@@ -80,5 +88,10 @@ def build_rag_client(
     index: RagIndex,
     document_provider: Callable[[Mapping[str, Any]], list[RagState]],
 ) -> RagClient:
-    """Build a RAG client from an index and update provider."""
+    """Build a RAG client from an index and update provider.
+
+    Returns:
+        Initialized RAG client bound to ``index`` and ``document_provider``.
+
+    """
     return RagClient(index=index, document_provider=document_provider)
