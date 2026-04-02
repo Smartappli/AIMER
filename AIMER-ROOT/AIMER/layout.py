@@ -16,7 +16,12 @@ class TemplateLayout:
     request: Any
 
     def init(self, context: dict[str, Any]) -> dict[str, Any]:
-        """Initialize template context for the current request."""
+        """Initialize template context for the current request.
+
+        Returns:
+            Updated template context with resolved layout metadata.
+
+        """
         context = TemplateHelper.init_context(context)
         layout = context["layout"]
         context.update(
