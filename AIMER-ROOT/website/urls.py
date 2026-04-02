@@ -1,3 +1,5 @@
+"""URL routes for website front pages."""
+
 from django.urls import path
 
 from .views import FrontPagesView

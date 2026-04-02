@@ -95,7 +95,11 @@ class RagIndex:
                 )
 
     def to_state(self) -> RagState:
-        """Export the current index as a serializable state object."""
+        """Export the current index as a serializable state object.
+
+        Returns:
+            Snapshot of the in-memory index as a ``RagState`` instance.
+        """
         return RagState(
             doc_ids=list(self._doc_ids),
             embeddings=self._embeddings.copy(),
