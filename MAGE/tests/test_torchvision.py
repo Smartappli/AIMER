@@ -16,9 +16,21 @@ from types import ModuleType
 from typing import TYPE_CHECKING
 from urllib.error import URLError
 
+import importlib.util
+
 import pytest
-import torchvision.models as tvm
-from tqdm.auto import tqdm
+
+TORCHVISION_AVAILABLE = importlib.util.find_spec("torchvision") is not None
+TQDM_AVAILABLE = importlib.util.find_spec("tqdm") is not None
+
+pytestmark = pytest.mark.skipif(
+    not (TORCHVISION_AVAILABLE and TQDM_AVAILABLE),
+    reason="Optional dependencies `torchvision` and `tqdm` are required for this test.",
+)
+
+if TORCHVISION_AVAILABLE and TQDM_AVAILABLE:
+    import torchvision.models as tvm
+    from tqdm.auto import tqdm
 
 if TYPE_CHECKING:
     from collections.abc import Iterator
