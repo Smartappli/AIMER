@@ -33,8 +33,7 @@ def timm_models() -> dict[str, list[str]]:
         modules = [m for m in modules if m in wanted]
 
     limit_env = os.getenv("TIMM_TEST_LIMIT_PER_MODULE")
-    limit_per_mod = int(limit_env) if (
-        limit_env and limit_env.isdigit()) else None
+    limit_per_mod = int(limit_env) if (limit_env and limit_env.isdigit()) else None
 
     out: dict[str, list[str]] = {}
     for module in modules:

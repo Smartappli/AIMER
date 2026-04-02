@@ -15,8 +15,7 @@ class TaskFedAvgStrategy(fl.server.strategy.FedAvg):
         self,
         task_name: str,
         on_fit_config_fn: Callable[[int], Mapping[str, Any]] | None = None,
-        on_evaluate_config_fn: Callable[[int],
-                                        Mapping[str, Any]] | None = None,
+        on_evaluate_config_fn: Callable[[int], Mapping[str, Any]] | None = None,
         **kwargs: Any,
     ) -> None:
         super().__init__(

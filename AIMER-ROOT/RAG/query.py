@@ -93,8 +93,7 @@ def hybrid_search(query: str, k: int = 10, filters: dict = None):
 
     if filters:
         condition = [
-            FieldCondition(key=f"metadata.{key}",
-                           match=MatchValue(value=value))
+            FieldCondition(key=f"metadata.{key}", match=MatchValue(value=value))
             for key, value in filters.items()
         ]
 
