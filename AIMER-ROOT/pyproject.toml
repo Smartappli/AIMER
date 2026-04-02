@@ -1,9 +1,9 @@
 [project]
 name = "aimer"
 version = "0.1.0"
-requires-python = ">=3.12"
+requires-python = ">=3.13"
 dependencies = [
-    "django[argon2]==6.0.3",
+    "django[argon2]>=6.0.3",
     "django-rich==2.2.0",
     "python-dotenv==1.2.2",
     "uvicorn==0.42.0",
@@ -27,29 +27,3 @@ dependencies = [
     "pytest==9.0.2",
     "coverage==7.13.5",
 ]
-
-[tool.ruff]
-target-version = "py312"
-line-length = 88
-preview = true
-exclude = [
-    "auth/migrations",
-    "geo_api/migrations",
-    "db_api/migrations",
-    "manage.py",
-    "dashboards/migrations",
-]
-
-[tool.ruff.lint]
-select = ["ALL"]
-
-[tool.ruff.format]
-quote-style = "double"
-indent-style = "space"
-line-ending = "lf"
-docstring-code-format = true
-
-[tool.ruff.lint.per-file-ignores]
-"AIMER/__init__.py" = ["N999"]
-"AIMER/template_helpers/__init__.py" = ["N999"]
-"AIMER/template_tags/__init__.py" = ["N999"]

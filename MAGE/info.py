@@ -18,6 +18,7 @@ import torch
 if TYPE_CHECKING:
     from collections.abc import Callable
 
+
 def _safe[T](label: str, fn: Callable[[], T], default: T | str = "N/A") -> T | str:
     """Call a function and return its result, or a safe fallback on failure.
 

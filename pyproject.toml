@@ -1,7 +1,7 @@
 [project]
 name = "aimer-workspace"
 version = "0.1.0"
-requires-python = ">=3.12"
+requires-python = ">=3.13"
 
 dependencies = []
 
@@ -21,3 +21,25 @@ members = [
 markers = [
   "slow: marks tests as slow (deselect with '-m \"not slow\"')",
 ]
+
+[tool.ruff]
+target-version = "py313"
+line-length = 88
+preview = true
+exclude = [
+    "auth/migrations",
+    "geo_api/migrations",
+    "db_api/migrations",
+    "manage.py",
+    "dashboards/migrations",
+]
+
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = ["N999", "PLW0127"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+line-ending = "lf"
+docstring-code-format = true
