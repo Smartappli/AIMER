@@ -329,10 +329,7 @@ def _run_module_creation(
             p_mod.set_postfix_str(
                 f"{model_name} • {status} • {elapsed:.2f}s",
             )
-            postfix = (
-                f"{module_name} • {model_name} • "
-                f"{status} • {elapsed:.2f}s"
-            )
+            postfix = f"{module_name} • {model_name} • {status} • {elapsed:.2f}s"
             p_global.set_postfix_str(postfix)
         except (
             RuntimeError,
