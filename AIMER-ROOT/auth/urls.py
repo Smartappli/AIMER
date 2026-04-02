@@ -1,11 +1,14 @@
+# Copyright (c) 2026 AIMER contributors.
+"""URL patterns for authentication views."""
+
 from django.contrib.auth.views import LogoutView
 from django.urls import path
 
-from .forgot_password.views import ForgetPasswordView
-from .login.views import LoginView
-from .register.views import RegisterView
-from .reset_password.views import ResetPasswordView
-from .verify_email.views import (
+from auth.forgot_password.views import ForgetPasswordView
+from auth.login.views import LoginView
+from auth.register.views import RegisterView
+from auth.reset_password.views import ResetPasswordView
+from auth.verify_email.views import (
     SendVerificationView,
     VerifyEmailTokenView,
     VerifyEmailView,

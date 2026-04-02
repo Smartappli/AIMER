@@ -32,7 +32,13 @@ async def send_email(subject: str, email: str, message: str) -> None:
 
 
 def get_absolute_url(path: str) -> str:
-    """Build an absolute URL from a relative path."""
+    """
+    Build an absolute URL from a relative path.
+
+    Returns:
+        str: Absolute URL string.
+
+    """
     return urljoin(settings.BASE_URL, path)
 
 

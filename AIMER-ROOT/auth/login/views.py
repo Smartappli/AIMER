@@ -3,30 +3,48 @@
 
 from __future__ import annotations
 
+from typing import TYPE_CHECKING, override
+
 from asgiref.sync import sync_to_async
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import aauthenticate, alogin
 from django.contrib.auth.models import User
-from django.http import HttpRequest, HttpResponse
 from django.shortcuts import redirect
 from django.utils.http import url_has_allowed_host_and_scheme
 
 from auth.views import AuthView
 
+if TYPE_CHECKING:
+    from django.http import HttpRequest, HttpResponse
+
 
 class LoginView(AuthView):
     """Handle user login."""
 
+    @override
     async def get(self, request: HttpRequest) -> HttpResponse:
-        """Render login page for anonymous users."""
+        """
+        Render login page for anonymous users.
+
+        Returns:
+            HttpResponse: The rendered login page or redirect.
+
+        """
         is_auth = await sync_to_async(lambda: request.user.is_authenticated)()
         if is_auth:
             return redirect("index")
         return await sync_to_async(super().get)(request)
 
+    @override
     async def post(self, request: HttpRequest) -> HttpResponse:
-        """Authenticate and login a user."""
+        """
+        Authenticate and login a user.
+
+        Returns:
+            HttpResponse: Redirect to the requested page or index.
+
+        """
         username = request.POST.get("email-username")
         password = request.POST.get("password")
         if not (username and password):

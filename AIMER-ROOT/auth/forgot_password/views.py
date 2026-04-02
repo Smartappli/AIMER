@@ -5,12 +5,12 @@ from __future__ import annotations
 
 import uuid
 from datetime import timedelta
+from typing import TYPE_CHECKING, override
 
 from asgiref.sync import sync_to_async
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.models import User
-from django.http import HttpRequest, HttpResponse
 from django.shortcuts import redirect
 from django.utils import timezone
 
@@ -18,18 +18,35 @@ from auth.helpers import send_password_reset_email
 from auth.models import Profile
 from auth.views import AuthView
 
+if TYPE_CHECKING:
+    from django.http import HttpRequest, HttpResponse
+
 
 class ForgetPasswordView(AuthView):
     """Request a password reset by email."""
 
+    @override
     async def get(self, request: HttpRequest) -> HttpResponse:
-        """Render form for non-authenticated users."""
+        """
+        Render form for non-authenticated users.
+
+        Returns:
+            HttpResponse: The rendered form or a redirect response.
+
+        """
         if request.user.is_authenticated:
             return redirect("index")
         return await sync_to_async(super().get)(request)
 
+    @override
     async def post(self, request: HttpRequest) -> HttpResponse:
-        """Generate reset token and send reset email."""
+        """
+        Generate reset token and send reset email.
+
+        Returns:
+            HttpResponse: Redirect response to forgot-password page.
+
+        """
         email = request.POST.get("email")
         if not email:
             await sync_to_async(messages.error)(

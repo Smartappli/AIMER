@@ -3,8 +3,6 @@
 
 from __future__ import annotations
 
-from typing import Any
-
 from django.contrib.auth.models import User
 from django.db import models
 from django.db.models.signals import post_save
@@ -33,7 +31,13 @@ class Profile(models.Model):
         verbose_name_plural = "User Profiles"
 
     def __str__(self) -> str:
-        """Return a readable username for admin pages."""
+        """
+        Return a readable username for admin pages.
+
+        Returns:
+            str: The related user's username.
+
+        """
         return self.user.username
 
 
@@ -41,10 +45,10 @@ class Profile(models.Model):
 def create_profile(
     sender: type[User],
     instance: User,
-    created: bool,
-    **_kwargs: Any,
+    created: object,
+    **_kwargs: object,
 ) -> None:
     """Create a profile automatically after user creation."""
     del sender
-    if created:
+    if bool(created):
         Profile.objects.create(user=instance, email=instance.email)
