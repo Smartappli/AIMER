@@ -1,4 +1,4 @@
-from AIMER.template_helpers.theme import TemplateHelper
+from ....AIMER.template_helpers.theme import TemplateHelper
 
 """
 This is an entry and Bootstrap class for the theme level.

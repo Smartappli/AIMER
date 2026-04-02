@@ -27,13 +27,13 @@ repos:
         args: [--py313-plus]
 
   - repo: https://github.com/adamchainz/django-upgrade
-    rev: "1.29.1"
+    rev: "1.30.0"
     hooks:
       - id: django-upgrade
         args: [--target-version, "6.0"]
 
   - repo: https://github.com/psf/black-pre-commit-mirror
-    rev: 26.1.0
+    rev: 26.3.1
     hooks:
       - id: black
         language_version: python3.13
@@ -44,13 +44,13 @@ repos:
       - id: flake8
 
   - repo: https://github.com/pycqa/isort
-    rev: 7.0.0
+    rev: 8.0.1
     hooks:
       - id: isort
         name: isort (python)
 
   - repo: https://github.com/PyCQA/bandit
-    rev: '1.9.3'
+    rev: '1.9.4'
     hooks:
       - id: bandit
 
@@ -63,7 +63,7 @@ repos:
         args: ["--configuration=pyproject.toml"]
 
   - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v1.19.1
+    rev: v1.20.0
     hooks:
       - id: mypy
         exclude: ^(mapproxy/|tests/|.*/migrations/|flower_healthcheck\.py)$
@@ -80,7 +80,7 @@ repos:
         additional_dependencies: ["validate-pyproject-schema-store[all]"]
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.15.1
+    rev: v0.15.8
     hooks:
       # Run the linter with custom arguments.
       - id: ruff-check
