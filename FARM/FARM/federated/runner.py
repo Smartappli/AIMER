@@ -1,3 +1,5 @@
+"""Server and client factory helpers for federated execution."""
+
 from __future__ import annotations
 
 from collections.abc import Callable, Mapping
@@ -14,6 +16,8 @@ from .tasks import TaskDefinition
 
 @dataclass(slots=True)
 class FederatedServerConfig:
+    """Configuration values used when starting a Flower server."""
+
     num_rounds: int = 3
     min_fit_clients: int = 2
     min_available_clients: int = 2
@@ -28,6 +32,7 @@ def start_task_server(
     on_fit_config_fn: Callable[[int], Mapping[str, Any]] | None = None,
     on_evaluate_config_fn: Callable[[int], Mapping[str, Any]] | None = None,
 ) -> None:
+    """Start a Flower server using task-oriented FedAvg strategy."""
     strategy = TaskFedAvgStrategy(
         task_name=task_name,
         on_fit_config_fn=on_fit_config_fn,
@@ -50,6 +55,7 @@ def start_rag_server(
     config: FederatedServerConfig,
     on_fit_config_fn: Callable[[int], Mapping[str, Any]] | None = None,
 ) -> None:
+    """Start a Flower server that aggregates shared RAG documents."""
     strategy = RagFedAvgStrategy(
         rag_index=index,
         on_fit_config_fn=on_fit_config_fn,
@@ -66,6 +72,7 @@ def start_rag_server(
 
 
 def build_task_client(task: TaskDefinition) -> FederatedTaskClient:
+    """Build a task client from a task definition."""
     return FederatedTaskClient(task=task)
 
 
@@ -73,4 +80,5 @@ def build_rag_client(
     index: RagIndex,
     document_provider: Callable[[Mapping[str, Any]], list[RagState]],
 ) -> RagClient:
+    """Build a RAG client from an index and update provider."""
     return RagClient(index=index, document_provider=document_provider)
