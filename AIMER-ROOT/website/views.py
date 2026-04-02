@@ -15,6 +15,7 @@ class FrontPagesView(TemplateView):
 
         Returns:
             Context dictionary enriched for front templates.
+
         """
         context = TemplateLayout.init(self, super().get_context_data(**kwargs))
 

@@ -99,6 +99,7 @@ class RagIndex:
 
         Returns:
             Snapshot of the in-memory index as a ``RagState`` instance.
+
         """
         return RagState(
             doc_ids=list(self._doc_ids),

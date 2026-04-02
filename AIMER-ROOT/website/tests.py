@@ -227,6 +227,7 @@ class TemplateTagTests(TestCase):
 
         Returns:
             Newly created user instance.
+
         """
         return self.user_model.objects.create_user(
             username=username,
