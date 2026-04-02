@@ -2,14 +2,18 @@
 
 from __future__ import annotations
 
-from collections.abc import Callable, Mapping, Sequence
 from dataclasses import dataclass
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 import flwr as fl
 
-from .rag import RagIndex, RagState, parameters_to_state, state_to_parameters
-from .tasks import EvaluationResult, TaskDefinition, TrainingResult
+from .rag import parameters_to_state, state_to_parameters
+
+if TYPE_CHECKING:
+    from collections.abc import Callable, Mapping, Sequence
+
+    from .rag import RagIndex, RagState
+    from .tasks import EvaluationResult, TaskDefinition, TrainingResult
 
 
 @dataclass(slots=True)
@@ -33,9 +37,14 @@ class FederatedTaskClient(fl.client.NumPyClient):
 
     def get_parameters(
         self,
-        config: Mapping[str, Any] | None = None,
+        _config: Mapping[str, Any] | None = None,
     ) -> list[Any]:
-        """Return current model parameters from task handlers."""
+        """Return current model parameters from task handlers.
+
+        Returns:
+            Current model parameters formatted for Flower transport.
+
+        """
         return self._task.handlers.get_parameters(self._task.model)
 
     def fit(
@@ -43,7 +52,12 @@ class FederatedTaskClient(fl.client.NumPyClient):
         parameters: Sequence[Any],
         config: Mapping[str, Any],
     ) -> tuple[list[Any], int, dict[str, Any]]:
-        """Apply incoming parameters and execute one local training step."""
+        """Apply incoming parameters and execute one local training step.
+
+        Returns:
+            Tuple ``(parameters, num_examples, metrics)`` after local training.
+
+        """
         self._task.handlers.set_parameters(self._task.model, parameters)
         result: TrainingResult = self._task.handlers.train(
             self._task.model,
@@ -57,7 +71,12 @@ class FederatedTaskClient(fl.client.NumPyClient):
         parameters: Sequence[Any],
         config: Mapping[str, Any],
     ) -> tuple[float, int, dict[str, Any]]:
-        """Evaluate the model using task-provided evaluation logic."""
+        """Evaluate the model using task-provided evaluation logic.
+
+        Returns:
+            Tuple ``(loss, num_examples, metrics)`` from local evaluation.
+
+        """
         self._task.handlers.set_parameters(self._task.model, parameters)
         result: EvaluationResult = self._task.handlers.evaluate(
             self._task.model,
@@ -81,9 +100,14 @@ class RagClient(fl.client.Client):
 
     def get_parameters(
         self,
-        ins: fl.common.GetParametersIns,
+        _ins: fl.common.GetParametersIns,
     ) -> fl.common.GetParametersRes:
-        """Return the current serialized RAG index state."""
+        """Return the current serialized RAG index state.
+
+        Returns:
+            Flower response containing serialized RAG state parameters.
+
+        """
         parameters = state_to_parameters(self._index.to_state())
         return fl.common.GetParametersRes(
             status=fl.common.Status(code=fl.common.Code.OK, message="ok"),
@@ -91,7 +115,12 @@ class RagClient(fl.client.Client):
         )
 
     def fit(self, ins: fl.common.FitIns) -> fl.common.FitRes:
-        """Merge incoming state, apply local updates, and return new state."""
+        """Merge incoming state, apply local updates, and return new state.
+
+        Returns:
+            Flower fit response with updated serialized state and metrics.
+
+        """
         incoming = parameters_to_state(ins.parameters)
         if incoming:
             self._index.merge_state(incoming)
@@ -108,8 +137,13 @@ class RagClient(fl.client.Client):
             metrics={"rag_docs": self._index.size},
         )
 
-    def evaluate(self, ins: fl.common.EvaluateIns) -> fl.common.EvaluateRes:
-        """Return a lightweight evaluation payload for compatibility."""
+    def evaluate(self, _ins: fl.common.EvaluateIns) -> fl.common.EvaluateRes:
+        """Return a lightweight evaluation payload for compatibility.
+
+        Returns:
+            Flower evaluation response with zero loss and RAG doc metrics.
+
+        """
         return fl.common.EvaluateRes(
             status=fl.common.Status(code=fl.common.Code.OK, message="ok"),
             loss=0.0,
