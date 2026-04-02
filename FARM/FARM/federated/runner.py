@@ -1,3 +1,5 @@
+# Copyright (c) 2026 AIMER contributors.
+
 """Server and client factory helpers for federated execution."""
 
 from __future__ import annotations

@@ -1,3 +1,5 @@
+# Copyright (c) 2026 AIMER contributors.
+
 """View controllers for website front pages."""
 
 from AIMER import TemplateLayout

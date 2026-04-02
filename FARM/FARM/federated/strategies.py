@@ -1,3 +1,5 @@
+# Copyright (c) 2026 AIMER contributors.
+
 """Flower strategies tailored for task and RAG synchronization."""
 
 from __future__ import annotations

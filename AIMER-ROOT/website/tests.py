@@ -326,4 +326,4 @@ class TemplateTagTests(TestCase):
     def test_current_url_tag(self) -> None:
         """Ensure current_url returns the absolute URL for request."""
         request = self.factory.get("/test/")
-        self.assertEqual(theme_tags.current_url(request), request.build_absolute_uri())
+        self.assertTrue(theme_tags.current_url(request) == request.build_absolute_uri())
