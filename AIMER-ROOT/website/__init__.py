@@ -1,0 +1,1 @@
+"""Website Django app package."""
