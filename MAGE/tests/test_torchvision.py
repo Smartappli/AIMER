@@ -314,8 +314,7 @@ def test_torchvision_model_creation(
     """Smoke-test that TorchVision models can be instantiated without crashing."""
     failures = _run_creation_with_progress(tv_models, num_classes=num_classes)
     if failures:
-        msg = (
-            "Certaines créations de modèles TorchVision ont échoué:\n"
-            + "\n".join(f"- {m} / {n}: {err}" for m, n, err in failures)
+        msg = "Certaines créations de modèles TorchVision ont échoué:\n" + "\n".join(
+            f"- {m} / {n}: {err}" for m, n, err in failures
         )
         pytest.fail(msg)

@@ -33,9 +33,7 @@ def timm_models() -> dict[str, list[str]]:
         modules = [m for m in modules if m in wanted]
 
     limit_env = os.getenv("TIMM_TEST_LIMIT_PER_MODULE")
-    limit_per_mod = (
-        int(limit_env) if (limit_env and limit_env.isdigit()) else None
-    )
+    limit_per_mod = int(limit_env) if (limit_env and limit_env.isdigit()) else None
 
     out: dict[str, list[str]] = {}
     for module in modules:
@@ -116,9 +114,7 @@ def test_timm_model_creation(
                         try:
                             pretrained_used, elapsed = _try_create(model_name)
                             status = (
-                                "pretrained"
-                                if pretrained_used
-                                else "no-pretrained"
+                                "pretrained" if pretrained_used else "no-pretrained"
                             )
                             p_mod.set_postfix_str(
                                 f"{model_name} • {status} • {elapsed:.2f}s",
@@ -154,8 +150,6 @@ def test_timm_model_creation(
                         failures.append((module_name, model_name, repr(e)))
                     pbar.update(1)
 
-    assert (
-        not failures
-    ), "Certaines créations de modèles ont échoué:\n" + "\n".join(
+    assert not failures, "Certaines créations de modèles ont échoué:\n" + "\n".join(
         f"- {m} / {n}: {err}" for m, n, err in failures
     )
