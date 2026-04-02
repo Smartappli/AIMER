@@ -1,3 +1,5 @@
+# Copyright (c) 2026 AIMER contributors.
+
 """RAG state structures and serialization helpers for Flower."""
 
 from __future__ import annotations

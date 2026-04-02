@@ -1,3 +1,5 @@
+# Copyright (c) 2026 AIMER contributors.
+
 """URL routes for website front pages."""
 
 from django.urls import path

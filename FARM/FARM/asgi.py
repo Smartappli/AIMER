@@ -1,3 +1,5 @@
+# Copyright (c) 2026 AIMER contributors.
+
 """ASGI config for framework project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.

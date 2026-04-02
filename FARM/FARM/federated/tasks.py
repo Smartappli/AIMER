@@ -1,3 +1,5 @@
+# Copyright (c) 2026 AIMER contributors.
+
 """Task definitions and protocol contracts for federated workloads."""
 
 from __future__ import annotations

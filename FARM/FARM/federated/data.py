@@ -1,3 +1,5 @@
+# Copyright (c) 2026 AIMER contributors.
+
 """Shared data containers for federated tasks."""
 
 from __future__ import annotations

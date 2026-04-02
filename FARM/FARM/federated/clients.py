@@ -1,3 +1,5 @@
+# Copyright (c) 2026 AIMER contributors.
+
 """Federated client implementations for task and RAG workloads."""
 
 from __future__ import annotations
