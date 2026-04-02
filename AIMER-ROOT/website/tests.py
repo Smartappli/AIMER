@@ -29,7 +29,24 @@ from templates.layout.bootstrap.layout_vertical import TemplateBootstrapLayoutVe
 from website.views import FrontPagesView
 
 
-class TemplateHelperTests(TestCase):
+class BaseTestCase(TestCase):
+    """Base test case with helper checks compatible with project Ruff rules."""
+
+    def _check(self, condition: object, message: str = "Expectation failed") -> None:
+        if not bool(condition):
+            self.fail(message)
+
+    def _check_equal(
+        self,
+        left: object,
+        right: object,
+        message: str = "Values are not equal",
+    ) -> None:
+        if left != right:
+            self.fail(f"{message}: {left!r} != {right!r}")
+
+
+class TemplateHelperTests(BaseTestCase):
     """Tests for TemplateHelper context initialization and mapping."""
 
     def test_init_context_populates_expected_keys(self) -> None:
@@ -37,9 +54,9 @@ class TemplateHelperTests(TestCase):
         context: dict[str, object] = {}
         TemplateHelper.init_context(context)
 
-        assert context["layout"] == "vertical"
-        assert context["navbar_type"] == "fixed"
-        assert context["menu_fixed"]
+        self._check_equal(context["layout"], "vertical")
+        self._check_equal(context["navbar_type"], "fixed")
+        self._check(context["menu_fixed"])
 
     def test_map_context_for_horizontal_layout(self) -> None:
         """Ensure horizontal layout values are mapped correctly."""
@@ -60,11 +77,11 @@ class TemplateHelperTests(TestCase):
 
         TemplateHelper.map_context(context)
 
-        assert context["header_type_class"] == "layout-menu-fixed"
-        assert not context["navbar_type_class"]
-        assert context["footer_fixed_class"] == "layout-footer-fixed"
-        assert context["container_class"] == "container-fluid"
-        assert not context["navbar_detached_class"]
+        self._check_equal(context["header_type_class"], "layout-menu-fixed")
+        self._check(not (context["navbar_type_class"]))
+        self._check_equal(context["footer_fixed_class"], "layout-footer-fixed")
+        self._check_equal(context["container_class"], "container-fluid")
+        self._check(not (context["navbar_detached_class"]))
 
     def test_map_context_for_vertical_layout(self) -> None:
         """Ensure vertical layout values are mapped correctly."""
@@ -85,23 +102,23 @@ class TemplateHelperTests(TestCase):
 
         TemplateHelper.map_context(context)
 
-        assert not context["header_type_class"]
-        assert context["navbar_type_class"] == "layout-navbar-hidden"
-        assert context["menu_collapsed_class"] == "layout-menu-collapsed"
-        assert context["menu_fixed_class"] == "layout-menu-fixed"
-        assert context["rtl_mode_value"] == "rtl"
-        assert not context["display_customizer_class"]
-        assert context["content_layout_class"] == "layout-compact"
-        assert context["navbar_detached_class"] == "navbar-detached"
+        self._check(not (context["header_type_class"]))
+        self._check_equal(context["navbar_type_class"], "layout-navbar-hidden")
+        self._check_equal(context["menu_collapsed_class"], "layout-menu-collapsed")
+        self._check_equal(context["menu_fixed_class"], "layout-menu-fixed")
+        self._check_equal(context["rtl_mode_value"], "rtl")
+        self._check(not (context["display_customizer_class"]))
+        self._check_equal(context["content_layout_class"], "layout-compact")
+        self._check_equal(context["navbar_detached_class"], "navbar-detached")
 
     def test_set_layout_uses_front_bootstrap(self) -> None:
         """Ensure set_layout resolves front layout metadata."""
         context: dict[str, object] = {}
         layout_path = TemplateHelper.set_layout("layout_front.html", context)
 
-        assert layout_path == "layout/layout_front.html"
-        assert context["layout"] == "front"
-        assert context["is_front"]
+        self._check_equal(layout_path, "layout/layout_front.html")
+        self._check_equal(context["layout"], "front")
+        self._check(context["is_front"])
 
     def test_template_bootstrap_variants(self) -> None:
         """Ensure each bootstrap variant initializes a layout key."""
@@ -126,10 +143,10 @@ class TemplateHelperTests(TestCase):
             }
             bootstrap.init(context)
 
-            assert "layout" in context
+            self._check("layout" in context)
 
 
-class TemplateLayoutTests(TestCase):
+class TemplateLayoutTests(BaseTestCase):
     """Tests for TemplateLayout behavior."""
 
     def test_template_layout_respects_rtl_cookie(self) -> None:
@@ -142,11 +159,11 @@ class TemplateLayoutTests(TestCase):
 
         context = layout.init({})
 
-        assert context["rtl_mode"]
-        assert context["layout_path"] == "layout/layout_vertical.html"
+        self._check(context["rtl_mode"])
+        self._check_equal(context["layout_path"], "layout/layout_vertical.html")
 
 
-class FrontPagesViewTests(TestCase):
+class FrontPagesViewTests(BaseTestCase):
     """Tests for front pages view context generation."""
 
     def test_front_pages_view_context(self) -> None:
@@ -160,12 +177,12 @@ class FrontPagesViewTests(TestCase):
 
         context = view.get_context_data()
 
-        assert context["layout"] == "front"
-        assert context["active_url"] == "/landing/"
-        assert context["layout_path"] == "layout/layout_front.html"
+        self._check_equal(context["layout"], "front")
+        self._check_equal(context["active_url"], "/landing/")
+        self._check_equal(context["layout_path"], "layout/layout_front.html")
 
 
-class ContextProcessorTests(TestCase):
+class ContextProcessorTests(BaseTestCase):
     """Tests for project context processors."""
 
     def test_context_processors_values(self) -> None:
@@ -174,13 +191,13 @@ class ContextProcessorTests(TestCase):
         request.LANGUAGE_CODE = "fr"
         request.COOKIES = {"session": "abc"}
 
-        assert "MY_SETTING" in my_setting(request)
-        assert language_code(request)["LANGUAGE_CODE"] == "fr"
-        assert get_cookie(request)["COOKIES"] == {"session": "abc"}
-        assert "ENVIRONMENT" in environment(request)
+        self._check("MY_SETTING" in my_setting(request))
+        self._check_equal(language_code(request)["LANGUAGE_CODE"], "fr")
+        self._check_equal(get_cookie(request)["COOKIES"], {"session": "abc"})
+        self._check("ENVIRONMENT" in environment(request))
 
 
-class LanguageMiddlewareTests(TestCase):
+class LanguageMiddlewareTests(BaseTestCase):
     """Tests for default language middleware behavior."""
 
     def test_middleware_sets_cookie_when_missing(self) -> None:
@@ -196,7 +213,7 @@ class LanguageMiddlewareTests(TestCase):
             response = middleware(request)
 
         activate_mock.assert_called_once()
-        assert "django_language" in response.cookies
+        self._check("django_language" in response.cookies)
 
     def test_middleware_skips_when_cookie_present(self) -> None:
         """Ensure middleware does not reset language when cookie exists."""
@@ -212,10 +229,10 @@ class LanguageMiddlewareTests(TestCase):
             response = middleware(request)
 
         activate_mock.assert_not_called()
-        assert "django_language" not in response.cookies
+        self._check("django_language" not in response.cookies)
 
 
-class TemplateTagTests(TestCase):
+class TemplateTagTests(BaseTestCase):
     """Tests for custom template tags and permission helpers."""
 
     def setUp(self) -> None:
@@ -242,9 +259,9 @@ class TemplateTagTests(TestCase):
         theme_name = theme_tags.get_theme_variables("template_name")
         layout = theme_tags.get_theme_config("layout")
 
-        assert isinstance(theme_name, SafeString)
-        assert str(theme_name) == "AIMER"
-        assert str(layout) == "vertical"
+        self._check(isinstance(theme_name, SafeString))
+        self._check_equal(str(theme_name), "AIMER")
+        self._check_equal(str(layout), "vertical")
 
     def test_filter_by_url_matches_nested_submenu(self) -> None:
         """Ensure submenu URL matcher works on nested entries."""
@@ -259,7 +276,7 @@ class TemplateTagTests(TestCase):
         resolver = SimpleNamespace(url_name="nested")
         url = SimpleNamespace(path="/nested/", resolver_match=resolver)
 
-        assert theme_tags.filter_by_url(submenu, url)
+        self._check(theme_tags.filter_by_url(submenu, url))
 
     def test_group_and_permission_filters(self) -> None:
         """Ensure group and permission helper filters evaluate properly."""
@@ -279,15 +296,15 @@ class TemplateTagTests(TestCase):
         user.user_permissions.add(permission)
         user.refresh_from_db()
 
-        assert theme_tags.has_group(user, "admin")
-        assert theme_tags.is_admin(user)
-        assert not theme_tags.is_client(user)
+        self._check(theme_tags.has_group(user, "admin"))
+        self._check(theme_tags.is_admin(user))
+        self._check(not (theme_tags.is_client(user)))
 
         perm_label = f"{ct.app_label}.{permission.codename}"
-        assert theme_tags.has_permission(user, perm_label)
+        self._check(theme_tags.has_permission(user, perm_label))
 
         user.groups.add(client_group)
-        assert theme_tags.is_client(user)
+        self._check(theme_tags.is_client(user))
 
     def test_role_required_decorators_allow_access(self) -> None:
         """Ensure role decorators allow access for matching users."""
@@ -313,31 +330,31 @@ class TemplateTagTests(TestCase):
         super_request = self.factory.get("/")
         super_request.user = super_user
 
-        assert (
-            theme_tags.admin_required(view)(admin_request).status_code
-            == HttpResponse().status_code
+        self._check_equal(
+            theme_tags.admin_required(view)(admin_request).status_code,
+            HttpResponse().status_code,
         )
-        assert (
-            theme_tags.client_required(view)(client_request).status_code
-            == HttpResponse().status_code
+        self._check_equal(
+            theme_tags.client_required(view)(client_request).status_code,
+            HttpResponse().status_code,
         )
-        assert (
-            theme_tags.staff_required(view)(staff_request).status_code
-            == HttpResponse().status_code
+        self._check_equal(
+            theme_tags.staff_required(view)(staff_request).status_code,
+            HttpResponse().status_code,
         )
-        assert (
-            theme_tags.superuser_required(view)(super_request).status_code
-            == HttpResponse().status_code
+        self._check_equal(
+            theme_tags.superuser_required(view)(super_request).status_code,
+            HttpResponse().status_code,
         )
 
     def test_user_flags_filters(self) -> None:
         """Ensure superuser and staff filters mirror user flags."""
         user = self._mkuser("flags", is_superuser=True, is_staff=True)
 
-        assert theme_tags.is_superuser(user)
-        assert theme_tags.is_staff(user)
+        self._check(theme_tags.is_superuser(user))
+        self._check(theme_tags.is_staff(user))
 
     def test_current_url_tag(self) -> None:
         """Ensure current_url returns the absolute URL for request."""
         request = self.factory.get("/test/")
-        assert theme_tags.current_url(request) == request.build_absolute_uri()
+        self._check_equal(theme_tags.current_url(request), request.build_absolute_uri())
