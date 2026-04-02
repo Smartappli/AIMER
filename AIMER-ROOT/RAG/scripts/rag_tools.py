@@ -1,3 +1,4 @@
+# Copyright (c) 2026 AIMER contributors.
 from dotenv import load_dotenv
 from langchain_core.tools import tool
 from langchain_ollama import ChatOllama, OllamaEmbeddings
@@ -55,12 +56,7 @@ def extract_filters(user_query: str):
 
     metadata = structured_llm.invoke(prompt)
 
-    if metadata:
-        filters = metadata.model_dump(exclude_none=True)
-    else:
-        filters = {}
-
-    return filters
+    return metadata.model_dump(exclude_none=True) if metadata else {}
 
 
 @tool

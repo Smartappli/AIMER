@@ -1,9 +1,10 @@
-from enum import Enum
+# Copyright (c) 2026 AIMER contributors.
+from enum import StrEnum
 
 from pydantic import BaseModel, Field
 
 
-class DocType(str, Enum):
+class DocType(StrEnum):
     """Supported document types.
 
     Values are stored/serialized as strings (subclassing `str` helps with JSON
