@@ -5,7 +5,7 @@ requires-python = ">=3.12"
 dependencies = [
   "fastapi[standard-no-fastapi-cloud-cli]==0.135.3",
   "fastmcp==3.2.0",
-  "keras==3.13.2",
+  "keras==3.14.0",
   "segmentation-models-pytorch==0.5.0",
 
   # macOS (Intel + Apple Silicon)
