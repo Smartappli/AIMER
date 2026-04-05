@@ -25,7 +25,11 @@ from langchain_core.documents import Document
 
 from RAG.omop import build_omop_metadata
 from RAG.recommender import recommend_models_for_query
-from RAG.timm_articles import load_timm_article_index
+from RAG.timm_articles import (
+    build_timm_article_index_from_pdfs,
+    ensure_timm_article_index_is_fresh,
+    load_timm_article_index,
+)
 from templates.layout.bootstrap.layout_blank import TemplateBootstrapLayoutBlank
 from templates.layout.bootstrap.layout_front import TemplateBootstrapLayoutFront
 from templates.layout.bootstrap.layout_horizontal import (
@@ -537,3 +541,42 @@ class OmopArchitectureTests(BaseTestCase):
         self._check("omop_condition_concept_ids" in metadata)
         self._check("omop_modality_concept_ids" in metadata)
         self._check("snomed_ct_codes" in metadata)
+
+
+class TimmIndexAutomationTests(BaseTestCase):
+    """Tests for automatic TIMM index refresh and deterministic generation."""
+
+    def test_build_timm_article_index_from_pdfs_is_sorted(self) -> None:
+        """Ensure generated rows are sorted and include arXiv links from filenames."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            root = Path(tmpdir)
+            (root / "ViT - 2010.11929v2.pdf").write_text("x", encoding="utf-8")
+            (root / "ResNet - 1512.03385v1.pdf").write_text("x", encoding="utf-8")
+
+            rows = build_timm_article_index_from_pdfs(root)
+
+        self._check_equal(rows[0]["model_name"], "ResNet")
+        self._check(rows[0]["paper_url"].endswith("1512.03385v1"))
+
+    def test_ensure_timm_article_index_is_fresh_updates_target_file(self) -> None:
+        """Ensure stale index file is automatically refreshed from available PDFs."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            root = Path(tmpdir)
+            pdf_dir = root / "pdfs"
+            pdf_dir.mkdir()
+            (pdf_dir / "Swin Transformer - 2103.14030v2.pdf").write_text(
+                "x",
+                encoding="utf-8",
+            )
+
+            index_file = root / "timm_model_articles.json"
+            index_file.write_text("[]", encoding="utf-8")
+
+            refreshed = ensure_timm_article_index_is_fresh(
+                pdf_directory=pdf_dir,
+                index_file=index_file,
+            )
+            rows = load_timm_article_index(index_file=index_file)
+
+        self._check(refreshed)
+        self._check_equal(rows[0]["model_name"], "Swin Transformer")

@@ -11,7 +11,7 @@ from typing import TYPE_CHECKING, Any
 from pydantic import BaseModel, Field
 
 from RAG.omop import build_omop_metadata
-from RAG.timm_articles import load_timm_article_index
+from RAG.timm_articles import ensure_timm_article_index_is_fresh, load_timm_article_index
 
 if TYPE_CHECKING:
     from langchain_core.documents import Document
@@ -182,6 +182,7 @@ def _build_model_catalog(pdf_directory: Path | None = None) -> dict[str, set[str
         if pdf_directory is not None
         else Path(__file__).resolve().parent / "data" / "pdfs"
     )
+    ensure_timm_article_index_is_fresh(pdf_directory=base_dir)
     catalog: dict[str, set[str]] = {}
     if base_dir.exists():
         for path in sorted(base_dir.glob("*.pdf")):

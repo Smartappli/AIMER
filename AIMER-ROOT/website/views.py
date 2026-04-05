@@ -14,7 +14,7 @@ from django.views import View
 from django.views.generic import TemplateView
 
 from RAG.recommender import recommend_models_for_query
-from RAG.timm_articles import load_timm_article_index
+from RAG.timm_articles import ensure_timm_article_index_is_fresh, load_timm_article_index
 
 PROJECT_KEYWORDS: Final[dict[str, tuple[str, ...]]] = {
     "AIMER-ROOT": ("vit", "transformer", "swin", "beit", "eva"),
@@ -90,6 +90,7 @@ def _discover_scientific_articles(pdf_dir: Path | None = None) -> list[str]:
 
     """
     articles_dir = pdf_dir or _rag_pdf_directory()
+    ensure_timm_article_index_is_fresh(pdf_directory=articles_dir)
     local_articles = (
         sorted(path.name for path in articles_dir.glob("*.pdf"))
         if articles_dir.exists()
