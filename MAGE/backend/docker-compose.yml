@@ -456,6 +456,153 @@ services:
     restart: always
 
   # =========================
+  # OMOP / OHDSI stack (CDM + WebAPI + Atlas)
+  # =========================
+  omop-postgres:
+    image: postgres:16-alpine
+    container_name: omop-postgres
+    env_file: .env
+    environment:
+      TZ: ${TZ}
+      POSTGRES_USER: ${OMOP_DB_USER:-omop}
+      POSTGRES_PASSWORD: ${OMOP_DB_PASSWORD:-omop}
+      POSTGRES_DB: ${OMOP_DB_NAME:-omop}
+    ports:
+      - "${OMOP_DB_HOST_PORT:-15432}:5432"
+    volumes:
+      - omop-postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "${OMOP_DB_USER:-omop}", "-d", "${OMOP_DB_NAME:-omop}", "-h", "localhost", "-p", "5432"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    restart: always
+
+  omop-db-init:
+    image: postgres:16-alpine
+    container_name: omop-db-init
+    env_file: .env
+    depends_on:
+      omop-postgres:
+        condition: service_healthy
+    environment:
+      PGPASSWORD: ${OMOP_DB_PASSWORD:-omop}
+      OMOP_DB_USER: ${OMOP_DB_USER:-omop}
+      OMOP_DB_NAME: ${OMOP_DB_NAME:-omop}
+      OMOP_CDM_SCHEMA: ${OMOP_CDM_SCHEMA:-cdm}
+      OMOP_VOCAB_SCHEMA: ${OMOP_VOCAB_SCHEMA:-vocab}
+      OMOP_RESULTS_SCHEMA: ${OMOP_RESULTS_SCHEMA:-results}
+      OMOP_TEMP_SCHEMA: ${OMOP_TEMP_SCHEMA:-temp}
+      OMOP_WEBAPI_SCHEMA: ${OMOP_WEBAPI_SCHEMA:-webapi}
+    entrypoint: ["/bin/sh", "-lc"]
+    command: >
+      set -e;
+      until pg_isready -h omop-postgres -p 5432 -U "${OMOP_DB_USER}" >/dev/null 2>&1; do sleep 1; done;
+      for schema in "${OMOP_CDM_SCHEMA}" "${OMOP_VOCAB_SCHEMA}" "${OMOP_RESULTS_SCHEMA}" "${OMOP_TEMP_SCHEMA}" "${OMOP_WEBAPI_SCHEMA}"; do
+        psql -h omop-postgres -U "${OMOP_DB_USER}" -d "${OMOP_DB_NAME}" -c "CREATE SCHEMA IF NOT EXISTS ${schema};";
+      done;
+      echo "OMOP schemas ready.";
+    restart: "no"
+
+  omop-webapi:
+    image: ohdsi/webapi:2.14.0
+    container_name: omop-webapi
+    env_file: .env
+    depends_on:
+      omop-db-init:
+        condition: service_completed_successfully
+    environment:
+      TZ: ${TZ}
+      SPRING_DATASOURCE_URL: jdbc:postgresql://omop-postgres:5432/${OMOP_DB_NAME:-omop}
+      SPRING_DATASOURCE_USERNAME: ${OMOP_DB_USER:-omop}
+      SPRING_DATASOURCE_PASSWORD: ${OMOP_DB_PASSWORD:-omop}
+      FLYWAY_DATASOURCE_URL: jdbc:postgresql://omop-postgres:5432/${OMOP_DB_NAME:-omop}
+      FLYWAY_DATASOURCE_USERNAME: ${OMOP_DB_USER:-omop}
+      FLYWAY_DATASOURCE_PASSWORD: ${OMOP_DB_PASSWORD:-omop}
+      WEBAPI_DATASOURCE_OHDSI_SCHEMA: ${OMOP_WEBAPI_SCHEMA:-webapi}
+      WEBAPI_CDM_DATASOURCE_URL: jdbc:postgresql://omop-postgres:5432/${OMOP_DB_NAME:-omop}
+      WEBAPI_CDM_DATASOURCE_USERNAME: ${OMOP_DB_USER:-omop}
+      WEBAPI_CDM_DATASOURCE_PASSWORD: ${OMOP_DB_PASSWORD:-omop}
+      WEBAPI_CDM_SCHEMA: ${OMOP_CDM_SCHEMA:-cdm}
+      WEBAPI_VOCAB_SCHEMA: ${OMOP_VOCAB_SCHEMA:-vocab}
+      WEBAPI_RESULTS_SCHEMA: ${OMOP_RESULTS_SCHEMA:-results}
+      WEBAPI_TEMP_SCHEMA: ${OMOP_TEMP_SCHEMA:-temp}
+      WEBAPI_SECURITY_ENABLED: "false"
+    ports:
+      - "${OMOP_WEBAPI_PORT:-8088}:8080"
+    restart: always
+
+  omop-terminology-import:
+    image: postgres:16-alpine
+    container_name: omop-terminology-import
+    env_file: .env
+    depends_on:
+      omop-db-init:
+        condition: service_completed_successfully
+      omop-postgres:
+        condition: service_healthy
+    environment:
+      TZ: ${TZ}
+      PGPASSWORD: ${OMOP_DB_PASSWORD:-omop}
+      OMOP_DB_USER: ${OMOP_DB_USER:-omop}
+      OMOP_DB_NAME: ${OMOP_DB_NAME:-omop}
+      OMOP_VOCAB_SCHEMA: ${OMOP_VOCAB_SCHEMA:-vocab}
+      OMOP_SNOMED_FILE: ${OMOP_SNOMED_FILE:-/import-data/snomed_ct.csv}
+      OMOP_ICD10_FILE: ${OMOP_ICD10_FILE:-/import-data/icd10.csv}
+    volumes:
+      - ./omop/data:/import-data:ro
+    entrypoint: ["/bin/sh", "-lc"]
+    command: >
+      set -e;
+      psql -h omop-postgres -U "${OMOP_DB_USER}" -d "${OMOP_DB_NAME}" -v ON_ERROR_STOP=1 -c "
+        CREATE TABLE IF NOT EXISTS ${OMOP_VOCAB_SCHEMA}.snomed_ct_raw (
+          concept_id BIGINT,
+          concept_name TEXT,
+          snomed_code TEXT PRIMARY KEY,
+          domain_id TEXT,
+          vocabulary_id TEXT
+        );
+        CREATE TABLE IF NOT EXISTS ${OMOP_VOCAB_SCHEMA}.icd10_raw (
+          concept_id BIGINT,
+          concept_name TEXT,
+          icd10_code TEXT PRIMARY KEY,
+          chapter TEXT,
+          vocabulary_id TEXT
+        );
+      ";
+      if [ -f "${OMOP_SNOMED_FILE}" ]; then
+        psql -h omop-postgres -U "${OMOP_DB_USER}" -d "${OMOP_DB_NAME}" -v ON_ERROR_STOP=1 -c "\\copy ${OMOP_VOCAB_SCHEMA}.snomed_ct_raw(concept_id,concept_name,snomed_code,domain_id,vocabulary_id) FROM '${OMOP_SNOMED_FILE}' WITH (FORMAT csv, HEADER true)";
+        echo "SNOMED CT import completed from ${OMOP_SNOMED_FILE}.";
+      else
+        echo "SNOMED CT file not found (${OMOP_SNOMED_FILE}) - skipped.";
+      fi;
+      if [ -f "${OMOP_ICD10_FILE}" ]; then
+        psql -h omop-postgres -U "${OMOP_DB_USER}" -d "${OMOP_DB_NAME}" -v ON_ERROR_STOP=1 -c "\\copy ${OMOP_VOCAB_SCHEMA}.icd10_raw(concept_id,concept_name,icd10_code,chapter,vocabulary_id) FROM '${OMOP_ICD10_FILE}' WITH (FORMAT csv, HEADER true)";
+        echo "ICD-10 import completed from ${OMOP_ICD10_FILE}.";
+      else
+        echo "ICD-10 file not found (${OMOP_ICD10_FILE}) - skipped.";
+      fi;
+    restart: "no"
+
+  omop-atlas:
+    image: ohdsi/atlas:2.14.0
+    container_name: omop-atlas
+    env_file: .env
+    depends_on:
+      - omop-webapi
+      - omop-terminology-import
+    environment:
+      TZ: ${TZ}
+      ATLAS_INSTANCE_NAME: ${OMOP_ATLAS_INSTANCE_NAME:-AIMER OMOP}
+      ATLAS_DEFAULT_LOCALE: ${OMOP_ATLAS_LOCALE:-en}
+      WEBAPI_URL: ${OMOP_WEBAPI_URL:-http://localhost:8088/WebAPI}
+      WEBAPI_DATASOURCES_JSON: >
+        [{"name":"AIMER-OMOP","key":"AIMER_OMOP","dialect":"postgresql","connectionString":"jdbc:postgresql://omop-postgres:5432/${OMOP_DB_NAME:-omop}","username":"${OMOP_DB_USER:-omop}","password":"${OMOP_DB_PASSWORD:-omop}","cdmSchema":"${OMOP_CDM_SCHEMA:-cdm}","vocabularySchema":"${OMOP_VOCAB_SCHEMA:-vocab}","resultsSchema":"${OMOP_RESULTS_SCHEMA:-results}","tempSchema":"${OMOP_TEMP_SCHEMA:-temp}"}]
+    ports:
+      - "${OMOP_ATLAS_PORT:-8081}:8080"
+    restart: always
+
+  # =========================
   # MLflow (Postgres backend + artifacts volume)
   # =========================
   mlflow:
@@ -533,3 +680,4 @@ volumes:
   mlflow-artifacts:
 
   fuseki-data:
+  omop-postgres-data:

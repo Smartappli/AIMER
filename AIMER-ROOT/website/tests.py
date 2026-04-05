@@ -21,6 +21,15 @@ from django.contrib.contenttypes.models import ContentType
 from django.http import HttpRequest, HttpResponse
 from django.test import RequestFactory, TestCase
 from django.utils.safestring import SafeString
+from langchain_core.documents import Document
+
+from RAG.omop import build_omop_metadata
+from RAG.recommender import recommend_models_for_query
+from RAG.timm_articles import (
+    build_timm_article_index_from_pdfs,
+    ensure_timm_article_index_is_fresh,
+    load_timm_article_index,
+)
 from templates.layout.bootstrap.layout_blank import TemplateBootstrapLayoutBlank
 from templates.layout.bootstrap.layout_front import TemplateBootstrapLayoutFront
 from templates.layout.bootstrap.layout_horizontal import (
@@ -193,7 +202,7 @@ class DashboardViewTests(BaseTestCase):
     """Tests for project dashboard and RAG article indexing."""
 
     def test_discover_scientific_articles_returns_sorted_pdfs(self) -> None:
-        """Ensure PDF discovery reads and sorts the provided directory."""
+        """Ensure PDF discovery includes local PDFs and default TIMM references."""
         with tempfile.TemporaryDirectory() as tmpdir:
             root = Path(tmpdir)
             (root / "b-paper.pdf").write_text("b", encoding="utf-8")
@@ -202,7 +211,9 @@ class DashboardViewTests(BaseTestCase):
 
             discovered = _discover_scientific_articles(root)
 
-        self._check_equal(discovered, ["a-paper.pdf", "b-paper.pdf"])
+        self._check("a-paper.pdf" in discovered)
+        self._check("b-paper.pdf" in discovered)
+        self._check(any("ResNet" in name for name in discovered))
 
     def test_build_project_rag_index_matches_keywords(self) -> None:
         """Ensure keyword matching builds a project-indexed article map."""
@@ -433,3 +444,139 @@ class TemplateTagTests(BaseTestCase):
         """Ensure current_url returns the absolute URL for request."""
         request = self.factory.get("/test/")
         self._check_equal(theme_tags.current_url(request), request.build_absolute_uri())
+
+
+class RagRecommenderTests(BaseTestCase):
+    """Tests for model recommendation logic based on retrieved evidence."""
+
+    def test_recommender_ranks_model_with_metric_evidence(self) -> None:
+        """Ensure evidence with metric hints yields a confident recommendation."""
+        docs = [
+            Document(
+                page_content=(
+                    "ResNet achieved AUC 0.94 on chest X-ray classification and "
+                    "improved specificity versus baseline."
+                ),
+                metadata={"source": "resnet-paper.pdf"},
+            ),
+            Document(
+                page_content="ViT was also evaluated but with lower reported recall.",
+                metadata={"source": "vit-paper.pdf"},
+            ),
+        ]
+
+        response = recommend_models_for_query(
+            query="meilleur modèle pour classification chest xray",
+            top_k=2,
+            documents=docs,
+        )
+
+        self._check(bool(response.recommended_models))
+        self._check_equal(response.retrieval_mode, "injected-documents")
+        self._check_equal(response.recommended_models[0].model_name, "ResNet (v1b-v1.5)")
+        self._check(response.recommended_models[0].confidence >= 0.4)
+        self._check(bool(response.recommended_models[0].evidence))
+        self._check(response.recommended_models[0].literature_support >= 1)
+        self._check(
+            bool(response.query_profile.omop_modality_concept_ids),
+            "Expected OMOP modality IDs in query profile",
+        )
+
+    def test_recommender_uses_default_timm_catalog_when_pdf_dir_missing(self) -> None:
+        """Ensure fallback catalog still includes TIMM models without local PDFs."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            missing_pdf_dir = Path(tmpdir) / "missing"
+            response = recommend_models_for_query(
+                query="best model for image classification",
+                top_k=2,
+                documents=[],
+                pdf_directory=missing_pdf_dir,
+            )
+
+        names = [item.model_name for item in response.recommended_models]
+        self._check(bool(names))
+        self._check(any("ResNet" in name for name in names))
+
+    def test_timm_seed_index_is_comprehensive(self) -> None:
+        """Ensure default TIMM seed includes a broad article coverage."""
+        index = load_timm_article_index()
+        self._check(len(index) >= 100)
+        model_names = {entry["model_name"] for entry in index}
+        self._check("ResNet (v1b-v1.5)" in model_names)
+
+
+class RagRecommendationApiTests(BaseTestCase):
+    """Tests for the recommendation JSON API endpoint."""
+
+    def test_recommendation_api_requires_query(self) -> None:
+        """Ensure missing query returns HTTP 400."""
+        response = self.client.get("/api/rag/recommend/")
+        self._check_equal(response.status_code, 400)
+
+    def test_recommendation_api_returns_payload(self) -> None:
+        """Ensure valid requests return a recommendation response payload."""
+        response = self.client.get(
+            "/api/rag/recommend/",
+            {
+                "q": "modèles segmentation cerveau MRI",
+                "top_k": "2",
+            },
+        )
+
+        self._check_equal(response.status_code, 200)
+        payload = response.json()
+        self._check("recommended_models" in payload)
+        self._check("safety_notice" in payload)
+        self._check("query_profile" in payload)
+        self._check("omop_modality_concept_ids" in payload["query_profile"])
+
+
+class OmopArchitectureTests(BaseTestCase):
+    """Tests for OMOP/SNOMED metadata enrichment helpers."""
+
+    def test_build_omop_metadata_extracts_condition_and_modality(self) -> None:
+        """Ensure OMOP helper extracts concept IDs/codes from a clinical query."""
+        metadata = build_omop_metadata("classification MRI for pneumonia with AUC")
+
+        self._check("omop_condition_concept_ids" in metadata)
+        self._check("omop_modality_concept_ids" in metadata)
+        self._check("snomed_ct_codes" in metadata)
+
+
+class TimmIndexAutomationTests(BaseTestCase):
+    """Tests for automatic TIMM index refresh and deterministic generation."""
+
+    def test_build_timm_article_index_from_pdfs_is_sorted(self) -> None:
+        """Ensure generated rows are sorted and include arXiv links from filenames."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            root = Path(tmpdir)
+            (root / "ViT - 2010.11929v2.pdf").write_text("x", encoding="utf-8")
+            (root / "ResNet - 1512.03385v1.pdf").write_text("x", encoding="utf-8")
+
+            rows = build_timm_article_index_from_pdfs(root)
+
+        self._check_equal(rows[0]["model_name"], "ResNet")
+        self._check(rows[0]["paper_url"].endswith("1512.03385v1"))
+
+    def test_ensure_timm_article_index_is_fresh_updates_target_file(self) -> None:
+        """Ensure stale index file is automatically refreshed from available PDFs."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            root = Path(tmpdir)
+            pdf_dir = root / "pdfs"
+            pdf_dir.mkdir()
+            (pdf_dir / "Swin Transformer - 2103.14030v2.pdf").write_text(
+                "x",
+                encoding="utf-8",
+            )
+
+            index_file = root / "timm_model_articles.json"
+            index_file.write_text("[]", encoding="utf-8")
+
+            refreshed = ensure_timm_article_index_is_fresh(
+                pdf_directory=pdf_dir,
+                index_file=index_file,
+            )
+            rows = load_timm_article_index(index_file=index_file)
+
+        self._check(refreshed)
+        self._check_equal(rows[0]["model_name"], "Swin Transformer")

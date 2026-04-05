@@ -9,8 +9,12 @@ from typing import Final
 
 from AIMER import TemplateLayout
 from AIMER.template_helpers.theme import TemplateHelper
-from django.http import HttpRequest, HttpResponse
+from django.http import HttpRequest, HttpResponse, JsonResponse
+from django.views import View
 from django.views.generic import TemplateView
+
+from RAG.recommender import recommend_models_for_query
+from RAG.timm_articles import ensure_timm_article_index_is_fresh, load_timm_article_index
 
 PROJECT_KEYWORDS: Final[dict[str, tuple[str, ...]]] = {
     "AIMER-ROOT": ("vit", "transformer", "swin", "beit", "eva"),
@@ -86,9 +90,17 @@ def _discover_scientific_articles(pdf_dir: Path | None = None) -> list[str]:
 
     """
     articles_dir = pdf_dir or _rag_pdf_directory()
-    if not articles_dir.exists():
-        return []
-    return sorted(path.name for path in articles_dir.glob("*.pdf"))
+    ensure_timm_article_index_is_fresh(pdf_directory=articles_dir)
+    local_articles = (
+        sorted(path.name for path in articles_dir.glob("*.pdf"))
+        if articles_dir.exists()
+        else []
+    )
+    timm_seed_articles = [
+        f"{article['model_name']} - {article['paper_title']} ({article['paper_url']})"
+        for article in load_timm_article_index()
+    ]
+    return sorted({*local_articles, *timm_seed_articles})
 
 
 def _build_project_rag_index(
@@ -164,3 +176,26 @@ class DashboardView(FrontPagesView):
             for project_name in PROJECT_KEYWORDS
         ]
         return context
+
+
+class RagRecommendationView(View):
+    """API endpoint returning ranked model recommendations from the RAG corpus."""
+
+    def get(self, request: HttpRequest, *args: object, **kwargs: object) -> JsonResponse:
+        """Return recommendation JSON for a natural-language clinician query."""
+        del args, kwargs
+        query = (request.GET.get("q") or "").strip()
+        if not query:
+            return JsonResponse(
+                {"error": "Missing required query parameter: q"},
+                status=400,
+            )
+
+        try:
+            top_k = int(request.GET.get("top_k", "3"))
+        except ValueError:
+            top_k = 3
+        top_k = max(1, min(top_k, 10))
+
+        payload = recommend_models_for_query(query=query, top_k=top_k)
+        return JsonResponse(payload.model_dump(), status=200)

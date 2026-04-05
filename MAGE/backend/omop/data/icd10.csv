@@ -1,0 +1,5 @@
+concept_id,concept_name,icd10_code,chapter,vocabulary_id
+45543486,Pneumonia due to streptococcus,J13,Chapter X,ICD10CM
+37310280,COVID-19,U07.1,Chapter XXII,ICD10CM
+45564987,Malignant neoplasm of bronchus and lung,C34,Chapter II,ICD10CM
+45574831,Malignant neoplasm of brain,C71,Chapter II,ICD10CM
