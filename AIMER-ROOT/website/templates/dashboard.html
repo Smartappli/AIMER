@@ -1,0 +1,50 @@
+{% extends layout_path %}
+{% load i18n %}
+
+{% block title %}
+  AIMER - {% trans "Dashboard RAG" %}
+{% endblock %}
+
+{% block content %}
+  <section class="section-py">
+    <div class="container">
+      <div class="row mb-4">
+        <div class="col-12">
+          <h2 class="mb-1">AIMER Dashboard</h2>
+          <p class="text-muted mb-2">
+            RAG scientifique centralisé par projet.
+          </p>
+          <div class="alert alert-primary" role="alert">
+            Corpus détecté : <strong>{{ total_scientific_articles }}</strong> article{{ total_scientific_articles|pluralize }} scientifique{{ total_scientific_articles|pluralize }}.
+          </div>
+        </div>
+      </div>
+
+      <div class="row g-4">
+        {% for project in project_cards %}
+          <div class="col-12 col-xl-4 col-lg-6">
+            <div class="card h-100">
+              <div class="card-body">
+                <h4 class="card-title mb-2">{{ project.name }}</h4>
+                <p class="text-muted">{{ project.description }}</p>
+                <span class="badge bg-label-primary mb-3">
+                  {{ project.article_count }} article{{ project.article_count|pluralize }} lié{{ project.article_count|pluralize }}
+                </span>
+
+                {% if project.articles %}
+                  <ul class="ps-3 mb-0">
+                    {% for article in project.articles|slice:":12" %}
+                      <li class="mb-1"><small>{{ article }}</small></li>
+                    {% endfor %}
+                  </ul>
+                {% else %}
+                  <p class="mb-0"><small>Aucun article trouvé pour ce projet.</small></p>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+{% endblock %}

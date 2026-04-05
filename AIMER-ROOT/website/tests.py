@@ -4,6 +4,8 @@
 
 from __future__ import annotations
 
+import tempfile
+from pathlib import Path
 from types import SimpleNamespace
 from unittest.mock import patch
 from uuid import uuid4
@@ -26,7 +28,12 @@ from templates.layout.bootstrap.layout_horizontal import (
 )
 from templates.layout.bootstrap.layout_vertical import TemplateBootstrapLayoutVertical
 
-from website.views import FrontPagesView
+from website.views import (
+    DashboardView,
+    FrontPagesView,
+    _build_project_rag_index,
+    _discover_scientific_articles,
+)
 
 
 class BaseTestCase(TestCase):
@@ -180,6 +187,73 @@ class FrontPagesViewTests(BaseTestCase):
         self._check_equal(context["layout"], "front")
         self._check_equal(context["active_url"], "/landing/")
         self._check_equal(context["layout_path"], "layout/layout_front.html")
+
+
+class DashboardViewTests(BaseTestCase):
+    """Tests for project dashboard and RAG article indexing."""
+
+    def test_discover_scientific_articles_returns_sorted_pdfs(self) -> None:
+        """Ensure PDF discovery reads and sorts the provided directory."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            root = Path(tmpdir)
+            (root / "b-paper.pdf").write_text("b", encoding="utf-8")
+            (root / "a-paper.pdf").write_text("a", encoding="utf-8")
+            (root / "ignore.txt").write_text("x", encoding="utf-8")
+
+            discovered = _discover_scientific_articles(root)
+
+        self._check_equal(discovered, ["a-paper.pdf", "b-paper.pdf"])
+
+    def test_build_project_rag_index_matches_keywords(self) -> None:
+        """Ensure keyword matching builds a project-indexed article map."""
+        projects = {"MAGE": ("resnet",), "FARM": ("adam",)}
+        articles = ["ResNet - 1512.03385v1.pdf", "adamp and sgdp - 2006.08217v3.pdf"]
+
+        index = _build_project_rag_index(projects, articles)
+
+        self._check_equal(index["MAGE"], ["ResNet - 1512.03385v1.pdf"])
+        self._check_equal(index["FARM"], ["adamp and sgdp - 2006.08217v3.pdf"])
+
+    def test_dashboard_view_context_contains_project_cards(self) -> None:
+        """Ensure dashboard context is populated with article totals and cards."""
+        request = RequestFactory().get("/dashboard/")
+
+        view = DashboardView()
+        view.request = request
+        view.args = ()
+        view.kwargs = {}
+
+        with patch(
+            "website.views._discover_scientific_articles",
+            return_value=["ResNet - 1512.03385v1.pdf"],
+        ):
+            context = view.get_context_data()
+
+        self._check_equal(context["total_scientific_articles"], 1)
+        self._check("project_cards" in context)
+        self._check(bool(context["project_cards"]))
+
+    def test_dashboard_requires_authentication(self) -> None:
+        """Ensure anonymous visitors see the landing page instead of dashboard."""
+        response = self.client.get("/dashboard/")
+
+        self._check_equal(response.status_code, 200)
+        self._check(any(t.name == "landing_page.html" for t in response.templates))
+
+    def test_dashboard_is_accessible_for_authenticated_user(self) -> None:
+        """Ensure authenticated users can access the dashboard page."""
+        user_model = get_user_model()
+        user = user_model.objects.create_user(
+            username="dashboard_user",
+            email="dash@example.com",
+            password="test-password-123",
+        )
+        self.client.force_login(user)
+
+        response = self.client.get("/dashboard/")
+
+        self._check_equal(response.status_code, 200)
+        self._check(any(t.name == "dashboard.html" for t in response.templates))
 
 
 class ContextProcessorTests(BaseTestCase):

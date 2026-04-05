@@ -12,6 +12,8 @@ This repository is managed as a unified workspace to keep development, quality c
 
 - `AIMER-ROOT/` — core application code and templates.
 - `MAGE/` — model-related services and tests.
+  - `MAGE/api/main.py` — API gateway (REST compatibility + MCP).
+  - `MAGE/api/services/` — microservices split by domain (`libraries`, `models`, `modules`).
 - `FARM/` — additional workspace module(s).
 - `pyproject.toml` — workspace-level configuration.
 

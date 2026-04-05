@@ -4,7 +4,7 @@
 
 from django.urls import path
 
-from .views import FrontPagesView
+from .views import DashboardView, FrontPagesView
 
 urlpatterns = [
     path(
@@ -12,4 +12,5 @@ urlpatterns = [
         FrontPagesView.as_view(template_name="landing_page.html"),
         name="index",
     ),
+    path("dashboard/", DashboardView.as_view(), name="dashboard"),
 ]
