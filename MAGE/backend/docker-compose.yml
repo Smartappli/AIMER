@@ -532,9 +532,9 @@ services:
       - "${OMOP_WEBAPI_PORT:-8088}:8080"
     restart: always
 
-  omop-terminology-import:
+  omop-athena-import:
     image: postgres:16-alpine
-    container_name: omop-terminology-import
+    container_name: omop-athena-import
     env_file: .env
     depends_on:
       omop-db-init:
@@ -547,41 +547,50 @@ services:
       OMOP_DB_USER: ${OMOP_DB_USER:-omop}
       OMOP_DB_NAME: ${OMOP_DB_NAME:-omop}
       OMOP_VOCAB_SCHEMA: ${OMOP_VOCAB_SCHEMA:-vocab}
-      OMOP_SNOMED_FILE: ${OMOP_SNOMED_FILE:-/import-data/snomed_ct.csv}
-      OMOP_ICD10_FILE: ${OMOP_ICD10_FILE:-/import-data/icd10.csv}
+      OMOP_ATHENA_DIR: ${OMOP_ATHENA_DIR:-/import-data}
     volumes:
       - ./omop/data:/import-data:ro
     entrypoint: ["/bin/sh", "-lc"]
     command: >
       set -e;
+      for table in vocabulary domain concept_class relationship concept concept_relationship concept_ancestor concept_synonym drug_strength; do
+        psql -h omop-postgres -U "${OMOP_DB_USER}" -d "${OMOP_DB_NAME}" -v ON_ERROR_STOP=1 -tAc "
+          SELECT to_regclass('${OMOP_VOCAB_SCHEMA}.${table}') IS NOT NULL;
+        " | grep -q t || { echo "Missing required OMOP table: ${OMOP_VOCAB_SCHEMA}.${table}"; exit 1; };
+      done;
       psql -h omop-postgres -U "${OMOP_DB_USER}" -d "${OMOP_DB_NAME}" -v ON_ERROR_STOP=1 -c "
-        CREATE TABLE IF NOT EXISTS ${OMOP_VOCAB_SCHEMA}.snomed_ct_raw (
-          concept_id BIGINT,
-          concept_name TEXT,
-          snomed_code TEXT PRIMARY KEY,
-          domain_id TEXT,
-          vocabulary_id TEXT
-        );
-        CREATE TABLE IF NOT EXISTS ${OMOP_VOCAB_SCHEMA}.icd10_raw (
-          concept_id BIGINT,
-          concept_name TEXT,
-          icd10_code TEXT PRIMARY KEY,
-          chapter TEXT,
-          vocabulary_id TEXT
-        );
+        TRUNCATE TABLE
+          ${OMOP_VOCAB_SCHEMA}.drug_strength,
+          ${OMOP_VOCAB_SCHEMA}.concept_synonym,
+          ${OMOP_VOCAB_SCHEMA}.concept_ancestor,
+          ${OMOP_VOCAB_SCHEMA}.concept_relationship,
+          ${OMOP_VOCAB_SCHEMA}.concept,
+          ${OMOP_VOCAB_SCHEMA}.relationship,
+          ${OMOP_VOCAB_SCHEMA}.concept_class,
+          ${OMOP_VOCAB_SCHEMA}.domain,
+          ${OMOP_VOCAB_SCHEMA}.vocabulary;
       ";
-      if [ -f "${OMOP_SNOMED_FILE}" ]; then
-        psql -h omop-postgres -U "${OMOP_DB_USER}" -d "${OMOP_DB_NAME}" -v ON_ERROR_STOP=1 -c "\\copy ${OMOP_VOCAB_SCHEMA}.snomed_ct_raw(concept_id,concept_name,snomed_code,domain_id,vocabulary_id) FROM '${OMOP_SNOMED_FILE}' WITH (FORMAT csv, HEADER true)";
-        echo "SNOMED CT import completed from ${OMOP_SNOMED_FILE}.";
-      else
-        echo "SNOMED CT file not found (${OMOP_SNOMED_FILE}) - skipped.";
-      fi;
-      if [ -f "${OMOP_ICD10_FILE}" ]; then
-        psql -h omop-postgres -U "${OMOP_DB_USER}" -d "${OMOP_DB_NAME}" -v ON_ERROR_STOP=1 -c "\\copy ${OMOP_VOCAB_SCHEMA}.icd10_raw(concept_id,concept_name,icd10_code,chapter,vocabulary_id) FROM '${OMOP_ICD10_FILE}' WITH (FORMAT csv, HEADER true)";
-        echo "ICD-10 import completed from ${OMOP_ICD10_FILE}.";
-      else
-        echo "ICD-10 file not found (${OMOP_ICD10_FILE}) - skipped.";
-      fi;
+      for entry in \
+        "VOCABULARY.csv|vocabulary" \
+        "DOMAIN.csv|domain" \
+        "CONCEPT_CLASS.csv|concept_class" \
+        "RELATIONSHIP.csv|relationship" \
+        "CONCEPT.csv|concept" \
+        "CONCEPT_RELATIONSHIP.csv|concept_relationship" \
+        "CONCEPT_ANCESTOR.csv|concept_ancestor" \
+        "CONCEPT_SYNONYM.csv|concept_synonym" \
+        "DRUG_STRENGTH.csv|drug_strength"; do
+        file="${entry%%|*}";
+        table="${entry##*|}";
+        full_path="${OMOP_ATHENA_DIR}/${file}";
+        if [ ! -f "${full_path}" ]; then
+          echo "Missing Athena file: ${full_path}";
+          exit 1;
+        fi;
+        psql -h omop-postgres -U "${OMOP_DB_USER}" -d "${OMOP_DB_NAME}" -v ON_ERROR_STOP=1 -c "\\copy ${OMOP_VOCAB_SCHEMA}.${table} FROM '${full_path}' WITH (FORMAT csv, HEADER true, DELIMITER E'\\t')";
+        echo "Imported ${file} into ${OMOP_VOCAB_SCHEMA}.${table}.";
+      done;
+      echo "Athena vocabulary import completed.";
     restart: "no"
 
   omop-atlas:
@@ -590,7 +599,7 @@ services:
     env_file: .env
     depends_on:
       - omop-webapi
-      - omop-terminology-import
+      - omop-athena-import
     environment:
       TZ: ${TZ}
       ATLAS_INSTANCE_NAME: ${OMOP_ATLAS_INSTANCE_NAME:-AIMER OMOP}

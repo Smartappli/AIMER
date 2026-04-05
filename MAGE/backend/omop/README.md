@@ -1,30 +1,36 @@
-# OMOP terminology import (SNOMED CT + ICD-10)
+# OMOP terminology import via Athena
 
-Le service `omop-terminology-import` du `docker-compose.yml` charge automatiquement :
+Le service `omop-athena-import` du `docker-compose.yml` charge les fichiers de vocabulaire Athena directement dans les tables standard du schéma vocabulaire OMOP (`${OMOP_VOCAB_SCHEMA}`).
 
-- `./omop/data/snomed_ct.csv`
-- `./omop/data/icd10.csv`
+## Fichiers attendus (Athena)
 
-vers les tables :
+Placer dans `./omop/data/` (ou le dossier configuré via `OMOP_ATHENA_DIR`) :
 
-- `${OMOP_VOCAB_SCHEMA}.snomed_ct_raw`
-- `${OMOP_VOCAB_SCHEMA}.icd10_raw`
+- `VOCABULARY.csv`
+- `DOMAIN.csv`
+- `CONCEPT_CLASS.csv`
+- `RELATIONSHIP.csv`
+- `CONCEPT.csv`
+- `CONCEPT_RELATIONSHIP.csv`
+- `CONCEPT_ANCESTOR.csv`
+- `CONCEPT_SYNONYM.csv`
+- `DRUG_STRENGTH.csv`
 
-## Format attendu
+## Comportement d'import
 
-### SNOMED CT (`snomed_ct.csv`)
+- Le service vérifie d'abord que les tables OMOP de vocabulaire existent déjà :
+  - `vocabulary`
+  - `domain`
+  - `concept_class`
+  - `relationship`
+  - `concept`
+  - `concept_relationship`
+  - `concept_ancestor`
+  - `concept_synonym`
+  - `drug_strength`
+- Les tables sont vidées dans l'ordre compatible avec les contraintes, puis rechargées depuis les fichiers Athena.
+- L'import utilise le format Athena tabulé (`DELIMITER E'\t'`) avec en-tête CSV.
 
-```csv
-concept_id,concept_name,snomed_code,domain_id,vocabulary_id
-```
+Variable configurable :
 
-### ICD-10 (`icd10.csv`)
-
-```csv
-concept_id,concept_name,icd10_code,chapter,vocabulary_id
-```
-
-Les chemins peuvent être redéfinis via :
-
-- `OMOP_SNOMED_FILE`
-- `OMOP_ICD10_FILE`
+- `OMOP_ATHENA_DIR` (défaut: `/import-data`)
