@@ -123,13 +123,13 @@ def save_page_images(doc_converter: object, figures_dir: Path) -> None:
                 if page_no:
                     pages_to_save.add(page_no)
 
-        for page_no in pages_to_save:
-            page = doc_converter.document.pages[page_no]
+    for page_no in pages_to_save:
+        page = doc_converter.document.pages[page_no]
 
-            page.image.pil_image.save(
-                figures_dir / f"page_{page_no}.png",
-                "PNG",
-            )
+        page.image.pil_image.save(
+            figures_dir / f"page_{page_no}.png",
+            "PNG",
+        )
 
 
 def extract_context_and_table(lines: list[str], table_index: int) -> tuple[str, int]:
@@ -171,7 +171,7 @@ def extract_tables_with_content(markdown_text: str) -> list[tuple[str, str, int]
     i = 0
 
     while i < len(lines):
-        if "<!-- page break -->" in lines[i]:
+        if "<!-- page_break -->" in lines[i]:
             current_page += 1
             i += 1
             continue
@@ -350,6 +350,9 @@ def extract_metadata_from_filename(filename: str) -> dict[str, str]:
 
     parts = filename.split("-")
 
+    if len(parts) < 3:
+        return {"doc_month": "unknown", "doc_year": "unknown", "eod_type": "unknown"}
+
     return {"doc_month": parts[0], "doc_year": parts[1], "eod_type": parts[2]}
 
 
@@ -383,20 +386,22 @@ processed_hashes = get_processed_hashes()
 def ingest_file_in_db(file_path: Path, processed_hashes: set[str]) -> None:
     """Ingest a markdown-derived file into the vector database."""
     file_hash = compute_file_hash(file_path)
+    if file_hash in processed_hashes:
+        return
 
     path_str = str(file_path)
     if "markdown" in path_str:
         content_type = "text"
-        doc_name = file_path.name
+        doc_name = file_path.stem
     elif "tables" in path_str:
         content_type = "tables"
         doc_name = file_path.parent.name
-    elif "image_desc" in path_str:
+    elif "figures_description" in path_str:
         content_type = "image_desc"
-        doc_name = file_path.parent_name
+        doc_name = file_path.parent.name
     else:
         content_type = "unknown"
-        doc_name = file_path.name
+        doc_name = file_path.stem
 
     content = file_path.read_text(encoding="utf-8")
 
@@ -411,13 +416,13 @@ def ingest_file_in_db(file_path: Path, processed_hashes: set[str]) -> None:
     )
 
     if content_type == "text":
-        pages = content.split("<!-- page break -->")
+        pages = content.split("<!-- page_break -->")
         documents: list[Document] = []
         for idx, page in enumerate(pages, start=1):
             metadata = base_metadata.copy()
             metadata.update({"page": idx})
             documents.append(
-                Document(page_content=page, metadata=base_metadata),
+                Document(page_content=page, metadata=metadata),
             )
 
         vector_store.add_documents(documents)
@@ -425,7 +430,7 @@ def ingest_file_in_db(file_path: Path, processed_hashes: set[str]) -> None:
         page_num = extract_page_number(file_path)
         metadata = base_metadata.copy()
         metadata.update({"page": page_num})
-        documents = [Document(page_content=content, metadata=base_metadata)]
+        documents = [Document(page_content=content, metadata=metadata)]
 
         vector_store.add_documents(documents)
 
@@ -446,6 +451,8 @@ for pdf_file in pdf_files:
 
 base_path = Path(OUTPUT_MD_DIR)
 all_md_files = list(base_path.rglob("*.md"))
+all_md_files.extend(Path(OUTPUT_TABLES_DIR).rglob("*.md"))
+all_md_files.extend(Path(OUTPUT_DESCRIPTIONS_DIR).rglob("*.md"))
 
 for md_file in tqdm(all_md_files):
     ingest_file_in_db(md_file, processed_hashes)
