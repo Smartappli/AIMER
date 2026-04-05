@@ -4,8 +4,7 @@ ARG APP_HOME=/app
 WORKDIR ${APP_HOME}
 
 # set environment variables
-ENV PYTHONDONTWRITEBYTECODE=1 \
-    PYTHONUNBUFFERED=1
+ENV PYTHONDONTWRITEBYTECODE=1     PYTHONUNBUFFERED=1
 
 # install python dependencies
 RUN pip install --upgrade pip && pip install uv
@@ -19,7 +18,9 @@ COPY ./AIMER-ROOT/ ${APP_HOME}
 
 # entrypoint
 COPY ./AIMER-ROOT/entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
+RUN chmod +x /entrypoint.sh     && addgroup --system appgroup     && adduser --system --ingroup appgroup appuser     && chown -R appuser:appgroup ${APP_HOME} /entrypoint.sh
+
+USER appuser
 
 ENTRYPOINT ["/entrypoint.sh"]
 
