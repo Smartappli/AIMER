@@ -12,6 +12,7 @@ from langchain_ollama import ChatOllama, OllamaEmbeddings
 from langchain_qdrant import FastEmbedSparse, QdrantVectorStore, RetrievalMode
 from qdrant_client.models import FieldCondition, Filter, MatchValue
 
+from RAG.omop import build_omop_metadata
 from RAG.scripts.schema import ChunkMetadata
 
 if TYPE_CHECKING:
@@ -54,7 +55,11 @@ def extract_filters(user_query: str) -> dict[str, Any]:
         """
     structured_llm = llm.with_structured_output(ChunkMetadata)
     metadata = structured_llm.invoke(prompt)
-    return metadata.model_dump(exclude_none=True) if metadata else {}
+    llm_filters = metadata.model_dump(exclude_none=True) if metadata else {}
+    omop_filters = build_omop_metadata(user_query)
+    for key, value in omop_filters.items():
+        llm_filters.setdefault(key, value)
+    return llm_filters
 
 
 def hybrid_search(
@@ -71,10 +76,17 @@ def hybrid_search(
     """
     qdrant_filter = None
     if filters:
-        condition = [
-            FieldCondition(key=f"metadata.{key}", match=MatchValue(value=value))
-            for key, value in filters.items()
-        ]
+        condition = []
+        for key, value in filters.items():
+            if isinstance(value, list):
+                condition.extend(
+                    FieldCondition(key=f"metadata.{key}", match=MatchValue(value=item))
+                    for item in value
+                )
+            else:
+                condition.append(
+                    FieldCondition(key=f"metadata.{key}", match=MatchValue(value=value)),
+                )
         qdrant_filter = Filter(must=condition)
 
     return vector_store.similarity_search(query=query, k=k, filter=qdrant_filter)

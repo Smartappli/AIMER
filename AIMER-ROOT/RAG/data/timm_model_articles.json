@@ -1,0 +1,702 @@
+[
+  {
+    "model_name": "Aggregating Nested Transformers",
+    "paper_title": "Aggregating Nested Transformers",
+    "paper_url": "https://arxiv.org/abs/2105.12723v4"
+  },
+  {
+    "model_name": "BEiT",
+    "paper_title": "BEiT",
+    "paper_url": "https://arxiv.org/abs/2106.08254v2"
+  },
+  {
+    "model_name": "BEiT-V2",
+    "paper_title": "BEiT-V2",
+    "paper_url": "https://arxiv.org/abs/2208.06366v2"
+  },
+  {
+    "model_name": "BEiT3",
+    "paper_title": "BEiT3",
+    "paper_url": "https://arxiv.org/abs/2208.10442v2"
+  },
+  {
+    "model_name": "Bag of Tricks",
+    "paper_title": "Bag of Tricks - Gluon C, D, E, S variations",
+    "paper_url": "https://arxiv.org/abs/1812.01187v2"
+  },
+  {
+    "model_name": "Big Transfer ResNetV2 (BiT)",
+    "paper_title": "Big Transfer ResNetV2 (BiT)",
+    "paper_url": "https://arxiv.org/abs/1912.11370v3"
+  },
+  {
+    "model_name": "Blur Pooling",
+    "paper_title": "Blur Pooling",
+    "paper_url": "https://arxiv.org/abs/1904.11486v2"
+  },
+  {
+    "model_name": "Bottleneck Transformers",
+    "paper_title": "Bottleneck Transformers",
+    "paper_url": "https://arxiv.org/abs/2101.11605v2"
+  },
+  {
+    "model_name": "CaiT (Class-Attention in Image Transformers)",
+    "paper_title": "CaiT (Class-Attention in Image Transformers)",
+    "paper_url": "https://arxiv.org/abs/2103.17239v2"
+  },
+  {
+    "model_name": "CoAtNet (Convolution and Attention)",
+    "paper_title": "CoAtNet (Convolution and Attention)",
+    "paper_url": "https://arxiv.org/abs/2106.04803v2"
+  },
+  {
+    "model_name": "CoaT (Co-Scale Conv-Attentional Image Transformers)",
+    "paper_title": "CoaT (Co-Scale Conv-Attentional Image Transformers)",
+    "paper_url": "https://arxiv.org/abs/2104.06399v2"
+  },
+  {
+    "model_name": "ConViT (Soft Convolutional Inductive Biases Vision Transformers)",
+    "paper_title": "ConViT (Soft Convolutional Inductive Biases Vision Transformers)",
+    "paper_url": "https://arxiv.org/abs/2103.10697v2"
+  },
+  {
+    "model_name": "ConvNeXt",
+    "paper_title": "ConvNeXt",
+    "paper_url": "https://arxiv.org/abs/2201.03545v2"
+  },
+  {
+    "model_name": "ConvNeXt-V2",
+    "paper_title": "ConvNeXt-V2",
+    "paper_url": "https://arxiv.org/abs/2301.00808v1"
+  },
+  {
+    "model_name": "CspNet (Cross-Stage Partial Networks)",
+    "paper_title": "CspNet (Cross-Stage Partial Networks)",
+    "paper_url": "https://arxiv.org/abs/1911.11929v1"
+  },
+  {
+    "model_name": "DLA",
+    "paper_title": "DLA",
+    "paper_url": "https://arxiv.org/abs/1707.06484v3"
+  },
+  {
+    "model_name": "DPN (Dual-Path Network)",
+    "paper_title": "DPN (Dual-Path Network)",
+    "paper_url": "https://arxiv.org/abs/1707.01629v2"
+  },
+  {
+    "model_name": "DeiT",
+    "paper_title": "DeiT",
+    "paper_url": "https://arxiv.org/abs/2012.12877v2"
+  },
+  {
+    "model_name": "DeiT-III",
+    "paper_title": "DeiT-III",
+    "paper_url": "https://arxiv.org/abs/2204.07118v1"
+  },
+  {
+    "model_name": "DenseNet",
+    "paper_title": "DenseNet",
+    "paper_url": "https://arxiv.org/abs/1608.06993v5"
+  },
+  {
+    "model_name": "DropBlock",
+    "paper_title": "DropBlock",
+    "paper_url": "https://arxiv.org/abs/1810.12890v1"
+  },
+  {
+    "model_name": "DropPath",
+    "paper_title": "DropPath",
+    "paper_url": "https://arxiv.org/abs/1603.09382v3"
+  },
+  {
+    "model_name": "ECA-Net (ECAResNet)",
+    "paper_title": "ECA-Net (ECAResNet)",
+    "paper_url": "https://arxiv.org/abs/1910.03151v4"
+  },
+  {
+    "model_name": "EVA",
+    "paper_title": "EVA",
+    "paper_url": "https://arxiv.org/abs/2211.07636v2"
+  },
+  {
+    "model_name": "EVA-02",
+    "paper_title": "EVA-02",
+    "paper_url": "https://arxiv.org/abs/2303.11331v2"
+  },
+  {
+    "model_name": "EdgeNeXt",
+    "paper_title": "EdgeNeXt",
+    "paper_url": "https://arxiv.org/abs/2206.10589v3"
+  },
+  {
+    "model_name": "EfficientFormer",
+    "paper_title": "EfficientFormer",
+    "paper_url": "https://arxiv.org/abs/2206.01191v5"
+  },
+  {
+    "model_name": "EfficientFormer-V2",
+    "paper_title": "EfficientFormer-V2",
+    "paper_url": "https://arxiv.org/abs/2212.08059v2"
+  },
+  {
+    "model_name": "EfficientNet (B0-B7)",
+    "paper_title": "EfficientNet (B0-B7)",
+    "paper_url": "https://arxiv.org/abs/1905.11946v5"
+  },
+  {
+    "model_name": "EfficientNet AdvProp (B0-B8)",
+    "paper_title": "EfficientNet AdvProp (B0-B8)",
+    "paper_url": "https://arxiv.org/abs/1911.09665v2"
+  },
+  {
+    "model_name": "EfficientNet NoisyStudent (B0-B7, L2)",
+    "paper_title": "EfficientNet NoisyStudent (B0-B7, L2)",
+    "paper_url": "https://arxiv.org/abs/1911.04252v4"
+  },
+  {
+    "model_name": "EfficientNet V2",
+    "paper_title": "EfficientNet V2",
+    "paper_url": "https://arxiv.org/abs/2104.00298v3"
+  },
+  {
+    "model_name": "EfficientViT (MIT)",
+    "paper_title": "EfficientViT (MIT)",
+    "paper_url": "https://arxiv.org/abs/2205.14756v6"
+  },
+  {
+    "model_name": "EfficientViT (MSRA)",
+    "paper_title": "EfficientViT (MSRA)",
+    "paper_url": "https://arxiv.org/abs/2305.07027v1"
+  },
+  {
+    "model_name": "FBNet-C",
+    "paper_title": "FBNet-C",
+    "paper_url": "https://arxiv.org/abs/1812.03443v3"
+  },
+  {
+    "model_name": "FBNet-V3",
+    "paper_title": "FBNet-V3",
+    "paper_url": "https://arxiv.org/abs/2006.02049v3"
+  },
+  {
+    "model_name": "FastViT",
+    "paper_title": "FastViT",
+    "paper_url": "https://arxiv.org/abs/2303.14189v2"
+  },
+  {
+    "model_name": "FasterNet",
+    "paper_title": "FasterNet",
+    "paper_url": "https://arxiv.org/abs/2303.03667v3"
+  },
+  {
+    "model_name": "FlexiViT",
+    "paper_title": "FlexiViT",
+    "paper_url": "https://arxiv.org/abs/2212.08013v2"
+  },
+  {
+    "model_name": "FocalNet (Focal Modulation Networks)",
+    "paper_title": "FocalNet (Focal Modulation Networks)",
+    "paper_url": "https://arxiv.org/abs/2203.11926v3"
+  },
+  {
+    "model_name": "GCViT (Global Context Vision Transformer)",
+    "paper_title": "GCViT (Global Context Vision Transformer)",
+    "paper_url": "https://arxiv.org/abs/2206.09959v5"
+  },
+  {
+    "model_name": "GPU-Efficient Networks",
+    "paper_title": "GPU-Efficient Networks",
+    "paper_url": "https://arxiv.org/abs/2006.14090v4"
+  },
+  {
+    "model_name": "GhostNet",
+    "paper_title": "GhostNet",
+    "paper_url": "https://arxiv.org/abs/1911.11907v2"
+  },
+  {
+    "model_name": "GhostNet-V2",
+    "paper_title": "GhostNet-V2",
+    "paper_url": "https://arxiv.org/abs/2211.12905v1"
+  },
+  {
+    "model_name": "GhostNet-V3",
+    "paper_title": "GhostNet-V3",
+    "paper_url": "https://arxiv.org/abs/2404.11202v2"
+  },
+  {
+    "model_name": "HRNet",
+    "paper_title": "HRNet",
+    "paper_url": "https://arxiv.org/abs/1908.07919v2"
+  },
+  {
+    "model_name": "Halo Nets",
+    "paper_title": "Halo Nets",
+    "paper_url": "https://arxiv.org/abs/2103.12731v3"
+  },
+  {
+    "model_name": "HardCoRe-NAS",
+    "paper_title": "HardCoRe-NAS",
+    "paper_url": "https://arxiv.org/abs/2102.11646v1"
+  },
+  {
+    "model_name": "Inception-ResNet-V2 and Inception-V4",
+    "paper_title": "Inception-ResNet-V2 and Inception-V4",
+    "paper_url": "https://arxiv.org/abs/1602.07261v2"
+  },
+  {
+    "model_name": "Inception-V3",
+    "paper_title": "Inception-V3",
+    "paper_url": "https://arxiv.org/abs/1512.00567v3"
+  },
+  {
+    "model_name": "InceptionNeXt",
+    "paper_title": "InceptionNeXt",
+    "paper_url": "https://arxiv.org/abs/2303.16900v3"
+  },
+  {
+    "model_name": "LCNet",
+    "paper_title": "LCNet",
+    "paper_url": "https://arxiv.org/abs/2109.15099v1"
+  },
+  {
+    "model_name": "Lambda Networks",
+    "paper_title": "Lambda Networks",
+    "paper_url": "https://arxiv.org/abs/2102.08602v1"
+  },
+  {
+    "model_name": "LeViT (Vision Transformer in ConvNet's Clothing)",
+    "paper_title": "LeViT (Vision Transformer in ConvNet's Clothing)",
+    "paper_url": "https://arxiv.org/abs/2104.01136v2"
+  },
+  {
+    "model_name": "MLP-Mixer",
+    "paper_title": "MLP-Mixer",
+    "paper_url": "https://arxiv.org/abs/2105.01601v4"
+  },
+  {
+    "model_name": "MNASNet B1, A1 (Squeeze-Excite), and Small",
+    "paper_title": "MNASNet B1, A1 (Squeeze-Excite), and Small",
+    "paper_url": "https://arxiv.org/abs/1807.11626v3"
+  },
+  {
+    "model_name": "MViT-V2 (Improved Multiscale Vision Transformer)",
+    "paper_title": "MViT-V2 (Improved Multiscale Vision Transformer)",
+    "paper_url": "https://arxiv.org/abs/2112.01526v2"
+  },
+  {
+    "model_name": "MambaOut",
+    "paper_title": "MambaOut",
+    "paper_url": "https://arxiv.org/abs/2405.07992v3"
+  },
+  {
+    "model_name": "MaxViT (Multi-Axis Vision Transformer)",
+    "paper_title": "MaxViT (Multi-Axis Vision Transformer)",
+    "paper_url": "https://arxiv.org/abs/2204.01697v4"
+  },
+  {
+    "model_name": "MetaFormer (PoolFormer-v2, ConvFormer, CAFormer)",
+    "paper_title": "MetaFormer (PoolFormer-v2, ConvFormer, CAFormer)",
+    "paper_url": "https://arxiv.org/abs/2210.13452v4"
+  },
+  {
+    "model_name": "MixNet",
+    "paper_title": "MixNet",
+    "paper_url": "https://arxiv.org/abs/1907.09595v3"
+  },
+  {
+    "model_name": "MobileCLIP",
+    "paper_title": "MobileCLIP",
+    "paper_url": "https://arxiv.org/abs/2311.17049v2"
+  },
+  {
+    "model_name": "MobileNet-V2",
+    "paper_title": "MobileNet-V2",
+    "paper_url": "https://arxiv.org/abs/1801.04381v4"
+  },
+  {
+    "model_name": "MobileNet-V3 (MBConvNet without Efficient Head)",
+    "paper_title": "MobileNet-V3 (MBConvNet without Efficient Head)",
+    "paper_url": "https://arxiv.org/abs/1905.02244v5"
+  },
+  {
+    "model_name": "MobileNetV4",
+    "paper_title": "MobileNetV4",
+    "paper_url": "https://arxiv.org/abs/2404.10518v2"
+  },
+  {
+    "model_name": "MobileOne",
+    "paper_title": "MobileOne",
+    "paper_url": "https://arxiv.org/abs/2206.04040v2"
+  },
+  {
+    "model_name": "MobileViT",
+    "paper_title": "MobileViT",
+    "paper_url": "https://arxiv.org/abs/2110.02178v2"
+  },
+  {
+    "model_name": "MobileViT-V2",
+    "paper_title": "MobileViT-V2",
+    "paper_url": "https://arxiv.org/abs/2206.02680v1"
+  },
+  {
+    "model_name": "NASNet-A",
+    "paper_title": "NASNet-A",
+    "paper_url": "https://arxiv.org/abs/1707.07012v4"
+  },
+  {
+    "model_name": "NF-RegNet",
+    "paper_title": "NF-RegNet - NF-ResNet",
+    "paper_url": "https://arxiv.org/abs/2101.08692v2"
+  },
+  {
+    "model_name": "NFNet-F",
+    "paper_title": "NFNet-F",
+    "paper_url": "https://arxiv.org/abs/2102.06171v1"
+  },
+  {
+    "model_name": "NesT",
+    "paper_title": "NesT",
+    "paper_url": "https://arxiv.org/abs/2105.12723v4"
+  },
+  {
+    "model_name": "Next-ViT",
+    "paper_title": "Next-ViT",
+    "paper_url": "https://arxiv.org/abs/2207.05501v4"
+  },
+  {
+    "model_name": "PE (Perception Encoder)",
+    "paper_title": "PE (Perception Encoder)",
+    "paper_url": "https://arxiv.org/abs/2504.13181v2"
+  },
+  {
+    "model_name": "PNasNet",
+    "paper_title": "PNasNet",
+    "paper_url": "https://arxiv.org/abs/1712.00559v3"
+  },
+  {
+    "model_name": "PVT-V2 (Improved Pyramid Vision Transformer)",
+    "paper_title": "PVT-V2 (Improved Pyramid Vision Transformer)",
+    "paper_url": "https://arxiv.org/abs/2106.13797v7"
+  },
+  {
+    "model_name": "PoolFormer (MetaFormer)",
+    "paper_title": "PoolFormer (MetaFormer)",
+    "paper_url": "https://arxiv.org/abs/2111.11418v3"
+  },
+  {
+    "model_name": "Pooling-based Vision Transformer (PiT)",
+    "paper_title": "Pooling-based Vision Transformer (PiT)",
+    "paper_url": "https://arxiv.org/abs/2103.16302v2"
+  },
+  {
+    "model_name": "RDNet (DenseNets Reloaded)",
+    "paper_title": "RDNet (DenseNets Reloaded)",
+    "paper_url": "https://arxiv.org/abs/2403.19588v2"
+  },
+  {
+    "model_name": "ROPE-ViT",
+    "paper_title": "ROPE-ViT",
+    "paper_url": "https://arxiv.org/abs/2403.13298v2"
+  },
+  {
+    "model_name": "ReXNet",
+    "paper_title": "ReXNet",
+    "paper_url": "https://arxiv.org/abs/2007.00992v3"
+  },
+  {
+    "model_name": "RegNet",
+    "paper_title": "RegNet",
+    "paper_url": "https://arxiv.org/abs/2003.13678v1"
+  },
+  {
+    "model_name": "RegNetZ",
+    "paper_title": "RegNetZ",
+    "paper_url": "https://arxiv.org/abs/2103.06877v1"
+  },
+  {
+    "model_name": "RepGhostNet",
+    "paper_title": "RepGhostNet",
+    "paper_url": "https://arxiv.org/abs/2211.06088v2"
+  },
+  {
+    "model_name": "RepVGG",
+    "paper_title": "RepVGG",
+    "paper_url": "https://arxiv.org/abs/2101.03697v3"
+  },
+  {
+    "model_name": "RepViT",
+    "paper_title": "RepViT",
+    "paper_url": "https://arxiv.org/abs/2307.09283v8"
+  },
+  {
+    "model_name": "Res2Net",
+    "paper_title": "Res2Net",
+    "paper_url": "https://arxiv.org/abs/1904.01169v3"
+  },
+  {
+    "model_name": "ResMLP",
+    "paper_title": "ResMLP",
+    "paper_url": "https://arxiv.org/abs/2105.03404v2"
+  },
+  {
+    "model_name": "ResNeSt",
+    "paper_title": "ResNeSt",
+    "paper_url": "https://arxiv.org/abs/2004.08955v2"
+  },
+  {
+    "model_name": "ResNeXt",
+    "paper_title": "ResNeXt",
+    "paper_url": "https://arxiv.org/abs/1611.05431v2"
+  },
+  {
+    "model_name": "ResNet (v1b-v1.5)",
+    "paper_title": "ResNet (v1b-v1.5)",
+    "paper_url": "https://arxiv.org/abs/1512.03385v1"
+  },
+  {
+    "model_name": "ResNet-RS",
+    "paper_title": "ResNet-RS",
+    "paper_url": "https://arxiv.org/abs/2103.07579v1"
+  },
+  {
+    "model_name": "SHViT",
+    "paper_title": "SHViT",
+    "paper_url": "https://arxiv.org/abs/2401.16456v2"
+  },
+  {
+    "model_name": "SelecSLS",
+    "paper_title": "SelecSLS",
+    "paper_url": "https://arxiv.org/abs/1907.00837v2"
+  },
+  {
+    "model_name": "Selective Kernel Networks",
+    "paper_title": "Selective Kernel Networks",
+    "paper_url": "https://arxiv.org/abs/1903.06586v2"
+  },
+  {
+    "model_name": "Semi-supervised (SSL)",
+    "paper_title": "Semi-supervised (SSL) - Semi-weakly Supervised (SWSL) ResNet-ResNeXts",
+    "paper_url": "https://arxiv.org/abs/1905.00546v1"
+  },
+  {
+    "model_name": "Sequencer2D",
+    "paper_title": "Sequencer2D",
+    "paper_url": "https://arxiv.org/abs/2205.01972v4"
+  },
+  {
+    "model_name": "SigLIP (image encoder)",
+    "paper_title": "SigLIP (image encoder)",
+    "paper_url": "https://arxiv.org/abs/2303.15343v4"
+  },
+  {
+    "model_name": "SigLIP 2 (image encoder)",
+    "paper_title": "SigLIP 2 (image encoder)",
+    "paper_url": "https://arxiv.org/abs/2502.14786v1"
+  },
+  {
+    "model_name": "Single-Path NAS",
+    "paper_title": "Single-Path NAS",
+    "paper_url": "https://arxiv.org/abs/1904.02877v1"
+  },
+  {
+    "model_name": "Squeeze-and-Excitation Networks (SEResNet)",
+    "paper_title": "Squeeze-and-Excitation Networks (SEResNet)",
+    "paper_url": "https://arxiv.org/abs/1709.01507v4"
+  },
+  {
+    "model_name": "StarNet",
+    "paper_title": "StarNet",
+    "paper_url": "https://arxiv.org/abs/2403.19967v1"
+  },
+  {
+    "model_name": "SwiftFormer",
+    "paper_title": "SwiftFormer",
+    "paper_url": "https://arxiv.org/abs/2303.15446v2"
+  },
+  {
+    "model_name": "Swin S3 (AutoFormerV2)",
+    "paper_title": "Swin S3 (AutoFormerV2)",
+    "paper_url": "https://arxiv.org/abs/2111.14725v1"
+  },
+  {
+    "model_name": "Swin Transformer",
+    "paper_title": "Swin Transformer",
+    "paper_url": "https://arxiv.org/abs/2103.14030v2"
+  },
+  {
+    "model_name": "Swin Transformer V2",
+    "paper_title": "Swin Transformer V2",
+    "paper_url": "https://arxiv.org/abs/2111.09883v2"
+  },
+  {
+    "model_name": "TResNet",
+    "paper_title": "TResNet",
+    "paper_url": "https://arxiv.org/abs/2003.13630v3"
+  },
+  {
+    "model_name": "TinyNet",
+    "paper_title": "TinyNet",
+    "paper_url": "https://arxiv.org/abs/2010.14819v2"
+  },
+  {
+    "model_name": "TinyViT",
+    "paper_title": "TinyViT",
+    "paper_url": "https://arxiv.org/abs/2207.10666v1"
+  },
+  {
+    "model_name": "Transformer-iN-Transformer (TNT)",
+    "paper_title": "Transformer-iN-Transformer (TNT)",
+    "paper_url": "https://arxiv.org/abs/2103.00112v3"
+  },
+  {
+    "model_name": "Twins (Spatial Attention in Vision Transformers)",
+    "paper_title": "Twins (Spatial Attention in Vision Transformers)",
+    "paper_url": "https://arxiv.org/abs/2104.13840v4"
+  },
+  {
+    "model_name": "VGG",
+    "paper_title": "VGG",
+    "paper_url": "https://arxiv.org/abs/1409.1556v6"
+  },
+  {
+    "model_name": "VOLO (Vision Outlooker)",
+    "paper_title": "VOLO (Vision Outlooker)",
+    "paper_url": "https://arxiv.org/abs/2106.13112v2"
+  },
+  {
+    "model_name": "ViTamin",
+    "paper_title": "ViTamin",
+    "paper_url": "https://arxiv.org/abs/2404.02132v2"
+  },
+  {
+    "model_name": "Visformer",
+    "paper_title": "Visformer",
+    "paper_url": "https://arxiv.org/abs/2104.12533v5"
+  },
+  {
+    "model_name": "Vision Transformer",
+    "paper_title": "Vision Transformer",
+    "paper_url": "https://arxiv.org/abs/2010.11929v2"
+  },
+  {
+    "model_name": "VovNet V2 and V1",
+    "paper_title": "VovNet V2 and V1",
+    "paper_url": "https://arxiv.org/abs/1911.06667v6"
+  },
+  {
+    "model_name": "Weakly-supervised (WSL) Instagram pretrained",
+    "paper_title": "Weakly-supervised (WSL) Instagram pretrained - ImageNet tuned ResNeXt101",
+    "paper_url": "https://arxiv.org/abs/1805.00932v1"
+  },
+  {
+    "model_name": "XCiT (Cross-Covariance Image Transformers)",
+    "paper_title": "XCiT (Cross-Covariance Image Transformers)",
+    "paper_url": "https://arxiv.org/abs/2106.09681v2"
+  },
+  {
+    "model_name": "Xception (Modified Aligned, Gluon)",
+    "paper_title": "Xception (Modified Aligned, Gluon)",
+    "paper_url": "https://arxiv.org/abs/1802.02611v3"
+  },
+  {
+    "model_name": "Xception (Modified Aligned, TF)",
+    "paper_title": "Xception (Modified Aligned, TF)",
+    "paper_url": "https://arxiv.org/abs/1802.02611v3"
+  },
+  {
+    "model_name": "Xception",
+    "paper_title": "Xception",
+    "paper_url": "https://arxiv.org/abs/1610.02357v3"
+  },
+  {
+    "model_name": "adabelief",
+    "paper_title": "adabelief",
+    "paper_url": "https://arxiv.org/abs/2010.07468v5"
+  },
+  {
+    "model_name": "adafactor",
+    "paper_title": "adafactor",
+    "paper_url": "https://arxiv.org/abs/1804.04235v1"
+  },
+  {
+    "model_name": "adafactorbv",
+    "paper_title": "adafactorbv",
+    "paper_url": "https://arxiv.org/abs/2106.04560v2"
+  },
+  {
+    "model_name": "adahessian",
+    "paper_title": "adahessian",
+    "paper_url": "https://arxiv.org/abs/2006.00719v3"
+  },
+  {
+    "model_name": "adamp and sgdp",
+    "paper_title": "adamp and sgdp",
+    "paper_url": "https://arxiv.org/abs/2006.08217v3"
+  },
+  {
+    "model_name": "adamuon and nadamuon",
+    "paper_title": "adamuon and nadamuon",
+    "paper_url": "https://arxiv.org/abs/2507.11005v3"
+  },
+  {
+    "model_name": "adan",
+    "paper_title": "adan",
+    "paper_url": "https://arxiv.org/abs/2208.06677v5"
+  },
+  {
+    "model_name": "adopt",
+    "paper_title": "adopt",
+    "paper_url": "https://arxiv.org/abs/2411.02853v3"
+  },
+  {
+    "model_name": "gMLP",
+    "paper_title": "gMLP",
+    "paper_url": "https://arxiv.org/abs/2105.08050v2"
+  },
+  {
+    "model_name": "lamb",
+    "paper_title": "lamb",
+    "paper_url": "https://arxiv.org/abs/1904.00962v5"
+  },
+  {
+    "model_name": "laprop",
+    "paper_title": "laprop",
+    "paper_url": "https://arxiv.org/abs/2002.04839v3"
+  },
+  {
+    "model_name": "lars",
+    "paper_title": "lars",
+    "paper_url": "https://arxiv.org/abs/1708.03888v3"
+  },
+  {
+    "model_name": "lion",
+    "paper_title": "lion",
+    "paper_url": "https://arxiv.org/abs/2302.06675v4"
+  },
+  {
+    "model_name": "lookahead",
+    "paper_title": "lookahead",
+    "paper_url": "https://arxiv.org/abs/1907.08610v2"
+  },
+  {
+    "model_name": "madgrad",
+    "paper_title": "madgrad",
+    "paper_url": "https://arxiv.org/abs/2101.11075v3"
+  },
+  {
+    "model_name": "mars",
+    "paper_title": "mars",
+    "paper_url": "https://arxiv.org/abs/2411.10438v4"
+  },
+  {
+    "model_name": "novograd",
+    "paper_title": "novograd",
+    "paper_url": "https://arxiv.org/abs/1905.11286v3"
+  },
+  {
+    "model_name": "radam",
+    "paper_title": "radam",
+    "paper_url": "https://arxiv.org/abs/1908.03265v4"
+  }
+]

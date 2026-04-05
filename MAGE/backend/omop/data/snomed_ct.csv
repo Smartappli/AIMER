@@ -1,0 +1,5 @@
+concept_id,concept_name,snomed_code,domain_id,vocabulary_id
+255848,Pneumonia,233604007,Condition,SNOMED
+37311061,COVID-19,840539006,Condition,SNOMED
+2212808,Magnetic resonance imaging,113091000,Procedure,SNOMED
+2212865,Computed tomography,77477000,Procedure,SNOMED

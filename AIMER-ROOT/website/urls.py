@@ -4,7 +4,7 @@
 
 from django.urls import path
 
-from .views import DashboardView, FrontPagesView
+from .views import DashboardView, FrontPagesView, RagRecommendationView
 
 urlpatterns = [
     path(
@@ -13,4 +13,5 @@ urlpatterns = [
         name="index",
     ),
     path("dashboard/", DashboardView.as_view(), name="dashboard"),
+    path("api/rag/recommend/", RagRecommendationView.as_view(), name="rag-recommend"),
 ]

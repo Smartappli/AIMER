@@ -20,6 +20,8 @@ from pypdf import PdfReader
 from qdrant_client import QdrantClient
 from tqdm import tqdm
 
+from RAG.omop import build_omop_metadata
+
 # Directory paths
 DATA_DIR = "data/pdfs"
 OUTPUT_MD_DIR = "data/markdown"
@@ -421,6 +423,7 @@ def ingest_file_in_db(file_path: Path, processed_hashes: set[str]) -> None:
         for idx, page in enumerate(pages, start=1):
             metadata = base_metadata.copy()
             metadata.update({"page": idx})
+            metadata.update(build_omop_metadata(page))
             documents.append(
                 Document(page_content=page, metadata=metadata),
             )
@@ -430,6 +433,7 @@ def ingest_file_in_db(file_path: Path, processed_hashes: set[str]) -> None:
         page_num = extract_page_number(file_path)
         metadata = base_metadata.copy()
         metadata.update({"page": page_num})
+        metadata.update(build_omop_metadata(content))
         documents = [Document(page_content=content, metadata=metadata)]
 
         vector_store.add_documents(documents)
