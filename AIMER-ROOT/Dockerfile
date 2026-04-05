@@ -24,4 +24,4 @@ RUN chmod +x /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
 
 # gunicorn
-CMD ["uv", "run", "uvicorn", "AIMER.asgi.application", "--host", "0.0.0.0", "--port", "8000", "--workers", "4"]
+CMD ["uv", "run", "granian", "--interface", "asgi", "--host", "0.0.0.0", "--port", "8000", "--workers", "4", "AIMER.asgi:application"]

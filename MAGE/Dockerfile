@@ -24,4 +24,4 @@ COPY ./MAGE/ ${APP_HOME}
 EXPOSE 8000
 
 # module:variable ASGI
-CMD ["uv", "run", "uvicorn", "api.main:app", "--host", "0.0.0.0", "--port", "10000", "--workers", "4"]
+CMD ["uv", "run", "granian", "--interface", "asgi", "--host", "0.0.0.0", "--port", "10000", "--workers", "4", "api.main:app"]
