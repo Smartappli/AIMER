@@ -504,6 +504,38 @@ class RagRecommenderTests(BaseTestCase):
         model_names = {entry["model_name"] for entry in index}
         self._check("ResNet (v1b-v1.5)" in model_names)
 
+    def test_recommender_boosts_metadata_aligned_evidence(self) -> None:
+        """Ensure OMOP/SNOMED-aligned metadata increases ranking confidence."""
+        docs = [
+            Document(
+                page_content=(
+                    "ResNet shows strong AUC for pneumonia detection on chest radiography."
+                ),
+                metadata={
+                    "source": "resnet-paper.pdf",
+                    "omop_condition_concept_ids": [233604007],
+                    "omop_modality_concept_ids": [77477000],
+                    "snomed_ct_codes": ["233604007"],
+                },
+            ),
+            Document(
+                page_content=(
+                    "ViT remains competitive, but reports lower recall for this cohort."
+                ),
+                metadata={"source": "vit-paper.pdf"},
+            ),
+        ]
+
+        response = recommend_models_for_query(
+            query="classification pneumonia chest xray",
+            top_k=2,
+            documents=docs,
+        )
+
+        self._check(bool(response.recommended_models))
+        self._check_equal(response.recommended_models[0].model_name, "ResNet (v1b-v1.5)")
+        self._check(response.recommended_models[0].confidence >= 0.5)
+
 
 class RagRecommendationApiTests(BaseTestCase):
     """Tests for the recommendation JSON API endpoint."""
