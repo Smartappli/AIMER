@@ -105,6 +105,7 @@ class RecommendationResponse(BaseModel):
 class _ScoredEvidence:
     score: float = 0.0
     evidence: list[EvidenceSnippet] = field(default_factory=list)
+    matched_query_tokens: set[str] = field(default_factory=set)
 
 
 def _normalize(text: str) -> str:
@@ -242,6 +243,34 @@ def _content_bonus(content_lowered: str, profile: QueryProfile) -> float:
     return task_bonus + modality_bonus + metric_bonus
 
 
+def _metadata_alignment_bonus(doc: Document, profile: QueryProfile) -> float:
+    """Boost score when document metadata aligns with OMOP/SNOMED query signals."""
+    metadata = doc.metadata or {}
+    bonus = 0.0
+
+    condition_ids = metadata.get("omop_condition_concept_ids")
+    if isinstance(condition_ids, list):
+        overlap = set(profile.omop_condition_concept_ids).intersection(condition_ids)
+        if overlap:
+            bonus += 0.2 + min(0.1, 0.05 * len(overlap))
+
+    modality_ids = metadata.get("omop_modality_concept_ids")
+    if isinstance(modality_ids, list):
+        overlap = set(profile.omop_modality_concept_ids).intersection(modality_ids)
+        if overlap:
+            bonus += 0.2 + min(0.1, 0.05 * len(overlap))
+
+    snomed_codes = metadata.get("snomed_ct_codes")
+    if isinstance(snomed_codes, list):
+        overlap = set(profile.snomed_ct_codes).intersection(
+            code for code in snomed_codes if isinstance(code, str)
+        )
+        if overlap:
+            bonus += 0.15 + min(0.1, 0.05 * len(overlap))
+
+    return bonus
+
+
 def _score_documents_against_catalog(
     documents: list[Document],
     catalog: dict[str, set[str]],
@@ -262,12 +291,20 @@ def _score_documents_against_catalog(
                 continue
 
             current = scored.setdefault(model_name, _ScoredEvidence())
-            token_overlap = sum(
-                1 for token in profile.query_tokens if token in model_name.lower()
-            )
+            query_tokens_in_doc = {token for token in profile.query_tokens if token in lowered}
+            token_overlap = sum(1 for token in profile.query_tokens if token in model_name.lower())
             source_bonus = 0.25 if _metadata_source(doc) else 0.0
-            delta = 1.0 + _content_bonus(lowered, profile) + source_bonus + (token_overlap * 0.05)
+            query_coverage_bonus = min(0.3, len(query_tokens_in_doc) * 0.05)
+            delta = (
+                1.0
+                + _content_bonus(lowered, profile)
+                + _metadata_alignment_bonus(doc, profile)
+                + source_bonus
+                + query_coverage_bonus
+                + (token_overlap * 0.05)
+            )
             current.score += delta
+            current.matched_query_tokens.update(query_tokens_in_doc)
 
             snippet = EvidenceSnippet(
                 source=_metadata_source(doc),
@@ -297,6 +334,24 @@ def _build_experimental_notes(model_name: str, evidence_count: int) -> list[str]
             "dans la base courante; confirmer la reproductibilité locale."
         ),
     ]
+
+
+def _confidence_from_score(
+    *,
+    score: float,
+    max_score: float,
+    token_coverage: float,
+    evidence_count: int,
+) -> float:
+    """Calibrate confidence by combining rank score and grounding signals."""
+    if max_score <= 0:
+        normalized_score = 0.0
+    else:
+        normalized_score = min(1.0, score / max_score)
+
+    evidence_boost = min(0.15, evidence_count * 0.04)
+    confidence = (normalized_score * 0.7) + (token_coverage * 0.2) + evidence_boost
+    return min(0.96, max(0.35, confidence))
 
 
 def _safe_retrieve(query: str, *, k: int) -> tuple[list[Document], dict[str, Any], str]:
@@ -367,7 +422,17 @@ def recommend_models_for_query(
 
         recommendations = []
         for model_name, evidence in ranked:
-            confidence = min(0.95, max(0.4, evidence.score / max_score))
+            token_coverage = (
+                len(evidence.matched_query_tokens) / len(profile.query_tokens)
+                if profile.query_tokens
+                else 0.0
+            )
+            confidence = _confidence_from_score(
+                score=evidence.score,
+                max_score=max_score,
+                token_coverage=token_coverage,
+                evidence_count=len(evidence.evidence),
+            )
             recommendations.append(
                 RecommendationItem(
                     model_name=model_name,
