@@ -6,7 +6,7 @@ dependencies = [
     "django[argon2]>=6.0.3",
     "django-rich==2.2.0",
     "python-dotenv==1.2.2",
-    "granian==2.5.0",
+    "granian==2.7.2",
     "docling[vlm]==2.84.0",
     "fastembed==0.8.0",
     "transformers==5.5.0",
