@@ -505,7 +505,7 @@ services:
     restart: "no"
 
   omop-webapi:
-    image: ohdsi/webapi:2.14.0
+    image: ohdsi/webapi:2.15.1
     container_name: omop-webapi
     env_file: .env
     depends_on:
