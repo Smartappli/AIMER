@@ -594,7 +594,7 @@ services:
     restart: "no"
 
   omop-atlas:
-    image: ohdsi/atlas:2.14.0
+    image: ohdsi/atlas:2.15.0
     container_name: omop-atlas
     env_file: .env
     depends_on:
