@@ -5,16 +5,18 @@
 from __future__ import annotations
 
 from pathlib import Path
-from typing import Final
+from typing import Final, override
 
 from AIMER import TemplateLayout
 from AIMER.template_helpers.theme import TemplateHelper
 from django.http import HttpRequest, HttpResponse, JsonResponse
 from django.views import View
 from django.views.generic import TemplateView
-
 from RAG.recommender import recommend_models_for_query
-from RAG.timm_articles import ensure_timm_article_index_is_fresh, load_timm_article_index
+from RAG.timm_articles import (
+    ensure_timm_article_index_is_fresh,
+    load_timm_article_index,
+)
 
 PROJECT_KEYWORDS: Final[dict[str, tuple[str, ...]]] = {
     "AIMER-ROOT": ("vit", "transformer", "swin", "beit", "eva"),
@@ -74,7 +76,13 @@ class FrontPagesView(TemplateView):
 
 
 def _rag_pdf_directory() -> Path:
-    """Return the RAG PDF directory used to feed project dashboards."""
+    """
+    Return the RAG PDF directory used to feed project dashboards.
+
+    Returns:
+        Path: Absolute path to the directory containing RAG PDF sources.
+
+    """
     return Path(__file__).resolve().parent.parent / "RAG" / "data" / "pdfs"
 
 
@@ -145,6 +153,11 @@ class DashboardView(FrontPagesView):
         Allow dashboard access only for authenticated users.
 
         Unauthenticated users are served the public landing page.
+
+        Returns:
+            HttpResponse: The dashboard response for authenticated users, or the
+                landing page for unauthenticated users.
+
         """
         if not request.user.is_authenticated:
             return FrontPagesView.as_view(template_name="landing_page.html")(
@@ -181,8 +194,21 @@ class DashboardView(FrontPagesView):
 class RagRecommendationView(View):
     """API endpoint returning ranked model recommendations from the RAG corpus."""
 
-    def get(self, request: HttpRequest, *args: object, **kwargs: object) -> JsonResponse:
-        """Return recommendation JSON for a natural-language clinician query."""
+    @override
+    def get(
+        self,
+        request: HttpRequest,
+        *args: object,
+        **kwargs: object,
+    ) -> JsonResponse:
+        """
+        Return recommendation JSON for a natural-language clinician query.
+
+        Returns:
+            JsonResponse: A JSON payload containing ranked recommendations, or
+                an error response when the query parameter is missing.
+
+        """
         del args, kwargs
         query = (request.GET.get("q") or "").strip()
         if not query:

@@ -113,33 +113,77 @@ CONCEPTS: tuple[ClinicalConcept, ...] = (
 
 
 def _normalize(text: str) -> str:
+    """
+    Normalize text for concept lookup.
+
+    Args:
+        text: Raw input text.
+
+    Returns:
+        Lowercased text with normalized spaces and hyphens.
+
+    """
     return " ".join(text.lower().replace("-", " ").split())
 
 
 def detect_omop_concepts(text: str) -> list[ClinicalConcept]:
-    """Detect known OMOP/SNOMED concepts from free text."""
+    """
+    Detect known OMOP/SNOMED concepts from free text.
+
+    Args:
+        text: Raw text to inspect.
+
+    Returns:
+        List of detected clinical concepts.
+
+    """
     normalized = _normalize(text)
-    hits: list[ClinicalConcept] = []
-    for concept in CONCEPTS:
-        if any(alias in normalized for alias in concept.aliases):
-            hits.append(concept)
-    return hits
+    return [
+        concept
+        for concept in CONCEPTS
+        if any(alias in normalized for alias in concept.aliases)
+    ]
 
 
 def build_omop_metadata(text: str) -> dict[str, list[int] | list[str]]:
-    """Build OMOP-compatible metadata fields from plain text content."""
+    """
+    Build OMOP-compatible metadata fields from plain text content.
+
+    Args:
+        text: Raw text used to infer structured metadata.
+
+    Returns:
+        Dictionary containing OMOP and SNOMED metadata fields.
+
+    """
     concepts = detect_omop_concepts(text)
     condition_ids = sorted(
-        {concept.omop_concept_id for concept in concepts if concept.domain == "condition"},
+        {
+            concept.omop_concept_id
+            for concept in concepts
+            if concept.domain == "condition"
+        },
     )
     procedure_ids = sorted(
-        {concept.omop_concept_id for concept in concepts if concept.domain == "procedure"},
+        {
+            concept.omop_concept_id
+            for concept in concepts
+            if concept.domain == "procedure"
+        },
     )
     measurement_ids = sorted(
-        {concept.omop_concept_id for concept in concepts if concept.domain == "measurement"},
+        {
+            concept.omop_concept_id
+            for concept in concepts
+            if concept.domain == "measurement"
+        },
     )
     modality_ids = sorted(
-        {concept.omop_concept_id for concept in concepts if concept.domain == "modality"},
+        {
+            concept.omop_concept_id
+            for concept in concepts
+            if concept.domain == "modality"
+        },
     )
     snomed_codes = sorted({concept.snomed_ct_code for concept in concepts})
 

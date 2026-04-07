@@ -85,7 +85,10 @@ def hybrid_search(
                 )
             else:
                 condition.append(
-                    FieldCondition(key=f"metadata.{key}", match=MatchValue(value=value)),
+                    FieldCondition(
+                        key=f"metadata.{key}",
+                        match=MatchValue(value=value),
+                    ),
                 )
         qdrant_filter = Filter(must=condition)
 

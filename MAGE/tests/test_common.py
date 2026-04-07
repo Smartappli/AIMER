@@ -7,10 +7,12 @@ from __future__ import annotations
 import importlib.metadata as md
 import sys
 from types import ModuleType
-
-import pytest
+from typing import TYPE_CHECKING
 
 from MAGE.api import common
+
+if TYPE_CHECKING:
+    import pytest
 
 
 class DummyModuleWithVersion(ModuleType):
@@ -30,6 +32,18 @@ class DummyModuleWithoutVersion(ModuleType):
         super().__init__("dummy_no_ver")
 
 
+def check(condition: object, message: str) -> None:
+    """
+    Raise an error if a condition is false.
+
+    Raises:
+        AssertionError: If ``condition`` is falsy.
+
+    """
+    if not condition:
+        raise AssertionError(message)
+
+
 def test_safe_version_prefers_module_dunder_version() -> None:
     """When module has ``__version__``, it should be returned directly."""
     dummy = DummyModuleWithVersion()
@@ -37,7 +51,7 @@ def test_safe_version_prefers_module_dunder_version() -> None:
 
     detected = common.safe_version("package-does-not-matter", dummy.__name__)
 
-    assert detected == "1.2.3"
+    check(detected == "1.2.3", "Expected module __version__ to be returned")
 
 
 def test_safe_version_falls_back_to_distribution_metadata(
@@ -46,14 +60,14 @@ def test_safe_version_falls_back_to_distribution_metadata(
     """When no module name is provided, metadata version should be used."""
 
     def fake_version(pkg_name: str) -> str:
-        assert pkg_name == "some-package"
+        check(pkg_name == "some-package", "Unexpected package name")
         return "9.9.9"
 
     monkeypatch.setattr(common, "version", fake_version)
 
     detected = common.safe_version("some-package")
 
-    assert detected == "9.9.9"
+    check(detected == "9.9.9", "Expected distribution metadata version")
 
 
 def test_safe_version_falls_back_when_module_has_no_dunder_version(
@@ -67,7 +81,7 @@ def test_safe_version_falls_back_when_module_has_no_dunder_version(
 
     detected = common.safe_version("dummy-package", dummy.__name__)
 
-    assert detected == "2.0.0"
+    check(detected == "2.0.0", "Expected metadata fallback version")
 
 
 def test_safe_version_returns_none_when_distribution_missing(
@@ -82,7 +96,7 @@ def test_safe_version_returns_none_when_distribution_missing(
 
     detected = common.safe_version("missing-package")
 
-    assert detected is None
+    check(detected is None, "Expected None for missing distribution")
 
 
 def test_safe_version_returns_none_on_module_import_error(
@@ -101,4 +115,4 @@ def test_safe_version_returns_none_on_module_import_error(
 
     detected = common.safe_version("ignored-package", "broken_module")
 
-    assert detected is None
+    check(detected is None, "Expected None when module import fails")

@@ -7,17 +7,22 @@ from __future__ import annotations
 from fastapi import FastAPI
 from fastmcp import FastMCP
 
-from MAGE.api.services.libraries import libraries, service_app as libraries_service
+from MAGE.api.services.libraries import libraries
+from MAGE.api.services.libraries import service_app as libraries_service
 from MAGE.api.services.models import (
     are_pretrained,
     is_pretrained,
     model_list,
+)
+from MAGE.api.services.models import (
     service_app as models_service,
 )
 from MAGE.api.services.modules import (
     module_all_details,
     module_details,
     module_list,
+)
+from MAGE.api.services.modules import (
     service_app as modules_service,
 )
 
@@ -26,7 +31,14 @@ api = FastAPI(title="MAGE API Gateway")
 
 @api.get("/")
 async def read_root() -> dict[str, str]:
-    """Gateway-level health-check endpoint."""
+    """
+    Gateway-level health-check endpoint.
+
+    Returns:
+        dict[str, str]: A simple status payload indicating that the API gateway
+            is running.
+
+    """
     return {"API": "UP"}
 
 

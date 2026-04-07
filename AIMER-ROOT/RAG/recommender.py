@@ -11,7 +11,17 @@ from typing import TYPE_CHECKING, Any
 from pydantic import BaseModel, Field
 
 from RAG.omop import build_omop_metadata
-from RAG.timm_articles import ensure_timm_article_index_is_fresh, load_timm_article_index
+from RAG.timm_articles import (
+    ensure_timm_article_index_is_fresh,
+    load_timm_article_index,
+)
+
+try:
+    from RAG.query import extract_filters, hybrid_search, rerank_results
+except ImportError:
+    extract_filters = None
+    hybrid_search = None
+    rerank_results = None
 
 if TYPE_CHECKING:
     from langchain_core.documents import Document
@@ -57,6 +67,10 @@ STOPWORDS = {
     "best",
     "meilleur",
 }
+
+MIN_TOKEN_LENGTH = 2
+MIN_HYBRID_SEARCH_K = 9
+MIN_RERANK_TOP_K = 8
 
 
 class QueryProfile(BaseModel):
@@ -109,21 +123,48 @@ class _ScoredEvidence:
 
 
 def _normalize(text: str) -> str:
-    """Normalize text for approximate keyword matching."""
+    """
+    Normalize text for approximate keyword matching.
+
+    Args:
+        text: Raw text to normalize.
+
+    Returns:
+        Normalized alphanumeric lowercase string.
+
+    """
     return re.sub(r"[^a-z0-9]", "", text.lower())
 
 
 def _tokenize_query(query: str) -> set[str]:
-    """Tokenize query while removing generic stopwords."""
+    """
+    Tokenize query while removing generic stopwords.
+
+    Args:
+        query: User query to tokenize.
+
+    Returns:
+        Set of filtered lowercase tokens.
+
+    """
     return {
         token
         for token in re.findall(r"[a-zA-Z0-9]+", query.lower())
-        if len(token) > 2 and token not in STOPWORDS
+        if len(token) > MIN_TOKEN_LENGTH and token not in STOPWORDS
     }
 
 
 def _infer_query_profile(query: str) -> QueryProfile:
-    """Infer query intent (task + modality) with a lightweight rule-based parser."""
+    """
+    Infer query intent (task + modality) with a lightweight rule-based parser.
+
+    Args:
+        query: User query to analyze.
+
+    Returns:
+        Structured profile inferred from the query and OMOP metadata.
+
+    """
     lowered = query.lower()
     omop_metadata = build_omop_metadata(query)
 
@@ -165,7 +206,16 @@ def _infer_query_profile(query: str) -> QueryProfile:
 
 
 def _extract_model_name_from_filename(filename: str) -> str:
-    """Extract a model-like name from a PDF filename."""
+    """
+    Extract a model-like name from a PDF filename.
+
+    Args:
+        filename: PDF filename.
+
+    Returns:
+        Extracted model name.
+
+    """
     stem = Path(filename).stem
     head = stem.split(" - ")[0].strip()
     return re.sub(r"\s+", " ", head)
@@ -177,6 +227,13 @@ def _build_model_catalog(pdf_directory: Path | None = None) -> dict[str, set[str
 
     The TIMM seed ensures the knowledge base contains baseline model paper references
     even when no local PDFs have been ingested yet.
+
+    Args:
+        pdf_directory: Optional directory containing model PDFs.
+
+    Returns:
+        Dictionary mapping canonical model names to normalized aliases.
+
     """
     base_dir = (
         pdf_directory
@@ -212,7 +269,16 @@ def _build_model_catalog(pdf_directory: Path | None = None) -> dict[str, set[str
 
 
 def _metadata_source(doc: Document) -> str | None:
-    """Extract a readable source name from document metadata."""
+    """
+    Extract a readable source name from document metadata.
+
+    Args:
+        doc: Source document.
+
+    Returns:
+        Basename of the source file when available, otherwise ``None``.
+
+    """
     source = doc.metadata.get("source")
     if not source:
         return None
@@ -220,7 +286,16 @@ def _metadata_source(doc: Document) -> str | None:
 
 
 def _metadata_page(doc: Document) -> int | None:
-    """Extract a normalized page number when available in metadata."""
+    """
+    Extract a normalized page number when available in metadata.
+
+    Args:
+        doc: Source document.
+
+    Returns:
+        Page number when found and valid, otherwise ``None``.
+
+    """
     page = doc.metadata.get("page") or doc.metadata.get("page_number")
     if isinstance(page, int):
         return page
@@ -228,10 +303,22 @@ def _metadata_page(doc: Document) -> int | None:
 
 
 def _content_bonus(content_lowered: str, profile: QueryProfile) -> float:
-    """Compute bonus based on alignment with task/modality hints."""
+    """
+    Compute bonus based on alignment with task/modality hints.
+
+    Args:
+        content_lowered: Lowercased document content.
+        profile: Query profile inferred from user input.
+
+    Returns:
+        Bonus score derived from task, modality, and metric hints.
+
+    """
     task_bonus = 0.0
     for task in profile.tasks:
-        task_bonus += 0.1 if any(k in content_lowered for k in TASK_HINTS[task]) else 0.0
+        task_bonus += (
+            0.1 if any(k in content_lowered for k in TASK_HINTS[task]) else 0.0
+        )
 
     modality_bonus = 0.0
     for modality in profile.modalities:
@@ -239,12 +326,24 @@ def _content_bonus(content_lowered: str, profile: QueryProfile) -> float:
             0.1 if any(k in content_lowered for k in MODALITY_HINTS[modality]) else 0.0
         )
 
-    metric_bonus = 0.15 if any(metric in content_lowered for metric in METRIC_HINTS) else 0.0
+    metric_bonus = (
+        0.15 if any(metric in content_lowered for metric in METRIC_HINTS) else 0.0
+    )
     return task_bonus + modality_bonus + metric_bonus
 
 
 def _metadata_alignment_bonus(doc: Document, profile: QueryProfile) -> float:
-    """Boost score when document metadata aligns with OMOP/SNOMED query signals."""
+    """
+    Boost score when document metadata aligns with OMOP/SNOMED query signals.
+
+    Args:
+        doc: Source document.
+        profile: Query profile inferred from user input.
+
+    Returns:
+        Bonus score derived from metadata overlap.
+
+    """
     metadata = doc.metadata or {}
     bonus = 0.0
 
@@ -276,7 +375,18 @@ def _score_documents_against_catalog(
     catalog: dict[str, set[str]],
     profile: QueryProfile,
 ) -> dict[str, _ScoredEvidence]:
-    """Score model candidates based on retrieved chunk evidence."""
+    """
+    Score model candidates based on retrieved chunk evidence.
+
+    Args:
+        documents: Retrieved documents to analyze.
+        catalog: Model alias catalog.
+        profile: Query profile inferred from user input.
+
+    Returns:
+        Per-model scored evidence aggregated from retrieved documents.
+
+    """
     scored: dict[str, _ScoredEvidence] = {}
 
     for doc in documents:
@@ -291,8 +401,12 @@ def _score_documents_against_catalog(
                 continue
 
             current = scored.setdefault(model_name, _ScoredEvidence())
-            query_tokens_in_doc = {token for token in profile.query_tokens if token in lowered}
-            token_overlap = sum(1 for token in profile.query_tokens if token in model_name.lower())
+            query_tokens_in_doc = {
+                token for token in profile.query_tokens if token in lowered
+            }
+            token_overlap = sum(
+                1 for token in profile.query_tokens if token in model_name.lower()
+            )
             source_bonus = 0.25 if _metadata_source(doc) else 0.0
             query_coverage_bonus = min(0.3, len(query_tokens_in_doc) * 0.05)
             delta = (
@@ -319,7 +433,17 @@ def _score_documents_against_catalog(
 
 
 def _build_experimental_notes(model_name: str, evidence_count: int) -> list[str]:
-    """Generate practical experiment notes to guide clinicians and ML teams."""
+    """
+    Generate practical experiment notes to guide clinicians and ML teams.
+
+    Args:
+        model_name: Candidate model name.
+        evidence_count: Number of supporting evidence snippets.
+
+    Returns:
+        List of practical validation notes.
+
+    """
     return [
         (
             "Valider ce modèle sur un sous-ensemble local et comparer au baseline "
@@ -343,28 +467,56 @@ def _confidence_from_score(
     token_coverage: float,
     evidence_count: int,
 ) -> float:
-    """Calibrate confidence by combining rank score and grounding signals."""
-    if max_score <= 0:
-        normalized_score = 0.0
-    else:
-        normalized_score = min(1.0, score / max_score)
+    """
+    Calibrate confidence by combining rank score and grounding signals.
 
+    Args:
+        score: Raw score for the current model.
+        max_score: Best score among ranked models.
+        token_coverage: Fraction of query tokens matched by evidence.
+        evidence_count: Number of supporting evidence snippets.
+
+    Returns:
+        Confidence score normalized between 0 and 1.
+
+    """
+    normalized_score = 0.0 if max_score <= 0 else min(1.0, score / max_score)
     evidence_boost = min(0.15, evidence_count * 0.04)
     confidence = (normalized_score * 0.7) + (token_coverage * 0.2) + evidence_boost
     return min(0.96, max(0.35, confidence))
 
 
 def _safe_retrieve(query: str, *, k: int) -> tuple[list[Document], dict[str, Any], str]:
-    """Try retrieval through the existing RAG query module with graceful fallback."""
-    try:
-        from RAG.query import extract_filters, hybrid_search, rerank_results
+    """
+    Try retrieval through the existing RAG query module with graceful fallback.
 
-        filters = extract_filters(query)
-        docs = hybrid_search(query=query, k=max(k * 3, 9), filters=filters)
-        reranked = rerank_results(query=query, documents=docs, top_k=max(k * 2, 8))
-        return reranked, filters, "hybrid+rerank"
-    except Exception:
+    Args:
+        query: User query to retrieve against.
+        k: Requested number of final recommendations.
+
+    Returns:
+        Tuple containing retrieved documents, applied filters, and retrieval mode.
+
+    """
+    if extract_filters is None or hybrid_search is None or rerank_results is None:
         return [], {}, "catalog-only-fallback"
+
+    try:
+        filters = extract_filters(query)
+        docs = hybrid_search(
+            query=query,
+            k=max(k * 3, MIN_HYBRID_SEARCH_K),
+            filters=filters,
+        )
+        reranked = rerank_results(
+            query=query,
+            documents=docs,
+            top_k=max(k * 2, MIN_RERANK_TOP_K),
+        )
+    except (AttributeError, RuntimeError, TypeError, ValueError):
+        return [], {}, "catalog-only-fallback"
+    else:
+        return reranked, filters, "hybrid+rerank"
 
 
 def _fallback_recommendations(
@@ -372,13 +524,26 @@ def _fallback_recommendations(
     profile: QueryProfile,
     top_k: int,
 ) -> list[RecommendationItem]:
-    """Provide deterministic lexical fallback when retrieval has no usable evidence."""
+    """
+    Provide deterministic lexical fallback when retrieval has no usable evidence.
+
+    Args:
+        catalog: Model alias catalog.
+        profile: Query profile inferred from user input.
+        top_k: Maximum number of models to return.
+
+    Returns:
+        List of fallback recommendation items.
+
+    """
     lexical_hits = [
         model
         for model in catalog
         if any(token in model.lower() for token in profile.query_tokens)
     ]
-    fallback_models = lexical_hits[:top_k] if lexical_hits else list(catalog.keys())[:top_k]
+    fallback_models = (
+        lexical_hits[:top_k] if lexical_hits else list(catalog.keys())[:top_k]
+    )
 
     return [
         RecommendationItem(
@@ -403,7 +568,19 @@ def recommend_models_for_query(
     documents: list[Document] | None = None,
     pdf_directory: Path | None = None,
 ) -> RecommendationResponse:
-    """Recommend candidate models based on retrieved literature snippets."""
+    """
+    Recommend candidate models based on retrieved literature snippets.
+
+    Args:
+        query: User query describing the clinical or technical need.
+        top_k: Maximum number of recommendations to return.
+        documents: Optional injected documents, bypassing retrieval.
+        pdf_directory: Optional PDF directory used to build the catalog.
+
+    Returns:
+        Structured recommendation response with ranked models and evidence.
+
+    """
     profile = _infer_query_profile(query)
     catalog = _build_model_catalog(pdf_directory=pdf_directory)
 
@@ -417,7 +594,9 @@ def recommend_models_for_query(
     if not scored:
         recommendations = _fallback_recommendations(catalog, profile, top_k)
     else:
-        ranked = sorted(scored.items(), key=lambda item: item[1].score, reverse=True)[:top_k]
+        ranked = sorted(scored.items(), key=lambda item: item[1].score, reverse=True)[
+            :top_k
+        ]
         max_score = ranked[0][1].score if ranked else 1.0
 
         recommendations = []

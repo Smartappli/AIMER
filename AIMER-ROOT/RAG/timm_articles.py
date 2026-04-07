@@ -19,16 +19,38 @@ class TimmArticle(TypedDict):
 
 
 def timm_article_index_file() -> Path:
-    """Return the versioned JSON file storing default TIMM paper references."""
+    """
+    Return the versioned JSON file storing default TIMM paper references.
+
+    Returns:
+        Path to the JSON index file.
+
+    """
     return Path(__file__).resolve().parent / "data" / "timm_model_articles.json"
 
 
 def timm_pdf_directory() -> Path:
-    """Return the TIMM PDF corpus location used to build/update the index."""
+    """
+    Return the TIMM PDF corpus location used to build/update the index.
+
+    Returns:
+        Path to the directory containing TIMM PDF files.
+
+    """
     return Path(__file__).resolve().parent / "data" / "pdfs"
 
 
 def _extract_article_from_pdf_name(filename: str) -> TimmArticle:
+    """
+    Extract a TIMM article mapping from a PDF filename.
+
+    Args:
+        filename: Name of the PDF file.
+
+    Returns:
+        Parsed TIMM article entry.
+
+    """
     stem = Path(filename).stem
     model_name = stem.split(" - ")[0].strip()
 
@@ -47,9 +69,14 @@ def _extract_article_from_pdf_name(filename: str) -> TimmArticle:
     )
 
 
-def build_timm_article_index_from_pdfs(pdf_directory: Path | None = None) -> list[TimmArticle]:
+def build_timm_article_index_from_pdfs(
+    pdf_directory: Path | None = None,
+) -> list[TimmArticle]:
     """
     Build a normalized TIMM index from local PDF filenames.
+
+    Args:
+        pdf_directory: Optional directory containing the PDF corpus.
 
     Returns:
         Deduplicated list sorted by model name then paper title.
@@ -59,7 +86,10 @@ def build_timm_article_index_from_pdfs(pdf_directory: Path | None = None) -> lis
     if not base_dir.exists():
         return []
 
-    rows = [_extract_article_from_pdf_name(path.name) for path in sorted(base_dir.glob("*.pdf"))]
+    rows = [
+        _extract_article_from_pdf_name(path.name)
+        for path in sorted(base_dir.glob("*.pdf"))
+    ]
     dedup: dict[tuple[str, str], TimmArticle] = {}
     for row in rows:
         key = (row["model_name"], row["paper_url"])
@@ -67,7 +97,10 @@ def build_timm_article_index_from_pdfs(pdf_directory: Path | None = None) -> lis
 
     return sorted(
         dedup.values(),
-        key=lambda article: (article["model_name"].lower(), article["paper_title"].lower()),
+        key=lambda article: (
+            article["model_name"].lower(),
+            article["paper_title"].lower(),
+        ),
     )
 
 
@@ -76,7 +109,14 @@ def save_timm_article_index(
     *,
     index_file: Path | None = None,
 ) -> None:
-    """Save TIMM rows in a deterministic JSON format."""
+    """
+    Save TIMM rows in a deterministic JSON format.
+
+    Args:
+        rows: TIMM article rows to persist.
+        index_file: Optional target JSON file.
+
+    """
     path = index_file or timm_article_index_file()
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(
@@ -92,6 +132,10 @@ def ensure_timm_article_index_is_fresh(
 ) -> bool:
     """
     Automatically refresh the TIMM index from PDF corpus when it is stale.
+
+    Args:
+        pdf_directory: Optional directory containing source PDFs.
+        index_file: Optional target JSON file.
 
     Returns:
         ``True`` when a refresh happened, otherwise ``False``.
@@ -111,10 +155,36 @@ def ensure_timm_article_index_is_fresh(
     return True
 
 
+def _is_valid_article_fields(
+    model_name: object,
+    paper_title: object,
+    paper_url: object,
+) -> bool:
+    """
+    Validate the three required TIMM article fields.
+
+    Args:
+        model_name: Candidate model name.
+        paper_title: Candidate paper title.
+        paper_url: Candidate paper URL.
+
+    Returns:
+        ``True`` when all fields are non-empty strings, otherwise ``False``.
+
+    """
+    return all(
+        isinstance(value, str) and value.strip()
+        for value in (model_name, paper_title, paper_url)
+    )
+
+
 @lru_cache(maxsize=4)
 def load_timm_article_index(index_file: Path | None = None) -> list[TimmArticle]:
     """
     Load the default TIMM paper references bundled with the repository.
+
+    Args:
+        index_file: Optional JSON file to read.
 
     Returns:
         List of TIMM paper references. Empty list when the file is missing or invalid.
@@ -139,19 +209,12 @@ def load_timm_article_index(index_file: Path | None = None) -> list[TimmArticle]
         model_name = item.get("model_name")
         paper_title = item.get("paper_title")
         paper_url = item.get("paper_url")
-        if (
-            isinstance(model_name, str)
-            and isinstance(paper_title, str)
-            and isinstance(paper_url, str)
-            and model_name.strip()
-            and paper_title.strip()
-            and paper_url.strip()
-        ):
+        if _is_valid_article_fields(model_name, paper_title, paper_url):
             cleaned.append(
                 TimmArticle(
-                    model_name=model_name.strip(),
-                    paper_title=paper_title.strip(),
-                    paper_url=paper_url.strip(),
+                    model_name=str(model_name).strip(),
+                    paper_title=str(paper_title).strip(),
+                    paper_url=str(paper_url).strip(),
                 ),
             )
     return cleaned

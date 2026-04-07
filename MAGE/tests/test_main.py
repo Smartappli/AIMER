@@ -89,8 +89,8 @@ class FakeFastMCP:
     @classmethod
     def from_fastapi(
         cls,
-        app: FastAPI | None = None,
-        name: str | None = None,
+        _app: FastAPI | None = None,
+        _name: str | None = None,
         **_: object,
     ) -> FakeFastMCP:
         """
@@ -103,7 +103,7 @@ class FakeFastMCP:
         return cls()
 
     @staticmethod
-    def http_app(path: str = "/mcp", **_: object) -> FakeMCPApp:
+    def http_app(_path: str = "/mcp", **_: object) -> FakeMCPApp:
         """
         Return a fake MCP app.
 

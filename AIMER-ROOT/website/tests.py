@@ -22,7 +22,6 @@ from django.http import HttpRequest, HttpResponse
 from django.test import RequestFactory, TestCase
 from django.utils.safestring import SafeString
 from langchain_core.documents import Document
-
 from RAG.omop import build_omop_metadata
 from RAG.recommender import recommend_models_for_query
 from RAG.timm_articles import (
@@ -43,6 +42,10 @@ from website.views import (
     _build_project_rag_index,
     _discover_scientific_articles,
 )
+
+MIN_CONFIDENCE_METRIC_EVIDENCE = 0.4
+MIN_TIMM_SEED_INDEX_SIZE = 100
+MIN_CONFIDENCE_METADATA_ALIGNED = 0.5
 
 
 class BaseTestCase(TestCase):
@@ -254,10 +257,11 @@ class DashboardViewTests(BaseTestCase):
     def test_dashboard_is_accessible_for_authenticated_user(self) -> None:
         """Ensure authenticated users can access the dashboard page."""
         user_model = get_user_model()
+        test_user_password = uuid4().hex
         user = user_model.objects.create_user(
             username="dashboard_user",
             email="dash@example.com",
-            password="test-password-123",
+            password=test_user_password,
         )
         self.client.force_login(user)
 
@@ -473,8 +477,13 @@ class RagRecommenderTests(BaseTestCase):
 
         self._check(bool(response.recommended_models))
         self._check_equal(response.retrieval_mode, "injected-documents")
-        self._check_equal(response.recommended_models[0].model_name, "ResNet (v1b-v1.5)")
-        self._check(response.recommended_models[0].confidence >= 0.4)
+        self._check_equal(
+            response.recommended_models[0].model_name,
+            "ResNet (v1b-v1.5)",
+        )
+        self._check(
+            response.recommended_models[0].confidence >= MIN_CONFIDENCE_METRIC_EVIDENCE,
+        )
         self._check(bool(response.recommended_models[0].evidence))
         self._check(response.recommended_models[0].literature_support >= 1)
         self._check(
@@ -500,7 +509,7 @@ class RagRecommenderTests(BaseTestCase):
     def test_timm_seed_index_is_comprehensive(self) -> None:
         """Ensure default TIMM seed includes a broad article coverage."""
         index = load_timm_article_index()
-        self._check(len(index) >= 100)
+        self._check(len(index) >= MIN_TIMM_SEED_INDEX_SIZE)
         model_names = {entry["model_name"] for entry in index}
         self._check("ResNet (v1b-v1.5)" in model_names)
 
@@ -533,8 +542,14 @@ class RagRecommenderTests(BaseTestCase):
         )
 
         self._check(bool(response.recommended_models))
-        self._check_equal(response.recommended_models[0].model_name, "ResNet (v1b-v1.5)")
-        self._check(response.recommended_models[0].confidence >= 0.5)
+        self._check_equal(
+            response.recommended_models[0].model_name,
+            "ResNet (v1b-v1.5)",
+        )
+        self._check(
+            response.recommended_models[0].confidence
+            >= MIN_CONFIDENCE_METADATA_ALIGNED,
+        )
 
 
 class RagRecommendationApiTests(BaseTestCase):
