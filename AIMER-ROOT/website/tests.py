@@ -518,7 +518,8 @@ class RagRecommenderTests(BaseTestCase):
         docs = [
             Document(
                 page_content=(
-                    "ResNet shows strong AUC for pneumonia detection on chest radiography."
+                    "ResNet shows strong AUC for pneumonia detection on chest "
+                    "radiography."
                 ),
                 metadata={
                     "source": "resnet-paper.pdf",

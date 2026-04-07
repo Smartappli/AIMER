@@ -3,28 +3,21 @@
 
 from __future__ import annotations
 
+import importlib
 import sys
 from pathlib import Path
 
 ROOT_DIR = Path(__file__).resolve().parents[2]
+if str(ROOT_DIR) not in sys.path:
+    sys.path.insert(0, str(ROOT_DIR))
+
+_TIMM_ARTICLES = importlib.import_module("RAG.timm_articles")
+ensure_timm_article_index_is_fresh = _TIMM_ARTICLES.ensure_timm_article_index_is_fresh
+load_timm_article_index = _TIMM_ARTICLES.load_timm_article_index
 
 
 def main() -> None:
-    """
-    Refresh the TIMM article index and report the resulting status.
-
-    Returns:
-        None.
-
-    """
-    if str(ROOT_DIR) not in sys.path:
-        sys.path.insert(0, str(ROOT_DIR))
-
-    from RAG.timm_articles import (
-        ensure_timm_article_index_is_fresh,
-        load_timm_article_index,
-    )
-
+    """Refresh the TIMM article index and report the resulting status."""
     refreshed = ensure_timm_article_index_is_fresh()
     rows = load_timm_article_index()
     status = "updated" if refreshed else "already up to date"

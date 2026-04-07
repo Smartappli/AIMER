@@ -38,6 +38,7 @@ RERANKER_MODEL = "Krakekai/qwen3-reranker-8b"
 
 TEXT_THRESHOLD = 50
 MIN_IMAGE_DIMENSION = 500
+FILENAME_METADATA_MIN_PARTS = 3
 
 Path(DATA_DIR).mkdir(exist_ok=True, parents=True)
 Path(OUTPUT_MD_DIR).mkdir(exist_ok=True, parents=True)
@@ -352,7 +353,7 @@ def extract_metadata_from_filename(filename: str) -> dict[str, str]:
 
     parts = filename.split("-")
 
-    if len(parts) < 3:
+    if len(parts) < FILENAME_METADATA_MIN_PARTS:
         return {"doc_month": "unknown", "doc_year": "unknown", "eod_type": "unknown"}
 
     return {"doc_month": parts[0], "doc_year": parts[1], "eod_type": parts[2]}

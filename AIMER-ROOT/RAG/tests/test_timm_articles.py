@@ -4,7 +4,7 @@
 from __future__ import annotations
 
 import json
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, NoReturn
 
 from RAG.timm_articles import (
     build_timm_article_index_from_pdfs,
@@ -14,6 +14,20 @@ from RAG.timm_articles import (
 
 if TYPE_CHECKING:
     from pathlib import Path
+
+
+def _fail_test(message: str) -> NoReturn:
+    """
+    Raise a test failure with a consistent assertion message.
+
+    Args:
+        message: Failure message to report.
+
+    Raises:
+        AssertionError: Always raised with the provided message.
+
+    """
+    raise AssertionError(message)
 
 
 def test_build_timm_article_index_from_pdfs_deduplicates_and_sorts(
@@ -57,7 +71,7 @@ def test_build_timm_article_index_from_pdfs_deduplicates_and_sorts(
 
     if rows != expected:
         msg = f"Expected deduplicated sorted rows {expected!r}, got {rows!r}."
-        raise AssertionError(msg)
+        _fail_test(msg)
 
 
 def test_build_timm_article_index_from_pdfs_returns_empty_when_directory_missing(
@@ -67,7 +81,7 @@ def test_build_timm_article_index_from_pdfs_returns_empty_when_directory_missing
     rows = build_timm_article_index_from_pdfs(pdf_directory=tmp_path / "missing")
     if rows != []:
         msg = f"Expected an empty list for missing directory, got {rows!r}."
-        raise AssertionError(msg)
+        _fail_test(msg)
 
 
 def test_load_timm_article_index_filters_invalid_rows(tmp_path: Path) -> None:
@@ -105,7 +119,7 @@ def test_load_timm_article_index_filters_invalid_rows(tmp_path: Path) -> None:
 
     if rows != expected:
         msg = f"Expected only valid rows {expected!r}, got {rows!r}."
-        raise AssertionError(msg)
+        _fail_test(msg)
 
 
 def test_ensure_timm_article_index_is_fresh_updates_stale_index(
@@ -134,15 +148,22 @@ def test_ensure_timm_article_index_is_fresh_updates_stale_index(
     rows = json.loads(index_file.read_text(encoding="utf-8"))
 
     if refreshed is not True:
-        raise AssertionError("Expected refreshed to be True.")
-    if len(rows) != 1:
-        raise AssertionError(f"Expected exactly one row, got {len(rows)}.")
-    if rows[0]["model_name"] != "resnet50":
-        msg = f"Expected model_name 'resnet50', got {rows[0]['model_name']!r}."
-        raise AssertionError(msg)
-    if rows[0]["paper_url"] != "https://arxiv.org/abs/1512.03385":
+        msg = "Expected refreshed to be True."
+        _fail_test(msg)
+
+    row_count = len(rows)
+    if row_count != 1:
+        msg = f"Expected exactly one row, got {row_count}."
+        _fail_test(msg)
+
+    model_name = rows[0]["model_name"]
+    if model_name != "resnet50":
+        msg = f"Expected model_name 'resnet50', got {model_name!r}."
+        _fail_test(msg)
+
+    paper_url = rows[0]["paper_url"]
+    if paper_url != "https://arxiv.org/abs/1512.03385":
         msg = (
-            "Expected paper_url 'https://arxiv.org/abs/1512.03385', "
-            f"got {rows[0]['paper_url']!r}."
+            f"Expected paper_url 'https://arxiv.org/abs/1512.03385', got {paper_url!r}."
         )
-        raise AssertionError(msg)
+        _fail_test(msg)
