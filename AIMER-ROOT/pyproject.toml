@@ -16,7 +16,7 @@ dependencies = [
     "langchain-community==0.4.1",
     "langchain-qdrant==1.1.0",
     "langchain-docling==2.0.0",
-    "langchain-ollama==1.0.1",
+    "langchain-ollama==1.1.0",
     "langgraph==1.1.6",
     "langgraph-checkpoint-sqlite==3.0.3",
     "numpy",
