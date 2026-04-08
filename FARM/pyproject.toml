@@ -6,7 +6,7 @@ dependencies = [
     "django>=6.0.3",
     "flwr>=1.27.0",
     # "syft-flwr==0.5.1",
-    "granian==2.7.2",
+    "granian==2.7.3",
 ]
 
 [tool.ruff]
