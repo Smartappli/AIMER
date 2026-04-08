@@ -24,6 +24,6 @@ dependencies = [
     "pypdf==6.9.2",
     "qdrant-client==1.17.1",
     "tqdm==4.67.3",
-    "pytest==9.0.2",
+    "pytest==9.0.3",
     "coverage==7.13.5",
 ]
