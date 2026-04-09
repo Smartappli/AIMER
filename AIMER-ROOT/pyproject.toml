@@ -9,7 +9,7 @@ dependencies = [
     "granian==2.7.3",
     "docling[vlm]==2.85.0",
     "fastembed==0.8.0",
-    "transformers==5.5.0",
+    "transformers==5.5.3",
     "huggingface-hub",
     "hf-xet",
     "langchain-core==1.2.28",
