@@ -40,5 +40,5 @@ def safe_version(pkg_name: str, module_name: str | None = None) -> str | None:
         return version(pkg_name)
     except PackageNotFoundError:
         return None
-    except (ImportError, AttributeError):
+    except Exception:
         return None
