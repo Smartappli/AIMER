@@ -1,31 +1,72 @@
-name: Release Drafter
+name-template: '$RESOLVED_VERSION'
+tag-template: '$RESOLVED_VERSION'
+categories:
+  - title: '❗ Breaking Changes:'
+    labels:
+      - '❗ Breaking Change'
+  - title: '🚀 New Features:'
+    labels:
+      - '✏️ Feature'
+  - title: '🐛 Fixes:'
+    labels:
+      - '☢️ Bug'
+  - title: '📚 Documentation:'
+    labels:
+      - '📒 Documentation'
+  - title: '🧹 Updates:'
+    labels:
+      - '🧹 Updates'
+  - title: '🤖 Dependencies:'
+    labels:
+      - '🤖 Dependencies'
+change-template: '- $TITLE (#$NUMBER)'
+change-title-escapes: '\<*_&'
+exclude-contributors:
+  - dependabot
+  - dependabot[bot]
+version-resolver:
+  major:
+    labels:
+      - 'major'
+  minor:
+    labels:
+      - 'minor'
+      - '❗ Breaking Change'
+      - '✏️ Feature'
+  patch:
+    labels:
+      - 'patch'
+      - '📒 Documentation'
+      - '☢️ Bug'
+      - '🤖 Dependencies'
+      - '🧹 Updates'
+  default: patch
+template: |
+    $CHANGES
 
-on:
-  push:
-    branches:
-      - master
+    ## 🐳 Docker Images
+    - `ghcr.io/$OWNER/$REPOSITORY:latest`
+    - `ghcr.io/$OWNER/$REPOSITORY:$RESOLVED_VERSION`
 
-  pull_request_target:
-    types: [opened, reopened, synchronize]
+    **Full Changelog**: https://github.com/$OWNER/$REPOSITORY/compare/$PREVIOUS_TAG...$RESOLVED_VERSION
 
-permissions:
-  contents: read
+    Thanks to $CONTRIBUTORS for making this release possible.
 
-jobs:
-  update_release_draft:
-    permissions:
-      contents: write
-      pull-requests: write
-    runs-on: ubuntu-latest
-    steps:
-      - name: Update draft release (attempt 1)
-        id: release_drafter_attempt_1
-        continue-on-error: true
-        uses: release-drafter/release-drafter@5de93583980a40bd78603b6dfdcda5b4df377b32 # v7.2.0
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Update draft release (retry after transient API/network failure)
-        if: steps.release_drafter_attempt_1.outcome == 'failure'
-        uses: release-drafter/release-drafter@5de93583980a40bd78603b6dfdcda5b4df377b32 # v7.2.0
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+autolabeler:
+  - label: '📒 Documentation'
+    files:
+      - '*.md'
+    title:
+      - '/(docs|doc:|\[doc\]|typos|comment|documentation)/i'
+  - label: '☢️ Bug'
+    title:
+      - '/(fix|bug|missing|correct)/i'
+  - label: '🧹 Updates'
+    title:
+      - '/(improve|update|refactor|deprecated|remove|unused|test)/i'
+  - label: '🤖 Dependencies'
+    title:
+      - '/(bump|dependencies)/i'
+  - label: '✏️ Feature'
+    title:
+      - '/(feature|feat|create|implement)/i'
