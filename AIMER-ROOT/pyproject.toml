@@ -7,7 +7,7 @@ dependencies = [
     "django-rich==2.2.0",
     "python-dotenv==1.2.2",
     "granian==2.7.3",
-    "docling[vlm]==2.88.0",
+    "docling[vlm]==2.89.0",
     "fastembed==0.8.0",
     "transformers==5.5.4",
     "huggingface-hub",
