@@ -1,5 +1,5 @@
 coverage==7.13.5
 fastapi[standard-no-fastapi-cloud-cli]==0.136.0
 httpx==0.28.1
-pre-commit==4.5.1
+pre-commit==4.6.0
 pytest==9.0.3
