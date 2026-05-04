@@ -12,7 +12,7 @@ dependencies = [
   "tensorflow>=2.21.0 ; sys_platform == 'darwin'",
 
   # Linux ARM64 (aarch64)
-  "tensorflow>=2.20.0 ; sys_platform == 'linux' and platform_machine == 'aarch64'",
+  "tensorflow>=2.21.0; sys_platform == 'linux' and platform_machine == 'aarch64'",
 
   # Linux x86_64
   "tensorflow-cpu>=2.21.0 ; sys_platform == 'linux' and platform_machine == 'x86_64'",
