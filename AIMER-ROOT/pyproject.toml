@@ -29,3 +29,7 @@ dependencies = [
     "pytest==9.0.3",
     "coverage==7.13.5",
 ]
+
+
+[project.scripts]
+verify-openrag = "RAG.verify_openrag:main"
