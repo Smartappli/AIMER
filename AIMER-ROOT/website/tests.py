@@ -610,12 +610,25 @@ class RagRecommendationApiTests(BaseTestCase):
         response = self.client.get("/api/rag/health/")
         self._check_equal(response.status_code, 401)
 
+    def test_rag_health_api_requires_staff_role(self) -> None:
+        """Ensure authenticated non-staff users cannot read runtime internals."""
+        user = get_user_model().objects.create_user(
+            username="rag-health-user",
+            email="rag-health-user@example.com",
+            password=uuid4().hex,
+        )
+        self.client.force_login(user)
+
+        response = self.client.get("/api/rag/health/")
+        self._check_equal(response.status_code, 403)
+
     def test_rag_health_api_returns_runtime_flags(self) -> None:
-        """Ensure authenticated health endpoint returns readiness + status flags."""
+        """Ensure staff health endpoint returns readiness + status flags."""
         user = get_user_model().objects.create_user(
             username="rag-health",
             email="rag-health@example.com",
             password=uuid4().hex,
+            is_staff=True,
         )
         self.client.force_login(user)
 

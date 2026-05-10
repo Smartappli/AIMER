@@ -248,6 +248,8 @@ class RagRuntimeHealthView(View):
         del args, kwargs
         if not request.user.is_authenticated:
             return JsonResponse({"error": "Authentication required"}, status=401)
+        if not request.user.is_staff:
+            return JsonResponse({"error": "Staff access required"}, status=403)
 
         status = rag_runtime_health()
         return JsonResponse({"ready": is_rag_runtime_ready(), "status": status}, status=200)
