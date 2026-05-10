@@ -2,71 +2,54 @@
 """RAG helper tools for metadata filtering and hybrid retrieval."""
 
 from collections.abc import Sequence
+import os
+from typing import Any
 
 from dotenv import load_dotenv
 from langchain_core.documents import Document
 from langchain_core.tools import tool
-from langchain_ollama import ChatOllama, OllamaEmbeddings
-from langchain_qdrant import FastEmbedSparse, QdrantVectorStore, RetrievalMode
-from qdrant_client.models import FieldCondition, Filter, MatchValue
-from schema import ChunkMetadata
+from langchain_ollama import ChatOllama
+from RAG.openrag_backend import openrag_hybrid_search
+from RAG.omop import build_omop_metadata
+from RAG.scripts.schema import ChunkMetadata
 
 load_dotenv()
 
 # Configuration
-COLLECTION_NAME = ""
-EMBEDDING_MODEL = ""
-SPARSE_EMBEDDING_MODEL = "Qdrant/bm25"
-LLM_MODEL = ""
-
-RERANKER_MODEL = ""
+LLM_MODEL = os.getenv("RAG_LLM_MODEL", "qwen3:8b")
+OLLAMA_BASE_URL = os.getenv("OLLAMA_BASE_URL", "http://localhost:11434")
 
 # Initialize LLM
-llm = ChatOllama(model=LLM_MODEL, base_url="http://localhost:11434")
+llm = ChatOllama(model=LLM_MODEL, base_url=OLLAMA_BASE_URL)
 
-# Embeddings
-embeddings = OllamaEmbeddings(
-    model=EMBEDDING_MODEL,
-    base_url="http://localhost:11434",
-)
-
-# Sparse embeddings
-sparse_embeddings = FastEmbedSparse(model=SPARSE_EMBEDDING_MODEL)
-
-# Connect to existing collection
-vector_store = QdrantVectorStore.from_existing_collection(
-    embedding=embeddings,
-    sparse_embeddings=sparse_embeddings,
-    collection_name=COLLECTION_NAME,
-    url="http://localhost:6333",
-    retrieval_mode=RetrievalMode.HYBRID,
-)
-
-
-def extract_filters(user_query: str) -> dict[str, str | int]:
+def extract_filters(user_query: str) -> dict[str, Any]:
     """
     Extract metadata filters from a user query using structured LLM output.
 
     Returns:
-        dict[str, str | int]: Non-null metadata fields inferred from the query.
+        dict[str, Any]: Non-null metadata fields inferred from the query.
 
     """
     prompt = f"""
-            Extract metada filers from the query. Return None for fields not mentionned.
+            Extract metadata filters from the query. Return None for fields not mentioned.
 
                 <USER QUERY STARTS>
                 {user_query}
                 <USER QUERY ENDS>
 
-                Extract metadata base on the user query only:
+                Extract metadata based on the user query only:
 
             """
 
     structured_llm = llm.with_structured_output(ChunkMetadata)
 
     metadata = structured_llm.invoke(prompt)
+    llm_filters = metadata.model_dump(exclude_none=True) if metadata else {}
+    omop_filters = build_omop_metadata(user_query)
+    for key, value in omop_filters.items():
+        llm_filters.setdefault(key, value)
 
-    return metadata.model_dump(exclude_none=True) if metadata else {}
+    return llm_filters
 
 
 @tool
@@ -84,18 +67,4 @@ def hybrid_search(query: str, k: int = 5) -> Sequence[Document]:
     """
     filters = extract_filters(query)
 
-    qdrant_filter = None
-
-    if filters:
-        condition = [
-            FieldCondition(key=f"metadata.{key}", match=MatchValue(value=value))
-            for key, value in filters.items()
-        ]
-
-        qdrant_filter = Filter(must=condition)
-
-    return vector_store.similarity_search(
-        query=query,
-        k=k,
-        filters=qdrant_filter,
-    )
+    return openrag_hybrid_search(query=query, k=k, filters=filters)
