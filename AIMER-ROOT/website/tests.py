@@ -561,8 +561,18 @@ class RagRecommendationApiTests(BaseTestCase):
         response = self.client.get("/api/rag/recommend/")
         self._check_equal(response.status_code, 400)
 
-    def test_recommendation_api_returns_payload(self) -> None:
-        """Ensure valid requests return a recommendation response payload."""
+    @patch("website.views.recommend_models_for_query")
+    def test_recommendation_api_returns_payload(self, mock_recommend) -> None:
+        """Ensure valid requests return recommendation payload in strict OpenRAG mode."""
+        mock_recommend.return_value = SimpleNamespace(
+            model_dump=lambda: {
+                "query": "modèles segmentation cerveau MRI",
+                "query_profile": {"omop_modality_concept_ids": [77477000]},
+                "recommended_models": [{"model_name": "ResNet (v1b-v1.5)"}],
+                "safety_notice": "test",
+            },
+        )
+
         response = self.client.get(
             "/api/rag/recommend/",
             {
@@ -577,6 +587,22 @@ class RagRecommendationApiTests(BaseTestCase):
         self._check("safety_notice" in payload)
         self._check("query_profile" in payload)
         self._check("omop_modality_concept_ids" in payload["query_profile"])
+        mock_recommend.assert_called_once()
+        call_kwargs = mock_recommend.call_args.kwargs
+        self._check_equal(call_kwargs["strict_openrag"], True)
+
+    @patch("website.views.recommend_models_for_query")
+    def test_recommendation_api_returns_503_when_openrag_unavailable(self, mock_recommend) -> None:
+        """Ensure runtime retrieval errors are surfaced as HTTP 503."""
+        mock_recommend.side_effect = OpenRAGRuntimeUnavailableError("OpenRAG retrieval is required")
+
+        response = self.client.get(
+            "/api/rag/recommend/",
+            {"q": "classification mri"},
+        )
+
+        self._check_equal(response.status_code, 503)
+        self._check("error" in response.json())
 
 
 class OmopArchitectureTests(BaseTestCase):

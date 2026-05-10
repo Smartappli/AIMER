@@ -25,3 +25,26 @@ def test_is_rag_runtime_ready_returns_bool() -> None:
 def test_rag_runtime_not_ready_without_endpoint(monkeypatch) -> None:
     monkeypatch.delenv("OPENRAG_ENDPOINT", raising=False)
     assert is_rag_runtime_ready() is False
+
+
+def test_verify_openrag_report_mentions_runtime_ready() -> None:
+    from RAG.verify_openrag import format_report
+
+    report = format_report()
+    assert "OpenRAG runtime verification:" in report
+    assert "runtime_ready:" in report
+
+
+def test_verify_openrag_main_returns_status_code(monkeypatch) -> None:
+    from RAG.verify_openrag import main
+
+    monkeypatch.setenv("OPENRAG_ENDPOINT", "http://localhost:8000")
+    status = main()
+    assert status in (0, 1)
+
+
+def test_verify_openrag_main_returns_one_when_endpoint_missing(monkeypatch) -> None:
+    from RAG.verify_openrag import main
+
+    monkeypatch.delenv("OPENRAG_ENDPOINT", raising=False)
+    assert main() == 1
