@@ -68,6 +68,25 @@ class FakeTimm(ModuleType):
         return bool(self._pretrained.get(model_id, False))
 
 
+
+
+class FakeSMPEncoders:
+    """Minimal fake of SMP encoders registry."""
+
+    @staticmethod
+    def get_encoder_names() -> list[str]:
+        return ["resnet34", "tu-efficientnet_b0", "tu-convnext_tiny"]
+
+
+class FakeSMP(ModuleType):
+    """In-memory stand-in for ``segmentation_models_pytorch``."""
+
+    def __init__(self) -> None:
+        super().__init__("segmentation_models_pytorch")
+        self.__version__ = "0.0.0"
+        self.encoders = FakeSMPEncoders()
+
+
 class FakeMCPApp:
     """Minimal fake app exposing the MCP ping route."""
 
@@ -148,6 +167,7 @@ def app_module(monkeypatch: pytest.MonkeyPatch) -> ModuleType:
 
     """
     monkeypatch.setitem(sys.modules, "timm", FakeTimm())
+    monkeypatch.setitem(sys.modules, "segmentation_models_pytorch", FakeSMP())
 
     fastmcp_mod = ModuleType("fastmcp")
     fastmcp_mod.FastMCP = FakeFastMCP
@@ -329,3 +349,13 @@ def test_libraries_handles_unexpected_exception(
     check(response.status_code == HTTP_OK, "Expected 200 on /libraries with error")
     ai = response.json()["AI"]
     check(ai["keras"] is None, "keras should be None on unexpected import error")
+
+
+def test_encoders_list(client: TestClient) -> None:
+    """`/encoders` should expose SMP encoders including TIMM-backed ones."""
+    response = client.get("/encoders")
+    check(response.status_code == HTTP_OK, "Expected 200 on /encoders")
+    data = response.json()
+    check("encoders" in data, "Missing encoders key")
+    check("timm_backed_encoders" in data, "Missing timm_backed_encoders key")
+    check("tu-efficientnet_b0" in data["timm_backed_encoders"], "Expected tu- encoder")
