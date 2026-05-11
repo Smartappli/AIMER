@@ -1,6 +1,6 @@
 # FARM - Federated Learning
 
-Ce module fournit une base **Flower + Syft** pour orchestrer l'entraînement fédéré de
+Ce module fournit une base **Flower** pour orchestrer l'entraînement fédéré de
 modèles de **classification**, **détection**, **segmentation** et un **RAG partagé**.
 
 ## Structure
@@ -88,9 +88,11 @@ client = build_rag_client(index=index, document_provider=provide_docs)
 fl.client.start_client(server_address="0.0.0.0:8081", client=client)
 ```
 
-## Syft
+## Dépendances clés
 
-La dépendance `syft-flwr` permet d'utiliser le transport sécurisé de Syft avec Flower.
-Les abstractions ci-dessus restent compatibles: vous pouvez remplacer `fl.client.start_*`
-par les exécutables Syft (clients/serveurs) afin d'orchestrer des entraînements sur
-plusieurs organisations tout en conservant la logique de tâches.
+- `flwr==1.29.0` pour les clients/serveurs fédérés.
+- `django` / `granian` pour l'environnement applicatif.
+
+
+> Note ops: après mise à jour de version Flower, régénérez `uv.lock` avec:
+> `uv lock --upgrade-package flwr==1.29.0`

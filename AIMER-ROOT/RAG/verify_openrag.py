@@ -3,7 +3,16 @@
 
 from __future__ import annotations
 
+from typing import TypedDict
+
 from RAG.healthcheck import is_rag_runtime_ready, rag_runtime_health
+
+
+class RuntimeStatusPayload(TypedDict):
+    """Structured runtime readiness payload."""
+
+    ready: bool
+    status: dict[str, bool]
 
 
 REQUIRED_KEYS = (
@@ -15,14 +24,23 @@ REQUIRED_KEYS = (
 )
 
 
+def runtime_status() -> RuntimeStatusPayload:
+    """Return machine-readable OpenRAG runtime readiness payload."""
+    status = rag_runtime_health()
+    ready = bool(all(status[name] for name in REQUIRED_KEYS))
+    return {"ready": ready, "status": status}
+
+
+
 def format_report() -> str:
     """Build a human-readable OpenRAG readiness report."""
-    status = rag_runtime_health()
+    payload = runtime_status()
+    status = payload["status"]
     lines = ["OpenRAG runtime verification:"]
     for key in sorted(status):
         mark = "OK" if status[key] else "MISSING"
         lines.append(f"- {key}: {mark}")
-    all_ready = all(status[name] for name in REQUIRED_KEYS)
+    all_ready = bool(payload["ready"])
     lines.append(f"- runtime_ready: {'YES' if all_ready else 'NO'}")
     if not all_ready:
         lines.append(

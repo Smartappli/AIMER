@@ -48,3 +48,12 @@ def test_verify_openrag_main_returns_one_when_endpoint_missing(monkeypatch) -> N
 
     monkeypatch.delenv("OPENRAG_ENDPOINT", raising=False)
     assert main() == 1
+
+
+def test_verify_openrag_runtime_status_shape() -> None:
+    from RAG.verify_openrag import runtime_status
+
+    payload = runtime_status()
+    assert set(payload.keys()) == {"ready", "status"}
+    assert isinstance(payload["ready"], bool)
+    assert isinstance(payload["status"], dict)

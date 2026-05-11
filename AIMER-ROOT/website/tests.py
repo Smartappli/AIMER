@@ -604,6 +604,7 @@ class RagRecommendationApiTests(BaseTestCase):
         self._check_equal(response.status_code, 503)
         self._check("error" in response.json())
 
+
     def test_rag_health_api_requires_authentication(self) -> None:
         """Ensure runtime health endpoint is not public."""
         response = self.client.get("/api/rag/health/")
