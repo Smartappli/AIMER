@@ -43,3 +43,15 @@ Expected behavior:
 ## Startup preflight (optional)
 
 Set `RAG_VERIFY_ON_START=1` to run `verify-openrag` automatically at container startup before migrations/service launch.
+
+
+## Runtime health endpoint
+
+`GET /api/rag/health/` exposes OpenRAG readiness for operations tooling.
+
+Access policy:
+- `401` for unauthenticated requests
+- `403` for authenticated non-staff users
+- `200` for staff users with payload:
+  - `ready` (boolean)
+  - `status` (dependency/config flags)
