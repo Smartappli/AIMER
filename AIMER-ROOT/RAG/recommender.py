@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import os
 import re
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -71,6 +72,10 @@ STOPWORDS = {
 MIN_TOKEN_LENGTH = 2
 MIN_HYBRID_SEARCH_K = 9
 MIN_RERANK_TOP_K = 8
+
+
+class OpenRAGRuntimeUnavailableError(RuntimeError):
+    """Raised when strict OpenRAG retrieval is required but unavailable."""
 
 
 class QueryProfile(BaseModel):
@@ -519,6 +524,20 @@ def _safe_retrieve(query: str, *, k: int) -> tuple[list[Document], dict[str, Any
         return reranked, filters, "hybrid+rerank"
 
 
+def _safe_retrieve_strict(
+    query: str,
+    *,
+    k: int,
+) -> tuple[list[Document], dict[str, Any], str]:
+    """Retrieve with strict OpenRAG requirement (no silent fallback)."""
+    docs, used_filters, mode = _safe_retrieve(query, k=k)
+    if mode == "catalog-only-fallback":
+        raise OpenRAGRuntimeUnavailableError(
+            "OpenRAG retrieval is required but runtime is not ready or retrieval failed.",
+        )
+    return docs, used_filters, mode
+
+
 def _fallback_recommendations(
     catalog: dict[str, set[str]],
     profile: QueryProfile,
@@ -561,12 +580,20 @@ def _fallback_recommendations(
     ]
 
 
+def _resolve_strict_openrag(strict_openrag: bool | None) -> bool:
+    """Resolve strict OpenRAG mode from explicit argument or environment."""
+    if strict_openrag is not None:
+        return strict_openrag
+    return os.getenv("RAG_STRICT_OPENRAG", "1").strip().lower() not in {"0", "false", "no"}
+
+
 def recommend_models_for_query(
     query: str,
     *,
     top_k: int = 3,
     documents: list[Document] | None = None,
     pdf_directory: Path | None = None,
+    strict_openrag: bool | None = None,
 ) -> RecommendationResponse:
     """
     Recommend candidate models based on retrieved literature snippets.
@@ -584,8 +611,13 @@ def recommend_models_for_query(
     profile = _infer_query_profile(query)
     catalog = _build_model_catalog(pdf_directory=pdf_directory)
 
+    resolved_strict = _resolve_strict_openrag(strict_openrag)
+
     if documents is None:
-        docs, used_filters, retrieval_mode = _safe_retrieve(query, k=top_k)
+        if resolved_strict:
+            docs, used_filters, retrieval_mode = _safe_retrieve_strict(query, k=top_k)
+        else:
+            docs, used_filters, retrieval_mode = _safe_retrieve(query, k=top_k)
     else:
         docs, used_filters, retrieval_mode = documents, {}, "injected-documents"
 

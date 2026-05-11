@@ -12,7 +12,8 @@ from AIMER.template_helpers.theme import TemplateHelper
 from django.http import HttpRequest, HttpResponse, JsonResponse
 from django.views import View
 from django.views.generic import TemplateView
-from RAG.recommender import recommend_models_for_query
+from RAG.healthcheck import is_rag_runtime_ready, rag_runtime_health
+from RAG.recommender import OpenRAGRuntimeUnavailableError, recommend_models_for_query
 from RAG.timm_articles import (
     ensure_timm_article_index_is_fresh,
     load_timm_article_index,
@@ -223,5 +224,32 @@ class RagRecommendationView(View):
             top_k = 3
         top_k = max(1, min(top_k, 10))
 
-        payload = recommend_models_for_query(query=query, top_k=top_k)
+        try:
+            payload = recommend_models_for_query(
+                query=query,
+                top_k=top_k,
+                strict_openrag=True,
+            )
+        except OpenRAGRuntimeUnavailableError as exc:
+            return JsonResponse({"error": str(exc)}, status=503)
         return JsonResponse(payload.model_dump(), status=200)
+
+
+class RagRuntimeHealthView(View):
+    """API endpoint exposing OpenRAG runtime readiness."""
+
+    @override
+    def get(
+        self,
+        request: HttpRequest,
+        *args: object,
+        **kwargs: object,
+    ) -> JsonResponse:
+        del args, kwargs
+        if not request.user.is_authenticated:
+            return JsonResponse({"error": "Authentication required"}, status=401)
+        if not request.user.is_staff:
+            return JsonResponse({"error": "Staff access required"}, status=403)
+
+        status = rag_runtime_health()
+        return JsonResponse({"ready": is_rag_runtime_ready(), "status": status}, status=200)
