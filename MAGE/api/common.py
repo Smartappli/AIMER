@@ -9,7 +9,9 @@ from typing import Final
 
 LIBRARIES_BY_CATEGORY: Final[dict[str, dict[str, str]]] = {
     "AI": {
+        "albumentations": "albumentations",
         "keras": "keras",
+        "pycaret": "pycaret",
         "segmentation-models-pytorch": "segmentation_models_pytorch",
         "tensorflow": "tensorflow",
         "timm": "timm",

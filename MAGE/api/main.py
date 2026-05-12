@@ -7,6 +7,8 @@ from __future__ import annotations
 from fastapi import FastAPI
 from fastmcp import FastMCP
 
+from MAGE.api.services.augmentations import augmentation_presets, validate_preset
+from MAGE.api.services.augmentations import service_app as augmentations_service
 from MAGE.api.services.encoders import list_encoders
 from MAGE.api.services.encoders import service_app as encoders_service
 from MAGE.api.services.libraries import libraries
@@ -46,6 +48,18 @@ async def read_root() -> dict[str, str]:
 
 # Backward-compatible routes served directly by the gateway.
 api.add_api_route("/libraries", libraries, methods=["GET"], tags=["libraries"])
+api.add_api_route(
+    "/augmentations",
+    augmentation_presets,
+    methods=["GET"],
+    tags=["augmentations"],
+)
+api.add_api_route(
+    "/augmentations/{preset_name}/validate",
+    validate_preset,
+    methods=["GET"],
+    tags=["augmentations"],
+)
 api.add_api_route("/encoders", list_encoders, methods=["GET"], tags=["encoders"])
 api.add_api_route("/model", model_list, methods=["GET"], tags=["models"])
 api.add_api_route(
@@ -76,6 +90,7 @@ api.add_api_route(
 
 # Microservice mounts (service-style boundaries under dedicated prefixes).
 api.mount("/services/libraries", libraries_service)
+api.mount("/services/augmentations", augmentations_service)
 api.mount("/services/encoders", encoders_service)
 api.mount("/services/models", models_service)
 api.mount("/services/modules", modules_service)

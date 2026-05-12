@@ -6,6 +6,7 @@ dependencies = [
   "fastapi[standard-no-fastapi-cloud-cli]==0.136.1",
   "fastmcp==3.2.4",
   "keras==3.14.0",
+  "albumentations>=1.4.0",
   "segmentation-models-pytorch==0.5.0",
 
   # macOS (Intel + Apple Silicon)
@@ -21,5 +22,6 @@ dependencies = [
   "torch>=2.11.0",
   "torchvision>=0.26.0",
   "tqdm>=4.67.3",
+  "pycaret==4.0.0a8",
   "granian==2.7.4",
 ]
