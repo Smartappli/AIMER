@@ -23,7 +23,7 @@ dependencies = [
     "numpy",
     "packaging>=25.0",
     "pydantic==2.13.4",
-    "pypdf==6.10.2",
+    "pypdf==6.12.0",
     "qdrant-client==1.18.0",
     "tqdm==4.67.3",
     "pytest==9.0.3",
