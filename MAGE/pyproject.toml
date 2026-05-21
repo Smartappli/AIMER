@@ -5,7 +5,7 @@ requires-python = ">=3.14.4"
 dependencies = [
   "fastapi[standard-no-fastapi-cloud-cli]==0.136.1",
   "fastmcp==3.2.4",
-  "keras==3.14.0",
+  "keras==3.14.1",
   "albumentations>=1.4.24",
   "segmentation-models-pytorch==0.5.0",
 
