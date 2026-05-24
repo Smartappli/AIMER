@@ -5,14 +5,15 @@ single quality, dependency, and CI/CD surface.
 
 ## Repository Map
 
-| Path | Role |
-| --- | --- |
-| `AIMER-ROOT/` | Primary Django web application, UI templates, static assets, and RAG code. |
-| `MAGE/` | ML/API services, model-oriented tests, and backend infrastructure manifests. |
-| `FARM/` | Supporting Django project for data and platform workflows. |
-| `.github/` | GitHub Actions, Dependabot, release automation, and issue templates. |
-| `pyproject.toml` | Workspace-level Python and tooling configuration. |
-| `renovate.json` | Renovate dependency automation configuration. |
+- `AIMER-ROOT/`: primary Django web application, UI templates, static assets,
+  and RAG code.
+- `MAGE/`: ML/API services, model-oriented tests, and backend infrastructure
+  manifests.
+- `FARM/`: supporting Django project for data and platform workflows.
+- `.github/`: GitHub Actions, Dependabot, release automation, and issue
+  templates.
+- `pyproject.toml`: workspace-level Python and tooling configuration.
+- `renovate.json`: Renovate dependency automation configuration.
 
 See [docs/PROJECT_STRUCTURE.md](docs/PROJECT_STRUCTURE.md) for the detailed
 layout and maintenance notes.
