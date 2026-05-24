@@ -37,7 +37,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v6
         with:
-          python-version: '3.13'
+          python-version: '3.14.5'
           cache: 'pip'
       - name: Install dependencies
         run: |
@@ -58,7 +58,7 @@ jobs:
           coverage report -m
           coverage xml -o coverage.xml
       - name: SonarQube Scan
-        uses: SonarSource/sonarqube-scan-action@v7.1.0
+        uses: SonarSource/sonarqube-scan-action@v8.1.0
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       - name: Run codacy-coverage-reporter

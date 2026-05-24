@@ -2,16 +2,21 @@
 
 """Display installed package versions used by FARM integrations."""
 
+from importlib.metadata import PackageNotFoundError, version
 import sys
 
-import syft_client as sc
-import syft_flwr
+
+def _safe_version(package_name: str) -> str:
+    """Return package version or a deterministic missing marker."""
+    try:
+        return version(package_name)
+    except PackageNotFoundError:
+        return "NOT_INSTALLED"
 
 
 def main() -> None:
-    """Print Syft-related package versions."""
-    sys.stdout.write(f"sc.__version__={sc.__version__}\n")
-    sys.stdout.write(f"syft_flwr.__version__={syft_flwr.__version__}\n")
+    """Print Flower package version used by FARM."""
+    sys.stdout.write(f"flwr.__version__={_safe_version('flwr')}\n")
 
 
 if __name__ == "__main__":

@@ -68,6 +68,46 @@ class FakeTimm(ModuleType):
         return bool(self._pretrained.get(model_id, False))
 
 
+class FakeSMPEncoders:
+    """Minimal fake of SMP encoders registry."""
+
+    @staticmethod
+    def get_encoder_names() -> list[str]:
+        """
+        Return deterministic encoder names used by API tests.
+
+        Returns:
+            list[str]: Static list of fake SMP encoder names.
+
+        """
+        return ["resnet34", "tu-efficientnet_b0", "tu-convnext_tiny"]
+
+
+class FakeSMP(ModuleType):
+    """In-memory stand-in for ``segmentation_models_pytorch``."""
+
+    def __init__(self) -> None:
+        """Initialize fake SMP module metadata and encoder registry."""
+        super().__init__("segmentation_models_pytorch")
+        self.__version__ = "0.0.0"
+        self.encoders = FakeSMPEncoders()
+
+
+class FakeAlbumentations(ModuleType):
+    """In-memory stand-in for ``albumentations`` used by API tests."""
+
+    def __init__(self) -> None:
+        """Initialize deterministic fake Albumentations metadata."""
+        super().__init__("albumentations")
+        self.__version__ = "1.4.99"
+        self.HorizontalFlip = object()
+        self.ShiftScaleRotate = object()
+        self.RandomBrightnessContrast = object()
+        self.Normalize = object()
+        self.VerticalFlip = object()
+        self.RandomResizedCrop = object()
+
+
 class FakeMCPApp:
     """Minimal fake app exposing the MCP ping route."""
 
@@ -148,6 +188,8 @@ def app_module(monkeypatch: pytest.MonkeyPatch) -> ModuleType:
 
     """
     monkeypatch.setitem(sys.modules, "timm", FakeTimm())
+    monkeypatch.setitem(sys.modules, "segmentation_models_pytorch", FakeSMP())
+    monkeypatch.setitem(sys.modules, "albumentations", FakeAlbumentations())
 
     fastmcp_mod = ModuleType("fastmcp")
     fastmcp_mod.FastMCP = FakeFastMCP
@@ -186,6 +228,7 @@ def check(condition: object, message: str) -> None:
 
 
 HTTP_OK = 200
+HTTP_NOT_FOUND = 404
 
 
 def test_root_healthcheck(client: TestClient) -> None:
@@ -268,6 +311,37 @@ def test_mcp_route_is_present(client: TestClient) -> None:
     check(response.json() == {"mcp": "ok"}, "Unexpected MCP ping payload")
 
 
+def test_augmentations_route_exposes_presets(client: TestClient) -> None:
+    """`/augmentations` should expose baseline Albumentations presets."""
+    response = client.get("/augmentations")
+    check(response.status_code == HTTP_OK, "Expected 200 on /augmentations")
+    payload = response.json()
+    check(payload["library"] == "albumentations", "Unexpected library name")
+    check(payload["version"] == "1.4.99", "Expected fake albumentations version")
+    check("presets" in payload, "Missing presets key in augmentations payload")
+    check(
+        "classification_basic" in payload["presets"],
+        "Missing classification preset",
+    )
+    check("segmentation_basic" in payload["presets"], "Missing segmentation preset")
+
+
+def test_augmentations_validate_preset_success(client: TestClient) -> None:
+    """`/augmentations/<preset>/validate` should confirm valid presets."""
+    response = client.get("/augmentations/classification_basic/validate")
+    check(response.status_code == HTTP_OK, "Expected 200 on preset validation")
+    payload = response.json()
+    check(payload["preset"] == "classification_basic", "Unexpected preset name")
+    check(payload["is_valid"] is True, "Expected classification preset to be valid")
+    check(payload["missing_transforms"] == [], "No transforms should be missing")
+
+
+def test_augmentations_validate_preset_unknown(client: TestClient) -> None:
+    """Unknown preset validation should return 404."""
+    response = client.get("/augmentations/does_not_exist/validate")
+    check(response.status_code == HTTP_NOT_FOUND, "Expected 404 on unknown preset")
+
+
 def test_libraries_versions_prefers_module_dunder_version(client: TestClient) -> None:
     """`/libraries` should expose the fake timm ``__version__``."""
     response = client.get("/libraries")
@@ -284,7 +358,14 @@ def test_libraries_missing_packages_return_none(
     real_import = __import__
 
     def fake_import(name: str, *args: object, **kwargs: object) -> object:
-        if name in {"keras", "tensorflow", "segmentation_models_pytorch", "torch"}:
+        if name in {
+            "albumentations",
+            "keras",
+            "pycaret",
+            "segmentation_models_pytorch",
+            "tensorflow",
+            "torch",
+        }:
             msg = "not installed"
             raise ImportError(msg)
         return real_import(name, *args, **kwargs)
@@ -301,7 +382,9 @@ def test_libraries_missing_packages_return_none(
     ai = response.json()["AI"]
 
     check(ai["timm"] == "9.9.9", "timm version should still resolve")
+    check(ai["albumentations"] is None, "albumentations should be None when missing")
     check(ai["keras"] is None, "keras should be None when missing")
+    check(ai["pycaret"] is None, "pycaret should be None when missing")
     check(ai["tensorflow"] is None, "tensorflow should be None when missing")
     check(ai["torch"] is None, "torch should be None when missing")
     check(
@@ -329,3 +412,30 @@ def test_libraries_handles_unexpected_exception(
     check(response.status_code == HTTP_OK, "Expected 200 on /libraries with error")
     ai = response.json()["AI"]
     check(ai["keras"] is None, "keras should be None on unexpected import error")
+
+
+def test_libraries_exposes_pycaret_when_available(
+    client: TestClient,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """`/libraries` should include the pycaret version when available."""
+    monkeypatch.setattr(
+        md,
+        "version",
+        lambda package_name: "4.0.0a8" if package_name == "pycaret" else "0.0.0",
+    )
+
+    response = client.get("/libraries")
+    check(response.status_code == HTTP_OK, "Expected 200 on /libraries")
+    ai = response.json()["AI"]
+    check(ai["pycaret"] == "4.0.0a8", "pycaret version should be reported")
+
+
+def test_encoders_list(client: TestClient) -> None:
+    """`/encoders` should expose SMP encoders including TIMM-backed ones."""
+    response = client.get("/encoders")
+    check(response.status_code == HTTP_OK, "Expected 200 on /encoders")
+    data = response.json()
+    check("encoders" in data, "Missing encoders key")
+    check("timm_backed_encoders" in data, "Missing timm_backed_encoders key")
+    check("tu-efficientnet_b0" in data["timm_backed_encoders"], "Expected tu- encoder")

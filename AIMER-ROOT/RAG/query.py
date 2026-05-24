@@ -1,17 +1,17 @@
 # Copyright (c) 2026 AIMER contributors.
-"""Query and reranking helpers for the RAG vector store."""
+"""Query and reranking helpers for the OpenRAG backend."""
 
 from __future__ import annotations
 
 import operator
+import os
 from typing import TYPE_CHECKING, Any
 
 from dotenv import load_dotenv
 from langchain_community.cross_encoders import HuggingFaceCrossEncoder
-from langchain_ollama import ChatOllama, OllamaEmbeddings
-from langchain_qdrant import FastEmbedSparse, QdrantVectorStore, RetrievalMode
-from qdrant_client.models import FieldCondition, Filter, MatchValue
+from langchain_ollama import ChatOllama
 
+from RAG.openrag_backend import openrag_hybrid_search
 from RAG.omop import build_omop_metadata
 from RAG.scripts.schema import ChunkMetadata
 
@@ -20,22 +20,11 @@ if TYPE_CHECKING:
 
 load_dotenv()
 
-COLLECTION_NAME = "rag_docs"
-LLM_MODEL = "qwen3:8b"
-EMBEDDING_MODEL = "qwen3-embedding:8b"
-SPARCE_EMBEDDING_MODEL = "Qdrant/bm25"
+LLM_MODEL = os.getenv("RAG_LLM_MODEL", "qwen3:8b")
 RERANKER_MODEL = "Krakekai/qwen3-reranker-8b"
+OLLAMA_BASE_URL = os.getenv("OLLAMA_BASE_URL", "http://localhost:11434")
 
-llm = ChatOllama(model=LLM_MODEL, base_url="http://localhost:11434")
-embeddings = OllamaEmbeddings(model=EMBEDDING_MODEL, base_url="http://localhost:11434")
-spare_embeddings = FastEmbedSparse(model=SPARCE_EMBEDDING_MODEL)
-vector_store = QdrantVectorStore.from_existing_collection(
-    embedding=embeddings,
-    sparse_embedding=spare_embeddings,
-    collection_name=COLLECTION_NAME,
-    url="http://localhost:6333",
-    retrieval_mode=RetrievalMode.HYBRID,
-)
+llm = ChatOllama(model=LLM_MODEL, base_url=OLLAMA_BASE_URL)
 
 
 def extract_filters(user_query: str) -> dict[str, Any]:
@@ -47,7 +36,7 @@ def extract_filters(user_query: str) -> dict[str, Any]:
 
     """
     prompt = f"""
-            Extract metadata filters from the query. Return None for fields mentioned.
+            Extract metadata filters from the query. Return None for fields not mentioned.
 
             <USER QUERY STARTS>
             {user_query}
@@ -68,31 +57,13 @@ def hybrid_search(
     filters: dict[str, Any] | None = None,
 ) -> list[Document]:
     """
-    Perform hybrid (dense + sparse) similarity search in Qdrant.
+    Perform hybrid retrieval via OpenRAG.
 
     Returns:
         List of retrieved documents matching the query and optional filters.
 
     """
-    qdrant_filter = None
-    if filters:
-        condition = []
-        for key, value in filters.items():
-            if isinstance(value, list):
-                condition.extend(
-                    FieldCondition(key=f"metadata.{key}", match=MatchValue(value=item))
-                    for item in value
-                )
-            else:
-                condition.append(
-                    FieldCondition(
-                        key=f"metadata.{key}",
-                        match=MatchValue(value=value),
-                    ),
-                )
-        qdrant_filter = Filter(must=condition)
-
-    return vector_store.similarity_search(query=query, k=k, filter=qdrant_filter)
+    return openrag_hybrid_search(query=query, k=k, filters=filters)
 
 
 def rerank_results(
