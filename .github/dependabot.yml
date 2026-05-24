@@ -1,78 +1,72 @@
 version: 2
+
+# Keep this file aligned with the manifests that actually exist in the
+# repository. Dependabot scans one directory list per ecosystem.
 updates:
+  # GitHub Actions workflows live in .github/workflows.
   - package-ecosystem: "github-actions"
     directory: "/"
-    schedule:
-      interval: "daily"
-    labels:
-      - "🤖 Dependencies"
+    schedule: &weekly_schedule
+      interval: "weekly"
+      day: "monday"
+      time: "05:00"
+      timezone: "Europe/Brussels"
+    labels: &dependency_labels
+      - "dependencies"
+    commit-message: &dependency_commit_message
+      prefix: "deps"
+      include: "scope"
+    open-pull-requests-limit: 5
 
-  - package-ecosystem: "pip"
-    directory: "/"
-    schedule:
-      interval: "daily"
-    labels:
-      - "🤖 Dependencies"
+  # Python projects are managed with uv lock files.
+  - package-ecosystem: "uv"
+    directories:
+      - "/"
+      - "/AIMER-ROOT"
+      - "/MAGE"
+      - "/FARM"
+    schedule: *weekly_schedule
+    labels: *dependency_labels
+    commit-message: *dependency_commit_message
+    open-pull-requests-limit: 5
 
-  - package-ecosystem: "pip"
-    directory: "/AIMER-ROOT"
-    schedule:
-      interval: "daily"
-    labels:
-      - "🤖 Dependencies"
-
+  # Standalone test requirements that are not represented by uv.lock.
   - package-ecosystem: "pip"
     directory: "/MAGE"
-    schedule:
-      interval: "daily"
-    labels:
-      - "🤖 Dependencies"
+    exclude-paths:
+      - "pyproject.toml"
+      - "uv.lock"
+    schedule: *weekly_schedule
+    labels: *dependency_labels
+    commit-message: *dependency_commit_message
+    open-pull-requests-limit: 5
 
-  - package-ecosystem: "pip"
-    directory: "/FARM"
-    schedule:
-      interval: "daily"
-    labels:
-      - "🤖 Dependencies"
-
-  - package-ecosystem: "docker"
+  # pre-commit hook revisions are configured at the repository root.
+  - package-ecosystem: "pre-commit"
     directory: "/"
-    schedule:
-      interval: "daily"
-    labels:
-      - "🤖 Dependencies"
+    schedule: *weekly_schedule
+    labels: *dependency_labels
+    commit-message: *dependency_commit_message
+    open-pull-requests-limit: 5
 
+  # One entry for every directory that contains a Dockerfile.
   - package-ecosystem: "docker"
-    directory: "/AIMER-ROOT"
-    schedule:
-      interval: "daily"
-    labels:
-      - "🤖 Dependencies"
+    directories:
+      - "/AIMER-ROOT"
+      - "/FARM"
+      - "/MAGE"
+      - "/MAGE/backend/airflow"
+      - "/MAGE/backend/mlflow"
+      - "/MAGE/backend/qdrant"
+    schedule: *weekly_schedule
+    labels: *dependency_labels
+    commit-message: *dependency_commit_message
+    open-pull-requests-limit: 5
 
-  - package-ecosystem: "docker"
-    directory: "/MAGE"
-    schedule:
-      interval: "daily"
-    labels:
-      - "🤖 Dependencies"
-
-  - package-ecosystem: "docker"
-    directory: "/MAGE/backend"
-    schedule:
-      interval: "daily"
-    labels:
-      - "🤖 Dependencies"
-
-  - package-ecosystem: "docker"
-    directory: "/FARM"
-    schedule:
-      interval: "daily"
-    labels:
-      - "🤖 Dependencies"
-
+  # The only compose manifest currently lives under MAGE/backend.
   - package-ecosystem: "docker-compose"
-    directory: "/"
-    schedule:
-      interval: "daily"
-    labels:
-      - "🤖 Dependencies"
+    directory: "/MAGE/backend"
+    schedule: *weekly_schedule
+    labels: *dependency_labels
+    commit-message: *dependency_commit_message
+    open-pull-requests-limit: 5
