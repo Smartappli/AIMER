@@ -42,6 +42,7 @@ from website.views import (
     _build_project_rag_index,
     _discover_scientific_articles,
 )
+from website.rag_client import RagServiceUnavailableError
 
 MIN_CONFIDENCE_METRIC_EVIDENCE = 0.4
 MIN_TIMM_SEED_INDEX_SIZE = 100
