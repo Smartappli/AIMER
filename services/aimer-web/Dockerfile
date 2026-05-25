@@ -4,7 +4,11 @@ ARG APP_HOME=/app
 WORKDIR ${APP_HOME}
 
 # set environment variables
-ENV PYTHONDONTWRITEBYTECODE=1     PYTHONUNBUFFERED=1
+ENV HOME=${APP_HOME} \
+    PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    UV_CACHE_DIR=${APP_HOME}/.cache/uv \
+    XDG_CACHE_HOME=${APP_HOME}/.cache
 
 RUN python -m pip install \
     --disable-pip-version-check \

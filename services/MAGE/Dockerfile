@@ -3,7 +3,11 @@ FROM python:3.13-slim
 ARG APP_HOME=/app
 WORKDIR ${APP_HOME}
 
-ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1
+ENV HOME=${APP_HOME} \
+    PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    UV_CACHE_DIR=${APP_HOME}/.cache/uv \
+    XDG_CACHE_HOME=${APP_HOME}/.cache
 
 # System dependencies used by ML wheels.
 RUN apt-get update \
