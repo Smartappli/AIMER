@@ -5,7 +5,7 @@ requires-python = ">=3.13,<3.14"
 dependencies = [
     "django[argon2]>=6.0.4",
     "django-rich==2.2.0",
-    "python-dotenv==1.0.1",
+    "python-dotenv==1.2.2",
     "granian==2.7.4",
     "docling[vlm]==2.93.0",
     "fastembed==0.8.0",
@@ -13,7 +13,7 @@ dependencies = [
     "huggingface-hub",
     "hf-xet",
     "langchain-core>=1.4.0,<2.0.0",
-    "langchain-community==0.4.1",
+    "langchain-community==0.4.2",
     "langchain-qdrant==1.1.0",
     "langchain-docling==2.0.0",
     "langchain-ollama==1.1.0",
