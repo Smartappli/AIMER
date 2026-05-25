@@ -54,6 +54,37 @@ jobs:
           # This will handover control about PR rejection to the GitHub side
           max-allowed-issues: 2147483647
 
+      - name: Normalize SARIF run categories
+        run: |
+          python - <<'PY'
+          import json
+          import re
+          from pathlib import Path
+
+          sarif_path = Path("results.sarif")
+          sarif = json.loads(sarif_path.read_text(encoding="utf-8"))
+          seen_categories = set()
+          runs = sarif.get("runs", [])
+
+          for index, run in enumerate(runs, start=1):
+              tool = run.get("tool", {}).get("driver", {})
+              tool_name = tool.get("name") or f"run-{index}"
+              slug = re.sub(r"[^A-Za-z0-9_.-]+", "-", str(tool_name)).strip("-").lower()
+              base_category = f"codacy/{slug or f'run-{index}'}"
+              category = base_category
+              suffix = 2
+
+              while category in seen_categories:
+                  category = f"{base_category}-{suffix}"
+                  suffix += 1
+
+              seen_categories.add(category)
+              run.setdefault("automationDetails", {})["id"] = category
+
+          sarif_path.write_text(json.dumps(sarif, separators=(",", ":")), encoding="utf-8")
+          print(f"Normalized {len(runs)} SARIF run categories.")
+          PY
+
       # Upload the SARIF file generated in the previous step
       - name: Upload SARIF results file
         uses: github/codeql-action/upload-sarif@v4
