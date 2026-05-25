@@ -35,7 +35,7 @@ jobs:
       - name: Resolve dependencies and export full requirements
         working-directory: services/aimer-web
         run: |
-          uv sync --all-extras
+          uv sync --locked --all-extras
           uv pip freeze > requirements-all.txt
 
       - name: Check Python licenses
