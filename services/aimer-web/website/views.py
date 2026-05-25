@@ -12,11 +12,14 @@ from AIMER.template_helpers.theme import TemplateHelper
 from django.http import HttpRequest, HttpResponse, JsonResponse
 from django.views import View
 from django.views.generic import TemplateView
-from RAG.healthcheck import is_rag_runtime_ready, rag_runtime_health
-from RAG.recommender import OpenRAGRuntimeUnavailableError, recommend_models_for_query
 from RAG.timm_articles import (
     ensure_timm_article_index_is_fresh,
     load_timm_article_index,
+)
+from website.rag_client import (
+    RagServiceUnavailableError,
+    recommend_models,
+    runtime_status,
 )
 
 PROJECT_KEYWORDS: Final[dict[str, tuple[str, ...]]] = {
@@ -240,14 +243,14 @@ class RagRecommendationView(View):
         top_k = max(1, min(top_k, 10))
 
         try:
-            payload = recommend_models_for_query(
+            payload = recommend_models(
                 query=query,
                 top_k=top_k,
                 strict_openrag=True,
             )
-        except OpenRAGRuntimeUnavailableError as exc:
+        except RagServiceUnavailableError as exc:
             return JsonResponse({"error": str(exc)}, status=503)
-        return JsonResponse(payload.model_dump(), status=200)
+        return JsonResponse(payload, status=200)
 
 
 class RagRuntimeHealthView(View):
@@ -266,7 +269,4 @@ class RagRuntimeHealthView(View):
         if not request.user.is_staff:
             return JsonResponse({"error": "Staff access required"}, status=403)
 
-        status = rag_runtime_health()
-        return JsonResponse(
-            {"ready": is_rag_runtime_ready(), "status": status}, status=200
-        )
+        return JsonResponse(runtime_status(), status=200)
