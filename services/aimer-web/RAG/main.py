@@ -45,6 +45,7 @@ QDRANT_API_KEY = os.getenv("QDRANT_API_KEY")
 TEXT_THRESHOLD = 50
 MIN_IMAGE_DIMENSION = 500
 FILENAME_METADATA_MIN_PARTS = 3
+PAGE_BREAK = "<!-- page_break -->"
 
 describe_image_prompt = (
     "Analyze this financial document page and extract meaningful data "
@@ -155,24 +156,33 @@ def convert_pdf_to_docling(pdf_file: Path) -> object:
     return doc_converter.convert(pdf_file)
 
 
+def _large_picture_page_number(element: PictureItem, document: object) -> int | None:
+    """Return a picture page number when it is large enough to save."""
+    image = element.get_image(document)
+    if max(image.size) <= MIN_IMAGE_DIMENSION or not element.prov:
+        return None
+    return element.prov[0].page_no
+
+
+def _large_picture_pages(doc_converter: object) -> set[int]:
+    """Return pages containing large picture items."""
+    pages_to_save: set[int] = set()
+    document = doc_converter.document
+
+    for item in document.iterate_items():
+        element = item[0]
+        if not isinstance(element, PictureItem):
+            continue
+        page_no = _large_picture_page_number(element, document)
+        if page_no:
+            pages_to_save.add(page_no)
+
+    return pages_to_save
+
+
 def save_page_images(doc_converter: object, figures_dir: Path) -> None:
     """Save page images when pages contain sufficiently large pictures."""
-    pages_to_save: set[int] = set()
-
-    for item in doc_converter.document.iterate_items():
-        element = item[0]
-
-        if isinstance(element, PictureItem):
-            image = element.get_image(doc_converter.document)
-
-            if (
-                image.size[0] > MIN_IMAGE_DIMENSION
-                or image.size[1] > MIN_IMAGE_DIMENSION
-            ):
-                page_no = element.prov[0].page_no if element.prov else None
-
-                if page_no:
-                    pages_to_save.add(page_no)
+    pages_to_save = _large_picture_pages(doc_converter)
 
     for page_no in pages_to_save:
         page = doc_converter.document.pages[page_no]
@@ -222,7 +232,7 @@ def extract_tables_with_content(markdown_text: str) -> list[tuple[str, str, int]
     i = 0
 
     while i < len(lines):
-        if "<!-- page_break -->" in lines[i]:
+        if PAGE_BREAK in lines[i]:
             current_page += 1
             i += 1
             continue
@@ -263,7 +273,7 @@ def extract_pdf_content(pdf_file: Path) -> None:
     doc_converter = convert_pdf_to_docling(pdf_file)
 
     markdown_text = doc_converter.document.export_to_markdown(
-        page_break_placeholder="<!-- page_break -->",
+        page_break_placeholder=PAGE_BREAK,
     )
 
     (md_dir / f"{pdf_file.stem}.md").write_text(markdown_text, encoding="utf-8")
@@ -444,7 +454,7 @@ def ingest_file_in_db(
     )
 
     if content_type == "text":
-        pages = content.split("<!-- page_break -->")
+        pages = content.split(PAGE_BREAK)
         documents: list[Document] = []
         for idx, page in enumerate(pages, start=1):
             metadata = base_metadata.copy()

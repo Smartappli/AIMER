@@ -42,34 +42,23 @@ def _safe[T](label: str, fn: Callable[[], T], default: T | str = "N/A") -> T | s
         return f"{default} ({label}: {type(exc).__name__}: {exc})"
 
 
-def build_info_report() -> str:
-    """
-    Build a multi-line report describing the current runtime environment.
+def _base_info_lines() -> list[str]:
+    """Return static Python and PyTorch runtime details."""
+    return [
+        f"Python: {sys.version.split()[0]} ({platform.system()} {platform.release()})",
+        f"PyTorch version: {torch.__version__}",
+        "",
+        "--- Build info (CUDA / HIP (ROCm) / etc.)",
+        f"torch.version.cuda: {torch.version.cuda}",
+        f"torch.version.hip:  {getattr(torch.version, 'hip', None)}",
+        f"torch.version.git:  {getattr(torch.version, 'git_version', None)}",
+        "",
+        "=== CUDA / ROCm ===",
+    ]
 
-    Returns:
-        A formatted string with Python, PyTorch and backend capability details.
 
-    """
-    lines: list[str] = []
-
-    lines.extend(
-        (
-            (
-                f"Python: {sys.version.split()[0]} "
-                f"({platform.system()} {platform.release()})"
-            ),
-            f"PyTorch version: {torch.__version__}",
-            "",
-            "--- Build info (CUDA / HIP (ROCm) / etc.)",
-            f"torch.version.cuda: {torch.version.cuda}",
-            f"torch.version.hip:  {getattr(torch.version, 'hip', None)}",
-            f"torch.version.git:  {getattr(torch.version, 'git_version', None)}",
-            "",
-            "=== CUDA / ROCm ===",
-        ),
-    )
-
-    # --- CUDA / ROCm (AMD uses torch.cuda API too)
+def _append_cuda_info(lines: list[str]) -> None:
+    """Append CUDA and ROCm device details to a report."""
     cuda_available = torch.cuda.is_available()
     lines.append(f"CUDA available: {cuda_available}")
 
@@ -107,7 +96,9 @@ def build_info_report() -> str:
                 ),
             )
 
-    # --- Apple MPS (Mac)
+
+def _append_mps_info(lines: list[str]) -> None:
+    """Append Apple MPS backend details to a report."""
     lines.extend(("", "=== MPS (Apple Silicon) ==="))
     mps_backend = getattr(torch.backends, "mps", None)
     if mps_backend is None:
@@ -126,7 +117,9 @@ def build_info_report() -> str:
             ),
         )
 
-    # --- Intel XPU (oneAPI / Intel GPU)
+
+def _append_xpu_info(lines: list[str]) -> None:
+    """Append Intel XPU backend details to a report."""
     lines.extend(("", "=== XPU (Intel) ==="))
     xpu = getattr(torch, "xpu", None)
     if xpu is None:
@@ -150,7 +143,9 @@ def build_info_report() -> str:
                 )
                 lines.append(f" - [{i}] {name}")
 
-    # --- CPU basics
+
+def _append_cpu_info(lines: list[str]) -> None:
+    """Append CPU details to a report."""
     lines.extend(
         (
             "",
@@ -160,6 +155,20 @@ def build_info_report() -> str:
         ),
     )
 
+
+def build_info_report() -> str:
+    """
+    Build a multi-line report describing the current runtime environment.
+
+    Returns:
+        A formatted string with Python, PyTorch and backend capability details.
+
+    """
+    lines = _base_info_lines()
+    _append_cuda_info(lines)
+    _append_mps_info(lines)
+    _append_xpu_info(lines)
+    _append_cpu_info(lines)
     return "\n".join(lines)
 
 

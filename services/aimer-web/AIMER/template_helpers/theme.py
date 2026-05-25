@@ -55,6 +55,17 @@ class TemplateHelper:
         is_horizontal = context.get("layout") == "horizontal"
         is_vertical = context.get("layout") == "vertical"
 
+        TemplateHelper._map_navigation_context(context, is_horizontal, is_vertical)
+        TemplateHelper._map_direction_context(context)
+        TemplateHelper._map_content_context(context)
+
+    @staticmethod
+    def _map_navigation_context(
+        context: dict[str, object],
+        is_horizontal: bool,
+        is_vertical: bool,
+    ) -> None:
+        """Map navigation and menu classes."""
         context["header_type_class"] = (
             "layout-menu-fixed"
             if is_horizontal and context.get("header_type") == "fixed"
@@ -80,6 +91,9 @@ class TemplateHelper:
             "layout-footer-fixed" if context.get("footer_fixed") else ""
         )
 
+    @staticmethod
+    def _map_direction_context(context: dict[str, object]) -> None:
+        """Map text direction and boolean data attributes."""
         if context.get("rtl_mode"):
             context["rtl_mode_value"] = "rtl"
             context["text_direction_value"] = "rtl"
@@ -95,6 +109,9 @@ class TemplateHelper:
             "" if context.get("display_customizer") else "customizer-hide"
         )
 
+    @staticmethod
+    def _map_content_context(context: dict[str, object]) -> None:
+        """Map page content layout classes."""
         if context.get("content_layout") == "wide":
             context["container_class"] = "container-fluid"
             context["content_layout_class"] = "layout-wide"
