@@ -55,13 +55,18 @@ class TemplateHelper:
         is_horizontal = context.get("layout") == "horizontal"
         is_vertical = context.get("layout") == "vertical"
 
-        TemplateHelper._map_navigation_context(context, is_horizontal, is_vertical)
+        TemplateHelper._map_navigation_context(
+            context,
+            is_horizontal=is_horizontal,
+            is_vertical=is_vertical,
+        )
         TemplateHelper._map_direction_context(context)
         TemplateHelper._map_content_context(context)
 
     @staticmethod
     def _map_navigation_context(
         context: dict[str, object],
+        *,
         is_horizontal: bool,
         is_vertical: bool,
     ) -> None:

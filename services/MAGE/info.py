@@ -43,7 +43,13 @@ def _safe[T](label: str, fn: Callable[[], T], default: T | str = "N/A") -> T | s
 
 
 def _base_info_lines() -> list[str]:
-    """Return static Python and PyTorch runtime details."""
+    """
+    Return static Python and PyTorch runtime details.
+
+    Returns:
+        Base report lines.
+
+    """
     return [
         f"Python: {sys.version.split()[0]} ({platform.system()} {platform.release()})",
         f"PyTorch version: {torch.__version__}",

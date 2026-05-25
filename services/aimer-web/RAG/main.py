@@ -2,11 +2,11 @@
 """Pipeline utilities to extract, enrich, and ingest RAG documents."""
 
 import base64
-from functools import lru_cache
 import hashlib
 import io
 import os
 import re
+from functools import lru_cache
 from pathlib import Path
 
 from docling.datamodel.base_models import InputFormat
@@ -79,13 +79,25 @@ def ensure_output_directories() -> None:
 
 @lru_cache(maxsize=1)
 def get_vision_model() -> ChatOllama:
-    """Return the configured multimodal Ollama client."""
+    """
+    Return the configured multimodal Ollama client.
+
+    Returns:
+        Cached Ollama chat model instance.
+
+    """
     return ChatOllama(model=MODEL_NAME, base_url=OLLAMA_BASE_URL)
 
 
 @lru_cache(maxsize=1)
 def get_embeddings() -> OllamaEmbeddings:
-    """Return the configured Ollama embedding client."""
+    """
+    Return the configured Ollama embedding client.
+
+    Returns:
+        Cached dense embedding model instance.
+
+    """
     return OllamaEmbeddings(
         model=EMBEDDING_MODEL,
         base_url=OLLAMA_BASE_URL,
@@ -94,13 +106,25 @@ def get_embeddings() -> OllamaEmbeddings:
 
 @lru_cache(maxsize=1)
 def get_sparse_embeddings() -> FastEmbedSparse:
-    """Return the configured sparse embedding model."""
+    """
+    Return the configured sparse embedding model.
+
+    Returns:
+        Cached sparse embedding model instance.
+
+    """
     return FastEmbedSparse(model_name=SPARSE_EMBEDDING_MODEL)
 
 
 @lru_cache(maxsize=1)
 def get_vector_store() -> QdrantVectorStore:
-    """Return the configured Qdrant vector store without hardcoded secrets."""
+    """
+    Return the configured Qdrant vector store without hardcoded secrets.
+
+    Returns:
+        Configured Qdrant vector store.
+
+    """
     return QdrantVectorStore.from_documents(
         documents=[],
         embedding=get_embeddings(),
@@ -157,7 +181,13 @@ def convert_pdf_to_docling(pdf_file: Path) -> object:
 
 
 def _large_picture_page_number(element: PictureItem, document: object) -> int | None:
-    """Return a picture page number when it is large enough to save."""
+    """
+    Return a picture page number when it is large enough to save.
+
+    Returns:
+        Page number for a large picture, otherwise ``None``.
+
+    """
     image = element.get_image(document)
     if max(image.size) <= MIN_IMAGE_DIMENSION or not element.prov:
         return None
@@ -165,7 +195,13 @@ def _large_picture_page_number(element: PictureItem, document: object) -> int | 
 
 
 def _large_picture_pages(doc_converter: object) -> set[int]:
-    """Return pages containing large picture items."""
+    """
+    Return pages containing large picture items.
+
+    Returns:
+        Set of page numbers to persist as images.
+
+    """
     pages_to_save: set[int] = set()
     document = doc_converter.document
 
@@ -478,7 +514,13 @@ def ingest_file_in_db(
 
 
 def run_ingestion() -> object:
-    """Extract configured PDFs and ingest generated Markdown into Qdrant."""
+    """
+    Extract configured PDFs and ingest generated Markdown into Qdrant.
+
+    Returns:
+        Qdrant collection information after ingestion.
+
+    """
     ensure_output_directories()
     vector_store = get_vector_store()
     processed_hashes = get_processed_hashes(vector_store)
