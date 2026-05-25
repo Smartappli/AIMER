@@ -5,7 +5,7 @@ requires-python = ">=3.13,<3.14"
 dependencies = [
     "django[argon2]>=6.0.4",
     "django-rich==2.2.0",
-    "python-dotenv==1.2.2",
+    "python-dotenv==1.0.1",
     "fastapi==0.128.0",
     "granian==2.7.4",
     "docling[vlm]==2.93.0",
