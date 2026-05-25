@@ -3,12 +3,10 @@
 
 from __future__ import annotations
 
-import json
 from typing import Any
-from urllib.error import HTTPError
 from urllib.parse import urlsplit
-from urllib.request import Request, urlopen
 
+import httpx
 from django.conf import settings
 
 DEFAULT_TIMEOUT_SECONDS = 5.0
@@ -34,27 +32,26 @@ def _rag_service_timeout() -> float:
     )
 
 
-def _decode_json_response(response: object) -> dict[str, Any]:
-    """Decode a urllib HTTP response body as JSON."""
-    body = response.read().decode("utf-8")
-    payload = json.loads(body)
+def _decode_json_response(response: httpx.Response) -> dict[str, Any]:
+    """Decode an HTTP response body as a JSON object."""
+    payload = response.json()
     if not isinstance(payload, dict):
         msg = "RAG service returned a non-object JSON payload."
         raise RagServiceUnavailableError(msg)
     return payload
 
 
-def _error_detail(exc: HTTPError) -> str:
+def _error_detail(response: httpx.Response) -> str:
     """Extract a concise error detail from a failed service response."""
     try:
-        payload = json.loads(exc.read().decode("utf-8"))
-    except (json.JSONDecodeError, UnicodeDecodeError):
-        return str(exc)
+        payload = response.json()
+    except ValueError:
+        return response.text or response.reason_phrase
     if isinstance(payload, dict):
         detail = payload.get("detail") or payload.get("error")
         if isinstance(detail, str):
             return detail
-    return str(exc)
+    return response.reason_phrase
 
 
 def _remote_json_request(
@@ -70,26 +67,26 @@ def _remote_json_request(
         msg = "RAG_SERVICE_URL must be an HTTP(S) URL."
         raise RagServiceUnavailableError(msg)
 
-    data = None
     headers = {"Accept": "application/json"}
     method = "GET"
+    json_payload = None
     if payload is not None:
-        data = json.dumps(payload).encode("utf-8")
         headers["Content-Type"] = "application/json"
         method = "POST"
+        json_payload = payload
 
-    request = Request(
-        f"{base_url}{path}",
-        data=data,
-        headers=headers,
-        method=method,
-    )
     try:
-        with urlopen(request, timeout=_rag_service_timeout()) as response:
-            return _decode_json_response(response)
-    except HTTPError as exc:
-        raise RagServiceUnavailableError(_error_detail(exc)) from exc
-    except (OSError, json.JSONDecodeError) as exc:
+        response = httpx.request(
+            method,
+            f"{base_url}{path}",
+            headers=headers,
+            json=json_payload,
+            timeout=_rag_service_timeout(),
+        )
+        if response.is_error:
+            raise RagServiceUnavailableError(_error_detail(response))
+        return _decode_json_response(response)
+    except (httpx.RequestError, ValueError) as exc:
         raise RagServiceUnavailableError(str(exc)) from exc
 
 

@@ -4,47 +4,28 @@
 from __future__ import annotations
 
 import json
-from types import TracebackType
-from typing import Self
 from unittest.mock import patch
 
+import httpx
 from django.test import SimpleTestCase, override_settings
 
-from website.rag_client import recommend_models, runtime_status
-
-
-class _JsonResponse:
-    """Minimal context-manager response used to fake urllib calls."""
-
-    def __init__(self, payload: dict[str, object]) -> None:
-        self.payload = payload
-
-    def __enter__(self) -> Self:
-        return self
-
-    def __exit__(
-        self,
-        exc_type: type[BaseException] | None,
-        exc: BaseException | None,
-        traceback: TracebackType | None,
-    ) -> bool:
-        del exc_type, exc, traceback
-        return False
-
-    def read(self) -> bytes:
-        """Return the fake response body."""
-        return json.dumps(self.payload).encode("utf-8")
+from website.rag_client import (
+    RagServiceUnavailableError,
+    recommend_models,
+    runtime_status,
+)
 
 
 class RagClientTests(SimpleTestCase):
     """Tests for remote RAG service calls from Django."""
 
     @override_settings(RAG_SERVICE_URL="http://rag-service:8000")
-    @patch("website.rag_client.urlopen")
-    def test_recommend_models_calls_remote_service(self, mock_urlopen) -> None:
+    @patch("website.rag_client.httpx.request")
+    def test_recommend_models_calls_remote_service(self, mock_request) -> None:
         """Ensure recommendation requests use the remote RAG API contract."""
-        mock_urlopen.return_value = _JsonResponse(
-            {
+        mock_request.return_value = httpx.Response(
+            200,
+            json={
                 "query": "classification mri",
                 "recommended_models": [{"model_name": "ResNet"}],
             },
@@ -57,11 +38,13 @@ class RagClientTests(SimpleTestCase):
         )
 
         self.assertEqual(payload["query"], "classification mri")
-        request = mock_urlopen.call_args.args[0]
-        self.assertEqual(request.full_url, "http://rag-service:8000/recommend")
-        self.assertEqual(request.get_method(), "POST")
+        self.assertEqual(mock_request.call_args.args[0], "POST")
         self.assertEqual(
-            json.loads(request.data.decode("utf-8")),
+            mock_request.call_args.args[1],
+            "http://rag-service:8000/recommend",
+        )
+        self.assertEqual(
+            json.loads(json.dumps(mock_request.call_args.kwargs["json"])),
             {
                 "query": "classification mri",
                 "top_k": 2,
@@ -70,16 +53,28 @@ class RagClientTests(SimpleTestCase):
         )
 
     @override_settings(RAG_SERVICE_URL="http://rag-service:8000")
-    @patch("website.rag_client.urlopen")
-    def test_runtime_status_calls_remote_readiness(self, mock_urlopen) -> None:
+    @patch("website.rag_client.httpx.request")
+    def test_runtime_status_calls_remote_readiness(self, mock_request) -> None:
         """Ensure runtime health uses the service readiness endpoint."""
-        mock_urlopen.return_value = _JsonResponse(
-            {"ready": True, "status": {"openrag_installed": True}},
+        mock_request.return_value = httpx.Response(
+            200,
+            json={"ready": True, "status": {"openrag_installed": True}},
         )
 
         payload = runtime_status()
 
         self.assertTrue(payload["ready"])
-        request = mock_urlopen.call_args.args[0]
-        self.assertEqual(request.full_url, "http://rag-service:8000/readyz")
-        self.assertEqual(request.get_method(), "GET")
+        self.assertEqual(mock_request.call_args.args[0], "GET")
+        self.assertEqual(
+            mock_request.call_args.args[1],
+            "http://rag-service:8000/readyz",
+        )
+
+    @override_settings(RAG_SERVICE_URL="file:///tmp/rag.sock")
+    @patch("website.rag_client.httpx.request")
+    def test_rejects_non_http_remote_service_url(self, mock_request) -> None:
+        """Ensure only HTTP(S) service URLs can cross the client boundary."""
+        with self.assertRaisesRegex(RagServiceUnavailableError, "HTTP\\(S\\)"):
+            runtime_status()
+
+        mock_request.assert_not_called()

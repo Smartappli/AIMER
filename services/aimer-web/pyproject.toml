@@ -8,6 +8,7 @@ dependencies = [
     "python-dotenv==1.0.1",
     "fastapi==0.128.0",
     "granian==2.7.4",
+    "httpx==0.28.1",
     "docling[vlm]==2.93.0",
     "fastembed==0.8.0",
     "transformers==5.9.0",
@@ -38,6 +39,5 @@ verify-openrag = "RAG.verify_openrag:main"
 [dependency-groups]
 dev = [
     "coverage==7.14.0",
-    "httpx==0.28.1",
     "pytest==9.0.3",
 ]

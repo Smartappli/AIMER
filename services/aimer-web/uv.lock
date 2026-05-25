@@ -51,6 +51,7 @@ dependencies = [
     { name = "granian" },
     { name = "hf-xet" },
     { name = "huggingface-hub" },
+    { name = "httpx" },
     { name = "langchain-community" },
     { name = "langchain-core" },
     { name = "langchain-docling" },
@@ -74,7 +75,6 @@ dependencies = [
 [package.dev-dependencies]
 dev = [
     { name = "coverage" },
-    { name = "httpx" },
     { name = "pytest" },
 ]
 
@@ -88,6 +88,7 @@ requires-dist = [
     { name = "granian", specifier = "==2.7.4" },
     { name = "hf-xet" },
     { name = "huggingface-hub" },
+    { name = "httpx", specifier = "==0.28.1" },
     { name = "langchain-community", specifier = "==0.4.2" },
     { name = "langchain-core", specifier = ">=1.4.0,<2.0.0" },
     { name = "langchain-docling", specifier = "==2.0.0" },
@@ -111,7 +112,6 @@ requires-dist = [
 [package.metadata.requires-dev]
 dev = [
     { name = "coverage", specifier = "==7.14.0" },
-    { name = "httpx", specifier = "==0.28.1" },
     { name = "pytest", specifier = "==9.0.3" },
 ]
 
