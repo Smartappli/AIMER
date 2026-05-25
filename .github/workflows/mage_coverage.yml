@@ -15,6 +15,9 @@ jobs:
   sonarcloud:
     name: Coverage
     runs-on: ubuntu-latest
+    env:
+      CODACY_PROJECT_TOKEN: ${{ secrets.CODACY_PROJECT_TOKEN }}
+      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
     steps:
       - name: Free Disk Space (Ubuntu)
         uses: jlumbroso/free-disk-space@v1.3.1
@@ -57,13 +60,26 @@ jobs:
           python -m uv --directory services/MAGE run --locked python -m coverage report -m
           python -m uv --directory services/MAGE run --locked python -m coverage xml -o ../../coverage.xml
       - name: SonarQube Scan
+        if: env.SONAR_TOKEN != ''
         uses: SonarSource/sonarqube-scan-action@v8.1.0
+        with:
+          args: >
+            -Dsonar.python.coverage.reportPaths=coverage.xml
+            -Dsonar.tests=services/MAGE/tests
+            -Dsonar.test.inclusions=services/MAGE/tests/**
         env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_TOKEN: ${{ env.SONAR_TOKEN }}
+      - name: Skip SonarCloud when token is not configured
+        if: env.SONAR_TOKEN == ''
+        run: echo "SONAR_TOKEN is not configured; skipping SonarCloud scan."
       - name: Run codacy-coverage-reporter
+        if: env.CODACY_PROJECT_TOKEN != ''
         uses: codacy/codacy-coverage-reporter-action@v1.3.0
         with:
-          project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
+          project-token: ${{ env.CODACY_PROJECT_TOKEN }}
           coverage-reports: 'coverage.xml'
         env:
-          CODACY_PROJECT_TOKEN: ${{ secrets.CODACY_PROJECT_TOKEN }}
+          CODACY_PROJECT_TOKEN: ${{ env.CODACY_PROJECT_TOKEN }}
+      - name: Skip Codacy coverage when token is not configured
+        if: env.CODACY_PROJECT_TOKEN == ''
+        run: echo "CODACY_PROJECT_TOKEN is not configured; skipping Codacy coverage upload."
