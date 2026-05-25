@@ -16,26 +16,40 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  unit-tests:
-    name: Unit Tests (${{ matrix.service }})
+  unit-tests-aimer-web:
+    name: Unit Tests (aimer-web)
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          - service: aimer-web
-            working-directory: services/aimer-web
-            test-command: |
-              SECRET_KEY=ci-secret-key DEBUG=true uv run python manage.py test website --testrunner django.test.runner.DiscoverRunner --verbosity 1
-              SECRET_KEY=ci-secret-key DEBUG=true uv run python -m pytest -q RAG/tests
-          - service: MAGE
-            working-directory: services/MAGE
-            test-command: |
-              uv run python -m pytest -q -m "not slow" tests
-          - service: FARM
-            working-directory: services/FARM
-            test-command: |
-              DJANGO_SECRET_KEY=ci-secret-key DJANGO_DEBUG=true uv run python -m pytest -q tests
+    env:
+      UV_LINK_MODE: copy
+      SECRET_KEY: ci-secret-key
+      DEBUG: "true"
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Setup uv
+        uses: astral-sh/setup-uv@v7
+        with:
+          enable-cache: true
+
+      - name: Install Python 3.13
+        run: uv python install 3.13
+
+      - name: Install aimer-web dependencies
+        working-directory: services/aimer-web
+        run: uv sync --locked
+
+      - name: Run aimer-web Django tests
+        working-directory: services/aimer-web
+        run: uv run --locked python manage.py test website --testrunner django.test.runner.DiscoverRunner --verbosity 1
+
+      - name: Run aimer-web RAG tests
+        working-directory: services/aimer-web
+        run: uv run --locked python -m pytest -q RAG/tests
+
+  unit-tests-mage:
+    name: Unit Tests (MAGE)
+    runs-on: ubuntu-latest
     env:
       UV_LINK_MODE: copy
     steps:
@@ -50,14 +64,40 @@ jobs:
       - name: Install Python 3.13
         run: uv python install 3.13
 
-      - name: Install service dependencies
-        working-directory: ${{ matrix.working-directory }}
-        run: uv sync --frozen
+      - name: Install MAGE dependencies
+        working-directory: services/MAGE
+        run: uv sync --locked
 
-      - name: Run service unit tests
-        working-directory: ${{ matrix.working-directory }}
-        run: |
-          ${{ matrix.test-command }}
+      - name: Run MAGE unit tests
+        working-directory: services/MAGE
+        run: uv run --locked python -m pytest -q -m "not slow" tests
+
+  unit-tests-farm:
+    name: Unit Tests (FARM)
+    runs-on: ubuntu-latest
+    env:
+      UV_LINK_MODE: copy
+      DJANGO_SECRET_KEY: ci-secret-key
+      DJANGO_DEBUG: "true"
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Setup uv
+        uses: astral-sh/setup-uv@v7
+        with:
+          enable-cache: true
+
+      - name: Install Python 3.13
+        run: uv python install 3.13
+
+      - name: Install FARM dependencies
+        working-directory: services/FARM
+        run: uv sync --locked
+
+      - name: Run FARM unit tests
+        working-directory: services/FARM
+        run: uv run --locked python -m pytest -q tests
 
   deployment-config:
     name: Deployment Config
@@ -75,7 +115,9 @@ jobs:
     name: Docker Smoke (${{ matrix.service }})
     runs-on: ubuntu-latest
     needs:
-      - unit-tests
+      - unit-tests-aimer-web
+      - unit-tests-mage
+      - unit-tests-farm
       - deployment-config
     strategy:
       fail-fast: false
