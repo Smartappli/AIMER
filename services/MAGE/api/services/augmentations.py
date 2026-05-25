@@ -23,7 +23,10 @@ async def healthcheck() -> dict[str, str]:
     return {"augmentations_service": "UP"}
 
 
-@router.get("/augmentations")
+@router.get(
+    "/augmentations",
+    responses={503: {"description": "Albumentations is unavailable"}},
+)
 async def augmentation_presets() -> dict[str, object]:
     """
     Return baseline augmentation presets suitable for image datasets.
@@ -68,7 +71,14 @@ async def augmentation_presets() -> dict[str, object]:
     }
 
 
-@router.get("/augmentations/{preset_name}/validate")
+@router.get(
+    "/augmentations/{preset_name}/validate",
+    responses={
+        404: {"description": "Unknown augmentation preset"},
+        500: {"description": "Invalid preset structure"},
+        503: {"description": "Albumentations is unavailable"},
+    },
+)
 async def validate_preset(preset_name: str) -> dict[str, object]:
     """
     Validate that a preset uses transforms available in Albumentations.
