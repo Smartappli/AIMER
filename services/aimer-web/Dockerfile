@@ -14,7 +14,7 @@ RUN pip install --no-cache-dir --upgrade pip \
 # Files copy
 COPY pyproject.toml uv.lock ./
 
-RUN uv sync --frozen --no-dev
+RUN uv sync --locked --no-dev
 
 COPY . ${APP_HOME}
 
@@ -29,4 +29,4 @@ EXPOSE 8000
 ENTRYPOINT ["/entrypoint.sh"]
 
 # gunicorn
-CMD ["uv", "run", "--frozen", "--no-dev", "granian", "--interface", "asgi", "--host", "0.0.0.0", "--port", "8000", "--workers", "4", "AIMER.asgi:application"]
+CMD ["uv", "run", "--locked", "--no-dev", "granian", "--interface", "asgi", "--host", "0.0.0.0", "--port", "8000", "--workers", "4", "AIMER.asgi:application"]

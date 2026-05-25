@@ -14,7 +14,7 @@ RUN pip install --no-cache-dir --upgrade pip \
 
 # Déps Python
 COPY pyproject.toml uv.lock ./
-RUN uv sync --frozen --no-dev
+RUN uv sync --locked --no-dev
 
 # Code
 COPY . ${APP_HOME}
@@ -27,4 +27,4 @@ USER appuser
 EXPOSE 10000
 
 # module:variable ASGI
-CMD ["uv", "run", "--frozen", "--no-dev", "granian", "--interface", "asgi", "--host", "0.0.0.0", "--port", "10000", "--workers", "4", "api.main:app"]
+CMD ["uv", "run", "--locked", "--no-dev", "granian", "--interface", "asgi", "--host", "0.0.0.0", "--port", "10000", "--workers", "4", "api.main:app"]
