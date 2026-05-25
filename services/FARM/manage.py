@@ -20,7 +20,7 @@ def main() -> None:
         ImportError: If Django is not installed in the current environment.
 
     """
-    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "framework.settings")
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "FARM.settings")
     if execute_from_command_line is None:
         raise ImportError from DJANGO_IMPORT_ERROR
     execute_from_command_line(sys.argv)
