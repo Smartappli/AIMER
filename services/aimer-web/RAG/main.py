@@ -36,10 +36,8 @@ OUTPUT_TABLES_DIR = os.getenv("RAG_TABLES_DIR", "data/tables")
 COLLECTION_NAME = os.getenv("RAG_COLLECTION_NAME", "rag_docs")
 
 MODEL_NAME = os.getenv("RAG_VISION_MODEL", "qwen3-vl:8b")
-LLM_MODEL = os.getenv("RAG_LLM_MODEL", "qwen3:8b")
 EMBEDDING_MODEL = os.getenv("RAG_EMBEDDING_MODEL", "qwen3-embedding:8b")
 SPARSE_EMBEDDING_MODEL = os.getenv("RAG_SPARSE_EMBEDDING_MODEL", "Qdrant/bm25")
-RERANKER_MODEL = "Krakekai/qwen3-reranker-8b"
 OLLAMA_BASE_URL = os.getenv("OLLAMA_BASE_URL", "http://localhost:11434")
 QDRANT_URL = os.getenv("QDRANT_URL", "http://localhost:6333")
 QDRANT_API_KEY = os.getenv("QDRANT_API_KEY")

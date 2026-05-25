@@ -11,3 +11,10 @@ logs.log
 .coverage
 htmlcov/
 
+RAG/data/pdfs/
+RAG/data/figures/
+RAG/data/figures_description/
+RAG/data/markdown/
+RAG/data/tables/
+
+tests/
