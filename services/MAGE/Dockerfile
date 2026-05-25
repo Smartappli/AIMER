@@ -29,4 +29,6 @@ USER appuser
 
 EXPOSE 10000
 
-CMD ["uv", "run", "--locked", "--no-dev", "--no-build", "granian", "--interface", "asgi", "--host", "0.0.0.0", "--port", "10000", "--workers", "4", "api.main:app"]
+CMD ["uv", "run", "--locked", "--no-dev", "--no-build", \
+    "granian", "--interface", "asgi", "--host", "0.0.0.0", \
+    "--port", "10000", "--workers", "4", "api.main:app"]
