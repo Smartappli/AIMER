@@ -26,7 +26,7 @@
                 <div class="w-100 d-flex justify-content-center">
                     <img src="{% static 'img/illustrations/boy-verify-email-' %}{{ COOKIES.theme|default:theme }}.png"
                          class="img-fluid"
-                         alt="Login image"
+                         alt="Email verification illustration"
                          width="700"
                          height="700"
                          data-app-dark-img="illustrations/boy-verify-email-dark.png"
@@ -54,10 +54,9 @@
                            class="btn btn-primary w-100 my-5"
                            href="{% url 'send-verification' %}">
                             <span id="btnText" class="me-1">{% trans "Verify Email" %}</span>
-                            <span id="btnLoader"
-                                  class="spinner-border spinner-border-sm visually-hidden ms-2"
-                                  role="status"
-                                  aria-hidden="true"></span>
+                             <output id="btnLoader"
+                                     class="spinner-border spinner-border-sm visually-hidden ms-2"
+                                     aria-hidden="true"></output>
                         </a>
                         <a class="btn btn-primary w-100" href="{% url 'index' %}">{% trans "Back" %}</a>
                     {% else %}
@@ -68,10 +67,9 @@
                                class="text-center"
                                href="{% url 'send-verification' %}">
                                 <span id="btnText" class="me-1">{% trans "Resend" %}</span>
-                                <span id="btnLoader"
-                                      class="spinner-border spinner-border-sm visually-hidden"
-                                      role="status"
-                                      aria-hidden="true"></span>
+                                 <output id="btnLoader"
+                                         class="spinner-border spinner-border-sm visually-hidden"
+                                         aria-hidden="true"></output>
                             </a>
                         </p>
                     {% endif %}

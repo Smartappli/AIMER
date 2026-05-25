@@ -37,7 +37,7 @@
                 <div class="w-100 d-flex justify-content-center">
                     <img src="{% static 'img/illustrations/girl-with-laptop-' %}{{ COOKIES.theme|default:theme }}.png"
                          class="img-fluid scaleX-n1-rtl"
-                         alt="Login image"
+                         alt="Registration illustration"
                          width="700"
                          height="700"
                          data-app-dark-img="illustrations/girl-with-laptop-dark.png"
@@ -98,10 +98,9 @@
                         </div>
                         <button id="btnSubmit" class="btn btn-primary w-100" type="submit">
                             <span id="btnText" class="me-1">{% trans "Sign up" %}</span>
-                            <span id="btnLoader"
-                                  class="spinner-border spinner-border-sm visually-hidden ms-2"
-                                  role="status"
-                                  aria-hidden="true"></span>
+                            <output id="btnLoader"
+                                    class="spinner-border spinner-border-sm visually-hidden ms-2"
+                                    aria-hidden="true"></output>
                         </button>
                     </form>
                     <p class="text-center">
