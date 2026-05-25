@@ -26,10 +26,14 @@ dependencies = [
     "pypdf==6.10.2",
     "qdrant-client==1.18.0",
     "tqdm==4.67.3",
-    "pytest==9.0.3",
-    "coverage==7.14.0",
 ]
 
 
 [project.scripts]
 verify-openrag = "RAG.verify_openrag:main"
+
+[dependency-groups]
+dev = [
+    "coverage==7.14.0",
+    "pytest==9.0.3",
+]

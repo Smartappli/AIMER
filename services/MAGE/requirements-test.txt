@@ -1,5 +1,0 @@
-coverage==7.14.0
-fastapi[standard-no-fastapi-cloud-cli]==0.136.1
-httpx==0.28.1
-pre-commit==4.6.0
-pytest==9.0.3

@@ -25,3 +25,10 @@ dependencies = [
   "pycaret==4.0.0a8",
   "granian==2.7.4",
 ]
+
+[dependency-groups]
+dev = [
+  "coverage==7.14.0",
+  "httpx==0.28.1",
+  "pytest==9.0.3",
+]

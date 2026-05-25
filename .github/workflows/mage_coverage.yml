@@ -44,14 +44,11 @@ jobs:
           cd services/MAGE
           python -m pip install --upgrade pip
           python -m pip install uv
-          python -m uv sync
-          python -m uv pip install -r requirements-test.txt
+          python -m uv sync --frozen
       - name: Coverage Erase
         run: |
           python -m uv --directory services/MAGE run python -m coverage erase
       - name: Coverage Models
-        env:
-          PYTHONPATH: ${{ github.workspace }}/services
         run: |
           python -m uv --directory services/MAGE run python -m coverage run --parallel-mode -m pytest -q -m "not slow" tests
           python -m uv --directory services/MAGE run python -m coverage combine

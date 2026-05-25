@@ -12,7 +12,7 @@ RUN pip install --upgrade pip && pip install uv
 # Files copy
 COPY pyproject.toml uv.lock ./
 
-RUN uv sync --frozen
+RUN uv sync --frozen --no-dev
 
 COPY . ${APP_HOME}
 
@@ -25,4 +25,4 @@ USER appuser
 ENTRYPOINT ["/entrypoint.sh"]
 
 # gunicorn
-CMD ["uv", "run", "granian", "--interface", "asgi", "--host", "0.0.0.0", "--port", "8000", "--workers", "4", "AIMER.asgi:application"]
+CMD ["uv", "run", "--frozen", "--no-dev", "granian", "--interface", "asgi", "--host", "0.0.0.0", "--port", "8000", "--workers", "4", "AIMER.asgi:application"]

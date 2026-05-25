@@ -43,7 +43,6 @@ name = "aimer"
 version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
-    { name = "coverage" },
     { name = "django", extra = ["argon2"] },
     { name = "django-rich" },
     { name = "docling", extra = ["vlm"] },
@@ -63,16 +62,20 @@ dependencies = [
     { name = "packaging" },
     { name = "pydantic" },
     { name = "pypdf" },
-    { name = "pytest" },
     { name = "python-dotenv" },
     { name = "qdrant-client" },
     { name = "tqdm" },
     { name = "transformers" },
 ]
 
+[package.dev-dependencies]
+dev = [
+    { name = "coverage" },
+    { name = "pytest" },
+]
+
 [package.metadata]
 requires-dist = [
-    { name = "coverage", specifier = "==7.14.0" },
     { name = "django", extras = ["argon2"], specifier = ">=6.0.4" },
     { name = "django-rich", specifier = "==2.2.0" },
     { name = "docling", extras = ["vlm"], specifier = "==2.93.0" },
@@ -92,11 +95,16 @@ requires-dist = [
     { name = "packaging", specifier = ">=25.0" },
     { name = "pydantic", specifier = "==2.12.5" },
     { name = "pypdf", specifier = "==6.10.2" },
-    { name = "pytest", specifier = "==9.0.3" },
     { name = "python-dotenv", specifier = "==1.0.1" },
     { name = "qdrant-client", specifier = "==1.18.0" },
     { name = "tqdm", specifier = "==4.67.3" },
     { name = "transformers", specifier = "==5.9.0" },
+]
+
+[package.metadata.requires-dev]
+dev = [
+    { name = "coverage", specifier = "==7.14.0" },
+    { name = "pytest", specifier = "==9.0.3" },
 ]
 
 [[package]]

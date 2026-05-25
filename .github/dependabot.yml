@@ -30,17 +30,6 @@ updates:
     commit-message: *dependency_commit_message
     open-pull-requests-limit: 5
 
-  # Standalone test requirements that are not represented by uv.lock.
-  - package-ecosystem: "pip"
-    directory: "/services/MAGE"
-    exclude-paths:
-      - "pyproject.toml"
-      - "uv.lock"
-    schedule: *weekly_schedule
-    labels: *dependency_labels
-    commit-message: *dependency_commit_message
-    open-pull-requests-limit: 5
-
   # pre-commit hook revisions are configured at the repository root.
   - package-ecosystem: "pre-commit"
     directory: "/"

@@ -8,6 +8,11 @@ dependencies = [
     "granian==2.7.4",
 ]
 
+[dependency-groups]
+dev = [
+    "pytest==9.0.3",
+]
+
 [tool.ruff]
 target-version = "py313"
 

@@ -36,7 +36,6 @@ Dependency automation should mirror the real manifests in the repository:
 | --- | --- |
 | GitHub Actions | `/` for `.github/workflows` |
 | uv | `/`, `/services/aimer-web`, `/services/MAGE`, `/services/FARM` |
-| pip | `/services/MAGE`, limited to standalone requirements files |
 | pre-commit | `/` |
 | Docker | See Docker paths below. |
 | Docker Compose | `/infra/dev-stack` |
