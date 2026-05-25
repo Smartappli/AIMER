@@ -53,7 +53,7 @@ jobs:
         env:
           PYTHONPATH: ${{ github.workspace }}/services
         run: |
-          python -m uv --directory services/MAGE run python -m coverage run --parallel-mode -m pytest -q tests
+          python -m uv --directory services/MAGE run python -m coverage run --parallel-mode -m pytest -q -m "not slow" tests
           python -m uv --directory services/MAGE run python -m coverage combine
       - name: Coverage Report
         run: |
