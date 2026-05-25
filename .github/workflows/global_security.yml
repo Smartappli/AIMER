@@ -47,7 +47,7 @@ jobs:
         run: uv export --locked --no-dev --format requirements-txt --output-file "${RUNNER_TEMP}/${{ matrix.service }}-requirements.txt"
 
       - name: Audit locked dependencies
-        run: uvx pip-audit -r "${RUNNER_TEMP}/${{ matrix.service }}-requirements.txt" --no-deps --vulnerability-service osv
+        run: uvx pip-audit -r "${RUNNER_TEMP}/${{ matrix.service }}-requirements.txt" --no-deps --disable-pip --vulnerability-service osv
 
   bandit:
     name: Bandit (${{ matrix.service }})
