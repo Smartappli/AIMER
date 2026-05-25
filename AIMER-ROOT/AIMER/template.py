@@ -87,6 +87,8 @@ THEME_VARIABLES = {
     "changelog": "https://demos.themeselection.com/sneat-bootstrap-html-django-admin-template/changelog.html",
     "git_repository": "https://github.com/themeselection/sneat-bootstrap-html-django-admin-template",
     "git_repo_access": "https://tools.themeselection.com/github/github-access",
+    "apple_store_url": "https://www.apple.com/app-store/",
+    "google_play_url": "https://play.google.com/store",
     "admin_templates": "https://themeselection.com/item/category/admin-templates/",
     "bootstrap_dashboard": "https://themeselection.com/item/category/bootstrap-admin-templates/",
     "og_title": "Sneat Bootstrap 5 HTML + Django Admin Template by ThemeSelection",

@@ -1,21 +1,9 @@
 [project]
 name = "aimer-workspace"
 version = "0.1.0"
-requires-python = ">=3.14.5"
+requires-python = ">=3.13,<3.14"
 
 dependencies = []
-
-[tool.uv]
-# Limit dependency resolution to Linux/Python 3.13 so workspace locking doesn't
-# fail on unsupported split environments (e.g. macOS + Python 3.14).
-environments = []
-
-[tool.uv.workspace]
-members = [
-  "AIMER-ROOT",
-  "MAGE",
-  "FARM",
-]
 
 [tool.pytest.ini_options]
 markers = [

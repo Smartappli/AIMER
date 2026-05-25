@@ -2,7 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/lab.iml" filepath="$PROJECT_DIR$/.idea/lab.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/aimer.iml" filepath="$PROJECT_DIR$/.idea/aimer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/aimer-workspace.iml" filepath="$PROJECT_DIR$/.idea/aimer-workspace.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/farm.iml" filepath="$PROJECT_DIR$/.idea/farm.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/mage.iml" filepath="$PROJECT_DIR$/.idea/mage.iml" />
     </modules>
   </component>
 </project>

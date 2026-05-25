@@ -90,9 +90,9 @@ fl.client.start_client(server_address="0.0.0.0:8081", client=client)
 
 ## Dépendances clés
 
-- `flwr==1.29.0` pour les clients/serveurs fédérés.
+- `flwr==1.30.0` pour les clients/serveurs fédérés.
 - `django` / `granian` pour l'environnement applicatif.
 
 
 > Note ops: après mise à jour de version Flower, régénérez `uv.lock` avec:
-> `uv lock --upgrade-package flwr==1.29.0`
+> `uv lock --upgrade-package flwr==1.30.0`

@@ -1,7 +1,8 @@
 # AIMER Workspace
 
 AIMER is a Python monorepo that groups three complementary projects behind a
-single quality, dependency, and CI/CD surface.
+single quality and CI/CD surface. Runtime dependencies are locked per package so
+the web, ML/API, and federated-learning services can evolve independently.
 
 ## Repository Map
 
@@ -12,7 +13,7 @@ single quality, dependency, and CI/CD surface.
 - `FARM/`: supporting Django project for data and platform workflows.
 - `.github/`: GitHub Actions, Dependabot, release automation, and issue
   templates.
-- `pyproject.toml`: workspace-level Python and tooling configuration.
+- `pyproject.toml`: repository-level Python and tooling configuration.
 - `renovate.json`: Renovate dependency automation configuration.
 
 See [docs/PROJECT_STRUCTURE.md](docs/PROJECT_STRUCTURE.md) for the detailed
@@ -39,8 +40,9 @@ layout and maintenance notes.
 
 1. Clone the repository.
 2. Choose the package you want to work on: `AIMER-ROOT`, `MAGE`, or `FARM`.
-3. Install dependencies from that package directory with the local `uv.lock`.
-4. Run package-specific tests and linters before opening a pull request.
+3. Use Python 3.13.
+4. Install dependencies from that package directory with the local `uv.lock`.
+5. Run package-specific tests and linters before opening a pull request.
 
 Each package may carry its own README and operational constraints. Prefer local
 package documentation for day-to-day commands.

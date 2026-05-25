@@ -1,6 +1,6 @@
 # Project Structure
 
-This repository is a Python monorepo. The current readable boundary is by
+This repository is a Python 3.13 monorepo. The current readable boundary is by
 product area, not by shared source tree.
 
 ## Top-Level Areas
@@ -21,6 +21,12 @@ product area, not by shared source tree.
   configs.
 
 ## Dependency Automation
+
+The repository root owns shared tooling configuration. Runtime dependencies are
+resolved independently in each product directory because the Django, ML/API, and
+federated-learning services do not need a single compatible dependency graph.
+Keep package-level `pyproject.toml` and `uv.lock` files authoritative for local
+development, Docker builds, and CI jobs.
 
 Dependency automation should mirror the real manifests in the repository:
 
@@ -60,6 +66,14 @@ out of version control:
 
 The root `.gitignore` already covers these patterns. If any of them are tracked
 in Git, remove them from the index instead of expanding the ignore list.
+
+## RAG Data
+
+`AIMER-ROOT/RAG` is currently an application-internal RAG module used by the
+Django app. Keep code, tests, scripts, and small metadata indexes in the module.
+Large source corpora such as PDFs should be treated as external datasets or
+release artifacts. If large files are already tracked, remove them from the Git
+index in a dedicated change after agreeing on the replacement storage location.
 
 ## Restructuring Rules
 

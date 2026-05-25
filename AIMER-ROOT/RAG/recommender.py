@@ -70,8 +70,16 @@ STOPWORDS = {
 }
 
 MIN_TOKEN_LENGTH = 2
+MIN_ALIAS_LENGTH = 3
 MIN_HYBRID_SEARCH_K = 9
 MIN_RERANK_TOP_K = 8
+CLASSIFICATION_BASELINE_HINTS = (
+    "resnet",
+    "efficientnet",
+    "convnext",
+    "mobilenet",
+    "vit",
+)
 
 
 class OpenRAGRuntimeUnavailableError(RuntimeError):
@@ -255,7 +263,7 @@ def _build_model_catalog(pdf_directory: Path | None = None) -> dict[str, set[str
                 _normalize(model_name.split("(")[0]),
                 _normalize(model_name.replace("-", " ")),
             }
-            aliases = {alias for alias in aliases if alias}
+            aliases = {alias for alias in aliases if len(alias) >= MIN_ALIAS_LENGTH}
             if aliases:
                 catalog[model_name] = aliases
 
@@ -263,10 +271,11 @@ def _build_model_catalog(pdf_directory: Path | None = None) -> dict[str, set[str
         model_name = article["model_name"]
         aliases = {
             _normalize(model_name),
+            _normalize(model_name.split("(")[0]),
             _normalize(model_name.replace("-", " ")),
             _normalize(model_name.replace("_", " ")),
         }
-        aliases = {alias for alias in aliases if alias}
+        aliases = {alias for alias in aliases if len(alias) >= MIN_ALIAS_LENGTH}
         if aliases:
             catalog.setdefault(model_name, set()).update(aliases)
 
@@ -555,14 +564,22 @@ def _fallback_recommendations(
         List of fallback recommendation items.
 
     """
-    lexical_hits = [
-        model
-        for model in catalog
-        if any(token in model.lower() for token in profile.query_tokens)
-    ]
-    fallback_models = (
-        lexical_hits[:top_k] if lexical_hits else list(catalog.keys())[:top_k]
-    )
+    ranked_models: list[tuple[float, int, str]] = []
+    for index, model in enumerate(catalog):
+        lowered = model.lower()
+        score = sum(1.0 for token in profile.query_tokens if token in lowered)
+        if "classification" in profile.tasks:
+            for rank, hint in enumerate(CLASSIFICATION_BASELINE_HINTS):
+                if hint in lowered:
+                    score += max(0.2, 1.2 - (rank * 0.2))
+                    break
+        ranked_models.append((score, index, model))
+
+    ranked_models.sort(key=lambda item: (-item[0], item[1]))
+    if ranked_models and ranked_models[0][0] > 0:
+        fallback_models = [model for _, _, model in ranked_models[:top_k]]
+    else:
+        fallback_models = list(catalog.keys())[:top_k]
 
     return [
         RecommendationItem(
