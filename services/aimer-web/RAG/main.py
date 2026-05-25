@@ -292,7 +292,7 @@ def compute_file_hash(file_path: Path) -> str:
     return sha256_hash.hexdigest()
 
 
-def get_processed_hashes() -> set[str]:
+def get_processed_hashes(vector_store: QdrantVectorStore) -> set[str]:
     """
     Retrieve already indexed file hashes from the vector store.
 
@@ -362,7 +362,7 @@ def generate_image_description(image_path: Path) -> str:
     )
     system_prompt = SystemMessage("You are an AI Assistant")
 
-    response = model.invoke([system_prompt, message])
+    response = get_vision_model().invoke([system_prompt, message])
 
     return response.text
 
@@ -409,34 +409,11 @@ def extract_metadata_from_filename(filename: str) -> dict[str, str]:
     return {"doc_month": parts[0], "doc_year": parts[1], "eod_type": parts[2]}
 
 
-model = ChatOllama(model=MODEL_NAME, base_url="http://localhost:11434")
-
-llm = ChatOllama(model=LLM_MODEL, base_url="http://localhost:11434")
-
-embeddings = OllamaEmbeddings(
-    model=EMBEDDING_MODEL,
-    base_url="http://localhost:11434",
-)
-
-sparse_embeddings = FastEmbedSparse(model_name="Qdrant/bm25")
-
-qdrant_client = QdrantClient(url="http://localhost:6333", api_key="azertyuiop")
-
-vector_store = QdrantVectorStore.from_documents(
-    documents=[],
-    embedding=embeddings,
-    sparse_embedding=sparse_embeddings,
-    url="http://localhost:6333",
-    api_key="azertyuiop",
-    collection_name=COLLECTION_NAME,
-    retrieval_mode=RetrievalMode.HYBRID,
-    force_recreate=False,
-)
-
-processed_hashes = get_processed_hashes()
-
-
-def ingest_file_in_db(file_path: Path, processed_hashes: set[str]) -> None:
+def ingest_file_in_db(
+    file_path: Path,
+    processed_hashes: set[str],
+    vector_store: QdrantVectorStore,
+) -> None:
     """Ingest a markdown-derived file into the vector database."""
     file_hash = compute_file_hash(file_path)
     if file_hash in processed_hashes:
@@ -492,24 +469,34 @@ def ingest_file_in_db(file_path: Path, processed_hashes: set[str]) -> None:
     processed_hashes.add(file_hash)
 
 
-data_path = Path(DATA_DIR)
-pdf_files = data_path.glob("*.pdf")
+def run_ingestion() -> object:
+    """Extract configured PDFs and ingest generated Markdown into Qdrant."""
+    ensure_output_directories()
+    vector_store = get_vector_store()
+    processed_hashes = get_processed_hashes(vector_store)
 
-for pdf_file in pdf_files:
-    extract_pdf_content(pdf_file)
+    data_path = Path(DATA_DIR)
+    pdf_files = data_path.glob("*.pdf")
 
-    images_path = Path(OUTPUT_FIGURES_DIR) / pdf_file.stem
-    image_files = list(images_path.rglob("*.png"))
+    for pdf_file in pdf_files:
+        extract_pdf_content(pdf_file)
 
-    for image_path in tqdm(image_files):
-        response = generate_and_save_description(image_path)
+        images_path = Path(OUTPUT_FIGURES_DIR) / pdf_file.stem
+        image_files = list(images_path.rglob("*.png"))
 
-base_path = Path(OUTPUT_MD_DIR)
-all_md_files = list(base_path.rglob("*.md"))
-all_md_files.extend(Path(OUTPUT_TABLES_DIR).rglob("*.md"))
-all_md_files.extend(Path(OUTPUT_DESCRIPTIONS_DIR).rglob("*.md"))
+        for image_path in tqdm(image_files):
+            generate_and_save_description(image_path)
 
-for md_file in tqdm(all_md_files):
-    ingest_file_in_db(md_file, processed_hashes)
+    base_path = Path(OUTPUT_MD_DIR)
+    all_md_files = list(base_path.rglob("*.md"))
+    all_md_files.extend(Path(OUTPUT_TABLES_DIR).rglob("*.md"))
+    all_md_files.extend(Path(OUTPUT_DESCRIPTIONS_DIR).rglob("*.md"))
 
-collection_info = vector_store.client.get_collection_info(COLLECTION_NAME)
+    for md_file in tqdm(all_md_files):
+        ingest_file_in_db(md_file, processed_hashes, vector_store)
+
+    return vector_store.client.get_collection_info(COLLECTION_NAME)
+
+
+if __name__ == "__main__":
+    run_ingestion()
