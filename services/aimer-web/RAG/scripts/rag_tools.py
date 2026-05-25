@@ -22,6 +22,7 @@ OLLAMA_BASE_URL = os.getenv("OLLAMA_BASE_URL", "http://localhost:11434")
 # Initialize LLM
 llm = ChatOllama(model=LLM_MODEL, base_url=OLLAMA_BASE_URL)
 
+
 def extract_filters(user_query: str) -> dict[str, Any]:
     """
     Extract metadata filters from a user query using structured LLM output.

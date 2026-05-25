@@ -601,7 +601,11 @@ def _resolve_strict_openrag(strict_openrag: bool | None) -> bool:
     """Resolve strict OpenRAG mode from explicit argument or environment."""
     if strict_openrag is not None:
         return strict_openrag
-    return os.getenv("RAG_STRICT_OPENRAG", "1").strip().lower() not in {"0", "false", "no"}
+    return os.getenv("RAG_STRICT_OPENRAG", "1").strip().lower() not in {
+        "0",
+        "false",
+        "no",
+    }
 
 
 def recommend_models_for_query(

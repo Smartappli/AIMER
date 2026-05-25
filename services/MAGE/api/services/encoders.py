@@ -24,7 +24,9 @@ async def list_encoders() -> dict[str, list[str] | int]:
         smp = import_module("segmentation_models_pytorch")
         smp_encoders = smp.encoders
     except Exception as exc:
-        raise HTTPException(status_code=503, detail="segmentation_models_pytorch is unavailable") from exc
+        raise HTTPException(
+            status_code=503, detail="segmentation_models_pytorch is unavailable"
+        ) from exc
 
     names = sorted(smp_encoders.get_encoder_names())
     timm_backed = [name for name in names if name.startswith("tu-")]

@@ -10,7 +10,7 @@ permissions:
   packages: write
 
 concurrency:
-  group: aimer-docker-builder-${{ github.event_name == 'pull_request' && format('{0}-{1}', github.workflow, github.event.pull_request.number) || github.workflow_ref }}
+  group: farm-docker-builder-${{ github.event_name == 'pull_request' && format('{0}-{1}', github.workflow, github.event.pull_request.number) || github.workflow_ref }}
   cancel-in-progress: true
 
 jobs:
@@ -32,6 +32,9 @@ jobs:
           large-packages: true
           docker-images: false
           swap-storage: true
+
+      - name: Checkout code
+        uses: actions/checkout@v6
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v4

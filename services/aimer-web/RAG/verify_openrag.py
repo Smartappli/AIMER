@@ -31,7 +31,6 @@ def runtime_status() -> RuntimeStatusPayload:
     return {"ready": ready, "status": status}
 
 
-
 def format_report() -> str:
     """Build a human-readable OpenRAG readiness report."""
     payload = runtime_status()

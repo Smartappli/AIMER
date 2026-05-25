@@ -11,6 +11,7 @@ from packaging.version import InvalidVersion, Version
 try:
     from langchain_core.documents import Document
 except ImportError:  # pragma: no cover - only used in minimal environments.
+
     class Document:  # type: ignore[no-redef]
         """Fallback Document type when langchain is unavailable."""
 
@@ -33,12 +34,13 @@ def _assert_supported_openrag_version() -> None:
     try:
         installed_version = Version(installed)
     except InvalidVersion as exc:
-        raise RuntimeError(f"Unable to parse OpenRAG version string: {installed}.") from exc
+        raise RuntimeError(
+            f"Unable to parse OpenRAG version string: {installed}."
+        ) from exc
 
     if installed_version < MIN_OPENRAG_VERSION:
         raise RuntimeError(
-            f"OpenRAG>={MIN_OPENRAG_VERSION} "
-            f"is required, found {installed}.",
+            f"OpenRAG>={MIN_OPENRAG_VERSION} is required, found {installed}.",
         )
 
 
@@ -58,7 +60,9 @@ def _to_langchain_documents(results: list[Any]) -> list[Document]:
     return normalized
 
 
-def _search_openrag(retriever: Any, query: str, k: int, filters: dict[str, Any]) -> list[Any]:
+def _search_openrag(
+    retriever: Any, query: str, k: int, filters: dict[str, Any]
+) -> list[Any]:
     """Call OpenRAG search with backward-compatible signatures."""
     attempts = (
         {"query": query, "top_k": k, "metadata_filters": filters},
@@ -71,7 +75,9 @@ def _search_openrag(retriever: Any, query: str, k: int, filters: dict[str, Any])
             return retriever.search(**params)
         except TypeError:
             continue
-    raise RuntimeError("OpenRAG retriever.search signature is incompatible with supported variants.")
+    raise RuntimeError(
+        "OpenRAG retriever.search signature is incompatible with supported variants."
+    )
 
 
 def openrag_hybrid_search(

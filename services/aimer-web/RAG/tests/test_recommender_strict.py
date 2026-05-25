@@ -19,7 +19,9 @@ def test_recommender_strict_mode_raises_when_retrieval_fallback(monkeypatch) -> 
     except OpenRAGRuntimeUnavailableError as exc:
         assert "OpenRAG retrieval is required" in str(exc)
     else:
-        raise AssertionError("Expected OpenRAGRuntimeUnavailableError in strict OpenRAG mode")
+        raise AssertionError(
+            "Expected OpenRAGRuntimeUnavailableError in strict OpenRAG mode"
+        )
 
 
 def test_resolve_strict_openrag_uses_env_default_true(monkeypatch) -> None:

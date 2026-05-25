@@ -606,9 +606,13 @@ class RagRecommendationApiTests(BaseTestCase):
         self._check_equal(call_kwargs["strict_openrag"], True)
 
     @patch("website.views.recommend_models_for_query")
-    def test_recommendation_api_returns_503_when_openrag_unavailable(self, mock_recommend) -> None:
+    def test_recommendation_api_returns_503_when_openrag_unavailable(
+        self, mock_recommend
+    ) -> None:
         """Ensure runtime retrieval errors are surfaced as HTTP 503."""
-        mock_recommend.side_effect = OpenRAGRuntimeUnavailableError("OpenRAG retrieval is required")
+        mock_recommend.side_effect = OpenRAGRuntimeUnavailableError(
+            "OpenRAG retrieval is required"
+        )
 
         response = self.client.get(
             "/api/rag/recommend/",
@@ -617,7 +621,6 @@ class RagRecommendationApiTests(BaseTestCase):
 
         self._check_equal(response.status_code, 503)
         self._check("error" in response.json())
-
 
     def test_rag_health_api_requires_authentication(self) -> None:
         """Ensure runtime health endpoint is not public."""
@@ -652,6 +655,7 @@ class RagRecommendationApiTests(BaseTestCase):
         self._check("ready" in payload)
         self._check("status" in payload)
         self._check("openrag_installed" in payload["status"])
+
 
 class OmopArchitectureTests(BaseTestCase):
     """Tests for OMOP/SNOMED metadata enrichment helpers."""
