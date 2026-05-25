@@ -6,6 +6,7 @@ from __future__ import annotations
 import json
 from typing import Any
 from urllib.error import HTTPError, URLError
+from urllib.parse import urlsplit
 from urllib.request import Request, urlopen
 
 from django.conf import settings
@@ -63,6 +64,10 @@ def _remote_json_request(
     base_url = _rag_service_url()
     if not base_url:
         msg = "RAG_SERVICE_URL is not configured."
+        raise RagServiceUnavailableError(msg)
+    parsed_url = urlsplit(base_url)
+    if parsed_url.scheme not in {"http", "https"} or not parsed_url.netloc:
+        msg = "RAG_SERVICE_URL must be an HTTP(S) URL."
         raise RagServiceUnavailableError(msg)
 
     data = None
