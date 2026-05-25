@@ -116,7 +116,7 @@ jobs:
         run: |
           cd services/aimer-web
           python -m pip install uv
-          uv sync --active
+          uv sync --locked
 
       - uses: pypa/gh-action-pip-audit@v1.1.0
         with:
