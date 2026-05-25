@@ -159,6 +159,7 @@ cython_debug/
 # Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
 
 # User-specific stuff
+.idea/
 .idea/**/workspace.xml
 .idea/**/tasks.xml
 .idea/**/usage.statistics.xml
@@ -178,6 +179,13 @@ cython_debug/
 .idea/**/sqlDataSources.xml
 .idea/**/dynamic.xml
 .idea/**/uiDesigner.xml
+
+# Large local RAG datasets and generated extraction outputs
+services/aimer-web/RAG/data/pdfs/
+services/aimer-web/RAG/data/figures/
+services/aimer-web/RAG/data/figures_description/
+services/aimer-web/RAG/data/markdown/
+services/aimer-web/RAG/data/tables/
 .idea/**/dbnavigator.xml
 
 # Gradle

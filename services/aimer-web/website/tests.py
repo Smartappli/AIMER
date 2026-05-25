@@ -23,7 +23,7 @@ from django.test import RequestFactory, TestCase
 from django.utils.safestring import SafeString
 from langchain_core.documents import Document
 from RAG.omop import build_omop_metadata
-from RAG.recommender import OpenRAGRuntimeUnavailableError, recommend_models_for_query
+from RAG.recommender import recommend_models_for_query
 from RAG.timm_articles import (
     build_timm_article_index_from_pdfs,
     ensure_timm_article_index_is_fresh,
@@ -36,6 +36,7 @@ from templates.layout.bootstrap.layout_horizontal import (
 )
 from templates.layout.bootstrap.layout_vertical import TemplateBootstrapLayoutVertical
 
+from website.rag_client import RagServiceUnavailableError
 from website.views import (
     DashboardView,
     FrontPagesView,
@@ -575,17 +576,15 @@ class RagRecommendationApiTests(BaseTestCase):
         response = self.client.get("/api/rag/recommend/")
         self._check_equal(response.status_code, 400)
 
-    @patch("website.views.recommend_models_for_query")
+    @patch("website.views.recommend_models")
     def test_recommendation_api_returns_payload(self, mock_recommend) -> None:
         """Ensure valid requests return recommendation payload in strict OpenRAG mode."""
-        mock_recommend.return_value = SimpleNamespace(
-            model_dump=lambda: {
-                "query": "modèles segmentation cerveau MRI",
-                "query_profile": {"omop_modality_concept_ids": [77477000]},
-                "recommended_models": [{"model_name": "ResNet (v1b-v1.5)"}],
-                "safety_notice": "test",
-            },
-        )
+        mock_recommend.return_value = {
+            "query": "modèles segmentation cerveau MRI",
+            "query_profile": {"omop_modality_concept_ids": [77477000]},
+            "recommended_models": [{"model_name": "ResNet (v1b-v1.5)"}],
+            "safety_notice": "test",
+        }
 
         response = self.client.get(
             "/api/rag/recommend/",
@@ -605,13 +604,13 @@ class RagRecommendationApiTests(BaseTestCase):
         call_kwargs = mock_recommend.call_args.kwargs
         self._check_equal(call_kwargs["strict_openrag"], True)
 
-    @patch("website.views.recommend_models_for_query")
+    @patch("website.views.recommend_models")
     def test_recommendation_api_returns_503_when_openrag_unavailable(
         self, mock_recommend
     ) -> None:
         """Ensure runtime retrieval errors are surfaced as HTTP 503."""
-        mock_recommend.side_effect = OpenRAGRuntimeUnavailableError(
-            "OpenRAG retrieval is required"
+        mock_recommend.side_effect = RagServiceUnavailableError(
+            "OpenRAG retrieval is required",
         )
 
         response = self.client.get(

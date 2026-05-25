@@ -132,6 +132,17 @@ jobs:
             target-port: "8000"
             health-url: http://127.0.0.1:18000/healthz/
             run-env: -e SECRET_KEY=ci-secret-key -e DEBUG=true -e ALLOWED_HOSTS=localhost,127.0.0.1 -e RAG_VERIFY_ON_START=0
+            run-command: ""
+          - service: aimer-rag
+            context: ./services/aimer-web
+            dockerfile: ./services/aimer-web/Dockerfile.rag
+            image: aimer-rag-smoke:ci
+            container: aimer-rag-smoke
+            host-port: "18002"
+            target-port: "8000"
+            health-url: http://127.0.0.1:18002/healthz
+            run-env: -e RUN_DJANGO_MIGRATIONS=0 -e RAG_VERIFY_ON_START=0
+            run-command: ""
           - service: MAGE
             context: ./services/MAGE
             dockerfile: ./services/MAGE/Dockerfile
@@ -141,6 +152,7 @@ jobs:
             target-port: "10000"
             health-url: http://127.0.0.1:10000/healthz
             run-env: ""
+            run-command: ""
           - service: FARM
             context: ./services/FARM
             dockerfile: ./services/FARM/Dockerfile
@@ -150,6 +162,7 @@ jobs:
             target-port: "8000"
             health-url: http://127.0.0.1:18001/healthz/
             run-env: -e DJANGO_SECRET_KEY=ci-secret-key -e DJANGO_DEBUG=true -e DJANGO_ALLOWED_HOSTS=localhost,127.0.0.1
+            run-command: ""
     steps:
       - name: Free Disk Space (Ubuntu)
         uses: jlumbroso/free-disk-space@v1.3.1
@@ -183,12 +196,13 @@ jobs:
           HEALTH_URL: ${{ matrix.health-url }}
           HOST_PORT: ${{ matrix.host-port }}
           IMAGE: ${{ matrix.image }}
+          RUN_COMMAND: ${{ matrix.run-command }}
           RUN_ENV: ${{ matrix.run-env }}
           TARGET_PORT: ${{ matrix.target-port }}
         run: |
           set -euo pipefail
 
-          docker run -d --name "${CONTAINER}" ${RUN_ENV} -p "${HOST_PORT}:${TARGET_PORT}" "${IMAGE}"
+          docker run -d --name "${CONTAINER}" ${RUN_ENV} -p "${HOST_PORT}:${TARGET_PORT}" "${IMAGE}" ${RUN_COMMAND}
 
           cleanup() {
             status=$?

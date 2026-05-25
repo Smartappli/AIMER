@@ -6,7 +6,8 @@ The repository is organized as a service-first monorepo.
 
 | Service | Path | Runtime | Responsibility |
 | --- | --- | --- | --- |
-| AIMER Web | `services/aimer-web` | Django/Granian | Web UI, auth, dashboard, and current RAG-facing UI/API |
+| AIMER Web | `services/aimer-web` | Django/Granian | Web UI, auth, dashboard, and RAG-facing UI/API client |
+| AIMER RAG | `services/aimer-web/RAG` | FastAPI/Granian | RAG health, readiness, and recommendation API |
 | MAGE API | `services/MAGE` | FastAPI/Granian/MCP | ML model, encoder, augmentation, and library metadata APIs |
 | FARM | `services/FARM` | Django/Granian/Flower | Federated learning and data workflow primitives |
 | Dev Stack | `infra/dev-stack` | Docker Compose | Local databases, vector stores, workflow engines, and observability |
@@ -25,8 +26,23 @@ The repository is organized as a service-first monorepo.
 
 ## Current Transitional State
 
-`services/aimer-web/RAG` remains inside the web service because Django views and
-tests import it directly. The next clean extraction would be a dedicated RAG
-service with an HTTP API, after the current in-process API has a stable request
-and response contract.
+`services/aimer-web/RAG` is now exposed through `RAG.service:app` as a separate
+HTTP runtime, built with `services/aimer-web/Dockerfile.rag`. Django uses
+`website.rag_client` and will call the remote service when `RAG_SERVICE_URL` is
+set, while retaining a local fallback for development and tests.
 
+This is the first extraction step. The remaining cleanup is to move the RAG
+package into its own service directory or shared package once the HTTP contract
+has stabilized.
+
+## Local App Profile
+
+The optional Docker Compose app profile wires the services together:
+
+```sh
+docker compose --env-file infra/dev-stack/.env -f infra/dev-stack/docker-compose.yml --profile apps up --build
+```
+
+`aimer-web` calls `aimer-rag` through `RAG_SERVICE_URL=http://aimer-rag:8000`.
+`RUN_DJANGO_MIGRATIONS=0` can be set on Django containers when migrations are
+run as a separate deployment job.

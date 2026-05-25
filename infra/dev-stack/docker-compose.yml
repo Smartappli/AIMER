@@ -670,6 +670,76 @@ services:
       start_period: 20s
     restart: always
 
+  # =========================
+  # AIMER application services (optional app profile)
+  # =========================
+  aimer-rag:
+    build:
+      context: ../../services/aimer-web
+      dockerfile: Dockerfile.rag
+    image: aimer-rag:local
+    profiles: ["apps"]
+    env_file: .env
+    environment:
+      RUN_DJANGO_MIGRATIONS: "0"
+      RAG_VERIFY_ON_START: "0"
+      OLLAMA_BASE_URL: ${OLLAMA_BASE_URL:-http://ollama:11434}
+      QDRANT_URL: ${QDRANT_URL:-http://qdrant:6333}
+      OPENRAG_ENDPOINT: ${OPENRAG_ENDPOINT:-}
+    ports:
+      - "${AIMER_RAG_PORT:-18002}:8000"
+    depends_on:
+      qdrant:
+        condition: service_healthy
+      ollama:
+        condition: service_started
+    restart: unless-stopped
+
+  aimer-web:
+    build:
+      context: ../../services/aimer-web
+      dockerfile: Dockerfile
+    image: aimer-web:local
+    profiles: ["apps"]
+    env_file: .env
+    environment:
+      SECRET_KEY: ${SECRET_KEY:-dev-insecure-key-change-me}
+      DEBUG: ${DEBUG:-true}
+      ALLOWED_HOSTS: ${ALLOWED_HOSTS:-localhost,127.0.0.1,aimer-web}
+      RAG_SERVICE_URL: ${RAG_SERVICE_URL:-http://aimer-rag:8000}
+      RUN_DJANGO_MIGRATIONS: ${RUN_DJANGO_MIGRATIONS:-1}
+    ports:
+      - "${AIMER_WEB_PORT:-8000}:8000"
+    depends_on:
+      aimer-rag:
+        condition: service_started
+    restart: unless-stopped
+
+  mage:
+    build:
+      context: ../../services/MAGE
+      dockerfile: Dockerfile
+    image: mage:local
+    profiles: ["apps"]
+    ports:
+      - "${MAGE_PORT:-10000}:10000"
+    restart: unless-stopped
+
+  farm:
+    build:
+      context: ../../services/FARM
+      dockerfile: Dockerfile
+    image: farm:local
+    profiles: ["apps"]
+    environment:
+      DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY:-dev-insecure-key-change-me}
+      DJANGO_DEBUG: ${DJANGO_DEBUG:-true}
+      DJANGO_ALLOWED_HOSTS: ${DJANGO_ALLOWED_HOSTS:-localhost,127.0.0.1,farm}
+      RUN_DJANGO_MIGRATIONS: ${RUN_DJANGO_MIGRATIONS:-1}
+    ports:
+      - "${FARM_PORT:-18001}:8000"
+    restart: unless-stopped
+
 volumes:
   postgres-data:
   pgvector-data:

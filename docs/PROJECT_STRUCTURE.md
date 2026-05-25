@@ -76,6 +76,17 @@ Large source corpora such as PDFs should be treated as external datasets or
 release artifacts. If large files are already tracked, remove them from the Git
 index in a dedicated change after agreeing on the replacement storage location.
 
+Runtime images exclude the local RAG corpora and generated extraction outputs.
+The bundled `RAG/data/timm_model_articles.json` seed index is the lightweight
+fallback that should remain in Git. Configure ingestion/runtime integrations
+through environment variables instead of editing code:
+
+- `RAG_PDF_DIR`, `RAG_MARKDOWN_DIR`, `RAG_FIGURES_DIR`,
+  `RAG_FIGURE_DESCRIPTIONS_DIR`, `RAG_TABLES_DIR`
+- `OLLAMA_BASE_URL`, `RAG_VISION_MODEL`, `RAG_EMBEDDING_MODEL`,
+  `RAG_SPARSE_EMBEDDING_MODEL`
+- `QDRANT_URL`, `QDRANT_API_KEY`, `RAG_COLLECTION_NAME`
+
 ## Restructuring Rules
 
 - Move Django packages only with corresponding updates to settings modules,
