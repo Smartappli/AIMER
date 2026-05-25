@@ -17,7 +17,10 @@ async def healthcheck() -> dict[str, str]:
     return {"encoders_service": "UP"}
 
 
-@router.get("/encoders")
+@router.get(
+    "/encoders",
+    responses={503: {"description": "segmentation_models_pytorch is unavailable"}},
+)
 async def list_encoders() -> dict[str, list[str] | int]:
     """List SMP encoders and a subset that are TIMM-backed."""
     try:

@@ -6,11 +6,11 @@ set -e
 
 if [ "${RAG_VERIFY_ON_START:-0}" = "1" ]; then
   echo "[entrypoint] Running OpenRAG readiness check..."
-  uv run --locked --no-dev verify-openrag
+  uv run --locked --no-dev --no-build verify-openrag
 fi
 
 if [ "${RUN_DJANGO_MIGRATIONS:-1}" = "1" ]; then
-  uv run --locked --no-dev python manage.py migrate --noinput
+  uv run --locked --no-dev --no-build python manage.py migrate --noinput
 fi
 
 exec "$@"

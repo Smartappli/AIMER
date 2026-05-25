@@ -61,9 +61,56 @@ jobs:
       - uses: actions/checkout@v6
         with:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+      - name: Set up Python
+        if: env.SONAR_TOKEN != ''
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.13'
+      - name: Install uv
+        if: env.SONAR_TOKEN != ''
+        run: |
+          python -m pip install \
+            --disable-pip-version-check \
+            --no-cache-dir \
+            --only-binary=:all: \
+            uv==0.9.28
+      - name: AIMER coverage
+        if: env.SONAR_TOKEN != ''
+        env:
+          DEBUG: '1'
+          SECRET_KEY: sonar-test-secret-key
+          SECURE_SSL_REDIRECT: '0'
+        run: |
+          python -m uv --directory services/aimer-web sync --locked
+          python -m uv --directory services/aimer-web run --locked coverage erase
+          python -m uv --directory services/aimer-web run --locked coverage run --parallel-mode --source=AIMER,auth,website,RAG -m pytest -q website RAG/tests
+          python -m uv --directory services/aimer-web run --locked coverage combine
+          python -m uv --directory services/aimer-web run --locked coverage xml -o ../../coverage-aimer-web.xml
+      - name: FARM coverage
+        if: env.SONAR_TOKEN != ''
+        env:
+          DJANGO_SECRET_KEY: sonar-test-secret-key
+          DJANGO_SECURE_SSL_REDIRECT: '0'
+        run: |
+          python -m uv --directory services/FARM sync --locked
+          python -m uv --directory services/FARM run --locked coverage erase
+          python -m uv --directory services/FARM run --locked coverage run --parallel-mode --source=FARM -m pytest -q tests
+          python -m uv --directory services/FARM run --locked coverage combine
+          python -m uv --directory services/FARM run --locked coverage xml -o ../../coverage-farm.xml
+      - name: MAGE coverage
+        if: env.SONAR_TOKEN != ''
+        run: |
+          python -m uv --directory services/MAGE sync --locked
+          python -m uv --directory services/MAGE run --locked coverage erase
+          python -m uv --directory services/MAGE run --locked coverage run --parallel-mode --source=api -m pytest -q -m "not slow" tests
+          python -m uv --directory services/MAGE run --locked coverage combine
+          python -m uv --directory services/MAGE run --locked coverage xml -o ../../coverage-mage.xml
       - name: SonarQube Scan
         if: env.SONAR_TOKEN != ''
         uses: SonarSource/sonarqube-scan-action@v8.1.0
+        with:
+          args: >
+            -Dsonar.python.coverage.reportPaths=coverage-aimer-web.xml,coverage-farm.xml,coverage-mage.xml
         env:
           SONAR_TOKEN: ${{ env.SONAR_TOKEN }}
 

@@ -6,7 +6,7 @@ on:
       - 'master'
 
 permissions:
-  contents: write
+  contents: read
   packages: write
 
 concurrency:

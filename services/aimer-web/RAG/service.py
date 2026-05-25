@@ -40,7 +40,10 @@ async def readyz() -> dict[str, object]:
     return {"ready": is_rag_runtime_ready(), "status": status}
 
 
-@app.post("/recommend", response_model=RecommendationResponse)
+@app.post(
+    "/recommend",
+    responses={503: {"description": "RAG runtime unavailable"}},
+)
 async def recommend(payload: RecommendationRequest) -> RecommendationResponse:
     """Return model recommendations from the RAG corpus."""
     try:

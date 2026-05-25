@@ -5,7 +5,7 @@ from __future__ import annotations
 
 import json
 from typing import Any
-from urllib.error import HTTPError, URLError
+from urllib.error import HTTPError
 from urllib.parse import urlsplit
 from urllib.request import Request, urlopen
 
@@ -89,7 +89,7 @@ def _remote_json_request(
             return _decode_json_response(response)
     except HTTPError as exc:
         raise RagServiceUnavailableError(_error_detail(exc)) from exc
-    except (OSError, URLError, TimeoutError, json.JSONDecodeError) as exc:
+    except (OSError, json.JSONDecodeError) as exc:
         raise RagServiceUnavailableError(str(exc)) from exc
 
 

@@ -1,7 +1,6 @@
 # Copyright (c) 2026 AIMER contributors.
 
-"""
-URL configuration for framework project.
+"""URL configuration for framework project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/6.0/topics/http/urls/
@@ -22,8 +21,10 @@ Including another URLconf
 from django.contrib import admin
 from django.http import HttpRequest, JsonResponse
 from django.urls import path
+from django.views.decorators.http import require_safe
 
 
+@require_safe
 def healthz(_request: HttpRequest) -> JsonResponse:
     """Return a minimal liveness payload for deployment smoke tests."""
     return JsonResponse({"service": "FARM", "status": "ok"}, status=200)
