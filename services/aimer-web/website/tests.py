@@ -201,6 +201,20 @@ class FrontPagesViewTests(BaseTestCase):
         self._check_equal(context["layout_path"], "layout/layout_front.html")
 
 
+class HealthCheckViewTests(BaseTestCase):
+    """Tests for public deployment health checks."""
+
+    def test_healthz_returns_service_status(self) -> None:
+        """Ensure smoke checks can verify the web service without auth."""
+        response = self.client.get("/healthz/")
+
+        self._check_equal(response.status_code, 200)
+        self._check_equal(
+            response.json(),
+            {"service": "aimer-web", "status": "ok"},
+        )
+
+
 class DashboardViewTests(BaseTestCase):
     """Tests for project dashboard and RAG article indexing."""
 

@@ -37,12 +37,12 @@ services:
     command: >
       set -e;
       echo "Waiting for Postgres...";
-      until pg_isready -h postgres -p 5432 -U "${POSTGRES_USER}" >/dev/null 2>&1; do sleep 1; done;
-      echo "Postgres is ready. Ensuring DBs: ${DB_NAMES}";
-      for db in ${DB_NAMES}; do
-        echo " - $db";
-        psql -h postgres -U "${POSTGRES_USER}" -d postgres -tAc "SELECT 1 FROM pg_database WHERE datname='${db}'" | grep -q 1
-          || psql -h postgres -U "${POSTGRES_USER}" -d postgres -c "CREATE DATABASE \"${db}\";";
+      until pg_isready -h postgres -p 5432 -U "$${POSTGRES_USER}" >/dev/null 2>&1; do sleep 1; done;
+      echo "Postgres is ready. Ensuring DBs: $${DB_NAMES}";
+      for db in $${DB_NAMES}; do
+        echo " - $${db}";
+        psql -h postgres -U "$${POSTGRES_USER}" -d postgres -tAc "SELECT 1 FROM pg_database WHERE datname='$${db}'" | grep -q 1
+          || psql -h postgres -U "$${POSTGRES_USER}" -d postgres -c "CREATE DATABASE \"$${db}\";";
       done;
       echo "Done."
     restart: "no"
@@ -497,9 +497,9 @@ services:
     entrypoint: ["/bin/sh", "-lc"]
     command: >
       set -e;
-      until pg_isready -h omop-postgres -p 5432 -U "${OMOP_DB_USER}" >/dev/null 2>&1; do sleep 1; done;
-      for schema in "${OMOP_CDM_SCHEMA}" "${OMOP_VOCAB_SCHEMA}" "${OMOP_RESULTS_SCHEMA}" "${OMOP_TEMP_SCHEMA}" "${OMOP_WEBAPI_SCHEMA}"; do
-        psql -h omop-postgres -U "${OMOP_DB_USER}" -d "${OMOP_DB_NAME}" -c "CREATE SCHEMA IF NOT EXISTS ${schema};";
+      until pg_isready -h omop-postgres -p 5432 -U "$${OMOP_DB_USER}" >/dev/null 2>&1; do sleep 1; done;
+      for schema in "$${OMOP_CDM_SCHEMA}" "$${OMOP_VOCAB_SCHEMA}" "$${OMOP_RESULTS_SCHEMA}" "$${OMOP_TEMP_SCHEMA}" "$${OMOP_WEBAPI_SCHEMA}"; do
+        psql -h omop-postgres -U "$${OMOP_DB_USER}" -d "$${OMOP_DB_NAME}" -c "CREATE SCHEMA IF NOT EXISTS $${schema};";
       done;
       echo "OMOP schemas ready.";
     restart: "no"
@@ -554,21 +554,21 @@ services:
     command: >
       set -e;
       for table in vocabulary domain concept_class relationship concept concept_relationship concept_ancestor concept_synonym drug_strength; do
-        psql -h omop-postgres -U "${OMOP_DB_USER}" -d "${OMOP_DB_NAME}" -v ON_ERROR_STOP=1 -tAc "
-          SELECT to_regclass('${OMOP_VOCAB_SCHEMA}.${table}') IS NOT NULL;
-        " | grep -q t || { echo "Missing required OMOP table: ${OMOP_VOCAB_SCHEMA}.${table}"; exit 1; };
+        psql -h omop-postgres -U "$${OMOP_DB_USER}" -d "$${OMOP_DB_NAME}" -v ON_ERROR_STOP=1 -tAc "
+          SELECT to_regclass('$${OMOP_VOCAB_SCHEMA}.$${table}') IS NOT NULL;
+        " | grep -q t || { echo "Missing required OMOP table: $${OMOP_VOCAB_SCHEMA}.$${table}"; exit 1; };
       done;
-      psql -h omop-postgres -U "${OMOP_DB_USER}" -d "${OMOP_DB_NAME}" -v ON_ERROR_STOP=1 -c "
+      psql -h omop-postgres -U "$${OMOP_DB_USER}" -d "$${OMOP_DB_NAME}" -v ON_ERROR_STOP=1 -c "
         TRUNCATE TABLE
-          ${OMOP_VOCAB_SCHEMA}.drug_strength,
-          ${OMOP_VOCAB_SCHEMA}.concept_synonym,
-          ${OMOP_VOCAB_SCHEMA}.concept_ancestor,
-          ${OMOP_VOCAB_SCHEMA}.concept_relationship,
-          ${OMOP_VOCAB_SCHEMA}.concept,
-          ${OMOP_VOCAB_SCHEMA}.relationship,
-          ${OMOP_VOCAB_SCHEMA}.concept_class,
-          ${OMOP_VOCAB_SCHEMA}.domain,
-          ${OMOP_VOCAB_SCHEMA}.vocabulary;
+          $${OMOP_VOCAB_SCHEMA}.drug_strength,
+          $${OMOP_VOCAB_SCHEMA}.concept_synonym,
+          $${OMOP_VOCAB_SCHEMA}.concept_ancestor,
+          $${OMOP_VOCAB_SCHEMA}.concept_relationship,
+          $${OMOP_VOCAB_SCHEMA}.concept,
+          $${OMOP_VOCAB_SCHEMA}.relationship,
+          $${OMOP_VOCAB_SCHEMA}.concept_class,
+          $${OMOP_VOCAB_SCHEMA}.domain,
+          $${OMOP_VOCAB_SCHEMA}.vocabulary;
       ";
       for entry in \
         "VOCABULARY.csv|vocabulary" \
@@ -580,15 +580,15 @@ services:
         "CONCEPT_ANCESTOR.csv|concept_ancestor" \
         "CONCEPT_SYNONYM.csv|concept_synonym" \
         "DRUG_STRENGTH.csv|drug_strength"; do
-        file="${entry%%|*}";
-        table="${entry##*|}";
-        full_path="${OMOP_ATHENA_DIR}/${file}";
-        if [ ! -f "${full_path}" ]; then
-          echo "Missing Athena file: ${full_path}";
+        file="$${entry%%|*}";
+        table="$${entry##*|}";
+        full_path="$${OMOP_ATHENA_DIR}/$${file}";
+        if [ ! -f "$${full_path}" ]; then
+          echo "Missing Athena file: $${full_path}";
           exit 1;
         fi;
-        psql -h omop-postgres -U "${OMOP_DB_USER}" -d "${OMOP_DB_NAME}" -v ON_ERROR_STOP=1 -c "\\copy ${OMOP_VOCAB_SCHEMA}.${table} FROM '${full_path}' WITH (FORMAT csv, HEADER true, DELIMITER E'\\t')";
-        echo "Imported ${file} into ${OMOP_VOCAB_SCHEMA}.${table}.";
+        psql -h omop-postgres -U "$${OMOP_DB_USER}" -d "$${OMOP_DB_NAME}" -v ON_ERROR_STOP=1 -c "\\copy $${OMOP_VOCAB_SCHEMA}.$${table} FROM '$${full_path}' WITH (FORMAT csv, HEADER true, DELIMITER E'\\t')";
+        echo "Imported $${file} into $${OMOP_VOCAB_SCHEMA}.$${table}.";
       done;
       echo "Athena vocabulary import completed.";
     restart: "no"

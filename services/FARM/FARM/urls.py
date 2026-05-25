@@ -20,6 +20,16 @@ Including another URLconf
 """
 
 from django.contrib import admin
+from django.http import HttpRequest, JsonResponse
 from django.urls import path
 
-urlpatterns = [path("admin/", admin.site.urls)]
+
+def healthz(_request: HttpRequest) -> JsonResponse:
+    """Return a minimal liveness payload for deployment smoke tests."""
+    return JsonResponse({"service": "FARM", "status": "ok"}, status=200)
+
+
+urlpatterns = [
+    path("healthz/", healthz, name="healthz"),
+    path("admin/", admin.site.urls),
+]

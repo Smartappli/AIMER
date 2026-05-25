@@ -193,6 +193,20 @@ class DashboardView(FrontPagesView):
         return context
 
 
+class HealthCheckView(View):
+    """Public liveness endpoint for deployment smoke tests."""
+
+    @override
+    def get(
+        self,
+        request: HttpRequest,
+        *args: object,
+        **kwargs: object,
+    ) -> JsonResponse:
+        del request, args, kwargs
+        return JsonResponse({"service": "aimer-web", "status": "ok"}, status=200)
+
+
 class RagRecommendationView(View):
     """API endpoint returning ranked model recommendations from the RAG corpus."""
 

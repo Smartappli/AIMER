@@ -24,6 +24,7 @@ boundaries.
 
 ## Continuous Integration
 
+[![Microservices Validation](https://github.com/Smartappli/AIMER/actions/workflows/microservices_validation.yml/badge.svg)](https://github.com/Smartappli/AIMER/actions/workflows/microservices_validation.yml)
 [![AIMER Docker Builder](https://github.com/Smartappli/AIMER/actions/workflows/aimer_docker_builder.yml/badge.svg)](https://github.com/Smartappli/AIMER/actions/workflows/aimer_docker_builder.yml)
 
 ### MAGE

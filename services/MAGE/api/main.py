@@ -46,6 +46,18 @@ async def read_root() -> dict[str, str]:
     return {"API": "UP"}
 
 
+@api.get("/healthz")
+async def healthz() -> dict[str, str]:
+    """
+    Gateway-level liveness endpoint for deployment smoke tests.
+
+    Returns:
+        dict[str, str]: A stable payload indicating the service is running.
+
+    """
+    return {"service": "MAGE", "status": "ok"}
+
+
 # Backward-compatible routes served directly by the gateway.
 api.add_api_route("/libraries", libraries, methods=["GET"], tags=["libraries"])
 api.add_api_route(

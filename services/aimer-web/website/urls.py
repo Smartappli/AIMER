@@ -7,6 +7,7 @@ from django.urls import path
 from .views import (
     DashboardView,
     FrontPagesView,
+    HealthCheckView,
     RagRecommendationView,
     RagRuntimeHealthView,
 )
@@ -17,6 +18,7 @@ urlpatterns = [
         FrontPagesView.as_view(template_name="landing_page.html"),
         name="index",
     ),
+    path("healthz/", HealthCheckView.as_view(), name="healthz"),
     path("dashboard/", DashboardView.as_view(), name="dashboard"),
     path("api/rag/recommend/", RagRecommendationView.as_view(), name="rag-recommend"),
     path("api/rag/health/", RagRuntimeHealthView.as_view(), name="rag-health"),

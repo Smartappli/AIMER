@@ -238,6 +238,16 @@ def test_root_healthcheck(client: TestClient) -> None:
     check(response.json() == {"API": "UP"}, "Unexpected root payload")
 
 
+def test_healthz(client: TestClient) -> None:
+    """`/healthz` should expose a stable deployment smoke payload."""
+    response = client.get("/healthz")
+    check(response.status_code == HTTP_OK, "Expected 200 on /healthz")
+    check(
+        response.json() == {"service": "MAGE", "status": "ok"},
+        "Unexpected /healthz payload",
+    )
+
+
 def test_model_list(client: TestClient) -> None:
     """`/model` should return the fake timm model list."""
     response = client.get("/model")

@@ -1,0 +1,169 @@
+name: Microservices Validation
+
+on:
+  push:
+    branches:
+      - master
+      - work
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: microservices-validation-${{ github.event_name == 'pull_request' && format('{0}-{1}', github.workflow, github.event.pull_request.number) || github.workflow_ref }}
+  cancel-in-progress: true
+
+jobs:
+  unit-tests:
+    name: Unit Tests (${{ matrix.service }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - service: aimer-web
+            working-directory: services/aimer-web
+            test-command: |
+              SECRET_KEY=ci-secret-key DEBUG=true uv run python manage.py test website --testrunner django.test.runner.DiscoverRunner --verbosity 1
+              SECRET_KEY=ci-secret-key DEBUG=true uv run python -m pytest -q RAG/tests
+          - service: MAGE
+            working-directory: services/MAGE
+            test-command: |
+              uv run python -m pytest -q -m "not slow" tests
+          - service: FARM
+            working-directory: services/FARM
+            test-command: |
+              DJANGO_SECRET_KEY=ci-secret-key DJANGO_DEBUG=true uv run python -m pytest -q tests
+    env:
+      UV_LINK_MODE: copy
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Setup uv
+        uses: astral-sh/setup-uv@v7
+        with:
+          enable-cache: true
+
+      - name: Install Python 3.13
+        run: uv python install 3.13
+
+      - name: Install service dependencies
+        working-directory: ${{ matrix.working-directory }}
+        run: uv sync --frozen
+
+      - name: Run service unit tests
+        working-directory: ${{ matrix.working-directory }}
+        run: |
+          ${{ matrix.test-command }}
+
+  deployment-config:
+    name: Deployment Config
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Validate dev-stack compose file
+        run: |
+          cp infra/dev-stack/.env.ci infra/dev-stack/.env
+          docker compose --env-file infra/dev-stack/.env -f infra/dev-stack/docker-compose.yml config > /tmp/dev-stack.compose.yml
+
+  smoke-tests:
+    name: Docker Smoke (${{ matrix.service }})
+    runs-on: ubuntu-latest
+    needs:
+      - unit-tests
+      - deployment-config
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - service: aimer-web
+            context: ./services/aimer-web
+            dockerfile: ./services/aimer-web/Dockerfile
+            image: aimer-web-smoke:ci
+            container: aimer-web-smoke
+            host-port: "18000"
+            target-port: "8000"
+            health-url: http://127.0.0.1:18000/healthz/
+            run-env: -e SECRET_KEY=ci-secret-key -e DEBUG=true -e ALLOWED_HOSTS=localhost,127.0.0.1 -e RAG_VERIFY_ON_START=0
+          - service: MAGE
+            context: ./services/MAGE
+            dockerfile: ./services/MAGE/Dockerfile
+            image: mage-smoke:ci
+            container: mage-smoke
+            host-port: "10000"
+            target-port: "10000"
+            health-url: http://127.0.0.1:10000/healthz
+            run-env: ""
+          - service: FARM
+            context: ./services/FARM
+            dockerfile: ./services/FARM/Dockerfile
+            image: farm-smoke:ci
+            container: farm-smoke
+            host-port: "18001"
+            target-port: "8000"
+            health-url: http://127.0.0.1:18001/healthz/
+            run-env: -e DJANGO_SECRET_KEY=ci-secret-key -e DJANGO_DEBUG=true -e DJANGO_ALLOWED_HOSTS=localhost,127.0.0.1
+    steps:
+      - name: Free Disk Space (Ubuntu)
+        uses: jlumbroso/free-disk-space@v1.3.1
+        with:
+          tool-cache: false
+          android: true
+          dotnet: true
+          haskell: true
+          large-packages: true
+          docker-images: false
+          swap-storage: true
+
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v4
+
+      - name: Build runtime image
+        uses: docker/build-push-action@v7
+        with:
+          context: ${{ matrix.context }}
+          file: ${{ matrix.dockerfile }}
+          push: false
+          load: true
+          tags: ${{ matrix.image }}
+
+      - name: Run HTTP smoke test
+        env:
+          CONTAINER: ${{ matrix.container }}
+          HEALTH_URL: ${{ matrix.health-url }}
+          HOST_PORT: ${{ matrix.host-port }}
+          IMAGE: ${{ matrix.image }}
+          RUN_ENV: ${{ matrix.run-env }}
+          TARGET_PORT: ${{ matrix.target-port }}
+        run: |
+          set -euo pipefail
+
+          docker run -d --name "${CONTAINER}" ${RUN_ENV} -p "${HOST_PORT}:${TARGET_PORT}" "${IMAGE}"
+
+          cleanup() {
+            status=$?
+            if [ "${status}" -ne 0 ]; then
+              docker logs "${CONTAINER}" || true
+            fi
+            docker rm -f "${CONTAINER}" || true
+            exit "${status}"
+          }
+          trap cleanup EXIT
+
+          for attempt in {1..60}; do
+            if curl -fsS "${HEALTH_URL}"; then
+              exit 0
+            fi
+            sleep 2
+          done
+
+          echo "Smoke check failed for ${HEALTH_URL}"
+          exit 1
