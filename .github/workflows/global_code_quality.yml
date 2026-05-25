@@ -78,14 +78,15 @@ jobs:
         if: env.SONAR_TOKEN != ''
         env:
           DEBUG: '1'
+          DJANGO_SETTINGS_MODULE: AIMER.settings
           SECRET_KEY: sonar-test-secret-key
           SECURE_SSL_REDIRECT: '0'
         run: |
           python -m uv --directory services/aimer-web sync --locked
-          python -m uv --directory services/aimer-web run --locked coverage erase
-          python -m uv --directory services/aimer-web run --locked coverage run --parallel-mode --source=AIMER,auth,website,RAG -m pytest -q website RAG/tests
-          python -m uv --directory services/aimer-web run --locked coverage combine
-          python -m uv --directory services/aimer-web run --locked coverage xml -o ../../coverage-aimer-web.xml
+          python -m uv --directory services/aimer-web run --locked python -m coverage erase
+          python -m uv --directory services/aimer-web run --locked python -m coverage run --parallel-mode --source=AIMER,auth,website,RAG -m pytest -q website RAG/tests
+          python -m uv --directory services/aimer-web run --locked python -m coverage combine
+          python -m uv --directory services/aimer-web run --locked python -m coverage xml -o ../../coverage-aimer-web.xml
       - name: FARM coverage
         if: env.SONAR_TOKEN != ''
         env:
@@ -93,18 +94,18 @@ jobs:
           DJANGO_SECURE_SSL_REDIRECT: '0'
         run: |
           python -m uv --directory services/FARM sync --locked
-          python -m uv --directory services/FARM run --locked coverage erase
-          python -m uv --directory services/FARM run --locked coverage run --parallel-mode --source=FARM -m pytest -q tests
-          python -m uv --directory services/FARM run --locked coverage combine
-          python -m uv --directory services/FARM run --locked coverage xml -o ../../coverage-farm.xml
+          python -m uv --directory services/FARM run --locked python -m coverage erase
+          python -m uv --directory services/FARM run --locked python -m coverage run --parallel-mode --source=FARM -m pytest -q tests
+          python -m uv --directory services/FARM run --locked python -m coverage combine
+          python -m uv --directory services/FARM run --locked python -m coverage xml -o ../../coverage-farm.xml
       - name: MAGE coverage
         if: env.SONAR_TOKEN != ''
         run: |
           python -m uv --directory services/MAGE sync --locked
-          python -m uv --directory services/MAGE run --locked coverage erase
-          python -m uv --directory services/MAGE run --locked coverage run --parallel-mode --source=api -m pytest -q -m "not slow" tests
-          python -m uv --directory services/MAGE run --locked coverage combine
-          python -m uv --directory services/MAGE run --locked coverage xml -o ../../coverage-mage.xml
+          python -m uv --directory services/MAGE run --locked python -m coverage erase
+          python -m uv --directory services/MAGE run --locked python -m coverage run --parallel-mode --source=api -m pytest -q -m "not slow" tests
+          python -m uv --directory services/MAGE run --locked python -m coverage combine
+          python -m uv --directory services/MAGE run --locked python -m coverage xml -o ../../coverage-mage.xml
       - name: SonarQube Scan
         if: env.SONAR_TOKEN != ''
         uses: SonarSource/sonarqube-scan-action@v8.1.0
