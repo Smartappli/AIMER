@@ -15,9 +15,9 @@ target-version = "py313"
 line-length = 88
 preview = true
 exclude = [
-    "auth/migrations",
+    "services/aimer-web/auth/migrations",
     "manage.py",
-    "website/migrations",
+    "services/aimer-web/website/migrations",
 ]
 
 [tool.ruff.lint]

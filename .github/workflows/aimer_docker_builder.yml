@@ -57,7 +57,8 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v7
         with:
-          file: ./AIMER-ROOT/Dockerfile
+          context: ./services/aimer-web
+          file: ./services/aimer-web/Dockerfile
           push: true
           platforms: linux/amd64,linux/arm64
           tags: smartappli/aimer:latest

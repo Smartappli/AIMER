@@ -20,7 +20,7 @@ from RAG.timm_articles import (
 )
 
 PROJECT_KEYWORDS: Final[dict[str, tuple[str, ...]]] = {
-    "AIMER-ROOT": ("vit", "transformer", "swin", "beit", "eva"),
+    "aimer-web": ("vit", "transformer", "swin", "beit", "eva"),
     "MAGE": (
         "resnet",
         "convnext",
@@ -41,7 +41,7 @@ PROJECT_KEYWORDS: Final[dict[str, tuple[str, ...]]] = {
 }
 
 PROJECT_DESCRIPTIONS: Final[dict[str, str]] = {
-    "AIMER-ROOT": "Dashboard produit et visualisation transverse des projets.",
+    "aimer-web": "Dashboard produit et visualisation transverse des services.",
     "MAGE": "Moteur ML/IA et catalogue de modèles de vision.",
     "FARM": "Workflows data/platform et stratégies d'optimisation d'entraînement.",
 }

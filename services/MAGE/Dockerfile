@@ -11,11 +11,11 @@ RUN apt-get update     && apt-get install git -y --no-install-recommends build-e
 RUN pip install --upgrade pip && pip install uv
 
 # Déps Python
-COPY ./MAGE/pyproject.toml ./MAGE/uv.lock ./
+COPY pyproject.toml uv.lock ./
 RUN uv sync --frozen
 
 # Code
-COPY ./MAGE/ ${APP_HOME}
+COPY . ${APP_HOME}
 
 RUN addgroup --system appgroup     && adduser --system --ingroup appgroup appuser     && chown -R appuser:appgroup ${APP_HOME}
 

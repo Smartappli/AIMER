@@ -114,7 +114,7 @@ jobs:
 
       - name: install
         run: |
-          cd AIMER-ROOT
+          cd services/aimer-web
           python -m pip install uv
           uv sync --active
 

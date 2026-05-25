@@ -7,7 +7,7 @@ This module gathers Python/PyTorch and accelerator backend details (CUDA/ROCm,
 Apple MPS, Intel XPU) for debugging and reproducibility.
 
 It is import-safe: nothing is written to stdout on import. Run as a script to
-print a report, e.g. ``python -m MAGE.info``.
+print a report, e.g. ``python info.py``.
 """
 
 from __future__ import annotations

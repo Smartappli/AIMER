@@ -6,7 +6,7 @@ from __future__ import annotations
 
 from fastapi import APIRouter, FastAPI
 
-from MAGE.api.common import LIBRARIES_BY_CATEGORY, safe_version
+from api.common import LIBRARIES_BY_CATEGORY, safe_version
 
 router = APIRouter(tags=["libraries"])
 

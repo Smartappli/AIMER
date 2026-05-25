@@ -41,22 +41,24 @@ jobs:
           cache: 'pip'
       - name: Install dependencies
         run: |
-          cd MAGE
+          cd services/MAGE
           python -m pip install --upgrade pip
           python -m pip install uv
           python -m uv sync
           python -m uv pip install -r requirements-test.txt
       - name: Coverage Erase
         run: |
-          coverage erase
+          python -m uv --directory services/MAGE run python -m coverage erase
       - name: Coverage Models
+        env:
+          PYTHONPATH: ${{ github.workspace }}/services
         run: |
-          coverage run --parallel-mode -m pytest -q MAGE/tests
-          coverage combine
+          python -m uv --directory services/MAGE run python -m coverage run --parallel-mode -m pytest -q tests
+          python -m uv --directory services/MAGE run python -m coverage combine
       - name: Coverage Report
         run: |
-          coverage report -m
-          coverage xml -o coverage.xml
+          python -m uv --directory services/MAGE run python -m coverage report -m
+          python -m uv --directory services/MAGE run python -m coverage xml -o ../../coverage.xml
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@v8.1.0
         env:

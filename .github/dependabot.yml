@@ -22,9 +22,9 @@ updates:
   - package-ecosystem: "uv"
     directories:
       - "/"
-      - "/AIMER-ROOT"
-      - "/MAGE"
-      - "/FARM"
+      - "/services/aimer-web"
+      - "/services/MAGE"
+      - "/services/FARM"
     schedule: *weekly_schedule
     labels: *dependency_labels
     commit-message: *dependency_commit_message
@@ -32,7 +32,7 @@ updates:
 
   # Standalone test requirements that are not represented by uv.lock.
   - package-ecosystem: "pip"
-    directory: "/MAGE"
+    directory: "/services/MAGE"
     exclude-paths:
       - "pyproject.toml"
       - "uv.lock"
@@ -52,20 +52,20 @@ updates:
   # One entry for every directory that contains a Dockerfile.
   - package-ecosystem: "docker"
     directories:
-      - "/AIMER-ROOT"
-      - "/FARM"
-      - "/MAGE"
-      - "/MAGE/backend/airflow"
-      - "/MAGE/backend/mlflow"
-      - "/MAGE/backend/qdrant"
+      - "/services/aimer-web"
+      - "/services/FARM"
+      - "/services/MAGE"
+      - "/infra/dev-stack/airflow"
+      - "/infra/dev-stack/mlflow"
+      - "/infra/dev-stack/qdrant"
     schedule: *weekly_schedule
     labels: *dependency_labels
     commit-message: *dependency_commit_message
     open-pull-requests-limit: 5
 
-  # The only compose manifest currently lives under MAGE/backend.
+  # The local integration compose manifest lives under infra/dev-stack.
   - package-ecosystem: "docker-compose"
-    directory: "/MAGE/backend"
+    directory: "/infra/dev-stack"
     schedule: *weekly_schedule
     labels: *dependency_labels
     commit-message: *dependency_commit_message

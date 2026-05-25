@@ -9,7 +9,7 @@ import sys
 from types import ModuleType
 from typing import TYPE_CHECKING
 
-from MAGE.api import common
+from api import common
 
 if TYPE_CHECKING:
     import pytest

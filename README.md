@@ -6,18 +6,21 @@ the web, ML/API, and federated-learning services can evolve independently.
 
 ## Repository Map
 
-- `AIMER-ROOT/`: primary Django web application, UI templates, static assets,
-  and RAG code.
-- `MAGE/`: ML/API services, model-oriented tests, and backend infrastructure
-  manifests.
-- `FARM/`: supporting Django project for data and platform workflows.
+- `services/aimer-web/`: primary Django web application, UI templates, static
+  assets, and RAG code.
+- `services/MAGE/`: ML/API service, model-oriented tests, and FastAPI/MCP
+  endpoints.
+- `services/FARM/`: supporting Django service for data and platform workflows.
+- `infra/dev-stack/`: local integration stack for stores, observability,
+  workflow tools, and RAG dependencies.
 - `.github/`: GitHub Actions, Dependabot, release automation, and issue
   templates.
 - `pyproject.toml`: repository-level Python and tooling configuration.
 - `renovate.json`: Renovate dependency automation configuration.
 
 See [docs/PROJECT_STRUCTURE.md](docs/PROJECT_STRUCTURE.md) for the detailed
-layout and maintenance notes.
+layout and [docs/MICROSERVICES.md](docs/MICROSERVICES.md) for service
+boundaries.
 
 ## Continuous Integration
 
@@ -39,7 +42,8 @@ layout and maintenance notes.
 ## Getting Started
 
 1. Clone the repository.
-2. Choose the package you want to work on: `AIMER-ROOT`, `MAGE`, or `FARM`.
+2. Choose the service you want to work on: `services/aimer-web`, `services/MAGE`,
+   or `services/FARM`.
 3. Use Python 3.13.
 4. Install dependencies from that package directory with the local `uv.lock`.
 5. Run package-specific tests and linters before opening a pull request.

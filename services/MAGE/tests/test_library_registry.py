@@ -2,7 +2,7 @@
 
 """Checks for AI library registry consistency."""
 
-from MAGE.api.common import LIBRARIES_BY_CATEGORY
+from api.common import LIBRARIES_BY_CATEGORY
 
 
 def test_ai_registry_includes_augmentation_and_modeling_libs() -> None:

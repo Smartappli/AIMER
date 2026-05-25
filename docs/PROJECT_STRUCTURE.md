@@ -5,14 +5,16 @@ product area, not by shared source tree.
 
 ## Top-Level Areas
 
-- `AIMER-ROOT/`: main Django web application.
+- `services/aimer-web/`: main Django web service.
   Contains the `AIMER` settings package, auth/website apps, templates, static
   assets, and RAG modules.
-- `MAGE/`: ML and API services.
-  Contains FastAPI/MCP API code, model tests, service modules, and backend
-  Docker Compose infrastructure.
-- `FARM/`: supporting Django application.
+- `services/MAGE/`: ML/API service.
+  Contains FastAPI/MCP API code, model tests, and service modules.
+- `services/FARM/`: supporting Django service.
   Contains the `FARM` settings package and federated/data workflow code.
+- `infra/dev-stack/`: local integration infrastructure.
+  Contains Docker Compose and supporting Dockerfiles/config for Postgres,
+  Qdrant, Airflow, MLflow, OMOP, and related local dependencies.
 - `.github/`: repository automation.
   Contains CI workflows, Dependabot, Renovate workflow, release drafting, and
   issue templates.
@@ -33,20 +35,20 @@ Dependency automation should mirror the real manifests in the repository:
 | Ecosystem | Paths |
 | --- | --- |
 | GitHub Actions | `/` for `.github/workflows` |
-| uv | `/`, `/AIMER-ROOT`, `/MAGE`, `/FARM` |
-| pip | `/MAGE`, limited to standalone requirements files |
+| uv | `/`, `/services/aimer-web`, `/services/MAGE`, `/services/FARM` |
+| pip | `/services/MAGE`, limited to standalone requirements files |
 | pre-commit | `/` |
 | Docker | See Docker paths below. |
-| Docker Compose | `/MAGE/backend` |
+| Docker Compose | `/infra/dev-stack` |
 
 Docker paths:
 
-- `/AIMER-ROOT`
-- `/FARM`
-- `/MAGE`
-- `/MAGE/backend/airflow`
-- `/MAGE/backend/mlflow`
-- `/MAGE/backend/qdrant`
+- `/services/aimer-web`
+- `/services/FARM`
+- `/services/MAGE`
+- `/infra/dev-stack/airflow`
+- `/infra/dev-stack/mlflow`
+- `/infra/dev-stack/qdrant`
 
 `renovate.json` is also enabled. If both Renovate and Dependabot stay active,
 keep their schedules and labels intentional so maintainers do not receive
@@ -69,7 +71,7 @@ in Git, remove them from the index instead of expanding the ignore list.
 
 ## RAG Data
 
-`AIMER-ROOT/RAG` is currently an application-internal RAG module used by the
+`services/aimer-web/RAG` is currently an application-internal RAG module used by the
 Django app. Keep code, tests, scripts, and small metadata indexes in the module.
 Large source corpora such as PDFs should be treated as external datasets or
 release artifacts. If large files are already tracked, remove them from the Git
@@ -81,7 +83,7 @@ index in a dedicated change after agreeing on the replacement storage location.
   URL configuration, Docker contexts, and CI workflows.
 - Keep package-level `pyproject.toml` and `uv.lock` files beside the code they
   resolve.
-- Keep `MAGE/backend/docker-compose.yml` with the backend service Dockerfiles it
-  orchestrates.
+- Keep `infra/dev-stack/docker-compose.yml` with the backend service Dockerfiles
+  it orchestrates.
 - Prefer adding structure documentation before moving runtime code. The current
   package names are part of import paths and deployment commands.

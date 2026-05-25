@@ -3,26 +3,22 @@ FROM python:3.13-slim
 ARG APP_HOME=/app
 WORKDIR ${APP_HOME}
 
-# set environment variables
 ENV PYTHONDONTWRITEBYTECODE=1     PYTHONUNBUFFERED=1
 
-# install python dependencies
 RUN pip install --upgrade pip && pip install uv
 
-# Files copy
-COPY ./AIMER-ROOT/pyproject.toml ./AIMER-ROOT/uv.lock ./
-
+# deps (cache)
+COPY pyproject.toml uv.lock ./
 RUN uv sync --frozen
 
-COPY ./AIMER-ROOT/ ${APP_HOME}
+# app
+COPY . ${APP_HOME}
 
 # entrypoint
-COPY ./AIMER-ROOT/entrypoint.sh /entrypoint.sh
+COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh     && addgroup --system appgroup     && adduser --system --ingroup appgroup appuser     && chown -R appuser:appgroup ${APP_HOME} /entrypoint.sh
 
 USER appuser
 
 ENTRYPOINT ["/entrypoint.sh"]
-
-# gunicorn
-CMD ["uv", "run", "granian", "--interface", "asgi", "--host", "0.0.0.0", "--port", "8000", "--workers", "4", "AIMER.asgi:application"]
+CMD ["uv", "run", "granian", "--interface", "asgi", "--host", "0.0.0.0", "--port", "8000", "--workers", "4", "FARM.asgi:application"]
