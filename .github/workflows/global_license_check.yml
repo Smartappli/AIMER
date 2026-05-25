@@ -16,33 +16,40 @@ permissions:
   contents: read
 
 jobs:
-  license_check:
+  license-check:
+    name: License Check (${{ matrix.service }})
     runs-on: ubuntu-latest
     timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - service: aimer-web
+            path: services/aimer-web
+          - service: MAGE
+            path: services/MAGE
+          - service: FARM
+            path: services/FARM
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v6
 
-      - name: Setup Python
-        uses: actions/setup-python@v6
-        with:
-          python-version: "3.13"
-
       - name: Setup uv
         uses: astral-sh/setup-uv@v7
 
-      - name: Resolve dependencies and export full requirements
-        working-directory: services/aimer-web
-        run: |
-          uv sync --locked --all-extras
-          uv pip freeze > requirements-all.txt
+      - name: Install Python 3.13
+        run: uv python install 3.13
+
+      - name: Export locked runtime requirements
+        working-directory: ${{ matrix.path }}
+        run: uv export --locked --no-dev --format requirements-txt --output-file "${RUNNER_TEMP}/${{ matrix.service }}-requirements.txt"
 
       - name: Check Python licenses
         id: license_check_report
         uses: pilosus/action-pip-license-checker@v3
         with:
-          requirements: services/aimer-web/requirements-all.txt
+          requirements: ${{ runner.temp }}/${{ matrix.service }}-requirements.txt
           fail: NetworkCopyleft
           exclude: (?i)^(pylint|tbb|nvidia|aio[-_]*).*
           verbose: 1
@@ -50,13 +57,12 @@ jobs:
 
       - name: Save report
         if: ${{ always() }}
-        run: |
-          printf '%s' '${{ steps.license_check_report.outputs.report }}' > license-report.json
+        run: printf '%s' '${{ steps.license_check_report.outputs.report }}' > "license-report-${{ matrix.service }}.json"
 
       - name: Upload artifact
         if: ${{ always() }}
         uses: actions/upload-artifact@v7
         with:
-          name: license-report
-          path: license-report.json
+          name: license-report-${{ matrix.service }}
+          path: license-report-${{ matrix.service }}.json
           if-no-files-found: error

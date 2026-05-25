@@ -46,6 +46,7 @@ dependencies = [
     { name = "django", extra = ["argon2"] },
     { name = "django-rich" },
     { name = "docling", extra = ["vlm"] },
+    { name = "fastapi" },
     { name = "fastembed" },
     { name = "granian" },
     { name = "hf-xet" },
@@ -71,6 +72,7 @@ dependencies = [
 [package.dev-dependencies]
 dev = [
     { name = "coverage" },
+    { name = "httpx" },
     { name = "pytest" },
 ]
 
@@ -79,6 +81,7 @@ requires-dist = [
     { name = "django", extras = ["argon2"], specifier = ">=6.0.4" },
     { name = "django-rich", specifier = "==2.2.0" },
     { name = "docling", extras = ["vlm"], specifier = "==2.93.0" },
+    { name = "fastapi", specifier = "==0.128.0" },
     { name = "fastembed", specifier = "==0.8.0" },
     { name = "granian", specifier = "==2.7.4" },
     { name = "hf-xet" },
@@ -104,6 +107,7 @@ requires-dist = [
 [package.metadata.requires-dev]
 dev = [
     { name = "coverage", specifier = "==7.14.0" },
+    { name = "httpx", specifier = "==0.28.1" },
     { name = "pytest", specifier = "==9.0.3" },
 ]
 

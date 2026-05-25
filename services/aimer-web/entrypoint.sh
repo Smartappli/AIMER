@@ -9,6 +9,8 @@ if [ "${RAG_VERIFY_ON_START:-0}" = "1" ]; then
   uv run --locked --no-dev verify-openrag
 fi
 
-uv run --locked --no-dev python manage.py migrate --noinput
+if [ "${RUN_DJANGO_MIGRATIONS:-1}" = "1" ]; then
+  uv run --locked --no-dev python manage.py migrate --noinput
+fi
 
 exec "$@"

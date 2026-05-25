@@ -23,7 +23,7 @@ from django.test import RequestFactory, TestCase
 from django.utils.safestring import SafeString
 from langchain_core.documents import Document
 from RAG.omop import build_omop_metadata
-from RAG.recommender import OpenRAGRuntimeUnavailableError, recommend_models_for_query
+from RAG.recommender import recommend_models_for_query
 from RAG.timm_articles import (
     build_timm_article_index_from_pdfs,
     ensure_timm_article_index_is_fresh,

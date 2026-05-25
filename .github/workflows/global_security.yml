@@ -2,17 +2,12 @@ name: Global Security
 
 on:
   push:
-    branches: [ "master" ]
+    branches: ["master"]
   pull_request:
-    # The branches below must be a subset of the branches above
-    branches: [ "master" ]
+    branches: ["master"]
   schedule:
-    - cron: "30 03 * * *" # 12am UTC, 5:30pm Indian, 9pm Brazil, 11am AEDT
+    - cron: "30 03 * * *"
   workflow_dispatch:
-    inputs:
-      none:
-        description: "Run Nightlies Tests Manually"
-        required: false
 
 concurrency:
   group: global-security-${{ github.event_name == 'pull_request' && format('{0}-{1}', github.workflow, github.event.pull_request.number) || github.workflow_ref }}
@@ -22,130 +17,72 @@ permissions:
   contents: read
 
 jobs:
-  safety:
-    name: Safety Security Scan
+  dependency-audit:
+    name: Dependency Audit (${{ matrix.service }})
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - service: aimer-web
+            path: services/aimer-web
+          - service: MAGE
+            path: services/MAGE
+          - service: FARM
+            path: services/FARM
     steps:
-      - name: Free Disk Space (Ubuntu)
-        uses: jlumbroso/free-disk-space@v1.3.1
-        with:
-          # this might remove tools that are actually needed,
-          # if set to "true" but frees about 6 GB
-          tool-cache: false
-
-          # all of these default to true, but feel free to set to
-          # "false" if necessary for your workflow
-          android: true
-          dotnet: true
-          haskell: true
-          large-packages: true
-          docker-images: false
-          swap-storage: true
-
-      - name: Check out master
-        uses: actions/checkout@v6
-
-      - uses: pyupio/safety-action@v1
-        with:
-          api-key: ${{ secrets.SAFETY_API_KEY }}
-
-  bandit-security-scan:
-    permissions:
-      contents: read # for actions/checkout to fetch code
-      security-events: write # for github/codeql-action/upload-sarif to upload SARIF results
-      actions: read # only required for a private repository by github/codeql-action/upload-sarif to get the Action run status
-
-    name: Bandit Security Scan
-    runs-on: ubuntu-latest
-    steps:
-      - name: Free Disk Space (Ubuntu)
-        uses: jlumbroso/free-disk-space@v1.3.1
-        with:
-          # this might remove tools that are actually needed,
-          # if set to "true" but frees about 6 GB
-          tool-cache: false
-
-          # all of these default to true, but feel free to set to
-          # "false" if necessary for your workflow
-          android: true
-          dotnet: true
-          haskell: true
-          large-packages: true
-          docker-images: true
-          swap-storage: true
-
       - name: Checkout code
         uses: actions/checkout@v6
 
-      - name: Set up Python
-        uses: actions/setup-python@v6
+      - name: Setup uv
+        uses: astral-sh/setup-uv@v7
         with:
-          python-version: '3.13'
+          enable-cache: true
 
-      - name: Bandit by PyCQA
-        uses: PyCQA/bandit-action@main
+      - name: Install Python 3.13
+        run: uv python install 3.13
 
-  security:
-    name: Pip-audit Scan
+      - name: Export locked runtime requirements
+        working-directory: ${{ matrix.path }}
+        run: uv export --locked --no-dev --format requirements-txt --output-file "${RUNNER_TEMP}/${{ matrix.service }}-requirements.txt"
+
+      - name: Audit locked dependencies
+        run: uvx pip-audit -r "${RUNNER_TEMP}/${{ matrix.service }}-requirements.txt" --vulnerability-service osv
+
+  bandit:
+    name: Bandit (${{ matrix.service }})
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - service: aimer-web
+            scan-paths: services/aimer-web/AIMER services/aimer-web/auth services/aimer-web/website services/aimer-web/RAG
+          - service: MAGE
+            scan-paths: services/MAGE/api services/MAGE/info.py
+          - service: FARM
+            scan-paths: services/FARM/FARM services/FARM/info.py
     steps:
-      - name: Free Disk Space (Ubuntu)
-        uses: jlumbroso/free-disk-space@v1.3.1
-        with:
-          # this might remove tools that are actually needed,
-          # if set to "true" but frees about 6 GB
-          tool-cache: false
-
-          # all of these default to true, but feel free to set to
-          # "false" if necessary for your workflow
-          android: true
-          dotnet: true
-          haskell: true
-          large-packages: true
-          docker-images: true
-          swap-storage: true
-
-      - name: Check out master
+      - name: Checkout code
         uses: actions/checkout@v6
 
-      - uses: actions/setup-python@v6
-        with:
-          python-version: '3.13'
+      - name: Setup uv
+        uses: astral-sh/setup-uv@v7
 
-      - name: install
-        run: |
-          cd services/aimer-web
-          python -m pip install uv
-          uv sync --locked
+      - name: Run Bandit high-confidence scan
+        run: uvx bandit -q -r ${{ matrix.scan-paths }} --severity-level high --confidence-level high
 
-      - uses: pypa/gh-action-pip-audit@v1.1.0
-        with:
-          vulnerability-service: osv
-
-  trufflehog:
+  secret-leaks:
     name: Secret Leaks
     runs-on: ubuntu-latest
     steps:
-      - name: Free Disk Space (Ubuntu)
-        uses: jlumbroso/free-disk-space@v1.3.1
-        with:
-          # this might remove tools that are actually needed,
-          # if set to "true" but frees about 6 GB
-          tool-cache: false
-
-          # all of these default to true, but feel free to set to
-          # "false" if necessary for your workflow
-          android: true
-          dotnet: true
-          haskell: true
-          large-packages: true
-          docker-images: true
-          swap-storage: true
-
       - name: Checkout code
         uses: actions/checkout@v6
         with:
           fetch-depth: 0
 
-      - name: Secret Scanning
-        uses: trufflesecurity/trufflehog@main
+      - name: Secret scanning
+        uses: trufflesecurity/trufflehog@v3.95.2
+        with:
+          path: ./
+          extra_args: --only-verified

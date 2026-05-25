@@ -56,7 +56,9 @@ def _error_detail(exc: HTTPError) -> str:
     return str(exc)
 
 
-def _remote_json_request(path: str, payload: dict[str, Any] | None = None) -> dict[str, Any]:
+def _remote_json_request(
+    path: str, payload: dict[str, Any] | None = None
+) -> dict[str, Any]:
     """Call the configured RAG service and return its JSON object payload."""
     base_url = _rag_service_url()
     if not base_url:
@@ -103,7 +105,7 @@ def recommend_models(
             },
         )
 
-    from RAG.recommender import (  # noqa: PLC0415
+    from RAG.recommender import (
         OpenRAGRuntimeUnavailableError,
         recommend_models_for_query,
     )
@@ -124,6 +126,6 @@ def runtime_status() -> dict[str, Any]:
     if _rag_service_url():
         return _remote_json_request("/readyz")
 
-    from RAG.healthcheck import is_rag_runtime_ready, rag_runtime_health  # noqa: PLC0415
+    from RAG.healthcheck import is_rag_runtime_ready, rag_runtime_health
 
     return {"ready": is_rag_runtime_ready(), "status": rag_runtime_health()}

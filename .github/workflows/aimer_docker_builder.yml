@@ -16,6 +16,16 @@ concurrency:
 jobs:
   build-docker-aimer:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - service: aimer-web
+            dockerfile: ./services/aimer-web/Dockerfile
+            tags: smartappli/aimer:latest
+          - service: aimer-rag
+            dockerfile: ./services/aimer-web/Dockerfile.rag
+            tags: smartappli/aimer-rag:latest
     steps:
       - name: Free Disk Space (Ubuntu)
         uses: jlumbroso/free-disk-space@v1.3.1
@@ -57,11 +67,11 @@ jobs:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build and push
+      - name: Build and push (${{ matrix.service }})
         uses: docker/build-push-action@v7
         with:
           context: ./services/aimer-web
-          file: ./services/aimer-web/Dockerfile
+          file: ${{ matrix.dockerfile }}
           push: true
           platforms: linux/amd64,linux/arm64
-          tags: smartappli/aimer:latest
+          tags: ${{ matrix.tags }}
