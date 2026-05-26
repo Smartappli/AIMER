@@ -21,6 +21,7 @@ REQUIRED_KEYS = (
     "langchain_core_installed",
     "dotenv_installed",
     "openrag_endpoint_set",
+    "openrag_endpoint_valid",
 )
 
 
@@ -44,7 +45,8 @@ def format_report() -> str:
     if not all_ready:
         lines.append(
             "- action: configure OPENRAG_ENDPOINT and install missing dependencies "
-            "before using /api/rag/recommend/ (or set RAG_STRICT_OPENRAG=0 for non-strict dev fallback)."
+            "before using /api/rag/recommend/ "
+            "(or set RAG_STRICT_OPENRAG=0 for non-strict dev fallback)."
         )
     return "\n".join(lines)
 

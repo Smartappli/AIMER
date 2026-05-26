@@ -542,7 +542,8 @@ def _safe_retrieve_strict(
     docs, used_filters, mode = _safe_retrieve(query, k=k)
     if mode == "catalog-only-fallback":
         raise OpenRAGRuntimeUnavailableError(
-            "OpenRAG retrieval is required but runtime is not ready or retrieval failed.",
+            "OpenRAG retrieval is required but runtime is not ready "
+            "or retrieval failed.",
         )
     return docs, used_filters, mode
 
