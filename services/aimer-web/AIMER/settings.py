@@ -282,9 +282,17 @@ TEST_RUNNER = "django_rich.test.RichRunner"
 STATIC_URL = "static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
 STATICFILES_DIRS = [BASE_DIR / "static"]
+STATICFILES_STORAGE_BACKEND = (
+    "whitenoise.storage.CompressedManifestStaticFilesStorage"
+    if IS_PRODUCTION
+    else "whitenoise.storage.CompressedStaticFilesStorage"
+)
 STORAGES = {
+    "default": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
+    },
     "staticfiles": {
-        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+        "BACKEND": STATICFILES_STORAGE_BACKEND,
     },
 }
 

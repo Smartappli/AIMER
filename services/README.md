@@ -18,7 +18,7 @@ inside a service directory.
 From the repository root:
 
 ```powershell
-.\.venv\Scripts\uv.exe --directory services/aimer-web run python manage.py test accounts website
+.\.venv\Scripts\uv.exe --directory services/aimer-web run python manage.py test auth website
 .\.venv\Scripts\uv.exe --directory services/FARM run python -m pytest -q tests
 .\.venv\Scripts\uv.exe --directory services/MAGE run python -m pytest -q -m "not slow" tests
 ```

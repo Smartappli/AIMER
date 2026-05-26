@@ -46,9 +46,14 @@ class ResetPasswordView(AuthView):
             HttpResponse: Redirect or rendered template based on validation result.
 
         """
-        profile = await Profile.objects.filter(
-            forget_password_token=token,
-        ).afirst()
+        profile = await (
+            Profile.objects
+            .select_related("user")
+            .filter(
+                forget_password_token=token,
+            )
+            .afirst()
+        )
         if not profile:
             await sync_to_async(messages.error)(
                 request,
