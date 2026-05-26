@@ -1,10 +1,11 @@
 #!/bin/sh
 set -e
 
-# Optionnel: collectstatic si tu en as besoin
-# python manage.py collectstatic --noinput
-
 VENV_BIN="${VIRTUAL_ENV:-/app/.venv}/bin"
+
+if [ -f manage.py ] && [ "${RUN_DJANGO_COLLECTSTATIC:-1}" = "1" ]; then
+  "${VENV_BIN}/python" manage.py collectstatic --noinput
+fi
 
 if [ "${RAG_VERIFY_ON_START:-0}" = "1" ]; then
   echo "[entrypoint] Running OpenRAG readiness check..."
