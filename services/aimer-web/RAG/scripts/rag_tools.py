@@ -2,6 +2,7 @@
 """RAG helper tools for metadata filtering and hybrid retrieval."""
 
 from collections.abc import Sequence
+from functools import lru_cache
 import os
 from typing import Any
 
@@ -19,8 +20,11 @@ load_dotenv()
 LLM_MODEL = os.getenv("RAG_LLM_MODEL", "qwen3:8b")
 OLLAMA_BASE_URL = os.getenv("OLLAMA_BASE_URL", "http://localhost:11434")
 
-# Initialize LLM
-llm = ChatOllama(model=LLM_MODEL, base_url=OLLAMA_BASE_URL)
+
+@lru_cache(maxsize=1)
+def get_llm() -> ChatOllama:
+    """Return the configured Ollama chat client lazily."""
+    return ChatOllama(model=LLM_MODEL, base_url=OLLAMA_BASE_URL)
 
 
 def extract_filters(user_query: str) -> dict[str, Any]:
@@ -32,7 +36,8 @@ def extract_filters(user_query: str) -> dict[str, Any]:
 
     """
     prompt = f"""
-            Extract metadata filters from the query. Return None for fields not mentioned.
+            Extract metadata filters from the query.
+            Return None for fields not mentioned.
 
                 <USER QUERY STARTS>
                 {user_query}
@@ -42,7 +47,7 @@ def extract_filters(user_query: str) -> dict[str, Any]:
 
             """
 
-    structured_llm = llm.with_structured_output(ChunkMetadata)
+    structured_llm = get_llm().with_structured_output(ChunkMetadata)
 
     metadata = structured_llm.invoke(prompt)
     llm_filters = metadata.model_dump(exclude_none=True) if metadata else {}
