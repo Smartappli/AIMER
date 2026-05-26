@@ -33,6 +33,18 @@ def env_bool(name: str, default: bool = False) -> bool:
     return value.strip().lower() in {"1", "true", "yes", "on"}
 
 
+def env_int(name: str, default: int) -> int:
+    """Parse integer environment variables safely."""
+    value = os.environ.get(name)
+    if value is None:
+        return default
+    try:
+        return int(value)
+    except ValueError as exc:
+        msg = f"{name} must be an integer."
+        raise RuntimeError(msg) from exc
+
+
 def database_config_from_url(database_url: str) -> dict[str, object]:
     """Build a Django DATABASES entry from a database URL."""
     parsed = urlparse(database_url)
@@ -207,6 +219,12 @@ STORAGES = {
 
 
 # Basic production security hardening. These can be tuned via environment.
+SECURE_HSTS_SECONDS = env_int(
+    "DJANGO_SECURE_HSTS_SECONDS",
+    default=3600 if not DEBUG else 0,
+)
+SECURE_HSTS_INCLUDE_SUBDOMAINS = not DEBUG
+SECURE_HSTS_PRELOAD = not DEBUG
 SECURE_BROWSER_XSS_FILTER = True
 SECURE_CONTENT_TYPE_NOSNIFF = True
 X_FRAME_OPTIONS = "DENY"

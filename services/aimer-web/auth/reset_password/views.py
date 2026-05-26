@@ -23,6 +23,11 @@ if TYPE_CHECKING:
 class ResetPasswordView(AuthView):
     """Handle password reset form rendering and submission."""
 
+    async def render_form(self, request: HttpRequest) -> HttpResponse:
+        """Render the reset-password form with the shared auth layout context."""
+        context = await sync_to_async(self.get_context_data)()
+        return await sync_to_async(render)(request, self.template_name, context)
+
     @override
     async def get(self, request: HttpRequest, _token: str) -> HttpResponse:
         """
@@ -81,21 +86,21 @@ class ResetPasswordView(AuthView):
                 request,
                 "Please fill all fields.",
             )
-            return await sync_to_async(render)(request, self.template_name)
+            return await self.render_form(request)
 
         if new_password != confirm_password:
             await sync_to_async(messages.error)(
                 request,
                 "Passwords do not match.",
             )
-            return await sync_to_async(render)(request, self.template_name)
+            return await self.render_form(request)
 
         user = profile.user
         try:
             await sync_to_async(validate_password)(new_password, user)
         except ValidationError as exc:
             await sync_to_async(messages.error)(request, " ".join(exc.messages))
-            return await sync_to_async(render)(request, self.template_name)
+            return await self.render_form(request)
 
         await sync_to_async(user.set_password)(new_password)
         await user.asave()
