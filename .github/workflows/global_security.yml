@@ -35,7 +35,7 @@ jobs:
         uses: actions/checkout@v6
 
       - name: Setup uv
-        uses: astral-sh/setup-uv@v7
+        uses: astral-sh/setup-uv@08807647e7069bb48b6ef5acd8ec9567f424441b # v8.1.0
         with:
           enable-cache: true
 
@@ -83,7 +83,7 @@ jobs:
         uses: actions/checkout@v6
 
       - name: Setup uv
-        uses: astral-sh/setup-uv@v7
+        uses: astral-sh/setup-uv@08807647e7069bb48b6ef5acd8ec9567f424441b # v8.1.0
 
       - name: Run Bandit high-confidence scan
         run: uvx bandit -q -r ${{ matrix.scan-paths }} --severity-level high --confidence-level high
