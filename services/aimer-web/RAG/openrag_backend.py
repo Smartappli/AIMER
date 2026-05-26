@@ -6,6 +6,8 @@ from __future__ import annotations
 import os
 from importlib.metadata import PackageNotFoundError, version
 from typing import Any
+from urllib.parse import urlsplit
+
 from packaging.version import InvalidVersion, Version
 
 try:
@@ -80,6 +82,15 @@ def _search_openrag(
     )
 
 
+def _openrag_endpoint() -> str:
+    """Return the required OpenRAG endpoint after basic URL validation."""
+    endpoint = os.getenv("OPENRAG_ENDPOINT", "").strip()
+    parsed = urlsplit(endpoint)
+    if parsed.scheme not in {"http", "https"} or not parsed.netloc:
+        raise RuntimeError("OPENRAG_ENDPOINT is required and must be an HTTP(S) URL.")
+    return endpoint.rstrip("/")
+
+
 def openrag_hybrid_search(
     query: str,
     k: int,
@@ -100,7 +111,7 @@ def openrag_hybrid_search(
         ) from exc
 
     retriever = OpenRAG(
-        endpoint=os.getenv("OPENRAG_ENDPOINT", "http://localhost:8000"),
+        endpoint=_openrag_endpoint(),
         api_key=os.getenv("OPENRAG_API_KEY"),
         collection=os.getenv("RAG_COLLECTION_NAME", "rag_docs"),
     )
