@@ -5,10 +5,13 @@
 from __future__ import annotations
 
 from pathlib import Path
+from time import time
 from typing import Final, override
 
 from AIMER import TemplateLayout
 from AIMER.template_helpers.theme import TemplateHelper
+from django.conf import settings
+from django.core.cache import cache
 from django.http import HttpRequest, HttpResponse, JsonResponse
 from django.views import View
 from django.views.generic import TemplateView
@@ -48,6 +51,28 @@ PROJECT_DESCRIPTIONS: Final[dict[str, str]] = {
     "MAGE": "Moteur ML/IA et catalogue de modèles de vision.",
     "FARM": "Workflows data/platform et stratégies d'optimisation d'entraînement.",
 }
+
+
+RAG_RATE_LIMIT_WINDOW_SECONDS: Final[int] = 60
+
+
+def _rag_rate_limit_exceeded(request: HttpRequest) -> bool:
+    """Return whether the authenticated caller exceeded the RAG API limit."""
+    limit = int(getattr(settings, "RAG_RECOMMENDATION_RATE_LIMIT_PER_MINUTE", 30))
+    if limit <= 0:
+        return False
+
+    window = int(time() // RAG_RATE_LIMIT_WINDOW_SECONDS)
+    key = f"rag-recommend:{request.user.pk}:{window}"
+    if cache.add(key, 1, timeout=RAG_RATE_LIMIT_WINDOW_SECONDS):
+        return False
+
+    try:
+        count = cache.incr(key)
+    except ValueError:
+        cache.set(key, 1, timeout=RAG_RATE_LIMIT_WINDOW_SECONDS)
+        return False
+    return count > limit
 
 
 class FrontPagesView(TemplateView):
@@ -229,6 +254,11 @@ class RagRecommendationView(View):
 
         """
         del args, kwargs
+        if not request.user.is_authenticated:
+            return JsonResponse({"error": "Authentication required"}, status=401)
+        if _rag_rate_limit_exceeded(request):
+            return JsonResponse({"error": "Rate limit exceeded"}, status=429)
+
         query = (request.GET.get("q") or "").strip()
         if not query:
             return JsonResponse(

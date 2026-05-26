@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import operator
 import os
+from functools import lru_cache
 from typing import TYPE_CHECKING, Any
 
 from dotenv import load_dotenv
@@ -22,9 +23,23 @@ load_dotenv()
 
 LLM_MODEL = os.getenv("RAG_LLM_MODEL", "qwen3:8b")
 RERANKER_MODEL = "Krakekai/qwen3-reranker-8b"
+RERANKER_DEVICE = os.getenv("RAG_RERANKER_DEVICE", "cpu")
 OLLAMA_BASE_URL = os.getenv("OLLAMA_BASE_URL", "http://localhost:11434")
 
-llm = ChatOllama(model=LLM_MODEL, base_url=OLLAMA_BASE_URL)
+
+@lru_cache(maxsize=1)
+def get_llm() -> ChatOllama:
+    """Return the configured Ollama chat client lazily."""
+    return ChatOllama(model=LLM_MODEL, base_url=OLLAMA_BASE_URL)
+
+
+@lru_cache(maxsize=1)
+def get_reranker() -> HuggingFaceCrossEncoder:
+    """Return the configured cross-encoder reranker lazily."""
+    return HuggingFaceCrossEncoder(
+        model_name=RERANKER_MODEL,
+        model_kwargs={"device": RERANKER_DEVICE},
+    )
 
 
 def extract_filters(user_query: str) -> dict[str, Any]:
@@ -36,13 +51,14 @@ def extract_filters(user_query: str) -> dict[str, Any]:
 
     """
     prompt = f"""
-            Extract metadata filters from the query. Return None for fields not mentioned.
+            Extract metadata filters from the query.
+            Return None for fields not mentioned.
 
             <USER QUERY STARTS>
             {user_query}
             </USER QUERY ENDS>
         """
-    structured_llm = llm.with_structured_output(ChunkMetadata)
+    structured_llm = get_llm().with_structured_output(ChunkMetadata)
     metadata = structured_llm.invoke(prompt)
     llm_filters = metadata.model_dump(exclude_none=True) if metadata else {}
     omop_filters = build_omop_metadata(user_query)
@@ -78,12 +94,8 @@ def rerank_results(
         Top-ranked documents ordered by reranker relevance score.
 
     """
-    reranker = HuggingFaceCrossEncoder(
-        model_name=RERANKER_MODEL,
-        model_kwargs={"device": "xpu"},
-    )
     query_doc_pairs = [(query, doc.page_content) for doc in documents]
-    scores = reranker.score(query_doc_pairs)
+    scores = get_reranker().score(query_doc_pairs)
     reranked = sorted(
         zip(scores, documents, strict=False),
         key=operator.itemgetter(0),
