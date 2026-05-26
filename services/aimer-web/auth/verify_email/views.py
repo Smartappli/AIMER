@@ -52,7 +52,7 @@ class VerifyEmailTokenView(AuthView):
             return redirect("verify-email-page")
 
         profile.is_verified = True
-        profile.email_token = ""
+        profile.email_token = None
         await profile.asave()
         if not request.user.is_authenticated:
             # User is not already authenticated

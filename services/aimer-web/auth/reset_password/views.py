@@ -57,7 +57,7 @@ class ResetPasswordView(AuthView):
         if profile.forget_password_token_expires_at and timezone.now() > (
             profile.forget_password_token_expires_at
         ):
-            profile.forget_password_token = ""
+            profile.forget_password_token = None
             profile.forget_password_token_expires_at = None
             await profile.asave()
             await sync_to_async(messages.error)(
@@ -87,7 +87,7 @@ class ResetPasswordView(AuthView):
         await sync_to_async(user.set_password)(new_password)
         await user.asave()
 
-        profile.forget_password_token = ""
+        profile.forget_password_token = None
         profile.forget_password_token_expires_at = None
         await profile.asave()
 

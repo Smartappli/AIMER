@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
 import os
+import secrets
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -21,10 +22,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "dev-insecure-key-change-me")
-
 
 def env_bool(name: str, default: bool = False) -> bool:
     """Parse boolean-like environment variables safely."""
@@ -37,15 +34,20 @@ def env_bool(name: str, default: bool = False) -> bool:
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env_bool("DJANGO_DEBUG", default=False)
 
+# SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY")
+if not SECRET_KEY:
+    if DEBUG:
+        SECRET_KEY = secrets.token_urlsafe(50)
+    else:
+        msg = "DJANGO_SECRET_KEY must be set in non-debug environments."
+        raise RuntimeError(msg)
+
 ALLOWED_HOSTS = [
     host.strip()
     for host in os.environ.get("DJANGO_ALLOWED_HOSTS", "localhost,127.0.0.1").split(",")
     if host.strip()
 ]
-
-if not DEBUG and SECRET_KEY == "dev-insecure-key-change-me":
-    msg = "DJANGO_SECRET_KEY must be set in non-debug environments."
-    raise RuntimeError(msg)
 
 
 # Application definition
