@@ -92,11 +92,11 @@ def normalize_csrf_origins(origins: Iterable[str]) -> list[str]:
     return normalized
 
 
-def database_config_from_url(database_url: str) -> dict[str, str]:
+def database_config_from_url(database_url: str) -> dict[str, object]:
     """Build a Django DATABASES entry from a database URL."""
     parsed = urlparse(database_url)
     if parsed.scheme in {"postgres", "postgresql", "postgresql+psycopg"}:
-        config = {
+        config: dict[str, object] = {
             "ENGINE": "django.db.backends.postgresql",
             "NAME": unquote(parsed.path.lstrip("/")),
         }
@@ -124,7 +124,7 @@ def database_config_from_url(database_url: str) -> dict[str, str]:
         if key
     }
     if options:
-        config["OPTIONS"] = options  # type: ignore[assignment]
+        config["OPTIONS"] = options
     return config
 
 
