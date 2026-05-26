@@ -3,13 +3,15 @@
 
 from __future__ import annotations
 
-import uuid
+import secrets
 from typing import TYPE_CHECKING, override
 
 from asgiref.sync import sync_to_async
 from django.conf import settings
 from django.contrib import messages
+from django.contrib.auth.password_validation import validate_password
 from django.contrib.auth.models import Group, User
+from django.core.exceptions import ValidationError
 from django.shortcuts import redirect
 
 from auth.helpers import send_verification_email
@@ -46,8 +48,8 @@ class RegisterView(AuthView):
             HttpResponse: Redirect to verification page or back to register page.
 
         """
-        username = request.POST.get("username")
-        email = request.POST.get("email")
+        username = (request.POST.get("username") or "").strip()
+        email = (request.POST.get("email") or "").strip().lower()
         password = request.POST.get("password")
 
         if not (username and email and password):
@@ -55,6 +57,13 @@ class RegisterView(AuthView):
                 request,
                 "Please fill in all required fields.",
             )
+            return redirect("register")
+
+        candidate_user = User(username=username, email=email)
+        try:
+            await sync_to_async(validate_password)(password, candidate_user)
+        except ValidationError as exc:
+            await sync_to_async(messages.error)(request, " ".join(exc.messages))
             return redirect("register")
 
         if await User.objects.filter(username=username, email=email).aexists():
@@ -85,7 +94,7 @@ class RegisterView(AuthView):
         user_group, _created = await Group.objects.aget_or_create(name="client")
         await sync_to_async(created_user.groups.add)(user_group)
 
-        token = str(uuid.uuid4())
+        token = secrets.token_urlsafe(32)
 
         user_profile, _created = await Profile.objects.aget_or_create(user=created_user)
         user_profile.email_token = token

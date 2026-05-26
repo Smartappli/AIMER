@@ -8,6 +8,8 @@ from typing import TYPE_CHECKING, override
 from asgiref.sync import sync_to_async
 from django.contrib import messages
 from django.contrib.auth import aauthenticate, alogin
+from django.contrib.auth.password_validation import validate_password
+from django.core.exceptions import ValidationError
 from django.shortcuts import redirect, render
 from django.utils import timezone
 
@@ -84,6 +86,12 @@ class ResetPasswordView(AuthView):
             return await sync_to_async(render)(request, self.template_name)
 
         user = profile.user
+        try:
+            await sync_to_async(validate_password)(new_password, user)
+        except ValidationError as exc:
+            await sync_to_async(messages.error)(request, " ".join(exc.messages))
+            return await sync_to_async(render)(request, self.template_name)
+
         await sync_to_async(user.set_password)(new_password)
         await user.asave()
 

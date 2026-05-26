@@ -3,7 +3,7 @@
 
 from __future__ import annotations
 
-import uuid
+import secrets
 from datetime import timedelta
 from typing import TYPE_CHECKING, override
 
@@ -47,7 +47,7 @@ class ForgetPasswordView(AuthView):
             HttpResponse: Redirect response to forgot-password page.
 
         """
-        email = request.POST.get("email")
+        email = (request.POST.get("email") or "").strip().lower()
         if not email:
             await sync_to_async(messages.error)(
                 request,
@@ -57,7 +57,7 @@ class ForgetPasswordView(AuthView):
 
         user = await User.objects.filter(email=email).afirst()
         if user:
-            token = str(uuid.uuid4())
+            token = secrets.token_urlsafe(32)
             expiration_time = timezone.now() + timedelta(hours=24)
             user_profile, _created = await Profile.objects.aget_or_create(user=user)
             user_profile.forget_password_token = token
