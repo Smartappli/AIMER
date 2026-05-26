@@ -21,6 +21,9 @@ COPY pyproject.toml uv.lock ./
 # ibm-cos-sdk is locked but currently has no Python 3.13 wheel.
 RUN uv sync --locked --no-dev # NOSONAR
 
+ENV VIRTUAL_ENV=${APP_HOME}/.venv \
+    PATH="${APP_HOME}/.venv/bin:${PATH}"
+
 COPY AIMER ./AIMER
 COPY RAG ./RAG
 COPY auth ./auth
@@ -42,6 +45,5 @@ EXPOSE 8000
 
 ENTRYPOINT ["/entrypoint.sh"]
 
-CMD ["uv", "run", "--locked", "--no-dev", "--no-build", \
-    "granian", "--interface", "asgi", "--host", "0.0.0.0", \
+CMD ["granian", "--interface", "asgi", "--host", "0.0.0.0", \
     "--port", "8000", "--workers", "4", "AIMER.asgi:application"]
