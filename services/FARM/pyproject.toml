@@ -6,7 +6,9 @@ dependencies = [
     "django>=6.0.4",
     "flwr==1.30.0",
     "granian==2.7.4",
+    "psycopg[binary]>=3.2.13,<4.0.0",
     "pygments>=2.20.0",
+    "whitenoise>=6.11.0,<7.0.0",
 ]
 
 [dependency-groups]

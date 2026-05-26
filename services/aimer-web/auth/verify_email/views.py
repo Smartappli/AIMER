@@ -1,8 +1,8 @@
 # Copyright (c) 2026 AIMER contributors.
 """Email verification views."""
 
-import uuid
-from typing import Any, override
+import secrets
+from typing import override
 
 from asgiref.sync import sync_to_async
 from django.conf import settings
@@ -92,16 +92,18 @@ class SendVerificationView(AuthView):
     """
     Generate and send a verification email.
 
-    GET /send-verification:
+    POST /send-verification:
     - Determines the target email (authenticated user profile or session).
-    - Generates a new UUID token, saves it into Profile.email_token.
+    - Generates a new token, saves it into Profile.email_token.
     - Sends the verification email.
     - Displays a success or error message.
     - Redirects back to the verify email page.
     """
 
+    http_method_names = ["post"]
+
     @override
-    async def get(self, request: HttpRequest) -> HttpResponseRedirect:
+    async def post(self, request: HttpRequest) -> HttpResponseRedirect:
         """
         Send a (re)verification email to the user.
 
@@ -112,78 +114,62 @@ class SendVerificationView(AuthView):
             An HTTP redirect response to the verify email page.
 
         """
-        email, message = await self.get_email_and_message(request)
+        email = await self.get_email(request)
 
-        if email:
-            token = str(uuid.uuid4())
-            user_profile = await Profile.objects.filter(email=email).afirst()
-            if not user_profile:
-                await sync_to_async(messages.error)(
-                    request,
-                    "Unable to find a profile for that email.",
-                )
-                return redirect("verify-email-page")
-            user_profile.email_token = token
-            await user_profile.asave()
-            await send_verification_email(email, token)
-            await sync_to_async(messages.success)(request, message)
-        else:
+        if not email:
             await sync_to_async(messages.error)(
                 request,
                 "Email not found in session",
             )
+            return redirect("verify-email-page")
+
+        if not (settings.EMAIL_HOST_USER and settings.EMAIL_HOST_PASSWORD):
+            await sync_to_async(messages.error)(
+                request,
+                "Email settings are not configured. Unable to send verification email.",
+            )
+            return redirect("verify-email-page")
+
+        user_profile = await Profile.objects.filter(email=email).afirst()
+        if not user_profile:
+            await sync_to_async(messages.error)(
+                request,
+                "Unable to find a profile for that email.",
+            )
+            return redirect("verify-email-page")
+
+        if user_profile.is_verified:
+            await sync_to_async(messages.success)(request, "Email is already verified.")
+            return redirect("verify-email-page")
+
+        token = secrets.token_urlsafe(32)
+        user_profile.email_token = token
+        await user_profile.asave()
+        await send_verification_email(email, token)
+        await sync_to_async(messages.success)(
+            request,
+            "Verification email sent successfully",
+        )
 
         return redirect("verify-email-page")
 
     @staticmethod
-    async def get_email_and_message(
+    async def get_email(
         request: HttpRequest,
-    ) -> tuple[str | None, Any]:
+    ) -> str | None:
         """
-        Resolve the recipient email and the user-facing message to display.
+        Resolve the recipient email.
 
         Rules:
         - If authenticated, use `request.user.profile.email`.
         - If not authenticated, use `request.session["email"]` if present.
-        - If EMAIL settings are missing, prepare an error message.
-
-        Args:
-            request: Django HttpRequest.
-
         Returns:
-            A tuple (email, message) where:
-            - email is a string or None
-            - message is either a string or a messages.* result depending on path
+            The target email address, or ``None`` when it cannot be resolved.
 
         """
         if request.user.is_authenticated:
             profile = await Profile.objects.filter(user=request.user).afirst()
-            email = profile.email if profile else None
+            return profile.email if profile else None
 
-            if settings.EMAIL_HOST_USER and settings.EMAIL_HOST_PASSWORD:
-                message = await sync_to_async(messages.success)(
-                    request,
-                    "Verification email sent successfully",
-                )
-            else:
-                message = await sync_to_async(messages.error)(
-                    request,
-                    (
-                        "Email settings are not configured. Unable to send "
-                        "verification email."
-                    ),
-                )
-        else:
-            email = request.session.get("email")
-            if settings.EMAIL_HOST_USER and settings.EMAIL_HOST_PASSWORD:
-                message = "Resend verification email successfully" if email else None
-            else:
-                message = await sync_to_async(messages.error)(
-                    request,
-                    (
-                        "Email settings are not configured. Unable to send "
-                        "verification email."
-                    ),
-                )
-
-        return email, message
+        email = request.session.get("email")
+        return str(email) if email else None
