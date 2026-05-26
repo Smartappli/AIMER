@@ -13,6 +13,7 @@ from django.contrib.auth.models import User
 from django.shortcuts import redirect
 from django.utils.http import url_has_allowed_host_and_scheme
 
+from auth.models import Profile
 from auth.views import AuthView
 
 if TYPE_CHECKING:
@@ -84,6 +85,9 @@ class LoginView(AuthView):
             )
             return redirect("login")
 
+        if await self.email_verification_blocks_login(request, authenticated_user):
+            return redirect("verify-email-page")
+
         await alogin(request, authenticated_user)
         next_url = request.POST.get("next", "")
         if next_url and url_has_allowed_host_and_scheme(
@@ -93,3 +97,22 @@ class LoginView(AuthView):
         ):
             return redirect(next_url)
         return redirect("index")
+
+    @staticmethod
+    async def email_verification_blocks_login(request: HttpRequest, user: User) -> bool:
+        """Return whether configured email verification should block login."""
+        if not getattr(settings, "EMAIL_VERIFICATION_REQUIRED", False):
+            return False
+        if user.is_staff or user.is_superuser:
+            return False
+
+        profile = await Profile.objects.filter(user=user).afirst()
+        if profile and profile.is_verified:
+            return False
+
+        request.session["email"] = user.email
+        await sync_to_async(messages.error)(
+            request,
+            "Please verify your email before logging in.",
+        )
+        return True
