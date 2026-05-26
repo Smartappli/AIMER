@@ -55,16 +55,19 @@ jobs:
           max-allowed-issues: 2147483647
 
       - name: Normalize SARIF run categories
+        id: normalize-sarif
         run: |
           python - <<'PY'
           import json
+          import os
           import re
           from pathlib import Path
 
           sarif_path = Path("results.sarif")
+          normalized_path = Path("results.normalized.sarif")
           sarif = json.loads(sarif_path.read_text(encoding="utf-8"))
           seen_categories = set()
-          runs = sarif.get("runs", [])
+          runs = sarif.setdefault("runs", [])
 
           for index, run in enumerate(runs, start=1):
               tool = run.get("tool", {}).get("driver", {})
@@ -81,12 +84,16 @@ jobs:
               seen_categories.add(category)
               run.setdefault("automationDetails", {})["id"] = category
 
-          sarif_path.write_text(json.dumps(sarif, separators=(",", ":")), encoding="utf-8")
+          normalized_path.write_text(json.dumps(sarif, separators=(",", ":")), encoding="utf-8")
+          if github_output := os.environ.get("GITHUB_OUTPUT"):
+              with open(github_output, "a", encoding="utf-8") as output:
+                  output.write(f"has_runs={'true' if runs else 'false'}\n")
           print(f"Normalized {len(runs)} SARIF run categories.")
           PY
 
       # Upload the SARIF file generated in the previous step
       - name: Upload SARIF results file
+        if: steps.normalize-sarif.outputs.has_runs == 'true'
         uses: github/codeql-action/upload-sarif@v4
         with:
-          sarif_file: results.sarif
+          sarif_file: results.normalized.sarif
