@@ -24,6 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
+
 def env_bool(name: str, default: bool = False) -> bool:
     """Parse boolean-like environment variables safely."""
     value = os.environ.get(name)
@@ -70,7 +71,9 @@ def database_config_from_url(database_url: str) -> dict[str, object]:
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env_bool("DJANGO_DEBUG", default=False)
-ENVIRONMENT = os.environ.get("DJANGO_ENVIRONMENT", os.environ.get("ENVIRONMENT", "local"))
+ENVIRONMENT = os.environ.get(
+    "DJANGO_ENVIRONMENT", os.environ.get("ENVIRONMENT", "local")
+)
 IS_PRODUCTION = ENVIRONMENT.strip().lower() in {"prod", "production"}
 
 # SECURITY WARNING: keep the secret key used in production secret!
