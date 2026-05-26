@@ -102,6 +102,7 @@ def openrag_hybrid_search(
     Raises:
         RuntimeError: If OpenRAG dependency is not installed.
     """
+    endpoint = _openrag_endpoint()
     _assert_supported_openrag_version()
     try:
         from openrag import OpenRAG  # type: ignore[import-not-found]
@@ -111,7 +112,7 @@ def openrag_hybrid_search(
         ) from exc
 
     retriever = OpenRAG(
-        endpoint=_openrag_endpoint(),
+        endpoint=endpoint,
         api_key=os.getenv("OPENRAG_API_KEY"),
         collection=os.getenv("RAG_COLLECTION_NAME", "rag_docs"),
     )

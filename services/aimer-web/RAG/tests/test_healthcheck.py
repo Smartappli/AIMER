@@ -13,6 +13,7 @@ def test_rag_runtime_health_shape() -> None:
         "langchain_core_installed",
         "dotenv_installed",
         "openrag_endpoint_set",
+        "openrag_endpoint_valid",
     }
     assert set(status.keys()) == expected
     assert all(isinstance(value, bool) for value in status.values())
@@ -24,6 +25,11 @@ def test_is_rag_runtime_ready_returns_bool() -> None:
 
 def test_rag_runtime_not_ready_without_endpoint(monkeypatch) -> None:
     monkeypatch.delenv("OPENRAG_ENDPOINT", raising=False)
+    assert is_rag_runtime_ready() is False
+
+
+def test_rag_runtime_not_ready_with_invalid_endpoint(monkeypatch) -> None:
+    monkeypatch.setenv("OPENRAG_ENDPOINT", "localhost:8000")
     assert is_rag_runtime_ready() is False
 
 

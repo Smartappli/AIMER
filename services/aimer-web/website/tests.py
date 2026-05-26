@@ -18,8 +18,9 @@ from AIMER.template_tags import theme as theme_tags
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import AbstractBaseUser, Group, Permission
 from django.contrib.contenttypes.models import ContentType
+from django.core.cache import cache
 from django.http import HttpRequest, HttpResponse
-from django.test import RequestFactory, TestCase
+from django.test import RequestFactory, TestCase, override_settings
 from django.utils.safestring import SafeString
 from langchain_core.documents import Document
 from RAG.omop import build_omop_metadata
@@ -571,14 +572,34 @@ class RagRecommenderTests(BaseTestCase):
 class RagRecommendationApiTests(BaseTestCase):
     """Tests for the recommendation JSON API endpoint."""
 
+    def setUp(self) -> None:
+        """Clear cache state used by API throttling."""
+        cache.clear()
+
+    def _login_rag_user(self, username: str = "rag-api-user") -> None:
+        """Create and authenticate a regular user for RAG API calls."""
+        user = get_user_model().objects.create_user(
+            username=f"{username}-{uuid4().hex}",
+            email=f"{username}-{uuid4().hex}@example.com",
+            password=uuid4().hex,
+        )
+        self.client.force_login(user)
+
+    def test_recommendation_api_requires_authentication(self) -> None:
+        """Ensure anonymous requests cannot trigger recommendation work."""
+        response = self.client.get("/api/rag/recommend/", {"q": "classification"})
+        self._check_equal(response.status_code, 401)
+
     def test_recommendation_api_requires_query(self) -> None:
         """Ensure missing query returns HTTP 400."""
+        self._login_rag_user()
         response = self.client.get("/api/rag/recommend/")
         self._check_equal(response.status_code, 400)
 
     @patch("website.views.recommend_models")
     def test_recommendation_api_returns_payload(self, mock_recommend) -> None:
         """Ensure valid requests return recommendation payload in strict OpenRAG mode."""
+        self._login_rag_user()
         mock_recommend.return_value = {
             "query": "modèles segmentation cerveau MRI",
             "query_profile": {"omop_modality_concept_ids": [77477000]},
@@ -609,6 +630,7 @@ class RagRecommendationApiTests(BaseTestCase):
         self, mock_recommend
     ) -> None:
         """Ensure runtime retrieval errors are surfaced as HTTP 503."""
+        self._login_rag_user()
         mock_recommend.side_effect = RagServiceUnavailableError(
             "OpenRAG retrieval is required",
         )
@@ -620,6 +642,24 @@ class RagRecommendationApiTests(BaseTestCase):
 
         self._check_equal(response.status_code, 503)
         self._check("error" in response.json())
+
+    @override_settings(RAG_RECOMMENDATION_RATE_LIMIT_PER_MINUTE=1)
+    @patch("website.views.recommend_models")
+    def test_recommendation_api_is_rate_limited(self, mock_recommend) -> None:
+        """Ensure repeated recommendation requests are throttled per user."""
+        self._login_rag_user()
+        mock_recommend.return_value = {
+            "query": "classification",
+            "query_profile": {},
+            "recommended_models": [],
+            "safety_notice": "test",
+        }
+
+        first = self.client.get("/api/rag/recommend/", {"q": "classification"})
+        second = self.client.get("/api/rag/recommend/", {"q": "classification"})
+
+        self._check_equal(first.status_code, 200)
+        self._check_equal(second.status_code, 429)
 
     def test_rag_health_api_requires_authentication(self) -> None:
         """Ensure runtime health endpoint is not public."""

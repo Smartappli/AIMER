@@ -41,7 +41,7 @@ jobs:
 
       - name: Run aimer-web Django tests
         working-directory: services/aimer-web
-        run: uv run --locked python manage.py test website --testrunner django.test.runner.DiscoverRunner --verbosity 1
+        run: uv run --locked python manage.py test accounts website --testrunner django.test.runner.DiscoverRunner --verbosity 1
 
       - name: Run aimer-web RAG tests
         working-directory: services/aimer-web

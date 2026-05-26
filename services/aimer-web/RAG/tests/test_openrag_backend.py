@@ -11,6 +11,8 @@ from RAG.openrag_backend import openrag_hybrid_search
 
 
 def test_openrag_hybrid_search_raises_when_dependency_missing(monkeypatch) -> None:
+    monkeypatch.setenv("OPENRAG_ENDPOINT", "http://localhost:8000")
+
     def fake_version(_: str) -> str:
         raise PackageNotFoundError
 
@@ -22,6 +24,17 @@ def test_openrag_hybrid_search_raises_when_dependency_missing(monkeypatch) -> No
         assert "required" in str(exc)
     else:
         raise AssertionError("Expected RuntimeError when openrag is missing")
+
+
+def test_openrag_hybrid_search_requires_valid_endpoint(monkeypatch) -> None:
+    monkeypatch.setenv("OPENRAG_ENDPOINT", "localhost:8000")
+
+    try:
+        openrag_hybrid_search(query="test", k=3, filters={})
+    except RuntimeError as exc:
+        assert "OPENRAG_ENDPOINT" in str(exc)
+    else:
+        raise AssertionError("Expected RuntimeError when endpoint is invalid")
 
 
 def test_to_langchain_documents_normalizes_dict_and_text() -> None:

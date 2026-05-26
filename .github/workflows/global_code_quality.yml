@@ -84,7 +84,7 @@ jobs:
         run: |
           python -m uv --directory services/aimer-web sync --locked
           python -m uv --directory services/aimer-web run --locked python -m coverage erase
-          python -m uv --directory services/aimer-web run --locked python -m coverage run --parallel-mode --source=AIMER,auth,website,RAG -m pytest -q website RAG/tests
+          python -m uv --directory services/aimer-web run --locked python -m coverage run --parallel-mode --source=AIMER,auth,website,RAG -m pytest -q auth website RAG/tests
           python -m uv --directory services/aimer-web run --locked python -m coverage combine
           python -m uv --directory services/aimer-web run --locked python -m coverage xml -o ../../coverage-aimer-web.xml
       - name: FARM coverage

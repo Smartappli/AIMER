@@ -32,7 +32,7 @@ services:
       # Pour psql sans prompt
       PGPASSWORD: ${POSTGRES_PASSWORD}
       # Liste des DB à créer (séparées par des espaces)
-      DB_NAMES: ${POSTGRES_EXTRA_DBS:-appdb mlflow airflow langfuse}
+      DB_NAMES: ${POSTGRES_EXTRA_DBS:-appdb aimer_web farm mlflow airflow langfuse}
     entrypoint: [ "/bin/sh", "-lc" ]
     command: >
       set -e;
@@ -706,6 +706,7 @@ services:
       SECRET_KEY: ${SECRET_KEY:-dev-insecure-key-change-me}
       DEBUG: ${DEBUG:-true}
       ALLOWED_HOSTS: ${ALLOWED_HOSTS:-localhost,127.0.0.1,aimer-web}
+      DATABASE_URL: postgresql://${POSTGRES_USER:-aimer}:${POSTGRES_PASSWORD:-aimer}@postgres:5432/${AIMER_WEB_DB:-aimer_web}
       RAG_SERVICE_URL: ${RAG_SERVICE_URL:-http://aimer-rag:8000}
       RUN_DJANGO_MIGRATIONS: ${RUN_DJANGO_MIGRATIONS:-1}
     ports:
@@ -713,6 +714,8 @@ services:
     depends_on:
       aimer-rag:
         condition: service_started
+      postgres-init-dbs:
+        condition: service_completed_successfully
     restart: unless-stopped
 
   mage:
@@ -735,9 +738,13 @@ services:
       DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY:-dev-insecure-key-change-me}
       DJANGO_DEBUG: ${DJANGO_DEBUG:-true}
       DJANGO_ALLOWED_HOSTS: ${DJANGO_ALLOWED_HOSTS:-localhost,127.0.0.1,farm}
+      DJANGO_DATABASE_URL: postgresql://${POSTGRES_USER:-aimer}:${POSTGRES_PASSWORD:-aimer}@postgres:5432/${FARM_DB:-farm}
       RUN_DJANGO_MIGRATIONS: ${RUN_DJANGO_MIGRATIONS:-1}
     ports:
       - "${FARM_PORT:-18001}:8000"
+    depends_on:
+      postgres-init-dbs:
+        condition: service_completed_successfully
     restart: unless-stopped
 
 volumes:
