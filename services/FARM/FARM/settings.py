@@ -15,6 +15,7 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 import os
 import secrets
 from pathlib import Path
+from urllib.parse import parse_qsl, unquote, urlparse
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -31,8 +32,46 @@ def env_bool(name: str, default: bool = False) -> bool:
     return value.strip().lower() in {"1", "true", "yes", "on"}
 
 
+def database_config_from_url(database_url: str) -> dict[str, object]:
+    """Build a Django DATABASES entry from a database URL."""
+    parsed = urlparse(database_url)
+    if parsed.scheme in {"postgres", "postgresql", "postgresql+psycopg"}:
+        config: dict[str, object] = {
+            "ENGINE": "django.db.backends.postgresql",
+            "NAME": unquote(parsed.path.lstrip("/")),
+        }
+    elif parsed.scheme == "sqlite":
+        return {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": unquote(parsed.path.lstrip("/")) or ":memory:",
+        }
+    else:
+        msg = "DJANGO_DATABASE_URL must use postgresql:// or sqlite://."
+        raise RuntimeError(msg)
+
+    if parsed.username:
+        config["USER"] = unquote(parsed.username)
+    if parsed.password:
+        config["PASSWORD"] = unquote(parsed.password)
+    if parsed.hostname:
+        config["HOST"] = parsed.hostname
+    if parsed.port:
+        config["PORT"] = str(parsed.port)
+
+    options = {
+        key: value
+        for key, value in parse_qsl(parsed.query, keep_blank_values=False)
+        if key
+    }
+    if options:
+        config["OPTIONS"] = options
+    return config
+
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env_bool("DJANGO_DEBUG", default=False)
+ENVIRONMENT = os.environ.get("DJANGO_ENVIRONMENT", os.environ.get("ENVIRONMENT", "local"))
+IS_PRODUCTION = ENVIRONMENT.strip().lower() in {"prod", "production"}
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY")
@@ -48,6 +87,9 @@ ALLOWED_HOSTS = [
     for host in os.environ.get("DJANGO_ALLOWED_HOSTS", "localhost,127.0.0.1").split(",")
     if host.strip()
 ]
+if IS_PRODUCTION and not ALLOWED_HOSTS:
+    msg = "DJANGO_ALLOWED_HOSTS must be set when DJANGO_ENVIRONMENT=production."
+    raise RuntimeError(msg)
 
 
 # Application definition
@@ -63,6 +105,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -94,11 +137,20 @@ ASGI_APPLICATION = "FARM.asgi.application"
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
+DATABASE_URL = os.environ.get("DJANGO_DATABASE_URL") or os.environ.get("DATABASE_URL")
+if IS_PRODUCTION and not DATABASE_URL:
+    msg = "DJANGO_DATABASE_URL must be set when DJANGO_ENVIRONMENT=production."
+    raise RuntimeError(msg)
+
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    },
+    "default": (
+        database_config_from_url(DATABASE_URL)
+        if DATABASE_URL
+        else {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "db.sqlite3",
+        }
+    ),
 }
 
 
@@ -135,6 +187,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = "static/"
+STATIC_ROOT = BASE_DIR / "staticfiles"
+STORAGES = {
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
 
 
 # Basic production security hardening. These can be tuned via environment.

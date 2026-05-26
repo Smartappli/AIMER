@@ -14,11 +14,13 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 import os
 from collections.abc import Iterable
 from pathlib import Path
-from urllib.parse import urlsplit
+from urllib.parse import parse_qsl, unquote, urlparse, urlsplit
 
 from dotenv import load_dotenv
 
-from .template import TEMPLATE_CONFIG, THEME_LAYOUT_DIR, THEME_VARIABLES
+from .template import TEMPLATE_CONFIG as DEFAULT_TEMPLATE_CONFIG
+from .template import THEME_LAYOUT_DIR as DEFAULT_THEME_LAYOUT_DIR
+from .template import THEME_VARIABLES as DEFAULT_THEME_VARIABLES
 
 load_dotenv()  # take environment variables from .env.
 
@@ -62,6 +64,18 @@ def env_list(name: str, default: Iterable[str] | None = None) -> list[str]:
     return [item.strip() for item in raw_value.split(",") if item.strip()]
 
 
+def env_int(name: str, *, default: int) -> int:
+    """Return an integer from an environment variable."""
+    raw_value = os.environ.get(name)
+    if raw_value is None:
+        return default
+    try:
+        return int(raw_value)
+    except ValueError as exc:
+        msg = f"{name} must be an integer."
+        raise RuntimeError(msg) from exc
+
+
 def normalize_csrf_origins(origins: Iterable[str]) -> list[str]:
     """
     Normalize CSRF trusted origins to include scheme + host.
@@ -78,6 +92,42 @@ def normalize_csrf_origins(origins: Iterable[str]) -> list[str]:
     return normalized
 
 
+def database_config_from_url(database_url: str) -> dict[str, str]:
+    """Build a Django DATABASES entry from a database URL."""
+    parsed = urlparse(database_url)
+    if parsed.scheme in {"postgres", "postgresql", "postgresql+psycopg"}:
+        config = {
+            "ENGINE": "django.db.backends.postgresql",
+            "NAME": unquote(parsed.path.lstrip("/")),
+        }
+    elif parsed.scheme == "sqlite":
+        return {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": unquote(parsed.path.lstrip("/")) or ":memory:",
+        }
+    else:
+        msg = "DATABASE_URL must use postgresql:// or sqlite://."
+        raise RuntimeError(msg)
+
+    if parsed.username:
+        config["USER"] = unquote(parsed.username)
+    if parsed.password:
+        config["PASSWORD"] = unquote(parsed.password)
+    if parsed.hostname:
+        config["HOST"] = parsed.hostname
+    if parsed.port:
+        config["PORT"] = str(parsed.port)
+
+    options = {
+        key: value
+        for key, value in parse_qsl(parsed.query, keep_blank_values=False)
+        if key
+    }
+    if options:
+        config["OPTIONS"] = options  # type: ignore[assignment]
+    return config
+
+
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get("SECRET_KEY")
 if not SECRET_KEY:
@@ -88,11 +138,15 @@ if not SECRET_KEY:
 DEBUG = env_bool("DEBUG", default=False)
 
 ENVIRONMENT = os.environ.get("ENVIRONMENT", "local")
+IS_PRODUCTION = ENVIRONMENT.strip().lower() in {"prod", "production"}
 
 ALLOWED_HOSTS = env_list(
     "ALLOWED_HOSTS",
     default=["localhost", "127.0.0.1", "[::1]"] if DEBUG else [],
 )
+if IS_PRODUCTION and not ALLOWED_HOSTS:
+    msg = "ALLOWED_HOSTS must be set when ENVIRONMENT=production."
+    raise RuntimeError(msg)
 
 CSRF_TRUSTED_ORIGINS = normalize_csrf_origins(
     env_list("CSRF_TRUSTED_ORIGINS"),
@@ -115,6 +169,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.locale.LocaleMiddleware",
     "AIMER.language_middleware.DefaultLanguageMiddleware",
@@ -157,11 +212,20 @@ ASGI_APPLICATION = "AIMER.asgi.application"
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
+DATABASE_URL = os.environ.get("DATABASE_URL")
+if IS_PRODUCTION and not DATABASE_URL:
+    msg = "DATABASE_URL must be set when ENVIRONMENT=production."
+    raise RuntimeError(msg)
+
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    },
+    "default": (
+        database_config_from_url(DATABASE_URL)
+        if DATABASE_URL
+        else {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "db.sqlite3",
+        }
+    ),
 }
 
 
@@ -201,6 +265,14 @@ USE_TZ = True
 BASE_URL = os.environ.get("BASE_URL", default="http://127.0.0.1:8000")
 RAG_SERVICE_URL = os.environ.get("RAG_SERVICE_URL", "").rstrip("/")
 RAG_SERVICE_TIMEOUT_SECONDS = float(os.environ.get("RAG_SERVICE_TIMEOUT_SECONDS", "5"))
+RAG_RECOMMENDATION_RATE_LIMIT_PER_MINUTE = env_int(
+    "RAG_RECOMMENDATION_RATE_LIMIT_PER_MINUTE",
+    default=30,
+)
+EMAIL_VERIFICATION_REQUIRED = env_bool(
+    "EMAIL_VERIFICATION_REQUIRED",
+    default=IS_PRODUCTION,
+)
 
 TEST_RUNNER = "django_rich.test.RichRunner"
 
@@ -210,6 +282,11 @@ TEST_RUNNER = "django_rich.test.RichRunner"
 STATIC_URL = "static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
 STATICFILES_DIRS = [BASE_DIR / "static"]
+STORAGES = {
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
 
 # Security settings
 SECURE_HSTS_SECONDS = 3600 if not DEBUG else 0
@@ -225,6 +302,6 @@ REFERRER_POLICY = "same-origin"
 # Template Settings
 # ------------------------------------------------------------------------------
 
-THEME_LAYOUT_DIR = THEME_LAYOUT_DIR
-TEMPLATE_CONFIG = TEMPLATE_CONFIG
-THEME_VARIABLES = THEME_VARIABLES
+THEME_LAYOUT_DIR = DEFAULT_THEME_LAYOUT_DIR
+TEMPLATE_CONFIG = DEFAULT_TEMPLATE_CONFIG
+THEME_VARIABLES = DEFAULT_THEME_VARIABLES
