@@ -14,14 +14,11 @@
 {% endblock page_js %}
 {% block content %}
     <div class="authentication-wrapper authentication-cover">
-        <!-- Logo -->
         <a href="{% url 'index' %}" class="app-brand auth-cover-brand gap-2">
             <span class="app-brand-logo demo">{% include 'partials/logo.html' %}</span>
             <span class="app-brand-text demo text-heading fw-bold">{% get_theme_variables 'template_name' %}</span>
         </a>
-        <!-- /Logo -->
         <div class="authentication-inner row m-0">
-            <!-- /Left Text -->
             <div class="d-none d-lg-flex col-lg-7 col-xl-8 align-items-center p-5">
                 <div class="w-100 d-flex justify-content-center">
                     <img src="{% static 'img/illustrations/boy-with-rocket-' %}{{ COOKIES.theme|default:theme }}.png"
@@ -29,19 +26,17 @@
                          alt="Email verification illustration"
                          width="700"
                          height="700"
-                          data-app-dark-img="illustrations/boy-with-rocket-dark.png"
-                          data-app-light-img="illustrations/boy-with-rocket-light.png" />
+                         data-app-dark-img="illustrations/boy-with-rocket-dark.png"
+                         data-app-light-img="illustrations/boy-with-rocket-light.png" />
                 </div>
             </div>
-            <!-- /Left Text -->
-            <!--  Verify email -->
             <div class="d-flex col-12 col-lg-5 col-xl-4 align-items-center authentication-bg p-sm-12 p-6">
                 <div class="w-px-400 mx-auto mt-sm-12 mt-8">
-                    <h4 class="mb-1">{% trans "Verify your email" %} ✉️</h4>
+                    <h4 class="mb-1">{% trans "Verify your email" %}</h4>
                     {% if request.user.is_authenticated %}
-                        <p class="text-start mb-1">{% trans "Verification link will be send to this email:" %} {{ request.user.email }}.</p>
+                        <p class="text-start mb-1">{% trans "Verification link will be sent to this email:" %} {{ request.user.email }}.</p>
                     {% else %}
-                        <p class="text-start mb-1">{% trans "Verification link send to your email address." %}</p>
+                        <p class="text-start mb-1">{% trans "A verification link was sent to your email address." %}</p>
                     {% endif %}
                     {% if messages %}
                         {% for message in messages %}
@@ -50,32 +45,35 @@
                         {% endfor %}
                     {% endif %}
                     {% if request.user.is_authenticated %}
-                        <a id="btnSubmit"
-                           class="btn btn-primary w-100 my-5"
-                           href="{% url 'send-verification' %}">
-                            <span id="btnText" class="me-1">{% trans "Verify Email" %}</span>
-                             <output id="btnLoader"
-                                     class="spinner-border spinner-border-sm visually-hidden ms-2"
-                                     aria-hidden="true"></output>
-                        </a>
+                        <form method="post" action="{% url 'send-verification' %}">
+                            {% csrf_token %}
+                            <button id="btnSubmit" type="submit" class="btn btn-primary w-100 my-5">
+                                <span id="btnText" class="me-1">{% trans "Verify Email" %}</span>
+                                <output id="btnLoader"
+                                        class="spinner-border spinner-border-sm visually-hidden ms-2"
+                                        aria-hidden="true"></output>
+                            </button>
+                        </form>
                         <a class="btn btn-primary w-100" href="{% url 'index' %}">{% trans "Back" %}</a>
                     {% else %}
-                        <a class="btn btn-primary w-100 my-4" href="{% url 'login' %}">{% trans "Skip for now & Login" %}</a>
-                        <p class="text-center">
+                        <a class="btn btn-primary w-100 my-4" href="{% url 'login' %}">{% trans "Back to login" %}</a>
+                        <div class="text-center">
                             Didn't get the mail?
-                            <a id="btnSubmit"
-                               class="text-center"
-                               href="{% url 'send-verification' %}">
-                                <span id="btnText" class="me-1">{% trans "Resend" %}</span>
-                                 <output id="btnLoader"
-                                         class="spinner-border spinner-border-sm visually-hidden"
-                                         aria-hidden="true"></output>
-                            </a>
-                        </p>
+                            <form method="post"
+                                  action="{% url 'send-verification' %}"
+                                  class="d-inline">
+                                {% csrf_token %}
+                                <button id="btnSubmit" type="submit" class="btn btn-link p-0 align-baseline">
+                                    <span id="btnText" class="me-1">{% trans "Resend" %}</span>
+                                    <output id="btnLoader"
+                                            class="spinner-border spinner-border-sm visually-hidden"
+                                            aria-hidden="true"></output>
+                                </button>
+                            </form>
+                        </div>
                     {% endif %}
                 </div>
             </div>
-            <!-- / Verify email -->
         </div>
     </div>
 {% endblock %}
