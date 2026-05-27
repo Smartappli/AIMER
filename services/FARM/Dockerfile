@@ -5,9 +5,7 @@ WORKDIR ${APP_HOME}
 
 ENV HOME=${APP_HOME} \
     PYTHONDONTWRITEBYTECODE=1 \
-    PYTHONUNBUFFERED=1 \
-    UV_CACHE_DIR=${APP_HOME}/.cache/uv \
-    XDG_CACHE_HOME=${APP_HOME}/.cache
+    PYTHONUNBUFFERED=1
 
 RUN python -m pip install \
     --disable-pip-version-check \
@@ -15,9 +13,12 @@ RUN python -m pip install \
     --only-binary=:all: \
     "uv==0.9.28"
 
-# deps (cache)
+# deps
 COPY pyproject.toml uv.lock ./
-RUN uv sync --locked --no-dev --no-build
+RUN uv sync --locked --no-dev --no-build --no-cache
+
+ENV VIRTUAL_ENV=${APP_HOME}/.venv \
+    PATH="${APP_HOME}/.venv/bin:${PATH}"
 
 COPY FARM ./FARM
 COPY info.py manage.py __init__.py ./
@@ -34,6 +35,5 @@ USER appuser
 EXPOSE 8000
 
 ENTRYPOINT ["/entrypoint.sh"]
-CMD ["uv", "run", "--locked", "--no-dev", "--no-build", \
-    "granian", "--interface", "asgi", "--host", "0.0.0.0", \
+CMD ["granian", "--interface", "asgi", "--host", "0.0.0.0", \
     "--port", "8000", "--workers", "4", "FARM.asgi:application"]

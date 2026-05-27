@@ -6,9 +6,7 @@ WORKDIR ${APP_HOME}
 # set environment variables
 ENV HOME=${APP_HOME} \
     PYTHONDONTWRITEBYTECODE=1 \
-    PYTHONUNBUFFERED=1 \
-    UV_CACHE_DIR=${APP_HOME}/.cache/uv \
-    XDG_CACHE_HOME=${APP_HOME}/.cache
+    PYTHONUNBUFFERED=1
 
 RUN python -m pip install \
     --disable-pip-version-check \
@@ -19,7 +17,7 @@ RUN python -m pip install \
 COPY pyproject.toml uv.lock ./
 
 # ibm-cos-sdk is locked but currently has no Python 3.13 wheel.
-RUN uv sync --locked --no-dev # NOSONAR
+RUN uv sync --locked --no-dev --no-cache # NOSONAR
 
 ENV VIRTUAL_ENV=${APP_HOME}/.venv \
     PATH="${APP_HOME}/.venv/bin:${PATH}"

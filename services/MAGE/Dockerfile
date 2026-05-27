@@ -5,9 +5,7 @@ WORKDIR ${APP_HOME}
 
 ENV HOME=${APP_HOME} \
     PYTHONDONTWRITEBYTECODE=1 \
-    PYTHONUNBUFFERED=1 \
-    UV_CACHE_DIR=${APP_HOME}/.cache/uv \
-    XDG_CACHE_HOME=${APP_HOME}/.cache
+    PYTHONUNBUFFERED=1
 
 # System dependencies used by ML wheels.
 RUN apt-get update \
@@ -20,7 +18,10 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
 
 COPY pyproject.toml uv.lock ./
-RUN uv sync --locked --no-dev --no-build
+RUN uv sync --locked --no-dev --no-build --no-cache
+
+ENV VIRTUAL_ENV=${APP_HOME}/.venv \
+    PATH="${APP_HOME}/.venv/bin:${PATH}"
 
 COPY api ./api
 COPY info.py __init__.py ./
@@ -33,6 +34,5 @@ USER appuser
 
 EXPOSE 10000
 
-CMD ["uv", "run", "--locked", "--no-dev", "--no-build", \
-    "granian", "--interface", "asgi", "--host", "0.0.0.0", \
+CMD ["granian", "--interface", "asgi", "--host", "0.0.0.0", \
     "--port", "10000", "--workers", "4", "api.main:app"]
