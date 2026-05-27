@@ -62,7 +62,7 @@ jobs:
           import json
           import os
           import re
-           from pathlib import Path
+          from pathlib import Path
 
           MAX_RUNS_PER_SARIF = 20
           sarif_path = Path("results.sarif")
