@@ -58,7 +58,6 @@ jobs:
         id: normalize-sarif
         run: |
           python - <<'PY'
-          import copy
           import json
           import os
           import re
@@ -97,10 +96,10 @@ jobs:
               runs[index:index + MAX_RUNS_PER_SARIF]
               for index in range(0, len(runs), MAX_RUNS_PER_SARIF)
           ]
+          base_sarif = {key: value for key, value in sarif.items() if key != "runs"}
 
           for index, chunk in enumerate(chunks, start=1):
-              chunked_sarif = copy.deepcopy(sarif)
-              chunked_sarif["runs"] = chunk
+              chunked_sarif = {**base_sarif, "runs": chunk}
               normalized_path = normalized_dir / f"results.normalized.{index:02d}.sarif"
               normalized_path.write_text(
                   json.dumps(chunked_sarif, separators=(",", ":")),
