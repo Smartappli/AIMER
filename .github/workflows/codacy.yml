@@ -58,13 +58,15 @@ jobs:
         id: normalize-sarif
         run: |
           python - <<'PY'
+          import copy
           import json
           import os
           import re
-          from pathlib import Path
+           from pathlib import Path
 
+          MAX_RUNS_PER_SARIF = 20
           sarif_path = Path("results.sarif")
-          normalized_path = Path("results.normalized.sarif")
+          normalized_dir = Path("sarif-results")
           sarif = json.loads(sarif_path.read_text(encoding="utf-8"))
           seen_categories = set()
           runs = sarif.setdefault("runs", [])
@@ -84,11 +86,31 @@ jobs:
               seen_categories.add(category)
               run.setdefault("automationDetails", {})["id"] = category
 
-          normalized_path.write_text(json.dumps(sarif, separators=(",", ":")), encoding="utf-8")
+              for result in run.get("results", []):
+                  result.pop("partialFingerprints", None)
+
+          normalized_dir.mkdir(exist_ok=True)
+          for stale_file in normalized_dir.glob("*.sarif"):
+              stale_file.unlink()
+
+          chunks = [
+              runs[index:index + MAX_RUNS_PER_SARIF]
+              for index in range(0, len(runs), MAX_RUNS_PER_SARIF)
+          ]
+
+          for index, chunk in enumerate(chunks, start=1):
+              chunked_sarif = copy.deepcopy(sarif)
+              chunked_sarif["runs"] = chunk
+              normalized_path = normalized_dir / f"results.normalized.{index:02d}.sarif"
+              normalized_path.write_text(
+                  json.dumps(chunked_sarif, separators=(",", ":")),
+                  encoding="utf-8",
+              )
+
           if github_output := os.environ.get("GITHUB_OUTPUT"):
               with open(github_output, "a", encoding="utf-8") as output:
                   output.write(f"has_runs={'true' if runs else 'false'}\n")
-          print(f"Normalized {len(runs)} SARIF run categories.")
+          print(f"Normalized {len(runs)} SARIF run categories into {len(chunks)} file(s).")
           PY
 
       # Upload the SARIF file generated in the previous step
@@ -96,4 +118,4 @@ jobs:
         if: steps.normalize-sarif.outputs.has_runs == 'true'
         uses: github/codeql-action/upload-sarif@v4
         with:
-          sarif_file: results.normalized.sarif
+          sarif_file: sarif-results
