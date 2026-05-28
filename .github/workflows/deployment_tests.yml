@@ -2,7 +2,8 @@ name: Deployment Tests
 
 on:
   push:
-    branches: ["master", "work"]
+    branches: ["master", "work", "release/**"]
+    tags: ["v*"]
   pull_request:
   schedule:
     - cron: "25 04 * * 1"
@@ -36,9 +37,10 @@ jobs:
     name: Deployment Manifests
     runs-on: ubuntu-latest
     env:
-      REQUIRE_REAL_DIGESTS: ${{ github.event_name == 'workflow_dispatch' && inputs.require_real_digests || 'false' }}
-      REQUIRE_REAL_DOMAINS: ${{ github.event_name == 'workflow_dispatch' && inputs.require_real_domains || 'false' }}
-      STRICT_NETWORK: ${{ github.event_name == 'workflow_dispatch' && inputs.strict_network || 'false' }}
+      RELEASE_REF: ${{ startsWith(github.ref, 'refs/tags/v') || startsWith(github.ref, 'refs/heads/release/') }}
+      REQUIRE_REAL_DIGESTS: ${{ startsWith(github.ref, 'refs/tags/v') || startsWith(github.ref, 'refs/heads/release/') || (github.event_name == 'workflow_dispatch' && inputs.require_real_digests) }}
+      REQUIRE_REAL_DOMAINS: ${{ startsWith(github.ref, 'refs/tags/v') || startsWith(github.ref, 'refs/heads/release/') || (github.event_name == 'workflow_dispatch' && inputs.require_real_domains) }}
+      STRICT_NETWORK: ${{ startsWith(github.ref, 'refs/tags/v') || startsWith(github.ref, 'refs/heads/release/') || (github.event_name == 'workflow_dispatch' && inputs.strict_network) }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v6
@@ -55,6 +57,9 @@ jobs:
         run: |
           set -euo pipefail
           args=("--summary-file" "deployment-test-summary.md")
+          if [ "${RELEASE_REF}" = "true" ]; then
+            echo "Release ref detected; strict production deployment validation is required."
+          fi
           if [ "${REQUIRE_REAL_DIGESTS}" = "true" ]; then
             args+=("--require-real-digests")
           fi
@@ -80,4 +85,3 @@ jobs:
           name: deployment-test-summary
           path: deployment-test-summary.md
           if-no-files-found: warn
-

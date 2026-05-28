@@ -50,5 +50,7 @@ exception review dates, register structure and supply-chain workflow guardrails.
 
 The `Deployment Tests` GitHub Actions workflow validates the production
 Kubernetes baseline, service exposure contracts, probes, runtime hardening and
-image pinning format. For release dry-runs, launch it manually with
+image pinning format. Release branches (`release/**`) and version tags (`v*`)
+must pass strict checks for real image digests, real domains and scoped network
+egress. For release dry-runs from another ref, launch it manually with
 `require_real_digests`, `require_real_domains` and `strict_network` enabled.
