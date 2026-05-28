@@ -10,9 +10,7 @@ The repository has useful production controls in place, but the current release
 candidate does not meet the release bar for security and test coverage:
 
 - Deployment manifests still contain release placeholders.
-- The strict deployment gate is optional rather than enforced by default.
 - Test coverage is below 80% for every service measured locally.
-- Production Django validation allows SQLite database URLs.
 - Local secret-bearing `.env` files exist and must be verified as untracked.
 
 ## Checks Executed
@@ -22,8 +20,10 @@ candidate does not meet the release bar for security and test coverage:
 | `python scripts/validate_production_evidence.py` | Pass |
 | `python scripts/validate_deployment_manifests.py` | Pass with warnings |
 | `python scripts/validate_deployment_manifests.py --require-real-digests --require-real-domains --strict-network` | Fail |
-| `manage.py check --deploy` for `aimer-web` with complete production env | Pass |
-| `manage.py check --deploy` for `FARM` with complete production env | Pass |
+| `manage.py check --deploy` for `aimer-web` with complete PostgreSQL production env | Pass |
+| `manage.py check --deploy` for `aimer-web` with SQLite production env | Fail as expected |
+| `manage.py check --deploy` for `FARM` with complete PostgreSQL production env | Pass |
+| `manage.py check --deploy` for `FARM` with SQLite production env | Fail as expected |
 | `MAGE` import with `MAGE_ENVIRONMENT=production` and API key | Pass |
 | `MAGE` import with `MAGE_ENVIRONMENT=production` and no API key | Fail as expected |
 
@@ -38,9 +38,9 @@ Coverage was measured with each service virtual environment and the repository
 
 | Service | Test result | Coverage | Meets 80% |
 | --- | ---: | ---: | --- |
-| `aimer-web` | 41 passed | 31.0% | No |
+| `aimer-web` | 43 passed | 32.5% | No |
 | `MAGE` | 26 passed, 2 deselected | 69.0% | No |
-| `FARM` | 19 passed | 73.4% | No |
+| `FARM` | 20 passed | 73.7% | No |
 
 Coverage is not currently enforced with `--fail-under=80` in the CI coverage
 workflows. The Sonar coverage job emits XML reports, but the workflow itself
@@ -65,33 +65,13 @@ destinations for the target platform.
 
 All services are below 80% with the current coverage scope:
 
-- `aimer-web`: 31.0%
+- `aimer-web`: 32.5%
 - `MAGE`: 69.0%
-- `FARM`: 73.4%
+- `FARM`: 73.7%
 
 Action: add focused tests for auth flows, RAG service paths, MAGE service
 branches, FARM federated runner/settings validation, and enforce
 `coverage report --fail-under=80` in CI once the threshold is reachable.
-
-### P1 - Strict deployment validation is opt-in
-
-`.github/workflows/deployment_tests.yml` runs strict checks only when manually
-dispatched with `require_real_digests`, `require_real_domains` and
-`strict_network` enabled.
-
-Action: make strict mode mandatory for release branches/tags or for any
-production promotion workflow. Warning-only checks are not sufficient evidence
-for a regulated go-live.
-
-### P1 - Production Django settings accept SQLite
-
-`aimer-web` and `FARM` both accept `sqlite://` URLs in production when the rest
-of the production environment is complete. Local `manage.py check --deploy`
-passes with SQLite database URLs.
-
-Action: reject SQLite in `ENVIRONMENT=production` and
-`DJANGO_ENVIRONMENT=production`; require PostgreSQL with TLS parameters for
-regulated production deployments.
 
 ### P1 - Local secret-bearing environment files exist
 
@@ -108,15 +88,6 @@ status could not be verified.
 Action: verify these files were never committed, rotate any values that may
 have been exposed, and keep production values only in the secret manager or
 sealed-secret workflow.
-
-### P2 - MAGE runtime image contains build toolchain packages
-
-`services/MAGE/Dockerfile` installs `build-essential` and `git` in the runtime
-image. This increases attack surface and patch burden.
-
-Action: move build tooling to a builder stage, copy only the virtual
-environment/runtime artifacts into the final image, and keep the runtime image
-minimal.
 
 ### P2 - Supply-chain scanning has blind spots
 
@@ -147,13 +118,24 @@ release workflows.
 - Vulnerability exceptions are documented with review dates.
 - Network policies include default deny ingress and egress.
 
+## Remediation Completed
+
+- Release branches (`release/**`) and version tags (`v*`) now force strict
+  deployment validation for real digests, real domains and scoped egress.
+- `aimer-web` and `FARM` now reject SQLite database URLs when running in
+  production mode.
+- `MAGE` now uses a multi-stage Dockerfile so `build-essential` and `git` stay
+  out of the runtime image.
+- Regression tests cover the production SQLite rejection in both Django
+  services.
+
 ## Go-Live Minimum Bar
 
 Before production promotion:
 
 1. Run deployment manifest validation in strict mode with real release values.
 2. Enforce coverage `--fail-under=80` and show all services above threshold.
-3. Reject SQLite in production settings.
+3. Keep PostgreSQL-only production settings enforced.
 4. Verify no local `.env` file or SQLite database artifact is tracked.
 5. Run CI security scans with current advisory data and review every exception.
 6. Pin production base images and release-critical Actions by immutable digest or
