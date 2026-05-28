@@ -7,7 +7,7 @@ CIDR ranges, secret provisioning and ingress labels for the target platform.
 ## Apply Order
 
 1. Create or connect the secret manager integration that materializes the
-   `aimer-prod-secrets` Kubernetes Secret.
+   service-specific Kubernetes Secrets listed below.
 2. Replace image digests in `kustomization.yaml` with approved release digests.
 3. Replace `aimer.example.org`, `farm.example.org` and external endpoints in
    `configmap.yaml`.
@@ -35,20 +35,30 @@ python scripts/validate_production_evidence.py
 
 ## Secret Contract
 
-The `aimer-prod-secrets` Secret must provide at least these keys:
+Use separate Kubernetes Secrets per workload:
+
+`aimer-web-secrets`:
 
 - `SECRET_KEY`
-- `DJANGO_SECRET_KEY`
 - `DATABASE_URL`
-- `DJANGO_DATABASE_URL`
 - `EMAIL_HOST_USER`
 - `EMAIL_HOST_PASSWORD`
 - `RAG_SERVICE_API_KEY`
+
+`aimer-rag-secrets`:
+
 - `AIMER_RAG_API_KEY`
-- `MAGE_API_KEY`
 - `OPENRAG_API_KEY`
 - `QDRANT_API_KEY`
 
+`mage-secrets`:
+
+- `MAGE_API_KEY`
+
+`farm-secrets`:
+
+- `DJANGO_SECRET_KEY`
+- `DJANGO_DATABASE_URL`
+
 Use an external secret manager or sealed-secret workflow. Do not commit real
 secret values to this directory.
-
