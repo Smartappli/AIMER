@@ -7,6 +7,7 @@ on:
 
 permissions:
   contents: read
+  id-token: write
   packages: write
 
 concurrency:
@@ -58,6 +59,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build and push
+        id: build
         uses: docker/build-push-action@v7
         with:
           context: ./services/FARM
@@ -67,3 +69,27 @@ jobs:
           provenance: true
           sbom: true
           tags: smartappli/farm:latest
+
+      - name: Install Cosign
+        uses: sigstore/cosign-installer@v4.1.0
+
+      - name: Sign published image
+        env:
+          DIGEST: ${{ steps.build.outputs.digest }}
+          IMAGE_REF: smartappli/farm:latest
+        run: cosign sign --yes "${IMAGE_REF}@${DIGEST}"
+
+      - name: Write image digest evidence
+        env:
+          DIGEST: ${{ steps.build.outputs.digest }}
+          IMAGE_REF: smartappli/farm:latest
+        run: |
+          mkdir -p image-digests
+          printf '%s@%s\n' "${IMAGE_REF}" "${DIGEST}" > image-digests/farm.txt
+
+      - name: Upload image digest evidence
+        uses: actions/upload-artifact@v7
+        with:
+          name: image-digest-farm
+          path: image-digests/farm.txt
+          if-no-files-found: error
