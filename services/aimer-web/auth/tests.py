@@ -5,10 +5,12 @@ from __future__ import annotations
 import json
 from datetime import timedelta
 
+from auth.middleware import AdminAuditMiddleware
 from auth.models import Profile, SecurityAuditEvent
 from auth.security import audit_event
 from auth.tokens import hash_token
 from django.contrib.auth import get_user_model
+from django.http import HttpResponse
 from django.test import RequestFactory
 from django.test import TestCase, override_settings
 from django.urls import reverse
@@ -120,6 +122,26 @@ class AuthSecurityTests(TestCase):
         self.assertEqual(payload["metadata"]["reason"], "unit_test")
         self.assertEqual(payload["metadata"]["reset_token"], "[REDACTED]")
         self.assertTrue(payload["persisted"])
+
+    def test_admin_mutations_are_audited(self) -> None:
+        """Mutating staff admin requests must produce privileged audit events."""
+        staff_user = get_user_model().objects.create_user(
+            username="admin-auditor",
+            email="admin-auditor@example.com",
+            password="Strong-Passphrase-2026",
+            is_staff=True,
+        )
+        request = RequestFactory().post("/admin/auth/user/1/change/")
+        request.user = staff_user
+        middleware = AdminAuditMiddleware(lambda _request: HttpResponse(status=302))
+
+        response = middleware(request)
+
+        self.assertEqual(response.status_code, 302)
+        event = SecurityAuditEvent.objects.get(event_type="admin.privileged_action")
+        self.assertEqual(event.user, staff_user)
+        self.assertEqual(event.metadata["method"], "POST")
+        self.assertEqual(event.metadata["status_code"], 302)
 
     @override_settings(EMAIL_VERIFICATION_REQUIRED=True)
     def test_login_blocks_unverified_user_when_required(self) -> None:
