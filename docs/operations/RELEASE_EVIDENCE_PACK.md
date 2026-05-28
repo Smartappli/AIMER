@@ -28,6 +28,7 @@ completed pack with the release record, image digest artifacts and approvals.
 | Rollback plan tested or reviewed | TBD | TBD | TBD |
 | Backup restore evidence current | TBD | TBD | TBD |
 | RTO/RPO targets still valid | `docs/operations/RESILIENCE_RUNBOOK.md` | TBD | TBD |
+| Kubernetes baseline rendered with approved digests | `infra/prod/kubernetes/` | TBD | TBD |
 | Vulnerability exceptions reviewed | `docs/operations/VULNERABILITY_EXCEPTIONS.md` | TBD | TBD |
 | Data protection impact reviewed | `docs/operations/DATA_PROTECTION_RETENTION.md` | TBD | TBD |
 | Clinical/model validation reviewed | TBD | TBD | TBD |
