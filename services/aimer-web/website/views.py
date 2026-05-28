@@ -14,6 +14,7 @@ from AIMER.template_helpers.theme import TemplateHelper
 from auth.security import audit_event
 from django.conf import settings
 from django.core.cache import cache
+from django.db import DatabaseError, connection
 from django.http import HttpRequest, HttpResponse, JsonResponse
 from django.views import View
 from django.views.generic import TemplateView
@@ -240,6 +241,39 @@ class HealthCheckView(View):
     ) -> JsonResponse:
         del request, args, kwargs
         return JsonResponse({"service": "aimer-web", "status": "ok"}, status=200)
+
+
+class ReadinessCheckView(View):
+    """Public readiness endpoint for orchestrator traffic decisions."""
+
+    @override
+    def get(
+        self,
+        request: HttpRequest,
+        *args: object,
+        **kwargs: object,
+    ) -> JsonResponse:
+        del request, args, kwargs
+        try:
+            with connection.cursor() as cursor:
+                cursor.execute("SELECT 1")
+        except DatabaseError:
+            return JsonResponse(
+                {
+                    "service": "aimer-web",
+                    "status": "unavailable",
+                    "checks": {"database": "error"},
+                },
+                status=503,
+            )
+        return JsonResponse(
+            {
+                "service": "aimer-web",
+                "status": "ok",
+                "checks": {"database": "ok"},
+            },
+            status=200,
+        )
 
 
 class RagRecommendationView(View):

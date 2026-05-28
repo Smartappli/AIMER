@@ -10,6 +10,7 @@ from .views import (
     HealthCheckView,
     RagRecommendationView,
     RagRuntimeHealthView,
+    ReadinessCheckView,
 )
 
 urlpatterns = [
@@ -19,6 +20,7 @@ urlpatterns = [
         name="index",
     ),
     path("healthz/", HealthCheckView.as_view(), name="healthz"),
+    path("readyz/", ReadinessCheckView.as_view(), name="readyz"),
     path("dashboard/", DashboardView.as_view(), name="dashboard"),
     path("api/rag/recommend/", RagRecommendationView.as_view(), name="rag-recommend"),
     path("api/rag/health/", RagRuntimeHealthView.as_view(), name="rag-health"),
