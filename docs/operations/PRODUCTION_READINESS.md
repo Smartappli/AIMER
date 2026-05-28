@@ -33,6 +33,7 @@ evidence and approvals for each production release.
 | Incident reporting | 24h/72h/1-month NIS2 workflow and DORA workflow, if applicable. |
 | Supply chain evidence | SBOM, container scan, IaC scan, dependency audit and signed images. |
 | Production evidence gate | `python scripts/validate_production_evidence.py` passes. |
+| Deployment tests | `python scripts/validate_deployment_manifests.py --require-real-digests --require-real-domains --strict-network` passes for release promotion. |
 | Clinical validation | Model/RAG output validated, drift monitored, human oversight defined. |
 | ICT risk acceptance | Risk register reviewed and residual `High`/`Critical` risks approved. |
 | Asset and supplier register | Critical assets, data classes and ICT suppliers reviewed. |

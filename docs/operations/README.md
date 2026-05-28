@@ -46,3 +46,8 @@ The `Production Evidence` GitHub Actions workflow runs the same check on pull
 requests, pushes and a weekly schedule. It verifies required evidence files,
 internal Markdown links, production environment inventory, vulnerability
 exception review dates, register structure and supply-chain workflow guardrails.
+
+The `Deployment Tests` GitHub Actions workflow validates the production
+Kubernetes baseline, service exposure contracts, probes, runtime hardening and
+image pinning format. For release dry-runs, launch it manually with
+`require_real_digests`, `require_real_domains` and `strict_network` enabled.

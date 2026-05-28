@@ -1,0 +1,83 @@
+name: Deployment Tests
+
+on:
+  push:
+    branches: ["master", "work"]
+  pull_request:
+  schedule:
+    - cron: "25 04 * * 1"
+  workflow_dispatch:
+    inputs:
+      require_real_digests:
+        description: "Reject placeholder image digests for a release deployment."
+        required: false
+        default: false
+        type: boolean
+      require_real_domains:
+        description: "Reject example.org ingress domains for a release deployment."
+        required: false
+        default: false
+        type: boolean
+      strict_network:
+        description: "Reject broad private CIDR egress rules."
+        required: false
+        default: false
+        type: boolean
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deployment-tests-${{ github.event_name == 'pull_request' && format('{0}-{1}', github.workflow, github.event.pull_request.number) || github.workflow_ref }}
+  cancel-in-progress: true
+
+jobs:
+  deployment-manifests:
+    name: Deployment Manifests
+    runs-on: ubuntu-latest
+    env:
+      REQUIRE_REAL_DIGESTS: ${{ github.event_name == 'workflow_dispatch' && inputs.require_real_digests || 'false' }}
+      REQUIRE_REAL_DOMAINS: ${{ github.event_name == 'workflow_dispatch' && inputs.require_real_domains || 'false' }}
+      STRICT_NETWORK: ${{ github.event_name == 'workflow_dispatch' && inputs.strict_network || 'false' }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+
+      - name: Run production evidence gate
+        run: python scripts/validate_production_evidence.py
+
+      - name: Run deployment manifest tests
+        run: |
+          set -euo pipefail
+          args=("--summary-file" "deployment-test-summary.md")
+          if [ "${REQUIRE_REAL_DIGESTS}" = "true" ]; then
+            args+=("--require-real-digests")
+          fi
+          if [ "${REQUIRE_REAL_DOMAINS}" = "true" ]; then
+            args+=("--require-real-domains")
+          fi
+          if [ "${STRICT_NETWORK}" = "true" ]; then
+            args+=("--strict-network")
+          fi
+          python scripts/validate_deployment_manifests.py "${args[@]}"
+
+      - name: Publish deployment summary
+        if: ${{ always() }}
+        run: |
+          if [ -f deployment-test-summary.md ]; then
+            cat deployment-test-summary.md >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: Upload deployment test summary
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: deployment-test-summary
+          path: deployment-test-summary.md
+          if-no-files-found: warn
+

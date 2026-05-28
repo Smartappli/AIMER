@@ -34,6 +34,12 @@ Run the production evidence gate locally with:
 python scripts/validate_production_evidence.py
 ```
 
+Run the deployment manifest tests locally with:
+
+```sh
+python scripts/validate_deployment_manifests.py
+```
+
 ## Continuous Integration
 
 [![Microservices Validation](https://github.com/Smartappli/AIMER/actions/workflows/microservices_validation.yml/badge.svg)](https://github.com/Smartappli/AIMER/actions/workflows/microservices_validation.yml)
