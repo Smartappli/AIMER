@@ -370,6 +370,7 @@ def validate_production_configuration() -> None:
 
     errors: list[str] = []
     parsed_base_url = urlsplit(BASE_URL)
+    parsed_database_url = urlparse(DATABASE_URL) if DATABASE_URL else None
 
     if DEBUG:
         errors.append("DEBUG must be false.")
@@ -384,6 +385,8 @@ def validate_production_configuration() -> None:
         "127.0.0.1",
     }:
         errors.append("BASE_URL must be a public HTTPS URL.")
+    if parsed_database_url and parsed_database_url.scheme == "sqlite":
+        errors.append("DATABASE_URL must use PostgreSQL in production.")
     if not SECURE_SSL_REDIRECT:
         errors.append("SECURE_SSL_REDIRECT must be enabled.")
     if not SESSION_COOKIE_SECURE:

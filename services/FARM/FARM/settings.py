@@ -260,6 +260,7 @@ def validate_production_configuration() -> None:
 
     errors: list[str] = []
     parsed_base_url = urlsplit(BASE_URL) if BASE_URL else None
+    parsed_database_url = urlparse(DATABASE_URL) if DATABASE_URL else None
 
     if DEBUG:
         errors.append("DJANGO_DEBUG must be false.")
@@ -286,6 +287,8 @@ def validate_production_configuration() -> None:
         or parsed_base_url.hostname in {"localhost", "127.0.0.1"}
     ):
         errors.append("DJANGO_BASE_URL must be a public HTTPS URL.")
+    if parsed_database_url and parsed_database_url.scheme == "sqlite":
+        errors.append("DJANGO_DATABASE_URL must use PostgreSQL in production.")
 
     if errors:
         joined = " ".join(errors)

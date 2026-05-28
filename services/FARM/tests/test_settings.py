@@ -24,6 +24,11 @@ def _set_safe_production_defaults(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setattr(farm_settings, "SECRET_KEY", STRONG_SECRET)
     monkeypatch.setattr(farm_settings, "ALLOWED_HOSTS", ["farm.example.org"])
     monkeypatch.setattr(farm_settings, "BASE_URL", "https://farm.example.org")
+    monkeypatch.setattr(
+        farm_settings,
+        "DATABASE_URL",
+        "postgresql://farm:password@db.example.org:5432/farm?sslmode=require",
+    )
     monkeypatch.setattr(farm_settings, "SECURE_SSL_REDIRECT", True)
     monkeypatch.setattr(farm_settings, "SESSION_COOKIE_SECURE", True)
     monkeypatch.setattr(farm_settings, "CSRF_COOKIE_SECURE", True)
@@ -70,4 +75,19 @@ def test_production_configuration_rejects_weak_secret(
     monkeypatch.setattr(farm_settings, "SECRET_KEY", "short")
 
     with pytest.raises(RuntimeError, match="high entropy"):
+        farm_settings.validate_production_configuration()
+
+
+def test_production_configuration_rejects_sqlite_database_url(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Ensure regulated production cannot run on local SQLite storage."""
+    _set_safe_production_defaults(monkeypatch)
+    monkeypatch.setattr(
+        farm_settings,
+        "DATABASE_URL",
+        "sqlite:///tmp/farm.sqlite3",
+    )
+
+    with pytest.raises(RuntimeError, match="PostgreSQL"):
         farm_settings.validate_production_configuration()
