@@ -204,12 +204,13 @@ class FrontPagesViewTests(BaseTestCase):
         self._check_equal(context["layout_path"], "layout/layout_front.html")
 
 
+@override_settings(SECURE_SSL_REDIRECT=False)
 class HealthCheckViewTests(BaseTestCase):
     """Tests for public deployment health checks."""
 
     def test_healthz_returns_service_status(self) -> None:
         """Ensure smoke checks can verify the web service without auth."""
-        response = self.client.get("/healthz/")
+        response = self.client.get("/healthz/", HTTP_X_FORWARDED_PROTO="https")
 
         self._check_equal(response.status_code, 200)
         self._check_equal(
@@ -219,14 +220,14 @@ class HealthCheckViewTests(BaseTestCase):
 
     def test_readyz_returns_database_status(self) -> None:
         """Ensure orchestrators can verify database-backed readiness."""
-        response = self.client.get("/readyz/")
+        response = self.client.get("/readyz/", HTTP_X_FORWARDED_PROTO="https")
 
         self._check_equal(response.status_code, 200)
         self._check_equal(response.json()["checks"]["database"], "ok")
 
     def test_readyz_rejects_unsafe_methods(self) -> None:
         """Ensure readiness checks are read-only."""
-        response = self.client.post("/readyz/")
+        response = self.client.post("/readyz/", HTTP_X_FORWARDED_PROTO="https")
 
         self._check_equal(response.status_code, 405)
 

@@ -1,0 +1,30 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: aimer-prod
+
+resources:
+  - namespace.yaml
+  - serviceaccounts.yaml
+  - configmap.yaml
+  - services.yaml
+  - deployments.yaml
+  - ingress.yaml
+  - network-policies.yaml
+  - pod-disruption-budgets.yaml
+  - hpa.yaml
+
+images:
+  - name: smartappli/aimer
+    newName: smartappli/aimer
+    digest: sha256:0000000000000000000000000000000000000000000000000000000000000000
+  - name: smartappli/aimer-rag
+    newName: smartappli/aimer-rag
+    digest: sha256:0000000000000000000000000000000000000000000000000000000000000000
+  - name: smartappli/mage-api
+    newName: smartappli/mage-api
+    digest: sha256:0000000000000000000000000000000000000000000000000000000000000000
+  - name: smartappli/farm
+    newName: smartappli/farm
+    digest: sha256:0000000000000000000000000000000000000000000000000000000000000000
+

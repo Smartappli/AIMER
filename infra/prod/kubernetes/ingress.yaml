@@ -1,0 +1,29 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: aimer-web
+  labels:
+    app.kubernetes.io/name: aimer-web
+    app.kubernetes.io/part-of: aimer
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/proxy-body-size: "10m"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "60"
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - aimer.example.org
+      secretName: aimer-web-tls
+  rules:
+    - host: aimer.example.org
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: aimer-web
+                port:
+                  name: http
+

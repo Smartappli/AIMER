@@ -11,6 +11,8 @@ evidence and approvals for each production release.
 - Services: `aimer-web`, `aimer-rag`, `MAGE`, `FARM`.
 - Infrastructure: PostgreSQL, vector store, RAG runtime, observability stack,
   workflow tooling and any clinical data stores.
+- Production architecture: [PRODUCTION_ARCHITECTURE.md](PRODUCTION_ARCHITECTURE.md)
+  and `infra/prod/kubernetes/`.
 - Regulatory drivers: NIS2 for healthcare/critical services and, when AIMER is
   used by a financial entity or an ICT provider to one, DORA.
 

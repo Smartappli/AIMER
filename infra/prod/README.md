@@ -48,5 +48,7 @@ storage, monitored ingress and auditable change control.
 ## Files In This Directory
 
 - `.env.example`: non-secret variable inventory for production planning.
+- `kubernetes/`: hardened Kubernetes reference baseline with private services,
+  network policies, probes, resource limits and digest-pinned image placeholders.
 
 Do not add real secrets to this directory.

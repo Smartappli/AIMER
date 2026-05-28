@@ -1,0 +1,64 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: aimer-web
+  labels:
+    app.kubernetes.io/name: aimer-web
+    app.kubernetes.io/part-of: aimer
+spec:
+  type: ClusterIP
+  selector:
+    app.kubernetes.io/name: aimer-web
+  ports:
+    - name: http
+      port: 8000
+      targetPort: http
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: aimer-rag
+  labels:
+    app.kubernetes.io/name: aimer-rag
+    app.kubernetes.io/part-of: aimer
+spec:
+  type: ClusterIP
+  selector:
+    app.kubernetes.io/name: aimer-rag
+  ports:
+    - name: http
+      port: 8000
+      targetPort: http
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mage
+  labels:
+    app.kubernetes.io/name: mage
+    app.kubernetes.io/part-of: aimer
+spec:
+  type: ClusterIP
+  selector:
+    app.kubernetes.io/name: mage
+  ports:
+    - name: http
+      port: 10000
+      targetPort: http
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: farm
+  labels:
+    app.kubernetes.io/name: farm
+    app.kubernetes.io/part-of: aimer
+spec:
+  type: ClusterIP
+  selector:
+    app.kubernetes.io/name: farm
+  ports:
+    - name: http
+      port: 8000
+      targetPort: http
+

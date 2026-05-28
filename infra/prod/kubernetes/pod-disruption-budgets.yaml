@@ -1,0 +1,52 @@
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: aimer-web
+  labels:
+    app.kubernetes.io/name: aimer-web
+    app.kubernetes.io/part-of: aimer
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: aimer-web
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: aimer-rag
+  labels:
+    app.kubernetes.io/name: aimer-rag
+    app.kubernetes.io/part-of: aimer
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: aimer-rag
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: mage
+  labels:
+    app.kubernetes.io/name: mage
+    app.kubernetes.io/part-of: aimer
+spec:
+  maxUnavailable: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: mage
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: farm
+  labels:
+    app.kubernetes.io/name: farm
+    app.kubernetes.io/part-of: aimer
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: farm
+

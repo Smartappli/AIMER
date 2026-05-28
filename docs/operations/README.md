@@ -9,6 +9,7 @@ stale or unapproved evidence should block production promotion.
 | Evidence | File | Cadence |
 | --- | --- | --- |
 | Production go/no-go checklist | [PRODUCTION_READINESS.md](PRODUCTION_READINESS.md) | Every release |
+| Production architecture | [PRODUCTION_ARCHITECTURE.md](PRODUCTION_ARCHITECTURE.md) | Every major architecture change |
 | Release evidence pack template | [RELEASE_EVIDENCE_PACK.md](RELEASE_EVIDENCE_PACK.md) | Every release |
 | NIS2 / DORA control matrix | [CONTROL_MATRIX_NIS2_DORA.md](CONTROL_MATRIX_NIS2_DORA.md) | Quarterly and every major change |
 | ICT risk register | [RISK_REGISTER.md](RISK_REGISTER.md) | Monthly and every major incident/change |
@@ -45,4 +46,3 @@ The `Production Evidence` GitHub Actions workflow runs the same check on pull
 requests, pushes and a weekly schedule. It verifies required evidence files,
 internal Markdown links, production environment inventory, vulnerability
 exception review dates, register structure and supply-chain workflow guardrails.
-

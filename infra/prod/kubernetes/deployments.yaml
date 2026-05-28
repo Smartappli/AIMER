@@ -1,0 +1,327 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: aimer-web
+  labels:
+    app.kubernetes.io/name: aimer-web
+    app.kubernetes.io/part-of: aimer
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: aimer-web
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: aimer-web
+        app.kubernetes.io/part-of: aimer
+    spec:
+      serviceAccountName: aimer-web
+      securityContext:
+        runAsNonRoot: true
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+        - name: aimer-web
+          image: smartappli/aimer
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 8000
+          envFrom:
+            - configMapRef:
+                name: aimer-prod-config
+            - secretRef:
+                name: aimer-prod-secrets
+          env:
+            - name: RUN_DJANGO_MIGRATIONS
+              value: "0"
+            - name: RUN_DJANGO_COLLECTSTATIC
+              value: "1"
+          livenessProbe:
+            httpGet:
+              path: /healthz/
+              port: http
+              httpHeaders:
+                - name: X-Forwarded-Proto
+                  value: https
+            initialDelaySeconds: 20
+            periodSeconds: 30
+            timeoutSeconds: 5
+          readinessProbe:
+            httpGet:
+              path: /readyz/
+              port: http
+              httpHeaders:
+                - name: X-Forwarded-Proto
+                  value: https
+            initialDelaySeconds: 10
+            periodSeconds: 15
+            timeoutSeconds: 5
+          resources:
+            requests:
+              cpu: 250m
+              memory: 512Mi
+            limits:
+              cpu: "1"
+              memory: 1Gi
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop: ["ALL"]
+          volumeMounts:
+            - name: tmp
+              mountPath: /tmp
+            - name: cache
+              mountPath: /app/.cache
+            - name: staticfiles
+              mountPath: /app/staticfiles
+      volumes:
+        - name: tmp
+          emptyDir: {}
+        - name: cache
+          emptyDir: {}
+        - name: staticfiles
+          emptyDir: {}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: aimer-rag
+  labels:
+    app.kubernetes.io/name: aimer-rag
+    app.kubernetes.io/part-of: aimer
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: aimer-rag
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: aimer-rag
+        app.kubernetes.io/part-of: aimer
+    spec:
+      serviceAccountName: aimer-rag
+      securityContext:
+        runAsNonRoot: true
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+        - name: aimer-rag
+          image: smartappli/aimer-rag
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 8000
+          envFrom:
+            - configMapRef:
+                name: aimer-prod-config
+            - secretRef:
+                name: aimer-prod-secrets
+          env:
+            - name: RAG_VERIFY_ON_START
+              value: "1"
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: http
+            initialDelaySeconds: 20
+            periodSeconds: 30
+            timeoutSeconds: 5
+          readinessProbe:
+            exec:
+              command:
+                - sh
+                - -c
+                - >
+                  python -c "import os, urllib.request;
+                  req = urllib.request.Request(
+                  'http://127.0.0.1:8000/readyz',
+                  headers={'X-API-Key': os.environ['AIMER_RAG_API_KEY']});
+                  urllib.request.urlopen(req, timeout=3).read()"
+            initialDelaySeconds: 15
+            periodSeconds: 20
+            timeoutSeconds: 5
+          resources:
+            requests:
+              cpu: 500m
+              memory: 1Gi
+            limits:
+              cpu: "2"
+              memory: 4Gi
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop: ["ALL"]
+          volumeMounts:
+            - name: tmp
+              mountPath: /tmp
+            - name: cache
+              mountPath: /app/.cache
+      volumes:
+        - name: tmp
+          emptyDir: {}
+        - name: cache
+          emptyDir: {}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mage
+  labels:
+    app.kubernetes.io/name: mage
+    app.kubernetes.io/part-of: aimer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: mage
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: mage
+        app.kubernetes.io/part-of: aimer
+    spec:
+      serviceAccountName: mage
+      securityContext:
+        runAsNonRoot: true
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+        - name: mage
+          image: smartappli/mage-api
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 10000
+          envFrom:
+            - configMapRef:
+                name: aimer-prod-config
+            - secretRef:
+                name: aimer-prod-secrets
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: http
+            initialDelaySeconds: 30
+            periodSeconds: 30
+            timeoutSeconds: 5
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: http
+            initialDelaySeconds: 15
+            periodSeconds: 20
+            timeoutSeconds: 5
+          resources:
+            requests:
+              cpu: "1"
+              memory: 4Gi
+            limits:
+              cpu: "4"
+              memory: 12Gi
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop: ["ALL"]
+          volumeMounts:
+            - name: tmp
+              mountPath: /tmp
+            - name: cache
+              mountPath: /app/.cache
+      volumes:
+        - name: tmp
+          emptyDir: {}
+        - name: cache
+          emptyDir: {}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: farm
+  labels:
+    app.kubernetes.io/name: farm
+    app.kubernetes.io/part-of: aimer
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: farm
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: farm
+        app.kubernetes.io/part-of: aimer
+    spec:
+      serviceAccountName: farm
+      securityContext:
+        runAsNonRoot: true
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+        - name: farm
+          image: smartappli/farm
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 8000
+          envFrom:
+            - configMapRef:
+                name: aimer-prod-config
+            - secretRef:
+                name: aimer-prod-secrets
+          env:
+            - name: RUN_DJANGO_MIGRATIONS
+              value: "0"
+            - name: RUN_DJANGO_COLLECTSTATIC
+              value: "1"
+          livenessProbe:
+            httpGet:
+              path: /healthz/
+              port: http
+              httpHeaders:
+                - name: X-Forwarded-Proto
+                  value: https
+            initialDelaySeconds: 20
+            periodSeconds: 30
+            timeoutSeconds: 5
+          readinessProbe:
+            httpGet:
+              path: /readyz/
+              port: http
+              httpHeaders:
+                - name: X-Forwarded-Proto
+                  value: https
+            initialDelaySeconds: 10
+            periodSeconds: 15
+            timeoutSeconds: 5
+          resources:
+            requests:
+              cpu: 250m
+              memory: 512Mi
+            limits:
+              cpu: "1"
+              memory: 1Gi
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop: ["ALL"]
+          volumeMounts:
+            - name: tmp
+              mountPath: /tmp
+            - name: cache
+              mountPath: /app/.cache
+            - name: staticfiles
+              mountPath: /app/staticfiles
+      volumes:
+        - name: tmp
+          emptyDir: {}
+        - name: cache
+          emptyDir: {}
+        - name: staticfiles
+          emptyDir: {}

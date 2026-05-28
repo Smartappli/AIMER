@@ -17,6 +17,7 @@ TODAY = datetime.now(UTC).date()
 OPERATIONS_DOCS = [
     "README.md",
     "PRODUCTION_READINESS.md",
+    "PRODUCTION_ARCHITECTURE.md",
     "RELEASE_EVIDENCE_PACK.md",
     "CONTROL_MATRIX_NIS2_DORA.md",
     "RISK_REGISTER.md",
@@ -78,6 +79,27 @@ BUILDER_WORKFLOWS = [
     ".github/workflows/aimer_docker_builder.yml",
     ".github/workflows/mage_docker_builder.yml",
     ".github/workflows/farm_docker_builder.yml",
+]
+
+DOCKERFILES = [
+    "services/aimer-web/Dockerfile",
+    "services/aimer-web/Dockerfile.rag",
+    "services/MAGE/Dockerfile",
+    "services/FARM/Dockerfile",
+]
+
+KUBERNETES_FILES = [
+    "README.md",
+    "kustomization.yaml",
+    "namespace.yaml",
+    "serviceaccounts.yaml",
+    "configmap.yaml",
+    "services.yaml",
+    "deployments.yaml",
+    "ingress.yaml",
+    "network-policies.yaml",
+    "pod-disruption-budgets.yaml",
+    "hpa.yaml",
 ]
 
 
@@ -352,6 +374,72 @@ def _validate_supply_chain_workflows(errors: list[str]) -> None:
             )
 
 
+def _validate_runtime_architecture(errors: list[str]) -> None:
+    """Validate production runtime architecture guardrails."""
+    for dockerfile in DOCKERFILES:
+        text = _read(dockerfile)
+        _check(
+            "HEALTHCHECK" in text,
+            f"{dockerfile} must define a container HEALTHCHECK.",
+            errors,
+        )
+        _check(
+            "USER appuser" in text,
+            f"{dockerfile} must run as the non-root appuser.",
+            errors,
+        )
+
+    k8s_root = ROOT / "infra" / "prod" / "kubernetes"
+    for filename in KUBERNETES_FILES:
+        path = k8s_root / filename
+        _check(path.is_file(), f"Missing Kubernetes baseline file: {path}", errors)
+        if path.is_file():
+            _check(path.stat().st_size > 0, f"Empty Kubernetes file: {path}", errors)
+
+    deployments = _read("infra/prod/kubernetes/deployments.yaml")
+    for required in (
+        "livenessProbe:",
+        "readinessProbe:",
+        "resources:",
+        "runAsNonRoot: true",
+        "allowPrivilegeEscalation: false",
+        "readOnlyRootFilesystem: true",
+        "drop: [\"ALL\"]",
+    ):
+        _check(
+            required in deployments,
+            f"deployments.yaml missing workload hardening: {required}",
+            errors,
+        )
+
+    network_policies = _read("infra/prod/kubernetes/network-policies.yaml")
+    for required in (
+        "name: default-deny",
+        "policyTypes:",
+        "network.aimer.io/ingress",
+        "app.kubernetes.io/name: aimer-rag",
+    ):
+        _check(
+            required in network_policies,
+            f"network-policies.yaml missing required boundary: {required}",
+            errors,
+        )
+
+    kustomization = _read("infra/prod/kubernetes/kustomization.yaml")
+    for image in (
+        "smartappli/aimer",
+        "smartappli/aimer-rag",
+        "smartappli/mage-api",
+        "smartappli/farm",
+    ):
+        _check(image in kustomization, f"kustomization.yaml missing {image}.", errors)
+    _check(
+        "digest: sha256:" in kustomization,
+        "kustomization.yaml must pin images by digest.",
+        errors,
+    )
+
+
 def _validate_pr_template(errors: list[str]) -> None:
     """Validate the pull request template includes production review prompts."""
     text = _read(".github/PULL_REQUEST_TEMPLATE.md")
@@ -375,6 +463,7 @@ def main() -> int:
     _validate_vulnerability_exceptions(errors)
     _validate_register_tables(errors)
     _validate_supply_chain_workflows(errors)
+    _validate_runtime_architecture(errors)
     _validate_pr_template(errors)
 
     if errors:

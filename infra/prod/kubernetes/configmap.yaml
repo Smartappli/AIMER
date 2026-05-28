@@ -1,0 +1,45 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: aimer-prod-config
+  labels:
+    app.kubernetes.io/part-of: aimer
+data:
+  ENVIRONMENT: "production"
+  DJANGO_ENVIRONMENT: "production"
+  AIMER_RAG_ENVIRONMENT: "production"
+  MAGE_ENVIRONMENT: "production"
+  FARM_FEDERATED_ENVIRONMENT: "production"
+  DEBUG: "false"
+  DJANGO_DEBUG: "false"
+  BASE_URL: "https://aimer.example.org"
+  DJANGO_BASE_URL: "https://farm.example.org"
+  ALLOWED_HOSTS: "aimer.example.org"
+  DJANGO_ALLOWED_HOSTS: "farm.example.org"
+  CSRF_TRUSTED_ORIGINS: "https://aimer.example.org"
+  SECURE_SSL_REDIRECT: "true"
+  DJANGO_SECURE_SSL_REDIRECT: "true"
+  SESSION_COOKIE_SECURE: "true"
+  DJANGO_SESSION_COOKIE_SECURE: "true"
+  CSRF_COOKIE_SECURE: "true"
+  DJANGO_CSRF_COOKIE_SECURE: "true"
+  SECURE_HSTS_SECONDS: "31536000"
+  DJANGO_SECURE_HSTS_SECONDS: "31536000"
+  EMAIL_HOST: "smtp.example.org"
+  EMAIL_PORT: "587"
+  EMAIL_USE_TLS: "true"
+  DEFAULT_FROM_EMAIL: "no-reply@example.org"
+  EMAIL_VERIFICATION_REQUIRED: "true"
+  RAG_SERVICE_URL: "http://aimer-rag.aimer-prod.svc.cluster.local:8000"
+  OPENRAG_ENDPOINT: "https://openrag.example.org"
+  QDRANT_URL: "https://qdrant.example.org"
+  RAG_STRICT_OPENRAG: "true"
+  RAG_ALLOW_UNGROUNDED_RECOMMENDATIONS: "false"
+  RAG_ALLOW_EXTERNAL_PLUGINS: "false"
+  AUTH_LOGIN_FAILURE_LIMIT: "5"
+  AUTH_LOGIN_WINDOW_SECONDS: "900"
+  AUTH_LOGIN_LOCKOUT_SECONDS: "900"
+  SECURITY_AUDIT_LOG_LEVEL: "INFO"
+  XDG_CACHE_HOME: "/tmp/.cache"
+  MPLCONFIGDIR: "/tmp/.cache/matplotlib"
+
