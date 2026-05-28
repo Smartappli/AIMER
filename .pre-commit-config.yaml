@@ -38,7 +38,7 @@ repos:
         additional_dependencies: ["validate-pyproject-schema-store[all]"]
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.15.9
+    rev: v0.15.14
     hooks:
       - id: ruff-format
         args: [ "--config=pyproject.toml" ]
