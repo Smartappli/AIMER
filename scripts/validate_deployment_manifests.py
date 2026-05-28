@@ -89,7 +89,8 @@ def _kind(doc: str) -> str | None:
 
 def _metadata_name(doc: str) -> str | None:
     """Return a Kubernetes document metadata.name value."""
-    match = re.search(r"(?ms)^metadata:\s*\n(?:^[ ]{2,}.*\n)*?^[ ]{2}name:\s*([^\n]+)", doc)
+    pattern = r"(?ms)^metadata:\s*\n(?:^[ ]{2,}.*\n)*?^[ ]{2}name:\s*([^\n]+)"
+    match = re.search(pattern, doc)
     return match.group(1).strip().strip('"') if match else None
 
 
@@ -227,7 +228,9 @@ def _validate_deployments(result: CheckResult) -> None:
                 result.error(f"Deployment/{service} missing required text: {required}")
         if service in {"aimer-web", "farm"}:
             if "RUN_DJANGO_MIGRATIONS" not in doc or 'value: "0"' not in doc:
-                result.error(f"Deployment/{service} must disable serving-pod migrations.")
+                result.error(
+                    f"Deployment/{service} must disable serving-pod migrations."
+                )
         if service == "aimer-rag" and "RAG_VERIFY_ON_START" not in doc:
             result.error("Deployment/aimer-rag must verify RAG runtime on start.")
 
@@ -260,7 +263,9 @@ def _validate_ingress(result: CheckResult, *, require_real_domains: bool) -> Non
         result.error("Ingress must route to the aimer-web service.")
     for private_service in ("aimer-rag", "mage", "farm"):
         if private_service in doc:
-            result.error(f"Ingress must not route to private service {private_service}.")
+            result.error(
+                f"Ingress must not route to private service {private_service}."
+            )
     if "example.org" in doc:
         message = "Ingress still uses example.org placeholder domains."
         if require_real_domains:
