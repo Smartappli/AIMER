@@ -1,0 +1,33 @@
+name: Production Evidence
+
+on:
+  push:
+    branches: ["master", "work"]
+  pull_request:
+  schedule:
+    - cron: "10 04 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: production-evidence-${{ github.event_name == 'pull_request' && format('{0}-{1}', github.workflow, github.event.pull_request.number) || github.workflow_ref }}
+  cancel-in-progress: true
+
+jobs:
+  production-evidence:
+    name: Production Evidence Gate
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+
+      - name: Validate production evidence
+        run: python scripts/validate_production_evidence.py
+

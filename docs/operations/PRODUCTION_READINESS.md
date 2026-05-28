@@ -30,6 +30,7 @@ evidence and approvals for each production release.
 | Backup and restore | Encrypted backups tested with measured RTO/RPO. |
 | Incident reporting | 24h/72h/1-month NIS2 workflow and DORA workflow, if applicable. |
 | Supply chain evidence | SBOM, container scan, IaC scan, dependency audit and signed images. |
+| Production evidence gate | `python scripts/validate_production_evidence.py` passes. |
 | Clinical validation | Model/RAG output validated, drift monitored, human oversight defined. |
 | ICT risk acceptance | Risk register reviewed and residual `High`/`Critical` risks approved. |
 | Asset and supplier register | Critical assets, data classes and ICT suppliers reviewed. |
@@ -77,6 +78,7 @@ For every production release, store the following artifacts with the release:
 
 - Git commit SHA and image digests.
 - Completed [release evidence pack](RELEASE_EVIDENCE_PACK.md).
+- Passing production evidence gate output.
 - Cosign signature verification output for every runtime image digest.
 - SBOM for each runtime image.
 - Vulnerability scan reports and accepted-risk records.

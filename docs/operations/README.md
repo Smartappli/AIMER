@@ -32,3 +32,17 @@ A release is not production-ready until:
 - Backup restore evidence is less than 90 days old.
 - Incident notification contacts and authority routes are current.
 
+## Automated Gate
+
+Run the production evidence validator before merging changes that affect
+regulated deployment:
+
+```sh
+python scripts/validate_production_evidence.py
+```
+
+The `Production Evidence` GitHub Actions workflow runs the same check on pull
+requests, pushes and a weekly schedule. It verifies required evidence files,
+internal Markdown links, production environment inventory, vulnerability
+exception review dates, register structure and supply-chain workflow guardrails.
+

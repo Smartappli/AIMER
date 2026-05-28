@@ -28,6 +28,12 @@ Production readiness and regulated-operation artefacts live under
 local-only; use [`infra/prod`](infra/prod/) as the starting checklist for
 production planning.
 
+Run the production evidence gate locally with:
+
+```sh
+python scripts/validate_production_evidence.py
+```
+
 ## Continuous Integration
 
 [![Microservices Validation](https://github.com/Smartappli/AIMER/actions/workflows/microservices_validation.yml/badge.svg)](https://github.com/Smartappli/AIMER/actions/workflows/microservices_validation.yml)
