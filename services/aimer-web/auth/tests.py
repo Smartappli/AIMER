@@ -4,7 +4,8 @@ from __future__ import annotations
 
 from datetime import timedelta
 
-from auth.models import Profile
+from auth.models import Profile, SecurityAuditEvent
+from auth.tokens import hash_token
 from django.contrib.auth import get_user_model
 from django.test import TestCase, override_settings
 from django.urls import reverse
@@ -38,7 +39,7 @@ class AuthSecurityTests(TestCase):
             password="Original-Strong-Passphrase-2026",
         )
         profile = Profile.objects.get(user=user)
-        profile.forget_password_token = "reset-token"
+        profile.forget_password_token = hash_token("reset-token")
         profile.forget_password_token_expires_at = timezone.now() + timedelta(hours=1)
         profile.save()
 
@@ -54,7 +55,47 @@ class AuthSecurityTests(TestCase):
         user.refresh_from_db()
         profile.refresh_from_db()
         self.assertTrue(user.check_password("Original-Strong-Passphrase-2026"))
-        self.assertEqual(profile.forget_password_token, "reset-token")
+        self.assertEqual(profile.forget_password_token, hash_token("reset-token"))
+
+    def test_password_reset_token_is_hashed_at_rest(self) -> None:
+        """Password reset requests must not persist the raw email token."""
+        user = get_user_model().objects.create_user(
+            username="token-user",
+            email="token-user@example.com",
+            password="Original-Strong-Passphrase-2026",
+        )
+
+        response = self.client.post(
+            reverse("forgot-password"),
+            {"email": user.email},
+        )
+
+        self.assertEqual(response.status_code, 302)
+        profile = Profile.objects.get(user=user)
+        self.assertIsNotNone(profile.forget_password_token)
+        self.assertEqual(len(profile.forget_password_token), 64)
+        self.assertNotEqual(profile.forget_password_token, "reset-token")
+
+    def test_failed_login_is_audited(self) -> None:
+        """Failed authentication attempts must produce security audit events."""
+        get_user_model().objects.create_user(
+            username="audit-login",
+            email="audit-login@example.com",
+            password="Strong-Passphrase-2026",
+        )
+
+        response = self.client.post(
+            reverse("login"),
+            {
+                "email-username": "audit-login",
+                "password": "wrong-password",
+            },
+        )
+
+        self.assertEqual(response.status_code, 302)
+        self.assertTrue(
+            SecurityAuditEvent.objects.filter(event_type="auth.login.failed").exists(),
+        )
 
     @override_settings(EMAIL_VERIFICATION_REQUIRED=True)
     def test_login_blocks_unverified_user_when_required(self) -> None:

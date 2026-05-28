@@ -32,6 +32,11 @@ def _rag_service_timeout() -> float:
     )
 
 
+def _rag_service_api_key() -> str:
+    """Return the optional service-to-service API key."""
+    return str(getattr(settings, "RAG_SERVICE_API_KEY", "") or "").strip()
+
+
 def _decode_json_response(response: httpx.Response) -> dict[str, Any]:
     """Decode an HTTP response body as a JSON object."""
     payload = response.json()
@@ -68,6 +73,9 @@ def _remote_json_request(
         raise RagServiceUnavailableError(msg)
 
     headers = {"Accept": "application/json"}
+    api_key = _rag_service_api_key()
+    if api_key:
+        headers["Authorization"] = f"Bearer {api_key}"
     method = "GET"
     json_payload = None
     if payload is not None:

@@ -4,7 +4,13 @@
 
 from __future__ import annotations
 
+import hmac
+import os
+from collections.abc import Awaitable, Callable
+
 from fastapi import FastAPI
+from fastapi.requests import Request
+from fastapi.responses import JSONResponse, Response
 from fastmcp import FastMCP
 
 from api.services.augmentations import augmentation_presets, validate_preset
@@ -31,6 +37,22 @@ from api.services.modules import (
 )
 
 api = FastAPI(title="MAGE API Gateway")
+
+PUBLIC_PATHS = {"/", "/healthz"}
+
+
+def _configured_api_key() -> str:
+    """Return the configured service API key, if any."""
+    return os.getenv("MAGE_API_KEY", "").strip()
+
+
+def _request_api_key(request: Request) -> str:
+    """Extract API key from Authorization bearer or X-API-Key headers."""
+    authorization = request.headers.get("authorization", "")
+    scheme, _, value = authorization.partition(" ")
+    if scheme.lower() == "bearer" and value:
+        return value.strip()
+    return request.headers.get("x-api-key", "").strip()
 
 
 @api.get("/")
@@ -115,3 +137,19 @@ app = FastAPI(
     routes=[*mcp_app.routes, *api.routes],
     lifespan=mcp_app.lifespan,
 )
+
+
+@app.middleware("http")
+async def require_service_api_key(
+    request: Request,
+    call_next: Callable[[Request], Awaitable[Response]],
+) -> Response:
+    """Require a service key for REST and MCP routes when configured."""
+    expected_key = _configured_api_key()
+    if not expected_key or request.url.path in PUBLIC_PATHS:
+        return await call_next(request)
+
+    provided_key = _request_api_key(request)
+    if not provided_key or not hmac.compare_digest(provided_key, expected_key):
+        return JSONResponse({"detail": "Unauthorized"}, status_code=401)
+    return await call_next(request)

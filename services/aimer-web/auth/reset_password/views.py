@@ -14,6 +14,8 @@ from django.shortcuts import redirect, render
 from django.utils import timezone
 
 from auth.models import Profile
+from auth.security import audit_event
+from auth.tokens import hash_token
 from auth.views import AuthView
 
 if TYPE_CHECKING:
@@ -51,15 +53,21 @@ class ResetPasswordView(AuthView):
             HttpResponse: Redirect or rendered template based on validation result.
 
         """
+        token_hash = hash_token(token)
         profile = await (
             Profile.objects
             .select_related("user")
             .filter(
-                forget_password_token=token,
+                forget_password_token=token_hash,
             )
             .afirst()
         )
         if not profile:
+            await sync_to_async(audit_event)(
+                "auth.password_reset.rejected",
+                request=request,
+                metadata={"reason": "invalid_token"},
+            )
             await sync_to_async(messages.error)(
                 request,
                 "Invalid or expired token.",
@@ -72,16 +80,29 @@ class ResetPasswordView(AuthView):
             profile.forget_password_token = None
             profile.forget_password_token_expires_at = None
             await profile.asave()
+            await sync_to_async(audit_event)(
+                "auth.password_reset.rejected",
+                request=request,
+                user=profile.user,
+                metadata={"reason": "expired_token"},
+            )
             await sync_to_async(messages.error)(
                 request,
                 "Invalid or expired token.",
             )
             return redirect("forgot-password")
 
+        user = profile.user
         new_password = request.POST.get("password")
         confirm_password = request.POST.get("confirm-password")
 
         if not (new_password and confirm_password):
+            await sync_to_async(audit_event)(
+                "auth.password_reset.rejected",
+                request=request,
+                user=user,
+                metadata={"reason": "missing_fields"},
+            )
             await sync_to_async(messages.error)(
                 request,
                 "Please fill all fields.",
@@ -89,16 +110,27 @@ class ResetPasswordView(AuthView):
             return await self.render_form(request)
 
         if new_password != confirm_password:
+            await sync_to_async(audit_event)(
+                "auth.password_reset.rejected",
+                request=request,
+                user=user,
+                metadata={"reason": "password_mismatch"},
+            )
             await sync_to_async(messages.error)(
                 request,
                 "Passwords do not match.",
             )
             return await self.render_form(request)
 
-        user = profile.user
         try:
             await sync_to_async(validate_password)(new_password, user)
         except ValidationError as exc:
+            await sync_to_async(audit_event)(
+                "auth.password_reset.rejected",
+                request=request,
+                user=user,
+                metadata={"reason": "weak_password"},
+            )
             await sync_to_async(messages.error)(request, " ".join(exc.messages))
             return await self.render_form(request)
 
@@ -113,6 +145,11 @@ class ResetPasswordView(AuthView):
             request,
             username=user.username,
             password=new_password,
+        )
+        await sync_to_async(audit_event)(
+            "auth.password_reset.completed",
+            request=request,
+            user=user,
         )
         if authenticated_user:
             await alogin(request, authenticated_user)

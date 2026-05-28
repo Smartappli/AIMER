@@ -22,6 +22,10 @@ See [docs/PROJECT_STRUCTURE.md](docs/PROJECT_STRUCTURE.md) for the detailed
 layout and [docs/MICROSERVICES.md](docs/MICROSERVICES.md) for service
 boundaries.
 
+Production readiness and regulated-operation artefacts live under
+[`docs/operations`](docs/operations/). `infra/dev-stack` is local-only; use
+[`infra/prod`](infra/prod/) as the starting checklist for production planning.
+
 ## Continuous Integration
 
 [![Microservices Validation](https://github.com/Smartappli/AIMER/actions/workflows/microservices_validation.yml/badge.svg)](https://github.com/Smartappli/AIMER/actions/workflows/microservices_validation.yml)

@@ -74,4 +74,6 @@ jobs:
           file: ${{ matrix.dockerfile }}
           push: true
           platforms: linux/amd64,linux/arm64
+          provenance: true
+          sbom: true
           tags: ${{ matrix.tags }}

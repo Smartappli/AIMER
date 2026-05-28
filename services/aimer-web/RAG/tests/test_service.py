@@ -3,8 +3,9 @@
 
 from __future__ import annotations
 
-from unittest.mock import patch
+from unittest.mock import Mock, patch
 
+import pytest
 from fastapi.testclient import TestClient
 
 from RAG.recommender import (
@@ -42,6 +43,27 @@ def test_healthz_returns_liveness_payload() -> None:
 
     assert response.status_code == 200
     assert response.json() == {"service": "aimer-rag", "status": "ok"}
+
+
+@patch("RAG.service.recommend_models_for_query")
+def test_recommend_endpoint_requires_api_key_when_configured(
+    mock_recommend: Mock,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Ensure service API auth is enforced when configured."""
+    monkeypatch.setenv("AIMER_RAG_API_KEY", "service-secret")
+    mock_recommend.return_value = _recommendation_response("classification mri")
+    client = TestClient(app)
+
+    unauthorized = client.post("/recommend", json={"query": "classification mri"})
+    authorized = client.post(
+        "/recommend",
+        headers={"Authorization": "Bearer service-secret"},
+        json={"query": "classification mri"},
+    )
+
+    assert unauthorized.status_code == 401
+    assert authorized.status_code == 200
 
 
 @patch("RAG.service.recommend_models_for_query")

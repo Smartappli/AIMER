@@ -1,0 +1,140 @@
+name: Supply Chain Security
+
+on:
+  push:
+    branches: ["master"]
+  pull_request:
+    branches: ["master"]
+  schedule:
+    - cron: "45 03 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  security-events: write
+  actions: read
+
+concurrency:
+  group: supply-chain-security-${{ github.workflow_ref }}
+  cancel-in-progress: true
+
+jobs:
+  repository-scan:
+    name: Repository Scan
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Trivy filesystem scan
+        uses: aquasecurity/trivy-action@0.33.1
+        with:
+          scan-type: fs
+          scan-ref: .
+          format: sarif
+          output: trivy-fs.sarif
+          severity: HIGH,CRITICAL
+          ignore-unfixed: true
+
+      - name: Upload filesystem SARIF
+        if: ${{ always() }}
+        uses: github/codeql-action/upload-sarif@v4
+        with:
+          sarif_file: trivy-fs.sarif
+
+      - name: Trivy IaC/config scan
+        uses: aquasecurity/trivy-action@0.33.1
+        with:
+          scan-type: config
+          scan-ref: .
+          format: sarif
+          output: trivy-config.sarif
+          severity: MEDIUM,HIGH,CRITICAL
+
+      - name: Upload IaC SARIF
+        if: ${{ always() }}
+        uses: github/codeql-action/upload-sarif@v4
+        with:
+          sarif_file: trivy-config.sarif
+
+  image-scan:
+    name: Image Scan (${{ matrix.service }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - service: aimer-web
+            context: ./services/aimer-web
+            dockerfile: ./services/aimer-web/Dockerfile
+            image: aimer-web-supply-chain:ci
+          - service: aimer-rag
+            context: ./services/aimer-web
+            dockerfile: ./services/aimer-web/Dockerfile.rag
+            image: aimer-rag-supply-chain:ci
+          - service: MAGE
+            context: ./services/MAGE
+            dockerfile: ./services/MAGE/Dockerfile
+            image: mage-supply-chain:ci
+          - service: FARM
+            context: ./services/FARM
+            dockerfile: ./services/FARM/Dockerfile
+            image: farm-supply-chain:ci
+    steps:
+      - name: Free Disk Space (Ubuntu)
+        uses: jlumbroso/free-disk-space@v1.3.1
+        with:
+          tool-cache: false
+          android: true
+          dotnet: true
+          haskell: true
+          large-packages: true
+          docker-images: false
+          swap-storage: true
+
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v4
+
+      - name: Build local image
+        uses: docker/build-push-action@v7
+        with:
+          context: ${{ matrix.context }}
+          file: ${{ matrix.dockerfile }}
+          push: false
+          load: true
+          tags: ${{ matrix.image }}
+
+      - name: Generate CycloneDX SBOM
+        uses: aquasecurity/trivy-action@0.33.1
+        with:
+          scan-type: image
+          image-ref: ${{ matrix.image }}
+          format: cyclonedx
+          output: sbom-${{ matrix.service }}.json
+
+      - name: Scan image
+        uses: aquasecurity/trivy-action@0.33.1
+        with:
+          scan-type: image
+          image-ref: ${{ matrix.image }}
+          format: sarif
+          output: trivy-image-${{ matrix.service }}.sarif
+          severity: HIGH,CRITICAL
+          ignore-unfixed: true
+
+      - name: Upload image SARIF
+        if: ${{ always() }}
+        uses: github/codeql-action/upload-sarif@v4
+        with:
+          sarif_file: trivy-image-${{ matrix.service }}.sarif
+
+      - name: Upload SBOM
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: sbom-${{ matrix.service }}
+          path: sbom-${{ matrix.service }}.json
+          if-no-files-found: error

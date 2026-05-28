@@ -683,6 +683,7 @@ services:
     environment:
       RUN_DJANGO_MIGRATIONS: "0"
       RAG_VERIFY_ON_START: "0"
+      AIMER_RAG_API_KEY: ${AIMER_RAG_API_KEY:-dev-insecure-rag-key-change-me}
       OLLAMA_BASE_URL: ${OLLAMA_BASE_URL:-http://ollama:11434}
       QDRANT_URL: ${QDRANT_URL:-http://qdrant:6333}
       OPENRAG_ENDPOINT: ${OPENRAG_ENDPOINT:-}
@@ -708,6 +709,7 @@ services:
       ALLOWED_HOSTS: ${ALLOWED_HOSTS:-localhost,127.0.0.1,aimer-web}
       DATABASE_URL: postgresql://${POSTGRES_USER:-aimer}:${POSTGRES_PASSWORD:-aimer}@postgres:5432/${AIMER_WEB_DB:-aimer_web}
       RAG_SERVICE_URL: ${RAG_SERVICE_URL:-http://aimer-rag:8000}
+      RAG_SERVICE_API_KEY: ${AIMER_RAG_API_KEY:-dev-insecure-rag-key-change-me}
       RUN_DJANGO_MIGRATIONS: ${RUN_DJANGO_MIGRATIONS:-1}
     ports:
       - "${AIMER_WEB_PORT:-8000}:8000"
@@ -724,6 +726,8 @@ services:
       dockerfile: Dockerfile
     image: mage:local
     profiles: ["apps"]
+    environment:
+      MAGE_API_KEY: ${MAGE_API_KEY:-}
     ports:
       - "${MAGE_PORT:-10000}:10000"
     restart: unless-stopped

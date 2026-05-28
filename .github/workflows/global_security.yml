@@ -52,6 +52,8 @@ jobs:
           # - openrag 0.4.1 pins litellm 1.83.3 and python-dotenv 1.0.1.
           # - fastapi currently keeps starlette below the audited fixed release.
           # - torch has no fixed version published for PYSEC-2026-139.
+          # Exception ownership and review dates are tracked in:
+          # docs/operations/VULNERABILITY_EXCEPTIONS.md
           uvx pip-audit \
             -r "${RUNNER_TEMP}/${{ matrix.service }}-requirements.txt" \
             --no-deps \

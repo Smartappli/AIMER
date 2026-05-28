@@ -46,3 +46,10 @@ docker compose --env-file infra/dev-stack/.env -f infra/dev-stack/docker-compose
 `aimer-web` calls `aimer-rag` through `RAG_SERVICE_URL=http://aimer-rag:8000`.
 `RUN_DJANGO_MIGRATIONS=0` can be set on Django containers when migrations are
 run as a separate deployment job.
+
+When `AIMER_RAG_API_KEY` is set on `aimer-rag`, the RAG service requires
+`Authorization: Bearer <key>` or `X-API-Key` for `/recommend` and `/readyz`.
+Configure the same value as `RAG_SERVICE_API_KEY` on `aimer-web`.
+
+When `MAGE_API_KEY` is set, MAGE protects REST and MCP routes while leaving `/`
+and `/healthz` available for liveness checks.

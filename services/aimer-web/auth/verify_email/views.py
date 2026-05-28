@@ -1,7 +1,7 @@
 # Copyright (c) 2026 AIMER contributors.
 """Email verification views."""
 
-import secrets
+from datetime import timedelta
 from typing import override
 
 from asgiref.sync import sync_to_async
@@ -9,10 +9,15 @@ from django.conf import settings
 from django.contrib import messages
 from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
 from django.shortcuts import redirect
+from django.utils import timezone
 
 from auth.helpers import send_verification_email
 from auth.models import Profile
+from auth.security import audit_event
+from auth.tokens import hash_token, new_token_pair
 from auth.views import AuthView
+
+DEFAULT_EMAIL_TOKEN_TTL_HOURS = 24
 
 
 class VerifyEmailTokenView(AuthView):
@@ -20,7 +25,7 @@ class VerifyEmailTokenView(AuthView):
     Verify a user's email address using a token.
 
     GET /verify-email/<token>:
-    - Finds the Profile with `email_token == token`.
+    - Finds the Profile with `email_token == hash(token)`.
     - Sets `is_verified = True` and clears `email_token`.
     - Shows a success message (mainly for non-authenticated users).
     - Redirects to the login page.
@@ -43,8 +48,34 @@ class VerifyEmailTokenView(AuthView):
             An HTTP redirect response.
 
         """
-        profile = await Profile.objects.filter(email_token=token).afirst()
+        profile_query = Profile.objects.select_related("user").filter(
+            email_token=hash_token(token),
+        )
+        profile = await profile_query.afirst()
         if not profile:
+            await sync_to_async(audit_event)(
+                "auth.email_verification.rejected",
+                request=request,
+                metadata={"reason": "invalid_token"},
+            )
+            await sync_to_async(messages.error)(
+                request,
+                "Invalid token, please try again",
+            )
+            return redirect("verify-email-page")
+
+        if profile.email_token_expires_at and profile.email_token_expires_at < (
+            timezone.now()
+        ):
+            profile.email_token = None
+            profile.email_token_expires_at = None
+            await profile.asave()
+            await sync_to_async(audit_event)(
+                "auth.email_verification.rejected",
+                request=request,
+                user=profile.user,
+                metadata={"reason": "expired_token"},
+            )
             await sync_to_async(messages.error)(
                 request,
                 "Invalid token, please try again",
@@ -53,7 +84,13 @@ class VerifyEmailTokenView(AuthView):
 
         profile.is_verified = True
         profile.email_token = None
+        profile.email_token_expires_at = None
         await profile.asave()
+        await sync_to_async(audit_event)(
+            "auth.email_verification.completed",
+            request=request,
+            user=profile.user,
+        )
         if not request.user.is_authenticated:
             # User is not already authenticated
             # Perform the email verification and any other necessary actions
@@ -130,7 +167,10 @@ class SendVerificationView(AuthView):
             )
             return redirect("verify-email-page")
 
-        user_profile = await Profile.objects.filter(email=email).afirst()
+        profile_query = Profile.objects.select_related("user").filter(
+            email=email,
+        )
+        user_profile = await profile_query.afirst()
         if not user_profile:
             await sync_to_async(messages.error)(
                 request,
@@ -142,10 +182,23 @@ class SendVerificationView(AuthView):
             await sync_to_async(messages.success)(request, "Email is already verified.")
             return redirect("verify-email-page")
 
-        token = secrets.token_urlsafe(32)
-        user_profile.email_token = token
+        token, token_hash = new_token_pair()
+        token_ttl_hours = int(
+            getattr(settings, "EMAIL_VERIFICATION_TOKEN_TTL_HOURS", 24)
+            or DEFAULT_EMAIL_TOKEN_TTL_HOURS,
+        )
+        user_profile.email_token = token_hash
+        user_profile.email_token_expires_at = timezone.now() + timedelta(
+            hours=token_ttl_hours,
+        )
         await user_profile.asave()
         await send_verification_email(email, token)
+        await sync_to_async(audit_event)(
+            "auth.email_verification.resent",
+            request=request,
+            user=user_profile.user,
+            actor_identifier=email,
+        )
         await sync_to_async(messages.success)(
             request,
             "Verification email sent successfully",

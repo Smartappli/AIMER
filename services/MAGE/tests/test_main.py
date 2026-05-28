@@ -248,6 +248,25 @@ def test_healthz(client: TestClient) -> None:
     )
 
 
+def test_service_api_key_protects_non_public_routes(
+    client: TestClient,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """MAGE routes must require service auth when MAGE_API_KEY is configured."""
+    monkeypatch.setenv("MAGE_API_KEY", "service-secret")
+
+    unauthorized = client.get("/model")
+    authorized = client.get(
+        "/model",
+        headers={"Authorization": "Bearer service-secret"},
+    )
+    health = client.get("/healthz")
+
+    check(unauthorized.status_code == 401, "Expected protected route to reject")
+    check(authorized.status_code == HTTP_OK, "Expected authorized route to pass")
+    check(health.status_code == HTTP_OK, "Expected healthz to stay public")
+
+
 def test_model_list(client: TestClient) -> None:
     """`/model` should return the fake timm model list."""
     response = client.get("/model")

@@ -14,10 +14,20 @@ from django.shortcuts import redirect
 from django.utils.http import url_has_allowed_host_and_scheme
 
 from auth.models import Profile
+from auth.security import (
+    audit_event,
+    clear_login_failures,
+    login_is_locked,
+    record_login_failure,
+)
 from auth.views import AuthView
 
 if TYPE_CHECKING:
     from django.http import HttpRequest, HttpResponse
+
+
+GENERIC_LOGIN_ERROR = "Invalid credentials."
+LOCKED_LOGIN_ERROR = "Too many failed attempts. Try again later."
 
 
 class LoginView(AuthView):
@@ -49,27 +59,62 @@ class LoginView(AuthView):
         username = request.POST.get("email-username")
         password = request.POST.get("password")
         if not (username and password):
+            await sync_to_async(audit_event)(
+                "auth.login.missing_credentials",
+                request=request,
+                actor_identifier=str(username or ""),
+            )
             await sync_to_async(messages.error)(
                 request,
                 "Please enter your username and password.",
             )
             return redirect("login")
 
+        actor_identifier = str(username).strip().lower()
+        if await sync_to_async(login_is_locked)(request, actor_identifier):
+            await sync_to_async(audit_event)(
+                "auth.login.locked",
+                request=request,
+                actor_identifier=actor_identifier,
+            )
+            await sync_to_async(messages.error)(request, LOCKED_LOGIN_ERROR)
+            return redirect("login")
+
         if "@" in username:
             user_by_email = await User.objects.filter(email=username).afirst()
             if user_by_email is None:
+                await sync_to_async(record_login_failure)(
+                    request,
+                    actor_identifier,
+                )
+                await sync_to_async(audit_event)(
+                    "auth.login.failed",
+                    request=request,
+                    actor_identifier=actor_identifier,
+                    metadata={"reason": "unknown_email"},
+                )
                 await sync_to_async(messages.error)(
                     request,
-                    "Please enter a valid email.",
+                    GENERIC_LOGIN_ERROR,
                 )
                 return redirect("login")
             username = user_by_email.username
 
         user_by_username = await User.objects.filter(username=username).afirst()
         if user_by_username is None:
+            await sync_to_async(record_login_failure)(
+                request,
+                actor_identifier,
+            )
+            await sync_to_async(audit_event)(
+                "auth.login.failed",
+                request=request,
+                actor_identifier=actor_identifier,
+                metadata={"reason": "unknown_username"},
+            )
             await sync_to_async(messages.error)(
                 request,
-                "Please enter a valid username.",
+                GENERIC_LOGIN_ERROR,
             )
             return redirect("login")
 
@@ -79,16 +124,40 @@ class LoginView(AuthView):
             password=password,
         )
         if authenticated_user is None:
+            locked = await sync_to_async(record_login_failure)(
+                request,
+                actor_identifier,
+            )
+            await sync_to_async(audit_event)(
+                "auth.login.failed",
+                request=request,
+                user=user_by_username,
+                actor_identifier=actor_identifier,
+                metadata={"reason": "bad_password", "locked": locked},
+            )
             await sync_to_async(messages.error)(
                 request,
-                "Please enter a valid username.",
+                LOCKED_LOGIN_ERROR if locked else GENERIC_LOGIN_ERROR,
             )
             return redirect("login")
 
         if await self.email_verification_blocks_login(request, authenticated_user):
+            await sync_to_async(audit_event)(
+                "auth.login.blocked_unverified_email",
+                request=request,
+                user=authenticated_user,
+                actor_identifier=actor_identifier,
+            )
             return redirect("verify-email-page")
 
+        await sync_to_async(clear_login_failures)(request, actor_identifier)
         await alogin(request, authenticated_user)
+        await sync_to_async(audit_event)(
+            "auth.login.success",
+            request=request,
+            user=authenticated_user,
+            actor_identifier=actor_identifier,
+        )
         next_url = request.POST.get("next", "")
         if next_url and url_has_allowed_host_and_scheme(
             url=next_url,

@@ -3,7 +3,13 @@
 
 from __future__ import annotations
 
+import hmac
+import os
+from collections.abc import Awaitable, Callable
+
 from fastapi import FastAPI, HTTPException
+from fastapi.requests import Request
+from fastapi.responses import JSONResponse, Response
 from pydantic import BaseModel, Field
 
 from RAG.healthcheck import is_rag_runtime_ready, rag_runtime_health
@@ -25,6 +31,38 @@ class RecommendationRequest(BaseModel):
 
 
 app = FastAPI(title="AIMER RAG Service")
+
+PUBLIC_PATHS = {"/healthz"}
+
+
+def _configured_api_key() -> str:
+    """Return the configured service API key, if any."""
+    return os.getenv("AIMER_RAG_API_KEY", "").strip()
+
+
+def _request_api_key(request: Request) -> str:
+    """Extract API key from Authorization bearer or X-API-Key headers."""
+    authorization = request.headers.get("authorization", "")
+    scheme, _, value = authorization.partition(" ")
+    if scheme.lower() == "bearer" and value:
+        return value.strip()
+    return request.headers.get("x-api-key", "").strip()
+
+
+@app.middleware("http")
+async def require_service_api_key(
+    request: Request,
+    call_next: Callable[[Request], Awaitable[Response]],
+) -> Response:
+    """Require a service key when AIMER_RAG_API_KEY is configured."""
+    expected_key = _configured_api_key()
+    if not expected_key or request.url.path in PUBLIC_PATHS:
+        return await call_next(request)
+
+    provided_key = _request_api_key(request)
+    if not provided_key or not hmac.compare_digest(provided_key, expected_key):
+        return JSONResponse({"detail": "Unauthorized"}, status_code=401)
+    return await call_next(request)
 
 
 @app.get("/healthz")

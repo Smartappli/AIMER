@@ -3,7 +3,6 @@
 
 from __future__ import annotations
 
-import secrets
 from datetime import timedelta
 from typing import TYPE_CHECKING, override
 
@@ -16,6 +15,8 @@ from django.utils import timezone
 
 from auth.helpers import send_password_reset_email
 from auth.models import Profile
+from auth.security import audit_event
+from auth.tokens import new_token_pair
 from auth.views import AuthView
 
 if TYPE_CHECKING:
@@ -49,6 +50,11 @@ class ForgetPasswordView(AuthView):
         """
         email = (request.POST.get("email") or "").strip().lower()
         if not email:
+            await sync_to_async(audit_event)(
+                "auth.password_reset.request_rejected",
+                request=request,
+                metadata={"reason": "missing_email"},
+            )
             await sync_to_async(messages.error)(
                 request,
                 "Please enter your email address.",
@@ -57,13 +63,26 @@ class ForgetPasswordView(AuthView):
 
         user = await User.objects.filter(email=email).afirst()
         if user:
-            token = secrets.token_urlsafe(32)
+            token, token_hash = new_token_pair()
             expiration_time = timezone.now() + timedelta(hours=24)
             user_profile, _created = await Profile.objects.aget_or_create(user=user)
-            user_profile.forget_password_token = token
+            user_profile.forget_password_token = token_hash
             user_profile.forget_password_token_expires_at = expiration_time
             await user_profile.asave()
             await send_password_reset_email(email, token)
+            await sync_to_async(audit_event)(
+                "auth.password_reset.requested",
+                request=request,
+                user=user,
+                actor_identifier=email,
+            )
+        else:
+            await sync_to_async(audit_event)(
+                "auth.password_reset.requested",
+                request=request,
+                actor_identifier=email,
+                metadata={"account_found": False},
+            )
 
         message_fn = messages.success
         message = "If an account exists for that email, a reset link has been sent."

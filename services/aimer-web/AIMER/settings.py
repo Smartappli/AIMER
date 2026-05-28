@@ -264,6 +264,7 @@ USE_TZ = True
 # Default URL on which Django application runs for specific environment
 BASE_URL = os.environ.get("BASE_URL", default="http://127.0.0.1:8000")
 RAG_SERVICE_URL = os.environ.get("RAG_SERVICE_URL", "").rstrip("/")
+RAG_SERVICE_API_KEY = os.environ.get("RAG_SERVICE_API_KEY", "")
 RAG_SERVICE_TIMEOUT_SECONDS = float(os.environ.get("RAG_SERVICE_TIMEOUT_SECONDS", "5"))
 RAG_RECOMMENDATION_RATE_LIMIT_PER_MINUTE = env_int(
     "RAG_RECOMMENDATION_RATE_LIMIT_PER_MINUTE",
@@ -275,6 +276,19 @@ EMAIL_VERIFICATION_REQUIRED = env_bool(
 )
 
 TEST_RUNNER = "django_rich.test.RichRunner"
+
+# Email
+EMAIL_BACKEND = os.environ.get(
+    "EMAIL_BACKEND",
+    "django.core.mail.backends.smtp.EmailBackend",
+)
+EMAIL_HOST = os.environ.get("EMAIL_HOST", "")
+EMAIL_PORT = env_int("EMAIL_PORT", default=587)
+EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER", "")
+EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD", "")
+EMAIL_USE_TLS = env_bool("EMAIL_USE_TLS", default=True)
+EMAIL_USE_SSL = env_bool("EMAIL_USE_SSL", default=False)
+DEFAULT_FROM_EMAIL = os.environ.get("DEFAULT_FROM_EMAIL", EMAIL_HOST_USER)
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
@@ -297,15 +311,77 @@ STORAGES = {
 }
 
 # Security settings
-SECURE_HSTS_SECONDS = 3600 if not DEBUG else 0
-SECURE_HSTS_INCLUDE_SUBDOMAINS = not DEBUG
-SECURE_HSTS_PRELOAD = not DEBUG
+SECURE_PROXY_SSL_HEADER = (
+    ("HTTP_X_FORWARDED_PROTO", "https")
+    if env_bool("SECURE_PROXY_SSL_HEADER_ENABLED", default=IS_PRODUCTION)
+    else None
+)
+SECURE_HSTS_SECONDS = env_int(
+    "SECURE_HSTS_SECONDS",
+    default=31536000 if IS_PRODUCTION else (3600 if not DEBUG else 0),
+)
+SECURE_HSTS_INCLUDE_SUBDOMAINS = env_bool(
+    "SECURE_HSTS_INCLUDE_SUBDOMAINS",
+    default=not DEBUG,
+)
+SECURE_HSTS_PRELOAD = env_bool("SECURE_HSTS_PRELOAD", default=not DEBUG)
 SECURE_SSL_REDIRECT = env_bool("SECURE_SSL_REDIRECT", default=not DEBUG)
 SESSION_COOKIE_SECURE = env_bool("SESSION_COOKIE_SECURE", default=not DEBUG)
 CSRF_COOKIE_SECURE = env_bool("CSRF_COOKIE_SECURE", default=not DEBUG)
+SESSION_COOKIE_SAMESITE = os.environ.get("SESSION_COOKIE_SAMESITE", "Lax")
+CSRF_COOKIE_SAMESITE = os.environ.get("CSRF_COOKIE_SAMESITE", "Lax")
+CSRF_COOKIE_HTTPONLY = env_bool("CSRF_COOKIE_HTTPONLY", default=IS_PRODUCTION)
 SESSION_COOKIE_HTTPONLY = True
 SECURE_CONTENT_TYPE_NOSNIFF = True
-REFERRER_POLICY = "same-origin"
+SECURE_REFERRER_POLICY = "same-origin"
+X_FRAME_OPTIONS = "DENY"
+
+AUTH_LOGIN_FAILURE_LIMIT = env_int("AUTH_LOGIN_FAILURE_LIMIT", default=5)
+AUTH_LOGIN_WINDOW_SECONDS = env_int("AUTH_LOGIN_WINDOW_SECONDS", default=900)
+AUTH_LOGIN_LOCKOUT_SECONDS = env_int("AUTH_LOGIN_LOCKOUT_SECONDS", default=900)
+EMAIL_VERIFICATION_TOKEN_TTL_HOURS = env_int(
+    "EMAIL_VERIFICATION_TOKEN_TTL_HOURS",
+    default=24,
+)
+
+
+def validate_production_configuration() -> None:
+    """Fail fast on configuration that is unsafe for regulated production."""
+    if not IS_PRODUCTION:
+        return
+
+    errors: list[str] = []
+    parsed_base_url = urlsplit(BASE_URL)
+
+    if DEBUG:
+        errors.append("DEBUG must be false.")
+    if SECRET_KEY.startswith(("dev-", "test-", "ci-")):
+        errors.append("SECRET_KEY must not use a development/test prefix.")
+    if "*" in ALLOWED_HOSTS:
+        errors.append("ALLOWED_HOSTS must not contain '*'.")
+    if parsed_base_url.scheme != "https" or parsed_base_url.hostname in {
+        "localhost",
+        "127.0.0.1",
+    }:
+        errors.append("BASE_URL must be a public HTTPS URL.")
+    if not SECURE_SSL_REDIRECT:
+        errors.append("SECURE_SSL_REDIRECT must be enabled.")
+    if not SESSION_COOKIE_SECURE:
+        errors.append("SESSION_COOKIE_SECURE must be enabled.")
+    if not CSRF_COOKIE_SECURE:
+        errors.append("CSRF_COOKIE_SECURE must be enabled.")
+    if SECURE_HSTS_PRELOAD and SECURE_HSTS_SECONDS < 31536000:
+        errors.append("SECURE_HSTS_SECONDS must be at least 31536000 for preload.")
+    if EMAIL_VERIFICATION_REQUIRED and not (EMAIL_HOST_USER and EMAIL_HOST_PASSWORD):
+        errors.append("Email credentials are required for verified production login.")
+    if RAG_SERVICE_URL and not RAG_SERVICE_API_KEY:
+        errors.append("RAG_SERVICE_API_KEY is required when RAG_SERVICE_URL is set.")
+
+    if errors:
+        joined = " ".join(errors)
+        msg = f"Unsafe production configuration: {joined}"
+        raise RuntimeError(msg)
+
 
 # Template Settings
 # ------------------------------------------------------------------------------
@@ -313,3 +389,5 @@ REFERRER_POLICY = "same-origin"
 THEME_LAYOUT_DIR = DEFAULT_THEME_LAYOUT_DIR
 TEMPLATE_CONFIG = DEFAULT_TEMPLATE_CONFIG
 THEME_VARIABLES = DEFAULT_THEME_VARIABLES
+
+validate_production_configuration()

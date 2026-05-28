@@ -15,7 +15,7 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 import os
 import secrets
 from pathlib import Path
-from urllib.parse import parse_qsl, unquote, urlparse
+from urllib.parse import parse_qsl, unquote, urlparse, urlsplit
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -219,16 +219,66 @@ STORAGES = {
 
 
 # Basic production security hardening. These can be tuned via environment.
+SECURE_PROXY_SSL_HEADER = (
+    ("HTTP_X_FORWARDED_PROTO", "https")
+    if env_bool("DJANGO_SECURE_PROXY_SSL_HEADER_ENABLED", default=IS_PRODUCTION)
+    else None
+)
 SECURE_HSTS_SECONDS = env_int(
     "DJANGO_SECURE_HSTS_SECONDS",
-    default=3600 if not DEBUG else 0,
+    default=31536000 if IS_PRODUCTION else (3600 if not DEBUG else 0),
 )
-SECURE_HSTS_INCLUDE_SUBDOMAINS = not DEBUG
-SECURE_HSTS_PRELOAD = not DEBUG
+SECURE_HSTS_INCLUDE_SUBDOMAINS = env_bool(
+    "DJANGO_SECURE_HSTS_INCLUDE_SUBDOMAINS",
+    default=not DEBUG,
+)
+SECURE_HSTS_PRELOAD = env_bool("DJANGO_SECURE_HSTS_PRELOAD", default=not DEBUG)
 SECURE_BROWSER_XSS_FILTER = True
 SECURE_CONTENT_TYPE_NOSNIFF = True
 X_FRAME_OPTIONS = "DENY"
 SECURE_REFERRER_POLICY = "same-origin"
 CSRF_COOKIE_SECURE = env_bool("DJANGO_CSRF_COOKIE_SECURE", default=not DEBUG)
 SESSION_COOKIE_SECURE = env_bool("DJANGO_SESSION_COOKIE_SECURE", default=not DEBUG)
+SESSION_COOKIE_SAMESITE = os.environ.get("DJANGO_SESSION_COOKIE_SAMESITE", "Lax")
+CSRF_COOKIE_SAMESITE = os.environ.get("DJANGO_CSRF_COOKIE_SAMESITE", "Lax")
+CSRF_COOKIE_HTTPONLY = env_bool(
+    "DJANGO_CSRF_COOKIE_HTTPONLY",
+    default=IS_PRODUCTION,
+)
 SECURE_SSL_REDIRECT = env_bool("DJANGO_SECURE_SSL_REDIRECT", default=not DEBUG)
+
+BASE_URL = os.environ.get("DJANGO_BASE_URL", "")
+
+
+def validate_production_configuration() -> None:
+    """Fail fast on configuration that is unsafe for regulated production."""
+    if not IS_PRODUCTION:
+        return
+
+    errors: list[str] = []
+    parsed_base_url = urlsplit(BASE_URL) if BASE_URL else None
+
+    if DEBUG:
+        errors.append("DJANGO_DEBUG must be false.")
+    if SECRET_KEY.startswith(("dev-", "test-", "ci-")):
+        errors.append("DJANGO_SECRET_KEY must not use a development/test prefix.")
+    if "*" in ALLOWED_HOSTS:
+        errors.append("DJANGO_ALLOWED_HOSTS must not contain '*'.")
+    if not SECURE_SSL_REDIRECT:
+        errors.append("DJANGO_SECURE_SSL_REDIRECT must be enabled.")
+    if not SESSION_COOKIE_SECURE:
+        errors.append("DJANGO_SESSION_COOKIE_SECURE must be enabled.")
+    if not CSRF_COOKIE_SECURE:
+        errors.append("DJANGO_CSRF_COOKIE_SECURE must be enabled.")
+    if SECURE_HSTS_PRELOAD and SECURE_HSTS_SECONDS < 31536000:
+        errors.append("DJANGO_SECURE_HSTS_SECONDS must be at least 31536000.")
+    if parsed_base_url and parsed_base_url.scheme != "https":
+        errors.append("DJANGO_BASE_URL must use HTTPS when configured.")
+
+    if errors:
+        joined = " ".join(errors)
+        msg = f"Unsafe production configuration: {joined}"
+        raise RuntimeError(msg)
+
+
+validate_production_configuration()
