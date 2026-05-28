@@ -21,6 +21,7 @@ storage, monitored ingress and auditable change control.
 - HTTPS `BASE_URL` / `DJANGO_BASE_URL`.
 - Secrets provided by vault/KMS, never `.env` files on hosts.
 - Images pinned by digest and signed before deployment.
+- Cosign verification succeeds for every image digest admitted to production.
 - Network policy denies all by default.
 - Backups encrypted and restore-tested.
 

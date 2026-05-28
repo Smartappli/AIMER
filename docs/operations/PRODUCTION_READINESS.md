@@ -53,6 +53,7 @@ fails unless these keys are set:
 For every production release, store the following artifacts with the release:
 
 - Git commit SHA and image digests.
+- Cosign signature verification output for every runtime image digest.
 - SBOM for each runtime image.
 - Vulnerability scan reports and accepted-risk records.
 - Database migration plan and rollback notes.
