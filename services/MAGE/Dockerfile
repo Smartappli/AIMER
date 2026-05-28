@@ -1,13 +1,12 @@
-FROM python:3.13-slim
+FROM python:3.13-slim AS builder
 
 ARG APP_HOME=/app
 WORKDIR ${APP_HOME}
 
-ENV HOME=${APP_HOME} \
-    PYTHONDONTWRITEBYTECODE=1 \
+ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1
 
-# System dependencies used by ML wheels.
+# System dependencies used only while resolving ML wheels.
 RUN apt-get update \
     && apt-get install -y --no-install-recommends build-essential git \
     && python -m pip install \
@@ -20,9 +19,18 @@ RUN apt-get update \
 COPY pyproject.toml uv.lock ./
 RUN uv sync --locked --no-dev --no-build --no-cache
 
-ENV VIRTUAL_ENV=${APP_HOME}/.venv \
+FROM python:3.13-slim
+
+ARG APP_HOME=/app
+WORKDIR ${APP_HOME}
+
+ENV HOME=${APP_HOME} \
+    PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    VIRTUAL_ENV=${APP_HOME}/.venv \
     PATH="${APP_HOME}/.venv/bin:${PATH}"
 
+COPY --from=builder ${APP_HOME}/.venv ${APP_HOME}/.venv
 COPY api ./api
 COPY info.py __init__.py ./
 
