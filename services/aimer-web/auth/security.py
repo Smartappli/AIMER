@@ -4,6 +4,8 @@
 from __future__ import annotations
 
 import hashlib
+import json
+import logging
 from typing import Any
 
 from django.conf import settings
@@ -17,6 +19,15 @@ from auth.models import SecurityAuditEvent
 DEFAULT_LOGIN_FAILURE_LIMIT = 5
 DEFAULT_LOGIN_WINDOW_SECONDS = 15 * 60
 DEFAULT_LOGIN_LOCKOUT_SECONDS = 15 * 60
+AUDIT_LOGGER = logging.getLogger("aimer.security.audit")
+SENSITIVE_METADATA_FRAGMENTS = (
+    "authorization",
+    "cookie",
+    "key",
+    "password",
+    "secret",
+    "token",
+)
 
 
 def _setting_int(name: str, default: int) -> int:
@@ -59,6 +70,69 @@ def _actor(user: object | None) -> object | None:
     return None
 
 
+def _sanitize_metadata(value: Any) -> Any:
+    """Return metadata with obvious secret-bearing fields redacted."""
+    if isinstance(value, dict):
+        redacted: dict[str, Any] = {}
+        for key, item in value.items():
+            key_str = str(key)
+            lowered = key_str.lower()
+            if any(fragment in lowered for fragment in SENSITIVE_METADATA_FRAGMENTS):
+                redacted[key_str] = "[REDACTED]"
+            else:
+                redacted[key_str] = _sanitize_metadata(item)
+        return redacted
+    if isinstance(value, list):
+        return [_sanitize_metadata(item) for item in value]
+    if isinstance(value, tuple):
+        return [_sanitize_metadata(item) for item in value]
+    if isinstance(value, str):
+        return value[:1024]
+    return value
+
+
+def _audit_log_payload(
+    event_type: str,
+    *,
+    request: HttpRequest | None,
+    user: object | None,
+    actor_identifier: str,
+    metadata: dict[str, Any] | None,
+    persisted: bool,
+) -> dict[str, Any]:
+    """Build a structured audit payload suitable for SIEM collection."""
+    actor = _actor(user)
+    return {
+        "event_type": event_type,
+        "actor_identifier": actor_identifier[:255],
+        "user_id": getattr(actor, "pk", None),
+        "ip_address": client_ip(request),
+        "user_agent": _user_agent(request),
+        "path": _path(request),
+        "metadata": _sanitize_metadata(metadata or {}),
+        "persisted": persisted,
+    }
+
+
+def _log_audit_event(payload: dict[str, Any]) -> None:
+    """Emit a JSON audit event without interrupting request handling."""
+    try:
+        AUDIT_LOGGER.info(
+            json.dumps(payload, sort_keys=True, default=str),
+            extra={"security_audit_event": payload},
+        )
+    except (TypeError, ValueError):
+        AUDIT_LOGGER.info(
+            '{"event_type":"security_audit.serialization_failed"}',
+            extra={
+                "security_audit_event": {
+                    "event_type": "security_audit.serialization_failed",
+                    "persisted": payload.get("persisted", False),
+                },
+            },
+        )
+
+
 def audit_event(
     event_type: str,
     *,
@@ -68,6 +142,8 @@ def audit_event(
     metadata: dict[str, Any] | None = None,
 ) -> None:
     """Persist a security audit event without raising into request handling."""
+    safe_metadata = _sanitize_metadata(metadata or {})
+    persisted = False
     try:
         SecurityAuditEvent.objects.create(
             event_type=event_type,
@@ -76,12 +152,23 @@ def audit_event(
             ip_address=client_ip(request),
             user_agent=_user_agent(request),
             path=_path(request),
-            metadata=metadata or {},
+            metadata=safe_metadata,
         )
+        persisted = True
     except DatabaseError:
         # Audit must not make authentication unavailable. Infrastructure should
         # still alert on database write failures through normal error logging.
-        return
+        persisted = False
+
+    payload = _audit_log_payload(
+        event_type,
+        request=request,
+        user=user,
+        actor_identifier=actor_identifier,
+        metadata=safe_metadata,
+        persisted=persisted,
+    )
+    _log_audit_event(payload)
 
 
 def _principal_hash(identifier: str, ip_address: str | None) -> str:

@@ -9,11 +9,11 @@ Legal applicability depends on the deploying entity and country transposition.
 | Asset inventory | Know critical systems and dependencies | `docs/MICROSERVICES.md` service boundaries | Maintain CMDB with owners, data class and criticality. |
 | Access control | Least privilege and strong auth | Django auth, staff gating for RAG health | Enforce MFA, SSO, admin reviews and break-glass controls. |
 | Incident reporting | Significant incident notification workflows | Incident playbook template | Wire SOC/CSIRT process to national authority timelines. |
-| ICT risk management | Policies, procedures and controls | Production settings fail fast | Add risk register, threat model and recurring review cadence. |
+| ICT risk management | Policies, procedures and controls | Production settings and internal service auth fail fast | Add risk register, threat model and recurring review cadence. |
 | Third-party risk | Register and monitor ICT providers | Dependency automation and docs | Maintain DORA register of information where applicable. |
 | Supply chain | Vulnerability and dependency management | `pip-audit`, Bandit, secret scan | Add SBOM, image signing, IaC/container scan gates. |
 | Resilience testing | Test backup, restore and operational resilience | Docker smoke tests | Add restore drills, failover tests and tabletop exercises. |
-| Logging | Detect and investigate security events | `SecurityAuditEvent` model | Export immutable logs to SIEM with retention and alerting. |
+| Logging | Detect and investigate security events | `SecurityAuditEvent` model, structured `aimer.security.audit` logs, RAG/admin action audit | Route logs to immutable SIEM storage with retention and alerting. |
 | Data protection | Protect medical data and PHI | No PHI-specific control in code | Add encryption, minimization, DPIA and data retention rules. |
 | AI/model safety | Human oversight and validation | RAG safety notice | Add clinical validation, drift monitoring and escalation path. |
 

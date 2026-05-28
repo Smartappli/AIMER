@@ -13,7 +13,7 @@ from RAG.recommender import (
     QueryProfile,
     RecommendationResponse,
 )
-from RAG.service import app
+from RAG.service import app, validate_service_configuration
 
 
 def _recommendation_response(query: str) -> RecommendationResponse:
@@ -43,6 +43,29 @@ def test_healthz_returns_liveness_payload() -> None:
 
     assert response.status_code == 200
     assert response.json() == {"service": "aimer-rag", "status": "ok"}
+
+
+def test_production_requires_rag_service_api_key(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Ensure production cannot silently expose RAG service routes."""
+    monkeypatch.setenv("ENVIRONMENT", "production")
+    monkeypatch.delenv("AIMER_RAG_ENVIRONMENT", raising=False)
+    monkeypatch.delenv("AIMER_RAG_API_KEY", raising=False)
+
+    with pytest.raises(RuntimeError, match="AIMER_RAG_API_KEY"):
+        validate_service_configuration()
+
+
+def test_production_rejects_development_rag_service_api_key(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Ensure placeholder service keys cannot satisfy production validation."""
+    monkeypatch.setenv("AIMER_RAG_ENVIRONMENT", "production")
+    monkeypatch.setenv("AIMER_RAG_API_KEY", "dev-insecure-rag-key-change-me")
+
+    with pytest.raises(RuntimeError, match="development/test prefix"):
+        validate_service_configuration()
 
 
 @patch("RAG.service.recommend_models_for_query")

@@ -15,6 +15,7 @@ from AIMER.context_processors import environment, get_cookie, language_code, my_
 from AIMER.language_middleware import DefaultLanguageMiddleware
 from AIMER.template_helpers.theme import TemplateHelper
 from AIMER.template_tags import theme as theme_tags
+from auth.models import SecurityAuditEvent
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import AbstractBaseUser, Group, Permission
 from django.contrib.contenttypes.models import ContentType
@@ -624,6 +625,12 @@ class RagRecommendationApiTests(BaseTestCase):
         mock_recommend.assert_called_once()
         call_kwargs = mock_recommend.call_args.kwargs
         self._check_equal(call_kwargs["strict_openrag"], True)
+        event = SecurityAuditEvent.objects.get(
+            event_type="rag.recommendation.requested",
+        )
+        self._check_equal(len(event.metadata["query_hash"]), 64)
+        self._check("modÃ¨les segmentation cerveau MRI" not in str(event.metadata))
+        self._check_equal(event.metadata["recommendation_count"], 1)
 
     @patch("website.views.recommend_models")
     def test_recommendation_api_returns_503_when_openrag_unavailable(
@@ -642,6 +649,11 @@ class RagRecommendationApiTests(BaseTestCase):
 
         self._check_equal(response.status_code, 503)
         self._check("error" in response.json())
+        self._check(
+            SecurityAuditEvent.objects.filter(
+                event_type="rag.recommendation.unavailable",
+            ).exists(),
+        )
 
     @override_settings(RAG_RECOMMENDATION_RATE_LIMIT_PER_MINUTE=1)
     @patch("website.views.recommend_models")
@@ -694,6 +706,9 @@ class RagRecommendationApiTests(BaseTestCase):
         self._check("ready" in payload)
         self._check("status" in payload)
         self._check("openrag_installed" in payload["status"])
+        self._check(
+            SecurityAuditEvent.objects.filter(event_type="rag.health.read").exists(),
+        )
 
 
 class OmopArchitectureTests(BaseTestCase):

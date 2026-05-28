@@ -267,6 +267,31 @@ def test_service_api_key_protects_non_public_routes(
     check(health.status_code == HTTP_OK, "Expected healthz to stay public")
 
 
+def test_production_requires_mage_service_api_key(
+    app_module: ModuleType,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Production MAGE runtime must not start without service auth."""
+    monkeypatch.setenv("MAGE_ENVIRONMENT", "production")
+    monkeypatch.delenv("MAGE_API_KEY", raising=False)
+
+    with pytest.raises(RuntimeError, match="MAGE_API_KEY"):
+        app_module.validate_service_configuration()
+
+
+def test_production_rejects_development_mage_service_api_key(
+    app_module: ModuleType,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Placeholder service keys cannot satisfy production validation."""
+    monkeypatch.setenv("ENVIRONMENT", "production")
+    monkeypatch.delenv("MAGE_ENVIRONMENT", raising=False)
+    monkeypatch.setenv("MAGE_API_KEY", "dev-insecure-mage-key-change-me")
+
+    with pytest.raises(RuntimeError, match="development/test prefix"):
+        app_module.validate_service_configuration()
+
+
 def test_model_list(client: TestClient) -> None:
     """`/model` should return the fake timm model list."""
     response = client.get("/model")

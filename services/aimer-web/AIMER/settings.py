@@ -176,6 +176,7 @@ MIDDLEWARE = [
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "auth.middleware.AdminAuditMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
@@ -336,6 +337,23 @@ SECURE_CONTENT_TYPE_NOSNIFF = True
 SECURE_REFERRER_POLICY = "same-origin"
 X_FRAME_OPTIONS = "DENY"
 
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {
+        "console": {
+            "class": "logging.StreamHandler",
+        },
+    },
+    "loggers": {
+        "aimer.security.audit": {
+            "handlers": ["console"],
+            "level": os.environ.get("SECURITY_AUDIT_LOG_LEVEL", "INFO"),
+            "propagate": False,
+        },
+    },
+}
+
 AUTH_LOGIN_FAILURE_LIMIT = env_int("AUTH_LOGIN_FAILURE_LIMIT", default=5)
 AUTH_LOGIN_WINDOW_SECONDS = env_int("AUTH_LOGIN_WINDOW_SECONDS", default=900)
 AUTH_LOGIN_LOCKOUT_SECONDS = env_int("AUTH_LOGIN_LOCKOUT_SECONDS", default=900)
@@ -357,6 +375,8 @@ def validate_production_configuration() -> None:
         errors.append("DEBUG must be false.")
     if SECRET_KEY.startswith(("dev-", "test-", "ci-")):
         errors.append("SECRET_KEY must not use a development/test prefix.")
+    if len(SECRET_KEY) < 50 or len(set(SECRET_KEY)) < 5:
+        errors.append("SECRET_KEY must be at least 50 chars and high entropy.")
     if "*" in ALLOWED_HOSTS:
         errors.append("ALLOWED_HOSTS must not contain '*'.")
     if parsed_base_url.scheme != "https" or parsed_base_url.hostname in {

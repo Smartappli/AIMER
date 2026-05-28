@@ -4,12 +4,14 @@
 
 from __future__ import annotations
 
+import hashlib
 from pathlib import Path
 from time import time
 from typing import Final, override
 
 from AIMER import TemplateLayout
 from AIMER.template_helpers.theme import TemplateHelper
+from auth.security import audit_event
 from django.conf import settings
 from django.core.cache import cache
 from django.http import HttpRequest, HttpResponse, JsonResponse
@@ -73,6 +75,11 @@ def _rag_rate_limit_exceeded(request: HttpRequest) -> bool:
         cache.set(key, 1, timeout=RAG_RATE_LIMIT_WINDOW_SECONDS)
         return False
     return count > limit
+
+
+def _query_hash(query: str) -> str:
+    """Return a stable non-reversible identifier for a user-provided query."""
+    return hashlib.sha256(query.encode("utf-8")).hexdigest()
 
 
 class FrontPagesView(TemplateView):
@@ -255,12 +262,28 @@ class RagRecommendationView(View):
         """
         del args, kwargs
         if not request.user.is_authenticated:
+            audit_event(
+                "rag.recommendation.unauthenticated",
+                request=request,
+                metadata={"reason": "anonymous"},
+            )
             return JsonResponse({"error": "Authentication required"}, status=401)
         if _rag_rate_limit_exceeded(request):
+            audit_event(
+                "rag.recommendation.rate_limited",
+                request=request,
+                user=request.user,
+            )
             return JsonResponse({"error": "Rate limit exceeded"}, status=429)
 
         query = (request.GET.get("q") or "").strip()
         if not query:
+            audit_event(
+                "rag.recommendation.rejected",
+                request=request,
+                user=request.user,
+                metadata={"reason": "missing_query"},
+            )
             return JsonResponse(
                 {"error": "Missing required query parameter: q"},
                 status=400,
@@ -279,7 +302,27 @@ class RagRecommendationView(View):
                 strict_openrag=True,
             )
         except RagServiceUnavailableError as exc:
+            audit_event(
+                "rag.recommendation.unavailable",
+                request=request,
+                user=request.user,
+                metadata={
+                    "query_hash": _query_hash(query),
+                    "top_k": top_k,
+                    "reason": str(exc)[:256],
+                },
+            )
             return JsonResponse({"error": str(exc)}, status=503)
+        audit_event(
+            "rag.recommendation.requested",
+            request=request,
+            user=request.user,
+            metadata={
+                "query_hash": _query_hash(query),
+                "top_k": top_k,
+                "recommendation_count": len(payload.get("recommended_models") or []),
+            },
+        )
         return JsonResponse(payload, status=200)
 
 
@@ -295,8 +338,26 @@ class RagRuntimeHealthView(View):
     ) -> JsonResponse:
         del args, kwargs
         if not request.user.is_authenticated:
+            audit_event(
+                "rag.health.unauthenticated",
+                request=request,
+                metadata={"reason": "anonymous"},
+            )
             return JsonResponse({"error": "Authentication required"}, status=401)
         if not request.user.is_staff:
+            audit_event(
+                "rag.health.forbidden",
+                request=request,
+                user=request.user,
+                metadata={"reason": "non_staff"},
+            )
             return JsonResponse({"error": "Staff access required"}, status=403)
 
-        return JsonResponse(runtime_status(), status=200)
+        payload = runtime_status()
+        audit_event(
+            "rag.health.read",
+            request=request,
+            user=request.user,
+            metadata={"ready": bool(payload.get("ready"))},
+        )
+        return JsonResponse(payload, status=200)
