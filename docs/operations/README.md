@@ -9,6 +9,7 @@ stale or unapproved evidence should block production promotion.
 | Evidence | File | Cadence |
 | --- | --- | --- |
 | Production go/no-go checklist | [PRODUCTION_READINESS.md](PRODUCTION_READINESS.md) | Every release |
+| Production security audit | [SECURITY_PRODUCTION_AUDIT.md](SECURITY_PRODUCTION_AUDIT.md) | Every release |
 | Production architecture | [PRODUCTION_ARCHITECTURE.md](PRODUCTION_ARCHITECTURE.md) | Every major architecture change |
 | Release evidence pack template | [RELEASE_EVIDENCE_PACK.md](RELEASE_EVIDENCE_PACK.md) | Every release |
 | NIS2 / DORA control matrix | [CONTROL_MATRIX_NIS2_DORA.md](CONTROL_MATRIX_NIS2_DORA.md) | Quarterly and every major change |
