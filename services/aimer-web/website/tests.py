@@ -217,6 +217,19 @@ class HealthCheckViewTests(BaseTestCase):
             {"service": "aimer-web", "status": "ok"},
         )
 
+    def test_readyz_returns_database_status(self) -> None:
+        """Ensure orchestrators can verify database-backed readiness."""
+        response = self.client.get("/readyz/")
+
+        self._check_equal(response.status_code, 200)
+        self._check_equal(response.json()["checks"]["database"], "ok")
+
+    def test_readyz_rejects_unsafe_methods(self) -> None:
+        """Ensure readiness checks are read-only."""
+        response = self.client.post("/readyz/")
+
+        self._check_equal(response.status_code, 405)
+
 
 class DashboardViewTests(BaseTestCase):
     """Tests for project dashboard and RAG article indexing."""

@@ -35,6 +35,21 @@ def test_healthz_rejects_unsafe_methods() -> None:
     assert response.status_code == HTTPStatus.METHOD_NOT_ALLOWED
 
 
+def test_readyz_returns_database_status() -> None:
+    """Ensure orchestrators can verify FARM database readiness."""
+    response = Client(HTTP_HOST="localhost").get("/readyz/")
+
+    assert response.status_code == HTTPStatus.OK
+    assert response.json()["checks"]["database"] == "ok"
+
+
+def test_readyz_rejects_unsafe_methods() -> None:
+    """Ensure the deployment readiness endpoint is read-only."""
+    response = Client(HTTP_HOST="localhost").post("/readyz/")
+
+    assert response.status_code == HTTPStatus.METHOD_NOT_ALLOWED
+
+
 def test_manage_uses_farm_settings(monkeypatch: pytest.MonkeyPatch) -> None:
     """Ensure container entrypoint management commands load FARM settings."""
     monkeypatch.delenv("DJANGO_SETTINGS_MODULE", raising=False)

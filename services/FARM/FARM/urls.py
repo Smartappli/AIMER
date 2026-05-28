@@ -19,6 +19,7 @@ Including another URLconf
 """
 
 from django.contrib import admin
+from django.db import DatabaseError, connection
 from django.http import HttpRequest, JsonResponse
 from django.urls import path
 from django.views.decorators.http import require_safe
@@ -30,7 +31,29 @@ def healthz(_request: HttpRequest) -> JsonResponse:
     return JsonResponse({"service": "FARM", "status": "ok"}, status=200)
 
 
+@require_safe
+def readyz(_request: HttpRequest) -> JsonResponse:
+    """Return database-backed readiness for orchestrator probes."""
+    try:
+        with connection.cursor() as cursor:
+            cursor.execute("SELECT 1")
+    except DatabaseError:
+        return JsonResponse(
+            {
+                "service": "FARM",
+                "status": "unavailable",
+                "checks": {"database": "error"},
+            },
+            status=503,
+        )
+    return JsonResponse(
+        {"service": "FARM", "status": "ok", "checks": {"database": "ok"}},
+        status=200,
+    )
+
+
 urlpatterns = [
     path("healthz/", healthz, name="healthz"),
+    path("readyz/", readyz, name="readyz"),
     path("admin/", admin.site.urls),
 ]
