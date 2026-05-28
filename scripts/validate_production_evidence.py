@@ -408,7 +408,7 @@ def _validate_runtime_architecture(errors: list[str]) -> None:
         "runAsNonRoot: true",
         "allowPrivilegeEscalation: false",
         "readOnlyRootFilesystem: true",
-        "drop: [\"ALL\"]",
+        'drop: ["ALL"]',
     ):
         _check(
             required in deployments,
