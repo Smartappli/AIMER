@@ -18,6 +18,8 @@ storage, monitored ingress and auditable change control.
 - `ENVIRONMENT=production` for `aimer-web`.
 - `DJANGO_ENVIRONMENT=production` for `FARM`.
 - `AIMER_RAG_ENVIRONMENT=production` for `aimer-rag`.
+- `MAGE_ENVIRONMENT=production` for `MAGE`.
+- `FARM_FEDERATED_ENVIRONMENT=production` for FARM federated Flower traffic.
 - `DEBUG=false` and `DJANGO_DEBUG=false`.
 - HTTPS `BASE_URL` / `DJANGO_BASE_URL`.
 - HTTPS `OPENRAG_ENDPOINT` with `OPENRAG_API_KEY`.
@@ -31,6 +33,17 @@ storage, monitored ingress and auditable change control.
 - Cosign verification succeeds for every image digest admitted to production.
 - Network policy denies all by default.
 - Backups encrypted and restore-tested.
+
+## Before Production Promotion
+
+- Complete `docs/operations/RELEASE_EVIDENCE_PACK.md`.
+- Review `docs/operations/RISK_REGISTER.md`.
+- Review `docs/operations/ASSET_AND_SUPPLIER_REGISTER.md`.
+- Confirm restore evidence from `docs/operations/RESILIENCE_RUNBOOK.md`.
+- Confirm data protection and retention evidence from
+  `docs/operations/DATA_PROTECTION_RETENTION.md`.
+- Confirm incident rota and authority notification path from
+  `docs/operations/INCIDENT_RESPONSE.md`.
 
 ## Files In This Directory
 

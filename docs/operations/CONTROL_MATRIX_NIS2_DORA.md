@@ -5,16 +5,16 @@ Legal applicability depends on the deploying entity and country transposition.
 
 | Area | NIS2 / DORA expectation | Current repository control | Required production action |
 | --- | --- | --- | --- |
-| Governance | Management accountability and ICT risk framework | Production readiness checklist | Assign accountable owner and approve residual risk. |
-| Asset inventory | Know critical systems and dependencies | `docs/MICROSERVICES.md` service boundaries | Maintain CMDB with owners, data class and criticality. |
+| Governance | Management accountability and ICT risk framework | Production readiness checklist, release evidence template and risk register | Assign accountable owner and approve residual risk per release. |
+| Asset inventory | Know critical systems and dependencies | `docs/MICROSERVICES.md` service boundaries and asset/supplier register | Maintain deployment CMDB with owners, data class and criticality. |
 | Access control | Least privilege and strong auth | Django auth, staff gating for RAG health, internal API key fail-fast | Enforce MFA, SSO, admin reviews and break-glass controls. |
-| Incident reporting | Significant incident notification workflows | Incident playbook template | Wire SOC/CSIRT process to national authority timelines. |
-| ICT risk management | Policies, procedures and controls | Production settings, internal service auth, RAG strict retrieval and Flower TLS enforcement fail fast | Add risk register, threat model and recurring review cadence. |
-| Third-party risk | Register and monitor ICT providers | Dependency automation and docs | Maintain DORA register of information where applicable. |
-| Supply chain | Vulnerability and dependency management | `pip-audit`, Bandit, secret scan | Add SBOM, image signing, IaC/container scan gates. |
-| Resilience testing | Test backup, restore and operational resilience | Docker smoke tests | Add restore drills, failover tests and tabletop exercises. |
+| Incident reporting | Significant incident notification workflows | Incident playbook with NIS2 and DORA timing references | Wire SOC/CSIRT process to national authority contacts and templates. |
+| ICT risk management | Policies, procedures and controls | Production settings, internal service auth, RAG strict retrieval, Flower TLS enforcement and ICT risk register | Review risks monthly, after incidents and before every release. |
+| Third-party risk | Register and monitor ICT providers | Asset/supplier register, dependency automation and supply-chain docs | Maintain formal DORA register of information where applicable. |
+| Supply chain | Vulnerability and dependency management | `pip-audit`, Bandit, secret scan, Trivy, SBOM and Cosign signing | Verify digests, signatures and scan evidence before deploy. |
+| Resilience testing | Test backup, restore and operational resilience | Resilience runbook and Docker smoke tests | Run restore drills, failover tests and tabletop exercises on cadence. |
 | Logging | Detect and investigate security events | `SecurityAuditEvent` model, structured `aimer.security.audit` logs, RAG/admin action audit | Route logs to immutable SIEM storage with retention and alerting. |
-| Data protection | Protect medical data and PHI | RAG query hashes in audit metadata; no PHI-specific retention policy in code | Add encryption, minimization, DPIA and data retention rules. |
+| Data protection | Protect medical data and PHI | RAG query hashes in audit metadata and data protection/retention baseline | Complete DPIA, encryption, minimization and deletion controls. |
 | AI/model safety | Human oversight and validation | RAG safety notice, strict retrieval, ungrounded recommendations blocked by default | Add clinical validation, drift monitoring and escalation path. |
 
 ## Minimum Release Evidence
@@ -25,3 +25,5 @@ Legal applicability depends on the deploying entity and country transposition.
 - Access review less than 90 days old.
 - Incident tabletop less than 180 days old.
 - Supplier register updated for all critical ICT services.
+- Release evidence pack approved by engineering, operations, security and
+  data-protection owners.

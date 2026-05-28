@@ -3,6 +3,9 @@
 This checklist is the release gate for regulated medical deployments. A release
 must be blocked while any `P0` item is open.
 
+Use [RELEASE_EVIDENCE_PACK.md](RELEASE_EVIDENCE_PACK.md) to record the concrete
+evidence and approvals for each production release.
+
 ## Scope
 
 - Services: `aimer-web`, `aimer-rag`, `MAGE`, `FARM`.
@@ -28,6 +31,9 @@ must be blocked while any `P0` item is open.
 | Incident reporting | 24h/72h/1-month NIS2 workflow and DORA workflow, if applicable. |
 | Supply chain evidence | SBOM, container scan, IaC scan, dependency audit and signed images. |
 | Clinical validation | Model/RAG output validated, drift monitored, human oversight defined. |
+| ICT risk acceptance | Risk register reviewed and residual `High`/`Critical` risks approved. |
+| Asset and supplier register | Critical assets, data classes and ICT suppliers reviewed. |
+| Data protection | DPIA, retention, deletion and breach-notification paths approved. |
 
 ## Runtime Configuration
 
@@ -70,6 +76,7 @@ FARM federated Flower servers require TLS material in production:
 For every production release, store the following artifacts with the release:
 
 - Git commit SHA and image digests.
+- Completed [release evidence pack](RELEASE_EVIDENCE_PACK.md).
 - Cosign signature verification output for every runtime image digest.
 - SBOM for each runtime image.
 - Vulnerability scan reports and accepted-risk records.
@@ -80,13 +87,22 @@ For every production release, store the following artifacts with the release:
 - Clinical/model validation reference, if recommendation output is exposed.
 - Third-party ICT register update.
 - Incident contact matrix and escalation rota.
+- Risk register review and residual-risk approval.
 
-## Residual Items Not Solved In Code
+## Organizational Activation Required
 
-These controls require organizational implementation:
+These controls cannot be completed by repository code alone. They must be
+activated by the production operator and evidenced in the release record:
 
-- SIEM routing and retention policy.
-- MFA provider and access reviews.
-- Formal supplier due diligence and DORA register of information.
-- NIS2/DORA authority notification process.
-- Clinical safety case, medical device classification and AI governance.
+- SIEM routing and retention policy, aligned with
+  [DATA_PROTECTION_RETENTION.md](DATA_PROTECTION_RETENTION.md).
+- MFA provider, privileged access reviews and break-glass controls.
+- Formal supplier due diligence and, where applicable, DORA register of
+  information using [ASSET_AND_SUPPLIER_REGISTER.md](ASSET_AND_SUPPLIER_REGISTER.md)
+  as the local baseline.
+- NIS2/DORA authority notification process and incident rota, maintained in
+  [INCIDENT_RESPONSE.md](INCIDENT_RESPONSE.md).
+- Clinical safety case, medical device classification and AI governance for any
+  user-facing recommendation workflow.
+- Backup, restore and operational resilience drills from
+  [RESILIENCE_RUNBOOK.md](RESILIENCE_RUNBOOK.md).

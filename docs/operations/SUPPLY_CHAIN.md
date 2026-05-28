@@ -20,7 +20,8 @@ repository or CI secrets.
 
 ## Release Gate
 
-Before production deployment, store the following in the release evidence pack:
+Before production deployment, store the following in the
+[release evidence pack](RELEASE_EVIDENCE_PACK.md):
 
 - Git commit SHA.
 - Image digest artifact from the Docker workflow.
@@ -39,3 +40,10 @@ cosign verify \
 
 Deployments must fail closed when signature verification, SBOM retrieval or
 vulnerability review evidence is missing.
+
+## Supplier and Registry Controls
+
+Container registries, CI/CD systems, hosted scanners and artifact stores are ICT
+suppliers for production purposes. Record them in
+[ASSET_AND_SUPPLIER_REGISTER.md](ASSET_AND_SUPPLIER_REGISTER.md), including
+contract owner, jurisdiction, exit plan and incident contact route.
