@@ -13,7 +13,7 @@ Legal applicability depends on the deploying entity and country transposition.
 | Third-party risk | Register and monitor ICT providers | Dependency automation and docs | Maintain DORA register of information where applicable. |
 | Supply chain | Vulnerability and dependency management | `pip-audit`, Bandit, secret scan | Add SBOM, image signing, IaC/container scan gates. |
 | Resilience testing | Test backup, restore and operational resilience | Docker smoke tests | Add restore drills, failover tests and tabletop exercises. |
-| Logging | Detect and investigate security events | `SecurityAuditEvent` model | Export immutable logs to SIEM with retention and alerting. |
+| Logging | Detect and investigate security events | `SecurityAuditEvent` model and structured `aimer.security.audit` logs | Route logs to immutable SIEM storage with retention and alerting. |
 | Data protection | Protect medical data and PHI | No PHI-specific control in code | Add encryption, minimization, DPIA and data retention rules. |
 | AI/model safety | Human oversight and validation | RAG safety notice | Add clinical validation, drift monitoring and escalation path. |
 

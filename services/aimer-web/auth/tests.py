@@ -2,11 +2,14 @@
 
 from __future__ import annotations
 
+import json
 from datetime import timedelta
 
 from auth.models import Profile, SecurityAuditEvent
+from auth.security import audit_event
 from auth.tokens import hash_token
 from django.contrib.auth import get_user_model
+from django.test import RequestFactory
 from django.test import TestCase, override_settings
 from django.urls import reverse
 from django.utils import timezone
@@ -96,6 +99,27 @@ class AuthSecurityTests(TestCase):
         self.assertTrue(
             SecurityAuditEvent.objects.filter(event_type="auth.login.failed").exists(),
         )
+
+    def test_audit_event_emits_structured_redacted_log(self) -> None:
+        """Audit events must produce SIEM-collectable structured logs."""
+        request = RequestFactory().get("/login/", HTTP_USER_AGENT="test-agent")
+
+        with self.assertLogs("aimer.security.audit", level="INFO") as captured:
+            audit_event(
+                "auth.test",
+                request=request,
+                actor_identifier="alice@example.org",
+                metadata={
+                    "reason": "unit_test",
+                    "reset_token": "raw-token-value",
+                },
+            )
+
+        payload = json.loads(captured.output[0].split("INFO:aimer.security.audit:")[1])
+        self.assertEqual(payload["event_type"], "auth.test")
+        self.assertEqual(payload["metadata"]["reason"], "unit_test")
+        self.assertEqual(payload["metadata"]["reset_token"], "[REDACTED]")
+        self.assertTrue(payload["persisted"])
 
     @override_settings(EMAIL_VERIFICATION_REQUIRED=True)
     def test_login_blocks_unverified_user_when_required(self) -> None:

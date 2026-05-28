@@ -36,6 +36,10 @@ without `RAG_SERVICE_API_KEY`.
 production hosts, missing public HTTPS `DJANGO_BASE_URL`, weak secrets, insecure
 cookies and weak HSTS settings.
 
+`aimer-web` persists security events in `SecurityAuditEvent` and emits the same
+events as structured JSON through the `aimer.security.audit` logger. Production
+must route those logs to immutable SIEM storage with retention and alerting.
+
 `aimer-rag` and `MAGE` accept unauthenticated calls only in non-production
 runtime modes when their service API key variables are unset. Production startup
 fails unless these keys are set:
