@@ -99,7 +99,10 @@ if not SECRET_KEY:
 
 ALLOWED_HOSTS = [
     host.strip()
-    for host in os.environ.get("DJANGO_ALLOWED_HOSTS", "localhost,127.0.0.1").split(",")
+    for host in os.environ.get(
+        "DJANGO_ALLOWED_HOSTS",
+        "" if IS_PRODUCTION else "localhost,127.0.0.1",
+    ).split(",")
     if host.strip()
 ]
 if IS_PRODUCTION and not ALLOWED_HOSTS:
@@ -262,8 +265,14 @@ def validate_production_configuration() -> None:
         errors.append("DJANGO_DEBUG must be false.")
     if SECRET_KEY.startswith(("dev-", "test-", "ci-")):
         errors.append("DJANGO_SECRET_KEY must not use a development/test prefix.")
+    if len(SECRET_KEY) < 50 or len(set(SECRET_KEY)) < 5:
+        errors.append("DJANGO_SECRET_KEY must be at least 50 chars and high entropy.")
+    if not ALLOWED_HOSTS:
+        errors.append("DJANGO_ALLOWED_HOSTS must be set.")
     if "*" in ALLOWED_HOSTS:
         errors.append("DJANGO_ALLOWED_HOSTS must not contain '*'.")
+    if not BASE_URL:
+        errors.append("DJANGO_BASE_URL must be set.")
     if not SECURE_SSL_REDIRECT:
         errors.append("DJANGO_SECURE_SSL_REDIRECT must be enabled.")
     if not SESSION_COOKIE_SECURE:
@@ -272,8 +281,11 @@ def validate_production_configuration() -> None:
         errors.append("DJANGO_CSRF_COOKIE_SECURE must be enabled.")
     if SECURE_HSTS_PRELOAD and SECURE_HSTS_SECONDS < 31536000:
         errors.append("DJANGO_SECURE_HSTS_SECONDS must be at least 31536000.")
-    if parsed_base_url and parsed_base_url.scheme != "https":
-        errors.append("DJANGO_BASE_URL must use HTTPS when configured.")
+    if parsed_base_url and (
+        parsed_base_url.scheme != "https"
+        or parsed_base_url.hostname in {"localhost", "127.0.0.1"}
+    ):
+        errors.append("DJANGO_BASE_URL must be a public HTTPS URL.")
 
     if errors:
         joined = " ".join(errors)

@@ -35,9 +35,32 @@ app = FastAPI(title="AIMER RAG Service")
 PUBLIC_PATHS = {"/healthz"}
 
 
+def _is_production() -> bool:
+    """Return whether this service is running in a production environment."""
+    environment = os.getenv(
+        "AIMER_RAG_ENVIRONMENT",
+        os.getenv("ENVIRONMENT", "local"),
+    )
+    return environment.strip().lower() in {"prod", "production"}
+
+
 def _configured_api_key() -> str:
     """Return the configured service API key, if any."""
     return os.getenv("AIMER_RAG_API_KEY", "").strip()
+
+
+def validate_service_configuration() -> None:
+    """Fail fast when regulated production service auth is not configured."""
+    if not _is_production():
+        return
+
+    api_key = _configured_api_key()
+    if not api_key:
+        msg = "AIMER_RAG_API_KEY must be set when ENVIRONMENT=production."
+        raise RuntimeError(msg)
+    if api_key.startswith(("dev-", "test-", "ci-")):
+        msg = "AIMER_RAG_API_KEY must not use a development/test prefix."
+        raise RuntimeError(msg)
 
 
 def _request_api_key(request: Request) -> str:
@@ -92,3 +115,6 @@ async def recommend(payload: RecommendationRequest) -> RecommendationResponse:
         )
     except OpenRAGRuntimeUnavailableError as exc:
         raise HTTPException(status_code=503, detail=str(exc)) from exc
+
+
+validate_service_configuration()

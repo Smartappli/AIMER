@@ -49,7 +49,12 @@ run as a separate deployment job.
 
 When `AIMER_RAG_API_KEY` is set on `aimer-rag`, the RAG service requires
 `Authorization: Bearer <key>` or `X-API-Key` for `/recommend` and `/readyz`.
-Configure the same value as `RAG_SERVICE_API_KEY` on `aimer-web`.
+Production startup fails if `ENVIRONMENT=production` or
+`AIMER_RAG_ENVIRONMENT=production` and `AIMER_RAG_API_KEY` is missing or uses a
+development/test prefix. Configure the same value as `RAG_SERVICE_API_KEY` on
+`aimer-web`.
 
 When `MAGE_API_KEY` is set, MAGE protects REST and MCP routes while leaving `/`
-and `/healthz` available for liveness checks.
+and `/healthz` available for liveness checks. Production startup fails if
+`ENVIRONMENT=production` or `MAGE_ENVIRONMENT=production` and `MAGE_API_KEY` is
+missing or uses a development/test prefix.

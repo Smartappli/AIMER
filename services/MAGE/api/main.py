@@ -41,9 +41,29 @@ api = FastAPI(title="MAGE API Gateway")
 PUBLIC_PATHS = {"/", "/healthz"}
 
 
+def _is_production() -> bool:
+    """Return whether the gateway is running in a production environment."""
+    environment = os.getenv("MAGE_ENVIRONMENT", os.getenv("ENVIRONMENT", "local"))
+    return environment.strip().lower() in {"prod", "production"}
+
+
 def _configured_api_key() -> str:
     """Return the configured service API key, if any."""
     return os.getenv("MAGE_API_KEY", "").strip()
+
+
+def validate_service_configuration() -> None:
+    """Fail fast when regulated production service auth is not configured."""
+    if not _is_production():
+        return
+
+    api_key = _configured_api_key()
+    if not api_key:
+        msg = "MAGE_API_KEY must be set when ENVIRONMENT=production."
+        raise RuntimeError(msg)
+    if api_key.startswith(("dev-", "test-", "ci-")):
+        msg = "MAGE_API_KEY must not use a development/test prefix."
+        raise RuntimeError(msg)
 
 
 def _request_api_key(request: Request) -> str:
@@ -153,3 +173,6 @@ async def require_service_api_key(
     if not provided_key or not hmac.compare_digest(provided_key, expected_key):
         return JSONResponse({"detail": "Unauthorized"}, status_code=401)
     return await call_next(request)
+
+
+validate_service_configuration()

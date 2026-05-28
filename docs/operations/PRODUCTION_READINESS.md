@@ -32,10 +32,13 @@ must be blocked while any `P0` item is open.
 wildcard hosts, non-HTTPS `BASE_URL`, insecure cookies and RAG service calls
 without `RAG_SERVICE_API_KEY`.
 
-`FARM` also fails fast for unsafe production Django settings.
+`FARM` also fails fast for unsafe production Django settings, including missing
+production hosts, missing public HTTPS `DJANGO_BASE_URL`, weak secrets, insecure
+cookies and weak HSTS settings.
 
-`aimer-rag` and `MAGE` accept unauthenticated calls only when their service API
-key variables are unset. Production must set:
+`aimer-rag` and `MAGE` accept unauthenticated calls only in non-production
+runtime modes when their service API key variables are unset. Production startup
+fails unless these keys are set:
 
 - `AIMER_RAG_API_KEY`
 - `RAG_SERVICE_API_KEY`
