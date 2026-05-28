@@ -19,6 +19,9 @@ must be blocked while any `P0` item is open.
 | Strong secrets | All secrets come from a secret manager; no default or `dev-*` values. |
 | HTTPS enforced | `ENVIRONMENT=production`, HTTPS `BASE_URL`, HSTS, secure cookies. |
 | Internal API auth | `RAG_SERVICE_API_KEY`, `AIMER_RAG_API_KEY`, and `MAGE_API_KEY` set. |
+| Grounded RAG output | `RAG_STRICT_OPENRAG=true`; ungrounded catalog recommendations disabled. |
+| Safe RAG ingestion | Docling external plugins disabled; vector store writes authenticated. |
+| Federated transport security | Flower servers use TLS certificates for all hospital node traffic. |
 | MFA and privileged access | MFA enforced for staff/admin/ops accounts. |
 | Audit logging | Auth, admin, RAG recommendations and privileged actions exported to SIEM. |
 | Backup and restore | Encrypted backups tested with measured RTO/RPO. |
@@ -47,6 +50,20 @@ fails unless these keys are set:
 - `AIMER_RAG_API_KEY`
 - `RAG_SERVICE_API_KEY`
 - `MAGE_API_KEY`
+
+RAG recommendation output is now evidence-gated. Production must keep
+`RAG_ALLOW_UNGROUNDED_RECOMMENDATIONS=false`; requests cannot disable strict
+OpenRAG retrieval in the `aimer-rag` service. Empty or irrelevant retrieval
+results return no recommendation instead of catalog-only suggestions.
+
+RAG ingestion disables Docling external plugins by default. Production ingestion
+must keep `RAG_ALLOW_EXTERNAL_PLUGINS=false` and set `QDRANT_API_KEY`.
+
+FARM federated Flower servers require TLS material in production:
+
+- `tls_ca_cert_path`
+- `tls_server_cert_path`
+- `tls_server_key_path`
 
 ## Operational Evidence Pack
 

@@ -25,6 +25,15 @@ except ImportError:  # pragma: no cover - only used in minimal environments.
 MIN_OPENRAG_VERSION = Version("0.4.1")
 
 
+def _is_production() -> bool:
+    """Return whether the RAG backend runs in a production environment."""
+    environment = os.getenv(
+        "AIMER_RAG_ENVIRONMENT",
+        os.getenv("ENVIRONMENT", "local"),
+    )
+    return environment.strip().lower() in {"prod", "production"}
+
+
 def _assert_supported_openrag_version() -> None:
     """Require OpenRAG runtime to be at least MIN_OPENRAG_VERSION."""
     try:
@@ -88,7 +97,17 @@ def _openrag_endpoint() -> str:
     parsed = urlsplit(endpoint)
     if parsed.scheme not in {"http", "https"} or not parsed.netloc:
         raise RuntimeError("OPENRAG_ENDPOINT is required and must be an HTTP(S) URL.")
+    if _is_production() and parsed.scheme != "https":
+        raise RuntimeError("OPENRAG_ENDPOINT must use HTTPS in production.")
     return endpoint.rstrip("/")
+
+
+def _openrag_api_key() -> str | None:
+    """Return the OpenRAG API key, requiring one in production."""
+    api_key = os.getenv("OPENRAG_API_KEY", "").strip()
+    if _is_production() and not api_key:
+        raise RuntimeError("OPENRAG_API_KEY must be set in production.")
+    return api_key or None
 
 
 def openrag_hybrid_search(
@@ -103,6 +122,7 @@ def openrag_hybrid_search(
         RuntimeError: If OpenRAG dependency is not installed.
     """
     endpoint = _openrag_endpoint()
+    api_key = _openrag_api_key()
     _assert_supported_openrag_version()
     try:
         from openrag import OpenRAG  # type: ignore[import-not-found]
@@ -113,7 +133,7 @@ def openrag_hybrid_search(
 
     retriever = OpenRAG(
         endpoint=endpoint,
-        api_key=os.getenv("OPENRAG_API_KEY"),
+        api_key=api_key,
         collection=os.getenv("RAG_COLLECTION_NAME", "rag_docs"),
     )
     results = _search_openrag(retriever, query=query, k=k, filters=filters or {})

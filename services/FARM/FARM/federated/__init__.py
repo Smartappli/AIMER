@@ -7,6 +7,7 @@ from .data import FederatedDataset
 from .rag import RagDocument, RagIndex, RagState
 from .runner import (
     FederatedServerConfig,
+    FederatedTransportSecurityError,
     build_rag_client,
     build_task_client,
     start_rag_server,
@@ -27,6 +28,7 @@ __all__ = [
     "FederatedDataset",
     "FederatedServerConfig",
     "FederatedTaskClient",
+    "FederatedTransportSecurityError",
     "RagClient",
     "RagDocument",
     "RagFedAvgStrategy",

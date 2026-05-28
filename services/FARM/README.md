@@ -88,6 +88,25 @@ client = build_rag_client(index=index, document_provider=provide_docs)
 fl.client.start_client(server_address="0.0.0.0:8081", client=client)
 ```
 
+## Transport production
+
+Les exemples ci-dessus sont uniquement locaux. En production hospitaliere,
+`FARM_FEDERATED_ENVIRONMENT=production` force les serveurs Flower a refuser le
+demarrage sans certificats TLS:
+
+```python
+from FARM.federated import FederatedServerConfig
+
+config = FederatedServerConfig(
+    tls_ca_cert_path="/run/secrets/flower-ca.pem",
+    tls_server_cert_path="/run/secrets/flower-server.pem",
+    tls_server_key_path="/run/secrets/flower-server.key",
+)
+```
+
+Les clients Flower doivent utiliser le meme CA et un canal authentifie par le
+reseau prive hospitalier ou par mTLS gere par l'infrastructure.
+
 ## Dépendances clés
 
 - `flwr==1.30.0` pour les clients/serveurs fédérés.

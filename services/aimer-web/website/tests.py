@@ -508,8 +508,8 @@ class RagRecommenderTests(BaseTestCase):
             "Expected OMOP modality IDs in query profile",
         )
 
-    def test_recommender_uses_default_timm_catalog_when_pdf_dir_missing(self) -> None:
-        """Ensure fallback catalog still includes TIMM models without local PDFs."""
+    def test_recommender_blocks_ungrounded_catalog_suggestions_by_default(self) -> None:
+        """Ensure empty evidence does not produce clinical recommendations."""
         with tempfile.TemporaryDirectory() as tmpdir:
             missing_pdf_dir = Path(tmpdir) / "missing"
             response = recommend_models_for_query(
@@ -519,9 +519,26 @@ class RagRecommenderTests(BaseTestCase):
                 pdf_directory=missing_pdf_dir,
             )
 
+        self._check_equal(response.recommended_models, [])
+        self._check(response.no_recommendation_reason is not None)
+        self._check("no-grounded-evidence" in response.retrieval_mode)
+
+    def test_recommender_allows_catalog_suggestions_for_research_only(self) -> None:
+        """Ensure explicit non-production opt-in keeps exploratory catalog behavior."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            missing_pdf_dir = Path(tmpdir) / "missing"
+            response = recommend_models_for_query(
+                query="best model for image classification",
+                top_k=2,
+                documents=[],
+                pdf_directory=missing_pdf_dir,
+                allow_ungrounded=True,
+            )
+
         names = [item.model_name for item in response.recommended_models]
         self._check(bool(names))
         self._check(any("ResNet" in name for name in names))
+        self._check("ungrounded-catalog" in response.retrieval_mode)
 
     def test_timm_seed_index_is_comprehensive(self) -> None:
         """Ensure default TIMM seed includes a broad article coverage."""

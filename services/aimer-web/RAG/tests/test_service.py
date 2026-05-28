@@ -68,6 +68,18 @@ def test_production_rejects_development_rag_service_api_key(
         validate_service_configuration()
 
 
+def test_production_rejects_ungrounded_recommendation_mode(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Ensure production startup rejects catalog-only recommendation opt-in."""
+    monkeypatch.setenv("AIMER_RAG_ENVIRONMENT", "production")
+    monkeypatch.setenv("AIMER_RAG_API_KEY", "service-secret")
+    monkeypatch.setenv("RAG_ALLOW_UNGROUNDED_RECOMMENDATIONS", "true")
+
+    with pytest.raises(RuntimeError, match="UNGROUNDED"):
+        validate_service_configuration()
+
+
 @patch("RAG.service.recommend_models_for_query")
 def test_recommend_endpoint_requires_api_key_when_configured(
     mock_recommend: Mock,
@@ -109,6 +121,34 @@ def test_recommend_endpoint_returns_recommendation_payload(mock_recommend) -> No
     mock_recommend.assert_called_once_with(
         query="classification mri",
         top_k=2,
+        strict_openrag=True,
+    )
+
+
+@patch("RAG.service.recommend_models_for_query")
+def test_recommend_endpoint_forces_strict_openrag_in_production(
+    mock_recommend,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Ensure production requests cannot disable strict retrieval."""
+    monkeypatch.setenv("AIMER_RAG_ENVIRONMENT", "production")
+    monkeypatch.setenv("AIMER_RAG_API_KEY", "service-secret")
+    mock_recommend.return_value = _recommendation_response("classification mri")
+    client = TestClient(app)
+
+    response = client.post(
+        "/recommend",
+        headers={"X-API-Key": "service-secret"},
+        json={
+            "query": "classification mri",
+            "strict_openrag": False,
+        },
+    )
+
+    assert response.status_code == 200
+    mock_recommend.assert_called_once_with(
+        query="classification mri",
+        top_k=3,
         strict_openrag=True,
     )
 

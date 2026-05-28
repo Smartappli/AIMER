@@ -61,6 +61,13 @@ def validate_service_configuration() -> None:
     if api_key.startswith(("dev-", "test-", "ci-")):
         msg = "AIMER_RAG_API_KEY must not use a development/test prefix."
         raise RuntimeError(msg)
+    if os.getenv("RAG_ALLOW_UNGROUNDED_RECOMMENDATIONS", "").strip().lower() in {
+        "1",
+        "true",
+        "yes",
+    }:
+        msg = "RAG_ALLOW_UNGROUNDED_RECOMMENDATIONS must be false in production."
+        raise RuntimeError(msg)
 
 
 def _request_api_key(request: Request) -> str:
@@ -111,7 +118,7 @@ async def recommend(payload: RecommendationRequest) -> RecommendationResponse:
         return recommend_models_for_query(
             query=payload.query.strip(),
             top_k=payload.top_k,
-            strict_openrag=payload.strict_openrag,
+            strict_openrag=True if _is_production() else payload.strict_openrag,
         )
     except OpenRAGRuntimeUnavailableError as exc:
         raise HTTPException(status_code=503, detail=str(exc)) from exc

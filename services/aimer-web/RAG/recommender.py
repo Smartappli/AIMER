@@ -126,6 +126,7 @@ class RecommendationResponse(BaseModel):
     retrieval_mode: str
     safety_notice: str
     recommended_models: list[RecommendationItem]
+    no_recommendation_reason: str | None = None
 
 
 @dataclass(slots=True)
@@ -133,6 +134,36 @@ class _ScoredEvidence:
     score: float = 0.0
     evidence: list[EvidenceSnippet] = field(default_factory=list)
     matched_query_tokens: set[str] = field(default_factory=set)
+
+
+def _is_production() -> bool:
+    """Return whether recommendations run in a production environment."""
+    environment = os.getenv(
+        "AIMER_RAG_ENVIRONMENT",
+        os.getenv("ENVIRONMENT", "local"),
+    )
+    return environment.strip().lower() in {"prod", "production"}
+
+
+def _env_bool(name: str, *, default: bool) -> bool:
+    """Parse a boolean environment variable."""
+    raw = os.getenv(name)
+    if raw is None:
+        return default
+    return raw.strip().lower() in {"1", "true", "yes"}
+
+
+def _resolve_allow_ungrounded(allow_ungrounded: bool | None) -> bool:
+    """Resolve whether catalog-only recommendations may be returned."""
+    resolved = (
+        allow_ungrounded
+        if allow_ungrounded is not None
+        else _env_bool("RAG_ALLOW_UNGROUNDED_RECOMMENDATIONS", default=False)
+    )
+    if resolved and _is_production():
+        msg = "Ungrounded recommendations are not allowed in production."
+        raise RuntimeError(msg)
+    return resolved
 
 
 def _normalize(text: str) -> str:
@@ -554,7 +585,7 @@ def _fallback_recommendations(
     top_k: int,
 ) -> list[RecommendationItem]:
     """
-    Provide deterministic lexical fallback when retrieval has no usable evidence.
+    Provide deterministic lexical suggestions for non-clinical exploration.
 
     Args:
         catalog: Model alias catalog.
@@ -562,7 +593,7 @@ def _fallback_recommendations(
         top_k: Maximum number of models to return.
 
     Returns:
-        List of fallback recommendation items.
+        List of ungrounded recommendation items.
 
     """
     ranked_models: list[tuple[float, int, str]] = []
@@ -600,6 +631,8 @@ def _fallback_recommendations(
 
 def _resolve_strict_openrag(strict_openrag: bool | None) -> bool:
     """Resolve strict OpenRAG mode from explicit argument or environment."""
+    if _is_production():
+        return True
     if strict_openrag is not None:
         return strict_openrag
     return os.getenv("RAG_STRICT_OPENRAG", "1").strip().lower() not in {
@@ -616,6 +649,7 @@ def recommend_models_for_query(
     documents: list[Document] | None = None,
     pdf_directory: Path | None = None,
     strict_openrag: bool | None = None,
+    allow_ungrounded: bool | None = None,
 ) -> RecommendationResponse:
     """
     Recommend candidate models based on retrieved literature snippets.
@@ -625,6 +659,9 @@ def recommend_models_for_query(
         top_k: Maximum number of recommendations to return.
         documents: Optional injected documents, bypassing retrieval.
         pdf_directory: Optional PDF directory used to build the catalog.
+        strict_openrag: Require OpenRAG retrieval instead of catalog-only fallback.
+        allow_ungrounded: Permit catalog-only exploratory suggestions. This is
+            disabled by default and rejected in production.
 
     Returns:
         Structured recommendation response with ranked models and evidence.
@@ -634,6 +671,7 @@ def recommend_models_for_query(
     catalog = _build_model_catalog(pdf_directory=pdf_directory)
 
     resolved_strict = _resolve_strict_openrag(strict_openrag)
+    resolved_allow_ungrounded = _resolve_allow_ungrounded(allow_ungrounded)
 
     if documents is None:
         if resolved_strict:
@@ -644,9 +682,19 @@ def recommend_models_for_query(
         docs, used_filters, retrieval_mode = documents, {}, "injected-documents"
 
     scored = _score_documents_against_catalog(docs, catalog, profile)
+    no_recommendation_reason = None
 
     if not scored:
-        recommendations = _fallback_recommendations(catalog, profile, top_k)
+        if resolved_allow_ungrounded:
+            recommendations = _fallback_recommendations(catalog, profile, top_k)
+            retrieval_mode = f"{retrieval_mode}+ungrounded-catalog"
+        else:
+            recommendations = []
+            no_recommendation_reason = (
+                "No grounded recommendation returned because retrieved evidence "
+                "did not mention a catalogued model with usable support."
+            )
+            retrieval_mode = f"{retrieval_mode}+no-grounded-evidence"
     else:
         ranked = sorted(scored.items(), key=lambda item: item[1].score, reverse=True)[
             :top_k
@@ -694,4 +742,5 @@ def recommend_models_for_query(
             "jugement médical, ni une validation clinique/prospective."
         ),
         recommended_models=recommendations,
+        no_recommendation_reason=no_recommendation_reason,
     )

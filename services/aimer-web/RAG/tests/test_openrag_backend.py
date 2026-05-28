@@ -37,6 +37,32 @@ def test_openrag_hybrid_search_requires_valid_endpoint(monkeypatch) -> None:
         raise AssertionError("Expected RuntimeError when endpoint is invalid")
 
 
+def test_openrag_hybrid_search_requires_https_in_production(monkeypatch) -> None:
+    monkeypatch.setenv("AIMER_RAG_ENVIRONMENT", "production")
+    monkeypatch.setenv("OPENRAG_ENDPOINT", "http://openrag.example.test")
+    monkeypatch.setenv("OPENRAG_API_KEY", "openrag-secret")
+
+    try:
+        openrag_hybrid_search(query="test", k=3, filters={})
+    except RuntimeError as exc:
+        assert "HTTPS" in str(exc)
+    else:
+        raise AssertionError("Expected production endpoint scheme to fail")
+
+
+def test_openrag_hybrid_search_requires_api_key_in_production(monkeypatch) -> None:
+    monkeypatch.setenv("AIMER_RAG_ENVIRONMENT", "production")
+    monkeypatch.setenv("OPENRAG_ENDPOINT", "https://openrag.example.test")
+    monkeypatch.delenv("OPENRAG_API_KEY", raising=False)
+
+    try:
+        openrag_hybrid_search(query="test", k=3, filters={})
+    except RuntimeError as exc:
+        assert "OPENRAG_API_KEY" in str(exc)
+    else:
+        raise AssertionError("Expected production OpenRAG API key to fail")
+
+
 def test_to_langchain_documents_normalizes_dict_and_text() -> None:
     docs = _to_langchain_documents(
         [{"content": "alpha", "metadata": {"a": 1}}, {"text": "beta"}, "gamma"],

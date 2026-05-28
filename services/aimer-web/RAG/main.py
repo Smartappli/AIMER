@@ -41,6 +41,10 @@ SPARSE_EMBEDDING_MODEL = os.getenv("RAG_SPARSE_EMBEDDING_MODEL", "Qdrant/bm25")
 OLLAMA_BASE_URL = os.getenv("OLLAMA_BASE_URL", "http://localhost:11434")
 QDRANT_URL = os.getenv("QDRANT_URL", "http://localhost:6333")
 QDRANT_API_KEY = os.getenv("QDRANT_API_KEY")
+ALLOW_EXTERNAL_PLUGINS = os.getenv(
+    "RAG_ALLOW_EXTERNAL_PLUGINS",
+    "0",
+).strip().lower() in {"1", "true", "yes"}
 
 TEXT_THRESHOLD = 50
 MIN_IMAGE_DIMENSION = 500
@@ -48,21 +52,43 @@ FILENAME_METADATA_MIN_PARTS = 3
 PAGE_BREAK = "<!-- page_break -->"
 
 describe_image_prompt = (
-    "Analyze this financial document page and extract meaningful data "
-    "in a concise format.\n\n"
-    "For charts and graphs:\n"
-    "- Identify the metric being measured\n"
-    "- List key data points and values\n"
-    "- Note significant trends (growth, decline, stability)\n\n"
+    "Analyze this clinical or biomedical document page and extract factual "
+    "retrieval evidence in a concise format.\n\n"
+    "For figures and charts:\n"
+    "- Identify the clinical task, modality, cohort, metric and comparator\n"
+    "- List reported values such as AUC, Dice, sensitivity, specificity or F1\n"
+    "- Note validation setting, dataset limits and population caveats\n\n"
     "For tables:\n"
-    "- Extract column headers and key rows\n"
-    "- Note important values and totals\n\n"
+    "- Extract column headers, model names, cohorts, endpoints and key results\n"
+    "- Keep units and confidence intervals when present\n\n"
     "For text:\n"
-    "- Summarize key facts and numbers only\n"
-    "- Skip formating, headers, and navigation elements\n\n"
-    "Be direct and factual. Focus on numbers, trends, and insights "
-    "that would be useful for retrieval."
+    "- Summarize objective claims only\n"
+    "- Preserve model names, disease terms, imaging modality and validation type\n"
+    "- Do not infer clinical recommendations beyond the source text\n\n"
+    "Be direct and factual. Focus on evidence that can be traced during "
+    "clinical review."
 )
+
+
+def _is_production() -> bool:
+    """Return whether ingestion is running in a production environment."""
+    environment = os.getenv(
+        "AIMER_RAG_ENVIRONMENT",
+        os.getenv("ENVIRONMENT", "local"),
+    )
+    return environment.strip().lower() in {"prod", "production"}
+
+
+def validate_ingestion_configuration() -> None:
+    """Fail fast for unsafe ingestion settings in regulated production."""
+    if not _is_production():
+        return
+    if ALLOW_EXTERNAL_PLUGINS:
+        msg = "RAG_ALLOW_EXTERNAL_PLUGINS must be false in production."
+        raise RuntimeError(msg)
+    if not QDRANT_API_KEY:
+        msg = "QDRANT_API_KEY must be set for RAG ingestion in production."
+        raise RuntimeError(msg)
 
 
 def ensure_output_directories() -> None:
@@ -164,7 +190,7 @@ def convert_pdf_to_docling(pdf_file: Path) -> object:
     do_ocr = not pdf_has_text(pdf_file)
 
     pipeline_options = PdfPipelineOptions(
-        allow_external_plugins=True,
+        allow_external_plugins=ALLOW_EXTERNAL_PLUGINS,
         do_ocr=do_ocr,
         images_scale=3.0,
         generate_picture_images=True,
@@ -521,6 +547,7 @@ def run_ingestion() -> object:
         Qdrant collection information after ingestion.
 
     """
+    validate_ingestion_configuration()
     ensure_output_directories()
     vector_store = get_vector_store()
     processed_hashes = get_processed_hashes(vector_store)

@@ -21,6 +21,8 @@ from FARM.federated.rag import (
 )
 from FARM.federated.runner import (
     FederatedServerConfig,
+    FederatedTransportSecurityError,
+    _server_certificates,
     build_rag_client,
     build_task_client,
 )
@@ -227,3 +229,32 @@ def test_runner_factories_build_clients_and_config() -> None:
     assert config.num_rounds == 3
     assert config.strategy_kwargs == {"fraction_fit": 1.0}
     assert strategy.task_name == "demo"
+
+
+def test_federated_server_requires_tls_in_production(monkeypatch) -> None:
+    """Ensure production Flower servers cannot start without TLS material."""
+    monkeypatch.setenv("FARM_FEDERATED_ENVIRONMENT", "production")
+
+    with pytest.raises(FederatedTransportSecurityError, match="TLS"):
+        _server_certificates(FederatedServerConfig())
+
+
+def test_federated_server_loads_tls_certificates(tmp_path) -> None:
+    """Ensure configured Flower TLS files are loaded as byte certificates."""
+    ca = tmp_path / "ca.pem"
+    cert = tmp_path / "server.pem"
+    key = tmp_path / "server.key"
+    ca.write_bytes(b"ca")
+    cert.write_bytes(b"cert")
+    key.write_bytes(b"key")
+
+    certificates = _server_certificates(
+        FederatedServerConfig(
+            require_tls=True,
+            tls_ca_cert_path=str(ca),
+            tls_server_cert_path=str(cert),
+            tls_server_key_path=str(key),
+        ),
+    )
+
+    assert certificates == (b"ca", b"cert", b"key")
