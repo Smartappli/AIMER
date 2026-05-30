@@ -41,6 +41,7 @@ jobs:
         uses: github/codeql-action/upload-sarif@v4
         with:
           sarif_file: trivy-fs.sarif
+          category: trivy/filesystem
 
       - name: Trivy IaC/config scan
         uses: aquasecurity/trivy-action@v0.36.0
@@ -56,6 +57,7 @@ jobs:
         uses: github/codeql-action/upload-sarif@v4
         with:
           sarif_file: trivy-config.sarif
+          category: trivy/config
 
   image-scan:
     name: Image Scan (${{ matrix.service }})
@@ -130,6 +132,7 @@ jobs:
         uses: github/codeql-action/upload-sarif@v4
         with:
           sarif_file: trivy-image-${{ matrix.service }}.sarif
+          category: trivy/image/${{ matrix.service }}
 
       - name: Upload SBOM
         if: ${{ always() }}
