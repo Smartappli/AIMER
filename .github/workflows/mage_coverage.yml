@@ -11,6 +11,9 @@ concurrency:
   group: mage-coverage-${{ github.event_name == 'pull_request' && format('{0}-{1}', github.workflow, github.event.pull_request.number) || github.workflow_ref }}
   cancel-in-progress: true
 
+permissions:
+  contents: read
+
 jobs:
   sonarcloud:
     name: Coverage
@@ -19,7 +22,7 @@ jobs:
       CODACY_PROJECT_TOKEN: ${{ secrets.CODACY_PROJECT_TOKEN }}
     steps:
       - name: Free Disk Space (Ubuntu)
-        uses: jlumbroso/free-disk-space@v1.3.1
+        uses: jlumbroso/free-disk-space@54081f138730dfa15788a46383842cd2f914a1be
         with:
           # this might remove tools that are actually needed,
           # if set to "true" but frees about 6 GB
@@ -33,19 +36,23 @@ jobs:
           large-packages: true
           docker-images: false
           swap-storage: true
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
         with:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
       - name: Set up Python
-        uses: actions/setup-python@v6
+        uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405
         with:
           python-version: '3.13'
           cache: 'pip'
       - name: Install dependencies
         run: |
           cd services/MAGE
-          python -m pip install --upgrade pip
-          python -m pip install uv
+          python -m pip install --upgrade \
+            --disable-pip-version-check \
+            --no-cache-dir \
+            --only-binary=:all: \
+            pip==26.1.1 \
+            uv==0.11.17
           python -m uv sync --locked
       - name: Coverage Erase
         run: |
@@ -60,7 +67,7 @@ jobs:
           python -m uv --directory services/MAGE run --locked python -m coverage xml -o ../../coverage.xml
       - name: Run codacy-coverage-reporter
         if: env.CODACY_PROJECT_TOKEN != ''
-        uses: codacy/codacy-coverage-reporter-action@v1.3.0
+        uses: codacy/codacy-coverage-reporter-action@89d6c85cfafaec52c72b6c5e8b2878d33104c699
         with:
           project-token: ${{ env.CODACY_PROJECT_TOKEN }}
           coverage-reports: 'coverage.xml'

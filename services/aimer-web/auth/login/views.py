@@ -161,8 +161,8 @@ class LoginView(AuthView):
         next_url = request.POST.get("next", "")
         if next_url and url_has_allowed_host_and_scheme(
             url=next_url,
-            allowed_hosts={request.get_host(), *getattr(settings, "ALLOWED_HOSTS", [])},
-            require_https=not settings.DEBUG,
+            allowed_hosts={request.get_host()},
+            require_https=request.is_secure(),
         ):
             return redirect(next_url)
         return redirect("index")

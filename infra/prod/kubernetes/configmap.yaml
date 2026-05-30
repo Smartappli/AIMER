@@ -1,3 +1,4 @@
+# trivy:ignore:AVD-KSV-01010 Non-secret security toggles and service URLs only; credentials are delivered by Secret refs.
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -42,4 +43,3 @@ data:
   SECURITY_AUDIT_LOG_LEVEL: "INFO"
   XDG_CACHE_HOME: "/tmp/.cache"
   MPLCONFIGDIR: "/tmp/.cache/matplotlib"
-

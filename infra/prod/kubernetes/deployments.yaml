@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: aimer-web
+  namespace: aimer-prod
   labels:
     app.kubernetes.io/name: aimer-web
     app.kubernetes.io/part-of: aimer
@@ -19,11 +20,14 @@ spec:
       serviceAccountName: aimer-web
       securityContext:
         runAsNonRoot: true
+        runAsUser: 10001
+        runAsGroup: 10001
+        fsGroup: 10001
         seccompProfile:
           type: RuntimeDefault
       containers:
         - name: aimer-web
-          image: smartappli/aimer
+          image: docker.io/smartappli/aimer:prod-placeholder
           imagePullPolicy: IfNotPresent
           ports:
             - name: http
@@ -66,6 +70,9 @@ spec:
               cpu: "1"
               memory: 1Gi
           securityContext:
+            runAsNonRoot: true
+            runAsUser: 10001
+            runAsGroup: 10001
             allowPrivilegeEscalation: false
             readOnlyRootFilesystem: true
             capabilities:
@@ -89,6 +96,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: aimer-rag
+  namespace: aimer-prod
   labels:
     app.kubernetes.io/name: aimer-rag
     app.kubernetes.io/part-of: aimer
@@ -106,11 +114,14 @@ spec:
       serviceAccountName: aimer-rag
       securityContext:
         runAsNonRoot: true
+        runAsUser: 10001
+        runAsGroup: 10001
+        fsGroup: 10001
         seccompProfile:
           type: RuntimeDefault
       containers:
         - name: aimer-rag
-          image: smartappli/aimer-rag
+          image: docker.io/smartappli/aimer-rag:prod-placeholder
           imagePullPolicy: IfNotPresent
           ports:
             - name: http
@@ -152,6 +163,9 @@ spec:
               cpu: "2"
               memory: 4Gi
           securityContext:
+            runAsNonRoot: true
+            runAsUser: 10001
+            runAsGroup: 10001
             allowPrivilegeEscalation: false
             readOnlyRootFilesystem: true
             capabilities:
@@ -171,6 +185,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: mage
+  namespace: aimer-prod
   labels:
     app.kubernetes.io/name: mage
     app.kubernetes.io/part-of: aimer
@@ -188,11 +203,14 @@ spec:
       serviceAccountName: mage
       securityContext:
         runAsNonRoot: true
+        runAsUser: 10001
+        runAsGroup: 10001
+        fsGroup: 10001
         seccompProfile:
           type: RuntimeDefault
       containers:
         - name: mage
-          image: smartappli/mage-api
+          image: docker.io/smartappli/mage-api:prod-placeholder
           imagePullPolicy: IfNotPresent
           ports:
             - name: http
@@ -224,6 +242,9 @@ spec:
               cpu: "4"
               memory: 12Gi
           securityContext:
+            runAsNonRoot: true
+            runAsUser: 10001
+            runAsGroup: 10001
             allowPrivilegeEscalation: false
             readOnlyRootFilesystem: true
             capabilities:
@@ -243,6 +264,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: farm
+  namespace: aimer-prod
   labels:
     app.kubernetes.io/name: farm
     app.kubernetes.io/part-of: aimer
@@ -260,11 +282,14 @@ spec:
       serviceAccountName: farm
       securityContext:
         runAsNonRoot: true
+        runAsUser: 10001
+        runAsGroup: 10001
+        fsGroup: 10001
         seccompProfile:
           type: RuntimeDefault
       containers:
         - name: farm
-          image: smartappli/farm
+          image: docker.io/smartappli/farm:prod-placeholder
           imagePullPolicy: IfNotPresent
           ports:
             - name: http
@@ -307,6 +332,9 @@ spec:
               cpu: "1"
               memory: 1Gi
           securityContext:
+            runAsNonRoot: true
+            runAsUser: 10001
+            runAsGroup: 10001
             allowPrivilegeEscalation: false
             readOnlyRootFilesystem: true
             capabilities:

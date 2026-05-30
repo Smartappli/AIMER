@@ -88,6 +88,10 @@ DOCKERFILES = [
     "services/FARM/Dockerfile",
 ]
 
+SENSITIVE_MESSAGE_PATTERN = re.compile(
+    r"(?i)(password|secret|token|credential|api[_-]?key)([^,\n]*)",
+)
+
 KUBERNETES_FILES = [
     "README.md",
     "kustomization.yaml",
@@ -120,6 +124,12 @@ def _check(condition: bool, message: str, errors: list[str]) -> None:
     """Append an error when a condition is false."""
     if not condition:
         errors.append(message)
+
+
+def _safe_console_message(message: str) -> str:
+    """Return a redacted single-line message for CI logs."""
+    redacted = SENSITIVE_MESSAGE_PATTERN.sub(r"\1=[REDACTED]", message)
+    return redacted.replace("\r", "\\r").replace("\n", "\\n")
 
 
 def _parse_env(path: str) -> dict[str, str]:
@@ -431,10 +441,10 @@ def _validate_runtime_architecture(errors: list[str]) -> None:
 
     kustomization = _read("infra/prod/kubernetes/kustomization.yaml")
     for image in (
-        "smartappli/aimer",
-        "smartappli/aimer-rag",
-        "smartappli/mage-api",
-        "smartappli/farm",
+        "docker.io/smartappli/aimer",
+        "docker.io/smartappli/aimer-rag",
+        "docker.io/smartappli/mage-api",
+        "docker.io/smartappli/farm",
     ):
         _check(image in kustomization, f"kustomization.yaml missing {image}.", errors)
     _check(
@@ -473,7 +483,7 @@ def main() -> int:
     if errors:
         print("Production evidence validation failed:", file=sys.stderr)
         for error in errors:
-            print(f"- {error}", file=sys.stderr)
+            print(f"- {_safe_console_message(error)}", file=sys.stderr)
         return 1
 
     print("Production evidence validation passed.")

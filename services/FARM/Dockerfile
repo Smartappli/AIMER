@@ -11,7 +11,8 @@ RUN python -m pip install \
     --disable-pip-version-check \
     --no-cache-dir \
     --only-binary=:all: \
-    "uv==0.9.28"
+    "pip==26.1.1" \
+    "uv==0.11.17"
 
 # deps
 COPY pyproject.toml uv.lock ./

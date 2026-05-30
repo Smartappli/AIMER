@@ -346,7 +346,10 @@ class RagRecommendationView(View):
                     "reason": str(exc)[:256],
                 },
             )
-            return JsonResponse({"error": str(exc)}, status=503)
+            return JsonResponse(
+                {"error": "Recommendation service is unavailable"},
+                status=503,
+            )
         audit_event(
             "rag.recommendation.requested",
             request=request,

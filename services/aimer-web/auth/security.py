@@ -4,7 +4,6 @@
 from __future__ import annotations
 
 import hashlib
-import json
 import logging
 from typing import Any
 
@@ -118,12 +117,12 @@ def _log_audit_event(payload: dict[str, Any]) -> None:
     """Emit a JSON audit event without interrupting request handling."""
     try:
         AUDIT_LOGGER.info(
-            json.dumps(payload, sort_keys=True, default=str),
+            "security_audit_event",
             extra={"security_audit_event": payload},
         )
     except (TypeError, ValueError):
         AUDIT_LOGGER.info(
-            '{"event_type":"security_audit.serialization_failed"}',
+            "security_audit_serialization_failed",
             extra={
                 "security_audit_event": {
                     "event_type": "security_audit.serialization_failed",

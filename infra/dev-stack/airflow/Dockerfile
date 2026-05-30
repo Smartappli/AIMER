@@ -10,4 +10,7 @@ RUN pip install --no-cache-dir \
     apache-airflow-providers-pgvector \
     apache-airflow-providers-qdrant \
     apache-airflow-providers-redis \
-    --constraint "${HOME}/constraints.txt" \
+    --constraint "${HOME}/constraints.txt"
+
+HEALTHCHECK --interval=30s --timeout=10s --start-period=30s --retries=5 \
+    CMD airflow version >/dev/null || exit 1

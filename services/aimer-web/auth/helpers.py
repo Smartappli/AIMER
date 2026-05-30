@@ -28,7 +28,7 @@ async def send_email(subject: str, email: str, message: str) -> None:
     try:
         await sync_to_async(email_message.send)()
     except Exception:
-        logger.exception("Failed to send email to %s.", email)
+        logger.exception("Failed to send authentication email.")
 
 
 def get_absolute_url(path: str) -> str:

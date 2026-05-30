@@ -28,10 +28,10 @@ EXPECTED_RESOURCES = {
 }
 
 EXPECTED_IMAGES = {
-    "aimer-web": "smartappli/aimer",
-    "aimer-rag": "smartappli/aimer-rag",
-    "mage": "smartappli/mage-api",
-    "farm": "smartappli/farm",
+    "aimer-web": "docker.io/smartappli/aimer",
+    "aimer-rag": "docker.io/smartappli/aimer-rag",
+    "mage": "docker.io/smartappli/mage-api",
+    "farm": "docker.io/smartappli/farm",
 }
 
 EXPECTED_SECRET_REFS = {
@@ -47,6 +47,10 @@ EXPECTED_SERVICE_PORTS = {
     "mage": "10000",
     "farm": "8000",
 }
+
+SENSITIVE_MESSAGE_PATTERN = re.compile(
+    r"(?i)(password|secret|token|credential|api[_-]?key)([^,\n]*)",
+)
 
 
 @dataclass(slots=True)
@@ -92,6 +96,20 @@ def _metadata_name(doc: str) -> str | None:
     pattern = r"(?ms)^metadata:\s*\n(?:^[ ]{2,}.*\n)*?^[ ]{2}name:\s*([^\n]+)"
     match = re.search(pattern, doc)
     return match.group(1).strip().strip('"') if match else None
+
+
+def _safe_console_message(message: str) -> str:
+    """Return a redacted single-line message for logs and CI summaries."""
+    redacted = SENSITIVE_MESSAGE_PATTERN.sub(r"\1=[REDACTED]", message)
+    return redacted.replace("\r", "\\r").replace("\n", "\\n")
+
+
+def _ingress_hosts(doc: str) -> set[str]:
+    """Return hostnames declared in an Ingress manifest."""
+    hosts: set[str] = set()
+    for match in re.finditer(r"(?m)^\s*host:\s*\"?([^\"\n]+)\"?\s*$", doc):
+        hosts.add(match.group(1).strip().lower().rstrip("."))
+    return hosts
 
 
 def _documents_by_kind_name(path: Path) -> dict[tuple[str, str], str]:
@@ -266,7 +284,8 @@ def _validate_ingress(result: CheckResult, *, require_real_domains: bool) -> Non
             result.error(
                 f"Ingress must not route to private service {private_service}."
             )
-    if "example.org" in doc:
+    hosts = _ingress_hosts(doc)
+    if any(host == "example.org" or host.endswith(".example.org") for host in hosts):
         message = "Ingress still uses example.org placeholder domains."
         if require_real_domains:
             result.error(message)
@@ -324,11 +343,13 @@ def _write_summary(path: Path, result: CheckResult) -> None:
     ]
     if result.errors:
         lines.extend(["### Errors", ""])
-        lines.extend(f"- {error}" for error in result.errors)
+        lines.extend(f"- {_safe_console_message(error)}" for error in result.errors)
         lines.append("")
     if result.warnings:
         lines.extend(["### Warnings", ""])
-        lines.extend(f"- {warning}" for warning in result.warnings)
+        lines.extend(
+            f"- {_safe_console_message(warning)}" for warning in result.warnings
+        )
         lines.append("")
     if not result.errors:
         lines.append("Deployment manifest validation passed.")
@@ -384,11 +405,11 @@ def main() -> int:
     if args.summary_file is not None:
         _write_summary(args.summary_file, result)
     for warning in result.warnings:
-        print(f"WARNING: {warning}")
+        print(f"WARNING: {_safe_console_message(warning)}")
     if result.errors:
         print("Deployment manifest validation failed:", file=sys.stderr)
         for error in result.errors:
-            print(f"- {error}", file=sys.stderr)
+            print(f"- {_safe_console_message(error)}", file=sys.stderr)
         return 1
     print("Deployment manifest validation passed.")
     return 0

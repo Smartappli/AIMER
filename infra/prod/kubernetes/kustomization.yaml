@@ -15,16 +15,15 @@ resources:
   - hpa.yaml
 
 images:
-  - name: smartappli/aimer
-    newName: smartappli/aimer
+  - name: docker.io/smartappli/aimer
+    newName: docker.io/smartappli/aimer
     digest: sha256:0000000000000000000000000000000000000000000000000000000000000000
-  - name: smartappli/aimer-rag
-    newName: smartappli/aimer-rag
+  - name: docker.io/smartappli/aimer-rag
+    newName: docker.io/smartappli/aimer-rag
     digest: sha256:0000000000000000000000000000000000000000000000000000000000000000
-  - name: smartappli/mage-api
-    newName: smartappli/mage-api
+  - name: docker.io/smartappli/mage-api
+    newName: docker.io/smartappli/mage-api
     digest: sha256:0000000000000000000000000000000000000000000000000000000000000000
-  - name: smartappli/farm
-    newName: smartappli/farm
+  - name: docker.io/smartappli/farm
+    newName: docker.io/smartappli/farm
     digest: sha256:0000000000000000000000000000000000000000000000000000000000000000
-

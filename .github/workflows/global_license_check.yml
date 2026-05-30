@@ -33,7 +33,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v6
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
 
       - name: Setup uv
         uses: astral-sh/setup-uv@08807647e7069bb48b6ef5acd8ec9567f424441b # v8.1.0
@@ -49,7 +49,7 @@ jobs:
 
       - name: Check Python licenses
         id: license_check_report
-        uses: pilosus/action-pip-license-checker@v3
+        uses: pilosus/action-pip-license-checker@e909b0226ff49d3235c99c4585bc617f49fff16a
         with:
           requirements: artifacts/${{ matrix.service }}-requirements.txt
           fail: NetworkCopyleft
@@ -63,7 +63,7 @@ jobs:
 
       - name: Upload artifact
         if: ${{ always() }}
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
         with:
           name: license-report-${{ matrix.service }}
           path: |
