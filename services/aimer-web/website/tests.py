@@ -241,7 +241,7 @@ class DashboardViewTests(BaseTestCase):
             root = Path(tmpdir)
             (root / "b-paper.pdf").write_text("b", encoding="utf-8")
             (root / "a-paper.pdf").write_text("a", encoding="utf-8")
-            (root / "ignore.txt").write_text("x", encoding="utf-8")
+            (root / "ignore.txt").write_text("ignored fixture", encoding="utf-8")
 
             discovered = _discover_scientific_articles(root)
 
@@ -761,8 +761,14 @@ class TimmIndexAutomationTests(BaseTestCase):
         """Ensure generated rows are sorted and include arXiv links from filenames."""
         with tempfile.TemporaryDirectory() as tmpdir:
             root = Path(tmpdir)
-            (root / "ViT - 2010.11929v2.pdf").write_text("x", encoding="utf-8")
-            (root / "ResNet - 1512.03385v1.pdf").write_text("x", encoding="utf-8")
+            (root / "ViT - 2010.11929v2.pdf").write_text(
+                "placeholder pdf",
+                encoding="utf-8",
+            )
+            (root / "ResNet - 1512.03385v1.pdf").write_text(
+                "placeholder pdf",
+                encoding="utf-8",
+            )
 
             rows = build_timm_article_index_from_pdfs(root)
 

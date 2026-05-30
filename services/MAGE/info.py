@@ -14,7 +14,7 @@ from __future__ import annotations
 
 import platform
 import sys
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, TypeVar
 
 import torch
 
@@ -22,7 +22,14 @@ if TYPE_CHECKING:
     from collections.abc import Callable
 
 
-def _safe[T](label: str, fn: Callable[[], T], default: T | str = "N/A") -> T | str:
+T = TypeVar("T")
+
+
+def _safe(  # noqa: UP047
+    label: str,
+    fn: Callable[[], T],
+    default: T | str = "N/A",
+) -> T | str:
     """
     Call a function and return its result, or a safe fallback on failure.
 

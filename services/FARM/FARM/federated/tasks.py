@@ -7,7 +7,7 @@ from __future__ import annotations
 from collections.abc import Mapping
 from dataclasses import dataclass, field
 from enum import StrEnum
-from typing import TYPE_CHECKING, Protocol
+from typing import TYPE_CHECKING, Protocol, TypeAlias
 
 if TYPE_CHECKING:
     from collections.abc import Sequence
@@ -18,7 +18,7 @@ if TYPE_CHECKING:
 
 
 ModelT = object
-type MetricsT = Mapping[str, float | int | str | bool]
+MetricsT: TypeAlias = Mapping[str, float | int | str | bool]  # noqa: UP040
 
 
 class TaskType(StrEnum):
