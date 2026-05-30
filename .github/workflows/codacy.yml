@@ -27,6 +27,9 @@ permissions:
 
 jobs:
   codacy-security-scan:
+    outputs:
+      has_runs: ${{ steps.normalize-sarif.outputs.has_runs }}
+      sarif_files: ${{ steps.normalize-sarif.outputs.sarif_files }}
     permissions:
       contents: read # for actions/checkout to fetch code
       security-events: write # for github/codeql-action/upload-sarif to upload SARIF results
@@ -107,14 +110,45 @@ jobs:
               )
 
           if github_output := os.environ.get("GITHUB_OUTPUT"):
+              sarif_files = [
+                  str(normalized_dir / f"results.normalized.{index:02d}.sarif")
+                  for index in range(1, len(chunks) + 1)
+              ]
               with open(github_output, "a", encoding="utf-8") as output:
                   output.write(f"has_runs={'true' if runs else 'false'}\n")
+                  output.write(f"sarif_files={json.dumps(sarif_files, separators=(',', ':'))}\n")
           print(f"Normalized {len(runs)} SARIF run categories into {len(chunks)} file(s).")
           PY
 
-      # Upload the SARIF file generated in the previous step
-      - name: Upload SARIF results file
+      - name: Upload normalized SARIF artifact
         if: steps.normalize-sarif.outputs.has_runs == 'true'
+        uses: actions/upload-artifact@v7
+        with:
+          name: codacy-sarif-results
+          path: sarif-results/*.sarif
+          if-no-files-found: error
+
+  upload-codacy-sarif:
+    name: Upload Codacy SARIF (${{ matrix.sarif_file }})
+    needs: codacy-security-scan
+    if: needs.codacy-security-scan.outputs.has_runs == 'true'
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        sarif_file: ${{ fromJson(needs.codacy-security-scan.outputs.sarif_files) }}
+    permissions:
+      contents: read
+      security-events: write
+      actions: read
+    steps:
+      - name: Download normalized SARIF artifact
+        uses: actions/download-artifact@v7
+        with:
+          name: codacy-sarif-results
+          path: sarif-results
+
+      - name: Upload SARIF results file
         uses: github/codeql-action/upload-sarif@v4
         with:
-          sarif_file: sarif-results
+          sarif_file: ${{ matrix.sarif_file }}
