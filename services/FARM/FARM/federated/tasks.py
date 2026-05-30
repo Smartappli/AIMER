@@ -18,7 +18,7 @@ if TYPE_CHECKING:
 
 
 ModelT = object
-MetricsT: TypeAlias = Mapping[str, float | int | str | bool]  # noqa: UP040
+MetricsT: TypeAlias = Mapping[str, float | int | str | bool]
 
 
 class TaskType(StrEnum):

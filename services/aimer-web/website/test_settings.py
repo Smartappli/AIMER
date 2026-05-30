@@ -15,12 +15,20 @@ class ProductionSettingsTests(SimpleTestCase):
 
     def _set_safe_production_defaults(self) -> None:
         """Patch AIMER settings globals to a valid production baseline."""
-        self.addCleanup(setattr, aimer_settings, "IS_PRODUCTION", aimer_settings.IS_PRODUCTION)
+        self.addCleanup(
+            setattr, aimer_settings, "IS_PRODUCTION", aimer_settings.IS_PRODUCTION
+        )
         self.addCleanup(setattr, aimer_settings, "DEBUG", aimer_settings.DEBUG)
-        self.addCleanup(setattr, aimer_settings, "SECRET_KEY", aimer_settings.SECRET_KEY)
-        self.addCleanup(setattr, aimer_settings, "ALLOWED_HOSTS", aimer_settings.ALLOWED_HOSTS)
+        self.addCleanup(
+            setattr, aimer_settings, "SECRET_KEY", aimer_settings.SECRET_KEY
+        )
+        self.addCleanup(
+            setattr, aimer_settings, "ALLOWED_HOSTS", aimer_settings.ALLOWED_HOSTS
+        )
         self.addCleanup(setattr, aimer_settings, "BASE_URL", aimer_settings.BASE_URL)
-        self.addCleanup(setattr, aimer_settings, "DATABASE_URL", aimer_settings.DATABASE_URL)
+        self.addCleanup(
+            setattr, aimer_settings, "DATABASE_URL", aimer_settings.DATABASE_URL
+        )
         self.addCleanup(
             setattr,
             aimer_settings,

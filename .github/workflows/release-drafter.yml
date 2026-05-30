@@ -1,72 +1,25 @@
-name-template: '$RESOLVED_VERSION'
-tag-template: '$RESOLVED_VERSION'
-categories:
-  - title: '❗ Breaking Changes:'
-    labels:
-      - '❗ Breaking Change'
-  - title: '🚀 New Features:'
-    labels:
-      - '✏️ Feature'
-  - title: '🐛 Fixes:'
-    labels:
-      - '☢️ Bug'
-  - title: '📚 Documentation:'
-    labels:
-      - '📒 Documentation'
-  - title: '🧹 Updates:'
-    labels:
-      - '🧹 Updates'
-  - title: '🤖 Dependencies:'
-    labels:
-      - '🤖 Dependencies'
-change-template: '- $TITLE (#$NUMBER)'
-change-title-escapes: '\<*_&'
-exclude-contributors:
-  - dependabot
-  - dependabot[bot]
-version-resolver:
-  major:
-    labels:
-      - 'major'
-  minor:
-    labels:
-      - 'minor'
-      - '❗ Breaking Change'
-      - '✏️ Feature'
-  patch:
-    labels:
-      - 'patch'
-      - '📒 Documentation'
-      - '☢️ Bug'
-      - '🤖 Dependencies'
-      - '🧹 Updates'
-  default: patch
-template: |
-    $CHANGES
+name: Release Drafter
 
-    ## 🐳 Docker Images
-    - `ghcr.io/$OWNER/$REPOSITORY:latest`
-    - `ghcr.io/$OWNER/$REPOSITORY:$RESOLVED_VERSION`
+on:
+  push:
+    branches: ["master"]
+  workflow_dispatch:
 
-    **Full Changelog**: https://github.com/$OWNER/$REPOSITORY/compare/$PREVIOUS_TAG...$RESOLVED_VERSION
+permissions:
+  contents: write
+  pull-requests: read
 
-    Thanks to $CONTRIBUTORS for making this release possible.
+concurrency:
+  group: release-drafter-${{ github.workflow_ref }}
+  cancel-in-progress: true
 
-autolabeler:
-  - label: '📒 Documentation'
-    files:
-      - '*.md'
-    title:
-      - '/(docs|doc:|\[doc\]|typos|comment|documentation)/i'
-  - label: '☢️ Bug'
-    title:
-      - '/(fix|bug|missing|correct)/i'
-  - label: '🧹 Updates'
-    title:
-      - '/(improve|update|refactor|deprecated|remove|unused|test)/i'
-  - label: '🤖 Dependencies'
-    title:
-      - '/(bump|dependencies)/i'
-  - label: '✏️ Feature'
-    title:
-      - '/(feature|feat|create|implement)/i'
+jobs:
+  update-release-draft:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Update release draft
+        uses: release-drafter/release-drafter@b1476f6e6eb133afa41ed8589daba6dc69b4d3f5
+        with:
+          config-name: release-drafter.yml
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

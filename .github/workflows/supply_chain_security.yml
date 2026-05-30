@@ -36,6 +36,23 @@ jobs:
           severity: HIGH,CRITICAL
           ignore-unfixed: true
 
+      - name: Normalize filesystem SARIF category
+        env:
+          SARIF_CATEGORY: trivy/filesystem
+          SARIF_FILE: trivy-fs.sarif
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          path = Path(os.environ["SARIF_FILE"])
+          sarif = json.loads(path.read_text(encoding="utf-8"))
+          for run in sarif.get("runs", []):
+              run.setdefault("automationDetails", {})["id"] = os.environ["SARIF_CATEGORY"]
+          path.write_text(json.dumps(sarif, separators=(",", ":")), encoding="utf-8")
+          PY
+
       - name: Upload filesystem SARIF
         if: ${{ always() }}
         uses: github/codeql-action/upload-sarif@7211b7c8077ea37d8641b6271f6a365a22a5fbfa
@@ -51,6 +68,23 @@ jobs:
           format: sarif
           output: trivy-config.sarif
           severity: MEDIUM,HIGH,CRITICAL
+
+      - name: Normalize IaC SARIF category
+        env:
+          SARIF_CATEGORY: trivy/config
+          SARIF_FILE: trivy-config.sarif
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          path = Path(os.environ["SARIF_FILE"])
+          sarif = json.loads(path.read_text(encoding="utf-8"))
+          for run in sarif.get("runs", []):
+              run.setdefault("automationDetails", {})["id"] = os.environ["SARIF_CATEGORY"]
+          path.write_text(json.dumps(sarif, separators=(",", ":")), encoding="utf-8")
+          PY
 
       - name: Upload IaC SARIF
         if: ${{ always() }}
@@ -126,6 +160,23 @@ jobs:
           output: trivy-image-${{ matrix.service }}.sarif
           severity: HIGH,CRITICAL
           ignore-unfixed: true
+
+      - name: Normalize image SARIF category
+        env:
+          SARIF_CATEGORY: trivy/image/${{ matrix.service }}
+          SARIF_FILE: trivy-image-${{ matrix.service }}.sarif
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          path = Path(os.environ["SARIF_FILE"])
+          sarif = json.loads(path.read_text(encoding="utf-8"))
+          for run in sarif.get("runs", []):
+              run.setdefault("automationDetails", {})["id"] = os.environ["SARIF_CATEGORY"]
+          path.write_text(json.dumps(sarif, separators=(",", ":")), encoding="utf-8")
+          PY
 
       - name: Upload image SARIF
         if: ${{ always() }}

@@ -25,7 +25,7 @@ if TYPE_CHECKING:
 T = TypeVar("T")
 
 
-def _safe(  # noqa: UP047
+def _safe(
     label: str,
     fn: Callable[[], T],
     default: T | str = "N/A",
