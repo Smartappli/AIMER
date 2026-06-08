@@ -17,7 +17,7 @@ resources:
 images:
   - name: docker.io/smartappli/aimer
     newName: docker.io/smartappli/aimer
-    digest: sha256:bda9699948bcbb6f1492723b5b35e7373877e5a1333cb53e2578e89625134884
+    digest: sha256:0bbc5726269d12829e85d7a69c233faf8772cf3276aa4c1b79189c9022afb8d8
   - name: docker.io/smartappli/aimer-rag
     newName: docker.io/smartappli/aimer-rag
     digest: sha256:903e9525b0362cfe1bb14a5faabf9a6d69542516b79f64f7037db330f3267f03
