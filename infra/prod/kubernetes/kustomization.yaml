@@ -26,4 +26,4 @@ images:
     digest: sha256:4080dce3717b4a09625bc29ebf4c8a23c4c50cbb04f51da1dcd9fed32095d7db
   - name: docker.io/smartappli/farm
     newName: docker.io/smartappli/farm
-    digest: sha256:78a2dbc7f1781d425ec62eb71d0e5245646c01dec05d0c1f38086d2cd9da0eeb
+    digest: sha256:afae341d0ee85f1daa28736a7a367d2e59f6158ca2adbb4e0dee0635d1482ce7
