@@ -37,6 +37,11 @@ def _rag_service_api_key() -> str:
     return str(getattr(settings, "RAG_SERVICE_API_KEY", "") or "").strip()
 
 
+def _rag_service_ca_cert_path() -> str:
+    """Return the optional CA bundle used to verify the RAG service."""
+    return str(getattr(settings, "RAG_SERVICE_CA_CERT_PATH", "") or "").strip()
+
+
 def _decode_json_response(response: httpx.Response) -> dict[str, Any]:
     """Decode an HTTP response body as a JSON object."""
     payload = response.json()
@@ -71,6 +76,9 @@ def _remote_json_request(
     if parsed_url.scheme not in {"http", "https"} or not parsed_url.netloc:
         msg = "RAG_SERVICE_URL must be an HTTP(S) URL."
         raise RagServiceUnavailableError(msg)
+    if getattr(settings, "IS_PRODUCTION", False) and parsed_url.scheme != "https":
+        msg = "RAG_SERVICE_URL must use HTTPS in production."
+        raise RagServiceUnavailableError(msg)
 
     headers = {"Accept": "application/json"}
     api_key = _rag_service_api_key()
@@ -84,13 +92,17 @@ def _remote_json_request(
         json_payload = payload
 
     try:
-        response = httpx.request(
-            method,
-            f"{base_url}{path}",
-            headers=headers,
-            json=json_payload,
-            timeout=_rag_service_timeout(),
-        )
+        request_kwargs = {
+            "headers": headers,
+            "json": json_payload,
+            "timeout": _rag_service_timeout(),
+        }
+        ca_cert_path = _rag_service_ca_cert_path()
+        if ca_cert_path:
+            with httpx.Client(verify=ca_cert_path) as client:
+                response = client.request(method, f"{base_url}{path}", **request_kwargs)
+        else:
+            response = httpx.request(method, f"{base_url}{path}", **request_kwargs)
         if response.is_error:
             raise RagServiceUnavailableError(_error_detail(response))
         return _decode_json_response(response)

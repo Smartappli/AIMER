@@ -77,6 +77,18 @@ class ProductionSettingsTests(SimpleTestCase):
             "EMAIL_HOST_PASSWORD",
             aimer_settings.EMAIL_HOST_PASSWORD,
         )
+        self.addCleanup(
+            setattr,
+            aimer_settings,
+            "RAG_SERVICE_URL",
+            aimer_settings.RAG_SERVICE_URL,
+        )
+        self.addCleanup(
+            setattr,
+            aimer_settings,
+            "RAG_SERVICE_CA_CERT_PATH",
+            aimer_settings.RAG_SERVICE_CA_CERT_PATH,
+        )
 
         aimer_settings.IS_PRODUCTION = True
         aimer_settings.DEBUG = False
@@ -94,6 +106,8 @@ class ProductionSettingsTests(SimpleTestCase):
         aimer_settings.EMAIL_VERIFICATION_REQUIRED = True
         aimer_settings.EMAIL_HOST_USER = "smtp-user"
         aimer_settings.EMAIL_HOST_PASSWORD = "smtp-password"
+        aimer_settings.RAG_SERVICE_URL = ""
+        aimer_settings.RAG_SERVICE_CA_CERT_PATH = ""
 
     def test_production_configuration_accepts_safe_baseline(self) -> None:
         """A hardened production baseline passes validation."""
@@ -107,4 +121,13 @@ class ProductionSettingsTests(SimpleTestCase):
         aimer_settings.DATABASE_URL = "sqlite:///tmp/aimer.sqlite3"
 
         with self.assertRaisesRegex(RuntimeError, "PostgreSQL"):
+            aimer_settings.validate_production_configuration()
+
+    def test_production_configuration_rejects_http_rag_service(self) -> None:
+        """Production RAG requests must not traverse an unencrypted link."""
+        self._set_safe_production_defaults()
+        aimer_settings.RAG_SERVICE_URL = "http://aimer-rag.internal:8000"
+        aimer_settings.RAG_SERVICE_CA_CERT_PATH = "/etc/aimer-rag-ca/ca.crt"
+
+        with self.assertRaisesRegex(RuntimeError, "RAG_SERVICE_URL must use HTTPS"):
             aimer_settings.validate_production_configuration()

@@ -18,6 +18,8 @@ from auth.models import SecurityAuditEvent
 DEFAULT_LOGIN_FAILURE_LIMIT = 5
 DEFAULT_LOGIN_WINDOW_SECONDS = 15 * 60
 DEFAULT_LOGIN_LOCKOUT_SECONDS = 15 * 60
+DEFAULT_EMAIL_ACTION_LIMIT = 5
+DEFAULT_EMAIL_ACTION_WINDOW_SECONDS = 60 * 60
 AUDIT_LOGGER = logging.getLogger("aimer.security.audit")
 SENSITIVE_METADATA_FRAGMENTS = (
     "authorization",
@@ -231,3 +233,32 @@ def clear_login_failures(request: HttpRequest, identifier: str) -> None:
         return
     cache.delete(_failure_key(request, identifier))
     cache.delete(_lockout_key(request, identifier))
+
+
+def consume_email_action(
+    request: HttpRequest,
+    action: str,
+    email: str,
+) -> bool:
+    """Record an email action and return whether its rate limit is exceeded."""
+    if not email:
+        return False
+
+    limit = _setting_int("AUTH_EMAIL_ACTION_LIMIT", DEFAULT_EMAIL_ACTION_LIMIT)
+    window = _setting_int(
+        "AUTH_EMAIL_ACTION_WINDOW_SECONDS",
+        DEFAULT_EMAIL_ACTION_WINDOW_SECONDS,
+    )
+    if limit <= 0 or window <= 0:
+        return False
+
+    principal = _principal_hash(f"{action}:{email}", client_ip(request))
+    key = f"auth-email-action:{principal}"
+    if cache.add(key, 1, timeout=window):
+        return False
+    try:
+        attempts = int(cache.incr(key))
+    except ValueError:
+        cache.set(key, 1, timeout=window)
+        return False
+    return attempts > limit

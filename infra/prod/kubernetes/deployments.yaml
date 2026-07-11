@@ -84,6 +84,9 @@ spec:
               mountPath: /app/.cache
             - name: staticfiles
               mountPath: /app/staticfiles
+            - name: aimer-rag-ca
+              mountPath: /etc/aimer-rag-ca
+              readOnly: true
       volumes:
         - name: tmp
           emptyDir: {}
@@ -91,6 +94,12 @@ spec:
           emptyDir: {}
         - name: staticfiles
           emptyDir: {}
+        - name: aimer-rag-ca
+          secret:
+            secretName: aimer-rag-tls
+            items:
+              - key: ca.crt
+                path: ca.crt
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -134,24 +143,23 @@ spec:
           env:
             - name: RAG_VERIFY_ON_START
               value: "1"
+            - name: GRANIAN_SSL_CERTIFICATE
+              value: /etc/aimer-rag-tls/tls.crt
+            - name: GRANIAN_SSL_KEYFILE
+              value: /etc/aimer-rag-tls/tls.key
           livenessProbe:
             httpGet:
               path: /healthz
               port: http
+              scheme: HTTPS
             initialDelaySeconds: 20
             periodSeconds: 30
             timeoutSeconds: 5
           readinessProbe:
-            exec:
-              command:
-                - sh
-                - -c
-                - >
-                  python -c "import os, urllib.request;
-                  req = urllib.request.Request(
-                  'http://127.0.0.1:8000/readyz',
-                  headers={'X-API-Key': os.environ['AIMER_RAG_API_KEY']});
-                  urllib.request.urlopen(req, timeout=3).read()"
+            httpGet:
+              path: /readyz
+              port: http
+              scheme: HTTPS
             initialDelaySeconds: 15
             periodSeconds: 20
             timeoutSeconds: 5
@@ -175,11 +183,17 @@ spec:
               mountPath: /tmp
             - name: cache
               mountPath: /app/.cache
+            - name: aimer-rag-tls
+              mountPath: /etc/aimer-rag-tls
+              readOnly: true
       volumes:
         - name: tmp
           emptyDir: {}
         - name: cache
           emptyDir: {}
+        - name: aimer-rag-tls
+          secret:
+            secretName: aimer-rag-tls
 ---
 apiVersion: apps/v1
 kind: Deployment

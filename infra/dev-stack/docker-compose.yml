@@ -727,9 +727,9 @@ services:
     image: mage:local
     profiles: ["apps"]
     environment:
-      MAGE_API_KEY: ${MAGE_API_KEY:-}
+      MAGE_API_KEY: ${MAGE_API_KEY:-dev-local-mage-key-change-me}
     ports:
-      - "${MAGE_PORT:-10000}:10000"
+      - "127.0.0.1:${MAGE_PORT:-10000}:10000"
     restart: unless-stopped
 
   farm:

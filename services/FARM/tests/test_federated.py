@@ -118,6 +118,22 @@ def test_rag_index_rejects_wrong_embedding_dimensions() -> None:
         index.add_documents(
             [RagDocument(doc_id="bad", embedding=[1.0, 2.0, 3.0], text="bad")],
         )
+    assert index.size == 0
+
+
+def test_rag_index_rejects_inconsistent_serialized_state() -> None:
+    """Malformed federated state must not be silently truncated during merge."""
+    index = RagIndex(embedding_dim=2)
+    malformed = RagState(
+        doc_ids=["doc-1"],
+        embeddings=np.asarray([[0.1, 0.2]], dtype=np.float32),
+        texts=[],
+        metadata=[{}],
+    )
+
+    with pytest.raises(ValueError, match="matching lengths"):
+        index.merge_state(malformed)
+    assert index.size == 0
 
 
 def test_federated_task_client_delegates_to_handlers() -> None:

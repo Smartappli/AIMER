@@ -266,6 +266,7 @@ USE_TZ = True
 BASE_URL = os.environ.get("BASE_URL", default="http://127.0.0.1:8000")
 RAG_SERVICE_URL = os.environ.get("RAG_SERVICE_URL", "").rstrip("/")
 RAG_SERVICE_API_KEY = os.environ.get("RAG_SERVICE_API_KEY", "")
+RAG_SERVICE_CA_CERT_PATH = os.environ.get("RAG_SERVICE_CA_CERT_PATH", "")
 RAG_SERVICE_TIMEOUT_SECONDS = float(os.environ.get("RAG_SERVICE_TIMEOUT_SECONDS", "5"))
 RAG_RECOMMENDATION_RATE_LIMIT_PER_MINUTE = env_int(
     "RAG_RECOMMENDATION_RATE_LIMIT_PER_MINUTE",
@@ -357,6 +358,11 @@ LOGGING = {
 AUTH_LOGIN_FAILURE_LIMIT = env_int("AUTH_LOGIN_FAILURE_LIMIT", default=5)
 AUTH_LOGIN_WINDOW_SECONDS = env_int("AUTH_LOGIN_WINDOW_SECONDS", default=900)
 AUTH_LOGIN_LOCKOUT_SECONDS = env_int("AUTH_LOGIN_LOCKOUT_SECONDS", default=900)
+AUTH_EMAIL_ACTION_LIMIT = env_int("AUTH_EMAIL_ACTION_LIMIT", default=5)
+AUTH_EMAIL_ACTION_WINDOW_SECONDS = env_int(
+    "AUTH_EMAIL_ACTION_WINDOW_SECONDS",
+    default=3600,
+)
 EMAIL_VERIFICATION_TOKEN_TTL_HOURS = env_int(
     "EMAIL_VERIFICATION_TOKEN_TTL_HOURS",
     default=24,
@@ -399,6 +405,17 @@ def validate_production_configuration() -> None:
         errors.append("Email credentials are required for verified production login.")
     if RAG_SERVICE_URL and not RAG_SERVICE_API_KEY:
         errors.append("RAG_SERVICE_API_KEY is required when RAG_SERVICE_URL is set.")
+    if RAG_SERVICE_URL:
+        parsed_rag_service_url = urlsplit(RAG_SERVICE_URL)
+        if (
+            parsed_rag_service_url.scheme != "https"
+            or not parsed_rag_service_url.netloc
+        ):
+            errors.append("RAG_SERVICE_URL must use HTTPS in production.")
+        if not RAG_SERVICE_CA_CERT_PATH:
+            errors.append(
+                "RAG_SERVICE_CA_CERT_PATH is required for production RAG TLS."
+            )
 
     if errors:
         joined = " ".join(errors)

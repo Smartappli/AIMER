@@ -31,7 +31,7 @@ class ResetPasswordView(AuthView):
         return await sync_to_async(render)(request, self.template_name, context)
 
     @override
-    async def get(self, request: HttpRequest, _token: str) -> HttpResponse:
+    async def get(self, request: HttpRequest, token: str) -> HttpResponse:
         """
         Render reset-password form for anonymous users.
 
@@ -39,6 +39,7 @@ class ResetPasswordView(AuthView):
             HttpResponse: Reset-password page or redirect for authenticated users.
 
         """
+        del token
         if request.user.is_authenticated:
             return redirect("index")
 

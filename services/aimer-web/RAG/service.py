@@ -32,7 +32,7 @@ class RecommendationRequest(BaseModel):
 
 app = FastAPI(title="AIMER RAG Service")
 
-PUBLIC_PATHS = {"/healthz"}
+PUBLIC_PATHS = {"/healthz", "/readyz"}
 
 
 def _is_production() -> bool:

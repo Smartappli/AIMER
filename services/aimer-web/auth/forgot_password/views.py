@@ -15,7 +15,7 @@ from django.utils import timezone
 
 from auth.helpers import send_password_reset_email
 from auth.models import Profile
-from auth.security import audit_event
+from auth.security import audit_event, consume_email_action
 from auth.tokens import new_token_pair
 from auth.views import AuthView
 
@@ -58,6 +58,22 @@ class ForgetPasswordView(AuthView):
             await sync_to_async(messages.error)(
                 request,
                 "Please enter your email address.",
+            )
+            return redirect("forgot-password")
+
+        if await sync_to_async(consume_email_action)(
+            request,
+            "password_reset",
+            email,
+        ):
+            await sync_to_async(audit_event)(
+                "auth.password_reset.rate_limited",
+                request=request,
+                actor_identifier=email,
+            )
+            await sync_to_async(messages.success)(
+                request,
+                "If an account exists for that email, a reset link has been sent.",
             )
             return redirect("forgot-password")
 

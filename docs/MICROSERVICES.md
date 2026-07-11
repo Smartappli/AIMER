@@ -43,12 +43,16 @@ The optional Docker Compose app profile wires the services together:
 docker compose --env-file infra/dev-stack/.env -f infra/dev-stack/docker-compose.yml --profile apps up --build
 ```
 
-`aimer-web` calls `aimer-rag` through `RAG_SERVICE_URL=http://aimer-rag:8000`.
+For local development, `aimer-web` calls `aimer-rag` through
+`RAG_SERVICE_URL=http://aimer-rag:8000`. Production must use HTTPS with a
+trusted internal CA configured through `RAG_SERVICE_CA_CERT_PATH`.
 `RUN_DJANGO_MIGRATIONS=0` can be set on Django containers when migrations are
 run as a separate deployment job.
 
 When `AIMER_RAG_API_KEY` is set on `aimer-rag`, the RAG service requires
-`Authorization: Bearer <key>` or `X-API-Key` for `/recommend` and `/readyz`.
+`Authorization: Bearer <key>` or `X-API-Key` for `/recommend`. Health and
+readiness remain private to the cluster network policy so Kubernetes can probe
+them without handling application secrets.
 Production startup fails if `ENVIRONMENT=production` or
 `AIMER_RAG_ENVIRONMENT=production` and `AIMER_RAG_API_KEY` is missing or uses a
 development/test prefix. Configure the same value as `RAG_SERVICE_API_KEY` on

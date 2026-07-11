@@ -13,7 +13,7 @@ from django.utils import timezone
 
 from auth.helpers import send_verification_email
 from auth.models import Profile
-from auth.security import audit_event
+from auth.security import audit_event, consume_email_action
 from auth.tokens import hash_token, new_token_pair
 from auth.views import AuthView
 
@@ -157,6 +157,22 @@ class SendVerificationView(AuthView):
             await sync_to_async(messages.error)(
                 request,
                 "Email not found in session",
+            )
+            return redirect("verify-email-page")
+
+        if await sync_to_async(consume_email_action)(
+            request,
+            "email_verification",
+            email,
+        ):
+            await sync_to_async(audit_event)(
+                "auth.email_verification.rate_limited",
+                request=request,
+                actor_identifier=email,
+            )
+            await sync_to_async(messages.error)(
+                request,
+                "Please wait before requesting another verification email.",
             )
             return redirect("verify-email-page")
 

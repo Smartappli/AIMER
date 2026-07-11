@@ -30,8 +30,8 @@ python scripts/validate_production_evidence.py
   runtime cache and Django `staticfiles`.
 - Django pods run migrations outside the serving deployment; do not run multiple
   concurrent migration jobs during deployment.
-- RAG readiness checks `/readyz` using the configured internal API key from the
-  pod environment, while `/healthz` remains unauthenticated liveness.
+- RAG probes use HTTPS. `/healthz` and `/readyz` are reachable only inside the
+  private service boundary; recommendation requests require the service API key.
 
 ## Secret Contract
 
@@ -50,6 +50,12 @@ Use separate Kubernetes Secrets per workload:
 - `AIMER_RAG_API_KEY`
 - `OPENRAG_API_KEY`
 - `QDRANT_API_KEY`
+
+`aimer-rag-tls`:
+
+- `tls.crt` and `tls.key`, containing a certificate valid for
+  `aimer-rag.aimer-prod.svc.cluster.local`
+- `ca.crt`, trusted by `aimer-web` to validate the RAG service certificate
 
 `mage-secrets`:
 

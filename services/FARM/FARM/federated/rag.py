@@ -61,12 +61,11 @@ class RagIndex:
         """
         if not documents:
             return
+        known_doc_ids = set(self._doc_ids)
+        prepared_documents: list[tuple[RagDocument, np.ndarray]] = []
         for doc in documents:
-            if doc.doc_id in self._doc_ids:
+            if doc.doc_id in known_doc_ids:
                 continue
-            self._doc_ids.append(doc.doc_id)
-            self._texts.append(doc.text)
-            self._metadata.append(doc.metadata)
             embedding = np.asarray(doc.embedding, dtype=np.float32).reshape(
                 1,
                 -1,
@@ -74,17 +73,25 @@ class RagIndex:
             if embedding.shape[1] != self._embedding_dim:
                 msg = "Embedding dimension mismatch for RAG index"
                 raise ValueError(msg)
+            known_doc_ids.add(doc.doc_id)
+            prepared_documents.append((doc, embedding))
+
+        for doc, embedding in prepared_documents:
+            self._doc_ids.append(doc.doc_id)
+            self._texts.append(doc.text)
+            self._metadata.append(doc.metadata)
             self._embeddings = np.vstack([self._embeddings, embedding])
 
     def merge_state(self, state: RagState) -> None:
         """Merge an external state into the local index."""
+        _validate_state_structure(state)
         if state.doc_ids:
             for doc_id, text, metadata, embedding in zip(
                 state.doc_ids,
                 state.texts,
                 state.metadata,
                 state.embeddings,
-                strict=False,
+                strict=True,
             ):
                 self.add_documents(
                     [
@@ -130,6 +137,19 @@ def _serialize_state(state: RagState) -> bytes:
     return json.dumps(payload).encode("utf-8")
 
 
+def _validate_state_structure(state: RagState) -> None:
+    """Reject serialized RAG states with inconsistent parallel fields."""
+    field_lengths = {
+        len(state.doc_ids),
+        len(state.texts),
+        len(state.metadata),
+        int(state.embeddings.shape[0]) if state.embeddings.ndim == 2 else -1,
+    }
+    if len(field_lengths) != 1:
+        msg = "RAG state fields must have matching lengths."
+        raise ValueError(msg)
+
+
 def _deserialize_state(payload: bytes) -> RagState:
     """
     Deserialize a UTF-8 JSON payload into a `RagState`.
@@ -139,15 +159,29 @@ def _deserialize_state(payload: bytes) -> RagState:
 
     """
     data = json.loads(payload.decode("utf-8"))
+    if not isinstance(data, dict):
+        msg = "RAG state payload must be a JSON object."
+        raise ValueError(msg)
+    doc_ids = data.get("doc_ids", [])
+    texts = data.get("texts", [])
+    metadata = data.get("metadata", [])
+    if not all(isinstance(value, list) for value in (doc_ids, texts, metadata)):
+        msg = "RAG state fields must be JSON arrays."
+        raise ValueError(msg)
     embeddings = np.asarray(data.get("embeddings", []), dtype=np.float32)
-    if embeddings.ndim == 1 and embeddings.size:
-        embeddings = embeddings.reshape(1, -1)
-    return RagState(
-        doc_ids=list(data.get("doc_ids", [])),
+    if embeddings.ndim == 1:
+        if embeddings.size:
+            embeddings = embeddings.reshape(1, -1)
+        else:
+            embeddings = embeddings.reshape(0, 0)
+    state = RagState(
+        doc_ids=list(doc_ids),
         embeddings=embeddings,
-        texts=list(data.get("texts", [])),
-        metadata=list(data.get("metadata", [])),
+        texts=list(texts),
+        metadata=list(metadata),
     )
+    _validate_state_structure(state)
+    return state
 
 
 def state_to_parameters(state: RagState) -> fl.common.Parameters:

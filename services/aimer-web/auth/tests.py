@@ -7,7 +7,7 @@ from datetime import timedelta
 
 from auth.middleware import AdminAuditMiddleware
 from auth.models import Profile, SecurityAuditEvent
-from auth.security import audit_event
+from auth.security import audit_event, consume_email_action
 from auth.tokens import hash_token
 from django.contrib.auth import get_user_model
 from django.http import HttpResponse
@@ -61,6 +61,35 @@ class AuthSecurityTests(TestCase):
         profile.refresh_from_db()
         self.assertTrue(user.check_password("Original-Strong-Passphrase-2026"))
         self.assertEqual(profile.forget_password_token, hash_token("reset-token"))
+
+    def test_reset_password_get_accepts_url_token(self) -> None:
+        """The password-reset link must render instead of failing on its token."""
+        response = self.client.get(
+            reverse("reset-password", kwargs={"token": "reset-token"}),
+        )
+
+        self.assertEqual(response.status_code, 200)
+
+    @override_settings(
+        AUTH_EMAIL_ACTION_LIMIT=1,
+        AUTH_EMAIL_ACTION_WINDOW_SECONDS=60,
+    )
+    def test_email_actions_are_rate_limited_per_ip_and_recipient(self) -> None:
+        """Repeated delivery requests must be throttled without global lockout."""
+        request = RequestFactory().post(
+            "/forgot_password/",
+            REMOTE_ADDR="203.0.113.20",
+        )
+
+        self.assertFalse(
+            consume_email_action(request, "password_reset", "user@example.org"),
+        )
+        self.assertTrue(
+            consume_email_action(request, "password_reset", "user@example.org"),
+        )
+        self.assertFalse(
+            consume_email_action(request, "password_reset", "other@example.org"),
+        )
 
     def test_password_reset_token_is_hashed_at_rest(self) -> None:
         """Password reset requests must not persist the raw email token."""
