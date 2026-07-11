@@ -60,7 +60,10 @@ production deployment input.
 | HTTPS public base URLs configured | TBD |
 | HSTS and secure cookies enabled | TBD |
 | Internal service API keys configured | TBD |
+| RAG internal TLS certificate, private key and CA bundle provisioned | TBD |
+| RAG certificate covers the service DNS name and client validation succeeds | TBD |
 | `RAG_STRICT_OPENRAG=true` | TBD |
+| RAG query-size and e-mail delivery rate limits configured | TBD |
 | `RAG_ALLOW_UNGROUNDED_RECOMMENDATIONS=false` | TBD |
 | `RAG_ALLOW_EXTERNAL_PLUGINS=false` | TBD |
 | `QDRANT_API_KEY` configured | TBD |

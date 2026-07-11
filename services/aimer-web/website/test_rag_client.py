@@ -78,3 +78,32 @@ class RagClientTests(SimpleTestCase):
             runtime_status()
 
         mock_request.assert_not_called()
+
+    @override_settings(RAG_SERVICE_URL="http://rag-service:8000")
+    @patch("website.rag_client.settings.IS_PRODUCTION", True)
+    @patch("website.rag_client.httpx.request")
+    def test_production_rejects_http_remote_service_url(self, mock_request) -> None:
+        """Production traffic must not fall back to plaintext RAG transport."""
+        with self.assertRaisesRegex(RagServiceUnavailableError, "use HTTPS"):
+            runtime_status()
+
+        mock_request.assert_not_called()
+
+    @override_settings(
+        RAG_SERVICE_URL="https://rag-service:8000",
+        RAG_SERVICE_CA_CERT_PATH="/etc/aimer-rag-ca/ca.crt",
+    )
+    @patch("website.rag_client.httpx.Client")
+    def test_remote_rag_service_uses_configured_ca(self, mock_client) -> None:
+        """The internal CA bundle must verify the encrypted RAG connection."""
+        client = mock_client.return_value.__enter__.return_value
+        client.request.return_value = httpx.Response(
+            200,
+            json={"ready": True, "status": {"openrag_installed": True}},
+        )
+
+        payload = runtime_status()
+
+        self.assertTrue(payload["ready"])
+        mock_client.assert_called_once_with(verify="/etc/aimer-rag-ca/ca.crt")
+        client.request.assert_called_once()

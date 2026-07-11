@@ -628,9 +628,26 @@ class RagRecommendationApiTests(BaseTestCase):
         response = self.client.get("/api/rag/recommend/")
         self._check_equal(response.status_code, 400)
 
+    @override_settings(RAG_RECOMMENDATION_MAX_QUERY_LENGTH=10)
+    @patch("website.views.recommend_models")
+    def test_recommendation_api_rejects_oversized_query(self, mock_recommend) -> None:
+        """Oversized queries must not reach the expensive recommendation runtime."""
+        self._login_rag_user()
+
+        response = self.client.get("/api/rag/recommend/", {"q": "x" * 11})
+
+        self._check_equal(response.status_code, 400)
+        mock_recommend.assert_not_called()
+        self._check(
+            SecurityAuditEvent.objects.filter(
+                event_type="rag.recommendation.rejected",
+                metadata__reason="query_too_long",
+            ).exists(),
+        )
+
     @patch("website.views.recommend_models")
     def test_recommendation_api_returns_payload(self, mock_recommend) -> None:
-        """Ensure valid requests return recommendation payload in strict OpenRAG mode."""
+        """Ensure valid requests use strict OpenRAG recommendation mode."""
         self._login_rag_user()
         mock_recommend.return_value = {
             "query": "modèles segmentation cerveau MRI",

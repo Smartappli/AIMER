@@ -126,6 +126,17 @@ def test_recommend_endpoint_returns_recommendation_payload(mock_recommend) -> No
 
 
 @patch("RAG.service.recommend_models_for_query")
+def test_recommend_endpoint_rejects_oversized_query(mock_recommend) -> None:
+    """The RAG API must bound requests before invoking retrieval."""
+    client = TestClient(app)
+
+    response = client.post("/recommend", json={"query": "x" * 2001})
+
+    assert response.status_code == 422
+    mock_recommend.assert_not_called()
+
+
+@patch("RAG.service.recommend_models_for_query")
 def test_recommend_endpoint_forces_strict_openrag_in_production(
     mock_recommend,
     monkeypatch: pytest.MonkeyPatch,

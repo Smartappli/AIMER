@@ -131,3 +131,11 @@ class ProductionSettingsTests(SimpleTestCase):
 
         with self.assertRaisesRegex(RuntimeError, "RAG_SERVICE_URL must use HTTPS"):
             aimer_settings.validate_production_configuration()
+
+    def test_production_configuration_requires_rag_ca_bundle(self) -> None:
+        """An internal HTTPS RAG endpoint requires an explicit trust anchor."""
+        self._set_safe_production_defaults()
+        aimer_settings.RAG_SERVICE_URL = "https://aimer-rag.internal:8000"
+
+        with self.assertRaisesRegex(RuntimeError, "RAG_SERVICE_CA_CERT_PATH"):
+            aimer_settings.validate_production_configuration()

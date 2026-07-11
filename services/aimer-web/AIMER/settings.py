@@ -272,6 +272,10 @@ RAG_RECOMMENDATION_RATE_LIMIT_PER_MINUTE = env_int(
     "RAG_RECOMMENDATION_RATE_LIMIT_PER_MINUTE",
     default=30,
 )
+RAG_RECOMMENDATION_MAX_QUERY_LENGTH = env_int(
+    "RAG_RECOMMENDATION_MAX_QUERY_LENGTH",
+    default=2000,
+)
 EMAIL_VERIFICATION_REQUIRED = env_bool(
     "EMAIL_VERIFICATION_REQUIRED",
     default=IS_PRODUCTION,
@@ -416,6 +420,8 @@ def validate_production_configuration() -> None:
             errors.append(
                 "RAG_SERVICE_CA_CERT_PATH is required for production RAG TLS."
             )
+    if RAG_RECOMMENDATION_MAX_QUERY_LENGTH < 1:
+        errors.append("RAG_RECOMMENDATION_MAX_QUERY_LENGTH must be positive.")
 
     if errors:
         joined = " ".join(errors)

@@ -302,14 +302,6 @@ class RagRecommendationView(View):
                 metadata={"reason": "anonymous"},
             )
             return JsonResponse({"error": "Authentication required"}, status=401)
-        if _rag_rate_limit_exceeded(request):
-            audit_event(
-                "rag.recommendation.rate_limited",
-                request=request,
-                user=request.user,
-            )
-            return JsonResponse({"error": "Rate limit exceeded"}, status=429)
-
         query = (request.GET.get("q") or "").strip()
         if not query:
             audit_event(
@@ -322,6 +314,32 @@ class RagRecommendationView(View):
                 {"error": "Missing required query parameter: q"},
                 status=400,
             )
+
+        max_query_length = int(
+            getattr(settings, "RAG_RECOMMENDATION_MAX_QUERY_LENGTH", 2000),
+        )
+        if len(query) > max_query_length:
+            audit_event(
+                "rag.recommendation.rejected",
+                request=request,
+                user=request.user,
+                metadata={
+                    "reason": "query_too_long",
+                    "query_length": len(query),
+                },
+            )
+            return JsonResponse(
+                {"error": f"Query must not exceed {max_query_length} characters"},
+                status=400,
+            )
+
+        if _rag_rate_limit_exceeded(request):
+            audit_event(
+                "rag.recommendation.rate_limited",
+                request=request,
+                user=request.user,
+            )
+            return JsonResponse({"error": "Rate limit exceeded"}, status=429)
 
         try:
             top_k = int(request.GET.get("top_k", "3"))

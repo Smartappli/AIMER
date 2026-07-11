@@ -20,12 +20,28 @@ from RAG.recommender import (
 )
 
 MAX_TOP_K = 10
+DEFAULT_MAX_QUERY_LENGTH = 2000
+
+
+def _max_query_length() -> int:
+    """Return a bounded maximum size for user-provided RAG queries."""
+    raw_value = os.getenv(
+        "RAG_RECOMMENDATION_MAX_QUERY_LENGTH",
+        str(DEFAULT_MAX_QUERY_LENGTH),
+    )
+    try:
+        return max(1, int(raw_value))
+    except ValueError:
+        return DEFAULT_MAX_QUERY_LENGTH
+
+
+MAX_QUERY_LENGTH = _max_query_length()
 
 
 class RecommendationRequest(BaseModel):
     """Request payload accepted by the RAG recommendation API."""
 
-    query: str = Field(min_length=1)
+    query: str = Field(min_length=1, max_length=MAX_QUERY_LENGTH)
     top_k: int = Field(default=3, ge=1, le=MAX_TOP_K)
     strict_openrag: bool = True
 

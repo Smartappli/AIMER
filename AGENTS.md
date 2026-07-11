@@ -32,9 +32,11 @@ Run commands from the repository root unless a task clearly belongs inside a ser
 ### Tests
 
 ```powershell
-.\.venv\Scripts\uv.exe --directory services/aimer-web run python manage.py test auth website
-.\.venv\Scripts\uv.exe --directory services/FARM run python -m pytest -q tests
-.\.venv\Scripts\uv.exe --directory services/MAGE run python -m pytest -q -m "not slow" tests
+$env:SECRET_KEY = "local-test-secret"
+uv --directory services/aimer-web run --locked python manage.py test auth website --testrunner django.test.runner.DiscoverRunner --verbosity 1
+uv --directory services/aimer-web run --locked python -m pytest -q RAG/tests
+uv --directory services/FARM run --locked python -m pytest -q tests
+uv --directory services/MAGE run --locked python -m pytest -q -m "not slow" tests
 ```
 
 ### Repository validation

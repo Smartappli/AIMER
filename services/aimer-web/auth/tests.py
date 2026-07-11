@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 from datetime import timedelta
+from unittest.mock import AsyncMock, patch
 
 from auth.middleware import AdminAuditMiddleware
 from auth.models import Profile, SecurityAuditEvent
@@ -89,6 +90,36 @@ class AuthSecurityTests(TestCase):
         )
         self.assertFalse(
             consume_email_action(request, "password_reset", "other@example.org"),
+        )
+
+    @override_settings(
+        AUTH_EMAIL_ACTION_LIMIT=1,
+        AUTH_EMAIL_ACTION_WINDOW_SECONDS=60,
+        EMAIL_HOST_USER="smtp-user",
+        EMAIL_HOST_PASSWORD="smtp-password",
+    )
+    @patch(
+        "auth.forgot_password.views.send_password_reset_email",
+        new_callable=AsyncMock,
+    )
+    def test_password_reset_delivery_is_rate_limited(self, send_email) -> None:
+        """The endpoint must not repeatedly send reset links to one recipient."""
+        user = get_user_model().objects.create_user(
+            username="limited-reset-user",
+            email="limited-reset-user@example.com",
+            password="Strong-Passphrase-2026",
+        )
+
+        first = self.client.post(reverse("forgot-password"), {"email": user.email})
+        second = self.client.post(reverse("forgot-password"), {"email": user.email})
+
+        self.assertEqual(first.status_code, 302)
+        self.assertEqual(second.status_code, 302)
+        send_email.assert_awaited_once()
+        self.assertTrue(
+            SecurityAuditEvent.objects.filter(
+                event_type="auth.password_reset.rate_limited",
+            ).exists(),
         )
 
     def test_password_reset_token_is_hashed_at_rest(self) -> None:
