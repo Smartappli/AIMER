@@ -35,6 +35,7 @@ class RagClientTests(SimpleTestCase):
             query="classification mri",
             top_k=2,
             strict_openrag=True,
+            language="nl",
         )
 
         self.assertEqual(payload["query"], "classification mri")
@@ -49,6 +50,7 @@ class RagClientTests(SimpleTestCase):
                 "query": "classification mri",
                 "top_k": 2,
                 "strict_openrag": True,
+                "language": "nl",
             },
         )
 

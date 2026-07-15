@@ -696,6 +696,7 @@ def _build_experimental_notes(
     Args:
         model_name: Candidate model name.
         evidence_count: Number of supporting evidence snippets.
+        language: Requested response language.
 
     Returns:
         List of practical validation notes.
@@ -795,6 +796,7 @@ def _fallback_recommendations(
         catalog: Model alias catalog.
         profile: Query profile inferred from user input.
         top_k: Maximum number of models to return.
+        language: Normalized response language.
 
     Returns:
         List of ungrounded recommendation items.
@@ -864,6 +866,7 @@ def recommend_models_for_query(
         strict_openrag: Require OpenRAG retrieval instead of catalog-only fallback.
         allow_ungrounded: Permit catalog-only exploratory suggestions. This is
             disabled by default and rejected in production.
+        language: Response language code (FR, EN, NL, or DE).
 
     Returns:
         Structured recommendation response with ranked models and evidence.

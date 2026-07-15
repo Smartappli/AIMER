@@ -563,6 +563,27 @@ class RagRecommenderTests(BaseTestCase):
         self._check(response.no_recommendation_reason is not None)
         self._check("no-grounded-evidence" in response.retrieval_mode)
 
+    def test_recommender_understands_supported_languages(self) -> None:
+        """Ensure FR, EN, NL, and DE queries retain task and modality intent."""
+        cases = (
+            ("fr", "classification d’images IRM", "Aide à la décision"),
+            ("en", "classification of MRI images", "experimental ML"),
+            ("nl", "classificatie van MRI-beelden", "Uitsluitend"),
+            ("de", "Klassifikation von MRT-Bildern", "Nur zur"),
+        )
+
+        for language, query, safety_fragment in cases:
+            response = recommend_models_for_query(
+                query=query,
+                documents=[],
+                language=language,
+            )
+
+            self._check_equal(response.language, language)
+            self._check("classification" in response.query_profile.tasks)
+            self._check("mri" in response.query_profile.modalities)
+            self._check(safety_fragment in response.safety_notice)
+
     def test_recommender_allows_catalog_suggestions_for_research_only(self) -> None:
         """Ensure explicit non-production opt-in keeps exploratory catalog behavior."""
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -687,6 +708,7 @@ class RagRecommendationApiTests(BaseTestCase):
             {
                 "q": "modèles segmentation cerveau MRI",
                 "top_k": "2",
+                "language": "nl-NL",
             },
         )
 
@@ -699,12 +721,36 @@ class RagRecommendationApiTests(BaseTestCase):
         mock_recommend.assert_called_once()
         call_kwargs = mock_recommend.call_args.kwargs
         self._check_equal(call_kwargs["strict_openrag"], True)
+        self._check_equal(call_kwargs["language"], "nl")
         event = SecurityAuditEvent.objects.get(
             event_type="rag.recommendation.requested",
         )
         self._check_equal(len(event.metadata["query_hash"]), 64)
         self._check("modÃ¨les segmentation cerveau MRI" not in str(event.metadata))
         self._check_equal(event.metadata["recommendation_count"], 1)
+        self._check_equal(event.metadata["language"], "nl")
+
+    @patch("website.views.recommend_models")
+    def test_recommendation_api_rejects_unsupported_language(
+        self,
+        mock_recommend,
+    ) -> None:
+        """Ensure unsupported languages do not reach the recommendation runtime."""
+        self._login_rag_user()
+
+        response = self.client.get(
+            "/api/rag/recommend/",
+            {"q": "classification mri", "language": "es"},
+        )
+
+        self._check_equal(response.status_code, 400)
+        mock_recommend.assert_not_called()
+        self._check(
+            SecurityAuditEvent.objects.filter(
+                event_type="rag.recommendation.rejected",
+                metadata__reason="unsupported_language",
+            ).exists(),
+        )
 
     @patch("website.views.recommend_models")
     def test_recommendation_api_returns_503_when_openrag_unavailable(

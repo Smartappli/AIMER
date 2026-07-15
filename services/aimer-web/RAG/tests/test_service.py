@@ -113,6 +113,7 @@ def test_recommend_endpoint_returns_recommendation_payload(mock_recommend) -> No
             "query": "classification mri",
             "top_k": 2,
             "strict_openrag": True,
+            "language": "nl",
         },
     )
 
@@ -122,6 +123,7 @@ def test_recommend_endpoint_returns_recommendation_payload(mock_recommend) -> No
         query="classification mri",
         top_k=2,
         strict_openrag=True,
+        language="nl",
     )
 
 
@@ -161,6 +163,7 @@ def test_recommend_endpoint_forces_strict_openrag_in_production(
         query="classification mri",
         top_k=3,
         strict_openrag=True,
+        language="fr",
     )
 
 

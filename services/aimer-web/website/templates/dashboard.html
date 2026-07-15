@@ -149,7 +149,7 @@
             </svg>
             <span class="voice-assistant__avatar-status" aria-hidden="true">
               <span class="voice-assistant__avatar-indicator"></span>
-              <span id="voice-assistant-avatar-state">Disponible</span>
+              <span id="voice-assistant-avatar-state" data-i18n="avatarIdle">Disponible</span>
             </span>
           </div>
 
@@ -158,13 +158,31 @@
               <h3 class="h4 mb-0">Assistant AIMER</h3>
               <span class="badge bg-label-primary">
                 <i class="icon-base bx bx-accessibility me-1" aria-hidden="true"></i>
-                Avatar 3D vocal
+                <span data-i18n="avatarBadge">Avatar 3D vocal</span>
               </span>
             </div>
-            <p class="text-muted mb-2">Interrogez le corpus par écrit ou à la voix.</p>
-            <p class="mb-0">
+            <p class="text-muted mb-2" data-i18n="introSubtitle">Interrogez le corpus par écrit ou à la voix.</p>
+            <p class="mb-3" data-i18n="introDescription">
               L’avatar vous écoute, recherche les références pertinentes et anime ses lèvres pendant la lecture de la réponse.
             </p>
+            <div class="voice-assistant__language">
+              <label class="form-label small fw-medium mb-1"
+                     for="voice-assistant-language"
+                     data-i18n="languageLabel">Langue de l’assistant</label>
+              <select class="form-select form-select-sm"
+                      id="voice-assistant-language"
+                      aria-describedby="voice-assistant-language-help">
+                <option value="fr-FR" lang="fr">Français</option>
+                <option value="en-US" lang="en">English</option>
+                <option value="nl-NL" lang="nl">Nederlands</option>
+                <option value="de-DE" lang="de">Deutsch</option>
+              </select>
+              <small class="text-muted"
+                     id="voice-assistant-language-help"
+                     data-i18n="languageHelp">
+                Ce choix règle la dictée, la voix et les réponses.
+              </small>
+            </div>
           </div>
         </div>
 
@@ -174,14 +192,15 @@
                role="log"
                aria-live="polite"
                aria-relevant="additions text"
-               aria-label="Conversation avec l’assistant AIMER">
+               aria-label="Conversation avec l’assistant AIMER"
+               data-i18n-aria-label="conversationLabel">
             <div class="voice-assistant__message voice-assistant__message--assistant">
               <span class="voice-assistant__message-avatar" aria-hidden="true">
                 <i class="icon-base bx bx-bot"></i>
               </span>
               <div class="voice-assistant__bubble">
-                <p class="mb-1 fw-medium">Bonjour, comment puis-je vous aider&nbsp;?</p>
-                <p class="mb-0 text-muted">
+                <p class="mb-1 fw-medium" data-i18n="greetingTitle">Bonjour, comment puis-je vous aider&nbsp;?</p>
+                <p class="mb-0 text-muted" data-i18n="greetingBody">
                   Décrivez votre tâche, votre modalité ou vos contraintes pour recevoir des recommandations issues du corpus scientifique.
                 </p>
               </div>
@@ -192,13 +211,16 @@
                 action="{% url 'rag-recommend' %}"
                 method="get"
                 novalidate>
-            <label class="form-label" for="voice-assistant-query">Votre question</label>
+            <label class="form-label"
+                   for="voice-assistant-query"
+                   data-i18n="questionLabel">Votre question</label>
             <textarea id="voice-assistant-query"
                       name="q"
                       class="form-control"
                       rows="3"
                       maxlength="{{ rag_query_max_length }}"
                       placeholder="Ex. Quel modèle recommandez-vous pour classifier des images IRM ?"
+                      data-i18n-placeholder="queryPlaceholder"
                       aria-describedby="voice-assistant-help voice-assistant-status voice-assistant-counter"
                       required></textarea>
             <input type="hidden" name="top_k" value="3" />
@@ -211,25 +233,25 @@
                         aria-controls="voice-assistant-query"
                         aria-pressed="false">
                   <i class="icon-base bx bx-microphone me-1" aria-hidden="true"></i>
-                  <span>Dicter</span>
+                  <span data-i18n="dictate">Dicter</span>
                 </button>
                 <button type="submit" class="btn btn-primary" id="voice-assistant-submit">
                   <i class="icon-base bx bx-send me-1" aria-hidden="true"></i>
-                  <span>Envoyer</span>
+                  <span data-i18n="send">Envoyer</span>
                 </button>
                 <button type="button"
                         class="btn btn-outline-secondary"
                         id="voice-assistant-read"
                         disabled>
                   <i class="icon-base bx bx-volume-full me-1" aria-hidden="true"></i>
-                  <span>Lire la réponse</span>
+                  <span data-i18n="readResponse">Lire la réponse</span>
                 </button>
                 <button type="button"
                         class="btn btn-outline-secondary"
                         id="voice-assistant-stop"
                         disabled>
                   <i class="icon-base bx bx-stop me-1" aria-hidden="true"></i>
-                  <span>Arrêter</span>
+                  <span data-i18n="stop">Arrêter</span>
                 </button>
               </div>
 
@@ -238,21 +260,28 @@
                        type="checkbox"
                        role="switch"
                        id="voice-assistant-auto-read" />
-                <label class="form-check-label" for="voice-assistant-auto-read">
+                <label class="form-check-label"
+                       for="voice-assistant-auto-read"
+                       data-i18n="autoRead">
                   Lecture automatique
                 </label>
               </div>
             </div>
 
             <div class="d-flex justify-content-between gap-3 mt-2">
-              <p id="voice-assistant-status" class="small text-muted mb-0" role="status">
+              <p id="voice-assistant-status"
+                 class="small text-muted mb-0"
+                 role="status"
+                 data-i18n="ready">
                 Prêt à écouter votre question.
               </p>
               <span id="voice-assistant-counter" class="small text-muted text-nowrap">
                 0 / {{ rag_query_max_length }}
               </span>
             </div>
-            <p id="voice-assistant-help" class="small text-muted mb-0 mt-2">
+            <p id="voice-assistant-help"
+               class="small text-muted mb-0 mt-2"
+               data-i18n="privacy">
               AIMER ne conserve aucun enregistrement audio. La reconnaissance vocale peut être traitée par le service de votre navigateur selon sa propre politique de confidentialité.
             </p>
             <p id="voice-assistant-support" class="small text-warning mb-0 mt-1" hidden></p>

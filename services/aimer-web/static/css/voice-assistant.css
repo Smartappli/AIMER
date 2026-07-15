@@ -179,6 +179,10 @@
   max-width: 46rem;
 }
 
+.voice-assistant__language {
+  max-width: 18rem;
+}
+
 .voice-assistant__conversation {
   background: var(--bs-body-bg);
   border: 1px solid var(--bs-border-color);
@@ -388,6 +392,11 @@
 
   .voice-assistant__intro .d-flex {
     justify-content: center;
+  }
+
+  .voice-assistant__language {
+    margin-inline: auto;
+    text-align: start;
   }
 }
 
