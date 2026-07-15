@@ -108,6 +108,12 @@ Object.defineProperty(window, 'SpeechRecognition', {
 
 window.fetch = async () => {
   await new Promise(resolve => window.setTimeout(resolve, 180));
+  if (window.__forceFetchError) {
+    return new Response(JSON.stringify({error: 'Service de test indisponible.'}), {
+      status: 503,
+      headers: {'Content-Type': 'application/json'}
+    });
+  }
   return new Response(JSON.stringify({
     query: 'classification MRI',
     language: 'fr',
@@ -396,6 +402,48 @@ class VoiceAssistantSeleniumTests(StaticLiveServerTestCase):
             ),
             "1.5",
         )
+
+    def test_reading_speed_persists_after_page_reload(self) -> None:
+        """Giovani restores the chosen speech and lip rate on the next visit."""
+        self._open_dashboard()
+        Select(
+            self.browser.find_element(By.ID, "voice-assistant-rate")
+        ).select_by_value("1.25")
+
+        with patch("website.views._discover_scientific_articles", return_value=[]):
+            self.browser.refresh()
+        rate = Select(
+            self.wait.until(
+                lambda driver: driver.find_element(By.ID, "voice-assistant-rate"),
+            ),
+        )
+        self._check_equal(
+            rate.first_selected_option.get_attribute("value"),
+            "1.25",
+        )
+        avatar = self.browser.find_element(By.ID, "voice-assistant-avatar")
+        self._check_equal(avatar.get_attribute("data-reading-rate"), "1.25")
+
+    def test_error_attitude_is_visible_when_rag_is_unavailable(self) -> None:
+        """A failed RAG request switches Giovani to his explicit error attitude."""
+        self._open_dashboard()
+        self.browser.execute_script("window.__forceFetchError = true;")
+        self.browser.find_element(By.ID, "voice-assistant-query").send_keys(
+            "classification MRI",
+        )
+        self.browser.find_element(By.ID, "voice-assistant-submit").click()
+
+        avatar = self.browser.find_element(By.ID, "voice-assistant-avatar")
+        self.wait.until(
+            lambda _driver: avatar.get_attribute("data-state") == "error"
+        )
+        error_cue = self.browser.find_element(
+            By.CSS_SELECTOR,
+            ".voice-assistant__attitude-cue--error",
+        )
+        self._check_equal(error_cue.value_of_css_property("display"), "flex")
+        status = self.browser.find_element(By.ID, "voice-assistant-status")
+        self._check("indisponible" in status.text)
 
     def test_guided_demo_runs_dictation_analysis_and_spoken_response(self) -> None:
         """The demo chains TTS, STT, RAG rendering, and lip-synced playback."""
