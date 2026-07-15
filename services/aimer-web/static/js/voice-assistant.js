@@ -535,6 +535,7 @@ document.addEventListener('DOMContentLoaded', () => {
     isLoading = loading;
     submitButton.disabled = loading;
     microphoneButton.disabled = loading || !Recognition;
+    languageSelect.disabled = loading || isListening;
     queryInput.readOnly = loading;
     submitIcon.className = loading
       ? 'icon-base bx bx-loader-circle voice-assistant__loading-icon me-1'
@@ -622,6 +623,7 @@ document.addEventListener('DOMContentLoaded', () => {
       : 'icon-base bx bx-microphone me-1';
     microphoneLabel.textContent = translate(listening ? 'stopDictation' : 'dictate');
     submitButton.disabled = listening || isLoading;
+    languageSelect.disabled = listening || isLoading;
     refreshAvatarState();
   };
 

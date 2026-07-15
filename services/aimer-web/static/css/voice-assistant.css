@@ -76,34 +76,71 @@
 }
 
 .voice-assistant__avatar-model {
-  height: 14rem;
+  height: 13.125rem;
   overflow: visible;
   position: relative;
+  transform-style: preserve-3d;
   transform: rotateY(-2deg) translateZ(1.25rem);
-  width: 12.85rem;
+  width: 11.25rem;
   z-index: 1;
 }
 
-.voice-avatar__body {
-  animation: voice-avatar-idle 4.8s ease-in-out infinite;
-  transform-box: fill-box;
-  transform-origin: center bottom;
+.voice-assistant__photo-frame {
+  background: #c9c5c5;
+  border: 0.16rem solid color-mix(in srgb, var(--avatar-state-color) 52%, white);
+  border-radius: 45% 45% 38% 38% / 31% 31% 22% 22%;
+  box-shadow:
+    0 1rem 1.8rem rgba(30, 25, 54, 0.22),
+    inset 0 0 0 0.18rem rgba(255, 255, 255, 0.2),
+    0 0 1.25rem color-mix(in srgb, var(--avatar-state-color) 24%, transparent);
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+  transition: border-color 180ms ease, box-shadow 180ms ease;
+  width: 100%;
+}
+
+.voice-assistant__photo {
+  filter: contrast(1.03) saturate(1.04);
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 50%;
+  pointer-events: none;
+  user-select: none;
+  width: 100%;
+}
+
+.voice-assistant__photo-shine {
+  background: linear-gradient(
+    118deg,
+    rgba(255, 255, 255, 0.34) 0%,
+    rgba(255, 255, 255, 0.04) 27%,
+    transparent 46%,
+    rgba(115, 103, 240, 0.1) 100%
+  );
+  inset: 0;
+  mix-blend-mode: screen;
+  pointer-events: none;
+  position: absolute;
+}
+
+.voice-assistant__face-rig {
+  height: 100%;
+  inset: 0;
+  overflow: visible;
+  pointer-events: none;
+  position: absolute;
+  width: 100%;
 }
 
 .voice-avatar__head {
   animation: voice-avatar-head-idle 5.6s ease-in-out infinite;
-  transform-box: fill-box;
   transform-origin: center 72%;
 }
 
-.voice-avatar__eye {
-  animation: voice-avatar-blink 6.5s infinite;
-  transform-box: fill-box;
-  transform-origin: center;
-}
-
-.voice-avatar__eye--right {
-  animation-delay: 40ms;
+.voice-avatar__photo-blink {
+  animation: voice-avatar-photo-blink 6.5s infinite;
+  opacity: 0;
 }
 
 .voice-avatar__viseme {
@@ -122,6 +159,21 @@
   transform: scale(1);
 }
 
+.voice-assistant__avatar-stage:not([data-state="speaking"])
+  .voice-assistant__face-rig
+  .voice-avatar__viseme {
+  opacity: 0;
+}
+
+.voice-avatar__mouth-mask {
+  opacity: 0;
+  transition: opacity 70ms ease;
+}
+
+.voice-assistant__avatar-stage[data-state="speaking"] .voice-avatar__mouth-mask {
+  opacity: 0.9;
+}
+
 .voice-assistant__avatar-stage[data-state="listening"] .voice-avatar__head {
   animation: voice-avatar-listen 1.8s ease-in-out infinite;
 }
@@ -136,10 +188,6 @@
 
 .voice-assistant__avatar-stage[data-state="speaking"] .voice-avatar__head {
   animation: voice-avatar-speak 0.9s ease-in-out infinite;
-}
-
-.voice-assistant__avatar-stage[data-state="speaking"] .voice-avatar__body {
-  animation-duration: 2.2s;
 }
 
 .voice-assistant__avatar-status {

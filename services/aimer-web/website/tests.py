@@ -323,6 +323,15 @@ class DashboardViewTests(BaseTestCase):
             "The voice assistant avatar must expose lip-sync visemes.",
         )
         self._check(
+            b'id="voice-assistant-language"' in response.content,
+            "The voice assistant must expose its language selector.",
+        )
+        for locale in (b"fr-FR", b"en-US", b"nl-NL", b"de-DE"):
+            self._check(
+                f'value="{locale.decode()}"'.encode() in response.content,
+                f"The voice assistant must support locale {locale.decode()}.",
+            )
+        self._check(
             b"js/voice-assistant.js" in response.content,
             "The voice assistant browser behavior must be loaded.",
         )
