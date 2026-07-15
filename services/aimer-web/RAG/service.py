@@ -6,6 +6,7 @@ from __future__ import annotations
 import hmac
 import os
 from collections.abc import Awaitable, Callable
+from typing import Literal
 
 from fastapi import FastAPI, HTTPException
 from fastapi.requests import Request
@@ -44,6 +45,7 @@ class RecommendationRequest(BaseModel):
     query: str = Field(min_length=1, max_length=MAX_QUERY_LENGTH)
     top_k: int = Field(default=3, ge=1, le=MAX_TOP_K)
     strict_openrag: bool = True
+    language: Literal["fr", "en", "nl", "de"] = "fr"
 
 
 app = FastAPI(title="AIMER RAG Service")
@@ -135,6 +137,7 @@ async def recommend(payload: RecommendationRequest) -> RecommendationResponse:
             query=payload.query.strip(),
             top_k=payload.top_k,
             strict_openrag=True if _is_production() else payload.strict_openrag,
+            language=payload.language,
         )
     except OpenRAGRuntimeUnavailableError as exc:
         raise HTTPException(status_code=503, detail=str(exc)) from exc

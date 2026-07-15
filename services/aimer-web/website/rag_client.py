@@ -115,6 +115,7 @@ def recommend_models(
     query: str,
     top_k: int,
     strict_openrag: bool = True,
+    language: str = "fr",
 ) -> dict[str, Any]:
     """Return recommendation payloads through the remote service or local fallback."""
     if _rag_service_url():
@@ -124,6 +125,7 @@ def recommend_models(
                 "query": query,
                 "top_k": top_k,
                 "strict_openrag": strict_openrag,
+                "language": language,
             },
         )
 
@@ -137,6 +139,7 @@ def recommend_models(
             query=query,
             top_k=top_k,
             strict_openrag=strict_openrag,
+            language=language,
         )
     except OpenRAGRuntimeUnavailableError as exc:
         raise RagServiceUnavailableError(str(exc)) from exc

@@ -259,6 +259,7 @@ class DashboardViewTests(BaseTestCase):
         self._check_equal(index["MAGE"], ["ResNet - 1512.03385v1.pdf"])
         self._check_equal(index["FARM"], ["adamp and sgdp - 2006.08217v3.pdf"])
 
+    @override_settings(RAG_RECOMMENDATION_MAX_QUERY_LENGTH=321)
     def test_dashboard_view_context_contains_project_cards(self) -> None:
         """Ensure dashboard context is populated with article totals and cards."""
         request = RequestFactory().get("/dashboard/")
@@ -275,6 +276,7 @@ class DashboardViewTests(BaseTestCase):
             context = view.get_context_data()
 
         self._check_equal(context["total_scientific_articles"], 1)
+        self._check_equal(context["rag_query_max_length"], 321)
         self._check("project_cards" in context)
         self._check(bool(context["project_cards"]))
 
@@ -300,6 +302,30 @@ class DashboardViewTests(BaseTestCase):
 
         self._check_equal(response.status_code, 200)
         self._check(any(t.name == "dashboard.html" for t in response.templates))
+        self._check(
+            b'id="voice-assistant"' in response.content,
+            "The authenticated dashboard must expose the voice assistant.",
+        )
+        self._check(
+            b'id="voice-assistant-microphone"' in response.content,
+            "The voice assistant must expose speech-to-text controls.",
+        )
+        self._check(
+            b'id="voice-assistant-read"' in response.content,
+            "The voice assistant must expose text-to-speech controls.",
+        )
+        self._check(
+            b'id="voice-assistant-avatar"' in response.content,
+            "The voice assistant must expose its animated 3D avatar.",
+        )
+        self._check(
+            b'voice-avatar__viseme--open' in response.content,
+            "The voice assistant avatar must expose lip-sync visemes.",
+        )
+        self._check(
+            b"js/voice-assistant.js" in response.content,
+            "The voice assistant browser behavior must be loaded.",
+        )
 
 
 class ContextProcessorTests(BaseTestCase):

@@ -1,9 +1,20 @@
 {% extends layout_path %}
+{% load static %}
 {% load i18n %}
 
 {% block title %}
   AIMER - {% trans "Dashboard RAG" %}
 {% endblock %}
+
+{% block page_css %}
+  {{ block.super }}
+  <link rel="stylesheet" href="{% static 'css/voice-assistant.css' %}" />
+{% endblock page_css %}
+
+{% block page_js %}
+  {{ block.super }}
+  <script src="{% static 'js/voice-assistant.js' %}"></script>
+{% endblock page_js %}
 
 {% block content %}
   <section class="section-py">
@@ -17,6 +28,235 @@
           <div class="alert alert-primary" role="alert">
             Corpus détecté : <strong>{{ total_scientific_articles }}</strong> article{{ total_scientific_articles|pluralize }} scientifique{{ total_scientific_articles|pluralize }}.
           </div>
+        </div>
+      </div>
+
+      <div class="card voice-assistant mb-4"
+           id="voice-assistant"
+           data-endpoint="{% url 'rag-recommend' %}"
+           data-language="fr-FR"
+           data-max-length="{{ rag_query_max_length }}">
+        <div class="card-header voice-assistant__hero">
+          <div class="voice-assistant__avatar-stage"
+               id="voice-assistant-avatar"
+               data-state="idle"
+               data-viseme="rest"
+               role="img"
+               aria-label="Avatar 3D animé de l’assistant AIMER">
+            <div class="voice-assistant__avatar-halo" aria-hidden="true"></div>
+            <svg class="voice-assistant__avatar-model"
+                 viewBox="0 0 220 240"
+                 focusable="false"
+                 aria-hidden="true">
+              <defs>
+                <linearGradient id="avatar-jacket" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0" stop-color="#7367f0" />
+                  <stop offset="0.55" stop-color="#4b3fc0" />
+                  <stop offset="1" stop-color="#2f277e" />
+                </linearGradient>
+                <radialGradient id="avatar-skin" cx="35%" cy="25%" r="80%">
+                  <stop offset="0" stop-color="#ffe5d1" />
+                  <stop offset="0.62" stop-color="#eebfa4" />
+                  <stop offset="1" stop-color="#bd8069" />
+                </radialGradient>
+                <linearGradient id="avatar-hair" x1="0" y1="0" x2="0.9" y2="1">
+                  <stop offset="0" stop-color="#312640" />
+                  <stop offset="1" stop-color="#120d1d" />
+                </linearGradient>
+                <radialGradient id="avatar-eye" cx="35%" cy="35%" r="65%">
+                  <stop offset="0" stop-color="#8ed7ff" />
+                  <stop offset="0.45" stop-color="#397ea9" />
+                  <stop offset="1" stop-color="#17334d" />
+                </radialGradient>
+                <filter id="avatar-shadow" x="-30%" y="-30%" width="160%" height="180%">
+                  <feDropShadow dx="0" dy="8" stdDeviation="7" flood-color="#171329" flood-opacity="0.28" />
+                </filter>
+              </defs>
+
+              <ellipse cx="110" cy="224" rx="73" ry="12" fill="#171329" opacity="0.16" />
+              <g class="voice-avatar__body" filter="url(#avatar-shadow)">
+                <path d="M32 229 C39 190 67 178 91 174 L129 174 C153 178 181 190 188 229 Z"
+                      fill="url(#avatar-jacket)" />
+                <path d="M91 174 L110 209 L76 182 Z" fill="#ffffff" opacity="0.92" />
+                <path d="M129 174 L110 209 L144 182 Z" fill="#e9e7ff" opacity="0.92" />
+                <path d="M104 199 L116 199 L120 229 L100 229 Z" fill="#282052" opacity="0.9" />
+                <path d="M94 153 H126 V183 C119 192 101 192 94 183 Z" fill="#d59a7f" />
+
+                <g class="voice-avatar__head">
+                  <ellipse cx="57" cy="104" rx="14" ry="23" fill="#dca287" />
+                  <ellipse cx="163" cy="104" rx="14" ry="23" fill="#c98d76" />
+                  <path d="M58 89 C58 42 77 20 111 20 C147 20 163 46 162 91 L158 128
+                           C154 155 134 174 110 174 C84 174 65 154 61 127 Z"
+                        fill="url(#avatar-skin)" />
+                  <path d="M63 91 C60 60 71 24 108 17 C139 12 163 35 165 70
+                           C147 57 124 55 96 60 C81 63 70 74 63 91 Z"
+                        fill="url(#avatar-hair)" />
+                  <path d="M63 83 C66 46 88 29 116 27 C95 37 86 50 84 66 C75 70 68 76 63 83 Z"
+                        fill="#493b59" opacity="0.65" />
+                  <path d="M149 60 C158 69 161 83 160 101 L166 86 C169 68 162 51 149 39 Z"
+                        fill="#100b19" />
+                  <path d="M72 102 C76 88 87 79 99 78" fill="none" stroke="#ffffff" stroke-linecap="round" stroke-width="5" opacity="0.16" />
+
+                  <path d="M76 91 Q88 84 99 90" fill="none" stroke="#493340" stroke-linecap="round" stroke-width="3.5" />
+                  <path d="M121 90 Q133 84 145 91" fill="none" stroke="#493340" stroke-linecap="round" stroke-width="3.5" />
+
+                  <g class="voice-avatar__eye voice-avatar__eye--left">
+                    <ellipse cx="88" cy="103" rx="12" ry="8" fill="#ffffff" />
+                    <circle cx="90" cy="103" r="6" fill="url(#avatar-eye)" />
+                    <circle cx="90" cy="103" r="2.6" fill="#101522" />
+                    <circle cx="92" cy="101" r="1.4" fill="#ffffff" />
+                  </g>
+                  <g class="voice-avatar__eye voice-avatar__eye--right">
+                    <ellipse cx="133" cy="103" rx="12" ry="8" fill="#ffffff" />
+                    <circle cx="131" cy="103" r="6" fill="url(#avatar-eye)" />
+                    <circle cx="131" cy="103" r="2.6" fill="#101522" />
+                    <circle cx="133" cy="101" r="1.4" fill="#ffffff" />
+                  </g>
+
+                  <path d="M109 104 C106 115 104 123 110 126 C114 127 117 125 119 123"
+                        fill="none" stroke="#a96f60" stroke-linecap="round" stroke-width="2.4" opacity="0.72" />
+                  <ellipse cx="79" cy="124" rx="12" ry="6" fill="#e98d8c" opacity="0.18" />
+                  <ellipse cx="142" cy="124" rx="12" ry="6" fill="#e98d8c" opacity="0.16" />
+
+                  <g class="voice-avatar__mouth" transform="translate(0 1)">
+                    <g class="voice-avatar__viseme voice-avatar__viseme--rest">
+                      <path d="M96 141 Q110 146 124 141 Q111 152 96 141 Z" fill="#b85e6b" />
+                      <path d="M99 143 Q110 146 121 143" fill="none" stroke="#713644" stroke-width="1.5" />
+                    </g>
+                    <g class="voice-avatar__viseme voice-avatar__viseme--closed">
+                      <path d="M96 143 Q110 138 124 143 Q110 149 96 143 Z" fill="#b85e6b" />
+                      <path d="M97 143 H123" stroke="#713644" stroke-linecap="round" stroke-width="1.5" />
+                    </g>
+                    <g class="voice-avatar__viseme voice-avatar__viseme--open">
+                      <path d="M96 141 Q110 131 124 141 Q123 160 110 163 Q97 160 96 141 Z" fill="#b85e6b" />
+                      <ellipse cx="110" cy="148" rx="10" ry="10" fill="#442130" />
+                      <path d="M101 140 Q110 136 119 140 L118 144 H102 Z" fill="#ffffff" />
+                      <ellipse cx="110" cy="155" rx="7" ry="3.5" fill="#dc7580" />
+                    </g>
+                    <g class="voice-avatar__viseme voice-avatar__viseme--wide">
+                      <path d="M91 143 Q110 132 129 143 Q110 157 91 143 Z" fill="#c36573" />
+                      <path d="M97 142 Q110 137 123 142 Q110 151 97 142 Z" fill="#ffffff" />
+                      <path d="M99 149 Q110 153 121 149" fill="none" stroke="#713644" stroke-width="2" />
+                    </g>
+                    <g class="voice-avatar__viseme voice-avatar__viseme--round">
+                      <ellipse cx="110" cy="146" rx="10" ry="14" fill="#b85e6b" />
+                      <ellipse cx="110" cy="147" rx="6" ry="9" fill="#442130" />
+                      <ellipse cx="108" cy="141" rx="3" ry="1.5" fill="#e99aa2" opacity="0.7" />
+                    </g>
+                  </g>
+                </g>
+              </g>
+            </svg>
+            <span class="voice-assistant__avatar-status" aria-hidden="true">
+              <span class="voice-assistant__avatar-indicator"></span>
+              <span id="voice-assistant-avatar-state">Disponible</span>
+            </span>
+          </div>
+
+          <div class="voice-assistant__intro">
+            <div class="d-flex flex-wrap align-items-center gap-2 mb-2">
+              <h3 class="h4 mb-0">Assistant AIMER</h3>
+              <span class="badge bg-label-primary">
+                <i class="icon-base bx bx-accessibility me-1" aria-hidden="true"></i>
+                Avatar 3D vocal
+              </span>
+            </div>
+            <p class="text-muted mb-2">Interrogez le corpus par écrit ou à la voix.</p>
+            <p class="mb-0">
+              L’avatar vous écoute, recherche les références pertinentes et anime ses lèvres pendant la lecture de la réponse.
+            </p>
+          </div>
+        </div>
+
+        <div class="card-body pt-0">
+          <div id="voice-assistant-conversation"
+               class="voice-assistant__conversation mb-3"
+               role="log"
+               aria-live="polite"
+               aria-relevant="additions text"
+               aria-label="Conversation avec l’assistant AIMER">
+            <div class="voice-assistant__message voice-assistant__message--assistant">
+              <span class="voice-assistant__message-avatar" aria-hidden="true">
+                <i class="icon-base bx bx-bot"></i>
+              </span>
+              <div class="voice-assistant__bubble">
+                <p class="mb-1 fw-medium">Bonjour, comment puis-je vous aider&nbsp;?</p>
+                <p class="mb-0 text-muted">
+                  Décrivez votre tâche, votre modalité ou vos contraintes pour recevoir des recommandations issues du corpus scientifique.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <form id="voice-assistant-form"
+                action="{% url 'rag-recommend' %}"
+                method="get"
+                novalidate>
+            <label class="form-label" for="voice-assistant-query">Votre question</label>
+            <textarea id="voice-assistant-query"
+                      name="q"
+                      class="form-control"
+                      rows="3"
+                      maxlength="{{ rag_query_max_length }}"
+                      placeholder="Ex. Quel modèle recommandez-vous pour classifier des images IRM ?"
+                      aria-describedby="voice-assistant-help voice-assistant-status voice-assistant-counter"
+                      required></textarea>
+            <input type="hidden" name="top_k" value="3" />
+
+            <div class="d-flex flex-column flex-lg-row align-items-lg-center justify-content-between gap-3 mt-3">
+              <div class="d-flex flex-wrap gap-2">
+                <button type="button"
+                        class="btn btn-outline-primary"
+                        id="voice-assistant-microphone"
+                        aria-controls="voice-assistant-query"
+                        aria-pressed="false">
+                  <i class="icon-base bx bx-microphone me-1" aria-hidden="true"></i>
+                  <span>Dicter</span>
+                </button>
+                <button type="submit" class="btn btn-primary" id="voice-assistant-submit">
+                  <i class="icon-base bx bx-send me-1" aria-hidden="true"></i>
+                  <span>Envoyer</span>
+                </button>
+                <button type="button"
+                        class="btn btn-outline-secondary"
+                        id="voice-assistant-read"
+                        disabled>
+                  <i class="icon-base bx bx-volume-full me-1" aria-hidden="true"></i>
+                  <span>Lire la réponse</span>
+                </button>
+                <button type="button"
+                        class="btn btn-outline-secondary"
+                        id="voice-assistant-stop"
+                        disabled>
+                  <i class="icon-base bx bx-stop me-1" aria-hidden="true"></i>
+                  <span>Arrêter</span>
+                </button>
+              </div>
+
+              <div class="form-check form-switch mb-0">
+                <input class="form-check-input"
+                       type="checkbox"
+                       role="switch"
+                       id="voice-assistant-auto-read" />
+                <label class="form-check-label" for="voice-assistant-auto-read">
+                  Lecture automatique
+                </label>
+              </div>
+            </div>
+
+            <div class="d-flex justify-content-between gap-3 mt-2">
+              <p id="voice-assistant-status" class="small text-muted mb-0" role="status">
+                Prêt à écouter votre question.
+              </p>
+              <span id="voice-assistant-counter" class="small text-muted text-nowrap">
+                0 / {{ rag_query_max_length }}
+              </span>
+            </div>
+            <p id="voice-assistant-help" class="small text-muted mb-0 mt-2">
+              AIMER ne conserve aucun enregistrement audio. La reconnaissance vocale peut être traitée par le service de votre navigateur selon sa propre politique de confidentialité.
+            </p>
+            <p id="voice-assistant-support" class="small text-warning mb-0 mt-1" hidden></p>
+          </form>
         </div>
       </div>
 

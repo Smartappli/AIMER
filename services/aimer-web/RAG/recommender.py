@@ -39,17 +39,87 @@ METRIC_HINTS = (
 )
 
 TASK_HINTS = {
-    "classification": {"classification", "classify", "triage"},
-    "segmentation": {"segmentation", "segment", "mask", "contour"},
-    "detection": {"detection", "detect", "localization", "lesion"},
+    "classification": {
+        "classification",
+        "classify",
+        "classifier",
+        "classificatie",
+        "classificeren",
+        "klassifikation",
+        "klassifizieren",
+        "triage",
+    },
+    "segmentation": {
+        "segmentation",
+        "segment",
+        "segmenter",
+        "segmentatie",
+        "segmenteren",
+        "segmentierung",
+        "segmentieren",
+        "mask",
+        "contour",
+    },
+    "detection": {
+        "detection",
+        "détection",
+        "detect",
+        "détecter",
+        "detectie",
+        "detecteren",
+        "erkennung",
+        "erkennen",
+        "localization",
+        "localisation",
+        "lokalisatie",
+        "lokalisierung",
+        "lesion",
+        "lésion",
+        "laesie",
+        "läsion",
+    },
 }
 
 MODALITY_HINTS = {
-    "mri": {"mri", "irm"},
-    "ct": {"ct", "scanner", "tomodensitometrie"},
-    "xray": {"xray", "x-ray", "radiography", "radio"},
-    "ultrasound": {"ultrasound", "echo", "echography"},
-    "dermoscopy": {"dermoscopy", "skin", "dermatology"},
+    "mri": {"mri", "irm", "mrt", "magnetresonanztomographie"},
+    "ct": {
+        "ct",
+        "ct-scan",
+        "scanner",
+        "tomodensitometrie",
+        "tomodensitométrie",
+        "computertomografie",
+        "computertomographie",
+    },
+    "xray": {
+        "xray",
+        "x-ray",
+        "radiography",
+        "radiographie",
+        "radio",
+        "röntgen",
+        "rontgen",
+        "röntgenfoto",
+    },
+    "ultrasound": {
+        "ultrasound",
+        "echo",
+        "echography",
+        "échographie",
+        "echografie",
+        "ultraschall",
+        "sonografie",
+    },
+    "dermoscopy": {
+        "dermoscopy",
+        "dermoscopie",
+        "dermatology",
+        "dermatologie",
+        "dermatoskopie",
+        "skin",
+        "huid",
+        "haut",
+    },
 }
 
 STOPWORDS = {
@@ -67,6 +137,137 @@ STOPWORDS = {
     "imaging",
     "best",
     "meilleur",
+    "meilleure",
+    "pour",
+    "avec",
+    "dans",
+    "quel",
+    "quelle",
+    "beste",
+    "voor",
+    "met",
+    "welke",
+    "der",
+    "die",
+    "das",
+    "und",
+    "für",
+    "mit",
+    "welches",
+    "welche",
+}
+
+SUPPORTED_LANGUAGES = frozenset({"fr", "en", "nl", "de"})
+
+RATIONALE_TEXT = {
+    "fr": (
+        "Modèle recommandé car fréquemment mentionné dans les passages retrouvés, "
+        "avec des signaux de performance et d'adéquation au contexte de requête."
+    ),
+    "en": (
+        "This model is recommended because it is frequently mentioned in the "
+        "retrieved passages, with performance and query-context relevance signals."
+    ),
+    "nl": (
+        "Dit model wordt aanbevolen omdat het vaak voorkomt in de opgehaalde "
+        "passages, met aanwijzingen voor prestaties en relevantie voor de vraag."
+    ),
+    "de": (
+        "Dieses Modell wird empfohlen, weil es in den abgerufenen Passagen häufig "
+        "erwähnt wird und Leistungs- sowie Kontextsignale zur Anfrage aufweist."
+    ),
+}
+
+FALLBACK_RATIONALE_TEXT = {
+    "fr": (
+        "Suggestion exploratoire basée sur le catalogue de la base de connaissances "
+        "(pas assez d'extraits récupérés pour scorer)."
+    ),
+    "en": (
+        "Exploratory suggestion based on the knowledge-base catalogue "
+        "(not enough retrieved excerpts to calculate a score)."
+    ),
+    "nl": (
+        "Verkennende suggestie op basis van de kennisbankcatalogus "
+        "(onvoldoende opgehaalde fragmenten om een score te berekenen)."
+    ),
+    "de": (
+        "Explorative Empfehlung auf Basis des Wissensbankkatalogs "
+        "(nicht genügend abgerufene Auszüge für eine Bewertung)."
+    ),
+}
+
+NO_RECOMMENDATION_TEXT = {
+    "fr": (
+        "Aucune recommandation étayée n'a été retournée, car les preuves récupérées "
+        "ne mentionnent aucun modèle catalogué avec un support exploitable."
+    ),
+    "en": (
+        "No grounded recommendation was returned because the retrieved evidence did "
+        "not mention a catalogued model with usable support."
+    ),
+    "nl": (
+        "Er is geen onderbouwde aanbeveling beschikbaar omdat het opgehaalde bewijs "
+        "geen gecatalogiseerd model met bruikbare ondersteuning vermeldde."
+    ),
+    "de": (
+        "Es wurde keine belegte Empfehlung zurückgegeben, da die abgerufenen Belege "
+        "kein katalogisiertes Modell mit verwertbarer Unterstützung nennen."
+    ),
+}
+
+SAFETY_NOTICE_TEXT = {
+    "fr": (
+        "Aide à la décision expérimentale ML uniquement. Ne remplace pas le jugement "
+        "médical, ni une validation clinique/prospective."
+    ),
+    "en": (
+        "For experimental ML decision support only. This does not replace medical "
+        "judgement or clinical/prospective validation."
+    ),
+    "nl": (
+        "Uitsluitend voor experimentele ML-beslissingsondersteuning. Dit vervangt "
+        "geen medisch oordeel of klinische/prospectieve validatie."
+    ),
+    "de": (
+        "Nur zur experimentellen ML-Entscheidungsunterstützung. Dies ersetzt weder "
+        "medizinisches Urteil noch eine klinische/prospektive Validierung."
+    ),
+}
+
+EXPERIMENTAL_NOTES_TEXT = {
+    "fr": (
+        "Valider ce modèle sur un sous-ensemble local et le comparer au référentiel "
+        "clinique avant tout déploiement.",
+        "Tracer AUC/Dice/sensibilité-spécificité selon la tâche clinique et documenter "
+        "les biais de population.",
+        "Le modèle « {model} » est supporté par {count} extrait(s) dans la base "
+        "courante; confirmer la reproductibilité locale.",
+    ),
+    "en": (
+        "Validate this model on a local subset and compare it with the clinical "
+        "baseline before deployment.",
+        "Track AUC/Dice/sensitivity-specificity for the clinical task and document "
+        "population bias.",
+        "The model “{model}” is supported by {count} excerpt(s) in the current "
+        "knowledge base; confirm local reproducibility.",
+    ),
+    "nl": (
+        "Valideer dit model op een lokale subset en vergelijk het vóór implementatie "
+        "met de klinische referentie.",
+        "Volg AUC/Dice/sensitiviteit-specificiteit voor de klinische taak en "
+        "documenteer populatiebias.",
+        "Het model ‘{model}’ wordt ondersteund door {count} fragment(en) in de huidige "
+        "kennisbank; bevestig de lokale reproduceerbaarheid.",
+    ),
+    "de": (
+        "Validieren Sie dieses Modell vor dem Einsatz an einer lokalen Teilmenge und "
+        "vergleichen Sie es mit der klinischen Referenz.",
+        "Erfassen Sie AUC/Dice/Sensitivität-Spezifität für die klinische Aufgabe und "
+        "dokumentieren Sie Populationsverzerrungen.",
+        "Das Modell „{model}“ wird durch {count} Auszug/Auszüge in der aktuellen "
+        "Wissensbasis gestützt; bestätigen Sie die lokale Reproduzierbarkeit.",
+    ),
 }
 
 MIN_TOKEN_LENGTH = 2
@@ -121,6 +322,7 @@ class RecommendationResponse(BaseModel):
     """Structured response returned by the recommendation engine."""
 
     query: str
+    language: str = "fr"
     query_profile: QueryProfile
     used_filters: dict[str, Any]
     retrieval_mode: str
@@ -193,7 +395,7 @@ def _tokenize_query(query: str) -> set[str]:
     """
     return {
         token
-        for token in re.findall(r"[a-zA-Z0-9]+", query.lower())
+        for token in re.findall(r"[^\W_]+", query.lower())
         if len(token) > MIN_TOKEN_LENGTH and token not in STOPWORDS
     }
 
@@ -477,7 +679,17 @@ def _score_documents_against_catalog(
     return scored
 
 
-def _build_experimental_notes(model_name: str, evidence_count: int) -> list[str]:
+def _normalize_language(language: str) -> str:
+    """Return a supported base language code, defaulting to French."""
+    normalized = language.strip().lower().split("-", maxsplit=1)[0]
+    return normalized if normalized in SUPPORTED_LANGUAGES else "fr"
+
+
+def _build_experimental_notes(
+    model_name: str,
+    evidence_count: int,
+    language: str = "fr",
+) -> list[str]:
     """
     Generate practical experiment notes to guide clinicians and ML teams.
 
@@ -489,19 +701,10 @@ def _build_experimental_notes(model_name: str, evidence_count: int) -> list[str]
         List of practical validation notes.
 
     """
+    localized = EXPERIMENTAL_NOTES_TEXT[_normalize_language(language)]
     return [
-        (
-            "Valider ce modèle sur un sous-ensemble local et comparer au baseline "
-            "clinique avant tout déploiement."
-        ),
-        (
-            "Tracer AUC/Dice/sensibilité-spécificité selon la tâche clinique et "
-            "documenter les biais de population."
-        ),
-        (
-            f"Le modèle « {model_name} » est supporté par {evidence_count} extrait(s) "
-            "dans la base courante; confirmer la reproductibilité locale."
-        ),
+        note.format(model=model_name, count=evidence_count)
+        for note in localized
     ]
 
 
@@ -583,6 +786,7 @@ def _fallback_recommendations(
     catalog: dict[str, set[str]],
     profile: QueryProfile,
     top_k: int,
+    language: str,
 ) -> list[RecommendationItem]:
     """
     Provide deterministic lexical suggestions for non-clinical exploration.
@@ -617,13 +821,10 @@ def _fallback_recommendations(
         RecommendationItem(
             model_name=model,
             confidence=0.35,
-            rationale=(
-                "Suggestion exploratoire basée sur le catalogue de la base de "
-                "connaissances (pas assez d'extraits récupérés pour scorer)."
-            ),
+            rationale=FALLBACK_RATIONALE_TEXT[language],
             evidence=[],
             literature_support=0,
-            experimental_notes=_build_experimental_notes(model, 0),
+            experimental_notes=_build_experimental_notes(model, 0, language),
         )
         for model in fallback_models
     ]
@@ -650,6 +851,7 @@ def recommend_models_for_query(
     pdf_directory: Path | None = None,
     strict_openrag: bool | None = None,
     allow_ungrounded: bool | None = None,
+    language: str = "fr",
 ) -> RecommendationResponse:
     """
     Recommend candidate models based on retrieved literature snippets.
@@ -667,6 +869,7 @@ def recommend_models_for_query(
         Structured recommendation response with ranked models and evidence.
 
     """
+    resolved_language = _normalize_language(language)
     profile = _infer_query_profile(query)
     catalog = _build_model_catalog(pdf_directory=pdf_directory)
 
@@ -686,14 +889,16 @@ def recommend_models_for_query(
 
     if not scored:
         if resolved_allow_ungrounded:
-            recommendations = _fallback_recommendations(catalog, profile, top_k)
+            recommendations = _fallback_recommendations(
+                catalog,
+                profile,
+                top_k,
+                resolved_language,
+            )
             retrieval_mode = f"{retrieval_mode}+ungrounded-catalog"
         else:
             recommendations = []
-            no_recommendation_reason = (
-                "No grounded recommendation returned because retrieved evidence "
-                "did not mention a catalogued model with usable support."
-            )
+            no_recommendation_reason = NO_RECOMMENDATION_TEXT[resolved_language]
             retrieval_mode = f"{retrieval_mode}+no-grounded-evidence"
     else:
         ranked = sorted(scored.items(), key=lambda item: item[1].score, reverse=True)[
@@ -718,29 +923,24 @@ def recommend_models_for_query(
                 RecommendationItem(
                     model_name=model_name,
                     confidence=round(confidence, 2),
-                    rationale=(
-                        "Modèle recommandé car fréquemment mentionné dans les passages "
-                        "retrouvés, avec des signaux de performance et d'adéquation "
-                        "au contexte de requête."
-                    ),
+                    rationale=RATIONALE_TEXT[resolved_language],
                     evidence=evidence.evidence[:3],
                     literature_support=len(evidence.evidence),
                     experimental_notes=_build_experimental_notes(
                         model_name,
                         len(evidence.evidence),
+                        resolved_language,
                     ),
                 ),
             )
 
     return RecommendationResponse(
         query=query,
+        language=resolved_language,
         query_profile=profile,
         used_filters=used_filters,
         retrieval_mode=retrieval_mode,
-        safety_notice=(
-            "Aide à la décision expérimentale ML uniquement. Ne remplace pas le "
-            "jugement médical, ni une validation clinique/prospective."
-        ),
+        safety_notice=SAFETY_NOTICE_TEXT[resolved_language],
         recommended_models=recommendations,
         no_recommendation_reason=no_recommendation_reason,
     )

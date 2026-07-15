@@ -4,8 +4,11 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/aimer.iml" filepath="$PROJECT_DIR$/.idea/aimer.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/aimer-workspace.iml" filepath="$PROJECT_DIR$/.idea/aimer-workspace.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/aimer@1.iml" filepath="$PROJECT_DIR$/.idea/aimer@1.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/farm.iml" filepath="$PROJECT_DIR$/.idea/farm.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/farm@1.iml" filepath="$PROJECT_DIR$/.idea/farm@1.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/mage.iml" filepath="$PROJECT_DIR$/.idea/mage.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/mage@1.iml" filepath="$PROJECT_DIR$/.idea/mage@1.iml" />
     </modules>
   </component>
 </project>

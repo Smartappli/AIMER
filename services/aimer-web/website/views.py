@@ -57,6 +57,7 @@ PROJECT_DESCRIPTIONS: Final[dict[str, str]] = {
 
 
 RAG_RATE_LIMIT_WINDOW_SECONDS: Final[int] = 60
+SUPPORTED_RAG_LANGUAGES: Final[frozenset[str]] = frozenset({"fr", "en", "nl", "de"})
 
 
 def _rag_rate_limit_exceeded(request: HttpRequest) -> bool:
@@ -217,6 +218,9 @@ class DashboardView(FrontPagesView):
         articles = _discover_scientific_articles()
         project_index = _build_project_rag_index(PROJECT_KEYWORDS, articles)
         context["total_scientific_articles"] = len(articles)
+        context["rag_query_max_length"] = int(
+            getattr(settings, "RAG_RECOMMENDATION_MAX_QUERY_LENGTH", 2000),
+        )
         context["project_cards"] = [
             {
                 "name": project_name,
@@ -302,6 +306,22 @@ class RagRecommendationView(View):
                 metadata={"reason": "anonymous"},
             )
             return JsonResponse({"error": "Authentication required"}, status=401)
+        requested_language = (request.GET.get("language") or "fr").strip().lower()
+        language = requested_language.split("-", maxsplit=1)[0]
+        if language not in SUPPORTED_RAG_LANGUAGES:
+            audit_event(
+                "rag.recommendation.rejected",
+                request=request,
+                user=request.user,
+                metadata={
+                    "reason": "unsupported_language",
+                    "language": requested_language[:16],
+                },
+            )
+            return JsonResponse(
+                {"error": "Supported languages are: fr, en, nl, de"},
+                status=400,
+            )
         query = (request.GET.get("q") or "").strip()
         if not query:
             audit_event(
@@ -352,6 +372,7 @@ class RagRecommendationView(View):
                 query=query,
                 top_k=top_k,
                 strict_openrag=True,
+                language=language,
             )
         except RagServiceUnavailableError as exc:
             audit_event(
@@ -361,6 +382,7 @@ class RagRecommendationView(View):
                 metadata={
                     "query_hash": _query_hash(query),
                     "top_k": top_k,
+                    "language": language,
                     "reason": str(exc)[:256],
                 },
             )
@@ -375,6 +397,7 @@ class RagRecommendationView(View):
             metadata={
                 "query_hash": _query_hash(query),
                 "top_k": top_k,
+                "language": language,
                 "recommendation_count": len(payload.get("recommended_models") or []),
             },
         )
