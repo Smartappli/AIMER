@@ -1875,22 +1875,27 @@ wheels = [
 
 [[package]]
 name = "langsmith"
-version = "0.8.5"
+version = "0.10.4"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
+    { name = "anyio" },
+    { name = "distro" },
     { name = "httpx" },
     { name = "orjson", marker = "platform_python_implementation != 'PyPy'" },
     { name = "packaging" },
     { name = "pydantic" },
     { name = "requests" },
     { name = "requests-toolbelt" },
+    { name = "sniffio" },
+    { name = "typing-extensions" },
     { name = "uuid-utils" },
+    { name = "websockets" },
     { name = "xxhash" },
     { name = "zstandard" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/17/eb/8883d1158c743d0aac350f09df7880714d27283497e8c80bb9fe3480f165/langsmith-0.8.5.tar.gz", hash = "sha256:3615243d99c12f4047f13042bdc05a373dce232d106a6511b3ca7b48c5af1c2c", size = 4462348, upload-time = "2026-05-15T21:31:41.093Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/2c/17/e8a73c6595fb58f12107a7c609034b32b24d7b2956e9dd079999344792be/langsmith-0.10.4.tar.gz", hash = "sha256:c13c750a044347b3b5eeb54572f1d85ed891d6055fc1c05397d1a3c0aa25a0ab", size = 4719993, upload-time = "2026-07-14T20:58:40.508Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/23/85/968c88a63e32a59b3e5c68afd2fe114ce0708a125db0be1a85efc25fb2ea/langsmith-0.8.5-py3-none-any.whl", hash = "sha256:efc779f9d450dcaf9d97bc8894f4926276509d6e730e05289af9a64debce06ae", size = 399564, upload-time = "2026-05-15T21:31:39.046Z" },
+    { url = "https://files.pythonhosted.org/packages/9d/82/c6bae8dfea5ca79293a98293df0a8c84064a1850fc46ae69c49c6f97f14c/langsmith-0.10.4-py3-none-any.whl", hash = "sha256:73025846a1a4246e06b8bb513726aa88473b678163dbdf9c290273e431b07526", size = 657371, upload-time = "2026-07-14T20:58:38.174Z" },
 ]
 
 [[package]]
