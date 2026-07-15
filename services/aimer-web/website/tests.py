@@ -319,17 +319,25 @@ class DashboardViewTests(BaseTestCase):
             "The voice assistant must expose its animated 3D avatar.",
         )
         self._check(
-            b'voice-avatar__viseme--open' in response.content,
+            b"giovani-assistant.jpg" in response.content,
+            "Giovani's reference portrait must be used by the voice assistant.",
+        )
+        self._check(
+            b"Giovani" in response.content,
+            "The voice assistant must introduce itself as Giovani.",
+        )
+        self._check(
+            b"voice-avatar__viseme--open" in response.content,
             "The voice assistant avatar must expose lip-sync visemes.",
         )
         self._check(
             b'id="voice-assistant-language"' in response.content,
             "The voice assistant must expose its language selector.",
         )
-        for locale in (b"fr-FR", b"en-US", b"nl-NL", b"de-DE"):
+        for locale in ("fr-FR", "en-US", "nl-NL", "de-DE"):
             self._check(
-                f'value="{locale.decode()}"'.encode() in response.content,
-                f"The voice assistant must support locale {locale.decode()}.",
+                f'value="{locale}"'.encode() in response.content,
+                f"The voice assistant must support locale {locale}.",
             )
         self._check(
             b"js/voice-assistant.js" in response.content,
@@ -575,7 +583,7 @@ class RagRecommenderTests(BaseTestCase):
     def test_recommender_understands_supported_languages(self) -> None:
         """Ensure FR, EN, NL, and DE queries retain task and modality intent."""
         cases = (
-            ("fr", "classification d’images IRM", "Aide à la décision"),
+            ("fr", "classification d'images IRM", "Aide à la décision"),
             ("en", "classification of MRI images", "experimental ML"),
             ("nl", "classificatie van MRI-beelden", "Uitsluitend"),
             ("de", "Klassifikation von MRT-Bildern", "Nur zur"),

@@ -47,6 +47,10 @@ jobs:
         working-directory: services/aimer-web
         run: uv run --locked python -m pytest -q RAG/tests
 
+      - name: Run Giovani Selenium tests
+        working-directory: services/aimer-web
+        run: uv run --locked python manage.py test website.selenium_tests --testrunner django.test.runner.DiscoverRunner --verbosity 1
+
   unit-tests-mage:
     name: Unit Tests (MAGE)
     runs-on: ubuntu-latest

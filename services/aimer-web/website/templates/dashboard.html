@@ -35,14 +35,17 @@
            id="voice-assistant"
            data-endpoint="{% url 'rag-recommend' %}"
            data-language="fr-FR"
+           data-avatar-url="{% static 'img/avatars/giovani-assistant.jpg' %}"
            data-max-length="{{ rag_query_max_length }}">
         <div class="card-header voice-assistant__hero">
           <div class="voice-assistant__avatar-stage"
                id="voice-assistant-avatar"
                data-state="idle"
                data-viseme="rest"
+               data-lip-index="0"
+               data-reading-rate="1"
                role="img"
-               aria-label="Avatar 3D animé de l’assistant AIMER">
+               aria-label="Avatar 3D animé de Giovani">
             <div class="voice-assistant__avatar-halo" aria-hidden="true"></div>
             <div class="voice-assistant__avatar-model" aria-hidden="true">
               <div class="voice-assistant__photo-frame voice-avatar__head">
@@ -58,8 +61,8 @@
                      focusable="false">
                   <defs>
                     <radialGradient id="giovani-skin-mask" cx="50%" cy="30%" r="70%">
-                      <stop offset="0" stop-color="#d79a78" />
-                      <stop offset="1" stop-color="#9f624e" />
+                      <stop offset="0" stop-color="#bd806d" />
+                      <stop offset="1" stop-color="#8d574b" />
                     </radialGradient>
                     <filter id="giovani-mask-soften" x="-30%" y="-30%" width="160%" height="160%">
                       <feGaussianBlur stdDeviation="1.2" />
@@ -107,6 +110,31 @@
                 </svg>
               </div>
             </div>
+            <div class="voice-assistant__attitude-cues" aria-hidden="true">
+              <span class="voice-assistant__attitude-cue voice-assistant__attitude-cue--listening">
+                <i class="icon-base bx bx-microphone"></i>
+                <span class="voice-assistant__listening-waves">
+                  <i></i><i></i><i></i>
+                </span>
+              </span>
+              <span class="voice-assistant__attitude-cue voice-assistant__attitude-cue--thinking">
+                <i class="icon-base bx bx-bulb"></i>
+                <span class="voice-assistant__thinking-dots">
+                  <i></i><i></i><i></i>
+                </span>
+              </span>
+              <span class="voice-assistant__attitude-cue voice-assistant__attitude-cue--speaking">
+                <span class="voice-assistant__speaking-bars">
+                  <i></i><i></i><i></i><i></i>
+                </span>
+              </span>
+              <span class="voice-assistant__attitude-cue voice-assistant__attitude-cue--success">
+                <i class="icon-base bx bx-check"></i>
+              </span>
+              <span class="voice-assistant__attitude-cue voice-assistant__attitude-cue--error">
+                <i class="icon-base bx bx-error"></i>
+              </span>
+            </div>
             <span class="voice-assistant__avatar-status" aria-hidden="true">
               <span class="voice-assistant__avatar-indicator"></span>
               <span id="voice-assistant-avatar-state" data-i18n="avatarIdle">Disponible</span>
@@ -115,7 +143,7 @@
 
           <div class="voice-assistant__intro">
             <div class="d-flex flex-wrap align-items-center gap-2 mb-2">
-              <h3 class="h4 mb-0">Assistant AIMER</h3>
+              <h3 class="h4 mb-0">Giovani</h3>
               <span class="badge bg-label-primary">
                 <i class="icon-base bx bx-accessibility me-1" aria-hidden="true"></i>
                 <span data-i18n="avatarBadge">Avatar 3D vocal</span>
@@ -125,23 +153,77 @@
             <p class="mb-3" data-i18n="introDescription">
               L’avatar vous écoute, recherche les références pertinentes et anime ses lèvres pendant la lecture de la réponse.
             </p>
-            <div class="voice-assistant__language">
-              <label class="form-label small fw-medium mb-1"
-                     for="voice-assistant-language"
-                     data-i18n="languageLabel">Langue de l’assistant</label>
-              <select class="form-select form-select-sm"
-                      id="voice-assistant-language"
-                      aria-describedby="voice-assistant-language-help">
-                <option value="fr-FR" lang="fr">Français</option>
-                <option value="en-US" lang="en">English</option>
-                <option value="nl-NL" lang="nl">Nederlands</option>
-                <option value="de-DE" lang="de">Deutsch</option>
-              </select>
-              <small class="text-muted"
-                     id="voice-assistant-language-help"
-                     data-i18n="languageHelp">
-                Ce choix règle la dictée, la voix et les réponses.
-              </small>
+            <div class="voice-assistant__preferences">
+              <div class="voice-assistant__language">
+                <label class="form-label small fw-medium mb-1"
+                       for="voice-assistant-language"
+                       data-i18n="languageLabel">Langue de l’assistant</label>
+                <select class="form-select form-select-sm"
+                        id="voice-assistant-language"
+                        aria-describedby="voice-assistant-language-help">
+                  <option value="fr-FR" lang="fr">Français</option>
+                  <option value="en-US" lang="en">English</option>
+                  <option value="nl-NL" lang="nl">Nederlands</option>
+                  <option value="de-DE" lang="de">Deutsch</option>
+                </select>
+                <small class="text-muted"
+                       id="voice-assistant-language-help"
+                       data-i18n="languageHelp">
+                  Ce choix règle la dictée, la voix et les réponses.
+                </small>
+              </div>
+              <div class="voice-assistant__rate">
+                <label class="form-label small fw-medium mb-1"
+                       for="voice-assistant-rate"
+                       data-i18n="rateLabel">Vitesse de lecture</label>
+                <select class="form-select form-select-sm"
+                        id="voice-assistant-rate"
+                        aria-describedby="voice-assistant-rate-help">
+                  <option value="0.75">0,75×</option>
+                  <option value="1" selected>1×</option>
+                  <option value="1.25">1,25×</option>
+                  <option value="1.5">1,5×</option>
+                </select>
+                <small class="text-muted"
+                       id="voice-assistant-rate-help"
+                       data-i18n="rateHelp">
+                  Le débit de la voix et des lèvres reste synchronisé.
+                </small>
+              </div>
+            </div>
+            <div class="voice-assistant__demo mt-3">
+              <div class="d-flex flex-wrap align-items-center gap-2">
+                <button type="button"
+                        class="btn btn-sm btn-label-primary"
+                        id="voice-assistant-demo"
+                        aria-pressed="false"
+                        aria-describedby="voice-assistant-demo-help">
+                  <i class="icon-base bx bx-play-circle me-1" aria-hidden="true"></i>
+                  <span data-i18n="demoStart">Lancer la démo vocale</span>
+                </button>
+                <small class="text-muted"
+                       id="voice-assistant-demo-help"
+                       data-i18n="demoHelp">
+                  Découvrez la dictée, l’analyse RAG et la réponse parlée en un seul parcours.
+                </small>
+              </div>
+              <div class="voice-assistant__demo-progress mt-2"
+                   id="voice-assistant-demo-progress"
+                   aria-hidden="true"
+                   hidden>
+                <span class="voice-assistant__demo-step" data-demo-step="dictation">
+                  <i class="icon-base bx bx-microphone" aria-hidden="true"></i>
+                  <span data-i18n="demoStepDictation">Dictée</span>
+                </span>
+                <span class="voice-assistant__demo-step" data-demo-step="analysis">
+                  <i class="icon-base bx bx-search-alt" aria-hidden="true"></i>
+                  <span data-i18n="demoStepAnalysis">Analyse</span>
+                </span>
+                <span class="voice-assistant__demo-step" data-demo-step="response">
+                  <i class="icon-base bx bx-volume-full" aria-hidden="true"></i>
+                  <span data-i18n="demoStepResponse">Réponse</span>
+                </span>
+              </div>
             </div>
           </div>
         </div>
@@ -152,14 +234,17 @@
                role="log"
                aria-live="polite"
                aria-relevant="additions text"
-               aria-label="Conversation avec l’assistant AIMER"
+               aria-label="Conversation avec Giovani"
                data-i18n-aria-label="conversationLabel">
             <div class="voice-assistant__message voice-assistant__message--assistant">
               <span class="voice-assistant__message-avatar" aria-hidden="true">
-                <i class="icon-base bx bx-bot"></i>
+                <img src="{% static 'img/avatars/giovani-assistant.jpg' %}"
+                     width="750"
+                     height="511"
+                     alt="" />
               </span>
               <div class="voice-assistant__bubble">
-                <p class="mb-1 fw-medium" data-i18n="greetingTitle">Bonjour, comment puis-je vous aider&nbsp;?</p>
+                <p class="mb-1 fw-medium" data-i18n="greetingTitle">Bonjour, je suis Giovani. Comment puis-je vous aider&nbsp;?</p>
                 <p class="mb-0 text-muted" data-i18n="greetingBody">
                   Décrivez votre tâche, votre modalité ou vos contraintes pour recevoir des recommandations issues du corpus scientifique.
                 </p>

@@ -10,6 +10,15 @@
   display: inline-flex;
   flex: 0 0 auto;
   justify-content: center;
+  overflow: hidden;
+}
+
+.voice-assistant__message-avatar img,
+.voice-assistant__message-avatar-image {
+  height: 100%;
+  object-fit: cover;
+  object-position: 46% 42%;
+  width: 100%;
 }
 
 .voice-assistant__hero {
@@ -45,6 +54,14 @@
 
 .voice-assistant__avatar-stage[data-state="speaking"] {
   --avatar-state-color: var(--bs-primary);
+}
+
+.voice-assistant__avatar-stage[data-state="success"] {
+  --avatar-state-color: var(--bs-success);
+}
+
+.voice-assistant__avatar-stage[data-state="error"] {
+  --avatar-state-color: var(--bs-danger);
 }
 
 .voice-assistant__avatar-halo {
@@ -171,7 +188,7 @@
 }
 
 .voice-assistant__avatar-stage[data-state="speaking"] .voice-avatar__mouth-mask {
-  opacity: 0.9;
+  opacity: 0.82;
 }
 
 .voice-assistant__avatar-stage[data-state="listening"] .voice-avatar__head {
@@ -188,6 +205,135 @@
 
 .voice-assistant__avatar-stage[data-state="speaking"] .voice-avatar__head {
   animation: voice-avatar-speak 0.9s ease-in-out infinite;
+}
+
+.voice-assistant__avatar-stage[data-state="success"] .voice-avatar__head {
+  animation: voice-avatar-success 0.7s ease-out;
+}
+
+.voice-assistant__avatar-stage[data-state="error"] .voice-avatar__head {
+  animation: voice-avatar-error 0.45s ease-in-out;
+}
+
+.voice-assistant__attitude-cues {
+  inset: 0;
+  pointer-events: none;
+  position: absolute;
+  z-index: 2;
+}
+
+.voice-assistant__attitude-cue {
+  align-items: center;
+  background: color-mix(in srgb, var(--bs-card-bg) 90%, transparent);
+  border: 1px solid color-mix(in srgb, var(--avatar-state-color) 42%, var(--bs-border-color));
+  border-radius: 50%;
+  box-shadow: 0 0.35rem 1rem color-mix(in srgb, var(--avatar-state-color) 22%, transparent);
+  color: var(--avatar-state-color);
+  display: none;
+  height: 2.75rem;
+  justify-content: center;
+  position: absolute;
+  right: 0.2rem;
+  top: 1rem;
+  width: 2.75rem;
+}
+
+.voice-assistant__avatar-stage[data-state="listening"]
+  .voice-assistant__attitude-cue--listening,
+.voice-assistant__avatar-stage[data-state="thinking"]
+  .voice-assistant__attitude-cue--thinking,
+.voice-assistant__avatar-stage[data-state="speaking"]
+  .voice-assistant__attitude-cue--speaking,
+.voice-assistant__avatar-stage[data-state="success"]
+  .voice-assistant__attitude-cue--success,
+.voice-assistant__avatar-stage[data-state="error"]
+  .voice-assistant__attitude-cue--error {
+  display: flex;
+}
+
+.voice-assistant__attitude-cue--listening > .icon-base,
+.voice-assistant__attitude-cue--thinking > .icon-base,
+.voice-assistant__attitude-cue--success > .icon-base,
+.voice-assistant__attitude-cue--error > .icon-base {
+  font-size: 1.25rem;
+}
+
+.voice-assistant__listening-waves {
+  inset: -0.1rem;
+  position: absolute;
+}
+
+.voice-assistant__listening-waves i {
+  animation: voice-avatar-listening-wave 1.5s ease-out infinite;
+  border: 1px solid var(--avatar-state-color);
+  border-radius: 50%;
+  inset: 0;
+  opacity: 0;
+  position: absolute;
+}
+
+.voice-assistant__listening-waves i:nth-child(2) {
+  animation-delay: 0.45s;
+}
+
+.voice-assistant__listening-waves i:nth-child(3) {
+  animation-delay: 0.9s;
+}
+
+.voice-assistant__thinking-dots {
+  align-items: center;
+  background: var(--bs-card-bg);
+  border-radius: 1rem;
+  bottom: -0.35rem;
+  display: flex;
+  gap: 0.12rem;
+  padding: 0.16rem 0.24rem;
+  position: absolute;
+  right: -0.35rem;
+}
+
+.voice-assistant__thinking-dots i {
+  animation: voice-avatar-thinking-dot 1.1s ease-in-out infinite;
+  background: var(--avatar-state-color);
+  border-radius: 50%;
+  height: 0.28rem;
+  width: 0.28rem;
+}
+
+.voice-assistant__thinking-dots i:nth-child(2) {
+  animation-delay: 0.16s;
+}
+
+.voice-assistant__thinking-dots i:nth-child(3) {
+  animation-delay: 0.32s;
+}
+
+.voice-assistant__speaking-bars {
+  align-items: center;
+  display: flex;
+  gap: 0.16rem;
+  height: 1.35rem;
+}
+
+.voice-assistant__speaking-bars i {
+  animation: voice-avatar-speaking-bar calc(0.72s / var(--speech-rate, 1)) ease-in-out infinite;
+  background: var(--avatar-state-color);
+  border-radius: 1rem;
+  height: 35%;
+  width: 0.2rem;
+}
+
+.voice-assistant__speaking-bars i:nth-child(2),
+.voice-assistant__speaking-bars i:nth-child(4) {
+  animation-delay: 0.18s;
+}
+
+.voice-assistant__attitude-cue--success {
+  animation: voice-avatar-feedback-pop 0.5s ease-out;
+}
+
+.voice-assistant__attitude-cue--error {
+  animation: voice-avatar-error 0.45s ease-in-out;
 }
 
 .voice-assistant__avatar-status {
@@ -227,8 +373,57 @@
   max-width: 46rem;
 }
 
-.voice-assistant__language {
-  max-width: 18rem;
+.voice-assistant__preferences {
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: minmax(12rem, 1.4fr) minmax(9rem, 1fr);
+  max-width: 31rem;
+}
+
+.voice-assistant__language,
+.voice-assistant__rate {
+  min-width: 0;
+}
+
+.voice-assistant__demo {
+  max-width: 42rem;
+}
+
+.voice-assistant__demo-progress {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.voice-assistant__demo-progress[hidden] {
+  display: none;
+}
+
+.voice-assistant__demo-step {
+  align-items: center;
+  background: var(--bs-secondary-bg);
+  border: 1px solid var(--bs-border-color);
+  border-radius: 2rem;
+  color: var(--bs-secondary-color);
+  display: inline-flex;
+  font-size: 0.78rem;
+  font-weight: 600;
+  gap: 0.35rem;
+  padding: 0.3rem 0.65rem;
+  transition: background 160ms ease, border-color 160ms ease, color 160ms ease;
+}
+
+.voice-assistant__demo-step.is-active {
+  background: color-mix(in srgb, var(--bs-primary) 14%, transparent);
+  border-color: var(--bs-primary);
+  color: var(--bs-primary);
+}
+
+.voice-assistant__demo-step.is-complete {
+  background: color-mix(in srgb, var(--bs-success) 14%, transparent);
+  border-color: var(--bs-success);
+  color: var(--bs-success);
 }
 
 .voice-assistant__conversation {
@@ -322,17 +517,6 @@
   }
 }
 
-@keyframes voice-avatar-idle {
-  0%,
-  100% {
-    transform: translateY(0) rotateY(0);
-  }
-
-  50% {
-    transform: translateY(-2px) rotateY(1.5deg);
-  }
-}
-
 @keyframes voice-avatar-head-idle {
   0%,
   68%,
@@ -346,17 +530,17 @@
   }
 }
 
-@keyframes voice-avatar-blink {
+@keyframes voice-avatar-photo-blink {
   0%,
   46%,
   49%,
   100% {
-    transform: scaleY(1);
+    opacity: 0;
   }
 
   47%,
   48% {
-    transform: scaleY(0.08);
+    opacity: 0.88;
   }
 }
 
@@ -393,6 +577,83 @@
   }
 }
 
+@keyframes voice-avatar-success {
+  0%,
+  100% {
+    transform: rotate(0) translateY(0);
+  }
+
+  45% {
+    transform: rotate(-1deg) translateY(2px);
+  }
+}
+
+@keyframes voice-avatar-error {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  30% {
+    transform: translateX(-2px) rotate(-1deg);
+  }
+
+  65% {
+    transform: translateX(2px) rotate(1deg);
+  }
+}
+
+@keyframes voice-avatar-listening-wave {
+  0% {
+    opacity: 0.65;
+    transform: scale(0.72);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(1.45);
+  }
+}
+
+@keyframes voice-avatar-thinking-dot {
+  0%,
+  60%,
+  100% {
+    transform: translateY(0);
+  }
+
+  30% {
+    transform: translateY(-0.22rem);
+  }
+}
+
+@keyframes voice-avatar-speaking-bar {
+  0%,
+  100% {
+    height: 32%;
+  }
+
+  50% {
+    height: 100%;
+  }
+}
+
+@keyframes voice-avatar-feedback-pop {
+  0% {
+    opacity: 0;
+    transform: scale(0.55);
+  }
+
+  70% {
+    transform: scale(1.12);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
 @keyframes voice-avatar-halo-spin {
   to {
     transform: rotateX(68deg) rotateZ(360deg) translateZ(-2rem);
@@ -422,11 +683,12 @@
     animation: none;
   }
 
-  .voice-avatar__body,
   .voice-avatar__head,
-  .voice-avatar__eye,
+  .voice-avatar__photo-blink,
   .voice-assistant__avatar-halo,
-  .voice-assistant__avatar-indicator {
+  .voice-assistant__avatar-indicator,
+  .voice-assistant__attitude-cue,
+  .voice-assistant__attitude-cue i {
     animation: none !important;
   }
 }
@@ -442,21 +704,30 @@
     justify-content: center;
   }
 
-  .voice-assistant__language {
+  .voice-assistant__preferences {
     margin-inline: auto;
     text-align: start;
+  }
+
+  .voice-assistant__demo > .d-flex,
+  .voice-assistant__demo-progress {
+    justify-content: center;
   }
 }
 
 @media (max-width: 575.98px) {
+  .voice-assistant__preferences {
+    grid-template-columns: 1fr;
+  }
+
   .voice-assistant__avatar-stage {
     height: 12rem;
     width: 12rem;
   }
 
   .voice-assistant__avatar-model {
-    height: 12rem;
-    width: 11rem;
+    height: 11.45rem;
+    width: 9.8rem;
   }
 
   .voice-assistant__avatar-halo {

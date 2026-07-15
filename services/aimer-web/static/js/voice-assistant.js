@@ -12,19 +12,24 @@ const VOICE_ASSISTANT_LANGUAGES = {
 
 const VOICE_ASSISTANT_TRANSLATIONS = {
   fr: {
-    avatarAria: 'Avatar 3D animé de l’assistant AIMER',
+    avatarAria: 'Avatar 3D animé de Giovani',
     avatarIdle: 'Disponible',
     avatarListening: 'Je vous écoute',
     avatarThinking: 'Je recherche',
     avatarSpeaking: 'Je vous réponds',
+    avatarSuccess: 'Réponse terminée',
+    avatarError: 'Une erreur est survenue',
     avatarBadge: 'Avatar 3D vocal',
     introSubtitle: 'Interrogez le corpus par écrit ou à la voix.',
     introDescription:
       'L’avatar vous écoute, recherche les références pertinentes et anime ses lèvres pendant la lecture de la réponse.',
     languageLabel: 'Langue de l’assistant',
     languageHelp: 'Ce choix règle la dictée, la voix et les réponses.',
-    conversationLabel: 'Conversation avec l’assistant AIMER',
-    greetingTitle: 'Bonjour, comment puis-je vous aider ?',
+    rateLabel: 'Vitesse de lecture',
+    rateHelp: 'Le débit de la voix et des lèvres reste synchronisé.',
+    rateChanged: 'Vitesse de lecture définie sur {rate}×.',
+    conversationLabel: 'Conversation avec Giovani',
+    greetingTitle: 'Bonjour, je suis Giovani. Comment puis-je vous aider ?',
     greetingBody:
       'Décrivez votre tâche, votre modalité ou vos contraintes pour recevoir des recommandations issues du corpus scientifique.',
     questionLabel: 'Votre question',
@@ -72,22 +77,41 @@ const VOICE_ASSISTANT_TRANSLATIONS = {
     requestFailed: 'La demande n’a pas pu être traitée.',
     unexpectedError: 'Une erreur inattendue empêche l’assistant de répondre.',
     responseReceived: 'Réponse reçue.',
+    demoStart: 'Lancer la démo vocale',
+    demoStop: 'Arrêter la démo',
+    demoHelp:
+      'Découvrez la dictée, l’analyse RAG et la réponse parlée en un seul parcours.',
+    demoStepDictation: 'Dictée',
+    demoStepAnalysis: 'Analyse',
+    demoStepResponse: 'Réponse',
+    demoIntro:
+      'Bonjour, je suis Giovani. Je vais démontrer mes capacités vocales. Après cette phrase, posez votre question à voix haute. Je la transcrirai, analyserai le corpus scientifique, puis lirai ma réponse.',
+    demoListening: 'À vous de parler : posez maintenant votre question à Giovani.',
+    demoComplete: 'Démonstration terminée. Giovani a écouté, analysé et répondu.',
+    demoStopped: 'Démonstration arrêtée.',
+    demoUnsupported:
+      'La démonstration nécessite la dictée et la lecture vocales dans ce navigateur.',
     languageChanged: 'Langue de l’assistant définie sur le français.'
   },
   en: {
-    avatarAria: 'Animated 3D avatar of the AIMER assistant',
+    avatarAria: 'Animated 3D avatar of Giovani',
     avatarIdle: 'Available',
     avatarListening: 'I’m listening',
     avatarThinking: 'Searching',
     avatarSpeaking: 'Speaking',
+    avatarSuccess: 'Answer complete',
+    avatarError: 'Something went wrong',
     avatarBadge: '3D voice avatar',
     introSubtitle: 'Ask the corpus by text or voice.',
     introDescription:
       'The avatar listens, searches for relevant references and moves its lips while reading the response.',
     languageLabel: 'Assistant language',
     languageHelp: 'This selection controls dictation, voice and responses.',
-    conversationLabel: 'Conversation with the AIMER assistant',
-    greetingTitle: 'Hello, how can I help?',
+    rateLabel: 'Reading speed',
+    rateHelp: 'Voice and lip movement stay synchronised at this speed.',
+    rateChanged: 'Reading speed set to {rate}×.',
+    conversationLabel: 'Conversation with Giovani',
+    greetingTitle: 'Hello, I’m Giovani. How can I help?',
     greetingBody:
       'Describe your task, modality or constraints to receive recommendations from the scientific corpus.',
     questionLabel: 'Your question',
@@ -134,22 +158,40 @@ const VOICE_ASSISTANT_TRANSLATIONS = {
     requestFailed: 'The request could not be processed.',
     unexpectedError: 'An unexpected error is preventing the assistant from responding.',
     responseReceived: 'Response received.',
+    demoStart: 'Start voice demo',
+    demoStop: 'Stop demo',
+    demoHelp: 'Experience dictation, RAG analysis and a spoken answer in one flow.',
+    demoStepDictation: 'Dictation',
+    demoStepAnalysis: 'Analysis',
+    demoStepResponse: 'Response',
+    demoIntro:
+      'Hello, I am Giovani. I will demonstrate my voice capabilities. After this message, ask your question aloud. I will transcribe it, analyse the scientific corpus and read my answer.',
+    demoListening: 'Your turn: ask Giovani your question now.',
+    demoComplete: 'Demo complete. Giovani listened, analysed and answered.',
+    demoStopped: 'Demo stopped.',
+    demoUnsupported:
+      'This demo requires speech recognition and voice playback in your browser.',
     languageChanged: 'Assistant language set to English.'
   },
   nl: {
-    avatarAria: 'Geanimeerde 3D-avatar van de AIMER-assistent',
+    avatarAria: 'Geanimeerde 3D-avatar van Giovani',
     avatarIdle: 'Beschikbaar',
     avatarListening: 'Ik luister',
     avatarThinking: 'Ik zoek',
     avatarSpeaking: 'Ik antwoord',
+    avatarSuccess: 'Antwoord voltooid',
+    avatarError: 'Er is iets misgegaan',
     avatarBadge: '3D-spraakavatar',
     introSubtitle: 'Doorzoek het corpus met tekst of spraak.',
     introDescription:
       'De avatar luistert, zoekt relevante referenties en beweegt de lippen tijdens het voorlezen van het antwoord.',
     languageLabel: 'Taal van de assistent',
     languageHelp: 'Deze keuze bepaalt de dicteerfunctie, stem en antwoorden.',
-    conversationLabel: 'Gesprek met de AIMER-assistent',
-    greetingTitle: 'Hallo, hoe kan ik u helpen?',
+    rateLabel: 'Leessnelheid',
+    rateHelp: 'Stem en lipbeweging blijven op deze snelheid synchroon.',
+    rateChanged: 'Leessnelheid ingesteld op {rate}×.',
+    conversationLabel: 'Gesprek met Giovani',
+    greetingTitle: 'Hallo, ik ben Giovani. Hoe kan ik u helpen?',
     greetingBody:
       'Beschrijf uw taak, modaliteit of beperkingen om aanbevelingen uit het wetenschappelijke corpus te ontvangen.',
     questionLabel: 'Uw vraag',
@@ -196,22 +238,40 @@ const VOICE_ASSISTANT_TRANSLATIONS = {
     requestFailed: 'De aanvraag kon niet worden verwerkt.',
     unexpectedError: 'Door een onverwachte fout kan de assistent niet antwoorden.',
     responseReceived: 'Antwoord ontvangen.',
+    demoStart: 'Spraakdemo starten',
+    demoStop: 'Demo stoppen',
+    demoHelp: 'Ervaar dicteren, RAG-analyse en een gesproken antwoord in één traject.',
+    demoStepDictation: 'Dicteren',
+    demoStepAnalysis: 'Analyse',
+    demoStepResponse: 'Antwoord',
+    demoIntro:
+      'Hallo, ik ben Giovani. Ik demonstreer nu mijn spraakfuncties. Stel na dit bericht uw vraag hardop. Ik schrijf ze uit, analyseer het wetenschappelijke corpus en lees mijn antwoord voor.',
+    demoListening: 'U bent aan de beurt: stel Giovani nu uw vraag.',
+    demoComplete: 'Demo voltooid. Giovani heeft geluisterd, geanalyseerd en geantwoord.',
+    demoStopped: 'Demo gestopt.',
+    demoUnsupported:
+      'Deze demo vereist spraakherkenning en spraakweergave in uw browser.',
     languageChanged: 'De taal van de assistent is ingesteld op Nederlands.'
   },
   de: {
-    avatarAria: 'Animierter 3D-Avatar des AIMER-Assistenten',
+    avatarAria: 'Animierter 3D-Avatar von Giovani',
     avatarIdle: 'Verfügbar',
     avatarListening: 'Ich höre zu',
     avatarThinking: 'Ich suche',
     avatarSpeaking: 'Ich antworte',
+    avatarSuccess: 'Antwort abgeschlossen',
+    avatarError: 'Ein Fehler ist aufgetreten',
     avatarBadge: '3D-Sprachavatar',
     introSubtitle: 'Fragen Sie den Korpus per Text oder Sprache ab.',
     introDescription:
       'Der Avatar hört zu, sucht relevante Referenzen und bewegt beim Vorlesen der Antwort die Lippen.',
     languageLabel: 'Sprache des Assistenten',
     languageHelp: 'Diese Auswahl steuert Diktat, Stimme und Antworten.',
-    conversationLabel: 'Unterhaltung mit dem AIMER-Assistenten',
-    greetingTitle: 'Hallo, wie kann ich Ihnen helfen?',
+    rateLabel: 'Lesegeschwindigkeit',
+    rateHelp: 'Stimme und Lippenbewegung bleiben bei diesem Tempo synchron.',
+    rateChanged: 'Lesegeschwindigkeit auf {rate}× eingestellt.',
+    conversationLabel: 'Unterhaltung mit Giovani',
+    greetingTitle: 'Hallo, ich bin Giovani. Wie kann ich Ihnen helfen?',
     greetingBody:
       'Beschreiben Sie Ihre Aufgabe, Modalität oder Einschränkungen, um Empfehlungen aus dem wissenschaftlichen Korpus zu erhalten.',
     questionLabel: 'Ihre Frage',
@@ -258,6 +318,19 @@ const VOICE_ASSISTANT_TRANSLATIONS = {
     requestFailed: 'Die Anfrage konnte nicht verarbeitet werden.',
     unexpectedError: 'Ein unerwarteter Fehler verhindert eine Antwort des Assistenten.',
     responseReceived: 'Antwort erhalten.',
+    demoStart: 'Sprachdemo starten',
+    demoStop: 'Demo beenden',
+    demoHelp: 'Erleben Sie Diktat, RAG-Analyse und Sprachantwort in einem Ablauf.',
+    demoStepDictation: 'Diktat',
+    demoStepAnalysis: 'Analyse',
+    demoStepResponse: 'Antwort',
+    demoIntro:
+      'Hallo, ich bin Giovani. Ich demonstriere jetzt meine Sprachfunktionen. Stellen Sie nach dieser Nachricht Ihre Frage laut. Ich transkribiere sie, analysiere den wissenschaftlichen Korpus und lese meine Antwort vor.',
+    demoListening: 'Sie sind dran: Stellen Sie Giovani jetzt Ihre Frage.',
+    demoComplete: 'Demo abgeschlossen. Giovani hat zugehört, analysiert und geantwortet.',
+    demoStopped: 'Demo beendet.',
+    demoUnsupported:
+      'Diese Demo benötigt Spracherkennung und Sprachausgabe in Ihrem Browser.',
     languageChanged: 'Die Sprache des Assistenten wurde auf Deutsch eingestellt.'
   }
 };
@@ -284,13 +357,26 @@ document.addEventListener('DOMContentLoaded', () => {
   const avatar = document.getElementById('voice-assistant-avatar');
   const avatarStateLabel = document.getElementById('voice-assistant-avatar-state');
   const languageSelect = document.getElementById('voice-assistant-language');
+  const rateSelect = document.getElementById('voice-assistant-rate');
+  const demoButton = document.getElementById('voice-assistant-demo');
+  const demoIcon = demoButton.querySelector('i');
+  const demoLabel = demoButton.querySelector('span');
+  const demoProgress = document.getElementById('voice-assistant-demo-progress');
+  const demoSteps = Array.from(demoProgress.querySelectorAll('[data-demo-step]'));
   const endpoint = assistant.dataset.endpoint;
+  const avatarUrl = assistant.dataset.avatarUrl;
   const supportedLocales = Object.values(VOICE_ASSISTANT_LANGUAGES);
+  const supportedSpeechRates = [0.75, 1, 1.25, 1.5];
   let savedLanguage = '';
+  let savedSpeechRate = 1;
   try {
     savedLanguage = window.localStorage.getItem('aimer-assistant-language') || '';
+    savedSpeechRate = Number.parseFloat(
+      window.localStorage.getItem('aimer-assistant-rate') || '1'
+    );
   } catch (error) {
     savedLanguage = '';
+    savedSpeechRate = 1;
   }
   const browserLanguages = navigator.languages || [navigator.language];
   const browserLanguage = supportedLocales.find(locale =>
@@ -305,15 +391,20 @@ document.addEventListener('DOMContentLoaded', () => {
   if (!supportedLocales.includes(speechLanguage)) speechLanguage = 'fr-FR';
   let currentLanguage = speechLanguage.slice(0, 2).toLowerCase();
   languageSelect.value = speechLanguage;
+  let speechRate = supportedSpeechRates.includes(savedSpeechRate) ? savedSpeechRate : 1;
+  rateSelect.value = String(speechRate);
+  avatar.dataset.readingRate = String(speechRate);
+  avatar.style.setProperty('--speech-rate', String(speechRate));
   assistant.lang = currentLanguage;
   const maxLength = Number.parseInt(assistant.dataset.maxLength, 10) || 2000;
-  const lipSyncInterval = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  const lipSyncBaseInterval = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     ? 140
-    : 75;
+    : 72;
   const Recognition = window.SpeechRecognition || window.webkitSpeechRecognition;
   const synthesis = window.speechSynthesis;
   const supportsSpeechOutput =
     Boolean(synthesis) && typeof window.SpeechSynthesisUtterance === 'function';
+  const supportsVoiceDemo = Boolean(Recognition) && supportsSpeechOutput;
 
   let recognition = null;
   let recognitionFailed = false;
@@ -326,6 +417,11 @@ document.addEventListener('DOMContentLoaded', () => {
   let lipSyncTimer = null;
   let lipSyncText = '';
   let lipSyncCursor = 0;
+  let feedbackState = null;
+  let feedbackTimer = null;
+  let demoMode = false;
+  let demoAwaitingDictation = false;
+  let demoPreviousAutoRead = false;
 
   const translate = (key, replacements = {}) => {
     const translations =
@@ -351,6 +447,43 @@ document.addEventListener('DOMContentLoaded', () => {
     assistant.lang = currentLanguage;
   };
 
+  const setDemoPhase = phase => {
+    const phases = ['dictation', 'analysis', 'response'];
+    const phaseIndex = phase === 'complete' ? phases.length : phases.indexOf(phase);
+    const visible = phaseIndex >= 0;
+    demoProgress.hidden = !visible;
+    demoProgress.setAttribute('aria-hidden', String(!visible));
+    demoSteps.forEach((step, index) => {
+      step.classList.toggle('is-active', phase !== 'complete' && index === phaseIndex);
+      step.classList.toggle('is-complete', phase === 'complete' || index < phaseIndex);
+    });
+  };
+
+  const setDemoButtonState = active => {
+    demoButton.classList.toggle('btn-label-danger', active);
+    demoButton.classList.toggle('btn-label-primary', !active);
+    demoButton.setAttribute('aria-pressed', String(active));
+    demoIcon.className = active
+      ? 'icon-base bx bx-stop-circle me-1'
+      : 'icon-base bx bx-play-circle me-1';
+    demoLabel.textContent = translate(active ? 'demoStop' : 'demoStart');
+  };
+
+  const finishDemo = ({statusKey = null, complete = false} = {}) => {
+    demoMode = false;
+    demoAwaitingDictation = false;
+    autoReadInput.checked = demoPreviousAutoRead;
+    setDemoButtonState(false);
+    setDemoPhase(complete ? 'complete' : null);
+    demoButton.disabled = !supportsVoiceDemo || isLoading;
+    microphoneButton.disabled = isLoading || !Recognition;
+    submitButton.disabled = isLoading || isListening;
+    languageSelect.disabled = isLoading || isListening;
+    rateSelect.disabled = !supportsSpeechOutput || isLoading || isListening || isSpeaking;
+    if (complete) showFeedback('success');
+    if (statusKey) setStatus(translate(statusKey));
+  };
+
   const refreshAvatarState = () => {
     const state = isSpeaking
       ? 'speaking'
@@ -358,55 +491,109 @@ document.addEventListener('DOMContentLoaded', () => {
         ? 'listening'
         : isLoading
           ? 'thinking'
-          : 'idle';
+          : feedbackState || 'idle';
     const labelKeys = {
       idle: 'avatarIdle',
       listening: 'avatarListening',
       thinking: 'avatarThinking',
-      speaking: 'avatarSpeaking'
+      speaking: 'avatarSpeaking',
+      success: 'avatarSuccess',
+      error: 'avatarError'
     };
     avatar.dataset.state = state;
     avatarStateLabel.textContent = translate(labelKeys[state]);
   };
 
-  const visemeForCharacter = character => {
-    const normalized = character
+  const clearFeedback = (refresh = true) => {
+    if (feedbackTimer) window.clearTimeout(feedbackTimer);
+    feedbackTimer = null;
+    feedbackState = null;
+    if (refresh) refreshAvatarState();
+  };
+
+  const showFeedback = (state, duration = 1800) => {
+    clearFeedback(false);
+    feedbackState = state;
+    refreshAvatarState();
+    feedbackTimer = window.setTimeout(() => {
+      feedbackTimer = null;
+      feedbackState = null;
+      refreshAvatarState();
+    }, duration);
+  };
+
+  const visemeForPosition = (text, index) => {
+    const normalized = text
+      .slice(index, index + 3)
       .normalize('NFD')
       .replace(/[\u0300-\u036f]/g, '')
       .toLowerCase();
-    if (!normalized || /[\s.,;:!?'-]/.test(normalized)) return 'rest';
-    if (/[bmp]/.test(normalized)) return 'closed';
-    if (/[ouqw]/.test(normalized)) return 'round';
-    if (/[a]/.test(normalized)) return 'open';
-    if (/[eiy]/.test(normalized)) return 'wide';
-    return lipSyncCursor % 2 === 0 ? 'open' : 'closed';
+    const firstCharacter = normalized.slice(0, 1);
+    if (!firstCharacter || /[\s.,;:!?'-]/.test(firstCharacter)) return 'rest';
+    if (/^[bmp]/.test(normalized)) return 'closed';
+    if (/^(ou|oo|oe|au|eu|[ouqw])/.test(normalized)) return 'round';
+    if (/^(a|aa|ah)/.test(normalized)) return 'open';
+    if (/^(ij|ie|ei|ey|[eiy])/.test(normalized)) return 'wide';
+    return index % 2 === 0 ? 'open' : 'closed';
   };
 
-  const updateViseme = character => {
-    avatar.dataset.viseme = visemeForCharacter(character);
+  const updateViseme = (text, index) => {
+    avatar.dataset.viseme = visemeForPosition(text, index);
+    avatar.dataset.lipIndex = String(index);
+  };
+
+  const lipFrameDelay = character => {
+    const pauseWeight = /[.!?;:]/.test(character)
+      ? 3.5
+      : /[,\s]/.test(character)
+        ? 1.4
+        : 1;
+    return Math.max(32, Math.round((lipSyncBaseInterval * pauseWeight) / speechRate));
+  };
+
+  const scheduleLipFrame = () => {
+    if (!lipSyncText || !isSpeaking) return;
+    if (lipSyncCursor >= lipSyncText.length) {
+      avatar.dataset.viseme = 'rest';
+      return;
+    }
+
+    const character = lipSyncText[lipSyncCursor];
+    updateViseme(lipSyncText, lipSyncCursor);
+    lipSyncCursor += 1;
+    lipSyncTimer = window.setTimeout(scheduleLipFrame, lipFrameDelay(character));
   };
 
   const stopLipSync = () => {
-    if (lipSyncTimer) window.clearInterval(lipSyncTimer);
+    if (lipSyncTimer) window.clearTimeout(lipSyncTimer);
     lipSyncTimer = null;
     lipSyncText = '';
     lipSyncCursor = 0;
     avatar.dataset.viseme = 'rest';
+    avatar.dataset.lipIndex = '0';
     isSpeaking = false;
+    rateSelect.disabled = !supportsSpeechOutput || isLoading || isListening || demoMode;
     refreshAvatarState();
   };
 
   const startLipSync = text => {
-    if (lipSyncTimer) window.clearInterval(lipSyncTimer);
+    if (lipSyncTimer) window.clearTimeout(lipSyncTimer);
+    clearFeedback(false);
     lipSyncText = text;
     lipSyncCursor = 0;
     isSpeaking = true;
+    rateSelect.disabled = true;
+    avatar.dataset.readingRate = String(speechRate);
     refreshAvatarState();
-    lipSyncTimer = window.setInterval(() => {
-      if (!lipSyncText) return;
-      updateViseme(lipSyncText[lipSyncCursor % lipSyncText.length]);
-      lipSyncCursor += 1;
-    }, lipSyncInterval);
+    scheduleLipFrame();
+  };
+
+  const syncLipToBoundary = (event, text) => {
+    const requestedIndex = Number.isFinite(event.charIndex) ? event.charIndex : 0;
+    const boundaryIndex = Math.max(0, Math.min(requestedIndex, text.length - 1));
+    lipSyncCursor = boundaryIndex;
+    updateViseme(text, boundaryIndex);
+    lipSyncCursor = boundaryIndex + 1;
   };
 
   const setStatus = message => {
@@ -437,7 +624,10 @@ document.addEventListener('DOMContentLoaded', () => {
     if (kind === 'assistant') {
       const avatar = createElement('span', 'voice-assistant__message-avatar');
       avatar.setAttribute('aria-hidden', 'true');
-      avatar.append(createElement('i', 'icon-base bx bx-bot'));
+      const avatarImage = createElement('img', 'voice-assistant__message-avatar-image');
+      avatarImage.src = avatarUrl;
+      avatarImage.alt = '';
+      avatar.append(avatarImage);
       message.append(avatar);
     }
 
@@ -532,10 +722,14 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   const setLoading = loading => {
+    if (loading) clearFeedback(false);
     isLoading = loading;
     submitButton.disabled = loading;
     microphoneButton.disabled = loading || !Recognition;
-    languageSelect.disabled = loading || isListening;
+    languageSelect.disabled = loading || isListening || demoMode;
+    rateSelect.disabled =
+      !supportsSpeechOutput || loading || isListening || isSpeaking || demoMode;
+    demoButton.disabled = !supportsVoiceDemo || (loading && !demoMode);
     queryInput.readOnly = loading;
     submitIcon.className = loading
       ? 'icon-base bx bx-loader-circle voice-assistant__loading-icon me-1'
@@ -553,7 +747,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setStatus(translate('speechStopped'));
   };
 
-  const speak = text => {
+  const speak = (text, {onEnd = null, onError = null} = {}) => {
     if (!supportsSpeechOutput || !text) return;
 
     if (recognition && isListening) recognition.stop();
@@ -563,7 +757,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const utterance = new window.SpeechSynthesisUtterance(text);
     activeUtterance = utterance;
     utterance.lang = speechLanguage;
-    utterance.rate = 1;
+    utterance.rate = speechRate;
 
     const availableVoices = synthesis.getVoices();
     const exactLanguage = speechLanguage.toLowerCase();
@@ -581,8 +775,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     utterance.addEventListener('boundary', event => {
       if (activeUtterance !== utterance) return;
-      lipSyncCursor = Math.max(0, Math.min(event.charIndex, text.length - 1));
-      updateViseme(text.slice(lipSyncCursor, lipSyncCursor + 1));
+      syncLipToBoundary(event, text);
     });
     utterance.addEventListener('end', () => {
       if (activeUtterance !== utterance) return;
@@ -590,6 +783,8 @@ document.addEventListener('DOMContentLoaded', () => {
       stopButton.disabled = true;
       stopLipSync();
       setStatus(translate('speechFinished'));
+      showFeedback('success');
+      if (typeof onEnd === 'function') onEnd();
     });
     utterance.addEventListener('error', event => {
       if (activeUtterance !== utterance) return;
@@ -598,6 +793,8 @@ document.addEventListener('DOMContentLoaded', () => {
       stopLipSync();
       if (event.error !== 'canceled' && event.error !== 'interrupted') {
         setStatus(translate('speechFailed'));
+        showFeedback('error');
+        if (typeof onError === 'function') onError(event);
       }
     });
     synthesis.speak(utterance);
@@ -615,6 +812,7 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   const setListening = listening => {
+    if (listening) clearFeedback(false);
     isListening = listening;
     microphoneButton.classList.toggle('is-listening', listening);
     microphoneButton.setAttribute('aria-pressed', String(listening));
@@ -623,7 +821,9 @@ document.addEventListener('DOMContentLoaded', () => {
       : 'icon-base bx bx-microphone me-1';
     microphoneLabel.textContent = translate(listening ? 'stopDictation' : 'dictate');
     submitButton.disabled = listening || isLoading;
-    languageSelect.disabled = listening || isLoading;
+    languageSelect.disabled = listening || isLoading || demoMode;
+    rateSelect.disabled =
+      !supportsSpeechOutput || listening || isLoading || isSpeaking || demoMode;
     refreshAvatarState();
   };
 
@@ -654,12 +854,22 @@ document.addEventListener('DOMContentLoaded', () => {
     recognition.addEventListener('error', event => {
       recognitionFailed = true;
       setStatus(recognitionErrorMessage(event.error));
+      showFeedback('error');
     });
 
     recognition.addEventListener('end', () => {
       setListening(false);
       dictatedBase = queryInput.value.trim();
-      if (!recognitionFailed) {
+      if (demoMode && demoAwaitingDictation) {
+        demoAwaitingDictation = false;
+        if (dictatedBase && !recognitionFailed) {
+          setDemoPhase('analysis');
+          setStatus(translate('corpusSearching'));
+          window.setTimeout(() => form.requestSubmit(), 250);
+        } else {
+          finishDemo();
+        }
+      } else if (!recognitionFailed) {
         setStatus(
           dictatedBase
             ? translate('dictationFinished')
@@ -682,6 +892,7 @@ document.addEventListener('DOMContentLoaded', () => {
         recognition.start();
       } catch (error) {
         setStatus(translate('dictationStartFailed'));
+        showFeedback('error');
       }
     });
   }
@@ -699,7 +910,10 @@ document.addEventListener('DOMContentLoaded', () => {
       readButton.disabled = true;
       stopButton.disabled = true;
       autoReadInput.disabled = true;
+      rateSelect.disabled = true;
     }
+    demoButton.disabled = !supportsVoiceDemo;
+    demoButton.title = supportsVoiceDemo ? '' : translate('demoUnsupported');
     support.hidden = unsupportedFeatures.length === 0;
     support.textContent = unsupportedFeatures.length > 0 ? translate('unsupported') : '';
   };
@@ -707,6 +921,65 @@ document.addEventListener('DOMContentLoaded', () => {
   queryInput.addEventListener('input', updateCounter);
   readButton.addEventListener('click', () => speak(lastResponseSpeech));
   stopButton.addEventListener('click', stopSpeaking);
+  demoButton.addEventListener('click', () => {
+    if (demoMode) {
+      if (recognition && isListening) {
+        recognitionFailed = true;
+        recognition.abort();
+      }
+      if (isSpeaking) stopSpeaking();
+      finishDemo({statusKey: 'demoStopped'});
+      return;
+    }
+    if (!supportsVoiceDemo) {
+      setStatus(translate('demoUnsupported'));
+      return;
+    }
+
+    demoMode = true;
+    demoAwaitingDictation = false;
+    demoPreviousAutoRead = autoReadInput.checked;
+    autoReadInput.checked = true;
+    queryInput.value = '';
+    dictatedBase = '';
+    updateCounter();
+    setDemoButtonState(true);
+    setDemoPhase('dictation');
+    languageSelect.disabled = true;
+    rateSelect.disabled = true;
+    microphoneButton.disabled = true;
+    submitButton.disabled = true;
+    setStatus(translate('demoIntro'));
+    speak(translate('demoIntro'), {
+      onEnd: () => {
+        if (!demoMode || !recognition) return;
+        demoAwaitingDictation = true;
+        microphoneButton.disabled = false;
+        setStatus(translate('demoListening'));
+        try {
+          recognition.start();
+        } catch (error) {
+          setStatus(translate('dictationStartFailed'));
+          showFeedback('error');
+          finishDemo();
+        }
+      },
+      onError: () => finishDemo()
+    });
+  });
+  rateSelect.addEventListener('change', () => {
+    const requestedRate = Number.parseFloat(rateSelect.value);
+    speechRate = supportedSpeechRates.includes(requestedRate) ? requestedRate : 1;
+    rateSelect.value = String(speechRate);
+    avatar.dataset.readingRate = String(speechRate);
+    avatar.style.setProperty('--speech-rate', String(speechRate));
+    try {
+      window.localStorage.setItem('aimer-assistant-rate', String(speechRate));
+    } catch (error) {
+      // The selected speed still applies for this page when storage is blocked.
+    }
+    setStatus(translate('rateChanged', {rate: speechRate}));
+  });
   languageSelect.addEventListener('change', () => {
     if (recognition && isListening) {
       recognition.abort();
@@ -747,6 +1020,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (isListening) recognition.stop();
+    if (demoMode) setDemoPhase('analysis');
     appendMessage('user', query);
     setLoading(true);
     setStatus(translate('corpusSearching'));
@@ -784,7 +1058,19 @@ document.addEventListener('DOMContentLoaded', () => {
       dictatedBase = '';
       updateCounter();
       setStatus(translate('responseReceived'));
-      if (autoReadInput.checked) speak(lastResponseSpeech);
+      if (demoMode) setDemoPhase('response');
+      if (autoReadInput.checked) {
+        speak(lastResponseSpeech, {
+          onEnd: demoMode
+            ? () => finishDemo({statusKey: 'demoComplete', complete: true})
+            : null,
+          onError: demoMode ? () => finishDemo() : null
+        });
+      } else if (demoMode) {
+        finishDemo({statusKey: 'demoComplete', complete: true});
+      } else {
+        showFeedback('success');
+      }
     } catch (error) {
       const message =
         error instanceof Error
@@ -792,6 +1078,8 @@ document.addEventListener('DOMContentLoaded', () => {
           : translate('unexpectedError');
       appendMessage('assistant', message);
       setStatus(message);
+      showFeedback('error');
+      if (demoMode) finishDemo();
     } finally {
       setLoading(false);
       queryInput.focus();
@@ -808,6 +1096,8 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   applyTranslations();
+  setDemoButtonState(false);
+  setDemoPhase(null);
   refreshAvatarState();
   updateUnsupportedMessage();
   updateCounter();
