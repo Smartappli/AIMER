@@ -20,7 +20,7 @@ images:
     digest: sha256:388bdc77b644e140450ef30c047c565fbb4f41d4ae7136f1b7ebc0eafca9c256
   - name: docker.io/smartappli/aimer-rag
     newName: docker.io/smartappli/aimer-rag
-    digest: sha256:64660f939a41739e78b596320fbe24c3c47397c781c98e9a911b81c29f096307
+    digest: sha256:8ee293fa38935fce08d4faa902bd67a3f3ceef349080af335725966d95d418ea
   - name: docker.io/smartappli/mage-api
     newName: docker.io/smartappli/mage-api
     digest: sha256:9e4f3baa5da8a1013096daca6d246eeca0dd576409896b32dd057fa489c9495c
