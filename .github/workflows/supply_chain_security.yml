@@ -55,7 +55,7 @@ jobs:
 
       - name: Upload filesystem SARIF
         if: ${{ always() }}
-        uses: github/codeql-action/upload-sarif@7188fc363630916deb702c7fdcf4e481b751f97a
+        uses: github/codeql-action/upload-sarif@e0647621c2984b5ed2f768cb892365bf2a616ad1
         with:
           sarif_file: trivy-fs.sarif
           category: trivy/filesystem
@@ -88,7 +88,7 @@ jobs:
 
       - name: Upload IaC SARIF
         if: ${{ always() }}
-        uses: github/codeql-action/upload-sarif@7188fc363630916deb702c7fdcf4e481b751f97a
+        uses: github/codeql-action/upload-sarif@e0647621c2984b5ed2f768cb892365bf2a616ad1
         with:
           sarif_file: trivy-config.sarif
           category: trivy/config
@@ -180,7 +180,7 @@ jobs:
 
       - name: Upload image SARIF
         if: ${{ always() }}
-        uses: github/codeql-action/upload-sarif@7188fc363630916deb702c7fdcf4e481b751f97a
+        uses: github/codeql-action/upload-sarif@e0647621c2984b5ed2f768cb892365bf2a616ad1
         with:
           sarif_file: trivy-image-${{ matrix.service }}.sarif
           category: trivy/image/${{ matrix.service }}

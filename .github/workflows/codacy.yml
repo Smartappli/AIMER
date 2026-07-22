@@ -149,6 +149,6 @@ jobs:
           path: sarif-results
 
       - name: Upload SARIF results file
-        uses: github/codeql-action/upload-sarif@7188fc363630916deb702c7fdcf4e481b751f97a
+        uses: github/codeql-action/upload-sarif@e0647621c2984b5ed2f768cb892365bf2a616ad1
         with:
           sarif_file: ${{ matrix.sarif_file }}
