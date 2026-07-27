@@ -23,7 +23,7 @@ images:
     digest: sha256:8ee293fa38935fce08d4faa902bd67a3f3ceef349080af335725966d95d418ea
   - name: docker.io/smartappli/mage-api
     newName: docker.io/smartappli/mage-api
-    digest: sha256:9e4f3baa5da8a1013096daca6d246eeca0dd576409896b32dd057fa489c9495c
+    digest: sha256:15f5f3f3eac5f5c95233b76cb555008451115d755f8acf78a5b3ef81eb9769fc
   - name: docker.io/smartappli/farm
     newName: docker.io/smartappli/farm
     digest: sha256:7cd65c5381ea520f34e176c3c326cbc94ac4f44fbf98399a6fac438fde299996
