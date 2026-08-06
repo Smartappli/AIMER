@@ -25,7 +25,7 @@ dependencies = [
     "openrag>=0.5.0,<0.6.0",
     "litellm==1.93.0",
     "langgraph==1.2.0",
-    "langgraph-checkpoint-sqlite==3.1.0",
+    "langgraph-checkpoint-sqlite==3.1.1",
     "numpy",
     "packaging>=25.0",
     "pydantic==2.12.5",
