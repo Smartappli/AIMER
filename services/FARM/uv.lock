@@ -219,7 +219,7 @@ requires-dist = [
     { name = "django", specifier = ">=6.0.6" },
     { name = "flwr", specifier = "==1.30.0" },
     { name = "granian", specifier = "==2.7.4" },
-    { name = "psycopg", extras = ["binary"], specifier = ">=3.2.13,<4.0.0" },
+    { name = "psycopg", extras = ["binary"], specifier = ">=3.3.4,<4.0.0" },
     { name = "pygments", specifier = ">=2.20.0" },
     { name = "whitenoise", specifier = ">=6.11.0,<7.0.0" },
 ]
