@@ -1071,7 +1071,7 @@ dev = [
 
 [package.metadata]
 requires-dist = [
-    { name = "albumentations", specifier = ">=1.4.24" },
+    { name = "albumentations", specifier = ">=2.0.8" },
     { name = "fastapi", extras = ["standard-no-fastapi-cloud-cli"], specifier = "==0.136.3" },
     { name = "fastmcp", specifier = "==3.3.1" },
     { name = "granian", specifier = "==2.7.4" },
