@@ -13,7 +13,7 @@ dependencies = [
     "httpx==0.28.1",
     "docling[vlm]==2.94.0",
     "fastembed==0.8.0",
-    "transformers==5.9.0",
+    "transformers==5.10.1",
     "huggingface-hub",
     "hf-xet",
     "langchain-core>=1.4.0,<2.0.0",
