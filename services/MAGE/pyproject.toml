@@ -6,7 +6,7 @@ dependencies = [
   "fastapi[standard-no-fastapi-cloud-cli]==0.136.3",
   "fastmcp==3.3.1",
   "keras==3.15.0",
-  "albumentations>=1.4.24",
+  "albumentations>=2.0.8",
   "segmentation-models-pytorch==0.5.0",
 
   # macOS (Intel + Apple Silicon)
