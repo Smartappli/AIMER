@@ -8,7 +8,7 @@ dependencies = [
     "granian==2.7.4",
     "psycopg[binary]>=3.3.4,<4.0.0",
     "pygments>=2.20.0",
-    "whitenoise>=6.11.0,<7.0.0",
+    "whitenoise>=6.12.0,<7.0.0",
 ]
 
 [dependency-groups]
