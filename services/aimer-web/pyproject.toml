@@ -24,7 +24,7 @@ dependencies = [
     "langsmith>=0.8.0",
     "openrag>=0.5.0,<0.6.0",
     "litellm==1.93.2",
-    "langgraph==1.2.12",
+    "langgraph==1.2.17",
     "langgraph-checkpoint-sqlite==3.1.1",
     "numpy",
     "packaging>=25.0",
