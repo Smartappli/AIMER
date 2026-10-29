@@ -1,5 +1,5 @@
 version = 1
-revision = 3
+revision = 5
 requires-python = "==3.13.*"
 
 [[package]]
@@ -216,7 +216,7 @@ dev = [
 
 [package.metadata]
 requires-dist = [
-    { name = "django", specifier = ">=6.0.6" },
+    { name = "django", specifier = ">=6.1.2" },
     { name = "flwr", specifier = "==1.30.0" },
     { name = "granian", specifier = "==2.7.4" },
     { name = "psycopg", extras = ["binary"], specifier = ">=3.3.6,<4.0.0" },
