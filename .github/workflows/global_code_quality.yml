@@ -109,7 +109,7 @@ jobs:
           python -m uv --directory services/MAGE run --locked python -m coverage xml -o ../../coverage-mage.xml
       - name: SonarQube Scan
         if: env.SONAR_TOKEN != ''
-        uses: SonarSource/sonarqube-scan-action@59202af334b4ba7b5db01b701b8e79f8b3bef0f4
+        uses: SonarSource/sonarqube-scan-action@70bad232163b09d998ea0707ee80c0ec80798c16
         with:
           args: >
             -Dsonar.python.coverage.reportPaths=coverage-aimer-web.xml,coverage-farm.xml,coverage-mage.xml
