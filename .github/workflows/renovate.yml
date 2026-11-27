@@ -24,7 +24,7 @@ jobs:
         run: python -m json.tool renovate.json > /dev/null
 
       - name: Run Renovate
-        uses: renovatebot/github-action@acdd6bda8b035c99ce59d5675816af2aa65a1774
+        uses: renovatebot/github-action@ebcbb513d07ead4d9c0c2139064301db05e84a3e
         with:
           configurationFile: renovate.json
           token: ${{ secrets.RENOVATE_TOKEN || secrets.GITHUB_TOKEN }}
